@@ -1,0 +1,99 @@
+---
+import "../styles/global.css";
+
+const links = [
+  { href: "https://github.com/rwjblue", label: "GitHub" },
+  { href: "https://www.qrz.com/db/N1RWJ", label: "N1RWJ" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Robert Jackson, rwjblue, and N1RWJ. Software, open source, amateur radio, and notes."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Robert Jackson / rwjblue / N1RWJ</title>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="intro">
+          <p class="eyebrow">Robert Jackson / rwjblue / N1RWJ</p>
+          <h1 id="page-title">Software, open source, radio, and assorted notes.</h1>
+          <p class="lede">
+            This is a small home base for the public parts of my work and hobbies.
+            Notes may show up here later; for now it is a useful front door for the
+            domains.
+          </p>
+          <nav class="links" aria-label="Profile links">
+            {
+              links.map((link) => (
+                <a href={link.href} target="_blank" rel="noreferrer">
+                  {link.label}
+                </a>
+              ))
+            }
+          </nav>
+        </div>
+
+        <aside class="identity-card" aria-label="Identity summary">
+          <div class="card-top">
+            <div class="mark" aria-hidden="true">RJ</div>
+            <div>
+              <strong>rwjblue</strong>
+              <span>software / open source / N1RWJ</span>
+            </div>
+          </div>
+          <div class="signal" aria-hidden="true">
+            <div class="frequency">N1RWJ.radio</div>
+            <svg class="trace" viewBox="0 0 320 138" fill="none" role="img">
+              <path
+                d="M8 88h36l18-34 30 68 38-102 30 76 18-32 18 24h116"
+                stroke="currentColor"
+                stroke-width="8"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M10 118h300"
+                stroke="currentColor"
+                stroke-opacity=".22"
+                stroke-width="2"
+                stroke-linecap="round"></path>
+              <path
+                d="M10 42h300"
+                stroke="currentColor"
+                stroke-opacity=".16"
+                stroke-width="2"
+                stroke-linecap="round"></path>
+            </svg>
+          </div>
+        </aside>
+      </section>
+
+      <section class="areas" aria-label="Areas">
+        <article>
+          <p class="section-label">Software</p>
+          <h2>Open source and engineering</h2>
+          <p>
+            I work on software, developer tooling, and open source projects as
+            rwjblue.
+          </p>
+        </article>
+
+        <article>
+          <p class="section-label">Radio</p>
+          <h2>N1RWJ</h2>
+          <p>
+            N1RWJ is my amateur radio callsign. More radio-specific notes may live
+            here later.
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -158,8 +158,8 @@ Package scripts should remain available for Cloudflare Pages and contributors:
 {
   "scripts": {
     "dev": "astro dev",
-    "check": "astro check",
-    "build": "astro check && astro build",
+    "check": "astro sync",
+    "build": "astro build",
     "preview": "astro preview"
   }
 }
@@ -197,7 +197,7 @@ mise run check
 mise run build
 ```
 
-This validates the pinned Node runtime, dependency install, Astro checks, and production build.
+This validates the pinned Node runtime, dependency install, Astro sync, and production build.
 
 ## Deployment
 

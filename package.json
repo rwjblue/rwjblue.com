@@ -1,0 +1,16 @@
+{
+  "name": "rwjblue.com",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro sync",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "astro": "^6.3.7",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,9 @@
+[settings]
+lockfile = true
+
+[tools]
+node = "lts"
+
+[env]
+_.file = ".env"
+ASTRO_TELEMETRY_DISABLED = "1"
