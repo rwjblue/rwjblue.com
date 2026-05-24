@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "test": "node --test tests/site-content.test.mjs",
     "check": "astro sync",
     "build": "astro build",
     "preview": "astro preview"

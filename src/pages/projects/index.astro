@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = await getCollection("projects");
+---
+
+<BaseLayout title="Projects / Robert Jackson">
+  <section class="page-intro">
+    <p class="eyebrow">Projects</p>
+    <h1>Selected artifacts</h1>
+    <p>
+      Project context, ongoing work, historical threads, and experiments. This is
+      closer to a workbench index than a portfolio.
+    </p>
+  </section>
+
+  <div class="artifact-list full">
+    {
+      projects.map((project) => (
+        <a href={`/projects/${project.id}/`} class="artifact-item">
+          <span>{project.data.status}</span>
+          <strong>{project.data.title}</strong>
+          <p>{project.data.summary}</p>
+          <div class="tags">
+            {project.data.tags.map((tag) => <em>{tag}</em>)}
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

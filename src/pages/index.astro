@@ -1,91 +1,119 @@
 ---
-import "../styles/global.css";
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-const links = [
-  { href: "https://github.com/rwjblue", label: "GitHub" },
-  { href: "https://www.qrz.com/db/N1RWJ", label: "N1RWJ" },
+const notes = (await getCollection("notes"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const projects = await getCollection("projects");
+
+const bench = [
+  {
+    label: "Software",
+    text: "Rust tooling, TypeScript infrastructure, CI/build systems, open source maintenance.",
+  },
+  {
+    label: "Radio",
+    text: "N1RWJ, CW practice, POTA, portable station setup, remote operation.",
+  },
+  {
+    label: "Publishing",
+    text: "Notes, field logs, experiments, and small tools.",
+  },
 ];
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Robert Jackson, rwjblue, and N1RWJ. Software, open source, amateur radio, and notes."
-    />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>Robert Jackson / rwjblue / N1RWJ</title>
-  </head>
-  <body>
-    <main class="shell">
-      <section class="hero" aria-labelledby="page-title">
-        <div class="intro">
-          <p class="eyebrow">Robert Jackson / rwjblue / N1RWJ</p>
-          <h1 id="page-title">Robert Jackson</h1>
-          <p class="tagline">Software, open source, and amateur radio.</p>
-          <p class="lede">
-            I work on developer tools and open source as rwjblue. N1RWJ is my
-            amateur radio callsign. This is the front door for the public parts of
-            both.
-          </p>
-          <nav class="links" aria-label="Profile links">
-            {
-              links.map((link) => (
-                <a href={link.href} target="_blank" rel="noreferrer">
-                  {link.label}
-                </a>
-              ))
-            }
-          </nav>
-        </div>
+<BaseLayout>
+  <section class="hero compact" aria-labelledby="page-title">
+    <div class="intro">
+      <p class="eyebrow">Robert Jackson / rwjblue / N1RWJ</p>
+      <h1 id="page-title">Robert Jackson</h1>
+      <p class="lede strong">
+        I build and maintain developer tools, infrastructure, and open source software.
+      </p>
+      <p class="lede">
+        These days that mostly means Rust, TypeScript, Go, Python, build systems,
+        test infrastructure, and the parts of engineering workflows that need to
+        keep working for years.
+      </p>
+      <p class="lede">
+        I also operate amateur radio as N1RWJ, with interests around CW, POTA,
+        portable HF, remote stations, and RF experimentation.
+      </p>
+    </div>
 
-        <aside class="identity-card" aria-label="Identity summary">
-          <div class="card-top">
-            <div class="mark" aria-hidden="true">RJ</div>
+    <aside class="bench-panel" aria-labelledby="bench-title">
+      <h2 id="bench-title">Current bench</h2>
+      <div class="bench-list">
+        {
+          bench.map((item) => (
             <div>
-              <strong>rwjblue</strong>
-              <span>Robert Jackson online</span>
+              <span>{item.label}</span>
+              <p>{item.text}</p>
             </div>
-          </div>
-          <div class="identity-list">
-            <div>
-              <span>Software</span>
-              <strong>Developer tooling, open source, and long-running projects.</strong>
-            </div>
-            <div>
-              <span>Radio</span>
-              <strong>N1RWJ on the amateur bands.</strong>
-            </div>
-            <div>
-              <span>Notes</span>
-              <strong>Occasional public writing will live here.</strong>
-            </div>
-          </div>
-        </aside>
-      </section>
+          ))
+        }
+      </div>
+    </aside>
+  </section>
 
-      <section class="areas" aria-label="Areas">
-        <article>
-          <p class="section-label">Software</p>
-          <h2>Open source and engineering</h2>
-          <p>
-            I work on software, developer tooling, and open source projects as
-            rwjblue.
-          </p>
-        </article>
+  <section class="section-grid" aria-label="Recent activity and selected artifacts">
+    <div class="section-block">
+      <div class="section-heading">
+        <p class="section-label">Recent</p>
+        <h2>Recent from the bench</h2>
+      </div>
+      <ol class="entry-list">
+        {
+          notes.map((note) => (
+            <li>
+              <time datetime={note.data.date.toISOString()}>
+                {formatDate(note.data.date)}
+              </time>
+              <a href={`/notes/${note.id}/`}>{note.data.title}</a>
+              <p>{note.data.summary}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
 
-        <article>
-          <p class="section-label">Radio</p>
-          <h2>N1RWJ</h2>
-          <p>
-            N1RWJ is my amateur radio callsign. More radio-specific notes may live
-            here later.
-          </p>
-        </article>
-      </section>
-    </main>
-  </body>
-</html>
+    <div class="section-block">
+      <div class="section-heading">
+        <p class="section-label">Artifacts</p>
+        <h2>Selected artifacts</h2>
+      </div>
+      <div class="artifact-list">
+        {
+          projects.map((project) => (
+            <a href={`/projects/${project.id}/`} class="artifact-item">
+              <span>{project.data.status}</span>
+              <strong>{project.data.title}</strong>
+              <p>{project.data.summary}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bridge" aria-labelledby="bridge-title">
+    <p class="section-label">Workshop</p>
+    <h2 id="bridge-title">Software and radio share the same habits.</h2>
+    <p>
+      Tooling, infrastructure, portable radio, and RF experiments all reward the
+      same kind of work: clear logs, repeatable setups, careful debugging, and
+      honest notes about what failed.
+    </p>
+    <nav class="path-links" aria-label="Workshop paths">
+      <a href="/notes/">Notes</a>
+      <a href="/projects/">Projects</a>
+      <a href="/radio/">Radio</a>
+      <a href="/now/">Now</a>
+    </nav>
+  </section>
+</BaseLayout>
