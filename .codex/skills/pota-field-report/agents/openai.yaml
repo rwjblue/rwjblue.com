@@ -1,0 +1,4 @@
+interface:
+  display_name: "POTA Field Report"
+  short_description: "Draft POTA activation notes for the site"
+  default_prompt: "Use $pota-field-report to turn my dictated POTA activation notes into a publishable Astro note draft."
