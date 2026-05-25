@@ -1,0 +1,148 @@
+---
+title: Rhode Island POTA rove field notes
+date: 2026-05-25
+summary: "A Memorial Day POTA rove through Rhode Island: five stops, six park references, 64 CW contacts, and a few useful lessons."
+tags:
+  - radio
+  - pota
+  - field-notes
+  - rove
+  - cw
+  - us-7719
+  - us-6983
+  - us-7865
+  - us-0515
+  - us-7518
+  - us-2871
+---
+
+![Final contact map from the Rhode Island POTA rove](/images/pota/2026-05-25-rhode-island-pota-rove-map.jpg)
+
+Memorial Day turned into a five-stop Rhode Island POTA rove: six park references,
+64 CW contacts, and a pretty good reminder that a small radio setup can cover a
+lot of ground if I keep moving.
+
+The radio for the day was the Elecraft KX3. Most of the activations were simple:
+set up, get the contacts, pack down, and drive to the next spot. A few were not
+simple at all. That is usually where the useful notes come from.
+
+## [Misquamicut State Beach, US-7719](https://pota.app/#/park/US-7719)
+
+I started at Misquamicut State Beach and set up directly on the sand. The beach
+was cloudy, overcast, and loud, but the weather was doing me a favor. On a clear
+Memorial Day this would have been a very different place to operate.
+
+I used the KX3 with the REZ Scout, the REZ Compact 17-foot whip, and the K8CES
+Zippy key. Setup and teardown were each about 10 minutes, and I logged 15 CW
+contacts between 16:56 and 17:39 UTC.
+
+![Operator seated on the sand with the REZ Scout setup at Misquamicut State Beach](/images/pota/2026-05-25-misquamicut-state-beach-pota/operator-and-radio.jpg)
+
+![REZ Compact 17-foot whip set up on the beach in front of the surf](/images/pota/2026-05-25-misquamicut-state-beach-pota/beach-whip-setup.jpg)
+
+The whip went straight into the sand near the waterline, with the counterpoise
+running down toward the surf. Nothing about it was elegant, but it was fast,
+compact, and good enough to get the first activation done.
+
+![KX3 and radio gear packed close to the operating position on the beach](/images/pota/2026-05-25-misquamicut-state-beach-pota/radio-in-pack.jpg)
+
+![Beach chair, pack, and vertical whip looking out over the overcast surf](/images/pota/2026-05-25-misquamicut-state-beach-pota/chair-whip-and-surf.jpg)
+
+## [Woody Hill Wildlife Management Area, US-6983](https://pota.app/#/park/US-6983)
+
+The second stop felt like a different day. Misquamicut was surf and sand; Woody
+Hill was wet leaves, green woods, a narrow trail, and an old stone wall nearby.
+
+I used the KX3 with the KJ6ER Challenger and stayed on 20 meters. I logged 11
+contacts from 18:51 to 19:20 UTC. The whole stop was quick: about 40 minutes
+including setup and teardown.
+
+![KJ6ER Challenger antenna set up along the trail at Woody Hill Wildlife Management Area](/images/pota/2026-05-25-woody-hill-management-area-pota/challenger-antenna-trail.jpg)
+
+The Challenger was a good fit for this kind of stop. It went up quickly, did not
+need much room, and kept the activation from turning into a project.
+
+![Operator in the woods near a stone wall at Woody Hill Wildlife Management Area](/images/pota/2026-05-25-woody-hill-management-area-pota/operator-woods-stone-wall.jpg)
+
+![Green trail through Woody Hill Wildlife Management Area after rain](/images/pota/2026-05-25-woody-hill-management-area-pota/woody-hill-trail.jpg)
+
+## [East State Beach, US-7865](https://pota.app/#/park/US-7865)
+
+East State Beach brought me back to the water. By then the sun had come out and
+the day had turned beautiful.
+
+I made 15 contacts on 20 meters from 20:15 to 20:51 UTC. I used the KX3, the REZ
+Scout, the REZ 25-foot whip, and the Palm Radio Pico paddle. At the time, I
+thought I had set up the usual REZ Rybakov setup. During teardown I realized I
+had not.
+
+![Operator at East State Beach with the REZ 25-foot whip and KX3 radio](/images/pota/2026-05-25-east-state-beach-pota/operator-25-foot-whip-beach.jpg)
+
+What I actually used was just the 25-foot whip with four 33-foot ground radials,
+leaving the KX3 to deal with the mismatch. The KX3 tuner handled it without
+complaint. I would not have planned it that way, but it worked, and it is worth
+remembering.
+
+![REZ 25-foot whip in the sand near the shoreline at East State Beach](/images/pota/2026-05-25-east-state-beach-pota/25-foot-whip-shoreline.jpg)
+
+## [Ninigret National Wildlife Refuge, US-0515](https://pota.app/#/park/US-0515)
+
+Ninigret was the fast one. I used the KX3 with the KJ6ER Challenger
+off-center-fed dipole and the Modern Morse Nameless key. All 11 contacts were on
+20 meters, logged between 21:37 and 21:58 UTC.
+
+![Operator near the access road at Ninigret National Wildlife Refuge](/images/pota/2026-05-25-ninigret-wildlife-refuge-pota/operator-access-road.jpg)
+
+The logistics were as clean as they get on a rove: about five minutes to set up,
+about five minutes to tear down, and then I was back at the car. At that point I
+still had enough daylight and momentum to try one more stop.
+
+## [Kimball Wildlife Refuge, US-7518](https://pota.app/#/park/US-7518) / [Burlingame State Park, US-2871](https://pota.app/#/park/US-2871)
+
+The last stop was a twofer, and it was the one that made me work for it. I parked
+at Kettle Pond Visitor Center and hiked in. The trail was easy and well marked,
+but it was still a hike-in activation after several earlier stops.
+
+I used the KX3 with the KJ6ER Challenger off-center-fed dipole in 20-meter mode.
+I started with the Palm Radio Pico paddles, but after the first contact I started
+getting a stuck dit. I could not send anything with multiple dits reliably, so I
+swapped keys in the middle of a contact and sent something like, "sorry, I broke
+the key." I hope that made sense on the other end.
+
+![KX3 radio and antenna setup in the woods for the Kimball and Burlingame twofer](/images/pota/2026-05-25-kimball-burlingame-twofer-pota/operator-kx3-woods.jpg)
+
+The K8CES Zippy paddle saved that activation. Once I switched keys, the next
+contacts came pretty easily. Then another station landed directly on my
+frequency while working the western U.S. For a few minutes the reports were
+confusing: some callers were answering me, and some were answering him. I moved
+up a couple of kilohertz and carried on.
+
+![KJ6ER Challenger antenna set up in the woods for the final twofer](/images/pota/2026-05-25-kimball-burlingame-twofer-pota/challenger-antenna-woods.jpg)
+
+The bigger problem came after about eight contacts. I had been running 5 watts
+from a 3 Ah Bioenno LiFePO4 battery, the same battery I had used on a six-park
+rove two days earlier. I had not charged it after that trip. The KX3 shut off in
+the middle of the activation, so I turned the power down to 2 watts and hoped
+there was enough left to finish.
+
+There was. The last few contacts were at 2 watts, and the reports were still
+good. Ohio and Tennessee were still reachable from the woods in Rhode Island. I
+finished with 12 contacts from 22:28 to 23:06 UTC and got both park references
+in the log.
+
+![Stone wall and woods near the final Kimball and Burlingame operating spot](/images/pota/2026-05-25-kimball-burlingame-twofer-pota/stone-wall-woods.jpg)
+
+## Afterward
+
+The day ended at 64 contacts across six park references:
+[US-7719](https://pota.app/#/park/US-7719),
+[US-6983](https://pota.app/#/park/US-6983),
+[US-7865](https://pota.app/#/park/US-7865),
+[US-0515](https://pota.app/#/park/US-0515),
+[US-7518](https://pota.app/#/park/US-7518), and
+[US-2871](https://pota.app/#/park/US-2871).
+
+The lessons are simple enough. Charge the battery before a rove. Carry a backup
+key. Do not assume the matching network is installed just because the antenna
+looks familiar. And keep moving, because even the messy stops can still make the
+log.

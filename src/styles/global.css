@@ -338,7 +338,9 @@ p {
 }
 
 .document {
+  width: 100%;
   max-width: 760px;
+  overflow-wrap: anywhere;
 }
 
 .document header {
@@ -353,6 +355,14 @@ p {
 
 .document p {
   font-size: 1.03rem;
+}
+
+.document img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 24px 0;
 }
 
 .tags {
@@ -419,5 +429,17 @@ p {
 
   h1 {
     font-size: clamp(3rem, 16vw, 4.8rem);
+  }
+
+  .document h1 {
+    font-size: clamp(2.35rem, 11vw, 3.6rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .shell {
+    width: min(362px, calc(100% - 28px));
+    margin-right: 14px;
+    margin-left: 14px;
   }
 }
