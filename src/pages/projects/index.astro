@@ -2,13 +2,23 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const projects = await getCollection("projects");
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.updated.valueOf() - a.data.updated.valueOf(),
+);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 ---
 
 <BaseLayout title="Projects / Robert Jackson">
   <section class="page-intro">
     <p class="eyebrow">Projects</p>
-    <h1>Selected artifacts</h1>
+    <h1>Projects</h1>
     <p>
       Project context, ongoing work, historical threads, and experiments. This is
       closer to a workbench index than a portfolio.
@@ -19,7 +29,9 @@ const projects = await getCollection("projects");
     {
       projects.map((project) => (
         <a href={`/projects/${project.id}/`} class="artifact-item">
-          <span>{project.data.status}</span>
+          <span>
+            {project.data.status} · updated {formatDate(project.data.updated)}
+          </span>
           <strong>{project.data.title}</strong>
           <p>{project.data.summary}</p>
           <div class="tags">

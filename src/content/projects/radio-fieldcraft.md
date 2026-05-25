@@ -1,6 +1,7 @@
 ---
 title: Radio fieldcraft
 status: experiment
+updated: 2026-05-24
 summary: Portable operating notes, station setup experiments, RF debugging, and practical field workflows around N1RWJ.
 tags:
   - radio

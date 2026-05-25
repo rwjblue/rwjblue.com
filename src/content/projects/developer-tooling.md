@@ -1,6 +1,7 @@
 ---
 title: Developer tooling
 status: active
+updated: 2026-05-24
 summary: Build systems, test infrastructure, project workflows, and tools that need to remain usable under real maintenance pressure.
 tags:
   - rust

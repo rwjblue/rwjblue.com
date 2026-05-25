@@ -1,5 +1,18 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const radioNotes = (await getCollection("notes"))
+  .filter((note) => note.data.tags.includes("radio"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 ---
 
 <BaseLayout title="Radio / N1RWJ">
@@ -32,5 +45,28 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <p>CW practice, repeatable workflows, and the small adjustments that make operating smoother.</p>
       </div>
     </div>
+  </section>
+
+  <section class="section-block wide">
+    <div class="section-heading">
+      <p class="section-label">Field reports</p>
+      <h2>Radio notes</h2>
+    </div>
+    <ol class="entry-list full">
+      {
+        radioNotes.map((note) => (
+          <li>
+            <time datetime={note.data.date.toISOString()}>
+              {formatDate(note.data.date)}
+            </time>
+            <a href={`/notes/${note.id}/`}>{note.data.title}</a>
+            <p>{note.data.summary}</p>
+            <div class="tags">
+              {note.data.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 </BaseLayout>

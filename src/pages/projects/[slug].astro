@@ -12,6 +12,12 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
 ---
 
 <BaseLayout title={`${project.data.title} / Projects / Robert Jackson`}>
@@ -19,7 +25,7 @@ const { Content } = await render(project);
     <header>
       <p class="eyebrow">Project</p>
       <h1>{project.data.title}</h1>
-      <p class="meta">{project.data.status}</p>
+      <p class="meta">{project.data.status} · updated {formattedUpdated}</p>
       <p>{project.data.summary}</p>
       <div class="tags">
         {project.data.tags.map((tag) => <span>{tag}</span>)}

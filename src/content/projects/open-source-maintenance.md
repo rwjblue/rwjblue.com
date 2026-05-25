@@ -1,6 +1,7 @@
 ---
 title: Open source maintenance
 status: historical
+updated: 2026-05-22
 summary: Long-running project work, release discipline, compatibility constraints, and community-facing technical decisions.
 tags:
   - open-source

@@ -6,9 +6,13 @@ const notes = (await getCollection("notes"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
-const projects = await getCollection("projects");
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.updated.valueOf() - a.data.updated.valueOf(),
+);
 
-const bench = [
+const recentProjects = projects.slice(0, 3);
+
+const currentBench = [
   {
     label: "Radio",
     text: "N1RWJ, CW practice, POTA, portable station setup, remote operation.",
@@ -24,7 +28,12 @@ const bench = [
 ];
 
 const formatDate = (date: Date) =>
-  date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 ---
 
 <BaseLayout>
@@ -49,7 +58,7 @@ const formatDate = (date: Date) =>
       <h2 id="bench-title">Current bench</h2>
       <div class="bench-list">
         {
-          bench.map((item) => (
+          currentBench.map((item) => (
             <div>
               <span>{item.label}</span>
               <p>{item.text}</p>
@@ -60,7 +69,7 @@ const formatDate = (date: Date) =>
     </aside>
   </section>
 
-  <section class="section-grid" aria-label="Recent activity and selected artifacts">
+  <section class="section-grid" aria-label="Recent activity and recently updated projects">
     <div class="section-block">
       <div class="section-heading">
         <p class="section-label">Recent</p>
@@ -83,14 +92,16 @@ const formatDate = (date: Date) =>
 
     <div class="section-block">
       <div class="section-heading">
-        <p class="section-label">Artifacts</p>
-        <h2>Selected artifacts</h2>
+        <p class="section-label">Projects</p>
+        <h2>Recently updated projects</h2>
       </div>
       <div class="artifact-list">
         {
-          projects.map((project) => (
+          recentProjects.map((project) => (
             <a href={`/projects/${project.id}/`} class="artifact-item">
-              <span>{project.data.status}</span>
+              <span>
+                {project.data.status} · updated {formatDate(project.data.updated)}
+              </span>
               <strong>{project.data.title}</strong>
               <p>{project.data.summary}</p>
             </a>
@@ -112,7 +123,6 @@ const formatDate = (date: Date) =>
       <a href="/notes/">Notes</a>
       <a href="/projects/">Projects</a>
       <a href="/radio/">Radio</a>
-      <a href="/now/">Now</a>
     </nav>
   </section>
 </BaseLayout>
