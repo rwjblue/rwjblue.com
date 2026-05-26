@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import trackerData from "../../data/pota/ri-tracker.json";
 
-const deadline = "December 31, 2026";
 const shareDescription = `${trackerData.summary.completed} of ${trackerData.summary.total} Rhode Island POTA references activated. Interactive map and reference checklist for N1RWJ's 2026 challenge.`;
 const generatedDate = new Date(trackerData.generatedAt).toLocaleDateString(
   "en-US",
@@ -48,12 +47,11 @@ const formatModes = (activation: {
       <p class="eyebrow">Project / POTA</p>
       <h1 id="page-title">2026 Activate All RI POTA</h1>
       <p class="lede strong">
-        Activate every POTA reference associated with Rhode Island by {deadline}.
+        Activate every POTA reference associated with Rhode Island in 2026.
       </p>
       <p class="lede">
-        Completed activations count across my callsigns. The reference list comes
-        from POTA's Rhode Island park data, including multi-state references that
-        include Rhode Island.
+        The reference list comes from POTA's Rhode Island park data, including
+        multi-state references that include Rhode Island.
       </p>
     </div>
 
