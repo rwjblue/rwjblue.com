@@ -267,6 +267,21 @@ p {
   margin-bottom: 0;
 }
 
+.section-more {
+  padding-top: 14px;
+}
+
+.section-more a {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.section-more a:hover {
+  color: var(--blue);
+}
+
 .artifact-list {
   display: grid;
   grid-template-columns: 1fr;
