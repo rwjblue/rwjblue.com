@@ -9,6 +9,17 @@ export async function getStaticPaths() {
 
 const { note } = Astro.props;
 const { Content } = await render(note);
+const firstMarkdownImage = note.body.match(
+  /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/,
+);
+const firstHtmlImage = note.body.match(
+  /<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/i,
+);
+const firstHtmlImageAlt = note.body.match(
+  /<img\b[^>]*\balt=["']([^"']*)["'][^>]*>/i,
+);
+const socialImage = firstMarkdownImage?.[2] ?? firstHtmlImage?.[1];
+const socialImageAlt = firstMarkdownImage?.[1] ?? firstHtmlImageAlt?.[1];
 const formattedDate = note.data.date.toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
@@ -17,7 +28,14 @@ const formattedDate = note.data.date.toLocaleDateString("en-US", {
 });
 ---
 
-<BaseLayout title={`${note.data.title} / Notes / Robert Jackson`}>
+<BaseLayout
+  title={`${note.data.title} / Notes / Robert Jackson`}
+  description={note.data.summary}
+  canonicalPath={`/notes/${note.id}/`}
+  image={socialImage}
+  imageAlt={socialImageAlt}
+  type="article"
+>
   <article class="document">
     <header>
       <p class="eyebrow">Note</p>

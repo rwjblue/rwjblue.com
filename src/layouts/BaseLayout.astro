@@ -4,12 +4,25 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  canonicalPath?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
 }
 
 const {
   title = "Robert Jackson / rwjblue / N1RWJ",
   description = "Robert Jackson, rwjblue, and N1RWJ. Software, open source, amateur radio, notes, and experiments.",
+  canonicalPath = Astro.url.pathname,
+  image,
+  imageAlt,
+  type = "website",
 } = Astro.props;
+
+const siteUrl = "https://rwjblue.com";
+const absoluteUrl = (path: string) => new URL(path, siteUrl).toString();
+const canonicalUrl = absoluteUrl(canonicalPath);
+const socialImage = image ? absoluteUrl(image) : undefined;
 
 const nav = [
   { href: "/", label: "Home" },
@@ -25,6 +38,7 @@ const nav = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link
       rel="alternate"
@@ -32,6 +46,21 @@ const nav = [
       title="Robert Jackson / Notes"
       href="/rss.xml"
     />
+    <meta property="og:site_name" content="Robert Jackson / rwjblue / N1RWJ" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+    <meta
+      name="twitter:card"
+      content={socialImage ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
     <title>{title}</title>
   </head>
   <body>

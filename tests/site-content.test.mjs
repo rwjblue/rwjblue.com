@@ -93,6 +93,20 @@ test("layout advertises the notes rss feed", () => {
   assert.match(layout, /href="\/rss\.xml"/);
 });
 
+test("notes provide social share metadata", () => {
+  const layout = read("src/layouts/BaseLayout.astro");
+  const notePage = read("src/pages/notes/[slug].astro");
+
+  assert.match(layout, /rel="canonical"/);
+  assert.match(layout, /property="og:title"/);
+  assert.match(layout, /property="og:description"/);
+  assert.match(layout, /property="og:image"/);
+  assert.match(layout, /name="twitter:card"/);
+  assert.match(notePage, /description=\{note\.data\.summary\}/);
+  assert.match(notePage, /canonicalPath=\{`\/notes\/\$\{note\.id\}\/`\}/);
+  assert.match(notePage, /type="article"/);
+});
+
 test("legacy note slugs redirect to their current urls", () => {
   assert.ok(existsSync("public/_redirects"));
 
