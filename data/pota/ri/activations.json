@@ -25,6 +25,929 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-7719",
+      "park": "Misquamicut State Beach",
+      "date": "2026-05-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 15,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7518",
+      "park": "Kimball Wildlife Refuge",
+      "date": "2026-05-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6983",
+      "park": "Woody Hill Wildlife Management Area",
+      "date": "2026-05-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2871",
+      "park": "Burlingame State Park",
+      "date": "2026-05-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7717",
+      "park": "Charlestown Breachway State Park",
+      "date": "2026-05-24",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 15,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0517",
+      "park": "Trustom Pond National Wildlife Refuge",
+      "date": "2026-05-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 19,
+        "cw": 19,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7721",
+      "park": "Salty Brine State Beach",
+      "date": "2026-05-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7720",
+      "park": "Roger W. Wheeler State Beach",
+      "date": "2026-05-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 15,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7718",
+      "park": "East Matunuck State Beach",
+      "date": "2026-05-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 25,
+        "cw": 25,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2873",
+      "park": "Fishermen's Memorial State Park",
+      "date": "2026-05-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7717",
+      "park": "Charlestown Breachway State Park",
+      "date": "2026-05-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 2,
+        "cw": 2,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2880",
+      "park": "Snake Den State Park",
+      "date": "2026-05-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 27,
+        "cw": 27,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-20",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 23,
+        "cw": 23,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-19",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-18",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 16,
+        "cw": 16,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2876",
+      "park": "Goddard Memorial State Park",
+      "date": "2026-05-16",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 10,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-15",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6982",
+      "park": "Big River Wildlife Management Area",
+      "date": "2026-05-14",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 20,
+        "cw": 20,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-13",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-12",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-10547",
+      "park": "Silver Spring State Recreation Area",
+      "date": "2026-05-11",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-10544",
+      "park": "Jerimoth Hill State Recreation Area",
+      "date": "2026-05-10",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 18,
+        "cw": 18,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-5482",
+      "park": "Wickaboxet Wildlife Management Area",
+      "date": "2026-05-09",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 18,
+        "cw": 18,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0789",
+      "park": "Roger Williams National Memorial",
+      "date": "2026-02-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 14,
+        "cw": 0,
+        "data": 0,
+        "phone": 14
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-0789",
+      "park": "Roger Williams National Memorial",
+      "date": "2025-09-27",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 31,
+        "cw": 0,
+        "data": 0,
+        "phone": 31
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2868",
+      "park": "Beavertail State Park",
+      "date": "2026-02-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 18,
+        "cw": 0,
+        "data": 0,
+        "phone": 18
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2869",
+      "park": "Blackstone River State Park",
+      "date": "2025-10-18",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 40,
+        "cw": 0,
+        "data": 0,
+        "phone": 40
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2870",
+      "park": "Brenton Point State Park",
+      "date": "2026-02-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 0,
+        "data": 0,
+        "phone": 11
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2871",
+      "park": "Burlingame State Park",
+      "date": "2025-11-16",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 5,
+        "cw": 0,
+        "data": 0,
+        "phone": 5
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2874",
+      "park": "Fort Adams State Park",
+      "date": "2026-02-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 13,
+        "cw": 0,
+        "data": 0,
+        "phone": 13
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2874",
+      "park": "Fort Adams State Park",
+      "date": "2026-02-27",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 25,
+        "cw": 0,
+        "data": 0,
+        "phone": 25
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2875",
+      "park": "Fort Wetherill State Park",
+      "date": "2026-02-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 0,
+        "data": 0,
+        "phone": 11
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2877",
+      "park": "Haines Memorial State Park",
+      "date": "2026-05-03",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 38,
+        "cw": 38,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2877",
+      "park": "Haines Memorial State Park",
+      "date": "2026-03-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 29,
+        "cw": 0,
+        "data": 0,
+        "phone": 29
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2878",
+      "park": "Lincoln Woods State Park",
+      "date": "2026-01-10",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 20,
+        "cw": 0,
+        "data": 0,
+        "phone": 20
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2878",
+      "park": "Lincoln Woods State Park",
+      "date": "2025-11-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 1,
+        "cw": 0,
+        "data": 0,
+        "phone": 1
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2879",
+      "park": "Rocky Point State Park",
+      "date": "2026-02-22",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 71,
+        "cw": 0,
+        "data": 0,
+        "phone": 71
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-2880",
+      "park": "Snake Den State Park",
+      "date": "2025-10-29",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 18,
+        "cw": 0,
+        "data": 0,
+        "phone": 18
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-4582",
+      "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "date": "2026-03-29",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 1,
+        "cw": 0,
+        "data": 0,
+        "phone": 1
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-4582",
+      "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "date": "2026-02-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 0,
+        "data": 0,
+        "phone": 11
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-5483",
+      "park": "Lincoln Woods State Forest",
+      "date": "2026-01-10",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 20,
+        "cw": 0,
+        "data": 0,
+        "phone": 20
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-5483",
+      "park": "Lincoln Woods State Forest",
+      "date": "2025-11-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 1,
+        "cw": 0,
+        "data": 0,
+        "phone": 1
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-5484",
+      "park": "George Washington Memorial State Forest",
+      "date": "2026-04-18",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 23,
+        "cw": 4,
+        "data": 0,
+        "phone": 19
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-5484",
+      "park": "George Washington Memorial State Forest",
+      "date": "2026-03-08",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 84,
+        "cw": 0,
+        "data": 0,
+        "phone": 84
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6979",
+      "park": "Arcadia Management Area",
+      "date": "2026-04-14",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 24,
+        "cw": 1,
+        "data": 0,
+        "phone": 23
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6982",
+      "park": "Big River Wildlife Management Area",
+      "date": "2025-11-01",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 3,
+        "cw": 0,
+        "data": 0,
+        "phone": 3
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6987",
+      "park": "Cocumcussoc State Park",
+      "date": "2026-04-04",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 69,
+        "cw": 0,
+        "data": 0,
+        "phone": 69
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6990",
+      "park": "Nicholas Farm Wildlife Management Area",
+      "date": "2026-03-15",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 0,
+        "data": 0,
+        "phone": 11
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-08",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-06",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 9,
+        "cw": 9,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-05",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-04-30",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 25,
+        "cw": 25,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-04-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-04-27",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-04-11",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 54,
+        "cw": 0,
+        "data": 0,
+        "phone": 54
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-04-10",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 0,
+        "data": 0,
+        "phone": 11
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-03-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 64,
+        "cw": 0,
+        "data": 0,
+        "phone": 64
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-03-19",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 121,
+        "cw": 0,
+        "data": 0,
+        "phone": 121
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-03-11",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 92,
+        "cw": 0,
+        "data": 0,
+        "phone": 92
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-03-09",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 76,
+        "cw": 0,
+        "data": 0,
+        "phone": 76
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-03-06",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 85,
+        "cw": 0,
+        "data": 0,
+        "phone": 85
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2025-11-26",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 0,
+        "data": 0,
+        "phone": 15
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2025-11-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 5,
+        "cw": 0,
+        "data": 0,
+        "phone": 5
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2025-11-15",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 0,
+        "data": 0,
+        "phone": 12
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2025-11-08",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 18,
+        "cw": 0,
+        "data": 0,
+        "phone": 18
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2025-09-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 0,
+        "data": 0,
+        "phone": 10
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-7722",
+      "park": "Scarborough North State Beach",
+      "date": "2026-04-26",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 13,
+        "cw": 13,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-7723",
+      "park": "John H. Chaffee Rome Point State Nature Preserve",
+      "date": "2026-04-04",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 30,
+        "cw": 0,
+        "data": 0,
+        "phone": 30
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-10542",
+      "park": "Camp Cronin State Recreation Area",
+      "date": "2026-05-01",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 17,
+        "cw": 17,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-10543",
+      "park": "Patriots Park State Historic Site",
+      "date": "2026-02-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 0,
+        "data": 0,
+        "phone": 11
+      },
+      "source": "backfill"
+    },
+    {
+      "reference": "US-10548",
+      "park": "Barber Pond State Recreation Area",
+      "date": "2026-04-05",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 93,
+        "cw": 0,
+        "data": 0,
+        "phone": 93
+      },
+      "source": "backfill"
     }
   ]
 }

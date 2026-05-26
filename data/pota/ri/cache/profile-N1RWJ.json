@@ -1,0 +1,686 @@
+{
+  "id": 79307,
+  "callsign": "N1RWJ",
+  "other_callsigns": [
+    "KC1YDM",
+    "KB9SMK"
+  ],
+  "name": "Robert Jackson",
+  "qth": "Providence, RI, USA",
+  "sk": 0,
+  "grid": "FN41fr",
+  "gravatar": "ba9860a14193e5bff4c93cdde3608492",
+  "stats": {
+    "activator": {
+      "activations": 70,
+      "parks": 44,
+      "qsos": 1805
+    },
+    "attempts": {
+      "activations": 78,
+      "parks": 44,
+      "qsos": 1832
+    },
+    "hunter": {
+      "parks": 429,
+      "qsos": 606
+    },
+    "awards": 22,
+    "endorsements": 47
+  },
+  "recent_activity": {
+    "activations": [
+      {
+        "date": "2026-05-25",
+        "reference": "US-7865",
+        "park": "East State Beach",
+        "location": "US-RI",
+        "cw": 15,
+        "data": 0,
+        "phone": 0,
+        "total": 15
+      },
+      {
+        "date": "2026-05-25",
+        "reference": "US-7719",
+        "park": "Misquamicut State Beach",
+        "location": "US-RI",
+        "cw": 15,
+        "data": 0,
+        "phone": 0,
+        "total": 15
+      },
+      {
+        "date": "2026-05-25",
+        "reference": "US-7518",
+        "park": "Kimball Wildlife Refuge",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-05-25",
+        "reference": "US-6983",
+        "park": "Woody Hill Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-05-25",
+        "reference": "US-2871",
+        "park": "Burlingame State Park",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-05-25",
+        "reference": "US-0515",
+        "park": "Ninigret National Wildlife Refuge",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-05-24",
+        "reference": "US-7717",
+        "park": "Charlestown Breachway State Park",
+        "location": "US-RI",
+        "cw": 15,
+        "data": 0,
+        "phone": 0,
+        "total": 15
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-0517",
+        "park": "Trustom Pond National Wildlife Refuge",
+        "location": "US-RI",
+        "cw": 19,
+        "data": 0,
+        "phone": 0,
+        "total": 19
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-7721",
+        "park": "Salty Brine State Beach",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-7720",
+        "park": "Roger W. Wheeler State Beach",
+        "location": "US-RI",
+        "cw": 15,
+        "data": 0,
+        "phone": 0,
+        "total": 15
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-7718",
+        "park": "East Matunuck State Beach",
+        "location": "US-RI",
+        "cw": 25,
+        "data": 0,
+        "phone": 0,
+        "total": 25
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-2873",
+        "park": "Fishermen's Memorial State Park",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-7717",
+        "park": "Charlestown Breachway State Park",
+        "location": "US-RI",
+        "cw": 2,
+        "data": 0,
+        "phone": 0,
+        "total": 2
+      },
+      {
+        "date": "2026-05-21",
+        "reference": "US-2880",
+        "park": "Snake Den State Park",
+        "location": "US-RI",
+        "cw": 27,
+        "data": 0,
+        "phone": 0,
+        "total": 27
+      },
+      {
+        "date": "2026-05-20",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 23,
+        "data": 0,
+        "phone": 0,
+        "total": 23
+      },
+      {
+        "date": "2026-05-19",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-05-18",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 16,
+        "data": 0,
+        "phone": 0,
+        "total": 16
+      },
+      {
+        "date": "2026-05-16",
+        "reference": "US-2876",
+        "park": "Goddard Memorial State Park",
+        "location": "US-RI",
+        "cw": 10,
+        "data": 0,
+        "phone": 0,
+        "total": 10
+      },
+      {
+        "date": "2026-05-15",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-05-14",
+        "reference": "US-6982",
+        "park": "Big River Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 20,
+        "data": 0,
+        "phone": 0,
+        "total": 20
+      },
+      {
+        "date": "2026-05-13",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-05-12",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-05-11",
+        "reference": "US-10547",
+        "park": "Silver Spring State Recreation Area",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-05-10",
+        "reference": "US-10544",
+        "park": "Jerimoth Hill State Recreation Area",
+        "location": "US-RI",
+        "cw": 18,
+        "data": 0,
+        "phone": 0,
+        "total": 18
+      },
+      {
+        "date": "2026-05-09",
+        "reference": "US-5482",
+        "park": "Wickaboxet Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 18,
+        "data": 0,
+        "phone": 0,
+        "total": 18
+      }
+    ],
+    "hunter_qsos": [
+      {
+        "date": "2026-05-25T20:41:00",
+        "callsign": "NI6L",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6434",
+        "park": "Champoeg State Park",
+        "location": "US-OR"
+      },
+      {
+        "date": "2026-05-25T20:21:00",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-05-25T20:20:01",
+        "callsign": "KB5YZY",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-13258",
+        "park": "Possum Woods State Conservation Area",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-05-25T19:11:19",
+        "callsign": "W8EO",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6771",
+        "park": "Rose Lake State Game Land",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-05-25T18:50:58",
+        "callsign": "N4MQU",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6947",
+        "park": "Sandhills State Game Land",
+        "location": "US-NC"
+      },
+      {
+        "date": "2026-05-25T17:33:00",
+        "callsign": "NL5Y",
+        "band": "17M",
+        "mode": "CW",
+        "reference": "US-8333",
+        "park": "Garcon Point State Conservation Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-05-25T17:24:00",
+        "callsign": "N4JAW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-7956",
+        "park": "Beargrass Creek State Nature Preserve",
+        "location": "US-KY"
+      },
+      {
+        "date": "2026-05-25T17:00:00",
+        "callsign": "NL5Y",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-8333",
+        "park": "Garcon Point State Conservation Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-05-24T19:50:07",
+        "callsign": "KC3DSO",
+        "band": "40M",
+        "mode": "PHONE",
+        "reference": "US-1733",
+        "park": "Cape Henlopen State Park",
+        "location": "US-DE"
+      },
+      {
+        "date": "2026-05-24T19:50:07",
+        "callsign": "KC3DSO",
+        "band": "40M",
+        "mode": "PHONE",
+        "reference": "US-9877",
+        "park": "Junction and Breakwater National Recreation Trail",
+        "location": "US-DE"
+      },
+      {
+        "date": "2026-05-23T22:47:00",
+        "callsign": "N3FE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-8736",
+        "park": "PA 037 State Game Land",
+        "location": "US-PA"
+      },
+      {
+        "date": "2026-05-23T21:12:40",
+        "callsign": "KG0HG",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10589",
+        "park": "Friendly Prairie State Conservation Area",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-05-23T20:48:14",
+        "callsign": "K0ACP",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6667",
+        "park": "Edmore State Game Land",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-05-23T19:25:46",
+        "callsign": "K1NW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-7718",
+        "park": "East Matunuck State Beach",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-05-23T16:39:00",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-05-22T18:56:47",
+        "callsign": "W5P",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3000",
+        "park": "Cooper Lake State Park",
+        "location": "US-TX"
+      },
+      {
+        "date": "2026-05-20T23:45:12",
+        "callsign": "KA0CSW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-0362",
+        "park": "Litchfield Wetland Management District",
+        "location": "US-MN"
+      },
+      {
+        "date": "2026-05-20T23:37:29",
+        "callsign": "NQ1F",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-0321",
+        "park": "Great Meadows National Wildlife Refuge",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-05-20T14:22:00",
+        "callsign": "K3CBK",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2542",
+        "park": "Lake Lincoln State Park",
+        "location": "US-MS"
+      },
+      {
+        "date": "2026-05-20T13:14:00",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-05-20T13:02:00",
+        "callsign": "NL5Y",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-8333",
+        "park": "Garcon Point State Conservation Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-05-20T13:00:22",
+        "callsign": "K1NW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-7722",
+        "park": "Scarborough North State Beach",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-05-18T20:08:06",
+        "callsign": "KC3UKC",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1352",
+        "park": "Fort Washington State Park",
+        "location": "US-PA"
+      },
+      {
+        "date": "2026-05-18T19:44:00",
+        "callsign": "KE9DGT",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-0717",
+        "park": "Fredericksburg and Spotsylvania National Military Park",
+        "location": "US-VA"
+      },
+      {
+        "date": "2026-05-18T18:44:52",
+        "callsign": "KE9DGT",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-0717",
+        "park": "Fredericksburg and Spotsylvania National Military Park",
+        "location": "US-VA"
+      }
+    ]
+  },
+  "awards": [
+    {
+      "name": "Bronze Activator",
+      "granted": "2026-02-22T23:42:07",
+      "endorsements": [
+        "20M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Silver Activator",
+      "granted": "2026-03-21T23:32:58",
+      "endorsements": [
+        "20M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Gold Activator",
+      "granted": "2026-05-11T18:44:16",
+      "endorsements": [
+        "20M"
+      ]
+    },
+    {
+      "name": "Platinum Activator",
+      "granted": "2026-05-26T02:02:52",
+      "endorsements": []
+    },
+    {
+      "name": "Bronze Hunter",
+      "granted": "2025-09-02T02:46:33",
+      "endorsements": [
+        "10M",
+        "15M",
+        "17M",
+        "20M",
+        "30M",
+        "40M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Silver Hunter",
+      "granted": "2025-09-08T15:30:47",
+      "endorsements": [
+        "17M",
+        "20M",
+        "40M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Gold Hunter",
+      "granted": "2025-09-21T21:22:50",
+      "endorsements": [
+        "20M",
+        "40M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Platinum Hunter",
+      "granted": "2025-09-26T15:18:01",
+      "endorsements": [
+        "20M",
+        "40M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Diamond Hunter",
+      "granted": "2025-10-15T16:19:58",
+      "endorsements": [
+        "20M",
+        "40M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Sapphire Hunter",
+      "granted": "2025-11-12T21:58:26",
+      "endorsements": [
+        "20M",
+        "40M",
+        "CW",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Arizona Agave Hunter",
+      "granted": "2025-12-19T11:55:39",
+      "endorsements": [
+        "20M",
+        "40M",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Enrubio Hunter",
+      "granted": "2026-03-08T20:27:11",
+      "endorsements": [
+        "20M",
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Ouachita Mountain Goldenrod Hunter",
+      "granted": "2026-04-05T18:45:31",
+      "endorsements": [
+        "PHONE"
+      ]
+    },
+    {
+      "name": "Stenogyne Kanehoana Hunter",
+      "granted": "2026-05-12T22:51:10",
+      "endorsements": []
+    },
+    {
+      "name": "Oasis Activator",
+      "granted": "2026-05-22T15:33:57",
+      "endorsements": []
+    },
+    {
+      "name": "Park to Park",
+      "granted": "2025-11-12T18:23:17",
+      "endorsements": []
+    },
+    {
+      "name": "Support Your Parks Activator",
+      "granted": "2025-10-18T20:55:58",
+      "endorsements": [
+        "Autumn 2025",
+        "Spring 2026"
+      ]
+    },
+    {
+      "name": "Support Your Parks Hunter",
+      "granted": "2025-10-18T21:22:04",
+      "endorsements": [
+        "Autumn 2025",
+        "Spring 2026"
+      ]
+    },
+    {
+      "name": "New Years Hunter",
+      "granted": "2026-01-01T20:31:33",
+      "endorsements": [
+        "2026"
+      ]
+    },
+    {
+      "name": "DX Hunter",
+      "granted": "2026-03-25T20:32:49",
+      "endorsements": []
+    },
+    {
+      "name": "Rover Warthog",
+      "granted": "2026-02-28T00:00:00",
+      "endorsements": []
+    },
+    {
+      "name": "Early Shift Activator",
+      "granted": "2026-04-30T20:18:23",
+      "endorsements": []
+    }
+  ]
+}

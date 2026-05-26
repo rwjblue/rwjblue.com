@@ -1,0 +1,426 @@
+[
+  {
+    "activeCallsign": "K1ECU",
+    "qso_date": "20260516",
+    "totalQSOs": 14,
+    "qsosCW": 14,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "WA1VIN",
+    "qso_date": "20260411",
+    "totalQSOs": 1,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 1
+  },
+  {
+    "activeCallsign": "N0TAR",
+    "qso_date": "20260405",
+    "totalQSOs": 11,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 11
+  },
+  {
+    "activeCallsign": "N1CNV",
+    "qso_date": "20260219",
+    "totalQSOs": 25,
+    "qsosCW": 0,
+    "qsosDATA": 25,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "WA1VIN",
+    "qso_date": "20260117",
+    "totalQSOs": 7,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 7
+  },
+  {
+    "activeCallsign": "WC1N",
+    "qso_date": "20251220",
+    "totalQSOs": 17,
+    "qsosCW": 17,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "KC1QDZ",
+    "qso_date": "20251128",
+    "totalQSOs": 44,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 44
+  },
+  {
+    "activeCallsign": "K1NW",
+    "qso_date": "20250829",
+    "totalQSOs": 21,
+    "qsosCW": 21,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20250421",
+    "totalQSOs": 21,
+    "qsosCW": 21,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "WB4JIM",
+    "qso_date": "20240817",
+    "totalQSOs": 106,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 106
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20240816",
+    "totalQSOs": 77,
+    "qsosCW": 57,
+    "qsosDATA": 0,
+    "qsosPHONE": 20
+  },
+  {
+    "activeCallsign": "NN3E",
+    "qso_date": "20240613",
+    "totalQSOs": 25,
+    "qsosCW": 25,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20240303",
+    "totalQSOs": 37,
+    "qsosCW": 37,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "K1RDD",
+    "qso_date": "20240210",
+    "totalQSOs": 48,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 48
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20240112",
+    "totalQSOs": 43,
+    "qsosCW": 30,
+    "qsosDATA": 0,
+    "qsosPHONE": 13
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231115",
+    "totalQSOs": 22,
+    "qsosCW": 17,
+    "qsosDATA": 0,
+    "qsosPHONE": 5
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231114",
+    "totalQSOs": 20,
+    "qsosCW": 20,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231113",
+    "totalQSOs": 28,
+    "qsosCW": 28,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231112",
+    "totalQSOs": 17,
+    "qsosCW": 17,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231108",
+    "totalQSOs": 23,
+    "qsosCW": 21,
+    "qsosDATA": 0,
+    "qsosPHONE": 2
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231106",
+    "totalQSOs": 55,
+    "qsosCW": 33,
+    "qsosDATA": 0,
+    "qsosPHONE": 22
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231105",
+    "totalQSOs": 31,
+    "qsosCW": 10,
+    "qsosDATA": 0,
+    "qsosPHONE": 21
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231101",
+    "totalQSOs": 80,
+    "qsosCW": 30,
+    "qsosDATA": 0,
+    "qsosPHONE": 50
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231031",
+    "totalQSOs": 59,
+    "qsosCW": 31,
+    "qsosDATA": 0,
+    "qsosPHONE": 28
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231025",
+    "totalQSOs": 50,
+    "qsosCW": 34,
+    "qsosDATA": 0,
+    "qsosPHONE": 16
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231020",
+    "totalQSOs": 156,
+    "qsosCW": 80,
+    "qsosDATA": 0,
+    "qsosPHONE": 76
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231019",
+    "totalQSOs": 129,
+    "qsosCW": 73,
+    "qsosDATA": 0,
+    "qsosPHONE": 56
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231018",
+    "totalQSOs": 92,
+    "qsosCW": 41,
+    "qsosDATA": 0,
+    "qsosPHONE": 51
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231016",
+    "totalQSOs": 107,
+    "qsosCW": 50,
+    "qsosDATA": 0,
+    "qsosPHONE": 57
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231015",
+    "totalQSOs": 111,
+    "qsosCW": 50,
+    "qsosDATA": 0,
+    "qsosPHONE": 61
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231013",
+    "totalQSOs": 102,
+    "qsosCW": 47,
+    "qsosDATA": 0,
+    "qsosPHONE": 55
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20231012",
+    "totalQSOs": 76,
+    "qsosCW": 50,
+    "qsosDATA": 0,
+    "qsosPHONE": 26
+  },
+  {
+    "activeCallsign": "KB3WAV",
+    "qso_date": "20230910",
+    "totalQSOs": 11,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 11
+  },
+  {
+    "activeCallsign": "KA1THY",
+    "qso_date": "20230908",
+    "totalQSOs": 27,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 27
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20230908",
+    "totalQSOs": 27,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 27
+  },
+  {
+    "activeCallsign": "K3SDM",
+    "qso_date": "20230905",
+    "totalQSOs": 16,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 16
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20230813",
+    "totalQSOs": 67,
+    "qsosCW": 44,
+    "qsosDATA": 0,
+    "qsosPHONE": 23
+  },
+  {
+    "activeCallsign": "N1BS",
+    "qso_date": "20230218",
+    "totalQSOs": 139,
+    "qsosCW": 4,
+    "qsosDATA": 0,
+    "qsosPHONE": 135
+  },
+  {
+    "activeCallsign": "KC1QDZ",
+    "qso_date": "20230102",
+    "totalQSOs": 32,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 32
+  },
+  {
+    "activeCallsign": "KC1QDZ",
+    "qso_date": "20221203",
+    "totalQSOs": 22,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 22
+  },
+  {
+    "activeCallsign": "K8ZFJ",
+    "qso_date": "20221114",
+    "totalQSOs": 12,
+    "qsosCW": 12,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "K9JFB",
+    "qso_date": "20221025",
+    "totalQSOs": 10,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 10
+  },
+  {
+    "activeCallsign": "N1ET",
+    "qso_date": "20220424",
+    "totalQSOs": 14,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 14
+  },
+  {
+    "activeCallsign": "KC1MEB/SK",
+    "qso_date": "20220305",
+    "totalQSOs": 19,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 19
+  },
+  {
+    "activeCallsign": "NU1U",
+    "qso_date": "20220305",
+    "totalQSOs": 13,
+    "qsosCW": 13,
+    "qsosDATA": 0,
+    "qsosPHONE": 0
+  },
+  {
+    "activeCallsign": "K1XHX",
+    "qso_date": "20220227",
+    "totalQSOs": 11,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 11
+  },
+  {
+    "activeCallsign": "KC1NDQ",
+    "qso_date": "20220221",
+    "totalQSOs": 29,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 29
+  },
+  {
+    "activeCallsign": "KB1RS",
+    "qso_date": "20220201",
+    "totalQSOs": 51,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 51
+  },
+  {
+    "activeCallsign": "KC1MEB/SK",
+    "qso_date": "20220119",
+    "totalQSOs": 38,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 38
+  },
+  {
+    "activeCallsign": "K1XHX",
+    "qso_date": "20211213",
+    "totalQSOs": 14,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 14
+  },
+  {
+    "activeCallsign": "W3DRE",
+    "qso_date": "20211023",
+    "totalQSOs": 14,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 14
+  },
+  {
+    "activeCallsign": "WB4SON",
+    "qso_date": "20210413",
+    "totalQSOs": 13,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 13
+  },
+  {
+    "activeCallsign": "W1LY",
+    "qso_date": "20210109",
+    "totalQSOs": 37,
+    "qsosCW": 0,
+    "qsosDATA": 0,
+    "qsosPHONE": 37
+  }
+]
