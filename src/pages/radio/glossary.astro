@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { GLOSSARY } from "../../data/glossary";
+---
+
+<BaseLayout
+  title="Radio Glossary / N1RWJ"
+  description="Short definitions for amateur radio terms that show up in field notes and project pages on this site."
+  canonicalPath="/radio/glossary/"
+>
+  <section class="page-intro">
+    <p class="eyebrow">Radio</p>
+    <h1>Glossary</h1>
+    <p>
+      Short definitions for terms that show up in field notes and project pages
+      here. Not a complete reference — just enough context for readers who
+      aren't deep into amateur radio.
+    </p>
+  </section>
+
+  <section class="section-block wide">
+    <div class="bench-list">
+      {
+        GLOSSARY.map((entry) => (
+          <div>
+            <span>{entry.term}</span>
+            <p>
+              {entry.body}
+              {entry.links && entry.links.length > 0 && (
+                <>
+                  {" "}
+                  {entry.links.map((link, i) => (
+                    <>
+                      <a href={link.href}>{link.label}</a>
+                      {i < entry.links!.length - 1 && ", "}
+                    </>
+                  ))}
+                </>
+              )}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

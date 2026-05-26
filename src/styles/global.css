@@ -421,6 +421,64 @@ p {
   justify-content: center;
 }
 
+.tag-hint {
+  margin-bottom: 28px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.tag-hint summary {
+  color: var(--quiet);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.tag-hint summary::-webkit-details-marker {
+  display: none;
+}
+
+.tag-hint summary::before {
+  content: "▶\00a0";
+}
+
+.tag-hint[open] summary::before {
+  content: "▼\00a0";
+}
+
+.tag-hint-body {
+  padding-top: 10px;
+}
+
+.tag-hint-body > p {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.tag-hint-term {
+  color: var(--ink);
+}
+
+.tag-hint-links {
+  margin-top: 8px;
+  color: var(--quiet);
+  font-size: 0.82rem;
+}
+
+.tag-hint-links a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.tag-hint-links a:hover {
+  text-decoration: underline;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

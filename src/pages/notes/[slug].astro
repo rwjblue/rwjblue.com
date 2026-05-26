@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TagHints from "../../components/TagHints.astro";
 import { formatDate, displayTags } from "../../lib/format";
 
 export async function getStaticPaths() {
@@ -42,6 +43,7 @@ const formattedDate = formatDate(note.data.date, "long");
         {displayTags(note.data.tags).map((tag) => <span>{tag}</span>)}
       </div>
     </header>
+    <TagHints tags={note.data.tags} />
     <Content />
   </article>
 </BaseLayout>

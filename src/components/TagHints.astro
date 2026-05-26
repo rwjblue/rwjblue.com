@@ -1,0 +1,53 @@
+---
+import { GLOSSARY } from "../data/glossary";
+
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+const tagSet = new Set(tags);
+
+const matched = GLOSSARY.filter((entry) => entry.tag && tagSet.has(entry.tag));
+
+const label =
+  matched.length === 1
+    ? (matched[0].hintLabel ?? matched[0].term)
+    : "Unfamiliar with some of these terms?";
+
+const seenHrefs = new Set<string>();
+const links: Array<{ label: string; href: string }> = [];
+for (const entry of matched) {
+  for (const link of entry.links ?? []) {
+    if (!seenHrefs.has(link.href)) {
+      seenHrefs.add(link.href);
+      links.push(link);
+    }
+  }
+}
+const glossaryHref = "/radio/glossary/";
+if (!seenHrefs.has(glossaryHref)) {
+  links.push({ label: "Radio glossary", href: glossaryHref });
+}
+---
+
+{
+  matched.length > 0 && (
+    <details class="tag-hint">
+      <summary>{label}</summary>
+      <div class="tag-hint-body">
+        {matched.map((entry) => (
+          <p><strong class="tag-hint-term">{entry.term}</strong>{" — "}{entry.body}</p>
+        ))}
+        <p class="tag-hint-links">
+          {links.map((link, i) => (
+            <>
+              <a href={link.href}>{link.label}</a>
+              {i < links.length - 1 && " · "}
+            </>
+          ))}
+        </p>
+      </div>
+    </details>
+  )
+}
