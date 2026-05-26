@@ -19,8 +19,7 @@ const {
   type = "website",
 } = Astro.props;
 
-const siteUrl = "https://rwjblue.com";
-const absoluteUrl = (path: string) => new URL(path, siteUrl).toString();
+const absoluteUrl = (path: string) => new URL(path, Astro.url).toString();
 const canonicalUrl = absoluteUrl(canonicalPath);
 const socialImage = image ? absoluteUrl(image) : undefined;
 
