@@ -546,8 +546,7 @@ p {
 }
 
 .pota-reference {
-  display: grid;
-  grid-template-columns: 24px 112px minmax(0, 1fr) minmax(190px, auto);
+  display: flex;
   gap: 12px;
   align-items: center;
   min-height: 52px;
@@ -561,6 +560,8 @@ p {
   font-size: 0.98rem;
   font-weight: 800;
   line-height: 1.25;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .pota-reference:hover .pota-reference-name {
@@ -568,24 +569,30 @@ p {
 }
 
 .pota-reference .meta {
+  flex: 0 0 132px;
   color: var(--quiet);
   font-size: 0.78rem;
   font-weight: 800;
+  line-height: 1.2;
 }
 
 .pota-reference-main {
-  display: contents;
+  display: flex;
+  flex: 1 1 auto;
+  gap: 14px;
+  align-items: center;
+  min-width: 0;
 }
 
 .pota-reference-status {
-  justify-self: end;
-  text-align: right;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .pota-reference-status p {
   color: var(--muted);
   font-size: 0.86rem;
-  line-height: 1.45;
+  line-height: 1.25;
   margin-bottom: 0;
 }
 
@@ -681,6 +688,7 @@ p {
   }
 
   .pota-reference {
+    display: grid;
     grid-template-columns: 24px minmax(0, 1fr);
     gap: 10px;
     align-items: center;
@@ -691,12 +699,20 @@ p {
   .pota-reference-main {
     display: grid;
     gap: 3px;
+    align-items: start;
+  }
+
+  .pota-reference .meta {
+    flex: none;
+  }
+
+  .pota-reference-name {
+    flex: none;
   }
 
   .pota-reference-status {
     grid-column: 2;
-    justify-self: stretch;
-    text-align: left;
+    white-space: normal;
   }
 }
 
