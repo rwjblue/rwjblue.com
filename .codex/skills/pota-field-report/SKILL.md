@@ -34,11 +34,14 @@ ASCII, and hyphenated.
    draft: location or park, operation date, and a basic activation summary.
 3. Preserve uncertainty instead of inventing facts. Mark uncertain details with
    plain prose such as "I need to confirm..." or "I think...".
-4. Read `references/report-template.md` before drafting the report body.
-5. Write the Astro note draft into `src/content/notes/`.
-6. If images are provided or mentioned, create or reference
+4. For a rove or multiple related stops on one day, prefer one combined note
+   unless the user asks for separate posts. Summarize the whole route first,
+   then give each park its own subsection.
+5. Read `references/report-template.md` before drafting the report body.
+6. Write the Astro note draft into `src/content/notes/`.
+7. If images are provided or mentioned, create or reference
    `public/images/pota/<slug>/`.
-7. After writing, run the repository's normal validation for content changes
+8. After writing, run the repository's normal validation for content changes
    when practical: `mise run check` and `mise run build`.
 
 ## Dictation Cleanup
@@ -49,8 +52,29 @@ ASCII, and hyphenated.
   references, callsigns, bands, modes, and rig names.
 - If a callsign, park reference, frequency, band, or QSO count is ambiguous,
   leave it unresolved and ask or mark it as uncertain.
+- When later evidence resolves uncertainty, update the prose directly and
+  remove stale "to confirm" notes.
 - Do not over-polish. The report should still sound like the operator made a
   note soon after the activation.
+
+## Rove Notes
+
+For a multi-park rove, use a single flowing narrative with one subsection per
+park or twofer. Open with the total result when known: number of stops, park
+references, total QSOs, mode, and the main lesson or texture of the day.
+
+For each park subsection:
+
+- Link the heading to the POTA park page:
+  `## [Park Name, US-1234](https://pota.app/#/park/US-1234)`.
+- Include the park name, POTA reference, QSO count, bands, modes, UTC window,
+  and equipment that changed at that stop.
+- Mention setup and teardown time when the user gave it, especially for quick
+  rove logistics.
+- Add frontmatter tags for every park reference, lowercased:
+  `us-7719`, `us-6983`, etc.
+- For twofers, put both linked park references in the same heading and explain
+  the shared operating position once.
 
 ## Editorial Voice
 
@@ -58,6 +82,11 @@ Write from first principles for useful portable radio field notes. The report
 should connect the operator's intent, the site constraints, the station choices,
 the on-air result, and the lessons worth remembering. Keep it in Robert's
 public-site style: plain, technical, concise, modest, and useful later.
+
+Write from Robert's perspective. Prefer direct first-person prose over detached
+phrases like "the station" when "I used..." or "the KX3..." sounds more natural.
+Do not imitate another writer's style directly, but it is fine to aim for a
+practical field-notes feel: grounded observations, useful details, and no hype.
 
 Good field reports usually include:
 
@@ -81,9 +110,13 @@ Avoid:
 
 - Inflated adventure writing.
 - Generic ham-radio filler.
+- Stiff phrasing such as "the station was deployed" when a simpler sentence
+  would sound more like Robert.
 - Treating QRP as implied. Mention QRP only when the user's notes identify the
   operation as QRP.
 - Invented drama, contacts, weather, park facts, or equipment details.
+- Making a corrected field mistake sound like a moral. State what happened, why
+  it matters, and what to remember.
 
 ## Image Handling
 
@@ -93,6 +126,28 @@ them in Markdown with root-relative paths:
 
 ```markdown
 ![Portable station setup at <place>](/images/pota/<slug>/station-setup.jpg)
+```
+
+For roves, put the final route or contact map near the top of the note if one is
+provided. Put park photos inline with the park subsection they describe instead
+of collecting them at the bottom.
+
+When a subsection has several photos, use the site's compact photo grid pattern
+instead of a long run of full-width images:
+
+```html
+<div class="photo-grid">
+  <img src="/images/pota/<slug>/first-photo.jpg" alt="Descriptive alt text">
+  <img src="/images/pota/<slug>/second-photo.jpg" alt="Descriptive alt text">
+</div>
+```
+
+For a single supporting photo that should be smaller than the lead image:
+
+```html
+<div class="photo-grid photo-grid--single">
+  <img src="/images/pota/<slug>/station-setup.jpg" alt="Descriptive alt text">
+</div>
 ```
 
 If images are only mentioned during dictation, add a short "Images to add" list
