@@ -68,3 +68,27 @@ test("date-only frontmatter renders without local timezone drift", () => {
     assert.match(read(path), /timeZone: "UTC"/, path);
   }
 });
+
+test("rss endpoint publishes notes with canonical domains", () => {
+  assert.ok(existsSync("src/pages/rss.xml.ts"));
+
+  const rssEndpoint = read("src/pages/rss.xml.ts");
+
+  assert.match(rssEndpoint, /@astrojs\/rss/);
+  assert.match(rssEndpoint, /getCollection\("notes"\)/);
+  assert.match(rssEndpoint, /markdown-it/);
+  assert.match(rssEndpoint, /sanitize-html/);
+  assert.match(rssEndpoint, /note\.data\.tags\.includes\("radio"\)/);
+  assert.match(rssEndpoint, /https:\/\/n1rwj\.com/);
+  assert.match(rssEndpoint, /https:\/\/rwjblue\.com/);
+  assert.doesNotMatch(rssEndpoint, /getCollection\("projects"\)/);
+});
+
+test("layout advertises the notes rss feed", () => {
+  const layout = read("src/layouts/BaseLayout.astro");
+
+  assert.match(layout, /rel="alternate"/);
+  assert.match(layout, /type="application\/rss\+xml"/);
+  assert.match(layout, /title="Robert Jackson \/ Notes"/);
+  assert.match(layout, /href="\/rss\.xml"/);
+});
