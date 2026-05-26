@@ -10,7 +10,7 @@ const FEED_DESCRIPTION =
   "Field logs, software observations, radio updates, and site notes from Robert Jackson.";
 
 const parser = new MarkdownIt({
-  html: false,
+  html: true,
   linkify: true,
 });
 
