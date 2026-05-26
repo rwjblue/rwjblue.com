@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate } from "../../lib/format";
+import { formatDate, displayTags } from "../../lib/format";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -39,7 +39,7 @@ const formattedDate = formatDate(note.data.date, "long");
       <p class="meta">{formattedDate}</p>
       <p>{note.data.summary}</p>
       <div class="tags">
-        {note.data.tags.map((tag) => <span>{tag}</span>)}
+        {displayTags(note.data.tags).map((tag) => <span>{tag}</span>)}
       </div>
     </header>
     <Content />
