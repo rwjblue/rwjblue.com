@@ -1,0 +1,148 @@
+{
+  "generatedAt": "2026-05-26T12:00:00.000Z",
+  "callsigns": ["N1RWJ", "KC1YDM", "KB9SMK"],
+  "summary": {
+    "completed": 2,
+    "remaining": 2,
+    "total": 4,
+    "percentComplete": 50
+  },
+  "references": [
+    {
+      "reference": "US-4582",
+      "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "latitude": 41.312,
+      "longitude": -73.9709,
+      "grid": "FN31ah",
+      "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
+      "status": "remaining",
+      "potaUrl": "https://pota.app/#/park/US-4582",
+      "firstActivation": null,
+      "latestActivation": null,
+      "activationCount": 0,
+      "notes": [],
+      "publicStats": {
+        "attempts": 2518,
+        "activations": 2471,
+        "qsos": 102631
+      }
+    },
+    {
+      "reference": "US-0513",
+      "name": "Block Island National Wildlife Refuge",
+      "latitude": 41.2133,
+      "longitude": -71.5724,
+      "grid": "FN41ff",
+      "locationDesc": "US-RI",
+      "status": "remaining",
+      "potaUrl": "https://pota.app/#/park/US-0513",
+      "firstActivation": null,
+      "latestActivation": null,
+      "activationCount": 0,
+      "notes": [],
+      "publicStats": {
+        "attempts": 28,
+        "activations": 28,
+        "qsos": 2391
+      }
+    },
+    {
+      "reference": "US-7865",
+      "name": "East State Beach",
+      "latitude": 41.3481,
+      "longitude": -71.6733,
+      "grid": "FN41di",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "potaUrl": "https://pota.app/#/park/US-7865",
+      "firstActivation": {
+        "reference": "US-7865",
+        "park": "East State Beach",
+        "date": "2026-05-25",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 15,
+          "cw": 15,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-7865",
+        "park": "East State Beach",
+        "date": "2026-05-25",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 15,
+          "cw": 15,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "2026-05-25 POTA Rove",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 61,
+        "activations": 61,
+        "qsos": 1948
+      }
+    },
+    {
+      "reference": "US-0515",
+      "name": "Ninigret National Wildlife Refuge",
+      "latitude": 41.3682,
+      "longitude": -71.6716,
+      "grid": "FN41di",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "potaUrl": "https://pota.app/#/park/US-0515",
+      "firstActivation": {
+        "reference": "US-0515",
+        "park": "Ninigret National Wildlife Refuge",
+        "date": "2026-05-25",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 11,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-0515",
+        "park": "Ninigret National Wildlife Refuge",
+        "date": "2026-05-25",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 11,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "2026-05-25 POTA Rove",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 145,
+        "activations": 129,
+        "qsos": 3723
+      }
+    }
+  ]
+}

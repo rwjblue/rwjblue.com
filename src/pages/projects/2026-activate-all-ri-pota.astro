@@ -1,0 +1,228 @@
+---
+import "leaflet/dist/leaflet.css";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import trackerData from "../../data/pota/ri-tracker.json";
+
+const deadline = "December 31, 2026";
+const generatedDate = new Date(trackerData.generatedAt).toLocaleDateString(
+  "en-US",
+  {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  },
+);
+const trackerJson = JSON.stringify(trackerData);
+
+const formatActivationDate = (date: string) =>
+  new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+const formatModes = (activation: {
+  qsos: { cw: number; data: number; phone: number; total: number };
+}) => {
+  const modes = [
+    activation.qsos.cw > 0 ? `${activation.qsos.cw} CW` : null,
+    activation.qsos.data > 0 ? `${activation.qsos.data} data` : null,
+    activation.qsos.phone > 0 ? `${activation.qsos.phone} phone` : null,
+  ].filter(Boolean);
+
+  return modes.length > 0 ? modes.join(" · ") : `${activation.qsos.total} QSOs`;
+};
+---
+
+<BaseLayout
+  title="2026 Activate All RI POTA / Projects / Robert Jackson"
+  description="N1RWJ's map-first tracker for activating every Rhode Island POTA reference by December 31, 2026."
+>
+  <section class="pota-tracker-hero" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow">Project / POTA</p>
+      <h1 id="page-title">2026 Activate All RI POTA</h1>
+      <p class="lede strong">
+        Activate every POTA reference associated with Rhode Island by {deadline}.
+      </p>
+      <p class="lede">
+        Completed activations count across my callsigns. The reference list comes
+        from POTA's Rhode Island park data, including multi-state references that
+        include Rhode Island.
+      </p>
+    </div>
+
+    <aside class="pota-scoreboard" aria-label="Challenge progress">
+      <div>
+        <strong>{trackerData.summary.completed}</strong>
+        <span>completed</span>
+      </div>
+      <div>
+        <strong>{trackerData.summary.remaining}</strong>
+        <span>remaining</span>
+      </div>
+      <div>
+        <strong>{trackerData.summary.percentComplete}%</strong>
+        <span>of {trackerData.summary.total}</span>
+      </div>
+      <p>Last updated {generatedDate}</p>
+    </aside>
+  </section>
+
+  <section class="pota-map-section" aria-labelledby="map-title">
+    <div class="section-heading">
+      <p class="section-label">Map</p>
+      <h2 id="map-title">Rhode Island references</h2>
+    </div>
+    <div id="ri-pota-map" class="pota-map" aria-label="Map of Rhode Island POTA references"></div>
+    <div class="pota-map-legend" aria-label="Map marker legend">
+      <span><i class="complete"></i>Completed</span>
+      <span><i class="remaining"></i>Remaining</span>
+    </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="checklist-title">
+    <div class="section-heading">
+      <p class="section-label">Checklist</p>
+      <h2 id="checklist-title">Remaining first</h2>
+    </div>
+    <div class="pota-reference-list">
+      {
+        trackerData.references.map((reference) => (
+          <article class={`pota-reference ${reference.status}`}>
+            <div>
+              <p class="meta">{reference.reference} · {reference.grid}</p>
+              <h3>{reference.name}</h3>
+              <p>{reference.locationDesc}</p>
+              {reference.notes.length > 0 && (
+                <div class="pota-note-links">
+                  {reference.notes.map((note) => (
+                    <a href={note.href}>{note.title}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div class="pota-reference-status">
+              <span>{reference.status === "completed" ? "Completed" : "Remaining"}</span>
+              {
+                reference.firstActivation ? (
+                  <p>
+                    {formatActivationDate(reference.firstActivation.date)}
+                    <br />
+                    {reference.firstActivation.qsos.total} QSOs · {reference.firstActivation.callsign}
+                  </p>
+                ) : (
+                  <p>Not yet activated</p>
+                )
+              }
+              <a href={reference.potaUrl} target="_blank" rel="noreferrer">
+                POTA
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <script type="application/json" id="ri-pota-tracker-data" set:html={trackerJson} />
+  <script>
+    import L from "leaflet";
+
+    const dataElement = document.getElementById("ri-pota-tracker-data");
+    const mapElement = document.getElementById("ri-pota-map");
+
+    if (dataElement && mapElement) {
+      const tracker = JSON.parse(dataElement.textContent ?? "{}");
+      const map = L.map(mapElement, {
+        scrollWheelZoom: false,
+      });
+      const bounds = L.latLngBounds([]);
+      const rhodeIslandBounds = L.latLngBounds([]);
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      for (const reference of tracker.references) {
+        const color = reference.status === "completed" ? "#167246" : "#ffeb2f";
+        const fillColor = color;
+        const marker = L.circleMarker([reference.latitude, reference.longitude], {
+          radius: 8,
+          color: "#172026",
+          weight: 2,
+          fillColor,
+          fillOpacity: 0.96,
+        }).addTo(map);
+
+        bounds.extend([reference.latitude, reference.longitude]);
+        if (isNearRhodeIsland(reference)) {
+          rhodeIslandBounds.extend([reference.latitude, reference.longitude]);
+        }
+        marker.bindPopup(popupHtml(reference));
+      }
+
+      if (rhodeIslandBounds.isValid()) {
+        map.fitBounds(rhodeIslandBounds, { padding: [28, 28], maxZoom: 10 });
+      } else if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [24, 24] });
+      } else {
+        map.setView([41.58, -71.48], 9);
+      }
+    }
+
+    function popupHtml(reference) {
+      const noteLinks = reference.notes
+        .map((note) => `<a href="${escapeHtml(note.href)}">${escapeHtml(note.title)}</a>`)
+        .join("");
+
+      if (reference.firstActivation) {
+        const activation = reference.firstActivation;
+        return `
+          <strong>${escapeHtml(reference.reference)}</strong>
+          <span>${escapeHtml(reference.name)}</span>
+          <em>Activated ${escapeHtml(activation.date)}</em>
+          <span>${activation.qsos.total} QSOs · ${escapeHtml(activation.callsign)}</span>
+          <a href="${escapeHtml(reference.potaUrl)}" target="_blank" rel="noreferrer">POTA page</a>
+          ${noteLinks}
+        `;
+      }
+
+      return `
+        <strong>${escapeHtml(reference.reference)}</strong>
+        <span>${escapeHtml(reference.name)}</span>
+        <em>Not yet activated</em>
+        <span>${escapeHtml(reference.grid)} · ${escapeHtml(reference.locationDesc)}</span>
+        <a href="${escapeHtml(reference.potaUrl)}" target="_blank" rel="noreferrer">POTA page</a>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => {
+        const entities = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        };
+
+        return entities[char];
+      });
+    }
+
+    function isNearRhodeIsland(reference) {
+      return (
+        reference.latitude >= 41.1 &&
+        reference.latitude <= 42.1 &&
+        reference.longitude >= -72.1 &&
+        reference.longitude <= -71
+      );
+    }
+  </script>
+</BaseLayout>

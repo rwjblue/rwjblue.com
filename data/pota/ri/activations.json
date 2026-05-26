@@ -1,0 +1,30 @@
+{
+  "activations": [
+    {
+      "reference": "US-7865",
+      "park": "East State Beach",
+      "date": "2026-05-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 15,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0515",
+      "park": "Ninigret National Wildlife Refuge",
+      "date": "2026-05-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    }
+  ]
+}

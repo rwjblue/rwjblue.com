@@ -117,3 +117,47 @@ test("legacy note slugs redirect to their current urls", () => {
     /^\/notes\/2026-05-25-rhode-island-pota-rove\/\s+\/notes\/2026-05-25-pota-rove\/\s+301$/m,
   );
 });
+
+test("ri pota tracker uses file-based mise tasks", () => {
+  const taskCommands = [
+    ["update-parks", "update-parks"],
+    ["update-profile", "update-profile"],
+    ["backfill-activations", "backfill-activations"],
+    ["build-tracker-data", "build-tracker-data"],
+    ["update-tracker", "update-tracker"],
+  ];
+
+  assert.ok(existsSync("scripts/pota/ri-tracker.mjs"));
+
+  for (const [file, command] of taskCommands) {
+    const path = `.mise/tasks/pota/ri/${file}`;
+
+    assert.ok(existsSync(path), path);
+
+    const task = read(path);
+
+    assert.match(task, /^#!\/usr\/bin\/env bash/);
+    assert.match(task, /#MISE description=/);
+    assert.match(task, /scripts\/pota\/ri-tracker\.mjs/);
+    assert.match(task, new RegExp(` ${command}(\\s|$)`));
+  }
+});
+
+test("ri pota tracker project page is wired for map-first tracking", () => {
+  assert.ok(existsSync("src/pages/projects/2026-activate-all-ri-pota.astro"));
+  assert.ok(existsSync("src/content/projects/2026-activate-all-ri-pota.md"));
+  assert.ok(existsSync("src/data/pota/ri-tracker.json"));
+  assert.ok(existsSync("data/pota/ri/activations.json"));
+
+  const page = read("src/pages/projects/2026-activate-all-ri-pota.astro");
+  const radio = read("src/pages/radio/index.astro");
+  const project = read("src/content/projects/2026-activate-all-ri-pota.md");
+
+  assert.match(page, /ri-tracker\.json/);
+  assert.match(page, /leaflet/);
+  assert.match(page, /tile\.openstreetmap\.org/);
+  assert.match(page, /OpenStreetMap/);
+  assert.match(page, /remaining/i);
+  assert.match(project, /2026 Activate All RI POTA/);
+  assert.match(radio, /\/projects\/2026-activate-all-ri-pota\//);
+});

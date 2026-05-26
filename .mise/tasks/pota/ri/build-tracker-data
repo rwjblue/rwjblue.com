@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Build generated Rhode Island POTA tracker data from local caches"
+
+set -euo pipefail
+
+node --experimental-strip-types scripts/pota/ri-tracker.mjs build-tracker-data

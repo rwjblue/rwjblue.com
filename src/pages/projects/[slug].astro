@@ -3,7 +3,9 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const projects = await getCollection("projects");
+  const projects = (await getCollection("projects")).filter(
+    (project) => project.id !== "2026-activate-all-ri-pota",
+  );
   return projects.map((project) => ({
     params: { slug: project.id },
     props: { project },
