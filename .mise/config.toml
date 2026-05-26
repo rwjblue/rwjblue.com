@@ -3,6 +3,13 @@ lockfile = true
 
 [tools]
 node = "lts"
+"pipx:pota-mcp" = "latest"
+"pipx:sota-mcp" = "latest"
+"pipx:solar-mcp" = "latest"
+"pipx:wspr-mcp" = "latest"
+"pipx:qrz-mcp" = "latest"
+"pipx:lotw-mcp" = "latest"
+"pipx:qso-graph-auth" = "latest"
 
 [env]
 _.file = ".env"

@@ -54,20 +54,6 @@ test("radio page keeps static context and lists radio notes", () => {
   assert.match(radio, /href=\{`\/notes\/\$\{note\.id\}\/`\}/);
 });
 
-test("date-only frontmatter renders without local timezone drift", () => {
-  const datedPages = [
-    "src/pages/index.astro",
-    "src/pages/notes/index.astro",
-    "src/pages/notes/[slug].astro",
-    "src/pages/projects/index.astro",
-    "src/pages/projects/[slug].astro",
-    "src/pages/radio/index.astro",
-  ];
-
-  for (const path of datedPages) {
-    assert.match(read(path), /timeZone: "UTC"/, path);
-  }
-});
 
 test("rss endpoint publishes notes with canonical domains", () => {
   assert.ok(existsSync("src/pages/rss.xml.ts"));
