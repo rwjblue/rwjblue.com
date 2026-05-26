@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatDate } from "../lib/format";
 
 const notes = (await getCollection("notes"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -27,13 +28,6 @@ const currentBench = [
   },
 ];
 
-const formatDate = (date: Date) =>
-  date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  });
 ---
 
 <BaseLayout>

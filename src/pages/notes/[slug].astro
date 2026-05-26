@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate } from "../../lib/format";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -20,12 +21,7 @@ const firstHtmlImageAlt = note.body.match(
 );
 const socialImage = firstMarkdownImage?.[2] ?? firstHtmlImage?.[1];
 const socialImageAlt = firstMarkdownImage?.[1] ?? firstHtmlImageAlt?.[1];
-const formattedDate = note.data.date.toLocaleDateString("en-US", {
-  month: "long",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-});
+const formattedDate = formatDate(note.data.date, "long");
 ---
 
 <BaseLayout

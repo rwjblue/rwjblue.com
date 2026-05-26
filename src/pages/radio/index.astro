@@ -1,18 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate } from "../../lib/format";
 
 const radioNotes = (await getCollection("notes"))
   .filter((note) => note.data.tags.includes("radio"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const formatDate = (date: Date) =>
-  date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  });
 ---
 
 <BaseLayout title="Radio / N1RWJ">
