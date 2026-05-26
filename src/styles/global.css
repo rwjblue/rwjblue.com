@@ -75,6 +75,10 @@ a {
   color: var(--blue);
 }
 
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+}
+
 main {
   padding-top: 42px;
 }
