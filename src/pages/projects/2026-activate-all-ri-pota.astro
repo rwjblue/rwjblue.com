@@ -42,8 +42,6 @@ const formatModes = (activation: {
   title="RI POTA Challenge / N1RWJ"
   description={shareDescription}
   canonicalPath="/projects/2026-activate-all-ri-pota/"
-  image="/images/pota/ri-pota-challenge-share.png"
-  imageAlt="RI POTA Challenge tracker page with challenge title and completion stats"
 >
   <section class="pota-tracker-hero" aria-labelledby="page-title">
     <div>
@@ -59,32 +57,34 @@ const formatModes = (activation: {
       </p>
     </div>
 
-    <aside class="pota-scoreboard" aria-label="Challenge progress">
-      <div>
-        <strong>{trackerData.summary.completed}</strong>
-        <span>completed</span>
-      </div>
-      <div>
-        <strong>{trackerData.summary.remaining}</strong>
-        <span>remaining</span>
-      </div>
-      <div>
-        <strong>{trackerData.summary.percentComplete}%</strong>
-        <span>of {trackerData.summary.total}</span>
-      </div>
-      <p>Last updated {generatedDate}</p>
-    </aside>
-  </section>
+    <div class="pota-tracker-panel">
+      <aside class="pota-scoreboard" aria-label="Challenge progress">
+        <div>
+          <strong>{trackerData.summary.completed}</strong>
+          <span>completed</span>
+        </div>
+        <div>
+          <strong>{trackerData.summary.remaining}</strong>
+          <span>remaining</span>
+        </div>
+        <div>
+          <strong>{trackerData.summary.percentComplete}%</strong>
+          <span>of {trackerData.summary.total}</span>
+        </div>
+        <p>Last updated {generatedDate}</p>
+      </aside>
 
-  <section class="pota-map-section" aria-labelledby="map-title">
-    <div class="section-heading">
-      <p class="section-label">Map</p>
-      <h2 id="map-title">Rhode Island references</h2>
-    </div>
-    <div id="ri-pota-map" class="pota-map" aria-label="Map of Rhode Island POTA references"></div>
-    <div class="pota-map-legend" aria-label="Map marker legend">
-      <span><i class="complete"></i>Completed</span>
-      <span><i class="remaining"></i>Remaining</span>
+      <section class="pota-map-section" aria-labelledby="map-title">
+        <div class="section-heading">
+          <p class="section-label">Map</p>
+          <h2 id="map-title">Rhode Island references</h2>
+        </div>
+        <div id="ri-pota-map" class="pota-map" aria-label="Map of Rhode Island POTA references"></div>
+        <div class="pota-map-legend" aria-label="Map marker legend">
+          <span><i class="complete"></i>Completed</span>
+          <span><i class="remaining"></i>Remaining</span>
+        </div>
+      </section>
     </div>
   </section>
 

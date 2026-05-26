@@ -170,7 +170,7 @@ test("ri pota tracker project page is wired for map-first tracking", () => {
   assert.match(page, /title="RI POTA Challenge \/ N1RWJ"/);
   assert.match(page, /description=\{shareDescription\}/);
   assert.match(page, /canonicalPath="\/projects\/2026-activate-all-ri-pota\/"/);
-  assert.match(page, /image="\/images\/pota\/ri-pota-challenge-share\.png"/);
+  assert.doesNotMatch(page, /image="\/images\/pota\/ri-pota-challenge-share\.png"/);
   assert.match(project, /2026 Activate All RI POTA/);
   assert.match(radio, /\/projects\/2026-activate-all-ri-pota\//);
 });

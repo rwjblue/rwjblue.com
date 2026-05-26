@@ -415,7 +415,7 @@ p {
 
 .pota-tracker-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.38fr);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 440px);
   gap: 42px;
   align-items: start;
 }
@@ -467,10 +467,24 @@ p {
   font-size: 0.84rem;
 }
 
+.pota-tracker-panel {
+  display: grid;
+  gap: 18px;
+}
+
 .pota-map-section {
   margin-top: 54px;
   padding-top: 18px;
   border-top: 2px solid var(--ink);
+}
+
+.pota-tracker-panel .pota-map-section {
+  margin-top: 0;
+  padding-top: 14px;
+}
+
+.pota-tracker-panel .section-heading {
+  margin-bottom: 12px;
 }
 
 .pota-map {
@@ -479,6 +493,10 @@ p {
   min-height: 560px;
   border: 1px solid var(--line-strong);
   background: var(--panel);
+}
+
+.pota-tracker-panel .pota-map {
+  min-height: 360px;
 }
 
 .pota-map .leaflet-popup-content {
@@ -680,6 +698,10 @@ p {
   }
 
   .pota-map {
+    min-height: 430px;
+  }
+
+  .pota-tracker-panel .pota-map {
     min-height: 430px;
   }
 
