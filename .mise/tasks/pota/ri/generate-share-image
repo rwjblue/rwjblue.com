@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Generate share image for the RI POTA challenge page"
+
+set -euo pipefail
+
+bash scripts/pota/generate-share-image.sh
