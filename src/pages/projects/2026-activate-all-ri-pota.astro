@@ -5,7 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import trackerData from "../../data/pota/ri-tracker.json";
 
 const deadline = "December 31, 2026";
-const shareDescription = `${trackerData.summary.completed} of ${trackerData.summary.total} Rhode Island POTA references activated. Interactive map and remaining-first checklist for N1RWJ's 2026 challenge.`;
+const shareDescription = `${trackerData.summary.completed} of ${trackerData.summary.total} Rhode Island POTA references activated. Interactive map and reference checklist for N1RWJ's 2026 challenge.`;
 const generatedDate = new Date(trackerData.generatedAt).toLocaleDateString(
   "en-US",
   {
@@ -91,42 +91,41 @@ const formatModes = (activation: {
   <section class="section-block wide" aria-labelledby="checklist-title">
     <div class="section-heading">
       <p class="section-label">Checklist</p>
-      <h2 id="checklist-title">Remaining first</h2>
+      <h2 id="checklist-title">Reference checklist</h2>
     </div>
     <div class="pota-reference-list">
       {
         trackerData.references.map((reference) => (
-          <article class={`pota-reference ${reference.status}`}>
-            <div>
-              <p class="meta">{reference.reference} · {reference.grid}</p>
-              <h3>{reference.name}</h3>
-              <p>{reference.locationDesc}</p>
-              {reference.notes.length > 0 && (
-                <div class="pota-note-links">
-                  {reference.notes.map((note) => (
-                    <a href={note.href}>{note.title}</a>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div class="pota-reference-status">
-              <span>{reference.status === "completed" ? "Completed" : "Remaining"}</span>
-              {
-                reference.firstActivation ? (
+          <a
+            class={`pota-reference ${reference.status}`}
+            href={reference.potaUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span
+              class={`pota-reference-check ${reference.status}`}
+              aria-label={reference.status === "completed" ? "Completed" : "Remaining"}
+            >
+              {reference.status === "completed" ? "✓" : ""}
+            </span>
+            <span class="pota-reference-main">
+              <span class="meta">{reference.reference} · {reference.grid}</span>
+              <span class="pota-reference-name">{reference.name}</span>
+            </span>
+            {
+              reference.firstActivation && (
+                <div class="pota-reference-status">
                   <p>
                     {formatActivationDate(reference.firstActivation.date)}
-                    <br />
-                    {reference.firstActivation.qsos.total} QSOs · {reference.firstActivation.callsign}
+                    {" · "}
+                    {formatModes(reference.firstActivation)}
+                    {" · "}
+                    {reference.firstActivation.callsign}
                   </p>
-                ) : (
-                  <p>Not yet activated</p>
-                )
-              }
-              <a href={reference.potaUrl} target="_blank" rel="noreferrer">
-                POTA
-              </a>
-            </div>
-          </article>
+                </div>
+              )
+            }
+          </a>
         ))
       }
     </div>

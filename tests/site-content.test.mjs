@@ -158,6 +158,14 @@ test("ri pota tracker project page is wired for map-first tracking", () => {
   assert.match(page, /tile\.openstreetmap\.org/);
   assert.match(page, /OpenStreetMap/);
   assert.match(page, /remaining/i);
+  assert.match(page, /id="checklist-title">Reference checklist/);
+  assert.match(page, /class=\{`pota-reference-check \$\{reference\.status\}`\}/);
+  assert.match(page, /class=\{`pota-reference \$\{reference\.status\}`\}/);
+  assert.match(page, /href=\{reference\.potaUrl\}/);
+  assert.match(page, /pota-reference-name/);
+  assert.doesNotMatch(page, /Remaining first/);
+  assert.doesNotMatch(page, /<p>Not yet activated<\/p>/);
+  assert.doesNotMatch(page, /<p>Open<\/p>/);
   assert.match(page, /title="RI POTA Challenge \/ N1RWJ"/);
   assert.match(page, /description=\{shareDescription\}/);
   assert.match(page, /canonicalPath="\/projects\/2026-activate-all-ri-pota\/"/);
