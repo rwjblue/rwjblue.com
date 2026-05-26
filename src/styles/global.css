@@ -83,6 +83,27 @@ main {
   padding-top: 42px;
 }
 
+.site-footer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 64px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--quiet);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.site-footer a {
+  color: var(--quiet);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--blue);
+}
+
 h1,
 h2,
 h3,
