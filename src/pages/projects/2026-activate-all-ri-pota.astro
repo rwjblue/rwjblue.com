@@ -5,6 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import trackerData from "../../data/pota/ri-tracker.json";
 
 const deadline = "December 31, 2026";
+const shareDescription = `${trackerData.summary.completed} of ${trackerData.summary.total} Rhode Island POTA references activated. Interactive map and remaining-first checklist for N1RWJ's 2026 challenge.`;
 const generatedDate = new Date(trackerData.generatedAt).toLocaleDateString(
   "en-US",
   {
@@ -38,8 +39,11 @@ const formatModes = (activation: {
 ---
 
 <BaseLayout
-  title="2026 Activate All RI POTA / Projects / Robert Jackson"
-  description="N1RWJ's map-first tracker for activating every Rhode Island POTA reference by December 31, 2026."
+  title="RI POTA Challenge / N1RWJ"
+  description={shareDescription}
+  canonicalPath="/projects/2026-activate-all-ri-pota/"
+  image="/images/pota/2026-05-25-rhode-island-pota-rove-map.jpg"
+  imageAlt="Map of a Rhode Island POTA rove with contacts across the United States"
 >
   <section class="pota-tracker-hero" aria-labelledby="page-title">
     <div>

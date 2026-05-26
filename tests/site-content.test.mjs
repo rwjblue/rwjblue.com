@@ -158,6 +158,10 @@ test("ri pota tracker project page is wired for map-first tracking", () => {
   assert.match(page, /tile\.openstreetmap\.org/);
   assert.match(page, /OpenStreetMap/);
   assert.match(page, /remaining/i);
+  assert.match(page, /title="RI POTA Challenge \/ N1RWJ"/);
+  assert.match(page, /description=\{shareDescription\}/);
+  assert.match(page, /canonicalPath="\/projects\/2026-activate-all-ri-pota\/"/);
+  assert.match(page, /image="\/images\/pota\/2026-05-25-rhode-island-pota-rove-map\.jpg"/);
   assert.match(project, /2026 Activate All RI POTA/);
   assert.match(radio, /\/projects\/2026-activate-all-ri-pota\//);
 });
