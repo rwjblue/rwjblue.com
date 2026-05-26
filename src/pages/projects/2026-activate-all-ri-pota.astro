@@ -90,7 +90,13 @@ const formatModes = (activation: {
     <div class="section-heading">
       <h2 id="checklist-title">Reference checklist</h2>
     </div>
-    <div class="pota-reference-list">
+    <div class="pota-checklist-controls">
+      <label class="pota-filter-label">
+        <input type="checkbox" id="pota-show-remaining" class="pota-filter-check" />
+        Show remaining only
+      </label>
+    </div>
+    <div class="pota-reference-list pota-filterable">
       {
         trackerData.references.map((reference) => (
           <a

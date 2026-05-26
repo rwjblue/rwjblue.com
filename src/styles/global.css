@@ -598,9 +598,35 @@ p {
   background: #ffeb2f;
 }
 
+.pota-checklist-controls {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.pota-filter-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pota-filter-check {
+  accent-color: var(--green);
+  cursor: pointer;
+}
+
 .pota-reference-list {
   display: grid;
   border-top: 1px solid var(--line);
+}
+
+.section-block:has(#pota-show-remaining:checked) .pota-reference.completed {
+  display: none;
 }
 
 .pota-reference {
