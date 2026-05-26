@@ -55,3 +55,12 @@
 - Match the existing commit style when creating commits.
 
 jj-commit-default: auto
+
+<!-- codex: ham-mcp begin -->
+## Ham Radio MCP Guidance
+
+- Use the configured ham radio MCP servers when they are relevant to the task.
+- Prefer `qrz` and `lotw` for callsign, logbook, and award verification workflows.
+- Prefer `pota`, `sota`, `solar`, and `wspr` for park, summit, propagation, and band-condition questions.
+- Do not put credentials in repo files. Authentication should be handled through the local OS keychain via `qso-auth`.
+<!-- codex: ham-mcp end -->

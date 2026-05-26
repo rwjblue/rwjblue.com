@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "pota": {
+      "command": "pota-mcp"
+    },
+    "sota": {
+      "command": "sota-mcp"
+    },
+    "solar": {
+      "command": "solar-mcp"
+    },
+    "wspr": {
+      "command": "wspr-mcp"
+    },
+    "qrz": {
+      "command": "qrz-mcp"
+    },
+    "lotw": {
+      "command": "lotw-mcp"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+[mcp_servers.pota]
+command = "pota-mcp"
+
+[mcp_servers.sota]
+command = "sota-mcp"
+
+[mcp_servers.solar]
+command = "solar-mcp"
+
+[mcp_servers.wspr]
+command = "wspr-mcp"
+
+[mcp_servers.qrz]
+command = "qrz-mcp"
+
+[mcp_servers.lotw]
+command = "lotw-mcp"
