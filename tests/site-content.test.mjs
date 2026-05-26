@@ -92,3 +92,14 @@ test("layout advertises the notes rss feed", () => {
   assert.match(layout, /title="Robert Jackson \/ Notes"/);
   assert.match(layout, /href="\/rss\.xml"/);
 });
+
+test("legacy note slugs redirect to their current urls", () => {
+  assert.ok(existsSync("public/_redirects"));
+
+  const redirects = read("public/_redirects");
+
+  assert.match(
+    redirects,
+    /^\/notes\/2026-05-25-rhode-island-pota-rove\/\s+\/notes\/2026-05-25-pota-rove\/\s+301$/m,
+  );
+});
