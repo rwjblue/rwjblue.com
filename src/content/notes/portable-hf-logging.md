@@ -1,7 +1,7 @@
 ---
 title: Portable HF logging workflow notes
 date: 2026-05-18
-summary: A placeholder field note for iterating on portable radio logging and post-operation cleanup.
+summary: Notes on logging workflow for portable HF operations, including what to capture in the field and how to clean up the log afterward.
 tags:
   - radio
   - pota
