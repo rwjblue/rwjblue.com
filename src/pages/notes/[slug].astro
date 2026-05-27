@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PotaContactMap from "../../components/PotaContactMap.astro";
 import TagHints from "../../components/TagHints.astro";
-import blackHutContactMap from "../../data/pota/contact-maps/2026-05-27-black-hut-wildlife-management-area-pota.json";
+import { contactMapForNote } from "../../data/pota/contact-maps";
 import { formatDate, displayTags } from "../../lib/format";
 
 export async function getStaticPaths() {
@@ -22,21 +22,22 @@ const firstHtmlImage = note.body.match(
 const firstHtmlImageAlt = note.body.match(
   /<img\b[^>]*\balt=["']([^"']*)["'][^>]*>/i,
 );
-const socialImage = firstMarkdownImage?.[2] ?? firstHtmlImage?.[1];
-const socialImageAlt = firstMarkdownImage?.[1] ?? firstHtmlImageAlt?.[1];
 const formattedDate = formatDate(note.data.date, "long");
-const contactMaps = {
-  "2026-05-27-black-hut-wildlife-management-area-pota": blackHutContactMap,
-};
-const contactMap = contactMaps[note.id];
+const contactMap = contactMapForNote(note.id);
+const shareImage = contactMap
+  ? `/images/pota/${note.id}/share.png`
+  : firstMarkdownImage?.[2] ?? firstHtmlImage?.[1];
+const shareImageAlt = contactMap
+  ? `${note.data.title} social share image`
+  : firstMarkdownImage?.[1] ?? firstHtmlImageAlt?.[1];
 ---
 
 <BaseLayout
   title={`${note.data.title} / Notes / Robert Jackson`}
   description={note.data.summary}
   canonicalPath={`/notes/${note.id}/`}
-  image={socialImage}
-  imageAlt={socialImageAlt}
+  image={shareImage}
+  imageAlt={shareImageAlt}
   type="article"
 >
   <article class="document">

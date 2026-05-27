@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Generate a checked-in note social share image from a note share-image page"
+#USAGE arg "<slug>" help="Note slug, for example 2026-05-27-black-hut-wildlife-management-area-pota"
+
+set -euo pipefail
+
+bash scripts/pota/generate-note-share-image.sh "$usage_slug"

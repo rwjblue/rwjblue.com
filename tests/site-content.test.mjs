@@ -19,11 +19,14 @@ test("homepage presents the public workshop structure", () => {
 
 test("content collections support notes and updated projects", () => {
   const config = read("src/content.config.ts");
+  const blackHutNote = read("src/content/notes/2026-05-27-black-hut-wildlife-management-area-pota.md");
 
   assert.match(config, /defineCollection/);
   assert.match(config, /notes/);
   assert.match(config, /projects/);
   assert.match(config, /updated/);
+  assert.match(config, /shareImageHero/);
+  assert.match(blackHutNote, /shareImageHero:/);
   assert.ok(existsSync("src/content/notes/public-workshop.md"));
   assert.ok(existsSync("src/content/projects/developer-tooling.md"));
 });
@@ -82,6 +85,7 @@ test("layout advertises the notes rss feed", () => {
 test("notes provide social share metadata", () => {
   const layout = read("src/layouts/BaseLayout.astro");
   const notePage = read("src/pages/notes/[slug].astro");
+  const noteSharePage = read("src/pages/notes/[slug]/share-image.astro");
 
   assert.match(layout, /rel="canonical"/);
   assert.match(layout, /property="og:title"/);
@@ -90,7 +94,14 @@ test("notes provide social share metadata", () => {
   assert.match(layout, /name="twitter:card"/);
   assert.match(notePage, /description=\{note\.data\.summary\}/);
   assert.match(notePage, /canonicalPath=\{`\/notes\/\$\{note\.id\}\/`\}/);
+  assert.match(notePage, /\/images\/pota\/\$\{note\.id\}\/share\.png/);
   assert.match(notePage, /type="article"/);
+  assert.match(noteSharePage, /getStaticPaths/);
+  assert.match(noteSharePage, /contactMapForNote/);
+  assert.match(noteSharePage, /share-map/);
+  assert.match(noteSharePage, /note\.data\.shareImageHero/);
+  assert.match(noteSharePage, /share-card--hero/);
+  assert.match(noteSharePage, /share-card--map/);
 });
 
 test("legacy note slugs redirect to their current urls", () => {
@@ -129,14 +140,21 @@ test("ri pota tracker uses file-based mise tasks", () => {
   }
 });
 
-test("pota image sanitizer is available as a file-based mise task", () => {
+test("pota image sanitizer and contact-map bootstrap are available as file-based mise tasks", () => {
   assert.ok(existsSync("scripts/pota/sanitize-images.sh"));
+  assert.ok(existsSync("scripts/pota/generate-note-share-image.sh"));
   assert.ok(existsSync(".mise/tasks/pota/images/sanitize"));
   assert.ok(existsSync("scripts/pota/render-contact-map.mjs"));
   assert.ok(existsSync(".mise/tasks/pota/images/render-contact-map"));
+  assert.ok(existsSync(".mise/tasks/pota/images/generate-note-share-image"));
+  assert.ok(existsSync(".mise/tasks/pota/contact-map/from-adi"));
+  assert.ok(existsSync(".agents/skills/pota-contact-map-bootstrap/SKILL.md"));
 
   const task = read(".mise/tasks/pota/images/sanitize");
   const mapTask = read(".mise/tasks/pota/images/render-contact-map");
+  const noteShareTask = read(".mise/tasks/pota/images/generate-note-share-image");
+  const bootstrapTask = read(".mise/tasks/pota/contact-map/from-adi");
+  const bootstrapSkill = read(".agents/skills/pota-contact-map-bootstrap/SKILL.md");
   const skill = read(".agents/skills/pota-field-report/SKILL.md");
 
   assert.match(task, /^#!\/usr\/bin\/env bash/);
@@ -147,8 +165,15 @@ test("pota image sanitizer is available as a file-based mise task", () => {
   assert.match(mapTask, /#MISE description=/);
   assert.match(mapTask, /#USAGE flag "--input <adi>"/);
   assert.match(mapTask, /node scripts\/pota\/render-contact-map\.mjs/);
+  assert.match(noteShareTask, /#MISE description=/);
+  assert.match(noteShareTask, /scripts\/pota\/generate-note-share-image\.sh/);
+  assert.match(bootstrapTask, /#MISE description=/);
+  assert.match(bootstrapTask, /#USAGE flag "--output <json>"/);
+  assert.match(bootstrapTask, /node scripts\/pota\/render-contact-map\.mjs/);
+  assert.match(bootstrapSkill, /mise run pota:contact-map:from-adi/);
   assert.match(skill, /mise run pota:images:sanitize/);
-  assert.match(skill, /mise run pota:images:render-contact-map/);
+  assert.match(skill, /mise run pota:contact-map:from-adi/);
+  assert.match(skill, /mise run pota:images:generate-note-share-image/);
 });
 
 test("ri pota tracker project page is wired for map-first tracking", () => {

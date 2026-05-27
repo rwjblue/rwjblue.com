@@ -20,6 +20,7 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
+    "@ham2k/lib-qson-adif": "^0.5.1",
     "leaflet": "^1.9.4"
   }
 }

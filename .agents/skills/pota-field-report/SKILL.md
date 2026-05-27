@@ -18,6 +18,7 @@ schema:
 title: ...
 date: YYYY-MM-DD
 summary: ...
+shareImageHero: /images/pota/<slug>/<filename>.jpg # optional
 tags:
   - radio
   - pota
@@ -160,15 +161,16 @@ For a single supporting photo that should be smaller than the lead image:
 </div>
 ```
 
-For a contact map, prefer generating a static SVG from the ADI log when
-`GRIDSQUARE` data is available:
+For a contact map, prefer generating checked-in JSON from the ADI log when
+`GRIDSQUARE` data is available. Use the `pota-contact-map-bootstrap` skill for
+this flow:
 
 ```bash
-mise run pota:images:render-contact-map -- \
+mise run pota:contact-map:from-adi -- \
   --input <log.adi> \
   --output src/data/pota/contact-maps/<slug>.json \
   --title "N1RWJ at US-1234" \
-  --subtitle "Park Name · 25 QSOs · May 27, 2026"
+  --subtitle "Park Name - 25 QSOs - May 27, 2026"
 ```
 
 Wire the generated JSON through `PotaContactMap.astro` from the note page rather
@@ -181,6 +183,17 @@ the compact modifier:
   <img src="/images/pota/<slug>/route-map.jpg" alt="Descriptive alt text">
 </div>
 ```
+
+If the note has a dedicated contact map and should use that map in social
+previews, generate the checked-in share image too:
+
+```bash
+mise run pota:images:generate-note-share-image -- <slug>
+```
+
+When a field photo should dominate the social card, set `shareImageHero` in the
+note frontmatter to the root-relative path for that image. The share card will
+use a hero-primary layout with a smaller contact map panel.
 
 If images are only mentioned during dictation, add a short "Images to add" list
 with expected filenames or captions. Do not pretend missing images exist.

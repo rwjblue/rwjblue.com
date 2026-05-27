@@ -1,5 +1,6 @@
 ---
 import "leaflet/dist/leaflet.css";
+import { BAND_COLORS } from "../data/pota/band-colors.mjs";
 
 interface ContactMapPoint {
   lat: number;
@@ -27,6 +28,8 @@ interface ContactMapData {
 const { map } = Astro.props as { map: ContactMapData };
 const mapId = `pota-contact-map-${map.date ?? "activation"}`;
 const dataId = `${mapId}-data`;
+const bandColorsId = `${mapId}-band-colors`;
+const bandColors = BAND_COLORS;
 ---
 
 <section class="contact-map-section" aria-labelledby={`${mapId}-title`}>
@@ -36,23 +39,21 @@ const dataId = `${mapId}-data`;
       <h2 id={`${mapId}-title`}>{map.title}</h2>
       <p>{map.subtitle}</p>
     </div>
-    <p class="contact-map-summary">
-      {map.summary.plotted} plotted · {map.summary.fromGrid} grid · {map.summary.fromState} state
-    </p>
+    <p class="contact-map-summary">{map.summary.plotted} QSOs</p>
   </div>
 
   <div id={mapId} class="contact-map" aria-label={`${map.title} contact map`}></div>
   <div class="contact-map-legend" aria-label="Contact map legend">
     {
       Object.entries(map.summary.bands).map(([band, count]) => (
-        <span><i data-band={band}></i>{band} {count}</span>
+        <span><i style={`background:${bandColors[band] ?? bandColors.other}`}></i>{band} {count}</span>
       ))
     }
-    {map.summary.fromState > 0 && <span><i class="state-centroid"></i>State centroid fallback</span>}
   </div>
 </section>
 
 <script type="application/json" id={dataId} set:html={JSON.stringify(map)} />
+<script type="application/json" id={bandColorsId} set:html={JSON.stringify(bandColors)} />
 <script>
   import L from "leaflet";
 
@@ -60,11 +61,13 @@ const dataId = `${mapId}-data`;
 
   for (const mapElement of mapElements) {
     const dataElement = document.getElementById(`${mapElement.id}-data`);
-    if (!dataElement) {
+    const bandColorsElement = document.getElementById(`${mapElement.id}-band-colors`);
+    if (!dataElement || !bandColorsElement) {
       continue;
     }
 
     const contactMap = JSON.parse(dataElement.textContent ?? "{}");
+    const bandColors = JSON.parse(bandColorsElement.textContent ?? "{}");
     const leafletMap = L.map(mapElement, {
       scrollWheelZoom: false,
     });
@@ -90,7 +93,7 @@ const dataId = `${mapId}-data`;
 
     for (const contact of contactMap.contacts) {
       const latLng = [contact.lat, contact.lon];
-      const color = bandColor(contact.band);
+      const color = bandColor(contact.band, bandColors);
 
       bounds.extend(latLng);
       L.polyline([origin, latLng], {
@@ -109,7 +112,7 @@ const dataId = `${mapId}-data`;
       })
         .addTo(leafletMap)
         .bindPopup(
-          `<strong>${escapeHtml(contact.band)}</strong><span>${contact.source === "state" ? "State centroid fallback" : "Grid-square position"}</span>`,
+          `<strong>${escapeHtml(contact.band)}</strong><span>${contact.source === "state" ? "Approximate location" : "Grid-square position"}</span>`,
         );
     }
 
@@ -118,15 +121,8 @@ const dataId = `${mapId}-data`;
     }
   }
 
-  function bandColor(band) {
-    switch (String(band).toLowerCase()) {
-      case "40m":
-        return "#1e6f4f";
-      case "20m":
-        return "#1774d1";
-      default:
-        return "#8a4b2b";
-    }
+  function bandColor(band, bandColors) {
+    return bandColors[String(band).toLowerCase()] ?? bandColors.other;
   }
 
   function escapeHtml(value) {

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # -*- mode: sh; sh-shell: bash; -*-
-#MISE description="Generate checked-in POTA contact-map JSON or SVG from an ADI log"
+#MISE description="Generate checked-in POTA contact-map JSON from an ADI log for a field note"
 #USAGE flag "--input <adi>" help="Path to the ADI/ADIF log file"
-#USAGE flag "--output <file>" help="Output .json or .svg path"
+#USAGE flag "--output <json>" help="Output JSON path under src/data/pota/contact-maps/"
 #USAGE flag "--title <title>" help="Map title"
 #USAGE flag "--subtitle <subtitle>" help="Map subtitle"
 

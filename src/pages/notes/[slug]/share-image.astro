@@ -1,0 +1,461 @@
+---
+import "leaflet/dist/leaflet.css";
+
+import { getCollection } from "astro:content";
+import { contactMapForNote } from "../../../data/pota/contact-maps";
+import { BAND_COLORS } from "../../../data/pota/band-colors.mjs";
+import { formatDate } from "../../../lib/format";
+
+export async function getStaticPaths() {
+  const notes = await getCollection("notes");
+
+  return notes
+    .filter((note) => contactMapForNote(note.id))
+    .map((note) => ({ params: { slug: note.id }, props: { note } }));
+}
+
+const { note } = Astro.props;
+const map = contactMapForNote(note.id);
+
+if (!map) {
+  throw new Error(`No contact map registered for note ${note.id}`);
+}
+
+const formattedDate = formatDate(note.data.date, "long");
+const mapJson = JSON.stringify(map);
+const bandColorsJson = JSON.stringify(BAND_COLORS);
+const heroImage = note.data.shareImageHero;
+const hasHeroLayout = Boolean(heroImage);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200" />
+    <meta name="robots" content="noindex" />
+    <style>
+      :root {
+        --bg: #f7f4ee;
+        --panel: #fffdfa;
+        --ink: #172026;
+        --muted: #5f6f79;
+        --quiet: #7a858c;
+        --line: #d9ded8;
+        --line-strong: #c5ccc4;
+        --accent: #2f6f4e;
+        --overlay: rgba(23, 32, 38, 0.54);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      .site-name,
+      .eyebrow,
+      .meta-label,
+      .bands span {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-weight: 800;
+      }
+
+      .site-name {
+        font-size: 0.76rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      h1 {
+        font-size: 2.6rem;
+        line-height: 1;
+        font-weight: 800;
+        text-wrap: balance;
+      }
+
+      .summary {
+        font-size: 1.08rem;
+        line-height: 1.45;
+      }
+
+      .meta-label {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+      }
+
+      .bands {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+      }
+
+      .bands span {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 0.8rem;
+      }
+
+      .bands i {
+        width: 12px;
+        height: 12px;
+        border: 2px solid currentColor;
+        border-radius: 50%;
+      }
+
+      .share-card--hero {
+        display: grid;
+        grid-template-columns: 1.8fr 1fr;
+        height: 630px;
+      }
+
+      .hero-panel {
+        position: relative;
+        overflow: hidden;
+        background: #d7ddd8;
+      }
+
+      .hero-panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 34px 34px 30px;
+        background:
+          linear-gradient(180deg, rgba(23, 32, 38, 0.34) 0%, rgba(23, 32, 38, 0.06) 35%, rgba(23, 32, 38, 0.68) 100%);
+        color: #fffdfa;
+      }
+
+      .hero-copy {
+        max-width: 520px;
+      }
+
+      .hero-copy .eyebrow {
+        color: #d4efdf;
+        margin-bottom: 12px;
+      }
+
+      .hero-copy .summary {
+        margin-top: 16px;
+        color: rgba(255, 253, 250, 0.92);
+      }
+
+      .hero-meta {
+        display: flex;
+        gap: 22px;
+        align-items: end;
+      }
+
+      .hero-metric strong {
+        display: block;
+        font-size: 2.1rem;
+        line-height: 1;
+      }
+
+      .hero-metric .meta-value {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.94rem;
+        line-height: 1.35;
+        color: rgba(255, 253, 250, 0.86);
+      }
+
+      .side-panel {
+        display: grid;
+        grid-template-rows: 290px 1fr;
+        background: var(--panel);
+        border-left: 2px solid var(--ink);
+      }
+
+      .side-map {
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .side-map,
+      #share-map {
+        width: 100%;
+        height: 100%;
+      }
+
+      .side-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px 24px 22px;
+      }
+
+      .side-copy .site-name {
+        color: var(--muted);
+      }
+
+      .side-copy h2 {
+        margin-top: 8px;
+        font-size: 2rem;
+        line-height: 0.98;
+        font-weight: 800;
+        text-wrap: balance;
+      }
+
+      .side-copy .reference-line {
+        margin-top: 14px;
+        font-size: 1rem;
+        line-height: 1.35;
+        color: var(--muted);
+      }
+
+      .side-copy .bands {
+        padding-top: 18px;
+        border-top: 2px solid var(--ink);
+        color: var(--muted);
+      }
+
+      .side-copy .bands i {
+        border-color: var(--ink);
+      }
+
+      .share-card--map {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        height: 630px;
+      }
+
+      .map-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 38px 34px;
+        border-right: 2px solid var(--ink);
+        background: var(--panel);
+      }
+
+      .map-copy .site-name {
+        color: var(--muted);
+      }
+
+      .map-copy .eyebrow {
+        margin-bottom: 14px;
+      }
+
+      .map-copy .summary {
+        margin-top: 18px;
+        color: var(--muted);
+      }
+
+      .map-copy .meta {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding-top: 18px;
+        border-top: 2px solid var(--ink);
+      }
+
+      .map-copy .meta-block strong {
+        display: block;
+        font-size: 1.6rem;
+        line-height: 1;
+      }
+
+      .map-copy .meta-value {
+        display: block;
+        margin-top: 8px;
+        font-size: 0.96rem;
+        line-height: 1.35;
+        color: var(--muted);
+      }
+
+      .map-copy .bands {
+        color: var(--muted);
+      }
+
+      .map-copy .bands i {
+        border-color: var(--ink);
+      }
+
+      .map-panel {
+        position: relative;
+        background: var(--panel);
+      }
+    </style>
+  </head>
+  <body>
+    {
+      hasHeroLayout ? (
+        <div class="share-card--hero">
+          <section class="hero-panel">
+            <img src={heroImage} alt="" />
+            <div class="hero-overlay">
+              <div class="hero-copy">
+                <div class="site-name">rwjblue / N1RWJ</div>
+                <div class="eyebrow">Note / POTA</div>
+                <h1>{note.data.title}</h1>
+                <p class="summary">{note.data.summary}</p>
+              </div>
+
+              <div class="hero-meta">
+                <div class="hero-metric">
+                  <strong>{map.summary.plotted}</strong>
+                  <span class="meta-label">QSOs</span>
+                  <span class="meta-value">{formattedDate}</span>
+                </div>
+                <div class="hero-metric">
+                  <strong>{map.title.replace("N1RWJ at ", "")}</strong>
+                  <span class="meta-label">Reference</span>
+                  <span class="meta-value">{map.subtitle}</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <aside class="side-panel">
+            <div class="side-map">
+              <div id="share-map"></div>
+            </div>
+            <div class="side-copy">
+              <div>
+                <div class="site-name">Contact map</div>
+                <h2>{map.title}</h2>
+                <p class="reference-line">{map.subtitle}</p>
+              </div>
+
+              <div class="bands">
+                {
+                  Object.entries(map.summary.bands).map(([band, count]) => (
+                    <span><i style={`background:${BAND_COLORS[band] ?? BAND_COLORS.other}`}></i>{band} {count}</span>
+                  ))
+                }
+              </div>
+            </div>
+          </aside>
+        </div>
+      ) : (
+        <div class="share-card--map">
+          <div class="map-copy">
+            <div>
+              <div class="site-name">rwjblue / N1RWJ</div>
+              <div class="eyebrow">Note / POTA</div>
+              <h1>{note.data.title}</h1>
+              <p class="summary">{note.data.summary}</p>
+            </div>
+
+            <div>
+              <div class="meta">
+                <div class="meta-block">
+                  <strong>{map.summary.plotted}</strong>
+                  <span class="meta-label">QSOs</span>
+                  <span class="meta-value">{formattedDate}</span>
+                </div>
+                <div class="meta-block">
+                  <strong>{map.title.replace("N1RWJ at ", "")}</strong>
+                  <span class="meta-label">Reference</span>
+                  <span class="meta-value">{map.subtitle}</span>
+                </div>
+              </div>
+
+              <div class="bands" style="margin-top: 18px;">
+                {
+                  Object.entries(map.summary.bands).map(([band, count]) => (
+                    <span><i style={`background:${BAND_COLORS[band] ?? BAND_COLORS.other}`}></i>{band} {count}</span>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="map-panel">
+            <div id="share-map"></div>
+          </div>
+        </div>
+      )
+    }
+
+    <script type="application/json" id="share-contact-map" set:html={mapJson} />
+    <script type="application/json" id="share-band-colors" set:html={bandColorsJson} />
+    <script>
+      import L from "leaflet";
+
+      const dataEl = document.getElementById("share-contact-map");
+      const bandColorsEl = document.getElementById("share-band-colors");
+      const mapEl = document.getElementById("share-map");
+
+      if (dataEl && bandColorsEl && mapEl) {
+        const contactMap = JSON.parse(dataEl.textContent ?? "{}");
+        const bandColors = JSON.parse(bandColorsEl.textContent ?? "{}");
+        const map = L.map(mapEl, {
+          scrollWheelZoom: false,
+          zoomControl: false,
+          attributionControl: false,
+        });
+
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+        }).addTo(map);
+
+        const bounds = L.latLngBounds([]);
+        const origin = [contactMap.origin.lat, contactMap.origin.lon];
+
+        bounds.extend(origin);
+        L.circleMarker(origin, {
+          radius: 9,
+          color: "#fffdfa",
+          weight: 3,
+          fillColor: "#172026",
+          fillOpacity: 1,
+        }).addTo(map);
+
+        for (const contact of contactMap.contacts) {
+          const latLng = [contact.lat, contact.lon];
+          const color = bandColors[String(contact.band).toLowerCase()] ?? bandColors.other;
+
+          bounds.extend(latLng);
+          L.polyline([origin, latLng], {
+            color,
+            opacity: contact.source === "state" ? 0.38 : 0.24,
+            weight: contact.source === "state" ? 2.2 : 1.5,
+          }).addTo(map);
+
+          L.circleMarker(latLng, {
+            radius: contact.source === "state" ? 7 : 5.5,
+            color: "#172026",
+            weight: contact.source === "state" ? 2 : 1.5,
+            fillColor: color,
+            fillOpacity: 0.94,
+          }).addTo(map);
+        }
+
+        if (bounds.isValid()) {
+          map.fitBounds(bounds, { padding: [20, 20] });
+        }
+      }
+    </script>
+  </body>
+</html>

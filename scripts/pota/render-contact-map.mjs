@@ -2,12 +2,14 @@
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { adifToQSON } from "./ham2k-qson-adif.mjs";
+import { bandColor } from "../../src/data/pota/band-colors.mjs";
 
 function usage() {
   console.error(`Usage:
   node scripts/pota/render-contact-map.mjs \\
     --input <adi> \\
-    --output <svg> \\
+    --output <file> \\
     [--title <title>] \\
     [--subtitle <subtitle>]
 
@@ -68,22 +70,7 @@ function parseArgs(argv) {
 }
 
 export function parseAdif(content) {
-  const records = content
-    .split(/<EOR>/i)
-    .map((record) => record.trim())
-    .filter(Boolean);
-
-  return records.map((record) => {
-    const fields = {};
-    const regex = /<([A-Z0-9_]+):(\d+)(:[^>]*)?>([^<]*)/gi;
-    let match;
-
-    while ((match = regex.exec(record))) {
-      fields[match[1].toUpperCase()] = match[4].trim();
-    }
-
-    return fields;
-  });
+  return adifToQSON(content);
 }
 
 export function gridToLatLon(grid) {
@@ -212,22 +199,11 @@ const US_STATE_CENTROIDS = {
 };
 
 export function stateToLatLon(state, dxcc) {
-  if ((dxcc && dxcc !== "291") || !state) {
+  if ((dxcc && String(dxcc) !== "291") || !state) {
     return null;
   }
 
   return US_STATE_CENTROIDS[state.trim().toUpperCase()] ?? null;
-}
-
-function bandColor(band) {
-  switch ((band ?? "").toLowerCase()) {
-    case "40m":
-      return "#1e6f4f";
-    case "20m":
-      return "#1774d1";
-    default:
-      return "#8a4b2b";
-  }
 }
 
 export function summarizeContacts(contacts, totalRecords) {
@@ -255,25 +231,26 @@ export function summarizeContacts(contacts, totalRecords) {
 }
 
 export function buildContactMapData(content, { title, subtitle } = {}) {
-  const records = parseAdif(content);
-  const contacts = records
-    .map((record) => {
+  const qson = parseAdif(content);
+  const contacts = qson.qsos
+    .map((qso) => {
       const point =
-        gridToLatLon(record.GRIDSQUARE) ?? stateToLatLon(record.STATE, record.DXCC);
+        gridToLatLon(qso.their?.grid) ??
+        stateToLatLon(qso.their?.state, qso.their?.dxccCode);
       if (!point) {
         return null;
       }
 
       return {
         ...point,
-        band: record.BAND || "other",
-        source: record.GRIDSQUARE ? "grid" : "state",
+        band: qso.band || "other",
+        source: qso.their?.grid ? "grid" : "state",
       };
     })
     .filter(Boolean);
 
-  const originRecord = records.find((record) => record.MY_GRIDSQUARE);
-  const originGrid = originRecord?.MY_GRIDSQUARE?.slice(0, 6);
+  const originQso = qson.qsos.find((qso) => qso.our?.grid);
+  const originGrid = originQso?.our?.grid?.slice(0, 6);
   const origin = gridToLatLon(originGrid);
 
   if (!origin) {
@@ -284,15 +261,16 @@ export function buildContactMapData(content, { title, subtitle } = {}) {
     throw new Error("No plottable contacts were found.");
   }
 
-  const stationCallsign = originRecord?.STATION_CALLSIGN || originRecord?.OPERATOR || "N1RWJ";
-  const dateLabel = formatDate(originRecord?.QSO_DATE);
-  const summary = summarizeContacts(contacts, records.length);
+  const stationCallsign = originQso?.our?.call || originQso?.our?.operator || "N1RWJ";
+  const date = originQso?.startAt?.slice(0, 10).replaceAll("-", "") ?? "";
+  const dateLabel = formatDate(date);
+  const summary = summarizeContacts(contacts, qson.qsos.length + qson.errors.length);
 
   return {
     title: title || "Contact map",
     subtitle: subtitle || `${stationCallsign} - ${contacts.length} QSOs - ${dateLabel}`,
     stationCallsign,
-    date: originRecord?.QSO_DATE ?? "",
+    date,
     dateLabel,
     originGrid,
     origin,
@@ -387,13 +365,7 @@ export function renderSvg({
     })
     .join("");
 
-  const footerParts = [`${summary.plotted} plotted`];
-  if (summary.fromGrid > 0) {
-    footerParts.push(`${summary.fromGrid} from grid`);
-  }
-  if (summary.fromState > 0) {
-    footerParts.push(`${summary.fromState} from state centroid`);
-  }
+  const footerParts = [`${summary.plotted} QSOs`];
   if (summary.unplottable > 0) {
     footerParts.push(`${summary.unplottable} unplottable`);
   }

@@ -505,19 +505,7 @@ p {
   height: 12px;
   border: 2px solid var(--ink);
   border-radius: 50%;
-  background: var(--rust);
-}
-
-.contact-map-legend i[data-band="40m"] {
-  background: #1e6f4f;
-}
-
-.contact-map-legend i[data-band="20m"] {
-  background: #1774d1;
-}
-
-.contact-map-legend .state-centroid {
-  border-style: dashed;
+  background: var(--ink);
 }
 
 .tag-hint {

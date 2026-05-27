@@ -8,6 +8,7 @@ operation, but keep the field report easy to scan.
 title: <Park or place> POTA field report
 date: YYYY-MM-DD
 summary: <One concise sentence about the activation, setup, or lesson.>
+shareImageHero: /images/pota/<slug>/<filename>.jpg
 tags:
   - radio
   - pota
@@ -45,6 +46,8 @@ deployed, what happened on the air, and the concrete lessons worth keeping.>
 <!-- Use this section only when images are available or expected. -->
 
 ![Descriptive alt text](/images/pota/<slug>/<filename>.jpg)
+
+<!-- If one image should anchor social sharing, reuse its path in shareImageHero. -->
 
 Images to add:
 

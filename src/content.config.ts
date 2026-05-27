@@ -8,6 +8,7 @@ const notes = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     summary: z.string(),
+    shareImageHero: z.string().optional(),
     tags: z.array(z.string()).default([]),
   }),
 });
