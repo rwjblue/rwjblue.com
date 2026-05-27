@@ -153,6 +153,8 @@ test("pota image sanitizer is available as a file-based mise task", () => {
   assert.match(mapTask, /#USAGE flag "--input <adi>"/);
   assert.match(mapTask, /node scripts\/pota\/render-contact-map\.mjs/);
   assert.match(mapScript, /GRIDSQUARE/);
+  assert.match(mapScript, /state centroid/);
+  assert.match(mapScript, /US_STATE_CENTROIDS/);
   assert.match(skill, /mise run pota:images:sanitize/);
   assert.match(skill, /mise run pota:images:render-contact-map/);
   assert.match(skill, /photo-grid--compact/);
