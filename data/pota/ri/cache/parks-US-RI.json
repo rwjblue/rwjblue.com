@@ -226,9 +226,9 @@
     "longitude": -73.9709,
     "grid": "FN31ah",
     "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
-    "attempts": 2518,
-    "activations": 2471,
-    "qsos": 102631
+    "attempts": 2522,
+    "activations": 2475,
+    "qsos": 102891
   },
   {
     "reference": "US-5482",
@@ -270,9 +270,9 @@
     "longitude": -71.685,
     "grid": "FN41dn",
     "locationDesc": "US-RI",
-    "attempts": 429,
-    "activations": 424,
-    "qsos": 14628
+    "attempts": 430,
+    "activations": 425,
+    "qsos": 14681
   },
   {
     "reference": "US-6980",
@@ -281,9 +281,9 @@
     "longitude": -71.7864,
     "grid": "FN41cn",
     "locationDesc": "US-RI",
-    "attempts": 381,
-    "activations": 378,
-    "qsos": 12684
+    "attempts": 382,
+    "activations": 379,
+    "qsos": 12737
   },
   {
     "reference": "US-6981",
@@ -479,9 +479,9 @@
     "longitude": -71.6382,
     "grid": "FN41ei",
     "locationDesc": "US-RI",
-    "attempts": 54,
-    "activations": 52,
-    "qsos": 1943
+    "attempts": 55,
+    "activations": 53,
+    "qsos": 1959
   },
   {
     "reference": "US-7718",
@@ -534,9 +534,9 @@
     "longitude": -71.4731,
     "grid": "FN41gj",
     "locationDesc": "US-RI",
-    "attempts": 93,
-    "activations": 93,
-    "qsos": 3348
+    "attempts": 94,
+    "activations": 94,
+    "qsos": 3359
   },
   {
     "reference": "US-7723",
@@ -556,9 +556,9 @@
     "longitude": -71.6733,
     "grid": "FN41di",
     "locationDesc": "US-RI",
-    "attempts": 61,
-    "activations": 61,
-    "qsos": 1948
+    "attempts": 62,
+    "activations": 62,
+    "qsos": 1965
   },
   {
     "reference": "US-7971",

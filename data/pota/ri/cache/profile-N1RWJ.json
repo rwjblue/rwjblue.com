@@ -12,24 +12,34 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 70,
-      "parks": 44,
-      "qsos": 1805
+      "activations": 71,
+      "parks": 45,
+      "qsos": 1830
     },
     "attempts": {
-      "activations": 78,
-      "parks": 44,
-      "qsos": 1832
+      "activations": 79,
+      "parks": 45,
+      "qsos": 1857
     },
     "hunter": {
-      "parks": 429,
-      "qsos": 606
+      "parks": 431,
+      "qsos": 608
     },
     "awards": 22,
     "endorsements": 47
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-05-27",
+        "reference": "US-6984",
+        "park": "Black Hut Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 25,
+        "data": 0,
+        "phone": 0,
+        "total": 25
+      },
       {
         "date": "2026-05-25",
         "reference": "US-7865",
@@ -269,19 +279,54 @@
         "data": 0,
         "phone": 0,
         "total": 18
-      },
-      {
-        "date": "2026-05-09",
-        "reference": "US-5482",
-        "park": "Wickaboxet Wildlife Management Area",
-        "location": "US-RI",
-        "cw": 18,
-        "data": 0,
-        "phone": 0,
-        "total": 18
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-05-27T14:24:59",
+        "callsign": "K1NW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10548",
+        "park": "Barber Pond State Recreation Area",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-05-27T14:18:00",
+        "callsign": "K3CBK",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2542",
+        "park": "Lake Lincoln State Park",
+        "location": "US-MS"
+      },
+      {
+        "date": "2026-05-27T13:26:00",
+        "callsign": "KM3STU",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2149",
+        "park": "Tallman Mountain State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-05-25T23:06:33",
+        "callsign": "KO4FX",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-0708",
+        "park": "Stones River National Battlefield",
+        "location": "US-TN"
+      },
+      {
+        "date": "2026-05-25T23:06:32",
+        "callsign": "KO4FX",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-0708",
+        "park": "Stones River National Battlefield",
+        "location": "US-TN"
+      },
       {
         "date": "2026-05-25T20:41:00",
         "callsign": "NI6L",
@@ -359,8 +404,8 @@
         "callsign": "KC3DSO",
         "band": "40M",
         "mode": "PHONE",
-        "reference": "US-1733",
-        "park": "Cape Henlopen State Park",
+        "reference": "US-9877",
+        "park": "Junction and Breakwater National Recreation Trail",
         "location": "US-DE"
       },
       {
@@ -368,8 +413,8 @@
         "callsign": "KC3DSO",
         "band": "40M",
         "mode": "PHONE",
-        "reference": "US-9877",
-        "park": "Junction and Breakwater National Recreation Trail",
+        "reference": "US-1733",
+        "park": "Cape Henlopen State Park",
         "location": "US-DE"
       },
       {
@@ -461,51 +506,6 @@
         "reference": "US-6305",
         "park": "Guana River Wildlife Management Area",
         "location": "US-FL"
-      },
-      {
-        "date": "2026-05-20T13:02:00",
-        "callsign": "NL5Y",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-8333",
-        "park": "Garcon Point State Conservation Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-05-20T13:00:22",
-        "callsign": "K1NW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-7722",
-        "park": "Scarborough North State Beach",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-05-18T20:08:06",
-        "callsign": "KC3UKC",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-1352",
-        "park": "Fort Washington State Park",
-        "location": "US-PA"
-      },
-      {
-        "date": "2026-05-18T19:44:00",
-        "callsign": "KE9DGT",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-0717",
-        "park": "Fredericksburg and Spotsylvania National Military Park",
-        "location": "US-VA"
-      },
-      {
-        "date": "2026-05-18T18:44:52",
-        "callsign": "KE9DGT",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-0717",
-        "park": "Fredericksburg and Spotsylvania National Military Park",
-        "location": "US-VA"
       }
     ]
   },

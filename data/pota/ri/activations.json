@@ -948,6 +948,19 @@
         "phone": 93
       },
       "source": "backfill"
+    },
+    {
+      "reference": "US-6984",
+      "park": "Black Hut Wildlife Management Area",
+      "date": "2026-05-27",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 25,
+        "cw": 25,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

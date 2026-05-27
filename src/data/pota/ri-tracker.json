@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-05-26T17:34:14.761Z",
+  "generatedAt": "2026-05-27T21:30:48.091Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 39,
-    "remaining": 22,
+    "completed": 40,
+    "remaining": 21,
     "total": 61,
-    "percentComplete": 64
+    "percentComplete": 66
   },
   "references": [
     {
@@ -178,9 +178,9 @@
       "activationCount": 0,
       "notes": [],
       "publicStats": {
-        "attempts": 381,
-        "activations": 378,
-        "qsos": 12684
+        "attempts": 382,
+        "activations": 379,
+        "qsos": 12737
       }
     },
     {
@@ -200,25 +200,6 @@
         "attempts": 59,
         "activations": 57,
         "qsos": 2003
-      }
-    },
-    {
-      "reference": "US-6984",
-      "name": "Black Hut Wildlife Management Area",
-      "latitude": 41.9928,
-      "longitude": -71.6568,
-      "grid": "FN41ex",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "potaUrl": "https://pota.app/#/park/US-6984",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 38,
-        "activations": 38,
-        "qsos": 1467
       }
     },
     {
@@ -431,6 +412,55 @@
       }
     },
     {
+      "reference": "US-6984",
+      "name": "Black Hut Wildlife Management Area",
+      "latitude": 41.9928,
+      "longitude": -71.6568,
+      "grid": "FN41ex",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "potaUrl": "https://pota.app/#/park/US-6984",
+      "firstActivation": {
+        "reference": "US-6984",
+        "park": "Black Hut Wildlife Management Area",
+        "date": "2026-05-27",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 25,
+          "cw": 25,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6984",
+        "park": "Black Hut Wildlife Management Area",
+        "date": "2026-05-27",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 25,
+          "cw": 25,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [
+        {
+          "id": "2026-05-27-black-hut-wildlife-management-area-pota",
+          "title": "Black Hut Wildlife Management Area with a 40m EFHW",
+          "href": "/notes/2026-05-27-black-hut-wildlife-management-area-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 38,
+        "activations": 38,
+        "qsos": 1467
+      }
+    },
+    {
       "reference": "US-0515",
       "name": "Ninigret National Wildlife Refuge",
       "latitude": 41.3682,
@@ -469,7 +499,7 @@
       "notes": [
         {
           "id": "2026-05-25-pota-rove",
-          "title": "2026-05-25 POTA Rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
           "href": "/notes/2026-05-25-pota-rove/"
         }
       ],
@@ -518,7 +548,7 @@
       "notes": [
         {
           "id": "2026-05-25-pota-rove",
-          "title": "2026-05-25 POTA Rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
           "href": "/notes/2026-05-25-pota-rove/"
         }
       ],
@@ -567,7 +597,7 @@
       "notes": [
         {
           "id": "2026-05-25-pota-rove",
-          "title": "2026-05-25 POTA Rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
           "href": "/notes/2026-05-25-pota-rove/"
         }
       ],
@@ -616,7 +646,7 @@
       "notes": [
         {
           "id": "2026-05-25-pota-rove",
-          "title": "2026-05-25 POTA Rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
           "href": "/notes/2026-05-25-pota-rove/"
         }
       ],
@@ -665,7 +695,7 @@
       "notes": [
         {
           "id": "2026-05-25-pota-rove",
-          "title": "2026-05-25 POTA Rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
           "href": "/notes/2026-05-25-pota-rove/"
         }
       ],
@@ -714,14 +744,14 @@
       "notes": [
         {
           "id": "2026-05-25-pota-rove",
-          "title": "2026-05-25 POTA Rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
           "href": "/notes/2026-05-25-pota-rove/"
         }
       ],
       "publicStats": {
-        "attempts": 61,
-        "activations": 61,
-        "qsos": 1948
+        "attempts": 62,
+        "activations": 62,
+        "qsos": 1965
       }
     },
     {
@@ -762,9 +792,9 @@
       "activationCount": 2,
       "notes": [],
       "publicStats": {
-        "attempts": 54,
-        "activations": 52,
-        "qsos": 1943
+        "attempts": 55,
+        "activations": 53,
+        "qsos": 1959
       }
     },
     {
@@ -1407,9 +1437,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 93,
-        "activations": 93,
-        "qsos": 3348
+        "attempts": 94,
+        "activations": 94,
+        "qsos": 3359
       }
     },
     {
@@ -1493,9 +1523,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 429,
-        "activations": 424,
-        "qsos": 14628
+        "attempts": 430,
+        "activations": 425,
+        "qsos": 14681
       }
     },
     {
@@ -1665,9 +1695,9 @@
       "activationCount": 2,
       "notes": [],
       "publicStats": {
-        "attempts": 2518,
-        "activations": 2471,
-        "qsos": 102631
+        "attempts": 2522,
+        "activations": 2475,
+        "qsos": 102891
       }
     },
     {
