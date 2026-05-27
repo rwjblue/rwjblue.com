@@ -1,7 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PotaContactMap from "../../components/PotaContactMap.astro";
 import TagHints from "../../components/TagHints.astro";
+import blackHutContactMap from "../../data/pota/contact-maps/2026-05-27-black-hut-wildlife-management-area-pota.json";
 import { formatDate, displayTags } from "../../lib/format";
 
 export async function getStaticPaths() {
@@ -23,6 +25,10 @@ const firstHtmlImageAlt = note.body.match(
 const socialImage = firstMarkdownImage?.[2] ?? firstHtmlImage?.[1];
 const socialImageAlt = firstMarkdownImage?.[1] ?? firstHtmlImageAlt?.[1];
 const formattedDate = formatDate(note.data.date, "long");
+const contactMaps = {
+  "2026-05-27-black-hut-wildlife-management-area-pota": blackHutContactMap,
+};
+const contactMap = contactMaps[note.id];
 ---
 
 <BaseLayout
@@ -44,6 +50,7 @@ const formattedDate = formatDate(note.data.date, "long");
       </div>
     </header>
     <TagHints tags={note.data.tags} />
+    {contactMap && <PotaContactMap map={contactMap} />}
     <Content />
   </article>
 </BaseLayout>
