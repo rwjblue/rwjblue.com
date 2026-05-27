@@ -6,3 +6,9 @@ dist/
 .env.local
 
 .superpowers/
+
+# Override global /.claude/ ignore — track the skills symlink only.
+# settings.json and settings.local.json remain untracked.
+!/.claude/
+/.claude/*
+!/.claude/skills
