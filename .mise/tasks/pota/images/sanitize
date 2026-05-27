@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Sanitize and resize POTA note images into public/images/pota/<slug>/"
+#USAGE flag "--slug <slug>" help="Destination note slug under public/images/pota/"
+#USAGE flag "--output-dir <dir>" help="Override the destination directory"
+#USAGE flag "--max-edge <px>" default="1600" help="Longest output edge in pixels"
+#USAGE flag "--quality <n>" default="82" help="JPEG quality from 1 to 100"
+#USAGE arg "<images>" var=#true help="Input image paths to sanitize"
+
+set -euo pipefail
+
+scripts/pota/sanitize-images.sh "$@"

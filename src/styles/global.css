@@ -421,6 +421,10 @@ p {
   justify-content: center;
 }
 
+.photo-grid--compact {
+  grid-template-columns: minmax(0, 420px);
+}
+
 .tag-hint {
   margin-bottom: 28px;
   padding: 10px 14px;
@@ -819,6 +823,10 @@ p {
   .photo-grid,
   .photo-grid--single {
     grid-template-columns: 1fr;
+  }
+
+  .photo-grid--compact {
+    grid-template-columns: minmax(0, 320px);
   }
 
   .pota-map {

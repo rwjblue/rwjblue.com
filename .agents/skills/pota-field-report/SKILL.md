@@ -39,8 +39,9 @@ ASCII, and hyphenated.
    then give each park its own subsection.
 5. Read `references/report-template.md` before drafting the report body.
 6. Write the Astro note draft into `src/content/notes/`.
-7. If images are provided or mentioned, create or reference
-   `public/images/pota/<slug>/`.
+7. If images are provided or mentioned, sanitize them with
+   `mise run pota:images:sanitize -- --slug <slug> <image>...` before
+   referencing files in `public/images/pota/<slug>/`.
 8. After writing, run the repository's normal validation for content changes
    when practical: `mise run check` and `mise run build`.
 
@@ -120,9 +121,18 @@ Avoid:
 
 ## Image Handling
 
-If images are attached and accessible, place them under
-`public/images/pota/<slug>/` with descriptive lowercase filenames. Reference
-them in Markdown with root-relative paths:
+If images are attached and accessible, run them through the local sanitizer
+before placing or replacing files under `public/images/pota/<slug>/`:
+
+```bash
+mise run pota:images:sanitize -- --slug <slug> <image>...
+```
+
+The sanitizer writes web-sized JPEGs with lowercase hyphenated filenames,
+auto-orients the image, and strips metadata, including location metadata. Use
+`--max-edge 900` for tall contact maps or route screenshots, and the default
+1600px max edge for normal field photos. Reference the sanitized files in
+Markdown with root-relative paths:
 
 ```markdown
 ![Portable station setup at <place>](/images/pota/<slug>/station-setup.jpg)
@@ -147,6 +157,16 @@ For a single supporting photo that should be smaller than the lead image:
 ```html
 <div class="photo-grid photo-grid--single">
   <img src="/images/pota/<slug>/station-setup.jpg" alt="Descriptive alt text">
+</div>
+```
+
+For a contact map, route screenshot, or other tall utility image that should be
+more compact than a field photo, combine the single-image grid with the compact
+modifier:
+
+```html
+<div class="photo-grid photo-grid--single photo-grid--compact">
+  <img src="/images/pota/<slug>/contact-map.jpg" alt="Descriptive alt text">
 </div>
 ```
 
