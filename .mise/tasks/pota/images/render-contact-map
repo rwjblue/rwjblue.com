@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Render a static POTA contact map SVG from an ADI log with grid squares"
+#USAGE flag "--input <adi>" help="Path to the ADI/ADIF log file"
+#USAGE flag "--output <svg>" help="Output SVG path"
+#USAGE flag "--title <title>" help="Map title"
+#USAGE flag "--subtitle <subtitle>" help="Map subtitle"
+
+set -euo pipefail
+
+node scripts/pota/render-contact-map.mjs "$@"

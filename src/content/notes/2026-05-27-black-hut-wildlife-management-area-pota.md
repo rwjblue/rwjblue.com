@@ -11,7 +11,7 @@ tags:
 ---
 
 <div class="photo-grid photo-grid--single photo-grid--compact">
-  <img src="/images/pota/2026-05-27-black-hut-wildlife-management-area-pota/contact-map.jpg" alt="Contact map from Black Hut Wildlife Management Area, US-6984">
+  <img src="/images/pota/2026-05-27-black-hut-wildlife-management-area-pota/contact-map.svg" alt="Contact map from Black Hut Wildlife Management Area, US-6984">
 </div>
 
 Black Hut Wildlife Management Area, [US-6984](https://pota.app/#/park/US-6984),

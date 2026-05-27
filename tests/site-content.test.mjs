@@ -132,10 +132,14 @@ test("ri pota tracker uses file-based mise tasks", () => {
 test("pota image sanitizer is available as a file-based mise task", () => {
   assert.ok(existsSync("scripts/pota/sanitize-images.sh"));
   assert.ok(existsSync(".mise/tasks/pota/images/sanitize"));
+  assert.ok(existsSync("scripts/pota/render-contact-map.mjs"));
+  assert.ok(existsSync(".mise/tasks/pota/images/render-contact-map"));
 
   const task = read(".mise/tasks/pota/images/sanitize");
+  const mapTask = read(".mise/tasks/pota/images/render-contact-map");
   const script = read("scripts/pota/sanitize-images.sh");
-  const skill = read(".codex/skills/pota-field-report/SKILL.md");
+  const mapScript = read("scripts/pota/render-contact-map.mjs");
+  const skill = read(".agents/skills/pota-field-report/SKILL.md");
   const css = read("src/styles/global.css");
 
   assert.match(task, /^#!\/usr\/bin\/env bash/);
@@ -145,7 +149,12 @@ test("pota image sanitizer is available as a file-based mise task", () => {
   assert.match(task, /scripts\/pota\/sanitize-images\.sh/);
   assert.match(script, /-strip/);
   assert.match(script, /-resize "\$\{max_edge\}x\$\{max_edge\}>"/);
+  assert.match(mapTask, /#MISE description=/);
+  assert.match(mapTask, /#USAGE flag "--input <adi>"/);
+  assert.match(mapTask, /node scripts\/pota\/render-contact-map\.mjs/);
+  assert.match(mapScript, /GRIDSQUARE/);
   assert.match(skill, /mise run pota:images:sanitize/);
+  assert.match(skill, /mise run pota:images:render-contact-map/);
   assert.match(skill, /photo-grid--compact/);
   assert.match(css, /\.photo-grid--compact/);
 });

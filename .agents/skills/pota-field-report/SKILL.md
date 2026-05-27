@@ -160,13 +160,24 @@ For a single supporting photo that should be smaller than the lead image:
 </div>
 ```
 
+For a contact map, prefer generating a static SVG from the ADI log when
+`GRIDSQUARE` data is available:
+
+```bash
+mise run pota:images:render-contact-map -- \
+  --input <log.adi> \
+  --output public/images/pota/<slug>/contact-map.svg \
+  --title "N1RWJ at US-1234" \
+  --subtitle "Park Name · 25 QSOs · May 27, 2026"
+```
+
 For a contact map, route screenshot, or other tall utility image that should be
 more compact than a field photo, combine the single-image grid with the compact
 modifier:
 
 ```html
 <div class="photo-grid photo-grid--single photo-grid--compact">
-  <img src="/images/pota/<slug>/contact-map.jpg" alt="Descriptive alt text">
+  <img src="/images/pota/<slug>/contact-map.svg" alt="Descriptive alt text">
 </div>
 ```
 
