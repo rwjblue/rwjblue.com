@@ -166,18 +166,19 @@ For a contact map, prefer generating a static SVG from the ADI log when
 ```bash
 mise run pota:images:render-contact-map -- \
   --input <log.adi> \
-  --output public/images/pota/<slug>/contact-map.svg \
+  --output src/data/pota/contact-maps/<slug>.json \
   --title "N1RWJ at US-1234" \
   --subtitle "Park Name · 25 QSOs · May 27, 2026"
 ```
 
-For a contact map, route screenshot, or other tall utility image that should be
-more compact than a field photo, combine the single-image grid with the compact
-modifier:
+Wire the generated JSON through `PotaContactMap.astro` from the note page rather
+than committing the ADI. For a route screenshot or other tall utility image that
+should be more compact than a field photo, combine the single-image grid with
+the compact modifier:
 
 ```html
 <div class="photo-grid photo-grid--single photo-grid--compact">
-  <img src="/images/pota/<slug>/contact-map.svg" alt="Descriptive alt text">
+  <img src="/images/pota/<slug>/route-map.jpg" alt="Descriptive alt text">
 </div>
 ```
 

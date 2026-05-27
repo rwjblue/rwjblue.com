@@ -11,7 +11,8 @@ function usage() {
     [--title <title>] \\
     [--subtitle <subtitle>]
 
-Reads an ADI/ADIF log with GRIDSQUARE fields and writes a static SVG contact map.`);
+Reads an ADI/ADIF log and writes public contact-map data as JSON, or a static SVG
+when the output path ends in .svg.`);
 }
 
 function escapeXml(value) {
@@ -66,7 +67,7 @@ function parseArgs(argv) {
   return options;
 }
 
-function parseAdif(content) {
+export function parseAdif(content) {
   const records = content
     .split(/<EOR>/i)
     .map((record) => record.trim())
@@ -85,7 +86,7 @@ function parseAdif(content) {
   });
 }
 
-function gridToLatLon(grid) {
+export function gridToLatLon(grid) {
   if (!grid || grid.length < 4) {
     return null;
   }
@@ -210,7 +211,7 @@ const US_STATE_CENTROIDS = {
   DC: { lat: 38.9072, lon: -77.0369 },
 };
 
-function stateToLatLon(state, dxcc) {
+export function stateToLatLon(state, dxcc) {
   if ((dxcc && dxcc !== "291") || !state) {
     return null;
   }
@@ -229,7 +230,78 @@ function bandColor(band) {
   }
 }
 
-function renderSvg({
+export function summarizeContacts(contacts, totalRecords) {
+  const bandCounts = {};
+  let gridCount = 0;
+  let stateCount = 0;
+
+  for (const contact of contacts) {
+    bandCounts[contact.band] = (bandCounts[contact.band] ?? 0) + 1;
+    if (contact.source === "grid") {
+      gridCount += 1;
+    } else if (contact.source === "state") {
+      stateCount += 1;
+    }
+  }
+
+  return {
+    totalRecords,
+    plotted: contacts.length,
+    fromGrid: gridCount,
+    fromState: stateCount,
+    unplottable: totalRecords - contacts.length,
+    bands: bandCounts,
+  };
+}
+
+export function buildContactMapData(content, { title, subtitle } = {}) {
+  const records = parseAdif(content);
+  const contacts = records
+    .map((record) => {
+      const point =
+        gridToLatLon(record.GRIDSQUARE) ?? stateToLatLon(record.STATE, record.DXCC);
+      if (!point) {
+        return null;
+      }
+
+      return {
+        ...point,
+        band: record.BAND || "other",
+        source: record.GRIDSQUARE ? "grid" : "state",
+      };
+    })
+    .filter(Boolean);
+
+  const originRecord = records.find((record) => record.MY_GRIDSQUARE);
+  const originGrid = originRecord?.MY_GRIDSQUARE?.slice(0, 6);
+  const origin = gridToLatLon(originGrid);
+
+  if (!origin) {
+    throw new Error("Could not determine MY_GRIDSQUARE from the ADI file.");
+  }
+
+  if (contacts.length === 0) {
+    throw new Error("No plottable contacts were found.");
+  }
+
+  const stationCallsign = originRecord?.STATION_CALLSIGN || originRecord?.OPERATOR || "N1RWJ";
+  const dateLabel = formatDate(originRecord?.QSO_DATE);
+  const summary = summarizeContacts(contacts, records.length);
+
+  return {
+    title: title || "Contact map",
+    subtitle: subtitle || `${stationCallsign} - ${contacts.length} QSOs - ${dateLabel}`,
+    stationCallsign,
+    date: originRecord?.QSO_DATE ?? "",
+    dateLabel,
+    originGrid,
+    origin,
+    contacts,
+    summary,
+  };
+}
+
+export function renderSvg({
   title,
   subtitle,
   origin,
@@ -261,18 +333,7 @@ function renderSvg({
   };
 
   const originPoint = project(origin);
-  const bandCounts = new Map();
-  let gridCount = 0;
-  let stateCount = 0;
-  for (const contact of contacts) {
-    bandCounts.set(contact.band, (bandCounts.get(contact.band) ?? 0) + 1);
-    if (contact.source === "grid") {
-      gridCount += 1;
-    } else if (contact.source === "state") {
-      stateCount += 1;
-    }
-  }
-  const missingGridCount = totalRecords - contacts.length;
+  const summary = summarizeContacts(contacts, totalRecords);
 
   const gridLines = [];
   for (let lon = -120; lon <= -70; lon += 10) {
@@ -316,7 +377,7 @@ function renderSvg({
     })
     .join("");
 
-  const legend = Array.from(bandCounts.entries())
+  const legend = Object.entries(summary.bands)
     .map(([band, count], index) => {
       const x = 52 + index * 132;
       return `
@@ -326,15 +387,15 @@ function renderSvg({
     })
     .join("");
 
-  const footerParts = [`${contacts.length} plotted`];
-  if (gridCount > 0) {
-    footerParts.push(`${gridCount} from grid`);
+  const footerParts = [`${summary.plotted} plotted`];
+  if (summary.fromGrid > 0) {
+    footerParts.push(`${summary.fromGrid} from grid`);
   }
-  if (stateCount > 0) {
-    footerParts.push(`${stateCount} from state centroid`);
+  if (summary.fromState > 0) {
+    footerParts.push(`${summary.fromState} from state centroid`);
   }
-  if (missingGridCount > 0) {
-    footerParts.push(`${missingGridCount} unplottable`);
+  if (summary.unplottable > 0) {
+    footerParts.push(`${summary.unplottable} unplottable`);
   }
   const footer = `Generated from ADI data · ${footerParts.join(" · ")}`;
 
@@ -365,53 +426,30 @@ function renderSvg({
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const input = await fs.readFile(options.input, "utf8");
-  const records = parseAdif(input);
-  const contacts = records
-    .map((record) => {
-      const point =
-        gridToLatLon(record.GRIDSQUARE) ?? stateToLatLon(record.STATE, record.DXCC);
-      if (!point) {
-        return null;
-      }
-
-      return {
-        ...point,
-        band: record.BAND || "other",
-        call: record.CALL || "",
-        source: record.GRIDSQUARE ? "grid" : "state",
-      };
-    })
-    .filter(Boolean);
-
-  const originRecord = records.find((record) => record.MY_GRIDSQUARE);
-  const origin = gridToLatLon(originRecord?.MY_GRIDSQUARE);
-
-  if (!origin) {
-    throw new Error("Could not determine MY_GRIDSQUARE from the ADI file.");
-  }
-
-  if (contacts.length === 0) {
-    throw new Error("No contacts with GRIDSQUARE fields were found.");
-  }
-
-  const stationCallsign = originRecord?.STATION_CALLSIGN || originRecord?.OPERATOR || "N1RWJ";
-  const dateLabel = formatDate(originRecord?.QSO_DATE);
-  const svg = renderSvg({
+  const mapData = buildContactMapData(input, {
     title: options.title,
     subtitle: options.subtitle,
-    origin,
-    contacts,
-    stationCallsign,
-    dateLabel,
-    totalRecords: records.length,
   });
 
   await fs.mkdir(path.dirname(options.output), { recursive: true });
-  await fs.writeFile(options.output, svg, "utf8");
+  if (options.output.endsWith(".json")) {
+    await fs.writeFile(options.output, `${JSON.stringify(mapData, null, 2)}\n`, "utf8");
+  } else {
+    await fs.writeFile(
+      options.output,
+      renderSvg({
+        ...mapData,
+        totalRecords: mapData.summary.totalRecords,
+      }),
+      "utf8",
+    );
+  }
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  usage();
-  process.exitCode = 1;
-});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((error) => {
+    console.error(error.message);
+    usage();
+    process.exitCode = 1;
+  });
+}

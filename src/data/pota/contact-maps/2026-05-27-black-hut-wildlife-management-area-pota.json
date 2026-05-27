@@ -1,0 +1,175 @@
+{
+  "title": "N1RWJ at US-6984",
+  "subtitle": "Black Hut Wildlife Management Area - 25 QSOs - May 27, 2026",
+  "stationCallsign": "N1RWJ",
+  "date": "20260527",
+  "dateLabel": "May 27, 2026",
+  "originGrid": "FN41dx",
+  "origin": {
+    "lat": 41.97916666666667,
+    "lon": -71.70833333333333
+  },
+  "contacts": [
+    {
+      "lat": 36.5625,
+      "lon": -82.45833333333333,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.9375,
+      "lon": -77.375,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.4375,
+      "lon": -71.45833333333333,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 40.9375,
+      "lon": -73.95833333333333,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 38.8125,
+      "lon": -77.45833333333333,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.97916666666667,
+      "lon": -83.875,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 35.9375,
+      "lon": -90.70833333333333,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 30.229166666666664,
+      "lon": -81.375,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 35.520833333333336,
+      "lon": -78.45833333333333,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.97916666666667,
+      "lon": -83.875,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 45.0625,
+      "lon": -93.29166666666666,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 31.604166666666664,
+      "lon": -90.375,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 35.60416666666667,
+      "lon": -78.45833333333333,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 35.0625,
+      "lon": -89.79166666666666,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.4375,
+      "lon": -71.45833333333333,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 39.849426,
+      "lon": -86.258278,
+      "band": "20m",
+      "source": "state"
+    },
+    {
+      "lat": 37.020833333333336,
+      "lon": -93.54166666666666,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 42.020833333333336,
+      "lon": -71.54166666666666,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 36.6875,
+      "lon": -93.20833333333333,
+      "band": "20m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.97916666666667,
+      "lon": -71.29166666666666,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 42.520833333333336,
+      "lon": -71.29166666666666,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 44.22916666666667,
+      "lon": -74.875,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.270833333333336,
+      "lon": -73.79166666666666,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 41.5625,
+      "lon": -73.45833333333333,
+      "band": "40m",
+      "source": "grid"
+    },
+    {
+      "lat": 38.85416666666667,
+      "lon": -77.20833333333333,
+      "band": "40m",
+      "source": "grid"
+    }
+  ],
+  "summary": {
+    "totalRecords": 25,
+    "plotted": 25,
+    "fromGrid": 24,
+    "fromState": 1,
+    "unplottable": 0,
+    "bands": {
+      "40m": 12,
+      "20m": 13
+    }
+  }
+}

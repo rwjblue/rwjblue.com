@@ -42,6 +42,11 @@ export const GLOSSARY: GlossaryEntry[] = [
     body: "Low-power operation, conventionally 5 watts or less on CW and digital modes, 10 watts or less on voice. Most activations here run 5 watts.",
   },
   {
+    term: "Pack Mule",
+    body: "A POTA News & Reviews activator award for portable stations carried away from the vehicle by hiking, cycling, paddling, or another non-motorized approach. A qualifying activation needs at least 22 QSOs, and the full award requires 100 qualifying activations.",
+    links: [{ label: "Pack Mule Award", href: "https://pota.news/pack-mule-award/" }],
+  },
+  {
     term: "Hunter",
     body: "A POTA participant who contacts activators from a fixed station, typically at home. Hunters earn credit for each unique park reference they contact.",
   },

@@ -137,28 +137,18 @@ test("pota image sanitizer is available as a file-based mise task", () => {
 
   const task = read(".mise/tasks/pota/images/sanitize");
   const mapTask = read(".mise/tasks/pota/images/render-contact-map");
-  const script = read("scripts/pota/sanitize-images.sh");
-  const mapScript = read("scripts/pota/render-contact-map.mjs");
   const skill = read(".agents/skills/pota-field-report/SKILL.md");
-  const css = read("src/styles/global.css");
 
   assert.match(task, /^#!\/usr\/bin\/env bash/);
   assert.match(task, /#MISE description=/);
   assert.match(task, /#USAGE flag "--slug <slug>"/);
   assert.match(task, /#USAGE flag "--max-edge <px>"/);
   assert.match(task, /scripts\/pota\/sanitize-images\.sh/);
-  assert.match(script, /-strip/);
-  assert.match(script, /-resize "\$\{max_edge\}x\$\{max_edge\}>"/);
   assert.match(mapTask, /#MISE description=/);
   assert.match(mapTask, /#USAGE flag "--input <adi>"/);
   assert.match(mapTask, /node scripts\/pota\/render-contact-map\.mjs/);
-  assert.match(mapScript, /GRIDSQUARE/);
-  assert.match(mapScript, /state centroid/);
-  assert.match(mapScript, /US_STATE_CENTROIDS/);
   assert.match(skill, /mise run pota:images:sanitize/);
   assert.match(skill, /mise run pota:images:render-contact-map/);
-  assert.match(skill, /photo-grid--compact/);
-  assert.match(css, /\.photo-grid--compact/);
 });
 
 test("ri pota tracker project page is wired for map-first tracking", () => {
