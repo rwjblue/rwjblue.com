@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Estimate driving times from a home grid square to remaining RI POTA parks"
+#USAGE flag "--grid <grid>" default="FN41fr" help="6-char Maidenhead grid square for the starting location (default: FN41fr)"
+
+set -euo pipefail
+
+node --experimental-strip-types scripts/pota/travel-times.mjs --grid "${usage_grid}"

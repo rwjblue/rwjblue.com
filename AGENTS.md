@@ -64,3 +64,41 @@ jj-commit-default: auto
 - Prefer `pota`, `sota`, `solar`, and `wspr` for park, summit, propagation, and band-condition questions.
 - Do not put credentials in repo files. Authentication should be handled through the local OS keychain via `qso-auth`.
 <!-- codex: ham-mcp end -->
+
+<!-- codex: pota-ri begin -->
+## POTA RI Challenge Tooling
+
+The `2026 Activate All RI POTA` project tracks activating every Rhode Island
+POTA reference by December 31, 2026.
+
+### Key files
+- `src/data/pota/ri-tracker.json` — generated tracker state (completed/remaining,
+  coordinates, activation history). Read this to answer questions about which
+  parks are done and which remain.
+- `data/pota/ri/` — local caches (park list, profile, activation ledger) used to
+  regenerate tracker data.
+
+### Available scripts and tasks
+
+| Task | Script | Purpose |
+|------|--------|---------|
+| `mise run pota:ri:travel-times [-- --grid FN41fr]` | `scripts/pota/travel-times.mjs` | Estimate driving times from a home grid square to remaining parks. Uses OSRM routing (requires network); falls back to haversine × 1.4 / 80 km/h. |
+| `mise run pota:ri:update-tracker` | `scripts/pota/ri-tracker.mjs` | Refresh parks, profile, and rebuild tracker data in one step. |
+| `mise run pota:ri:update-parks` | `scripts/pota/ri-tracker.mjs` | Fetch the latest RI park list from POTA API. |
+| `mise run pota:ri:update-profile` | `scripts/pota/ri-tracker.mjs` | Fetch N1RWJ profile and merge recent activations into the ledger. |
+| `mise run pota:ri:build-tracker-data` | `scripts/pota/ri-tracker.mjs` | Rebuild `ri-tracker.json` from local caches without hitting the network. |
+| `mise run pota:ri:backfill-activations` | `scripts/pota/ri-tracker.mjs` | Back-fill activation history for all RI references from the POTA API. |
+
+### Park notes
+- **US-0513 Block Island NWR** — requires a ferry from Point Judith (~1 hr each
+  way); plan for a half-day minimum. Travel-time estimates for this reference
+  are misleading (straight-line only).
+- **US-10545 Hillsdale Preserve** — also an Historical and Archaeological
+  Preserve; antennas staked into the ground are not permitted here.
+
+### Live data
+- Use the `pota` MCP tool (`pota_spots` with `location=US-RI`) to check for
+  current activators before heading out.
+- Use `solar_conditions` and `solar_band_outlook` to assess HF conditions for
+  the day before planning a park visit.
+<!-- codex: pota-ri end -->
