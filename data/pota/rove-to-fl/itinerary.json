@@ -1,0 +1,34 @@
+{
+  "departureFrom": {
+    "name": "Providence, RI",
+    "lat": 41.824,
+    "lon": -71.412
+  },
+  "arriveBy": "2026-06-26",
+  "fieldDay": "2026-06-27",
+  "constraints": {
+    "workStart": "13:00",
+    "workEnd": "17:00",
+    "maxConsecutiveCampNights": 2
+  },
+  "days": [
+    {
+      "date": "2026-06-20",
+      "states": ["US-CT", "US-NY"],
+      "overnight": {
+        "type": "camp",
+        "name": "TBD — somewhere in CT or NY",
+        "reference": null,
+        "booking": {
+          "status": "planned",
+          "confirmation": null,
+          "url": null,
+          "notes": null
+        }
+      },
+      "parkTargets": [],
+      "notes": "Day 1 example — fill in park targets once clusters are planned.",
+      "approxDriveMiles": 150
+    }
+  ]
+}

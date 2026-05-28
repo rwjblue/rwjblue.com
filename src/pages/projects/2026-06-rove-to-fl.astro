@@ -2,8 +2,69 @@
 import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import trackerData from "../../data/pota/rove-to-fl.json";
+import itinerary from "../../../data/pota/rove-to-fl/itinerary.json";
 
 const trackerJson = JSON.stringify(trackerData);
+
+// Build a map of POTA ref → park name for itinerary tooltips
+const parkByRef = Object.fromEntries(
+  trackerData.parks.map((p) => [p.reference, p])
+);
+
+// Validate camping-nights constraint and annotate days
+type OvernightType = "camp" | "hotel" | "home" | "tbd";
+interface BookingInfo {
+  status: "planned" | "booked" | "n/a";
+  confirmation?: string | null;
+  url?: string | null;
+  notes?: string | null;
+}
+interface ItineraryDay {
+  date: string;
+  states: string[];
+  overnight: {
+    type: OvernightType;
+    name: string;
+    reference?: string;
+    lat?: number;
+    lon?: number;
+    booking: BookingInfo;
+  };
+  parkTargets: string[];
+  notes?: string;
+  approxDriveMiles?: number;
+}
+
+let consecutiveCamp = 0;
+const annotatedDays = (itinerary.days as ItineraryDay[]).map((day) => {
+  const isCamp = day.overnight.type === "camp";
+  if (isCamp) {
+    consecutiveCamp += 1;
+  } else {
+    consecutiveCamp = 0;
+  }
+  return {
+    ...day,
+    consecutiveCampCount: isCamp ? consecutiveCamp : 0,
+    campViolation: consecutiveCamp > itinerary.constraints.maxConsecutiveCampNights,
+  };
+});
+
+function formatDate(iso: string) {
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+const OVERNIGHT_ICON: Record<OvernightType, string> = {
+  camp: "⛺",
+  hotel: "🏨",
+  home: "🏠",
+  tbd: "?",
+};
 
 // Colors assigned in route order (CT → FL)
 const STATE_COLORS: Record<string, string> = {
@@ -92,6 +153,99 @@ const STATE_COLORS: Record<string, string> = {
         </div>
       ))}
     </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="itinerary-title">
+    <div class="section-heading">
+      <h2 id="itinerary-title">Itinerary</h2>
+    </div>
+
+    {annotatedDays.length === 0 ? (
+      <div class="rove-itinerary-empty">
+        <p>Planning in progress. Days will appear here as the itinerary is drafted.</p>
+        <p class="meta">
+          Work window: {itinerary.constraints.workStart}–{itinerary.constraints.workEnd} local ·
+          Max {itinerary.constraints.maxConsecutiveCampNights} consecutive camping nights ·
+          Arrive by {itinerary.arriveBy}
+        </p>
+      </div>
+    ) : (
+      <div class="rove-itinerary">
+        <p class="meta rove-constraints">
+          Work {itinerary.constraints.workStart}–{itinerary.constraints.workEnd} local ·
+          max {itinerary.constraints.maxConsecutiveCampNights} consecutive camping nights ·
+          arrive by {itinerary.arriveBy}
+        </p>
+        <ol class="rove-day-list">
+          {annotatedDays.map((day, i) => (
+            <li class={`rove-day${day.campViolation ? " rove-day--violation" : ""}`}>
+              <div class="rove-day-header">
+                <span class="rove-day-number">Day {i + 1}</span>
+                <span class="rove-day-date">{formatDate(day.date)}</span>
+                {day.approxDriveMiles && (
+                  <span class="rove-day-miles">{day.approxDriveMiles} mi</span>
+                )}
+                <span class="rove-day-states">
+                  {day.states.map((s) => s.replace("US-", "")).join(" · ")}
+                </span>
+              </div>
+
+              <div class="rove-day-body">
+                <div class="rove-overnight">
+                  <span class="rove-overnight-icon" title={day.overnight.type}>
+                    {OVERNIGHT_ICON[day.overnight.type as OvernightType]}
+                  </span>
+                  <span class="rove-overnight-name">{day.overnight.name}</span>
+                  {day.overnight.reference && (
+                    <a
+                      class="rove-overnight-ref"
+                      href={`https://pota.app/#/park/${day.overnight.reference}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {day.overnight.reference}
+                    </a>
+                  )}
+                  <span class={`rove-booking-status rove-booking-${day.overnight.booking.status}`}>
+                    {day.overnight.booking.status}
+                    {day.overnight.booking.confirmation && (
+                      <span> · #{day.overnight.booking.confirmation}</span>
+                    )}
+                  </span>
+                  {day.campViolation && (
+                    <span class="rove-camp-warning" title="Exceeds max consecutive camping nights">
+                      ⚠ camp limit
+                    </span>
+                  )}
+                </div>
+
+                {day.parkTargets.length > 0 && (
+                  <ul class="rove-park-targets">
+                    {day.parkTargets.map((ref) => {
+                      const park = parkByRef[ref];
+                      return (
+                        <li>
+                          <a
+                            href={`https://pota.app/#/park/${ref}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {ref}
+                          </a>
+                          {park && <span> {park.name}</span>}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+
+                {day.notes && <p class="rove-day-notes">{day.notes}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
   </section>
 
   <script type="application/json" id="rove-tracker-data" set:html={trackerJson} />
@@ -204,6 +358,143 @@ const STATE_COLORS: Record<string, string> = {
 
   .rove-map-legend {
     flex-wrap: wrap;
+  }
+
+  /* Itinerary */
+  .rove-itinerary-empty {
+    color: var(--color-text-muted, #666);
+  }
+
+  .rove-constraints {
+    margin-bottom: 1.25rem;
+  }
+
+  .rove-day-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .rove-day {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .rove-day--violation {
+    border-color: #c0392b;
+  }
+
+  .rove-day-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--color-surface-raised, #f5f0e8);
+    font-size: 0.8rem;
+  }
+
+  .rove-day-number {
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .rove-day-date {
+    flex: 1;
+  }
+
+  .rove-day-miles {
+    color: var(--color-text-muted, #888);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rove-day-states {
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-accent, #167246);
+  }
+
+  .rove-day-body {
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .rove-overnight {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+  }
+
+  .rove-overnight-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .rove-overnight-name {
+    font-weight: 600;
+  }
+
+  .rove-overnight-ref {
+    font-size: 0.78rem;
+    color: var(--color-text-muted, #888);
+  }
+
+  .rove-booking-status {
+    font-size: 0.75rem;
+    padding: 0.1em 0.45em;
+    border-radius: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .rove-booking-planned {
+    background: #fff3cd;
+    color: #856404;
+  }
+
+  .rove-booking-booked {
+    background: #d1e7dd;
+    color: #0a3622;
+  }
+
+  .rove-booking-n\/a {
+    background: var(--color-surface-raised, #eee);
+    color: var(--color-text-muted, #888);
+  }
+
+  .rove-camp-warning {
+    font-size: 0.75rem;
+    color: #c0392b;
+    font-weight: 600;
+  }
+
+  .rove-park-targets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-size: 0.85rem;
+  }
+
+  .rove-park-targets li {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .rove-day-notes {
+    font-size: 0.85rem;
+    color: var(--color-text-muted, #666);
+    margin: 0;
   }
 
   .rove-state-count {
