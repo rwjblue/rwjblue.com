@@ -57,9 +57,20 @@ Route summary is in `d.route` — each entry has `code`, `name`, `total`, `corri
 
 ## Step 3 — Find clusters per leg
 
-**TODO**: `scripts/pota/rove-clusters.mjs` currently reads `ri-tracker.json` (RI only). It needs a `--source` or `--state` flag to accept corridor parks from `rove-to-fl.json` for per-leg cluster analysis. Until that's built, use the node snippet above to get a ranked list and pick targets manually.
+```bash
+# CT corridor parks, 30-min adjacency, starting from FN41fr (Providence area)
+mise run pota:rove-to-fl:rove-clusters -- --state US-CT --threshold 30
 
-When extending rove-clusters, the entry point to adapt is the park-loading section at the top of `buildMatrix()`. Pass `--state US-NC` (or a list of refs) and load from `src/data/pota/rove-to-fl.json` instead of `ri-tracker.json`.
+# Multiple states (e.g. a leg that crosses VA+NC)
+mise run pota:rove-to-fl:rove-clusters -- --state US-VA --state US-NC --threshold 45
+
+# Start grid for a mid-trip leg (e.g. Richmond, VA)
+mise run pota:rove-to-fl:rove-clusters -- --state US-NC --grid FM17kk --threshold 45
+```
+
+Uses OSRM for real driving distances; falls back to haversine if OSRM is unreachable.
+Adjust `--threshold` (minutes) to control cluster tightness. The `--grid` flag sets
+the round-trip start point — use your overnight location for that leg.
 
 ## Step 4 — Update the itinerary
 

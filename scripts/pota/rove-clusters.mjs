@@ -11,11 +11,14 @@
  * Usage:
  *   node --experimental-strip-types scripts/pota/rove-clusters.mjs [options]
  *   mise run pota:ri:rove-clusters [-- --threshold 60 --all]
+ *   mise run pota:rove-to-fl:rove-clusters [-- --state US-CT --state US-NY]
  *
  * Options:
  *   --grid <grid>        Home Maidenhead grid square (default: FN41fr)
  *   --threshold <min>    Max inter-park drive time for adjacency (default: 45)
- *   --all                Include already-activated parks (default: remaining only)
+ *   --all                Include already-activated RI parks (default: remaining only)
+ *   --state <code>       Filter to corridor parks in this state (repeatable);
+ *                        when given, loads from rove-to-fl.json instead of ri-tracker.json
  */
 
 import { readFile } from "node:fs/promises";
@@ -28,7 +31,8 @@ import {
 } from "./lib/routing.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const trackerDataPath = path.join(root, "src/data/pota/ri-tracker.json");
+const riTrackerPath = path.join(root, "src/data/pota/ri-tracker.json");
+const corridorDataPath = path.join(root, "src/data/pota/rove-to-fl.json");
 
 const DEFAULT_THRESHOLD_MIN = 45;
 const DEFAULT_HOME_GRID = "FN41fr";
@@ -113,6 +117,40 @@ function fmtMin(min) {
 const col = (s, w) => String(s).padEnd(w);
 const rcol = (s, w) => String(s).padStart(w);
 
+function collectFlagValues(args, flag) {
+  const values = [];
+  for (let i = 0; i < args.length - 1; i++) {
+    if (args[i] === flag) values.push(args[i + 1]);
+  }
+  return values;
+}
+
+async function loadParks(args) {
+  const states = collectFlagValues(args, "--state");
+  if (states.length > 0) {
+    const tracker = JSON.parse(await readFile(corridorDataPath, "utf8"));
+    const stateSet = new Set(states);
+    return tracker.parks
+      .filter((p) => stateSet.has(p.state))
+      .map((p) => ({
+        reference: p.reference,
+        name: p.name,
+        latitude: p.latitude,
+        longitude: p.longitude,
+      }));
+  }
+  const showAll = args.includes("--all");
+  const tracker = JSON.parse(await readFile(riTrackerPath, "utf8"));
+  return tracker.references
+    .filter((r) => showAll || r.status === "remaining")
+    .map((r) => ({
+      reference: r.reference,
+      name: r.name,
+      latitude: r.latitude,
+      longitude: r.longitude,
+    }));
+}
+
 async function main() {
   const args = process.argv.slice(2);
 
@@ -123,6 +161,7 @@ async function main() {
   const thresholdMin =
     threshFlag >= 0 ? parseInt(args[threshFlag + 1], 10) : DEFAULT_THRESHOLD_MIN;
 
+  const states = collectFlagValues(args, "--state");
   const showAll = args.includes("--all");
 
   if (grid.length < 6) {
@@ -132,21 +171,22 @@ async function main() {
   }
 
   const [homeLat, homeLon] = gridToLatLon(grid);
-  const tracker = JSON.parse(await readFile(trackerDataPath, "utf8"));
-  const parks = tracker.references.filter(
-    (r) => showAll || r.status === "remaining"
-  );
+  const parks = await loadParks(args);
 
   if (parks.length === 0) {
     console.log("No parks to cluster.");
     return;
   }
 
+  const sourceLabel = states.length > 0
+    ? `${states.join(" + ")} corridor parks`
+    : `${showAll ? "total" : "remaining"} RI parks`;
+
   console.log(
     `Rove clusters from ${grid} (${homeLat.toFixed(3)}, ${homeLon.toFixed(3)})`
   );
   console.log(
-    `${parks.length} ${showAll ? "total" : "remaining"} parks  •  ${thresholdMin}-min adjacency threshold\n`
+    `${parks.length} ${sourceLabel}  •  ${thresholdMin}-min adjacency threshold\n`
   );
 
   // allCoords: index 0 = home, indices 1..N = parks
