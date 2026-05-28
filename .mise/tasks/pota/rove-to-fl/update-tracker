@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Fetch parks for all I-95 corridor states and rebuild rove-to-fl.json"
+
+set -euo pipefail
+node --experimental-strip-types scripts/pota/rove-to-fl-tracker.mjs update-tracker

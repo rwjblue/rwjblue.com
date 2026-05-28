@@ -3,8 +3,9 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
+  const DEDICATED_PAGES = ["2026-activate-all-ri-pota", "2026-06-rove-to-fl"];
   const projects = (await getCollection("projects")).filter(
-    (project) => project.id !== "2026-activate-all-ri-pota",
+    (project) => !DEDICATED_PAGES.includes(project.id),
   );
   return projects.map((project) => ({
     params: { slug: project.id },

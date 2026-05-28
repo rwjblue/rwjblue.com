@@ -1,0 +1,214 @@
+---
+import "leaflet/dist/leaflet.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import trackerData from "../../data/pota/rove-to-fl.json";
+
+const trackerJson = JSON.stringify(trackerData);
+
+// Colors assigned in route order (CT → FL)
+const STATE_COLORS: Record<string, string> = {
+  "US-CT": "#4e79a7",
+  "US-NY": "#f28e2b",
+  "US-NJ": "#e15759",
+  "US-DE": "#76b7b2",
+  "US-MD": "#59a14f",
+  "US-VA": "#edc948",
+  "US-NC": "#b07aa1",
+  "US-SC": "#ff9da7",
+  "US-GA": "#9c755f",
+  "US-FL": "#bab0ac",
+};
+---
+
+<BaseLayout
+  title="2026 Rove to FL / N1RWJ"
+  description="A week-long POTA activation drive from Rhode Island down the I-95 corridor to Singer Island, FL for Field Day 2026."
+  canonicalPath="/projects/2026-06-rove-to-fl/"
+>
+  <section class="pota-tracker-hero" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow">Project / POTA</p>
+      <h1 id="page-title">2026 Rove to FL</h1>
+      <p class="lede strong">
+        I-95 corridor from Rhode Island to Singer Island, FL — activating parks
+        along the way and arriving June 26 for Field Day 2026.
+      </p>
+      <p class="lede">
+        {trackerData.parks.length} parks along the corridor across {trackerData.route.length} states.
+        Targets TBD.
+      </p>
+    </div>
+
+    <div class="pota-tracker-panel">
+      <aside class="pota-scoreboard" aria-label="Trip details">
+        <div>
+          <strong>Jun 26</strong>
+          <span>arrive FL</span>
+        </div>
+        <div>
+          <strong>Jun 27–28</strong>
+          <span>Field Day</span>
+        </div>
+        <div>
+          <strong>{trackerData.parks.length}</strong>
+          <span>corridor parks</span>
+        </div>
+        <p>Singer Island / Riviera Beach, FL</p>
+      </aside>
+
+      <section class="pota-map-section" aria-labelledby="map-title">
+        <div class="section-heading">
+          <p class="section-label">Map</p>
+          <h2 id="map-title">I-95 corridor parks</h2>
+        </div>
+        <div id="rove-map" class="pota-map" aria-label="Map of I-95 corridor POTA parks"></div>
+        <div class="pota-map-legend rove-map-legend" aria-label="State color legend">
+          {trackerData.route.map((s) => (
+            <span>
+              <i style={`background:${STATE_COLORS[s.code] ?? "#888"};border-color:#172026`}></i>
+              {s.code.replace("US-", "")}
+            </span>
+          ))}
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="states-title">
+    <div class="section-heading">
+      <h2 id="states-title">Parks by state</h2>
+    </div>
+    <div class="rove-state-grid">
+      {trackerData.route.map((s) => (
+        <div class="rove-state-card">
+          <span
+            class="rove-state-dot"
+            style={`background:${STATE_COLORS[s.code] ?? "#888"}`}
+            aria-hidden="true"
+          ></span>
+          <span class="rove-state-abbr">{s.code.replace("US-", "")}</span>
+          <span class="rove-state-name">{s.name}</span>
+          <span class="rove-state-count">{s.corridorCount}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script type="application/json" id="rove-tracker-data" set:html={trackerJson} />
+  <script>
+    import L from "leaflet";
+
+    const STATE_COLORS: Record<string, string> = {
+      "US-CT": "#4e79a7",
+      "US-NY": "#f28e2b",
+      "US-NJ": "#e15759",
+      "US-DE": "#76b7b2",
+      "US-MD": "#59a14f",
+      "US-VA": "#edc948",
+      "US-NC": "#b07aa1",
+      "US-SC": "#ff9da7",
+      "US-GA": "#9c755f",
+      "US-FL": "#bab0ac",
+    };
+
+    const dataEl = document.getElementById("rove-tracker-data");
+    const mapEl = document.getElementById("rove-map");
+
+    if (dataEl && mapEl) {
+      const tracker = JSON.parse(dataEl.textContent ?? "{}");
+      const map = L.map(mapEl, { scrollWheelZoom: false });
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      const bounds = L.latLngBounds([]);
+
+      for (const park of tracker.parks) {
+        const color = STATE_COLORS[park.state] ?? "#888";
+        const marker = L.circleMarker([park.latitude, park.longitude], {
+          radius: 5,
+          color: "#172026",
+          weight: 1,
+          fillColor: color,
+          fillOpacity: 0.85,
+        }).addTo(map);
+
+        bounds.extend([park.latitude, park.longitude]);
+        marker.bindPopup(popupHtml(park));
+      }
+
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [24, 24] });
+      }
+    }
+
+    function escapeHtml(value: string) {
+      return String(value).replace(/[&<>"']/g, (c: string) => {
+        const e: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+        return e[c] ?? c;
+      });
+    }
+
+    function popupHtml(park: { reference: string; name: string; stateName: string; activations: number; qsos: number }) {
+      return `
+        <strong>${escapeHtml(park.reference)}</strong>
+        <span>${escapeHtml(park.name)}</span>
+        <em>${escapeHtml(park.stateName)}</em>
+        <span>${park.activations} activations · ${park.qsos} QSOs</span>
+        <a href="https://pota.app/#/park/${escapeHtml(park.reference)}" target="_blank" rel="noreferrer">POTA page</a>
+      `;
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .rove-state-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-width: 32rem;
+  }
+
+  .rove-state-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    background: var(--color-surface-raised, #f5f0e8);
+  }
+
+  .rove-state-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1.5px solid #172026;
+  }
+
+  .rove-state-abbr {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    width: 2rem;
+    flex-shrink: 0;
+  }
+
+  .rove-state-name {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+
+  .rove-map-legend {
+    flex-wrap: wrap;
+  }
+
+  .rove-state-count {
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-muted, #666);
+  }
+</style>
