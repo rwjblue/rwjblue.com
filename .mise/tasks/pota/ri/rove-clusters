@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Find clusters of remaining RI POTA parks suitable for a single rove outing"
+#USAGE flag "--grid <grid>" default="FN41fr" help="6-char Maidenhead grid square for the home/start location"
+#USAGE flag "--threshold <min>" default="45" help="Max drive time in minutes between adjacent parks"
+
+set -euo pipefail
+
+node --experimental-strip-types scripts/pota/rove-clusters.mjs \
+  --grid "${usage_grid}" \
+  --threshold "${usage_threshold}" \
+  "$@"

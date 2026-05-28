@@ -30,6 +30,18 @@ mise run pota:ri:travel-times -- --grid FN41gs
 
 Output is sorted by estimated drive time. Requires network for OSRM routing; falls back to haversine if OSRM is unreachable. Default home grid is **FN41fr**.
 
+## Step 2b — Find rove clusters
+
+```bash
+mise run pota:ri:rove-clusters
+# wider threshold (more parks per cluster):
+mise run pota:ri:rove-clusters -- --threshold 60
+# include already-activated parks:
+mise run pota:ri:rove-clusters -- --all
+```
+
+Groups remaining parks by adjacency (default: 45-min inter-park drive) using connected components. For each cluster, computes a nearest-neighbor round-trip from home and reports ordered stops with segment times and total drive. Isolated parks (no neighbor within threshold) are listed separately. Falls back to haversine if OSRM is unreachable.
+
 ## Step 3 — Check live conditions
 
 ```
@@ -65,5 +77,7 @@ mise run pota:ri:build-tracker-data
 | `data/pota/ri/activations.json` | Activation ledger (hand-editable if needed) |
 | `data/pota/ri/cache/` | Raw API response caches |
 | `scripts/pota/ri-tracker.mjs` | Tracker data pipeline |
-| `scripts/pota/travel-times.mjs` | Drive-time estimator |
+| `scripts/pota/travel-times.mjs` | Drive-time estimator (home → each park) |
+| `scripts/pota/rove-clusters.mjs` | Rove cluster finder (groups of nearby parks) |
+| `scripts/pota/lib/routing.mjs` | Shared routing utilities (grid, haversine, OSRM) |
 | `src/pages/projects/2026-activate-all-ri-pota.astro` | Public tracker page |

@@ -14,71 +14,14 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  gridToLatLon,
+  haversineDriveMinutes,
+  osrmTableFrom,
+} from "./lib/routing.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const trackerDataPath = path.join(root, "src/data/pota/ri-tracker.json");
-
-const OSRM_BASE = "http://router.project-osrm.org";
-
-// Maidenhead grid square center → [lat, lon]
-function gridToLatLon(grid) {
-  const g = grid.toUpperCase();
-  const lon =
-    (g.charCodeAt(0) - 65) * 20 +
-    (g.charCodeAt(2) - 48) * 2 +
-    (g.toLowerCase().charCodeAt(4) - 97 + 0.5) * (2 / 24) -
-    180;
-  const lat =
-    (g.charCodeAt(1) - 65) * 10 +
-    (g.charCodeAt(3) - 48) * 1 +
-    (g.toLowerCase().charCodeAt(5) - 97 + 0.5) * (1 / 24) -
-    90;
-  return [lat, lon];
-}
-
-// Haversine great-circle distance in km
-function haversineKm(lat1, lon1, lat2, lon2) {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-// Rough drive-time estimate: straight-line × 1.4 road factor at 80 km/h average
-function haversineDriveMinutes(lat1, lon1, lat2, lon2) {
-  const km = haversineKm(lat1, lon1, lat2, lon2) * 1.4;
-  return Math.round((km / 80) * 60);
-}
-
-async function osrmTableDurations(coords) {
-  const coordStr = coords.map(([lon, lat]) => `${lon},${lat}`).join(";");
-  const dests = coords
-    .slice(1)
-    .map((_, i) => i + 1)
-    .join(",");
-  const url = `${OSRM_BASE}/table/v1/driving/${coordStr}?sources=0&destinations=${dests}&annotations=duration`;
-
-  const response = await fetch(url, {
-    headers: {
-      "user-agent": "rwjblue.com POTA RI travel time estimator",
-      accept: "application/json",
-    },
-    signal: AbortSignal.timeout(15_000),
-  });
-
-  if (!response.ok) throw new Error(`OSRM responded ${response.status}`);
-
-  const data = await response.json();
-  if (data.code !== "Ok") throw new Error(`OSRM code: ${data.code}`);
-
-  // durations[0][i] = seconds from source 0 to destination i
-  return data.durations[0];
-}
 
 async function main() {
   const args = process.argv.slice(2);
@@ -109,8 +52,8 @@ async function main() {
 
   try {
     process.stdout.write("Querying OSRM routing... ");
-    const rawDurations = await osrmTableDurations(coords);
-    durations = rawDurations.map((s) => (s != null ? Math.round(s / 60) : null));
+    const rawDurations = await osrmTableFrom(coords, 0);
+    durations = rawDurations.slice(1).map((m) => (m != null ? Math.round(m) : null));
     console.log("ok\n");
   } catch (err) {
     console.log(`failed (${err.message})\nFalling back to haversine estimate.\n`);
