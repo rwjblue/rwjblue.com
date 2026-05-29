@@ -44,8 +44,8 @@ field opens up and the trees have real height.
 </div>
 
 The throw line went to the first branch I aimed at, roughly 30 feet up — the
-best throw I have made. The problem came right after. The bag pulled the weight
-over the limb cleanly, but the line had tangled inside the bag on the way up,
+best throw I have made. The problem came right after. The weight cleared the
+limb cleanly, but the line had tangled inside the bag on the way up,
 so the whole bag was hanging elevated off the limb instead of paying out. I had
 to untangle it on the fly while hauling everything into position. Still, the
 branch was exactly right, and once the wire was up the rest of the setup took
@@ -56,11 +56,11 @@ only a few minutes more.
 </div>
 
 I ran 25 feet of RG-316 back from the antenna to the camping chair, plugged in,
-and let the KX2's internal tuner match the Rybakov. It handled it without
-complaint. I started on 40 meters and made four contacts, then moved to 30 and
+and let the KX2's internal tuner match the Rybakov. It locked on fast —
+noticeably quicker than the KX3. I started on 40 meters and made four contacts, then moved to 30 and
 picked up five more. The best run was 20 meters — ten contacts from 14:00 to
-14:16 UTC, including VO1AW in Newfoundland, which was a nice surprise for a
-short operating window.
+14:16 UTC, including VO1AW in Newfoundland. Brian hunts me constantly — I hear
+"VO" in a pileup and just autocomplete at this point. Picked him right out.
 
 <div class="photo-grid">
   <img src="/images/pota/2026-05-29-durfee-hill-wildlife-management-area-pota/operator-station.jpg" alt="N1RWJ operating the KX2 seated at the edge of the meadow at Durfee Hill Wildlife Management Area">
@@ -69,17 +69,22 @@ short operating window.
 
 The RBN spots confirmed I was getting out well across all three bands. I did try
 to hunt N1BS, who was activating another RI park at the same time, but he could
-not hear me. Good to have someone else working the RI challenge on the same
-morning.
+not hear me. Still — for the smallest state in the country, Rhode Island has
+a surprisingly active POTA scene.
 
 <div class="photo-grid">
   <img src="/images/pota/2026-05-29-durfee-hill-wildlife-management-area-pota/operating-area.jpg" alt="The overgrown hilltop operating area at Durfee Hill with power lines visible in the background">
   <img src="/images/pota/2026-05-29-durfee-hill-wildlife-management-area-pota/hilltop-meadow.jpg" alt="Meadow edge at the hilltop operating position, pine trees lining the field boundary">
 </div>
 
-The KX2 was excellent. The built-in paddle worked well, the ATU is noticeably
-faster than the KX3's, and the whole radio disappears into a pack in a way the
-KX3 does not.
+The KX2 was excellent. The internal speaker is noticeably better than the KX3's
+— though my KX3's speaker may be damaged, so I'll reserve final judgment. The
+KXPD2 paddle is also a step up from the KXPD3 on the KX3: better feel, cleaner
+action. The ATU locks on fast. Running on the internal battery was a revelation
+— just the radio, the coax, and the key, with no separate battery pack or power
+wires to manage. The whole station felt genuinely simpler. The KX2 also has a
+built-in Ah usage meter, which is a nice touch — this activation came in around
+0.475 Ah.
 
 ## What worked
 
