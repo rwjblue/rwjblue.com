@@ -6,16 +6,26 @@ import { contactMapForNote } from "../../../data/pota/contact-maps";
 import { BAND_COLORS } from "../../../data/pota/band-colors.mjs";
 import { formatDate } from "../../../lib/format";
 
+function collectBandCounts(contacts) {
+  const bandCounts = {};
+
+  for (const contact of contacts) {
+    bandCounts[contact.band] = (bandCounts[contact.band] ?? 0) + 1;
+  }
+
+  return bandCounts;
+}
+
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
 
   return notes
-    .filter((note) => contactMapForNote(note.id))
+    .filter((note) => contactMapForNote(note))
     .map((note) => ({ params: { slug: note.id }, props: { note } }));
 }
 
 const { note } = Astro.props;
-const map = contactMapForNote(note.id);
+const map = contactMapForNote(note);
 
 if (!map) {
   throw new Error(`No contact map registered for note ${note.id}`);
@@ -26,6 +36,7 @@ const mapJson = JSON.stringify(map);
 const bandColorsJson = JSON.stringify(BAND_COLORS);
 const heroImage = note.data.shareImageHero;
 const hasHeroLayout = Boolean(heroImage);
+const bandCounts = collectBandCounts(map.contacts);
 ---
 
 <!doctype html>
@@ -323,7 +334,7 @@ const hasHeroLayout = Boolean(heroImage);
 
               <div class="hero-meta">
                 <div class="hero-metric">
-                  <strong>{map.summary.plotted}</strong>
+                  <strong>{map.contacts.length}</strong>
                   <span class="meta-label">QSOs</span>
                   <span class="meta-value">{formattedDate}</span>
                 </div>
@@ -349,7 +360,7 @@ const hasHeroLayout = Boolean(heroImage);
 
               <div class="bands">
                 {
-                  Object.entries(map.summary.bands).map(([band, count]) => (
+                  Object.entries(bandCounts).map(([band, count]) => (
                     <span><i style={`background:${BAND_COLORS[band] ?? BAND_COLORS.other}`}></i>{band} {count}</span>
                   ))
                 }
@@ -370,7 +381,7 @@ const hasHeroLayout = Boolean(heroImage);
             <div>
               <div class="meta">
                 <div class="meta-block">
-                  <strong>{map.summary.plotted}</strong>
+                  <strong>{map.contacts.length}</strong>
                   <span class="meta-label">QSOs</span>
                   <span class="meta-value">{formattedDate}</span>
                 </div>
@@ -383,7 +394,7 @@ const hasHeroLayout = Boolean(heroImage);
 
               <div class="bands" style="margin-top: 18px;">
                 {
-                  Object.entries(map.summary.bands).map(([band, count]) => (
+                  Object.entries(bandCounts).map(([band, count]) => (
                     <span><i style={`background:${BAND_COLORS[band] ?? BAND_COLORS.other}`}></i>{band} {count}</span>
                   ))
                 }
@@ -421,32 +432,37 @@ const hasHeroLayout = Boolean(heroImage);
         }).addTo(map);
 
         const bounds = L.latLngBounds([]);
-        const origin = [contactMap.origin.lat, contactMap.origin.lon];
 
-        bounds.extend(origin);
-        L.circleMarker(origin, {
-          radius: 9,
-          color: "#fffdfa",
-          weight: 3,
-          fillColor: "#172026",
-          fillOpacity: 1,
-        }).addTo(map);
+        for (const originPoint of uniqueOrigins(contactMap.contacts)) {
+          const latLng = [originPoint.origin.lat, originPoint.origin.lon];
+
+          bounds.extend(latLng);
+          L.circleMarker(latLng, {
+            radius: 9,
+            color: "#fffdfa",
+            weight: 3,
+            fillColor: "#172026",
+            fillOpacity: 1,
+          }).addTo(map);
+        }
 
         for (const contact of contactMap.contacts) {
-          const latLng = [contact.lat, contact.lon];
+          const origin = [contact.origin.lat, contact.origin.lon];
+          const latLng = [contact.destination.lat, contact.destination.lon];
           const color = bandColors[String(contact.band).toLowerCase()] ?? bandColors.other;
 
           bounds.extend(latLng);
           L.polyline([origin, latLng], {
             color,
-            opacity: contact.source === "state" ? 0.38 : 0.24,
-            weight: contact.source === "state" ? 2.2 : 1.5,
+            opacity: contact.source === "grid" ? 0.24 : 0.38,
+            weight: contact.source === "grid" ? 1.5 : 2.2,
           }).addTo(map);
 
           L.circleMarker(latLng, {
-            radius: contact.source === "state" ? 7 : 5.5,
+            radius: contact.source === "grid" ? 5.5 : 7,
             color: "#172026",
-            weight: contact.source === "state" ? 2 : 1.5,
+            weight: contact.source === "grid" ? 1.5 : 2,
+            dashArray: contact.source === "grid" ? undefined : "3 2",
             fillColor: color,
             fillOpacity: 0.94,
           }).addTo(map);
@@ -455,6 +471,22 @@ const hasHeroLayout = Boolean(heroImage);
         if (bounds.isValid()) {
           map.fitBounds(bounds, { padding: [20, 20] });
         }
+      }
+
+      function uniqueOrigins(contacts) {
+        const seen = new Map();
+
+        for (const contact of contacts) {
+          const key = `${contact.origin.lat},${contact.origin.lon},${contact.originGrid}`;
+          if (!seen.has(key)) {
+            seen.set(key, {
+              originGrid: contact.originGrid,
+              origin: contact.origin,
+            });
+          }
+        }
+
+        return [...seen.values()];
       }
     </script>
   </body>

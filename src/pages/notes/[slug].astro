@@ -23,7 +23,7 @@ const firstHtmlImageAlt = note.body.match(
   /<img\b[^>]*\balt=["']([^"']*)["'][^>]*>/i,
 );
 const formattedDate = formatDate(note.data.date, "long");
-const contactMap = contactMapForNote(note.id);
+const contactMap = contactMapForNote(note);
 const shareImage = contactMap
   ? `/images/pota/${note.id}/share.png`
   : firstMarkdownImage?.[2] ?? firstHtmlImage?.[1];

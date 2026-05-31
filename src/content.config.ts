@@ -9,6 +9,7 @@ const notes = defineCollection({
     date: z.coerce.date(),
     summary: z.string(),
     shareImageHero: z.string().optional(),
+    contactMap: z.string().optional(),
     tags: z.array(z.string()).default([]),
   }),
 });

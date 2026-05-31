@@ -19,6 +19,14 @@ const sampleAdif = `
 <CALL:4>NONE <BAND:3>20m <QSO_DATE:8>20260527 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41dx97 <DXCC:3>291 <EOR>
 `;
 
+const roveAdif = `
+<ADIF_VER:5>3.1.5
+<EOH>
+<CALL:5>FIRST <BAND:3>20m <QSO_DATE:8>20260530 <TIME_ON:6>195100 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41km12 <GRIDSQUARE:6>EN13ab <DXCC:3>291 <STATE:2>SD <EOR>
+<CALL:6>SECOND <BAND:3>30m <QSO_DATE:8>20260530 <TIME_ON:6>215900 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41hn34 <DXCC:3>291 <STATE:2>MI <EOR>
+<CALL:5>THIRD <BAND:3>20m <QSO_DATE:8>20260531 <TIME_ON:6>000600 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl56 <DXCC:3>110 <EOR>
+`;
+
 test("parseAdif extracts records and fields", () => {
   const qson = parseAdif(sampleAdif);
 
@@ -52,22 +60,47 @@ test("buildContactMapData uses grids first and state centroids as fallback", () 
   });
 
   assert.equal(map.title, "Sample map");
-  assert.equal(map.originGrid, "FN41dx");
-  assert.deepEqual(map.origin, gridToLatLon("FN41dx"));
-  assert.equal(map.contacts.length, 2);
+  assert.equal(map.contacts.length, 3);
+  assert.equal(map.contacts[0].timestamp, "2026-05-27T00:00:00Z");
+  assert.equal(map.contacts[0].originGrid, "FN41dx97");
+  assert.deepEqual(map.contacts[0].origin, gridToLatLon("FN41dx97"));
+  assert.equal(map.contacts[0].destinationGrid, "EM86sn");
+  assert.deepEqual(map.contacts[0].destination, gridToLatLon("EM86sn"));
   assert.equal(map.contacts[0].source, "grid");
+  assert.equal(map.contacts[1].destinationState, "IN");
   assert.equal(map.contacts[1].source, "state");
-  assert.deepEqual(map.summary, {
-    totalRecords: 3,
-    plotted: 2,
-    fromGrid: 1,
-    fromState: 1,
-    unplottable: 1,
-    bands: {
-      "40m": 1,
-      "20m": 1,
-    },
+  assert.equal(map.contacts[2].destinationCountry, "291");
+  assert.equal(map.contacts[2].source, "country");
+  assert.ok(!("originGrid" in map));
+  assert.ok(!("origin" in map));
+  assert.ok(!("summary" in map));
+});
+
+test("buildContactMapData preserves per-contact origins and country fallback for roves", () => {
+  const map = buildContactMapData(roveAdif, {
+    title: "Rove map",
+    subtitle: "Rove subtitle",
   });
+
+  assert.equal(map.contacts.length, 3);
+  assert.deepEqual(
+    map.contacts.map((contact) => contact.timestamp),
+    [
+      "2026-05-30T19:51:00Z",
+      "2026-05-30T21:59:00Z",
+      "2026-05-31T00:06:00Z",
+    ],
+  );
+  assert.deepEqual(
+    map.contacts.map((contact) => contact.originGrid),
+    ["FN41km12", "FN41hn34", "FN41jl56"],
+  );
+  assert.deepEqual(map.contacts[0].destination, gridToLatLon("EN13ab"));
+  assert.equal(map.contacts[0].destinationGrid, "EN13ab");
+  assert.equal(map.contacts[1].destinationState, "MI");
+  assert.equal(map.contacts[1].source, "state");
+  assert.equal(map.contacts[2].destinationCountry, "110");
+  assert.equal(map.contacts[2].source, "country");
 });
 
 test("bandColor matches Ham2K PoLo band colors", () => {
@@ -85,12 +118,9 @@ test("renderSvg summarizes the map in QSOs", () => {
     subtitle: "Sample subtitle",
   });
 
-  const svg = renderSvg({
-    ...map,
-    totalRecords: map.summary.totalRecords,
-  });
+  const svg = renderSvg(map);
 
-  assert.match(svg, /Generated from ADI data · 2 QSOs/);
+  assert.match(svg, /Generated from ADI data · 3 QSOs/);
   assert.doesNotMatch(svg, /from grid|from state centroid|plotted/);
 });
 
@@ -100,10 +130,10 @@ test("contact map UI uses QSO summary and omits state fallback legend copy", () 
     "utf8",
   );
 
-  assert.match(componentSource, /map\.summary\.plotted}\s+QSOs/);
+  assert.match(componentSource, /map\.contacts\.length}\s+QSOs/);
   assert.match(componentSource, /type="application\/json" id=\{bandColorsId\}/);
   assert.match(componentSource, /JSON\.parse\(bandColorsElement\.textContent \?\? "\{\}"\)/);
-  assert.match(componentSource, /background:\$\{bandColors\[band\] \?\? bandColors\.other\}/);
+  assert.match(componentSource, /collectBandCounts\(map\.contacts\)/);
   assert.doesNotMatch(componentSource, /State centroid fallback/);
   assert.doesNotMatch(componentSource, /plotted ·/);
 });

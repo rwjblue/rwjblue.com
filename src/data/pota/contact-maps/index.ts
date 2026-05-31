@@ -1,13 +1,23 @@
-import blackHutContactMap from "./2026-05-27-black-hut-wildlife-management-area-pota.json";
-import eastBayRoveContactMap from "./2026-05-30-east-bay-pota-rove.json";
-import durfeeHillContactMap from "./2026-05-29-durfee-hill-wildlife-management-area-pota.json";
+const contactMaps = import.meta.glob("./*.json", {
+  eager: true,
+  import: "default",
+});
 
-export const CONTACT_MAPS = {
-  "2026-05-27-black-hut-wildlife-management-area-pota": blackHutContactMap,
-  "2026-05-29-durfee-hill-wildlife-management-area-pota": durfeeHillContactMap,
-  "2026-05-30-east-bay-pota-rove": eastBayRoveContactMap,
-} as const;
+const CONTACT_MAPS = Object.fromEntries(
+  Object.entries(contactMaps).map(([path, map]) => {
+    const repoPath = `src/data/pota/contact-maps/${path.slice(2)}`;
+    return [repoPath, map];
+  }),
+);
 
-export function contactMapForNote(noteId: string) {
-  return CONTACT_MAPS[noteId as keyof typeof CONTACT_MAPS];
+export function contactMapForPath(contactMapPath?: string) {
+  if (!contactMapPath) {
+    return undefined;
+  }
+
+  return CONTACT_MAPS[contactMapPath as keyof typeof CONTACT_MAPS];
+}
+
+export function contactMapForNote(note: { data: { contactMap?: string } }) {
+  return contactMapForPath(note.data.contactMap);
 }

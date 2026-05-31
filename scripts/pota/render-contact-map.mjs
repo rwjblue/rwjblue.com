@@ -206,65 +206,102 @@ export function stateToLatLon(state, dxcc) {
   return US_STATE_CENTROIDS[state.trim().toUpperCase()] ?? null;
 }
 
-export function summarizeContacts(contacts, totalRecords) {
+const DXCC_CENTROIDS = {
+  "1": { lat: 56.130366, lon: -106.346771 }, // Canada
+  "6": { lat: 64.200841, lon: -149.493673 }, // Alaska
+  "50": { lat: 23.634501, lon: -102.552784 }, // Mexico
+  "110": { lat: 19.8986829, lon: -155.6658568 }, // Hawaii
+  "291": { lat: 39.8283, lon: -98.5795 }, // United States
+};
+
+export function countryToLatLon(dxcc) {
+  if (!dxcc) {
+    return null;
+  }
+
+  return DXCC_CENTROIDS[String(dxcc)] ?? null;
+}
+
+export function collectBandCounts(contacts) {
   const bandCounts = {};
-  let gridCount = 0;
-  let stateCount = 0;
 
   for (const contact of contacts) {
     bandCounts[contact.band] = (bandCounts[contact.band] ?? 0) + 1;
-    if (contact.source === "grid") {
-      gridCount += 1;
-    } else if (contact.source === "state") {
-      stateCount += 1;
+  }
+
+  return bandCounts;
+}
+
+function uniqueOrigins(contacts) {
+  const seen = new Map();
+
+  for (const contact of contacts) {
+    const key = `${contact.origin.lat},${contact.origin.lon},${contact.originGrid}`;
+    if (!seen.has(key)) {
+      seen.set(key, {
+        originGrid: contact.originGrid,
+        origin: contact.origin,
+      });
     }
   }
 
-  return {
-    totalRecords,
-    plotted: contacts.length,
-    fromGrid: gridCount,
-    fromState: stateCount,
-    unplottable: totalRecords - contacts.length,
-    bands: bandCounts,
-  };
+  return [...seen.values()];
 }
 
 export function buildContactMapData(content, { title, subtitle } = {}) {
   const qson = parseAdif(content);
   const contacts = qson.qsos
     .map((qso) => {
-      const point =
-        gridToLatLon(qso.their?.grid) ??
-        stateToLatLon(qso.their?.state, qso.their?.dxccCode);
-      if (!point) {
+      const originGrid = qso.our?.grid;
+      const origin = gridToLatLon(originGrid);
+      if (!origin) {
         return null;
       }
 
-      return {
-        ...point,
+      const destinationGrid = qso.their?.grid;
+      const destinationState = qso.their?.state;
+      const destinationCountry = qso.their?.dxccCode ? String(qso.their.dxccCode) : undefined;
+      const destination =
+        gridToLatLon(destinationGrid) ??
+        stateToLatLon(destinationState, qso.their?.dxccCode) ??
+        countryToLatLon(destinationCountry);
+      if (!destination) {
+        return null;
+      }
+
+      const contact = {
+        timestamp: qso.startAt ?? qso.endAt,
+        originGrid,
+        origin,
+        destination,
         band: qso.band || "other",
-        source: qso.their?.grid ? "grid" : "state",
+        source: destinationGrid
+          ? "grid"
+          : destinationState && String(qso.their?.dxccCode) === "291"
+            ? "state"
+            : "country",
       };
+
+      if (destinationGrid) {
+        contact.destinationGrid = destinationGrid;
+      } else if (destinationState && String(qso.their?.dxccCode) === "291") {
+        contact.destinationState = destinationState;
+      } else if (destinationCountry) {
+        contact.destinationCountry = destinationCountry;
+      }
+
+      return contact;
     })
     .filter(Boolean);
-
-  const originQso = qson.qsos.find((qso) => qso.our?.grid);
-  const originGrid = originQso?.our?.grid?.slice(0, 6);
-  const origin = gridToLatLon(originGrid);
-
-  if (!origin) {
-    throw new Error("Could not determine MY_GRIDSQUARE from the ADI file.");
-  }
 
   if (contacts.length === 0) {
     throw new Error("No plottable contacts were found.");
   }
 
-  const stationCallsign = originQso?.our?.call || originQso?.our?.operator || "N1RWJ";
-  const date = originQso?.startAt?.slice(0, 10).replaceAll("-", "") ?? "";
+  const firstQso = qson.qsos.find((qso) => qso.our?.grid);
+  const stationCallsign = firstQso?.our?.call || firstQso?.our?.operator || "N1RWJ";
+  const date = firstQso?.startAt?.slice(0, 10).replaceAll("-", "") ?? "";
   const dateLabel = formatDate(date);
-  const summary = summarizeContacts(contacts, qson.qsos.length + qson.errors.length);
 
   return {
     title: title || "Contact map",
@@ -272,21 +309,16 @@ export function buildContactMapData(content, { title, subtitle } = {}) {
     stationCallsign,
     date,
     dateLabel,
-    originGrid,
-    origin,
     contacts,
-    summary,
   };
 }
 
 export function renderSvg({
   title,
   subtitle,
-  origin,
   contacts,
   stationCallsign,
   dateLabel,
-  totalRecords,
 }) {
   const width = 840;
   const height = 1120;
@@ -310,8 +342,8 @@ export function renderSvg({
     return { x, y };
   };
 
-  const originPoint = project(origin);
-  const summary = summarizeContacts(contacts, totalRecords);
+  const bandCounts = collectBandCounts(contacts);
+  const origins = uniqueOrigins(contacts);
 
   const gridLines = [];
   for (let lon = -120; lon <= -70; lon += 10) {
@@ -343,19 +375,27 @@ export function renderSvg({
 
   const contactLines = contacts
     .map((contact) => {
-      const p = project(contact);
-      return `<line x1="${originPoint.x}" y1="${originPoint.y}" x2="${p.x}" y2="${p.y}" stroke="${bandColor(contact.band)}" stroke-opacity="0.28" stroke-width="1.6"/>`;
+      const originPoint = project(contact.origin);
+      const destinationPoint = project(contact.destination);
+      return `<line x1="${originPoint.x}" y1="${originPoint.y}" x2="${destinationPoint.x}" y2="${destinationPoint.y}" stroke="${bandColor(contact.band)}" stroke-opacity="0.28" stroke-width="1.6"/>`;
     })
     .join("");
 
   const contactPoints = contacts
     .map((contact) => {
-      const p = project(contact);
+      const p = project(contact.destination);
       return `<circle cx="${p.x}" cy="${p.y}" r="5.5" fill="${bandColor(contact.band)}" stroke="#172026" stroke-width="1.5"/>`;
     })
     .join("");
 
-  const legend = Object.entries(summary.bands)
+  const originPoints = origins
+    .map(({ origin }) => {
+      const p = project(origin);
+      return `<circle cx="${p.x}" cy="${p.y}" r="8.5" fill="#172026" stroke="#fffdfa" stroke-width="3"/>`;
+    })
+    .join("");
+
+  const legend = Object.entries(bandCounts)
     .map(([band, count], index) => {
       const x = 52 + index * 132;
       return `
@@ -365,11 +405,7 @@ export function renderSvg({
     })
     .join("");
 
-  const footerParts = [`${summary.plotted} QSOs`];
-  if (summary.unplottable > 0) {
-    footerParts.push(`${summary.unplottable} unplottable`);
-  }
-  const footer = `Generated from ADI data · ${footerParts.join(" · ")}`;
+  const footer = `Generated from ADI data · ${contacts.length} QSOs`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title subtitle">
@@ -388,10 +424,7 @@ export function renderSvg({
   <text x="${mapLeft + 18}" y="${mapTop + mapHeight - 18}" fill="#9aa5a0" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">${escapeXml(footer)}</text>
   ${contactLines}
   ${contactPoints}
-  <circle cx="${originPoint.x}" cy="${originPoint.y}" r="8.5" fill="#172026" stroke="#fffdfa" stroke-width="3"/>
-  <text x="${originPoint.x + 14}" y="${originPoint.y - 14}" fill="#172026" font-size="20" font-weight="800" font-family="system-ui, sans-serif">${escapeXml(
-    stationCallsign,
-  )}</text>
+  ${originPoints}
 </svg>`;
 }
 
@@ -409,10 +442,7 @@ async function main() {
   } else {
     await fs.writeFile(
       options.output,
-      renderSvg({
-        ...mapData,
-        totalRecords: mapData.summary.totalRecords,
-      }),
+      renderSvg(mapData),
       "utf8",
     );
   }

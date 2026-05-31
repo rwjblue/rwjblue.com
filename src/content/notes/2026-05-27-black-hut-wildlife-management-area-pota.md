@@ -3,6 +3,7 @@ title: Black Hut Wildlife Management Area with a 40m EFHW
 date: 2026-05-27
 summary: "A mile-plus hike into US-6984, a throw-line-supported 40-meter EFHW, and 25 CW QSOs after a slow middle stretch."
 shareImageHero: /images/pota/2026-05-27-black-hut-wildlife-management-area-pota/kx3-station-stone-table.jpg
+contactMap: src/data/pota/contact-maps/2026-05-27-black-hut-wildlife-management-area-pota.json
 tags:
   - radio
   - pota
