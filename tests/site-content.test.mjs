@@ -86,6 +86,7 @@ test("notes provide social share metadata", () => {
   const layout = read("src/layouts/BaseLayout.astro");
   const notePage = read("src/pages/notes/[slug].astro");
   const noteSharePage = read("src/pages/notes/[slug]/share-image.astro");
+  const roveNote = read("src/content/notes/2026-05-25-pota-rove.md");
 
   assert.match(layout, /rel="canonical"/);
   assert.match(layout, /property="og:title"/);
@@ -102,6 +103,8 @@ test("notes provide social share metadata", () => {
   assert.match(noteSharePage, /note\.data\.shareImageHero/);
   assert.match(noteSharePage, /share-card--hero/);
   assert.match(noteSharePage, /share-card--map/);
+  assert.match(roveNote, /contactMap: src\/data\/pota\/contact-maps\/2026-05-25-pota-rove\.json/);
+  assert.doesNotMatch(roveNote, /2026-05-25-rhode-island-pota-rove-map\.jpg/);
 });
 
 test("legacy note slugs redirect to their current urls", () => {
