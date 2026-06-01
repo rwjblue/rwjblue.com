@@ -92,3 +92,10 @@ Florida buffer or recovery day, and Friday as the Florida activation plus
 arrival. With the two-hour park-stop budget and weekday work window, the
 southern push is hotel-heavy unless specific campsites fit the 18:30-19:00
 arrival rule. The plan should not double back north for DC after Sunday.
+
+The current broad overnight recommendation is Friday camp, Saturday hotel,
+Sunday hotel, Monday camp, Tuesday camp, Wednesday hotel, and Thursday camp.
+That gets to four camping nights out of seven pre-arrival nights, stays within
+the two-night camping limit, and uses camps where they can replace a separate
+two-hour daytime state stop: ideally Connecticut on Friday, Virginia on Monday,
+North Carolina on Tuesday, and Florida on Thursday.

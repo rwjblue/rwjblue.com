@@ -504,6 +504,78 @@
       "The plan should avoid leaving a very long Georgia-to-Singer-Island push for Friday.",
       "With the 2-hour park-stop rule, hotel nights are the safer broad assumption after Saturday until specific campsite candidates prove workable."
     ],
+    "overnightStrategy": {
+      "goal": "Use camping nights where they can cover a required jurisdiction without consuming a separate 2-hour daytime park stop, and use hotels on structurally long or schedule-sensitive days.",
+      "recommendedPattern": [
+        "2026-06-19 camp",
+        "2026-06-20 hotel",
+        "2026-06-21 hotel",
+        "2026-06-22 camp",
+        "2026-06-23 camp",
+        "2026-06-24 hotel",
+        "2026-06-25 camp"
+      ],
+      "summary": "This pattern yields four camping nights out of seven pre-arrival nights, stays within the two-consecutive-camp limit, and keeps the longest southbound days on hotel nights.",
+      "nights": [
+        {
+          "date": "2026-06-19",
+          "preferredType": "camp",
+          "area": "Connecticut coast",
+          "why": "Friday is only an evening reposition, so a CT POTA campsite is the easiest way to start the camping-night share and secure a UTC-morning activation from camp.",
+          "savesSeparateParkStop": true,
+          "likelyJurisdictionCoverage": ["US-CT"]
+        },
+        {
+          "date": "2026-06-20",
+          "preferredType": "hotel",
+          "area": "Central or south New Jersey",
+          "why": "After the high-count Saturday rove, a hotel avoids a camp-setup deadline and keeps Sunday's DE/MD/DC day comfortable.",
+          "savesSeparateParkStop": false,
+          "likelyJurisdictionCoverage": []
+        },
+        {
+          "date": "2026-06-21",
+          "preferredType": "hotel",
+          "area": "DC / Northern Virginia",
+          "why": "Sunday is already the long DE/MD/DC day and includes the friend activation; a hotel is the safer broad assumption than trying to land a campsite by 19:00.",
+          "savesSeparateParkStop": false,
+          "likelyJurisdictionCoverage": []
+        },
+        {
+          "date": "2026-06-22",
+          "preferredType": "camp",
+          "area": "Southern Virginia or Virginia / North Carolina border",
+          "why": "Monday only needs Virginia. A Virginia POTA campsite can satisfy that jurisdiction at night and remove the need for a separate 2-hour Virginia stop during a workday.",
+          "savesSeparateParkStop": true,
+          "likelyJurisdictionCoverage": ["US-VA"]
+        },
+        {
+          "date": "2026-06-23",
+          "preferredType": "camp",
+          "area": "North Carolina corridor",
+          "why": "Tuesday only needs North Carolina. This is the second good place to trade a normal stop for an overnight activation while still staying within the two-night camp limit.",
+          "savesSeparateParkStop": true,
+          "likelyJurisdictionCoverage": ["US-NC"]
+        },
+        {
+          "date": "2026-06-24",
+          "preferredType": "hotel",
+          "area": "Coastal Georgia or north Florida",
+          "why": "Wednesday is the hard SC/GA day. Hotel gives margin after two activations, a long drive block, and charging, and resets the camping-night count.",
+          "savesSeparateParkStop": false,
+          "likelyJurisdictionCoverage": []
+        },
+        {
+          "date": "2026-06-25",
+          "preferredType": "camp",
+          "area": "North or central Florida",
+          "why": "A Florida POTA campsite lets Florida get activated after setup and turns Friday into a mostly direct arrival day to Singer Island.",
+          "savesSeparateParkStop": true,
+          "likelyJurisdictionCoverage": ["US-FL"]
+        }
+      ],
+      "fallbackNote": "If one of the Monday, Tuesday, or Thursday camp nights proves impractical, replace it with a hotel and expect to add back the corresponding 2-hour state stop elsewhere in the route."
+    },
     "days": [
       {
         "date": "2026-06-21",

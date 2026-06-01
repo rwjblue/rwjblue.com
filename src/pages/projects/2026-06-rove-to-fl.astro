@@ -117,9 +117,25 @@ interface RestOfTripDay {
   roughTotalHours: number;
   notes?: string;
 }
+interface OvernightStrategyNight {
+  date: string;
+  preferredType: string;
+  area: string;
+  why: string;
+  savesSeparateParkStop: boolean;
+  likelyJurisdictionCoverage: string[];
+}
+interface OvernightStrategy {
+  goal: string;
+  recommendedPattern: string[];
+  summary: string;
+  nights: OvernightStrategyNight[];
+  fallbackNote?: string;
+}
 interface RestOfTripDraft {
   status: string;
   assumptions: string[];
+  overnightStrategy?: OvernightStrategy;
   days: RestOfTripDay[];
   risk?: string;
 }
@@ -259,6 +275,7 @@ const restOfTripDraft =
   (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft
     ? ((itinerary as { restOfTripDraft: RestOfTripDraft }).restOfTripDraft)
     : null;
+const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
 const campArrival =
   typeof tripConstraints.campArrival === "object" && tripConstraints.campArrival
     ? (tripConstraints.campArrival as {
@@ -660,6 +677,51 @@ const parkStopPlanning =
           Camping nights target arrival by {campArrival.targetLatestArrival};{" "}
           {campArrival.activationTiming}
         </p>
+      )}
+
+      {overnightStrategy && (
+        <section class="rove-overnight-strategy" aria-labelledby="overnight-strategy-title">
+          <div class="section-heading">
+            <h3 id="overnight-strategy-title">Overnight strategy</h3>
+          </div>
+          <p>{overnightStrategy.goal}</p>
+          <p class="rove-weekend-note">{overnightStrategy.summary}</p>
+          <p class="meta">
+            Recommended pattern: {overnightStrategy.recommendedPattern.join(" · ")}
+          </p>
+          <div class="rove-rest-days">
+            {overnightStrategy.nights.map((night) => (
+              <article class="rove-rest-day">
+                <header>
+                  <span>{formatShortDate(night.date)}</span>
+                  <strong>{night.area}</strong>
+                </header>
+                <p>{night.why}</p>
+                <dl>
+                  <div>
+                    <dt>Night</dt>
+                    <dd>{night.preferredType}</dd>
+                  </div>
+                  <div>
+                    <dt>2h saved</dt>
+                    <dd>{night.savesSeparateParkStop ? "yes" : "no"}</dd>
+                  </div>
+                  <div>
+                    <dt>State credit</dt>
+                    <dd>
+                      {night.likelyJurisdictionCoverage.length > 0
+                        ? night.likelyJurisdictionCoverage.map((s) => s.replace("US-", "")).join(" / ")
+                        : "none"}
+                    </dd>
+                  </div>
+                </dl>
+              </article>
+            ))}
+          </div>
+          {overnightStrategy.fallbackNote && (
+            <p class="rove-weekend-note rove-weekend-rule">{overnightStrategy.fallbackNote}</p>
+          )}
+        </section>
       )}
 
       <div class="rove-rest-days">
