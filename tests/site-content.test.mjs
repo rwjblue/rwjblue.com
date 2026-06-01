@@ -107,6 +107,21 @@ test("notes provide social share metadata", () => {
   assert.doesNotMatch(roveNote, /2026-05-25-rhode-island-pota-rove-map\.jpg/);
 });
 
+test("cq wpx note is wired to a checked-in contact map artifact", () => {
+  const note = read("src/content/notes/2026-05-31-cq-wpx-cw-learning-weekend.md");
+
+  assert.ok(
+    existsSync("src/data/pota/contact-maps/2026-05-31-cq-wpx-cw-learning-weekend.json"),
+  );
+  assert.ok(
+    existsSync("public/images/pota/2026-05-31-cq-wpx-cw-learning-weekend/share.png"),
+  );
+  assert.match(
+    note,
+    /contactMap: src\/data\/pota\/contact-maps\/2026-05-31-cq-wpx-cw-learning-weekend\.json/,
+  );
+});
+
 test("legacy note slugs redirect to their current urls", () => {
   assert.ok(existsSync("public/_redirects"));
 

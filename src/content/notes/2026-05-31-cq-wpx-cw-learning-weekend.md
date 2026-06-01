@@ -3,6 +3,7 @@ title: CQ WPX CW as a Learning Weekend
 date: 2026-05-31
 summary: "Thirty-seven CW QSOs over the CQ WPX CW weekend, a lot of repeat requests and nerves, and a surprisingly effective way to pick up new DXCC entities."
 shareImageHero: /images/radio/2026-05-31-cq-wpx-cw-learning-weekend/img-8987.jpg
+contactMap: src/data/pota/contact-maps/2026-05-31-cq-wpx-cw-learning-weekend.json
 tags:
   - radio
   - field-notes
