@@ -14,6 +14,12 @@
     "activationTimeMinutes": 60,
     "maxDetourMinutesForNonOvernightPark": 30,
     "campAtPotaParkMinimumNightShare": 0.5,
+    "roveCounting": {
+      "unit": "unique POTA entities",
+      "dayBoundary": "UTC",
+      "multiParkRule": "Multi-entity activations count once per unique POTA entity; a 2-fer counts as 2 entities.",
+      "eveningStrategy": "Evening activations can intentionally count toward the current UTC rove day and reduce the next local day's required load."
+    },
     "vehicle": {
       "type": "Tesla",
       "chargingStopMinutes": 30,
@@ -62,6 +68,140 @@
       "emailDraft": "Hi <name>, I am planning a June 2026 POTA road trip from Rhode Island to Florida and noticed you have activated <park/reference>. I am considering it for a brief activation while passing through and would appreciate any practical advice: easy parking, good operating spots, antenna constraints, safety/access issues, and whether it is realistic for about an hour on site. Thanks and 73, Rob / N1RWJ"
     }
   },
+  "timelineDrafts": [
+    {
+      "name": "Friday evening reposition",
+      "status": "rough",
+      "recommendation": "Preferred if leaving Friday after work is realistic; it creates more slack before the mid-week DC activation.",
+      "assumptions": [
+        "Approximate I-95 movement plus Tesla charging is about 27 hours before activations.",
+        "Minimum jurisdiction activation plan adds up to about 12 hours on site, but convenient multi-entity activations can reduce the number of physical stops.",
+        "Rove progress is counted by unique POTA entities on a UTC day, so evening activations can ease the next local day if they fit the UTC boundary.",
+        "Friday is treated as a work day with an evening departure unless later clarified.",
+        "Saturday and Sunday can carry heavier driving and activation loads because there is no work window."
+      ],
+      "days": [
+        {
+          "date": "2026-06-19",
+          "area": "Rhode Island to Connecticut",
+          "focus": "Optional evening reposition after work; activate RI near departure or CT near the first overnight.",
+          "jurisdictions": ["US-RI", "US-CT"],
+          "notes": "Keep this short and low-risk. A POTA camp in CT would start the camping-at-parks goal early."
+        },
+        {
+          "date": "2026-06-20",
+          "area": "Connecticut, New York, New Jersey",
+          "focus": "Primary high-density weekend rove day.",
+          "jurisdictions": ["US-CT", "US-NY", "US-NJ"],
+          "notes": "Evaluate 6-10 activations, but treat 10 parks as ambitious once drive time, charging, setup, logging, meals, and fatigue are included."
+        },
+        {
+          "date": "2026-06-21",
+          "area": "New Jersey, Delaware, Maryland / DC approach",
+          "focus": "Use the second no-work day to pick up DE and MD and position near DC.",
+          "jurisdictions": ["US-NJ", "US-DE", "US-MD"],
+          "notes": "Good candidate for a POTA overnight if it does not create three camping nights in a row."
+        },
+        {
+          "date": "2026-06-22",
+          "area": "DC / Northern Virginia buffer",
+          "focus": "Workday positioning and buffer time.",
+          "jurisdictions": ["US-MD", "US-DC", "US-VA"],
+          "notes": "Avoid overloading Monday. Use morning or evening for one practical activation if needed."
+        },
+        {
+          "date": "2026-06-23",
+          "area": "Washington, DC",
+          "focus": "Preferred evening window for the friend activation if the drive balance supports it.",
+          "jurisdictions": ["US-DC"],
+          "notes": "Rock Creek Park is the first suggestion to evaluate, with other DC-area parks still in scope."
+        },
+        {
+          "date": "2026-06-24",
+          "area": "Virginia to North Carolina",
+          "focus": "Begin the southern push after the DC area is handled.",
+          "jurisdictions": ["US-VA", "US-NC"],
+          "notes": "Work window limits midday progress; choose a low-detour VA or NC activation and an overnight that sets up Thursday."
+        },
+        {
+          "date": "2026-06-25",
+          "area": "North Carolina, South Carolina, Georgia",
+          "focus": "Long southern corridor day with SC and GA activations.",
+          "jurisdictions": ["US-NC", "US-SC", "US-GA"],
+          "notes": "Likely one of the tightest days because it combines weekday work, distance, charging, and multiple jurisdictions."
+        },
+        {
+          "date": "2026-06-26",
+          "area": "Georgia / North Florida to Singer Island",
+          "focus": "Arrive in Florida for Field Day weekend.",
+          "jurisdictions": ["US-GA", "US-FL"],
+          "notes": "Florida activation can be near the destination if needed; avoid risking the arrival deadline."
+        }
+      ]
+    },
+    {
+      "name": "Saturday morning start",
+      "status": "rough",
+      "recommendation": "Viable, but tighter. It needs a productive Saturday/Sunday and leaves less slack for the DC timing and the southern push.",
+      "assumptions": [
+        "No Friday repositioning.",
+        "Saturday likely needs to cover RI, CT, NY, and NJ with an ambitious park count.",
+        "Sunday should position as close to the DC area as practical without forcing the friend activation early.",
+        "Evening activations and 2/3/4-fers may be needed to keep the Saturday-start plan comfortable."
+      ],
+      "days": [
+        {
+          "date": "2026-06-20",
+          "area": "Rhode Island through New Jersey",
+          "focus": "Heavy first rove day; candidate 8-10 park day if clusters are favorable.",
+          "jurisdictions": ["US-RI", "US-CT", "US-NY", "US-NJ"],
+          "notes": "This is the main stress point in the Saturday-start plan."
+        },
+        {
+          "date": "2026-06-21",
+          "area": "New Jersey, Delaware, Maryland / DC approach",
+          "focus": "Second heavy weekend day; pick up DE and MD and position near DC.",
+          "jurisdictions": ["US-DE", "US-MD"],
+          "notes": "Try to preserve energy and schedule slack for the mid-week friend activation."
+        },
+        {
+          "date": "2026-06-22",
+          "area": "DC / Northern Virginia",
+          "focus": "Workday buffer near DC.",
+          "jurisdictions": ["US-DC", "US-VA"],
+          "notes": "May need a hotel or non-camp night to reset after two possible camping nights."
+        },
+        {
+          "date": "2026-06-23",
+          "area": "Washington, DC",
+          "focus": "Likely friend activation evening.",
+          "jurisdictions": ["US-DC"],
+          "notes": "If Tuesday does not work, hold DC for Wednesday and shift the southern push later."
+        },
+        {
+          "date": "2026-06-24",
+          "area": "Virginia to North Carolina",
+          "focus": "Start making meaningful southbound distance.",
+          "jurisdictions": ["US-VA", "US-NC"],
+          "notes": "This becomes a key catch-up day if DC slides to Wednesday."
+        },
+        {
+          "date": "2026-06-25",
+          "area": "North Carolina, South Carolina, Georgia",
+          "focus": "Long weekday push with required SC and GA activations.",
+          "jurisdictions": ["US-NC", "US-SC", "US-GA"],
+          "notes": "Likely requires carefully paired charging, food, and short activations."
+        },
+        {
+          "date": "2026-06-26",
+          "area": "Georgia / North Florida to Singer Island",
+          "focus": "Florida activation and arrival.",
+          "jurisdictions": ["US-FL"],
+          "notes": "Keep the Florida park close to the final destination unless the prior day creates extra slack."
+        }
+      ]
+    }
+  ],
   "days": [
     {
       "date": "2026-06-20",

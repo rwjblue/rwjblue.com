@@ -22,6 +22,10 @@ Maryland, DC, Virginia, North Carolina, South Carolina, Georgia, and Florida.
 Each drive-by activation needs at least an hour on site, and non-overnight park
 targets should stay within roughly 30 minutes of the I-95 corridor.
 
+For rove planning, the count is unique POTA entities on a UTC day. Multi-entity
+activations count once per entity, so a 2-fer counts as two; evening activations
+can also be used deliberately to ease the next local day's load.
+
 Camping at POTA parks is preferred for at least half the nights, with no more
 than two camping nights in a row. Saturday and Sunday have no work window, so
 they can carry more driving and more activations than the weekdays; a 10-park
@@ -40,3 +44,10 @@ are still in scope.
 Park selection and cluster planning are in progress. Convenient 2/3/4-fers are
 welcome, but they are secondary to a practical route, reasonable driving days,
 and the per-jurisdiction activation goal.
+
+The current rough timeline favors a Friday evening reposition if practical,
+because the trip has about 27 hours of I-95 movement plus charging before any
+activation time is counted. The minimum per-jurisdiction activation goal adds
+up to roughly 12 more hours on site, though 2/3/4-fers can reduce the number of
+physical stops. Using Friday evening for a short RI/CT move creates useful slack
+before the DC friend activation and the southern push.

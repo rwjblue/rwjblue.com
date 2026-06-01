@@ -34,6 +34,19 @@ interface ItineraryDay {
   notes?: string;
   approxDriveMiles?: number;
 }
+interface TimelineDraftDay {
+  date: string;
+  area: string;
+  focus: string;
+  jurisdictions: string[];
+  notes?: string;
+}
+interface TimelineDraft {
+  name: string;
+  status: string;
+  recommendation: string;
+  days: TimelineDraftDay[];
+}
 
 let consecutiveCamp = 0;
 const annotatedDays = (itinerary.days as ItineraryDay[]).map((day) => {
@@ -106,6 +119,15 @@ const weekendPlanning =
         candidateHighRoveDay?: { parkCount?: number; status?: string };
       })
     : null;
+const roveCounting =
+  typeof tripConstraints.roveCounting === "object" && tripConstraints.roveCounting
+    ? (tripConstraints.roveCounting as {
+        unit?: string;
+        dayBoundary?: string;
+        multiParkRule?: string;
+        eveningStrategy?: string;
+      })
+    : null;
 
 function formatShortDate(iso: string) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
@@ -119,6 +141,9 @@ const departureLabel =
   departureWindow.length === 2
     ? `${formatShortDate(departureWindow[0])}-${formatShortDate(departureWindow[1])}`
     : departureWindow.map(formatShortDate).join(", ");
+const timelineDrafts = Array.isArray((itinerary as { timelineDrafts?: unknown }).timelineDrafts)
+  ? ((itinerary as { timelineDrafts: TimelineDraft[] }).timelineDrafts)
+  : [];
 ---
 
 <BaseLayout
@@ -215,6 +240,15 @@ const departureLabel =
         <dt>Activation budget</dt>
         <dd>{String(tripConstraints.activationTimeMinutes ?? 60)} min per stop</dd>
       </div>
+      {roveCounting && (
+        <div>
+          <dt>Rove count</dt>
+          <dd>
+            {roveCounting.unit ?? "unique POTA entities"} per{" "}
+            {roveCounting.dayBoundary ?? "UTC"} day
+          </dd>
+        </div>
+      )}
       <div>
         <dt>Drive-by detour limit</dt>
         <dd>{String(tripConstraints.maxDetourMinutesForNonOvernightPark ?? 30)} min from I-95</dd>
@@ -257,7 +291,45 @@ const departureLabel =
         Activation goal: {requiredJurisdictions.map((s) => s.replace("US-", "")).join(" / ")}
       </p>
     )}
+    {roveCounting && (
+      <p class="rove-jurisdictions">
+        {roveCounting.multiParkRule} {roveCounting.eveningStrategy}
+      </p>
+    )}
   </section>
+
+  {timelineDrafts.length > 0 && (
+    <section class="section-block wide" aria-labelledby="timeline-title">
+      <div class="section-heading">
+        <h2 id="timeline-title">Timeline sketch</h2>
+      </div>
+
+      <div class="rove-timeline-drafts">
+        {timelineDrafts.map((draft) => (
+          <article class="rove-timeline-draft">
+            <header>
+              <p class="section-label">{draft.status}</p>
+              <h3>{draft.name}</h3>
+              <p>{draft.recommendation}</p>
+            </header>
+
+            <ol class="rove-timeline-list">
+              {draft.days.map((day) => (
+                <li>
+                  <div class="rove-timeline-date">{formatShortDate(day.date)}</div>
+                  <div>
+                    <strong>{day.area}</strong>
+                    <p>{day.focus}</p>
+                    <span>{day.jurisdictions.map((s) => s.replace("US-", "")).join(" / ")}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
 
   <section class="section-block wide" aria-labelledby="itinerary-title">
     <div class="section-heading">
@@ -493,6 +565,62 @@ const departureLabel =
     color: var(--color-text-muted, #666);
     font-size: 0.9rem;
     margin: 1rem 0 0;
+  }
+
+  .rove-timeline-drafts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+    gap: 1rem;
+  }
+
+  .rove-timeline-draft {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+
+  .rove-timeline-draft h3 {
+    margin: 0;
+  }
+
+  .rove-timeline-draft header p:last-child {
+    color: var(--color-text-muted, #666);
+    margin: 0.35rem 0 0;
+  }
+
+  .rove-timeline-list {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .rove-timeline-list li {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .rove-timeline-date {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .rove-timeline-list p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    margin: 0.15rem 0;
+  }
+
+  .rove-timeline-list span {
+    color: var(--color-accent, #167246);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
   }
 
   /* Itinerary */
