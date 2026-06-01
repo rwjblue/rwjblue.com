@@ -86,16 +86,16 @@ local so there is enough daylight to set up camp; the overnight POTA park can
 then be activated after setup as a night activation if needed.
 
 The rough Sunday-Friday draft now treats Saturday night as a hotel reset,
-Sunday as the DE/MD/DC day, Monday as a Virginia/southbound hotel move, Tuesday
-as the North Carolina push, Wednesday as the hard SC/GA day, Thursday as a
-Florida buffer or recovery day, and Friday as the Florida activation plus
-arrival. With the two-hour park-stop budget and weekday work window, the
-southern push is hotel-heavy unless specific campsites fit the 18:30-19:00
-arrival rule. The plan should not double back north for DC after Sunday.
+Sunday as the DE/MD/DC day plus a Virginia campsite, Monday as a hotel transit
+day into North Carolina, Tuesday as the North Carolina daytime stop plus a
+South Carolina campsite, Wednesday as the Georgia day on a hotel night,
+Thursday as the Florida campsite day, and Friday as the destination arrival.
+The plan should not double back north for DC after Sunday.
 
 The current broad overnight recommendation is Friday camp, Saturday hotel,
-Sunday hotel, Monday camp, Tuesday camp, Wednesday hotel, and Thursday camp.
-That gets to four camping nights out of seven pre-arrival nights, stays within
-the two-night camping limit, and uses camps where they can replace a separate
-two-hour daytime state stop: ideally Connecticut on Friday, Virginia on Monday,
-North Carolina on Tuesday, and Florida on Thursday.
+Sunday camp, Monday hotel, Tuesday camp, Wednesday hotel, and Thursday camp.
+That still gets to four camping nights out of seven pre-arrival nights, stays
+within the two-night camping limit, and shifts the campground state-credit
+saves to Connecticut on Friday, Virginia on Sunday, South Carolina on Tuesday,
+and Florida on Thursday. The main broad risk is whether Sunday can still reach
+a workable Virginia campsite after the DC friend activation.

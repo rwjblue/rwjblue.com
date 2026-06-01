@@ -502,20 +502,20 @@
       "Camping nights should arrive by about 18:30-19:00 local for setup before dark.",
       "A campsite activation can happen after setup, effectively as a night activation.",
       "The plan should avoid leaving a very long Georgia-to-Singer-Island push for Friday.",
-      "With the 2-hour park-stop rule, hotel nights are the safer broad assumption after Saturday until specific campsite candidates prove workable."
+      "With the 2-hour park-stop rule, broad overnight choices should be driven by where a campsite can replace a separate daytime jurisdiction stop without breaking the southbound flow."
     ],
     "overnightStrategy": {
       "goal": "Use camping nights where they can cover a required jurisdiction without consuming a separate 2-hour daytime park stop, and use hotels on structurally long or schedule-sensitive days.",
       "recommendedPattern": [
         "2026-06-19 camp",
         "2026-06-20 hotel",
-        "2026-06-21 hotel",
-        "2026-06-22 camp",
+        "2026-06-21 camp",
+        "2026-06-22 hotel",
         "2026-06-23 camp",
         "2026-06-24 hotel",
         "2026-06-25 camp"
       ],
-      "summary": "This pattern yields four camping nights out of seven pre-arrival nights, stays within the two-consecutive-camp limit, and keeps the longest southbound days on hotel nights.",
+      "summary": "This pattern yields four camping nights out of seven pre-arrival nights, stays within the two-consecutive-camp limit, and puts the camp nights where they can plausibly bank Connecticut, Virginia, South Carolina, and Florida.",
       "nights": [
         {
           "date": "2026-06-19",
@@ -535,140 +535,140 @@
         },
         {
           "date": "2026-06-21",
-          "preferredType": "hotel",
-          "area": "DC / Northern Virginia",
-          "why": "Sunday is already the long DE/MD/DC day and includes the friend activation; a hotel is the safer broad assumption than trying to land a campsite by 19:00.",
-          "savesSeparateParkStop": false,
-          "likelyJurisdictionCoverage": []
-        },
-        {
-          "date": "2026-06-22",
           "preferredType": "camp",
-          "area": "Southern Virginia or Virginia / North Carolina border",
-          "why": "Monday only needs Virginia. A Virginia POTA campsite can satisfy that jurisdiction at night and remove the need for a separate 2-hour Virginia stop during a workday.",
+          "area": "Northern Virginia / outer DC orbit",
+          "why": "If the Sunday camp is close enough to the DC friend activation, it can bank Virginia without spending Monday on a separate Virginia stop.",
           "savesSeparateParkStop": true,
           "likelyJurisdictionCoverage": ["US-VA"]
         },
         {
+          "date": "2026-06-22",
+          "preferredType": "hotel",
+          "area": "North Carolina corridor hotel",
+          "why": "Monday is the work-constrained transit day. Hotel keeps the southbound push moving without forcing a campsite-arrival deadline immediately after Sunday camp.",
+          "savesSeparateParkStop": false,
+          "likelyJurisdictionCoverage": []
+        },
+        {
           "date": "2026-06-23",
           "preferredType": "camp",
-          "area": "North Carolina corridor",
-          "why": "Tuesday only needs North Carolina. This is the second good place to trade a normal stop for an overnight activation while still staying within the two-night camp limit.",
+          "area": "South Carolina corridor",
+          "why": "Tuesday can use a daytime stop for North Carolina and then reach a South Carolina campsite by evening, letting the overnight activation cover South Carolina.",
           "savesSeparateParkStop": true,
-          "likelyJurisdictionCoverage": ["US-NC"]
+          "likelyJurisdictionCoverage": ["US-SC"]
         },
         {
           "date": "2026-06-24",
           "preferredType": "hotel",
           "area": "Coastal Georgia or north Florida",
-          "why": "Wednesday is the hard SC/GA day. Hotel gives margin after two activations, a long drive block, and charging, and resets the camping-night count.",
+          "why": "Wednesday still needs Georgia as a daytime stop and is one of the longer mileage days, so hotel preserves margin and resets the camping-night count.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": []
         },
         {
           "date": "2026-06-25",
           "preferredType": "camp",
-          "area": "North or central Florida",
-          "why": "A Florida POTA campsite lets Florida get activated after setup and turns Friday into a mostly direct arrival day to Singer Island.",
+          "area": "Central Florida or Treasure Coast approach",
+          "why": "A Florida POTA campsite lets Florida get activated after setup on Thursday and turns Friday into a shorter, lower-stress destination day.",
           "savesSeparateParkStop": true,
           "likelyJurisdictionCoverage": ["US-FL"]
         }
       ],
-      "fallbackNote": "If one of the Monday, Tuesday, or Thursday camp nights proves impractical, replace it with a hotel and expect to add back the corresponding 2-hour state stop elsewhere in the route."
+      "fallbackNote": "If the Sunday Virginia camp, Tuesday South Carolina camp, or Thursday Florida camp proves impractical, replace it with a hotel and add back the corresponding 2-hour daytime jurisdiction stop elsewhere in the route."
     },
     "days": [
       {
         "date": "2026-06-21",
-        "overnightType": "hotel",
+        "overnightType": "camp",
         "startArea": "Central/south New Jersey hotel",
-        "endArea": "DC / Northern Virginia hotel",
-        "focus": "Pick up Delaware and Maryland, then do the DC friend activation Sunday evening if possible.",
-        "jurisdictions": ["US-DE", "US-MD", "US-DC"],
-        "roughMiles": 230,
-        "roughDriveHours": 3.8,
+        "endArea": "Northern Virginia campsite",
+        "focus": "Pick up Delaware and Maryland, do the DC friend activation Sunday evening if possible, and finish at a Virginia campsite.",
+        "jurisdictions": ["US-DE", "US-MD", "US-DC", "US-VA"],
+        "roughMiles": 255,
+        "roughDriveHours": 4.3,
         "chargingHours": 0.5,
-        "minimumEntities": 3,
+        "minimumEntities": 4,
         "parkStopHours": 6,
-        "roughTotalHours": 10.3,
-        "notes": "Sunday is long but feasible because there is no work window. This is the preferred DC timing because it avoids any later double-back."
+        "roughTotalHours": 10.8,
+        "notes": "Sunday is long but feasible because there is no work window. The key broad requirement is that the Virginia campsite must still be reachable in time for setup after the DC activation."
       },
       {
         "date": "2026-06-22",
         "overnightType": "hotel",
-        "startArea": "DC / Northern Virginia",
-        "endArea": "southern Virginia / NC-border hotel",
-        "focus": "Use the workday margins to pick up Virginia and keep moving south.",
-        "jurisdictions": ["US-VA"],
-        "roughMiles": 170,
-        "roughDriveHours": 2.8,
-        "chargingHours": 0.5,
-        "minimumEntities": 1,
-        "parkStopHours": 2,
-        "roughTotalHours": 5.3,
-        "notes": "This prevents Virginia from competing with NC/SC/GA later in the week. It assumes a hotel because a camp setup deadline would add fragility."
-      },
-      {
-        "date": "2026-06-23",
-        "overnightType": "hotel",
-        "startArea": "southern Virginia / NC-border",
-        "endArea": "Fayetteville or Florence-area hotel",
-        "focus": "Pick up North Carolina and continue south.",
-        "jurisdictions": ["US-NC"],
+        "startArea": "Northern Virginia campsite",
+        "endArea": "North Carolina corridor hotel",
+        "focus": "Use the workday margins for mostly southbound transit, with Virginia already banked by the Sunday campsite.",
+        "jurisdictions": [],
         "roughMiles": 220,
         "roughDriveHours": 3.7,
         "chargingHours": 0.5,
-        "minimumEntities": 1,
+        "minimumEntities": 0,
+        "parkStopHours": 0,
+        "roughTotalHours": 4.2,
+        "notes": "This day works as a hotel day because Sunday camp already covered Virginia and Monday's job is mostly to make distance into North Carolina."
+      },
+      {
+        "date": "2026-06-23",
+        "overnightType": "camp",
+        "startArea": "North Carolina corridor hotel",
+        "endArea": "South Carolina campsite",
+        "focus": "Use a daytime stop for North Carolina, then continue to a South Carolina campsite for the overnight activation.",
+        "jurisdictions": ["US-NC", "US-SC"],
+        "roughMiles": 250,
+        "roughDriveHours": 4.2,
+        "chargingHours": 0.5,
+        "minimumEntities": 2,
         "parkStopHours": 2,
-        "roughTotalHours": 6.2,
-        "notes": "Keep this monotonic southbound. No return to DC."
+        "roughTotalHours": 6.7,
+        "notes": "The broad assumption is that the campsite covers South Carolina, so only North Carolina needs a separate 2-hour daytime stop."
       },
       {
         "date": "2026-06-24",
         "overnightType": "hotel",
-        "startArea": "Fayetteville / Florence area",
+        "startArea": "South Carolina campsite",
         "endArea": "coastal Georgia / north Florida hotel",
-        "focus": "Cover South Carolina and Georgia while preserving Friday arrival comfort.",
-        "jurisdictions": ["US-SC", "US-GA"],
-        "roughMiles": 360,
-        "roughDriveHours": 6,
-        "chargingHours": 1,
-        "minimumEntities": 2,
-        "parkStopHours": 4,
-        "roughTotalHours": 11,
-        "notes": "This is the hard day. Hotel is the broad assumption unless a campsite fits perfectly."
-      },
-      {
-        "date": "2026-06-25",
-        "overnightType": "hotel",
-        "startArea": "coastal Georgia / north Florida",
-        "endArea": "north/central Florida hotel or destination approach",
-        "focus": "Buffer day: continue through Florida, rest, or pick up the Florida activation early if useful.",
-        "jurisdictions": [],
-        "roughMiles": 250,
-        "roughDriveHours": 4.2,
-        "chargingHours": 0.5,
-        "minimumEntities": 0,
-        "parkStopHours": 0,
-        "roughTotalHours": 4.7,
-        "notes": "This day exists to avoid a stressful Friday arrival. If Wednesday ran long, it can absorb recovery."
-      },
-      {
-        "date": "2026-06-26",
-        "overnightType": "destination",
-        "startArea": "north/central Florida",
-        "endArea": "Singer Island / Riviera Beach",
-        "focus": "Florida activation and arrival for Field Day weekend.",
-        "jurisdictions": ["US-FL"],
-        "roughMiles": 200,
-        "roughDriveHours": 3.3,
+        "focus": "Use Wednesday for the Georgia daytime stop and keep moving into Florida on a hotel night.",
+        "jurisdictions": ["US-GA"],
+        "roughMiles": 260,
+        "roughDriveHours": 4.3,
         "chargingHours": 0.5,
         "minimumEntities": 1,
         "parkStopHours": 2,
-        "roughTotalHours": 5.8,
-        "notes": "Florida activation should stay close to the route or destination. This should be a comfortable arrival day if Thursday preserved the buffer."
+        "roughTotalHours": 6.8,
+        "notes": "This gets easier because South Carolina is already covered by the Tuesday campsite. Hotel remains the right broad assumption for the mileage day."
+      },
+      {
+        "date": "2026-06-25",
+        "overnightType": "camp",
+        "startArea": "coastal Georgia / north Florida hotel",
+        "endArea": "central Florida campsite",
+        "focus": "Use Thursday to move through Florida and make the overnight Florida activation from camp.",
+        "jurisdictions": ["US-FL"],
+        "roughMiles": 230,
+        "roughDriveHours": 4.2,
+        "chargingHours": 0.5,
+        "minimumEntities": 1,
+        "parkStopHours": 0,
+        "roughTotalHours": 4.7,
+        "notes": "This preserves the low-stress Friday arrival while still banking Florida before destination day."
+      },
+      {
+        "date": "2026-06-26",
+        "overnightType": "hotel",
+        "startArea": "central Florida campsite",
+        "endArea": "Singer Island / Riviera Beach",
+        "focus": "Destination day and hotel arrival for Field Day weekend, with Florida already covered the night before.",
+        "jurisdictions": [],
+        "roughMiles": 160,
+        "roughDriveHours": 2.8,
+        "chargingHours": 0,
+        "minimumEntities": 0,
+        "parkStopHours": 0,
+        "roughTotalHours": 2.8,
+        "notes": "If Thursday successfully banks Florida from camp, Friday becomes a short arrival day instead of another stop-and-drive day."
       }
     ],
-    "risk": "The broad plan works only if DC is handled Sunday and the route stays monotonic southbound afterward. Camping may need to be traded for hotels on the southern push unless specific campsites fit the 18:30-19:00 arrival rule."
+    "risk": "The broad plan works only if DC is handled Sunday, the route stays monotonic southbound afterward, and the Sunday Virginia campsite is close enough that camp setup is still realistic after the friend activation."
   },
   "days": [
     {
