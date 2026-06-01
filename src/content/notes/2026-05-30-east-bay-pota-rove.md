@@ -25,7 +25,9 @@ This was a three-park evening rove through the East Bay side of Rhode Island:
 The first stop was crowded by the CQ WPX CW contest, the second turned into an
 SWR debugging session, and the last made up for both of them with a fast
 20-meter run right on the water at sunset. I finished the rove with 43 CW QSOs:
-14 at Simmons Mill, 14 at Eight Rod Farm, and 15 at Sapowet Marsh.
+14 at Simmons Mill, 14 at Eight Rod Farm, and 15 at Sapowet Marsh. See my
+separate writeup about the [CQ WPX CW
+contest](/notes/2026-05-31-cq-wpx-cw-learning-weekend/).
 
 ## At a glance
 
