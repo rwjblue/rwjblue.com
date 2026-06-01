@@ -115,7 +115,7 @@ again here, with the paddle base moved to the right side, and I was noticeably
 more comfortable and more accurate.
 
 One of the fun moments was hearing a call that sounded like it ended in `X` and
-thinking it might be Rory, [WA8KNX](https://www.qrz.com/db/WA8KNX). It was, and he
+thinking it might be Rory, [W8KNX](https://www.qrz.com/db/W8KNX). It was, and he
 was loud from Michigan. The broader pattern was even better: the transcript notes
 contacts from California, Nevada, Michigan, Illinois, and Florida, all at 5 watts.
 Being right on the saltwater almost certainly helped.
