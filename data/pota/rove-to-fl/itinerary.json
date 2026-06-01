@@ -24,6 +24,11 @@
       "notes": "If RI is activated Friday morning, the Friday evening reposition can focus on CT or simply making distance toward the first overnight."
     },
     "activationTimeMinutes": 60,
+    "parkStopPlanning": {
+      "offHighwayStopHours": 2,
+      "meaning": "For broad planning, count two hours per non-overnight park stop to cover leaving the highway, setup, activation, teardown, and returning to the route.",
+      "overnightParkException": "If the park is also the campsite, treat the drive/setup separately and plan the activation after camp is set up."
+    },
     "maxDetourMinutesForNonOvernightPark": 30,
     "campAtPotaParkMinimumNightShare": 0.5,
     "roveCounting": {
@@ -69,7 +74,7 @@
     "jurisdictionActivationGoal": "Activate every state and Washington, DC, crossed on the route.",
     "multiParkActivationPriority": "Nice to have; do not optimize the route around 2/3/4-fers unless they are convenient.",
     "dcActivation": {
-      "timing": "Mid-week evening preferred; Tuesday June 23 or Wednesday June 24 are both acceptable until drive balance is clearer.",
+      "timing": "Sunday June 21 evening is preferred if the friend can do it; avoid any plan that doubles back north for DC later in the week.",
       "withFriend": true,
       "suggestedParks": [
         {
@@ -78,7 +83,7 @@
           "status": "friend suggested"
         }
       ],
-      "notes": "Need to evaluate Rock Creek Park and other DC-area options once the mid-week leg is chosen. Do not lock the exact night until the Saturday/Sunday driving and activation load is balanced."
+      "notes": "Need to evaluate Rock Creek Park and other DC-area options. If Sunday evening works, do DC then and keep the rest of the trip monotonic southbound."
     },
     "outreach": {
       "purpose": "Contact common activators near short-listed corridor parks for practical access, parking, antenna, and operating vibe checks.",
@@ -116,30 +121,30 @@
         {
           "date": "2026-06-21",
           "area": "New Jersey, Delaware, Maryland / DC approach",
-          "focus": "Use the second no-work day to pick up DE and MD and position near DC.",
-          "jurisdictions": ["US-NJ", "US-DE", "US-MD"],
-          "notes": "Good candidate for a POTA overnight if it does not create three camping nights in a row."
+          "focus": "Use the second no-work day to pick up DE/MD and do the DC friend activation Sunday evening if possible.",
+          "jurisdictions": ["US-NJ", "US-DE", "US-MD", "US-DC"],
+          "notes": "End near DC/NoVA, then keep the rest of the trip moving south. Do not plan a later DC double-back."
         },
         {
           "date": "2026-06-22",
           "area": "DC / Northern Virginia buffer",
-          "focus": "Workday positioning and buffer time.",
-          "jurisdictions": ["US-MD", "US-DC", "US-VA"],
-          "notes": "Avoid overloading Monday. Use morning or evening for one practical activation if needed."
+          "focus": "Begin the southbound weekday push after Sunday DC.",
+          "jurisdictions": ["US-VA"],
+          "notes": "Use Monday to clear VA and move toward southern VA / the NC border."
         },
         {
           "date": "2026-06-23",
           "area": "Washington, DC",
-          "focus": "Preferred evening window for the friend activation if the drive balance supports it.",
-          "jurisdictions": ["US-DC"],
-          "notes": "Rock Creek Park is the first suggestion to evaluate, with other DC-area parks still in scope."
+          "focus": "Continue southbound rather than returning to DC.",
+          "jurisdictions": ["US-NC"],
+          "notes": "If Sunday DC worked, Tuesday should be a southbound workday with NC as the target."
         },
         {
           "date": "2026-06-24",
           "area": "Virginia to North Carolina",
-          "focus": "Begin the southern push after the DC area is handled.",
-          "jurisdictions": ["US-VA", "US-NC"],
-          "notes": "Work window limits midday progress; choose a low-detour VA or NC activation and an overnight that sets up Thursday."
+          "focus": "Keep moving through the Carolinas toward Georgia.",
+          "jurisdictions": ["US-SC", "US-GA"],
+          "notes": "The goal is to avoid leaving SC/GA and too much Florida for Friday."
         },
         {
           "date": "2026-06-25",
@@ -154,68 +159,6 @@
           "focus": "Arrive in Florida for Field Day weekend.",
           "jurisdictions": ["US-GA", "US-FL"],
           "notes": "Florida activation can be near the destination if needed; avoid risking the arrival deadline."
-        }
-      ]
-    },
-    {
-      "name": "Saturday morning start",
-      "status": "rough",
-      "recommendation": "Viable, but tighter. It needs a productive Saturday/Sunday and leaves less slack for the DC timing and the southern push.",
-      "assumptions": [
-        "No Friday repositioning.",
-        "Saturday likely needs to cover RI, CT, NY, and NJ with an ambitious park count.",
-        "Sunday should position as close to the DC area as practical without forcing the friend activation early.",
-        "Evening activations and 2/3/4-fers may be needed to keep the Saturday-start plan comfortable."
-      ],
-      "days": [
-        {
-          "date": "2026-06-20",
-          "area": "Rhode Island through New Jersey",
-          "focus": "Heavy first rove day; candidate 8-10 park day if clusters are favorable.",
-          "jurisdictions": ["US-RI", "US-CT", "US-NY", "US-NJ"],
-          "notes": "This is the main stress point in the Saturday-start plan."
-        },
-        {
-          "date": "2026-06-21",
-          "area": "New Jersey, Delaware, Maryland / DC approach",
-          "focus": "Second heavy weekend day; pick up DE and MD and position near DC.",
-          "jurisdictions": ["US-DE", "US-MD"],
-          "notes": "Try to preserve energy and schedule slack for the mid-week friend activation."
-        },
-        {
-          "date": "2026-06-22",
-          "area": "DC / Northern Virginia",
-          "focus": "Workday buffer near DC.",
-          "jurisdictions": ["US-DC", "US-VA"],
-          "notes": "May need a hotel or non-camp night to reset after two possible camping nights."
-        },
-        {
-          "date": "2026-06-23",
-          "area": "Washington, DC",
-          "focus": "Likely friend activation evening.",
-          "jurisdictions": ["US-DC"],
-          "notes": "If Tuesday does not work, hold DC for Wednesday and shift the southern push later."
-        },
-        {
-          "date": "2026-06-24",
-          "area": "Virginia to North Carolina",
-          "focus": "Start making meaningful southbound distance.",
-          "jurisdictions": ["US-VA", "US-NC"],
-          "notes": "This becomes a key catch-up day if DC slides to Wednesday."
-        },
-        {
-          "date": "2026-06-25",
-          "area": "North Carolina, South Carolina, Georgia",
-          "focus": "Long weekday push with required SC and GA activations.",
-          "jurisdictions": ["US-NC", "US-SC", "US-GA"],
-          "notes": "Likely requires carefully paired charging, food, and short activations."
-        },
-        {
-          "date": "2026-06-26",
-          "area": "Georgia / North Florida to Singer Island",
-          "focus": "Florida activation and arrival.",
-          "jurisdictions": ["US-FL"],
-          "notes": "Keep the Florida park close to the final destination unless the prior day creates extra slack."
         }
       ]
     }
@@ -267,7 +210,7 @@
       "minimumActivationHours": 2,
       "roughBlockHours": 3.9,
       "jurisdictions": ["US-DE", "US-MD", "US-DC"],
-      "notes": "Second weekend positioning block. Should set up the DC friend activation without forcing it before mid-week."
+      "notes": "Second weekend positioning block. If Sunday DC works, handle the friend activation here and keep the rest of the week southbound."
     },
     {
       "from": "DC / Northern VA",
@@ -335,7 +278,7 @@
     "Activating RI Friday morning is preferred if practical because it removes RI from the outbound driving block; activating RI on the way out remains the fallback.",
     "The northern corridor is the best place to attempt a high-count rove day because park density is high and Saturday has no work window.",
     "The southern push from Virginia through Georgia is the schedule risk; it should prioritize low-detour, reliable access parks over high entity count.",
-    "Tuesday and Wednesday should remain flexible for DC until the weekend load and southern overnight targets are firmer."
+    "If the DC friend activation can happen Sunday evening, do it then and avoid any weekday double-back."
   ],
   "firstWeekendPlan": {
     "status": "candidate",
@@ -555,97 +498,105 @@
     "status": "rough",
     "assumptions": [
       "Saturday night is a hotel in central or south New Jersey.",
+      "Broad planning now uses 2 hours per non-overnight park stop, including detour, setup, activation, teardown, and return to the highway.",
       "Camping nights should arrive by about 18:30-19:00 local for setup before dark.",
       "A campsite activation can happen after setup, effectively as a night activation.",
-      "The plan should avoid leaving a very long Georgia-to-Singer-Island push for Friday."
+      "The plan should avoid leaving a very long Georgia-to-Singer-Island push for Friday.",
+      "With the 2-hour park-stop rule, hotel nights are the safer broad assumption after Saturday until specific campsite candidates prove workable."
     ],
     "days": [
       {
         "date": "2026-06-21",
-        "overnightType": "hotel or camp",
+        "overnightType": "hotel",
         "startArea": "Central/south New Jersey hotel",
-        "endArea": "DC / Maryland approach",
-        "focus": "Pick up Delaware and Maryland, then position near DC without forcing the friend activation early.",
-        "jurisdictions": ["US-DE", "US-MD"],
+        "endArea": "DC / Northern Virginia hotel",
+        "focus": "Pick up Delaware and Maryland, then do the DC friend activation Sunday evening if possible.",
+        "jurisdictions": ["US-DE", "US-MD", "US-DC"],
         "roughMiles": 230,
-        "roughDriveHours": 3,
+        "roughDriveHours": 3.8,
         "chargingHours": 0.5,
-        "minimumEntities": 2,
-        "roughTotalHours": 5.5,
-        "notes": "Sunday is the main positioning day after the hotel reset. A camping overnight is possible if arrival by 18:30-19:00 is realistic."
+        "minimumEntities": 3,
+        "parkStopHours": 6,
+        "roughTotalHours": 10.3,
+        "notes": "Sunday is long but feasible because there is no work window. This is the preferred DC timing because it avoids any later double-back."
       },
       {
         "date": "2026-06-22",
         "overnightType": "hotel",
-        "startArea": "DC / Maryland approach",
-        "endArea": "DC / Northern Virginia",
-        "focus": "Workday buffer near DC and optional Virginia positioning.",
+        "startArea": "DC / Northern Virginia",
+        "endArea": "southern Virginia / NC-border hotel",
+        "focus": "Use the workday margins to pick up Virginia and keep moving south.",
         "jurisdictions": ["US-VA"],
-        "roughMiles": 80,
-        "roughDriveHours": 1.3,
-        "chargingHours": 0,
+        "roughMiles": 170,
+        "roughDriveHours": 2.8,
+        "chargingHours": 0.5,
         "minimumEntities": 1,
-        "roughTotalHours": 2.3,
-        "notes": "Keep Monday light so the schedule can absorb Saturday/Sunday slippage."
+        "parkStopHours": 2,
+        "roughTotalHours": 5.3,
+        "notes": "This prevents Virginia from competing with NC/SC/GA later in the week. It assumes a hotel because a camp setup deadline would add fragility."
       },
       {
         "date": "2026-06-23",
         "overnightType": "hotel",
-        "startArea": "DC / Northern Virginia",
-        "endArea": "DC / Northern Virginia",
-        "focus": "Workday plus the friend activation in DC if Tuesday works.",
-        "jurisdictions": ["US-DC"],
-        "roughMiles": 40,
-        "roughDriveHours": 0.7,
-        "chargingHours": 0,
+        "startArea": "southern Virginia / NC-border",
+        "endArea": "Fayetteville or Florence-area hotel",
+        "focus": "Pick up North Carolina and continue south.",
+        "jurisdictions": ["US-NC"],
+        "roughMiles": 220,
+        "roughDriveHours": 3.7,
+        "chargingHours": 0.5,
         "minimumEntities": 1,
-        "roughTotalHours": 1.7,
-        "notes": "If the DC activation slips to Wednesday, preserve Tuesday as buffer rather than forcing southbound distance."
+        "parkStopHours": 2,
+        "roughTotalHours": 6.2,
+        "notes": "Keep this monotonic southbound. No return to DC."
       },
       {
         "date": "2026-06-24",
-        "overnightType": "hotel or camp",
-        "startArea": "DC / Northern Virginia",
-        "endArea": "Richmond / southern Virginia",
-        "focus": "Begin the southern push after DC and make Virginia easy.",
-        "jurisdictions": ["US-VA"],
-        "roughMiles": 120,
-        "roughDriveHours": 2,
-        "chargingHours": 0,
-        "minimumEntities": 1,
-        "roughTotalHours": 3,
-        "notes": "A camp is reasonable only if arrival by 18:30-19:00 works after the workday. Otherwise use a hotel and push Thursday."
+        "overnightType": "hotel",
+        "startArea": "Fayetteville / Florence area",
+        "endArea": "coastal Georgia / north Florida hotel",
+        "focus": "Cover South Carolina and Georgia while preserving Friday arrival comfort.",
+        "jurisdictions": ["US-SC", "US-GA"],
+        "roughMiles": 360,
+        "roughDriveHours": 6,
+        "chargingHours": 1,
+        "minimumEntities": 2,
+        "parkStopHours": 4,
+        "roughTotalHours": 11,
+        "notes": "This is the hard day. Hotel is the broad assumption unless a campsite fits perfectly."
       },
       {
         "date": "2026-06-25",
-        "overnightType": "camp or hotel",
-        "startArea": "Richmond / southern Virginia",
-        "endArea": "coastal Georgia or north Florida",
-        "focus": "Main southern push: cover North Carolina, South Carolina, and Georgia while preserving Friday arrival comfort.",
-        "jurisdictions": ["US-NC", "US-SC", "US-GA"],
-        "roughMiles": 430,
-        "roughDriveHours": 7.2,
-        "chargingHours": 1,
-        "minimumEntities": 3,
-        "roughTotalHours": 11.2,
-        "notes": "This is the hard day. If camping, the campsite must be close to the route and reachable by 18:30-19:00; otherwise choose a hotel and keep activations low-detour."
+        "overnightType": "hotel",
+        "startArea": "coastal Georgia / north Florida",
+        "endArea": "north/central Florida hotel or destination approach",
+        "focus": "Buffer day: continue through Florida, rest, or pick up the Florida activation early if useful.",
+        "jurisdictions": [],
+        "roughMiles": 250,
+        "roughDriveHours": 4.2,
+        "chargingHours": 0.5,
+        "minimumEntities": 0,
+        "parkStopHours": 0,
+        "roughTotalHours": 4.7,
+        "notes": "This day exists to avoid a stressful Friday arrival. If Wednesday ran long, it can absorb recovery."
       },
       {
         "date": "2026-06-26",
         "overnightType": "destination",
-        "startArea": "coastal Georgia or north Florida",
+        "startArea": "north/central Florida",
         "endArea": "Singer Island / Riviera Beach",
         "focus": "Florida activation and arrival for Field Day weekend.",
         "jurisdictions": ["US-FL"],
-        "roughMiles": 280,
-        "roughDriveHours": 4.7,
+        "roughMiles": 200,
+        "roughDriveHours": 3.3,
         "chargingHours": 0.5,
         "minimumEntities": 1,
-        "roughTotalHours": 6.2,
-        "notes": "Friday stays comfortable only if Thursday gets far enough south. Florida activation should stay close to the route or destination."
+        "parkStopHours": 2,
+        "roughTotalHours": 5.8,
+        "notes": "Florida activation should stay close to the route or destination. This should be a comfortable arrival day if Thursday preserved the buffer."
       }
     ],
-    "risk": "If Thursday only reaches the NC/SC area, Friday becomes roughly a 10-hour drive/charge/activation day before arrival, which is too tight for comfort."
+    "risk": "The broad plan works only if DC is handled Sunday and the route stays monotonic southbound afterward. Camping may need to be traded for hotels on the southern push unless specific campsites fit the 18:30-19:00 arrival rule."
   },
   "days": [
     {

@@ -21,6 +21,9 @@ Washington, DC: Rhode Island, Connecticut, New York, New Jersey, Delaware,
 Maryland, DC, Virginia, North Carolina, South Carolina, Georgia, and Florida.
 Each drive-by activation needs at least an hour on site, and non-overnight park
 targets should stay within roughly 30 minutes of the I-95 corridor.
+For broad planning, non-overnight park stops now get budgeted as two-hour
+blocks to cover leaving the highway, operating, packing up, and returning to
+the route.
 
 For rove planning, the count is unique POTA entities on a UTC day. Multi-entity
 activations count once per entity, so a 2-fer counts as two; evening activations
@@ -36,10 +39,11 @@ The trip will be in a Tesla, so the drive plan needs to account for roughly
 charging, food, rest breaks, and nearby activations should be paired instead of
 treated as separate delays.
 
-A mid-week evening activation in the DC area is also part of the plan. Tuesday,
-June 23 or Wednesday, June 24 could work depending on the final drive balance;
-Rock Creek Park is the first suggestion to evaluate, but other DC-area options
-are still in scope.
+An evening activation in the DC area with a friend is part of the plan. If
+Sunday, June 21 works, that is the preferred timing: pick up DE/MD during the
+day, do DC that evening, then keep the rest of the trip moving south. Rock
+Creek Park is the first suggestion to evaluate, but other DC-area options are
+still in scope.
 
 Park selection and cluster planning are in progress. Convenient 2/3/4-fers are
 welcome, but they are secondary to a practical route, reasonable driving days,
@@ -81,8 +85,10 @@ Jersey. For later camping nights, the target is to arrive by about 18:30-19:00
 local so there is enough daylight to set up camp; the overnight POTA park can
 then be activated after setup as a night activation if needed.
 
-The rough Sunday-Friday draft keeps Sunday as the DE/MD positioning day,
-Monday and Tuesday around DC/NoVA, Wednesday beginning the southern push, and
-Thursday as the hard VA/NC/SC/GA day. The main risk is leaving too much distance
-for Friday: if Thursday only reaches the NC/SC area, Friday becomes too tight
-for a comfortable Field Day arrival.
+The rough Sunday-Friday draft now treats Saturday night as a hotel reset,
+Sunday as the DE/MD/DC day, Monday as a Virginia/southbound hotel move, Tuesday
+as the North Carolina push, Wednesday as the hard SC/GA day, Thursday as a
+Florida buffer or recovery day, and Friday as the Florida activation plus
+arrival. With the two-hour park-stop budget and weekday work window, the
+southern push is hotel-heavy unless specific campsites fit the 18:30-19:00
+arrival rule. The plan should not double back north for DC after Sunday.

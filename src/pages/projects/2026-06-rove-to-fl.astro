@@ -113,6 +113,7 @@ interface RestOfTripDay {
   roughDriveHours: number;
   chargingHours: number;
   minimumEntities: number;
+  parkStopHours?: number;
   roughTotalHours: number;
   notes?: string;
 }
@@ -266,6 +267,14 @@ const campArrival =
         activationTiming?: string;
       })
     : null;
+const parkStopPlanning =
+  typeof tripConstraints.parkStopPlanning === "object" && tripConstraints.parkStopPlanning
+    ? (tripConstraints.parkStopPlanning as {
+        offHighwayStopHours?: number;
+        meaning?: string;
+        overnightParkException?: string;
+      })
+    : null;
 ---
 
 <BaseLayout
@@ -373,6 +382,12 @@ const campArrival =
         <dt>Activation budget</dt>
         <dd>{String(tripConstraints.activationTimeMinutes ?? 60)} min per stop</dd>
       </div>
+      {parkStopPlanning && (
+        <div>
+          <dt>Broad stop budget</dt>
+          <dd>{parkStopPlanning.offHighwayStopHours ?? 2} hr per park stop</dd>
+        </div>
+      )}
       {roveCounting && (
         <div>
           <dt>Rove count</dt>
@@ -436,6 +451,7 @@ const campArrival =
       </p>
     )}
     {riActivation?.notes && <p class="rove-jurisdictions">{riActivation.notes}</p>}
+    {parkStopPlanning?.meaning && <p class="rove-jurisdictions">{parkStopPlanning.meaning}</p>}
   </section>
 
   {timelineDrafts.length > 0 && (
@@ -664,9 +680,15 @@ const campArrival =
                 <dd>{day.roughDriveHours.toFixed(1)}h</dd>
               </div>
               <div>
-                <dt>Entities</dt>
+                <dt>Stops</dt>
                 <dd>{day.minimumEntities}</dd>
               </div>
+              {day.parkStopHours != null && (
+                <div>
+                  <dt>Park time</dt>
+                  <dd>{day.parkStopHours.toFixed(1)}h</dd>
+                </div>
+              )}
               <div>
                 <dt>Total</dt>
                 <dd>{day.roughTotalHours.toFixed(1)}h</dd>
@@ -1244,7 +1266,7 @@ const campArrival =
 
   .rove-rest-day dl {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(3.5rem, 1fr));
     gap: 0.35rem;
     margin: 0.65rem 0;
   }
