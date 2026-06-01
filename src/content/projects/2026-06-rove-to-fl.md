@@ -16,14 +16,10 @@ activations along the way. The working assumption is a Friday, June 19
 departure from Rhode Island around 17:00-18:00, with a June 26 arrival to
 participate in Field Day 2026 with a local club in the Palm Beach area.
 
-The working goal is to activate every state crossed on the route, plus
-Washington, DC: Rhode Island, Connecticut, New York, New Jersey, Delaware,
-Maryland, DC, Virginia, North Carolina, South Carolina, Georgia, and Florida.
-Each drive-by activation needs at least an hour on site, and non-overnight park
-targets should stay within roughly 30 minutes of the I-95 corridor.
-For broad planning, non-overnight park stops now get budgeted as two-hour
-blocks to cover leaving the highway, operating, packing up, and returning to
-the route.
+The working goal is to activate every state crossed on the route plus
+Washington, DC: RI, CT, NY, NJ, DE, MD, DC, VA, NC, SC, GA, and FL. For broad
+planning, non-overnight parks are budgeted as two-hour stops to cover leaving
+the highway, operating, packing up, and returning to the route.
 
 For rove planning, the count is unique POTA entities on a UTC day. Multi-entity
 activations count once per entity, so a 2-fer counts as two; evening activations
@@ -35,8 +31,10 @@ they can carry more driving and more activations than the weekdays; a 10-park
 Saturday rove is an idea to evaluate, not a committed plan.
 
 The trip will be in a Tesla, so the drive plan needs to account for roughly
-30-minute charging stops after every 2.5 hours of driving. Where possible,
-charging, food, rest breaks, and nearby activations should be paired instead of
+30-minute Tesla Supercharger stops after every 2.5 hours of driving. Planned
+charging should use Tesla Superchargers only; generic EV chargers should not be
+treated as equivalent when judging feasibility. Where possible, Supercharger
+stops, food, rest breaks, and nearby activations should be paired instead of
 treated as separate delays.
 
 An evening activation in the DC area with a friend is part of the plan. If
@@ -45,57 +43,28 @@ day, do DC that evening, then keep the rest of the trip moving south. Rock
 Creek Park is the first suggestion to evaluate, but other DC-area options are
 still in scope.
 
-Park selection and cluster planning are in progress. Convenient 2/3/4-fers are
-welcome, but they are secondary to a practical route, reasonable driving days,
-and the per-jurisdiction activation goal.
+Current broad shape:
 
-The current rough timeline favors a Friday evening reposition if practical,
-because the trip has about 27 hours of I-95 movement plus charging before any
-activation time is counted. The minimum per-jurisdiction activation goal adds
-up to roughly 12 more hours on site, though 2/3/4-fers can reduce the number of
-physical stops. Using Friday evening for a short RI/CT move creates useful slack
-before the DC friend activation and the southern push.
+- Friday: activate RI before departure if practical, camp at Hammonasset or
+  another CT POTA park, and try to activate after the 20:00 EDT UTC rollover.
+- Saturday: attempt the CT/NY/NJ 10-entity UTC rove and end at a central or
+  south New Jersey hotel.
+- Sunday: pick up DE/MD, do the DC friend activation, then camp in northern
+  Virginia if the timing still allows camp setup before dark.
+- Monday: hotel transit day into North Carolina.
+- Tuesday: daytime NC activation, then South Carolina POTA camp.
+- Wednesday: Georgia activation and hotel night in coastal GA or north FL.
+- Thursday: Florida POTA camp.
+- Friday: short destination arrival day, with Florida ideally already banked.
 
-Rhode Island can be activated Friday morning before the drive starts, which is
-the preferred planning case because it keeps the Friday evening departure
-simple. The fallback is to activate RI on the way out of town and add about an
-hour to the outbound block.
+The first weekend candidate plan uses Hammonasset as the preferred Friday
+anchor if a reservation works. The current 10-entity attempt is Hammonasset,
+Stewart B. McKinney, Silver Sands, Sherwood Island, Mianus River, Tallman
+Mountain, Palisades, Gateway/Fort Wadsworth as a 2-fer, and Cheesequake.
+Google Maps routing puts that Saturday line at about 3h45m of driving from a
+06:00 start, or about 13h15m total once activations, one Supercharger stop, and
+a one-hour buffer are counted.
 
-The first area-by-area budget suggests the northern corridor is the best place
-to attempt a high-count rove day. The southern push from Virginia through
-Georgia is the schedule risk, so those park choices should favor low detours,
-reliable access, and charging alignment over extra entity count.
-
-The first weekend candidate plan is to anchor Friday night at a Connecticut
-POTA campground, with Rocky Neck as the short reposition option and Hammonasset
-as the better westward launch if a reservation works. Saturday then becomes a
-CT/NY/NJ rove candidate day: a 6-entity day looks like the baseline, while a
-10-entity day probably requires efficient CT shoreline stops plus either
-NY/NJ Palisades or a riskier NYC harbor 2-fer.
-
-The current Saturday timing model assumes a UTC-morning activation from the
-Friday campsite. The lower-risk CT/NY/NJ line to Cheesequake is roughly 13
-hours with local drive estimates, one charge stop, one hour per entity, and a
-small buffer. The NYC harbor stretch is closer to 17 hours and should not be
-trusted without real routing and access checks. For the rest of the trip to
-stay comfortable, Saturday should end at least around central New Jersey.
-
-Saturday night is now assumed to be a hotel night in central or south New
-Jersey. For later camping nights, the target is to arrive by about 18:30-19:00
-local so there is enough daylight to set up camp; the overnight POTA park can
-then be activated after setup as a night activation if needed.
-
-The rough Sunday-Friday draft now treats Saturday night as a hotel reset,
-Sunday as the DE/MD/DC day plus a Virginia campsite, Monday as a hotel transit
-day into North Carolina, Tuesday as the North Carolina daytime stop plus a
-South Carolina campsite, Wednesday as the Georgia day on a hotel night,
-Thursday as the Florida campsite day, and Friday as the destination arrival.
-The plan should not double back north for DC after Sunday.
-
-The current broad overnight recommendation is Friday camp, Saturday hotel,
-Sunday camp, Monday hotel, Tuesday camp, Wednesday hotel, and Thursday camp.
-That still gets to four camping nights out of seven pre-arrival nights, stays
-within the two-night camping limit, and shifts the campground state-credit
-saves to Connecticut on Friday, Virginia on Sunday, South Carolina on Tuesday,
-and Florida on Thursday. The main broad risk is whether Sunday can still reach
-a workable Virginia campsite after the DC friend activation.
+The plan should not double back north for DC after Sunday. The main broad risk
+is whether Sunday can still reach a workable Virginia campsite after the DC
+friend activation.

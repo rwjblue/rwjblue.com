@@ -139,6 +139,16 @@ interface RestOfTripDraft {
   days: RestOfTripDay[];
   risk?: string;
 }
+interface RoadmapDay {
+  date: string;
+  route: string;
+  focus: string;
+  jurisdictions: string[];
+  overnightType: string;
+  overnightArea: string;
+  roughTotalHours?: number;
+  notes?: string;
+}
 
 let consecutiveCamp = 0;
 const annotatedDays = (itinerary.days as ItineraryDay[]).map((day) => {
@@ -200,6 +210,7 @@ const vehicle =
   typeof tripConstraints.vehicle === "object" && tripConstraints.vehicle
     ? (tripConstraints.vehicle as {
         type?: string;
+        preferredChargingNetwork?: string;
         chargingStopMinutes?: number;
         drivingHoursBetweenChargingStops?: number;
       })
@@ -276,6 +287,38 @@ const restOfTripDraft =
     ? ((itinerary as { restOfTripDraft: RestOfTripDraft }).restOfTripDraft)
     : null;
 const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
+const roadmapDays: RoadmapDay[] = [
+  {
+    date: "2026-06-19",
+    route: "Providence → Hammonasset",
+    focus: "Depart after work, camp in Connecticut, and activate Hammonasset after the UTC rollover if practical.",
+    jurisdictions: ["US-RI", "US-CT"],
+    overnightType: "camp",
+    overnightArea: "Hammonasset / CT coast",
+    roughTotalHours: 1.3,
+    notes: "RI is preferred Friday morning; Hammonasset is the westward Friday anchor if a reservation works.",
+  },
+  {
+    date: "2026-06-20",
+    route: "CT coast → central/south NJ",
+    focus: "Primary 10-entity UTC rove attempt through CT, lower Hudson, Staten Island, and Cheesequake.",
+    jurisdictions: ["US-CT", "US-NY", "US-NJ"],
+    overnightType: "hotel",
+    overnightArea: "Central or south New Jersey",
+    roughTotalHours: 13.25,
+    notes: "Works best with a 06:00 start and Hammonasset already counted Friday night after 20:00 EDT.",
+  },
+  ...(restOfTripDraft?.days ?? []).map((day) => ({
+    date: day.date,
+    route: `${day.startArea} → ${day.endArea}`,
+    focus: day.focus,
+    jurisdictions: day.jurisdictions,
+    overnightType: day.overnightType,
+    overnightArea: day.endArea,
+    roughTotalHours: day.roughTotalHours,
+    notes: day.notes,
+  })),
+];
 const campArrival =
   typeof tripConstraints.campArrival === "object" && tripConstraints.campArrival
     ? (tripConstraints.campArrival as {
@@ -429,6 +472,7 @@ const parkStopPlanning =
         <div>
           <dt>Charging cadence</dt>
           <dd>
+            {vehicle.preferredChargingNetwork ? `${vehicle.preferredChargingNetwork}: ` : ""}
             {vehicle.chargingStopMinutes ?? 30} min after about{" "}
             {vehicle.drivingHoursBetweenChargingStops ?? 2.5} hr driving
           </dd>
@@ -471,85 +515,50 @@ const parkStopPlanning =
     {parkStopPlanning?.meaning && <p class="rove-jurisdictions">{parkStopPlanning.meaning}</p>}
   </section>
 
-  {timelineDrafts.length > 0 && (
-    <section class="section-block wide" aria-labelledby="timeline-title">
-      <div class="section-heading">
-        <h2 id="timeline-title">Timeline sketch</h2>
-      </div>
+  <section class="section-block wide" aria-labelledby="roadmap-title">
+    <div class="section-heading">
+      <p class="section-label">Working plan</p>
+      <h2 id="roadmap-title">High-level roadmap</h2>
+    </div>
 
-      <div class="rove-timeline-drafts">
-        {timelineDrafts.map((draft) => (
-          <article class="rove-timeline-draft">
-            <header>
-              <p class="section-label">{draft.status}</p>
-              <h3>{draft.name}</h3>
-              <p>{draft.recommendation}</p>
-            </header>
+    {overnightStrategy && (
+      <p class="rove-weekend-note">
+        Overnight rhythm: {overnightStrategy.recommendedPattern.join(" · ")}.
+      </p>
+    )}
 
-            <ol class="rove-timeline-list">
-              {draft.days.map((day) => (
-                <li>
-                  <div class="rove-timeline-date">{formatShortDate(day.date)}</div>
-                  <div>
-                    <strong>{day.area}</strong>
-                    <p>{day.focus}</p>
-                    <span>{day.jurisdictions.map((s) => s.replace("US-", "")).join(" / ")}</span>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
-
-  {areaBudgets.length > 0 && (
-    <section class="section-block wide" aria-labelledby="budget-title">
-      <div class="section-heading">
-        <h2 id="budget-title">Route budget</h2>
-      </div>
-
-      <div class="rove-budget-list">
-        {areaBudgets.map((block) => (
-          <article class="rove-budget-block">
-            <header>
-              <h3>{block.from} → {block.to}</h3>
-              <span>{block.approxMiles} mi</span>
-            </header>
-            <dl>
+    <ol class="rove-timeline-list rove-roadmap-list">
+      {roadmapDays.map((day) => (
+        <li>
+          <div class="rove-timeline-date">{formatShortDate(day.date)}</div>
+          <div>
+            <strong>{day.route}</strong>
+            <p>{day.focus}</p>
+            <dl class="rove-roadmap-meta">
               <div>
-                <dt>Drive</dt>
-                <dd>{block.driveHours.toFixed(1)}h</dd>
+                <dt>Night</dt>
+                <dd>{day.overnightType}</dd>
               </div>
               <div>
-                <dt>Charge</dt>
-                <dd>{block.chargingHours.toFixed(1)}h</dd>
+                <dt>Area</dt>
+                <dd>{day.overnightArea}</dd>
               </div>
-              <div>
-                <dt>Entities</dt>
-                <dd>{block.minimumActivationEntities}</dd>
-              </div>
-              <div>
-                <dt>Total</dt>
-                <dd>{block.roughBlockHours.toFixed(1)}h</dd>
-              </div>
+              {day.roughTotalHours != null && (
+                <div>
+                  <dt>Budget</dt>
+                  <dd>{day.roughTotalHours.toFixed(day.roughTotalHours % 1 === 0 ? 0 : 1)}h</dd>
+                </div>
+              )}
             </dl>
-            <p class="rove-budget-jurisdictions">
-              {block.jurisdictions.map((s) => s.replace("US-", "")).join(" / ")}
-            </p>
-            {block.notes && <p>{block.notes}</p>}
-          </article>
-        ))}
-      </div>
+            <span>{day.jurisdictions.map((s) => s.replace("US-", "")).join(" / ") || "buffer"}</span>
+            {day.notes && <p>{day.notes}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
 
-      {planningConclusions.length > 0 && (
-        <ul class="rove-conclusions">
-          {planningConclusions.map((conclusion) => <li>{conclusion}</li>)}
-        </ul>
-      )}
-    </section>
-  )}
+    {restOfTripDraft?.risk && <p class="rove-weekend-note rove-weekend-rule">{restOfTripDraft.risk}</p>}
+  </section>
 
   {firstWeekendPlan && (
     <section class="section-block wide" aria-labelledby="weekend-title">
@@ -665,203 +674,6 @@ const parkStopPlanning =
     </section>
   )}
 
-  {restOfTripDraft && (
-    <section class="section-block wide" aria-labelledby="rest-title">
-      <div class="section-heading">
-        <p class="section-label">{restOfTripDraft.status}</p>
-        <h2 id="rest-title">Rest of trip draft</h2>
-      </div>
-
-      {campArrival && (
-        <p class="rove-weekend-note">
-          Camping nights target arrival by {campArrival.targetLatestArrival};{" "}
-          {campArrival.activationTiming}
-        </p>
-      )}
-
-      {overnightStrategy && (
-        <section class="rove-overnight-strategy" aria-labelledby="overnight-strategy-title">
-          <div class="section-heading">
-            <h3 id="overnight-strategy-title">Overnight strategy</h3>
-          </div>
-          <p>{overnightStrategy.goal}</p>
-          <p class="rove-weekend-note">{overnightStrategy.summary}</p>
-          <p class="meta">
-            Recommended pattern: {overnightStrategy.recommendedPattern.join(" · ")}
-          </p>
-          <div class="rove-rest-days">
-            {overnightStrategy.nights.map((night) => (
-              <article class="rove-rest-day">
-                <header>
-                  <span>{formatShortDate(night.date)}</span>
-                  <strong>{night.area}</strong>
-                </header>
-                <p>{night.why}</p>
-                <dl>
-                  <div>
-                    <dt>Night</dt>
-                    <dd>{night.preferredType}</dd>
-                  </div>
-                  <div>
-                    <dt>2h saved</dt>
-                    <dd>{night.savesSeparateParkStop ? "yes" : "no"}</dd>
-                  </div>
-                  <div>
-                    <dt>State credit</dt>
-                    <dd>
-                      {night.likelyJurisdictionCoverage.length > 0
-                        ? night.likelyJurisdictionCoverage.map((s) => s.replace("US-", "")).join(" / ")
-                        : "none"}
-                    </dd>
-                  </div>
-                </dl>
-              </article>
-            ))}
-          </div>
-          {overnightStrategy.fallbackNote && (
-            <p class="rove-weekend-note rove-weekend-rule">{overnightStrategy.fallbackNote}</p>
-          )}
-        </section>
-      )}
-
-      <div class="rove-rest-days">
-        {restOfTripDraft.days.map((day) => (
-          <article class="rove-rest-day">
-            <header>
-              <span>{formatShortDate(day.date)}</span>
-              <strong>{day.startArea} → {day.endArea}</strong>
-            </header>
-            <p>{day.focus}</p>
-            <dl>
-              <div>
-                <dt>Miles</dt>
-                <dd>{day.roughMiles}</dd>
-              </div>
-              <div>
-                <dt>Drive</dt>
-                <dd>{day.roughDriveHours.toFixed(1)}h</dd>
-              </div>
-              <div>
-                <dt>Stops</dt>
-                <dd>{day.minimumEntities}</dd>
-              </div>
-              {day.parkStopHours != null && (
-                <div>
-                  <dt>Park time</dt>
-                  <dd>{day.parkStopHours.toFixed(1)}h</dd>
-                </div>
-              )}
-              <div>
-                <dt>Total</dt>
-                <dd>{day.roughTotalHours.toFixed(1)}h</dd>
-              </div>
-              <div>
-                <dt>Night</dt>
-                <dd>{day.overnightType}</dd>
-              </div>
-            </dl>
-            <span>{day.jurisdictions.map((s) => s.replace("US-", "")).join(" / ")}</span>
-            {day.notes && <p>{day.notes}</p>}
-          </article>
-        ))}
-      </div>
-
-      {restOfTripDraft.risk && <p class="rove-weekend-note rove-weekend-rule">{restOfTripDraft.risk}</p>}
-    </section>
-  )}
-
-  <section class="section-block wide" aria-labelledby="itinerary-title">
-    <div class="section-heading">
-      <h2 id="itinerary-title">Itinerary</h2>
-    </div>
-
-    {annotatedDays.length === 0 ? (
-      <div class="rove-itinerary-empty">
-        <p>Planning in progress. Days will appear here as the itinerary is drafted.</p>
-        <p class="meta">
-          Work window: {itinerary.constraints.workStart}–{itinerary.constraints.workEnd} local ·
-          Max {itinerary.constraints.maxConsecutiveCampNights} consecutive camping nights ·
-          Arrive by {itinerary.arriveBy}
-        </p>
-      </div>
-    ) : (
-      <div class="rove-itinerary">
-        <p class="meta rove-constraints">
-          Work {itinerary.constraints.workStart}–{itinerary.constraints.workEnd} local ·
-          max {itinerary.constraints.maxConsecutiveCampNights} consecutive camping nights ·
-          arrive by {itinerary.arriveBy}
-        </p>
-        <ol class="rove-day-list">
-          {annotatedDays.map((day, i) => (
-            <li class={`rove-day${day.campViolation ? " rove-day--violation" : ""}`}>
-              <div class="rove-day-header">
-                <span class="rove-day-number">Day {i + 1}</span>
-                <span class="rove-day-date">{formatDate(day.date)}</span>
-                {day.approxDriveMiles && (
-                  <span class="rove-day-miles">{day.approxDriveMiles} mi</span>
-                )}
-                <span class="rove-day-states">
-                  {day.states.map((s) => s.replace("US-", "")).join(" · ")}
-                </span>
-              </div>
-
-              <div class="rove-day-body">
-                <div class="rove-overnight">
-                  <span class="rove-overnight-icon" title={day.overnight.type}>
-                    {OVERNIGHT_ICON[day.overnight.type as OvernightType]}
-                  </span>
-                  <span class="rove-overnight-name">{day.overnight.name}</span>
-                  {day.overnight.reference && (
-                    <a
-                      class="rove-overnight-ref"
-                      href={`https://pota.app/#/park/${day.overnight.reference}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {day.overnight.reference}
-                    </a>
-                  )}
-                  <span class={`rove-booking-status rove-booking-${day.overnight.booking.status}`}>
-                    {day.overnight.booking.status}
-                    {day.overnight.booking.confirmation && (
-                      <span> · #{day.overnight.booking.confirmation}</span>
-                    )}
-                  </span>
-                  {day.campViolation && (
-                    <span class="rove-camp-warning" title="Exceeds max consecutive camping nights">
-                      ⚠ camp limit
-                    </span>
-                  )}
-                </div>
-
-                {day.parkTargets.length > 0 && (
-                  <ul class="rove-park-targets">
-                    {day.parkTargets.map((ref) => {
-                      const park = parkByRef[ref];
-                      return (
-                        <li>
-                          <a
-                            href={`https://pota.app/#/park/${ref}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {ref}
-                          </a>
-                          {park && <span> {park.name}</span>}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-
-                {day.notes && <p class="rove-day-notes">{day.notes}</p>}
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    )}
-  </section>
 
   <script type="application/json" id="rove-tracker-data" set:html={trackerJson} />
   <script>
@@ -1060,6 +872,32 @@ const parkStopPlanning =
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.04em;
+  }
+
+  .rove-roadmap-list {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+
+  .rove-roadmap-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  .rove-roadmap-meta dt {
+    color: var(--color-text-muted, #666);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-roadmap-meta dd {
+    font-size: 0.85rem;
+    margin: 0.1rem 0 0;
   }
 
   .rove-budget-list {

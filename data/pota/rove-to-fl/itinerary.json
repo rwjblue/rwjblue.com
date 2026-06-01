@@ -39,9 +39,11 @@
     },
     "vehicle": {
       "type": "Tesla",
+      "preferredChargingNetwork": "Tesla Supercharger",
+      "chargingNetworkRule": "Prefer Tesla Superchargers only for planned charging stops; do not treat generic EV chargers as equivalent when judging feasibility.",
       "chargingStopMinutes": 30,
       "drivingHoursBetweenChargingStops": 2.5,
-      "notes": "Account for roughly 30 minutes of charging after each 2.5 hours of driving. Prefer parks, meals, and short breaks that can pair with charging when practical."
+      "notes": "Account for roughly 30 minutes at Tesla Superchargers after each 2.5 hours of driving. Prefer parks, meals, and short breaks that can pair with Supercharger stops when practical."
     },
     "campArrival": {
       "targetLatestArrival": "18:30-19:00",
@@ -319,19 +321,49 @@
     ],
     "saturdayRove": {
       "targetDate": "2026-06-20",
-      "baselineEntityTarget": 6,
+      "baselineEntityTarget": 8,
       "stretchEntityTarget": 10,
-      "strategy": "Start with a UTC-morning activation at the Friday CT campsite, work southwest through CT, then choose either a lower-risk NY/NJ line or a higher-risk NYC harbor line for extra entities.",
+      "strategy": "Prefer Hammonasset for Friday night, activate it after the 20:00 EDT UTC rollover, then start early Saturday and work southwest through CT, the lower Hudson, the Staten Island 2-fer, and Cheesequake.",
       "timingAssumptions": {
-        "source": "Local haversine road-factor estimates; real routing still needed.",
+        "source": "Google Maps MCP traffic-aware route checks for Friday evening and Saturday morning; park access and operating spots still need confirmation.",
         "activationMinutesPerEntity": 60,
+        "activationMinutesPerPhysicalStop": 60,
+        "hammonassetActivationTiming": "Activate Friday night after 20:00 EDT so it counts toward the Saturday UTC rove day.",
+        "chargingNetwork": "Tesla Superchargers only",
         "chargingStopsIncluded": 1,
         "chargingMinutesIncluded": 30,
         "bufferMinutesBaseline": 60,
         "bufferMinutesStretch": 90,
+        "fridayDriveToHammonassetMinutes": 78,
+        "fridayDriveToRockyNeckMinutes": 61,
         "utcDayRolloverLocal": "20:00 EDT"
       },
       "timingModels": [
+        {
+          "name": "Preferred 10-entity UTC line",
+          "entityCount": 10,
+          "startAnchor": "Hammonasset Beach State Park",
+          "endAnchor": "Cheesequake State Park",
+          "estimatedDriveMinutes": 225,
+          "activationMinutes": 480,
+          "chargingMinutes": 30,
+          "bufferMinutes": 60,
+          "estimatedTotalMinutes": 795,
+          "estimatedTotalLabel": "13h 15m after Saturday departure",
+          "comfort": "plausible but requires an early start",
+          "route": [
+            { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 13 },
+            { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 37 },
+            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 20 },
+            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 24 },
+            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 36 },
+            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 13 },
+            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 45 },
+            { "from": "US-0680", "to": "US-8087", "estimatedDriveMinutes": 0 },
+            { "from": "US-8087", "to": "US-1611", "estimatedDriveMinutes": 36 }
+          ],
+          "notes": "This assumes Hammonasset is already activated Friday night for the Saturday UTC day, then Saturday starts driving around 06:00 local. The Gateway/Fort Wadsworth pair is one physical stop for two entities. An 08:00 departure makes the same route about 4h 1m of driving and pushes the final activation close to the 20:00 EDT UTC rollover."
+        },
         {
           "name": "Baseline CT/NY/NJ line",
           "entityCount": 8,
@@ -380,7 +412,7 @@
           "notes": "This gives Sunday a better southbound handoff but should not be chosen unless the day is running well."
         },
         {
-          "name": "NYC harbor stretch",
+          "name": "NYC harbor plus Liberty stretch",
           "entityCount": 11,
           "startAnchor": "Hammonasset Beach State Park",
           "endAnchor": "Cheesequake State Park",
@@ -403,7 +435,7 @@
             { "from": "US-8087", "to": "US-1623", "estimatedDriveMinutes": 12 },
             { "from": "US-1623", "to": "US-1611", "estimatedDriveMinutes": 37 }
           ],
-          "notes": "Gateway/Fort Wadsworth can be attractive as a multi-entity stop, but this version risks consuming too much of Saturday and should require activator outreach plus real routing before being trusted."
+          "notes": "Adding Liberty State Park on top of the preferred 10-entity line is likely too much for the same UTC day unless access is unusually smooth and the day is running ahead of plan."
         }
       ],
       "restOfTripComfortRule": "Saturday should end at least around Cheesequake / central NJ, and ideally farther south, so Sunday can pick up DE/MD and position near DC without turning the rest of the trip into catch-up driving.",
@@ -487,9 +519,9 @@
         }
       ],
       "openQuestions": [
-        "Choose Rocky Neck versus Hammonasset as the Friday overnight anchor.",
-        "Decide whether Saturday should avoid NYC harbor traffic or intentionally chase the Gateway/Fort Wadsworth 2-fer.",
-        "Find charging stops that pair with late-morning CT, mid-afternoon NY/NJ, and evening NJ movement.",
+        "Confirm Hammonasset camping availability and whether a Friday-night activation after 20:00 EDT is practical from the campsite.",
+        "Confirm Gateway/Fort Wadsworth access, parking, and whether one operating position can reliably count both entities.",
+        "Find Tesla Supercharger stops that pair with late-morning CT, mid-afternoon NY/NJ, and evening NJ movement.",
         "Contact common activators for Hammonasset, Silver Sands, Sherwood Island, Palisades, Gateway/Fort Wadsworth, and Cheesequake."
       ]
     }
