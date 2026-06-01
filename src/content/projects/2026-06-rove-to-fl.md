@@ -75,3 +75,14 @@ hours with local drive estimates, one charge stop, one hour per entity, and a
 small buffer. The NYC harbor stretch is closer to 17 hours and should not be
 trusted without real routing and access checks. For the rest of the trip to
 stay comfortable, Saturday should end at least around central New Jersey.
+
+Saturday night is now assumed to be a hotel night in central or south New
+Jersey. For later camping nights, the target is to arrive by about 18:30-19:00
+local so there is enough daylight to set up camp; the overnight POTA park can
+then be activated after setup as a night activation if needed.
+
+The rough Sunday-Friday draft keeps Sunday as the DE/MD positioning day,
+Monday and Tuesday around DC/NoVA, Wednesday beginning the southern push, and
+Thursday as the hard VA/NC/SC/GA day. The main risk is leaving too much distance
+for Friday: if Thursday only reaches the NC/SC area, Friday becomes too tight
+for a comfortable Field Day arrival.

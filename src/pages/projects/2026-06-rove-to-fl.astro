@@ -102,6 +102,26 @@ interface FirstWeekendPlan {
     openQuestions: string[];
   };
 }
+interface RestOfTripDay {
+  date: string;
+  overnightType: string;
+  startArea: string;
+  endArea: string;
+  focus: string;
+  jurisdictions: string[];
+  roughMiles: number;
+  roughDriveHours: number;
+  chargingHours: number;
+  minimumEntities: number;
+  roughTotalHours: number;
+  notes?: string;
+}
+interface RestOfTripDraft {
+  status: string;
+  assumptions: string[];
+  days: RestOfTripDay[];
+  risk?: string;
+}
 
 let consecutiveCamp = 0;
 const annotatedDays = (itinerary.days as ItineraryDay[]).map((day) => {
@@ -232,6 +252,19 @@ const firstWeekendPlan =
   typeof (itinerary as { firstWeekendPlan?: unknown }).firstWeekendPlan === "object" &&
   (itinerary as { firstWeekendPlan?: unknown }).firstWeekendPlan
     ? ((itinerary as { firstWeekendPlan: FirstWeekendPlan }).firstWeekendPlan)
+    : null;
+const restOfTripDraft =
+  typeof (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft === "object" &&
+  (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft
+    ? ((itinerary as { restOfTripDraft: RestOfTripDraft }).restOfTripDraft)
+    : null;
+const campArrival =
+  typeof tripConstraints.campArrival === "object" && tripConstraints.campArrival
+    ? (tripConstraints.campArrival as {
+        targetLatestArrival?: string;
+        reason?: string;
+        activationTiming?: string;
+      })
     : null;
 ---
 
@@ -367,6 +400,12 @@ const firstWeekendPlan =
             {vehicle.chargingStopMinutes ?? 30} min after about{" "}
             {vehicle.drivingHoursBetweenChargingStops ?? 2.5} hr driving
           </dd>
+        </div>
+      )}
+      {campArrival && (
+        <div>
+          <dt>Camp arrival</dt>
+          <dd>{campArrival.targetLatestArrival ?? "18:30-19:00"}</dd>
         </div>
       )}
       {weekendPlanning && (
@@ -590,6 +629,60 @@ const firstWeekendPlan =
           {firstWeekendPlan.saturdayRove.restOfTripComfortRule}
         </p>
       )}
+    </section>
+  )}
+
+  {restOfTripDraft && (
+    <section class="section-block wide" aria-labelledby="rest-title">
+      <div class="section-heading">
+        <p class="section-label">{restOfTripDraft.status}</p>
+        <h2 id="rest-title">Rest of trip draft</h2>
+      </div>
+
+      {campArrival && (
+        <p class="rove-weekend-note">
+          Camping nights target arrival by {campArrival.targetLatestArrival};{" "}
+          {campArrival.activationTiming}
+        </p>
+      )}
+
+      <div class="rove-rest-days">
+        {restOfTripDraft.days.map((day) => (
+          <article class="rove-rest-day">
+            <header>
+              <span>{formatShortDate(day.date)}</span>
+              <strong>{day.startArea} → {day.endArea}</strong>
+            </header>
+            <p>{day.focus}</p>
+            <dl>
+              <div>
+                <dt>Miles</dt>
+                <dd>{day.roughMiles}</dd>
+              </div>
+              <div>
+                <dt>Drive</dt>
+                <dd>{day.roughDriveHours.toFixed(1)}h</dd>
+              </div>
+              <div>
+                <dt>Entities</dt>
+                <dd>{day.minimumEntities}</dd>
+              </div>
+              <div>
+                <dt>Total</dt>
+                <dd>{day.roughTotalHours.toFixed(1)}h</dd>
+              </div>
+              <div>
+                <dt>Night</dt>
+                <dd>{day.overnightType}</dd>
+              </div>
+            </dl>
+            <span>{day.jurisdictions.map((s) => s.replace("US-", "")).join(" / ")}</span>
+            {day.notes && <p>{day.notes}</p>}
+          </article>
+        ))}
+      </div>
+
+      {restOfTripDraft.risk && <p class="rove-weekend-note rove-weekend-rule">{restOfTripDraft.risk}</p>}
     </section>
   )}
 
@@ -1114,6 +1207,67 @@ const firstWeekendPlan =
     border-top: 1px solid var(--color-border, #ddd);
     margin-top: 1rem;
     padding-top: 0.75rem;
+  }
+
+  .rove-rest-days {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-rest-day {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-rest-day header {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .rove-rest-day header span {
+    color: var(--color-text-muted, #666);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .rove-rest-day header strong {
+    font-size: 0.95rem;
+  }
+
+  .rove-rest-day p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    margin: 0.55rem 0;
+  }
+
+  .rove-rest-day dl {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.35rem;
+    margin: 0.65rem 0;
+  }
+
+  .rove-rest-day dt {
+    color: var(--color-text-muted, #666);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-rest-day dd {
+    font-size: 0.82rem;
+    margin: 0;
+  }
+
+  .rove-rest-day > span {
+    color: var(--color-accent, #167246);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
   }
 
   @media (max-width: 760px) {

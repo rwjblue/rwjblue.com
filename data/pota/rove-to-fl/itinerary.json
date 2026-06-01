@@ -38,6 +38,11 @@
       "drivingHoursBetweenChargingStops": 2.5,
       "notes": "Account for roughly 30 minutes of charging after each 2.5 hours of driving. Prefer parks, meals, and short breaks that can pair with charging when practical."
     },
+    "campArrival": {
+      "targetLatestArrival": "18:30-19:00",
+      "reason": "Arrive with enough daylight to set up camp before full dark.",
+      "activationTiming": "For camping nights, activate the overnight park after camp is set up if needed."
+    },
     "weekendPlanning": {
       "workExemptDates": ["2026-06-20", "2026-06-21"],
       "notes": "Saturday and Sunday have no work window, so they can carry more driving and more activations than weekdays.",
@@ -459,6 +464,12 @@
         }
       ],
       "restOfTripComfortRule": "Saturday should end at least around Cheesequake / central NJ, and ideally farther south, so Sunday can pick up DE/MD and position near DC without turning the rest of the trip into catch-up driving.",
+      "saturdayOvernight": {
+        "type": "hotel",
+        "area": "central or south New Jersey",
+        "status": "assumed for planning",
+        "reason": "Use a hotel after the high-count rove day to recover and avoid starting the camping-night count before the mid-trip push."
+      },
       "baselineCandidates": [
         {
           "reference": "US-1676",
@@ -539,6 +550,102 @@
         "Contact common activators for Hammonasset, Silver Sands, Sherwood Island, Palisades, Gateway/Fort Wadsworth, and Cheesequake."
       ]
     }
+  },
+  "restOfTripDraft": {
+    "status": "rough",
+    "assumptions": [
+      "Saturday night is a hotel in central or south New Jersey.",
+      "Camping nights should arrive by about 18:30-19:00 local for setup before dark.",
+      "A campsite activation can happen after setup, effectively as a night activation.",
+      "The plan should avoid leaving a very long Georgia-to-Singer-Island push for Friday."
+    ],
+    "days": [
+      {
+        "date": "2026-06-21",
+        "overnightType": "hotel or camp",
+        "startArea": "Central/south New Jersey hotel",
+        "endArea": "DC / Maryland approach",
+        "focus": "Pick up Delaware and Maryland, then position near DC without forcing the friend activation early.",
+        "jurisdictions": ["US-DE", "US-MD"],
+        "roughMiles": 230,
+        "roughDriveHours": 3,
+        "chargingHours": 0.5,
+        "minimumEntities": 2,
+        "roughTotalHours": 5.5,
+        "notes": "Sunday is the main positioning day after the hotel reset. A camping overnight is possible if arrival by 18:30-19:00 is realistic."
+      },
+      {
+        "date": "2026-06-22",
+        "overnightType": "hotel",
+        "startArea": "DC / Maryland approach",
+        "endArea": "DC / Northern Virginia",
+        "focus": "Workday buffer near DC and optional Virginia positioning.",
+        "jurisdictions": ["US-VA"],
+        "roughMiles": 80,
+        "roughDriveHours": 1.3,
+        "chargingHours": 0,
+        "minimumEntities": 1,
+        "roughTotalHours": 2.3,
+        "notes": "Keep Monday light so the schedule can absorb Saturday/Sunday slippage."
+      },
+      {
+        "date": "2026-06-23",
+        "overnightType": "hotel",
+        "startArea": "DC / Northern Virginia",
+        "endArea": "DC / Northern Virginia",
+        "focus": "Workday plus the friend activation in DC if Tuesday works.",
+        "jurisdictions": ["US-DC"],
+        "roughMiles": 40,
+        "roughDriveHours": 0.7,
+        "chargingHours": 0,
+        "minimumEntities": 1,
+        "roughTotalHours": 1.7,
+        "notes": "If the DC activation slips to Wednesday, preserve Tuesday as buffer rather than forcing southbound distance."
+      },
+      {
+        "date": "2026-06-24",
+        "overnightType": "hotel or camp",
+        "startArea": "DC / Northern Virginia",
+        "endArea": "Richmond / southern Virginia",
+        "focus": "Begin the southern push after DC and make Virginia easy.",
+        "jurisdictions": ["US-VA"],
+        "roughMiles": 120,
+        "roughDriveHours": 2,
+        "chargingHours": 0,
+        "minimumEntities": 1,
+        "roughTotalHours": 3,
+        "notes": "A camp is reasonable only if arrival by 18:30-19:00 works after the workday. Otherwise use a hotel and push Thursday."
+      },
+      {
+        "date": "2026-06-25",
+        "overnightType": "camp or hotel",
+        "startArea": "Richmond / southern Virginia",
+        "endArea": "coastal Georgia or north Florida",
+        "focus": "Main southern push: cover North Carolina, South Carolina, and Georgia while preserving Friday arrival comfort.",
+        "jurisdictions": ["US-NC", "US-SC", "US-GA"],
+        "roughMiles": 430,
+        "roughDriveHours": 7.2,
+        "chargingHours": 1,
+        "minimumEntities": 3,
+        "roughTotalHours": 11.2,
+        "notes": "This is the hard day. If camping, the campsite must be close to the route and reachable by 18:30-19:00; otherwise choose a hotel and keep activations low-detour."
+      },
+      {
+        "date": "2026-06-26",
+        "overnightType": "destination",
+        "startArea": "coastal Georgia or north Florida",
+        "endArea": "Singer Island / Riviera Beach",
+        "focus": "Florida activation and arrival for Field Day weekend.",
+        "jurisdictions": ["US-FL"],
+        "roughMiles": 280,
+        "roughDriveHours": 4.7,
+        "chargingHours": 0.5,
+        "minimumEntities": 1,
+        "roughTotalHours": 6.2,
+        "notes": "Friday stays comfortable only if Thursday gets far enough south. Florida activation should stay close to the route or destination."
+      }
+    ],
+    "risk": "If Thursday only reaches the NC/SC area, Friday becomes roughly a 10-hour drive/charge/activation day before arrival, which is too tight for comfort."
   },
   "days": [
     {
