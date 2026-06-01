@@ -15,3 +15,8 @@ command = "qrz-mcp"
 
 [mcp_servers.lotw]
 command = "lotw-mcp"
+
+[mcp_servers.googleMaps]
+command = "npx"
+args = ["-y", "@cablate/mcp-google-map", "--stdio"]
+env_vars = ["GOOGLE_MAPS_API_KEY"]

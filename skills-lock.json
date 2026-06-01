@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "google-maps": {
+      "source": "cablate/mcp-google-map",
+      "sourceType": "github",
+      "skillPath": "skills/google-maps/SKILL.md",
+      "computedHash": "3dbf7773d0fcd0d1ae50db6e0808ccb63670e6f289f7cd4479ffeff06b1a855f"
+    }
+  }
+}
