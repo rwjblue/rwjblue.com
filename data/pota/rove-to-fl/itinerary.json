@@ -332,6 +332,214 @@
     "The southern push from Virginia through Georgia is the schedule risk; it should prioritize low-detour, reliable access parks over high entity count.",
     "Tuesday and Wednesday should remain flexible for DC until the weekend load and southern overnight targets are firmer."
   ],
+  "firstWeekendPlan": {
+    "status": "candidate",
+    "utcNote": "In June EDT, the UTC day changes at 20:00 local. Friday evening activations after 20:00 local count toward the next UTC day.",
+    "fridayNightAnchors": [
+      {
+        "name": "Rocky Neck State Park",
+        "reference": "US-1711",
+        "state": "US-CT",
+        "role": "short Friday reposition",
+        "pros": [
+          "POTA park with an official campground",
+          "Keeps Friday evening short after work",
+          "Good low-risk first camping night"
+        ],
+        "cons": [
+          "Less westward progress than Hammonasset",
+          "Need reservation and campground arrival details"
+        ],
+        "verification": "Official CT page confirms campground, reservations, check-in requirements, and 160 wooded/open sites for the 2025 season; verify 2026 availability when booking."
+      },
+      {
+        "name": "Hammonasset Beach State Park",
+        "reference": "US-1676",
+        "state": "US-CT",
+        "role": "preferred westward Friday anchor if available",
+        "pros": [
+          "POTA park with a large official campground",
+          "Better Saturday launch point for southwest CT, NY, and NJ",
+          "Nearby Stewart B. McKinney NWR creates an early Saturday entity option"
+        ],
+        "cons": [
+          "Longer Friday evening after work",
+          "Large popular campground, so reservation availability matters"
+        ],
+        "verification": "Official CT Parks page lists 558 RV/tent sites and a 2026 camping season from May 22 through October 12."
+      }
+    ],
+    "saturdayRove": {
+      "targetDate": "2026-06-20",
+      "baselineEntityTarget": 6,
+      "stretchEntityTarget": 10,
+      "strategy": "Start with a UTC-morning activation at the Friday CT campsite, work southwest through CT, then choose either a lower-risk NY/NJ line or a higher-risk NYC harbor line for extra entities.",
+      "timingAssumptions": {
+        "source": "Local haversine road-factor estimates; real routing still needed.",
+        "activationMinutesPerEntity": 60,
+        "chargingStopsIncluded": 1,
+        "chargingMinutesIncluded": 30,
+        "bufferMinutesBaseline": 60,
+        "bufferMinutesStretch": 90,
+        "utcDayRolloverLocal": "20:00 EDT"
+      },
+      "timingModels": [
+        {
+          "name": "Baseline CT/NY/NJ line",
+          "entityCount": 8,
+          "startAnchor": "Hammonasset Beach State Park",
+          "endAnchor": "Cheesequake State Park",
+          "estimatedDriveMinutes": 217,
+          "activationMinutes": 480,
+          "chargingMinutes": 30,
+          "bufferMinutes": 60,
+          "estimatedTotalMinutes": 787,
+          "estimatedTotalLabel": "13h 7m",
+          "comfort": "plausible full-day rove",
+          "route": [
+            { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 8 },
+            { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 54 },
+            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 25 },
+            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 23 },
+            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 30 },
+            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 9 },
+            { "from": "US-8319", "to": "US-1611", "estimatedDriveMinutes": 68 }
+          ],
+          "notes": "This works best if Hammonasset is the Friday overnight and the first activation happens from camp in the UTC morning. It should end far enough south in NJ to keep Sunday comfortable."
+        },
+        {
+          "name": "Southbound handoff line",
+          "entityCount": 9,
+          "startAnchor": "Hammonasset Beach State Park",
+          "endAnchor": "Delaware and Raritan Canal State Park",
+          "estimatedDriveMinutes": 249,
+          "activationMinutes": 540,
+          "chargingMinutes": 30,
+          "bufferMinutes": 60,
+          "estimatedTotalMinutes": 879,
+          "estimatedTotalLabel": "14h 39m",
+          "comfort": "ambitious but useful if Sunday needs a better launch",
+          "route": [
+            { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 8 },
+            { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 54 },
+            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 25 },
+            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 23 },
+            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 30 },
+            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 9 },
+            { "from": "US-8319", "to": "US-1611", "estimatedDriveMinutes": 68 },
+            { "from": "US-1611", "to": "US-1613", "estimatedDriveMinutes": 32 }
+          ],
+          "notes": "This gives Sunday a better southbound handoff but should not be chosen unless the day is running well."
+        },
+        {
+          "name": "NYC harbor stretch",
+          "entityCount": 11,
+          "startAnchor": "Hammonasset Beach State Park",
+          "endAnchor": "Cheesequake State Park",
+          "estimatedDriveMinutes": 240,
+          "activationMinutes": 660,
+          "chargingMinutes": 30,
+          "bufferMinutes": 90,
+          "estimatedTotalMinutes": 1020,
+          "estimatedTotalLabel": "17h 0m",
+          "comfort": "not comfortable without real routing and access confirmation",
+          "route": [
+            { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 8 },
+            { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 54 },
+            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 25 },
+            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 23 },
+            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 30 },
+            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 9 },
+            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 42 },
+            { "from": "US-0680", "to": "US-8087", "estimatedDriveMinutes": 0 },
+            { "from": "US-8087", "to": "US-1623", "estimatedDriveMinutes": 12 },
+            { "from": "US-1623", "to": "US-1611", "estimatedDriveMinutes": 37 }
+          ],
+          "notes": "Gateway/Fort Wadsworth can be attractive as a multi-entity stop, but this version risks consuming too much of Saturday and should require activator outreach plus real routing before being trusted."
+        }
+      ],
+      "restOfTripComfortRule": "Saturday should end at least around Cheesequake / central NJ, and ideally farther south, so Sunday can pick up DE/MD and position near DC without turning the rest of the trip into catch-up driving.",
+      "baselineCandidates": [
+        {
+          "reference": "US-1676",
+          "name": "Hammonasset Beach State Beach",
+          "state": "US-CT",
+          "role": "activate if overnighting there or passing through early"
+        },
+        {
+          "reference": "US-0228",
+          "name": "Stewart B. Mckinney National Wildlife Refuge",
+          "state": "US-CT",
+          "role": "early CT shoreline add-on near Hammonasset"
+        },
+        {
+          "reference": "US-1716",
+          "name": "Silver Sands State Park",
+          "state": "US-CT",
+          "role": "southwest CT shoreline candidate"
+        },
+        {
+          "reference": "US-1715",
+          "name": "Sherwood Island State Park",
+          "state": "US-CT",
+          "role": "southwest CT shoreline candidate"
+        },
+        {
+          "reference": "US-1696",
+          "name": "Mianus River State Park",
+          "state": "US-CT",
+          "role": "last CT candidate before NY"
+        },
+        {
+          "reference": "US-2149",
+          "name": "Tallman Mountain State Park",
+          "state": "US-NY",
+          "role": "lower-risk NY candidate north of the NYC core"
+        },
+        {
+          "reference": "US-8319",
+          "name": "Palisades Interstate Park",
+          "state": "US-NY/US-NJ",
+          "role": "high-value NY/NJ corridor entity; confirm best legal operating side"
+        },
+        {
+          "reference": "US-1611",
+          "name": "Cheesequake State Park",
+          "state": "US-NJ",
+          "role": "useful NJ stop that also positions south for Sunday"
+        }
+      ],
+      "stretchCandidates": [
+        {
+          "references": ["US-0680", "US-8087"],
+          "name": "Gateway National Recreation Area / Fort Wadsworth National Historic Site",
+          "state": "US-NY",
+          "role": "possible 2-entity stop",
+          "risk": "NYC/Staten Island traffic and access risk; only include after activator vibe check"
+        },
+        {
+          "reference": "US-1623",
+          "name": "Liberty State Park",
+          "state": "US-NJ",
+          "role": "NJ harbor candidate",
+          "risk": "Urban access and timing risk; useful only if it does not disrupt southbound progress"
+        },
+        {
+          "reference": "US-1613",
+          "name": "Delaware and Raritan Canal State Park",
+          "state": "US-NJ",
+          "role": "southern NJ add-on or Sunday handoff candidate",
+          "risk": "May fit better Sunday depending on overnight target"
+        }
+      ],
+      "openQuestions": [
+        "Choose Rocky Neck versus Hammonasset as the Friday overnight anchor.",
+        "Decide whether Saturday should avoid NYC harbor traffic or intentionally chase the Gateway/Fort Wadsworth 2-fer.",
+        "Find charging stops that pair with late-morning CT, mid-afternoon NY/NJ, and evening NJ movement.",
+        "Contact common activators for Hammonasset, Silver Sands, Sherwood Island, Palisades, Gateway/Fort Wadsworth, and Cheesequake."
+      ]
+    }
+  },
   "days": [
     {
       "date": "2026-06-20",

@@ -61,3 +61,17 @@ The first area-by-area budget suggests the northern corridor is the best place
 to attempt a high-count rove day. The southern push from Virginia through
 Georgia is the schedule risk, so those park choices should favor low detours,
 reliable access, and charging alignment over extra entity count.
+
+The first weekend candidate plan is to anchor Friday night at a Connecticut
+POTA campground, with Rocky Neck as the short reposition option and Hammonasset
+as the better westward launch if a reservation works. Saturday then becomes a
+CT/NY/NJ rove candidate day: a 6-entity day looks like the baseline, while a
+10-entity day probably requires efficient CT shoreline stops plus either
+NY/NJ Palisades or a riskier NYC harbor 2-fer.
+
+The current Saturday timing model assumes a UTC-morning activation from the
+Friday campsite. The lower-risk CT/NY/NJ line to Cheesequake is roughly 13
+hours with local drive estimates, one charge stop, one hour per entity, and a
+small buffer. The NYC harbor stretch is closer to 17 hours and should not be
+trusted without real routing and access checks. For the rest of the trip to
+stay comfortable, Saturday should end at least around central New Jersey.

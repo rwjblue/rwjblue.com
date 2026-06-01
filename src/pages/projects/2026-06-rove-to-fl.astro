@@ -58,6 +58,50 @@ interface AreaBudget {
   jurisdictions: string[];
   notes?: string;
 }
+interface FridayNightAnchor {
+  name: string;
+  reference: string;
+  state: string;
+  role: string;
+  pros: string[];
+  cons: string[];
+}
+interface CandidateStop {
+  reference?: string;
+  references?: string[];
+  name: string;
+  state: string;
+  role: string;
+  risk?: string;
+}
+interface FirstWeekendPlan {
+  status: string;
+  utcNote: string;
+  fridayNightAnchors: FridayNightAnchor[];
+  saturdayRove: {
+    targetDate: string;
+    baselineEntityTarget: number;
+    stretchEntityTarget: number;
+    strategy: string;
+    timingAssumptions?: {
+      source?: string;
+      utcDayRolloverLocal?: string;
+    };
+    timingModels?: Array<{
+      name: string;
+      entityCount: number;
+      endAnchor: string;
+      estimatedDriveMinutes: number;
+      estimatedTotalLabel: string;
+      comfort: string;
+      notes?: string;
+    }>;
+    restOfTripComfortRule?: string;
+    baselineCandidates: CandidateStop[];
+    stretchCandidates: CandidateStop[];
+    openQuestions: string[];
+  };
+}
 
 let consecutiveCamp = 0;
 const annotatedDays = (itinerary.days as ItineraryDay[]).map((day) => {
@@ -184,6 +228,11 @@ const planningConclusions = Array.isArray(
 )
   ? ((itinerary as { planningConclusions: string[] }).planningConclusions)
   : [];
+const firstWeekendPlan =
+  typeof (itinerary as { firstWeekendPlan?: unknown }).firstWeekendPlan === "object" &&
+  (itinerary as { firstWeekendPlan?: unknown }).firstWeekendPlan
+    ? ((itinerary as { firstWeekendPlan: FirstWeekendPlan }).firstWeekendPlan)
+    : null;
 ---
 
 <BaseLayout
@@ -426,6 +475,120 @@ const planningConclusions = Array.isArray(
         <ul class="rove-conclusions">
           {planningConclusions.map((conclusion) => <li>{conclusion}</li>)}
         </ul>
+      )}
+    </section>
+  )}
+
+  {firstWeekendPlan && (
+    <section class="section-block wide" aria-labelledby="weekend-title">
+      <div class="section-heading">
+        <p class="section-label">{firstWeekendPlan.status}</p>
+        <h2 id="weekend-title">First weekend candidates</h2>
+      </div>
+
+      <p class="rove-weekend-note">{firstWeekendPlan.utcNote}</p>
+
+      <div class="rove-weekend-grid">
+        <section aria-labelledby="friday-anchor-title">
+          <h3 id="friday-anchor-title">Friday night anchors</h3>
+          <div class="rove-anchor-list">
+            {firstWeekendPlan.fridayNightAnchors.map((anchor) => (
+              <article class="rove-anchor-card">
+                <header>
+                  <h4>{anchor.name}</h4>
+                  <a
+                    href={`https://pota.app/#/park/${anchor.reference}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {anchor.reference}
+                  </a>
+                </header>
+                <p>{anchor.role}</p>
+                <ul>
+                  {anchor.pros.slice(0, 2).map((pro) => <li>{pro}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="saturday-candidates-title">
+          <h3 id="saturday-candidates-title">Saturday rove shape</h3>
+          <p class="rove-weekend-note">{firstWeekendPlan.saturdayRove.strategy}</p>
+          {firstWeekendPlan.saturdayRove.timingAssumptions?.source && (
+            <p class="rove-weekend-note">
+              {firstWeekendPlan.saturdayRove.timingAssumptions.source}
+              {firstWeekendPlan.saturdayRove.timingAssumptions.utcDayRolloverLocal &&
+                ` UTC rolls at ${firstWeekendPlan.saturdayRove.timingAssumptions.utcDayRolloverLocal}.`}
+            </p>
+          )}
+          <div class="rove-entity-targets">
+            <span>{firstWeekendPlan.saturdayRove.baselineEntityTarget} baseline</span>
+            <span>{firstWeekendPlan.saturdayRove.stretchEntityTarget} stretch</span>
+          </div>
+          {firstWeekendPlan.saturdayRove.timingModels && (
+            <div class="rove-timing-models">
+              {firstWeekendPlan.saturdayRove.timingModels.map((model) => (
+                <article>
+                  <strong>{model.name}</strong>
+                  <dl>
+                    <div>
+                      <dt>Entities</dt>
+                      <dd>{model.entityCount}</dd>
+                    </div>
+                    <div>
+                      <dt>Drive</dt>
+                      <dd>{Math.floor(model.estimatedDriveMinutes / 60)}h {model.estimatedDriveMinutes % 60}m</dd>
+                    </div>
+                    <div>
+                      <dt>Total</dt>
+                      <dd>{model.estimatedTotalLabel}</dd>
+                    </div>
+                  </dl>
+                  <p>{model.comfort}; ends near {model.endAnchor}</p>
+                </article>
+              ))}
+            </div>
+          )}
+          <ol class="rove-candidate-list">
+            {firstWeekendPlan.saturdayRove.baselineCandidates.map((candidate) => (
+              <li>
+                <strong>
+                  {candidate.reference}
+                  {" "}
+                  {candidate.name}
+                </strong>
+                <span>{candidate.state.replace("US-", "")} · {candidate.role}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+
+      <section aria-labelledby="stretch-title" class="rove-stretch-section">
+        <h3 id="stretch-title">Stretch and verification items</h3>
+        <div class="rove-stretch-grid">
+          {firstWeekendPlan.saturdayRove.stretchCandidates.map((candidate) => (
+            <article>
+              <strong>
+                {(candidate.references ?? [candidate.reference]).filter(Boolean).join(" + ")}
+                {" "}
+                {candidate.name}
+              </strong>
+              <p>{candidate.role}</p>
+              {candidate.risk && <span>{candidate.risk}</span>}
+            </article>
+          ))}
+        </div>
+        <ul class="rove-conclusions">
+          {firstWeekendPlan.saturdayRove.openQuestions.map((question) => <li>{question}</li>)}
+        </ul>
+      </section>
+      {firstWeekendPlan.saturdayRove.restOfTripComfortRule && (
+        <p class="rove-weekend-note rove-weekend-rule">
+          {firstWeekendPlan.saturdayRove.restOfTripComfortRule}
+        </p>
       )}
     </section>
   )}
@@ -796,6 +959,167 @@ const planningConclusions = Array.isArray(
 
   .rove-conclusions li + li {
     margin-top: 0.35rem;
+  }
+
+  .rove-weekend-note {
+    color: var(--color-text-muted, #666);
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+  }
+
+  .rove-weekend-grid {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.85fr) minmax(20rem, 1.15fr);
+    gap: 1rem;
+  }
+
+  .rove-weekend-grid h3,
+  .rove-stretch-section h3 {
+    font-size: 1rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .rove-anchor-list,
+  .rove-stretch-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .rove-anchor-card,
+  .rove-stretch-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-anchor-card header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .rove-anchor-card h4 {
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .rove-anchor-card p,
+  .rove-stretch-grid p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    margin: 0.4rem 0;
+  }
+
+  .rove-anchor-card ul {
+    color: var(--color-text-muted, #666);
+    font-size: 0.8rem;
+    margin: 0.5rem 0 0;
+    padding-left: 1rem;
+  }
+
+  .rove-entity-targets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .rove-entity-targets span {
+    background: var(--color-surface-raised, #f5f0e8);
+    border-radius: 3px;
+    color: var(--color-accent, #167246);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.45rem;
+    text-transform: uppercase;
+  }
+
+  .rove-timing-models {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .rove-timing-models article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.7rem;
+  }
+
+  .rove-timing-models strong {
+    display: block;
+    font-size: 0.88rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .rove-timing-models dl {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+    margin: 0;
+  }
+
+  .rove-timing-models dt {
+    color: var(--color-text-muted, #666);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-timing-models dd {
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .rove-timing-models p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.8rem;
+    margin: 0.45rem 0 0;
+  }
+
+  .rove-candidate-list {
+    display: grid;
+    gap: 0.45rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rove-candidate-list li {
+    border-top: 1px solid var(--color-border, #ddd);
+    padding-top: 0.45rem;
+  }
+
+  .rove-candidate-list strong {
+    display: block;
+    font-size: 0.9rem;
+  }
+
+  .rove-candidate-list span,
+  .rove-stretch-grid span {
+    color: var(--color-text-muted, #666);
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+  }
+
+  .rove-stretch-section {
+    margin-top: 1.25rem;
+  }
+
+  .rove-weekend-rule {
+    border-top: 1px solid var(--color-border, #ddd);
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  @media (max-width: 760px) {
+    .rove-weekend-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Itinerary */
