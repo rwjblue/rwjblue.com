@@ -202,6 +202,122 @@
       ]
     }
   ],
+  "areaBudgets": [
+    {
+      "from": "Providence / RI start",
+      "to": "CT coast",
+      "approxMiles": 90,
+      "driveHours": 1.5,
+      "chargingHours": 0,
+      "minimumActivationEntities": 1,
+      "minimumActivationHours": 1,
+      "roughBlockHours": 2.5,
+      "jurisdictions": ["US-RI", "US-CT"],
+      "notes": "Good Friday-evening reposition candidate if leaving after work. A quick RI or CT activation can reduce Saturday pressure."
+    },
+    {
+      "from": "CT coast",
+      "to": "NY / North NJ",
+      "approxMiles": 110,
+      "driveHours": 1.8,
+      "chargingHours": 0,
+      "minimumActivationEntities": 2,
+      "minimumActivationHours": 2,
+      "roughBlockHours": 3.8,
+      "jurisdictions": ["US-CT", "US-NY", "US-NJ"],
+      "notes": "High-density corridor where multi-entity stops and evening UTC-day strategy could help a 10-entity rove goal."
+    },
+    {
+      "from": "NY / North NJ",
+      "to": "South NJ / Delaware",
+      "approxMiles": 150,
+      "driveHours": 2.5,
+      "chargingHours": 0.5,
+      "minimumActivationEntities": 2,
+      "minimumActivationHours": 2,
+      "roughBlockHours": 5,
+      "jurisdictions": ["US-NJ", "US-DE"],
+      "notes": "Likely weekend work. Needs traffic-aware park choices and charging paired with food or a nearby activation."
+    },
+    {
+      "from": "Delaware",
+      "to": "Maryland / DC approach",
+      "approxMiles": 115,
+      "driveHours": 1.9,
+      "chargingHours": 0,
+      "minimumActivationEntities": 2,
+      "minimumActivationHours": 2,
+      "roughBlockHours": 3.9,
+      "jurisdictions": ["US-DE", "US-MD", "US-DC"],
+      "notes": "Second weekend positioning block. Should set up the DC friend activation without forcing it before mid-week."
+    },
+    {
+      "from": "DC / Northern VA",
+      "to": "Richmond / central VA",
+      "approxMiles": 110,
+      "driveHours": 1.8,
+      "chargingHours": 0,
+      "minimumActivationEntities": 1,
+      "minimumActivationHours": 1,
+      "roughBlockHours": 2.8,
+      "jurisdictions": ["US-DC", "US-VA"],
+      "notes": "Best handled as a buffer/workday block around the DC evening activation rather than a high-mileage day."
+    },
+    {
+      "from": "Richmond / central VA",
+      "to": "Fayetteville / eastern NC",
+      "approxMiles": 230,
+      "driveHours": 3.8,
+      "chargingHours": 0.5,
+      "minimumActivationEntities": 2,
+      "minimumActivationHours": 2,
+      "roughBlockHours": 6.3,
+      "jurisdictions": ["US-VA", "US-NC"],
+      "notes": "A tight weekday segment because it must fit around the 13:00-17:00 work window unless the evening runs late."
+    },
+    {
+      "from": "Fayetteville / eastern NC",
+      "to": "Savannah / coastal GA",
+      "approxMiles": 260,
+      "driveHours": 4.3,
+      "chargingHours": 0.5,
+      "minimumActivationEntities": 2,
+      "minimumActivationHours": 2,
+      "roughBlockHours": 6.8,
+      "jurisdictions": ["US-NC", "US-SC", "US-GA"],
+      "notes": "Likely the hardest southern block. SC and GA should use very low-detour parks or multi-entity opportunities if available."
+    },
+    {
+      "from": "Savannah / coastal GA",
+      "to": "Jacksonville / north FL",
+      "approxMiles": 140,
+      "driveHours": 2.3,
+      "chargingHours": 0,
+      "minimumActivationEntities": 1,
+      "minimumActivationHours": 1,
+      "roughBlockHours": 3.3,
+      "jurisdictions": ["US-GA", "US-FL"],
+      "notes": "Useful arrival-buffer segment if Thursday gets long; can also carry the first Florida activation."
+    },
+    {
+      "from": "Jacksonville / north FL",
+      "to": "Singer Island",
+      "approxMiles": 280,
+      "driveHours": 4.7,
+      "chargingHours": 0.5,
+      "minimumActivationEntities": 1,
+      "minimumActivationHours": 1,
+      "roughBlockHours": 6.2,
+      "jurisdictions": ["US-FL"],
+      "notes": "Keep the final Florida activation close to the route or destination unless earlier days create real slack."
+    }
+  ],
+  "planningConclusions": [
+    "Friday evening departure is preferred if practical because it can remove one or two entities from Saturday and create slack before DC.",
+    "The northern corridor is the best place to attempt a high-count rove day because park density is high and Saturday has no work window.",
+    "The southern push from Virginia through Georgia is the schedule risk; it should prioritize low-detour, reliable access parks over high entity count.",
+    "Tuesday and Wednesday should remain flexible for DC until the weekend load and southern overnight targets are firmer."
+  ],
   "days": [
     {
       "date": "2026-06-20",

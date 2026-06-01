@@ -51,3 +51,8 @@ activation time is counted. The minimum per-jurisdiction activation goal adds
 up to roughly 12 more hours on site, though 2/3/4-fers can reduce the number of
 physical stops. Using Friday evening for a short RI/CT move creates useful slack
 before the DC friend activation and the southern push.
+
+The first area-by-area budget suggests the northern corridor is the best place
+to attempt a high-count rove day. The southern push from Virginia through
+Georgia is the schedule risk, so those park choices should favor low detours,
+reliable access, and charging alignment over extra entity count.

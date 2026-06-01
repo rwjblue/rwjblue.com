@@ -47,6 +47,17 @@ interface TimelineDraft {
   recommendation: string;
   days: TimelineDraftDay[];
 }
+interface AreaBudget {
+  from: string;
+  to: string;
+  approxMiles: number;
+  driveHours: number;
+  chargingHours: number;
+  minimumActivationEntities: number;
+  roughBlockHours: number;
+  jurisdictions: string[];
+  notes?: string;
+}
 
 let consecutiveCamp = 0;
 const annotatedDays = (itinerary.days as ItineraryDay[]).map((day) => {
@@ -143,6 +154,14 @@ const departureLabel =
     : departureWindow.map(formatShortDate).join(", ");
 const timelineDrafts = Array.isArray((itinerary as { timelineDrafts?: unknown }).timelineDrafts)
   ? ((itinerary as { timelineDrafts: TimelineDraft[] }).timelineDrafts)
+  : [];
+const areaBudgets = Array.isArray((itinerary as { areaBudgets?: unknown }).areaBudgets)
+  ? ((itinerary as { areaBudgets: AreaBudget[] }).areaBudgets)
+  : [];
+const planningConclusions = Array.isArray(
+  (itinerary as { planningConclusions?: unknown }).planningConclusions
+)
+  ? ((itinerary as { planningConclusions: string[] }).planningConclusions)
   : [];
 ---
 
@@ -328,6 +347,53 @@ const timelineDrafts = Array.isArray((itinerary as { timelineDrafts?: unknown })
           </article>
         ))}
       </div>
+    </section>
+  )}
+
+  {areaBudgets.length > 0 && (
+    <section class="section-block wide" aria-labelledby="budget-title">
+      <div class="section-heading">
+        <h2 id="budget-title">Route budget</h2>
+      </div>
+
+      <div class="rove-budget-list">
+        {areaBudgets.map((block) => (
+          <article class="rove-budget-block">
+            <header>
+              <h3>{block.from} → {block.to}</h3>
+              <span>{block.approxMiles} mi</span>
+            </header>
+            <dl>
+              <div>
+                <dt>Drive</dt>
+                <dd>{block.driveHours.toFixed(1)}h</dd>
+              </div>
+              <div>
+                <dt>Charge</dt>
+                <dd>{block.chargingHours.toFixed(1)}h</dd>
+              </div>
+              <div>
+                <dt>Entities</dt>
+                <dd>{block.minimumActivationEntities}</dd>
+              </div>
+              <div>
+                <dt>Total</dt>
+                <dd>{block.roughBlockHours.toFixed(1)}h</dd>
+              </div>
+            </dl>
+            <p class="rove-budget-jurisdictions">
+              {block.jurisdictions.map((s) => s.replace("US-", "")).join(" / ")}
+            </p>
+            {block.notes && <p>{block.notes}</p>}
+          </article>
+        ))}
+      </div>
+
+      {planningConclusions.length > 0 && (
+        <ul class="rove-conclusions">
+          {planningConclusions.map((conclusion) => <li>{conclusion}</li>)}
+        </ul>
+      )}
     </section>
   )}
 
@@ -621,6 +687,82 @@ const timelineDrafts = Array.isArray((itinerary as { timelineDrafts?: unknown })
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.04em;
+  }
+
+  .rove-budget-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-budget-block {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-budget-block header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    justify-content: space-between;
+  }
+
+  .rove-budget-block h3 {
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .rove-budget-block header span {
+    color: var(--color-text-muted, #666);
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rove-budget-block dl {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.35rem;
+    margin: 0.75rem 0;
+  }
+
+  .rove-budget-block dt {
+    color: var(--color-text-muted, #666);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-budget-block dd {
+    margin: 0;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rove-budget-block p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    margin: 0.4rem 0 0;
+  }
+
+  .rove-budget-jurisdictions {
+    color: var(--color-accent, #167246) !important;
+    font-size: 0.75rem !important;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .rove-conclusions {
+    color: var(--color-text-muted, #666);
+    font-size: 0.9rem;
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .rove-conclusions li + li {
+    margin-top: 0.35rem;
   }
 
   /* Itinerary */
