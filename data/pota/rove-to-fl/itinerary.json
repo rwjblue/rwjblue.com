@@ -11,6 +11,18 @@
     "workEnd": "17:00",
     "maxConsecutiveCampNights": 2,
     "departureWindow": ["2026-06-19", "2026-06-20"],
+    "workingDeparture": {
+      "date": "2026-06-19",
+      "localWindow": "17:00-18:00",
+      "status": "assumed for planning",
+      "notes": "Assume a Friday evening departure from Rhode Island unless later constraints force a Saturday start."
+    },
+    "riActivation": {
+      "preferredTiming": "Friday morning before the road departure",
+      "fallbackTiming": "On the way out of Rhode Island Friday evening",
+      "status": "decision pending",
+      "notes": "If RI is activated Friday morning, the Friday evening reposition can focus on CT or simply making distance toward the first overnight."
+    },
     "activationTimeMinutes": 60,
     "maxDetourMinutesForNonOvernightPark": 30,
     "campAtPotaParkMinimumNightShare": 0.5,
@@ -72,21 +84,22 @@
     {
       "name": "Friday evening reposition",
       "status": "rough",
-      "recommendation": "Preferred if leaving Friday after work is realistic; it creates more slack before the mid-week DC activation.",
+      "recommendation": "Working assumption: leave Rhode Island Friday around 17:00-18:00. Activating RI Friday morning is preferred if practical; otherwise activate RI on the way out.",
       "assumptions": [
         "Approximate I-95 movement plus Tesla charging is about 27 hours before activations.",
         "Minimum jurisdiction activation plan adds up to about 12 hours on site, but convenient multi-entity activations can reduce the number of physical stops.",
         "Rove progress is counted by unique POTA entities on a UTC day, so evening activations can ease the next local day if they fit the UTC boundary.",
-        "Friday is treated as a work day with an evening departure unless later clarified.",
+        "Friday is treated as a work day with a 17:00-18:00 local departure from Rhode Island.",
+        "RI can be activated Friday morning before departure, which removes it from the Friday evening driving block.",
         "Saturday and Sunday can carry heavier driving and activation loads because there is no work window."
       ],
       "days": [
         {
           "date": "2026-06-19",
           "area": "Rhode Island to Connecticut",
-          "focus": "Optional evening reposition after work; activate RI near departure or CT near the first overnight.",
+          "focus": "Evening reposition after work; activate CT near the first overnight if RI was handled Friday morning.",
           "jurisdictions": ["US-RI", "US-CT"],
-          "notes": "Keep this short and low-risk. A POTA camp in CT would start the camping-at-parks goal early."
+          "notes": "Keep this short and low-risk. RI can be activated Friday morning or on the way out; a POTA camp in CT would start the camping-at-parks goal early."
         },
         {
           "date": "2026-06-20",
@@ -209,11 +222,11 @@
       "approxMiles": 90,
       "driveHours": 1.5,
       "chargingHours": 0,
-      "minimumActivationEntities": 1,
-      "minimumActivationHours": 1,
-      "roughBlockHours": 2.5,
+      "minimumActivationEntities": 0,
+      "minimumActivationHours": 0,
+      "roughBlockHours": 1.5,
       "jurisdictions": ["US-RI", "US-CT"],
-      "notes": "Good Friday-evening reposition candidate if leaving after work. A quick RI or CT activation can reduce Saturday pressure."
+      "notes": "Working Friday 17:00-18:00 departure block. If RI is activated Friday morning, this can be a simple CT reposition or CT activation near the first overnight; otherwise add about 1 hour for an outbound RI activation."
     },
     {
       "from": "CT coast",
@@ -313,7 +326,8 @@
     }
   ],
   "planningConclusions": [
-    "Friday evening departure is preferred if practical because it can remove one or two entities from Saturday and create slack before DC.",
+    "Friday evening departure is now the working assumption, with a 17:00-18:00 local departure from Rhode Island.",
+    "Activating RI Friday morning is preferred if practical because it removes RI from the outbound driving block; activating RI on the way out remains the fallback.",
     "The northern corridor is the best place to attempt a high-count rove day because park density is high and Saturday has no work window.",
     "The southern push from Virginia through Georgia is the schedule risk; it should prioritize low-detour, reliable access parks over high entity count.",
     "Tuesday and Wednesday should remain flexible for DC until the weekend load and southern overnight targets are firmer."

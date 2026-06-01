@@ -12,9 +12,9 @@ tags:
 ---
 
 Driving the I-95 corridor from Rhode Island to Singer Island, FL with POTA
-activations along the way. The current departure window is June 19-20, with a
-June 26 arrival to participate in Field Day 2026 with a local club in the Palm
-Beach area.
+activations along the way. The working assumption is a Friday, June 19
+departure from Rhode Island around 17:00-18:00, with a June 26 arrival to
+participate in Field Day 2026 with a local club in the Palm Beach area.
 
 The working goal is to activate every state crossed on the route, plus
 Washington, DC: Rhode Island, Connecticut, New York, New Jersey, Delaware,
@@ -51,6 +51,11 @@ activation time is counted. The minimum per-jurisdiction activation goal adds
 up to roughly 12 more hours on site, though 2/3/4-fers can reduce the number of
 physical stops. Using Friday evening for a short RI/CT move creates useful slack
 before the DC friend activation and the southern push.
+
+Rhode Island can be activated Friday morning before the drive starts, which is
+the preferred planning case because it keeps the Friday evening departure
+simple. The fallback is to activate RI on the way out of town and add about an
+hour to the outbound block.
 
 The first area-by-area budget suggests the northern corridor is the best place
 to attempt a high-count rove day. The southern push from Virginia through

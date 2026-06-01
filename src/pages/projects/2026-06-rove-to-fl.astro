@@ -139,6 +139,24 @@ const roveCounting =
         eveningStrategy?: string;
       })
     : null;
+const workingDeparture =
+  typeof tripConstraints.workingDeparture === "object" && tripConstraints.workingDeparture
+    ? (tripConstraints.workingDeparture as {
+        date?: string;
+        localWindow?: string;
+        status?: string;
+        notes?: string;
+      })
+    : null;
+const riActivation =
+  typeof tripConstraints.riActivation === "object" && tripConstraints.riActivation
+    ? (tripConstraints.riActivation as {
+        preferredTiming?: string;
+        fallbackTiming?: string;
+        status?: string;
+        notes?: string;
+      })
+    : null;
 
 function formatShortDate(iso: string) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
@@ -152,6 +170,9 @@ const departureLabel =
   departureWindow.length === 2
     ? `${formatShortDate(departureWindow[0])}-${formatShortDate(departureWindow[1])}`
     : departureWindow.map(formatShortDate).join(", ");
+const workingDepartureLabel = workingDeparture?.date
+  ? `${formatShortDate(workingDeparture.date)} ${workingDeparture.localWindow ?? ""}`.trim()
+  : null;
 const timelineDrafts = Array.isArray((itinerary as { timelineDrafts?: unknown }).timelineDrafts)
   ? ((itinerary as { timelineDrafts: TimelineDraft[] }).timelineDrafts)
   : [];
@@ -245,10 +266,21 @@ const planningConclusions = Array.isArray(
     </div>
 
     <dl class="rove-constraint-grid">
-      {departureLabel && (
+      {workingDepartureLabel ? (
+        <div>
+          <dt>Departure</dt>
+          <dd>{workingDepartureLabel}</dd>
+        </div>
+      ) : departureLabel && (
         <div>
           <dt>Departure window</dt>
           <dd>{departureLabel}</dd>
+        </div>
+      )}
+      {riActivation && (
+        <div>
+          <dt>RI activation</dt>
+          <dd>{riActivation.preferredTiming ?? "Friday morning preferred"}</dd>
         </div>
       )}
       <div>
@@ -315,6 +347,7 @@ const planningConclusions = Array.isArray(
         {roveCounting.multiParkRule} {roveCounting.eveningStrategy}
       </p>
     )}
+    {riActivation?.notes && <p class="rove-jurisdictions">{riActivation.notes}</p>}
   </section>
 
   {timelineDrafts.length > 0 && (
