@@ -79,6 +79,46 @@ const STATE_COLORS: Record<string, string> = {
   "US-GA": "#9c755f",
   "US-FL": "#bab0ac",
 };
+
+const tripConstraints = itinerary.constraints as Record<string, unknown>;
+const departureWindow = Array.isArray(tripConstraints.departureWindow)
+  ? (tripConstraints.departureWindow as string[])
+  : [];
+const requiredJurisdictions = Array.isArray(tripConstraints.requiredJurisdictions)
+  ? (tripConstraints.requiredJurisdictions as string[])
+  : [];
+const dcActivation =
+  typeof tripConstraints.dcActivation === "object" && tripConstraints.dcActivation
+    ? (tripConstraints.dcActivation as { timing?: string; notes?: string })
+    : null;
+const vehicle =
+  typeof tripConstraints.vehicle === "object" && tripConstraints.vehicle
+    ? (tripConstraints.vehicle as {
+        type?: string;
+        chargingStopMinutes?: number;
+        drivingHoursBetweenChargingStops?: number;
+      })
+    : null;
+const weekendPlanning =
+  typeof tripConstraints.weekendPlanning === "object" && tripConstraints.weekendPlanning
+    ? (tripConstraints.weekendPlanning as {
+        notes?: string;
+        candidateHighRoveDay?: { parkCount?: number; status?: string };
+      })
+    : null;
+
+function formatShortDate(iso: string) {
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+const departureLabel =
+  departureWindow.length === 2
+    ? `${formatShortDate(departureWindow[0])}-${formatShortDate(departureWindow[1])}`
+    : departureWindow.map(formatShortDate).join(", ");
 ---
 
 <BaseLayout
@@ -153,6 +193,70 @@ const STATE_COLORS: Record<string, string> = {
         </div>
       ))}
     </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="planning-title">
+    <div class="section-heading">
+      <h2 id="planning-title">Planning constraints</h2>
+    </div>
+
+    <dl class="rove-constraint-grid">
+      {departureLabel && (
+        <div>
+          <dt>Departure window</dt>
+          <dd>{departureLabel}</dd>
+        </div>
+      )}
+      <div>
+        <dt>Arrival target</dt>
+        <dd>{formatShortDate(itinerary.arriveBy)}</dd>
+      </div>
+      <div>
+        <dt>Activation budget</dt>
+        <dd>{String(tripConstraints.activationTimeMinutes ?? 60)} min per stop</dd>
+      </div>
+      <div>
+        <dt>Drive-by detour limit</dt>
+        <dd>{String(tripConstraints.maxDetourMinutesForNonOvernightPark ?? 30)} min from I-95</dd>
+      </div>
+      <div>
+        <dt>Camping rhythm</dt>
+        <dd>
+          POTA parks for at least half the nights; max{" "}
+          {itinerary.constraints.maxConsecutiveCampNights} in a row
+        </dd>
+      </div>
+      {vehicle && (
+        <div>
+          <dt>Charging cadence</dt>
+          <dd>
+            {vehicle.chargingStopMinutes ?? 30} min after about{" "}
+            {vehicle.drivingHoursBetweenChargingStops ?? 2.5} hr driving
+          </dd>
+        </div>
+      )}
+      {weekendPlanning && (
+        <div>
+          <dt>Weekend load</dt>
+          <dd>
+            No work window; {weekendPlanning.candidateHighRoveDay?.parkCount ?? 10}-park
+            rove idea to evaluate
+          </dd>
+        </div>
+      )}
+      {dcActivation && (
+        <div>
+          <dt>DC activation</dt>
+          <dd>{dcActivation.timing ?? "Mid-week evening preferred"}</dd>
+        </div>
+      )}
+    </dl>
+
+    {requiredJurisdictions.length > 0 && (
+      <p class="rove-jurisdictions">
+        Activation goal: {requiredJurisdictions.map((s) => s.replace("US-", "")).join(" / ")}
+      </p>
+    )}
   </section>
 
   <section class="section-block wide" aria-labelledby="itinerary-title">
@@ -358,6 +462,37 @@ const STATE_COLORS: Record<string, string> = {
 
   .rove-map-legend {
     flex-wrap: wrap;
+  }
+
+  .rove-constraint-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .rove-constraint-grid div {
+    border-top: 1px solid var(--color-border, #ddd);
+    padding-top: 0.5rem;
+  }
+
+  .rove-constraint-grid dt {
+    color: var(--color-text-muted, #666);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-constraint-grid dd {
+    margin: 0.15rem 0 0;
+    font-size: 0.95rem;
+  }
+
+  .rove-jurisdictions {
+    color: var(--color-text-muted, #666);
+    font-size: 0.9rem;
+    margin: 1rem 0 0;
   }
 
   /* Itinerary */

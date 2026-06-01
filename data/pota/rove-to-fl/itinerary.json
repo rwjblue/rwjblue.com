@@ -9,7 +9,58 @@
   "constraints": {
     "workStart": "13:00",
     "workEnd": "17:00",
-    "maxConsecutiveCampNights": 2
+    "maxConsecutiveCampNights": 2,
+    "departureWindow": ["2026-06-19", "2026-06-20"],
+    "activationTimeMinutes": 60,
+    "maxDetourMinutesForNonOvernightPark": 30,
+    "campAtPotaParkMinimumNightShare": 0.5,
+    "vehicle": {
+      "type": "Tesla",
+      "chargingStopMinutes": 30,
+      "drivingHoursBetweenChargingStops": 2.5,
+      "notes": "Account for roughly 30 minutes of charging after each 2.5 hours of driving. Prefer parks, meals, and short breaks that can pair with charging when practical."
+    },
+    "weekendPlanning": {
+      "workExemptDates": ["2026-06-20", "2026-06-21"],
+      "notes": "Saturday and Sunday have no work window, so they can carry more driving and more activations than weekdays.",
+      "candidateHighRoveDay": {
+        "targetDate": "2026-06-20",
+        "parkCount": 10,
+        "status": "idea to evaluate"
+      }
+    },
+    "requiredJurisdictions": [
+      "US-RI",
+      "US-CT",
+      "US-NY",
+      "US-NJ",
+      "US-DE",
+      "US-MD",
+      "US-DC",
+      "US-VA",
+      "US-NC",
+      "US-SC",
+      "US-GA",
+      "US-FL"
+    ],
+    "jurisdictionActivationGoal": "Activate every state and Washington, DC, crossed on the route.",
+    "multiParkActivationPriority": "Nice to have; do not optimize the route around 2/3/4-fers unless they are convenient.",
+    "dcActivation": {
+      "timing": "Mid-week evening preferred; Tuesday June 23 or Wednesday June 24 are both acceptable until drive balance is clearer.",
+      "withFriend": true,
+      "suggestedParks": [
+        {
+          "reference": null,
+          "name": "Rock Creek Park",
+          "status": "friend suggested"
+        }
+      ],
+      "notes": "Need to evaluate Rock Creek Park and other DC-area options once the mid-week leg is chosen. Do not lock the exact night until the Saturday/Sunday driving and activation load is balanced."
+    },
+    "outreach": {
+      "purpose": "Contact common activators near short-listed corridor parks for practical access, parking, antenna, and operating vibe checks.",
+      "emailDraft": "Hi <name>, I am planning a June 2026 POTA road trip from Rhode Island to Florida and noticed you have activated <park/reference>. I am considering it for a brief activation while passing through and would appreciate any practical advice: easy parking, good operating spots, antenna constraints, safety/access issues, and whether it is realistic for about an hour on site. Thanks and 73, Rob / N1RWJ"
+    }
   },
   "days": [
     {
@@ -27,7 +78,7 @@
         }
       },
       "parkTargets": [],
-      "notes": "Day 1 example — fill in park targets once clusters are planned.",
+      "notes": "Candidate Day 1 if departing Saturday. Friday departure remains possible; fill in park targets once clusters are planned.",
       "approxDriveMiles": 150
     }
   ]
