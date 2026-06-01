@@ -116,16 +116,16 @@ more comfortable and more accurate.
 
 One of the fun moments was hearing a call that sounded like it ended in `X` and
 thinking it might be Rory, [W8KNX](https://www.qrz.com/db/W8KNX). It was, and he
-was loud from Michigan. The broader pattern was even better: the transcript notes
-contacts from California, Nevada, Michigan, Illinois, and Florida, all at 5 watts.
-Being right on the saltwater almost certainly helped.
+was loud from Michigan. The broader pattern was even better: contacts from
+California, Nevada, Michigan, Illinois, and Florida, all at 5 watts. Being
+right on the saltwater almost certainly helped.
 
 <div class="photo-grid">
   <img src="/images/pota/2026-05-30-east-bay-pota-rove/img-8979.jpg" alt="Operator selfie at Sapowet Marsh with the whip set up by the shoreline at sunset">
   <img src="/images/pota/2026-05-30-east-bay-pota-rove/img-8983.jpg" alt="Moon rising over the water after the Sapowet Marsh activation">
 </div>
 
-The full log shows 15 CW QSOs from 00:06 to 00:29 UTC on May 31.
+The full log ended with 15 CW QSOs from 00:06 to 00:29 UTC on May 31.
 
 ## What worked
 
