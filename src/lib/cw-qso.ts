@@ -5,11 +5,25 @@ export type CwQsoFieldId =
   | "myName"
   | "myQth"
   | "myRst"
+  | "myRig"
+  | "myPwr"
+  | "myAnt"
+  | "myWx"
+  | "myHamYears"
+  | "myAge"
+  | "myJob"
   | "greet"
   | "hisCall"
   | "hisName"
   | "hisQth"
   | "hisRst"
+  | "hisRig"
+  | "hisPwr"
+  | "hisAnt"
+  | "hisWx"
+  | "hisHamYears"
+  | "hisAge"
+  | "hisJob"
   | "band"
   | "freq"
   | "comment";
@@ -19,11 +33,25 @@ export interface CwQsoValues {
   myName: string;
   myQth: string;
   myRst: string;
+  myRig: string;
+  myPwr: string;
+  myAnt: string;
+  myWx: string;
+  myHamYears: string;
+  myAge: string;
+  myJob: string;
   greet: string;
   hisCall: string;
   hisName: string;
   hisQth: string;
   hisRst: string;
+  hisRig: string;
+  hisPwr: string;
+  hisAnt: string;
+  hisWx: string;
+  hisHamYears: string;
+  hisAge: string;
+  hisJob: string;
   band: string;
   freq: string;
   comment: string;
@@ -66,11 +94,25 @@ export const FIELD_DEFAULTS: Record<CwQsoFieldId, string> = {
   myName: "[NAME]",
   myQth: "[QTH]",
   myRst: "599",
+  myRig: "[RIG]",
+  myPwr: "[PWR]",
+  myAnt: "[ANT]",
+  myWx: "[WX]",
+  myHamYears: "[YRS]",
+  myAge: "[AGE]",
+  myJob: "[JOB]",
   greet: "GE",
   hisCall: "[THEIRCALL]",
   hisName: "[THEIRNAME]",
   hisQth: "[THEIRQTH]",
   hisRst: "___",
+  hisRig: "[THEIRRIG]",
+  hisPwr: "[THEIRPWR]",
+  hisAnt: "[THEIRANT]",
+  hisWx: "[THEIRWX]",
+  hisHamYears: "[THEIRYRS]",
+  hisAge: "[THEIRAGE]",
+  hisJob: "[THEIRJOB]",
   band: "",
   freq: "",
   comment: "",
@@ -81,6 +123,13 @@ export const PERSISTED_FIELDS: ReadonlySet<CwQsoFieldId> = new Set([
   "myName",
   "myQth",
   "myRst",
+  "myRig",
+  "myPwr",
+  "myAnt",
+  "myWx",
+  "myHamYears",
+  "myAge",
+  "myJob",
   "band",
   "freq",
 ]);
@@ -92,6 +141,10 @@ export const STEP_OWNER: Record<number, "stn1" | "stn2"> = {
   4: "stn2",
   5: "stn1",
   6: "stn2",
+  7: "stn1",
+  8: "stn2",
+  9: "stn1",
+  10: "stn2",
 };
 
 export const STEP_TEXT: Record<number, CwStepText> = {
@@ -128,20 +181,52 @@ export const STEP_TEXT: Record<number, CwStepText> = {
       "HI [their name] is a personal greeting. TU fer RPRT means thanks for the report. RST and QTH twice. Bracket your transmission with the calls: [THEIR] DE [YOU] ... [YOU] DE [THEIR] BK.",
   },
   5: {
+    titleCq: "Rig, power, antenna, and weather",
+    titleAns: "Their station and weather details",
+    tipCq:
+      "This is the first common ragchew extension after the basic exchange. Keep the station description compact and readable.",
+    tipAns:
+      "Copy their rig, power, antenna, and weather. If you miss one item, ask just for that item instead of restarting the whole turn.",
+  },
+  6: {
+    titleCq: "Their station and weather details",
+    titleAns: "Your station and weather details",
+    tipCq:
+      "Copy their station details. If you want a short QSO, you can skip from step 4 to the closing instead of taking this extension.",
+    tipAns:
+      "Answer with your own rig, power, antenna, and weather details, then pass it back with BK.",
+  },
+  7: {
+    titleCq: "Age, job, and how long you've been a ham",
+    titleAns: "Their background details",
+    tipCq:
+      "This is the second common extension in a longer ragchew. Share as much or as little background as feels natural.",
+    tipAns:
+      "Copy their ham-years, age, and job details. Once the exchange gets this far, it often feels more conversational and less rigid.",
+  },
+  8: {
+    titleCq: "Their background details",
+    titleAns: "Your background details",
+    tipCq:
+      "Copy their background details. Pull out only the specific item you missed if you need a repeat.",
+    tipAns:
+      "Answer with your own ham-years, age, and job details, then hand it back with BK.",
+  },
+  9: {
     titleCq: "Wrap up - thanks + 73",
     titleAns: "They wrap up",
     tipCq:
-      ' <strong>FB QSO</strong> = "fine business QSO" (great contact). <strong>HPE CUAGN SN</strong> = hope to see you again soon. <strong>73</strong> = best regards. <strong>EE</strong> = the "dit-dit" closer (two short dits, a friendly farewell).',
+      '<strong>FB QSO</strong> = "fine business QSO" (great contact). <strong>CUAGN</strong> = see you again. <strong>SK</strong> marks the end of the contact.',
     tipAns:
-      "Listen for their wrap-up. They'll thank you by name, send 73, then close with EE. Your response is short - TU 73 EE.",
+      "Listen for their closing turn. After a longer ragchew, this usually includes thanks for the QSO and the info before 73 and SK.",
   },
-  6: {
+  10: {
     titleCq: "Their final",
     titleAns: "Your final",
     tipCq:
-      "QSO complete. Log it: time (UTC), band/freq, mode (CW), their call, RST sent/received, name, QTH.",
+      "QSO complete. Log it while the extra station and background details are still fresh.",
     tipAns:
-      "Short and sweet - TU 73 EE closes the QSO. Log it: time (UTC), band/freq, mode (CW), their call, RST sent/received, name, QTH.",
+      "A short final closes the contact cleanly. Then log it while the details are still fresh.",
   },
 };
 
@@ -151,11 +236,25 @@ export function createEmptyValues(): CwQsoValues {
     myName: "",
     myQth: "",
     myRst: "",
+    myRig: "",
+    myPwr: "",
+    myAnt: "",
+    myWx: "",
+    myHamYears: "",
+    myAge: "",
+    myJob: "",
     greet: "",
     hisCall: "",
     hisName: "",
     hisQth: "",
     hisRst: "",
+    hisRig: "",
+    hisPwr: "",
+    hisAnt: "",
+    hisWx: "",
+    hisHamYears: "",
+    hisAge: "",
+    hisJob: "",
     band: "",
     freq: "",
     comment: "",
@@ -266,6 +365,90 @@ function s1Greet(role: CwQsoRole, values: CwQsoValues): RenderToken {
     : tokenFor(values, "greet", "him");
 }
 
+function s1Rig(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "myRig", "me")
+    : tokenFor(values, "hisRig", "him");
+}
+
+function s2Rig(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "hisRig", "him")
+    : tokenFor(values, "myRig", "me");
+}
+
+function s1Pwr(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "myPwr", "me")
+    : tokenFor(values, "hisPwr", "him");
+}
+
+function s2Pwr(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "hisPwr", "him")
+    : tokenFor(values, "myPwr", "me");
+}
+
+function s1Ant(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "myAnt", "me")
+    : tokenFor(values, "hisAnt", "him");
+}
+
+function s2Ant(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "hisAnt", "him")
+    : tokenFor(values, "myAnt", "me");
+}
+
+function s1Wx(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "myWx", "me")
+    : tokenFor(values, "hisWx", "him");
+}
+
+function s2Wx(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "hisWx", "him")
+    : tokenFor(values, "myWx", "me");
+}
+
+function s1HamYears(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "myHamYears", "me")
+    : tokenFor(values, "hisHamYears", "him");
+}
+
+function s2HamYears(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "hisHamYears", "him")
+    : tokenFor(values, "myHamYears", "me");
+}
+
+function s1Age(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "myAge", "me")
+    : tokenFor(values, "hisAge", "him");
+}
+
+function s2Age(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "hisAge", "him")
+    : tokenFor(values, "myAge", "me");
+}
+
+function s1Job(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "myJob", "me")
+    : tokenFor(values, "hisJob", "him");
+}
+
+function s2Job(role: CwQsoRole, values: CwQsoValues): RenderToken {
+  return role === "cq"
+    ? tokenFor(values, "hisJob", "him")
+    : tokenFor(values, "myJob", "me");
+}
+
 function renderLine(parts: Array<string | RenderToken>): string {
   return parts
     .map((part) => (typeof part === "string" ? escapeHtml(part) : tokenHtml(part)))
@@ -282,6 +465,20 @@ export function renderTransmissions(role: CwQsoRole, values: CwQsoValues) {
   const station1Rst = s1Rst(role, values);
   const station2Rst = s2Rst(role, values);
   const greeting = s1Greet(role, values);
+  const station1Rig = s1Rig(role, values);
+  const station2Rig = s2Rig(role, values);
+  const station1Pwr = s1Pwr(role, values);
+  const station2Pwr = s2Pwr(role, values);
+  const station1Ant = s1Ant(role, values);
+  const station2Ant = s2Ant(role, values);
+  const station1Wx = s1Wx(role, values);
+  const station2Wx = s2Wx(role, values);
+  const station1HamYears = s1HamYears(role, values);
+  const station2HamYears = s2HamYears(role, values);
+  const station1Age = s1Age(role, values);
+  const station2Age = s2Age(role, values);
+  const station1Job = s1Job(role, values);
+  const station2Job = s2Job(role, values);
   const myCall = tokenFor(values, "myCall", "me");
 
   return {
@@ -302,11 +499,39 @@ export function renderTransmissions(role: CwQsoRole, values: CwQsoValues) {
       renderLine([station1Call, " DE ", station2Call, " BK"]),
     ].join("\n"),
     tx5: [
-      renderLine([station2Call, " DE ", station1Call, " TU ", station2Name]),
-      "FB QSO ES HPE CUAGN SN 73",
-      renderLine([station2Call, " DE ", station1Call, " TU EE"]),
+      renderLine([station2Call, " DE ", station1Call]),
+      renderLine(["RIG HR ", station1Rig, " ES PWR ", station1Pwr]),
+      renderLine(["ANT HR ", station1Ant]),
+      renderLine(["WX HR ", station1Wx]),
+      "HW? BK",
     ].join("\n"),
-    tx6: "TU 73 EE",
+    tx6: [
+      renderLine([station1Call, " DE ", station2Call]),
+      renderLine(["RIG HR ", station2Rig, " ES PWR ", station2Pwr]),
+      renderLine(["ANT HR ", station2Ant]),
+      renderLine(["WX HR ", station2Wx]),
+      renderLine([station1Call, " DE ", station2Call, " BK"]),
+    ].join("\n"),
+    tx7: [
+      renderLine([station2Call, " DE ", station1Call]),
+      renderLine(["HAM FER ", station1HamYears]),
+      renderLine(["AGE HR ", station1Age]),
+      renderLine(["JOB HR ", station1Job]),
+      "HW? BK",
+    ].join("\n"),
+    tx8: [
+      renderLine([station1Call, " DE ", station2Call]),
+      renderLine(["HAM FER ", station2HamYears]),
+      renderLine(["AGE HR ", station2Age]),
+      renderLine(["JOB HR ", station2Job]),
+      renderLine([station1Call, " DE ", station2Call, " BK"]),
+    ].join("\n"),
+    tx9: [
+      renderLine([station2Call, " DE ", station1Call, " TNX FER FB QSO ES INFO"]),
+      "HPE CUAGN SN 73",
+      renderLine([station2Call, " DE ", station1Call, " TU SK"]),
+    ].join("\n"),
+    tx10: "TNX INFO ES QSO 73 TU SK",
     wQrz: renderLine(["DE ", myCall, " ", myCall]),
     wAgnName: getDisplayValue(values, "myName"),
     wAgnQth: getDisplayValue(values, "myQth"),

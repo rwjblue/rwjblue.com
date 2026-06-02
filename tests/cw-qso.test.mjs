@@ -17,11 +17,25 @@ function sampleValues() {
     myName: "rob",
     myQth: "rhode island ri",
     myRst: "579",
+    myRig: "kx3",
+    myPwr: "5w",
+    myAnt: "efhw up 25 ft",
+    myWx: "sunny 68f",
+    myHamYears: "3 yrs",
+    myAge: "42",
+    myJob: "software engineer",
     greet: "GE",
     hisCall: "k9xyz",
     hisName: "bob",
     hisQth: "texas tx",
     hisRst: "559",
+    hisRig: "ten tec eagle",
+    hisPwr: "50w",
+    hisAnt: "dipole up 45 ft",
+    hisWx: "rain 60f",
+    hisHamYears: "24 yrs",
+    hisAge: "55",
+    hisJob: "retired army",
     band: "20m",
     freq: "14.050",
     comment: "portable practice",
@@ -49,7 +63,11 @@ test("renderTransmissions builds cq-side examples with escaped highlighted field
 
   assert.match(tx.tx1, /CQ CQ CQ DE <span class="me">N1RWJ<\/span>/);
   assert.match(tx.tx4, /UR <span class="him">559<\/span>/);
-  assert.match(tx.tx5, /BOB &amp; SUE/);
+  assert.match(tx.tx5, /RIG HR <span class="me">KX3<\/span>/);
+  assert.match(tx.tx6, /RIG HR <span class="him">TEN TEC EAGLE<\/span>/);
+  assert.match(tx.tx8, /JOB HR <span class="him">RETIRED ARMY<\/span>/);
+  assert.match(tx.tx9, /TNX FER FB QSO ES INFO/);
+  assert.equal(tx.tx10, "TNX INFO ES QSO 73 TU SK");
   assert.match(tx.wQrz, /DE <span class="me">N1RWJ<\/span>/);
 });
 

@@ -148,6 +148,10 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
     setHtml("tx4", tx.tx4);
     setHtml("tx5", tx.tx5);
     setHtml("tx6", tx.tx6);
+    setHtml("tx7", tx.tx7);
+    setHtml("tx8", tx.tx8);
+    setHtml("tx9", tx.tx9);
+    setHtml("tx10", tx.tx10);
     setHtml("wQrz", tx.wQrz);
     setText("wAgnName", tx.wAgnName);
     setText("wAgnName2", tx.wAgnName);
@@ -181,7 +185,19 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
   }
 
   function resetOtherStation(): void {
-    (["hisCall", "hisName", "hisQth", "hisRst"] as const).forEach((id) => {
+    ([
+      "hisCall",
+      "hisName",
+      "hisQth",
+      "hisRst",
+      "hisRig",
+      "hisPwr",
+      "hisAnt",
+      "hisWx",
+      "hisHamYears",
+      "hisAge",
+      "hisJob",
+    ] as const).forEach((id) => {
       getControl(id).value = "";
       getControl(id).dispatchEvent(new Event("input", { bubbles: true }));
     });
@@ -209,7 +225,20 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
     log.push(entry);
     persistLog(log);
 
-    (["hisCall", "hisName", "hisQth", "hisRst", "comment"] as const).forEach((id) => {
+    ([
+      "hisCall",
+      "hisName",
+      "hisQth",
+      "hisRst",
+      "hisRig",
+      "hisPwr",
+      "hisAnt",
+      "hisWx",
+      "hisHamYears",
+      "hisAge",
+      "hisJob",
+      "comment",
+    ] as const).forEach((id) => {
       getControl(id).value = "";
       getControl(id).dispatchEvent(new Event("input", { bubbles: true }));
     });
@@ -306,7 +335,19 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
     });
   });
 
-  (["hisCall", "hisName", "hisQth", "hisRst"] as const).forEach(setupFieldSync);
+  ([
+    "hisCall",
+    "hisName",
+    "hisQth",
+    "hisRst",
+    "hisRig",
+    "hisPwr",
+    "hisAnt",
+    "hisWx",
+    "hisHamYears",
+    "hisAge",
+    "hisJob",
+  ] as const).forEach(setupFieldSync);
 
   applyRole();
   renderLog();
