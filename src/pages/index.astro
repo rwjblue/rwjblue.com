@@ -3,9 +3,12 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { formatDate } from "../lib/format";
 
-const notes = (await getCollection("notes"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const allNotes = (await getCollection("notes")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const latestNote = allNotes[0];
+const notes = allNotes.slice(0, 4);
 
 const projects = (await getCollection("projects")).sort(
   (a, b) => b.data.updated.valueOf() - a.data.updated.valueOf(),
@@ -13,18 +16,30 @@ const projects = (await getCollection("projects")).sort(
 
 const recentProjects = projects.slice(0, 3);
 
-const currentBench = [
+const benchLinks = [
   {
-    label: "Radio",
-    text: "N1RWJ, CW practice, POTA, portable station setup, remote operation.",
+    label: "Latest note",
+    title: latestNote.data.title,
+    text: `${formatDate(latestNote.data.date)} · ${latestNote.data.summary}`,
+    href: `/notes/${latestNote.id}/`,
   },
   {
-    label: "Software",
-    text: "Rust tooling, TypeScript infrastructure, CI/build systems, open source maintenance.",
+    label: "Radio setup",
+    title: "My shack",
+    text: "Home station, portable HF kit, antennas, and operating workflow notes.",
+    href: "/radio/shack/",
   },
   {
-    label: "Publishing",
-    text: "Notes, field logs, experiments, and small tools.",
+    label: "POTA",
+    title: "2026 Activate All RI POTA",
+    text: "The map-first tracker for activating every Rhode Island POTA reference.",
+    href: "/projects/2026-activate-all-ri-pota/",
+  },
+  {
+    label: "Radio notes",
+    title: "N1RWJ field reports",
+    text: "POTA, CW, station setup, antennas, and practical radio debugging.",
+    href: "/radio/",
   },
 ];
 
@@ -33,30 +48,38 @@ const currentBench = [
 <BaseLayout>
   <section class="hero compact" aria-labelledby="page-title">
     <div class="intro">
-      <h1 id="page-title">Robert Jackson</h1>
+      <p class="eyebrow">N1RWJ / Robert Jackson</p>
+      <h1 id="page-title">Radio notes from the bench and field.</h1>
       <p class="lede strong">
-        I operate amateur radio as N1RWJ, with a focus on portable HF, CW, and practical station work.
+        I operate amateur radio as N1RWJ, mostly around portable HF, CW, POTA,
+        antennas, and the station work that makes those things repeatable.
       </p>
       <p class="lede">
-        Radio is where I spend a lot of my workshop time: POTA, portable station
-        setup, remote operation, antennas, logging, and RF experimentation.
-      </p>
-      <p class="lede">
-        I also build and maintain software, mostly Rust, TypeScript, Go, Python,
-        build systems, test infrastructure, and open source tools that need to
-        keep working for years.
+        This site is where I keep field reports, station notes, project context,
+        and the occasional software writeup. The common thread is practical
+        debugging: make the setup clear, try the experiment, write down what
+        actually happened.
       </p>
     </div>
 
     <aside class="bench-panel" aria-labelledby="bench-title">
-      <h2 id="bench-title">Current bench</h2>
-      <div class="bench-list">
+      <h2 id="bench-title">On the bench</h2>
+      <div class="bench-list linked">
         {
-          currentBench.map((item) => (
-            <div>
-              <span>{item.label}</span>
-              <p>{item.text}</p>
-            </div>
+          benchLinks.map((item) => (
+            item.href === `/notes/${latestNote.id}/` ? (
+              <a href={`/notes/${latestNote.id}/`}>
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+                <p>{item.text}</p>
+              </a>
+            ) : (
+              <a href={item.href}>
+                <span>{item.label}</span>
+                <strong>{item.title}</strong>
+                <p>{item.text}</p>
+              </a>
+            )
           ))
         }
       </div>
@@ -66,8 +89,8 @@ const currentBench = [
   <section class="section-grid" aria-label="Recent activity and recently updated projects">
     <div class="section-block">
       <div class="section-heading">
-        <p class="section-label">Recent</p>
-        <h2>Recent from the bench</h2>
+        <p class="section-label">Latest</p>
+        <h2>Recent notes</h2>
       </div>
       <ol class="entry-list">
         {
@@ -90,7 +113,7 @@ const currentBench = [
     <div class="section-block">
       <div class="section-heading">
         <p class="section-label">Projects</p>
-        <h2>Recently updated projects</h2>
+        <h2>Active projects</h2>
       </div>
       <div class="artifact-list">
         {
@@ -113,13 +136,14 @@ const currentBench = [
 
   <section class="bridge" aria-labelledby="bridge-title">
     <p class="section-label">Workshop</p>
-    <h2 id="bridge-title">Software and radio share the same habits.</h2>
+    <h2 id="bridge-title">Radio leads, but the habits carry across.</h2>
     <p>
-      Tooling, infrastructure, portable radio, and RF experiments all reward the
-      same kind of work: clear logs, repeatable setups, careful debugging, and
+      Portable radio, station building, software tooling, and infrastructure all
+      reward the same work: clear logs, repeatable setups, careful debugging, and
       honest notes about what failed.
     </p>
     <nav class="path-links" aria-label="Workshop paths">
+      <a href="/radio/shack/">My shack</a>
       <a href="/notes/">Notes</a>
       <a href="/projects/">Projects</a>
       <a href="/radio/">Radio</a>
