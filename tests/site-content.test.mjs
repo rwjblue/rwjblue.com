@@ -4,17 +4,21 @@ import assert from "node:assert/strict";
 
 const read = (path) => readFileSync(path, "utf8");
 
-test("homepage presents the public workshop structure", () => {
+test("homepage presents a radio-led dispatch with live paths", () => {
   const homepage = read("src/pages/index.astro");
 
-  assert.match(homepage, /Current bench/);
-  assert.match(homepage, /Recent from the bench/);
-  assert.match(homepage, /Recently updated projects/);
-  assert.match(homepage, /\/notes\//);
-  assert.match(homepage, /\/projects\//);
+  assert.match(homepage, /N1RWJ/);
+  assert.match(homepage, /On the bench/);
+  assert.match(homepage, /benchLinks/);
+  assert.match(homepage, /latestNote/);
+  assert.match(homepage, /Recent notes/);
+  assert.match(homepage, /Active projects/);
+  assert.match(homepage, /href=\{`\/notes\/\$\{latestNote\.id\}\/`\}/);
+  assert.match(homepage, /\/radio\/shack\//);
+  assert.match(homepage, /\/projects\/2026-activate-all-ri-pota\//);
   assert.match(homepage, /\/radio\//);
+  assert.doesNotMatch(homepage, /Current bench/);
   assert.doesNotMatch(homepage, /\/now\//);
-  assert.match(homepage, /updated/);
 });
 
 test("content collections support notes and updated projects", () => {
@@ -35,6 +39,7 @@ test("new section routes exist", () => {
   assert.ok(existsSync("src/pages/notes/index.astro"));
   assert.ok(existsSync("src/pages/projects/index.astro"));
   assert.ok(existsSync("src/pages/radio/index.astro"));
+  assert.ok(existsSync("src/pages/radio/shack.astro"));
   assert.ok(!existsSync("src/pages/now/index.astro"));
 });
 
@@ -48,13 +53,28 @@ test("primary navigation omits now", () => {
   assert.doesNotMatch(layout, /Now/);
 });
 
-test("radio page keeps static context and lists radio notes", () => {
+test("radio page keeps static context, links shack notes, and lists radio notes", () => {
   const radio = read("src/pages/radio/index.astro");
 
   assert.match(radio, /getCollection\("notes"\)/);
   assert.match(radio, /note\.data\.tags\.includes\("radio"\)/);
   assert.match(radio, /Radio notes/);
   assert.match(radio, /href=\{`\/notes\/\$\{note\.id\}\/`\}/);
+  assert.match(radio, /\/radio\/shack\//);
+  assert.match(radio, /My shack/);
+});
+
+test("shack page documents station and portable setup", () => {
+  assert.ok(existsSync("src/pages/radio/shack.astro"));
+
+  const shack = read("src/pages/radio/shack.astro");
+
+  assert.match(shack, /title="My shack \/ N1RWJ"/);
+  assert.match(shack, /<h1>My shack<\/h1>/);
+  assert.match(shack, /Home station/);
+  assert.match(shack, /Portable kit/);
+  assert.match(shack, /Operating focus/);
+  assert.match(shack, /Last updated/);
 });
 
 
