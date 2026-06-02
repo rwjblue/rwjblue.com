@@ -12,24 +12,64 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 71,
-      "parks": 45,
-      "qsos": 1830
+      "activations": 75,
+      "parks": 48,
+      "qsos": 1884
     },
     "attempts": {
-      "activations": 79,
-      "parks": 45,
-      "qsos": 1857
+      "activations": 83,
+      "parks": 48,
+      "qsos": 1911
     },
     "hunter": {
-      "parks": 431,
-      "qsos": 608
+      "parks": 443,
+      "qsos": 638
     },
-    "awards": 22,
-    "endorsements": 47
+    "awards": 23,
+    "endorsements": 48
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-05-31",
+        "reference": "US-8293",
+        "park": "Sapowet Marsh State Wildlife Area",
+        "location": "US-RI",
+        "cw": 15,
+        "data": 0,
+        "phone": 0,
+        "total": 15
+      },
+      {
+        "date": "2026-05-30",
+        "reference": "US-6986",
+        "park": "Simmons Mill Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 14,
+        "data": 0,
+        "phone": 0,
+        "total": 14
+      },
+      {
+        "date": "2026-05-30",
+        "reference": "US-10546",
+        "park": "Eight Rod Farm Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 14,
+        "data": 0,
+        "phone": 0,
+        "total": 14
+      },
+      {
+        "date": "2026-05-28",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
       {
         "date": "2026-05-27",
         "reference": "US-6984",
@@ -122,33 +162,13 @@
       },
       {
         "date": "2026-05-23",
-        "reference": "US-7721",
-        "park": "Salty Brine State Beach",
+        "reference": "US-7717",
+        "park": "Charlestown Breachway State Park",
         "location": "US-RI",
-        "cw": 12,
+        "cw": 2,
         "data": 0,
         "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-05-23",
-        "reference": "US-7720",
-        "park": "Roger W. Wheeler State Beach",
-        "location": "US-RI",
-        "cw": 15,
-        "data": 0,
-        "phone": 0,
-        "total": 15
-      },
-      {
-        "date": "2026-05-23",
-        "reference": "US-7718",
-        "park": "East Matunuck State Beach",
-        "location": "US-RI",
-        "cw": 25,
-        "data": 0,
-        "phone": 0,
-        "total": 25
+        "total": 2
       },
       {
         "date": "2026-05-23",
@@ -162,13 +182,33 @@
       },
       {
         "date": "2026-05-23",
-        "reference": "US-7717",
-        "park": "Charlestown Breachway State Park",
+        "reference": "US-7718",
+        "park": "East Matunuck State Beach",
         "location": "US-RI",
-        "cw": 2,
+        "cw": 25,
         "data": 0,
         "phone": 0,
-        "total": 2
+        "total": 25
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-7720",
+        "park": "Roger W. Wheeler State Beach",
+        "location": "US-RI",
+        "cw": 15,
+        "data": 0,
+        "phone": 0,
+        "total": 15
+      },
+      {
+        "date": "2026-05-23",
+        "reference": "US-7721",
+        "park": "Salty Brine State Beach",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
       },
       {
         "date": "2026-05-21",
@@ -239,222 +279,110 @@
         "data": 0,
         "phone": 0,
         "total": 20
-      },
-      {
-        "date": "2026-05-13",
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "location": "US-RI",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-05-12",
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "location": "US-RI",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-05-11",
-        "reference": "US-10547",
-        "park": "Silver Spring State Recreation Area",
-        "location": "US-RI",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-05-10",
-        "reference": "US-10544",
-        "park": "Jerimoth Hill State Recreation Area",
-        "location": "US-RI",
-        "cw": 18,
-        "data": 0,
-        "phone": 0,
-        "total": 18
       }
     ],
     "hunter_qsos": [
       {
-        "date": "2026-05-27T14:24:59",
-        "callsign": "K1NW",
+        "date": "2026-06-01T16:03:06",
+        "callsign": "NQ8T",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-10548",
-        "park": "Barber Pond State Recreation Area",
-        "location": "US-RI"
+        "reference": "US-9392",
+        "park": "Augusta-Anne Olsen State Nature Preserve",
+        "location": "US-OH"
       },
       {
-        "date": "2026-05-27T14:18:00",
-        "callsign": "K3CBK",
+        "date": "2026-06-01T15:49:18",
+        "callsign": "KU3J",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-2542",
-        "park": "Lake Lincoln State Park",
-        "location": "US-MS"
-      },
-      {
-        "date": "2026-05-27T13:26:00",
-        "callsign": "KM3STU",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-2149",
-        "park": "Tallman Mountain State Park",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-05-25T23:06:33",
-        "callsign": "KO4FX",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-0708",
-        "park": "Stones River National Battlefield",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-05-25T23:06:32",
-        "callsign": "KO4FX",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-0708",
-        "park": "Stones River National Battlefield",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-05-25T20:41:00",
-        "callsign": "NI6L",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6434",
-        "park": "Champoeg State Park",
-        "location": "US-OR"
-      },
-      {
-        "date": "2026-05-25T20:21:00",
-        "callsign": "KG1A",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-05-25T20:20:01",
-        "callsign": "KB5YZY",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-13258",
-        "park": "Possum Woods State Conservation Area",
-        "location": "US-MO"
-      },
-      {
-        "date": "2026-05-25T19:11:19",
-        "callsign": "W8EO",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6771",
-        "park": "Rose Lake State Game Land",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-05-25T18:50:58",
-        "callsign": "N4MQU",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6947",
-        "park": "Sandhills State Game Land",
-        "location": "US-NC"
-      },
-      {
-        "date": "2026-05-25T17:33:00",
-        "callsign": "NL5Y",
-        "band": "17M",
-        "mode": "CW",
-        "reference": "US-8333",
-        "park": "Garcon Point State Conservation Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-05-25T17:24:00",
-        "callsign": "N4JAW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-7956",
-        "park": "Beargrass Creek State Nature Preserve",
-        "location": "US-KY"
-      },
-      {
-        "date": "2026-05-25T17:00:00",
-        "callsign": "NL5Y",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-8333",
-        "park": "Garcon Point State Conservation Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-05-24T19:50:07",
-        "callsign": "KC3DSO",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-9877",
-        "park": "Junction and Breakwater National Recreation Trail",
-        "location": "US-DE"
-      },
-      {
-        "date": "2026-05-24T19:50:07",
-        "callsign": "KC3DSO",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-1733",
-        "park": "Cape Henlopen State Park",
-        "location": "US-DE"
-      },
-      {
-        "date": "2026-05-23T22:47:00",
-        "callsign": "N3FE",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-8736",
-        "park": "PA 037 State Game Land",
+        "reference": "US-8900",
+        "park": "PA 203 State Game Land",
         "location": "US-PA"
       },
       {
-        "date": "2026-05-23T21:12:40",
-        "callsign": "KG0HG",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-10589",
-        "park": "Friendly Prairie State Conservation Area",
-        "location": "US-MO"
-      },
-      {
-        "date": "2026-05-23T20:48:14",
-        "callsign": "K0ACP",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6667",
-        "park": "Edmore State Game Land",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-05-23T19:25:46",
+        "date": "2026-06-01T15:48:08",
         "callsign": "K1NW",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-7718",
-        "park": "East Matunuck State Beach",
+        "reference": "US-6981",
+        "park": "Great Swamp Wildlife Management Area",
         "location": "US-RI"
       },
       {
-        "date": "2026-05-23T16:39:00",
+        "date": "2026-05-31T15:05:35",
+        "callsign": "KD3D",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-5217",
+        "park": "North Harmony State Forest",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-05-31T13:42:55",
+        "callsign": "KD3D",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-5217",
+        "park": "North Harmony State Forest",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-05-31T00:26:08",
+        "callsign": "N9ANA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-0987",
+        "park": "Channahon State Park",
+        "location": "US-IL"
+      },
+      {
+        "date": "2026-05-31T00:26:08",
+        "callsign": "N9ANA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10660",
+        "park": "Illinois and Michigan Canal State Trail",
+        "location": "US-IL"
+      },
+      {
+        "date": "2026-05-31T00:22:05",
+        "callsign": "N1CCC",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4579",
+        "park": "Santa Fe National Historic Trail",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-05-31T00:22:05",
+        "callsign": "N1CCC",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4566",
+        "park": "California National Historic Trail",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-05-31T00:22:05",
+        "callsign": "N1CCC",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4576",
+        "park": "Oregon National Historic Trail",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-05-30T23:59:00",
+        "callsign": "N2XTO",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-12105",
+        "park": "Rockport Wildlife Management Area",
+        "location": "US-NJ"
+      },
+      {
+        "date": "2026-05-30T23:14:00",
         "callsign": "KG1A",
         "band": "20M",
         "mode": "CW",
@@ -463,17 +391,89 @@
         "location": "US-FL"
       },
       {
-        "date": "2026-05-22T18:56:47",
-        "callsign": "W5P",
+        "date": "2026-05-30T23:13:25",
+        "callsign": "KI5WWT",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-3000",
-        "park": "Cooper Lake State Park",
+        "reference": "US-2996",
+        "park": "Cedar Hill State Park",
         "location": "US-TX"
       },
       {
-        "date": "2026-05-20T23:45:12",
-        "callsign": "KA0CSW",
+        "date": "2026-05-30T23:05:11",
+        "callsign": "K6PLI",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-0647",
+        "park": "Golden Gate National Recreation Area",
+        "location": "US-CA"
+      },
+      {
+        "date": "2026-05-30T23:00:31",
+        "callsign": "KN6BAZ",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1198",
+        "park": "Sonoma Coast State Park",
+        "location": "US-CA"
+      },
+      {
+        "date": "2026-05-30T22:51:00",
+        "callsign": "NL5Y",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-8333",
+        "park": "Garcon Point State Conservation Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-05-30T22:46:21",
+        "callsign": "N9ANA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-7256",
+        "park": "Midewin National Grassland",
+        "location": "US-IL"
+      },
+      {
+        "date": "2026-05-30T22:44:00",
+        "callsign": "WC1D",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2620",
+        "park": "Niobrara State Park",
+        "location": "US-NE"
+      },
+      {
+        "date": "2026-05-30T22:42:56",
+        "callsign": "KI5WWT",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2996",
+        "park": "Cedar Hill State Park",
+        "location": "US-TX"
+      },
+      {
+        "date": "2026-05-30T21:59:39",
+        "callsign": "N1TJC",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2085",
+        "park": "John Boyd Thacher State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-05-30T21:04:42",
+        "callsign": "WB0RLJ",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4011",
+        "park": "Chalco Hills State Recreation Area",
+        "location": "US-NE"
+      },
+      {
+        "date": "2026-05-30T20:19:49",
+        "callsign": "K0LAR",
         "band": "20M",
         "mode": "CW",
         "reference": "US-0362",
@@ -481,25 +481,25 @@
         "location": "US-MN"
       },
       {
-        "date": "2026-05-20T23:37:29",
-        "callsign": "NQ1F",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-0321",
-        "park": "Great Meadows National Wildlife Refuge",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-05-20T14:22:00",
-        "callsign": "K3CBK",
+        "date": "2026-05-30T19:53:43",
+        "callsign": "K0LAR",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-2542",
-        "park": "Lake Lincoln State Park",
-        "location": "US-MS"
+        "reference": "US-0362",
+        "park": "Litchfield Wetland Management District",
+        "location": "US-MN"
       },
       {
-        "date": "2026-05-20T13:14:00",
+        "date": "2026-05-30T19:51:46",
+        "callsign": "WC1D",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2620",
+        "park": "Niobrara State Park",
+        "location": "US-NE"
+      },
+      {
+        "date": "2026-05-29T14:07:00",
         "callsign": "KG1A",
         "band": "20M",
         "mode": "CW",
@@ -611,6 +611,7 @@
       "endorsements": [
         "20M",
         "40M",
+        "CW",
         "PHONE"
       ]
     },
@@ -675,6 +676,11 @@
     {
       "name": "Rover Warthog",
       "granted": "2026-02-28T00:00:00",
+      "endorsements": []
+    },
+    {
+      "name": "Late Shift Activator",
+      "granted": "2026-05-31T13:55:55",
       "endorsements": []
     },
     {

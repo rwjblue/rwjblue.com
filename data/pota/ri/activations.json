@@ -961,6 +961,58 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-8293",
+      "park": "Sapowet Marsh State Wildlife Area",
+      "date": "2026-05-31",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 15,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6986",
+      "park": "Simmons Mill Wildlife Management Area",
+      "date": "2026-05-30",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 14,
+        "cw": 14,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-10546",
+      "park": "Eight Rod Farm Wildlife Management Area",
+      "date": "2026-05-30",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 14,
+        "cw": 14,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-05-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }
