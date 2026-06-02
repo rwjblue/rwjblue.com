@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const updated = "June 2, 2026";
+
+const homeStation = [
+  {
+    label: "Radio",
+    text: "Elecraft K4D at the desk for home operating, contest practice, CW work, and experiments that benefit from a stable station.",
+  },
+  {
+    label: "Antenna",
+    text: "DX Commander Expedition, usually treated as the known-good home vertical when I want repeatable 20-meter performance.",
+  },
+  {
+    label: "Operating position",
+    text: "A practical bench for listening, logging, debugging RF problems, and keeping the station easy to reconfigure.",
+  },
+];
+
+const portableKit = [
+  {
+    label: "Field radios",
+    text: "Elecraft KX2 and KX3 for portable HF, POTA activations, quick experiments, and lightweight setups.",
+  },
+  {
+    label: "Antennas",
+    text: "Whips and wire antennas depending on the park, available supports, wind, time, and how much setup friction the outing can tolerate.",
+  },
+  {
+    label: "Logging",
+    text: "Portable logging is treated as part of the station: simple enough to use in the field, detailed enough to reconstruct what happened later.",
+  },
+];
+
+const operatingFocus = [
+  "CW practice and getting more comfortable at real on-air speeds.",
+  "POTA activations, especially repeatable field workflows around Rhode Island parks.",
+  "Antenna and station experiments that produce notes worth finding again.",
+  "Contest weekends used as dense practice, not only as score-chasing.",
+];
+---
+
+<BaseLayout
+  title="My shack / N1RWJ"
+  description="The current N1RWJ home station, portable HF kit, antennas, and operating workflow notes."
+  canonicalPath="/radio/shack/"
+>
+  <section class="page-intro">
+    <p class="eyebrow">N1RWJ</p>
+    <h1>My shack</h1>
+    <p>
+      This is the current shape of my radio setup: the home station, portable
+      HF kits, antennas, logging habits, and operating workflows behind the
+      field notes on this site.
+    </p>
+    <p class="meta">Last updated {updated}</p>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="home-station-title">
+    <div class="section-heading">
+      <p class="section-label">Station</p>
+      <h2 id="home-station-title">Home station</h2>
+    </div>
+    <div class="setup-list">
+      {
+        homeStation.map((item) => (
+          <div>
+            <h3>{item.label}</h3>
+            <p>{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="portable-kit-title">
+    <div class="section-heading">
+      <p class="section-label">Field</p>
+      <h2 id="portable-kit-title">Portable kit</h2>
+    </div>
+    <div class="setup-list">
+      {
+        portableKit.map((item) => (
+          <div>
+            <h3>{item.label}</h3>
+            <p>{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bridge" aria-labelledby="operating-focus-title">
+    <p class="section-label">Practice</p>
+    <h2 id="operating-focus-title">Operating focus</h2>
+    <ul class="plain-list">
+      {operatingFocus.map((item) => <li>{item}</li>)}
+    </ul>
+    <nav class="path-links" aria-label="Related radio paths">
+      <a href="/radio/">Radio notes</a>
+      <a href="/projects/2026-activate-all-ri-pota/">RI POTA tracker</a>
+    </nav>
+  </section>
+</BaseLayout>
