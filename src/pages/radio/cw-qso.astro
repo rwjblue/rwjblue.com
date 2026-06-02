@@ -11,9 +11,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <p class="eyebrow">Radio</p>
     <h1 class="cw-page-title"><span>CW QSO</span><span>Walkthrough</span></h1>
     <p>
-      A practical template for a standard CW contact. Fill in your side, copy
-      the other station as the exchange develops, and use the built-in log to
-      export an ADIF file when you are done.
+      A practical template for a standard CW contact. Steps 1-4 cover the
+      basic exchange; steps 5-8 are optional extensions for a longer ragchew.
     </p>
   </section>
 
@@ -21,10 +20,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <div class="cw-qso-header">
       <div>
         <p class="section-label">Practice tool</p>
-        <h2>Work a basic contact without guessing the next line.</h2>
+        <h2>Work a standard contact, then optionally extend it.</h2>
       </div>
       <p class="cw-qso-subhead">
-        The examples update live and save your own operating defaults on this
+        The examples update live and save your operating defaults on this
         device.
       </p>
     </div>
@@ -35,7 +34,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </div>
 
     <div class="cw-fields">
-      <div class="cw-group-label cw-group-label-you">Your info</div>
+      <div class="cw-group-label cw-group-label-you">Your basic info</div>
       <div class="cw-field cw-field-you">
         <label for="myCall">Your callsign</label>
         <input id="myCall" type="text" placeholder="W1ABC" autocomplete="off" />
@@ -61,6 +60,36 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         </select>
       </div>
 
+      <div class="cw-group-label cw-group-label-you">Your optional station and background</div>
+      <div class="cw-field cw-field-you">
+        <label for="myRig">Your rig</label>
+        <input id="myRig" type="text" placeholder="KX3" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-you">
+        <label for="myPwr">Your power</label>
+        <input id="myPwr" type="text" placeholder="5W" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-you">
+        <label for="myAnt">Your antenna</label>
+        <input id="myAnt" type="text" placeholder="EFHW UP 25 FT" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-you">
+        <label for="myWx">Your weather</label>
+        <input id="myWx" type="text" placeholder="SUNNY 68F" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-you">
+        <label for="myHamYears">Ham for</label>
+        <input id="myHamYears" type="text" placeholder="3 YRS" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-you">
+        <label for="myAge">Your age</label>
+        <input id="myAge" type="text" placeholder="42" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-you">
+        <label for="myJob">Your job</label>
+        <input id="myJob" type="text" placeholder="SOFTWARE ENGINEER" autocomplete="off" />
+      </div>
+
       <div class="cw-group-label cw-group-label-them">Other station</div>
       <div class="cw-field cw-field-them">
         <label for="hisCall">Their callsign</label>
@@ -77,6 +106,34 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <div class="cw-field cw-field-them">
         <label for="hisRst">RST they gave you</label>
         <input id="hisRst" type="text" placeholder="579" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-them">
+        <label for="hisRig">Their rig</label>
+        <input id="hisRig" type="text" placeholder="TEN TEC EAGLE" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-them">
+        <label for="hisPwr">Their power</label>
+        <input id="hisPwr" type="text" placeholder="50W" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-them">
+        <label for="hisAnt">Their antenna</label>
+        <input id="hisAnt" type="text" placeholder="DIPOLE UP 45 FT" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-them">
+        <label for="hisWx">Their weather</label>
+        <input id="hisWx" type="text" placeholder="RAIN 60F" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-them">
+        <label for="hisHamYears">Ham for</label>
+        <input id="hisHamYears" type="text" placeholder="24 YRS" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-them">
+        <label for="hisAge">Their age</label>
+        <input id="hisAge" type="text" placeholder="55" autocomplete="off" />
+      </div>
+      <div class="cw-field cw-field-them">
+        <label for="hisJob">Their job</label>
+        <input id="hisJob" type="text" placeholder="RETIRED ARMY" autocomplete="off" />
       </div>
       <div class="cw-field-row-end">
         <button class="cw-reset" id="resetBtn" type="button">Clear other station</button>
@@ -136,142 +193,109 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <div class="cw-grid">
       <div>
         <div class="cw-step cw-step-you" data-step="1">
-          <div class="cw-step-head">
-            <span class="cw-step-num">1</span>
-            <span class="cw-who">You send</span>
-            <span class="cw-step-title">Call CQ</span>
-          </div>
+          <div class="cw-step-head"><span class="cw-step-num">1</span><span class="cw-who">You send</span><span class="cw-step-title">Call CQ</span></div>
           <div class="cw-tx" id="tx1"></div>
           <div class="cw-copy-panel">
-            <div class="cw-copy-field">
-              <label>Their callsign</label>
-              <input type="text" id="hisCall-s1" data-master="hisCall" autocomplete="off" placeholder="K9XYZ" />
-            </div>
+            <div class="cw-copy-field"><label>Their callsign</label><input type="text" id="hisCall-s1" data-master="hisCall" autocomplete="off" placeholder="K9XYZ" /></div>
           </div>
-          <div class="cw-tip">
-            Send your callsign twice so a listener can lock onto it. Listen 5-10 sec, then repeat the call if no answer. <strong>PSE</strong> is optional politeness; <strong>K</strong> means "any station, come back."
-          </div>
+          <div class="cw-tip">Send your callsign twice so a listener can lock onto it. Listen 5-10 sec, then repeat the call if no answer. <strong>PSE</strong> is optional politeness; <strong>K</strong> means "any station, come back."</div>
         </div>
 
         <div class="cw-step cw-step-them" data-step="2">
-          <div class="cw-step-head">
-            <span class="cw-step-num">2</span>
-            <span class="cw-who">They send</span>
-            <span class="cw-step-title">A station answers</span>
-          </div>
+          <div class="cw-step-head"><span class="cw-step-num">2</span><span class="cw-who">They send</span><span class="cw-step-title">A station answers</span></div>
           <div class="cw-tx" id="tx2"></div>
           <div class="cw-copy-panel">
-            <div class="cw-copy-field">
-              <label>Their callsign</label>
-              <input type="text" id="hisCall-s2" data-master="hisCall" autocomplete="off" placeholder="K9XYZ" />
-            </div>
+            <div class="cw-copy-field"><label>Their callsign</label><input type="text" id="hisCall-s2" data-master="hisCall" autocomplete="off" placeholder="K9XYZ" /></div>
           </div>
-          <div class="cw-tip">
-            They'll typically just send their callsign twice. Copy it into the field above and the rest of the QSO populates with it.
-          </div>
+          <div class="cw-tip">They'll typically just send their callsign twice. Copy it into the field above and the rest of the QSO populates with it.</div>
         </div>
 
         <div class="cw-step cw-step-you" data-step="3">
-          <div class="cw-step-head">
-            <span class="cw-step-num">3</span>
-            <span class="cw-who">You send</span>
-            <span class="cw-step-title">First exchange - greet + report + name + QTH</span>
-          </div>
+          <div class="cw-step-head"><span class="cw-step-num">3</span><span class="cw-who">You send</span><span class="cw-step-title">First exchange - greet + report + name + QTH</span></div>
           <div class="cw-tx" id="tx3"></div>
           <div class="cw-copy-panel">
-            <div class="cw-copy-field">
-              <label>Their callsign</label>
-              <input type="text" id="hisCall-s3" data-master="hisCall" autocomplete="off" />
-            </div>
-            <div class="cw-copy-field">
-              <label>Their RST</label>
-              <input type="text" id="hisRst-s3" data-master="hisRst" autocomplete="off" placeholder="579" />
-            </div>
-            <div class="cw-copy-field">
-              <label>Their name</label>
-              <input type="text" id="hisName-s3" data-master="hisName" autocomplete="off" placeholder="BOB" />
-            </div>
-            <div class="cw-copy-field">
-              <label>Their QTH</label>
-              <input type="text" id="hisQth-s3" data-master="hisQth" autocomplete="off" placeholder="TEXAS TX" />
-            </div>
+            <div class="cw-copy-field"><label>Their callsign</label><input type="text" id="hisCall-s3" data-master="hisCall" autocomplete="off" /></div>
+            <div class="cw-copy-field"><label>Their RST</label><input type="text" id="hisRst-s3" data-master="hisRst" autocomplete="off" placeholder="579" /></div>
+            <div class="cw-copy-field"><label>Their name</label><input type="text" id="hisName-s3" data-master="hisName" autocomplete="off" placeholder="BOB" /></div>
+            <div class="cw-copy-field"><label>Their QTH</label><input type="text" id="hisQth-s3" data-master="hisQth" autocomplete="off" placeholder="TEXAS TX" /></div>
           </div>
-          <div class="cw-tip">
-            <strong>DR OM</strong> = "dear old man" (friendly, used for any op). <strong>TU fer call</strong> = thanks for the call. RST and QTH are each sent twice. <strong>HW?</strong> = how copy? <strong>BK</strong> = back to you.
-          </div>
+          <div class="cw-tip"><strong>DR OM</strong> = "dear old man" (friendly, used for any op). <strong>TU fer call</strong> = thanks for the call. RST and QTH are each sent twice. <strong>HW?</strong> = how copy? <strong>BK</strong> = back to you.</div>
         </div>
 
         <div class="cw-step cw-step-them" data-step="4">
-          <div class="cw-step-head">
-            <span class="cw-step-num">4</span>
-            <span class="cw-who">They send</span>
-            <span class="cw-step-title">Their exchange back to you</span>
-          </div>
+          <div class="cw-step-head"><span class="cw-step-num">4</span><span class="cw-who">They send</span><span class="cw-step-title">Their exchange back to you</span></div>
           <div class="cw-tx" id="tx4"></div>
           <div class="cw-copy-panel">
-            <div class="cw-copy-field">
-              <label>Their callsign</label>
-              <input type="text" id="hisCall-s4" data-master="hisCall" autocomplete="off" />
-            </div>
-            <div class="cw-copy-field">
-              <label>Their RST</label>
-              <input type="text" id="hisRst-s4" data-master="hisRst" autocomplete="off" placeholder="579" />
-            </div>
-            <div class="cw-copy-field">
-              <label>Their name</label>
-              <input type="text" id="hisName-s4" data-master="hisName" autocomplete="off" placeholder="BOB" />
-            </div>
-            <div class="cw-copy-field">
-              <label>Their QTH</label>
-              <input type="text" id="hisQth-s4" data-master="hisQth" autocomplete="off" placeholder="TEXAS TX" />
-            </div>
+            <div class="cw-copy-field"><label>Their callsign</label><input type="text" id="hisCall-s4" data-master="hisCall" autocomplete="off" /></div>
+            <div class="cw-copy-field"><label>Their RST</label><input type="text" id="hisRst-s4" data-master="hisRst" autocomplete="off" placeholder="579" /></div>
+            <div class="cw-copy-field"><label>Their name</label><input type="text" id="hisName-s4" data-master="hisName" autocomplete="off" placeholder="BOB" /></div>
+            <div class="cw-copy-field"><label>Their QTH</label><input type="text" id="hisQth-s4" data-master="hisQth" autocomplete="off" placeholder="TEXAS TX" /></div>
           </div>
-          <div class="cw-tip">
-            Copy their RST, name, and QTH right into the fields above. Sign-off line in step 5 populates automatically. If you miss something, see "If you missed something" on the right.
-          </div>
+          <div class="cw-tip">Copy their RST, name, and QTH right into the fields above. You can close after this point, or continue into the optional station-info section below.</div>
+        </div>
+
+        <div class="cw-phase-break" aria-label="Optional ragchew extensions">
+          <strong>Basic QSO complete after step 4.</strong>
+          <span>Steps 5-8 are optional ragchew extensions.</span>
         </div>
 
         <div class="cw-step cw-step-you" data-step="5">
-          <div class="cw-step-head">
-            <span class="cw-step-num">5</span>
-            <span class="cw-who">You send</span>
-            <span class="cw-step-title">Wrap up - thanks + 73</span>
-          </div>
+          <div class="cw-step-head"><span class="cw-step-num">5</span><span class="cw-who">You send</span><span class="cw-step-title">Rig, power, antenna, and weather</span><span class="cw-step-phase">Optional extension</span></div>
           <div class="cw-tx" id="tx5"></div>
-          <div class="cw-tip">
-            <strong>FB QSO</strong> = "fine business QSO" (great contact). <strong>HPE CUAGN SN</strong> = hope to see you again soon. <strong>73</strong> = best regards. <strong>EE</strong> = the "dit-dit" closer (two short dits, a friendly farewell).
-          </div>
+          <div class="cw-tip">This is the first extension past the basic exchange. Keep the station description compact and readable.</div>
         </div>
 
         <div class="cw-step cw-step-them" data-step="6">
-          <div class="cw-step-head">
-            <span class="cw-step-num">6</span>
-            <span class="cw-who">They send</span>
-            <span class="cw-step-title">Their final</span>
-          </div>
+          <div class="cw-step-head"><span class="cw-step-num">6</span><span class="cw-who">They send</span><span class="cw-step-title">Their station and weather details</span><span class="cw-step-phase">Optional extension</span></div>
           <div class="cw-tx" id="tx6"></div>
-          <div class="cw-tip">
-            QSO complete. Log it below - band/freq are already set, just confirm and save.
+          <div class="cw-copy-panel">
+            <div class="cw-copy-field"><label>Their rig</label><input type="text" id="hisRig-s6" data-master="hisRig" autocomplete="off" placeholder="TEN TEC EAGLE" /></div>
+            <div class="cw-copy-field"><label>Their power</label><input type="text" id="hisPwr-s6" data-master="hisPwr" autocomplete="off" placeholder="50W" /></div>
+            <div class="cw-copy-field"><label>Their antenna</label><input type="text" id="hisAnt-s6" data-master="hisAnt" autocomplete="off" placeholder="DIPOLE UP 45 FT" /></div>
+            <div class="cw-copy-field"><label>Their weather</label><input type="text" id="hisWx-s6" data-master="hisWx" autocomplete="off" placeholder="RAIN 60F" /></div>
           </div>
+          <div class="cw-tip">Copy the station details you care about. If you lose one item, ask only for that item instead of the whole turn.</div>
+        </div>
+
+        <div class="cw-step cw-step-you" data-step="7">
+          <div class="cw-step-head"><span class="cw-step-num">7</span><span class="cw-who">You send</span><span class="cw-step-title">Age, job, and how long you've been a ham</span><span class="cw-step-phase">Optional extension</span></div>
+          <div class="cw-tx" id="tx7"></div>
+          <div class="cw-tip">This is the second common extension in a standard ragchew. Use whatever level of detail feels natural.</div>
+        </div>
+
+        <div class="cw-step cw-step-them" data-step="8">
+          <div class="cw-step-head"><span class="cw-step-num">8</span><span class="cw-who">They send</span><span class="cw-step-title">Their background details</span><span class="cw-step-phase">Optional extension</span></div>
+          <div class="cw-tx" id="tx8"></div>
+          <div class="cw-copy-panel">
+            <div class="cw-copy-field"><label>Ham for</label><input type="text" id="hisHamYears-s8" data-master="hisHamYears" autocomplete="off" placeholder="24 YRS" /></div>
+            <div class="cw-copy-field"><label>Their age</label><input type="text" id="hisAge-s8" data-master="hisAge" autocomplete="off" placeholder="55" /></div>
+            <div class="cw-copy-field"><label>Their job</label><input type="text" id="hisJob-s8" data-master="hisJob" autocomplete="off" placeholder="RETIRED ARMY" /></div>
+          </div>
+          <div class="cw-tip">Once you have this much copied, you usually have enough context to write a better note in the log comment too.</div>
+        </div>
+
+        <div class="cw-step cw-step-you" data-step="9">
+          <div class="cw-step-head"><span class="cw-step-num">9</span><span class="cw-who">You send</span><span class="cw-step-title">Wrap up - thanks + 73</span></div>
+          <div class="cw-tx" id="tx9"></div>
+          <div class="cw-tip"><strong>FB QSO</strong> = "fine business QSO." <strong>CUAGN</strong> = see you again. <strong>SK</strong> marks the end of the contact.</div>
+        </div>
+
+        <div class="cw-step cw-step-them" data-step="10">
+          <div class="cw-step-head"><span class="cw-step-num">10</span><span class="cw-who">They send</span><span class="cw-step-title">Their final</span></div>
+          <div class="cw-tx" id="tx10"></div>
+          <div class="cw-tip">QSO complete. Log it below while the station and background details are still fresh.</div>
           <div class="cw-inline-save">
             <button type="button" class="cw-btn-primary cw-inline-save-btn">+ Save QSO</button>
-            <span class="cw-inline-hint">
-              Adds this contact to your log and clears the "their" fields for the next QSO.
-            </span>
+            <span class="cw-inline-hint">Adds this contact to your log and clears the "their" fields for the next QSO.</span>
           </div>
         </div>
 
         <div class="cw-step cw-step-note">
-          <div class="cw-step-head">
-            <span class="cw-step-num">!</span>
-            <span class="cw-who">Practice notes</span>
-            <span class="cw-step-title">Session reminders</span>
-          </div>
+          <div class="cw-step-head"><span class="cw-step-num">!</span><span class="cw-who">Practice notes</span><span class="cw-step-title">Session reminders</span></div>
           <div class="cw-tip cw-tip-note">
-            Use <strong>GM / GA / GE</strong> based on local time. Change your
-            <strong>RST</strong>, <strong>QTH</strong>, and <strong>name</strong>
-            from practice to practice so the structure stays familiar but the
-            copy work does not become memorized.
+            The LICW sheet treats these later turns as examples, not rigid rules.
+            Once the structure feels natural, vary the content and shorten or
+            lengthen the turns to sound like a real QSO rather than a recital.
           </div>
         </div>
       </div>
@@ -291,10 +315,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <div class="cw-tx">QTH AGN <span class="me" id="wAgnQth">OHIO OH</span> <span class="me" id="wAgnQth2">OHIO OH</span> BK</div>
           </details>
           <details class="cw-whatif">
-            <summary>You miss their name or QTH</summary>
-            <p>Ask directly for the piece you need.</p>
-            <div class="cw-tx">NAME AGN? BK</div>
-            <div class="cw-tx">QTH AGN? BK</div>
+            <summary>You miss their rig, weather, or job</summary>
+            <p>Pull out only the one item you need.</p>
+            <div class="cw-tx">RIG AGN? BK</div>
+            <div class="cw-tx">WX AGN? BK</div>
+            <div class="cw-tx">JOB AGN? BK</div>
           </details>
 
           <h2>Conditions</h2>
@@ -308,18 +333,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           </details>
           <details class="cw-whatif">
             <summary>They send <code>QRN</code> or <code>QRM</code></summary>
-            <p>
-              <code>QRN</code> means atmospheric noise. <code>QRM</code> means
-              interference from another signal. Keep exchanges tight and consider
-              a frequency change if needed.
-            </p>
+            <p><code>QRN</code> means atmospheric noise. <code>QRM</code> means interference from another signal. Keep exchanges tight and consider a frequency change if needed.</p>
           </details>
           <details class="cw-whatif">
             <summary>You make a sending mistake</summary>
-            <p>
-              Send a string of dits to mark the error, then resend the word
-              cleanly.
-            </p>
+            <p>Send a string of dits to mark the error, then resend the word cleanly.</p>
           </details>
           <details class="cw-whatif">
             <summary>They need to leave - <code>QRT</code></summary>
@@ -367,19 +385,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <code>88</code><span>love &amp; kisses</span>
           </div>
 
-          <h2>Q-codes</h2>
-          <div class="cw-abbr">
-            <code>QRZ?</code><span>who's calling me?</span>
-            <code>QRS</code><span>slow down</span>
-            <code>QRQ</code><span>speed up</span>
-            <code>QSB</code><span>signal fading</span>
-            <code>QRN</code><span>atmospheric noise</span>
-            <code>QRM</code><span>man-made interference</span>
-            <code>QRT</code><span>I must stop</span>
-            <code>QSY</code><span>change frequency</span>
-            <code>QSL</code><span>I acknowledge / confirm</span>
-            <code>QTH</code><span>my location is</span>
-          </div>
+          <h2>References</h2>
+          <p>
+            This extended structure follows the extra station-info and
+            personal-info turns shown in the LICW protocol reference.
+          </p>
         </div>
       </div>
     </div>
@@ -387,9 +397,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <nav class="path-links" aria-label="Radio references">
       <a href="/radio/">Back to radio</a>
       <a href="/radio/glossary/">Glossary</a>
-      <a href="https://cwops.org/cw-academy/" target="_blank" rel="noreferrer">
-        CW Academy
-      </a>
+      <a href="https://cwops.org/cw-academy/" target="_blank" rel="noreferrer">CW Academy</a>
+      <a href="https://longislandcwclub.org/wp-content/uploads/2022/11/LICW-CW-QSO-Protocol.pdf" target="_blank" rel="noreferrer">LICW protocol sheet</a>
     </nav>
   </section>
 </BaseLayout>
