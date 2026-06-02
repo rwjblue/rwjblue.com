@@ -65,21 +65,18 @@ const benchLinks = [
     <aside class="bench-panel" aria-labelledby="bench-title">
       <h2 id="bench-title">On the bench</h2>
       <div class="bench-list linked">
+        <a href={`/notes/${latestNote.id}/`}>
+          <span>{benchLinks[0].label}</span>
+          <strong>{benchLinks[0].title}</strong>
+          <p>{benchLinks[0].text}</p>
+        </a>
         {
-          benchLinks.map((item) => (
-            item.href === `/notes/${latestNote.id}/` ? (
-              <a href={`/notes/${latestNote.id}/`}>
-                <span>{item.label}</span>
-                <strong>{item.title}</strong>
-                <p>{item.text}</p>
-              </a>
-            ) : (
-              <a href={item.href}>
-                <span>{item.label}</span>
-                <strong>{item.title}</strong>
-                <p>{item.text}</p>
-              </a>
-            )
+          benchLinks.slice(1).map((item) => (
+            <a href={item.href}>
+              <span>{item.label}</span>
+              <strong>{item.title}</strong>
+              <p>{item.text}</p>
+            </a>
           ))
         }
       </div>
