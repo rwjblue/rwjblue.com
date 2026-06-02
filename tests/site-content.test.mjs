@@ -16,7 +16,7 @@ test("homepage presents a radio-led dispatch with live paths", () => {
   assert.match(homepage, /href=\{`\/notes\/\$\{latestNote\.id\}\/`\}/);
   assert.match(homepage, /\/radio\/shack\//);
   assert.match(homepage, /\/projects\/2026-activate-all-ri-pota\//);
-  assert.match(homepage, /\/radio\//);
+  assert.match(homepage, /href="\/radio\/"/);
   assert.doesNotMatch(homepage, /Current bench/);
   assert.doesNotMatch(homepage, /\/now\//);
 });
