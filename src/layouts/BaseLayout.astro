@@ -65,6 +65,11 @@ const isActive = (href: string) =>
     {socialImage && <meta name="twitter:image" content={socialImage} />}
     {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
     <title>{title}</title>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "22d098b3f6564ca1aba1f6297ab62668"}'
+    ></script>
   </head>
   <body>
     <div class="shell">
