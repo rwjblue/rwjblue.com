@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { GLOSSARY } from "../../data/glossary";
+
+const slugFor = (term: string) =>
+  term
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 ---
 
 <BaseLayout
@@ -8,36 +14,55 @@ import { GLOSSARY } from "../../data/glossary";
   description="Short definitions for amateur radio terms that show up in field notes and project pages on this site."
   canonicalPath="/radio/glossary/"
 >
-  <section class="page-intro">
-    <p class="eyebrow">Radio</p>
-    <h1>Glossary</h1>
-    <p>
-      Short definitions for terms that show up in field notes and project pages
-      here. Not a complete reference — just enough context for readers who
-      aren't deep into amateur radio.
-    </p>
+  <section class="glossary-hero">
+    <div>
+      <p class="eyebrow">Radio reference</p>
+      <h1>Glossary</h1>
+      <p class="lede">
+        Plain-language definitions for the radio terms that show up in field
+        notes and project pages here.
+      </p>
+    </div>
+    <aside class="glossary-summary" aria-label="Glossary summary">
+      <strong>{GLOSSARY.length}</strong>
+      <span>field-note terms</span>
+      <p>
+        A short companion reference, not a complete amateur-radio dictionary.
+      </p>
+    </aside>
   </section>
 
-  <section class="section-block wide">
-    <div class="bench-list">
+  <nav class="glossary-jump" aria-label="Glossary terms">
+    {
+      GLOSSARY.map((entry) => (
+        <a href={`#${slugFor(entry.term)}`}>{entry.term}</a>
+      ))
+    }
+  </nav>
+
+  <section class="glossary-section" aria-labelledby="glossary-terms-title">
+    <div class="section-heading">
+      <p class="section-label">Terms</p>
+      <h2 id="glossary-terms-title">Definitions used on this site</h2>
+    </div>
+    <div class="glossary-list">
       {
         GLOSSARY.map((entry) => (
-          <div>
-            <span>{entry.term}</span>
-            <p>
-              {entry.body}
+          <div class="glossary-entry" id={slugFor(entry.term)}>
+            <h3>{entry.term}</h3>
+            <div>
+              <p>{entry.body}</p>
               {entry.links && entry.links.length > 0 && (
-                <>
-                  {" "}
+                <p class="glossary-links">
                   {entry.links.map((link, i) => (
                     <>
                       <a href={link.href}>{link.label}</a>
                       {i < entry.links!.length - 1 && ", "}
                     </>
                   ))}
-                </>
+                </p>
               )}
-            </p>
+            </div>
           </div>
         ))
       }

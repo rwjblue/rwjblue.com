@@ -389,6 +389,135 @@ p {
   margin-bottom: 16px;
 }
 
+.glossary-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: 42px;
+  align-items: end;
+  padding-bottom: 34px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.glossary-hero h1 {
+  font-size: clamp(3.2rem, 7vw, 5.4rem);
+}
+
+.glossary-hero .lede {
+  max-width: 660px;
+  margin-bottom: 0;
+}
+
+.glossary-summary {
+  padding: 18px 18px 16px;
+  border: 1px solid var(--line-strong);
+  background:
+    linear-gradient(135deg, rgb(47 111 78 / 10%), transparent 58%),
+    var(--panel);
+  box-shadow: 8px 8px 0 rgb(23 32 38 / 4%);
+}
+
+.glossary-summary strong {
+  display: block;
+  color: var(--ink);
+  font-size: clamp(2.15rem, 4vw, 3.15rem);
+  line-height: 1;
+}
+
+.glossary-summary span {
+  display: block;
+  margin-top: 6px;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  color: var(--rust);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.glossary-summary p {
+  margin: 14px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.glossary-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding-bottom: 30px;
+}
+
+.glossary-jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  background: rgb(255 253 250 / 70%);
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.glossary-jump a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.glossary-section {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.glossary-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.glossary-entry {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.28fr) minmax(0, 1fr);
+  gap: 28px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 24px;
+}
+
+.glossary-entry h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.1;
+}
+
+.glossary-entry p {
+  max-width: 780px;
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.glossary-entry p + p {
+  margin-top: 10px;
+}
+
+.glossary-links {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.glossary-links a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.glossary-links a:hover {
+  text-decoration: underline;
+}
+
 .document {
   width: 100%;
   max-width: 760px;
@@ -1542,6 +1671,7 @@ p {
   .hero,
   .section-grid,
   .split-list,
+  .glossary-hero,
   .pota-tracker-hero,
   .pota-reference,
   .cw-grid {
@@ -1558,6 +1688,29 @@ p {
 
   .document h1 {
     font-size: clamp(2.35rem, 11vw, 3.6rem);
+  }
+
+  .glossary-hero {
+    gap: 24px;
+    align-items: start;
+  }
+
+  .glossary-hero h1 {
+    font-size: clamp(3rem, 15vw, 4.4rem);
+  }
+
+  .glossary-summary {
+    max-width: 360px;
+  }
+
+  .glossary-jump {
+    padding-bottom: 24px;
+  }
+
+  .glossary-entry {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    padding: 20px 0;
   }
 
   .photo-grid,
