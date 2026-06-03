@@ -15,7 +15,7 @@ tags:
 I finished two small upgrades to the KX2: the
 [KXUSBC2 internal USB-C charger from G7UFO](https://shop.g7ufo.radio/collections/kxusbc2-unofficial-internal-usb-c-charger-for-the-elecraft-kx2)
 and the Side KX rails from
-[Gems Products / Jen's Products](https://gemsproducts.com/installation/).
+[Gems Products](https://gemsproducts.com/shop-kx/).
 The KXUSBC2 replaces the KXIBC2 that came factory-installed in this radio,
 using the same side-plate location to add USB-C charging. The rails replace the
 stock side plates with protective handles, which should make the radio easier
