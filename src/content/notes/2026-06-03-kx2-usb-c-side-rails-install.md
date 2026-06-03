@@ -185,8 +185,10 @@ behaved.
 </div>
 
 It worked. I plugged in a USB-C cable, got the green charging light, and the
-radio looked happy. I still want to use it in the field before treating the
-whole setup as proven, but the first power test passed.
+radio looked happy. The first real field use came later that morning during a
+[Pack Mule activation at JL Curran State Park](/notes/2026-06-03-jl-curran-state-park-pota/).
+That does not make the install fully proven yet, but it did get the radio
+through a normal portable CW outing.
 
 ## What I would do the same way again
 
@@ -199,7 +201,7 @@ whole setup as proven, but the first power test passed.
 
 ## What I still want to verify
 
-- Do a longer charge cycle and a normal portable operating session before
+- Do a longer charge cycle and a few more portable operating sessions before
   calling the install boringly complete.
 - Decide after a few activations whether the rail handles stay on full time or
   whether I prefer the normal side plate for some trips.
