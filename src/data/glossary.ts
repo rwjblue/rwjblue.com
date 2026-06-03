@@ -43,6 +43,8 @@ export const GLOSSARY: GlossaryEntry[] = [
   },
   {
     term: "Pack Mule",
+    tag: "pack-mule",
+    hintLabel: "What is Pack Mule?",
     body: "A POTA News & Reviews activator award for portable stations carried away from the vehicle by hiking, cycling, paddling, or another non-motorized approach. A qualifying activation needs at least 22 QSOs, and the full award requires 100 qualifying activations.",
     links: [{ label: "Pack Mule Award", href: "https://pota.news/pack-mule-award/" }],
   },
