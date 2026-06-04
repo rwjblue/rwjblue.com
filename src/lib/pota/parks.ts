@@ -103,6 +103,34 @@ const noteReferences = (note: PotaNote): string[] =>
     .filter((tag) => referenceTagPattern.test(tag))
     .map((tag) => tag.toUpperCase());
 
+export function collectKnownReferences({
+  notes,
+  activations,
+  projectReferences,
+}: {
+  notes: PotaNote[];
+  activations: PotaActivation[];
+  projectReferences: string[];
+}): string[] {
+  const references = new Set<string>();
+
+  for (const note of notes) {
+    for (const reference of noteReferences(note)) {
+      references.add(reference);
+    }
+  }
+
+  for (const activation of activations) {
+    references.add(normalizeReference(activation.reference));
+  }
+
+  for (const reference of projectReferences) {
+    references.add(normalizeReference(reference));
+  }
+
+  return [...references].sort((left, right) => left.localeCompare(right));
+}
+
 const projectAppliesToActivation = (
   project: PotaProjectRule,
   activation: PotaActivation,

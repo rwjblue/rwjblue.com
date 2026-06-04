@@ -1,0 +1,2938 @@
+{
+  "generatedAt": "2026-06-04T20:05:32.050Z",
+  "parks": [
+    {
+      "reference": "US-0513",
+      "name": "Block Island National Wildlife Refuge",
+      "latitude": 41.2133,
+      "longitude": -71.5724,
+      "grid": "FN41ff",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-0513/",
+      "potaUrl": "https://pota.app/#/park/US-0513",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 28,
+        "activations": 28,
+        "qsos": 2391
+      }
+    },
+    {
+      "reference": "US-0514",
+      "name": "John H. Chafee National Wildlife Refuge",
+      "latitude": 41.443,
+      "longitude": -71.4707,
+      "grid": "FN41gk",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-0514/",
+      "potaUrl": "https://pota.app/#/park/US-0514",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 49,
+        "activations": 49,
+        "qsos": 1838
+      }
+    },
+    {
+      "reference": "US-0515",
+      "name": "Ninigret National Wildlife Refuge",
+      "latitude": 41.3682,
+      "longitude": -71.6716,
+      "grid": "FN41di",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-0515/",
+      "potaUrl": "https://pota.app/#/park/US-0515",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-0515",
+          "park": "Ninigret National Wildlife Refuge",
+          "date": "2026-05-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-25-pota-rove",
+              "title": "Memorial Day Rhode Island POTA Rove",
+              "date": "2026-05-25",
+              "href": "/notes/2026-05-25-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
+          "date": "2026-05-25",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 145,
+        "activations": 129,
+        "qsos": 3723
+      }
+    },
+    {
+      "reference": "US-0516",
+      "name": "Sachuest Point National Wildlife Refuge",
+      "latitude": 41.4798,
+      "longitude": -71.2436,
+      "grid": "FN41jl",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-0516/",
+      "potaUrl": "https://pota.app/#/park/US-0516",
+      "activationCount": 1,
+      "qsoTotal": 38,
+      "activations": [
+        {
+          "reference": "US-0516",
+          "park": "Sachuest Point National Wildlife Refuge",
+          "date": "2026-06-04",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 38,
+            "cw": 38,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "adi",
+          "notes": [
+            {
+              "id": "2026-06-04-sachuest-point-national-wildlife-refuge-pota",
+              "title": "2026-06-04 Sachuest Point",
+              "date": "2026-06-04",
+              "href": "/notes/2026-06-04-sachuest-point-national-wildlife-refuge-pota/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-04-sachuest-point-national-wildlife-refuge-pota",
+          "title": "2026-06-04 Sachuest Point",
+          "date": "2026-06-04",
+          "href": "/notes/2026-06-04-sachuest-point-national-wildlife-refuge-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 177,
+        "activations": 173,
+        "qsos": 7471
+      }
+    },
+    {
+      "reference": "US-0517",
+      "name": "Trustom Pond National Wildlife Refuge",
+      "latitude": 41.3834,
+      "longitude": -71.5846,
+      "grid": "FN41ej",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-0517/",
+      "potaUrl": "https://pota.app/#/park/US-0517",
+      "activationCount": 1,
+      "qsoTotal": 19,
+      "activations": [
+        {
+          "reference": "US-0517",
+          "park": "Trustom Pond National Wildlife Refuge",
+          "date": "2026-05-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 19,
+            "cw": 19,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 49,
+        "activations": 49,
+        "qsos": 1339
+      }
+    },
+    {
+      "reference": "US-0789",
+      "name": "Roger Williams National Memorial",
+      "latitude": 41.831,
+      "longitude": -71.411,
+      "grid": "FN41ht",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-0789/",
+      "potaUrl": "https://pota.app/#/park/US-0789",
+      "activationCount": 2,
+      "qsoTotal": 45,
+      "activations": [
+        {
+          "reference": "US-0789",
+          "park": "Roger Williams National Memorial",
+          "date": "2026-02-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 14,
+            "cw": 0,
+            "data": 0,
+            "phone": 14
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-0789",
+          "park": "Roger Williams National Memorial",
+          "date": "2025-09-27",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 31,
+            "cw": 0,
+            "data": 0,
+            "phone": 31
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 75,
+        "activations": 68,
+        "qsos": 1626
+      }
+    },
+    {
+      "reference": "US-10541",
+      "name": "Gull Cove State Recreation Area",
+      "latitude": 41.6339,
+      "longitude": -71.231,
+      "grid": "FN41jp",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10541/",
+      "potaUrl": "https://pota.app/#/park/US-10541",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 114,
+        "activations": 113,
+        "qsos": 4663
+      }
+    },
+    {
+      "reference": "US-10542",
+      "name": "Camp Cronin State Recreation Area",
+      "latitude": 41.3625,
+      "longitude": -71.4873,
+      "grid": "FN41gi",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10542/",
+      "potaUrl": "https://pota.app/#/park/US-10542",
+      "activationCount": 1,
+      "qsoTotal": 17,
+      "activations": [
+        {
+          "reference": "US-10542",
+          "park": "Camp Cronin State Recreation Area",
+          "date": "2026-05-01",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 17,
+            "cw": 17,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 86,
+        "activations": 83,
+        "qsos": 3916
+      }
+    },
+    {
+      "reference": "US-10543",
+      "name": "Patriots Park State Historic Site",
+      "latitude": 41.6018,
+      "longitude": -71.2583,
+      "grid": "FN41io",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10543/",
+      "potaUrl": "https://pota.app/#/park/US-10543",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-10543",
+          "park": "Patriots Park State Historic Site",
+          "date": "2026-02-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 0,
+            "data": 0,
+            "phone": 11
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 84,
+        "activations": 84,
+        "qsos": 2887
+      }
+    },
+    {
+      "reference": "US-10544",
+      "name": "Jerimoth Hill State Recreation Area",
+      "latitude": 41.8512,
+      "longitude": -71.7786,
+      "grid": "FN41cu",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10544/",
+      "potaUrl": "https://pota.app/#/park/US-10544",
+      "activationCount": 1,
+      "qsoTotal": 18,
+      "activations": [
+        {
+          "reference": "US-10544",
+          "park": "Jerimoth Hill State Recreation Area",
+          "date": "2026-05-10",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 18,
+            "cw": 18,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 32,
+        "activations": 32,
+        "qsos": 916
+      }
+    },
+    {
+      "reference": "US-10545",
+      "name": "Hillsdale Preserve Management Area",
+      "latitude": 41.522,
+      "longitude": -71.6411,
+      "grid": "FN41em",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10545/",
+      "potaUrl": "https://pota.app/#/park/US-10545",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 266,
+        "activations": 266,
+        "qsos": 12867
+      }
+    },
+    {
+      "reference": "US-10546",
+      "name": "Eight Rod Farm Wildlife Management Area",
+      "latitude": 41.5521,
+      "longitude": -71.1899,
+      "grid": "FN41jn",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10546/",
+      "potaUrl": "https://pota.app/#/park/US-10546",
+      "activationCount": 1,
+      "qsoTotal": 14,
+      "activations": [
+        {
+          "reference": "US-10546",
+          "park": "Eight Rod Farm Wildlife Management Area",
+          "date": "2026-05-30",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 14,
+            "cw": 14,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-30-east-bay-pota-rove",
+              "title": "East Bay Three-Park POTA Rove",
+              "date": "2026-05-30",
+              "href": "/notes/2026-05-30-east-bay-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-30-east-bay-pota-rove",
+          "title": "East Bay Three-Park POTA Rove",
+          "date": "2026-05-30",
+          "href": "/notes/2026-05-30-east-bay-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 59,
+        "activations": 57,
+        "qsos": 2428
+      }
+    },
+    {
+      "reference": "US-10547",
+      "name": "Silver Spring State Recreation Area",
+      "latitude": 41.5388,
+      "longitude": -71.4705,
+      "grid": "FN41gm",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10547/",
+      "potaUrl": "https://pota.app/#/park/US-10547",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-10547",
+          "park": "Silver Spring State Recreation Area",
+          "date": "2026-05-11",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 85,
+        "activations": 84,
+        "qsos": 3202
+      }
+    },
+    {
+      "reference": "US-10548",
+      "name": "Barber Pond State Recreation Area",
+      "latitude": 41.4994,
+      "longitude": -71.5639,
+      "grid": "FN41fl",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-10548/",
+      "potaUrl": "https://pota.app/#/park/US-10548",
+      "activationCount": 1,
+      "qsoTotal": 93,
+      "activations": [
+        {
+          "reference": "US-10548",
+          "park": "Barber Pond State Recreation Area",
+          "date": "2026-04-05",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 93,
+            "cw": 0,
+            "data": 0,
+            "phone": 93
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 48,
+        "activations": 46,
+        "qsos": 1537
+      }
+    },
+    {
+      "reference": "US-2868",
+      "name": "Beavertail State Park",
+      "latitude": 41.446,
+      "longitude": -71.3993,
+      "grid": "FN41hk",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2868/",
+      "potaUrl": "https://pota.app/#/park/US-2868",
+      "activationCount": 1,
+      "qsoTotal": 18,
+      "activations": [
+        {
+          "reference": "US-2868",
+          "park": "Beavertail State Park",
+          "date": "2026-02-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 18,
+            "cw": 0,
+            "data": 0,
+            "phone": 18
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 224,
+        "activations": 211,
+        "qsos": 37875
+      }
+    },
+    {
+      "reference": "US-2869",
+      "name": "Blackstone River State Park",
+      "latitude": 41.9379,
+      "longitude": -71.4343,
+      "grid": "FN41gw",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2869/",
+      "potaUrl": "https://pota.app/#/park/US-2869",
+      "activationCount": 1,
+      "qsoTotal": 40,
+      "activations": [
+        {
+          "reference": "US-2869",
+          "park": "Blackstone River State Park",
+          "date": "2025-10-18",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 40,
+            "cw": 0,
+            "data": 0,
+            "phone": 40
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 74,
+        "activations": 73,
+        "qsos": 1993
+      }
+    },
+    {
+      "reference": "US-2870",
+      "name": "Brenton Point State Park",
+      "latitude": 41.452,
+      "longitude": -71.3542,
+      "grid": "FN41hk",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2870/",
+      "potaUrl": "https://pota.app/#/park/US-2870",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-2870",
+          "park": "Brenton Point State Park",
+          "date": "2026-02-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 0,
+            "data": 0,
+            "phone": 11
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 165,
+        "activations": 162,
+        "qsos": 6364
+      }
+    },
+    {
+      "reference": "US-2871",
+      "name": "Burlingame State Park",
+      "latitude": 41.3756,
+      "longitude": -71.6986,
+      "grid": "FN41dj",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2871/",
+      "potaUrl": "https://pota.app/#/park/US-2871",
+      "activationCount": 2,
+      "qsoTotal": 17,
+      "activations": [
+        {
+          "reference": "US-2871",
+          "park": "Burlingame State Park",
+          "date": "2026-05-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-25-pota-rove",
+              "title": "Memorial Day Rhode Island POTA Rove",
+              "date": "2026-05-25",
+              "href": "/notes/2026-05-25-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-2871",
+          "park": "Burlingame State Park",
+          "date": "2025-11-16",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 5,
+            "cw": 0,
+            "data": 0,
+            "phone": 5
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
+          "date": "2026-05-25",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 110,
+        "activations": 104,
+        "qsos": 2828
+      }
+    },
+    {
+      "reference": "US-2872",
+      "name": "Colt State Park",
+      "latitude": 41.6769,
+      "longitude": -71.2985,
+      "grid": "FN41iq",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2872/",
+      "potaUrl": "https://pota.app/#/park/US-2872",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 326,
+        "activations": 321,
+        "qsos": 12679
+      }
+    },
+    {
+      "reference": "US-2873",
+      "name": "Fishermen's Memorial State Park",
+      "latitude": 41.3805,
+      "longitude": -71.4897,
+      "grid": "FN41gj",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2873/",
+      "potaUrl": "https://pota.app/#/park/US-2873",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-2873",
+          "park": "Fishermen's Memorial State Park",
+          "date": "2026-05-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 104,
+        "activations": 101,
+        "qsos": 4149
+      }
+    },
+    {
+      "reference": "US-2874",
+      "name": "Fort Adams State Park",
+      "latitude": 41.4778,
+      "longitude": -71.3355,
+      "grid": "FN41hl",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2874/",
+      "potaUrl": "https://pota.app/#/park/US-2874",
+      "activationCount": 2,
+      "qsoTotal": 38,
+      "activations": [
+        {
+          "reference": "US-2874",
+          "park": "Fort Adams State Park",
+          "date": "2026-02-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 13,
+            "cw": 0,
+            "data": 0,
+            "phone": 13
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-2874",
+          "park": "Fort Adams State Park",
+          "date": "2026-02-27",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 25,
+            "cw": 0,
+            "data": 0,
+            "phone": 25
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 167,
+        "activations": 156,
+        "qsos": 5938
+      }
+    },
+    {
+      "reference": "US-2875",
+      "name": "Fort Wetherill State Park",
+      "latitude": 41.4778,
+      "longitude": -71.3585,
+      "grid": "FN41hl",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2875/",
+      "potaUrl": "https://pota.app/#/park/US-2875",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-2875",
+          "park": "Fort Wetherill State Park",
+          "date": "2026-02-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 0,
+            "data": 0,
+            "phone": 11
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 170,
+        "activations": 166,
+        "qsos": 6450
+      }
+    },
+    {
+      "reference": "US-2876",
+      "name": "Goddard Memorial State Park",
+      "latitude": 41.657,
+      "longitude": -71.4377,
+      "grid": "FN41gp",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2876/",
+      "potaUrl": "https://pota.app/#/park/US-2876",
+      "activationCount": 1,
+      "qsoTotal": 10,
+      "activations": [
+        {
+          "reference": "US-2876",
+          "park": "Goddard Memorial State Park",
+          "date": "2026-05-16",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 512,
+        "activations": 482,
+        "qsos": 21397
+      }
+    },
+    {
+      "reference": "US-2877",
+      "name": "Haines Memorial State Park",
+      "latitude": 41.7539,
+      "longitude": -71.3508,
+      "grid": "FN41hs",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2877/",
+      "potaUrl": "https://pota.app/#/park/US-2877",
+      "activationCount": 2,
+      "qsoTotal": 67,
+      "activations": [
+        {
+          "reference": "US-2877",
+          "park": "Haines Memorial State Park",
+          "date": "2026-05-03",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 38,
+            "cw": 38,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-2877",
+          "park": "Haines Memorial State Park",
+          "date": "2026-03-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 29,
+            "cw": 0,
+            "data": 0,
+            "phone": 29
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 175,
+        "activations": 173,
+        "qsos": 6973
+      }
+    },
+    {
+      "reference": "US-2878",
+      "name": "Lincoln Woods State Park",
+      "latitude": 41.8975,
+      "longitude": -71.4329,
+      "grid": "FN41gv",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2878/",
+      "potaUrl": "https://pota.app/#/park/US-2878",
+      "activationCount": 2,
+      "qsoTotal": 21,
+      "activations": [
+        {
+          "reference": "US-2878",
+          "park": "Lincoln Woods State Park",
+          "date": "2026-01-10",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 20,
+            "cw": 0,
+            "data": 0,
+            "phone": 20
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-2878",
+          "park": "Lincoln Woods State Park",
+          "date": "2025-11-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 1,
+            "cw": 0,
+            "data": 0,
+            "phone": 1
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 84,
+        "activations": 80,
+        "qsos": 2764
+      }
+    },
+    {
+      "reference": "US-2879",
+      "name": "Rocky Point State Park",
+      "latitude": 41.6915,
+      "longitude": -71.3634,
+      "grid": "FN41hq",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2879/",
+      "potaUrl": "https://pota.app/#/park/US-2879",
+      "activationCount": 1,
+      "qsoTotal": 71,
+      "activations": [
+        {
+          "reference": "US-2879",
+          "park": "Rocky Point State Park",
+          "date": "2026-02-22",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 71,
+            "cw": 0,
+            "data": 0,
+            "phone": 71
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 202,
+        "activations": 190,
+        "qsos": 8572
+      }
+    },
+    {
+      "reference": "US-2880",
+      "name": "Snake Den State Park",
+      "latitude": 41.8303,
+      "longitude": -71.5373,
+      "grid": "FN41ft",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2880/",
+      "potaUrl": "https://pota.app/#/park/US-2880",
+      "activationCount": 2,
+      "qsoTotal": 45,
+      "activations": [
+        {
+          "reference": "US-2880",
+          "park": "Snake Den State Park",
+          "date": "2026-05-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 27,
+            "cw": 27,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-2880",
+          "park": "Snake Den State Park",
+          "date": "2025-10-29",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 18,
+            "cw": 0,
+            "data": 0,
+            "phone": 18
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 152,
+        "activations": 149,
+        "qsos": 5364
+      }
+    },
+    {
+      "reference": "US-2881",
+      "name": "World War II Veterans Memorial State Park",
+      "latitude": 42.0101,
+      "longitude": -71.5097,
+      "grid": "FN42fa",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-2881/",
+      "potaUrl": "https://pota.app/#/park/US-2881",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 53,
+        "activations": 51,
+        "qsos": 1288
+      }
+    },
+    {
+      "reference": "US-4582",
+      "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "latitude": 41.312,
+      "longitude": -73.9709,
+      "grid": "FN31ah",
+      "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
+      "href": "/radio/pota/US-4582/",
+      "potaUrl": "https://pota.app/#/park/US-4582",
+      "activationCount": 2,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-4582",
+          "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+          "date": "2026-03-29",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 1,
+            "cw": 0,
+            "data": 0,
+            "phone": 1
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-4582",
+          "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+          "date": "2026-02-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 0,
+            "data": 0,
+            "phone": 11
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 2522,
+        "activations": 2475,
+        "qsos": 102891
+      }
+    },
+    {
+      "reference": "US-5482",
+      "name": "Wickaboxet Wildlife Management Area",
+      "latitude": 41.6364,
+      "longitude": -71.7359,
+      "grid": "FN41dp",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-5482/",
+      "potaUrl": "https://pota.app/#/park/US-5482",
+      "activationCount": 1,
+      "qsoTotal": 18,
+      "activations": [
+        {
+          "reference": "US-5482",
+          "park": "Wickaboxet Wildlife Management Area",
+          "date": "2026-05-09",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 18,
+            "cw": 18,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 69,
+        "activations": 68,
+        "qsos": 3053
+      }
+    },
+    {
+      "reference": "US-5483",
+      "name": "Lincoln Woods State Forest",
+      "latitude": 41.8962,
+      "longitude": -71.4327,
+      "grid": "FN41gv",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-5483/",
+      "potaUrl": "https://pota.app/#/park/US-5483",
+      "activationCount": 2,
+      "qsoTotal": 21,
+      "activations": [
+        {
+          "reference": "US-5483",
+          "park": "Lincoln Woods State Forest",
+          "date": "2026-01-10",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 20,
+            "cw": 0,
+            "data": 0,
+            "phone": 20
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-5483",
+          "park": "Lincoln Woods State Forest",
+          "date": "2025-11-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 1,
+            "cw": 0,
+            "data": 0,
+            "phone": 1
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 74,
+        "activations": 70,
+        "qsos": 2393
+      }
+    },
+    {
+      "reference": "US-5484",
+      "name": "George Washington Memorial State Forest",
+      "latitude": 41.9259,
+      "longitude": -71.7359,
+      "grid": "FN41dw",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-5484/",
+      "potaUrl": "https://pota.app/#/park/US-5484",
+      "activationCount": 2,
+      "qsoTotal": 107,
+      "activations": [
+        {
+          "reference": "US-5484",
+          "park": "George Washington Memorial State Forest",
+          "date": "2026-04-18",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 23,
+            "cw": 4,
+            "data": 0,
+            "phone": 19
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-5484",
+          "park": "George Washington Memorial State Forest",
+          "date": "2026-03-08",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 84,
+            "cw": 0,
+            "data": 0,
+            "phone": 84
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 63,
+        "activations": 61,
+        "qsos": 2297
+      }
+    },
+    {
+      "reference": "US-6979",
+      "name": "Arcadia Management Area",
+      "latitude": 41.5561,
+      "longitude": -71.685,
+      "grid": "FN41dn",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6979/",
+      "potaUrl": "https://pota.app/#/park/US-6979",
+      "activationCount": 1,
+      "qsoTotal": 24,
+      "activations": [
+        {
+          "reference": "US-6979",
+          "park": "Arcadia Management Area",
+          "date": "2026-04-14",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 24,
+            "cw": 1,
+            "data": 0,
+            "phone": 23
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 430,
+        "activations": 425,
+        "qsos": 14681
+      }
+    },
+    {
+      "reference": "US-6980",
+      "name": "Beach Pond Wildlife Management Area",
+      "latitude": 41.5739,
+      "longitude": -71.7864,
+      "grid": "FN41cn",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6980/",
+      "potaUrl": "https://pota.app/#/park/US-6980",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 382,
+        "activations": 379,
+        "qsos": 12737
+      }
+    },
+    {
+      "reference": "US-6981",
+      "name": "Great Swamp Wildlife Management Area",
+      "latitude": 41.4691,
+      "longitude": -71.5796,
+      "grid": "FN41fl",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6981/",
+      "potaUrl": "https://pota.app/#/park/US-6981",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 60,
+        "activations": 58,
+        "qsos": 2026
+      }
+    },
+    {
+      "reference": "US-6982",
+      "name": "Big River Wildlife Management Area",
+      "latitude": 41.6311,
+      "longitude": -71.5714,
+      "grid": "FN41fp",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6982/",
+      "potaUrl": "https://pota.app/#/park/US-6982",
+      "activationCount": 2,
+      "qsoTotal": 23,
+      "activations": [
+        {
+          "reference": "US-6982",
+          "park": "Big River Wildlife Management Area",
+          "date": "2026-05-14",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 20,
+            "cw": 20,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6982",
+          "park": "Big River Wildlife Management Area",
+          "date": "2025-11-01",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 3,
+            "cw": 0,
+            "data": 0,
+            "phone": 3
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 327,
+        "activations": 326,
+        "qsos": 13818
+      }
+    },
+    {
+      "reference": "US-6983",
+      "name": "Woody Hill Wildlife Management Area",
+      "latitude": 41.3694,
+      "longitude": -71.7448,
+      "grid": "FN41di",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6983/",
+      "potaUrl": "https://pota.app/#/park/US-6983",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-6983",
+          "park": "Woody Hill Wildlife Management Area",
+          "date": "2026-05-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-25-pota-rove",
+              "title": "Memorial Day Rhode Island POTA Rove",
+              "date": "2026-05-25",
+              "href": "/notes/2026-05-25-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
+          "date": "2026-05-25",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 46,
+        "activations": 46,
+        "qsos": 1409
+      }
+    },
+    {
+      "reference": "US-6984",
+      "name": "Black Hut Wildlife Management Area",
+      "latitude": 41.9928,
+      "longitude": -71.6568,
+      "grid": "FN41ex",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6984/",
+      "potaUrl": "https://pota.app/#/park/US-6984",
+      "activationCount": 1,
+      "qsoTotal": 25,
+      "activations": [
+        {
+          "reference": "US-6984",
+          "park": "Black Hut Wildlife Management Area",
+          "date": "2026-05-27",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 25,
+            "cw": 25,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-27-black-hut-wildlife-management-area-pota",
+              "title": "Black Hut Wildlife Management Area with a 40m EFHW",
+              "date": "2026-05-27",
+              "href": "/notes/2026-05-27-black-hut-wildlife-management-area-pota/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-27-black-hut-wildlife-management-area-pota",
+          "title": "Black Hut Wildlife Management Area with a 40m EFHW",
+          "date": "2026-05-27",
+          "href": "/notes/2026-05-27-black-hut-wildlife-management-area-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 39,
+        "activations": 39,
+        "qsos": 1492
+      }
+    },
+    {
+      "reference": "US-6985",
+      "name": "Round Top Wildlife Management Area",
+      "latitude": 42.0014,
+      "longitude": -71.7011,
+      "grid": "FN42da",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6985/",
+      "potaUrl": "https://pota.app/#/park/US-6985",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 63,
+        "activations": 62,
+        "qsos": 2301
+      }
+    },
+    {
+      "reference": "US-6986",
+      "name": "Simmons Mill Wildlife Management Area",
+      "latitude": 41.5358,
+      "longitude": -71.1341,
+      "grid": "FN41km",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6986/",
+      "potaUrl": "https://pota.app/#/park/US-6986",
+      "activationCount": 1,
+      "qsoTotal": 14,
+      "activations": [
+        {
+          "reference": "US-6986",
+          "park": "Simmons Mill Wildlife Management Area",
+          "date": "2026-05-30",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 14,
+            "cw": 14,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-30-east-bay-pota-rove",
+              "title": "East Bay Three-Park POTA Rove",
+              "date": "2026-05-30",
+              "href": "/notes/2026-05-30-east-bay-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-30-east-bay-pota-rove",
+          "title": "East Bay Three-Park POTA Rove",
+          "date": "2026-05-30",
+          "href": "/notes/2026-05-30-east-bay-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 63,
+        "activations": 63,
+        "qsos": 2249
+      }
+    },
+    {
+      "reference": "US-6987",
+      "name": "Cocumcussoc State Park",
+      "latitude": 41.5823,
+      "longitude": -71.4599,
+      "grid": "FN41gn",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6987/",
+      "potaUrl": "https://pota.app/#/park/US-6987",
+      "activationCount": 1,
+      "qsoTotal": 69,
+      "activations": [
+        {
+          "reference": "US-6987",
+          "park": "Cocumcussoc State Park",
+          "date": "2026-04-04",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 69,
+            "cw": 0,
+            "data": 0,
+            "phone": 69
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 70,
+        "activations": 64,
+        "qsos": 2546
+      }
+    },
+    {
+      "reference": "US-6988",
+      "name": "Grills State Preserve",
+      "latitude": 41.3997,
+      "longitude": -71.7591,
+      "grid": "FN41cj",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6988/",
+      "potaUrl": "https://pota.app/#/park/US-6988",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 49,
+        "activations": 44,
+        "qsos": 1387
+      }
+    },
+    {
+      "reference": "US-6989",
+      "name": "Black Farm Wildlife Management Area",
+      "latitude": 41.4674,
+      "longitude": -71.7285,
+      "grid": "FN41dl",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6989/",
+      "potaUrl": "https://pota.app/#/park/US-6989",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 64,
+        "activations": 63,
+        "qsos": 2384
+      }
+    },
+    {
+      "reference": "US-6990",
+      "name": "Nicholas Farm Wildlife Management Area",
+      "latitude": 41.6804,
+      "longitude": -71.7739,
+      "grid": "FN41cq",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6990/",
+      "potaUrl": "https://pota.app/#/park/US-6990",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-6990",
+          "park": "Nicholas Farm Wildlife Management Area",
+          "date": "2026-03-15",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 0,
+            "data": 0,
+            "phone": 11
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 63,
+        "activations": 62,
+        "qsos": 3068
+      }
+    },
+    {
+      "reference": "US-6991",
+      "name": "Rockville Wildlife Management Area",
+      "latitude": 41.5054,
+      "longitude": -71.7591,
+      "grid": "FN41cm",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6991/",
+      "potaUrl": "https://pota.app/#/park/US-6991",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 54,
+        "activations": 52,
+        "qsos": 2335
+      }
+    },
+    {
+      "reference": "US-6992",
+      "name": "JL Curran State Park",
+      "latitude": 41.7507,
+      "longitude": -71.5516,
+      "grid": "FN41fs",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-6992/",
+      "potaUrl": "https://pota.app/#/park/US-6992",
+      "activationCount": 25,
+      "qsoTotal": 740,
+      "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-20",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 23,
+            "cw": 23,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-19",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-18",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 16,
+            "cw": 16,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-15",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-13",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-12",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-08",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-06",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 9,
+            "cw": 9,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-05-05",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-04-30",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 25,
+            "cw": 25,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-04-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-04-27",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-04-11",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 54,
+            "cw": 0,
+            "data": 0,
+            "phone": 54
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-04-10",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 0,
+            "data": 0,
+            "phone": 11
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-03-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 64,
+            "cw": 0,
+            "data": 0,
+            "phone": 64
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-03-19",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 121,
+            "cw": 0,
+            "data": 0,
+            "phone": 121
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-03-11",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 92,
+            "cw": 0,
+            "data": 0,
+            "phone": 92
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-03-09",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 76,
+            "cw": 0,
+            "data": 0,
+            "phone": 76
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-03-06",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 85,
+            "cw": 0,
+            "data": 0,
+            "phone": 85
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2025-11-26",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 0,
+            "data": 0,
+            "phone": 15
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2025-11-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 5,
+            "cw": 0,
+            "data": 0,
+            "phone": 5
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2025-11-15",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 0,
+            "data": 0,
+            "phone": 12
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2025-11-08",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 18,
+            "cw": 0,
+            "data": 0,
+            "phone": 18
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2025-09-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 0,
+            "data": 0,
+            "phone": 10
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-03-jl-curran-state-park-pota",
+          "title": "JL Curran State Park Pack Mule Activation",
+          "date": "2026-06-03",
+          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 73,
+        "activations": 70,
+        "qsos": 2260
+      }
+    },
+    {
+      "reference": "US-7508",
+      "name": "Pulaski State Park",
+      "latitude": 41.9281,
+      "longitude": -71.7969,
+      "grid": "FN41cw",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7508/",
+      "potaUrl": "https://pota.app/#/park/US-7508",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 112,
+        "activations": 111,
+        "qsos": 3401
+      }
+    },
+    {
+      "reference": "US-7518",
+      "name": "Kimball Wildlife Refuge",
+      "latitude": 41.3745,
+      "longitude": -71.6868,
+      "grid": "FN41di",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7518/",
+      "potaUrl": "https://pota.app/#/park/US-7518",
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-7518",
+          "park": "Kimball Wildlife Refuge",
+          "date": "2026-05-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-25-pota-rove",
+              "title": "Memorial Day Rhode Island POTA Rove",
+              "date": "2026-05-25",
+              "href": "/notes/2026-05-25-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
+          "date": "2026-05-25",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 40,
+        "activations": 40,
+        "qsos": 1004
+      }
+    },
+    {
+      "reference": "US-7714",
+      "name": "Buck Hill Wildlife Management Area",
+      "latitude": 41.9851,
+      "longitude": -71.7893,
+      "grid": "FN41cx",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7714/",
+      "potaUrl": "https://pota.app/#/park/US-7714",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 108,
+        "activations": 108,
+        "qsos": 4266
+      }
+    },
+    {
+      "reference": "US-7715",
+      "name": "Durfee Hill Wildlife Management Area",
+      "latitude": 41.9025,
+      "longitude": -71.7841,
+      "grid": "FN41cv",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7715/",
+      "potaUrl": "https://pota.app/#/park/US-7715",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-05-29-durfee-hill-wildlife-management-area-pota",
+          "title": "Durfee Hill Wildlife Management Area POTA",
+          "date": "2026-05-29",
+          "href": "/notes/2026-05-29-durfee-hill-wildlife-management-area-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 76,
+        "activations": 76,
+        "qsos": 2920
+      }
+    },
+    {
+      "reference": "US-7716",
+      "name": "Carolina Wildlife Management Area",
+      "latitude": 41.4665,
+      "longitude": -71.689,
+      "grid": "FN41dl",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7716/",
+      "potaUrl": "https://pota.app/#/park/US-7716",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 71,
+        "activations": 70,
+        "qsos": 3396
+      }
+    },
+    {
+      "reference": "US-7717",
+      "name": "Charlestown Breachway State Park",
+      "latitude": 41.3567,
+      "longitude": -71.6382,
+      "grid": "FN41ei",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7717/",
+      "potaUrl": "https://pota.app/#/park/US-7717",
+      "activationCount": 2,
+      "qsoTotal": 17,
+      "activations": [
+        {
+          "reference": "US-7717",
+          "park": "Charlestown Breachway State Park",
+          "date": "2026-05-24",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 15,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-7717",
+          "park": "Charlestown Breachway State Park",
+          "date": "2026-05-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 2,
+            "cw": 2,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 55,
+        "activations": 53,
+        "qsos": 1959
+      }
+    },
+    {
+      "reference": "US-7718",
+      "name": "East Matunuck State Beach",
+      "latitude": 41.3776,
+      "longitude": -71.5251,
+      "grid": "FN41fj",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7718/",
+      "potaUrl": "https://pota.app/#/park/US-7718",
+      "activationCount": 1,
+      "qsoTotal": 25,
+      "activations": [
+        {
+          "reference": "US-7718",
+          "park": "East Matunuck State Beach",
+          "date": "2026-05-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 25,
+            "cw": 25,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 58,
+        "activations": 58,
+        "qsos": 1913
+      }
+    },
+    {
+      "reference": "US-7719",
+      "name": "Misquamicut State Beach",
+      "latitude": 41.3234,
+      "longitude": -71.8025,
+      "grid": "FN41ch",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7719/",
+      "potaUrl": "https://pota.app/#/park/US-7719",
+      "activationCount": 1,
+      "qsoTotal": 15,
+      "activations": [
+        {
+          "reference": "US-7719",
+          "park": "Misquamicut State Beach",
+          "date": "2026-05-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 15,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-25-pota-rove",
+              "title": "Memorial Day Rhode Island POTA Rove",
+              "date": "2026-05-25",
+              "href": "/notes/2026-05-25-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
+          "date": "2026-05-25",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 80,
+        "activations": 77,
+        "qsos": 2200
+      }
+    },
+    {
+      "reference": "US-7720",
+      "name": "Roger W. Wheeler State Beach",
+      "latitude": 41.3735,
+      "longitude": -71.5004,
+      "grid": "FN41fi",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7720/",
+      "potaUrl": "https://pota.app/#/park/US-7720",
+      "activationCount": 1,
+      "qsoTotal": 15,
+      "activations": [
+        {
+          "reference": "US-7720",
+          "park": "Roger W. Wheeler State Beach",
+          "date": "2026-05-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 15,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 78,
+        "activations": 77,
+        "qsos": 2132
+      }
+    },
+    {
+      "reference": "US-7721",
+      "name": "Salty Brine State Beach",
+      "latitude": 41.3761,
+      "longitude": -71.5127,
+      "grid": "FN41fj",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7721/",
+      "potaUrl": "https://pota.app/#/park/US-7721",
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-7721",
+          "park": "Salty Brine State Beach",
+          "date": "2026-05-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 54,
+        "activations": 53,
+        "qsos": 1253
+      }
+    },
+    {
+      "reference": "US-7722",
+      "name": "Scarborough North State Beach",
+      "latitude": 41.3897,
+      "longitude": -71.4731,
+      "grid": "FN41gj",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7722/",
+      "potaUrl": "https://pota.app/#/park/US-7722",
+      "activationCount": 1,
+      "qsoTotal": 13,
+      "activations": [
+        {
+          "reference": "US-7722",
+          "park": "Scarborough North State Beach",
+          "date": "2026-04-26",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 13,
+            "cw": 13,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 95,
+        "activations": 95,
+        "qsos": 3369
+      }
+    },
+    {
+      "reference": "US-7723",
+      "name": "John H. Chaffee Rome Point State Nature Preserve",
+      "latitude": 41.5372,
+      "longitude": -71.4374,
+      "grid": "FN41gm",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7723/",
+      "potaUrl": "https://pota.app/#/park/US-7723",
+      "activationCount": 1,
+      "qsoTotal": 30,
+      "activations": [
+        {
+          "reference": "US-7723",
+          "park": "John H. Chaffee Rome Point State Nature Preserve",
+          "date": "2026-04-04",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 30,
+            "cw": 0,
+            "data": 0,
+            "phone": 30
+          },
+          "source": "backfill",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 66,
+        "activations": 66,
+        "qsos": 2480
+      }
+    },
+    {
+      "reference": "US-7865",
+      "name": "East State Beach",
+      "latitude": 41.3481,
+      "longitude": -71.6733,
+      "grid": "FN41di",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-7865/",
+      "potaUrl": "https://pota.app/#/park/US-7865",
+      "activationCount": 1,
+      "qsoTotal": 15,
+      "activations": [
+        {
+          "reference": "US-7865",
+          "park": "East State Beach",
+          "date": "2026-05-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 15,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-25-pota-rove",
+              "title": "Memorial Day Rhode Island POTA Rove",
+              "date": "2026-05-25",
+              "href": "/notes/2026-05-25-pota-rove/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
+          "date": "2026-05-25",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 62,
+        "activations": 62,
+        "qsos": 1965
+      }
+    },
+    {
+      "reference": "US-7971",
+      "name": "Blackstone River Valley National Historical Park",
+      "latitude": 42.015,
+      "longitude": -71.5529,
+      "grid": "FN42fa",
+      "locationDesc": "US-MA,US-RI",
+      "href": "/radio/pota/US-7971/",
+      "potaUrl": "https://pota.app/#/park/US-7971",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [],
+      "publicStats": {
+        "attempts": 55,
+        "activations": 52,
+        "qsos": 1616
+      }
+    },
+    {
+      "reference": "US-8293",
+      "name": "Sapowet Marsh State Wildlife Area",
+      "latitude": 41.5825,
+      "longitude": -71.2089,
+      "grid": "FN41jn",
+      "locationDesc": "US-RI",
+      "href": "/radio/pota/US-8293/",
+      "potaUrl": "https://pota.app/#/park/US-8293",
+      "activationCount": 1,
+      "qsoTotal": 15,
+      "activations": [
+        {
+          "reference": "US-8293",
+          "park": "Sapowet Marsh State Wildlife Area",
+          "date": "2026-05-31",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 15,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-05-30-east-bay-pota-rove",
+          "title": "East Bay Three-Park POTA Rove",
+          "date": "2026-05-30",
+          "href": "/notes/2026-05-30-east-bay-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 140,
+        "activations": 134,
+        "qsos": 6750
+      }
+    }
+  ]
+}

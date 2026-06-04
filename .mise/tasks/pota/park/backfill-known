@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Ensure cached POTA park metadata for all locally known references"
+
+set -euo pipefail
+
+node --experimental-strip-types scripts/pota/parks.mjs backfill-known

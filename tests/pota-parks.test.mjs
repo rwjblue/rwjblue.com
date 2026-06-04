@@ -1,7 +1,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { buildPotaParkPages } from "../src/lib/pota/parks.ts";
+import {
+  buildPotaParkPages,
+  collectKnownReferences,
+} from "../src/lib/pota/parks.ts";
 
 const parks = [
   {
@@ -123,4 +126,31 @@ test("buildPotaParkPages labels RI challenge qualifying activations", () => {
       href: "/projects/2026-activate-all-ri-pota/",
     },
   ]);
+});
+
+test("collectKnownReferences combines notes, activations, and project references", () => {
+  assert.deepEqual(
+    collectKnownReferences({
+      notes: [
+        {
+          id: "2026-05-25-pota-rove",
+          title: "POTA Rove",
+          date: "2026-05-25",
+          tags: ["radio", "us-0515", "US-7865", "not-a-reference"],
+        },
+      ],
+      activations: [
+        {
+          reference: "us-6992",
+          park: "JL Curran State Park",
+          date: "2026-05-28",
+          callsign: "N1RWJ",
+          qsos: { total: 11, cw: 11, data: 0, phone: 0 },
+          source: "profile",
+        },
+      ],
+      projectReferences: ["US-0516", "us-6992"],
+    }),
+    ["US-0515", "US-0516", "US-6992", "US-7865"],
+  );
 });

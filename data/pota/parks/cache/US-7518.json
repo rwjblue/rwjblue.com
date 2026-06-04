@@ -1,0 +1,11 @@
+{
+  "reference": "US-7518",
+  "name": "Kimball Wildlife Refuge",
+  "latitude": 41.3745,
+  "longitude": -71.6868,
+  "grid": "FN41di",
+  "locationDesc": "US-RI",
+  "attempts": 40,
+  "activations": 40,
+  "qsos": 1004
+}
