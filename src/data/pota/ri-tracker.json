@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-06-04T20:09:42.285Z",
+  "generatedAt": "2026-06-04T20:52:24.062Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 44,
-    "remaining": 17,
+    "completed": 45,
+    "remaining": 16,
     "total": 61,
-    "percentComplete": 72
+    "percentComplete": 74
   },
   "references": [
     {
@@ -293,33 +293,6 @@
       }
     },
     {
-      "reference": "US-7715",
-      "name": "Durfee Hill Wildlife Management Area",
-      "latitude": 41.9025,
-      "longitude": -71.7841,
-      "grid": "FN41cv",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "href": "/radio/pota/US-7715/",
-      "potaUrl": "https://pota.app/#/park/US-7715",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [
-        {
-          "id": "2026-05-29-durfee-hill-wildlife-management-area-pota",
-          "title": "Durfee Hill Wildlife Management Area POTA",
-          "date": "2026-05-29",
-          "href": "/notes/2026-05-29-durfee-hill-wildlife-management-area-pota/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 76,
-        "activations": 76,
-        "qsos": 2920
-      }
-    },
-    {
       "reference": "US-7716",
       "name": "Carolina Wildlife Management Area",
       "latitude": 41.4665,
@@ -408,6 +381,57 @@
         "attempts": 177,
         "activations": 173,
         "qsos": 7471
+      }
+    },
+    {
+      "reference": "US-6992",
+      "name": "JL Curran State Park",
+      "latitude": 41.7507,
+      "longitude": -71.5516,
+      "grid": "FN41fs",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6992/",
+      "potaUrl": "https://pota.app/#/park/US-6992",
+      "firstActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2025-09-21",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 0,
+          "data": 0,
+          "phone": 10
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2026-06-03",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 22,
+          "cw": 22,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 24,
+      "notes": [
+        {
+          "id": "2026-06-03-jl-curran-state-park-pota",
+          "title": "JL Curran State Park Pack Mule Activation",
+          "date": "2026-06-03",
+          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 73,
+        "activations": 70,
+        "qsos": 2260
       }
     },
     {
@@ -564,54 +588,54 @@
       }
     },
     {
-      "reference": "US-6992",
-      "name": "JL Curran State Park",
-      "latitude": 41.7507,
-      "longitude": -71.5516,
-      "grid": "FN41fs",
+      "reference": "US-7715",
+      "name": "Durfee Hill Wildlife Management Area",
+      "latitude": 41.9025,
+      "longitude": -71.7841,
+      "grid": "FN41cv",
       "locationDesc": "US-RI",
       "status": "completed",
-      "href": "/radio/pota/US-6992/",
-      "potaUrl": "https://pota.app/#/park/US-6992",
+      "href": "/radio/pota/US-7715/",
+      "potaUrl": "https://pota.app/#/park/US-7715",
       "firstActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2025-09-21",
+        "reference": "US-7715",
+        "park": "Durfee Hill Wildlife Management Area",
+        "date": "2026-05-29",
         "callsign": "N1RWJ",
         "qsos": {
-          "total": 10,
-          "cw": 0,
-          "data": 0,
-          "phone": 10
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2026-05-28",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 11,
-          "cw": 11,
+          "total": 20,
+          "cw": 20,
           "data": 0,
           "phone": 0
         },
         "source": "profile"
       },
-      "activationCount": 23,
+      "latestActivation": {
+        "reference": "US-7715",
+        "park": "Durfee Hill Wildlife Management Area",
+        "date": "2026-05-29",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 20,
+          "cw": 20,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
       "notes": [
         {
-          "id": "2026-06-03-jl-curran-state-park-pota",
-          "title": "JL Curran State Park Pack Mule Activation",
-          "date": "2026-06-03",
-          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+          "id": "2026-05-29-durfee-hill-wildlife-management-area-pota",
+          "title": "Durfee Hill Wildlife Management Area POTA",
+          "date": "2026-05-29",
+          "href": "/notes/2026-05-29-durfee-hill-wildlife-management-area-pota/"
         }
       ],
       "publicStats": {
-        "attempts": 73,
-        "activations": 70,
-        "qsos": 2260
+        "attempts": 76,
+        "activations": 76,
+        "qsos": 2920
       }
     },
     {

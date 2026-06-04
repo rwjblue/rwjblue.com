@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T20:05:32.050Z",
+  "generatedAt": "2026-06-04T20:52:24.180Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -1851,9 +1851,37 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 25,
-      "qsoTotal": 740,
+      "activationCount": 26,
+      "qsoTotal": 762,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-06-03",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 22,
+            "cw": 22,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-03-jl-curran-state-park-pota",
+              "title": "JL Curran State Park Pack Mule Activation",
+              "date": "2026-06-03",
+              "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",
@@ -2460,9 +2488,38 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-7715/",
       "potaUrl": "https://pota.app/#/park/US-7715",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 20,
+      "activations": [
+        {
+          "reference": "US-7715",
+          "park": "Durfee Hill Wildlife Management Area",
+          "date": "2026-05-29",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 20,
+            "cw": 20,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-05-29-durfee-hill-wildlife-management-area-pota",
+              "title": "Durfee Hill Wildlife Management Area POTA",
+              "date": "2026-05-29",
+              "href": "/notes/2026-05-29-durfee-hill-wildlife-management-area-pota/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [
         {
           "id": "2026-05-29-durfee-hill-wildlife-management-area-pota",

@@ -12,24 +12,34 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 75,
-      "parks": 48,
-      "qsos": 1884
+      "activations": 77,
+      "parks": 49,
+      "qsos": 1926
     },
     "attempts": {
-      "activations": 83,
-      "parks": 48,
-      "qsos": 1911
+      "activations": 85,
+      "parks": 49,
+      "qsos": 1953
     },
     "hunter": {
-      "parks": 443,
-      "qsos": 638
+      "parks": 449,
+      "qsos": 647
     },
     "awards": 23,
     "endorsements": 48
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-06-03",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 22,
+        "data": 0,
+        "phone": 0,
+        "total": 22
+      },
       {
         "date": "2026-05-31",
         "reference": "US-8293",
@@ -59,6 +69,16 @@
         "data": 0,
         "phone": 0,
         "total": 14
+      },
+      {
+        "date": "2026-05-29",
+        "reference": "US-7715",
+        "park": "Durfee Hill Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 20,
+        "data": 0,
+        "phone": 0,
+        "total": 20
       },
       {
         "date": "2026-05-28",
@@ -259,29 +279,108 @@
         "data": 0,
         "phone": 0,
         "total": 10
-      },
-      {
-        "date": "2026-05-15",
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "location": "US-RI",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-05-14",
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "location": "US-RI",
-        "cw": 20,
-        "data": 0,
-        "phone": 0,
-        "total": 20
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-06-04T14:26:26",
+        "callsign": "KB6NU",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-13184",
+        "park": "Iron Belle State Trail",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-06-04T14:16:47",
+        "callsign": "WB0POH",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-0364",
+        "park": "Minnesota Valley National Wildlife Refuge",
+        "location": "US-MN"
+      },
+      {
+        "date": "2026-06-03T14:24:00",
+        "callsign": "W4BD",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-9935",
+        "park": "Virginia Bird & Wildlife State Trail",
+        "location": "US-VA"
+      },
+      {
+        "date": "2026-06-03T14:24:00",
+        "callsign": "W4BD",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-5507",
+        "park": "Channels State Forest",
+        "location": "US-VA"
+      },
+      {
+        "date": "2026-06-03T13:30:00",
+        "callsign": "WB3GCK",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1355",
+        "park": "French Creek State Park",
+        "location": "US-PA"
+      },
+      {
+        "date": "2026-06-03T13:23:47",
+        "callsign": "W4WJE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-4564",
+        "park": "Potomac Heritage Trail National Scenic Trail",
+        "location": "US-DC"
+      },
+      {
+        "date": "2026-06-03T13:23:47",
+        "callsign": "W4WJE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-0784",
+        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
+        "location": "US-DC"
+      },
+      {
+        "date": "2026-06-03T13:23:47",
+        "callsign": "W4WJE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-4567",
+        "park": "Captain John Smith Chesapeake National Historic Trail",
+        "location": "US-DC"
+      },
+      {
+        "date": "2026-06-03T13:23:47",
+        "callsign": "W4WJE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-4581",
+        "park": "Star-Spangled Banner National Historic Trail",
+        "location": "US-DC"
+      },
+      {
+        "date": "2026-06-03T13:23:47",
+        "callsign": "W4WJE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-0670",
+        "park": "George Washington Memorial Parkway",
+        "location": "US-DC"
+      },
+      {
+        "date": "2026-06-03T13:23:47",
+        "callsign": "W4WJE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-9898",
+        "park": "Mount Vernon National Historic Trail",
+        "location": "US-DC"
+      },
       {
         "date": "2026-06-01T16:03:06",
         "callsign": "NQ8T",
@@ -407,105 +506,6 @@
         "reference": "US-0647",
         "park": "Golden Gate National Recreation Area",
         "location": "US-CA"
-      },
-      {
-        "date": "2026-05-30T23:00:31",
-        "callsign": "KN6BAZ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1198",
-        "park": "Sonoma Coast State Park",
-        "location": "US-CA"
-      },
-      {
-        "date": "2026-05-30T22:51:00",
-        "callsign": "NL5Y",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-8333",
-        "park": "Garcon Point State Conservation Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-05-30T22:46:21",
-        "callsign": "N9ANA",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-7256",
-        "park": "Midewin National Grassland",
-        "location": "US-IL"
-      },
-      {
-        "date": "2026-05-30T22:44:00",
-        "callsign": "WC1D",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2620",
-        "park": "Niobrara State Park",
-        "location": "US-NE"
-      },
-      {
-        "date": "2026-05-30T22:42:56",
-        "callsign": "KI5WWT",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2996",
-        "park": "Cedar Hill State Park",
-        "location": "US-TX"
-      },
-      {
-        "date": "2026-05-30T21:59:39",
-        "callsign": "N1TJC",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-2085",
-        "park": "John Boyd Thacher State Park",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-05-30T21:04:42",
-        "callsign": "WB0RLJ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-4011",
-        "park": "Chalco Hills State Recreation Area",
-        "location": "US-NE"
-      },
-      {
-        "date": "2026-05-30T20:19:49",
-        "callsign": "K0LAR",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-0362",
-        "park": "Litchfield Wetland Management District",
-        "location": "US-MN"
-      },
-      {
-        "date": "2026-05-30T19:53:43",
-        "callsign": "K0LAR",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-0362",
-        "park": "Litchfield Wetland Management District",
-        "location": "US-MN"
-      },
-      {
-        "date": "2026-05-30T19:51:46",
-        "callsign": "WC1D",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2620",
-        "park": "Niobrara State Park",
-        "location": "US-NE"
-      },
-      {
-        "date": "2026-05-29T14:07:00",
-        "callsign": "KG1A",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
       }
     ]
   },

@@ -1026,6 +1026,32 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-06-03",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 22,
+        "cw": 22,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7715",
+      "park": "Durfee Hill Wildlife Management Area",
+      "date": "2026-05-29",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 20,
+        "cw": 20,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }
