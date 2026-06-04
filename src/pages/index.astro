@@ -7,114 +7,85 @@ const allNotes = (await getCollection("notes")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
-const latestNote = allNotes[0];
-const notes = allNotes.slice(0, 4);
+const noteItems = allNotes.map((note) => ({
+  type: "note" as const,
+  label: "Note",
+  date: note.data.date,
+  title: note.data.title,
+  summary: note.data.summary,
+  href: `/notes/${note.id}/`,
+}));
 
 const projects = (await getCollection("projects")).sort(
   (a, b) => b.data.updated.valueOf() - a.data.updated.valueOf(),
 );
 
-const recentProjects = projects.slice(0, 3);
+const projectItems = projects.map((project) => ({
+  type: "project" as const,
+  label: "Project",
+  date: project.data.updated,
+  title: project.data.title,
+  summary: project.data.summary,
+  href: `/projects/${project.id}/`,
+  status: project.data.status,
+}));
 
-const benchLinks = [
-  {
-    label: "Latest note",
-    title: latestNote.data.title,
-    text: `${formatDate(latestNote.data.date)} · ${latestNote.data.summary}`,
-    href: `/notes/${latestNote.id}/`,
-  },
-  {
-    label: "Radio setup",
-    title: "My shack",
-    text: "Home station, portable HF kit, antennas, and operating workflow notes.",
-    href: "/radio/shack/",
-  },
-  {
-    label: "POTA",
-    title: "2026 Activate All RI POTA",
-    text: "The map-first tracker for activating every Rhode Island POTA reference.",
-    href: "/projects/2026-activate-all-ri-pota/",
-  },
-  {
-    label: "Radio notes",
-    title: "N1RWJ field reports",
-    text: "POTA, CW, station setup, antennas, and practical radio debugging.",
-    href: "/radio/",
-  },
-];
+const activityItems = [...noteItems, ...projectItems]
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf())
+  .slice(0, 8);
+
+const activeProjects = projects
+  .filter((project) => project.data.status === "active")
+  .slice(0, 4);
 
 ---
 
 <BaseLayout>
-  <section class="hero compact" aria-labelledby="page-title">
-    <div class="intro">
-      <p class="eyebrow">N1RWJ / Robert Jackson</p>
-      <h1 id="page-title">Radio notes from the bench and field.</h1>
-      <p class="lede strong">
-        I operate amateur radio as N1RWJ, mostly around portable HF, CW, POTA,
-        antennas, and the station work that makes those things repeatable.
-      </p>
-      <p class="lede">
-        This site is where I keep field reports, station notes, project context,
-        and the occasional software writeup. The common thread is practical
-        debugging: make the setup clear, try the experiment, write down what
-        actually happened.
-      </p>
-    </div>
-
-    <aside class="bench-panel" aria-labelledby="bench-title">
-      <h2 id="bench-title">On the bench</h2>
-      <div class="bench-list linked">
-        <a href={`/notes/${latestNote.id}/`}>
-          <span>{benchLinks[0].label}</span>
-          <strong>{benchLinks[0].title}</strong>
-          <p>{benchLinks[0].text}</p>
-        </a>
-        {
-          benchLinks.slice(1).map((item) => (
-            <a href={item.href}>
-              <span>{item.label}</span>
-              <strong>{item.title}</strong>
-              <p>{item.text}</p>
-            </a>
-          ))
-        }
-      </div>
-    </aside>
+  <section class="home-intro" aria-labelledby="page-title">
+    <p class="eyebrow">N1RWJ / Robert Jackson</p>
+    <h1 id="page-title">Recent notes and project updates.</h1>
+    <p class="lede">
+      Portable HF, CW, POTA, station work, software tooling, and the practical
+      debugging notes that make those projects easier to repeat.
+    </p>
   </section>
 
-  <section class="section-grid" aria-label="Recent activity and recently updated projects">
-    <div class="section-block">
+  <div class="home-grid">
+    <section class="section-block activity-block" aria-labelledby="activity-title">
       <div class="section-heading">
         <p class="section-label">Latest</p>
-        <h2>Recent notes</h2>
+        <h2 id="activity-title">Recent activity</h2>
       </div>
-      <ol class="entry-list">
+      <ol class="entry-list activity-list">
         {
-          notes.map((note) => (
-            <li>
-              <time datetime={note.data.date.toISOString()}>
-                {formatDate(note.data.date)}
-              </time>
-              <a href={`/notes/${note.id}/`}>{note.data.title}</a>
-              <p>{note.data.summary}</p>
+          activityItems.map((item) => (
+            <li class={`activity-item activity-item--${item.type}`}>
+              <div class="activity-meta">
+                <span>{item.label}</span>
+                <time datetime={item.date.toISOString()}>
+                  {formatDate(item.date)}
+                </time>
+              </div>
+              <a href={item.href}>{item.title}</a>
+              <p>{item.summary}</p>
             </li>
           ))
         }
       </ol>
-      <nav class="section-more" aria-label="All notes">
-        <a href="/notes/">All notes →</a>
+      <nav class="section-more" aria-label="Browse writing">
+        <a href="/notes/">All notes</a>
+        <a href="/projects/">All projects</a>
       </nav>
-    </div>
+    </section>
 
-    <div class="section-block">
+    <aside class="section-block project-rail" aria-labelledby="projects-title">
       <div class="section-heading">
         <p class="section-label">Projects</p>
-        <h2>Active projects</h2>
+        <h2 id="projects-title">Active projects</h2>
       </div>
-      <div class="artifact-list">
+      <div class="artifact-list compact">
         {
-          recentProjects.map((project) => (
+          activeProjects.map((project) => (
             <a href={`/projects/${project.id}/`} class="artifact-item">
               <span>
                 {project.data.status} · updated {formatDate(project.data.updated)}
@@ -125,25 +96,16 @@ const benchLinks = [
           ))
         }
       </div>
-      <nav class="section-more" aria-label="All projects">
-        <a href="/projects/">All projects →</a>
+      <nav class="section-more" aria-label="Project index">
+        <a href="/projects/">All projects</a>
       </nav>
-    </div>
-  </section>
+    </aside>
+  </div>
 
-  <section class="bridge" aria-labelledby="bridge-title">
-    <p class="section-label">Workshop</p>
-    <h2 id="bridge-title">Radio leads, but the habits carry across.</h2>
-    <p>
-      Portable radio, station building, software tooling, and infrastructure all
-      reward the same work: clear logs, repeatable setups, careful debugging, and
-      honest notes about what failed.
-    </p>
-    <nav class="path-links" aria-label="Workshop paths">
-      <a href="/radio/shack/">My shack</a>
-      <a href="/notes/">Notes</a>
-      <a href="/projects/">Projects</a>
-      <a href="/radio/">Radio</a>
-    </nav>
-  </section>
+  <nav class="path-links home-paths" aria-label="Site sections">
+    <a href="/notes/">Notes</a>
+    <a href="/projects/">Projects</a>
+    <a href="/radio/">Radio</a>
+    <a href="/radio/shack/">My shack</a>
+  </nav>
 </BaseLayout>

@@ -4,19 +4,22 @@ import assert from "node:assert/strict";
 
 const read = (path) => readFileSync(path, "utf8");
 
-test("homepage presents a radio-led dispatch with live paths", () => {
+test("homepage presents a notes-first recent activity timeline", () => {
   const homepage = read("src/pages/index.astro");
 
   assert.match(homepage, /N1RWJ/);
-  assert.match(homepage, /On the bench/);
-  assert.match(homepage, /benchLinks/);
-  assert.match(homepage, /latestNote/);
-  assert.match(homepage, /Recent notes/);
+  assert.match(homepage, /activityItems/);
+  assert.match(homepage, /Recent activity/);
   assert.match(homepage, /Active projects/);
-  assert.match(homepage, /href=\{`\/notes\/\$\{latestNote\.id\}\/`\}/);
+  assert.match(homepage, /type: "note"/);
+  assert.match(homepage, /type: "project"/);
+  assert.match(homepage, /note\.data\.date/);
+  assert.match(homepage, /project\.data\.updated/);
+  assert.match(homepage, /href=\{item\.href\}/);
   assert.match(homepage, /\/radio\/shack\//);
-  assert.match(homepage, /\/projects\/2026-activate-all-ri-pota\//);
   assert.match(homepage, /href="\/radio\/"/);
+  assert.doesNotMatch(homepage, /On the bench/);
+  assert.doesNotMatch(homepage, /benchLinks/);
   assert.doesNotMatch(homepage, /Current bench/);
   assert.doesNotMatch(homepage, /\/now\//);
 });
