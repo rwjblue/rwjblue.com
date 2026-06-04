@@ -208,6 +208,10 @@ p {
   align-items: start;
 }
 
+.home-main {
+  min-width: 0;
+}
+
 .activity-block {
   min-width: 0;
 }

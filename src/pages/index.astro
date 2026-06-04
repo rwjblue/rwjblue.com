@@ -41,42 +41,44 @@ const activeProjects = projects
 ---
 
 <BaseLayout>
-  <section class="home-intro" aria-labelledby="page-title">
-    <p class="eyebrow">N1RWJ / Robert Jackson</p>
-    <h1 id="page-title">Recent notes and project updates.</h1>
-    <p class="lede">
-      Portable HF, CW, POTA, station work, software tooling, and the practical
-      debugging notes that make those projects easier to repeat.
-    </p>
-  </section>
-
   <div class="home-grid">
-    <section class="section-block activity-block" aria-labelledby="activity-title">
-      <div class="section-heading">
-        <p class="section-label">Latest</p>
-        <h2 id="activity-title">Recent activity</h2>
-      </div>
-      <ol class="entry-list activity-list">
-        {
-          activityItems.map((item) => (
-            <li class={`activity-item activity-item--${item.type}`}>
-              <div class="activity-meta">
-                <span>{item.label}</span>
-                <time datetime={item.date.toISOString()}>
-                  {formatDate(item.date)}
-                </time>
-              </div>
-              <a href={item.href}>{item.title}</a>
-              <p>{item.summary}</p>
-            </li>
-          ))
-        }
-      </ol>
-      <nav class="section-more" aria-label="Browse writing">
-        <a href="/notes/">All notes</a>
-        <a href="/projects/">All projects</a>
-      </nav>
-    </section>
+    <div class="home-main">
+      <section class="home-intro" aria-labelledby="page-title">
+        <p class="eyebrow">N1RWJ / Robert Jackson</p>
+        <h1 id="page-title">Recent notes and project updates.</h1>
+        <p class="lede">
+          Portable HF, CW, POTA, station work, software tooling, and the
+          practical debugging notes that make those projects easier to repeat.
+        </p>
+      </section>
+
+      <section class="section-block activity-block" aria-labelledby="activity-title">
+        <div class="section-heading">
+          <p class="section-label">Latest</p>
+          <h2 id="activity-title">Recent activity</h2>
+        </div>
+        <ol class="entry-list activity-list">
+          {
+            activityItems.map((item) => (
+              <li class={`activity-item activity-item--${item.type}`}>
+                <div class="activity-meta">
+                  <span>{item.label}</span>
+                  <time datetime={item.date.toISOString()}>
+                    {formatDate(item.date)}
+                  </time>
+                </div>
+                <a href={item.href}>{item.title}</a>
+                <p>{item.summary}</p>
+              </li>
+            ))
+          }
+        </ol>
+        <nav class="section-more" aria-label="Browse writing">
+          <a href="/notes/">All notes</a>
+          <a href="/projects/">All projects</a>
+        </nav>
+      </section>
+    </div>
 
     <aside class="section-block project-rail" aria-labelledby="projects-title">
       <div class="section-heading">
