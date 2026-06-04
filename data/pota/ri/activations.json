@@ -1,6 +1,19 @@
 {
   "activations": [
     {
+      "reference": "US-0516",
+      "park": "Sachuest Point National Wildlife Refuge",
+      "date": "2026-06-04",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 38,
+        "cw": 38,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "adi"
+    },
+    {
       "reference": "US-7865",
       "park": "East State Beach",
       "date": "2026-05-25",

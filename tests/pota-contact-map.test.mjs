@@ -27,6 +27,17 @@ const roveAdif = `
 <CALL:5>THIRD <BAND:3>20m <QSO_DATE:8>20260531 <TIME_ON:6>000600 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl56 <DXCC:3>110 <EOR>
 `;
 
+const ham2kMetadataAdif = `
+<ADIF_VER:5>3.1.5
+<EOH>
+<CALL:4>REAL <BAND:3>20m <QSO_DATE:8>20260604 <TIME_ON:6>141649 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl03 <GRIDSQUARE:6>EM85jx <DXCC:3>291 <STATE:2>TN <EOR>
+<CALL:5>BREAK <BAND:3>20m <QSO_DATE:8>20260604 <TIME_ON:6>141700 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl03 <GRIDSQUARE:6>FN41jl <DXCC:3>291 <STATE:2>RI <EOR>
+<CALL:5>SOLAR <BAND:3>20m <QSO_DATE:8>20260604 <TIME_ON:6>141800 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl03 <GRIDSQUARE:6>FN41jl <DXCC:3>291 <STATE:2>RI <EOR>
+<CALL:7>WEATHER <BAND:3>20m <QSO_DATE:8>20260604 <TIME_ON:6>141900 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl03 <GRIDSQUARE:6>FN41jl <DXCC:3>291 <STATE:2>RI <EOR>
+<CALL:5>START <BAND:3>20m <QSO_DATE:8>20260604 <TIME_ON:6>142000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl03 <GRIDSQUARE:6>FN41jl <DXCC:3>291 <STATE:2>RI <EOR>
+<X_HAM2K_SOLAR:26>2026-06-04T15:41:54Z SFI <X_HAM2K_WEATHER:29>2026-06-04T15:41:57Z Sunny <EOR>
+`;
+
 test("parseAdif extracts records and fields", () => {
   const qson = parseAdif(sampleAdif);
 
@@ -35,6 +46,15 @@ test("parseAdif extracts records and fields", () => {
   assert.equal(qson.qsos[0].their.grid, "EM86sn");
   assert.equal(qson.qsos[1].their.state, "IN");
   assert.equal(qson.qsos[0].our.grid, "FN41dx97");
+});
+
+test("parseAdif excludes Ham2K PoLo metadata entries from QSOs", () => {
+  const qson = parseAdif(ham2kMetadataAdif);
+
+  assert.deepEqual(
+    qson.qsos.map((qso) => qso.their.call),
+    ["REAL"],
+  );
 });
 
 test("gridToLatLon returns the center of the Maidenhead grid square", () => {

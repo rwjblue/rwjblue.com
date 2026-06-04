@@ -26,6 +26,10 @@ function parseADIF(str, options = {}) {
 
   let qsoCount = 0;
   adif.records.forEach((adifQSO) => {
+    if (!isQsoRecord(adifQSO)) {
+      return;
+    }
+
     const qso = parseAdifQSO(adifQSO);
     if (qso) {
       qsoCount += 1;
@@ -56,6 +60,23 @@ function parseADIF(str, options = {}) {
     qsos,
     errors,
   };
+}
+
+const HAM2K_POLO_METADATA_CALLS = new Set([
+  "BREAK",
+  "SOLAR",
+  "START",
+  "WEATHER",
+]);
+
+function isQsoRecord(adifQSO) {
+  const call = adifQSO.call?.trim().toUpperCase();
+
+  if (!call) {
+    return false;
+  }
+
+  return !HAM2K_POLO_METADATA_CALLS.has(call);
 }
 
 function condSet(src, dest, field, destField, formatValue) {
