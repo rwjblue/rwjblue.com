@@ -34,7 +34,7 @@ and figuring out what Elecraft changed.
 
 - **Radio:** Elecraft KX2, manufactured mid-May 2026
 - **USB-C charger:** G7UFO KXUSBC2
-- **Rails:** Gems Products / Jen's Products Side KX for the KX2
+- **Rails:** Gems Products / Gem's Products Side KX for the KX2
 - **Extra parts:** non-rail KXUSBC2 side plate, plus an uninstalled Pro Audio
   Engineering heatsink
 - **References:** the
