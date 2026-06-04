@@ -1,11 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import riPotaTrackerData from "../../data/pota/ri-tracker.json";
 import { formatDate } from "../../lib/format";
+import { effectiveProjectUpdatedDate } from "../../lib/project-updates";
 
-const projects = (await getCollection("projects")).sort(
-  (a, b) => b.data.updated.valueOf() - a.data.updated.valueOf(),
-);
+const projects = (await getCollection("projects"))
+  .map((project) => ({
+    project,
+    updated: effectiveProjectUpdatedDate(project, { riPotaTrackerData }),
+  }))
+  .sort((a, b) => b.updated.valueOf() - a.updated.valueOf());
 ---
 
 <BaseLayout title="Projects / Robert Jackson">
@@ -20,10 +25,10 @@ const projects = (await getCollection("projects")).sort(
 
   <div class="artifact-list full">
     {
-      projects.map((project) => (
+      projects.map(({ project, updated }) => (
         <a href={`/projects/${project.id}/`} class="artifact-item">
           <span>
-            {project.data.status} · updated {formatDate(project.data.updated)}
+            {project.data.status} · updated {formatDate(updated)}
           </span>
           <strong>{project.data.title}</strong>
           <p>{project.data.summary}</p>

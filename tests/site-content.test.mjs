@@ -14,7 +14,7 @@ test("homepage presents a notes-first recent activity timeline", () => {
   assert.match(homepage, /type: "note"/);
   assert.match(homepage, /type: "project"/);
   assert.match(homepage, /note\.data\.date/);
-  assert.match(homepage, /project\.data\.updated/);
+  assert.match(homepage, /effectiveProjectUpdatedDate/);
   assert.match(homepage, /href=\{item\.href\}/);
   assert.match(homepage, /\/radio\/shack\//);
   assert.match(homepage, /href="\/radio\/"/);
@@ -36,6 +36,16 @@ test("content collections support notes and updated projects", () => {
   assert.match(blackHutNote, /shareImageHero:/);
   assert.ok(existsSync("src/content/notes/public-workshop.md"));
   assert.ok(existsSync("src/content/projects/developer-tooling.md"));
+});
+
+test("project listings use effective project update dates", () => {
+  const homepage = read("src/pages/index.astro");
+  const projects = read("src/pages/projects/index.astro");
+
+  assert.match(homepage, /effectiveProjectUpdatedDate/);
+  assert.match(homepage, /formatDate\(updated\)/);
+  assert.match(projects, /effectiveProjectUpdatedDate/);
+  assert.match(projects, /formatDate\(updated\)/);
 });
 
 test("new section routes exist", () => {

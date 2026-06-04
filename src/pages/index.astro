@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import riPotaTrackerData from "../data/pota/ri-tracker.json";
 import { formatDate } from "../lib/format";
+import { effectiveProjectUpdatedDate } from "../lib/project-updates";
 
 const allNotes = (await getCollection("notes")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -16,14 +18,17 @@ const noteItems = allNotes.map((note) => ({
   href: `/notes/${note.id}/`,
 }));
 
-const projects = (await getCollection("projects")).sort(
-  (a, b) => b.data.updated.valueOf() - a.data.updated.valueOf(),
-);
+const projects = (await getCollection("projects"))
+  .map((project) => ({
+    project,
+    updated: effectiveProjectUpdatedDate(project, { riPotaTrackerData }),
+  }))
+  .sort((a, b) => b.updated.valueOf() - a.updated.valueOf());
 
-const projectItems = projects.map((project) => ({
+const projectItems = projects.map(({ project, updated }) => ({
   type: "project" as const,
   label: "Project",
-  date: project.data.updated,
+  date: updated,
   title: project.data.title,
   summary: project.data.summary,
   href: `/projects/${project.id}/`,
@@ -35,7 +40,7 @@ const activityItems = [...noteItems, ...projectItems]
   .slice(0, 8);
 
 const activeProjects = projects
-  .filter((project) => project.data.status === "active")
+  .filter(({ project }) => project.data.status === "active")
   .slice(0, 4);
 
 ---
@@ -87,10 +92,10 @@ const activeProjects = projects
       </div>
       <div class="artifact-list compact">
         {
-          activeProjects.map((project) => (
+          activeProjects.map(({ project, updated }) => (
             <a href={`/projects/${project.id}/`} class="artifact-item">
               <span>
-                {project.data.status} · updated {formatDate(project.data.updated)}
+                {project.data.status} · updated {formatDate(updated)}
               </span>
               <strong>{project.data.title}</strong>
               <p>{project.data.summary}</p>
