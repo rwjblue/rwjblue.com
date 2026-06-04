@@ -86,6 +86,7 @@ POTA reference by December 31, 2026.
 
 | Task | Script | Purpose |
 |------|--------|---------|
+| `mise run pota:update [--full-backfill]` | `scripts/pota/update.mjs` | One-command refresh for POTA profile, RI tracker data, park metadata, and canonical park pages. Use `--full-backfill` to refresh RI park list and back-fill activation history too. |
 | `mise run pota:ri:travel-times [-- --grid FN41fr]` | `scripts/pota/travel-times.mjs` | Estimate driving times from a home grid square to remaining parks. Uses OSRM routing (requires network); falls back to haversine × 1.4 / 80 km/h. |
 | `mise run pota:ri:update-tracker` | `scripts/pota/ri-tracker.mjs` | Refresh parks, profile, and rebuild tracker data in one step. |
 | `mise run pota:ri:update-parks` | `scripts/pota/ri-tracker.mjs` | Fetch the latest RI park list from POTA API. |
@@ -103,8 +104,10 @@ POTA reference by December 31, 2026.
   not directly to POTA.app. The canonical park page provides the external
   POTA.app link.
 - Before publishing a field note for a new reference, run
-  `mise run pota:park:ensure -- US-1234`, then rebuild page data with
-  `mise run pota:park:build-page-data`.
+  `mise run pota:park:ensure -- US-1234`, then run `mise run pota:update`.
+- After a new activation, field note, or POTA profile change, run
+  `mise run pota:update`. Use `mise run pota:update --full-backfill` when
+  the RI park list or historical activation history also needs to be refreshed.
 - Keep lowercased POTA reference tags such as `us-1234` in note frontmatter so
   field notes can attach to matching activation rows by date and reference.
 

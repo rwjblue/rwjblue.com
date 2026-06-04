@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Refresh POTA profile, tracker, and canonical park page data"
+#USAGE flag "--full-backfill" help="Refresh RI park list and backfill activation history too"
+
+set -euo pipefail
+
+args=("$@")
+
+if [[ "${usage_full_backfill:-false}" == "true" ]]; then
+  args=(--full-backfill "${args[@]}")
+fi
+
+node scripts/pota/update.mjs "${args[@]}"

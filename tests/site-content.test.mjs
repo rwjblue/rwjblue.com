@@ -215,21 +215,30 @@ test("pota image sanitizer and contact-map bootstrap are available as file-based
 });
 
 test("pota park page workflow is documented for agents", () => {
+  assert.ok(existsSync(".mise/tasks/pota/update"));
   assert.ok(existsSync(".mise/tasks/pota/park/ensure"));
   assert.ok(existsSync(".mise/tasks/pota/park/build-page-data"));
   assert.ok(existsSync(".mise/tasks/pota/park/backfill-known"));
 
+  const updateTask = read(".mise/tasks/pota/update");
   const ensureTask = read(".mise/tasks/pota/park/ensure");
   const fieldReportSkill = read(".agents/skills/pota-field-report/SKILL.md");
   const riPotaSkill = read(".agents/skills/ri-pota/skill.md");
   const agents = read("AGENTS.md");
 
+  assert.match(updateTask, /#USAGE flag "--full-backfill"/);
+  assert.match(updateTask, /usage_full_backfill/);
+  assert.match(updateTask, /scripts\/pota\/update\.mjs/);
   assert.match(ensureTask, /scripts\/pota\/parks\.mjs ensure/);
   assert.match(fieldReportSkill, /mise run pota:park:ensure -- US-1234/);
+  assert.match(fieldReportSkill, /mise run pota:update/);
   assert.match(fieldReportSkill, /\/radio\/pota\/US-1234\//);
-  assert.match(riPotaSkill, /mise run pota:park:backfill-known/);
+  assert.match(riPotaSkill, /mise run pota:update/);
+  assert.match(riPotaSkill, /--full-backfill/);
   assert.match(riPotaSkill, /\/radio\/pota\/US-1234\//);
+  assert.match(agents, /mise run pota:update/);
   assert.match(agents, /mise run pota:park:ensure -- US-1234/);
+  assert.match(agents, /--full-backfill/);
   assert.match(agents, /\/radio\/pota\/US-1234\//);
 });
 

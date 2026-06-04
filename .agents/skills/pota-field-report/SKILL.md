@@ -46,8 +46,8 @@ ASCII, and hyphenated.
 8. If images are provided or mentioned, sanitize them with
    `mise run pota:images:sanitize -- --slug <slug> <image>...` before
    referencing files in `public/images/pota/<slug>/`.
-9. After writing, rebuild generated park page data when new references were
-   ensured: `mise run pota:park:build-page-data`.
+9. After writing, refresh generated POTA tracker and park page data:
+   `mise run pota:update`.
 10. After writing, run the repository's normal validation for content changes
    when practical: `mise run check` and `mise run build`.
 

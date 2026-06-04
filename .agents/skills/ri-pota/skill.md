@@ -53,16 +53,17 @@ solar_band_outlook()                   # per-band forecast
 ## Step 4 — Refresh tracker data (if stale)
 
 ```bash
-mise run pota:ri:update-tracker        # fetches parks + profile, rebuilds JSON
-mise run pota:park:backfill-known      # ensures canonical park-page metadata
+mise run pota:update                   # profile, tracker, park pages
 ```
 
-Or rebuild from existing caches only (no network):
+For a full historical refresh:
 
 ```bash
-mise run pota:ri:build-tracker-data
-mise run pota:park:build-page-data
+mise run pota:update --full-backfill
 ```
+
+The full backfill refreshes the RI park list and activation history before
+rebuilding tracker and canonical park-page data.
 
 The public RI checklist and map should link to canonical park pages such as
 `/radio/pota/US-1234/`. Keep POTA.app as the external reference from those park
