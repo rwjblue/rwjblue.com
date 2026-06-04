@@ -1,0 +1,229 @@
+---
+import "leaflet/dist/leaflet.css";
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import parksData from "../../../data/pota/parks.json";
+
+export async function getStaticPaths() {
+  return parksData.parks.map((park) => ({
+    params: { reference: park.reference },
+    props: { park },
+  }));
+}
+
+const { park } = Astro.props;
+const parkJson = JSON.stringify({
+  reference: park.reference,
+  name: park.name,
+  latitude: park.latitude,
+  longitude: park.longitude,
+});
+
+const formattedGeneratedDate = new Date(
+  parksData.generatedAt,
+).toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+const formatActivationDate = (date: string) =>
+  new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+const formatModes = (activation: {
+  qsos: { cw: number; data: number; phone: number; total: number };
+}) => {
+  const modes = [
+    activation.qsos.cw > 0 ? `${activation.qsos.cw} CW` : null,
+    activation.qsos.data > 0 ? `${activation.qsos.data} data` : null,
+    activation.qsos.phone > 0 ? `${activation.qsos.phone} phone` : null,
+  ].filter(Boolean);
+
+  return modes.length > 0 ? modes.join(" · ") : `${activation.qsos.total} QSOs`;
+};
+
+const description =
+  park.activationCount > 0
+    ? `${park.name}, ${park.reference}. ${park.activationCount} known activation${park.activationCount === 1 ? "" : "s"} and ${park.qsoTotal} QSOs in the local N1RWJ POTA ledger.`
+    : `${park.name}, ${park.reference}. Basic POTA reference details and local field-note links.`;
+---
+
+<BaseLayout
+  title={`${park.reference} ${park.name} / POTA / N1RWJ`}
+  description={description}
+  canonicalPath={park.href}
+>
+  <section class="pota-park-hero" aria-labelledby="park-title">
+    <div>
+      <p class="eyebrow">Radio / POTA</p>
+      <h1 id="park-title">{park.name}</h1>
+      <p class="lede strong">{park.reference} · {park.grid}</p>
+      <p class="lede">
+        {park.locationDesc}
+      </p>
+      <nav class="path-links" aria-label="Park links">
+        <a href={park.potaUrl} target="_blank" rel="noreferrer">Open on POTA.app</a>
+      </nav>
+    </div>
+
+    <aside class="pota-park-summary" aria-label="Park summary">
+      <div>
+        <strong>{park.activationCount}</strong>
+        <span>activations</span>
+      </div>
+      <div>
+        <strong>{park.qsoTotal}</strong>
+        <span>local QSOs</span>
+      </div>
+      <div>
+        <strong>{park.publicStats.activations ?? "—"}</strong>
+        <span>POTA activations</span>
+      </div>
+      <p>Park data generated {formattedGeneratedDate}</p>
+    </aside>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="park-map-title">
+    <div class="section-heading">
+      <p class="section-label">Reference</p>
+      <h2 id="park-map-title">Park location</h2>
+    </div>
+    <div class="pota-park-facts">
+      <div id="pota-park-map" class="pota-park-map" aria-label={`Map centered on ${park.name}`}></div>
+      <dl>
+        <div>
+          <dt>Reference</dt>
+          <dd>{park.reference}</dd>
+        </div>
+        <div>
+          <dt>Grid</dt>
+          <dd>{park.grid}</dd>
+        </div>
+        <div>
+          <dt>Region</dt>
+          <dd>{park.locationDesc}</dd>
+        </div>
+        <div>
+          <dt>Public attempts</dt>
+          <dd>{park.publicStats.attempts ?? "—"}</dd>
+        </div>
+        <div>
+          <dt>Public QSOs</dt>
+          <dd>{park.publicStats.qsos ?? "—"}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="activations-title">
+    <div class="section-heading">
+      <p class="section-label">Ledger</p>
+      <h2 id="activations-title">Known activations</h2>
+    </div>
+    {
+      park.activations.length > 0 ? (
+        <ol class="pota-activation-list">
+          {park.activations.map((activation) => (
+            <li class="pota-activation">
+              <div class="pota-activation-main">
+                <time datetime={activation.date}>
+                  {formatActivationDate(activation.date)}
+                </time>
+                <strong>{activation.qsos.total} QSOs</strong>
+                <span>{formatModes(activation)}</span>
+                <span>{activation.callsign}</span>
+              </div>
+              {activation.projects.length > 0 && (
+                <div class="pota-project-labels" aria-label="Project labels">
+                  {activation.projects.map((project) => (
+                    <a href={project.href}>{project.label}</a>
+                  ))}
+                </div>
+              )}
+              {activation.notes.length > 0 && (
+                <div class="pota-activation-notes" aria-label="Field notes">
+                  {activation.notes.map((note) => (
+                    <a href={note.href}>Field note: {note.title}</a>
+                  ))}
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="lede">
+          No activations for this reference are in the local N1RWJ ledger yet.
+        </p>
+      )
+    }
+  </section>
+
+  {
+    park.notes.length > 0 && (
+      <section class="section-block wide" aria-labelledby="field-notes-title">
+        <div class="section-heading">
+          <p class="section-label">Notes</p>
+          <h2 id="field-notes-title">Field notes for this reference</h2>
+        </div>
+        <div class="pota-note-links">
+          {park.notes.map((note) => (
+            <a href={note.href}>{note.title}</a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <script type="application/json" id="pota-park-data" set:html={parkJson} />
+  <script>
+    import L from "leaflet";
+
+    const dataElement = document.getElementById("pota-park-data");
+    const mapElement = document.getElementById("pota-park-map");
+
+    if (dataElement && mapElement) {
+      const park = JSON.parse(dataElement.textContent ?? "{}");
+      const map = L.map(mapElement, {
+        scrollWheelZoom: false,
+      }).setView([park.latitude, park.longitude], 11);
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      L.circleMarker([park.latitude, park.longitude], {
+        radius: 8,
+        color: "#172026",
+        weight: 2,
+        fillColor: "#2f6f4e",
+        fillOpacity: 0.96,
+      })
+        .addTo(map)
+        .bindPopup(
+          `<strong>${escapeHtml(park.reference)}</strong><span>${escapeHtml(park.name)}</span>`,
+        );
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => {
+        const entities = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        };
+
+        return entities[char];
+      });
+    }
+  </script>
+</BaseLayout>
