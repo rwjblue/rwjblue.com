@@ -139,6 +139,84 @@ test("completion can come from any known callsign and old ledger entries remain"
   assert.equal(tracker.summary.completed, 2);
 });
 
+test("sub-10 QSO attempts do not complete a reference", () => {
+  const tracker = buildTrackerData({
+    parks,
+    ledger: {
+      activations: [
+        {
+          reference: "US-4582",
+          park: "Washington-Rochambeau Revolutionary Route National Historic Trail",
+          date: "2026-03-29",
+          callsign: "N1RWJ",
+          qsos: { total: 9, cw: 9, data: 0, phone: 0 },
+          source: "backfill",
+        },
+      ],
+    },
+    profile: { ...profile, recent_activity: { activations: [] } },
+    notes: [],
+    generatedAt: "2026-05-26T12:00:00.000Z",
+  });
+
+  const route = tracker.references.find(
+    (reference) => reference.reference === "US-4582",
+  );
+
+  assert.equal(route.status, "remaining");
+  assert.equal(route.firstActivation, null);
+  assert.equal(route.latestActivation, null);
+  assert.equal(route.activationCount, 0);
+  assert.equal(tracker.summary.completed, 0);
+});
+
+test("first and latest activations use only single-day 10-plus QSO activations", () => {
+  const tracker = buildTrackerData({
+    parks,
+    ledger: {
+      activations: [
+        {
+          reference: "US-0515",
+          park: "Ninigret National Wildlife Refuge",
+          date: "2025-12-30",
+          callsign: "KC1YDM",
+          qsos: { total: 4, cw: 4, data: 0, phone: 0 },
+          source: "backfill",
+        },
+        {
+          reference: "US-0515",
+          park: "Ninigret National Wildlife Refuge",
+          date: "2026-01-02",
+          callsign: "KC1YDM",
+          qsos: { total: 11, cw: 11, data: 0, phone: 0 },
+          source: "backfill",
+        },
+        {
+          reference: "US-0515",
+          park: "Ninigret National Wildlife Refuge",
+          date: "2026-01-03",
+          callsign: "KC1YDM",
+          qsos: { total: 2, cw: 2, data: 0, phone: 0 },
+          source: "backfill",
+        },
+      ],
+    },
+    profile: { ...profile, recent_activity: { activations: [] } },
+    notes: [],
+    generatedAt: "2026-05-26T12:00:00.000Z",
+  });
+
+  const ninigret = tracker.references.find(
+    (reference) => reference.reference === "US-0515",
+  );
+
+  assert.equal(ninigret.status, "completed");
+  assert.equal(ninigret.firstActivation.date, "2026-01-02");
+  assert.equal(ninigret.latestActivation.date, "2026-01-02");
+  assert.equal(ninigret.activationCount, 1);
+  assert.equal(tracker.summary.completed, 1);
+});
+
 test("note tags link field notes to matching references", () => {
   const tracker = buildTrackerData({
     parks,

@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-06-02T18:48:08.677Z",
+  "generatedAt": "2026-06-04T18:19:16.131Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 43,
-    "remaining": 18,
+    "completed": 44,
+    "remaining": 17,
     "total": 61,
-    "percentComplete": 70
+    "percentComplete": 72
   },
   "references": [
     {
@@ -48,25 +48,6 @@
         "attempts": 49,
         "activations": 49,
         "qsos": 1838
-      }
-    },
-    {
-      "reference": "US-0516",
-      "name": "Sachuest Point National Wildlife Refuge",
-      "latitude": 41.4798,
-      "longitude": -71.2436,
-      "grid": "FN41jl",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "potaUrl": "https://pota.app/#/park/US-0516",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 177,
-        "activations": 173,
-        "qsos": 7471
       }
     },
     {
@@ -361,6 +342,55 @@
       }
     },
     {
+      "reference": "US-0516",
+      "name": "Sachuest Point National Wildlife Refuge",
+      "latitude": 41.4798,
+      "longitude": -71.2436,
+      "grid": "FN41jl",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "potaUrl": "https://pota.app/#/park/US-0516",
+      "firstActivation": {
+        "reference": "US-0516",
+        "park": "Sachuest Point National Wildlife Refuge",
+        "date": "2026-06-04",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 38,
+          "cw": 38,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "adi"
+      },
+      "latestActivation": {
+        "reference": "US-0516",
+        "park": "Sachuest Point National Wildlife Refuge",
+        "date": "2026-06-04",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 38,
+          "cw": 38,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "adi"
+      },
+      "activationCount": 1,
+      "notes": [
+        {
+          "id": "2026-06-04-sachuest-point-national-wildlife-refuge-pota",
+          "title": "Sachuest Point Pack Mule with the Challenger Whip",
+          "href": "/notes/2026-06-04-sachuest-point-national-wildlife-refuge-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 177,
+        "activations": 173,
+        "qsos": 7471
+      }
+    },
+    {
       "reference": "US-8293",
       "name": "Sapowet Marsh State Wildlife Area",
       "latitude": 41.5825,
@@ -542,8 +572,14 @@
         },
         "source": "profile"
       },
-      "activationCount": 25,
-      "notes": [],
+      "activationCount": 23,
+      "notes": [
+        {
+          "id": "2026-06-03-jl-curran-state-park-pota",
+          "title": "JL Curran State Park Pack Mule Activation",
+          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        }
+      ],
       "publicStats": {
         "attempts": 73,
         "activations": 70,
@@ -660,15 +696,15 @@
       "firstActivation": {
         "reference": "US-2871",
         "park": "Burlingame State Park",
-        "date": "2025-11-16",
+        "date": "2026-05-25",
         "callsign": "N1RWJ",
         "qsos": {
-          "total": 5,
-          "cw": 0,
+          "total": 12,
+          "cw": 12,
           "data": 0,
-          "phone": 5
+          "phone": 0
         },
-        "source": "backfill"
+        "source": "profile"
       },
       "latestActivation": {
         "reference": "US-2871",
@@ -683,7 +719,7 @@
         },
         "source": "profile"
       },
-      "activationCount": 2,
+      "activationCount": 1,
       "notes": [
         {
           "id": "2026-05-25-pota-rove",
@@ -905,11 +941,11 @@
       "firstActivation": {
         "reference": "US-7717",
         "park": "Charlestown Breachway State Park",
-        "date": "2026-05-23",
+        "date": "2026-05-24",
         "callsign": "N1RWJ",
         "qsos": {
-          "total": 2,
-          "cw": 2,
+          "total": 15,
+          "cw": 15,
           "data": 0,
           "phone": 0
         },
@@ -928,7 +964,7 @@
         },
         "source": "profile"
       },
-      "activationCount": 2,
+      "activationCount": 1,
       "notes": [],
       "publicStats": {
         "attempts": 55,
@@ -1249,15 +1285,15 @@
       "firstActivation": {
         "reference": "US-6982",
         "park": "Big River Wildlife Management Area",
-        "date": "2025-11-01",
+        "date": "2026-05-14",
         "callsign": "N1RWJ",
         "qsos": {
-          "total": 3,
-          "cw": 0,
+          "total": 20,
+          "cw": 20,
           "data": 0,
-          "phone": 3
+          "phone": 0
         },
-        "source": "backfill"
+        "source": "profile"
       },
       "latestActivation": {
         "reference": "US-6982",
@@ -1272,7 +1308,7 @@
         },
         "source": "profile"
       },
-      "activationCount": 2,
+      "activationCount": 1,
       "notes": [],
       "publicStats": {
         "attempts": 327,
@@ -1754,49 +1790,6 @@
       }
     },
     {
-      "reference": "US-4582",
-      "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
-      "latitude": 41.312,
-      "longitude": -73.9709,
-      "grid": "FN31ah",
-      "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
-      "status": "completed",
-      "potaUrl": "https://pota.app/#/park/US-4582",
-      "firstActivation": {
-        "reference": "US-4582",
-        "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
-        "date": "2026-02-28",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 11,
-          "cw": 0,
-          "data": 0,
-          "phone": 11
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-4582",
-        "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
-        "date": "2026-03-29",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 1,
-          "cw": 0,
-          "data": 0,
-          "phone": 1
-        },
-        "source": "backfill"
-      },
-      "activationCount": 2,
-      "notes": [],
-      "publicStats": {
-        "attempts": 2552,
-        "activations": 2505,
-        "qsos": 104249
-      }
-    },
-    {
       "reference": "US-6990",
       "name": "Nicholas Farm Wildlife Management Area",
       "latitude": 41.6804,
@@ -2098,6 +2091,49 @@
       }
     },
     {
+      "reference": "US-4582",
+      "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "latitude": 41.312,
+      "longitude": -73.9709,
+      "grid": "FN31ah",
+      "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
+      "status": "completed",
+      "potaUrl": "https://pota.app/#/park/US-4582",
+      "firstActivation": {
+        "reference": "US-4582",
+        "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+        "date": "2026-02-28",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 0,
+          "data": 0,
+          "phone": 11
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-4582",
+        "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+        "date": "2026-02-28",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 0,
+          "data": 0,
+          "phone": 11
+        },
+        "source": "backfill"
+      },
+      "activationCount": 1,
+      "notes": [],
+      "publicStats": {
+        "attempts": 2552,
+        "activations": 2505,
+        "qsos": 104249
+      }
+    },
+    {
       "reference": "US-2879",
       "name": "Rocky Point State Park",
       "latitude": 41.6915,
@@ -2152,13 +2188,13 @@
       "firstActivation": {
         "reference": "US-2878",
         "park": "Lincoln Woods State Park",
-        "date": "2025-11-28",
+        "date": "2026-01-10",
         "callsign": "N1RWJ",
         "qsos": {
-          "total": 1,
+          "total": 20,
           "cw": 0,
           "data": 0,
-          "phone": 1
+          "phone": 20
         },
         "source": "backfill"
       },
@@ -2175,7 +2211,7 @@
         },
         "source": "backfill"
       },
-      "activationCount": 2,
+      "activationCount": 1,
       "notes": [],
       "publicStats": {
         "attempts": 84,
@@ -2195,13 +2231,13 @@
       "firstActivation": {
         "reference": "US-5483",
         "park": "Lincoln Woods State Forest",
-        "date": "2025-11-28",
+        "date": "2026-01-10",
         "callsign": "N1RWJ",
         "qsos": {
-          "total": 1,
+          "total": 20,
           "cw": 0,
           "data": 0,
-          "phone": 1
+          "phone": 20
         },
         "source": "backfill"
       },
@@ -2218,7 +2254,7 @@
         },
         "source": "backfill"
       },
-      "activationCount": 2,
+      "activationCount": 1,
       "notes": [],
       "publicStats": {
         "attempts": 74,

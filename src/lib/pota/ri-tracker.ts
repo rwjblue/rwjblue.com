@@ -40,7 +40,7 @@ export interface ActivationLedgerEntry {
     data: number;
     phone: number;
   };
-  source: "backfill" | "profile";
+  source: "adi" | "backfill" | "profile";
 }
 
 export interface ActivationLedger {
@@ -90,6 +90,7 @@ export interface TrackerReference {
 }
 
 const normalizeReference = (reference: string) => reference.trim().toUpperCase();
+const minimumActivationQsos = 10;
 
 const callsignsForProfile = (profile: PotaProfile): string[] => [
   profile.callsign.toUpperCase(),
@@ -105,6 +106,9 @@ const activationKey = (activation: ActivationLedgerEntry): string =>
 
 const compareDate = (left: ActivationLedgerEntry, right: ActivationLedgerEntry) =>
   left.date.localeCompare(right.date);
+
+const isQualifyingActivation = (activation: ActivationLedgerEntry): boolean =>
+  activation.qsos.total >= minimumActivationQsos;
 
 export function mergeProfileActivations(
   ledger: ActivationLedger,
@@ -180,6 +184,10 @@ export function buildTrackerData({
     const callsign = activation.callsign.toUpperCase();
 
     if (!callsignSet.has(callsign)) {
+      continue;
+    }
+
+    if (!isQualifyingActivation(activation)) {
       continue;
     }
 
