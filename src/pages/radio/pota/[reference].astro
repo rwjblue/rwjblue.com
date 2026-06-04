@@ -17,6 +17,7 @@ const parkJson = JSON.stringify({
   name: park.name,
   latitude: park.latitude,
   longitude: park.longitude,
+  locationDesc: park.locationDesc,
 });
 
 const formattedGeneratedDate = new Date(
@@ -75,15 +76,15 @@ const description =
     <aside class="pota-park-summary" aria-label="Park summary">
       <div>
         <strong>{park.activationCount}</strong>
-        <span>activations</span>
+        <span>my activations</span>
       </div>
       <div>
         <strong>{park.qsoTotal}</strong>
-        <span>local QSOs</span>
+        <span>my QSOs</span>
       </div>
       <div>
-        <strong>{park.publicStats.activations ?? "—"}</strong>
-        <span>POTA activations</span>
+        <strong>{park.notes.length}</strong>
+        <span>field notes</span>
       </div>
       <p>Park data generated {formattedGeneratedDate}</p>
     </aside>
@@ -124,7 +125,7 @@ const description =
   <section class="section-block wide" aria-labelledby="activations-title">
     <div class="section-heading">
       <p class="section-label">Ledger</p>
-      <h2 id="activations-title">Known activations</h2>
+      <h2 id="activations-title">My activations</h2>
     </div>
     {
       park.activations.length > 0 ? (
@@ -158,7 +159,7 @@ const description =
         </ol>
       ) : (
         <p class="lede">
-          No activations for this reference are in the local N1RWJ ledger yet.
+          No N1RWJ activations for this reference are in the local ledger yet.
         </p>
       )
     }
@@ -191,7 +192,7 @@ const description =
       const park = JSON.parse(dataElement.textContent ?? "{}");
       const map = L.map(mapElement, {
         scrollWheelZoom: false,
-      }).setView([park.latitude, park.longitude], 11);
+      });
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -210,6 +211,18 @@ const description =
         .bindPopup(
           `<strong>${escapeHtml(park.reference)}</strong><span>${escapeHtml(park.name)}</span>`,
         );
+
+      if (String(park.locationDesc ?? "").includes("US-RI")) {
+        map.fitBounds(
+          [
+            [41.05, -72.05],
+            [42.05, -71.05],
+          ],
+          { padding: [18, 18] },
+        );
+      } else {
+        map.setView([park.latitude, park.longitude], 9);
+      }
     }
 
     function escapeHtml(value) {

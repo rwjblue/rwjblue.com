@@ -300,6 +300,11 @@ test("canonical POTA park pages are generated from local park data", () => {
   assert.match(page, /getStaticPaths/);
   assert.match(page, /canonicalPath=\{park\.href\}/);
   assert.match(page, /pota-activation-list/);
+  assert.match(page, /my activations/);
+  assert.match(page, /My activations/);
+  assert.doesNotMatch(page, /park\.publicStats\.activations/);
+  assert.match(page, /map\.fitBounds/);
+  assert.match(page, /US-RI/);
   assert.match(page, /tile\.openstreetmap\.org/);
   assert.match(page, /OpenStreetMap/);
   assert.equal(sachuest.href, "/radio/pota/US-0516/");
