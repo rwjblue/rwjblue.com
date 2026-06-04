@@ -1,3 +1,5 @@
+import { potaParkHref } from "./parks.ts";
+
 export interface PotaPark {
   reference: string;
   name: string;
@@ -50,6 +52,7 @@ export interface ActivationLedger {
 export interface TrackerNote {
   id: string;
   title: string;
+  date: string;
   tags: string[];
 }
 
@@ -73,6 +76,7 @@ export interface TrackerReference {
   grid: string;
   locationDesc: string;
   status: "completed" | "remaining";
+  href: string;
   potaUrl: string;
   firstActivation: ActivationLedgerEntry | null;
   latestActivation: ActivationLedgerEntry | null;
@@ -80,6 +84,7 @@ export interface TrackerReference {
   notes: Array<{
     id: string;
     title: string;
+    date: string;
     href: string;
   }>;
   publicStats: {
@@ -171,6 +176,7 @@ export function buildTrackerData({
         referenceNotes.push({
           id: note.id,
           title: note.title,
+          date: note.date,
           href: `/notes/${note.id}/`,
         });
         notesByReference.set(reference, referenceNotes);
@@ -217,6 +223,7 @@ export function buildTrackerData({
       grid: park.grid,
       locationDesc: park.locationDesc,
       status: firstActivation ? "completed" : "remaining",
+      href: potaParkHref(reference),
       potaUrl: `https://pota.app/#/park/${reference}`,
       firstActivation,
       latestActivation,

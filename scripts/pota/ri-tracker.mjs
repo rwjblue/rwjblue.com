@@ -193,6 +193,7 @@ async function readNotes() {
     notes.push({
       id: file.replace(/\.md$/, ""),
       title: readFrontmatterScalar(frontmatter.groups.frontmatter, "title"),
+      date: readFrontmatterScalar(frontmatter.groups.frontmatter, "date"),
       tags: readFrontmatterList(frontmatter.groups.frontmatter, "tags"),
     });
   }

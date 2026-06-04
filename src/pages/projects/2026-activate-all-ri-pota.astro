@@ -103,9 +103,7 @@ const formatModes = (activation: {
         trackerData.references.map((reference) => (
           <a
             class={`pota-reference ${reference.status}`}
-            href={reference.potaUrl}
-            target="_blank"
-            rel="noreferrer"
+            href={reference.href}
           >
             <span
               class={`pota-reference-check ${reference.status}`}
@@ -197,6 +195,7 @@ const formatModes = (activation: {
           <em>Activated ${escapeHtml(activation.date)}</em>
           <span>${activation.qsos.total} QSOs · ${escapeHtml(activation.callsign)}</span>
           <a href="${escapeHtml(reference.potaUrl)}" target="_blank" rel="noreferrer">POTA page</a>
+          <a href="${escapeHtml(reference.href)}">Local park page</a>
           ${noteLinks}
         `;
       }
@@ -206,6 +205,7 @@ const formatModes = (activation: {
         <span>${escapeHtml(reference.name)}</span>
         <em>Not yet activated</em>
         <span>${escapeHtml(reference.grid)} · ${escapeHtml(reference.locationDesc)}</span>
+        <a href="${escapeHtml(reference.href)}">Local park page</a>
         <a href="${escapeHtml(reference.potaUrl)}" target="_blank" rel="noreferrer">POTA page</a>
       `;
     }

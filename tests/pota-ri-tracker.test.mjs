@@ -78,6 +78,7 @@ const notes = [
   {
     id: "2026-05-25-pota-rove",
     title: "2026-05-25 POTA Rove",
+    date: "2026-05-25",
     tags: ["radio", "pota", "us-7865", "US-0515"],
   },
 ];
@@ -237,8 +238,26 @@ test("note tags link field notes to matching references", () => {
     {
       id: "2026-05-25-pota-rove",
       title: "2026-05-25 POTA Rove",
+      date: "2026-05-25",
       href: "/notes/2026-05-25-pota-rove/",
     },
   ]);
   assert.deepEqual(ninigret.notes, eastBeach.notes);
+});
+
+test("tracker references expose local canonical park hrefs", () => {
+  const tracker = buildTrackerData({
+    parks,
+    ledger,
+    profile,
+    notes,
+    generatedAt: "2026-05-26T12:00:00.000Z",
+  });
+
+  const eastBeach = tracker.references.find(
+    (reference) => reference.reference === "US-7865",
+  );
+
+  assert.equal(eastBeach.href, "/radio/pota/US-7865/");
+  assert.equal(eastBeach.potaUrl, "https://pota.app/#/park/US-7865");
 });

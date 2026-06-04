@@ -233,7 +233,8 @@ test("ri pota tracker project page is wired for map-first tracking", () => {
   assert.doesNotMatch(page, /<p class="section-label">Checklist<\/p>/);
   assert.match(page, /class=\{`pota-reference-check \$\{reference\.status\}`\}/);
   assert.match(page, /class=\{`pota-reference \$\{reference\.status\}`\}/);
-  assert.match(page, /href=\{reference\.potaUrl\}/);
+  assert.match(page, /href=\{reference\.href\}/);
+  assert.match(page, /reference\.potaUrl/);
   assert.match(page, /pota-reference-name/);
   assert.doesNotMatch(page, /Remaining first/);
   assert.doesNotMatch(page, /<p>Not yet activated<\/p>/);
