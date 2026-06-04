@@ -245,3 +245,28 @@ test("ri pota tracker project page is wired for map-first tracking", () => {
   assert.match(project, /2026 Activate All RI POTA/);
   assert.match(radio, /\/projects\/2026-activate-all-ri-pota\//);
 });
+
+test("canonical POTA park pages are generated from local park data", () => {
+  assert.ok(existsSync("src/data/pota/parks.json"));
+  assert.ok(existsSync("src/pages/radio/pota/[reference].astro"));
+
+  const page = read("src/pages/radio/pota/[reference].astro");
+  const data = JSON.parse(read("src/data/pota/parks.json"));
+  const sachuest = data.parks.find((park) => park.reference === "US-0516");
+
+  assert.match(page, /parks\.json/);
+  assert.match(page, /getStaticPaths/);
+  assert.match(page, /canonicalPath=\{park\.href\}/);
+  assert.match(page, /pota-activation-list/);
+  assert.match(page, /tile\.openstreetmap\.org/);
+  assert.match(page, /OpenStreetMap/);
+  assert.equal(sachuest.href, "/radio/pota/US-0516/");
+  assert.ok(
+    sachuest.activations.some((activation) =>
+      activation.notes.some(
+        (note) =>
+          note.id === "2026-06-04-sachuest-point-national-wildlife-refuge-pota",
+      ),
+    ),
+  );
+});
