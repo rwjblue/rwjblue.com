@@ -102,6 +102,12 @@ Good field reports usually include:
 - One or two grounded observations about conditions, ergonomics, or workflow.
 - A short note about what to repeat or adjust next time.
 
+When naming a POTA park with its reference anywhere in the note, link that
+park/reference text to the POTA park page, not only section headings. This
+includes first mentions, "At a glance" location bullets, and later repeated
+references when the park name/reference is useful to the reader:
+`[Park Name, US-1234](https://pota.app/#/park/US-1234)`.
+
 Prefer:
 
 - "I set the wire low because the site was busy..."
