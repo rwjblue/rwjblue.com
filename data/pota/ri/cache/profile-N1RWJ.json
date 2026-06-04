@@ -12,24 +12,34 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 77,
-      "parks": 49,
-      "qsos": 1926
+      "activations": 78,
+      "parks": 50,
+      "qsos": 1964
     },
     "attempts": {
-      "activations": 85,
-      "parks": 49,
-      "qsos": 1953
+      "activations": 86,
+      "parks": 50,
+      "qsos": 1991
     },
     "hunter": {
       "parks": 449,
       "qsos": 647
     },
-    "awards": 23,
+    "awards": 24,
     "endorsements": 48
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-06-04",
+        "reference": "US-0516",
+        "park": "Sachuest Point National Wildlife Refuge",
+        "location": "US-RI",
+        "cw": 38,
+        "data": 0,
+        "phone": 0,
+        "total": 38
+      },
       {
         "date": "2026-06-03",
         "reference": "US-6992",
@@ -172,16 +182,6 @@
       },
       {
         "date": "2026-05-23",
-        "reference": "US-0517",
-        "park": "Trustom Pond National Wildlife Refuge",
-        "location": "US-RI",
-        "cw": 19,
-        "data": 0,
-        "phone": 0,
-        "total": 19
-      },
-      {
-        "date": "2026-05-23",
         "reference": "US-7717",
         "park": "Charlestown Breachway State Park",
         "location": "US-RI",
@@ -231,6 +231,16 @@
         "total": 12
       },
       {
+        "date": "2026-05-23",
+        "reference": "US-0517",
+        "park": "Trustom Pond National Wildlife Refuge",
+        "location": "US-RI",
+        "cw": 19,
+        "data": 0,
+        "phone": 0,
+        "total": 19
+      },
+      {
         "date": "2026-05-21",
         "reference": "US-2880",
         "park": "Snake Den State Park",
@@ -269,16 +279,6 @@
         "data": 0,
         "phone": 0,
         "total": 16
-      },
-      {
-        "date": "2026-05-16",
-        "reference": "US-2876",
-        "park": "Goddard Memorial State Park",
-        "location": "US-RI",
-        "cw": 10,
-        "data": 0,
-        "phone": 0,
-        "total": 10
       }
     ],
     "hunter_qsos": [
@@ -538,6 +538,11 @@
     {
       "name": "Platinum Activator",
       "granted": "2026-05-26T02:02:52",
+      "endorsements": []
+    },
+    {
+      "name": "Diamond Activator",
+      "granted": "2026-06-04T21:39:18",
       "endorsements": []
     },
     {
