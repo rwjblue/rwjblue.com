@@ -214,6 +214,25 @@ test("pota image sanitizer and contact-map bootstrap are available as file-based
   assert.match(skill, /mise run pota:images:generate-note-share-image/);
 });
 
+test("pota park page workflow is documented for agents", () => {
+  assert.ok(existsSync(".mise/tasks/pota/park/ensure"));
+  assert.ok(existsSync(".mise/tasks/pota/park/build-page-data"));
+  assert.ok(existsSync(".mise/tasks/pota/park/backfill-known"));
+
+  const ensureTask = read(".mise/tasks/pota/park/ensure");
+  const fieldReportSkill = read(".agents/skills/pota-field-report/SKILL.md");
+  const riPotaSkill = read(".agents/skills/ri-pota/skill.md");
+  const agents = read("AGENTS.md");
+
+  assert.match(ensureTask, /scripts\/pota\/parks\.mjs ensure/);
+  assert.match(fieldReportSkill, /mise run pota:park:ensure -- US-1234/);
+  assert.match(fieldReportSkill, /\/radio\/pota\/US-1234\//);
+  assert.match(riPotaSkill, /mise run pota:park:backfill-known/);
+  assert.match(riPotaSkill, /\/radio\/pota\/US-1234\//);
+  assert.match(agents, /mise run pota:park:ensure -- US-1234/);
+  assert.match(agents, /\/radio\/pota\/US-1234\//);
+});
+
 test("ri pota tracker project page is wired for map-first tracking", () => {
   assert.ok(existsSync("src/pages/projects/2026-activate-all-ri-pota.astro"));
   assert.ok(existsSync("src/content/projects/2026-activate-all-ri-pota.md"));

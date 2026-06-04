@@ -54,13 +54,20 @@ solar_band_outlook()                   # per-band forecast
 
 ```bash
 mise run pota:ri:update-tracker        # fetches parks + profile, rebuilds JSON
+mise run pota:park:backfill-known      # ensures canonical park-page metadata
 ```
 
 Or rebuild from existing caches only (no network):
 
 ```bash
 mise run pota:ri:build-tracker-data
+mise run pota:park:build-page-data
 ```
+
+The public RI checklist and map should link to canonical park pages such as
+`/radio/pota/US-1234/`. Keep POTA.app as the external reference from those park
+pages. RI challenge labels are activation metadata on canonical park pages, not
+project-owned detail pages.
 
 ## Park notes
 
@@ -74,8 +81,11 @@ mise run pota:ri:build-tracker-data
 | Path | Purpose |
 |------|---------|
 | `src/data/pota/ri-tracker.json` | Generated tracker state — source of truth for status |
+| `src/data/pota/parks.json` | Generated canonical POTA park-page data |
+| `data/pota/parks/cache/` | Cached POTA park metadata for `/radio/pota/US-1234/` pages |
 | `data/pota/ri/activations.json` | Activation ledger (hand-editable if needed) |
 | `data/pota/ri/cache/` | Raw API response caches |
+| `scripts/pota/parks.mjs` | Canonical park-page cache and data pipeline |
 | `scripts/pota/ri-tracker.mjs` | Tracker data pipeline |
 | `scripts/pota/travel-times.mjs` | Drive-time estimator (home → each park) |
 | `scripts/pota/rove-clusters.mjs` | Rove cluster finder (groups of nearby parks) |

@@ -75,6 +75,10 @@ POTA reference by December 31, 2026.
 - `src/data/pota/ri-tracker.json` — generated tracker state (completed/remaining,
   coordinates, activation history). Read this to answer questions about which
   parks are done and which remain.
+- `src/data/pota/parks.json` — generated canonical POTA park-page data for
+  `/radio/pota/US-1234/` pages.
+- `data/pota/parks/cache/` — cached POTA park metadata used to render canonical
+  park pages.
 - `data/pota/ri/` — local caches (park list, profile, activation ledger) used to
   regenerate tracker data.
 
@@ -88,6 +92,21 @@ POTA reference by December 31, 2026.
 | `mise run pota:ri:update-profile` | `scripts/pota/ri-tracker.mjs` | Fetch N1RWJ profile and merge recent activations into the ledger. |
 | `mise run pota:ri:build-tracker-data` | `scripts/pota/ri-tracker.mjs` | Rebuild `ri-tracker.json` from local caches without hitting the network. |
 | `mise run pota:ri:backfill-activations` | `scripts/pota/ri-tracker.mjs` | Back-fill activation history for all RI references from the POTA API. |
+| `mise run pota:park:ensure -- US-1234` | `scripts/pota/parks.mjs` | Ensure local cached metadata for one or more POTA references before linking a field note. |
+| `mise run pota:park:backfill-known` | `scripts/pota/parks.mjs` | Ensure park metadata for all references found in field-note tags, the activation ledger, and RI tracker data. |
+| `mise run pota:park:build-page-data` | `scripts/pota/parks.mjs` | Rebuild generated canonical park-page data from local caches. |
+
+### Canonical park pages
+- Use `/radio/pota/US-1234/` as the local canonical URL for POTA reference
+  pages.
+- Field notes should link park/reference mentions to the local canonical page,
+  not directly to POTA.app. The canonical park page provides the external
+  POTA.app link.
+- Before publishing a field note for a new reference, run
+  `mise run pota:park:ensure -- US-1234`, then rebuild page data with
+  `mise run pota:park:build-page-data`.
+- Keep lowercased POTA reference tags such as `us-1234` in note frontmatter so
+  field notes can attach to matching activation rows by date and reference.
 
 ### Park notes
 - **US-0513 Block Island NWR** — requires a ferry from Point Judith (~1 hr each

@@ -39,11 +39,16 @@ ASCII, and hyphenated.
    unless the user asks for separate posts. Summarize the whole route first,
    then give each park its own subsection.
 5. Read `references/report-template.md` before drafting the report body.
-6. Write the Astro note draft into `src/content/notes/`.
-7. If images are provided or mentioned, sanitize them with
+6. Ensure every referenced POTA park has local metadata before linking it:
+   `mise run pota:park:ensure -- US-1234`. For a rove, run this for every
+   stop/reference in the note.
+7. Write the Astro note draft into `src/content/notes/`.
+8. If images are provided or mentioned, sanitize them with
    `mise run pota:images:sanitize -- --slug <slug> <image>...` before
    referencing files in `public/images/pota/<slug>/`.
-8. After writing, run the repository's normal validation for content changes
+9. After writing, rebuild generated park page data when new references were
+   ensured: `mise run pota:park:build-page-data`.
+10. After writing, run the repository's normal validation for content changes
    when practical: `mise run check` and `mise run build`.
 
 ## Dictation Cleanup
@@ -67,8 +72,8 @@ references, total QSOs, mode, and the main lesson or texture of the day.
 
 For each park subsection:
 
-- Link the heading to the POTA park page:
-  `## [Park Name, US-1234](https://pota.app/#/park/US-1234)`.
+- Link the heading to the local canonical POTA park page:
+  `## [Park Name, US-1234](/radio/pota/US-1234/)`.
 - Include the park name, POTA reference, QSO count, bands, modes, UTC window,
   and equipment that changed at that stop.
 - Mention setup and teardown time when the user gave it, especially for quick
@@ -103,10 +108,15 @@ Good field reports usually include:
 - A short note about what to repeat or adjust next time.
 
 When naming a POTA park with its reference anywhere in the note, link that
-park/reference text to the POTA park page, not only section headings. This
+park/reference text to the local canonical POTA park page, not only section headings. This
 includes first mentions, "At a glance" location bullets, and later repeated
 references when the park name/reference is useful to the reader:
-`[Park Name, US-1234](https://pota.app/#/park/US-1234)`.
+`[Park Name, US-1234](/radio/pota/US-1234/)`.
+
+The canonical page at `/radio/pota/US-1234/` provides the external POTA.app
+link, park metadata, map, and activation ledger. Keep lowercased reference tags
+such as `us-1234` in frontmatter so field notes can attach to matching
+activation rows by date and reference.
 
 Prefer:
 
