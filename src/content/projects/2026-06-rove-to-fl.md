@@ -37,34 +37,85 @@ treated as equivalent when judging feasibility. Where possible, Supercharger
 stops, food, rest breaks, and nearby activations should be paired instead of
 treated as separate delays.
 
-An evening activation in the DC area with a friend is part of the plan. If
-Sunday, June 21 works, that is the preferred timing: pick up DE/MD during the
-day, do DC that evening, then keep the rest of the trip moving south. Rock
-Creek Park is the first suggestion to evaluate, but other DC-area options are
-still in scope.
+An evening activation in the DC area with a friend would be good, but it is not
+a route constraint. DC should be activated on the southbound pass, preferably
+Sunday, June 21 if that fits the day; the plan should not double back north just
+to make the meetup work. Rock Creek Park is the first suggestion to evaluate,
+but other DC-area options are still in scope.
 
 Current broad shape:
 
-- Friday: activate RI before departure if practical, camp at Hammonasset or
-  another CT POTA park, and try to activate after the 20:00 EDT UTC rollover.
-- Saturday: attempt the CT/NY/NJ 10-entity UTC rove and end at a central or
-  south New Jersey hotel.
-- Sunday: pick up DE/MD, do the DC friend activation, then camp in northern
-  Virginia if the timing still allows camp setup before dark.
-- Monday: hotel transit day into North Carolina.
-- Tuesday: daytime NC activation, then South Carolina POTA camp.
-- Wednesday: Georgia activation and hotel night in coastal GA or north FL.
+- Friday: activate RI before departure if practical, then choose the Friday
+  hotel anchor based on the Saturday target. Hammonasset is now only a standby
+  POTA camp option because CT state park campsites require two-night advance
+  reservations, with one-night campsite reservations only possible inside the
+  1-3 day arrival window if availability remains. Milford/Silver Sands,
+  Stamford/Mianus, or Tallman/lower Hudson all buy a stronger Saturday by
+  moving farther west after work.
+- Saturday: attempt the 10-entity UTC rove and end at a central or south New
+  Jersey hotel at minimum. A Delaware or Maryland finish helps Sunday, but only
+  if the day does not become a fatigue trap.
+- Sunday: pick up DE/MD, activate DC on the southbound pass, then camp in
+  northern Virginia if the timing still allows camp setup before dark. Meet the
+  DC friend if it fits, but do not route around that.
+- Monday: North Carolina POTA camp, replacing the lost Friday camp night.
+- Tuesday: South Carolina activation, then hotel farther south.
+- Wednesday: Georgia or north Florida POTA camp.
 - Thursday: Florida POTA camp.
 - Friday: short destination arrival day, with Florida ideally already banked.
 
-The first weekend candidate plan uses Hammonasset as the preferred Friday
-anchor if a reservation works. The current 10-entity attempt is Hammonasset,
-Stewart B. McKinney, Silver Sands, Sherwood Island, Mianus River, Tallman
-Mountain, Palisades, Gateway/Fort Wadsworth as a 2-fer, and Cheesequake.
-Google Maps routing puts that Saturday line at about 3h45m of driving from a
-06:00 start, or about 13h15m total once activations, one Supercharger stop, and
-a one-hour buffer are counted.
+The first weekend decision is now the Friday anchor. Traffic-aware Google Maps
+routing from a 17:30 Friday departure puts Hammonasset around 1h19m, Silver
+Sands/Milford around 1h48m, Mianus/Stamford around 2h18m, and Tallman/lower
+Hudson around 2h46m from Providence. Hammonasset would be the best camping fit
+geographically, but its reservation rules make it unreliable for this one-night
+Friday reposition and it makes a Sandy Hook/Gateway-inclusive Saturday too long
+as the default. The Milford/Silver Sands hotel option looks like the current best 10-entity
+compromise if Silver Sands is activated Friday night after the UTC rollover.
+Stamford makes Delaware reachable Saturday. Tallman is the only setup that
+makes a 15-entity thought experiment remotely plausible, and only with
+Friday-night UTC credit plus multiple verified n-fers.
+
+Two Friday evening activations before a hotel are driving-feasible but
+access-risky. Providence to Silver Sands, Sherwood Island, and a Stamford hotel
+is about 2h28m of driving; Silver Sands to Mianus and a Stamford hotel is about
+2h47m. With two one-hour activations and buffer, either is a late but plausible
+Friday block in pure routing terms. The issue is that the Saturday UTC day does
+not begin until 20:00 EDT, while sunset along the Milford / Westport / Stamford
+corridor on June 19 is only about 20:28-20:31. Connecticut state park
+recreation areas are generally open sunrise to sunset, with vehicle access from
+8:00 to sunset, so normal one-hour post-rollover activations do not fit unless
+there is confirmed after-hours access through fishing access, adjacent public
+right-of-way, or park permission.
+
+Car camping in the Tesla reduces setup time and site-size needs, but it does
+not remove the need for a legal campsite reservation or explicit overnight
+permission. The initial policy scan shows this is not the same everywhere:
+Connecticut, New York, and Maryland are the highest minimum-stay risks; North
+Carolina has a holiday/weekend minimum with a near-arrival exception; Florida
+looks more flexible for campsites but requires late-arrival gate handling.
+Delaware, South Carolina, Georgia, and Virginia need park-specific checks before
+being trusted for one-night POTA camping.
+
+Less-developed CT park or forest areas do not appear to solve Friday car
+camping. Connecticut has one-night backpacking sites, but they are for true
+backpackers, dispersed camping is not permitted, and they do not provide
+vehicle-adjacent overnight parking. A highway service plaza or rest area may be
+usable for sleeping in the Tesla as a safety rest stop, but that would not count
+as POTA park camping.
+
+The imported top-activator n-fer data changes the confidence level on a few
+ideas. It does not yet validate the assumed Gateway/Fort Wadsworth 2-fer, but
+it does show Gateway plus New Jersey Coastal State Trail as a data-backed
+candidate. Tesla Superchargers are present along the corridor around Milford /
+New Haven, north Jersey, Edison / Elizabeth, and the NYC approaches, so the
+charger constraint looks manageable; the harder constraint is how much Saturday
+driving and activation time to accept. For Sunday, the strongest leads are Fox
+Point plus Northern Delaware
+Greenway in Delaware, Fort McHenry plus the Chesapeake/Star-Spangled trail
+references in Maryland, and Mason Neck State Park plus the Mason Neck NWR in
+Virginia.
 
 The plan should not double back north for DC after Sunday. The main broad risk
 is whether Sunday can still reach a workable Virginia campsite after the DC
-friend activation.
+activation if the day also includes Delaware and Maryland.

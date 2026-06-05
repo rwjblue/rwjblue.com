@@ -1,0 +1,8969 @@
+[
+  {
+    "id": "M1GRY_2025-05-10_11",
+    "activator": "M1GRY",
+    "date": "2025-05-10",
+    "total": 11,
+    "references": [
+      "US-0522",
+      "US-8147"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-10_13",
+    "activator": "M1GRY",
+    "date": "2025-05-10",
+    "total": 13,
+    "references": [
+      "US-2890",
+      "US-11995"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-09_12",
+    "activator": "M1GRY",
+    "date": "2025-05-09",
+    "total": 12,
+    "references": [
+      "US-1831",
+      "US-1839"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-09_11",
+    "activator": "M1GRY",
+    "date": "2025-05-09",
+    "total": 11,
+    "references": [
+      "US-1871",
+      "US-0658"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-08_14",
+    "activator": "M1GRY",
+    "date": "2025-05-08",
+    "total": 14,
+    "references": [
+      "US-3648",
+      "US-3669"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-08_13",
+    "activator": "M1GRY",
+    "date": "2025-05-08",
+    "total": 13,
+    "references": [
+      "US-0775",
+      "US-0658"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-06_14",
+    "activator": "M1GRY",
+    "date": "2025-05-06",
+    "total": 14,
+    "references": [
+      "GB-1799",
+      "GB-1632"
+    ]
+  },
+  {
+    "id": "K3SDM_2025-05-10_21",
+    "activator": "K3SDM",
+    "date": "2025-05-10",
+    "total": 21,
+    "references": [
+      "US-2253",
+      "US-4572",
+      "US-10180"
+    ]
+  },
+  {
+    "id": "K3SDM_2025-05-09_16",
+    "activator": "K3SDM",
+    "date": "2025-05-09",
+    "total": 16,
+    "references": [
+      "US-10180",
+      "US-4572",
+      "US-2253"
+    ]
+  },
+  {
+    "id": "K3SDM_2025-05-08_18",
+    "activator": "K3SDM",
+    "date": "2025-05-08",
+    "total": 18,
+    "references": [
+      "US-4191",
+      "US-10185"
+    ]
+  },
+  {
+    "id": "K3SDM_2025-05-08_28",
+    "activator": "K3SDM",
+    "date": "2025-05-08",
+    "total": 28,
+    "references": [
+      "US-10180",
+      "US-2253",
+      "US-4572"
+    ]
+  },
+  {
+    "id": "K3SDM_2025-05-07_14",
+    "activator": "K3SDM",
+    "date": "2025-05-07",
+    "total": 14,
+    "references": [
+      "US-4116",
+      "US-4572"
+    ]
+  },
+  {
+    "id": "K3SDM_2025-05-07_16",
+    "activator": "K3SDM",
+    "date": "2025-05-07",
+    "total": 16,
+    "references": [
+      "US-1745",
+      "US-6489"
+    ]
+  },
+  {
+    "id": "K3SDM_2025-05-06_14",
+    "activator": "K3SDM",
+    "date": "2025-05-06",
+    "total": 14,
+    "references": [
+      "US-1753",
+      "US-0375"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-05-05_45",
+    "activator": "F5PGP",
+    "date": "2025-05-05",
+    "total": 45,
+    "references": [
+      "FR-7055",
+      "FR-7063",
+      "FR-3876",
+      "FR-7056"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-05-05_11",
+    "activator": "F5PGP",
+    "date": "2025-05-05",
+    "total": 11,
+    "references": [
+      "FR-7049",
+      "FR-7039"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-05-04_43",
+    "activator": "F5PGP",
+    "date": "2025-05-04",
+    "total": 43,
+    "references": [
+      "FR-4821",
+      "FR-4820"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-04-28_11",
+    "activator": "F5PGP",
+    "date": "2025-04-28",
+    "total": 11,
+    "references": [
+      "FR-4588",
+      "FR-4587"
+    ]
+  },
+  {
+    "id": "JF4IQS_2025-05-05_14",
+    "activator": "JF4IQS",
+    "date": "2025-05-05",
+    "total": 14,
+    "references": [
+      "JP-1081",
+      "JP-1079"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-09_46",
+    "activator": "KE8PZN",
+    "date": "2025-05-09",
+    "total": 46,
+    "references": [
+      "US-12044",
+      "US-7069"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-08_45",
+    "activator": "KE8PZN",
+    "date": "2025-05-08",
+    "total": 45,
+    "references": [
+      "US-12044",
+      "US-7069"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-07_16",
+    "activator": "KE8PZN",
+    "date": "2025-05-07",
+    "total": 16,
+    "references": [
+      "US-11181",
+      "US-10107",
+      "US-0686"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-07_15",
+    "activator": "KE8PZN",
+    "date": "2025-05-07",
+    "total": 15,
+    "references": [
+      "US-10103",
+      "US-1277"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-25_11",
+    "activator": "NJ9L",
+    "date": "2025-04-25",
+    "total": 11,
+    "references": [
+      "US-12282",
+      "US-3190",
+      "US-0694"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-23_11",
+    "activator": "NJ9L",
+    "date": "2025-04-23",
+    "total": 11,
+    "references": [
+      "US-0379",
+      "US-3180"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-18_11",
+    "activator": "NJ9L",
+    "date": "2025-04-18",
+    "total": 11,
+    "references": [
+      "US-12309",
+      "US-3248",
+      "US-3206"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-15_16",
+    "activator": "NJ9L",
+    "date": "2025-04-15",
+    "total": 16,
+    "references": [
+      "US-3249",
+      "US-12284"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-13_11",
+    "activator": "NJ9L",
+    "date": "2025-04-13",
+    "total": 11,
+    "references": [
+      "US-8663",
+      "US-10000",
+      "US-2832"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-05-05_22",
+    "activator": "DK5UR",
+    "date": "2025-05-05",
+    "total": 22,
+    "references": [
+      "DE-0623",
+      "DE-0941"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-10_16",
+    "activator": "DK5UR",
+    "date": "2025-04-10",
+    "total": 16,
+    "references": [
+      "DE-0674",
+      "DE-0205"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-10_11",
+    "activator": "DK5UR",
+    "date": "2025-04-10",
+    "total": 11,
+    "references": [
+      "DE-0132",
+      "DE-0746",
+      "DE-0453",
+      "DE-0829"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-09_104",
+    "activator": "DK5UR",
+    "date": "2025-04-09",
+    "total": 104,
+    "references": [
+      "DE-0127",
+      "DE-0129"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-08_12",
+    "activator": "DK5UR",
+    "date": "2025-04-08",
+    "total": 12,
+    "references": [
+      "DE-0467",
+      "DE-0928",
+      "DE-0788",
+      "DE-0625",
+      "DE-0070"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-08_11",
+    "activator": "DK5UR",
+    "date": "2025-04-08",
+    "total": 11,
+    "references": [
+      "DE-0062",
+      "DE-0943"
+    ]
+  },
+  {
+    "id": "KC8ZKS_2025-05-08_14",
+    "activator": "KC8ZKS",
+    "date": "2025-05-08",
+    "total": 14,
+    "references": [
+      "US-3641",
+      "US-4559"
+    ]
+  },
+  {
+    "id": "KC8ZKS_2025-05-08_15",
+    "activator": "KC8ZKS",
+    "date": "2025-05-08",
+    "total": 15,
+    "references": [
+      "US-6281",
+      "US-1887"
+    ]
+  },
+  {
+    "id": "KC8ZKS_2025-05-08_11",
+    "activator": "KC8ZKS",
+    "date": "2025-05-08",
+    "total": 11,
+    "references": [
+      "US-1884",
+      "US-6311"
+    ]
+  },
+  {
+    "id": "KC8ZKS_2025-05-07_11",
+    "activator": "KC8ZKS",
+    "date": "2025-05-07",
+    "total": 11,
+    "references": [
+      "US-8717",
+      "US-3654",
+      "US-6284"
+    ]
+  },
+  {
+    "id": "KC8ZKS_2025-05-07_14",
+    "activator": "KC8ZKS",
+    "date": "2025-05-07",
+    "total": 14,
+    "references": [
+      "US-6281",
+      "US-1887"
+    ]
+  },
+  {
+    "id": "KC8ZKS_2025-05-06_11",
+    "activator": "KC8ZKS",
+    "date": "2025-05-06",
+    "total": 11,
+    "references": [
+      "US-8716",
+      "US-1915"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-05-10_12",
+    "activator": "KG5LRB",
+    "date": "2025-05-10",
+    "total": 12,
+    "references": [
+      "US-6712",
+      "US-6678"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-05-10_11",
+    "activator": "KG5LRB",
+    "date": "2025-05-10",
+    "total": 11,
+    "references": [
+      "US-1550",
+      "US-1549"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-04-27_20",
+    "activator": "KG5LRB",
+    "date": "2025-04-27",
+    "total": 20,
+    "references": [
+      "US-9481",
+      "US-0483"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-04-26_10",
+    "activator": "KG5LRB",
+    "date": "2025-04-26",
+    "total": 10,
+    "references": [
+      "US-6669",
+      "US-0714"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-04-26_12",
+    "activator": "KG5LRB",
+    "date": "2025-04-26",
+    "total": 12,
+    "references": [
+      "US-9414",
+      "US-6760"
+    ]
+  },
+  {
+    "id": "JL1CGT_2025-04-28_12",
+    "activator": "JL1CGT",
+    "date": "2025-04-28",
+    "total": 12,
+    "references": [
+      "JP-1974",
+      "JP-1973",
+      "JP-1975"
+    ]
+  },
+  {
+    "id": "JL1CGT_2025-04-27_19",
+    "activator": "JL1CGT",
+    "date": "2025-04-27",
+    "total": 19,
+    "references": [
+      "JP-1111",
+      "JP-1972"
+    ]
+  },
+  {
+    "id": "JL1CGT_2025-04-25_22",
+    "activator": "JL1CGT",
+    "date": "2025-04-25",
+    "total": 22,
+    "references": [
+      "JP-1294",
+      "JP-1251"
+    ]
+  },
+  {
+    "id": "NX9T_2025-05-05_24",
+    "activator": "NX9T",
+    "date": "2025-05-05",
+    "total": 24,
+    "references": [
+      "US-9430",
+      "US-9428"
+    ]
+  },
+  {
+    "id": "NX9T_2025-04-16_65",
+    "activator": "NX9T",
+    "date": "2025-04-16",
+    "total": 65,
+    "references": [
+      "US-0350",
+      "US-3331",
+      "US-6804",
+      "US-6726"
+    ]
+  },
+  {
+    "id": "NX9T_2025-04-15_60",
+    "activator": "NX9T",
+    "date": "2025-04-15",
+    "total": 60,
+    "references": [
+      "US-6619",
+      "US-3304"
+    ]
+  },
+  {
+    "id": "JG1RFE_2025-04-26_13",
+    "activator": "JG1RFE",
+    "date": "2025-04-26",
+    "total": 13,
+    "references": [
+      "JP-0016",
+      "JP-1331",
+      "JP-1334"
+    ]
+  },
+  {
+    "id": "JG1RFE_2025-04-26_18",
+    "activator": "JG1RFE",
+    "date": "2025-04-26",
+    "total": 18,
+    "references": [
+      "JP-1332",
+      "JP-1917"
+    ]
+  },
+  {
+    "id": "JG1RFE_2025-04-26_17",
+    "activator": "JG1RFE",
+    "date": "2025-04-26",
+    "total": 17,
+    "references": [
+      "JP-0123",
+      "JP-1916"
+    ]
+  },
+  {
+    "id": "JG1RFE_2025-04-25_14",
+    "activator": "JG1RFE",
+    "date": "2025-04-25",
+    "total": 14,
+    "references": [
+      "JP-1911",
+      "JP-1328",
+      "JP-1330"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-05-07_24",
+    "activator": "KB3WAV",
+    "date": "2025-05-07",
+    "total": 24,
+    "references": [
+      "US-10771",
+      "US-1566"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-28_13",
+    "activator": "KB3WAV",
+    "date": "2025-04-28",
+    "total": 13,
+    "references": [
+      "US-4582",
+      "US-4581",
+      "US-4567",
+      "US-0928"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-26_34",
+    "activator": "KB3WAV",
+    "date": "2025-04-26",
+    "total": 34,
+    "references": [
+      "US-4582",
+      "US-4581",
+      "US-4567",
+      "US-0928"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-20_111",
+    "activator": "KB3WAV",
+    "date": "2025-04-20",
+    "total": 111,
+    "references": [
+      "US-5471",
+      "US-4556"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-18_22",
+    "activator": "KB3WAV",
+    "date": "2025-04-18",
+    "total": 22,
+    "references": [
+      "US-10771",
+      "US-1566"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-10_18",
+    "activator": "JO4FDA",
+    "date": "2025-05-10",
+    "total": 18,
+    "references": [
+      "GU-0006",
+      "GU-0003"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-05_14",
+    "activator": "JO4FDA",
+    "date": "2025-05-05",
+    "total": 14,
+    "references": [
+      "JP-1076",
+      "JP-1081"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-03_10",
+    "activator": "JO4FDA",
+    "date": "2025-05-03",
+    "total": 10,
+    "references": [
+      "JP-2054",
+      "JP-1041"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-02_12",
+    "activator": "JO4FDA",
+    "date": "2025-05-02",
+    "total": 12,
+    "references": [
+      "JP-1047",
+      "JP-1936"
+    ]
+  },
+  {
+    "id": "S57MS_2025-05-04_18",
+    "activator": "S57MS",
+    "date": "2025-05-04",
+    "total": 18,
+    "references": [
+      "SI-0507",
+      "SI-0499"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-28_14",
+    "activator": "S57MS",
+    "date": "2025-04-28",
+    "total": 14,
+    "references": [
+      "SI-1124",
+      "SI-1125"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-27_16",
+    "activator": "S57MS",
+    "date": "2025-04-27",
+    "total": 16,
+    "references": [
+      "SI-0840",
+      "SI-0904"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-26_17",
+    "activator": "S57MS",
+    "date": "2025-04-26",
+    "total": 17,
+    "references": [
+      "SI-0490",
+      "SI-0491"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-20_26",
+    "activator": "S57MS",
+    "date": "2025-04-20",
+    "total": 26,
+    "references": [
+      "SI-1034",
+      "SI-0323"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-19_17",
+    "activator": "S57MS",
+    "date": "2025-04-19",
+    "total": 17,
+    "references": [
+      "SI-0589",
+      "SI-0590"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-19_41",
+    "activator": "S57MS",
+    "date": "2025-04-19",
+    "total": 41,
+    "references": [
+      "SI-1035",
+      "SI-1038"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-10_26",
+    "activator": "S57MS",
+    "date": "2025-04-10",
+    "total": 26,
+    "references": [
+      "SI-0720",
+      "SI-0719"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-07_10",
+    "activator": "S57MS",
+    "date": "2025-04-07",
+    "total": 10,
+    "references": [
+      "SI-0423",
+      "SI-0422"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-06_15",
+    "activator": "S57MS",
+    "date": "2025-04-06",
+    "total": 15,
+    "references": [
+      "SI-0701",
+      "SI-0702"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-05-04_11",
+    "activator": "G0HIO",
+    "date": "2025-05-04",
+    "total": 11,
+    "references": [
+      "GB-4911",
+      "GB-4910"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-04-10_10",
+    "activator": "G0HIO",
+    "date": "2025-04-10",
+    "total": 10,
+    "references": [
+      "GB-4718",
+      "GB-4717"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-04-10_12",
+    "activator": "G0HIO",
+    "date": "2025-04-10",
+    "total": 12,
+    "references": [
+      "GB-4716",
+      "GB-4725"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-04-08_15",
+    "activator": "G0HIO",
+    "date": "2025-04-08",
+    "total": 15,
+    "references": [
+      "GB-4676",
+      "GB-4678"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-03-24_12",
+    "activator": "G0HIO",
+    "date": "2025-03-24",
+    "total": 12,
+    "references": [
+      "GB-4419",
+      "GB-0141",
+      "GB-4420"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-03-24_13",
+    "activator": "G0HIO",
+    "date": "2025-03-24",
+    "total": 13,
+    "references": [
+      "GB-4505",
+      "GB-0514"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-04_13",
+    "activator": "KE8SZL",
+    "date": "2025-05-04",
+    "total": 13,
+    "references": [
+      "US-1093",
+      "US-7526"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-04_12",
+    "activator": "KE8SZL",
+    "date": "2025-05-04",
+    "total": 12,
+    "references": [
+      "US-7289",
+      "US-11164",
+      "US-11088",
+      "US-7284",
+      "US-1077",
+      "US-12331",
+      "US-12330"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-04_11",
+    "activator": "KE8SZL",
+    "date": "2025-05-04",
+    "total": 11,
+    "references": [
+      "US-7159",
+      "US-7175",
+      "US-7299",
+      "US-12093"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-03_11",
+    "activator": "KE8SZL",
+    "date": "2025-05-03",
+    "total": 11,
+    "references": [
+      "US-0163",
+      "US-7265"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-02_12",
+    "activator": "KE8SZL",
+    "date": "2025-05-02",
+    "total": 12,
+    "references": [
+      "US-0171",
+      "US-11355",
+      "US-11713"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-02_11",
+    "activator": "KE8SZL",
+    "date": "2025-05-02",
+    "total": 11,
+    "references": [
+      "US-11953",
+      "US-11164",
+      "US-9757"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-10_10",
+    "activator": "N1IPB",
+    "date": "2025-05-10",
+    "total": 10,
+    "references": [
+      "US-4698",
+      "US-2433",
+      "US-11678"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-07_10",
+    "activator": "N1IPB",
+    "date": "2025-05-07",
+    "total": 10,
+    "references": [
+      "US-12130",
+      "US-8721",
+      "US-12127",
+      "US-8718",
+      "US-10462",
+      "US-12128"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-06_10",
+    "activator": "N1IPB",
+    "date": "2025-05-06",
+    "total": 10,
+    "references": [
+      "US-0232",
+      "US-1882"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-03_10",
+    "activator": "N1IPB",
+    "date": "2025-05-03",
+    "total": 10,
+    "references": [
+      "US-11848",
+      "US-0451",
+      "US-4962",
+      "US-4883"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-04-23_11",
+    "activator": "N1IPB",
+    "date": "2025-04-23",
+    "total": 11,
+    "references": [
+      "US-11587",
+      "US-4755"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-04-23_10",
+    "activator": "N1IPB",
+    "date": "2025-04-23",
+    "total": 10,
+    "references": [
+      "US-4746",
+      "US-11595",
+      "US-2422"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-04-21_10",
+    "activator": "N1IPB",
+    "date": "2025-04-21",
+    "total": 10,
+    "references": [
+      "US-11603",
+      "US-0328"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-02_72",
+    "activator": "SP8ULA",
+    "date": "2025-05-02",
+    "total": 72,
+    "references": [
+      "PL-2080",
+      "PL-0027"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-01_146",
+    "activator": "SP8ULA",
+    "date": "2025-05-01",
+    "total": 146,
+    "references": [
+      "PL-0079",
+      "PL-2066",
+      "PL-0047"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-01_176",
+    "activator": "SP8ULA",
+    "date": "2025-05-01",
+    "total": 176,
+    "references": [
+      "PL-2211",
+      "PL-0078"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-01_190",
+    "activator": "SP8ULA",
+    "date": "2025-05-01",
+    "total": 190,
+    "references": [
+      "PL-0035",
+      "PL-2262"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-04-30_131",
+    "activator": "SP8ULA",
+    "date": "2025-04-30",
+    "total": 131,
+    "references": [
+      "PL-0096",
+      "PL-1994",
+      "PL-0078"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-04-12_65",
+    "activator": "SP8ULA",
+    "date": "2025-04-12",
+    "total": 65,
+    "references": [
+      "PL-2087",
+      "PL-2602"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-04-12_89",
+    "activator": "SP8ULA",
+    "date": "2025-04-12",
+    "total": 89,
+    "references": [
+      "PL-2652",
+      "PL-0065",
+      "PL-0086"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-02_72",
+    "activator": "SP8QC",
+    "date": "2025-05-02",
+    "total": 72,
+    "references": [
+      "PL-2080",
+      "PL-0027"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-01_177",
+    "activator": "SP8QC",
+    "date": "2025-05-01",
+    "total": 177,
+    "references": [
+      "PL-0078",
+      "PL-2211"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-01_147",
+    "activator": "SP8QC",
+    "date": "2025-05-01",
+    "total": 147,
+    "references": [
+      "PL-2066",
+      "PL-0079",
+      "PL-0047"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-01_190",
+    "activator": "SP8QC",
+    "date": "2025-05-01",
+    "total": 190,
+    "references": [
+      "PL-0035",
+      "PL-2262"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-04-30_131",
+    "activator": "SP8QC",
+    "date": "2025-04-30",
+    "total": 131,
+    "references": [
+      "PL-1994",
+      "PL-0096",
+      "PL-0078"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-03-30_112",
+    "activator": "SP8QC",
+    "date": "2025-03-30",
+    "total": 112,
+    "references": [
+      "PL-0716",
+      "PL-2786"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-03-30_130",
+    "activator": "SP8QC",
+    "date": "2025-03-30",
+    "total": 130,
+    "references": [
+      "PL-0938",
+      "PL-0722"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-10_18",
+    "activator": "AD0AA",
+    "date": "2025-05-10",
+    "total": 18,
+    "references": [
+      "US-4254",
+      "US-4276"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-10_21",
+    "activator": "AD0AA",
+    "date": "2025-05-10",
+    "total": 21,
+    "references": [
+      "US-8222",
+      "US-4283"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-09_33",
+    "activator": "AD0AA",
+    "date": "2025-05-09",
+    "total": 33,
+    "references": [
+      "US-0365",
+      "US-0364"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-09_13",
+    "activator": "AD0AA",
+    "date": "2025-05-09",
+    "total": 13,
+    "references": [
+      "US-3381",
+      "US-2482"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-09_61",
+    "activator": "AD0AA",
+    "date": "2025-05-09",
+    "total": 61,
+    "references": [
+      "US-7145",
+      "US-9384"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-08_32",
+    "activator": "AD0AA",
+    "date": "2025-05-08",
+    "total": 32,
+    "references": [
+      "US-3381",
+      "US-2482"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-04_48",
+    "activator": "AD0AA",
+    "date": "2025-05-04",
+    "total": 48,
+    "references": [
+      "US-2517",
+      "US-11153"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-04_39",
+    "activator": "AD0AA",
+    "date": "2025-05-04",
+    "total": 39,
+    "references": [
+      "US-9384",
+      "US-7145"
+    ]
+  },
+  {
+    "id": "HB9BIN_2025-05-10_10",
+    "activator": "HB9BIN",
+    "date": "2025-05-10",
+    "total": 10,
+    "references": [
+      "DE-0359",
+      "DE-0041"
+    ]
+  },
+  {
+    "id": "W1WC_2025-05-10_81",
+    "activator": "W1WC",
+    "date": "2025-05-10",
+    "total": 81,
+    "references": [
+      "US-1044",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "W1WC_2025-05-08_48",
+    "activator": "W1WC",
+    "date": "2025-05-08",
+    "total": 48,
+    "references": [
+      "US-0161",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "W1WC_2025-05-07_96",
+    "activator": "W1WC",
+    "date": "2025-05-07",
+    "total": 96,
+    "references": [
+      "US-3791",
+      "US-0161"
+    ]
+  },
+  {
+    "id": "W1WC_2025-05-06_11",
+    "activator": "W1WC",
+    "date": "2025-05-06",
+    "total": 11,
+    "references": [
+      "US-3791",
+      "US-0161"
+    ]
+  },
+  {
+    "id": "W1WC_2025-05-05_13",
+    "activator": "W1WC",
+    "date": "2025-05-05",
+    "total": 13,
+    "references": [
+      "US-3686",
+      "US-9921"
+    ]
+  },
+  {
+    "id": "W1WC_2025-05-04_33",
+    "activator": "W1WC",
+    "date": "2025-05-04",
+    "total": 33,
+    "references": [
+      "US-3600",
+      "US-3702"
+    ]
+  },
+  {
+    "id": "KE8NHH_2025-05-11_66",
+    "activator": "KE8NHH",
+    "date": "2025-05-11",
+    "total": 66,
+    "references": [
+      "US-1887",
+      "US-6281"
+    ]
+  },
+  {
+    "id": "KE8NHH_2025-05-10_96",
+    "activator": "KE8NHH",
+    "date": "2025-05-10",
+    "total": 96,
+    "references": [
+      "US-6281",
+      "US-1887"
+    ]
+  },
+  {
+    "id": "KE8NHH_2025-05-08_11",
+    "activator": "KE8NHH",
+    "date": "2025-05-08",
+    "total": 11,
+    "references": [
+      "US-1884",
+      "US-6311"
+    ]
+  },
+  {
+    "id": "KE8NHH_2025-05-08_15",
+    "activator": "KE8NHH",
+    "date": "2025-05-08",
+    "total": 15,
+    "references": [
+      "US-1887",
+      "US-6281"
+    ]
+  },
+  {
+    "id": "KE8NHH_2025-05-08_14",
+    "activator": "KE8NHH",
+    "date": "2025-05-08",
+    "total": 14,
+    "references": [
+      "US-4559",
+      "US-3641"
+    ]
+  },
+  {
+    "id": "KE8NHH_2025-05-07_11",
+    "activator": "KE8NHH",
+    "date": "2025-05-07",
+    "total": 11,
+    "references": [
+      "US-8717",
+      "US-3654",
+      "US-6284"
+    ]
+  },
+  {
+    "id": "KE8NHH_2025-05-07_14",
+    "activator": "KE8NHH",
+    "date": "2025-05-07",
+    "total": 14,
+    "references": [
+      "US-6281",
+      "US-1887"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-28_15",
+    "activator": "WD6UCK",
+    "date": "2025-04-28",
+    "total": 15,
+    "references": [
+      "US-7495",
+      "US-10345"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-21_24",
+    "activator": "WD6UCK",
+    "date": "2025-04-21",
+    "total": 24,
+    "references": [
+      "US-2265",
+      "US-1552"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-20_22",
+    "activator": "WD6UCK",
+    "date": "2025-04-20",
+    "total": 22,
+    "references": [
+      "US-1952",
+      "US-6755"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-18_14",
+    "activator": "WD6UCK",
+    "date": "2025-04-18",
+    "total": 14,
+    "references": [
+      "US-0448",
+      "US-10302"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-22_12",
+    "activator": "N9OZ",
+    "date": "2025-04-22",
+    "total": 12,
+    "references": [
+      "US-5777",
+      "US-5773",
+      "US-3069"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-22_13",
+    "activator": "N9OZ",
+    "date": "2025-04-22",
+    "total": 13,
+    "references": [
+      "US-5774",
+      "US-11744"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-21_12",
+    "activator": "N9OZ",
+    "date": "2025-04-21",
+    "total": 12,
+    "references": [
+      "US-11099",
+      "US-11654",
+      "US-11661"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-20_13",
+    "activator": "N9OZ",
+    "date": "2025-04-20",
+    "total": 13,
+    "references": [
+      "US-5876",
+      "US-5865",
+      "US-5896"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-11_13",
+    "activator": "N9OZ",
+    "date": "2025-04-11",
+    "total": 13,
+    "references": [
+      "US-9660",
+      "US-1229",
+      "US-0051"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-09_14",
+    "activator": "N9OZ",
+    "date": "2025-04-09",
+    "total": 14,
+    "references": [
+      "US-9603",
+      "US-1224",
+      "US-0801"
+    ]
+  },
+  {
+    "id": "W0YES_2025-03-19_26",
+    "activator": "W0YES",
+    "date": "2025-03-19",
+    "total": 26,
+    "references": [
+      "US-7658",
+      "US-11074"
+    ]
+  },
+  {
+    "id": "W0YES_2025-03-18_24",
+    "activator": "W0YES",
+    "date": "2025-03-18",
+    "total": 24,
+    "references": [
+      "US-8245",
+      "US-11076",
+      "US-8247",
+      "US-3337"
+    ]
+  },
+  {
+    "id": "W0YES_2025-03-18_26",
+    "activator": "W0YES",
+    "date": "2025-03-18",
+    "total": 26,
+    "references": [
+      "US-11140",
+      "US-4587"
+    ]
+  },
+  {
+    "id": "W0YES_2025-03-18_22",
+    "activator": "W0YES",
+    "date": "2025-03-18",
+    "total": 22,
+    "references": [
+      "US-8242",
+      "US-8263",
+      "US-8258"
+    ]
+  },
+  {
+    "id": "WI2X_2025-04-17_48",
+    "activator": "WI2X",
+    "date": "2025-04-17",
+    "total": 48,
+    "references": [
+      "US-8044",
+      "US-8040"
+    ]
+  },
+  {
+    "id": "WI2X_2025-04-17_50",
+    "activator": "WI2X",
+    "date": "2025-04-17",
+    "total": 50,
+    "references": [
+      "US-11992",
+      "US-1614"
+    ]
+  },
+  {
+    "id": "WI2X_2025-04-13_52",
+    "activator": "WI2X",
+    "date": "2025-04-13",
+    "total": 52,
+    "references": [
+      "US-1630",
+      "US-4556"
+    ]
+  },
+  {
+    "id": "WI2X_2025-04-13_48",
+    "activator": "WI2X",
+    "date": "2025-04-13",
+    "total": 48,
+    "references": [
+      "US-1624",
+      "US-4991"
+    ]
+  },
+  {
+    "id": "HS0FVS_2025-04-18_12",
+    "activator": "HS0FVS",
+    "date": "2025-04-18",
+    "total": 12,
+    "references": [
+      "TH-0862",
+      "TH-0495"
+    ]
+  },
+  {
+    "id": "HS0FVS_2025-04-17_19",
+    "activator": "HS0FVS",
+    "date": "2025-04-17",
+    "total": 19,
+    "references": [
+      "TH-0631",
+      "TH-0446"
+    ]
+  },
+  {
+    "id": "N4TRD_2025-04-28_104",
+    "activator": "N4TRD",
+    "date": "2025-04-28",
+    "total": 104,
+    "references": [
+      "US-8313",
+      "US-11020",
+      "US-6936"
+    ]
+  },
+  {
+    "id": "N4TRD_2025-04-28_99",
+    "activator": "N4TRD",
+    "date": "2025-04-28",
+    "total": 99,
+    "references": [
+      "US-4509",
+      "US-10398"
+    ]
+  },
+  {
+    "id": "N4TRD_2025-04-27_100",
+    "activator": "N4TRD",
+    "date": "2025-04-27",
+    "total": 100,
+    "references": [
+      "US-4509",
+      "US-10398"
+    ]
+  },
+  {
+    "id": "N4TRD_2025-04-26_11",
+    "activator": "N4TRD",
+    "date": "2025-04-26",
+    "total": 11,
+    "references": [
+      "US-10399",
+      "US-10389"
+    ]
+  },
+  {
+    "id": "N4TRD_2025-04-26_319",
+    "activator": "N4TRD",
+    "date": "2025-04-26",
+    "total": 319,
+    "references": [
+      "US-6927",
+      "US-4509"
+    ]
+  },
+  {
+    "id": "N4TRD_2025-04-25_230",
+    "activator": "N4TRD",
+    "date": "2025-04-25",
+    "total": 230,
+    "references": [
+      "US-10398",
+      "US-4509"
+    ]
+  },
+  {
+    "id": "A65D_2025-04-05_29",
+    "activator": "A65D",
+    "date": "2025-04-05",
+    "total": 29,
+    "references": [
+      "AE-0017",
+      "AE-0097"
+    ]
+  },
+  {
+    "id": "A65D_2025-04-03_2",
+    "activator": "A65D",
+    "date": "2025-04-03",
+    "total": 2,
+    "references": [
+      "AE-0097",
+      "AE-0017"
+    ]
+  },
+  {
+    "id": "A65D_2025-04-01_110",
+    "activator": "A65D",
+    "date": "2025-04-01",
+    "total": 110,
+    "references": [
+      "AE-0030",
+      "AE-0017"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-31_63",
+    "activator": "A65D",
+    "date": "2025-03-31",
+    "total": 63,
+    "references": [
+      "AE-0017",
+      "AE-0030"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-24_30",
+    "activator": "A65D",
+    "date": "2025-03-24",
+    "total": 30,
+    "references": [
+      "AE-0017",
+      "AE-0097"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-23_140",
+    "activator": "A65D",
+    "date": "2025-03-23",
+    "total": 140,
+    "references": [
+      "AE-0019",
+      "AE-0078"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-22_89",
+    "activator": "A65D",
+    "date": "2025-03-22",
+    "total": 89,
+    "references": [
+      "AE-0017",
+      "AE-0030"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-20_70",
+    "activator": "A65D",
+    "date": "2025-03-20",
+    "total": 70,
+    "references": [
+      "AE-0017",
+      "AE-0096"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-18_82",
+    "activator": "A65D",
+    "date": "2025-03-18",
+    "total": 82,
+    "references": [
+      "AE-0017",
+      "AE-0030"
+    ]
+  },
+  {
+    "id": "JG7MRR_2025-05-11_47",
+    "activator": "JG7MRR",
+    "date": "2025-05-11",
+    "total": 47,
+    "references": [
+      "JP-0009",
+      "JP-1871"
+    ]
+  },
+  {
+    "id": "JG7MRR_2025-05-04_48",
+    "activator": "JG7MRR",
+    "date": "2025-05-04",
+    "total": 48,
+    "references": [
+      "JP-2106",
+      "JP-0128"
+    ]
+  },
+  {
+    "id": "JG7MRR_2025-05-04_11",
+    "activator": "JG7MRR",
+    "date": "2025-05-04",
+    "total": 11,
+    "references": [
+      "JP-1461",
+      "JP-1923"
+    ]
+  },
+  {
+    "id": "JG7MRR_2025-05-03_50",
+    "activator": "JG7MRR",
+    "date": "2025-05-03",
+    "total": 50,
+    "references": [
+      "JP-0127",
+      "JP-1424"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-05-04_33",
+    "activator": "JQ3JUK",
+    "date": "2025-05-04",
+    "total": 33,
+    "references": [
+      "JP-2011",
+      "JP-0022"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-04-30_22",
+    "activator": "JQ3JUK",
+    "date": "2025-04-30",
+    "total": 22,
+    "references": [
+      "JP-0023",
+      "JP-1661"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-04-30_24",
+    "activator": "JQ3JUK",
+    "date": "2025-04-30",
+    "total": 24,
+    "references": [
+      "JP-1662",
+      "JP-2018"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-04-29_27",
+    "activator": "JQ3JUK",
+    "date": "2025-04-29",
+    "total": 27,
+    "references": [
+      "JP-1684",
+      "JP-1669"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-05-10_15",
+    "activator": "G1JPV",
+    "date": "2025-05-10",
+    "total": 15,
+    "references": [
+      "GB-4858",
+      "GB-2450",
+      "GB-4857"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-05-10_11",
+    "activator": "G1JPV",
+    "date": "2025-05-10",
+    "total": 11,
+    "references": [
+      "GB-4672",
+      "GB-4859"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-05-06_27",
+    "activator": "G1JPV",
+    "date": "2025-05-06",
+    "total": 27,
+    "references": [
+      "GB-0710",
+      "GB-4855",
+      "GB-0749"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-04-25_31",
+    "activator": "G1JPV",
+    "date": "2025-04-25",
+    "total": 31,
+    "references": [
+      "GB-4855",
+      "GB-0710"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-04-25_11",
+    "activator": "G1JPV",
+    "date": "2025-04-25",
+    "total": 11,
+    "references": [
+      "GB-4856",
+      "GB-3427"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-04-25_24",
+    "activator": "G1JPV",
+    "date": "2025-04-25",
+    "total": 24,
+    "references": [
+      "GB-4849",
+      "GB-3948",
+      "GB-0228"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-04-25_20",
+    "activator": "G1JPV",
+    "date": "2025-04-25",
+    "total": 20,
+    "references": [
+      "GB-4723",
+      "GB-4796"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-04-19_19",
+    "activator": "G1JPV",
+    "date": "2025-04-19",
+    "total": 19,
+    "references": [
+      "GB-1799",
+      "GB-1632"
+    ]
+  },
+  {
+    "id": "G1JPV_2025-04-18_20",
+    "activator": "G1JPV",
+    "date": "2025-04-18",
+    "total": 20,
+    "references": [
+      "GB-3022",
+      "GB-4723"
+    ]
+  },
+  {
+    "id": "G7WKX_2025-04-27_6",
+    "activator": "G7WKX",
+    "date": "2025-04-27",
+    "total": 6,
+    "references": [
+      "GB-4422",
+      "GB-1024"
+    ]
+  },
+  {
+    "id": "G7WKX_2025-04-26_11",
+    "activator": "G7WKX",
+    "date": "2025-04-26",
+    "total": 11,
+    "references": [
+      "GB-2837",
+      "GB-1362"
+    ]
+  },
+  {
+    "id": "G7WKX_2025-04-23_19",
+    "activator": "G7WKX",
+    "date": "2025-04-23",
+    "total": 19,
+    "references": [
+      "GB-4849",
+      "GB-3948"
+    ]
+  },
+  {
+    "id": "G7WKX_2025-04-21_11",
+    "activator": "G7WKX",
+    "date": "2025-04-21",
+    "total": 11,
+    "references": [
+      "GB-0070",
+      "GB-1606",
+      "GB-1717",
+      "GB-3047"
+    ]
+  },
+  {
+    "id": "G7WKX_2025-04-20_13",
+    "activator": "G7WKX",
+    "date": "2025-04-20",
+    "total": 13,
+    "references": [
+      "GB-1231",
+      "GB-2083"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-05-02_15",
+    "activator": "SP4VIT",
+    "date": "2025-05-02",
+    "total": 15,
+    "references": [
+      "PL-2771",
+      "PL-1336",
+      "PL-1291"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-05-01_17",
+    "activator": "SP4VIT",
+    "date": "2025-05-01",
+    "total": 17,
+    "references": [
+      "PL-2161",
+      "PL-2510"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-27_193",
+    "activator": "SP4VIT",
+    "date": "2025-04-27",
+    "total": 193,
+    "references": [
+      "PL-0746",
+      "PL-0753"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-27_55",
+    "activator": "SP4VIT",
+    "date": "2025-04-27",
+    "total": 55,
+    "references": [
+      "PL-0752",
+      "PL-0829"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-20_140",
+    "activator": "SP4VIT",
+    "date": "2025-04-20",
+    "total": 140,
+    "references": [
+      "PL-2488",
+      "PL-1000",
+      "PL-0900"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-13_206",
+    "activator": "SP4VIT",
+    "date": "2025-04-13",
+    "total": 206,
+    "references": [
+      "PL-0865",
+      "PL-2795",
+      "PL-2488"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-03-26_50",
+    "activator": "SP4VIT",
+    "date": "2025-03-26",
+    "total": 50,
+    "references": [
+      "PL-0952",
+      "PL-0883"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-03-26_105",
+    "activator": "SP4VIT",
+    "date": "2025-03-26",
+    "total": 105,
+    "references": [
+      "PL-0695",
+      "PL-0708",
+      "PL-1951"
+    ]
+  },
+  {
+    "id": "NT2A_2025-04-17_48",
+    "activator": "NT2A",
+    "date": "2025-04-17",
+    "total": 48,
+    "references": [
+      "US-8040",
+      "US-8044"
+    ]
+  },
+  {
+    "id": "NT2A_2025-04-17_50",
+    "activator": "NT2A",
+    "date": "2025-04-17",
+    "total": 50,
+    "references": [
+      "US-11992",
+      "US-1614"
+    ]
+  },
+  {
+    "id": "NT2A_2025-04-13_52",
+    "activator": "NT2A",
+    "date": "2025-04-13",
+    "total": 52,
+    "references": [
+      "US-1630",
+      "US-4556"
+    ]
+  },
+  {
+    "id": "NT2A_2025-04-13_48",
+    "activator": "NT2A",
+    "date": "2025-04-13",
+    "total": 48,
+    "references": [
+      "US-4991",
+      "US-1624"
+    ]
+  },
+  {
+    "id": "WC1N_2025-05-05_32",
+    "activator": "WC1N",
+    "date": "2025-05-05",
+    "total": 32,
+    "references": [
+      "US-8847",
+      "US-1373"
+    ]
+  },
+  {
+    "id": "WC1N_2025-05-03_16",
+    "activator": "WC1N",
+    "date": "2025-05-03",
+    "total": 16,
+    "references": [
+      "US-4556",
+      "US-3999"
+    ]
+  },
+  {
+    "id": "K0ACP_2025-05-04_25",
+    "activator": "K0ACP",
+    "date": "2025-05-04",
+    "total": 25,
+    "references": [
+      "US-4583",
+      "US-6724",
+      "US-4779"
+    ]
+  },
+  {
+    "id": "K0ACP_2025-05-03_10",
+    "activator": "K0ACP",
+    "date": "2025-05-03",
+    "total": 10,
+    "references": [
+      "US-6646",
+      "US-6616"
+    ]
+  },
+  {
+    "id": "K0ACP_2025-04-27_32",
+    "activator": "K0ACP",
+    "date": "2025-04-27",
+    "total": 32,
+    "references": [
+      "US-0249",
+      "US-0660"
+    ]
+  },
+  {
+    "id": "K0ACP_2025-04-26_10",
+    "activator": "K0ACP",
+    "date": "2025-04-26",
+    "total": 10,
+    "references": [
+      "US-1878",
+      "US-7155",
+      "US-3621"
+    ]
+  },
+  {
+    "id": "K0ACP_2025-04-25_29",
+    "activator": "K0ACP",
+    "date": "2025-04-25",
+    "total": 29,
+    "references": [
+      "US-4627",
+      "US-1853",
+      "US-0246"
+    ]
+  },
+  {
+    "id": "KE9BHN_2025-05-09_40",
+    "activator": "KE9BHN",
+    "date": "2025-05-09",
+    "total": 40,
+    "references": [
+      "US-2278",
+      "US-5729"
+    ]
+  },
+  {
+    "id": "KE9BHN_2025-05-03_21",
+    "activator": "KE9BHN",
+    "date": "2025-05-03",
+    "total": 21,
+    "references": [
+      "US-4238",
+      "US-4261"
+    ]
+  },
+  {
+    "id": "N9JF_2025-04-11_46",
+    "activator": "N9JF",
+    "date": "2025-04-11",
+    "total": 46,
+    "references": [
+      "US-2969",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "N9JF_2025-04-09_46",
+    "activator": "N9JF",
+    "date": "2025-04-09",
+    "total": 46,
+    "references": [
+      "US-0708",
+      "US-3956",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "WW3K_2025-04-17_33",
+    "activator": "WW3K",
+    "date": "2025-04-17",
+    "total": 33,
+    "references": [
+      "US-1702",
+      "US-2418"
+    ]
+  },
+  {
+    "id": "JJ8ISZ_2025-04-04_17",
+    "activator": "JJ8ISZ",
+    "date": "2025-04-04",
+    "total": 17,
+    "references": [
+      "JP-2065",
+      "JP-2063"
+    ]
+  },
+  {
+    "id": "JJ8ISZ_2025-04-03_14",
+    "activator": "JJ8ISZ",
+    "date": "2025-04-03",
+    "total": 14,
+    "references": [
+      "JP-2006",
+      "JP-1392"
+    ]
+  },
+  {
+    "id": "JJ8ISZ_2025-04-03_16",
+    "activator": "JJ8ISZ",
+    "date": "2025-04-03",
+    "total": 16,
+    "references": [
+      "JP-2005",
+      "JP-1397"
+    ]
+  },
+  {
+    "id": "G5LSI_2025-04-20_21",
+    "activator": "G5LSI",
+    "date": "2025-04-20",
+    "total": 21,
+    "references": [
+      "ES-0205",
+      "ES-1312"
+    ]
+  },
+  {
+    "id": "G5LSI_2025-04-12_10",
+    "activator": "G5LSI",
+    "date": "2025-04-12",
+    "total": 10,
+    "references": [
+      "US-0655",
+      "US-7499"
+    ]
+  },
+  {
+    "id": "G5LSI_2025-04-10_5",
+    "activator": "G5LSI",
+    "date": "2025-04-10",
+    "total": 5,
+    "references": [
+      "US-0064",
+      "US-4556"
+    ]
+  },
+  {
+    "id": "G5LSI_2025-04-06_15",
+    "activator": "G5LSI",
+    "date": "2025-04-06",
+    "total": 15,
+    "references": [
+      "US-1570",
+      "US-0015"
+    ]
+  },
+  {
+    "id": "G5LSI_2025-03-30_11",
+    "activator": "G5LSI",
+    "date": "2025-03-30",
+    "total": 11,
+    "references": [
+      "GB-4432",
+      "GB-2092"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-26_10",
+    "activator": "KA1VRY",
+    "date": "2025-04-26",
+    "total": 10,
+    "references": [
+      "US-10185",
+      "US-4165"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-20_20",
+    "activator": "KA1VRY",
+    "date": "2025-04-20",
+    "total": 20,
+    "references": [
+      "US-4576",
+      "US-4579",
+      "US-4566"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-12_10",
+    "activator": "KA1VRY",
+    "date": "2025-04-12",
+    "total": 10,
+    "references": [
+      "US-12019",
+      "US-2268"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-08_19",
+    "activator": "KA1VRY",
+    "date": "2025-04-08",
+    "total": 19,
+    "references": [
+      "US-12020",
+      "US-2266"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-08_24",
+    "activator": "KA1VRY",
+    "date": "2025-04-08",
+    "total": 24,
+    "references": [
+      "US-10280",
+      "US-4233"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-08_10",
+    "activator": "KA1VRY",
+    "date": "2025-04-08",
+    "total": 10,
+    "references": [
+      "US-10282",
+      "US-12314"
+    ]
+  },
+  {
+    "id": "OZ4JR_2025-04-20_10",
+    "activator": "OZ4JR",
+    "date": "2025-04-20",
+    "total": 10,
+    "references": [
+      "DK-0229",
+      "DK-0228",
+      "DK-0213",
+      "DK-0212",
+      "DK-0087"
+    ]
+  },
+  {
+    "id": "OZ4JR_2025-03-15_10",
+    "activator": "OZ4JR",
+    "date": "2025-03-15",
+    "total": 10,
+    "references": [
+      "DK-0084",
+      "DK-0080",
+      "DK-0081",
+      "DK-0079"
+    ]
+  },
+  {
+    "id": "OZ4JR_2025-03-15_13",
+    "activator": "OZ4JR",
+    "date": "2025-03-15",
+    "total": 13,
+    "references": [
+      "DK-0096",
+      "DK-0097"
+    ]
+  },
+  {
+    "id": "OZ4JR_2025-03-15_11",
+    "activator": "OZ4JR",
+    "date": "2025-03-15",
+    "total": 11,
+    "references": [
+      "DK-0083",
+      "DK-0082"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-11_51",
+    "activator": "OE3BIY",
+    "date": "2025-05-11",
+    "total": 51,
+    "references": [
+      "AT-0217",
+      "AT-0301",
+      "AT-0250",
+      "AT-0265"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-10_26",
+    "activator": "OE3BIY",
+    "date": "2025-05-10",
+    "total": 26,
+    "references": [
+      "AT-0301",
+      "AT-0217",
+      "AT-0265",
+      "AT-0250"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-07_17",
+    "activator": "OE3BIY",
+    "date": "2025-05-07",
+    "total": 17,
+    "references": [
+      "AT-0250",
+      "AT-0301",
+      "AT-0217",
+      "AT-0265"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-03_47",
+    "activator": "OE3BIY",
+    "date": "2025-05-03",
+    "total": 47,
+    "references": [
+      "AT-0265",
+      "AT-0301",
+      "AT-0250",
+      "AT-0217"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-02_13",
+    "activator": "OE3BIY",
+    "date": "2025-05-02",
+    "total": 13,
+    "references": [
+      "AT-0301",
+      "AT-0265",
+      "AT-0217",
+      "AT-0250"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-01_50",
+    "activator": "OE3BIY",
+    "date": "2025-05-01",
+    "total": 50,
+    "references": [
+      "AT-0301",
+      "AT-0265",
+      "AT-0250",
+      "AT-0217"
+    ]
+  },
+  {
+    "id": "SP3AT_2025-04-21_10",
+    "activator": "SP3AT",
+    "date": "2025-04-21",
+    "total": 10,
+    "references": [
+      "PL-2605",
+      "PL-1692",
+      "PL-1675"
+    ]
+  },
+  {
+    "id": "SP3AT_2025-04-20_38",
+    "activator": "SP3AT",
+    "date": "2025-04-20",
+    "total": 38,
+    "references": [
+      "PL-2605",
+      "PL-1692",
+      "PL-1675"
+    ]
+  },
+  {
+    "id": "SP3AT_2025-04-14_17",
+    "activator": "SP3AT",
+    "date": "2025-04-14",
+    "total": 17,
+    "references": [
+      "PL-0663",
+      "PL-2202"
+    ]
+  },
+  {
+    "id": "KE8YVD_2025-04-26_244",
+    "activator": "KE8YVD",
+    "date": "2025-04-26",
+    "total": 244,
+    "references": [
+      "US-6927",
+      "US-4509"
+    ]
+  },
+  {
+    "id": "KE8YVD_2025-04-24_52",
+    "activator": "KE8YVD",
+    "date": "2025-04-24",
+    "total": 52,
+    "references": [
+      "US-0034",
+      "US-4556"
+    ]
+  },
+  {
+    "id": "KE8YVD_2025-04-23_35",
+    "activator": "KE8YVD",
+    "date": "2025-04-23",
+    "total": 35,
+    "references": [
+      "US-4556",
+      "US-4510"
+    ]
+  },
+  {
+    "id": "N5BO_2025-04-28_177",
+    "activator": "N5BO",
+    "date": "2025-04-28",
+    "total": 177,
+    "references": [
+      "US-4614",
+      "US-1841",
+      "US-4559"
+    ]
+  },
+  {
+    "id": "KC2VTM_2025-04-18_16",
+    "activator": "KC2VTM",
+    "date": "2025-04-18",
+    "total": 16,
+    "references": [
+      "US-6544",
+      "US-0680"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-05-05_51",
+    "activator": "W1SRR",
+    "date": "2025-05-05",
+    "total": 51,
+    "references": [
+      "US-4559",
+      "US-4630"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-29_48",
+    "activator": "W1SRR",
+    "date": "2025-04-29",
+    "total": 48,
+    "references": [
+      "US-8340",
+      "US-6329",
+      "US-4559"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-27_49",
+    "activator": "W1SRR",
+    "date": "2025-04-27",
+    "total": 49,
+    "references": [
+      "US-4559",
+      "US-8370"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-20_14",
+    "activator": "W1SRR",
+    "date": "2025-04-20",
+    "total": 14,
+    "references": [
+      "US-4620",
+      "US-3645"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-20_16",
+    "activator": "W1SRR",
+    "date": "2025-04-20",
+    "total": 16,
+    "references": [
+      "US-10590",
+      "US-8700",
+      "US-4612"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-24_12",
+    "activator": "W8TAM",
+    "date": "2025-04-24",
+    "total": 12,
+    "references": [
+      "US-6726",
+      "US-6804",
+      "US-3331",
+      "US-0350"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-20_16",
+    "activator": "W8TAM",
+    "date": "2025-04-20",
+    "total": 16,
+    "references": [
+      "US-0350",
+      "US-6679",
+      "US-6693"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-20_14",
+    "activator": "W8TAM",
+    "date": "2025-04-20",
+    "total": 14,
+    "references": [
+      "US-3331",
+      "US-6686"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-16_14",
+    "activator": "W8TAM",
+    "date": "2025-04-16",
+    "total": 14,
+    "references": [
+      "US-10647",
+      "US-8225",
+      "US-9846"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-15_15",
+    "activator": "W8TAM",
+    "date": "2025-04-15",
+    "total": 15,
+    "references": [
+      "US-0602",
+      "US-4339",
+      "US-10648"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-15_14",
+    "activator": "W8TAM",
+    "date": "2025-04-15",
+    "total": 14,
+    "references": [
+      "US-10651",
+      "US-4331",
+      "US-4255",
+      "US-10558",
+      "US-10654",
+      "US-10649",
+      "US-4322",
+      "US-4304"
+    ]
+  },
+  {
+    "id": "VA3GHB_2025-05-03_23",
+    "activator": "VA3GHB",
+    "date": "2025-05-03",
+    "total": 23,
+    "references": [
+      "CA-6003",
+      "CA-0128"
+    ]
+  },
+  {
+    "id": "VA3GHB_2025-04-18_21",
+    "activator": "VA3GHB",
+    "date": "2025-04-18",
+    "total": 21,
+    "references": [
+      "CA-5082",
+      "CA-1525"
+    ]
+  },
+  {
+    "id": "VA3GHB_2025-04-16_53",
+    "activator": "VA3GHB",
+    "date": "2025-04-16",
+    "total": 53,
+    "references": [
+      "CA-5643",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "VA3GHB_2025-04-15_56",
+    "activator": "VA3GHB",
+    "date": "2025-04-15",
+    "total": 56,
+    "references": [
+      "CA-6003",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "JH2KAG_2025-03-20_21",
+    "activator": "JH2KAG",
+    "date": "2025-03-20",
+    "total": 21,
+    "references": [
+      "JP-1812",
+      "JP-1796"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-05-06_12",
+    "activator": "MM0MMN",
+    "date": "2025-05-06",
+    "total": 12,
+    "references": [
+      "GB-1455",
+      "GB-1789"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-04-27_15",
+    "activator": "MM0MMN",
+    "date": "2025-04-27",
+    "total": 15,
+    "references": [
+      "GB-3079",
+      "GB-3270",
+      "GB-1446"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-04-09_10",
+    "activator": "MM0MMN",
+    "date": "2025-04-09",
+    "total": 10,
+    "references": [
+      "GE-0026",
+      "GE-0027"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-03-29_10",
+    "activator": "MM0MMN",
+    "date": "2025-03-29",
+    "total": 10,
+    "references": [
+      "GB-1481",
+      "GB-1480"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-03-08_11",
+    "activator": "MM0MMN",
+    "date": "2025-03-08",
+    "total": 11,
+    "references": [
+      "GB-4524",
+      "GB-4529"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-03-05_10",
+    "activator": "MM0MMN",
+    "date": "2025-03-05",
+    "total": 10,
+    "references": [
+      "GB-1386",
+      "GB-2994",
+      "GB-4521"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-05-01_16",
+    "activator": "SQ9SZ",
+    "date": "2025-05-01",
+    "total": 16,
+    "references": [
+      "PL-1339",
+      "PL-1322"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-03-30_4",
+    "activator": "SQ9SZ",
+    "date": "2025-03-30",
+    "total": 4,
+    "references": [
+      "PL-1120",
+      "PL-1156"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-03-30_15",
+    "activator": "SQ9SZ",
+    "date": "2025-03-30",
+    "total": 15,
+    "references": [
+      "PL-1120",
+      "PL-1156"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-03-17_14",
+    "activator": "SQ9SZ",
+    "date": "2025-03-17",
+    "total": 14,
+    "references": [
+      "PL-0879",
+      "PL-0959"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-03-16_11",
+    "activator": "SQ9SZ",
+    "date": "2025-03-16",
+    "total": 11,
+    "references": [
+      "PL-1463",
+      "PL-2784",
+      "PL-1410"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-03-10_16",
+    "activator": "SQ9SZ",
+    "date": "2025-03-10",
+    "total": 16,
+    "references": [
+      "PL-1325",
+      "PL-1329"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-03-09_14",
+    "activator": "SQ9SZ",
+    "date": "2025-03-09",
+    "total": 14,
+    "references": [
+      "PL-1330",
+      "PL-1339"
+    ]
+  },
+  {
+    "id": "SQ9SZ_2025-03-08_41",
+    "activator": "SQ9SZ",
+    "date": "2025-03-08",
+    "total": 41,
+    "references": [
+      "PL-1477",
+      "PL-1474",
+      "PL-1462"
+    ]
+  },
+  {
+    "id": "M7CUW_2025-05-10_140",
+    "activator": "M7CUW",
+    "date": "2025-05-10",
+    "total": 140,
+    "references": [
+      "GB-4878",
+      "GB-2900",
+      "GB-4879"
+    ]
+  },
+  {
+    "id": "M7CUW_2025-05-08_35",
+    "activator": "M7CUW",
+    "date": "2025-05-08",
+    "total": 35,
+    "references": [
+      "GB-4076",
+      "GB-1421"
+    ]
+  },
+  {
+    "id": "M7CUW_2025-05-07_33",
+    "activator": "M7CUW",
+    "date": "2025-05-07",
+    "total": 33,
+    "references": [
+      "GB-2677",
+      "GB-1233"
+    ]
+  },
+  {
+    "id": "M7CUW_2025-05-05_64",
+    "activator": "M7CUW",
+    "date": "2025-05-05",
+    "total": 64,
+    "references": [
+      "GB-2624",
+      "GB-2622",
+      "GB-1681"
+    ]
+  },
+  {
+    "id": "M7CUW_2025-04-28_45",
+    "activator": "M7CUW",
+    "date": "2025-04-28",
+    "total": 45,
+    "references": [
+      "GB-1233",
+      "GB-2677"
+    ]
+  },
+  {
+    "id": "M7CUW_2025-04-26_79",
+    "activator": "M7CUW",
+    "date": "2025-04-26",
+    "total": 79,
+    "references": [
+      "GB-3067",
+      "GB-3068"
+    ]
+  },
+  {
+    "id": "KF0INE_2025-03-30_18",
+    "activator": "KF0INE",
+    "date": "2025-03-30",
+    "total": 18,
+    "references": [
+      "US-1238",
+      "US-1208"
+    ]
+  },
+  {
+    "id": "KF0INE_2025-03-30_13",
+    "activator": "KF0INE",
+    "date": "2025-03-30",
+    "total": 13,
+    "references": [
+      "US-1212",
+      "US-4407"
+    ]
+  },
+  {
+    "id": "KF0INE_2025-03-30_14",
+    "activator": "KF0INE",
+    "date": "2025-03-30",
+    "total": 14,
+    "references": [
+      "US-0192",
+      "US-9667"
+    ]
+  },
+  {
+    "id": "JL1DEE_2025-05-11_18",
+    "activator": "JL1DEE",
+    "date": "2025-05-11",
+    "total": 18,
+    "references": [
+      "JP-1206",
+      "JP-1272"
+    ]
+  },
+  {
+    "id": "JL1DEE_2025-05-10_18",
+    "activator": "JL1DEE",
+    "date": "2025-05-10",
+    "total": 18,
+    "references": [
+      "JP-1286",
+      "JP-1257"
+    ]
+  },
+  {
+    "id": "JL1DEE_2025-05-01_13",
+    "activator": "JL1DEE",
+    "date": "2025-05-01",
+    "total": 13,
+    "references": [
+      "JP-1549",
+      "JP-1529"
+    ]
+  },
+  {
+    "id": "JL1DEE_2025-04-30_15",
+    "activator": "JL1DEE",
+    "date": "2025-04-30",
+    "total": 15,
+    "references": [
+      "JP-1550",
+      "JP-0022",
+      "JP-2090",
+      "JP-0137"
+    ]
+  },
+  {
+    "id": "JL1DEE_2025-04-30_16",
+    "activator": "JL1DEE",
+    "date": "2025-04-30",
+    "total": 16,
+    "references": [
+      "JP-2011",
+      "JP-2013",
+      "JP-0022"
+    ]
+  },
+  {
+    "id": "SP5TEN_2025-05-03_14",
+    "activator": "SP5TEN",
+    "date": "2025-05-03",
+    "total": 14,
+    "references": [
+      "SE-0408",
+      "SE-0390"
+    ]
+  },
+  {
+    "id": "SP5TEN_2025-05-01_14",
+    "activator": "SP5TEN",
+    "date": "2025-05-01",
+    "total": 14,
+    "references": [
+      "SE-0386",
+      "SE-0385",
+      "SE-0388"
+    ]
+  },
+  {
+    "id": "SP5TEN_2025-05-01_10",
+    "activator": "SP5TEN",
+    "date": "2025-05-01",
+    "total": 10,
+    "references": [
+      "SE-0367",
+      "SE-0368"
+    ]
+  },
+  {
+    "id": "SP5TEN_2025-05-01_13",
+    "activator": "SP5TEN",
+    "date": "2025-05-01",
+    "total": 13,
+    "references": [
+      "SE-0382",
+      "SE-0395",
+      "SE-0381"
+    ]
+  },
+  {
+    "id": "SP5TEN_2025-04-30_11",
+    "activator": "SP5TEN",
+    "date": "2025-04-30",
+    "total": 11,
+    "references": [
+      "SE-0394",
+      "SE-0393"
+    ]
+  },
+  {
+    "id": "SP5TEN_2025-04-30_17",
+    "activator": "SP5TEN",
+    "date": "2025-04-30",
+    "total": 17,
+    "references": [
+      "SE-0397",
+      "SE-0396"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-05-01_246",
+    "activator": "F4JCF",
+    "date": "2025-05-01",
+    "total": 246,
+    "references": [
+      "FR-3127",
+      "FR-4571"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-21_32",
+    "activator": "F4JCF",
+    "date": "2025-04-21",
+    "total": 32,
+    "references": [
+      "FR-2469",
+      "FR-4547",
+      "FR-4477",
+      "FR-3879"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-21_31",
+    "activator": "F4JCF",
+    "date": "2025-04-21",
+    "total": 31,
+    "references": [
+      "FR-2475",
+      "FR-4545"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-21_30",
+    "activator": "F4JCF",
+    "date": "2025-04-21",
+    "total": 30,
+    "references": [
+      "FR-4544",
+      "FR-4720"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-10_83",
+    "activator": "F4JCF",
+    "date": "2025-04-10",
+    "total": 83,
+    "references": [
+      "FR-4555",
+      "FR-2467"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-09_42",
+    "activator": "F4JCF",
+    "date": "2025-04-09",
+    "total": 42,
+    "references": [
+      "FR-4552",
+      "FR-4480",
+      "FR-3135"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-09_18",
+    "activator": "F4JCF",
+    "date": "2025-04-09",
+    "total": 18,
+    "references": [
+      "FR-4551",
+      "FR-2478"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-08_27",
+    "activator": "F4JCF",
+    "date": "2025-04-08",
+    "total": 27,
+    "references": [
+      "FR-4549",
+      "FR-4106"
+    ]
+  },
+  {
+    "id": "F4JCF_2025-04-06_243",
+    "activator": "F4JCF",
+    "date": "2025-04-06",
+    "total": 243,
+    "references": [
+      "FR-3875",
+      "FR-3877"
+    ]
+  },
+  {
+    "id": "KC3RW_2025-05-07_22",
+    "activator": "KC3RW",
+    "date": "2025-05-07",
+    "total": 22,
+    "references": [
+      "US-1566",
+      "US-10771"
+    ]
+  },
+  {
+    "id": "KC3RW_2025-04-26_34",
+    "activator": "KC3RW",
+    "date": "2025-04-26",
+    "total": 34,
+    "references": [
+      "US-4581",
+      "US-0928",
+      "US-4567",
+      "US-4582"
+    ]
+  },
+  {
+    "id": "KC3RW_2025-04-18_22",
+    "activator": "KC3RW",
+    "date": "2025-04-18",
+    "total": 22,
+    "references": [
+      "US-10771",
+      "US-1566"
+    ]
+  },
+  {
+    "id": "KC3RW_2025-04-04_54",
+    "activator": "KC3RW",
+    "date": "2025-04-04",
+    "total": 54,
+    "references": [
+      "US-6433",
+      "US-0898"
+    ]
+  },
+  {
+    "id": "KC3RW_2025-03-14_49",
+    "activator": "KC3RW",
+    "date": "2025-03-14",
+    "total": 49,
+    "references": [
+      "US-0563",
+      "US-1308"
+    ]
+  },
+  {
+    "id": "SQ9MDF_2025-04-17_33",
+    "activator": "SQ9MDF",
+    "date": "2025-04-17",
+    "total": 33,
+    "references": [
+      "DE-0625",
+      "DE-0012",
+      "DE-0938"
+    ]
+  },
+  {
+    "id": "SQ9MDF_2025-04-15_98",
+    "activator": "SQ9MDF",
+    "date": "2025-04-15",
+    "total": 98,
+    "references": [
+      "FR-0620",
+      "FR-6444",
+      "FR-6442",
+      "FR-6441",
+      "FR-6443"
+    ]
+  },
+  {
+    "id": "SQ9MDF_2025-04-09_21",
+    "activator": "SQ9MDF",
+    "date": "2025-04-09",
+    "total": 21,
+    "references": [
+      "FR-6102",
+      "FR-6103"
+    ]
+  },
+  {
+    "id": "JR4ARN_2025-04-29_29",
+    "activator": "JR4ARN",
+    "date": "2025-04-29",
+    "total": 29,
+    "references": [
+      "JP-1581",
+      "JP-1585"
+    ]
+  },
+  {
+    "id": "JR4ARN_2025-04-28_13",
+    "activator": "JR4ARN",
+    "date": "2025-04-28",
+    "total": 13,
+    "references": [
+      "JP-0022",
+      "JP-2011"
+    ]
+  },
+  {
+    "id": "JR4ARN_2025-04-28_35",
+    "activator": "JR4ARN",
+    "date": "2025-04-28",
+    "total": 35,
+    "references": [
+      "JP-0137",
+      "JP-1550"
+    ]
+  },
+  {
+    "id": "W1IP_2025-04-16_21",
+    "activator": "W1IP",
+    "date": "2025-04-16",
+    "total": 21,
+    "references": [
+      "US-6301",
+      "US-12128"
+    ]
+  },
+  {
+    "id": "W1IP_2025-04-16_24",
+    "activator": "W1IP",
+    "date": "2025-04-16",
+    "total": 24,
+    "references": [
+      "US-6321",
+      "US-12127"
+    ]
+  },
+  {
+    "id": "W1IP_2025-03-31_34",
+    "activator": "W1IP",
+    "date": "2025-03-31",
+    "total": 34,
+    "references": [
+      "US-4559",
+      "US-8370"
+    ]
+  },
+  {
+    "id": "W1IP_2025-03-07_15",
+    "activator": "W1IP",
+    "date": "2025-03-07",
+    "total": 15,
+    "references": [
+      "US-8374",
+      "US-4619"
+    ]
+  },
+  {
+    "id": "VK3PF_2025-04-27_169",
+    "activator": "VK3PF",
+    "date": "2025-04-27",
+    "total": 169,
+    "references": [
+      "AU-8293",
+      "AU-10416"
+    ]
+  },
+  {
+    "id": "VK3PF_2025-04-25_178",
+    "activator": "VK3PF",
+    "date": "2025-04-25",
+    "total": 178,
+    "references": [
+      "AU-10415",
+      "AU-2750"
+    ]
+  },
+  {
+    "id": "VK3PF_2025-04-21_228",
+    "activator": "VK3PF",
+    "date": "2025-04-21",
+    "total": 228,
+    "references": [
+      "AU-0510",
+      "AU-8567"
+    ]
+  },
+  {
+    "id": "W7IMC_2025-05-03_11",
+    "activator": "W7IMC",
+    "date": "2025-05-03",
+    "total": 11,
+    "references": [
+      "US-11285",
+      "US-12290"
+    ]
+  },
+  {
+    "id": "W7IMC_2025-05-02_11",
+    "activator": "W7IMC",
+    "date": "2025-05-02",
+    "total": 11,
+    "references": [
+      "US-11289",
+      "US-11283"
+    ]
+  },
+  {
+    "id": "W7IMC_2025-04-26_25",
+    "activator": "W7IMC",
+    "date": "2025-04-26",
+    "total": 25,
+    "references": [
+      "US-11251",
+      "US-11463"
+    ]
+  },
+  {
+    "id": "W7IMC_2025-04-25_29",
+    "activator": "W7IMC",
+    "date": "2025-04-25",
+    "total": 29,
+    "references": [
+      "US-11249",
+      "US-12221"
+    ]
+  },
+  {
+    "id": "W7IMC_2025-04-19_20",
+    "activator": "W7IMC",
+    "date": "2025-04-19",
+    "total": 20,
+    "references": [
+      "US-12157",
+      "US-12349"
+    ]
+  },
+  {
+    "id": "W7IMC_2025-04-01_27",
+    "activator": "W7IMC",
+    "date": "2025-04-01",
+    "total": 27,
+    "references": [
+      "US-4576",
+      "US-12223"
+    ]
+  },
+  {
+    "id": "8P5KM_2025-05-03_13",
+    "activator": "8P5KM",
+    "date": "2025-05-03",
+    "total": 13,
+    "references": [
+      "BB-0026",
+      "BB-0017"
+    ]
+  },
+  {
+    "id": "8P5KM_2025-04-28_10",
+    "activator": "8P5KM",
+    "date": "2025-04-28",
+    "total": 10,
+    "references": [
+      "BB-0023",
+      "BB-0003",
+      "BB-0010"
+    ]
+  },
+  {
+    "id": "JK1XUQ_2025-04-13_32",
+    "activator": "JK1XUQ",
+    "date": "2025-04-13",
+    "total": 32,
+    "references": [
+      "JP-1202",
+      "JP-0116"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-20_4",
+    "activator": "WT8J",
+    "date": "2025-04-20",
+    "total": 4,
+    "references": [
+      "US-3331",
+      "US-6686",
+      "US-6679"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-20_13",
+    "activator": "WT8J",
+    "date": "2025-04-20",
+    "total": 13,
+    "references": [
+      "US-6693",
+      "US-0350"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-16_14",
+    "activator": "WT8J",
+    "date": "2025-04-16",
+    "total": 14,
+    "references": [
+      "US-9846",
+      "US-8225",
+      "US-10647"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-15_14",
+    "activator": "WT8J",
+    "date": "2025-04-15",
+    "total": 14,
+    "references": [
+      "US-10649",
+      "US-10651",
+      "US-9766",
+      "US-10654",
+      "US-10558",
+      "US-10648",
+      "US-10652",
+      "US-9855",
+      "US-4339"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-15_17",
+    "activator": "WT8J",
+    "date": "2025-04-15",
+    "total": 17,
+    "references": [
+      "US-4255",
+      "US-4304"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-15_4",
+    "activator": "WT8J",
+    "date": "2025-04-15",
+    "total": 4,
+    "references": [
+      "US-4322",
+      "US-4331"
+    ]
+  },
+  {
+    "id": "K4NYM_2025-05-09_74",
+    "activator": "K4NYM",
+    "date": "2025-05-09",
+    "total": 74,
+    "references": [
+      "US-9961",
+      "US-9935",
+      "US-9898",
+      "US-4581",
+      "US-4567",
+      "US-4564",
+      "US-0670"
+    ]
+  },
+  {
+    "id": "K4NYM_2025-05-06_36",
+    "activator": "K4NYM",
+    "date": "2025-05-06",
+    "total": 36,
+    "references": [
+      "US-5330",
+      "US-4646",
+      "US-4559",
+      "US-3627"
+    ]
+  },
+  {
+    "id": "K4NYM_2025-05-05_36",
+    "activator": "K4NYM",
+    "date": "2025-05-05",
+    "total": 36,
+    "references": [
+      "US-5330",
+      "US-4646",
+      "US-4559",
+      "US-3627"
+    ]
+  },
+  {
+    "id": "K4NYM_2025-05-04_49",
+    "activator": "K4NYM",
+    "date": "2025-05-04",
+    "total": 49,
+    "references": [
+      "US-5330",
+      "US-4646",
+      "US-4559",
+      "US-3627"
+    ]
+  },
+  {
+    "id": "K4AA_2025-05-09_19",
+    "activator": "K4AA",
+    "date": "2025-05-09",
+    "total": 19,
+    "references": [
+      "US-3791",
+      "US-6927",
+      "US-4509"
+    ]
+  },
+  {
+    "id": "K4AA_2025-05-08_44",
+    "activator": "K4AA",
+    "date": "2025-05-08",
+    "total": 44,
+    "references": [
+      "US-3791",
+      "US-4509",
+      "US-6927"
+    ]
+  },
+  {
+    "id": "K4AA_2025-05-07_12",
+    "activator": "K4AA",
+    "date": "2025-05-07",
+    "total": 12,
+    "references": [
+      "US-2914",
+      "US-9211",
+      "US-3877",
+      "US-9227",
+      "US-5487"
+    ]
+  },
+  {
+    "id": "K4AA_2025-04-26_251",
+    "activator": "K4AA",
+    "date": "2025-04-26",
+    "total": 251,
+    "references": [
+      "US-6927",
+      "US-4509"
+    ]
+  },
+  {
+    "id": "KC1YL_2025-04-16_21",
+    "activator": "KC1YL",
+    "date": "2025-04-16",
+    "total": 21,
+    "references": [
+      "US-6301",
+      "US-12128"
+    ]
+  },
+  {
+    "id": "KC1YL_2025-04-16_24",
+    "activator": "KC1YL",
+    "date": "2025-04-16",
+    "total": 24,
+    "references": [
+      "US-12127",
+      "US-6321"
+    ]
+  },
+  {
+    "id": "KC1QDZ_2025-05-05_30",
+    "activator": "KC1QDZ",
+    "date": "2025-05-05",
+    "total": 30,
+    "references": [
+      "US-10543",
+      "US-4582"
+    ]
+  },
+  {
+    "id": "KC1QDZ_2025-04-10_30",
+    "activator": "KC1QDZ",
+    "date": "2025-04-10",
+    "total": 30,
+    "references": [
+      "US-10543",
+      "US-4582"
+    ]
+  },
+  {
+    "id": "KC1QDZ_2025-04-09_13",
+    "activator": "KC1QDZ",
+    "date": "2025-04-09",
+    "total": 13,
+    "references": [
+      "US-10543",
+      "US-4582"
+    ]
+  },
+  {
+    "id": "KC1QDZ_2025-04-01_61",
+    "activator": "KC1QDZ",
+    "date": "2025-04-01",
+    "total": 61,
+    "references": [
+      "US-4582",
+      "US-10543"
+    ]
+  },
+  {
+    "id": "VK1AO_2025-05-05_29",
+    "activator": "VK1AO",
+    "date": "2025-05-05",
+    "total": 29,
+    "references": [
+      "AU-8914",
+      "AU-1723"
+    ]
+  },
+  {
+    "id": "VK1AO_2025-05-04_105",
+    "activator": "VK1AO",
+    "date": "2025-05-04",
+    "total": 105,
+    "references": [
+      "AU-1825",
+      "AU-9853"
+    ]
+  },
+  {
+    "id": "VK1AO_2025-05-04_70",
+    "activator": "VK1AO",
+    "date": "2025-05-04",
+    "total": 70,
+    "references": [
+      "AU-1723",
+      "AU-9848"
+    ]
+  },
+  {
+    "id": "VK1AO_2025-05-02_61",
+    "activator": "VK1AO",
+    "date": "2025-05-02",
+    "total": 61,
+    "references": [
+      "AU-2290",
+      "AU-6946"
+    ]
+  },
+  {
+    "id": "K7HTM_2025-05-01_12",
+    "activator": "K7HTM",
+    "date": "2025-05-01",
+    "total": 12,
+    "references": [
+      "US-11284",
+      "US-4476"
+    ]
+  },
+  {
+    "id": "K7HTM_2025-04-16_12",
+    "activator": "K7HTM",
+    "date": "2025-04-16",
+    "total": 12,
+    "references": [
+      "US-11285",
+      "US-11283"
+    ]
+  },
+  {
+    "id": "K7HTM_2025-04-15_11",
+    "activator": "K7HTM",
+    "date": "2025-04-15",
+    "total": 11,
+    "references": [
+      "US-0054",
+      "US-4572"
+    ]
+  },
+  {
+    "id": "K7HTM_2025-04-14_11",
+    "activator": "K7HTM",
+    "date": "2025-04-14",
+    "total": 11,
+    "references": [
+      "US-2245",
+      "US-10434"
+    ]
+  },
+  {
+    "id": "K7HTM_2025-04-14_13",
+    "activator": "K7HTM",
+    "date": "2025-04-14",
+    "total": 13,
+    "references": [
+      "US-12112",
+      "US-12289",
+      "US-4479"
+    ]
+  },
+  {
+    "id": "VK4KC_2025-05-04_18",
+    "activator": "VK4KC",
+    "date": "2025-05-04",
+    "total": 18,
+    "references": [
+      "AU-8907",
+      "AU-8909"
+    ]
+  },
+  {
+    "id": "VK4KC_2025-05-04_19",
+    "activator": "VK4KC",
+    "date": "2025-05-04",
+    "total": 19,
+    "references": [
+      "AU-8904",
+      "AU-8905"
+    ]
+  },
+  {
+    "id": "VK4KC_2025-05-04_22",
+    "activator": "VK4KC",
+    "date": "2025-05-04",
+    "total": 22,
+    "references": [
+      "AU-8899",
+      "AU-8906"
+    ]
+  },
+  {
+    "id": "VK4KC_2025-05-03_13",
+    "activator": "VK4KC",
+    "date": "2025-05-03",
+    "total": 13,
+    "references": [
+      "AU-8914",
+      "AU-8911"
+    ]
+  },
+  {
+    "id": "KJ7BES_2025-05-10_14",
+    "activator": "KJ7BES",
+    "date": "2025-05-10",
+    "total": 14,
+    "references": [
+      "US-4398",
+      "US-3095"
+    ]
+  },
+  {
+    "id": "KJ7BES_2025-05-09_23",
+    "activator": "KJ7BES",
+    "date": "2025-05-09",
+    "total": 23,
+    "references": [
+      "US-3095",
+      "US-4398"
+    ]
+  },
+  {
+    "id": "KJ7BES_2025-04-25_14",
+    "activator": "KJ7BES",
+    "date": "2025-04-25",
+    "total": 14,
+    "references": [
+      "US-4566",
+      "US-4576",
+      "US-4573",
+      "US-6219",
+      "US-4578",
+      "US-6220",
+      "US-0615"
+    ]
+  },
+  {
+    "id": "KJ7BES_2025-04-25_11",
+    "activator": "KJ7BES",
+    "date": "2025-04-25",
+    "total": 11,
+    "references": [
+      "US-4398",
+      "US-3067",
+      "US-3095"
+    ]
+  },
+  {
+    "id": "KJ7BES_2025-04-25_10",
+    "activator": "KJ7BES",
+    "date": "2025-04-25",
+    "total": 10,
+    "references": [
+      "US-6222",
+      "US-6221"
+    ]
+  },
+  {
+    "id": "KJ7BES_2025-04-24_17",
+    "activator": "KJ7BES",
+    "date": "2025-04-24",
+    "total": 17,
+    "references": [
+      "US-4398",
+      "US-3095"
+    ]
+  },
+  {
+    "id": "W2SMF_2025-05-08_25",
+    "activator": "W2SMF",
+    "date": "2025-05-08",
+    "total": 25,
+    "references": [
+      "US-0789",
+      "US-6860",
+      "US-4582"
+    ]
+  },
+  {
+    "id": "W2SMF_2025-04-23_16",
+    "activator": "W2SMF",
+    "date": "2025-04-23",
+    "total": 16,
+    "references": [
+      "US-2111",
+      "US-2076"
+    ]
+  },
+  {
+    "id": "7L4WVU_2025-04-16_14",
+    "activator": "7L4WVU",
+    "date": "2025-04-16",
+    "total": 14,
+    "references": [
+      "JP-1728",
+      "JP-1737",
+      "JP-1738",
+      "JP-1740",
+      "JP-1731"
+    ]
+  },
+  {
+    "id": "S55G_2025-03-02_251",
+    "activator": "S55G",
+    "date": "2025-03-02",
+    "total": 251,
+    "references": [
+      "SI-0049",
+      "SI-0078",
+      "SI-1003"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-27_259",
+    "activator": "S55G",
+    "date": "2025-02-27",
+    "total": 259,
+    "references": [
+      "SI-1129",
+      "SI-0160"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-23_2",
+    "activator": "S55G",
+    "date": "2025-02-23",
+    "total": 2,
+    "references": [
+      "SI-0558",
+      "SI-0420",
+      "SI-0284"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-22_143",
+    "activator": "S55G",
+    "date": "2025-02-22",
+    "total": 143,
+    "references": [
+      "SI-0044",
+      "SI-0049",
+      "SI-1005"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-21_213",
+    "activator": "S55G",
+    "date": "2025-02-21",
+    "total": 213,
+    "references": [
+      "SI-0120",
+      "SI-0633",
+      "SI-0241"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-05-07_35",
+    "activator": "KO4FHS",
+    "date": "2025-05-07",
+    "total": 35,
+    "references": [
+      "US-2172",
+      "US-3747"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-05-03_15",
+    "activator": "KO4FHS",
+    "date": "2025-05-03",
+    "total": 15,
+    "references": [
+      "US-4650",
+      "US-7899",
+      "US-3743"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-04-30_31",
+    "activator": "KO4FHS",
+    "date": "2025-04-30",
+    "total": 31,
+    "references": [
+      "US-3754",
+      "US-2203"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-03-15_71",
+    "activator": "KO4FHS",
+    "date": "2025-03-15",
+    "total": 71,
+    "references": [
+      "US-12128",
+      "US-12127"
+    ]
+  },
+  {
+    "id": "KN4SWS_2025-05-07_35",
+    "activator": "KN4SWS",
+    "date": "2025-05-07",
+    "total": 35,
+    "references": [
+      "US-2172",
+      "US-3747"
+    ]
+  },
+  {
+    "id": "KN4SWS_2025-05-03_15",
+    "activator": "KN4SWS",
+    "date": "2025-05-03",
+    "total": 15,
+    "references": [
+      "US-4650",
+      "US-3743",
+      "US-7899"
+    ]
+  },
+  {
+    "id": "KN4SWS_2025-03-15_71",
+    "activator": "KN4SWS",
+    "date": "2025-03-15",
+    "total": 71,
+    "references": [
+      "US-12128",
+      "US-12127"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-23_16",
+    "activator": "AI5SM",
+    "date": "2025-04-23",
+    "total": 16,
+    "references": [
+      "US-4564",
+      "US-9898"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-23_19",
+    "activator": "AI5SM",
+    "date": "2025-04-23",
+    "total": 19,
+    "references": [
+      "US-4581",
+      "US-4567",
+      "US-9961",
+      "US-9935"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-22_5",
+    "activator": "AI5SM",
+    "date": "2025-04-22",
+    "total": 5,
+    "references": [
+      "US-4564",
+      "US-9898"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-20_12",
+    "activator": "AI5SM",
+    "date": "2025-04-20",
+    "total": 12,
+    "references": [
+      "US-3362",
+      "US-1755"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-05-10_17",
+    "activator": "JK1JXP",
+    "date": "2025-05-10",
+    "total": 17,
+    "references": [
+      "JP-2109",
+      "JP-1250"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-05-04_15",
+    "activator": "JK1JXP",
+    "date": "2025-05-04",
+    "total": 15,
+    "references": [
+      "JP-1217",
+      "JP-1245"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-04-29_11",
+    "activator": "JK1JXP",
+    "date": "2025-04-29",
+    "total": 11,
+    "references": [
+      "JP-1825",
+      "JP-1820",
+      "JP-1818"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-04-29_12",
+    "activator": "JK1JXP",
+    "date": "2025-04-29",
+    "total": 12,
+    "references": [
+      "JP-1813",
+      "JP-1799",
+      "JP-1823",
+      "JP-1824"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-04-29_10",
+    "activator": "JK1JXP",
+    "date": "2025-04-29",
+    "total": 10,
+    "references": [
+      "JP-1816",
+      "JP-2069"
+    ]
+  },
+  {
+    "id": "JA1AZM_2025-05-03_13",
+    "activator": "JA1AZM",
+    "date": "2025-05-03",
+    "total": 13,
+    "references": [
+      "JP-1130",
+      "JP-1121"
+    ]
+  },
+  {
+    "id": "JA1AZM_2025-05-03_16",
+    "activator": "JA1AZM",
+    "date": "2025-05-03",
+    "total": 16,
+    "references": [
+      "JP-1131",
+      "JP-1109"
+    ]
+  },
+  {
+    "id": "JA1AZM_2025-04-26_22",
+    "activator": "JA1AZM",
+    "date": "2025-04-26",
+    "total": 22,
+    "references": [
+      "JP-1123",
+      "JP-1112"
+    ]
+  },
+  {
+    "id": "JQ3CQT_2025-04-19_14",
+    "activator": "JQ3CQT",
+    "date": "2025-04-19",
+    "total": 14,
+    "references": [
+      "JP-1940",
+      "JP-0136"
+    ]
+  },
+  {
+    "id": "JQ3CQT_2025-04-05_19",
+    "activator": "JQ3CQT",
+    "date": "2025-04-05",
+    "total": 19,
+    "references": [
+      "JP-1575",
+      "JP-1862"
+    ]
+  },
+  {
+    "id": "KE4EST_2025-05-09_19",
+    "activator": "KE4EST",
+    "date": "2025-05-09",
+    "total": 19,
+    "references": [
+      "US-4509",
+      "US-6927",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "KE4EST_2025-05-08_44",
+    "activator": "KE4EST",
+    "date": "2025-05-08",
+    "total": 44,
+    "references": [
+      "US-6927",
+      "US-3791",
+      "US-4509"
+    ]
+  },
+  {
+    "id": "KE4EST_2025-05-07_12",
+    "activator": "KE4EST",
+    "date": "2025-05-07",
+    "total": 12,
+    "references": [
+      "US-9227",
+      "US-3877",
+      "US-2914",
+      "US-5487",
+      "US-9211"
+    ]
+  },
+  {
+    "id": "KE4EST_2025-04-26_251",
+    "activator": "KE4EST",
+    "date": "2025-04-26",
+    "total": 251,
+    "references": [
+      "US-6927",
+      "US-4509"
+    ]
+  },
+  {
+    "id": "KE4EST_2025-04-25_40",
+    "activator": "KE4EST",
+    "date": "2025-04-25",
+    "total": 40,
+    "references": [
+      "US-4509",
+      "US-6927"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_14",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 14,
+    "references": [
+      "JP-1489",
+      "JP-1469"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_10",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 10,
+    "references": [
+      "JP-1460",
+      "JP-1490",
+      "JP-0209",
+      "JP-0126",
+      "JP-0128",
+      "JP-1453",
+      "JP-1418"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_12",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 12,
+    "references": [
+      "JP-1483",
+      "JP-0130",
+      "JP-1485"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_11",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 11,
+    "references": [
+      "JP-1471",
+      "JP-1919",
+      "JP-0209"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_13",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 13,
+    "references": [
+      "JP-1467",
+      "JP-0129",
+      "JP-1491"
+    ]
+  },
+  {
+    "id": "W1GRD_2025-04-10_12",
+    "activator": "W1GRD",
+    "date": "2025-04-10",
+    "total": 12,
+    "references": [
+      "US-7508",
+      "US-7715"
+    ]
+  },
+  {
+    "id": "W1GRD_2025-03-25_17",
+    "activator": "W1GRD",
+    "date": "2025-03-25",
+    "total": 17,
+    "references": [
+      "US-2430",
+      "US-0891"
+    ]
+  },
+  {
+    "id": "F6KEX_2025-03-26_113",
+    "activator": "F6KEX",
+    "date": "2025-03-26",
+    "total": 113,
+    "references": [
+      "FR-2695",
+      "FR-2528"
+    ]
+  },
+  {
+    "id": "F6KEX_2025-03-25_144",
+    "activator": "F6KEX",
+    "date": "2025-03-25",
+    "total": 144,
+    "references": [
+      "FR-2542",
+      "FR-0517"
+    ]
+  },
+  {
+    "id": "F6KEX_2025-03-24_162",
+    "activator": "F6KEX",
+    "date": "2025-03-24",
+    "total": 162,
+    "references": [
+      "FR-3338",
+      "FR-2710",
+      "FR-2500",
+      "FR-1276"
+    ]
+  },
+  {
+    "id": "F6KEX_2025-03-15_117",
+    "activator": "F6KEX",
+    "date": "2025-03-15",
+    "total": 117,
+    "references": [
+      "FR-5265",
+      "FR-5266",
+      "FR-5275",
+      "FR-5267",
+      "FR-2694"
+    ]
+  },
+  {
+    "id": "F6KEX_2025-03-14_1",
+    "activator": "F6KEX",
+    "date": "2025-03-14",
+    "total": 1,
+    "references": [
+      "FR-3351",
+      "FR-3350"
+    ]
+  },
+  {
+    "id": "F6KEX_2025-03-13_106",
+    "activator": "F6KEX",
+    "date": "2025-03-13",
+    "total": 106,
+    "references": [
+      "FR-3351",
+      "FR-3350"
+    ]
+  },
+  {
+    "id": "F6KEX_2025-03-12_176",
+    "activator": "F6KEX",
+    "date": "2025-03-12",
+    "total": 176,
+    "references": [
+      "FR-2759",
+      "FR-1025",
+      "FR-2547",
+      "FR-2550",
+      "FR-2555"
+    ]
+  },
+  {
+    "id": "K5LD_2025-04-02_22",
+    "activator": "K5LD",
+    "date": "2025-04-02",
+    "total": 22,
+    "references": [
+      "US-0231",
+      "US-1914"
+    ]
+  },
+  {
+    "id": "K5LD_2025-04-01_108",
+    "activator": "K5LD",
+    "date": "2025-04-01",
+    "total": 108,
+    "references": [
+      "US-1914",
+      "US-0231"
+    ]
+  },
+  {
+    "id": "K5LD_2025-03-31_35",
+    "activator": "K5LD",
+    "date": "2025-03-31",
+    "total": 35,
+    "references": [
+      "US-8370",
+      "US-4559"
+    ]
+  },
+  {
+    "id": "PD4EV_2025-04-22_17",
+    "activator": "PD4EV",
+    "date": "2025-04-22",
+    "total": 17,
+    "references": [
+      "NL-0210",
+      "NL-0009"
+    ]
+  },
+  {
+    "id": "PD4EV_2025-04-20_52",
+    "activator": "PD4EV",
+    "date": "2025-04-20",
+    "total": 52,
+    "references": [
+      "NL-0009",
+      "NL-0210"
+    ]
+  },
+  {
+    "id": "PD4EV_2025-04-08_31",
+    "activator": "PD4EV",
+    "date": "2025-04-08",
+    "total": 31,
+    "references": [
+      "NL-0205",
+      "NL-0207"
+    ]
+  },
+  {
+    "id": "PD4EV_2025-02-18_76",
+    "activator": "PD4EV",
+    "date": "2025-02-18",
+    "total": 76,
+    "references": [
+      "NL-0017",
+      "NL-0126"
+    ]
+  },
+  {
+    "id": "DL6WWM_2025-04-19_22",
+    "activator": "DL6WWM",
+    "date": "2025-04-19",
+    "total": 22,
+    "references": [
+      "DE-0184",
+      "DE-0817"
+    ]
+  },
+  {
+    "id": "DL6WWM_2025-04-16_13",
+    "activator": "DL6WWM",
+    "date": "2025-04-16",
+    "total": 13,
+    "references": [
+      "DE-0391",
+      "DE-0631"
+    ]
+  },
+  {
+    "id": "DL6WWM_2025-04-11_10",
+    "activator": "DL6WWM",
+    "date": "2025-04-11",
+    "total": 10,
+    "references": [
+      "DE-0185",
+      "DE-0699"
+    ]
+  },
+      {
+    "id": "N4MTE_2025-02-04_11",
+    "activator": "N4MTE",
+    "date": "2025-02-04",
+    "total": 11,
+    "references": [
+      "US-3622",
+      "US-0658",
+      "US-0775",
+      "US-1926"
+    ]
+  },
+  {
+    "id": "N4MTE_2025-02-04_20",
+    "activator": "N4MTE",
+    "date": "2025-02-04",
+    "total": 20,
+    "references": [
+      "US-0927",
+      "US-4631"
+    ]
+  },
+  {
+    "id": "N4MTE_2025-02-04_13",
+    "activator": "N4MTE",
+    "date": "2025-02-04",
+    "total": 13,
+    "references": [
+      "US-8372",
+      "US-1866"
+    ]
+  },
+  {
+    "id": "N4MTE_2025-02-04_18",
+    "activator": "N4MTE",
+    "date": "2025-02-04",
+    "total": 18,
+    "references": [
+      "US-3648",
+      "US-8352"
+    ]
+  },
+  {
+    "id": "N4MTE_2025-02-03_14",
+    "activator": "N4MTE",
+    "date": "2025-02-03",
+    "total": 14,
+    "references": [
+      "US-10603",
+      "US-10614"
+    ]
+  },
+  {
+    "id": "7L4WVU_2025-04-16_14",
+    "activator": "7L4WVU",
+    "date": "2025-04-16",
+    "total": 14,
+    "references": [
+      "JP-1728",
+      "JP-1737",
+      "JP-1738",
+      "JP-1740",
+      "JP-1731"
+    ]
+  },
+  {
+    "id": "VE2IMQ_2025-05-03_32",
+    "activator": "VE2IMQ",
+    "date": "2025-05-03",
+    "total": 32,
+    "references": [
+      "CA-1970",
+      "CA-2050",
+      "CA-1927"
+    ]
+  },
+  {
+    "id": "VE2IMQ_2025-04-20_32",
+    "activator": "VE2IMQ",
+    "date": "2025-04-20",
+    "total": 32,
+    "references": [
+      "CA-0997",
+      "CA-4988",
+      "CA-0967",
+      "CA-5082",
+      "CA-5861",
+      "CA-2052"
+    ]
+  },
+  {
+    "id": "VE2IMQ_2025-04-19_32",
+    "activator": "VE2IMQ",
+    "date": "2025-04-19",
+    "total": 32,
+    "references": [
+      "CA-0967",
+      "CA-5082",
+      "CA-5861",
+      "CA-0997",
+      "CA-2052",
+      "CA-4988"
+    ]
+  },
+  {
+    "id": "VE2IMQ_2025-04-18_32",
+    "activator": "VE2IMQ",
+    "date": "2025-04-18",
+    "total": 32,
+    "references": [
+      "CA-0997",
+      "CA-0967",
+      "CA-2052",
+      "CA-4988",
+      "CA-5082",
+      "CA-5861"
+    ]
+  },
+  {
+    "id": "VE2IMQ_2025-04-17_32",
+    "activator": "VE2IMQ",
+    "date": "2025-04-17",
+    "total": 32,
+    "references": [
+      "CA-0967",
+      "CA-2052",
+      "CA-5082",
+      "CA-0997"
+    ]
+  },
+  {
+    "id": "VE2YYQ_2025-05-03_32",
+    "activator": "VE2YYQ",
+    "date": "2025-05-03",
+    "total": 32,
+    "references": [
+      "CA-1970",
+      "CA-1927",
+      "CA-2050"
+    ]
+  },
+  {
+    "id": "VE2YYQ_2025-04-20_32",
+    "activator": "VE2YYQ",
+    "date": "2025-04-20",
+    "total": 32,
+    "references": [
+      "CA-4988",
+      "CA-5861",
+      "CA-2052",
+      "CA-5082",
+      "CA-0997",
+      "CA-0967"
+    ]
+  },
+  {
+    "id": "VE2YYQ_2025-04-19_32",
+    "activator": "VE2YYQ",
+    "date": "2025-04-19",
+    "total": 32,
+    "references": [
+      "CA-4988",
+      "CA-5861",
+      "CA-2052",
+      "CA-0997",
+      "CA-0967",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "VE2YYQ_2025-04-18_32",
+    "activator": "VE2YYQ",
+    "date": "2025-04-18",
+    "total": 32,
+    "references": [
+      "CA-0997",
+      "CA-0967",
+      "CA-2052",
+      "CA-4988",
+      "CA-5861",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "VE2YYQ_2025-04-17_32",
+    "activator": "VE2YYQ",
+    "date": "2025-04-17",
+    "total": 32,
+    "references": [
+      "CA-4988",
+      "CA-0967",
+      "CA-2052",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-22_12",
+    "activator": "N9OZ",
+    "date": "2025-04-22",
+    "total": 12,
+    "references": [
+      "US-5777",
+      "US-5773",
+      "US-3069"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-22_13",
+    "activator": "N9OZ",
+    "date": "2025-04-22",
+    "total": 13,
+    "references": [
+      "US-5774",
+      "US-11744"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-21_12",
+    "activator": "N9OZ",
+    "date": "2025-04-21",
+    "total": 12,
+    "references": [
+      "US-11099",
+      "US-11654",
+      "US-11661"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-20_13",
+    "activator": "N9OZ",
+    "date": "2025-04-20",
+    "total": 13,
+    "references": [
+      "US-5876",
+      "US-5865",
+      "US-5896"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-11_13",
+    "activator": "N9OZ",
+    "date": "2025-04-11",
+    "total": 13,
+    "references": [
+      "US-9660",
+      "US-1229",
+      "US-0051"
+    ]
+  },
+  {
+    "id": "N9OZ_2025-04-09_14",
+    "activator": "N9OZ",
+    "date": "2025-04-09",
+    "total": 14,
+    "references": [
+      "US-9603",
+      "US-1224",
+      "US-0801"
+    ]
+  },
+  {
+    "id": "VA2GCU_2025-05-03_32",
+    "activator": "VA2GCU",
+    "date": "2025-05-03",
+    "total": 32,
+    "references": [
+      "CA-1927",
+      "CA-2050",
+      "CA-1970"
+    ]
+  },
+  {
+    "id": "VA2GCU_2025-04-20_32",
+    "activator": "VA2GCU",
+    "date": "2025-04-20",
+    "total": 32,
+    "references": [
+      "CA-5861",
+      "CA-0967",
+      "CA-2052",
+      "CA-5082",
+      "CA-4988",
+      "CA-0997"
+    ]
+  },
+  {
+    "id": "VA2GCU_2025-04-19_32",
+    "activator": "VA2GCU",
+    "date": "2025-04-19",
+    "total": 32,
+    "references": [
+      "CA-2052",
+      "CA-4988",
+      "CA-5861",
+      "CA-5082",
+      "CA-0967",
+      "CA-0997"
+    ]
+  },
+  {
+    "id": "VA2GCU_2025-04-18_32",
+    "activator": "VA2GCU",
+    "date": "2025-04-18",
+    "total": 32,
+    "references": [
+      "CA-2052",
+      "CA-4988",
+      "CA-0967",
+      "CA-0997",
+      "CA-5082",
+      "CA-5861"
+    ]
+  },
+  {
+    "id": "VA2GCU_2025-04-17_32",
+    "activator": "VA2GCU",
+    "date": "2025-04-17",
+    "total": 32,
+    "references": [
+      "CA-0997",
+      "CA-4988",
+      "CA-2052",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-09_46",
+    "activator": "KE8PZN",
+    "date": "2025-05-09",
+    "total": 46,
+    "references": [
+      "US-12044",
+      "US-7069"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-08_45",
+    "activator": "KE8PZN",
+    "date": "2025-05-08",
+    "total": 45,
+    "references": [
+      "US-12044",
+      "US-7069"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-07_16",
+    "activator": "KE8PZN",
+    "date": "2025-05-07",
+    "total": 16,
+    "references": [
+      "US-11181",
+      "US-10107",
+      "US-0686"
+    ]
+  },
+  {
+    "id": "KE8PZN_2025-05-07_15",
+    "activator": "KE8PZN",
+    "date": "2025-05-07",
+    "total": 15,
+    "references": [
+      "US-10103",
+      "US-1277"
+    ]
+  },
+  {
+    "id": "K8BSR_2025-05-10_11",
+    "activator": "K8BSR",
+    "date": "2025-05-10",
+    "total": 11,
+    "references": [
+      "US-9507",
+      "US-8106"
+    ]
+  },
+  {
+    "id": "K8BSR_2025-05-10_15",
+    "activator": "K8BSR",
+    "date": "2025-05-10",
+    "total": 15,
+    "references": [
+      "US-9409",
+      "US-1956",
+      "US-9513",
+      "US-9488"
+    ]
+  },
+  {
+    "id": "K8BSR_2025-05-10_12",
+    "activator": "K8BSR",
+    "date": "2025-05-10",
+    "total": 12,
+    "references": [
+      "US-9503",
+      "US-1975"
+    ]
+  },
+  {
+    "id": "K8BSR_2025-05-03_35",
+    "activator": "K8BSR",
+    "date": "2025-05-03",
+    "total": 35,
+    "references": [
+      "US-1960",
+      "US-8106",
+      "US-4239"
+    ]
+  },
+  {
+    "id": "K8BSR_2025-05-03_15",
+    "activator": "K8BSR",
+    "date": "2025-05-03",
+    "total": 15,
+    "references": [
+      "US-9507",
+      "US-9491",
+      "US-9503"
+    ]
+  },
+  {
+    "id": "K8BSR_2025-05-03_10",
+    "activator": "K8BSR",
+    "date": "2025-05-03",
+    "total": 10,
+    "references": [
+      "US-1959",
+      "US-9413"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-10_11",
+    "activator": "M1GRY",
+    "date": "2025-05-10",
+    "total": 11,
+    "references": [
+      "US-0522",
+      "US-8147"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-10_13",
+    "activator": "M1GRY",
+    "date": "2025-05-10",
+    "total": 13,
+    "references": [
+      "US-2890",
+      "US-11995"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-09_12",
+    "activator": "M1GRY",
+    "date": "2025-05-09",
+    "total": 12,
+    "references": [
+      "US-1831",
+      "US-1839"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-09_11",
+    "activator": "M1GRY",
+    "date": "2025-05-09",
+    "total": 11,
+    "references": [
+      "US-1871",
+      "US-0658"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-08_14",
+    "activator": "M1GRY",
+    "date": "2025-05-08",
+    "total": 14,
+    "references": [
+      "US-3648",
+      "US-3669"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-08_13",
+    "activator": "M1GRY",
+    "date": "2025-05-08",
+    "total": 13,
+    "references": [
+      "US-0775",
+      "US-0658"
+    ]
+  },
+  {
+    "id": "M1GRY_2025-05-06_14",
+    "activator": "M1GRY",
+    "date": "2025-05-06",
+    "total": 14,
+    "references": [
+      "GB-1799",
+      "GB-1632"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-04_13",
+    "activator": "KE8SZL",
+    "date": "2025-05-04",
+    "total": 13,
+    "references": [
+      "US-1093",
+      "US-7526"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-04_12",
+    "activator": "KE8SZL",
+    "date": "2025-05-04",
+    "total": 12,
+    "references": [
+      "US-7298",
+      "US-11164",
+      "US-11088",
+      "US-7284",
+      "US-1077",
+      "US-12331",
+      "US-12330"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-04_11",
+    "activator": "KE8SZL",
+    "date": "2025-05-04",
+    "total": 11,
+    "references": [
+      "US-7159",
+      "US-7175",
+      "US-7299",
+      "US-12093"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-03_11",
+    "activator": "KE8SZL",
+    "date": "2025-05-03",
+    "total": 11,
+    "references": [
+      "US-0163",
+      "US-7265"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-02_12",
+    "activator": "KE8SZL",
+    "date": "2025-05-02",
+    "total": 12,
+    "references": [
+      "US-0171",
+      "US-11355",
+      "US-11713"
+    ]
+  },
+  {
+    "id": "KE8SZL_2025-05-02_11",
+    "activator": "KE8SZL",
+    "date": "2025-05-02",
+    "total": 11,
+    "references": [
+      "US-11953",
+      "US-11164",
+      "US-9757"
+    ]
+  },
+  {
+    "id": "KE8TUW_2024-11-09_16",
+    "activator": "KE8TUW",
+    "date": "2024-11-09",
+    "total": 16,
+    "references": [
+      "US-3315",
+      "US-1518",
+      "US-6705",
+      "US-3313"
+    ]
+  },
+  {
+    "id": "KE8TUW_2024-11-09_25",
+    "activator": "KE8TUW",
+    "date": "2024-11-09",
+    "total": 25,
+    "references": [
+      "US-6800",
+      "US-6643"
+    ]
+  },
+  {
+    "id": "KE8TUW_2024-11-09_27",
+    "activator": "KE8TUW",
+    "date": "2024-11-09",
+    "total": 27,
+    "references": [
+      "US-6726",
+      "US-0350",
+      "US-3331",
+      "US-6804"
+    ]
+  },
+  {
+    "id": "YO3BEE_2025-01-03_20",
+    "activator": "YO3BEE",
+    "date": "2025-01-03",
+    "total": 20,
+    "references": [
+      "RO-0430",
+      "RO-0434",
+      "RO-0428"
+    ]
+  },
+  {
+    "id": "YO3BEE_2025-01-02_42",
+    "activator": "YO3BEE",
+    "date": "2025-01-02",
+    "total": 42,
+    "references": [
+      "RO-0430",
+      "RO-0429",
+      "RO-0428"
+    ]
+  },
+  {
+    "id": "S55G_2025-03-02_251",
+    "activator": "S55G",
+    "date": "2025-03-02",
+    "total": 251,
+    "references": [
+      "SI-0049",
+      "SI-0078",
+      "SI-1003"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-27_259",
+    "activator": "S55G",
+    "date": "2025-02-27",
+    "total": 259,
+    "references": [
+      "SI-1129",
+      "SI-0160"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-23_2",
+    "activator": "S55G",
+    "date": "2025-02-23",
+    "total": 2,
+    "references": [
+      "SI-0558",
+      "SI-0420",
+      "SI-0284"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-22_143",
+    "activator": "S55G",
+    "date": "2025-02-22",
+    "total": 143,
+    "references": [
+      "SI-0044",
+      "SI-0049",
+      "SI-1005"
+    ]
+  },
+  {
+    "id": "S55G_2025-02-21_213",
+    "activator": "S55G",
+    "date": "2025-02-21",
+    "total": 213,
+    "references": [
+      "SI-0120",
+      "SI-0633",
+      "SI-0241"
+    ]
+  },
+  {
+    "id": "YO3DYL_2025-01-19_33",
+    "activator": "YO3DYL",
+    "date": "2025-01-19",
+    "total": 33,
+    "references": [
+      "RO-1042",
+      "RO-0984"
+    ]
+  },
+  {
+    "id": "YO3DYL_2025-01-02_42",
+    "activator": "YO3DYL",
+    "date": "2025-01-02",
+    "total": 42,
+    "references": [
+      "RO-0430",
+      "RO-0428"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-25_11",
+    "activator": "NJ9L",
+    "date": "2025-04-25",
+    "total": 11,
+    "references": [
+      "US-12282",
+      "US-3190",
+      "US-0694"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-23_11",
+    "activator": "NJ9L",
+    "date": "2025-04-23",
+    "total": 11,
+    "references": [
+      "US-0379",
+      "US-3180"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-18_11",
+    "activator": "NJ9L",
+    "date": "2025-04-18",
+    "total": 11,
+    "references": [
+      "US-12309",
+      "US-3248",
+      "US-3206"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-15_16",
+    "activator": "NJ9L",
+    "date": "2025-04-15",
+    "total": 16,
+    "references": [
+      "US-3249",
+      "US-12284"
+    ]
+  },
+  {
+    "id": "NJ9L_2025-04-13_11",
+    "activator": "NJ9L",
+    "date": "2025-04-13",
+    "total": 11,
+    "references": [
+      "US-8663",
+      "US-10000",
+      "US-2832"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_14",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 14,
+    "references": [
+      "JP-1489",
+      "JP-1469"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_10",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 10,
+    "references": [
+      "JP-1460",
+      "JP-1490",
+      "JP-0209",
+      "JP-0126",
+      "JP-0128",
+      "JP-1453",
+      "JP-1418"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_12",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 12,
+    "references": [
+      "JP-1483",
+      "JP-0130",
+      "JP-1485"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_11",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 11,
+    "references": [
+      "JP-1471",
+      "JP-1919",
+      "JP-0209"
+    ]
+  },
+  {
+    "id": "JF2CRP_2025-04-06_13",
+    "activator": "JF2CRP",
+    "date": "2025-04-06",
+    "total": 13,
+    "references": [
+      "JP-1467",
+      "JP-0129",
+      "JP-1491"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-02_72",
+    "activator": "SP8QC",
+    "date": "2025-05-02",
+    "total": 72,
+    "references": [
+      "PL-2080",
+      "PL-0027"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-01_177",
+    "activator": "SP8QC",
+    "date": "2025-05-01",
+    "total": 177,
+    "references": [
+      "PL-0078",
+      "PL-2211"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-01_147",
+    "activator": "SP8QC",
+    "date": "2025-05-01",
+    "total": 147,
+    "references": [
+      "PL-2066",
+      "PL-0079",
+      "PL-0047"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-05-01_190",
+    "activator": "SP8QC",
+    "date": "2025-05-01",
+    "total": 190,
+    "references": [
+      "PL-0035",
+      "PL-2262"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-04-30_131",
+    "activator": "SP8QC",
+    "date": "2025-04-30",
+    "total": 131,
+    "references": [
+      "PL-1994",
+      "PL-0096",
+      "PL-0078"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-03-30_112",
+    "activator": "SP8QC",
+    "date": "2025-03-30",
+    "total": 112,
+    "references": [
+      "PL-0716",
+      "PL-2786"
+    ]
+  },
+  {
+    "id": "SP8QC_2025-03-30_130",
+    "activator": "SP8QC",
+    "date": "2025-03-30",
+    "total": 130,
+    "references": [
+      "PL-0938",
+      "PL-0722"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-24_12",
+    "activator": "W8TAM",
+    "date": "2025-04-24",
+    "total": 12,
+    "references": [
+      "US-6726",
+      "US-6804",
+      "US-3331",
+      "US-0350"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-20_16",
+    "activator": "W8TAM",
+    "date": "2025-04-20",
+    "total": 16,
+    "references": [
+      "US-0350",
+      "US-6679",
+      "US-6693"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-20_14",
+    "activator": "W8TAM",
+    "date": "2025-04-20",
+    "total": 14,
+    "references": [
+      "US-3331",
+      "US-6686"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-16_14",
+    "activator": "W8TAM",
+    "date": "2025-04-16",
+    "total": 14,
+    "references": [
+      "US-10647",
+      "US-8225",
+      "US-9846"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-15_15",
+    "activator": "W8TAM",
+    "date": "2025-04-15",
+    "total": 15,
+    "references": [
+      "US-0602",
+      "US-4339",
+      "US-10648"
+    ]
+  },
+  {
+    "id": "W8TAM_2025-04-15_14",
+    "activator": "W8TAM",
+    "date": "2025-04-15",
+    "total": 14,
+    "references": [
+      "US-10651",
+      "US-4331",
+      "US-4255",
+      "US-10558",
+      "US-10654",
+      "US-10649",
+      "US-4322",
+      "US-4304"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-02_72",
+    "activator": "SP8ULA",
+    "date": "2025-05-02",
+    "total": 72,
+    "references": [
+      "PL-2080",
+      "PL-0027"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-01_146",
+    "activator": "SP8ULA",
+    "date": "2025-05-01",
+    "total": 146,
+    "references": [
+      "PL-0079",
+      "PL-2066",
+      "PL-0047"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-01_176",
+    "activator": "SP8ULA",
+    "date": "2025-05-01",
+    "total": 176,
+    "references": [
+      "PL-2211",
+      "PL-0078"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-05-01_190",
+    "activator": "SP8ULA",
+    "date": "2025-05-01",
+    "total": 190,
+    "references": [
+      "PL-0035",
+      "PL-2262"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-04-30_131",
+    "activator": "SP8ULA",
+    "date": "2025-04-30",
+    "total": 131,
+    "references": [
+      "PL-0096",
+      "PL-1994",
+      "PL-0078"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-04-12_65",
+    "activator": "SP8ULA",
+    "date": "2025-04-12",
+    "total": 65,
+    "references": [
+      "PL-2087",
+      "PL-2602"
+    ]
+  },
+  {
+    "id": "SP8ULA_2025-04-12_89",
+    "activator": "SP8ULA",
+    "date": "2025-04-12",
+    "total": 89,
+    "references": [
+      "PL-2652",
+      "PL-0065",
+      "PL-0086"
+    ]
+  },
+  {
+    "id": "JA1AZM_2025-05-03_13",
+    "activator": "JA1AZM",
+    "date": "2025-05-03",
+    "total": 13,
+    "references": [
+      "JP-1130",
+      "JP-1121"
+    ]
+  },
+  {
+    "id": "JA1AZM_2025-05-03_16",
+    "activator": "JA1AZM",
+    "date": "2025-05-03",
+    "total": 16,
+    "references": [
+      "JP-1131",
+      "JP-1109"
+    ]
+  },
+  {
+    "id": "JA1AZM_2025-04-26_22",
+    "activator": "JA1AZM",
+    "date": "2025-04-26",
+    "total": 22,
+    "references": [
+      "JP-1123",
+      "JP-1112"
+    ]
+  },
+  {
+    "id": "JF4IQS_2025-05-05_14",
+    "activator": "JF4IQS",
+    "date": "2025-05-05",
+    "total": 14,
+    "references": [
+      "JP-1081",
+      "JP-1079"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-05-07_24",
+    "activator": "KB3WAV",
+    "date": "2025-05-07",
+    "total": 24,
+    "references": [
+      "US-10771",
+      "US-1566"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-28_13",
+    "activator": "KB3WAV",
+    "date": "2025-04-28",
+    "total": 13,
+    "references": [
+      "US-4582",
+      "US-4581",
+      "US-4567",
+      "US-0928"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-26_34",
+    "activator": "KB3WAV",
+    "date": "2025-04-26",
+    "total": 34,
+    "references": [
+      "US-4582",
+      "US-4581",
+      "US-4567",
+      "US-0928"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-20_111",
+    "activator": "KB3WAV",
+    "date": "2025-04-20",
+    "total": 111,
+    "references": [
+      "US-5471",
+      "US-4556"
+    ]
+  },
+  {
+    "id": "KB3WAV_2025-04-18_22",
+    "activator": "KB3WAV",
+    "date": "2025-04-18",
+    "total": 22,
+    "references": [
+      "US-10771",
+      "US-1566"
+    ]
+  },
+  {
+    "id": "VK2IO_2024-10-11_14",
+    "activator": "VK2IO",
+    "date": "2024-10-11",
+    "total": 14,
+    "references": [
+      "AU-7900",
+      "AU-8045"
+    ]
+  },
+  {
+    "id": "W8SEE_2025-04-13_11",
+    "activator": "W8SEE",
+    "date": "2025-04-13",
+    "total": 11,
+    "references": [
+      "US-7006",
+      "US-9741"
+    ]
+  },
+  {
+    "id": "W8SEE_2025-04-13_12",
+    "activator": "W8SEE",
+    "date": "2025-04-13",
+    "total": 12,
+    "references": [
+      "US-1818",
+      "US-1825"
+    ]
+  },
+  {
+    "id": "W8SEE_2025-04-12_11",
+    "activator": "W8SEE",
+    "date": "2025-04-12",
+    "total": 11,
+    "references": [
+      "US-7766",
+      "US-1579",
+      "US-4765",
+      "US-0631",
+      "US-6394"
+    ]
+  },
+  {
+    "id": "W8SEE_2025-04-12_12",
+    "activator": "W8SEE",
+    "date": "2025-04-12",
+    "total": 12,
+    "references": [
+      "US-7005",
+      "US-10766",
+      "US-6400"
+    ]
+  },
+  {
+    "id": "W8SEE_2025-04-11_11",
+    "activator": "W8SEE",
+    "date": "2025-04-11",
+    "total": 11,
+    "references": [
+      "US-4768",
+      "US-10768",
+      "US-7771",
+      "US-10767",
+      "US-1560",
+      "US-6397"
+    ]
+  },
+  {
+    "id": "W8SEE_2025-04-11_12",
+    "activator": "W8SEE",
+    "date": "2025-04-11",
+    "total": 12,
+    "references": [
+      "US-7010",
+      "US-10784",
+      "US-10770"
+    ]
+  },
+  {
+    "id": "W8SEE_2025-04-10_11",
+    "activator": "W8SEE",
+    "date": "2025-04-10",
+    "total": 11,
+    "references": [
+      "US-1369",
+      "US-1367"
+    ]
+  },
+  {
+    "id": "KD2PWB_2025-04-14_14",
+    "activator": "KD2PWB",
+    "date": "2025-04-14",
+    "total": 14,
+    "references": [
+      "US-12103",
+      "US-12104"
+    ]
+  },
+  {
+    "id": "KD2PWB_2025-03-24_11",
+    "activator": "KD2PWB",
+    "date": "2025-03-24",
+    "total": 11,
+    "references": [
+      "US-12101",
+      "US-12102",
+      "US-1633"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-11_51",
+    "activator": "OE3BIY",
+    "date": "2025-05-11",
+    "total": 51,
+    "references": [
+      "AT-0217",
+      "AT-0301",
+      "AT-0250",
+      "AT-0265"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-10_26",
+    "activator": "OE3BIY",
+    "date": "2025-05-10",
+    "total": 26,
+    "references": [
+      "AT-0301",
+      "AT-0217",
+      "AT-0265",
+      "AT-0250"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-07_17",
+    "activator": "OE3BIY",
+    "date": "2025-05-07",
+    "total": 17,
+    "references": [
+      "AT-0250",
+      "AT-0301",
+      "AT-0217",
+      "AT-0265"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-03_47",
+    "activator": "OE3BIY",
+    "date": "2025-05-03",
+    "total": 47,
+    "references": [
+      "AT-0265",
+      "AT-0301",
+      "AT-0250",
+      "AT-0217"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-02_13",
+    "activator": "OE3BIY",
+    "date": "2025-05-02",
+    "total": 13,
+    "references": [
+      "AT-0301",
+      "AT-0265",
+      "AT-0217",
+      "AT-0250"
+    ]
+  },
+  {
+    "id": "OE3BIY_2025-05-01_50",
+    "activator": "OE3BIY",
+    "date": "2025-05-01",
+    "total": 50,
+    "references": [
+      "AT-0301",
+      "AT-0265",
+      "AT-0250",
+      "AT-0217"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-28_15",
+    "activator": "WD6UCK",
+    "date": "2025-04-28",
+    "total": 15,
+    "references": [
+      "US-7495",
+      "US-10345"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-21_24",
+    "activator": "WD6UCK",
+    "date": "2025-04-21",
+    "total": 24,
+    "references": [
+      "US-2265",
+      "US-1552"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-20_22",
+    "activator": "WD6UCK",
+    "date": "2025-04-20",
+    "total": 22,
+    "references": [
+      "US-1952",
+      "US-6755"
+    ]
+  },
+  {
+    "id": "WD6UCK_2025-04-18_14",
+    "activator": "WD6UCK",
+    "date": "2025-04-18",
+    "total": 14,
+    "references": [
+      "US-0448",
+      "US-10302"
+    ]
+  },
+  {
+    "id": "JF1HMC_2025-02-16_12",
+    "activator": "JF1HMC",
+    "date": "2025-02-16",
+    "total": 12,
+    "references": [
+      "JP-1838",
+      "JP-1162"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-05-07_35",
+    "activator": "KO4FHS",
+    "date": "2025-05-07",
+    "total": 35,
+    "references": [
+      "US-2172",
+      "US-3747"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-05-03_15",
+    "activator": "KO4FHS",
+    "date": "2025-05-03",
+    "total": 15,
+    "references": [
+      "US-4650",
+      "US-7899",
+      "US-3743"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-04-30_31",
+    "activator": "KO4FHS",
+    "date": "2025-04-30",
+    "total": 31,
+    "references": [
+      "US-3754",
+      "US-2203"
+    ]
+  },
+  {
+    "id": "KO4FHS_2025-03-15_71",
+    "activator": "KO4FHS",
+    "date": "2025-03-15",
+    "total": 71,
+    "references": [
+      "US-12128",
+      "US-12127"
+    ]
+  },
+  {
+    "id": "KN4SWS_2025-05-07_35",
+    "activator": "KN4SWS",
+    "date": "2025-05-07",
+    "total": 35,
+    "references": [
+      "US-2172",
+      "US-3747"
+    ]
+  },
+  {
+    "id": "KN4SWS_2025-05-03_15",
+    "activator": "KN4SWS",
+    "date": "2025-05-03",
+    "total": 15,
+    "references": [
+      "US-4650",
+      "US-3743",
+      "US-7899"
+    ]
+  },
+  {
+    "id": "KN4SWS_2025-03-15_71",
+    "activator": "KN4SWS",
+    "date": "2025-03-15",
+    "total": 71,
+    "references": [
+      "US-12128",
+      "US-12127"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-05-10_11",
+    "activator": "KG5LRB",
+    "date": "2025-05-10",
+    "total": 11,
+    "references": [
+      "US-1550",
+      "US-1549"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-05-10_12",
+    "activator": "KG5LRB",
+    "date": "2025-05-10",
+    "total": 12,
+    "references": [
+      "US-6712",
+      "US-6678"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-04-27_20",
+    "activator": "KG5LRB",
+    "date": "2025-04-27",
+    "total": 20,
+    "references": [
+      "US-9481",
+      "US-0483"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-04-26_10",
+    "activator": "KG5LRB",
+    "date": "2025-04-26",
+    "total": 10,
+    "references": [
+      "US-6669",
+      "US-0714"
+    ]
+  },
+  {
+    "id": "KG5LRB_2025-04-26_12",
+    "activator": "KG5LRB",
+    "date": "2025-04-26",
+    "total": 12,
+    "references": [
+      "US-9414",
+      "US-6760"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-10_18",
+    "activator": "AD0AA",
+    "date": "2025-05-10",
+    "total": 18,
+    "references": [
+      "US-4254",
+      "US-4276"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-10_21",
+    "activator": "AD0AA",
+    "date": "2025-05-10",
+    "total": 21,
+    "references": [
+      "US-8222",
+      "US-4283"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-09_33",
+    "activator": "AD0AA",
+    "date": "2025-05-09",
+    "total": 33,
+    "references": [
+      "US-0365",
+      "US-0364"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-09_13",
+    "activator": "AD0AA",
+    "date": "2025-05-09",
+    "total": 13,
+    "references": [
+      "US-3381",
+      "US-2482"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-09_61",
+    "activator": "AD0AA",
+    "date": "2025-05-09",
+    "total": 61,
+    "references": [
+      "US-7145",
+      "US-9384"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-08_32",
+    "activator": "AD0AA",
+    "date": "2025-05-08",
+    "total": 32,
+    "references": [
+      "US-3381",
+      "US-2482"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-04_48",
+    "activator": "AD0AA",
+    "date": "2025-05-04",
+    "total": 48,
+    "references": [
+      "US-2517",
+      "US-11153"
+    ]
+  },
+  {
+    "id": "AD0AA_2025-05-04_39",
+    "activator": "AD0AA",
+    "date": "2025-05-04",
+    "total": 39,
+    "references": [
+      "US-9384",
+      "US-7145"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-10_10",
+    "activator": "N1IPB",
+    "date": "2025-05-10",
+    "total": 10,
+    "references": [
+      "US-4698",
+      "US-2433",
+      "US-11678"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-07_10",
+    "activator": "N1IPB",
+    "date": "2025-05-07",
+    "total": 10,
+    "references": [
+      "US-12130",
+      "US-8721",
+      "US-12127",
+      "US-8718",
+      "US-10462",
+      "US-12128"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-06_10",
+    "activator": "N1IPB",
+    "date": "2025-05-06",
+    "total": 10,
+    "references": [
+      "US-0232",
+      "US-1882"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-05-03_10",
+    "activator": "N1IPB",
+    "date": "2025-05-03",
+    "total": 10,
+    "references": [
+      "US-11848",
+      "US-0451",
+      "US-4962",
+      "US-4883"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-04-23_11",
+    "activator": "N1IPB",
+    "date": "2025-04-23",
+    "total": 11,
+    "references": [
+      "US-11587",
+      "US-4755"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-04-23_10",
+    "activator": "N1IPB",
+    "date": "2025-04-23",
+    "total": 10,
+    "references": [
+      "US-4746",
+      "US-11595",
+      "US-2422"
+    ]
+  },
+  {
+    "id": "N1IPB_2025-04-21_10",
+    "activator": "N1IPB",
+    "date": "2025-04-21",
+    "total": 10,
+    "references": [
+      "US-11603",
+      "US-0328"
+    ]
+  },
+  {
+    "id": "KD0OIX_2025-05-08_18",
+    "activator": "KD0OIX",
+    "date": "2025-05-08",
+    "total": 18,
+    "references": [
+      "US-4239",
+      "US-9389"
+    ]
+  },
+  {
+    "id": "KD0OIX_2025-04-30_45",
+    "activator": "KD0OIX",
+    "date": "2025-04-30",
+    "total": 45,
+    "references": [
+      "US-4239",
+      "US-9389"
+    ]
+  },
+  {
+    "id": "KD0OIX_2025-04-27_50",
+    "activator": "KD0OIX",
+    "date": "2025-04-27",
+    "total": 50,
+    "references": [
+      "US-4835",
+      "US-11152"
+    ]
+  },
+  {
+    "id": "KD0OIX_2025-04-27_47",
+    "activator": "KD0OIX",
+    "date": "2025-04-27",
+    "total": 47,
+    "references": [
+      "US-4786",
+      "US-9373",
+      "US-2500"
+    ]
+  },
+  {
+    "id": "KD0OIX_2025-04-24_24",
+    "activator": "KD0OIX",
+    "date": "2025-04-24",
+    "total": 24,
+    "references": [
+      "US-9389",
+      "US-4239"
+    ]
+  },
+  {
+    "id": "WI0O_2025-04-26_22",
+    "activator": "WI0O",
+    "date": "2025-04-26",
+    "total": 22,
+    "references": [
+      "US-2482",
+      "US-3381"
+    ]
+  },
+  {
+    "id": "WI0O_2025-04-19_21",
+    "activator": "WI0O",
+    "date": "2025-04-19",
+    "total": 21,
+    "references": [
+      "US-2482",
+      "US-3381"
+    ]
+  },
+  {
+    "id": "WI0O_2025-04-12_14",
+    "activator": "WI0O",
+    "date": "2025-04-12",
+    "total": 14,
+    "references": [
+      "US-12074",
+      "US-12073"
+    ]
+  },
+  {
+    "id": "WI0O_2025-03-01_15",
+    "activator": "WI0O",
+    "date": "2025-03-01",
+    "total": 15,
+    "references": [
+      "US-3381",
+      "US-2482"
+    ]
+  },
+  {
+    "id": "WI0O_2025-02-23_28",
+    "activator": "WI0O",
+    "date": "2025-02-23",
+    "total": 28,
+    "references": [
+      "US-2482",
+      "US-3381"
+    ]
+  },
+  {
+    "id": "WI0O_2025-01-31_18",
+    "activator": "WI0O",
+    "date": "2025-01-31",
+    "total": 18,
+    "references": [
+      "US-7145",
+      "US-9384"
+    ]
+  },
+  {
+    "id": "WI0O_2025-01-31_20",
+    "activator": "WI0O",
+    "date": "2025-01-31",
+    "total": 20,
+    "references": [
+      "US-0364",
+      "US-0365"
+    ]
+  },
+  {
+    "id": "WI0O_2025-01-25_28",
+    "activator": "WI0O",
+    "date": "2025-01-25",
+    "total": 28,
+    "references": [
+      "US-2482",
+      "US-3381"
+    ]
+  },
+  {
+    "id": "KN4AL_2025-04-12_39",
+    "activator": "KN4AL",
+    "date": "2025-04-12",
+    "total": 39,
+    "references": [
+      "US-6705",
+      "US-3313"
+    ]
+  },
+  {
+    "id": "VK3PF_2025-04-27_169",
+    "activator": "VK3PF",
+    "date": "2025-04-27",
+    "total": 169,
+    "references": [
+      "AU-8293",
+      "AU-10416"
+    ]
+  },
+  {
+    "id": "VK3PF_2025-04-25_178",
+    "activator": "VK3PF",
+    "date": "2025-04-25",
+    "total": 178,
+    "references": [
+      "AU-10415",
+      "AU-2750"
+    ]
+  },
+  {
+    "id": "VK3PF_2025-04-21_228",
+    "activator": "VK3PF",
+    "date": "2025-04-21",
+    "total": 228,
+    "references": [
+      "AU-0510",
+      "AU-8567"
+    ]
+  },
+  {
+    "id": "KG5YMI_2025-01-25_39",
+    "activator": "KG5YMI",
+    "date": "2025-01-25",
+    "total": 39,
+    "references": [
+      "US-11953",
+      "US-11164",
+      "US-7356",
+      "US-4425",
+      "US-1102"
+    ]
+  },
+  {
+    "id": "KG5YMI_2024-12-23_15",
+    "activator": "KG5YMI",
+    "date": "2024-12-23",
+    "total": 15,
+    "references": [
+      "US-4159",
+      "US-4572"
+    ]
+  },
+  {
+    "id": "KG5YMI_2024-12-23_24",
+    "activator": "KG5YMI",
+    "date": "2024-12-23",
+    "total": 24,
+    "references": [
+      "US-3791",
+      "US-4157"
+    ]
+  },
+  {
+    "id": "KG5YMI_2024-11-07_11",
+    "activator": "KG5YMI",
+    "date": "2024-11-07",
+    "total": 11,
+    "references": [
+      "US-1097",
+      "US-7154"
+    ]
+  },
+  {
+    "id": "KG5YMI_2024-11-07_13",
+    "activator": "KG5YMI",
+    "date": "2024-11-07",
+    "total": 13,
+    "references": [
+      "US-11953",
+      "US-11164"
+    ]
+  },
+  {
+    "id": "N9VFR_2025-04-23_14",
+    "activator": "N9VFR",
+    "date": "2025-04-23",
+    "total": 14,
+    "references": [
+      "US-12332",
+      "US-4482",
+      "US-4157"
+    ]
+  },
+  {
+    "id": "N9VFR_2025-03-28_37",
+    "activator": "N9VFR",
+    "date": "2025-03-28",
+    "total": 37,
+    "references": [
+      "US-9989",
+      "US-4572"
+    ]
+  },
+  {
+    "id": "N9VFR_2025-03-24_48",
+    "activator": "N9VFR",
+    "date": "2025-03-24",
+    "total": 48,
+    "references": [
+      "US-9989",
+      "US-4572"
+    ]
+  },
+  {
+    "id": "N9VFR_2025-03-09_71",
+    "activator": "N9VFR",
+    "date": "2025-03-09",
+    "total": 71,
+    "references": [
+      "US-9989",
+      "US-4572"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-05-02_15",
+    "activator": "SP4VIT",
+    "date": "2025-05-02",
+    "total": 15,
+    "references": [
+      "PL-2771",
+      "PL-1336",
+      "PL-1291"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-05-01_17",
+    "activator": "SP4VIT",
+    "date": "2025-05-01",
+    "total": 17,
+    "references": [
+      "PL-2161",
+      "PL-2510"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-27_193",
+    "activator": "SP4VIT",
+    "date": "2025-04-27",
+    "total": 193,
+    "references": [
+      "PL-0746",
+      "PL-0753"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-27_55",
+    "activator": "SP4VIT",
+    "date": "2025-04-27",
+    "total": 55,
+    "references": [
+      "PL-0752",
+      "PL-0829"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-20_140",
+    "activator": "SP4VIT",
+    "date": "2025-04-20",
+    "total": 140,
+    "references": [
+      "PL-2488",
+      "PL-1000",
+      "PL-0900"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-04-13_206",
+    "activator": "SP4VIT",
+    "date": "2025-04-13",
+    "total": 206,
+    "references": [
+      "PL-0865",
+      "PL-2795",
+      "PL-2488"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-03-26_50",
+    "activator": "SP4VIT",
+    "date": "2025-03-26",
+    "total": 50,
+    "references": [
+      "PL-0952",
+      "PL-0883"
+    ]
+  },
+  {
+    "id": "SP4VIT_2025-03-26_105",
+    "activator": "SP4VIT",
+    "date": "2025-03-26",
+    "total": 105,
+    "references": [
+      "PL-0695",
+      "PL-0708",
+      "PL-1951"
+    ]
+  },
+  {
+    "id": "VE3JLN_2025-04-19_41",
+    "activator": "VE3JLN",
+    "date": "2025-04-19",
+    "total": 41,
+    "references": [
+      "CA-0145",
+      "CA-0232"
+    ]
+  },
+  {
+    "id": "VE3JLN_2025-04-19_100",
+    "activator": "VE3JLN",
+    "date": "2025-04-19",
+    "total": 100,
+    "references": [
+      "CA-4889",
+      "CA-5082",
+      "CA-4876"
+    ]
+  },
+  {
+    "id": "VE3JLN_2025-04-06_81",
+    "activator": "VE3JLN",
+    "date": "2025-04-06",
+    "total": 81,
+    "references": [
+      "CA-5628",
+      "CA-0190",
+      "CA-0063"
+    ]
+  },
+  {
+    "id": "VE3JLN_2025-01-01_89",
+    "activator": "VE3JLN",
+    "date": "2025-01-01",
+    "total": 89,
+    "references": [
+      "CA-1413",
+      "CA-0027"
+    ]
+  },
+  {
+    "id": "VE3JLN_2024-10-28_77",
+    "activator": "VE3JLN",
+    "date": "2024-10-28",
+    "total": 77,
+    "references": [
+      "CA-5536",
+      "CA-5628",
+      "CA-1046"
+    ]
+  },
+  {
+    "id": "VE3JLN_2024-10-28_121",
+    "activator": "VE3JLN",
+    "date": "2024-10-28",
+    "total": 121,
+    "references": [
+      "CA-5568",
+      "CA-6003"
+    ]
+  },
+  {
+    "id": "HB9HDI_2025-04-02_11",
+    "activator": "HB9HDI",
+    "date": "2025-04-02",
+    "total": 11,
+    "references": [
+      "CH-0278",
+      "CH-0040",
+      "CH-0279"
+    ]
+  },
+  {
+    "id": "K5DGR_2025-02-22_105",
+    "activator": "K5DGR",
+    "date": "2025-02-22",
+    "total": 105,
+    "references": [
+      "US-4427",
+      "US-3672"
+    ]
+  },
+  {
+    "id": "K5DGR_2025-02-21_64",
+    "activator": "K5DGR",
+    "date": "2025-02-21",
+    "total": 64,
+    "references": [
+      "US-3672",
+      "US-4427"
+    ]
+  },
+  {
+    "id": "K5DGR_2025-02-20_72",
+    "activator": "K5DGR",
+    "date": "2025-02-20",
+    "total": 72,
+    "references": [
+      "US-4427",
+      "US-3672"
+    ]
+  },
+  {
+    "id": "K5DGR_2025-02-19_126",
+    "activator": "K5DGR",
+    "date": "2025-02-19",
+    "total": 126,
+    "references": [
+      "US-4427",
+      "US-3672"
+    ]
+  },
+  {
+    "id": "K5DGR_2025-02-18_54",
+    "activator": "K5DGR",
+    "date": "2025-02-18",
+    "total": 54,
+    "references": [
+      "US-3672",
+      "US-4427"
+    ]
+  },
+  {
+    "id": "KU8T_2025-04-25_19",
+    "activator": "KU8T",
+    "date": "2025-04-25",
+    "total": 19,
+    "references": [
+      "US-4229",
+      "US-10235"
+    ]
+  },
+  {
+    "id": "KU8T_2025-04-20_14",
+    "activator": "KU8T",
+    "date": "2025-04-20",
+    "total": 14,
+    "references": [
+      "US-2264",
+      "US-12018"
+    ]
+  },
+  {
+    "id": "KU8T_2025-04-20_13",
+    "activator": "KU8T",
+    "date": "2025-04-20",
+    "total": 13,
+    "references": [
+      "US-4218",
+      "US-10238"
+    ]
+  },
+  {
+    "id": "KU8T_2025-04-20_15",
+    "activator": "KU8T",
+    "date": "2025-04-20",
+    "total": 15,
+    "references": [
+      "US-11999",
+      "US-4182"
+    ]
+  },
+  {
+    "id": "KU8T_2025-03-14_18",
+    "activator": "KU8T",
+    "date": "2025-03-14",
+    "total": 18,
+    "references": [
+      "US-2252",
+      "US-10283"
+    ]
+  },
+  {
+    "id": "KU8T_2024-10-20_92",
+    "activator": "KU8T",
+    "date": "2024-10-20",
+    "total": 92,
+    "references": [
+      "US-9424",
+      "US-1965"
+    ]
+  },
+  {
+    "id": "AD0WN_2025-05-11_17",
+    "activator": "AD0WN",
+    "date": "2025-05-11",
+    "total": 17,
+    "references": [
+      "US-10861",
+      "US-4535"
+    ]
+  },
+  {
+    "id": "AD0WN_2025-05-10_18",
+    "activator": "AD0WN",
+    "date": "2025-05-10",
+    "total": 18,
+    "references": [
+      "US-4566",
+      "US-4573",
+      "US-6232",
+      "US-4576",
+      "US-4578"
+    ]
+  },
+  {
+    "id": "AD0WN_2025-05-10_27",
+    "activator": "AD0WN",
+    "date": "2025-05-10",
+    "total": 27,
+    "references": [
+      "US-4558",
+      "US-10885"
+    ]
+  },
+  {
+    "id": "AD0WN_2025-05-10_12",
+    "activator": "AD0WN",
+    "date": "2025-05-10",
+    "total": 12,
+    "references": [
+      "US-6188",
+      "US-6176"
+    ]
+  },
+  {
+    "id": "AD0WN_2025-05-07_21",
+    "activator": "AD0WN",
+    "date": "2025-05-07",
+    "total": 21,
+    "references": [
+      "US-4566",
+      "US-9180",
+      "US-4576",
+      "US-4578"
+    ]
+  },
+  {
+    "id": "W3NY_2025-04-28_11",
+    "activator": "W3NY",
+    "date": "2025-04-28",
+    "total": 11,
+    "references": [
+      "US-8930",
+      "US-4567"
+    ]
+  },
+  {
+    "id": "W3NY_2025-04-27_24",
+    "activator": "W3NY",
+    "date": "2025-04-27",
+    "total": 24,
+    "references": [
+      "US-8930",
+      "US-4567"
+    ]
+  },
+  {
+    "id": "W3NY_2025-04-25_50",
+    "activator": "W3NY",
+    "date": "2025-04-25",
+    "total": 50,
+    "references": [
+      "US-1517",
+      "US-6818"
+    ]
+  },
+  {
+    "id": "W3NY_2025-04-24_10",
+    "activator": "W3NY",
+    "date": "2025-04-24",
+    "total": 10,
+    "references": [
+      "US-6677",
+      "US-6750"
+    ]
+  },
+  {
+    "id": "AD9WM_2025-04-23_14",
+    "activator": "AD9WM",
+    "date": "2025-04-23",
+    "total": 14,
+    "references": [
+      "US-12332",
+      "US-4482",
+      "US-4157"
+    ]
+  },
+  {
+    "id": "AD9WM_2025-03-26_19",
+    "activator": "AD9WM",
+    "date": "2025-03-26",
+    "total": 19,
+    "references": [
+      "US-4572",
+      "US-9989"
+    ]
+  },
+  {
+    "id": "OE4JHW_2025-03-21_12",
+    "activator": "OE4JHW",
+    "date": "2025-03-21",
+    "total": 12,
+    "references": [
+      "AT-0284",
+      "AT-0283",
+      "AT-0291"
+    ]
+  },
+  {
+    "id": "OE4JHW_2025-03-06_69",
+    "activator": "OE4JHW",
+    "date": "2025-03-06",
+    "total": 69,
+    "references": [
+      "AT-0307",
+      "AT-0240"
+    ]
+  },
+  {
+    "id": "OE4JHW_2025-01-04_78",
+    "activator": "OE4JHW",
+    "date": "2025-01-04",
+    "total": 78,
+    "references": [
+      "AT-0199",
+      "AT-0278"
+    ]
+  },
+  {
+    "id": "OE4JHW_2024-08-28_12",
+    "activator": "OE4JHW",
+    "date": "2024-08-28",
+    "total": 12,
+    "references": [
+      "SI-0517",
+      "SI-0518"
+    ]
+  },
+  {
+    "id": "OE4JHW_2024-08-26_30",
+    "activator": "OE4JHW",
+    "date": "2024-08-26",
+    "total": 30,
+    "references": [
+      "AT-0122",
+      "AT-0123"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-05-03_31",
+    "activator": "2E0HPI",
+    "date": "2025-05-03",
+    "total": 31,
+    "references": [
+      "GB-4907",
+      "GB-0711"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-04-29_118",
+    "activator": "2E0HPI",
+    "date": "2025-04-29",
+    "total": 118,
+    "references": [
+      "GB-0711",
+      "GB-1611",
+      "GB-4876",
+      "GB-0592"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-04-26_65",
+    "activator": "2E0HPI",
+    "date": "2025-04-26",
+    "total": 65,
+    "references": [
+      "GB-1611",
+      "GB-2843",
+      "GB-2848",
+      "GB-0711"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-04-25_76",
+    "activator": "2E0HPI",
+    "date": "2025-04-25",
+    "total": 76,
+    "references": [
+      "GB-0193",
+      "GB-0711"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-04-22_64",
+    "activator": "2E0HPI",
+    "date": "2025-04-22",
+    "total": 64,
+    "references": [
+      "GB-0193",
+      "GB-0711"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-04-20_24",
+    "activator": "2E0HPI",
+    "date": "2025-04-20",
+    "total": 24,
+    "references": [
+      "GB-0193",
+      "GB-0711"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-04-19_83",
+    "activator": "2E0HPI",
+    "date": "2025-04-19",
+    "total": 83,
+    "references": [
+      "GB-0711",
+      "GB-1611",
+      "GB-2848",
+      "GB-2843"
+    ]
+  },
+  {
+    "id": "2E0HPI_2025-04-17_10",
+    "activator": "2E0HPI",
+    "date": "2025-04-17",
+    "total": 10,
+    "references": [
+      "GB-0711",
+      "GB-0193"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-20_4",
+    "activator": "WT8J",
+    "date": "2025-04-20",
+    "total": 4,
+    "references": [
+      "US-3331",
+      "US-6686",
+      "US-6679"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-20_13",
+    "activator": "WT8J",
+    "date": "2025-04-20",
+    "total": 13,
+    "references": [
+      "US-6693",
+      "US-0350"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-16_14",
+    "activator": "WT8J",
+    "date": "2025-04-16",
+    "total": 14,
+    "references": [
+      "US-9846",
+      "US-8225",
+      "US-10647"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-15_14",
+    "activator": "WT8J",
+    "date": "2025-04-15",
+    "total": 14,
+    "references": [
+      "US-10649",
+      "US-10651",
+      "US-9766",
+      "US-10654",
+      "US-10558",
+      "US-10648",
+      "US-10652",
+      "US-9855",
+      "US-4339"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-15_17",
+    "activator": "WT8J",
+    "date": "2025-04-15",
+    "total": 17,
+    "references": [
+      "US-4255",
+      "US-4304"
+    ]
+  },
+  {
+    "id": "WT8J_2025-04-15_4",
+    "activator": "WT8J",
+    "date": "2025-04-15",
+    "total": 4,
+    "references": [
+      "US-4322",
+      "US-4331"
+    ]
+  },
+  {
+    "id": "KI5GTR_2025-05-10_12",
+    "activator": "KI5GTR",
+    "date": "2025-05-10",
+    "total": 12,
+    "references": [
+      "US-7435",
+      "US-9161",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "KI5GTR_2025-04-25_12",
+    "activator": "KI5GTR",
+    "date": "2025-04-25",
+    "total": 12,
+    "references": [
+      "US-12093",
+      "US-3000",
+      "US-6550",
+      "US-4423"
+    ]
+  },
+  {
+    "id": "KI5GTR_2025-04-22_17",
+    "activator": "KI5GTR",
+    "date": "2025-04-22",
+    "total": 17,
+    "references": [
+      "US-3791",
+      "US-9161",
+      "US-7435"
+    ]
+  },
+  {
+    "id": "KI5GTR_2025-04-21_69",
+    "activator": "KI5GTR",
+    "date": "2025-04-21",
+    "total": 69,
+    "references": [
+      "US-9161",
+      "US-3791",
+      "US-7435"
+    ]
+  },
+  {
+    "id": "KI5GTR_2025-04-19_49",
+    "activator": "KI5GTR",
+    "date": "2025-04-19",
+    "total": 49,
+    "references": [
+      "US-7435",
+      "US-3791",
+      "US-9161"
+    ]
+  },
+  {
+    "id": "KI5GTR_2025-04-18_16",
+    "activator": "KI5GTR",
+    "date": "2025-04-18",
+    "total": 16,
+    "references": [
+      "US-7289",
+      "US-12331",
+      "US-12330"
+    ]
+  },
+  {
+    "id": "JN1JYD_2025-01-13_15",
+    "activator": "JN1JYD",
+    "date": "2025-01-13",
+    "total": 15,
+    "references": [
+      "JP-1578",
+      "JP-1990"
+    ]
+  },
+  {
+    "id": "JN1JYD_2025-01-12_37",
+    "activator": "JN1JYD",
+    "date": "2025-01-12",
+    "total": 37,
+    "references": [
+      "JP-1558",
+      "JP-1561"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-05-05_45",
+    "activator": "F5PGP",
+    "date": "2025-05-05",
+    "total": 45,
+    "references": [
+      "FR-7055",
+      "FR-7063",
+      "FR-3876",
+      "FR-7056"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-05-05_11",
+    "activator": "F5PGP",
+    "date": "2025-05-05",
+    "total": 11,
+    "references": [
+      "FR-7049",
+      "FR-7039"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-05-04_43",
+    "activator": "F5PGP",
+    "date": "2025-05-04",
+    "total": 43,
+    "references": [
+      "FR-4821",
+      "FR-4820"
+    ]
+  },
+  {
+    "id": "F5PGP_2025-04-28_11",
+    "activator": "F5PGP",
+    "date": "2025-04-28",
+    "total": 11,
+    "references": [
+      "FR-4588",
+      "FR-4587"
+    ]
+  },
+  {
+    "id": "KC1YL_2025-04-16_21",
+    "activator": "KC1YL",
+    "date": "2025-04-16",
+    "total": 21,
+    "references": [
+      "US-6301",
+      "US-12128"
+    ]
+  },
+  {
+    "id": "KC1YL_2025-04-16_24",
+    "activator": "KC1YL",
+    "date": "2025-04-16",
+    "total": 24,
+    "references": [
+      "US-12127",
+      "US-6321"
+    ]
+  },
+  {
+    "id": "KD8JSP_2025-02-09_14",
+    "activator": "KD8JSP",
+    "date": "2025-02-09",
+    "total": 14,
+    "references": [
+      "US-2913",
+      "US-9230",
+      "US-2890"
+    ]
+  },
+  {
+    "id": "KD8JSP_2025-02-09_15",
+    "activator": "KD8JSP",
+    "date": "2025-02-09",
+    "total": 15,
+    "references": [
+      "US-1317",
+      "US-1310"
+    ]
+  },
+  {
+    "id": "KD8JSP_2025-02-08_15",
+    "activator": "KD8JSP",
+    "date": "2025-02-08",
+    "total": 15,
+    "references": [
+      "US-4616",
+      "US-2188",
+      "US-3746",
+      "US-4651"
+    ]
+  },
+  {
+    "id": "KD8JSP_2025-02-08_14",
+    "activator": "KD8JSP",
+    "date": "2025-02-08",
+    "total": 14,
+    "references": [
+      "US-4621",
+      "US-8374"
+    ]
+  },
+  {
+    "id": "KD8JSP_2025-02-07_14",
+    "activator": "KD8JSP",
+    "date": "2025-02-07",
+    "total": 14,
+    "references": [
+      "US-0926",
+      "US-0263"
+    ]
+  },
+  {
+    "id": "KD8JSP_2025-02-07_19",
+    "activator": "KD8JSP",
+    "date": "2025-02-07",
+    "total": 19,
+    "references": [
+      "US-9770",
+      "US-4637"
+    ]
+  },
+  {
+    "id": "AI5P_2025-04-23_28",
+    "activator": "AI5P",
+    "date": "2025-04-23",
+    "total": 28,
+    "references": [
+      "US-4424",
+      "US-12094"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-05-06_12",
+    "activator": "MM0MMN",
+    "date": "2025-05-06",
+    "total": 12,
+    "references": [
+      "GB-1455",
+      "GB-1789"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-04-27_15",
+    "activator": "MM0MMN",
+    "date": "2025-04-27",
+    "total": 15,
+    "references": [
+      "GB-3079",
+      "GB-3270",
+      "GB-1446"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-04-09_10",
+    "activator": "MM0MMN",
+    "date": "2025-04-09",
+    "total": 10,
+    "references": [
+      "GE-0026",
+      "GE-0027"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-03-29_10",
+    "activator": "MM0MMN",
+    "date": "2025-03-29",
+    "total": 10,
+    "references": [
+      "GB-1481",
+      "GB-1480"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-03-08_11",
+    "activator": "MM0MMN",
+    "date": "2025-03-08",
+    "total": 11,
+    "references": [
+      "GB-4524",
+      "GB-4529"
+    ]
+  },
+  {
+    "id": "MM0MMN_2025-03-05_10",
+    "activator": "MM0MMN",
+    "date": "2025-03-05",
+    "total": 10,
+    "references": [
+      "GB-1386",
+      "GB-2994",
+      "GB-4521"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-05-04_11",
+    "activator": "G0HIO",
+    "date": "2025-05-04",
+    "total": 11,
+    "references": [
+      "GB-4911",
+      "GB-4910"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-04-10_10",
+    "activator": "G0HIO",
+    "date": "2025-04-10",
+    "total": 10,
+    "references": [
+      "GB-4718",
+      "GB-4717"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-04-10_12",
+    "activator": "G0HIO",
+    "date": "2025-04-10",
+    "total": 12,
+    "references": [
+      "GB-4716",
+      "GB-4725"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-04-08_15",
+    "activator": "G0HIO",
+    "date": "2025-04-08",
+    "total": 15,
+    "references": [
+      "GB-4676",
+      "GB-4678"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-03-24_12",
+    "activator": "G0HIO",
+    "date": "2025-03-24",
+    "total": 12,
+    "references": [
+      "GB-4419",
+      "GB-0141",
+      "GB-4420"
+    ]
+  },
+  {
+    "id": "G0HIO_2025-03-24_13",
+    "activator": "G0HIO",
+    "date": "2025-03-24",
+    "total": 13,
+    "references": [
+      "GB-4505",
+      "GB-0514"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-26_10",
+    "activator": "KA1VRY",
+    "date": "2025-04-26",
+    "total": 10,
+    "references": [
+      "US-10185",
+      "US-4165"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-20_20",
+    "activator": "KA1VRY",
+    "date": "2025-04-20",
+    "total": 20,
+    "references": [
+      "US-4576",
+      "US-4579",
+      "US-4566"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-12_10",
+    "activator": "KA1VRY",
+    "date": "2025-04-12",
+    "total": 10,
+    "references": [
+      "US-12019",
+      "US-2268"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-08_19",
+    "activator": "KA1VRY",
+    "date": "2025-04-08",
+    "total": 19,
+    "references": [
+      "US-12020",
+      "US-2266"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-08_24",
+    "activator": "KA1VRY",
+    "date": "2025-04-08",
+    "total": 24,
+    "references": [
+      "US-10280",
+      "US-4233"
+    ]
+  },
+  {
+    "id": "KA1VRY_2025-04-08_10",
+    "activator": "KA1VRY",
+    "date": "2025-04-08",
+    "total": 10,
+    "references": [
+      "US-10282",
+      "US-12314"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-23_16",
+    "activator": "AI5SM",
+    "date": "2025-04-23",
+    "total": 16,
+    "references": [
+      "US-4564",
+      "US-9898"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-23_19",
+    "activator": "AI5SM",
+    "date": "2025-04-23",
+    "total": 19,
+    "references": [
+      "US-4581",
+      "US-4567",
+      "US-9961",
+      "US-9935"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-22_5",
+    "activator": "AI5SM",
+    "date": "2025-04-22",
+    "total": 5,
+    "references": [
+      "US-4564",
+      "US-9898"
+    ]
+  },
+  {
+    "id": "AI5SM_2025-04-20_12",
+    "activator": "AI5SM",
+    "date": "2025-04-20",
+    "total": 12,
+    "references": [
+      "US-3362",
+      "US-1755"
+    ]
+  },
+  {
+    "id": "K0OTC_2025-03-28_252",
+    "activator": "K0OTC",
+    "date": "2025-03-28",
+    "total": 252,
+    "references": [
+      "US-2507",
+      "US-4239"
+    ]
+  },
+  {
+    "id": "K0OTC_2025-03-08_380",
+    "activator": "K0OTC",
+    "date": "2025-03-08",
+    "total": 380,
+    "references": [
+      "US-4239",
+      "US-2507"
+    ]
+  },
+  {
+    "id": "K0OTC_2025-01-18_14",
+    "activator": "K0OTC",
+    "date": "2025-01-18",
+    "total": 14,
+    "references": [
+      "US-7146",
+      "US-0360",
+      "US-2501"
+    ]
+  },
+  {
+    "id": "K0OTC_2025-01-18_15",
+    "activator": "K0OTC",
+    "date": "2025-01-18",
+    "total": 15,
+    "references": [
+      "US-8587",
+      "US-5745",
+      "US-2515"
+    ]
+  },
+  {
+    "id": "K0OTC_2024-12-31_15",
+    "activator": "K0OTC",
+    "date": "2024-12-31",
+    "total": 15,
+    "references": [
+      "US-0673",
+      "US-2517"
+    ]
+  },
+  {
+    "id": "N9JF_2025-04-11_46",
+    "activator": "N9JF",
+    "date": "2025-04-11",
+    "total": 46,
+    "references": [
+      "US-2969",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "N9JF_2025-04-09_46",
+    "activator": "N9JF",
+    "date": "2025-04-09",
+    "total": 46,
+    "references": [
+      "US-0708",
+      "US-3956",
+      "US-3791"
+    ]
+  },
+  {
+    "id": "VE9CF_2025-04-18_171",
+    "activator": "VE9CF",
+    "date": "2025-04-18",
+    "total": 171,
+    "references": [
+      "CA-5154",
+      "CA-0014"
+    ]
+  },
+  {
+    "id": "VE9CF_2025-04-09_183",
+    "activator": "VE9CF",
+    "date": "2025-04-09",
+    "total": 183,
+    "references": [
+      "CA-5435",
+      "CA-0926"
+    ]
+  },
+  {
+    "id": "VE9CF_2025-03-24_425",
+    "activator": "VE9CF",
+    "date": "2025-03-24",
+    "total": 425,
+    "references": [
+      "CA-0024",
+      "CA-0025"
+    ]
+  },
+  {
+    "id": "VE9CF_2025-03-15_417",
+    "activator": "VE9CF",
+    "date": "2025-03-15",
+    "total": 417,
+    "references": [
+      "CA-4419",
+      "CA-0024"
+    ]
+  },
+  {
+    "id": "VE9CF_2025-02-21_58",
+    "activator": "VE9CF",
+    "date": "2025-02-21",
+    "total": 58,
+    "references": [
+      "CA-1740",
+      "CA-0952"
+    ]
+  },
+  {
+    "id": "VE9CF_2025-02-21_93",
+    "activator": "VE9CF",
+    "date": "2025-02-21",
+    "total": 93,
+    "references": [
+      "CA-4827",
+      "CA-1718",
+      "CA-4834",
+      "CA-0016"
+    ]
+  },
+  {
+    "id": "VE9CF_2025-02-06_148",
+    "activator": "VE9CF",
+    "date": "2025-02-06",
+    "total": 148,
+    "references": [
+      "CA-5082",
+      "CA-5250"
+    ]
+  },
+  {
+    "id": "KD9KJC_2025-05-08_90",
+    "activator": "KD9KJC",
+    "date": "2025-05-08",
+    "total": 90,
+    "references": [
+      "US-4238",
+      "US-11976"
+    ]
+  },
+  {
+    "id": "KD9KJC_2025-05-06_80",
+    "activator": "KD9KJC",
+    "date": "2025-05-06",
+    "total": 80,
+    "references": [
+      "US-9768",
+      "US-4345"
+    ]
+  },
+  {
+    "id": "KD9KJC_2025-04-27_17",
+    "activator": "KD9KJC",
+    "date": "2025-04-27",
+    "total": 17,
+    "references": [
+      "US-4238",
+      "US-4352",
+      "US-10785"
+    ]
+  },
+  {
+    "id": "KD9KJC_2025-04-27_13",
+    "activator": "KD9KJC",
+    "date": "2025-04-27",
+    "total": 13,
+    "references": [
+      "US-8671",
+      "US-4294"
+    ]
+  },
+  {
+    "id": "KD9KJC_2025-04-26_13",
+    "activator": "KD9KJC",
+    "date": "2025-04-26",
+    "total": 13,
+    "references": [
+      "US-11961",
+      "US-9868"
+    ]
+  },
+  {
+    "id": "KF0INE_2025-03-30_18",
+    "activator": "KF0INE",
+    "date": "2025-03-30",
+    "total": 18,
+    "references": [
+      "US-1238",
+      "US-1208"
+    ]
+  },
+  {
+    "id": "KF0INE_2025-03-30_13",
+    "activator": "KF0INE",
+    "date": "2025-03-30",
+    "total": 13,
+    "references": [
+      "US-1212",
+      "US-4407"
+    ]
+  },
+  {
+    "id": "KF0INE_2025-03-30_14",
+    "activator": "KF0INE",
+    "date": "2025-03-30",
+    "total": 14,
+    "references": [
+      "US-0192",
+      "US-9667"
+    ]
+  },
+  {
+    "id": "KB3CMT_2025-04-06_60",
+    "activator": "KB3CMT",
+    "date": "2025-04-06",
+    "total": 60,
+    "references": [
+      "US-5450",
+      "US-1991"
+    ]
+  },
+  {
+    "id": "KB3CMT_2025-04-05_21",
+    "activator": "KB3CMT",
+    "date": "2025-04-05",
+    "total": 21,
+    "references": [
+      "US-5450",
+      "US-1991"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-05-05_22",
+    "activator": "DK5UR",
+    "date": "2025-05-05",
+    "total": 22,
+    "references": [
+      "DE-0623",
+      "DE-0941"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-10_16",
+    "activator": "DK5UR",
+    "date": "2025-04-10",
+    "total": 16,
+    "references": [
+      "DE-0674",
+      "DE-0205"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-10_11",
+    "activator": "DK5UR",
+    "date": "2025-04-10",
+    "total": 11,
+    "references": [
+      "DE-0132",
+      "DE-0746",
+      "DE-0453",
+      "DE-0829"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-09_104",
+    "activator": "DK5UR",
+    "date": "2025-04-09",
+    "total": 104,
+    "references": [
+      "DE-0127",
+      "DE-0129"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-08_12",
+    "activator": "DK5UR",
+    "date": "2025-04-08",
+    "total": 12,
+    "references": [
+      "DE-0467",
+      "DE-0928",
+      "DE-0788",
+      "DE-0625",
+      "DE-0070"
+    ]
+  },
+  {
+    "id": "DK5UR_2025-04-08_11",
+    "activator": "DK5UR",
+    "date": "2025-04-08",
+    "total": 11,
+    "references": [
+      "DE-0062",
+      "DE-0943"
+    ]
+  },
+  {
+    "id": "VE3THR_2025-04-19_41",
+    "activator": "VE3THR",
+    "date": "2025-04-19",
+    "total": 41,
+    "references": [
+      "CA-0145",
+      "CA-0232"
+    ]
+  },
+  {
+    "id": "VE3THR_2025-04-19_100",
+    "activator": "VE3THR",
+    "date": "2025-04-19",
+    "total": 100,
+    "references": [
+      "CA-4876",
+      "CA-5082",
+      "CA-4889"
+    ]
+  },
+  {
+    "id": "VE3THR_2025-04-06_81",
+    "activator": "VE3THR",
+    "date": "2025-04-06",
+    "total": 81,
+    "references": [
+      "CA-5628",
+      "CA-0190",
+      "CA-0063"
+    ]
+  },
+  {
+    "id": "VE3THR_2025-01-18_40",
+    "activator": "VE3THR",
+    "date": "2025-01-18",
+    "total": 40,
+    "references": [
+      "CA-1658",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "VE3THR_2025-01-01_89",
+    "activator": "VE3THR",
+    "date": "2025-01-01",
+    "total": 89,
+    "references": [
+      "CA-0027",
+      "CA-1413"
+    ]
+  },
+  {
+    "id": "JF1AWC_2025-05-11_14",
+    "activator": "JF1AWC",
+    "date": "2025-05-11",
+    "total": 14,
+    "references": [
+      "JP-1206",
+      "JP-1280"
+    ]
+  },
+  {
+    "id": "JF1AWC_2025-05-10_42",
+    "activator": "JF1AWC",
+    "date": "2025-05-10",
+    "total": 42,
+    "references": [
+      "JP-1280",
+      "JP-1206"
+    ]
+  },
+  {
+    "id": "JF1AWC_2025-04-28_18",
+    "activator": "JF1AWC",
+    "date": "2025-04-28",
+    "total": 18,
+    "references": [
+      "JP-1259",
+      "JP-1286"
+    ]
+  },
+  {
+    "id": "JF1AWC_2025-04-25_33",
+    "activator": "JF1AWC",
+    "date": "2025-04-25",
+    "total": 33,
+    "references": [
+      "JP-0014",
+      "JP-1947"
+    ]
+  },
+  {
+    "id": "JF1AWC_2025-04-25_22",
+    "activator": "JF1AWC",
+    "date": "2025-04-25",
+    "total": 22,
+    "references": [
+      "JP-1209",
+      "JP-1829"
+    ]
+  },
+  {
+    "id": "VE3XNS_2025-04-19_41",
+    "activator": "VE3XNS",
+    "date": "2025-04-19",
+    "total": 41,
+    "references": [
+      "CA-0232",
+      "CA-0145"
+    ]
+  },
+  {
+    "id": "VE3XNS_2025-04-19_100",
+    "activator": "VE3XNS",
+    "date": "2025-04-19",
+    "total": 100,
+    "references": [
+      "CA-4876",
+      "CA-5082",
+      "CA-4889"
+    ]
+  },
+  {
+    "id": "VE3XNS_2025-01-01_89",
+    "activator": "VE3XNS",
+    "date": "2025-01-01",
+    "total": 89,
+    "references": [
+      "CA-0027",
+      "CA-1413"
+    ]
+  },
+  {
+    "id": "VE3XNS_2024-11-09_60",
+    "activator": "VE3XNS",
+    "date": "2024-11-09",
+    "total": 60,
+    "references": [
+      "CA-1658",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "VE3XNS_2024-11-03_117",
+    "activator": "VE3XNS",
+    "date": "2024-11-03",
+    "total": 117,
+    "references": [
+      "CA-1658",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "VE3XNS_2024-10-31_97",
+    "activator": "VE3XNS",
+    "date": "2024-10-31",
+    "total": 97,
+    "references": [
+      "CA-1658",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "VE3XNS_2024-10-29_222",
+    "activator": "VE3XNS",
+    "date": "2024-10-29",
+    "total": 222,
+    "references": [
+      "CA-1658",
+      "CA-5082"
+    ]
+  },
+  {
+    "id": "W1IP_2025-04-16_21",
+    "activator": "W1IP",
+    "date": "2025-04-16",
+    "total": 21,
+    "references": [
+      "US-6301",
+      "US-12128"
+    ]
+  },
+  {
+    "id": "W1IP_2025-04-16_24",
+    "activator": "W1IP",
+    "date": "2025-04-16",
+    "total": 24,
+    "references": [
+      "US-6321",
+      "US-12127"
+    ]
+  },
+  {
+    "id": "W1IP_2025-03-31_34",
+    "activator": "W1IP",
+    "date": "2025-03-31",
+    "total": 34,
+    "references": [
+      "US-4559",
+      "US-8370"
+    ]
+  },
+  {
+    "id": "W1IP_2025-03-07_15",
+    "activator": "W1IP",
+    "date": "2025-03-07",
+    "total": 15,
+    "references": [
+      "US-8374",
+      "US-4619"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-05-04_33",
+    "activator": "JQ3JUK",
+    "date": "2025-05-04",
+    "total": 33,
+    "references": [
+      "JP-2011",
+      "JP-0022"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-04-30_22",
+    "activator": "JQ3JUK",
+    "date": "2025-04-30",
+    "total": 22,
+    "references": [
+      "JP-0023",
+      "JP-1661"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-04-30_24",
+    "activator": "JQ3JUK",
+    "date": "2025-04-30",
+    "total": 24,
+    "references": [
+      "JP-1662",
+      "JP-2018"
+    ]
+  },
+  {
+    "id": "JQ3JUK_2025-04-29_27",
+    "activator": "JQ3JUK",
+    "date": "2025-04-29",
+    "total": 27,
+    "references": [
+      "JP-1684",
+      "JP-1669"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-05-05_51",
+    "activator": "W1SRR",
+    "date": "2025-05-05",
+    "total": 51,
+    "references": [
+      "US-4559",
+      "US-4630"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-29_48",
+    "activator": "W1SRR",
+    "date": "2025-04-29",
+    "total": 48,
+    "references": [
+      "US-8340",
+      "US-6329",
+      "US-4559"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-27_49",
+    "activator": "W1SRR",
+    "date": "2025-04-27",
+    "total": 49,
+    "references": [
+      "US-4559",
+      "US-8370"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-20_14",
+    "activator": "W1SRR",
+    "date": "2025-04-20",
+    "total": 14,
+    "references": [
+      "US-4620",
+      "US-3645"
+    ]
+  },
+  {
+    "id": "W1SRR_2025-04-20_16",
+    "activator": "W1SRR",
+    "date": "2025-04-20",
+    "total": 16,
+    "references": [
+      "US-10590",
+      "US-8700",
+      "US-4612"
+    ]
+  },
+  {
+    "id": "W2TEF_2025-04-09_36",
+    "activator": "W2TEF",
+    "date": "2025-04-09",
+    "total": 36,
+    "references": [
+      "US-6609",
+      "US-11964"
+    ]
+  },
+  {
+    "id": "N3WD_2025-04-20_18",
+    "activator": "N3WD",
+    "date": "2025-04-20",
+    "total": 18,
+    "references": [
+      "US-0016",
+      "US-9902",
+      "US-4582"
+    ]
+  },
+  {
+    "id": "N3WD_2025-04-19_17",
+    "activator": "N3WD",
+    "date": "2025-04-19",
+    "total": 17,
+    "references": [
+      "US-9902",
+      "US-0016",
+      "US-4582"
+    ]
+  },
+  {
+    "id": "N3WD_2025-04-18_45",
+    "activator": "N3WD",
+    "date": "2025-04-18",
+    "total": 45,
+    "references": [
+      "US-0016",
+      "US-4582",
+      "US-9902"
+    ]
+  },
+  {
+    "id": "N3WD_2025-04-18_11",
+    "activator": "N3WD",
+    "date": "2025-04-18",
+    "total": 11,
+    "references": [
+      "US-8204",
+      "US-9935"
+    ]
+  },
+  {
+    "id": "N5MIG_2025-01-03_11",
+    "activator": "N5MIG",
+    "date": "2025-01-03",
+    "total": 11,
+    "references": [
+      "US-0534",
+      "US-2965",
+      "US-3952"
+    ]
+  },
+  {
+    "id": "N5MIG_2025-01-03_10",
+    "activator": "N5MIG",
+    "date": "2025-01-03",
+    "total": 10,
+    "references": [
+      "US-3792",
+      "US-3792",
+      "US-7568"
+    ]
+  },
+  {
+    "id": "N5MIG_2025-01-03_12",
+    "activator": "N5MIG",
+    "date": "2025-01-03",
+    "total": 12,
+    "references": [
+      "US-0703",
+      "US-5502",
+      "US-7592"
+    ]
+  },
+  {
+    "id": "N5MIG_2024-10-26_10",
+    "activator": "N5MIG",
+    "date": "2024-10-26",
+    "total": 10,
+    "references": [
+      "US-11960",
+      "US-11951"
+    ]
+  },
+  {
+    "id": "N5MIG_2024-10-26_11",
+    "activator": "N5MIG",
+    "date": "2024-10-26",
+    "total": 11,
+    "references": [
+      "US-11870",
+      "US-11873"
+    ]
+  },
+  {
+    "id": "K7PRA_2025-02-15_73",
+    "activator": "K7PRA",
+    "date": "2025-02-15",
+    "total": 73,
+    "references": [
+      "US-6043",
+      "US-12142"
+    ]
+  },
+  {
+    "id": "K7PRA_2025-02-12_25",
+    "activator": "K7PRA",
+    "date": "2025-02-12",
+    "total": 25,
+    "references": [
+      "US-4557",
+      "US-5965"
+    ]
+  },
+  {
+    "id": "K7PRA_2025-01-24_18",
+    "activator": "K7PRA",
+    "date": "2025-01-24",
+    "total": 18,
+    "references": [
+      "US-6038",
+      "US-11004"
+    ]
+  },
+  {
+    "id": "JL1CGT_2025-04-28_12",
+    "activator": "JL1CGT",
+    "date": "2025-04-28",
+    "total": 12,
+    "references": [
+      "JP-1974",
+      "JP-1973",
+      "JP-1975"
+    ]
+  },
+  {
+    "id": "JL1CGT_2025-04-27_19",
+    "activator": "JL1CGT",
+    "date": "2025-04-27",
+    "total": 19,
+    "references": [
+      "JP-1111",
+      "JP-1972"
+    ]
+  },
+  {
+    "id": "JL1CGT_2025-04-25_22",
+    "activator": "JL1CGT",
+    "date": "2025-04-25",
+    "total": 22,
+    "references": [
+      "JP-1294",
+      "JP-1251"
+    ]
+  },
+  {
+    "id": "S57MS_2025-05-04_18",
+    "activator": "S57MS",
+    "date": "2025-05-04",
+    "total": 18,
+    "references": [
+      "SI-0507",
+      "SI-0499"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-28_14",
+    "activator": "S57MS",
+    "date": "2025-04-28",
+    "total": 14,
+    "references": [
+      "SI-1124",
+      "SI-1125"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-27_16",
+    "activator": "S57MS",
+    "date": "2025-04-27",
+    "total": 16,
+    "references": [
+      "SI-0840",
+      "SI-0904"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-26_17",
+    "activator": "S57MS",
+    "date": "2025-04-26",
+    "total": 17,
+    "references": [
+      "SI-0490",
+      "SI-0491"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-20_26",
+    "activator": "S57MS",
+    "date": "2025-04-20",
+    "total": 26,
+    "references": [
+      "SI-1034",
+      "SI-0323"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-19_17",
+    "activator": "S57MS",
+    "date": "2025-04-19",
+    "total": 17,
+    "references": [
+      "SI-0589",
+      "SI-0590"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-19_41",
+    "activator": "S57MS",
+    "date": "2025-04-19",
+    "total": 41,
+    "references": [
+      "SI-1035",
+      "SI-1038"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-10_26",
+    "activator": "S57MS",
+    "date": "2025-04-10",
+    "total": 26,
+    "references": [
+      "SI-0720",
+      "SI-0719"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-07_10",
+    "activator": "S57MS",
+    "date": "2025-04-07",
+    "total": 10,
+    "references": [
+      "SI-0423",
+      "SI-0422"
+    ]
+  },
+  {
+    "id": "S57MS_2025-04-06_15",
+    "activator": "S57MS",
+    "date": "2025-04-06",
+    "total": 15,
+    "references": [
+      "SI-0701",
+      "SI-0702"
+    ]
+  },
+  {
+    "id": "JF4OZY_2024-09-14_14",
+    "activator": "JF4OZY",
+    "date": "2024-09-14",
+    "total": 14,
+    "references": [
+      "JP-1415",
+      "JP-1407",
+      "JP-1417"
+    ]
+  },
+  {
+    "id": "JF4OZY_2024-09-13_25",
+    "activator": "JF4OZY",
+    "date": "2024-09-13",
+    "total": 25,
+    "references": [
+      "JP-1414",
+      "JP-1409"
+    ]
+  },
+  {
+    "id": "JF4OZY_2024-08-24_13",
+    "activator": "JF4OZY",
+    "date": "2024-08-24",
+    "total": 13,
+    "references": [
+      "JP-1499",
+      "JP-1509"
+    ]
+  },
+  {
+    "id": "W7MJG_2025-02-15_73",
+    "activator": "W7MJG",
+    "date": "2025-02-15",
+    "total": 73,
+    "references": [
+      "US-6043",
+      "US-12142"
+    ]
+  },
+  {
+    "id": "W7MJG_2025-02-12_25",
+    "activator": "W7MJG",
+    "date": "2025-02-12",
+    "total": 25,
+    "references": [
+      "US-4557",
+      "US-5965"
+    ]
+  },
+  {
+    "id": "W7MJG_2025-01-24_18",
+    "activator": "W7MJG",
+    "date": "2025-01-24",
+    "total": 18,
+    "references": [
+      "US-11004",
+      "US-6038"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-05-10_17",
+    "activator": "JK1JXP",
+    "date": "2025-05-10",
+    "total": 17,
+    "references": [
+      "JP-2109",
+      "JP-1250"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-05-04_15",
+    "activator": "JK1JXP",
+    "date": "2025-05-04",
+    "total": 15,
+    "references": [
+      "JP-1217",
+      "JP-1245"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-04-29_11",
+    "activator": "JK1JXP",
+    "date": "2025-04-29",
+    "total": 11,
+    "references": [
+      "JP-1825",
+      "JP-1820",
+      "JP-1818"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-04-29_12",
+    "activator": "JK1JXP",
+    "date": "2025-04-29",
+    "total": 12,
+    "references": [
+      "JP-1813",
+      "JP-1799",
+      "JP-1823",
+      "JP-1824"
+    ]
+  },
+  {
+    "id": "JK1JXP_2025-04-29_10",
+    "activator": "JK1JXP",
+    "date": "2025-04-29",
+    "total": 10,
+    "references": [
+      "JP-1816",
+      "JP-2069"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-10_18",
+    "activator": "JO4FDA",
+    "date": "2025-05-10",
+    "total": 18,
+    "references": [
+      "GU-0006",
+      "GU-0003"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-05_14",
+    "activator": "JO4FDA",
+    "date": "2025-05-05",
+    "total": 14,
+    "references": [
+      "JP-1076",
+      "JP-1081"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-03_10",
+    "activator": "JO4FDA",
+    "date": "2025-05-03",
+    "total": 10,
+    "references": [
+      "JP-2054",
+      "JP-1041"
+    ]
+  },
+  {
+    "id": "JO4FDA_2025-05-02_12",
+    "activator": "JO4FDA",
+    "date": "2025-05-02",
+    "total": 12,
+    "references": [
+      "JP-1047",
+      "JP-1936"
+    ]
+  },
+  {
+    "id": "EA4DOS_2025-04-20_32",
+    "activator": "EA4DOS",
+    "date": "2025-04-20",
+    "total": 32,
+    "references": [
+      "ES-1450",
+      "ES-0954"
+    ]
+  },
+  {
+    "id": "EA4DOS_2025-03-29_79",
+    "activator": "EA4DOS",
+    "date": "2025-03-29",
+    "total": 79,
+    "references": [
+      "ES-0154",
+      "ES-0955"
+    ]
+  },
+  {
+    "id": "EA4DOS_2024-12-01_36",
+    "activator": "EA4DOS",
+    "date": "2024-12-01",
+    "total": 36,
+    "references": [
+      "ES-0158",
+      "ES-0956",
+      "ES-2240"
+    ]
+  },
+  {
+    "id": "EA4DON_2025-04-20_56",
+    "activator": "EA4DON",
+    "date": "2025-04-20",
+    "total": 56,
+    "references": [
+      "ES-0954",
+      "ES-1450"
+    ]
+  },
+  {
+    "id": "EA4DON_2025-03-29_24",
+    "activator": "EA4DON",
+    "date": "2025-03-29",
+    "total": 24,
+    "references": [
+      "ES-0154",
+      "ES-0955"
+    ]
+  },
+  {
+    "id": "EA4DON_2024-12-01_30",
+    "activator": "EA4DON",
+    "date": "2024-12-01",
+    "total": 30,
+    "references": [
+      "ES-0158",
+      "ES-0956",
+      "ES-2240"
+    ]
+  },
+  {
+    "id": "SP3ATB_2025-04-25_18",
+    "activator": "SP3ATB",
+    "date": "2025-04-25",
+    "total": 18,
+    "references": [
+      "PL-1954",
+      "PL-2506"
+    ]
+  },
+  {
+    "id": "SP3ATB_2025-04-16_10",
+    "activator": "SP3ATB",
+    "date": "2025-04-16",
+    "total": 10,
+    "references": [
+      "PL-1954",
+      "PL-2506"
+    ]
+  },
+  {
+    "id": "SP3ATB_2025-04-13_18",
+    "activator": "SP3ATB",
+    "date": "2025-04-13",
+    "total": 18,
+    "references": [
+      "PL-2506",
+      "PL-1954"
+    ]
+  },
+  {
+    "id": "SP3ATB_2025-03-21_92",
+    "activator": "SP3ATB",
+    "date": "2025-03-21",
+    "total": 92,
+    "references": [
+      "PL-2507",
+      "PL-2508"
+    ]
+  },
+  {
+    "id": "SP3ATB_2025-03-08_107",
+    "activator": "SP3ATB",
+    "date": "2025-03-08",
+    "total": 107,
+    "references": [
+      "PL-1954",
+      "PL-2506"
+    ]
+  },
+  {
+    "id": "SP3ATB_2024-12-27_213",
+    "activator": "SP3ATB",
+    "date": "2024-12-27",
+    "total": 213,
+    "references": [
+      "PL-1785",
+      "PL-1790"
+    ]
+  },
+  {
+    "id": "SP3ATB_2024-12-24_108",
+    "activator": "SP3ATB",
+    "date": "2024-12-24",
+    "total": 108,
+    "references": [
+      "PL-1790",
+      "PL-2739",
+      "PL-2738"
+    ]
+  },
+  {
+    "id": "SP3ATB_2024-12-21_284",
+    "activator": "SP3ATB",
+    "date": "2024-12-21",
+    "total": 284,
+    "references": [
+      "PL-2763",
+      "PL-1891",
+      "PL-2758"
+    ]
+  },
+  {
+    "id": "SP3ATB_2024-12-12_116",
+    "activator": "SP3ATB",
+    "date": "2024-12-12",
+    "total": 116,
+    "references": [
+      "PL-1947",
+      "PL-2655"
+    ]
+  },
+  {
+    "id": "W0YKS_2025-04-05_12",
+    "activator": "W0YKS",
+    "date": "2025-04-05",
+    "total": 12,
+    "references": [
+      "US-4203",
+      "US-2262"
+    ]
+  },
+  {
+    "id": "KF0JEL_2025-03-16_15",
+    "activator": "KF0JEL",
+    "date": "2025-03-16",
+    "total": 15,
+    "references": [
+      "US-2482",
+      "US-2466"
+    ]
+  },
+  {
+    "id": "K4OKI_2025-04-10_30",
+    "activator": "K4OKI",
+    "date": "2025-04-10",
+    "total": 30,
+    "references": [
+      "US-6920",
+      "US-3851",
+      "US-6838",
+      "US-6916",
+      "US-6909",
+      "US-3844",
+      "US-3857",
+      "US-6852",
+      "US-6844",
+      "US-6832",
+      "US-3859",
+      "US-2755"
+    ]
+  },
+  {
+    "id": "K4OKI_2025-04-10_60",
+    "activator": "K4OKI",
+    "date": "2025-04-10",
+    "total": 60,
+    "references": [
+      "US-3841",
+      "US-2729"
+    ]
+  },
+  {
+    "id": "K9JP_2025-05-08_17",
+    "activator": "K9JP",
+    "date": "2025-05-08",
+    "total": 17,
+    "references": [
+      "US-1522",
+      "US-6823"
+    ]
+  },
+  {
+    "id": "K9JP_2025-05-07_17",
+    "activator": "K9JP",
+    "date": "2025-05-07",
+    "total": 17,
+    "references": [
+      "US-1522",
+      "US-6823"
+    ]
+  },
+  {
+    "id": "K9JP_2025-05-04_29",
+    "activator": "K9JP",
+    "date": "2025-05-04",
+    "total": 29,
+    "references": [
+      "US-0714",
+      "US-6669"
+    ]
+  },
+  {
+    "id": "K9JP_2025-05-03_16",
+    "activator": "K9JP",
+    "date": "2025-05-03",
+    "total": 16,
+    "references": [
+      "US-6823",
+      "US-1522"
+    ]
+  },
+  {
+    "id": "K9JP_2025-04-29_21",
+    "activator": "K9JP",
+    "date": "2025-04-29",
+    "total": 21,
+    "references": [
+      "US-1522",
+      "US-6823"
+    ]
+  },
+  {
+    "id": "A65D_2025-04-05_29",
+    "activator": "A65D",
+    "date": "2025-04-05",
+    "total": 29,
+    "references": [
+      "AE-0017",
+      "AE-0097"
+    ]
+  },
+  {
+    "id": "A65D_2025-04-03_2",
+    "activator": "A65D",
+    "date": "2025-04-03",
+    "total": 2,
+    "references": [
+      "AE-0097",
+      "AE-0017"
+    ]
+  },
+  {
+    "id": "A65D_2025-04-01_110",
+    "activator": "A65D",
+    "date": "2025-04-01",
+    "total": 110,
+    "references": [
+      "AE-0030",
+      "AE-0017"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-31_63",
+    "activator": "A65D",
+    "date": "2025-03-31",
+    "total": 63,
+    "references": [
+      "AE-0017",
+      "AE-0030"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-24_30",
+    "activator": "A65D",
+    "date": "2025-03-24",
+    "total": 30,
+    "references": [
+      "AE-0017",
+      "AE-0097"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-23_140",
+    "activator": "A65D",
+    "date": "2025-03-23",
+    "total": 140,
+    "references": [
+      "AE-0019",
+      "AE-0078"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-22_89",
+    "activator": "A65D",
+    "date": "2025-03-22",
+    "total": 89,
+    "references": [
+      "AE-0017",
+      "AE-0030"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-20_70",
+    "activator": "A65D",
+    "date": "2025-03-20",
+    "total": 70,
+    "references": [
+      "AE-0017",
+      "AE-0096"
+    ]
+  },
+  {
+    "id": "A65D_2025-03-18_82",
+    "activator": "A65D",
+    "date": "2025-03-18",
+    "total": 82,
+    "references": [
+      "AE-0017",
+      "AE-0030"
+    ]
+  },
+  {
+    "id": "NX9T_2025-05-05_24",
+    "activator": "NX9T",
+    "date": "2025-05-05",
+    "total": 24,
+    "references": [
+      "US-9430",
+      "US-9428"
+    ]
+  },
+  {
+    "id": "NX9T_2025-04-16_65",
+    "activator": "NX9T",
+    "date": "2025-04-16",
+    "total": 65,
+    "references": [
+      "US-0350",
+      "US-3331",
+      "US-6804",
+      "US-6726"
+    ]
+  },
+  {
+    "id": "NX9T_2025-04-15_60",
+    "activator": "NX9T",
+    "date": "2025-04-15",
+    "total": 60,
+    "references": [
+      "US-6619",
+      "US-3304"
+    ]
+  },
+  {
+    "id": "NS1C_2025-02-27_25",
+    "activator": "NS1C",
+    "date": "2025-02-27",
+    "total": 25,
+    "references": [
+      "US-6320",
+      "US-0245"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-04-28_13",
+    "activator": "N3DRK",
+    "date": "2025-04-28",
+    "total": 13,
+    "references": [
+      "US-8043",
+      "US-6609"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-04-18_10",
+    "activator": "N3DRK",
+    "date": "2025-04-18",
+    "total": 10,
+    "references": [
+      "US-1738",
+      "US-9878"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-04-10_30",
+    "activator": "N3DRK",
+    "date": "2025-04-10",
+    "total": 30,
+    "references": [
+      "US-8034",
+      "US-6544"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-04-06_100",
+    "activator": "N3DRK",
+    "date": "2025-04-06",
+    "total": 100,
+    "references": [
+      "US-6609",
+      "US-8043"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-04-05_43",
+    "activator": "N3DRK",
+    "date": "2025-04-05",
+    "total": 43,
+    "references": [
+      "US-6609",
+      "US-5000"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-03-31_113",
+    "activator": "N3DRK",
+    "date": "2025-03-31",
+    "total": 113,
+    "references": [
+      "US-6609",
+      "US-6544"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-03-31_58",
+    "activator": "N3DRK",
+    "date": "2025-03-31",
+    "total": 58,
+    "references": [
+      "US-0886",
+      "US-8042"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-03-22_70",
+    "activator": "N3DRK",
+    "date": "2025-03-22",
+    "total": 70,
+    "references": [
+      "US-5000",
+      "US-6609"
+    ]
+  },
+  {
+    "id": "N3DRK_2025-03-19_53",
+    "activator": "N3DRK",
+    "date": "2025-03-19",
+    "total": 53,
+    "references": [
+      "US-11964",
+      "US-8055"
+    ]
+  },
+    {
+    "id": "WC9B_2025-05-09_19",
+    "activator": "WC9B",
+    "date": "2025-05-09",
+    "total": 19,
+    "references": [
+      "US-9935",
+      "US-9933",
+      "US-1299",
+      "US-4567",
+      "US-9907"
+    ]
+  },
+  {
+    "id": "WC9B_2025-04-05_19",
+    "activator": "WC9B",
+    "date": "2025-04-05",
+    "total": 19,
+    "references": [
+      "US-9935",
+      "US-9936"
+    ]
+  },
+  {
+    "id": "WC9B_2025-04-05_17",
+    "activator": "WC9B",
+    "date": "2025-04-05",
+    "total": 17,
+    "references": [
+      "US-4572",
+      "US-0015",
+      "US-0735",
+      "US-4556"
+    ]
+  },
+  {
+    "id": "WC9B_2025-04-05_16",
+    "activator": "WC9B",
+    "date": "2025-04-05",
+    "total": 16,
+    "references": [
+      "US-4564",
+      "US-4556",
+      "US-0735"
+    ]
+  },
+  {
+    "id": "WC9B_2025-04-04_14",
+    "activator": "WC9B",
+    "date": "2025-04-04",
+    "total": 14,
+    "references": [
+      "US-9967",
+      "US-1307"
+    ]
+  },
+  {
+    "id": "WC9B_2025-04-04_13",
+    "activator": "WC9B",
+    "date": "2025-04-04",
+    "total": 13,
+    "references": [
+      "US-7636",
+      "US-4564"
+    ]
+  },
+  {
+    "id": "WC9B_2025-02-08_16",
+    "activator": "WC9B",
+    "date": "2025-02-08",
+    "total": 16,
+    "references": [
+      "US-4522",
+      "US-9203"
+    ]
+  }
+]

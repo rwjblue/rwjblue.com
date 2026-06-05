@@ -62,9 +62,12 @@ interface FridayNightAnchor {
   name: string;
   reference: string;
   state: string;
+  overnightType?: string;
+  driveFromProvidenceMinutes?: number;
   role: string;
   pros: string[];
   cons: string[];
+  saturdayImpact?: string;
 }
 interface CandidateStop {
   reference?: string;
@@ -91,6 +94,14 @@ interface FirstWeekendPlan {
       name: string;
       entityCount: number;
       endAnchor: string;
+      estimatedDriveMinutes: number;
+      estimatedTotalLabel: string;
+      comfort: string;
+      notes?: string;
+    }>;
+    fridayEveningOptions?: Array<{
+      name: string;
+      route: string;
       estimatedDriveMinutes: number;
       estimatedTotalLabel: string;
       comfort: string;
@@ -138,6 +149,33 @@ interface RestOfTripDraft {
   overnightStrategy?: OvernightStrategy;
   days: RestOfTripDay[];
   risk?: string;
+}
+interface NferLead {
+  status: string;
+  summary: string;
+  references: string[];
+  notes?: string;
+  routingNote?: string;
+  exampleActivator?: string;
+  exampleActivators?: string[];
+  exampleDate?: string;
+}
+interface NferEvidence {
+  sourceDescription: string;
+  recordCount: number;
+  currentRead: string;
+  saturday: NferLead[];
+  sunday: NferLead[];
+}
+interface CampingPolicyNotes {
+  status: string;
+  currentRead: string;
+  carCampingRead?: string;
+  jurisdictions: Array<{
+    state: string;
+    risk: string;
+    summary: string;
+  }>;
 }
 interface RoadmapDay {
   date: string;
@@ -286,27 +324,37 @@ const restOfTripDraft =
   (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft
     ? ((itinerary as { restOfTripDraft: RestOfTripDraft }).restOfTripDraft)
     : null;
+const nferEvidence =
+  typeof (itinerary as { nferEvidence?: unknown }).nferEvidence === "object" &&
+  (itinerary as { nferEvidence?: unknown }).nferEvidence
+    ? ((itinerary as { nferEvidence: NferEvidence }).nferEvidence)
+    : null;
+const campingPolicyNotes =
+  typeof (itinerary as { campingPolicyNotes?: unknown }).campingPolicyNotes === "object" &&
+  (itinerary as { campingPolicyNotes?: unknown }).campingPolicyNotes
+    ? ((itinerary as { campingPolicyNotes: CampingPolicyNotes }).campingPolicyNotes)
+    : null;
 const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
 const roadmapDays: RoadmapDay[] = [
   {
     date: "2026-06-19",
-    route: "Providence → Hammonasset",
-    focus: "Depart after work, camp in Connecticut, and activate Hammonasset after the UTC rollover if practical.",
+    route: "Providence → CT coast / lower Hudson",
+    focus: "Depart after work and choose how far west to reposition based on the Saturday rove target.",
     jurisdictions: ["US-RI", "US-CT"],
-    overnightType: "camp",
-    overnightArea: "Hammonasset / CT coast",
+    overnightType: "camp or hotel",
+    overnightArea: "Milford, Stamford, or Tallman",
     roughTotalHours: 1.3,
-    notes: "RI is preferred Friday morning; Hammonasset is the westward Friday anchor if a reservation works.",
+    notes: "Hammonasset is now a standby-only camp option because one-night advance reservations are not reliable; Milford/Stamford/Tallman are the realistic anchors.",
   },
   {
     date: "2026-06-20",
-    route: "CT coast → central/south NJ",
-    focus: "Primary 10-entity UTC rove attempt through CT, lower Hudson, Staten Island, and Cheesequake.",
+    route: "CT / lower Hudson → NJ / DE",
+    focus: "Primary 10-entity UTC rove attempt, with a 15-entity stretch only if Friday-night UTC credit and verified n-fers line up.",
     jurisdictions: ["US-CT", "US-NY", "US-NJ"],
     overnightType: "hotel",
     overnightArea: "Central or south New Jersey",
-    roughTotalHours: 13.25,
-    notes: "Works best with a 06:00 start and Hammonasset already counted Friday night after 20:00 EDT.",
+    roughTotalHours: 15.25,
+    notes: "Milford/Silver Sands currently looks like the best compromise; Hammonasset is no longer the default because of campsite minimum-stay rules.",
   },
   ...(restOfTripDraft?.days ?? []).map((day) => ({
     date: day.date,
@@ -586,9 +634,16 @@ const parkStopPlanning =
                   </a>
                 </header>
                 <p>{anchor.role}</p>
+                <p>
+                  {anchor.overnightType ? `${anchor.overnightType} · ` : ""}
+                  {anchor.driveFromProvidenceMinutes
+                    ? `${Math.floor(anchor.driveFromProvidenceMinutes / 60)}h ${anchor.driveFromProvidenceMinutes % 60}m from Providence`
+                    : anchor.state.replace("US-", "")}
+                </p>
                 <ul>
                   {anchor.pros.slice(0, 2).map((pro) => <li>{pro}</li>)}
                 </ul>
+                {anchor.saturdayImpact && <p>{anchor.saturdayImpact}</p>}
               </article>
             ))}
           </div>
@@ -608,6 +663,26 @@ const parkStopPlanning =
             <span>{firstWeekendPlan.saturdayRove.baselineEntityTarget} baseline</span>
             <span>{firstWeekendPlan.saturdayRove.stretchEntityTarget} stretch</span>
           </div>
+          {firstWeekendPlan.saturdayRove.fridayEveningOptions && (
+            <div class="rove-timing-models">
+              {firstWeekendPlan.saturdayRove.fridayEveningOptions.map((option) => (
+                <article>
+                  <strong>{option.name}</strong>
+                  <dl>
+                    <div>
+                      <dt>Drive</dt>
+                      <dd>{Math.floor(option.estimatedDriveMinutes / 60)}h {option.estimatedDriveMinutes % 60}m</dd>
+                    </div>
+                    <div>
+                      <dt>Total</dt>
+                      <dd>{option.estimatedTotalLabel}</dd>
+                    </div>
+                  </dl>
+                  <p>{option.comfort}. {option.notes}</p>
+                </article>
+              ))}
+            </div>
+          )}
           {firstWeekendPlan.saturdayRove.timingModels && (
             <div class="rove-timing-models">
               {firstWeekendPlan.saturdayRove.timingModels.map((model) => (
@@ -671,6 +746,77 @@ const parkStopPlanning =
           {firstWeekendPlan.saturdayRove.restOfTripComfortRule}
         </p>
       )}
+    </section>
+  )}
+
+  {nferEvidence && (
+    <section class="section-block wide" aria-labelledby="nfer-title">
+      <div class="section-heading">
+        <p class="section-label">Evidence</p>
+        <h2 id="nfer-title">N-fer leads</h2>
+      </div>
+
+      <p class="rove-weekend-note">
+        {nferEvidence.sourceDescription} {nferEvidence.recordCount} records imported.{" "}
+        {nferEvidence.currentRead}
+      </p>
+
+      <div class="rove-nfer-grid">
+        <section aria-labelledby="nfer-saturday-title">
+          <h3 id="nfer-saturday-title">Saturday implications</h3>
+          {nferEvidence.saturday.map((lead) => (
+            <article class="rove-nfer-card">
+              <span>{lead.status}</span>
+              <strong>{lead.references.join(" + ")}</strong>
+              <p>{lead.summary}</p>
+              {lead.notes && <p>{lead.notes}</p>}
+              {lead.routingNote && <p>{lead.routingNote}</p>}
+            </article>
+          ))}
+        </section>
+
+        <section aria-labelledby="nfer-sunday-title">
+          <h3 id="nfer-sunday-title">Sunday leads</h3>
+          {nferEvidence.sunday.map((lead) => (
+            <article class="rove-nfer-card">
+              <span>{lead.status}</span>
+              <strong>{lead.references.join(" + ")}</strong>
+              <p>{lead.summary}</p>
+              {lead.routingNote && <p>{lead.routingNote}</p>}
+              {(lead.exampleActivator || lead.exampleActivators) && (
+                <p>
+                  Seen from {(lead.exampleActivators ?? [lead.exampleActivator]).filter(Boolean).join(", ")}
+                  {lead.exampleDate ? ` on ${lead.exampleDate}` : ""}.
+                </p>
+              )}
+            </article>
+          ))}
+        </section>
+      </div>
+    </section>
+  )}
+
+  {campingPolicyNotes && (
+    <section class="section-block wide" aria-labelledby="camping-policy-title">
+      <div class="section-heading">
+        <p class="section-label">{campingPolicyNotes.status}</p>
+        <h2 id="camping-policy-title">Camping policy scan</h2>
+      </div>
+
+      <p class="rove-weekend-note">{campingPolicyNotes.currentRead}</p>
+      {campingPolicyNotes.carCampingRead && (
+        <p class="rove-weekend-note">{campingPolicyNotes.carCampingRead}</p>
+      )}
+
+      <div class="rove-policy-grid">
+        {campingPolicyNotes.jurisdictions.map((item) => (
+          <article>
+            <span>{item.risk}</span>
+            <strong>{item.state.replace("US-", "")}</strong>
+            <p>{item.summary}</p>
+          </article>
+        ))}
+      </div>
     </section>
   )}
 
@@ -1129,6 +1275,80 @@ const parkStopPlanning =
     border-top: 1px solid var(--color-border, #ddd);
     margin-top: 1rem;
     padding-top: 0.75rem;
+  }
+
+  .rove-nfer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: 1rem;
+  }
+
+  .rove-nfer-grid h3 {
+    font-size: 1rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .rove-nfer-card {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-nfer-card + .rove-nfer-card {
+    margin-top: 0.75rem;
+  }
+
+  .rove-nfer-card span {
+    color: var(--color-accent, #167246);
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .rove-nfer-card strong {
+    display: block;
+    font-size: 0.9rem;
+  }
+
+  .rove-nfer-card p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    margin: 0.45rem 0 0;
+  }
+
+  .rove-policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-policy-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-policy-grid span {
+    color: var(--color-accent, #167246);
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .rove-policy-grid strong {
+    display: block;
+  }
+
+  .rove-policy-grid p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    margin: 0.45rem 0 0;
   }
 
   .rove-rest-days {

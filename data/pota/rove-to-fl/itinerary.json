@@ -41,6 +41,8 @@
       "type": "Tesla",
       "preferredChargingNetwork": "Tesla Supercharger",
       "chargingNetworkRule": "Prefer Tesla Superchargers only for planned charging stops; do not treat generic EV chargers as equivalent when judging feasibility.",
+      "sleepingMode": "Car camping in the back of the Tesla",
+      "carCampingRule": "Sleeping in the vehicle reduces setup needs but does not remove the need for a legal reserved campsite or explicit overnight permission; do not plan to sleep in ordinary day-use parking lots.",
       "chargingStopMinutes": 30,
       "drivingHoursBetweenChargingStops": 2.5,
       "notes": "Account for roughly 30 minutes at Tesla Superchargers after each 2.5 hours of driving. Prefer parks, meals, and short breaks that can pair with Supercharger stops when practical."
@@ -76,8 +78,8 @@
     "jurisdictionActivationGoal": "Activate every state and Washington, DC, crossed on the route.",
     "multiParkActivationPriority": "Nice to have; do not optimize the route around 2/3/4-fers unless they are convenient.",
     "dcActivation": {
-      "timing": "Sunday June 21 evening is preferred if the friend can do it; avoid any plan that doubles back north for DC later in the week.",
-      "withFriend": true,
+      "timing": "Handle DC on the southbound pass, preferably Sunday June 21 if it fits; do not double back later just to meet the friend.",
+      "withFriend": "optional",
       "suggestedParks": [
         {
           "reference": null,
@@ -85,7 +87,7 @@
           "status": "friend suggested"
         }
       ],
-      "notes": "Need to evaluate Rock Creek Park and other DC-area options. If Sunday evening works, do DC then and keep the rest of the trip monotonic southbound."
+      "notes": "The friend activation is nice to have, not a route constraint. If the meetup works on the pass through DC, do it; otherwise activate DC solo and keep moving south."
     },
     "outreach": {
       "purpose": "Contact common activators near short-listed corridor parks for practical access, parking, antenna, and operating vibe checks.",
@@ -280,77 +282,124 @@
     "Activating RI Friday morning is preferred if practical because it removes RI from the outbound driving block; activating RI on the way out remains the fallback.",
     "The northern corridor is the best place to attempt a high-count rove day because park density is high and Saturday has no work window.",
     "The southern push from Virginia through Georgia is the schedule risk; it should prioritize low-detour, reliable access parks over high entity count.",
-    "If the DC friend activation can happen Sunday evening, do it then and avoid any weekday double-back."
+    "Treat the DC friend activation as optional; DC still needs to be activated on the southbound pass, but the plan should not double back later just for the meetup."
   ],
   "firstWeekendPlan": {
     "status": "candidate",
     "utcNote": "In June EDT, the UTC day changes at 20:00 local. Friday evening activations after 20:00 local count toward the next UTC day.",
     "fridayNightAnchors": [
       {
-        "name": "Rocky Neck State Park",
-        "reference": "US-1711",
-        "state": "US-CT",
-        "role": "short Friday reposition",
-        "pros": [
-          "POTA park with an official campground",
-          "Keeps Friday evening short after work",
-          "Good low-risk first camping night"
-        ],
-        "cons": [
-          "Less westward progress than Hammonasset",
-          "Need reservation and campground arrival details"
-        ],
-        "verification": "Official CT page confirms campground, reservations, check-in requirements, and 160 wooded/open sites for the 2025 season; verify 2026 availability when booking."
-      },
-      {
         "name": "Hammonasset Beach State Park",
         "reference": "US-1676",
         "state": "US-CT",
-        "role": "preferred westward Friday anchor if available",
+        "overnightType": "camp",
+        "driveFromProvidenceMinutes": 79,
+        "role": "standby camp anchor, not reliable for one-night advance booking",
         "pros": [
-          "POTA park with a large official campground",
-          "Better Saturday launch point for southwest CT, NY, and NJ",
-          "Nearby Stewart B. McKinney NWR creates an early Saturday entity option"
+          "Would preserve the planned Friday POTA camping night if a one-night stay becomes available",
+          "Short enough Friday drive after work",
+          "Can activate from camp after the 20:00 EDT UTC rollover"
         ],
         "cons": [
-          "Longer Friday evening after work",
-          "Large popular campground, so reservation availability matters"
+          "CT state park campsites require a two-night minimum for advance reservations, with one-night reservations only allowed inside the 1-3 day arrival window if available",
+          "Saturday starts far enough east that Sandy Hook/Gateway makes the day long",
+          "Booking two nights for a one-night reposition is expensive and blocks a site on Saturday",
+          "15 entities is not realistic from here without several confirmed n-fers"
         ],
-        "verification": "Official CT Parks page lists 558 RV/tent sites and a 2026 camping season from May 22 through October 12."
+        "saturdayImpact": "Best camping fit only if the booking problem is solved; otherwise treat it as an activation stop, not the planned overnight."
+      },
+      {
+        "name": "Silver Sands / Milford",
+        "reference": "US-1716",
+        "state": "US-CT",
+        "overnightType": "hotel",
+        "driveFromProvidenceMinutes": 108,
+        "role": "balanced Friday hotel reposition",
+        "pros": [
+          "Gets meaningfully farther west Friday without a brutal evening drive",
+          "Silver Sands can be activated Friday night after UTC rollover for Saturday credit",
+          "Makes a 10-entity Saturday more comfortable if the hotel is nearby"
+        ],
+        "cons": [
+          "Loses the Friday POTA camping night",
+          "Still leaves several CT stops before reaching NY/NJ",
+          "Needs a hotel near the park or Supercharger corridor"
+        ],
+        "saturdayImpact": "Strong current compromise for a 10-entity Saturday while keeping Sunday comfortable."
+      },
+      {
+        "name": "Mianus / Stamford",
+        "reference": "US-1696",
+        "state": "US-CT",
+        "overnightType": "hotel",
+        "driveFromProvidenceMinutes": 138,
+        "role": "aggressive Connecticut reposition",
+        "pros": [
+          "Starts Saturday near the NY line",
+          "Can bank CT Friday night after UTC rollover",
+          "Makes Delaware reachable Saturday if the day runs well"
+        ],
+        "cons": [
+          "Friday evening is over two hours before any activation/setup",
+          "Skips eastern CT candidates unless they are intentionally dropped",
+          "No Friday camping credit"
+        ],
+        "saturdayImpact": "Best 10-entity posture among CT anchors; 12-ish entities may be possible with confirmed n-fers, but 15 remains a stretch."
+      },
+      {
+        "name": "Tallman / lower Hudson",
+        "reference": "US-2149",
+        "state": "US-NY",
+        "overnightType": "hotel",
+        "driveFromProvidenceMinutes": 166,
+        "role": "maximum Friday reposition",
+        "pros": [
+          "Starts Saturday in the NY/NJ high-density section",
+          "Can aim Saturday at NJ, DE, and maybe MD instead of spending the day crossing CT",
+          "Best setup for an aggressive 10+ entity rove"
+        ],
+        "cons": [
+          "Requires handling CT separately Friday or deliberately dropping CT from the rove count",
+          "Longest Friday after-work drive",
+          "No Friday camping credit"
+        ],
+        "saturdayImpact": "Only anchor that makes a 15-entity thought experiment remotely plausible, and only with Friday-night UTC credit plus multiple verified n-fers."
       }
     ],
     "saturdayRove": {
       "targetDate": "2026-06-20",
-      "baselineEntityTarget": 8,
-      "stretchEntityTarget": 10,
-      "strategy": "Prefer Hammonasset for Friday night, activate it after the 20:00 EDT UTC rollover, then start early Saturday and work southwest through CT, the lower Hudson, the Staten Island 2-fer, and Cheesequake.",
+      "baselineEntityTarget": 10,
+      "stretchEntityTarget": 15,
+      "strategy": "Choose the Friday anchor based on the Saturday goal. Because Hammonasset is not reliable for a one-night advance campsite reservation, Milford/Silver Sands is the best current compromise for a 10-entity UTC day, Stamford/Mianus makes Delaware reachable, and Tallman/lower Hudson is the only plausible setup for a 15-entity stretch.",
       "timingAssumptions": {
         "source": "Google Maps MCP traffic-aware route checks for Friday evening and Saturday morning; park access and operating spots still need confirmation.",
         "activationMinutesPerEntity": 60,
         "activationMinutesPerPhysicalStop": 60,
-        "hammonassetActivationTiming": "Activate Friday night after 20:00 EDT so it counts toward the Saturday UTC rove day.",
+        "fridayActivationTiming": "Any Friday evening activation after 20:00 EDT counts toward the Saturday UTC rove day.",
         "chargingNetwork": "Tesla Superchargers only",
-        "chargingStopsIncluded": 1,
-        "chargingMinutesIncluded": 30,
+        "chargingStopsIncluded": "1-2 depending on anchor and southern reach",
+        "chargingMinutesIncluded": "30-60",
         "bufferMinutesBaseline": 60,
         "bufferMinutesStretch": 90,
         "fridayDriveToHammonassetMinutes": 78,
-        "fridayDriveToRockyNeckMinutes": 61,
+        "fridayDriveToSilverSandsMinutes": 108,
+        "fridayDriveToMianusMinutes": 138,
+        "fridayDriveToTallmanMinutes": 166,
         "utcDayRolloverLocal": "20:00 EDT"
       },
       "timingModels": [
         {
-          "name": "Preferred 10-entity UTC line",
-          "entityCount": 10,
+          "name": "Hammonasset camp, Sandy Hook included",
+          "entityCount": 9,
           "startAnchor": "Hammonasset Beach State Park",
-          "endAnchor": "Cheesequake State Park",
-          "estimatedDriveMinutes": 225,
-          "activationMinutes": 480,
-          "chargingMinutes": 30,
+          "endAnchor": "Delaware and Raritan Canal State Park",
+          "estimatedDriveMinutes": 297,
+          "activationMinutes": 540,
+          "chargingMinutes": 60,
           "bufferMinutes": 60,
-          "estimatedTotalMinutes": 795,
-          "estimatedTotalLabel": "13h 15m after Saturday departure",
-          "comfort": "plausible but requires an early start",
+          "estimatedTotalMinutes": 957,
+          "estimatedTotalLabel": "15h 57m after Saturday departure",
+          "comfort": "too long for the default plan unless several stops become multi-fers",
           "route": [
             { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 13 },
             { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 37 },
@@ -358,87 +407,108 @@
             { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 24 },
             { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 36 },
             { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 13 },
-            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 45 },
-            { "from": "US-0680", "to": "US-8087", "estimatedDriveMinutes": 0 },
-            { "from": "US-8087", "to": "US-1611", "estimatedDriveMinutes": 36 }
+            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 72 },
+            { "from": "US-0680", "to": "US-1611", "estimatedDriveMinutes": 30 },
+            { "from": "US-1611", "to": "US-1613", "estimatedDriveMinutes": 52 }
           ],
-          "notes": "This assumes Hammonasset is already activated Friday night for the Saturday UTC day, then Saturday starts driving around 06:00 local. The Gateway/Fort Wadsworth pair is one physical stop for two entities. An 08:00 departure makes the same route about 4h 1m of driving and pushes the final activation close to the 20:00 EDT UTC rollover."
+          "notes": "Google Maps route check at a 06:00 local Saturday departure. This only works as a camp-start model if a two-night booking is acceptable or a last-minute one-night campsite opens. Including Sandy Hook/Gateway consumes enough drive time that the baseline should probably drop Sandy Hook unless it is a verified 2-fer and the day is running early."
         },
         {
-          "name": "Baseline CT/NY/NJ line",
-          "entityCount": 8,
-          "startAnchor": "Hammonasset Beach State Park",
-          "endAnchor": "Cheesequake State Park",
-          "estimatedDriveMinutes": 217,
-          "activationMinutes": 480,
-          "chargingMinutes": 30,
-          "bufferMinutes": 60,
-          "estimatedTotalMinutes": 787,
-          "estimatedTotalLabel": "13h 7m",
-          "comfort": "plausible full-day rove",
-          "route": [
-            { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 8 },
-            { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 54 },
-            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 25 },
-            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 23 },
-            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 30 },
-            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 9 },
-            { "from": "US-8319", "to": "US-1611", "estimatedDriveMinutes": 68 }
-          ],
-          "notes": "This works best if Hammonasset is the Friday overnight and the first activation happens from camp in the UTC morning. It should end far enough south in NJ to keep Sunday comfortable."
-        },
-        {
-          "name": "Southbound handoff line",
-          "entityCount": 9,
-          "startAnchor": "Hammonasset Beach State Park",
-          "endAnchor": "Delaware and Raritan Canal State Park",
-          "estimatedDriveMinutes": 249,
+          "name": "Milford hotel, 10-entity compromise",
+          "entityCount": 10,
+          "startAnchor": "Silver Sands State Park",
+          "endAnchor": "Washington Crossing State Park",
+          "estimatedDriveMinutes": 263,
           "activationMinutes": 540,
-          "chargingMinutes": 30,
+          "chargingMinutes": 60,
+          "bufferMinutes": 60,
+          "estimatedTotalMinutes": 923,
+          "estimatedTotalLabel": "15h 23m including Saturday stops",
+          "comfort": "best current 10-entity compromise if Silver Sands is activated Friday night",
+          "route": [
+            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 19 },
+            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 24 },
+            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 36 },
+            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 13 },
+            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 71 },
+            { "from": "US-0680", "to": "US-1611", "estimatedDriveMinutes": 29 },
+            { "from": "US-1611", "to": "US-1613", "estimatedDriveMinutes": 50 },
+            { "from": "US-1613", "to": "Washington Crossing", "estimatedDriveMinutes": 21 }
+          ],
+          "notes": "Assumes Silver Sands is banked Friday evening for Saturday UTC credit, then Saturday starts with Sherwood/Mianus. The total is still a full day, but it avoids spending Saturday morning crossing eastern CT."
+        },
+        {
+          "name": "Stamford hotel, Delaware reach",
+          "entityCount": 10,
+          "startAnchor": "Mianus River State Park",
+          "endAnchor": "Fox Point State Park",
+          "estimatedDriveMinutes": 279,
+          "activationMinutes": 480,
+          "chargingMinutes": 60,
           "bufferMinutes": 60,
           "estimatedTotalMinutes": 879,
-          "estimatedTotalLabel": "14h 39m",
-          "comfort": "ambitious but useful if Sunday needs a better launch",
+          "estimatedTotalLabel": "14h 39m including Saturday stops",
+          "comfort": "strong 10-entity posture if CT is banked Friday night",
           "route": [
-            { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 8 },
-            { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 54 },
-            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 25 },
-            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 23 },
-            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 30 },
-            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 9 },
-            { "from": "US-8319", "to": "US-1611", "estimatedDriveMinutes": 68 },
-            { "from": "US-1611", "to": "US-1613", "estimatedDriveMinutes": 32 }
+            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 36 },
+            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 12 },
+            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 70 },
+            { "from": "US-0680", "to": "US-1611", "estimatedDriveMinutes": 28 },
+            { "from": "US-1611", "to": "US-1613", "estimatedDriveMinutes": 49 },
+            { "from": "US-1613", "to": "Washington Crossing", "estimatedDriveMinutes": 21 },
+            { "from": "Washington Crossing", "to": "US-1738", "estimatedDriveMinutes": 62 }
           ],
-          "notes": "This gives Sunday a better southbound handoff but should not be chosen unless the day is running well."
+          "notes": "Assumes Mianus or another CT park is activated Friday night for Saturday UTC credit, so Saturday can begin by moving directly toward NY/NJ. Fox Point is a data-backed Delaware 2-fer candidate with Northern Delaware Greenway."
         },
         {
-          "name": "NYC harbor plus Liberty stretch",
-          "entityCount": 11,
-          "startAnchor": "Hammonasset Beach State Park",
-          "endAnchor": "Cheesequake State Park",
-          "estimatedDriveMinutes": 240,
-          "activationMinutes": 660,
-          "chargingMinutes": 30,
+          "name": "Tallman hotel, 15-entity thought experiment",
+          "entityCount": 12,
+          "startAnchor": "Tallman Mountain State Park",
+          "endAnchor": "Fort McHenry",
+          "estimatedDriveMinutes": 313,
+          "activationMinutes": 480,
+          "chargingMinutes": 60,
           "bufferMinutes": 90,
-          "estimatedTotalMinutes": 1020,
-          "estimatedTotalLabel": "17h 0m",
-          "comfort": "not comfortable without real routing and access confirmation",
+          "estimatedTotalMinutes": 943,
+          "estimatedTotalLabel": "15h 43m before counting extra n-fer entities",
+          "comfort": "15 requires Friday-night UTC credit and multiple verified n-fers",
           "route": [
-            { "from": "US-1676", "to": "US-0228", "estimatedDriveMinutes": 8 },
-            { "from": "US-0228", "to": "US-1716", "estimatedDriveMinutes": 54 },
-            { "from": "US-1716", "to": "US-1715", "estimatedDriveMinutes": 25 },
-            { "from": "US-1715", "to": "US-1696", "estimatedDriveMinutes": 23 },
-            { "from": "US-1696", "to": "US-2149", "estimatedDriveMinutes": 30 },
-            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 9 },
-            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 42 },
-            { "from": "US-0680", "to": "US-8087", "estimatedDriveMinutes": 0 },
-            { "from": "US-8087", "to": "US-1623", "estimatedDriveMinutes": 12 },
-            { "from": "US-1623", "to": "US-1611", "estimatedDriveMinutes": 37 }
+            { "from": "US-2149", "to": "US-8319", "estimatedDriveMinutes": 12 },
+            { "from": "US-8319", "to": "US-0680", "estimatedDriveMinutes": 69 },
+            { "from": "US-0680", "to": "US-1611", "estimatedDriveMinutes": 28 },
+            { "from": "US-1611", "to": "US-1613", "estimatedDriveMinutes": 48 },
+            { "from": "US-1613", "to": "Washington Crossing", "estimatedDriveMinutes": 20 },
+            { "from": "Washington Crossing", "to": "US-1738", "estimatedDriveMinutes": 62 },
+            { "from": "US-1738", "to": "US-0928", "estimatedDriveMinutes": 74 }
           ],
-          "notes": "Adding Liberty State Park on top of the preferred 10-entity line is likely too much for the same UTC day unless access is unusually smooth and the day is running ahead of plan."
+          "notes": "This route only makes sense if CT is handled Friday night and if Saturday's count comes from n-fers: Gateway/Coastal, Fox Point/Northern Delaware Greenway, and Fort McHenry trail overlaps. It is a stretch model, not a default Saturday."
         }
       ],
-      "restOfTripComfortRule": "Saturday should end at least around Cheesequake / central NJ, and ideally farther south, so Sunday can pick up DE/MD and position near DC without turning the rest of the trip into catch-up driving.",
+      "fridayEveningOptions": [
+        {
+          "name": "Silver Sands plus Sherwood to Stamford hotel",
+          "route": "Providence -> Silver Sands -> Sherwood Island -> Stamford",
+          "estimatedDriveMinutes": 148,
+          "activationMinutes": 120,
+          "bufferMinutes": 30,
+          "estimatedTotalMinutes": 298,
+          "estimatedTotalLabel": "about 5h from departure",
+          "comfort": "driving-feasible but access-risky",
+          "notes": "Google Maps puts the driving at about 2h28 from a 17:30 Friday departure. The access problem is that CT state parks normally close at sunset, and sunset on June 19 is only about 20:28-20:31 along the Milford/Westport/Stamford corridor. Since the Saturday UTC day starts at 20:00 EDT, there is only a roughly 30-minute legal-light window unless after-hours access is confirmed."
+        },
+        {
+          "name": "Silver Sands plus Mianus to Stamford hotel",
+          "route": "Providence -> Silver Sands -> Mianus -> Stamford",
+          "estimatedDriveMinutes": 167,
+          "activationMinutes": 120,
+          "bufferMinutes": 30,
+          "estimatedTotalMinutes": 317,
+          "estimatedTotalLabel": "about 5h 15m from departure",
+          "comfort": "more aggressive and still access-risky",
+          "notes": "This better positions Saturday at the NY line, but it pushes the hotel later and still depends on confirming legal evening access. Without such access, one full post-20:00 activation is already tight and two one-hour activations are not realistic before sunset."
+        }
+      ],
+      "restOfTripComfortRule": "Saturday should end at least around central/south NJ. Ending in Delaware or Maryland improves Sunday, but only if Saturday does not become a fatigue trap that compromises the rest of the week.",
       "saturdayOvernight": {
         "type": "hotel",
         "area": "central or south New Jersey",
@@ -519,12 +589,106 @@
         }
       ],
       "openQuestions": [
-        "Confirm Hammonasset camping availability and whether a Friday-night activation after 20:00 EDT is practical from the campsite.",
+        "Treat Hammonasset as a standby camp option only: confirm whether a last-minute one-night campsite is possible, or decide explicitly whether booking two nights for one use is acceptable.",
+        "Confirm whether Silver Sands, Sherwood Island, or Mianus has a legal after-hours operating option such as fishing access, adjacent public right-of-way, or explicit park permission.",
         "Confirm Gateway/Fort Wadsworth access, parking, and whether one operating position can reliably count both entities.",
         "Find Tesla Supercharger stops that pair with late-morning CT, mid-afternoon NY/NJ, and evening NJ movement.",
         "Contact common activators for Hammonasset, Silver Sands, Sherwood Island, Palisades, Gateway/Fort Wadsworth, and Cheesequake."
       ]
     }
+  },
+  "campingPolicyNotes": {
+    "status": "initial scan",
+    "currentRead": "Minimum-stay rules are not uniform. Car camping in the Tesla helps with setup time and site-size needs, but most public parks still require an actual campsite reservation or explicit overnight permission.",
+    "carCampingRead": "Less-developed areas are not a workaround in Connecticut unless they are designated for overnight use. CT backpack campsites are one-night options, but they are for true backpackers, dispersed camping is not permitted, and they do not solve vehicle-adjacent sleeping. Highway service plazas/rest areas may be viable rest/sleep stops in the vehicle, but they are not POTA park camping and should be treated as safety rest rather than a campsite.",
+    "jurisdictions": [
+      {
+        "state": "US-CT",
+        "risk": "high",
+        "summary": "CT state park campsites generally require two-night advance reservations, with one-night campsite reservations only inside the 1-3 day arrival window if available. Day-use parks generally close at sunset.",
+        "sourceUrls": [
+          "https://portal.ct.gov/deep-campingreservations",
+          "https://ctparks.com/node/133",
+          "https://portal.ct.gov/deep/state-parks/policies---ct-state-parks-and-forests"
+        ]
+      },
+      {
+        "state": "US-NY",
+        "risk": "medium-high",
+        "summary": "At least the relevant Harriman/Beaver Pond camping brochure says campsite reservations are minimum two nights; day-of arrivals may register subject to availability.",
+        "sourceUrls": ["https://parks.ny.gov/sites/default/files/2026-02/BP%20Camping%20Brochure%202026.pdf"]
+      },
+      {
+        "state": "US-MD",
+        "risk": "medium-high",
+        "summary": "Maryland requires two-night weekend-linked stays from Memorial Day weekend through Labor Day, with three-night holiday-weekend rules.",
+        "sourceUrls": ["https://dnr.maryland.gov/publiclands/pages/oc.aspx"]
+      },
+      {
+        "state": "US-NC",
+        "risk": "medium",
+        "summary": "North Carolina has a two-night minimum between Friday and Sunday on holiday weekends from Memorial Day through Labor Day, but the rule is waived for bookings within 7 days of arrival; some walk-up/onsite options exist.",
+        "sourceUrls": ["https://www.ncparks.gov/recreation/camping"]
+      },
+      {
+        "state": "US-FL",
+        "risk": "lower for campsites, higher for late arrival logistics",
+        "summary": "Florida reservation information lists maximum stay rules and cabin two-night minimums, but not a general campsite minimum in the checked source. Late arrivals after sunset require calling the park before 5 p.m. for gate access.",
+        "sourceUrls": ["https://www.floridastateparks.org/reservation-information"]
+      },
+      {
+        "state": "US-DE/US-SC/US-GA/US-VA",
+        "risk": "unknown / park-specific",
+        "summary": "Need park-specific reservation checks before relying on one-night stays. Do not assume the CT rule applies everywhere, but also do not assume one-night stays are available on summer weekends."
+      }
+    ]
+  },
+  "nferEvidence": {
+    "sourceFile": "data/pota/rove-to-fl/external/nfer_from_top_activators.json",
+    "sourceDescription": "Candidate n-fer locations inferred from submissions by top activators.",
+    "recordCount": 853,
+    "importedDate": "2026-06-07",
+    "currentRead": "Useful for finding proven multi-reference positions, but treat it as evidence to verify rather than proof that an activation will work from any exact parking spot.",
+    "saturday": [
+      {
+        "status": "caution",
+        "summary": "The data does not validate the assumed Gateway/Fort Wadsworth 2-fer.",
+        "references": ["US-0680", "US-8087"],
+        "notes": "The current Saturday stretch should not rely on this pair until activator outreach or another source confirms it."
+      },
+      {
+        "status": "candidate",
+        "summary": "Gateway National Recreation Area plus New Jersey Coastal State Trail appears as a data-backed 2-fer.",
+        "references": ["US-0680", "US-6544"],
+        "exampleActivator": "KC2VTM",
+        "exampleDate": "2025-04-18",
+        "routingNote": "Google Maps routing from Palisades to Sandy Hook Gateway to Cheesequake is about 2h total drive time, so this may be too expensive for the Saturday UTC target unless it replaces the Staten Island idea and the day is running early."
+      }
+    ],
+    "sunday": [
+      {
+        "status": "strong lead",
+        "summary": "Fox Point State Park plus Northern Delaware Greenway National Recreation Trail is a Delaware 2-fer candidate near I-95.",
+        "references": ["US-1738", "US-9878"],
+        "exampleActivator": "N3DRK",
+        "exampleDate": "2025-04-18"
+      },
+      {
+        "status": "strong lead",
+        "summary": "Fort McHenry has repeated n-fer evidence with Star-Spangled Banner and Captain John Smith Chesapeake trails.",
+        "references": ["US-0928", "US-4581", "US-4567"],
+        "exampleActivators": ["KB3WAV", "KC3RW"],
+        "routingNote": "Central NJ to Fox Point to Fort McHenry to Rock Creek to Mason Neck is about 4h31m of driving before activation time."
+      },
+      {
+        "status": "strong lead",
+        "summary": "Mason Neck State Park plus Elizabeth Hartwell Mason Neck NWR is a Virginia 2-fer candidate for the Sunday camp concept.",
+        "references": ["US-1308", "US-0563"],
+        "exampleActivator": "KC3RW",
+        "exampleDate": "2025-03-14",
+        "routingNote": "Rock Creek Park to Mason Neck State Park is roughly 55-63 minutes depending on the exact route."
+      }
+    ]
   },
   "restOfTripDraft": {
     "status": "rough",
@@ -539,22 +703,22 @@
     "overnightStrategy": {
       "goal": "Use camping nights where they can cover a required jurisdiction without consuming a separate 2-hour daytime park stop, and use hotels on structurally long or schedule-sensitive days.",
       "recommendedPattern": [
-        "2026-06-19 camp",
+        "2026-06-19 hotel",
         "2026-06-20 hotel",
         "2026-06-21 camp",
-        "2026-06-22 hotel",
-        "2026-06-23 camp",
-        "2026-06-24 hotel",
+        "2026-06-22 camp",
+        "2026-06-23 hotel",
+        "2026-06-24 camp",
         "2026-06-25 camp"
       ],
-      "summary": "This pattern yields four camping nights out of seven pre-arrival nights, stays within the two-consecutive-camp limit, and puts the camp nights where they can plausibly bank Connecticut, Virginia, South Carolina, and Florida.",
+      "summary": "Because CT shoreline state park campsites are not reliable for a one-night Friday reservation, the revised pattern moves Friday to a hotel and keeps four camping nights by using two two-night-or-less camp blocks later in the week: Sunday/Monday and Wednesday/Thursday.",
       "nights": [
         {
           "date": "2026-06-19",
-          "preferredType": "camp",
-          "area": "Connecticut coast",
-          "why": "Friday is only an evening reposition, so a CT POTA campsite is the easiest way to start the camping-night share and secure a UTC-morning activation from camp.",
-          "savesSeparateParkStop": true,
+          "preferredType": "hotel",
+          "area": "Milford / Stamford / lower Hudson",
+          "why": "Hammonasset and similar CT shoreline campsites are not reliable for one-night advance booking. Use Friday as a hotel reposition night and activate a nearby CT/NY park after the UTC rollover.",
+          "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": ["US-CT"]
         },
         {
@@ -569,33 +733,33 @@
           "date": "2026-06-21",
           "preferredType": "camp",
           "area": "Northern Virginia / outer DC orbit",
-          "why": "If the Sunday camp is close enough to the DC friend activation, it can bank Virginia without spending Monday on a separate Virginia stop.",
+        "why": "If the Sunday camp is close enough to the DC activation, it can bank Virginia without spending Monday on a separate Virginia stop.",
           "savesSeparateParkStop": true,
           "likelyJurisdictionCoverage": ["US-VA"]
         },
         {
           "date": "2026-06-22",
-          "preferredType": "hotel",
-          "area": "North Carolina corridor hotel",
-          "why": "Monday is the work-constrained transit day. Hotel keeps the southbound push moving without forcing a campsite-arrival deadline immediately after Sunday camp.",
-          "savesSeparateParkStop": false,
-          "likelyJurisdictionCoverage": []
+          "preferredType": "camp",
+          "area": "North Carolina corridor campsite",
+          "why": "Adding Monday as a camp night replaces the lost Friday camp while staying within the two-consecutive-camp limit after Sunday. The campsite should cover North Carolina so Tuesday does not need a separate NC stop.",
+          "savesSeparateParkStop": true,
+          "likelyJurisdictionCoverage": ["US-NC"]
         },
         {
           "date": "2026-06-23",
-          "preferredType": "camp",
-          "area": "South Carolina corridor",
-          "why": "Tuesday can use a daytime stop for North Carolina and then reach a South Carolina campsite by evening, letting the overnight activation cover South Carolina.",
-          "savesSeparateParkStop": true,
+          "preferredType": "hotel",
+          "area": "South Carolina / Georgia corridor hotel",
+          "why": "Tuesday should reset after the Sunday/Monday camp block. Use a daytime South Carolina activation, then hotel farther south to protect the Wednesday/Thursday camp block.",
+          "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": ["US-SC"]
         },
         {
           "date": "2026-06-24",
-          "preferredType": "hotel",
-          "area": "Coastal Georgia or north Florida",
-          "why": "Wednesday still needs Georgia as a daytime stop and is one of the longer mileage days, so hotel preserves margin and resets the camping-night count.",
-          "savesSeparateParkStop": false,
-          "likelyJurisdictionCoverage": []
+          "preferredType": "camp",
+          "area": "Georgia / north Florida campsite",
+          "why": "Wednesday becomes the first night of the second camp block and can cover Georgia or a north Florida approach park, depending on exact routing.",
+          "savesSeparateParkStop": true,
+          "likelyJurisdictionCoverage": ["US-GA"]
         },
         {
           "date": "2026-06-25",
@@ -606,7 +770,7 @@
           "likelyJurisdictionCoverage": ["US-FL"]
         }
       ],
-      "fallbackNote": "If the Sunday Virginia camp, Tuesday South Carolina camp, or Thursday Florida camp proves impractical, replace it with a hotel and add back the corresponding 2-hour daytime jurisdiction stop elsewhere in the route."
+      "fallbackNote": "If the Sunday Virginia camp, Monday North Carolina camp, Wednesday Georgia/north Florida camp, or Thursday Florida camp proves impractical, replace it with a hotel and add back the corresponding 2-hour daytime jurisdiction stop elsewhere in the route."
     },
     "days": [
       {
@@ -614,7 +778,7 @@
         "overnightType": "camp",
         "startArea": "Central/south New Jersey hotel",
         "endArea": "Northern Virginia campsite",
-        "focus": "Pick up Delaware and Maryland, do the DC friend activation Sunday evening if possible, and finish at a Virginia campsite.",
+        "focus": "Pick up Delaware and Maryland, activate DC on the southbound pass, and finish at a Virginia campsite.",
         "jurisdictions": ["US-DE", "US-MD", "US-DC", "US-VA"],
         "roughMiles": 255,
         "roughDriveHours": 4.3,
@@ -622,57 +786,57 @@
         "minimumEntities": 4,
         "parkStopHours": 6,
         "roughTotalHours": 10.8,
-        "notes": "Sunday is long but feasible because there is no work window. The key broad requirement is that the Virginia campsite must still be reachable in time for setup after the DC activation."
+        "notes": "Sunday is long but feasible because there is no work window. The friend meetup can happen here if it fits, but the hard requirement is activating DC and still reaching the Virginia campsite in time for setup."
       },
       {
         "date": "2026-06-22",
-        "overnightType": "hotel",
+        "overnightType": "camp",
         "startArea": "Northern Virginia campsite",
-        "endArea": "North Carolina corridor hotel",
-        "focus": "Use the workday margins for mostly southbound transit, with Virginia already banked by the Sunday campsite.",
-        "jurisdictions": [],
+        "endArea": "North Carolina corridor campsite",
+        "focus": "Use the workday margins for southbound transit and make the North Carolina activation from camp after setup.",
+        "jurisdictions": ["US-NC"],
         "roughMiles": 220,
         "roughDriveHours": 3.7,
         "chargingHours": 0.5,
-        "minimumEntities": 0,
+        "minimumEntities": 1,
         "parkStopHours": 0,
         "roughTotalHours": 4.2,
-        "notes": "This day works as a hotel day because Sunday camp already covered Virginia and Monday's job is mostly to make distance into North Carolina."
+        "notes": "This replaces the lost Friday camp night while staying within the two-consecutive-camp limit. The campsite should be far enough south that Tuesday can still make South Carolina / Georgia progress."
       },
       {
         "date": "2026-06-23",
-        "overnightType": "camp",
-        "startArea": "North Carolina corridor hotel",
-        "endArea": "South Carolina campsite",
-        "focus": "Use a daytime stop for North Carolina, then continue to a South Carolina campsite for the overnight activation.",
-        "jurisdictions": ["US-NC", "US-SC"],
+        "overnightType": "hotel",
+        "startArea": "North Carolina corridor campsite",
+        "endArea": "South Carolina / Georgia corridor hotel",
+        "focus": "Use a daytime stop for South Carolina, then hotel farther south to reset after two camp nights.",
+        "jurisdictions": ["US-SC"],
         "roughMiles": 250,
         "roughDriveHours": 4.2,
         "chargingHours": 0.5,
-        "minimumEntities": 2,
+        "minimumEntities": 1,
         "parkStopHours": 2,
         "roughTotalHours": 6.7,
-        "notes": "The broad assumption is that the campsite covers South Carolina, so only North Carolina needs a separate 2-hour daytime stop."
+        "notes": "North Carolina should already be covered by the Monday campsite, so Tuesday's separate park stop can focus on South Carolina."
       },
       {
         "date": "2026-06-24",
-        "overnightType": "hotel",
-        "startArea": "South Carolina campsite",
-        "endArea": "coastal Georgia / north Florida hotel",
-        "focus": "Use Wednesday for the Georgia daytime stop and keep moving into Florida on a hotel night.",
+        "overnightType": "camp",
+        "startArea": "South Carolina / Georgia corridor hotel",
+        "endArea": "Georgia / north Florida campsite",
+        "focus": "Use Wednesday to make Georgia progress and cover the overnight jurisdiction from camp.",
         "jurisdictions": ["US-GA"],
         "roughMiles": 260,
         "roughDriveHours": 4.3,
         "chargingHours": 0.5,
         "minimumEntities": 1,
-        "parkStopHours": 2,
-        "roughTotalHours": 6.8,
-        "notes": "This gets easier because South Carolina is already covered by the Tuesday campsite. Hotel remains the right broad assumption for the mileage day."
+        "parkStopHours": 0,
+        "roughTotalHours": 4.8,
+        "notes": "This is the first night of the second camp block. If the campsite is in north Florida instead of Georgia, add a low-detour Georgia stop earlier in the day."
       },
       {
         "date": "2026-06-25",
         "overnightType": "camp",
-        "startArea": "coastal Georgia / north Florida hotel",
+        "startArea": "Georgia / north Florida campsite",
         "endArea": "central Florida campsite",
         "focus": "Use Thursday to move through Florida and make the overnight Florida activation from camp.",
         "jurisdictions": ["US-FL"],
@@ -700,7 +864,7 @@
         "notes": "If Thursday successfully banks Florida from camp, Friday becomes a short arrival day instead of another stop-and-drive day."
       }
     ],
-    "risk": "The broad plan works only if DC is handled Sunday, the route stays monotonic southbound afterward, and the Sunday Virginia campsite is close enough that camp setup is still realistic after the friend activation."
+    "risk": "The broad plan works only if DC is handled on the southbound pass, the route stays monotonic afterward, and the Sunday Virginia campsite is close enough that camp setup is still realistic after the DC activation."
   },
   "days": [
     {
