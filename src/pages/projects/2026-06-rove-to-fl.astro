@@ -77,6 +77,17 @@ interface CandidateStop {
   role: string;
   risk?: string;
 }
+interface RoveTimingModel {
+  name: string;
+  entityCount: number;
+  physicalStops?: number;
+  endAnchor: string;
+  estimatedDriveMinutes: number;
+  estimatedTotalLabel: string;
+  comfort: string;
+  notes?: string;
+  entities?: string[];
+}
 interface FirstWeekendPlan {
   status: string;
   utcNote: string;
@@ -90,15 +101,7 @@ interface FirstWeekendPlan {
       source?: string;
       utcDayRolloverLocal?: string;
     };
-    timingModels?: Array<{
-      name: string;
-      entityCount: number;
-      endAnchor: string;
-      estimatedDriveMinutes: number;
-      estimatedTotalLabel: string;
-      comfort: string;
-      notes?: string;
-    }>;
+    timingModels?: RoveTimingModel[];
     fridayEveningOptions?: Array<{
       name: string;
       route: string;
@@ -110,6 +113,18 @@ interface FirstWeekendPlan {
     restOfTripComfortRule?: string;
     baselineCandidates: CandidateStop[];
     stretchCandidates: CandidateStop[];
+    openQuestions: string[];
+  };
+  sundayDcRove?: {
+    status: string;
+    targetDate: string;
+    strategy: string;
+    timingAssumptions?: {
+      source?: string;
+      departureArea?: string;
+      utcDayRolloverLocal?: string;
+    };
+    timingModels?: RoveTimingModel[];
     openQuestions: string[];
   };
 }
@@ -338,23 +353,23 @@ const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
 const roadmapDays: RoadmapDay[] = [
   {
     date: "2026-06-19",
-    route: "Providence → CT coast / lower Hudson",
-    focus: "Depart after work and choose how far west to reposition based on the Saturday rove target.",
+    route: "Hope → Silver Sands → lower Hudson / southwest CT",
+    focus: "Activate RI before work, then activate CT at Silver Sands, charge, and drive west only until the 21:30 comfort limit.",
     jurisdictions: ["US-RI", "US-CT"],
-    overnightType: "camp or hotel",
-    overnightArea: "Milford, Stamford, or Tallman",
-    roughTotalHours: 1.3,
-    notes: "Hammonasset is now a standby-only camp option because one-night advance reservations are not reliable; Milford/Stamford/Tallman are the realistic anchors.",
+    overnightType: "hotel",
+    overnightArea: "Tarrytown / Nyack preferred",
+    roughTotalHours: 5,
+    notes: "Stamford / White Plains is the fatigue-aware fallback; Milford / Fairfield is the safety fallback if CT or charging runs long.",
   },
   {
     date: "2026-06-20",
-    route: "CT / lower Hudson → NJ / DE",
-    focus: "Primary 10-entity UTC rove attempt, with a 15-entity stretch only if Friday-night UTC credit and verified n-fers line up.",
-    jurisdictions: ["US-CT", "US-NY", "US-NJ"],
+    route: "Lower Hudson / southwest CT → Foggy Bottom",
+    focus: "Cover NY, NJ, PA, DE, and MD before the fixed Foggy Bottom hotel.",
+    jurisdictions: ["US-NY", "US-NJ", "US-PA", "US-DE", "US-MD", "US-DC"],
     overnightType: "hotel",
-    overnightArea: "Central or south New Jersey",
-    roughTotalHours: 15.25,
-    notes: "Milford/Silver Sands currently looks like the best compromise; Hammonasset is no longer the default because of campsite minimum-stay rules.",
+    overnightArea: "Foggy Bottom / Washington, DC",
+    roughTotalHours: 12.6,
+    notes: "Current route is Tallman, Cheesequake, John Heinz NWR at Tinicum, Fox Point, and Fort McHenry. MD can slide after 20:00 EDT for Sunday UTC credit.",
   },
   ...(restOfTripDraft?.days ?? []).map((day) => ({
     date: day.date,
@@ -693,6 +708,12 @@ const parkStopPlanning =
                       <dt>Entities</dt>
                       <dd>{model.entityCount}</dd>
                     </div>
+                    {model.physicalStops && (
+                      <div>
+                        <dt>Stops</dt>
+                        <dd>{model.physicalStops}</dd>
+                      </div>
+                    )}
                     <div>
                       <dt>Drive</dt>
                       <dd>{Math.floor(model.estimatedDriveMinutes / 60)}h {model.estimatedDriveMinutes % 60}m</dd>
@@ -703,6 +724,9 @@ const parkStopPlanning =
                     </div>
                   </dl>
                   <p>{model.comfort}; ends near {model.endAnchor}</p>
+                  {model.entities && (
+                    <p>{model.entities.join(" · ")}</p>
+                  )}
                 </article>
               ))}
             </div>
@@ -746,6 +770,61 @@ const parkStopPlanning =
           {firstWeekendPlan.saturdayRove.restOfTripComfortRule}
         </p>
       )}
+    </section>
+  )}
+
+  {firstWeekendPlan?.sundayDcRove && (
+    <section class="section-block wide" aria-labelledby="sunday-dc-title">
+      <div class="section-heading">
+        <p class="section-label">{firstWeekendPlan.sundayDcRove.status}</p>
+        <h2 id="sunday-dc-title">Sunday DC rove branch</h2>
+      </div>
+
+      <p class="rove-weekend-note">{firstWeekendPlan.sundayDcRove.strategy}</p>
+      {firstWeekendPlan.sundayDcRove.timingAssumptions?.source && (
+        <p class="rove-weekend-note">
+          {firstWeekendPlan.sundayDcRove.timingAssumptions.source}
+          {firstWeekendPlan.sundayDcRove.timingAssumptions.departureArea &&
+            ` Starts from ${firstWeekendPlan.sundayDcRove.timingAssumptions.departureArea}.`}
+        </p>
+      )}
+
+      {firstWeekendPlan.sundayDcRove.timingModels && (
+        <div class="rove-timing-models">
+          {firstWeekendPlan.sundayDcRove.timingModels.map((model) => (
+            <article>
+              <strong>{model.name}</strong>
+              <dl>
+                <div>
+                  <dt>Entities</dt>
+                  <dd>{model.entityCount}</dd>
+                </div>
+                {model.physicalStops && (
+                  <div>
+                    <dt>Stops</dt>
+                    <dd>{model.physicalStops}</dd>
+                  </div>
+                )}
+                <div>
+                  <dt>Drive</dt>
+                  <dd>{Math.floor(model.estimatedDriveMinutes / 60)}h {model.estimatedDriveMinutes % 60}m</dd>
+                </div>
+                <div>
+                  <dt>Total</dt>
+                  <dd>{model.estimatedTotalLabel}</dd>
+                </div>
+              </dl>
+              <p>{model.comfort}; ends near {model.endAnchor}</p>
+              {model.notes && <p>{model.notes}</p>}
+              {model.entities && <p>{model.entities.join(" · ")}</p>}
+            </article>
+          ))}
+        </div>
+      )}
+
+      <ul class="rove-conclusions">
+        {firstWeekendPlan.sundayDcRove.openQuestions.map((question) => <li>{question}</li>)}
+      </ul>
     </section>
   )}
 
