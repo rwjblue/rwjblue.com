@@ -53,6 +53,15 @@ const ROUTE_STATES = [
     lonMax: -73.9,
   },
   {
+    code: "US-PA",
+    name: "Pennsylvania",
+    // Philadelphia / Delaware Valley corridor between NJ and DE
+    latMin: 39.7,
+    latMax: 40.3,
+    lonMin: -75.6,
+    lonMax: -74.8,
+  },
+  {
     code: "US-DE",
     name: "Delaware",
     latMin: 38.4,

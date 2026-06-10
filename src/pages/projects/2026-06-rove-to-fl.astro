@@ -11,8 +11,7 @@ const parkByRef = Object.fromEntries(
   trackerData.parks.map((p) => [p.reference, p])
 );
 
-// Validate camping-nights constraint and annotate days
-type OvernightType = "camp" | "hotel" | "home" | "tbd";
+type OvernightType = "hotel" | "home" | "tbd";
 interface BookingInfo {
   status: "planned" | "booked" | "n/a";
   confirmation?: string | null;
@@ -60,20 +59,20 @@ interface AreaBudget {
 }
 interface FridayNightAnchor {
   name: string;
-  reference: string;
+  reference?: string | null;
   state: string;
   overnightType?: string;
-  driveFromProvidenceMinutes?: number;
+  driveFromProvidenceMinutes?: number | null;
   role: string;
   pros: string[];
   cons: string[];
   saturdayImpact?: string;
 }
 interface CandidateStop {
-  reference?: string;
+  reference?: string | null;
   references?: string[];
   name: string;
-  state: string;
+  state?: string;
   role: string;
   risk?: string;
 }
@@ -91,7 +90,22 @@ interface RoveTimingModel {
 interface FirstWeekendPlan {
   status: string;
   utcNote: string;
+  mdTarget?: {
+    localTime: string;
+    meaning: string;
+    optionalBranch?: string;
+  };
   fridayNightAnchors: FridayNightAnchor[];
+  parkShortlist?: Array<{
+    state: string;
+    goal: string;
+    defaultReferences: string[];
+    options: Array<CandidateStop & {
+      latitude: number;
+      longitude: number;
+      priority: string;
+    }>;
+  }>;
   saturdayRove: {
     targetDate: string;
     baselineEntityTarget: number;
@@ -182,16 +196,6 @@ interface NferEvidence {
   saturday: NferLead[];
   sunday: NferLead[];
 }
-interface CampingPolicyNotes {
-  status: string;
-  currentRead: string;
-  carCampingRead?: string;
-  jurisdictions: Array<{
-    state: string;
-    risk: string;
-    summary: string;
-  }>;
-}
 interface RoadmapDay {
   date: string;
   route: string;
@@ -202,21 +206,46 @@ interface RoadmapDay {
   roughTotalHours?: number;
   notes?: string;
 }
+interface DriveEstimateLeg {
+  date: string;
+  from: string;
+  to: string;
+  distance: string;
+  estimatedDriveMinutes: number;
+  estimatedDriveLabel: string;
+  notes?: string;
+}
+interface DriveEstimates {
+  source: string;
+  updated: string;
+  legs: DriveEstimateLeg[];
+}
+interface MapOverlayPoint {
+  id?: string;
+  label?: string;
+  reference?: string;
+  name?: string;
+  state?: string;
+  type?: string;
+  status?: string;
+  priority?: string;
+  goal?: string;
+  role?: string;
+  latitude: number;
+  longitude: number;
+  notes?: string;
+}
+interface MapOverlays {
+  anchors: MapOverlayPoint[];
+  parkPoints: MapOverlayPoint[];
+}
 
-let consecutiveCamp = 0;
-const annotatedDays = (itinerary.days as ItineraryDay[]).map((day) => {
-  const isCamp = day.overnight.type === "camp";
-  if (isCamp) {
-    consecutiveCamp += 1;
-  } else {
-    consecutiveCamp = 0;
-  }
-  return {
-    ...day,
-    consecutiveCampCount: isCamp ? consecutiveCamp : 0,
-    campViolation: consecutiveCamp > itinerary.constraints.maxConsecutiveCampNights,
-  };
-});
+const mapOverlays =
+  typeof (itinerary as { mapOverlays?: unknown }).mapOverlays === "object" &&
+  (itinerary as { mapOverlays?: unknown }).mapOverlays
+    ? ((itinerary as { mapOverlays: MapOverlays }).mapOverlays)
+    : { anchors: [], parkPoints: [] };
+const mapOverlaysJson = JSON.stringify(mapOverlays);
 
 function formatDate(iso: string) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
@@ -228,7 +257,6 @@ function formatDate(iso: string) {
 }
 
 const OVERNIGHT_ICON: Record<OvernightType, string> = {
-  camp: "⛺",
   hotel: "🏨",
   home: "🏠",
   tbd: "?",
@@ -239,6 +267,7 @@ const STATE_COLORS: Record<string, string> = {
   "US-CT": "#4e79a7",
   "US-NY": "#f28e2b",
   "US-NJ": "#e15759",
+  "US-PA": "#7f7f7f",
   "US-DE": "#76b7b2",
   "US-MD": "#59a14f",
   "US-VA": "#edc948",
@@ -344,10 +373,10 @@ const nferEvidence =
   (itinerary as { nferEvidence?: unknown }).nferEvidence
     ? ((itinerary as { nferEvidence: NferEvidence }).nferEvidence)
     : null;
-const campingPolicyNotes =
-  typeof (itinerary as { campingPolicyNotes?: unknown }).campingPolicyNotes === "object" &&
-  (itinerary as { campingPolicyNotes?: unknown }).campingPolicyNotes
-    ? ((itinerary as { campingPolicyNotes: CampingPolicyNotes }).campingPolicyNotes)
+const driveEstimates =
+  typeof (itinerary as { driveEstimates?: unknown }).driveEstimates === "object" &&
+  (itinerary as { driveEstimates?: unknown }).driveEstimates
+    ? ((itinerary as { driveEstimates: DriveEstimates }).driveEstimates)
     : null;
 const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
 const roadmapDays: RoadmapDay[] = [
@@ -364,12 +393,12 @@ const roadmapDays: RoadmapDay[] = [
   {
     date: "2026-06-20",
     route: "Lower Hudson / southwest CT → Foggy Bottom",
-    focus: "Cover NY, NJ, PA, DE, and MD before the fixed Foggy Bottom hotel.",
-    jurisdictions: ["US-NY", "US-NJ", "US-PA", "US-DE", "US-MD", "US-DC"],
+    focus: "Cover NY, NJ, DE, and MD before the fixed Foggy Bottom hotel, with PA as an optional branch.",
+    jurisdictions: ["US-NY", "US-NJ", "US-DE", "US-MD", "US-DC"],
     overnightType: "hotel",
     overnightArea: "Foggy Bottom / Washington, DC",
-    roughTotalHours: 12.6,
-    notes: "Current route is Tallman, Cheesequake, John Heinz NWR at Tinicum, Fox Point, and Fort McHenry. MD can slide after 20:00 EDT for Sunday UTC credit.",
+    roughTotalHours: 11.5,
+    notes: "Default route is Tallman, Cheesequake, Fox Point, and Fort McHenry. Optional PA branch inserts US-0512 John Heinz between Cheesequake and Fox Point.",
   },
   ...(restOfTripDraft?.days ?? []).map((day) => ({
     date: day.date,
@@ -382,14 +411,6 @@ const roadmapDays: RoadmapDay[] = [
     notes: day.notes,
   })),
 ];
-const campArrival =
-  typeof tripConstraints.campArrival === "object" && tripConstraints.campArrival
-    ? (tripConstraints.campArrival as {
-        targetLatestArrival?: string;
-        reason?: string;
-        activationTiming?: string;
-      })
-    : null;
 const parkStopPlanning =
   typeof tripConstraints.parkStopPlanning === "object" && tripConstraints.parkStopPlanning
     ? (tripConstraints.parkStopPlanning as {
@@ -524,13 +545,6 @@ const parkStopPlanning =
         <dt>Drive-by detour limit</dt>
         <dd>{String(tripConstraints.maxDetourMinutesForNonOvernightPark ?? 30)} min from I-95</dd>
       </div>
-      <div>
-        <dt>Camping rhythm</dt>
-        <dd>
-          POTA parks for at least half the nights; max{" "}
-          {itinerary.constraints.maxConsecutiveCampNights} in a row
-        </dd>
-      </div>
       {vehicle && (
         <div>
           <dt>Charging cadence</dt>
@@ -539,12 +553,6 @@ const parkStopPlanning =
             {vehicle.chargingStopMinutes ?? 30} min after about{" "}
             {vehicle.drivingHoursBetweenChargingStops ?? 2.5} hr driving
           </dd>
-        </div>
-      )}
-      {campArrival && (
-        <div>
-          <dt>Camp arrival</dt>
-          <dd>{campArrival.targetLatestArrival ?? "18:30-19:00"}</dd>
         </div>
       )}
       {weekendPlanning && (
@@ -623,6 +631,37 @@ const parkStopPlanning =
     {restOfTripDraft?.risk && <p class="rove-weekend-note rove-weekend-rule">{restOfTripDraft.risk}</p>}
   </section>
 
+  {driveEstimates && (
+    <section class="section-block wide" aria-labelledby="drive-estimates-title">
+      <div class="section-heading">
+        <p class="section-label">Route budget</p>
+        <h2 id="drive-estimates-title">Drive estimates</h2>
+      </div>
+
+      <p class="rove-weekend-note">{driveEstimates.source}</p>
+
+      <div class="rove-drive-grid">
+        {driveEstimates.legs.map((leg) => (
+          <article>
+            <span>{formatShortDate(leg.date)}</span>
+            <strong>{leg.from} -> {leg.to}</strong>
+            <dl>
+              <div>
+                <dt>Drive</dt>
+                <dd>{leg.estimatedDriveLabel}</dd>
+              </div>
+              <div>
+                <dt>Distance</dt>
+                <dd>{leg.distance}</dd>
+              </div>
+            </dl>
+            {leg.notes && <p>{leg.notes}</p>}
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
   {firstWeekendPlan && (
     <section class="section-block wide" aria-labelledby="weekend-title">
       <div class="section-heading">
@@ -631,6 +670,43 @@ const parkStopPlanning =
       </div>
 
       <p class="rove-weekend-note">{firstWeekendPlan.utcNote}</p>
+      {firstWeekendPlan.mdTarget && (
+        <p class="rove-weekend-note rove-weekend-rule">
+          Maryland target: {firstWeekendPlan.mdTarget.localTime}.{" "}
+          {firstWeekendPlan.mdTarget.meaning}
+        </p>
+      )}
+
+      {firstWeekendPlan.parkShortlist && (
+        <section aria-labelledby="shortlist-title" class="rove-shortlist-section">
+          <h3 id="shortlist-title">RI to MD shortlist</h3>
+          <div class="rove-shortlist-grid">
+            {firstWeekendPlan.parkShortlist.map((group) => (
+              <article>
+                <header>
+                  <strong>{group.state.replace("US-", "")}</strong>
+                  <span>{group.goal}</span>
+                </header>
+                <ul>
+                  {group.options.map((option) => (
+                    <li>
+                      <span class={`rove-priority rove-priority-${option.priority}`}>
+                        {option.priority}
+                      </span>
+                      <strong>
+                        {option.reference}
+                        {" "}
+                        {option.name}
+                      </strong>
+                      <em>{option.role}</em>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div class="rove-weekend-grid">
         <section aria-labelledby="friday-anchor-title">
@@ -640,13 +716,17 @@ const parkStopPlanning =
               <article class="rove-anchor-card">
                 <header>
                   <h4>{anchor.name}</h4>
-                  <a
-                    href={`https://pota.app/#/park/${anchor.reference}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {anchor.reference}
-                  </a>
+                  {anchor.reference ? (
+                    <a
+                      href={`https://pota.app/#/park/${anchor.reference}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {anchor.reference}
+                    </a>
+                  ) : (
+                    <span>{anchor.state.replace("US-", "")}</span>
+                  )}
                 </header>
                 <p>{anchor.role}</p>
                 <p>
@@ -735,7 +815,7 @@ const parkStopPlanning =
             {firstWeekendPlan.saturdayRove.baselineCandidates.map((candidate) => (
               <li>
                 <strong>
-                  {candidate.reference}
+                  {candidate.reference ?? "TBD"}
                   {" "}
                   {candidate.name}
                 </strong>
@@ -875,32 +955,8 @@ const parkStopPlanning =
     </section>
   )}
 
-  {campingPolicyNotes && (
-    <section class="section-block wide" aria-labelledby="camping-policy-title">
-      <div class="section-heading">
-        <p class="section-label">{campingPolicyNotes.status}</p>
-        <h2 id="camping-policy-title">Camping policy scan</h2>
-      </div>
-
-      <p class="rove-weekend-note">{campingPolicyNotes.currentRead}</p>
-      {campingPolicyNotes.carCampingRead && (
-        <p class="rove-weekend-note">{campingPolicyNotes.carCampingRead}</p>
-      )}
-
-      <div class="rove-policy-grid">
-        {campingPolicyNotes.jurisdictions.map((item) => (
-          <article>
-            <span>{item.risk}</span>
-            <strong>{item.state.replace("US-", "")}</strong>
-            <p>{item.summary}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
-
-
   <script type="application/json" id="rove-tracker-data" set:html={trackerJson} />
+  <script type="application/json" id="rove-map-overlays" set:html={mapOverlaysJson} />
   <script>
     import L from "leaflet";
 
@@ -917,12 +973,14 @@ const parkStopPlanning =
       "US-FL": "#bab0ac",
     };
 
-    const dataEl = document.getElementById("rove-tracker-data");
-    const mapEl = document.getElementById("rove-map");
+      const dataEl = document.getElementById("rove-tracker-data");
+      const overlayEl = document.getElementById("rove-map-overlays");
+      const mapEl = document.getElementById("rove-map");
 
-    if (dataEl && mapEl) {
-      const tracker = JSON.parse(dataEl.textContent ?? "{}");
-      const map = L.map(mapEl, { scrollWheelZoom: false });
+      if (dataEl && mapEl) {
+        const tracker = JSON.parse(dataEl.textContent ?? "{}");
+        const overlays = overlayEl ? JSON.parse(overlayEl.textContent ?? "{}") : { anchors: [], parkPoints: [] };
+        const map = L.map(mapEl, { scrollWheelZoom: false });
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -935,15 +993,38 @@ const parkStopPlanning =
       for (const park of tracker.parks) {
         const color = STATE_COLORS[park.state] ?? "#888";
         const marker = L.circleMarker([park.latitude, park.longitude], {
-          radius: 5,
+          radius: 3,
           color: "#172026",
           weight: 1,
           fillColor: color,
-          fillOpacity: 0.85,
+          fillOpacity: 0.25,
         }).addTo(map);
 
         bounds.extend([park.latitude, park.longitude]);
         marker.bindPopup(popupHtml(park));
+      }
+
+      for (const point of overlays.parkPoints ?? []) {
+        const color = priorityColor(point.priority);
+        const marker = L.circleMarker([point.latitude, point.longitude], {
+          radius: point.priority === "default" ? 8 : 6,
+          color: "#172026",
+          weight: 2,
+          fillColor: color,
+          fillOpacity: 0.95,
+        }).addTo(map);
+
+        bounds.extend([point.latitude, point.longitude]);
+        marker.bindPopup(planningParkPopup(point));
+      }
+
+      for (const anchor of overlays.anchors ?? []) {
+        const marker = L.marker([anchor.latitude, anchor.longitude], {
+          title: anchor.label,
+        }).addTo(map);
+
+        bounds.extend([anchor.latitude, anchor.longitude]);
+        marker.bindPopup(anchorPopup(anchor));
       }
 
       if (bounds.isValid()) {
@@ -965,6 +1046,45 @@ const parkStopPlanning =
         <em>${escapeHtml(park.stateName)}</em>
         <span>${park.activations} activations · ${park.qsos} QSOs</span>
         <a href="https://pota.app/#/park/${escapeHtml(park.reference)}" target="_blank" rel="noreferrer">POTA page</a>
+      `;
+    }
+
+    function priorityColor(priority?: string) {
+      if (priority === "default") return "#167246";
+      if (priority === "linked") return "#4e79a7";
+      if (priority === "optional") return "#f28e2b";
+      return "#7f7f7f";
+    }
+
+    function planningParkPopup(point: {
+      reference?: string;
+      name?: string;
+      state?: string;
+      priority?: string;
+      goal?: string;
+      role?: string;
+    }) {
+      const ref = point.reference ?? "TBD";
+      return `
+        <strong>${escapeHtml(ref)}</strong>
+        <span>${escapeHtml(point.name ?? "")}</span>
+        <em>${escapeHtml((point.state ?? "").replace("US-", ""))} · ${escapeHtml(point.priority ?? "candidate")}</em>
+        <span>${escapeHtml(point.goal ?? "")}</span>
+        <span>${escapeHtml(point.role ?? "")}</span>
+        ${point.reference ? `<a href="https://pota.app/#/park/${escapeHtml(point.reference)}" target="_blank" rel="noreferrer">POTA page</a>` : ""}
+      `;
+    }
+
+    function anchorPopup(anchor: {
+      label?: string;
+      type?: string;
+      status?: string;
+      notes?: string;
+    }) {
+      return `
+        <strong>${escapeHtml(anchor.label ?? "")}</strong>
+        <em>${escapeHtml(anchor.type ?? "anchor")} · ${escapeHtml(anchor.status ?? "")}</em>
+        <span>${escapeHtml(anchor.notes ?? "")}</span>
       `;
     }
   </script>
@@ -1214,9 +1334,87 @@ const parkStopPlanning =
   }
 
   .rove-weekend-grid h3,
-  .rove-stretch-section h3 {
+  .rove-stretch-section h3,
+  .rove-shortlist-section h3 {
     font-size: 1rem;
     margin: 0 0 0.75rem;
+  }
+
+  .rove-shortlist-section {
+    margin: 1rem 0;
+  }
+
+  .rove-shortlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-shortlist-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-shortlist-grid header {
+    display: grid;
+    gap: 0.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .rove-shortlist-grid header strong {
+    font-size: 1rem;
+  }
+
+  .rove-shortlist-grid header span,
+  .rove-shortlist-grid em {
+    color: var(--color-text-muted, #666);
+    font-size: 0.8rem;
+    font-style: normal;
+  }
+
+  .rove-shortlist-grid ul {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rove-shortlist-grid li {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .rove-priority {
+    border-radius: 3px;
+    display: inline-flex;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.12rem 0.4rem;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .rove-priority-default {
+    background: #d1e7dd;
+    color: #0a3622;
+  }
+
+  .rove-priority-backup {
+    background: var(--color-surface-raised, #eee);
+    color: var(--color-text-muted, #666);
+  }
+
+  .rove-priority-linked {
+    background: #dbeafe;
+    color: #1e3a8a;
+  }
+
+  .rove-priority-optional {
+    background: #fff3cd;
+    color: #856404;
   }
 
   .rove-anchor-list,
@@ -1320,6 +1518,59 @@ const parkStopPlanning =
     margin: 0.45rem 0 0;
   }
 
+  .rove-drive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-drive-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-drive-grid span {
+    color: var(--color-accent, #167246);
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .rove-drive-grid strong {
+    display: block;
+    font-size: 0.9rem;
+  }
+
+  .rove-drive-grid dl {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.35rem;
+    margin: 0.55rem 0 0;
+  }
+
+  .rove-drive-grid dt {
+    color: var(--color-text-muted, #666);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-drive-grid dd {
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .rove-drive-grid p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.8rem;
+    margin: 0.45rem 0 0;
+  }
+
   .rove-candidate-list {
     display: grid;
     gap: 0.45rem;
@@ -1393,38 +1644,6 @@ const parkStopPlanning =
   }
 
   .rove-nfer-card p {
-    color: var(--color-text-muted, #666);
-    font-size: 0.85rem;
-    margin: 0.45rem 0 0;
-  }
-
-  .rove-policy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-    gap: 0.75rem;
-  }
-
-  .rove-policy-grid article {
-    border: 1px solid var(--color-border, #ddd);
-    border-radius: 6px;
-    padding: 0.85rem;
-  }
-
-  .rove-policy-grid span {
-    color: var(--color-accent, #167246);
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.25rem;
-    text-transform: uppercase;
-  }
-
-  .rove-policy-grid strong {
-    display: block;
-  }
-
-  .rove-policy-grid p {
     color: var(--color-text-muted, #666);
     font-size: 0.85rem;
     margin: 0.45rem 0 0;
@@ -1605,12 +1824,6 @@ const parkStopPlanning =
   .rove-booking-n\/a {
     background: var(--color-surface-raised, #eee);
     color: var(--color-text-muted, #888);
-  }
-
-  .rove-camp-warning {
-    font-size: 0.75rem;
-    color: #c0392b;
-    font-weight: 600;
   }
 
   .rove-park-targets {

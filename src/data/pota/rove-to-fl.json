@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-28T01:29:37.705Z",
+  "generatedAt": "2026-06-10T01:44:26.818Z",
   "destination": {
     "name": "Singer Island / Riviera Beach, FL",
     "arriveBy": "2026-06-26"
@@ -25,6 +25,12 @@
       "corridorCount": 130
     },
     {
+      "code": "US-PA",
+      "name": "Pennsylvania",
+      "total": 492,
+      "corridorCount": 17
+    },
+    {
       "code": "US-DE",
       "name": "Delaware",
       "total": 89,
@@ -33,8 +39,8 @@
     {
       "code": "US-MD",
       "name": "Maryland",
-      "total": 184,
-      "corridorCount": 121
+      "total": 185,
+      "corridorCount": 122
     },
     {
       "code": "US-VA",
@@ -77,9 +83,9 @@
       "longitude": -72.4716,
       "grid": "FN31sg",
       "status": "corridor",
-      "attempts": 141,
-      "activations": 138,
-      "qsos": 6190
+      "attempts": 143,
+      "activations": 140,
+      "qsos": 6417
     },
     {
       "reference": "US-0873",
@@ -116,9 +122,9 @@
       "longitude": -72.9672,
       "grid": "FN31mu",
       "status": "corridor",
-      "attempts": 504,
-      "activations": 497,
-      "qsos": 24430
+      "attempts": 513,
+      "activations": 506,
+      "qsos": 24845
     },
     {
       "reference": "US-1645",
@@ -129,9 +135,9 @@
       "longitude": -73.3539,
       "grid": "FN31hr",
       "status": "corridor",
-      "attempts": 26,
-      "activations": 25,
-      "qsos": 873
+      "attempts": 27,
+      "activations": 26,
+      "qsos": 884
     },
     {
       "reference": "US-1646",
@@ -155,9 +161,9 @@
       "longitude": -73.4804,
       "grid": "FN31gh",
       "status": "corridor",
-      "attempts": 111,
-      "activations": 108,
-      "qsos": 3901
+      "attempts": 112,
+      "activations": 109,
+      "qsos": 3915
     },
     {
       "reference": "US-1648",
@@ -168,9 +174,9 @@
       "longitude": -72.1322,
       "grid": "FN31wx",
       "status": "corridor",
-      "attempts": 61,
-      "activations": 56,
-      "qsos": 1758
+      "attempts": 62,
+      "activations": 57,
+      "qsos": 1798
     },
     {
       "reference": "US-1649",
@@ -181,9 +187,9 @@
       "longitude": -73.0988,
       "grid": "FN31kp",
       "status": "corridor",
-      "attempts": 104,
-      "activations": 102,
-      "qsos": 5345
+      "attempts": 106,
+      "activations": 104,
+      "qsos": 5376
     },
     {
       "reference": "US-1650",
@@ -194,9 +200,9 @@
       "longitude": -72.0332,
       "grid": "FN31xi",
       "status": "corridor",
-      "attempts": 173,
-      "activations": 170,
-      "qsos": 7078
+      "attempts": 176,
+      "activations": 173,
+      "qsos": 7137
     },
     {
       "reference": "US-1651",
@@ -207,9 +213,9 @@
       "longitude": -72.4501,
       "grid": "FN31ss",
       "status": "corridor",
-      "attempts": 100,
-      "activations": 92,
-      "qsos": 2983
+      "attempts": 101,
+      "activations": 93,
+      "qsos": 2994
     },
     {
       "reference": "US-1652",
@@ -220,9 +226,9 @@
       "longitude": -72.4624,
       "grid": "FN31sl",
       "status": "corridor",
-      "attempts": 17,
-      "activations": 17,
-      "qsos": 667
+      "attempts": 18,
+      "activations": 18,
+      "qsos": 697
     },
     {
       "reference": "US-1653",
@@ -233,9 +239,9 @@
       "longitude": -73.0925,
       "grid": "FN31ku",
       "status": "corridor",
-      "attempts": 55,
-      "activations": 55,
-      "qsos": 1962
+      "attempts": 57,
+      "activations": 57,
+      "qsos": 2006
     },
     {
       "reference": "US-1654",
@@ -246,9 +252,9 @@
       "longitude": -73.2242,
       "grid": "FN31jq",
       "status": "corridor",
-      "attempts": 139,
-      "activations": 137,
-      "qsos": 4936
+      "attempts": 140,
+      "activations": 138,
+      "qsos": 4952
     },
     {
       "reference": "US-1655",
@@ -272,9 +278,9 @@
       "longitude": -72.5859,
       "grid": "FN31qi",
       "status": "corridor",
-      "attempts": 70,
-      "activations": 67,
-      "qsos": 2242
+      "attempts": 73,
+      "activations": 70,
+      "qsos": 2478
     },
     {
       "reference": "US-1657",
@@ -285,9 +291,9 @@
       "longitude": -73.3593,
       "grid": "FN31hh",
       "status": "corridor",
-      "attempts": 149,
-      "activations": 140,
-      "qsos": 6578
+      "attempts": 151,
+      "activations": 142,
+      "qsos": 6621
     },
     {
       "reference": "US-1658",
@@ -324,9 +330,9 @@
       "longitude": -72.4172,
       "grid": "FN31sn",
       "status": "corridor",
-      "attempts": 115,
-      "activations": 109,
-      "qsos": 3451
+      "attempts": 116,
+      "activations": 110,
+      "qsos": 3482
     },
     {
       "reference": "US-1661",
@@ -337,9 +343,9 @@
       "longitude": -73.1989,
       "grid": "FN31jw",
       "status": "corridor",
-      "attempts": 80,
-      "activations": 75,
-      "qsos": 2886
+      "attempts": 81,
+      "activations": 76,
+      "qsos": 2897
     },
     {
       "reference": "US-1662",
@@ -363,9 +369,9 @@
       "longitude": -72.6564,
       "grid": "FN31qp",
       "status": "corridor",
-      "attempts": 172,
-      "activations": 170,
-      "qsos": 6306
+      "attempts": 173,
+      "activations": 171,
+      "qsos": 6349
     },
     {
       "reference": "US-1664",
@@ -376,9 +382,9 @@
       "longitude": -72.4654,
       "grid": "FN31sk",
       "status": "corridor",
-      "attempts": 57,
-      "activations": 55,
-      "qsos": 1425
+      "attempts": 58,
+      "activations": 56,
+      "qsos": 1463
     },
     {
       "reference": "US-1665",
@@ -402,9 +408,9 @@
       "longitude": -72.0799,
       "grid": "FN31xi",
       "status": "corridor",
-      "attempts": 85,
-      "activations": 84,
-      "qsos": 3295
+      "attempts": 86,
+      "activations": 85,
+      "qsos": 3305
     },
     {
       "reference": "US-1667",
@@ -428,9 +434,9 @@
       "longitude": -72.2266,
       "grid": "FN31vm",
       "status": "corridor",
-      "attempts": 65,
-      "activations": 63,
-      "qsos": 1775
+      "attempts": 66,
+      "activations": 64,
+      "qsos": 1790
     },
     {
       "reference": "US-1669",
@@ -506,9 +512,9 @@
       "longitude": -72.5097,
       "grid": "FN31rl",
       "status": "corridor",
-      "attempts": 78,
-      "activations": 77,
-      "qsos": 2231
+      "attempts": 80,
+      "activations": 79,
+      "qsos": 2262
     },
     {
       "reference": "US-1675",
@@ -519,9 +525,9 @@
       "longitude": -72.0098,
       "grid": "FN31xh",
       "status": "corridor",
-      "attempts": 148,
-      "activations": 144,
-      "qsos": 3434
+      "attempts": 150,
+      "activations": 146,
+      "qsos": 3527
     },
     {
       "reference": "US-1676",
@@ -532,9 +538,9 @@
       "longitude": -72.5589,
       "grid": "FN31rg",
       "status": "corridor",
-      "attempts": 229,
-      "activations": 222,
-      "qsos": 10631
+      "attempts": 230,
+      "activations": 223,
+      "qsos": 10652
     },
     {
       "reference": "US-1677",
@@ -545,9 +551,9 @@
       "longitude": -72.1151,
       "grid": "FN31wh",
       "status": "corridor",
-      "attempts": 129,
-      "activations": 126,
-      "qsos": 7189
+      "attempts": 130,
+      "activations": 127,
+      "qsos": 7244
     },
     {
       "reference": "US-1678",
@@ -558,9 +564,9 @@
       "longitude": -73.2083,
       "grid": "FN32ja",
       "status": "corridor",
-      "attempts": 55,
-      "activations": 50,
-      "qsos": 1524
+      "attempts": 56,
+      "activations": 51,
+      "qsos": 1534
     },
     {
       "reference": "US-1679",
@@ -597,9 +603,9 @@
       "longitude": -71.9222,
       "grid": "FN41ao",
       "status": "corridor",
-      "attempts": 121,
-      "activations": 117,
-      "qsos": 4399
+      "attempts": 124,
+      "activations": 120,
+      "qsos": 4483
     },
     {
       "reference": "US-1682",
@@ -610,9 +616,9 @@
       "longitude": -73.3812,
       "grid": "FN31hu",
       "status": "corridor",
-      "attempts": 44,
-      "activations": 42,
-      "qsos": 1302
+      "attempts": 46,
+      "activations": 44,
+      "qsos": 1387
     },
     {
       "reference": "US-1683",
@@ -623,9 +629,9 @@
       "longitude": -72.5412,
       "grid": "FN31rm",
       "status": "corridor",
-      "attempts": 114,
-      "activations": 114,
-      "qsos": 3061
+      "attempts": 116,
+      "activations": 116,
+      "qsos": 3167
     },
     {
       "reference": "US-1684",
@@ -649,9 +655,9 @@
       "longitude": -73.1697,
       "grid": "FN31jv",
       "status": "corridor",
-      "attempts": 37,
-      "activations": 35,
-      "qsos": 1011
+      "attempts": 38,
+      "activations": 36,
+      "qsos": 1022
     },
     {
       "reference": "US-1686",
@@ -688,9 +694,9 @@
       "longitude": -73.3842,
       "grid": "FN31hq",
       "status": "corridor",
-      "attempts": 42,
-      "activations": 40,
-      "qsos": 1527
+      "attempts": 43,
+      "activations": 41,
+      "qsos": 1537
     },
     {
       "reference": "US-1690",
@@ -714,9 +720,9 @@
       "longitude": -73.4086,
       "grid": "FN31hn",
       "status": "corridor",
-      "attempts": 123,
-      "activations": 119,
-      "qsos": 3862
+      "attempts": 125,
+      "activations": 121,
+      "qsos": 3944
     },
     {
       "reference": "US-1692",
@@ -727,9 +733,9 @@
       "longitude": -73.4951,
       "grid": "FN31gs",
       "status": "corridor",
-      "attempts": 31,
-      "activations": 31,
-      "qsos": 783
+      "attempts": 32,
+      "activations": 32,
+      "qsos": 815
     },
     {
       "reference": "US-1693",
@@ -753,9 +759,9 @@
       "longitude": -72.1785,
       "grid": "FN31vs",
       "status": "corridor",
-      "attempts": 122,
-      "activations": 107,
-      "qsos": 3236
+      "attempts": 123,
+      "activations": 108,
+      "qsos": 3267
     },
     {
       "reference": "US-1695",
@@ -792,9 +798,9 @@
       "longitude": -72.6291,
       "grid": "FN31ql",
       "status": "corridor",
-      "attempts": 69,
-      "activations": 67,
-      "qsos": 2532
+      "attempts": 70,
+      "activations": 68,
+      "qsos": 2545
     },
     {
       "reference": "US-1698",
@@ -844,9 +850,9 @@
       "longitude": -73.3561,
       "grid": "FN31hq",
       "status": "corridor",
-      "attempts": 16,
-      "activations": 16,
-      "qsos": 359
+      "attempts": 17,
+      "activations": 17,
+      "qsos": 377
     },
     {
       "reference": "US-1702",
@@ -870,9 +876,9 @@
       "longitude": -73.2794,
       "grid": "FN31iq",
       "status": "corridor",
-      "attempts": 56,
-      "activations": 56,
-      "qsos": 1969
+      "attempts": 58,
+      "activations": 57,
+      "qsos": 1988
     },
     {
       "reference": "US-1704",
@@ -896,9 +902,9 @@
       "longitude": -73.1025,
       "grid": "FN31ki",
       "status": "corridor",
-      "attempts": 236,
-      "activations": 232,
-      "qsos": 7173
+      "attempts": 241,
+      "activations": 237,
+      "qsos": 7294
     },
     {
       "reference": "US-1706",
@@ -909,9 +915,9 @@
       "longitude": -72.7848,
       "grid": "FN31ou",
       "status": "corridor",
-      "attempts": 295,
-      "activations": 290,
-      "qsos": 16599
+      "attempts": 304,
+      "activations": 299,
+      "qsos": 17056
     },
     {
       "reference": "US-1707",
@@ -924,7 +930,7 @@
       "status": "corridor",
       "attempts": 155,
       "activations": 150,
-      "qsos": 6888
+      "qsos": 6797
     },
     {
       "reference": "US-1708",
@@ -974,9 +980,9 @@
       "longitude": -72.2443,
       "grid": "FN31vh",
       "status": "corridor",
-      "attempts": 113,
-      "activations": 110,
-      "qsos": 4725
+      "attempts": 117,
+      "activations": 114,
+      "qsos": 4799
     },
     {
       "reference": "US-1712",
@@ -1026,9 +1032,9 @@
       "longitude": -73.3302,
       "grid": "FN31ic",
       "status": "corridor",
-      "attempts": 293,
-      "activations": 281,
-      "qsos": 11559
+      "attempts": 292,
+      "activations": 280,
+      "qsos": 11474
     },
     {
       "reference": "US-1716",
@@ -1052,9 +1058,9 @@
       "longitude": -72.8992,
       "grid": "FN31nk",
       "status": "corridor",
-      "attempts": 322,
-      "activations": 316,
-      "qsos": 13730
+      "attempts": 323,
+      "activations": 317,
+      "qsos": 13764
     },
     {
       "reference": "US-1718",
@@ -1065,9 +1071,9 @@
       "longitude": -73.1647,
       "grid": "FN31kl",
       "status": "corridor",
-      "attempts": 71,
-      "activations": 63,
-      "qsos": 1930
+      "attempts": 72,
+      "activations": 64,
+      "qsos": 1945
     },
     {
       "reference": "US-1719",
@@ -1078,9 +1084,9 @@
       "longitude": -73.4764,
       "grid": "FN31gm",
       "status": "corridor",
-      "attempts": 140,
-      "activations": 133,
-      "qsos": 5156
+      "attempts": 141,
+      "activations": 134,
+      "qsos": 5171
     },
     {
       "reference": "US-1720",
@@ -1091,9 +1097,9 @@
       "longitude": -73.1519,
       "grid": "FN31ku",
       "status": "corridor",
-      "attempts": 36,
-      "activations": 32,
-      "qsos": 741
+      "attempts": 37,
+      "activations": 33,
+      "qsos": 753
     },
     {
       "reference": "US-1721",
@@ -1104,9 +1110,9 @@
       "longitude": -72.8353,
       "grid": "FN31nu",
       "status": "corridor",
-      "attempts": 325,
-      "activations": 308,
-      "qsos": 12506
+      "attempts": 328,
+      "activations": 311,
+      "qsos": 12612
     },
     {
       "reference": "US-1722",
@@ -1117,9 +1123,9 @@
       "longitude": -73.1257,
       "grid": "FN31ku",
       "status": "corridor",
-      "attempts": 26,
-      "activations": 26,
-      "qsos": 668
+      "attempts": 27,
+      "activations": 27,
+      "qsos": 679
     },
     {
       "reference": "US-1723",
@@ -1143,9 +1149,9 @@
       "longitude": -72.7906,
       "grid": "FN31ou",
       "status": "corridor",
-      "attempts": 211,
-      "activations": 208,
-      "qsos": 9221
+      "attempts": 213,
+      "activations": 210,
+      "qsos": 9251
     },
     {
       "reference": "US-1725",
@@ -1169,9 +1175,9 @@
       "longitude": -72.6859,
       "grid": "FN31pm",
       "status": "corridor",
-      "attempts": 224,
-      "activations": 219,
-      "qsos": 10625
+      "attempts": 226,
+      "activations": 221,
+      "qsos": 10683
     },
     {
       "reference": "US-1727",
@@ -1182,9 +1188,9 @@
       "longitude": -72.9661,
       "grid": "FN31mi",
       "status": "corridor",
-      "attempts": 65,
-      "activations": 64,
-      "qsos": 2359
+      "attempts": 70,
+      "activations": 69,
+      "qsos": 2586
     },
     {
       "reference": "US-1728",
@@ -1195,9 +1201,9 @@
       "longitude": -72.8376,
       "grid": "FN31nk",
       "status": "corridor",
-      "attempts": 862,
-      "activations": 840,
-      "qsos": 28428
+      "attempts": 876,
+      "activations": 854,
+      "qsos": 28709
     },
     {
       "reference": "US-1729",
@@ -1221,9 +1227,9 @@
       "longitude": -72.4084,
       "grid": "FN31tx",
       "status": "corridor",
-      "attempts": 84,
-      "activations": 80,
-      "qsos": 3086
+      "attempts": 86,
+      "activations": 82,
+      "qsos": 3128
     },
     {
       "reference": "US-6857",
@@ -1234,9 +1240,9 @@
       "longitude": -73.003,
       "grid": "FN31lw",
       "status": "corridor",
-      "attempts": 54,
-      "activations": 52,
-      "qsos": 2024
+      "attempts": 55,
+      "activations": 53,
+      "qsos": 2037
     },
     {
       "reference": "US-6858",
@@ -1299,9 +1305,9 @@
       "longitude": -72.8616,
       "grid": "FN31nt",
       "status": "corridor",
-      "attempts": 151,
-      "activations": 141,
-      "qsos": 4621
+      "attempts": 152,
+      "activations": 142,
+      "qsos": 4682
     },
     {
       "reference": "US-6863",
@@ -1364,9 +1370,9 @@
       "longitude": -72.3075,
       "grid": "FN31uv",
       "status": "corridor",
-      "attempts": 82,
-      "activations": 78,
-      "qsos": 2741
+      "attempts": 83,
+      "activations": 79,
+      "qsos": 2769
     },
     {
       "reference": "US-6868",
@@ -1377,9 +1383,9 @@
       "longitude": -71.8363,
       "grid": "FN41bi",
       "status": "corridor",
-      "attempts": 90,
-      "activations": 84,
-      "qsos": 2301
+      "attempts": 92,
+      "activations": 86,
+      "qsos": 2350
     },
     {
       "reference": "US-6869",
@@ -1390,9 +1396,9 @@
       "longitude": -72.9981,
       "grid": "FN31mw",
       "status": "corridor",
-      "attempts": 155,
-      "activations": 151,
-      "qsos": 5426
+      "attempts": 158,
+      "activations": 154,
+      "qsos": 5540
     },
     {
       "reference": "US-6870",
@@ -1429,9 +1435,9 @@
       "longitude": -72.0893,
       "grid": "FN31wp",
       "status": "corridor",
-      "attempts": 47,
-      "activations": 46,
-      "qsos": 1655
+      "attempts": 48,
+      "activations": 47,
+      "qsos": 1671
     },
     {
       "reference": "US-6873",
@@ -1442,9 +1448,9 @@
       "longitude": -72.0666,
       "grid": "FN31xl",
       "status": "corridor",
-      "attempts": 197,
-      "activations": 194,
-      "qsos": 7976
+      "attempts": 199,
+      "activations": 196,
+      "qsos": 8125
     },
     {
       "reference": "US-6874",
@@ -1520,7 +1526,7 @@
       "longitude": -73.3851,
       "grid": "FN31hg",
       "status": "corridor",
-      "attempts": 82,
+      "attempts": 81,
       "activations": 77,
       "qsos": 3741
     },
@@ -1533,9 +1539,9 @@
       "longitude": -72.5251,
       "grid": "FN31rk",
       "status": "corridor",
-      "attempts": 225,
-      "activations": 220,
-      "qsos": 9331
+      "attempts": 229,
+      "activations": 224,
+      "qsos": 9425
     },
     {
       "reference": "US-7532",
@@ -1572,9 +1578,9 @@
       "longitude": -72.0864,
       "grid": "FN31wp",
       "status": "corridor",
-      "attempts": 23,
-      "activations": 23,
-      "qsos": 1104
+      "attempts": 24,
+      "activations": 24,
+      "qsos": 1117
     },
     {
       "reference": "US-7535",
@@ -1624,9 +1630,9 @@
       "longitude": -72.95,
       "grid": "FN31ml",
       "status": "corridor",
-      "attempts": 42,
-      "activations": 41,
-      "qsos": 1278
+      "attempts": 43,
+      "activations": 42,
+      "qsos": 1308
     },
     {
       "reference": "US-7539",
@@ -1637,9 +1643,9 @@
       "longitude": -73.1107,
       "grid": "FN31kv",
       "status": "corridor",
-      "attempts": 54,
-      "activations": 51,
-      "qsos": 1731
+      "attempts": 55,
+      "activations": 52,
+      "qsos": 1749
     },
     {
       "reference": "US-7540",
@@ -1663,9 +1669,9 @@
       "longitude": -72.4495,
       "grid": "FN31sn",
       "status": "corridor",
-      "attempts": 120,
-      "activations": 117,
-      "qsos": 3348
+      "attempts": 121,
+      "activations": 118,
+      "qsos": 3359
     },
     {
       "reference": "US-7542",
@@ -1689,9 +1695,9 @@
       "longitude": -72.6051,
       "grid": "FN31qx",
       "status": "corridor",
-      "attempts": 217,
-      "activations": 210,
-      "qsos": 6520
+      "attempts": 218,
+      "activations": 211,
+      "qsos": 6538
     },
     {
       "reference": "US-7545",
@@ -1728,9 +1734,9 @@
       "longitude": -72.4068,
       "grid": "FN31tl",
       "status": "corridor",
-      "attempts": 31,
-      "activations": 31,
-      "qsos": 1001
+      "attempts": 33,
+      "activations": 33,
+      "qsos": 1050
     },
     {
       "reference": "US-7548",
@@ -1741,9 +1747,9 @@
       "longitude": -71.8754,
       "grid": "FN41bo",
       "status": "corridor",
-      "attempts": 114,
-      "activations": 112,
-      "qsos": 4413
+      "attempts": 117,
+      "activations": 115,
+      "qsos": 4483
     },
     {
       "reference": "US-7652",
@@ -1767,9 +1773,9 @@
       "longitude": -73.1529,
       "grid": "FN31kr",
       "status": "corridor",
-      "attempts": 79,
-      "activations": 78,
-      "qsos": 3848
+      "attempts": 80,
+      "activations": 79,
+      "qsos": 3878
     },
     {
       "reference": "US-9896",
@@ -1780,9 +1786,9 @@
       "longitude": -72.7689,
       "grid": "FN31ot",
       "status": "corridor",
-      "attempts": 180,
-      "activations": 178,
-      "qsos": 14136
+      "attempts": 188,
+      "activations": 186,
+      "qsos": 14399
     },
     {
       "reference": "US-10073",
@@ -1806,9 +1812,9 @@
       "longitude": -72.9728,
       "grid": "FN31mt",
       "status": "corridor",
-      "attempts": 37,
-      "activations": 37,
-      "qsos": 1572
+      "attempts": 36,
+      "activations": 36,
+      "qsos": 1519
     },
     {
       "reference": "US-10079",
@@ -1819,9 +1825,9 @@
       "longitude": -73.4849,
       "grid": "FN31gl",
       "status": "corridor",
-      "attempts": 33,
-      "activations": 33,
-      "qsos": 900
+      "attempts": 34,
+      "activations": 34,
+      "qsos": 913
     },
     {
       "reference": "US-10086",
@@ -1845,9 +1851,9 @@
       "longitude": -72.1311,
       "grid": "FN31wh",
       "status": "corridor",
-      "attempts": 77,
-      "activations": 75,
-      "qsos": 4296
+      "attempts": 80,
+      "activations": 78,
+      "qsos": 4404
     },
     {
       "reference": "US-10656",
@@ -1858,9 +1864,9 @@
       "longitude": -71.8531,
       "grid": "FN41bi",
       "status": "corridor",
-      "attempts": 64,
-      "activations": 64,
-      "qsos": 2678
+      "attempts": 66,
+      "activations": 66,
+      "qsos": 2771
     },
     {
       "reference": "US-10952",
@@ -1871,9 +1877,9 @@
       "longitude": -73.1876,
       "grid": "FN31jj",
       "status": "corridor",
-      "attempts": 36,
-      "activations": 35,
-      "qsos": 1161
+      "attempts": 37,
+      "activations": 36,
+      "qsos": 1179
     },
     {
       "reference": "US-10961",
@@ -1897,9 +1903,9 @@
       "longitude": -72.3952,
       "grid": "FN31tn",
       "status": "corridor",
-      "attempts": 25,
-      "activations": 22,
-      "qsos": 949
+      "attempts": 27,
+      "activations": 24,
+      "qsos": 970
     },
     {
       "reference": "US-11013",
@@ -1923,9 +1929,9 @@
       "longitude": -72.6625,
       "grid": "FN31qo",
       "status": "corridor",
-      "attempts": 63,
-      "activations": 63,
-      "qsos": 2461
+      "attempts": 65,
+      "activations": 65,
+      "qsos": 2683
     },
     {
       "reference": "US-12092",
@@ -1949,9 +1955,9 @@
       "longitude": -73.4309,
       "grid": "FN31gs",
       "status": "corridor",
-      "attempts": 15,
-      "activations": 15,
-      "qsos": 406
+      "attempts": 16,
+      "activations": 16,
+      "qsos": 419
     },
     {
       "reference": "US-12460",
@@ -1962,9 +1968,9 @@
       "longitude": -72.7512,
       "grid": "FN32oa",
       "status": "corridor",
-      "attempts": 50,
-      "activations": 49,
-      "qsos": 1865
+      "attempts": 51,
+      "activations": 50,
+      "qsos": 1876
     },
     {
       "reference": "US-12604",
@@ -1988,9 +1994,9 @@
       "longitude": -72.7448,
       "grid": "FN31px",
       "status": "corridor",
-      "attempts": 32,
-      "activations": 32,
-      "qsos": 1893
+      "attempts": 34,
+      "activations": 34,
+      "qsos": 1925
     },
     {
       "reference": "US-12628",
@@ -2003,7 +2009,7 @@
       "status": "corridor",
       "attempts": 35,
       "activations": 35,
-      "qsos": 1352
+      "qsos": 1356
     },
     {
       "reference": "US-12777",
@@ -2040,9 +2046,9 @@
       "longitude": -74.058,
       "grid": "FN20xo",
       "status": "corridor",
-      "attempts": 1391,
-      "activations": 1365,
-      "qsos": 113085
+      "attempts": 1435,
+      "activations": 1408,
+      "qsos": 115217
     },
     {
       "reference": "US-0773",
@@ -2066,9 +2072,9 @@
       "longitude": -73.9633,
       "grid": "FN30at",
       "status": "corridor",
-      "attempts": 29,
-      "activations": 29,
-      "qsos": 710
+      "attempts": 31,
+      "activations": 31,
+      "qsos": 740
     },
     {
       "reference": "US-0778",
@@ -2118,9 +2124,9 @@
       "longitude": -74.0045,
       "grid": "FN20xr",
       "status": "corridor",
-      "attempts": 5,
-      "activations": 5,
-      "qsos": 85
+      "attempts": 6,
+      "activations": 6,
+      "qsos": 95
     },
     {
       "reference": "US-0913",
@@ -2131,9 +2137,9 @@
       "longitude": -74.0168,
       "grid": "FN20xq",
       "status": "corridor",
-      "attempts": 30,
-      "activations": 26,
-      "qsos": 520
+      "attempts": 31,
+      "activations": 27,
+      "qsos": 548
     },
     {
       "reference": "US-0938",
@@ -2144,9 +2150,9 @@
       "longitude": -74.0163,
       "grid": "FN20xq",
       "status": "corridor",
-      "attempts": 85,
+      "attempts": 86,
       "activations": 82,
-      "qsos": 6971
+      "qsos": 6972
     },
     {
       "reference": "US-0963",
@@ -2196,9 +2202,9 @@
       "longitude": -73.9389,
       "grid": "FN31ab",
       "status": "corridor",
-      "attempts": 153,
-      "activations": 150,
-      "qsos": 5833
+      "attempts": 154,
+      "activations": 151,
+      "qsos": 5848
     },
     {
       "reference": "US-2049",
@@ -2209,9 +2215,9 @@
       "longitude": -73.9621,
       "grid": "FN30ar",
       "status": "corridor",
-      "attempts": 118,
-      "activations": 112,
-      "qsos": 2695
+      "attempts": 120,
+      "activations": 114,
+      "qsos": 2752
     },
     {
       "reference": "US-2059",
@@ -2222,9 +2228,9 @@
       "longitude": -73.9587,
       "grid": "FN30ar",
       "status": "corridor",
-      "attempts": 87,
-      "activations": 73,
-      "qsos": 2364
+      "attempts": 88,
+      "activations": 74,
+      "qsos": 2384
     },
     {
       "reference": "US-2072",
@@ -2235,9 +2241,9 @@
       "longitude": -73.645,
       "grid": "FN30eq",
       "status": "corridor",
-      "attempts": 489,
-      "activations": 473,
-      "qsos": 19415
+      "attempts": 497,
+      "activations": 481,
+      "qsos": 19834
     },
     {
       "reference": "US-2078",
@@ -2274,9 +2280,9 @@
       "longitude": -73.956,
       "grid": "FN30at",
       "status": "corridor",
-      "attempts": 43,
-      "activations": 42,
-      "qsos": 1007
+      "attempts": 44,
+      "activations": 43,
+      "qsos": 1019
     },
     {
       "reference": "US-2130",
@@ -2300,9 +2306,9 @@
       "longitude": -73.9184,
       "grid": "FN31ad",
       "status": "corridor",
-      "attempts": 358,
-      "activations": 354,
-      "qsos": 13613
+      "attempts": 361,
+      "activations": 357,
+      "qsos": 13655
     },
     {
       "reference": "US-2149",
@@ -2313,9 +2319,9 @@
       "longitude": -73.914,
       "grid": "FN31ba",
       "status": "corridor",
-      "attempts": 461,
-      "activations": 450,
-      "qsos": 15188
+      "attempts": 469,
+      "activations": 458,
+      "qsos": 15484
     },
     {
       "reference": "US-2153",
@@ -2326,9 +2332,9 @@
       "longitude": -73.695,
       "grid": "FN30dq",
       "status": "corridor",
-      "attempts": 413,
-      "activations": 407,
-      "qsos": 27945
+      "attempts": 416,
+      "activations": 410,
+      "qsos": 28048
     },
     {
       "reference": "US-8061",
@@ -2352,9 +2358,9 @@
       "longitude": -73.875,
       "grid": "FN30bp",
       "status": "corridor",
-      "attempts": 122,
-      "activations": 117,
-      "qsos": 5505
+      "attempts": 124,
+      "activations": 119,
+      "qsos": 5537
     },
     {
       "reference": "US-8082",
@@ -2378,9 +2384,9 @@
       "longitude": -73.8838,
       "grid": "FN30bp",
       "status": "corridor",
-      "attempts": 131,
-      "activations": 128,
-      "qsos": 8413
+      "attempts": 132,
+      "activations": 129,
+      "qsos": 8424
     },
     {
       "reference": "US-8087",
@@ -2391,9 +2397,9 @@
       "longitude": -74.0582,
       "grid": "FN20xo",
       "status": "corridor",
-      "attempts": 245,
-      "activations": 231,
-      "qsos": 25995
+      "attempts": 248,
+      "activations": 233,
+      "qsos": 24966
     },
     {
       "reference": "US-8090",
@@ -2417,9 +2423,9 @@
       "longitude": -73.9207,
       "grid": "FN30aw",
       "status": "corridor",
-      "attempts": 748,
-      "activations": 714,
-      "qsos": 27328
+      "attempts": 763,
+      "activations": 725,
+      "qsos": 27621
     },
     {
       "reference": "US-10045",
@@ -2482,9 +2488,9 @@
       "longitude": -73.986,
       "grid": "FN30aj",
       "status": "corridor",
-      "attempts": 121,
-      "activations": 114,
-      "qsos": 3951
+      "attempts": 122,
+      "activations": 115,
+      "qsos": 3962
     },
     {
       "reference": "US-0452",
@@ -2508,9 +2514,9 @@
       "longitude": -74.4498,
       "grid": "FM29sl",
       "status": "corridor",
-      "attempts": 413,
-      "activations": 403,
-      "qsos": 12219
+      "attempts": 417,
+      "activations": 407,
+      "qsos": 12313
     },
     {
       "reference": "US-0454",
@@ -2521,9 +2527,9 @@
       "longitude": -74.5133,
       "grid": "FN20rr",
       "status": "corridor",
-      "attempts": 261,
-      "activations": 256,
-      "qsos": 8858
+      "attempts": 270,
+      "activations": 264,
+      "qsos": 9060
     },
     {
       "reference": "US-0456",
@@ -2560,9 +2566,9 @@
       "longitude": -74.058,
       "grid": "FN20xo",
       "status": "corridor",
-      "attempts": 1391,
-      "activations": 1365,
-      "qsos": 113085
+      "attempts": 1435,
+      "activations": 1408,
+      "qsos": 115217
     },
     {
       "reference": "US-0684",
@@ -2573,9 +2579,9 @@
       "longitude": -74.872,
       "grid": "FN20nh",
       "status": "corridor",
-      "attempts": 442,
-      "activations": 424,
-      "qsos": 12597
+      "attempts": 453,
+      "activations": 434,
+      "qsos": 12748
     },
     {
       "reference": "US-0746",
@@ -2586,9 +2592,9 @@
       "longitude": -74.5428,
       "grid": "FN20rs",
       "status": "corridor",
-      "attempts": 398,
-      "activations": 384,
-      "qsos": 12910
+      "attempts": 400,
+      "activations": 386,
+      "qsos": 12942
     },
     {
       "reference": "US-0751",
@@ -2599,9 +2605,9 @@
       "longitude": -74.1796,
       "grid": "FN20vw",
       "status": "corridor",
-      "attempts": 280,
-      "activations": 271,
-      "qsos": 9809
+      "attempts": 283,
+      "activations": 274,
+      "qsos": 9989
     },
     {
       "reference": "US-0759",
@@ -2612,9 +2618,9 @@
       "longitude": -74.2393,
       "grid": "FN20vs",
       "status": "corridor",
-      "attempts": 76,
-      "activations": 75,
-      "qsos": 3732
+      "attempts": 77,
+      "activations": 76,
+      "qsos": 3753
     },
     {
       "reference": "US-0886",
@@ -2625,9 +2631,9 @@
       "longitude": -74.9865,
       "grid": "FM29mg",
       "status": "corridor",
-      "attempts": 74,
-      "activations": 68,
-      "qsos": 3176
+      "attempts": 75,
+      "activations": 69,
+      "qsos": 3193
     },
     {
       "reference": "US-0888",
@@ -2638,9 +2644,9 @@
       "longitude": -74.9677,
       "grid": "FN20mr",
       "status": "corridor",
-      "attempts": 278,
-      "activations": 262,
-      "qsos": 7733
+      "attempts": 279,
+      "activations": 263,
+      "qsos": 7749
     },
     {
       "reference": "US-1607",
@@ -2651,9 +2657,9 @@
       "longitude": -74.1324,
       "grid": "FN20wd",
       "status": "corridor",
-      "attempts": 212,
-      "activations": 205,
-      "qsos": 6671
+      "attempts": 214,
+      "activations": 207,
+      "qsos": 6839
     },
     {
       "reference": "US-1608",
@@ -2664,9 +2670,9 @@
       "longitude": -74.749,
       "grid": "FN20pw",
       "status": "corridor",
-      "attempts": 214,
-      "activations": 210,
-      "qsos": 6111
+      "attempts": 216,
+      "activations": 212,
+      "qsos": 6150
     },
     {
       "reference": "US-1609",
@@ -2690,9 +2696,9 @@
       "longitude": -74.9566,
       "grid": "FM28mw",
       "status": "corridor",
-      "attempts": 245,
-      "activations": 230,
-      "qsos": 6981
+      "attempts": 246,
+      "activations": 231,
+      "qsos": 6993
     },
     {
       "reference": "US-1611",
@@ -2703,9 +2709,9 @@
       "longitude": -74.2666,
       "grid": "FN20uk",
       "status": "corridor",
-      "attempts": 1142,
-      "activations": 1120,
-      "qsos": 76262
+      "attempts": 1147,
+      "activations": 1125,
+      "qsos": 76663
     },
     {
       "reference": "US-1612",
@@ -2716,9 +2722,9 @@
       "longitude": -74.6452,
       "grid": "FM29qf",
       "status": "corridor",
-      "attempts": 91,
-      "activations": 89,
-      "qsos": 2844
+      "attempts": 92,
+      "activations": 90,
+      "qsos": 2971
     },
     {
       "reference": "US-1613",
@@ -2729,9 +2735,9 @@
       "longitude": -74.6152,
       "grid": "FN20qi",
       "status": "corridor",
-      "attempts": 463,
-      "activations": 444,
-      "qsos": 11658
+      "attempts": 471,
+      "activations": 452,
+      "qsos": 11764
     },
     {
       "reference": "US-1614",
@@ -2742,9 +2748,9 @@
       "longitude": -74.2211,
       "grid": "FM29vv",
       "status": "corridor",
-      "attempts": 130,
-      "activations": 123,
-      "qsos": 4363
+      "attempts": 133,
+      "activations": 124,
+      "qsos": 4383
     },
     {
       "reference": "US-1615",
@@ -2794,9 +2800,9 @@
       "longitude": -74.6661,
       "grid": "FN21qh",
       "status": "corridor",
-      "attempts": 343,
-      "activations": 327,
-      "qsos": 11515
+      "attempts": 344,
+      "activations": 328,
+      "qsos": 11593
     },
     {
       "reference": "US-1620",
@@ -2820,9 +2826,9 @@
       "longitude": -74.0814,
       "grid": "FM29xv",
       "status": "corridor",
-      "attempts": 228,
-      "activations": 216,
-      "qsos": 9613
+      "attempts": 230,
+      "activations": 218,
+      "qsos": 9677
     },
     {
       "reference": "US-1622",
@@ -2833,9 +2839,9 @@
       "longitude": -74.7371,
       "grid": "FN21pa",
       "status": "corridor",
-      "attempts": 106,
-      "activations": 102,
-      "qsos": 3357
+      "attempts": 107,
+      "activations": 103,
+      "qsos": 3390
     },
     {
       "reference": "US-1623",
@@ -2846,9 +2852,9 @@
       "longitude": -74.0457,
       "grid": "FN20xq",
       "status": "corridor",
-      "attempts": 443,
-      "activations": 422,
-      "qsos": 19394
+      "attempts": 454,
+      "activations": 433,
+      "qsos": 20111
     },
     {
       "reference": "US-1624",
@@ -2872,9 +2878,9 @@
       "longitude": -74.3208,
       "grid": "FN20ug",
       "status": "corridor",
-      "attempts": 225,
-      "activations": 219,
-      "qsos": 9342
+      "attempts": 227,
+      "activations": 221,
+      "qsos": 9546
     },
     {
       "reference": "US-1626",
@@ -2911,9 +2917,9 @@
       "longitude": -74.6748,
       "grid": "FN20ph",
       "status": "corridor",
-      "attempts": 173,
-      "activations": 163,
-      "qsos": 4381
+      "attempts": 175,
+      "activations": 165,
+      "qsos": 4405
     },
     {
       "reference": "US-1629",
@@ -2924,9 +2930,9 @@
       "longitude": -74.821,
       "grid": "FN20oa",
       "status": "corridor",
-      "attempts": 190,
-      "activations": 178,
-      "qsos": 4174
+      "attempts": 191,
+      "activations": 179,
+      "qsos": 4202
     },
     {
       "reference": "US-1630",
@@ -2950,9 +2956,9 @@
       "longitude": -74.8102,
       "grid": "FN20ou",
       "status": "corridor",
-      "attempts": 138,
-      "activations": 134,
-      "qsos": 3748
+      "attempts": 139,
+      "activations": 135,
+      "qsos": 3768
     },
     {
       "reference": "US-1632",
@@ -2963,9 +2969,9 @@
       "longitude": -74.8189,
       "grid": "FN21ob",
       "status": "corridor",
-      "attempts": 134,
-      "activations": 129,
-      "qsos": 3790
+      "attempts": 136,
+      "activations": 131,
+      "qsos": 3850
     },
     {
       "reference": "US-1633",
@@ -2976,9 +2982,9 @@
       "longitude": -74.896,
       "grid": "FN20nq",
       "status": "corridor",
-      "attempts": 153,
-      "activations": 146,
-      "qsos": 4329
+      "attempts": 155,
+      "activations": 148,
+      "qsos": 4353
     },
     {
       "reference": "US-1634",
@@ -2989,9 +2995,9 @@
       "longitude": -74.8612,
       "grid": "FN20nh",
       "status": "corridor",
-      "attempts": 360,
-      "activations": 343,
-      "qsos": 8857
+      "attempts": 377,
+      "activations": 360,
+      "qsos": 9244
     },
     {
       "reference": "US-1635",
@@ -3002,9 +3008,9 @@
       "longitude": -74.4724,
       "grid": "FN20so",
       "status": "corridor",
-      "attempts": 192,
-      "activations": 178,
-      "qsos": 5659
+      "attempts": 194,
+      "activations": 180,
+      "qsos": 5680
     },
     {
       "reference": "US-1636",
@@ -3028,9 +3034,9 @@
       "longitude": -75.0169,
       "grid": "FN21lb",
       "status": "corridor",
-      "attempts": 273,
-      "activations": 254,
-      "qsos": 7966
+      "attempts": 274,
+      "activations": 255,
+      "qsos": 7979
     },
     {
       "reference": "US-4582",
@@ -3041,9 +3047,9 @@
       "longitude": -73.9709,
       "grid": "FN31ah",
       "status": "corridor",
-      "attempts": 2522,
-      "activations": 2475,
-      "qsos": 102891
+      "attempts": 2560,
+      "activations": 2513,
+      "qsos": 104546
     },
     {
       "reference": "US-4991",
@@ -3093,9 +3099,9 @@
       "longitude": -74.5751,
       "grid": "FM29rv",
       "status": "corridor",
-      "attempts": 130,
-      "activations": 117,
-      "qsos": 5161
+      "attempts": 132,
+      "activations": 119,
+      "qsos": 5269
     },
     {
       "reference": "US-4995",
@@ -3145,9 +3151,9 @@
       "longitude": -74.2607,
       "grid": "FN21ub",
       "status": "corridor",
-      "attempts": 139,
-      "activations": 133,
-      "qsos": 3981
+      "attempts": 141,
+      "activations": 135,
+      "qsos": 4108
     },
     {
       "reference": "US-4999",
@@ -3171,9 +3177,9 @@
       "longitude": -74.729,
       "grid": "FM29pr",
       "status": "corridor",
-      "attempts": 189,
-      "activations": 182,
-      "qsos": 6834
+      "attempts": 190,
+      "activations": 183,
+      "qsos": 6999
     },
     {
       "reference": "US-5001",
@@ -3197,9 +3203,9 @@
       "longitude": -74.925,
       "grid": "FN20mp",
       "status": "corridor",
-      "attempts": 200,
-      "activations": 190,
-      "qsos": 6456
+      "attempts": 204,
+      "activations": 194,
+      "qsos": 6683
     },
     {
       "reference": "US-6462",
@@ -3210,9 +3216,9 @@
       "longitude": -74.1806,
       "grid": "FN20vv",
       "status": "corridor",
-      "attempts": 1133,
-      "activations": 1101,
-      "qsos": 42445
+      "attempts": 1151,
+      "activations": 1118,
+      "qsos": 43052
     },
     {
       "reference": "US-6467",
@@ -3236,9 +3242,9 @@
       "longitude": -73.985,
       "grid": "FN30ak",
       "status": "corridor",
-      "attempts": 2616,
-      "activations": 2564,
-      "qsos": 142004
+      "attempts": 2645,
+      "activations": 2593,
+      "qsos": 143739
     },
     {
       "reference": "US-6609",
@@ -3249,9 +3255,9 @@
       "longitude": -74.6461,
       "grid": "FM29qp",
       "status": "corridor",
-      "attempts": 1265,
-      "activations": 1241,
-      "qsos": 52698
+      "attempts": 1271,
+      "activations": 1247,
+      "qsos": 52990
     },
     {
       "reference": "US-7504",
@@ -3262,9 +3268,9 @@
       "longitude": -74.5041,
       "grid": "FN20re",
       "status": "corridor",
-      "attempts": 146,
-      "activations": 146,
-      "qsos": 4806
+      "attempts": 149,
+      "activations": 149,
+      "qsos": 4875
     },
     {
       "reference": "US-7505",
@@ -3275,9 +3281,9 @@
       "longitude": -74.8517,
       "grid": "FN20np",
       "status": "corridor",
-      "attempts": 235,
-      "activations": 225,
-      "qsos": 6553
+      "attempts": 237,
+      "activations": 227,
+      "qsos": 6576
     },
     {
       "reference": "US-7506",
@@ -3314,9 +3320,9 @@
       "longitude": -74.3836,
       "grid": "FM29tk",
       "status": "corridor",
-      "attempts": 103,
-      "activations": 102,
-      "qsos": 3537
+      "attempts": 106,
+      "activations": 105,
+      "qsos": 3579
     },
     {
       "reference": "US-8031",
@@ -3340,9 +3346,9 @@
       "longitude": -74.6671,
       "grid": "FN20pt",
       "status": "corridor",
-      "attempts": 130,
-      "activations": 126,
-      "qsos": 4098
+      "attempts": 132,
+      "activations": 128,
+      "qsos": 4211
     },
     {
       "reference": "US-8033",
@@ -3652,9 +3658,9 @@
       "longitude": -74.3176,
       "grid": "FN20ue",
       "status": "corridor",
-      "attempts": 78,
-      "activations": 76,
-      "qsos": 2321
+      "attempts": 79,
+      "activations": 77,
+      "qsos": 2362
     },
     {
       "reference": "US-8057",
@@ -3665,9 +3671,9 @@
       "longitude": -75.0983,
       "grid": "FM29kk",
       "status": "corridor",
-      "attempts": 84,
-      "activations": 82,
-      "qsos": 2477
+      "attempts": 86,
+      "activations": 84,
+      "qsos": 2509
     },
     {
       "reference": "US-8058",
@@ -3730,9 +3736,9 @@
       "longitude": -73.9207,
       "grid": "FN30aw",
       "status": "corridor",
-      "attempts": 748,
-      "activations": 714,
-      "qsos": 27328
+      "attempts": 763,
+      "activations": 725,
+      "qsos": 27621
     },
     {
       "reference": "US-11337",
@@ -3808,9 +3814,9 @@
       "longitude": -75.074,
       "grid": "FM29lq",
       "status": "corridor",
-      "attempts": 143,
-      "activations": 138,
-      "qsos": 5049
+      "attempts": 145,
+      "activations": 140,
+      "qsos": 5099
     },
     {
       "reference": "US-11988",
@@ -3873,9 +3879,9 @@
       "longitude": -74.342,
       "grid": "FM29tx",
       "status": "corridor",
-      "attempts": 18,
-      "activations": 17,
-      "qsos": 492
+      "attempts": 19,
+      "activations": 18,
+      "qsos": 548
     },
     {
       "reference": "US-11993",
@@ -3899,9 +3905,9 @@
       "longitude": -74.87,
       "grid": "FN20nj",
       "status": "corridor",
-      "attempts": 67,
-      "activations": 67,
-      "qsos": 1263
+      "attempts": 71,
+      "activations": 71,
+      "qsos": 1314
     },
     {
       "reference": "US-12100",
@@ -3912,9 +3918,9 @@
       "longitude": -74.844,
       "grid": "FN20nj",
       "status": "corridor",
-      "attempts": 69,
-      "activations": 69,
-      "qsos": 1939
+      "attempts": 75,
+      "activations": 75,
+      "qsos": 2030
     },
     {
       "reference": "US-12101",
@@ -3925,9 +3931,9 @@
       "longitude": -74.963,
       "grid": "FN20mp",
       "status": "corridor",
-      "attempts": 61,
-      "activations": 61,
-      "qsos": 1695
+      "attempts": 63,
+      "activations": 63,
+      "qsos": 1723
     },
     {
       "reference": "US-12102",
@@ -3938,9 +3944,9 @@
       "longitude": -74.88,
       "grid": "FN20nq",
       "status": "corridor",
-      "attempts": 51,
-      "activations": 51,
-      "qsos": 968
+      "attempts": 54,
+      "activations": 54,
+      "qsos": 1015
     },
     {
       "reference": "US-12103",
@@ -3951,9 +3957,9 @@
       "longitude": -75.001,
       "grid": "FN20ll",
       "status": "corridor",
-      "attempts": 27,
-      "activations": 25,
-      "qsos": 723
+      "attempts": 29,
+      "activations": 27,
+      "qsos": 765
     },
     {
       "reference": "US-12104",
@@ -3977,9 +3983,9 @@
       "longitude": -74.872,
       "grid": "FN20nt",
       "status": "corridor",
-      "attempts": 89,
-      "activations": 89,
-      "qsos": 2477
+      "attempts": 90,
+      "activations": 90,
+      "qsos": 2488
     },
     {
       "reference": "US-12168",
@@ -4003,9 +4009,9 @@
       "longitude": -74.6364,
       "grid": "FN20qv",
       "status": "corridor",
-      "attempts": 49,
-      "activations": 49,
-      "qsos": 3551
+      "attempts": 51,
+      "activations": 51,
+      "qsos": 3594
     },
     {
       "reference": "US-12645",
@@ -4042,9 +4048,9 @@
       "longitude": -75.165,
       "grid": "FM29ko",
       "status": "corridor",
-      "attempts": 60,
-      "activations": 60,
-      "qsos": 2756
+      "attempts": 62,
+      "activations": 62,
+      "qsos": 2796
     },
     {
       "reference": "US-13061",
@@ -4107,9 +4113,9 @@
       "longitude": -75.0336,
       "grid": "FN20lu",
       "status": "corridor",
-      "attempts": 9,
-      "activations": 9,
-      "qsos": 182
+      "attempts": 10,
+      "activations": 10,
+      "qsos": 197
     },
     {
       "reference": "US-13150",
@@ -4120,9 +4126,9 @@
       "longitude": -75.0822,
       "grid": "FN20lt",
       "status": "corridor",
-      "attempts": 13,
-      "activations": 13,
-      "qsos": 366
+      "attempts": 14,
+      "activations": 14,
+      "qsos": 376
     },
     {
       "reference": "US-13254",
@@ -4133,9 +4139,9 @@
       "longitude": -74.6715,
       "grid": "FN20pg",
       "status": "corridor",
-      "attempts": 8,
-      "activations": 8,
-      "qsos": 288
+      "attempts": 22,
+      "activations": 22,
+      "qsos": 744
     },
     {
       "reference": "US-13255",
@@ -4164,6 +4170,227 @@
       "qsos": 29
     },
     {
+      "reference": "US-0512",
+      "name": "John Heinz National Wildlife Refuge",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 39.8929,
+      "longitude": -75.2575,
+      "grid": "FM29iv",
+      "status": "corridor",
+      "attempts": 125,
+      "activations": 120,
+      "qsos": 3836
+    },
+    {
+      "reference": "US-0684",
+      "name": "Lower Delaware National Wild and Scenic River",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.297,
+      "longitude": -74.872,
+      "grid": "FN20nh",
+      "status": "corridor",
+      "attempts": 453,
+      "activations": 434,
+      "qsos": 12748
+    },
+    {
+      "reference": "US-0738",
+      "name": "Independence National Historical Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 39.9514,
+      "longitude": -75.1498,
+      "grid": "FM29kw",
+      "status": "corridor",
+      "attempts": 30,
+      "activations": 25,
+      "qsos": 649
+    },
+    {
+      "reference": "US-0761",
+      "name": "Valley Forge National Historical Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.1016,
+      "longitude": -75.4252,
+      "grid": "FN20gc",
+      "status": "corridor",
+      "attempts": 569,
+      "activations": 518,
+      "qsos": 15740
+    },
+    {
+      "reference": "US-0790",
+      "name": "Thaddeus Kosciuszko National Memorial",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 39.9434,
+      "longitude": -75.1473,
+      "grid": "FM29kw",
+      "status": "corridor",
+      "attempts": 13,
+      "activations": 13,
+      "qsos": 368
+    },
+    {
+      "reference": "US-0809",
+      "name": "Edgar Allan Poe National Historic Site",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 39.962,
+      "longitude": -75.1498,
+      "grid": "FM29kx",
+      "status": "corridor",
+      "attempts": 15,
+      "activations": 15,
+      "qsos": 546
+    },
+    {
+      "reference": "US-1332",
+      "name": "Benjamin Rush State Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.1167,
+      "longitude": -74.9779,
+      "grid": "FN20mc",
+      "status": "corridor",
+      "attempts": 67,
+      "activations": 63,
+      "qsos": 1711
+    },
+    {
+      "reference": "US-1351",
+      "name": "Evansburg State Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.2007,
+      "longitude": -75.404,
+      "grid": "FN20he",
+      "status": "corridor",
+      "attempts": 363,
+      "activations": 344,
+      "qsos": 12486
+    },
+    {
+      "reference": "US-1352",
+      "name": "Fort Washington State Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.1209,
+      "longitude": -75.2237,
+      "grid": "FN20jc",
+      "status": "corridor",
+      "attempts": 506,
+      "activations": 483,
+      "qsos": 17234
+    },
+    {
+      "reference": "US-1390",
+      "name": "Neshaminy State Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.0792,
+      "longitude": -74.919,
+      "grid": "FN20mb",
+      "status": "corridor",
+      "attempts": 185,
+      "activations": 180,
+      "qsos": 5671
+    },
+    {
+      "reference": "US-1414",
+      "name": "Ridley Creek State Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 39.9512,
+      "longitude": -75.452,
+      "grid": "FM29gw",
+      "status": "corridor",
+      "attempts": 292,
+      "activations": 271,
+      "qsos": 10749
+    },
+    {
+      "reference": "US-1430",
+      "name": "Tyler State Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.2327,
+      "longitude": -74.9728,
+      "grid": "FN20mf",
+      "status": "corridor",
+      "attempts": 639,
+      "activations": 598,
+      "qsos": 23642
+    },
+    {
+      "reference": "US-4363",
+      "name": "Norristown Farm State Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.1462,
+      "longitude": -75.3416,
+      "grid": "FN20hd",
+      "status": "corridor",
+      "attempts": 139,
+      "activations": 132,
+      "qsos": 4147
+    },
+    {
+      "reference": "US-6432",
+      "name": "Washington Crossing State Historical Park",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.2951,
+      "longitude": -74.8722,
+      "grid": "FN20nh",
+      "status": "corridor",
+      "attempts": 427,
+      "activations": 392,
+      "qsos": 11622
+    },
+    {
+      "reference": "US-8931",
+      "name": "PA 234 State Game Land",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.2544,
+      "longitude": -75.5119,
+      "grid": "FN20fg",
+      "status": "corridor",
+      "attempts": 104,
+      "activations": 100,
+      "qsos": 3433
+    },
+    {
+      "reference": "US-10802",
+      "name": "Gloria Dei Church National Historic Site",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 39.9337,
+      "longitude": -75.1442,
+      "grid": "FM29kw",
+      "status": "corridor",
+      "attempts": 13,
+      "activations": 13,
+      "qsos": 354
+    },
+    {
+      "reference": "US-11977",
+      "name": "PA 339 State Game Land",
+      "state": "US-PA",
+      "stateName": "Pennsylvania",
+      "latitude": 40.12,
+      "longitude": -74.9909,
+      "grid": "FN20mc",
+      "status": "corridor",
+      "attempts": 10,
+      "activations": 10,
+      "qsos": 277
+    },
+    {
       "reference": "US-0229",
       "name": "Bombay Hook National Wildlife Refuge",
       "state": "US-DE",
@@ -4172,9 +4399,9 @@
       "longitude": -75.4514,
       "grid": "FM29gg",
       "status": "corridor",
-      "attempts": 88,
-      "activations": 87,
-      "qsos": 3089
+      "attempts": 89,
+      "activations": 88,
+      "qsos": 3101
     },
     {
       "reference": "US-0230",
@@ -4224,9 +4451,9 @@
       "longitude": -75.5621,
       "grid": "FM29fs",
       "status": "corridor",
-      "attempts": 176,
-      "activations": 170,
-      "qsos": 7686
+      "attempts": 178,
+      "activations": 172,
+      "qsos": 7784
     },
     {
       "reference": "US-1731",
@@ -4250,9 +4477,9 @@
       "longitude": -75.573,
       "grid": "FM29ft",
       "status": "corridor",
-      "attempts": 360,
-      "activations": 328,
-      "qsos": 12524
+      "attempts": 361,
+      "activations": 329,
+      "qsos": 12568
     },
     {
       "reference": "US-1733",
@@ -4263,9 +4490,9 @@
       "longitude": -75.0939,
       "grid": "FM28ks",
       "status": "corridor",
-      "attempts": 268,
-      "activations": 254,
-      "qsos": 10667
+      "attempts": 273,
+      "activations": 259,
+      "qsos": 10904
     },
     {
       "reference": "US-1734",
@@ -4276,9 +4503,9 @@
       "longitude": -75.0713,
       "grid": "FM28lo",
       "status": "corridor",
-      "attempts": 325,
-      "activations": 305,
-      "qsos": 11615
+      "attempts": 330,
+      "activations": 309,
+      "qsos": 11705
     },
     {
       "reference": "US-1735",
@@ -4289,9 +4516,9 @@
       "longitude": -75.0509,
       "grid": "FM28ll",
       "status": "corridor",
-      "attempts": 259,
-      "activations": 250,
-      "qsos": 9270
+      "attempts": 264,
+      "activations": 255,
+      "qsos": 9349
     },
     {
       "reference": "US-1736",
@@ -4341,9 +4568,9 @@
       "longitude": -75.1297,
       "grid": "FM28ko",
       "status": "corridor",
-      "attempts": 202,
-      "activations": 199,
-      "qsos": 7245
+      "attempts": 206,
+      "activations": 203,
+      "qsos": 7317
     },
     {
       "reference": "US-1740",
@@ -4367,9 +4594,9 @@
       "longitude": -75.7199,
       "grid": "FM29dn",
       "status": "corridor",
-      "attempts": 471,
-      "activations": 427,
-      "qsos": 14051
+      "attempts": 472,
+      "activations": 428,
+      "qsos": 14077
     },
     {
       "reference": "US-1742",
@@ -4380,9 +4607,9 @@
       "longitude": -75.4764,
       "grid": "FM28gm",
       "status": "corridor",
-      "attempts": 219,
-      "activations": 206,
-      "qsos": 7624
+      "attempts": 221,
+      "activations": 208,
+      "qsos": 7651
     },
     {
       "reference": "US-1743",
@@ -4393,9 +4620,9 @@
       "longitude": -75.7571,
       "grid": "FM29cr",
       "status": "corridor",
-      "attempts": 539,
-      "activations": 514,
-      "qsos": 19352
+      "attempts": 549,
+      "activations": 524,
+      "qsos": 19911
     },
     {
       "reference": "US-1744",
@@ -4419,9 +4646,9 @@
       "longitude": -75.6797,
       "grid": "FM29dt",
       "status": "corridor",
-      "attempts": 178,
-      "activations": 173,
-      "qsos": 5632
+      "attempts": 182,
+      "activations": 177,
+      "qsos": 5716
     },
     {
       "reference": "US-4367",
@@ -4458,9 +4685,9 @@
       "longitude": -75.4163,
       "grid": "FM28hr",
       "status": "corridor",
-      "attempts": 102,
-      "activations": 99,
-      "qsos": 4001
+      "attempts": 103,
+      "activations": 100,
+      "qsos": 4027
     },
     {
       "reference": "US-4611",
@@ -4614,9 +4841,9 @@
       "longitude": -75.0793,
       "grid": "FM28ll",
       "status": "corridor",
-      "attempts": 226,
-      "activations": 221,
-      "qsos": 10777
+      "attempts": 229,
+      "activations": 224,
+      "qsos": 10929
     },
     {
       "reference": "US-7646",
@@ -4666,9 +4893,9 @@
       "longitude": -75.5475,
       "grid": "FM29fj",
       "status": "corridor",
-      "attempts": 43,
-      "activations": 43,
-      "qsos": 1395
+      "attempts": 44,
+      "activations": 44,
+      "qsos": 1418
     },
     {
       "reference": "US-7650",
@@ -4692,9 +4919,9 @@
       "longitude": -75.5151,
       "grid": "FM29fh",
       "status": "corridor",
-      "attempts": 58,
-      "activations": 58,
-      "qsos": 2600
+      "attempts": 59,
+      "activations": 59,
+      "qsos": 2656
     },
     {
       "reference": "US-9877",
@@ -4705,9 +4932,9 @@
       "longitude": -75.1114,
       "grid": "FM28kr",
       "status": "corridor",
-      "attempts": 52,
-      "activations": 51,
-      "qsos": 1885
+      "attempts": 53,
+      "activations": 52,
+      "qsos": 1895
     },
     {
       "reference": "US-9878",
@@ -4718,9 +4945,9 @@
       "longitude": -75.5455,
       "grid": "FM29fs",
       "status": "corridor",
-      "attempts": 183,
-      "activations": 181,
-      "qsos": 8646
+      "attempts": 186,
+      "activations": 184,
+      "qsos": 8757
     },
     {
       "reference": "US-9879",
@@ -4731,9 +4958,9 @@
       "longitude": -75.0973,
       "grid": "FM28ks",
       "status": "corridor",
-      "attempts": 49,
-      "activations": 49,
-      "qsos": 1764
+      "attempts": 50,
+      "activations": 50,
+      "qsos": 1864
     },
     {
       "reference": "US-9881",
@@ -4757,9 +4984,9 @@
       "longitude": -75.4254,
       "grid": "FM29gd",
       "status": "corridor",
-      "attempts": 35,
-      "activations": 35,
-      "qsos": 1045
+      "attempts": 36,
+      "activations": 36,
+      "qsos": 1062
     },
     {
       "reference": "US-9883",
@@ -4783,9 +5010,9 @@
       "longitude": -75.0671,
       "grid": "FM28lp",
       "status": "corridor",
-      "attempts": 57,
-      "activations": 54,
-      "qsos": 1692
+      "attempts": 58,
+      "activations": 55,
+      "qsos": 1706
     },
     {
       "reference": "US-9886",
@@ -4874,9 +5101,9 @@
       "longitude": -75.582,
       "grid": "FM29fe",
       "status": "corridor",
-      "attempts": 69,
-      "activations": 62,
-      "qsos": 1856
+      "attempts": 72,
+      "activations": 65,
+      "qsos": 1902
     },
     {
       "reference": "US-10659",
@@ -4900,9 +5127,9 @@
       "longitude": -75.4752,
       "grid": "FM28gv",
       "status": "corridor",
-      "attempts": 24,
-      "activations": 24,
-      "qsos": 629
+      "attempts": 25,
+      "activations": 25,
+      "qsos": 652
     },
     {
       "reference": "US-10668",
@@ -4926,9 +5153,9 @@
       "longitude": -75.4862,
       "grid": "FM28gv",
       "status": "corridor",
-      "attempts": 27,
-      "activations": 27,
-      "qsos": 645
+      "attempts": 28,
+      "activations": 28,
+      "qsos": 662
     },
     {
       "reference": "US-10670",
@@ -5004,9 +5231,9 @@
       "longitude": -75.5881,
       "grid": "FM29ef",
       "status": "corridor",
-      "attempts": 48,
-      "activations": 47,
-      "qsos": 1564
+      "attempts": 49,
+      "activations": 48,
+      "qsos": 1575
     },
     {
       "reference": "US-10676",
@@ -5082,9 +5309,9 @@
       "longitude": -75.6196,
       "grid": "FM29ef",
       "status": "corridor",
-      "attempts": 54,
-      "activations": 50,
-      "qsos": 1591
+      "attempts": 55,
+      "activations": 51,
+      "qsos": 1648
     },
     {
       "reference": "US-10682",
@@ -5173,9 +5400,9 @@
       "longitude": -75.4277,
       "grid": "FM28gw",
       "status": "corridor",
-      "attempts": 50,
-      "activations": 48,
-      "qsos": 1550
+      "attempts": 51,
+      "activations": 49,
+      "qsos": 1560
     },
     {
       "reference": "US-10689",
@@ -5303,9 +5530,9 @@
       "longitude": -76.1194,
       "grid": "FM18wk",
       "status": "corridor",
-      "attempts": 78,
-      "activations": 75,
-      "qsos": 2741
+      "attempts": 79,
+      "activations": 76,
+      "qsos": 2755
     },
     {
       "reference": "US-0332",
@@ -5329,9 +5556,9 @@
       "longitude": -76.8168,
       "grid": "FM19ob",
       "status": "corridor",
-      "attempts": 383,
-      "activations": 373,
-      "qsos": 10814
+      "attempts": 387,
+      "activations": 375,
+      "qsos": 10858
     },
     {
       "reference": "US-0335",
@@ -5355,9 +5582,9 @@
       "longitude": -76.9795,
       "grid": "FM18mu",
       "status": "corridor",
-      "attempts": 2035,
-      "activations": 2020,
-      "qsos": 69576
+      "attempts": 2039,
+      "activations": 2024,
+      "qsos": 69710
     },
     {
       "reference": "US-0666",
@@ -5368,9 +5595,9 @@
       "longitude": -77.45,
       "grid": "FM19gp",
       "status": "corridor",
-      "attempts": 288,
-      "activations": 275,
-      "qsos": 7165
+      "attempts": 289,
+      "activations": 276,
+      "qsos": 7175
     },
     {
       "reference": "US-0667",
@@ -5394,9 +5621,9 @@
       "longitude": -76.895,
       "grid": "FM18nx",
       "status": "corridor",
-      "attempts": 1590,
-      "activations": 1575,
-      "qsos": 50863
+      "attempts": 1594,
+      "activations": 1578,
+      "qsos": 50942
     },
     {
       "reference": "US-0669",
@@ -5420,9 +5647,9 @@
       "longitude": -77.1478,
       "grid": "FM18kx",
       "status": "corridor",
-      "attempts": 2042,
-      "activations": 1998,
-      "qsos": 94352
+      "attempts": 2056,
+      "activations": 2012,
+      "qsos": 95133
     },
     {
       "reference": "US-0705",
@@ -5433,9 +5660,9 @@
       "longitude": -77.3956,
       "grid": "FM19hj",
       "status": "corridor",
-      "attempts": 405,
-      "activations": 391,
-      "qsos": 9846
+      "attempts": 406,
+      "activations": 392,
+      "qsos": 9864
     },
     {
       "reference": "US-0736",
@@ -5446,9 +5673,9 @@
       "longitude": -76.1378,
       "grid": "FM18wk",
       "status": "corridor",
-      "attempts": 71,
-      "activations": 65,
-      "qsos": 2737
+      "attempts": 72,
+      "activations": 66,
+      "qsos": 2751
     },
     {
       "reference": "US-0808",
@@ -5472,9 +5699,9 @@
       "longitude": -76.5868,
       "grid": "FM19qk",
       "status": "corridor",
-      "attempts": 272,
-      "activations": 268,
-      "qsos": 11204
+      "attempts": 275,
+      "activations": 271,
+      "qsos": 11269
     },
     {
       "reference": "US-0867",
@@ -5498,9 +5725,9 @@
       "longitude": -76.5799,
       "grid": "FM19rg",
       "status": "corridor",
-      "attempts": 839,
-      "activations": 820,
-      "qsos": 30090
+      "attempts": 840,
+      "activations": 821,
+      "qsos": 30100
     },
     {
       "reference": "US-1561",
@@ -5524,9 +5751,9 @@
       "longitude": -76.4354,
       "grid": "FM18sj",
       "status": "corridor",
-      "attempts": 204,
-      "activations": 200,
-      "qsos": 6852
+      "attempts": 205,
+      "activations": 201,
+      "qsos": 6864
     },
     {
       "reference": "US-1564",
@@ -5576,9 +5803,9 @@
       "longitude": -75.9809,
       "grid": "FM29al",
       "status": "corridor",
-      "attempts": 135,
-      "activations": 121,
-      "qsos": 4609
+      "attempts": 137,
+      "activations": 123,
+      "qsos": 4844
     },
     {
       "reference": "US-1572",
@@ -5589,9 +5816,9 @@
       "longitude": -76.5122,
       "grid": "FM18rt",
       "status": "corridor",
-      "attempts": 205,
-      "activations": 202,
-      "qsos": 7087
+      "attempts": 208,
+      "activations": 205,
+      "qsos": 7129
     },
     {
       "reference": "US-1573",
@@ -5602,9 +5829,9 @@
       "longitude": -77.4956,
       "grid": "FM19gl",
       "status": "corridor",
-      "attempts": 489,
-      "activations": 476,
-      "qsos": 11689
+      "attempts": 490,
+      "activations": 477,
+      "qsos": 11700
     },
     {
       "reference": "US-1576",
@@ -5615,9 +5842,9 @@
       "longitude": -76.5213,
       "grid": "FM18ri",
       "status": "corridor",
-      "attempts": 126,
-      "activations": 121,
-      "qsos": 4558
+      "attempts": 128,
+      "activations": 123,
+      "qsos": 4608
     },
     {
       "reference": "US-1577",
@@ -5628,9 +5855,9 @@
       "longitude": -76.3493,
       "grid": "FM19ti",
       "status": "corridor",
-      "attempts": 445,
-      "activations": 417,
-      "qsos": 13494
+      "attempts": 449,
+      "activations": 421,
+      "qsos": 13555
     },
     {
       "reference": "US-1578",
@@ -5667,9 +5894,9 @@
       "longitude": -76.4841,
       "grid": "FM18sx",
       "status": "corridor",
-      "attempts": 269,
-      "activations": 264,
-      "qsos": 9464
+      "attempts": 273,
+      "activations": 268,
+      "qsos": 9647
     },
     {
       "reference": "US-1582",
@@ -5680,9 +5907,9 @@
       "longitude": -75.8391,
       "grid": "FM28bu",
       "status": "corridor",
-      "attempts": 102,
-      "activations": 100,
-      "qsos": 5226
+      "attempts": 104,
+      "activations": 102,
+      "qsos": 5255
     },
     {
       "reference": "US-1583",
@@ -5693,9 +5920,9 @@
       "longitude": -77.0806,
       "grid": "FM19lb",
       "status": "corridor",
-      "attempts": 113,
-      "activations": 107,
-      "qsos": 5255
+      "attempts": 114,
+      "activations": 108,
+      "qsos": 5270
     },
     {
       "reference": "US-1585",
@@ -5706,9 +5933,9 @@
       "longitude": -76.7052,
       "grid": "FM18pf",
       "status": "corridor",
-      "attempts": 114,
-      "activations": 113,
-      "qsos": 4137
+      "attempts": 115,
+      "activations": 114,
+      "qsos": 4151
     },
     {
       "reference": "US-1586",
@@ -5732,9 +5959,9 @@
       "longitude": -76.2783,
       "grid": "FM19uo",
       "status": "corridor",
-      "attempts": 114,
-      "activations": 107,
-      "qsos": 2842
+      "attempts": 117,
+      "activations": 110,
+      "qsos": 2885
     },
     {
       "reference": "US-1588",
@@ -5745,9 +5972,9 @@
       "longitude": -76.7853,
       "grid": "FM19oh",
       "status": "corridor",
-      "attempts": 1065,
-      "activations": 1025,
-      "qsos": 29617
+      "attempts": 1072,
+      "activations": 1031,
+      "qsos": 29859
     },
     {
       "reference": "US-1589",
@@ -5758,9 +5985,9 @@
       "longitude": -77.1361,
       "grid": "FM19kg",
       "status": "corridor",
-      "attempts": 368,
-      "activations": 363,
-      "qsos": 10499
+      "attempts": 371,
+      "activations": 366,
+      "qsos": 10608
     },
     {
       "reference": "US-1590",
@@ -5771,9 +5998,9 @@
       "longitude": -76.3336,
       "grid": "FM18tb",
       "status": "corridor",
-      "attempts": 66,
-      "activations": 59,
-      "qsos": 2251
+      "attempts": 68,
+      "activations": 61,
+      "qsos": 2277
     },
     {
       "reference": "US-1591",
@@ -5797,9 +6024,9 @@
       "longitude": -76.4177,
       "grid": "FM19sp",
       "status": "corridor",
-      "attempts": 157,
-      "activations": 151,
-      "qsos": 6046
+      "attempts": 160,
+      "activations": 154,
+      "qsos": 6082
     },
     {
       "reference": "US-1594",
@@ -5810,9 +6037,9 @@
       "longitude": -76.819,
       "grid": "FM18os",
       "status": "corridor",
-      "attempts": 116,
-      "activations": 115,
-      "qsos": 4087
+      "attempts": 117,
+      "activations": 116,
+      "qsos": 4120
     },
     {
       "reference": "US-1595",
@@ -5823,9 +6050,9 @@
       "longitude": -76.4071,
       "grid": "FM19ta",
       "status": "corridor",
-      "attempts": 247,
-      "activations": 239,
-      "qsos": 9489
+      "attempts": 249,
+      "activations": 241,
+      "qsos": 9521
     },
     {
       "reference": "US-1596",
@@ -5836,9 +6063,9 @@
       "longitude": -77.2496,
       "grid": "FM19jd",
       "status": "corridor",
-      "attempts": 180,
-      "activations": 174,
-      "qsos": 5479
+      "attempts": 181,
+      "activations": 175,
+      "qsos": 5492
     },
     {
       "reference": "US-1597",
@@ -5862,9 +6089,9 @@
       "longitude": -76.7445,
       "grid": "FM18pf",
       "status": "corridor",
-      "attempts": 14,
-      "activations": 14,
-      "qsos": 711
+      "attempts": 15,
+      "activations": 15,
+      "qsos": 759
     },
     {
       "reference": "US-1600",
@@ -5875,9 +6102,9 @@
       "longitude": -76.506,
       "grid": "FM18rg",
       "status": "corridor",
-      "attempts": 121,
-      "activations": 118,
-      "qsos": 4425
+      "attempts": 122,
+      "activations": 119,
+      "qsos": 4437
     },
     {
       "reference": "US-1601",
@@ -5888,9 +6115,9 @@
       "longitude": -76.1607,
       "grid": "FM19wo",
       "status": "corridor",
-      "attempts": 207,
-      "activations": 193,
-      "qsos": 5624
+      "attempts": 209,
+      "activations": 195,
+      "qsos": 5647
     },
     {
       "reference": "US-1603",
@@ -5901,9 +6128,9 @@
       "longitude": -75.9452,
       "grid": "FM28ax",
       "status": "corridor",
-      "attempts": 123,
-      "activations": 117,
-      "qsos": 4043
+      "attempts": 132,
+      "activations": 124,
+      "qsos": 4131
     },
     {
       "reference": "US-1606",
@@ -5927,9 +6154,9 @@
       "longitude": -76.4877,
       "grid": "FM19sg",
       "status": "corridor",
-      "attempts": 362,
-      "activations": 357,
-      "qsos": 12993
+      "attempts": 365,
+      "activations": 360,
+      "qsos": 13049
     },
     {
       "reference": "US-4564",
@@ -5940,9 +6167,9 @@
       "longitude": -77.2748,
       "grid": "FM18io",
       "status": "corridor",
-      "attempts": 3010,
-      "activations": 2964,
-      "qsos": 124208
+      "attempts": 3034,
+      "activations": 2988,
+      "qsos": 125691
     },
     {
       "reference": "US-4567",
@@ -5953,9 +6180,9 @@
       "longitude": -77.0681,
       "grid": "FM18lv",
       "status": "corridor",
-      "attempts": 6375,
-      "activations": 6273,
-      "qsos": 265367
+      "attempts": 6463,
+      "activations": 6361,
+      "qsos": 271243
     },
     {
       "reference": "US-4581",
@@ -5966,9 +6193,9 @@
       "longitude": -76.5836,
       "grid": "FM19qg",
       "status": "corridor",
-      "attempts": 5249,
-      "activations": 5204,
-      "qsos": 233885
+      "attempts": 5312,
+      "activations": 5267,
+      "qsos": 236934
     },
     {
       "reference": "US-4763",
@@ -5992,9 +6219,9 @@
       "longitude": -75.9058,
       "grid": "FM29bo",
       "status": "corridor",
-      "attempts": 72,
-      "activations": 71,
-      "qsos": 2312
+      "attempts": 73,
+      "activations": 72,
+      "qsos": 2326
     },
     {
       "reference": "US-4769",
@@ -6005,9 +6232,9 @@
       "longitude": -76.5531,
       "grid": "FM18rg",
       "status": "corridor",
-      "attempts": 68,
-      "activations": 68,
-      "qsos": 2300
+      "attempts": 69,
+      "activations": 69,
+      "qsos": 2311
     },
     {
       "reference": "US-4771",
@@ -6018,9 +6245,9 @@
       "longitude": -76.4205,
       "grid": "FM18sc",
       "status": "corridor",
-      "attempts": 38,
-      "activations": 37,
-      "qsos": 1420
+      "attempts": 39,
+      "activations": 38,
+      "qsos": 1431
     },
     {
       "reference": "US-6382",
@@ -6031,9 +6258,9 @@
       "longitude": -76.1377,
       "grid": "FM18wk",
       "status": "corridor",
-      "attempts": 59,
-      "activations": 56,
-      "qsos": 1956
+      "attempts": 60,
+      "activations": 57,
+      "qsos": 1970
     },
     {
       "reference": "US-6383",
@@ -6044,9 +6271,9 @@
       "longitude": -76.3534,
       "grid": "FM18tw",
       "status": "corridor",
-      "attempts": 76,
-      "activations": 75,
-      "qsos": 3133
+      "attempts": 78,
+      "activations": 77,
+      "qsos": 3221
     },
     {
       "reference": "US-6385",
@@ -6057,9 +6284,9 @@
       "longitude": -75.8484,
       "grid": "FM29bl",
       "status": "corridor",
-      "attempts": 29,
-      "activations": 29,
-      "qsos": 879
+      "attempts": 30,
+      "activations": 30,
+      "qsos": 892
     },
     {
       "reference": "US-6387",
@@ -6070,9 +6297,9 @@
       "longitude": -75.8558,
       "grid": "FM29bq",
       "status": "corridor",
-      "attempts": 111,
-      "activations": 110,
-      "qsos": 2850
+      "attempts": 112,
+      "activations": 111,
+      "qsos": 2864
     },
     {
       "reference": "US-6388",
@@ -6096,9 +6323,9 @@
       "longitude": -76.508,
       "grid": "FM18rj",
       "status": "corridor",
-      "attempts": 164,
-      "activations": 163,
-      "qsos": 7284
+      "attempts": 167,
+      "activations": 166,
+      "qsos": 7354
     },
     {
       "reference": "US-6391",
@@ -6109,9 +6336,9 @@
       "longitude": -76.7084,
       "grid": "FM18pr",
       "status": "corridor",
-      "attempts": 51,
-      "activations": 51,
-      "qsos": 2302
+      "attempts": 52,
+      "activations": 52,
+      "qsos": 2323
     },
     {
       "reference": "US-6392",
@@ -6135,9 +6362,9 @@
       "longitude": -77.0006,
       "grid": "FM19ll",
       "status": "corridor",
-      "attempts": 546,
-      "activations": 532,
-      "qsos": 17656
+      "attempts": 548,
+      "activations": 534,
+      "qsos": 17684
     },
     {
       "reference": "US-6395",
@@ -6161,9 +6388,9 @@
       "longitude": -76.8357,
       "grid": "FM19nj",
       "status": "corridor",
-      "attempts": 348,
-      "activations": 343,
-      "qsos": 11140
+      "attempts": 349,
+      "activations": 344,
+      "qsos": 11157
     },
     {
       "reference": "US-6399",
@@ -6239,9 +6466,9 @@
       "longitude": -76.7812,
       "grid": "FM19ok",
       "status": "corridor",
-      "attempts": 214,
-      "activations": 214,
-      "qsos": 8346
+      "attempts": 215,
+      "activations": 215,
+      "qsos": 8458
     },
     {
       "reference": "US-7729",
@@ -6252,9 +6479,9 @@
       "longitude": -76.9739,
       "grid": "FM19mi",
       "status": "corridor",
-      "attempts": 343,
-      "activations": 341,
-      "qsos": 11099
+      "attempts": 345,
+      "activations": 343,
+      "qsos": 11207
     },
     {
       "reference": "US-7730",
@@ -6278,9 +6505,9 @@
       "longitude": -75.7969,
       "grid": "FM29ch",
       "status": "corridor",
-      "attempts": 37,
-      "activations": 37,
-      "qsos": 1117
+      "attempts": 38,
+      "activations": 38,
+      "qsos": 1129
     },
     {
       "reference": "US-7732",
@@ -6447,9 +6674,9 @@
       "longitude": -76.2768,
       "grid": "FM18uk",
       "status": "corridor",
-      "attempts": 13,
-      "activations": 13,
-      "qsos": 376
+      "attempts": 15,
+      "activations": 15,
+      "qsos": 437
     },
     {
       "reference": "US-7753",
@@ -6486,9 +6713,9 @@
       "longitude": -77.0773,
       "grid": "FM18lk",
       "status": "corridor",
-      "attempts": 20,
-      "activations": 20,
-      "qsos": 561
+      "attempts": 21,
+      "activations": 21,
+      "qsos": 581
     },
     {
       "reference": "US-7756",
@@ -6551,9 +6778,9 @@
       "longitude": -76.5372,
       "grid": "FM18rm",
       "status": "corridor",
-      "attempts": 177,
-      "activations": 177,
-      "qsos": 4333
+      "attempts": 178,
+      "activations": 178,
+      "qsos": 4344
     },
     {
       "reference": "US-7762",
@@ -6564,9 +6791,9 @@
       "longitude": -76.9911,
       "grid": "FM18mj",
       "status": "corridor",
-      "attempts": 27,
-      "activations": 27,
-      "qsos": 836
+      "attempts": 28,
+      "activations": 28,
+      "qsos": 872
     },
     {
       "reference": "US-7763",
@@ -6668,9 +6895,9 @@
       "longitude": -76.8976,
       "grid": "FM18nx",
       "status": "corridor",
-      "attempts": 1583,
-      "activations": 1576,
-      "qsos": 50049
+      "attempts": 1584,
+      "activations": 1577,
+      "qsos": 50084
     },
     {
       "reference": "US-7974",
@@ -6707,9 +6934,9 @@
       "longitude": -77.126,
       "grid": "FM18kw",
       "status": "corridor",
-      "attempts": 1032,
-      "activations": 1019,
-      "qsos": 45691
+      "attempts": 1038,
+      "activations": 1025,
+      "qsos": 46177
     },
     {
       "reference": "US-10732",
@@ -6811,9 +7038,9 @@
       "longitude": -75.8982,
       "grid": "FM29bn",
       "status": "corridor",
-      "attempts": 38,
-      "activations": 38,
-      "qsos": 1471
+      "attempts": 39,
+      "activations": 39,
+      "qsos": 1494
     },
     {
       "reference": "US-10775",
@@ -6850,9 +7077,9 @@
       "longitude": -76.9342,
       "grid": "FM18mk",
       "status": "corridor",
-      "attempts": 16,
-      "activations": 16,
-      "qsos": 459
+      "attempts": 17,
+      "activations": 17,
+      "qsos": 472
     },
     {
       "reference": "US-10781",
@@ -6863,9 +7090,22 @@
       "longitude": -76.4216,
       "grid": "FM18sj",
       "status": "corridor",
-      "attempts": 119,
-      "activations": 118,
-      "qsos": 4220
+      "attempts": 120,
+      "activations": 119,
+      "qsos": 4232
+    },
+    {
+      "reference": "US-13377",
+      "name": "Freedman's State Park",
+      "state": "US-MD",
+      "stateName": "Maryland",
+      "latitude": 39.2393,
+      "longitude": -77.0581,
+      "grid": "FM19lf",
+      "status": "corridor",
+      "attempts": 1,
+      "activations": 1,
+      "qsos": 11
     },
     {
       "reference": "US-0016",
@@ -6876,9 +7116,9 @@
       "longitude": -76.5025,
       "grid": "FM17rf",
       "status": "corridor",
-      "attempts": 454,
-      "activations": 428,
-      "qsos": 16640
+      "attempts": 462,
+      "activations": 436,
+      "qsos": 16771
     },
     {
       "reference": "US-0563",
@@ -6889,9 +7129,9 @@
       "longitude": -77.1654,
       "grid": "FM18kp",
       "status": "corridor",
-      "attempts": 67,
-      "activations": 65,
-      "qsos": 1844
+      "attempts": 68,
+      "activations": 66,
+      "qsos": 1859
     },
     {
       "reference": "US-0564",
@@ -6915,9 +7155,9 @@
       "longitude": -76.5517,
       "grid": "FM16ro",
       "status": "corridor",
-      "attempts": 160,
-      "activations": 153,
-      "qsos": 6239
+      "attempts": 161,
+      "activations": 154,
+      "qsos": 6288
     },
     {
       "reference": "US-0567",
@@ -6941,9 +7181,9 @@
       "longitude": -77.2261,
       "grid": "FM18jp",
       "status": "corridor",
-      "attempts": 136,
-      "activations": 135,
-      "qsos": 3939
+      "attempts": 138,
+      "activations": 137,
+      "qsos": 3992
     },
     {
       "reference": "US-0572",
@@ -6954,9 +7194,9 @@
       "longitude": -76.8873,
       "grid": "FM17nw",
       "status": "corridor",
-      "attempts": 76,
-      "activations": 75,
-      "qsos": 3461
+      "attempts": 78,
+      "activations": 77,
+      "qsos": 3562
     },
     {
       "reference": "US-0691",
@@ -6967,9 +7207,9 @@
       "longitude": -77.4166,
       "grid": "FM18hn",
       "status": "corridor",
-      "attempts": 311,
-      "activations": 280,
-      "qsos": 10736
+      "attempts": 313,
+      "activations": 282,
+      "qsos": 11212
     },
     {
       "reference": "US-0707",
@@ -6980,9 +7220,9 @@
       "longitude": -77.6223,
       "grid": "FM17ed",
       "status": "corridor",
-      "attempts": 184,
-      "activations": 178,
-      "qsos": 6236
+      "attempts": 187,
+      "activations": 181,
+      "qsos": 6304
     },
     {
       "reference": "US-0712",
@@ -6993,9 +7233,9 @@
       "longitude": -77.5493,
       "grid": "FM18ft",
       "status": "corridor",
-      "attempts": 710,
-      "activations": 686,
-      "qsos": 27376
+      "attempts": 714,
+      "activations": 690,
+      "qsos": 27471
     },
     {
       "reference": "US-0713",
@@ -7019,9 +7259,9 @@
       "longitude": -77.7426,
       "grid": "FM18dg",
       "status": "corridor",
-      "attempts": 342,
-      "activations": 330,
-      "qsos": 15654
+      "attempts": 343,
+      "activations": 331,
+      "qsos": 15687
     },
     {
       "reference": "US-0844",
@@ -7032,9 +7272,9 @@
       "longitude": -77.4383,
       "grid": "FM17gn",
       "status": "corridor",
-      "attempts": 14,
-      "activations": 13,
-      "qsos": 394
+      "attempts": 15,
+      "activations": 14,
+      "qsos": 407
     },
     {
       "reference": "US-0929",
@@ -7045,9 +7285,9 @@
       "longitude": -76.3111,
       "grid": "FM17ua",
       "status": "corridor",
-      "attempts": 298,
-      "activations": 285,
-      "qsos": 15474
+      "attempts": 318,
+      "activations": 305,
+      "qsos": 18140
     },
     {
       "reference": "US-0935",
@@ -7084,9 +7324,9 @@
       "longitude": -77.1558,
       "grid": "FM18ki",
       "status": "corridor",
-      "attempts": 223,
-      "activations": 222,
-      "qsos": 7011
+      "attempts": 226,
+      "activations": 224,
+      "qsos": 7053
     },
     {
       "reference": "US-1294",
@@ -7097,9 +7337,9 @@
       "longitude": -76.7404,
       "grid": "FM17pd",
       "status": "corridor",
-      "attempts": 178,
-      "activations": 170,
-      "qsos": 6569
+      "attempts": 182,
+      "activations": 174,
+      "qsos": 6677
     },
     {
       "reference": "US-1299",
@@ -7110,9 +7350,9 @@
       "longitude": -76.0218,
       "grid": "FM16xv",
       "status": "corridor",
-      "attempts": 759,
-      "activations": 720,
-      "qsos": 33221
+      "attempts": 776,
+      "activations": 737,
+      "qsos": 34405
     },
     {
       "reference": "US-1306",
@@ -7136,9 +7376,9 @@
       "longitude": -77.2563,
       "grid": "FM18io",
       "status": "corridor",
-      "attempts": 116,
-      "activations": 112,
-      "qsos": 3728
+      "attempts": 117,
+      "activations": 113,
+      "qsos": 3777
     },
     {
       "reference": "US-1308",
@@ -7149,9 +7389,9 @@
       "longitude": -77.1988,
       "grid": "FM18jp",
       "status": "corridor",
-      "attempts": 124,
-      "activations": 120,
-      "qsos": 4517
+      "attempts": 125,
+      "activations": 121,
+      "qsos": 4535
     },
     {
       "reference": "US-1312",
@@ -7162,9 +7402,9 @@
       "longitude": -77.5677,
       "grid": "FM17fj",
       "status": "corridor",
-      "attempts": 484,
-      "activations": 459,
-      "qsos": 16364
+      "attempts": 489,
+      "activations": 464,
+      "qsos": 16447
     },
     {
       "reference": "US-1313",
@@ -7175,9 +7415,9 @@
       "longitude": -77.9259,
       "grid": "FM17aq",
       "status": "corridor",
-      "attempts": 268,
-      "activations": 255,
-      "qsos": 10531
+      "attempts": 269,
+      "activations": 256,
+      "qsos": 10566
     },
     {
       "reference": "US-1324",
@@ -7201,9 +7441,9 @@
       "longitude": -76.7245,
       "grid": "FM17pj",
       "status": "corridor",
-      "attempts": 118,
-      "activations": 116,
-      "qsos": 3302
+      "attempts": 119,
+      "activations": 117,
+      "qsos": 3317
     },
     {
       "reference": "US-2364",
@@ -7227,9 +7467,9 @@
       "longitude": -77.2748,
       "grid": "FM18io",
       "status": "corridor",
-      "attempts": 3010,
-      "activations": 2964,
-      "qsos": 124208
+      "attempts": 3034,
+      "activations": 2988,
+      "qsos": 125691
     },
     {
       "reference": "US-5506",
@@ -7253,9 +7493,9 @@
       "longitude": -77.5378,
       "grid": "FM17fh",
       "status": "corridor",
-      "attempts": 158,
-      "activations": 158,
-      "qsos": 7024
+      "attempts": 159,
+      "activations": 159,
+      "qsos": 7040
     },
     {
       "reference": "US-5509",
@@ -7474,9 +7714,9 @@
       "longitude": -76.0083,
       "grid": "FM16xw",
       "status": "corridor",
-      "attempts": 123,
-      "activations": 122,
-      "qsos": 3086
+      "attempts": 125,
+      "activations": 124,
+      "qsos": 3112
     },
     {
       "reference": "US-8204",
@@ -7487,9 +7727,9 @@
       "longitude": -76.5106,
       "grid": "FM17rf",
       "status": "corridor",
-      "attempts": 174,
-      "activations": 169,
-      "qsos": 5848
+      "attempts": 180,
+      "activations": 175,
+      "qsos": 5953
     },
     {
       "reference": "US-9897",
@@ -7513,9 +7753,9 @@
       "longitude": -77.0496,
       "grid": "FM18lt",
       "status": "corridor",
-      "attempts": 1315,
-      "activations": 1304,
-      "qsos": 55635
+      "attempts": 1328,
+      "activations": 1317,
+      "qsos": 56352
     },
     {
       "reference": "US-9899",
@@ -7526,9 +7766,9 @@
       "longitude": -77.0528,
       "grid": "FM18lr",
       "status": "corridor",
-      "attempts": 106,
+      "attempts": 107,
       "activations": 99,
-      "qsos": 5652
+      "qsos": 5656
     },
     {
       "reference": "US-9902",
@@ -7539,9 +7779,9 @@
       "longitude": -76.5565,
       "grid": "FM17rg",
       "status": "corridor",
-      "attempts": 216,
-      "activations": 205,
-      "qsos": 7419
+      "attempts": 217,
+      "activations": 206,
+      "qsos": 7431
     },
     {
       "reference": "US-9907",
@@ -7552,9 +7792,9 @@
       "longitude": -76.0531,
       "grid": "FM16xw",
       "status": "corridor",
-      "attempts": 518,
-      "activations": 508,
-      "qsos": 25545
+      "attempts": 535,
+      "activations": 525,
+      "qsos": 26729
     },
     {
       "reference": "US-9926",
@@ -7578,9 +7818,9 @@
       "longitude": -77.8235,
       "grid": "FM18cc",
       "status": "corridor",
-      "attempts": 6116,
-      "activations": 6006,
-      "qsos": 330018
+      "attempts": 6204,
+      "activations": 6093,
+      "qsos": 336789
     },
     {
       "reference": "US-9937",
@@ -7591,9 +7831,9 @@
       "longitude": -77.1978,
       "grid": "FM18jq",
       "status": "corridor",
-      "attempts": 86,
-      "activations": 85,
-      "qsos": 2470
+      "attempts": 88,
+      "activations": 87,
+      "qsos": 2583
     },
     {
       "reference": "US-9961",
@@ -7604,9 +7844,9 @@
       "longitude": -77.05,
       "grid": "FM18ls",
       "status": "corridor",
-      "attempts": 271,
-      "activations": 264,
-      "qsos": 9647
+      "attempts": 278,
+      "activations": 271,
+      "qsos": 9874
     },
     {
       "reference": "US-9967",
@@ -7630,9 +7870,9 @@
       "longitude": -77.1767,
       "grid": "FM18jq",
       "status": "corridor",
-      "attempts": 31,
-      "activations": 30,
-      "qsos": 768
+      "attempts": 32,
+      "activations": 31,
+      "qsos": 828
     },
     {
       "reference": "US-11672",
@@ -7656,9 +7896,9 @@
       "longitude": -77.8661,
       "grid": "FM18bm",
       "status": "corridor",
-      "attempts": 103,
-      "activations": 101,
-      "qsos": 3851
+      "attempts": 104,
+      "activations": 102,
+      "qsos": 3908
     },
     {
       "reference": "US-0410",
@@ -7682,9 +7922,9 @@
       "longitude": -76.3892,
       "grid": "FM14tw",
       "status": "corridor",
-      "attempts": 27,
-      "activations": 25,
-      "qsos": 1196
+      "attempts": 28,
+      "activations": 26,
+      "qsos": 1209
     },
     {
       "reference": "US-0412",
@@ -7708,9 +7948,9 @@
       "longitude": -75.9669,
       "grid": "FM26am",
       "status": "corridor",
-      "attempts": 97,
+      "attempts": 98,
       "activations": 96,
-      "qsos": 6074
+      "qsos": 6076
     },
     {
       "reference": "US-0414",
@@ -7760,9 +8000,9 @@
       "longitude": -77.0224,
       "grid": "FM15lv",
       "status": "corridor",
-      "attempts": 37,
-      "activations": 35,
-      "qsos": 1047
+      "attempts": 38,
+      "activations": 36,
+      "qsos": 1059
     },
     {
       "reference": "US-0419",
@@ -7786,9 +8026,9 @@
       "longitude": -76.5828,
       "grid": "FM14rp",
       "status": "corridor",
-      "attempts": 243,
-      "activations": 237,
-      "qsos": 16791
+      "attempts": 244,
+      "activations": 238,
+      "qsos": 16806
     },
     {
       "reference": "US-0706",
@@ -7799,9 +8039,9 @@
       "longitude": -78.1128,
       "grid": "FM04wl",
       "status": "corridor",
-      "attempts": 87,
-      "activations": 81,
-      "qsos": 3870
+      "attempts": 89,
+      "activations": 83,
+      "qsos": 3895
     },
     {
       "reference": "US-0718",
@@ -7812,9 +8052,9 @@
       "longitude": -79.8325,
       "grid": "FM06cd",
       "status": "corridor",
-      "attempts": 482,
-      "activations": 445,
-      "qsos": 16961
+      "attempts": 485,
+      "activations": 448,
+      "qsos": 17049
     },
     {
       "reference": "US-0797",
@@ -7838,9 +8078,9 @@
       "longitude": -75.7233,
       "grid": "FM25dw",
       "status": "corridor",
-      "attempts": 80,
-      "activations": 78,
-      "qsos": 2739
+      "attempts": 81,
+      "activations": 79,
+      "qsos": 2749
     },
     {
       "reference": "US-2721",
@@ -7864,9 +8104,9 @@
       "longitude": -77.9139,
       "grid": "FM14bb",
       "status": "corridor",
-      "attempts": 311,
-      "activations": 302,
-      "qsos": 12549
+      "attempts": 315,
+      "activations": 306,
+      "qsos": 12666
     },
     {
       "reference": "US-2723",
@@ -7877,9 +8117,9 @@
       "longitude": -78.9775,
       "grid": "FM05mf",
       "status": "corridor",
-      "attempts": 1044,
-      "activations": 1018,
-      "qsos": 37223
+      "attempts": 1056,
+      "activations": 1029,
+      "qsos": 37741
     },
     {
       "reference": "US-2725",
@@ -7890,9 +8130,9 @@
       "longitude": -77.8897,
       "grid": "FM15bf",
       "status": "corridor",
-      "attempts": 122,
-      "activations": 107,
-      "qsos": 4271
+      "attempts": 125,
+      "activations": 110,
+      "qsos": 4344
     },
     {
       "reference": "US-2727",
@@ -7916,9 +8156,9 @@
       "longitude": -79.0059,
       "grid": "FM06lb",
       "status": "corridor",
-      "attempts": 196,
+      "attempts": 197,
       "activations": 192,
-      "qsos": 7388
+      "qsos": 7395
     },
     {
       "reference": "US-2730",
@@ -7929,9 +8169,9 @@
       "longitude": -76.6904,
       "grid": "FM14pq",
       "status": "corridor",
-      "attempts": 107,
-      "activations": 94,
-      "qsos": 3604
+      "attempts": 109,
+      "activations": 96,
+      "qsos": 3667
     },
     {
       "reference": "US-2731",
@@ -7955,9 +8195,9 @@
       "longitude": -77.1341,
       "grid": "FM14kp",
       "status": "corridor",
-      "attempts": 154,
-      "activations": 138,
-      "qsos": 4978
+      "attempts": 157,
+      "activations": 141,
+      "qsos": 5016
     },
     {
       "reference": "US-2735",
@@ -7968,9 +8208,9 @@
       "longitude": -80.2682,
       "grid": "EM96uj",
       "status": "corridor",
-      "attempts": 145,
-      "activations": 138,
-      "qsos": 5532
+      "attempts": 146,
+      "activations": 139,
+      "qsos": 5543
     },
     {
       "reference": "US-2737",
@@ -7994,9 +8234,9 @@
       "longitude": -78.5964,
       "grid": "FM04qq",
       "status": "corridor",
-      "attempts": 213,
-      "activations": 204,
-      "qsos": 11300
+      "attempts": 215,
+      "activations": 206,
+      "qsos": 11384
     },
     {
       "reference": "US-2741",
@@ -8007,9 +8247,9 @@
       "longitude": -78.5005,
       "grid": "FM04rg",
       "status": "corridor",
-      "attempts": 78,
-      "activations": 77,
-      "qsos": 3675
+      "attempts": 79,
+      "activations": 78,
+      "qsos": 3688
     },
     {
       "reference": "US-2742",
@@ -8020,9 +8260,9 @@
       "longitude": -79.001,
       "grid": "FM04lj",
       "status": "corridor",
-      "attempts": 182,
-      "activations": 177,
-      "qsos": 6081
+      "attempts": 187,
+      "activations": 182,
+      "qsos": 6301
     },
     {
       "reference": "US-2743",
@@ -8033,9 +8273,9 @@
       "longitude": -79.9501,
       "grid": "FM06ak",
       "status": "corridor",
-      "attempts": 223,
-      "activations": 216,
-      "qsos": 10551
+      "attempts": 225,
+      "activations": 218,
+      "qsos": 10590
     },
     {
       "reference": "US-2744",
@@ -8046,9 +8286,9 @@
       "longitude": -77.8888,
       "grid": "FM16bf",
       "status": "corridor",
-      "attempts": 119,
+      "attempts": 120,
       "activations": 112,
-      "qsos": 5779
+      "qsos": 5716
     },
     {
       "reference": "US-2745",
@@ -8072,9 +8312,9 @@
       "longitude": -80.0835,
       "grid": "EM95wi",
       "status": "corridor",
-      "attempts": 454,
-      "activations": 427,
-      "qsos": 18396
+      "attempts": 459,
+      "activations": 432,
+      "qsos": 18620
     },
     {
       "reference": "US-2749",
@@ -8098,9 +8338,9 @@
       "longitude": -80.4637,
       "grid": "EM96si",
       "status": "corridor",
-      "attempts": 271,
-      "activations": 249,
-      "qsos": 9621
+      "attempts": 273,
+      "activations": 251,
+      "qsos": 9662
     },
     {
       "reference": "US-2751",
@@ -8111,9 +8351,9 @@
       "longitude": -78.8995,
       "grid": "FM05nl",
       "status": "corridor",
-      "attempts": 234,
-      "activations": 224,
-      "qsos": 11803
+      "attempts": 237,
+      "activations": 227,
+      "qsos": 11854
     },
     {
       "reference": "US-2752",
@@ -8137,9 +8377,9 @@
       "longitude": -78.7541,
       "grid": "FM05ov",
       "status": "corridor",
-      "attempts": 707,
-      "activations": 667,
-      "qsos": 21311
+      "attempts": 711,
+      "activations": 671,
+      "qsos": 21580
     },
     {
       "reference": "US-3841",
@@ -8150,9 +8390,9 @@
       "longitude": -78.6888,
       "grid": "FM06pa",
       "status": "corridor",
-      "attempts": 766,
-      "activations": 728,
-      "qsos": 30253
+      "attempts": 774,
+      "activations": 736,
+      "qsos": 30367
     },
     {
       "reference": "US-3842",
@@ -8163,9 +8403,9 @@
       "longitude": -77.929,
       "grid": "FM13aw",
       "status": "corridor",
-      "attempts": 147,
-      "activations": 140,
-      "qsos": 5206
+      "attempts": 148,
+      "activations": 141,
+      "qsos": 5219
     },
     {
       "reference": "US-3843",
@@ -8176,9 +8416,9 @@
       "longitude": -79.7853,
       "grid": "FM06cf",
       "status": "corridor",
-      "attempts": 392,
-      "activations": 386,
-      "qsos": 15121
+      "attempts": 394,
+      "activations": 388,
+      "qsos": 15191
     },
     {
       "reference": "US-3844",
@@ -8189,9 +8429,9 @@
       "longitude": -79.0169,
       "grid": "FM05lr",
       "status": "corridor",
-      "attempts": 588,
-      "activations": 573,
-      "qsos": 20034
+      "attempts": 591,
+      "activations": 575,
+      "qsos": 20107
     },
     {
       "reference": "US-3845",
@@ -8202,9 +8442,9 @@
       "longitude": -78.3688,
       "grid": "FM06tk",
       "status": "corridor",
-      "attempts": 167,
-      "activations": 159,
-      "qsos": 7843
+      "attempts": 172,
+      "activations": 164,
+      "qsos": 8007
     },
     {
       "reference": "US-3847",
@@ -8228,9 +8468,9 @@
       "longitude": -79.369,
       "grid": "FM05hd",
       "status": "corridor",
-      "attempts": 203,
-      "activations": 198,
-      "qsos": 5538
+      "attempts": 205,
+      "activations": 199,
+      "qsos": 5556
     },
     {
       "reference": "US-3849",
@@ -8241,9 +8481,9 @@
       "longitude": -77.9782,
       "grid": "FM13au",
       "status": "corridor",
-      "attempts": 53,
-      "activations": 52,
-      "qsos": 2796
+      "attempts": 54,
+      "activations": 53,
+      "qsos": 2812
     },
     {
       "reference": "US-3850",
@@ -8254,9 +8494,9 @@
       "longitude": -78.5379,
       "grid": "FM03ru",
       "status": "corridor",
-      "attempts": 63,
-      "activations": 60,
-      "qsos": 2774
+      "attempts": 64,
+      "activations": 61,
+      "qsos": 2787
     },
     {
       "reference": "US-3851",
@@ -8267,9 +8507,9 @@
       "longitude": -79.0489,
       "grid": "FM06la",
       "status": "corridor",
-      "attempts": 111,
-      "activations": 107,
-      "qsos": 3579
+      "attempts": 112,
+      "activations": 108,
+      "qsos": 3589
     },
     {
       "reference": "US-3852",
@@ -8332,9 +8572,9 @@
       "longitude": -79.0473,
       "grid": "FM05lx",
       "status": "corridor",
-      "attempts": 75,
-      "activations": 75,
-      "qsos": 1866
+      "attempts": 76,
+      "activations": 76,
+      "qsos": 1877
     },
     {
       "reference": "US-3860",
@@ -8423,9 +8663,9 @@
       "longitude": -79.7711,
       "grid": "FM05co",
       "status": "corridor",
-      "attempts": 57,
-      "activations": 55,
-      "qsos": 2507
+      "attempts": 59,
+      "activations": 57,
+      "qsos": 2535
     },
     {
       "reference": "US-3867",
@@ -8436,9 +8676,9 @@
       "longitude": -78.7537,
       "grid": "FM05or",
       "status": "corridor",
-      "attempts": 447,
-      "activations": 434,
-      "qsos": 13841
+      "attempts": 453,
+      "activations": 440,
+      "qsos": 14017
     },
     {
       "reference": "US-3868",
@@ -8449,9 +8689,9 @@
       "longitude": -76.8332,
       "grid": "FM14oq",
       "status": "corridor",
-      "attempts": 54,
-      "activations": 54,
-      "qsos": 1521
+      "attempts": 55,
+      "activations": 55,
+      "qsos": 1532
     },
     {
       "reference": "US-3870",
@@ -8475,9 +8715,9 @@
       "longitude": -79.1591,
       "grid": "FM05ko",
       "status": "corridor",
-      "attempts": 142,
-      "activations": 135,
-      "qsos": 4208
+      "attempts": 144,
+      "activations": 137,
+      "qsos": 4277
     },
     {
       "reference": "US-4508",
@@ -8488,9 +8728,9 @@
       "longitude": -76.9971,
       "grid": "FM14mu",
       "status": "corridor",
-      "attempts": 222,
-      "activations": 215,
-      "qsos": 10907
+      "attempts": 239,
+      "activations": 232,
+      "qsos": 11763
     },
     {
       "reference": "US-4511",
@@ -8501,9 +8741,9 @@
       "longitude": -80.0193,
       "grid": "EM95xk",
       "status": "corridor",
-      "attempts": 519,
-      "activations": 514,
-      "qsos": 37556
+      "attempts": 531,
+      "activations": 526,
+      "qsos": 37937
     },
     {
       "reference": "US-4852",
@@ -8514,9 +8754,9 @@
       "longitude": -78.5951,
       "grid": "FM04qq",
       "status": "corridor",
-      "attempts": 333,
-      "activations": 326,
-      "qsos": 59427
+      "attempts": 334,
+      "activations": 327,
+      "qsos": 59632
     },
     {
       "reference": "US-4853",
@@ -8527,9 +8767,9 @@
       "longitude": -78.4893,
       "grid": "FM05sq",
       "status": "corridor",
-      "attempts": 137,
-      "activations": 133,
-      "qsos": 4023
+      "attempts": 139,
+      "activations": 135,
+      "qsos": 4058
     },
     {
       "reference": "US-4857",
@@ -8553,9 +8793,9 @@
       "longitude": -78.5831,
       "grid": "FM04rq",
       "status": "corridor",
-      "attempts": 202,
-      "activations": 201,
-      "qsos": 38635
+      "attempts": 204,
+      "activations": 203,
+      "qsos": 38858
     },
     {
       "reference": "US-6830",
@@ -8566,9 +8806,9 @@
       "longitude": -79.521,
       "grid": "FM06fa",
       "status": "corridor",
-      "attempts": 105,
-      "activations": 99,
-      "qsos": 3446
+      "attempts": 106,
+      "activations": 100,
+      "qsos": 3458
     },
     {
       "reference": "US-6831",
@@ -8579,9 +8819,9 @@
       "longitude": -77.9544,
       "grid": "FM14af",
       "status": "corridor",
-      "attempts": 282,
-      "activations": 271,
-      "qsos": 16584
+      "attempts": 284,
+      "activations": 273,
+      "qsos": 16631
     },
     {
       "reference": "US-6832",
@@ -8618,9 +8858,9 @@
       "longitude": -77.9462,
       "grid": "FM14aa",
       "status": "corridor",
-      "attempts": 90,
-      "activations": 83,
-      "qsos": 2969
+      "attempts": 91,
+      "activations": 84,
+      "qsos": 2982
     },
     {
       "reference": "US-6835",
@@ -8631,9 +8871,9 @@
       "longitude": -77.976,
       "grid": "FM15am",
       "status": "corridor",
-      "attempts": 64,
-      "activations": 62,
-      "qsos": 2808
+      "attempts": 65,
+      "activations": 63,
+      "qsos": 2832
     },
     {
       "reference": "US-6836",
@@ -8644,9 +8884,9 @@
       "longitude": -79.6243,
       "grid": "FM06eb",
       "status": "corridor",
-      "attempts": 252,
-      "activations": 251,
-      "qsos": 17751
+      "attempts": 254,
+      "activations": 253,
+      "qsos": 17809
     },
     {
       "reference": "US-6837",
@@ -8683,9 +8923,9 @@
       "longitude": -77.9177,
       "grid": "FM13ax",
       "status": "corridor",
-      "attempts": 131,
-      "activations": 127,
-      "qsos": 4212
+      "attempts": 132,
+      "activations": 128,
+      "qsos": 4225
     },
     {
       "reference": "US-6841",
@@ -8709,9 +8949,9 @@
       "longitude": -76.6079,
       "grid": "FM16qb",
       "status": "corridor",
-      "attempts": 30,
-      "activations": 30,
-      "qsos": 674
+      "attempts": 31,
+      "activations": 31,
+      "qsos": 684
     },
     {
       "reference": "US-6843",
@@ -8722,9 +8962,9 @@
       "longitude": -77.5896,
       "grid": "FM16eh",
       "status": "corridor",
-      "attempts": 91,
-      "activations": 78,
-      "qsos": 6012
+      "attempts": 92,
+      "activations": 79,
+      "qsos": 6034
     },
     {
       "reference": "US-6844",
@@ -8761,9 +9001,9 @@
       "longitude": -79.3839,
       "grid": "FM05hl",
       "status": "corridor",
-      "attempts": 74,
-      "activations": 72,
-      "qsos": 2358
+      "attempts": 75,
+      "activations": 73,
+      "qsos": 2370
     },
     {
       "reference": "US-6847",
@@ -8774,9 +9014,9 @@
       "longitude": -80.4301,
       "grid": "EM95sq",
       "status": "corridor",
-      "attempts": 254,
-      "activations": 245,
-      "qsos": 11502
+      "attempts": 255,
+      "activations": 246,
+      "qsos": 11517
     },
     {
       "reference": "US-6849",
@@ -8787,9 +9027,9 @@
       "longitude": -80.4666,
       "grid": "EM95sg",
       "status": "corridor",
-      "attempts": 238,
-      "activations": 225,
-      "qsos": 7705
+      "attempts": 240,
+      "activations": 227,
+      "qsos": 7729
     },
     {
       "reference": "US-6850",
@@ -8852,9 +9092,9 @@
       "longitude": -77.0443,
       "grid": "FM15lc",
       "status": "corridor",
-      "attempts": 34,
-      "activations": 31,
-      "qsos": 838
+      "attempts": 35,
+      "activations": 32,
+      "qsos": 849
     },
     {
       "reference": "US-6877",
@@ -8865,9 +9105,9 @@
       "longitude": -80.2128,
       "grid": "EM95vn",
       "status": "corridor",
-      "attempts": 472,
-      "activations": 468,
-      "qsos": 20522
+      "attempts": 479,
+      "activations": 474,
+      "qsos": 20713
     },
     {
       "reference": "US-6878",
@@ -8891,9 +9131,9 @@
       "longitude": -77.8527,
       "grid": "FM14bp",
       "status": "corridor",
-      "attempts": 32,
-      "activations": 32,
-      "qsos": 1400
+      "attempts": 33,
+      "activations": 33,
+      "qsos": 1434
     },
     {
       "reference": "US-6880",
@@ -8930,9 +9170,9 @@
       "longitude": -78.5951,
       "grid": "FM04qq",
       "status": "corridor",
-      "attempts": 82,
-      "activations": 80,
-      "qsos": 3805
+      "attempts": 83,
+      "activations": 81,
+      "qsos": 3823
     },
     {
       "reference": "US-6883",
@@ -8943,9 +9183,9 @@
       "longitude": -77.9044,
       "grid": "FM16bg",
       "status": "corridor",
-      "attempts": 25,
-      "activations": 25,
-      "qsos": 1047
+      "attempts": 24,
+      "activations": 24,
+      "qsos": 976
     },
     {
       "reference": "US-6884",
@@ -8956,9 +9196,9 @@
       "longitude": -79.2213,
       "grid": "FM06ja",
       "status": "corridor",
-      "attempts": 68,
-      "activations": 66,
-      "qsos": 2444
+      "attempts": 69,
+      "activations": 67,
+      "qsos": 2458
     },
     {
       "reference": "US-6885",
@@ -8982,9 +9222,9 @@
       "longitude": -79.0008,
       "grid": "FM04lm",
       "status": "corridor",
-      "attempts": 28,
-      "activations": 27,
-      "qsos": 890
+      "attempts": 29,
+      "activations": 28,
+      "qsos": 903
     },
     {
       "reference": "US-6888",
@@ -8995,9 +9235,9 @@
       "longitude": -78.7463,
       "grid": "FM06pb",
       "status": "corridor",
-      "attempts": 380,
-      "activations": 374,
-      "qsos": 18498
+      "attempts": 385,
+      "activations": 378,
+      "qsos": 18558
     },
     {
       "reference": "US-6889",
@@ -9021,9 +9261,9 @@
       "longitude": -77.8174,
       "grid": "FM14cm",
       "status": "corridor",
-      "attempts": 22,
-      "activations": 22,
-      "qsos": 1039
+      "attempts": 23,
+      "activations": 23,
+      "qsos": 1050
     },
     {
       "reference": "US-6891",
@@ -9034,9 +9274,9 @@
       "longitude": -76.7105,
       "grid": "FM14ps",
       "status": "corridor",
-      "attempts": 16,
-      "activations": 16,
-      "qsos": 959
+      "attempts": 17,
+      "activations": 17,
+      "qsos": 972
     },
     {
       "reference": "US-6892",
@@ -9060,9 +9300,9 @@
       "longitude": -76.6507,
       "grid": "FM16qb",
       "status": "corridor",
-      "attempts": 18,
-      "activations": 18,
-      "qsos": 436
+      "attempts": 19,
+      "activations": 19,
+      "qsos": 447
     },
     {
       "reference": "US-6894",
@@ -9086,9 +9326,9 @@
       "longitude": -78.5385,
       "grid": "FM04rd",
       "status": "corridor",
-      "attempts": 36,
-      "activations": 36,
-      "qsos": 1401
+      "attempts": 37,
+      "activations": 37,
+      "qsos": 1414
     },
     {
       "reference": "US-6897",
@@ -9099,9 +9339,9 @@
       "longitude": -77.0695,
       "grid": "FM15lb",
       "status": "corridor",
-      "attempts": 146,
-      "activations": 143,
-      "qsos": 7944
+      "attempts": 153,
+      "activations": 150,
+      "qsos": 8117
     },
     {
       "reference": "US-6898",
@@ -9164,9 +9404,9 @@
       "longitude": -78.1024,
       "grid": "FM06wi",
       "status": "corridor",
-      "attempts": 27,
-      "activations": 26,
-      "qsos": 1242
+      "attempts": 26,
+      "activations": 25,
+      "qsos": 1118
     },
     {
       "reference": "US-6905",
@@ -9190,9 +9430,9 @@
       "longitude": -78.2995,
       "grid": "FM04uc",
       "status": "corridor",
-      "attempts": 94,
-      "activations": 90,
-      "qsos": 4006
+      "attempts": 95,
+      "activations": 91,
+      "qsos": 4019
     },
     {
       "reference": "US-6908",
@@ -9216,9 +9456,9 @@
       "longitude": -78.9392,
       "grid": "FM05mo",
       "status": "corridor",
-      "attempts": 269,
-      "activations": 269,
-      "qsos": 10941
+      "attempts": 271,
+      "activations": 271,
+      "qsos": 11128
     },
     {
       "reference": "US-6911",
@@ -9242,9 +9482,9 @@
       "longitude": -77.8124,
       "grid": "FM14cn",
       "status": "corridor",
-      "attempts": 87,
-      "activations": 86,
-      "qsos": 4212
+      "attempts": 88,
+      "activations": 87,
+      "qsos": 4223
     },
     {
       "reference": "US-6913",
@@ -9294,9 +9534,9 @@
       "longitude": -78.3803,
       "grid": "FM04td",
       "status": "corridor",
-      "attempts": 42,
-      "activations": 41,
-      "qsos": 1483
+      "attempts": 43,
+      "activations": 42,
+      "qsos": 1494
     },
     {
       "reference": "US-6919",
@@ -9320,9 +9560,9 @@
       "longitude": -79.0461,
       "grid": "FM05ln",
       "status": "corridor",
-      "attempts": 113,
-      "activations": 112,
-      "qsos": 4271
+      "attempts": 114,
+      "activations": 113,
+      "qsos": 4309
     },
     {
       "reference": "US-6922",
@@ -9333,9 +9573,9 @@
       "longitude": -80.3445,
       "grid": "EM95tr",
       "status": "corridor",
-      "attempts": 62,
-      "activations": 62,
-      "qsos": 1946
+      "attempts": 63,
+      "activations": 63,
+      "qsos": 1963
     },
     {
       "reference": "US-6923",
@@ -9359,9 +9599,9 @@
       "longitude": -77.1442,
       "grid": "FM15kv",
       "status": "corridor",
-      "attempts": 20,
-      "activations": 20,
-      "qsos": 770
+      "attempts": 21,
+      "activations": 21,
+      "qsos": 781
     },
     {
       "reference": "US-6925",
@@ -9385,9 +9625,9 @@
       "longitude": -76.9849,
       "grid": "FM15mc",
       "status": "corridor",
-      "attempts": 74,
-      "activations": 71,
-      "qsos": 4306
+      "attempts": 75,
+      "activations": 72,
+      "qsos": 4321
     },
     {
       "reference": "US-6930",
@@ -9411,9 +9651,9 @@
       "longitude": -79.2166,
       "grid": "FM05ja",
       "status": "corridor",
-      "attempts": 470,
-      "activations": 465,
-      "qsos": 29809
+      "attempts": 476,
+      "activations": 471,
+      "qsos": 29877
     },
     {
       "reference": "US-6932",
@@ -9424,9 +9664,9 @@
       "longitude": -76.0126,
       "grid": "FM16xh",
       "status": "corridor",
-      "attempts": 34,
-      "activations": 33,
-      "qsos": 1610
+      "attempts": 35,
+      "activations": 34,
+      "qsos": 1623
     },
     {
       "reference": "US-6933",
@@ -9463,9 +9703,9 @@
       "longitude": -80.4473,
       "grid": "EM95su",
       "status": "corridor",
-      "attempts": 82,
-      "activations": 82,
-      "qsos": 3451
+      "attempts": 83,
+      "activations": 83,
+      "qsos": 3462
     },
     {
       "reference": "US-6939",
@@ -9502,9 +9742,9 @@
       "longitude": -78.652,
       "grid": "FM05qf",
       "status": "corridor",
-      "attempts": 377,
-      "activations": 375,
-      "qsos": 17806
+      "attempts": 380,
+      "activations": 378,
+      "qsos": 17843
     },
     {
       "reference": "US-6944",
@@ -9515,9 +9755,9 @@
       "longitude": -79.3103,
       "grid": "FM05ia",
       "status": "corridor",
-      "attempts": 197,
-      "activations": 191,
-      "qsos": 6255
+      "attempts": 205,
+      "activations": 199,
+      "qsos": 6355
     },
     {
       "reference": "US-6945",
@@ -9554,9 +9794,9 @@
       "longitude": -79.5751,
       "grid": "FM05fa",
       "status": "corridor",
-      "attempts": 253,
-      "activations": 248,
-      "qsos": 8872
+      "attempts": 268,
+      "activations": 263,
+      "qsos": 9186
     },
     {
       "reference": "US-6948",
@@ -9567,9 +9807,9 @@
       "longitude": -78.0383,
       "grid": "FM06xd",
       "status": "corridor",
-      "attempts": 30,
-      "activations": 30,
-      "qsos": 1176
+      "attempts": 31,
+      "activations": 31,
+      "qsos": 1209
     },
     {
       "reference": "US-6951",
@@ -9580,9 +9820,9 @@
       "longitude": -78.0589,
       "grid": "FM06xf",
       "status": "corridor",
-      "attempts": 47,
-      "activations": 47,
-      "qsos": 3207
+      "attempts": 46,
+      "activations": 46,
+      "qsos": 3155
     },
     {
       "reference": "US-6953",
@@ -9593,9 +9833,9 @@
       "longitude": -77.4467,
       "grid": "FM14gn",
       "status": "corridor",
-      "attempts": 84,
-      "activations": 83,
-      "qsos": 3262
+      "attempts": 85,
+      "activations": 84,
+      "qsos": 3278
     },
     {
       "reference": "US-6954",
@@ -9606,9 +9846,9 @@
       "longitude": -78.7162,
       "grid": "FM04pt",
       "status": "corridor",
-      "attempts": 302,
-      "activations": 298,
-      "qsos": 47630
+      "attempts": 303,
+      "activations": 299,
+      "qsos": 47973
     },
     {
       "reference": "US-6955",
@@ -9619,9 +9859,9 @@
       "longitude": -77.9937,
       "grid": "FM14ah",
       "status": "corridor",
-      "attempts": 86,
-      "activations": 84,
-      "qsos": 3612
+      "attempts": 87,
+      "activations": 85,
+      "qsos": 3624
     },
     {
       "reference": "US-6956",
@@ -9632,9 +9872,9 @@
       "longitude": -77.5296,
       "grid": "FM15fu",
       "status": "corridor",
-      "attempts": 530,
-      "activations": 530,
-      "qsos": 15178
+      "attempts": 531,
+      "activations": 531,
+      "qsos": 15189
     },
     {
       "reference": "US-6957",
@@ -9684,9 +9924,9 @@
       "longitude": -80.0193,
       "grid": "EM95xk",
       "status": "corridor",
-      "attempts": 467,
-      "activations": 458,
-      "qsos": 34699
+      "attempts": 480,
+      "activations": 471,
+      "qsos": 35096
     },
     {
       "reference": "US-6963",
@@ -9710,9 +9950,9 @@
       "longitude": -77.1577,
       "grid": "FM15kq",
       "status": "corridor",
-      "attempts": 80,
-      "activations": 79,
-      "qsos": 5243
+      "attempts": 82,
+      "activations": 81,
+      "qsos": 5300
     },
     {
       "reference": "US-6965",
@@ -9762,9 +10002,9 @@
       "longitude": -76.6392,
       "grid": "FM16qb",
       "status": "corridor",
-      "attempts": 28,
-      "activations": 28,
-      "qsos": 1206
+      "attempts": 29,
+      "activations": 29,
+      "qsos": 1216
     },
     {
       "reference": "US-8010",
@@ -9788,9 +10028,9 @@
       "longitude": -78.0676,
       "grid": "FM04xo",
       "status": "corridor",
-      "attempts": 26,
-      "activations": 26,
-      "qsos": 798
+      "attempts": 27,
+      "activations": 27,
+      "qsos": 809
     },
     {
       "reference": "US-8226",
@@ -9801,9 +10041,9 @@
       "longitude": -79.2065,
       "grid": "FM05ja",
       "status": "corridor",
-      "attempts": 455,
-      "activations": 448,
-      "qsos": 28109
+      "attempts": 461,
+      "activations": 454,
+      "qsos": 28177
     },
     {
       "reference": "US-8313",
@@ -9814,9 +10054,9 @@
       "longitude": -79.0112,
       "grid": "FM06lb",
       "status": "corridor",
-      "attempts": 2315,
-      "activations": 2256,
-      "qsos": 192439
+      "attempts": 2334,
+      "activations": 2274,
+      "qsos": 193975
     },
     {
       "reference": "US-9372",
@@ -9827,9 +10067,9 @@
       "longitude": -77.6213,
       "grid": "FM15eg",
       "status": "corridor",
-      "attempts": 122,
-      "activations": 114,
-      "qsos": 3319
+      "attempts": 126,
+      "activations": 118,
+      "qsos": 3406
     },
     {
       "reference": "US-10259",
@@ -9840,9 +10080,9 @@
       "longitude": -80.131,
       "grid": "EM95wu",
       "status": "corridor",
-      "attempts": 294,
-      "activations": 291,
-      "qsos": 19048
+      "attempts": 298,
+      "activations": 295,
+      "qsos": 19185
     },
     {
       "reference": "US-10260",
@@ -9853,9 +10093,9 @@
       "longitude": -79.9048,
       "grid": "FM05bp",
       "status": "corridor",
-      "attempts": 263,
-      "activations": 263,
-      "qsos": 24395
+      "attempts": 268,
+      "activations": 268,
+      "qsos": 24646
     },
     {
       "reference": "US-10263",
@@ -9866,9 +10106,9 @@
       "longitude": -76.8144,
       "grid": "FM15ol",
       "status": "corridor",
-      "attempts": 27,
-      "activations": 27,
-      "qsos": 752
+      "attempts": 28,
+      "activations": 28,
+      "qsos": 766
     },
     {
       "reference": "US-10388",
@@ -9892,9 +10132,9 @@
       "longitude": -79.04,
       "grid": "FM05la",
       "status": "corridor",
-      "attempts": 349,
-      "activations": 346,
-      "qsos": 18497
+      "attempts": 353,
+      "activations": 350,
+      "qsos": 18550
     },
     {
       "reference": "US-10511",
@@ -9905,9 +10145,9 @@
       "longitude": -78.7296,
       "grid": "FM04pu",
       "status": "corridor",
-      "attempts": 155,
-      "activations": 155,
-      "qsos": 14789
+      "attempts": 156,
+      "activations": 156,
+      "qsos": 14807
     },
     {
       "reference": "US-11375",
@@ -9944,9 +10184,9 @@
       "longitude": -80.3909,
       "grid": "EM95tr",
       "status": "corridor",
-      "attempts": 369,
-      "activations": 366,
-      "qsos": 17816
+      "attempts": 381,
+      "activations": 378,
+      "qsos": 18875
     },
     {
       "reference": "US-12717",
@@ -9957,9 +10197,9 @@
       "longitude": -79.7763,
       "grid": "FM05ct",
       "status": "corridor",
-      "attempts": 75,
-      "activations": 74,
-      "qsos": 3479
+      "attempts": 76,
+      "activations": 75,
+      "qsos": 3492
     },
     {
       "reference": "US-13002",
@@ -9970,9 +10210,9 @@
       "longitude": -79.7501,
       "grid": "FM06cl",
       "status": "corridor",
-      "attempts": 36,
-      "activations": 36,
-      "qsos": 1661
+      "attempts": 37,
+      "activations": 37,
+      "qsos": 1673
     },
     {
       "reference": "US-0017",
@@ -9983,9 +10223,9 @@
       "longitude": -80.8289,
       "grid": "EM93ou",
       "status": "corridor",
-      "attempts": 193,
-      "activations": 186,
-      "qsos": 6867
+      "attempts": 194,
+      "activations": 187,
+      "qsos": 6882
     },
     {
       "reference": "US-0265",
@@ -9996,9 +10236,9 @@
       "longitude": -80.7848,
       "grid": "EM92of",
       "status": "corridor",
-      "attempts": 217,
-      "activations": 209,
-      "qsos": 8378
+      "attempts": 220,
+      "activations": 212,
+      "qsos": 8470
     },
     {
       "reference": "US-0518",
@@ -10048,9 +10288,9 @@
       "longitude": -80.427,
       "grid": "EM93sm",
       "status": "corridor",
-      "attempts": 116,
-      "activations": 115,
-      "qsos": 2910
+      "attempts": 117,
+      "activations": 116,
+      "qsos": 2924
     },
     {
       "reference": "US-0522",
@@ -10061,9 +10301,9 @@
       "longitude": -81.1514,
       "grid": "EM92kd",
       "status": "corridor",
-      "attempts": 571,
-      "activations": 560,
-      "qsos": 20370
+      "attempts": 574,
+      "activations": 563,
+      "qsos": 20414
     },
     {
       "reference": "US-0524",
@@ -10074,9 +10314,9 @@
       "longitude": -79.0329,
       "grid": "FM03ls",
       "status": "corridor",
-      "attempts": 266,
-      "activations": 153,
-      "qsos": 5342
+      "attempts": 276,
+      "activations": 154,
+      "qsos": 5375
     },
     {
       "reference": "US-0702",
@@ -10087,9 +10327,9 @@
       "longitude": -81.8159,
       "grid": "EM95cd",
       "status": "corridor",
-      "attempts": 650,
-      "activations": 639,
-      "qsos": 27001
+      "attempts": 651,
+      "activations": 640,
+      "qsos": 27066
     },
     {
       "reference": "US-0720",
@@ -10100,9 +10340,9 @@
       "longitude": -81.3951,
       "grid": "EM95hd",
       "status": "corridor",
-      "attempts": 746,
-      "activations": 732,
-      "qsos": 22018
+      "attempts": 752,
+      "activations": 738,
+      "qsos": 22117
     },
     {
       "reference": "US-0806",
@@ -10113,9 +10353,9 @@
       "longitude": -79.8234,
       "grid": "FM02cu",
       "status": "corridor",
-      "attempts": 108,
-      "activations": 108,
-      "qsos": 3015
+      "attempts": 111,
+      "activations": 111,
+      "qsos": 3057
     },
     {
       "reference": "US-0932",
@@ -10126,9 +10366,9 @@
       "longitude": -79.8571,
       "grid": "FM02bs",
       "status": "corridor",
-      "attempts": 68,
-      "activations": 66,
-      "qsos": 2780
+      "attempts": 75,
+      "activations": 73,
+      "qsos": 2983
     },
     {
       "reference": "US-2882",
@@ -10139,9 +10379,9 @@
       "longitude": -81.4906,
       "grid": "EM93gn",
       "status": "corridor",
-      "attempts": 148,
-      "activations": 140,
-      "qsos": 8235
+      "attempts": 151,
+      "activations": 143,
+      "qsos": 8356
     },
     {
       "reference": "US-2883",
@@ -10152,9 +10392,9 @@
       "longitude": -80.8086,
       "grid": "EM94ou",
       "status": "corridor",
-      "attempts": 425,
-      "activations": 395,
-      "qsos": 20929
+      "attempts": 426,
+      "activations": 396,
+      "qsos": 20948
     },
     {
       "reference": "US-2885",
@@ -10165,9 +10405,9 @@
       "longitude": -81.301,
       "grid": "EM93ih",
       "status": "corridor",
-      "attempts": 106,
-      "activations": 95,
-      "qsos": 5939
+      "attempts": 107,
+      "activations": 96,
+      "qsos": 5954
     },
     {
       "reference": "US-2888",
@@ -10204,9 +10444,9 @@
       "longitude": -80.6159,
       "grid": "EM93qb",
       "status": "corridor",
-      "attempts": 178,
+      "attempts": 179,
       "activations": 173,
-      "qsos": 7284
+      "qsos": 7289
     },
     {
       "reference": "US-2891",
@@ -10217,9 +10457,9 @@
       "longitude": -81.8713,
       "grid": "EM94bv",
       "status": "corridor",
-      "attempts": 229,
-      "activations": 219,
-      "qsos": 9309
+      "attempts": 233,
+      "activations": 223,
+      "qsos": 9398
     },
     {
       "reference": "US-2893",
@@ -10230,9 +10470,9 @@
       "longitude": -81.4158,
       "grid": "EM94hc",
       "status": "corridor",
-      "attempts": 232,
-      "activations": 229,
-      "qsos": 10440
+      "attempts": 237,
+      "activations": 232,
+      "qsos": 10712
     },
     {
       "reference": "US-2894",
@@ -10295,9 +10535,9 @@
       "longitude": -79.0738,
       "grid": "FM03lm",
       "status": "corridor",
-      "attempts": 443,
-      "activations": 419,
-      "qsos": 20844
+      "attempts": 444,
+      "activations": 420,
+      "qsos": 20867
     },
     {
       "reference": "US-2902",
@@ -10308,9 +10548,9 @@
       "longitude": -81.3344,
       "grid": "EM95hd",
       "status": "corridor",
-      "attempts": 1158,
-      "activations": 1127,
-      "qsos": 44015
+      "attempts": 1167,
+      "activations": 1136,
+      "qsos": 44571
     },
     {
       "reference": "US-2903",
@@ -10334,9 +10574,9 @@
       "longitude": -80.8949,
       "grid": "EM94ns",
       "status": "corridor",
-      "attempts": 267,
-      "activations": 241,
-      "qsos": 9787
+      "attempts": 269,
+      "activations": 243,
+      "qsos": 9861
     },
     {
       "reference": "US-2905",
@@ -10347,9 +10587,9 @@
       "longitude": -80.176,
       "grid": "EM94ve",
       "status": "corridor",
-      "attempts": 544,
-      "activations": 529,
-      "qsos": 17125
+      "attempts": 549,
+      "activations": 534,
+      "qsos": 17195
     },
     {
       "reference": "US-2906",
@@ -10360,9 +10600,9 @@
       "longitude": -79.2832,
       "grid": "FM04ih",
       "status": "corridor",
-      "attempts": 152,
-      "activations": 144,
-      "qsos": 6230
+      "attempts": 153,
+      "activations": 145,
+      "qsos": 6250
     },
     {
       "reference": "US-2910",
@@ -10373,9 +10613,9 @@
       "longitude": -80.5334,
       "grid": "EM93rt",
       "status": "corridor",
-      "attempts": 193,
-      "activations": 181,
-      "qsos": 10116
+      "attempts": 195,
+      "activations": 183,
+      "qsos": 10149
     },
     {
       "reference": "US-2912",
@@ -10386,9 +10626,9 @@
       "longitude": -80.4963,
       "grid": "EM93sm",
       "status": "corridor",
-      "attempts": 323,
-      "activations": 311,
-      "qsos": 10245
+      "attempts": 325,
+      "activations": 313,
+      "qsos": 10272
     },
     {
       "reference": "US-2913",
@@ -10399,9 +10639,9 @@
       "longitude": -80.9106,
       "grid": "EM94nc",
       "status": "corridor",
-      "attempts": 673,
-      "activations": 624,
-      "qsos": 68597
+      "attempts": 679,
+      "activations": 630,
+      "qsos": 68794
     },
     {
       "reference": "US-2915",
@@ -10412,9 +10652,9 @@
       "longitude": -79.9769,
       "grid": "FM03aw",
       "status": "corridor",
-      "attempts": 201,
-      "activations": 193,
-      "qsos": 5455
+      "attempts": 202,
+      "activations": 194,
+      "qsos": 5468
     },
     {
       "reference": "US-3872",
@@ -10425,9 +10665,9 @@
       "longitude": -79.9864,
       "grid": "FM02at",
       "status": "corridor",
-      "attempts": 340,
-      "activations": 322,
-      "qsos": 11529
+      "attempts": 341,
+      "activations": 323,
+      "qsos": 11543
     },
     {
       "reference": "US-3873",
@@ -10438,9 +10678,9 @@
       "longitude": -80.1706,
       "grid": "EM92vw",
       "status": "corridor",
-      "attempts": 716,
-      "activations": 675,
-      "qsos": 22218
+      "attempts": 717,
+      "activations": 676,
+      "qsos": 22243
     },
     {
       "reference": "US-3874",
@@ -10477,9 +10717,9 @@
       "longitude": -81.9577,
       "grid": "EM94ae",
       "status": "corridor",
-      "attempts": 247,
-      "activations": 231,
-      "qsos": 10784
+      "attempts": 255,
+      "activations": 239,
+      "qsos": 10918
     },
     {
       "reference": "US-3880",
@@ -10516,9 +10756,9 @@
       "longitude": -81.8628,
       "grid": "EM93bk",
       "status": "corridor",
-      "attempts": 83,
-      "activations": 82,
-      "qsos": 3046
+      "attempts": 84,
+      "activations": 83,
+      "qsos": 3062
     },
     {
       "reference": "US-3884",
@@ -10529,9 +10769,9 @@
       "longitude": -81.0976,
       "grid": "EM93kb",
       "status": "corridor",
-      "attempts": 63,
-      "activations": 63,
-      "qsos": 1829
+      "attempts": 64,
+      "activations": 64,
+      "qsos": 1841
     },
     {
       "reference": "US-3885",
@@ -10581,9 +10821,9 @@
       "longitude": -79.8738,
       "grid": "FM03bc",
       "status": "corridor",
-      "attempts": 147,
-      "activations": 142,
-      "qsos": 5565
+      "attempts": 150,
+      "activations": 145,
+      "qsos": 5650
     },
     {
       "reference": "US-3889",
@@ -10763,9 +11003,9 @@
       "longitude": -81.798,
       "grid": "EM94cx",
       "status": "corridor",
-      "attempts": 51,
-      "activations": 51,
-      "qsos": 1455
+      "attempts": 52,
+      "activations": 52,
+      "qsos": 1470
     },
     {
       "reference": "US-3910",
@@ -10828,9 +11068,9 @@
       "longitude": -80.705,
       "grid": "EM93pr",
       "status": "corridor",
-      "attempts": 90,
-      "activations": 87,
-      "qsos": 4396
+      "attempts": 92,
+      "activations": 89,
+      "qsos": 4591
     },
     {
       "reference": "US-3917",
@@ -10841,9 +11081,9 @@
       "longitude": -79.2009,
       "grid": "FM04jd",
       "status": "corridor",
-      "attempts": 55,
-      "activations": 55,
-      "qsos": 1665
+      "attempts": 56,
+      "activations": 56,
+      "qsos": 1681
     },
     {
       "reference": "US-3918",
@@ -10867,9 +11107,9 @@
       "longitude": -81.0324,
       "grid": "EM93lw",
       "status": "corridor",
-      "attempts": 215,
-      "activations": 210,
-      "qsos": 8315
+      "attempts": 217,
+      "activations": 212,
+      "qsos": 8368
     },
     {
       "reference": "US-3921",
@@ -10880,9 +11120,9 @@
       "longitude": -81.781,
       "grid": "EM94cw",
       "status": "corridor",
-      "attempts": 67,
-      "activations": 67,
-      "qsos": 1892
+      "attempts": 69,
+      "activations": 69,
+      "qsos": 1931
     },
     {
       "reference": "US-4522",
@@ -10893,9 +11133,9 @@
       "longitude": -79.6176,
       "grid": "FM03ea",
       "status": "corridor",
-      "attempts": 542,
-      "activations": 514,
-      "qsos": 21632
+      "attempts": 546,
+      "activations": 518,
+      "qsos": 21726
     },
     {
       "reference": "US-4554",
@@ -10919,9 +11159,9 @@
       "longitude": -81.4076,
       "grid": "EM95hd",
       "status": "corridor",
-      "attempts": 1229,
-      "activations": 1214,
-      "qsos": 47614
+      "attempts": 1241,
+      "activations": 1226,
+      "qsos": 48738
     },
     {
       "reference": "US-5485",
@@ -10932,9 +11172,9 @@
       "longitude": -81.1346,
       "grid": "EM94kb",
       "status": "corridor",
-      "attempts": 159,
-      "activations": 152,
-      "qsos": 6752
+      "attempts": 162,
+      "activations": 155,
+      "qsos": 6795
     },
     {
       "reference": "US-5486",
@@ -10945,9 +11185,9 @@
       "longitude": -80.5122,
       "grid": "EM93rt",
       "status": "corridor",
-      "attempts": 123,
-      "activations": 122,
-      "qsos": 4368
+      "attempts": 125,
+      "activations": 124,
+      "qsos": 4401
     },
     {
       "reference": "US-5488",
@@ -11062,9 +11302,9 @@
       "longitude": -81.4609,
       "grid": "EM94gw",
       "status": "corridor",
-      "attempts": 91,
-      "activations": 89,
-      "qsos": 5808
+      "attempts": 92,
+      "activations": 90,
+      "qsos": 5875
     },
     {
       "reference": "US-9192",
@@ -11075,9 +11315,9 @@
       "longitude": -81.7419,
       "grid": "EM93do",
       "status": "corridor",
-      "attempts": 75,
-      "activations": 73,
-      "qsos": 3458
+      "attempts": 78,
+      "activations": 76,
+      "qsos": 3604
     },
     {
       "reference": "US-9193",
@@ -11114,9 +11354,9 @@
       "longitude": -80.8223,
       "grid": "EM92og",
       "status": "corridor",
-      "attempts": 73,
-      "activations": 70,
-      "qsos": 1954
+      "attempts": 74,
+      "activations": 71,
+      "qsos": 1973
     },
     {
       "reference": "US-9198",
@@ -11127,9 +11367,9 @@
       "longitude": -79.9354,
       "grid": "FM03ac",
       "status": "corridor",
-      "attempts": 150,
-      "activations": 150,
-      "qsos": 5194
+      "attempts": 151,
+      "activations": 151,
+      "qsos": 5205
     },
     {
       "reference": "US-9199",
@@ -11140,9 +11380,9 @@
       "longitude": -80.1032,
       "grid": "EM93wg",
       "status": "corridor",
-      "attempts": 192,
-      "activations": 188,
-      "qsos": 9495
+      "attempts": 194,
+      "activations": 190,
+      "qsos": 9575
     },
     {
       "reference": "US-9200",
@@ -11153,9 +11393,9 @@
       "longitude": -80.195,
       "grid": "EM92vr",
       "status": "corridor",
-      "attempts": 67,
-      "activations": 65,
-      "qsos": 2940
+      "attempts": 68,
+      "activations": 66,
+      "qsos": 2972
     },
     {
       "reference": "US-9201",
@@ -11192,9 +11432,9 @@
       "longitude": -79.6956,
       "grid": "FM03db",
       "status": "corridor",
-      "attempts": 703,
-      "activations": 688,
-      "qsos": 26537
+      "attempts": 717,
+      "activations": 702,
+      "qsos": 26928
     },
     {
       "reference": "US-9204",
@@ -11205,9 +11445,9 @@
       "longitude": -80.2922,
       "grid": "EM94uj",
       "status": "corridor",
-      "attempts": 28,
-      "activations": 28,
-      "qsos": 664
+      "attempts": 29,
+      "activations": 29,
+      "qsos": 678
     },
     {
       "reference": "US-9205",
@@ -11257,9 +11497,9 @@
       "longitude": -79.3876,
       "grid": "FM03he",
       "status": "corridor",
-      "attempts": 52,
-      "activations": 51,
-      "qsos": 1543
+      "attempts": 54,
+      "activations": 53,
+      "qsos": 1781
     },
     {
       "reference": "US-9214",
@@ -11296,9 +11536,9 @@
       "longitude": -79.0781,
       "grid": "FM04ld",
       "status": "corridor",
-      "attempts": 30,
-      "activations": 30,
-      "qsos": 1049
+      "attempts": 31,
+      "activations": 31,
+      "qsos": 1061
     },
     {
       "reference": "US-9218",
@@ -11361,9 +11601,9 @@
       "longitude": -81.2024,
       "grid": "EM93jt",
       "status": "corridor",
-      "attempts": 81,
-      "activations": 80,
-      "qsos": 2584
+      "attempts": 82,
+      "activations": 81,
+      "qsos": 2601
     },
     {
       "reference": "US-9224",
@@ -11387,9 +11627,9 @@
       "longitude": -81.8724,
       "grid": "EM94bx",
       "status": "corridor",
-      "attempts": 57,
-      "activations": 55,
-      "qsos": 1690
+      "attempts": 58,
+      "activations": 56,
+      "qsos": 1713
     },
     {
       "reference": "US-9229",
@@ -11413,9 +11653,9 @@
       "longitude": -81.0229,
       "grid": "EM94lv",
       "status": "corridor",
-      "attempts": 102,
-      "activations": 100,
-      "qsos": 4653
+      "attempts": 104,
+      "activations": 102,
+      "qsos": 4734
     },
     {
       "reference": "US-9759",
@@ -11426,9 +11666,9 @@
       "longitude": -79.9048,
       "grid": "FM02br",
       "status": "corridor",
-      "attempts": 60,
-      "activations": 59,
-      "qsos": 1861
+      "attempts": 62,
+      "activations": 61,
+      "qsos": 1924
     },
     {
       "reference": "US-10414",
@@ -11439,9 +11679,9 @@
       "longitude": -80.6555,
       "grid": "EM93qw",
       "status": "corridor",
-      "attempts": 54,
-      "activations": 53,
-      "qsos": 3412
+      "attempts": 56,
+      "activations": 55,
+      "qsos": 3439
     },
     {
       "reference": "US-10415",
@@ -11465,9 +11705,9 @@
       "longitude": -81.2363,
       "grid": "EM93ju",
       "status": "corridor",
-      "attempts": 73,
-      "activations": 73,
-      "qsos": 2521
+      "attempts": 74,
+      "activations": 74,
+      "qsos": 2536
     },
     {
       "reference": "US-10467",
@@ -11556,9 +11796,9 @@
       "longitude": -81.571,
       "grid": "EM95fb",
       "status": "corridor",
-      "attempts": 96,
-      "activations": 96,
-      "qsos": 5357
+      "attempts": 97,
+      "activations": 97,
+      "qsos": 5438
     },
     {
       "reference": "US-12108",
@@ -11569,9 +11809,9 @@
       "longitude": -81.7782,
       "grid": "EM95cb",
       "status": "corridor",
-      "attempts": 183,
-      "activations": 181,
-      "qsos": 9150
+      "attempts": 184,
+      "activations": 182,
+      "qsos": 9175
     },
     {
       "reference": "US-13016",
@@ -11582,9 +11822,9 @@
       "longitude": -81.2555,
       "grid": "EM94ib",
       "status": "corridor",
-      "attempts": 40,
-      "activations": 40,
-      "qsos": 2720
+      "attempts": 47,
+      "activations": 47,
+      "qsos": 2926
     },
     {
       "reference": "US-13198",
@@ -11608,9 +11848,9 @@
       "longitude": -80.9193,
       "grid": "EM92mq",
       "status": "corridor",
-      "attempts": 4,
-      "activations": 4,
-      "qsos": 119
+      "attempts": 7,
+      "activations": 7,
+      "qsos": 163
     },
     {
       "reference": "US-0260",
@@ -11673,9 +11913,9 @@
       "longitude": -81.1514,
       "grid": "EM92kd",
       "status": "corridor",
-      "attempts": 571,
-      "activations": 560,
-      "qsos": 20370
+      "attempts": 574,
+      "activations": 563,
+      "qsos": 20414
     },
     {
       "reference": "US-0636",
@@ -11686,9 +11926,9 @@
       "longitude": -81.42,
       "grid": "EM91ga",
       "status": "corridor",
-      "attempts": 280,
-      "activations": 256,
-      "qsos": 11310
+      "attempts": 286,
+      "activations": 262,
+      "qsos": 11565
     },
     {
       "reference": "US-0663",
@@ -11959,9 +12199,9 @@
       "longitude": -81.2216,
       "grid": "EM91jt",
       "status": "corridor",
-      "attempts": 89,
-      "activations": 87,
-      "qsos": 4346
+      "attempts": 90,
+      "activations": 88,
+      "qsos": 4367
     },
     {
       "reference": "US-7905",
@@ -12037,9 +12277,9 @@
       "longitude": -81.3168,
       "grid": "EM91iw",
       "status": "corridor",
-      "attempts": 50,
-      "activations": 50,
-      "qsos": 2650
+      "attempts": 51,
+      "activations": 51,
+      "qsos": 2668
     },
     {
       "reference": "US-0007",
@@ -12050,9 +12290,9 @@
       "longitude": -80.3353,
       "grid": "EL95tl",
       "status": "corridor",
-      "attempts": 200,
-      "activations": 189,
-      "qsos": 5910
+      "attempts": 205,
+      "activations": 194,
+      "qsos": 5998
     },
     {
       "reference": "US-0024",
@@ -12063,9 +12303,9 @@
       "longitude": -80.766,
       "grid": "EL95os",
       "status": "corridor",
-      "attempts": 354,
-      "activations": 340,
-      "qsos": 12701
+      "attempts": 355,
+      "activations": 341,
+      "qsos": 12759
     },
     {
       "reference": "US-0231",
@@ -12076,9 +12316,9 @@
       "longitude": -80.456,
       "grid": "EL97sv",
       "status": "corridor",
-      "attempts": 323,
-      "activations": 319,
-      "qsos": 17194
+      "attempts": 324,
+      "activations": 320,
+      "qsos": 17222
     },
     {
       "reference": "US-0232",
@@ -12089,9 +12329,9 @@
       "longitude": -80.2117,
       "grid": "EL96vl",
       "status": "corridor",
-      "attempts": 362,
-      "activations": 332,
-      "qsos": 12830
+      "attempts": 367,
+      "activations": 337,
+      "qsos": 12985
     },
     {
       "reference": "US-0236",
@@ -12115,9 +12355,9 @@
       "longitude": -81.3455,
       "grid": "EL96hd",
       "status": "corridor",
-      "attempts": 141,
-      "activations": 139,
-      "qsos": 4201
+      "attempts": 142,
+      "activations": 140,
+      "qsos": 4231
     },
     {
       "reference": "US-0241",
@@ -12128,9 +12368,9 @@
       "longitude": -80.1119,
       "grid": "EL97wa",
       "status": "corridor",
-      "attempts": 218,
-      "activations": 216,
-      "qsos": 9411
+      "attempts": 228,
+      "activations": 226,
+      "qsos": 9598
     },
     {
       "reference": "US-0245",
@@ -12167,9 +12407,9 @@
       "longitude": -80.7361,
       "grid": "EL98pp",
       "status": "corridor",
-      "attempts": 1051,
-      "activations": 528,
-      "qsos": 33609
+      "attempts": 1054,
+      "activations": 531,
+      "qsos": 33697
     },
     {
       "reference": "US-0250",
@@ -12195,7 +12435,7 @@
       "status": "corridor",
       "attempts": 172,
       "activations": 172,
-      "qsos": 6683
+      "qsos": 6682
     },
     {
       "reference": "US-0634",
@@ -12206,9 +12446,9 @@
       "longitude": -81.4137,
       "grid": "EM90hk",
       "status": "corridor",
-      "attempts": 155,
-      "activations": 146,
-      "qsos": 5910
+      "attempts": 156,
+      "activations": 147,
+      "qsos": 5937
     },
     {
       "reference": "US-0658",
@@ -12232,9 +12472,9 @@
       "longitude": -81.0324,
       "grid": "EL95lu",
       "status": "corridor",
-      "attempts": 724,
-      "activations": 712,
-      "qsos": 29352
+      "attempts": 725,
+      "activations": 713,
+      "qsos": 29363
     },
     {
       "reference": "US-0660",
@@ -12245,9 +12485,9 @@
       "longitude": -80.8384,
       "grid": "EL98nu",
       "status": "corridor",
-      "attempts": 367,
-      "activations": 361,
-      "qsos": 19896
+      "attempts": 370,
+      "activations": 364,
+      "qsos": 19982
     },
     {
       "reference": "US-0775",
@@ -12271,9 +12511,9 @@
       "longitude": -81.4125,
       "grid": "EL98ht",
       "status": "corridor",
-      "attempts": 266,
-      "activations": 258,
-      "qsos": 11455
+      "attempts": 270,
+      "activations": 262,
+      "qsos": 11632
     },
     {
       "reference": "US-0912",
@@ -12284,9 +12524,9 @@
       "longitude": -81.3115,
       "grid": "EL99iv",
       "status": "corridor",
-      "attempts": 107,
-      "activations": 102,
-      "qsos": 2910
+      "attempts": 109,
+      "activations": 104,
+      "qsos": 2951
     },
     {
       "reference": "US-0927",
@@ -12297,9 +12537,9 @@
       "longitude": -81.2347,
       "grid": "EL99jr",
       "status": "corridor",
-      "attempts": 98,
-      "activations": 96,
-      "qsos": 2164
+      "attempts": 99,
+      "activations": 97,
+      "qsos": 2180
     },
     {
       "reference": "US-1831",
@@ -12323,9 +12563,9 @@
       "longitude": -81.2822,
       "grid": "EL99iv",
       "status": "corridor",
-      "attempts": 303,
-      "activations": 288,
-      "qsos": 9690
+      "attempts": 310,
+      "activations": 295,
+      "qsos": 9875
     },
     {
       "reference": "US-1833",
@@ -12336,9 +12576,9 @@
       "longitude": -80.3162,
       "grid": "EL97um",
       "status": "corridor",
-      "attempts": 186,
-      "activations": 182,
-      "qsos": 9887
+      "attempts": 189,
+      "activations": 185,
+      "qsos": 10173
     },
     {
       "reference": "US-1834",
@@ -12388,9 +12628,9 @@
       "longitude": -80.1581,
       "grid": "EL95wq",
       "status": "corridor",
-      "attempts": 86,
-      "activations": 83,
-      "qsos": 3159
+      "attempts": 87,
+      "activations": 84,
+      "qsos": 3170
     },
     {
       "reference": "US-1842",
@@ -12401,9 +12641,9 @@
       "longitude": -81.3403,
       "grid": "EL98hw",
       "status": "corridor",
-      "attempts": 230,
-      "activations": 225,
-      "qsos": 14304
+      "attempts": 231,
+      "activations": 226,
+      "qsos": 14318
     },
     {
       "reference": "US-1843",
@@ -12427,9 +12667,9 @@
       "longitude": -80.9807,
       "grid": "EL94mr",
       "status": "corridor",
-      "attempts": 129,
-      "activations": 124,
-      "qsos": 9484
+      "attempts": 138,
+      "activations": 133,
+      "qsos": 10052
     },
     {
       "reference": "US-1852",
@@ -12453,9 +12693,9 @@
       "longitude": -81.3611,
       "grid": "EL99hd",
       "status": "corridor",
-      "attempts": 117,
-      "activations": 115,
-      "qsos": 3146
+      "attempts": 118,
+      "activations": 116,
+      "qsos": 3197
     },
     {
       "reference": "US-1858",
@@ -12466,9 +12706,9 @@
       "longitude": -80.1106,
       "grid": "EL96wc",
       "status": "corridor",
-      "attempts": 166,
-      "activations": 162,
-      "qsos": 6971
+      "attempts": 167,
+      "activations": 163,
+      "qsos": 6981
     },
     {
       "reference": "US-1866",
@@ -12479,9 +12719,9 @@
       "longitude": -81.2712,
       "grid": "EL99iq",
       "status": "corridor",
-      "attempts": 149,
-      "activations": 145,
-      "qsos": 3896
+      "attempts": 151,
+      "activations": 147,
+      "qsos": 4037
     },
     {
       "reference": "US-1869",
@@ -12492,9 +12732,9 @@
       "longitude": -81.4416,
       "grid": "EM90gq",
       "status": "corridor",
-      "attempts": 221,
-      "activations": 212,
-      "qsos": 11190
+      "attempts": 223,
+      "activations": 214,
+      "qsos": 11318
     },
     {
       "reference": "US-1871",
@@ -12518,9 +12758,9 @@
       "longitude": -80.3032,
       "grid": "EL97ul",
       "status": "corridor",
-      "attempts": 177,
-      "activations": 177,
-      "qsos": 11121
+      "attempts": 178,
+      "activations": 178,
+      "qsos": 11132
     },
     {
       "reference": "US-1881",
@@ -12531,9 +12771,9 @@
       "longitude": -81.3569,
       "grid": "EL98hx",
       "status": "corridor",
-      "attempts": 54,
-      "activations": 54,
-      "qsos": 2331
+      "attempts": 55,
+      "activations": 55,
+      "qsos": 2359
     },
     {
       "reference": "US-1882",
@@ -12544,9 +12784,9 @@
       "longitude": -80.1052,
       "grid": "EL96wd",
       "status": "corridor",
-      "attempts": 188,
-      "activations": 176,
-      "qsos": 6727
+      "attempts": 191,
+      "activations": 179,
+      "qsos": 6764
     },
     {
       "reference": "US-1884",
@@ -12557,9 +12797,9 @@
       "longitude": -80.044,
       "grid": "EL96xt",
       "status": "corridor",
-      "attempts": 261,
-      "activations": 251,
-      "qsos": 9951
+      "attempts": 263,
+      "activations": 253,
+      "qsos": 9977
     },
     {
       "reference": "US-1886",
@@ -12583,9 +12823,9 @@
       "longitude": -80.1013,
       "grid": "EL97wa",
       "status": "corridor",
-      "attempts": 845,
-      "activations": 819,
-      "qsos": 50867
+      "attempts": 862,
+      "activations": 836,
+      "qsos": 51444
     },
     {
       "reference": "US-1891",
@@ -12609,9 +12849,9 @@
       "longitude": -81.3801,
       "grid": "EL97hx",
       "status": "corridor",
-      "attempts": 154,
-      "activations": 150,
-      "qsos": 7213
+      "attempts": 155,
+      "activations": 151,
+      "qsos": 7253
     },
     {
       "reference": "US-1897",
@@ -12635,9 +12875,9 @@
       "longitude": -80.8264,
       "grid": "EL94ot",
       "status": "corridor",
-      "attempts": 74,
-      "activations": 74,
-      "qsos": 2280
+      "attempts": 75,
+      "activations": 75,
+      "qsos": 2304
     },
     {
       "reference": "US-1905",
@@ -12648,9 +12888,9 @@
       "longitude": -81.0994,
       "grid": "EL99kj",
       "status": "corridor",
-      "attempts": 245,
-      "activations": 244,
-      "qsos": 6635
+      "attempts": 247,
+      "activations": 246,
+      "qsos": 6665
     },
     {
       "reference": "US-1908",
@@ -12661,9 +12901,9 @@
       "longitude": -80.1394,
       "grid": "EL95ww",
       "status": "corridor",
-      "attempts": 94,
-      "activations": 87,
-      "qsos": 4423
+      "attempts": 96,
+      "activations": 89,
+      "qsos": 4451
     },
     {
       "reference": "US-1914",
@@ -12674,9 +12914,9 @@
       "longitude": -80.448,
       "grid": "EL97su",
       "status": "corridor",
-      "attempts": 417,
-      "activations": 406,
-      "qsos": 21052
+      "attempts": 420,
+      "activations": 409,
+      "qsos": 21157
     },
     {
       "reference": "US-1923",
@@ -12700,9 +12940,9 @@
       "longitude": -81.2064,
       "grid": "EL99jp",
       "status": "corridor",
-      "attempts": 145,
-      "activations": 135,
-      "qsos": 3398
+      "attempts": 147,
+      "activations": 137,
+      "qsos": 3432
     },
     {
       "reference": "US-1927",
@@ -12713,9 +12953,9 @@
       "longitude": -81.4647,
       "grid": "EL98gr",
       "status": "corridor",
-      "attempts": 369,
-      "activations": 358,
-      "qsos": 14037
+      "attempts": 371,
+      "activations": 360,
+      "qsos": 14080
     },
     {
       "reference": "US-1930",
@@ -12752,9 +12992,9 @@
       "longitude": -81.4969,
       "grid": "EL97gx",
       "status": "corridor",
-      "attempts": 224,
-      "activations": 222,
-      "qsos": 10423
+      "attempts": 225,
+      "activations": 223,
+      "qsos": 10435
     },
     {
       "reference": "US-3609",
@@ -12765,9 +13005,9 @@
       "longitude": -81.1425,
       "grid": "EL99kk",
       "status": "corridor",
-      "attempts": 93,
-      "activations": 92,
-      "qsos": 2119
+      "attempts": 94,
+      "activations": 93,
+      "qsos": 2132
     },
     {
       "reference": "US-3618",
@@ -12791,9 +13031,9 @@
       "longitude": -81.4565,
       "grid": "EM90gq",
       "status": "corridor",
-      "attempts": 121,
-      "activations": 120,
-      "qsos": 3004
+      "attempts": 122,
+      "activations": 121,
+      "qsos": 3031
     },
     {
       "reference": "US-3620",
@@ -12804,9 +13044,9 @@
       "longitude": -80.7809,
       "grid": "EL94ou",
       "status": "corridor",
-      "attempts": 139,
-      "activations": 132,
-      "qsos": 4517
+      "attempts": 148,
+      "activations": 141,
+      "qsos": 5061
     },
     {
       "reference": "US-3622",
@@ -12817,9 +13057,9 @@
       "longitude": -81.3222,
       "grid": "EL99iw",
       "status": "corridor",
-      "attempts": 139,
-      "activations": 136,
-      "qsos": 3467
+      "attempts": 141,
+      "activations": 138,
+      "qsos": 3526
     },
     {
       "reference": "US-3626",
@@ -12830,9 +13070,9 @@
       "longitude": -81.111,
       "grid": "EL99kk",
       "status": "corridor",
-      "attempts": 278,
-      "activations": 272,
-      "qsos": 10849
+      "attempts": 282,
+      "activations": 276,
+      "qsos": 10998
     },
     {
       "reference": "US-3628",
@@ -12882,9 +13122,9 @@
       "longitude": -80.4977,
       "grid": "EL97sw",
       "status": "corridor",
-      "attempts": 191,
-      "activations": 182,
-      "qsos": 6753
+      "attempts": 193,
+      "activations": 184,
+      "qsos": 6786
     },
     {
       "reference": "US-3632",
@@ -12908,9 +13148,9 @@
       "longitude": -81.3801,
       "grid": "EL98hv",
       "status": "corridor",
-      "attempts": 257,
-      "activations": 249,
-      "qsos": 11213
+      "attempts": 260,
+      "activations": 252,
+      "qsos": 11347
     },
     {
       "reference": "US-3641",
@@ -12973,9 +13213,9 @@
       "longitude": -80.279,
       "grid": "EL97uh",
       "status": "corridor",
-      "attempts": 541,
-      "activations": 532,
-      "qsos": 30039
+      "attempts": 547,
+      "activations": 538,
+      "qsos": 30200
     },
     {
       "reference": "US-3655",
@@ -12986,9 +13226,9 @@
       "longitude": -80.1695,
       "grid": "EL97vd",
       "status": "corridor",
-      "attempts": 218,
-      "activations": 215,
-      "qsos": 10003
+      "attempts": 232,
+      "activations": 229,
+      "qsos": 10328
     },
     {
       "reference": "US-3657",
@@ -12999,9 +13239,9 @@
       "longitude": -80.1502,
       "grid": "EL97wd",
       "status": "corridor",
-      "attempts": 109,
-      "activations": 108,
-      "qsos": 5160
+      "attempts": 116,
+      "activations": 115,
+      "qsos": 5338
     },
     {
       "reference": "US-3659",
@@ -13012,9 +13252,9 @@
       "longitude": -80.6072,
       "grid": "EL97qt",
       "status": "corridor",
-      "attempts": 305,
-      "activations": 263,
-      "qsos": 12351
+      "attempts": 306,
+      "activations": 264,
+      "qsos": 12392
     },
     {
       "reference": "US-4559",
@@ -13025,9 +13265,9 @@
       "longitude": -81.4092,
       "grid": "EL98hg",
       "status": "corridor",
-      "attempts": 3859,
-      "activations": 3790,
-      "qsos": 189914
+      "attempts": 3888,
+      "activations": 3815,
+      "qsos": 191312
     },
     {
       "reference": "US-4617",
@@ -13090,9 +13330,9 @@
       "longitude": -81.4463,
       "grid": "EL97gq",
       "status": "corridor",
-      "attempts": 98,
-      "activations": 91,
-      "qsos": 3288
+      "attempts": 100,
+      "activations": 93,
+      "qsos": 3313
     },
     {
       "reference": "US-4630",
@@ -13103,9 +13343,9 @@
       "longitude": -81.1595,
       "grid": "EL98kq",
       "status": "corridor",
-      "attempts": 238,
-      "activations": 233,
-      "qsos": 10925
+      "attempts": 239,
+      "activations": 234,
+      "qsos": 10985
     },
     {
       "reference": "US-4631",
@@ -13129,9 +13369,9 @@
       "longitude": -81.3206,
       "grid": "EL96in",
       "status": "corridor",
-      "attempts": 118,
-      "activations": 117,
-      "qsos": 4714
+      "attempts": 120,
+      "activations": 119,
+      "qsos": 4839
     },
     {
       "reference": "US-4639",
@@ -13142,9 +13382,9 @@
       "longitude": -81.4281,
       "grid": "EL98gt",
       "status": "corridor",
-      "attempts": 361,
-      "activations": 354,
-      "qsos": 15088
+      "attempts": 364,
+      "activations": 357,
+      "qsos": 15251
     },
     {
       "reference": "US-4641",
@@ -13155,9 +13395,9 @@
       "longitude": -81.1781,
       "grid": "EL99jc",
       "status": "corridor",
-      "attempts": 178,
-      "activations": 168,
-      "qsos": 5635
+      "attempts": 179,
+      "activations": 169,
+      "qsos": 5667
     },
     {
       "reference": "US-5624",
@@ -13181,9 +13421,9 @@
       "longitude": -80.1429,
       "grid": "EL96wx",
       "status": "corridor",
-      "attempts": 585,
-      "activations": 578,
-      "qsos": 38920
+      "attempts": 600,
+      "activations": 593,
+      "qsos": 39436
     },
     {
       "reference": "US-6284",
@@ -13194,9 +13434,9 @@
       "longitude": -80.2413,
       "grid": "EL97vc",
       "status": "corridor",
-      "attempts": 244,
-      "activations": 242,
-      "qsos": 10191
+      "attempts": 254,
+      "activations": 252,
+      "qsos": 10502
     },
     {
       "reference": "US-6299",
@@ -13246,9 +13486,9 @@
       "longitude": -81.3325,
       "grid": "EM90ia",
       "status": "corridor",
-      "attempts": 143,
-      "activations": 141,
-      "qsos": 10698
+      "attempts": 150,
+      "activations": 148,
+      "qsos": 11457
     },
     {
       "reference": "US-6307",
@@ -13259,9 +13499,9 @@
       "longitude": -80.9326,
       "grid": "EL98mc",
       "status": "corridor",
-      "attempts": 165,
-      "activations": 162,
-      "qsos": 8606
+      "attempts": 166,
+      "activations": 163,
+      "qsos": 8821
     },
     {
       "reference": "US-6310",
@@ -13298,9 +13538,9 @@
       "longitude": -80.2879,
       "grid": "EL96ux",
       "status": "corridor",
-      "attempts": 416,
-      "activations": 415,
-      "qsos": 19558
+      "attempts": 419,
+      "activations": 418,
+      "qsos": 19610
     },
     {
       "reference": "US-6318",
@@ -13311,9 +13551,9 @@
       "longitude": -81.3764,
       "grid": "EL96ho",
       "status": "corridor",
-      "attempts": 119,
-      "activations": 111,
-      "qsos": 4148
+      "attempts": 121,
+      "activations": 113,
+      "qsos": 4273
     },
     {
       "reference": "US-6320",
@@ -13350,9 +13590,9 @@
       "longitude": -80.8748,
       "grid": "EL98np",
       "status": "corridor",
-      "attempts": 131,
-      "activations": 127,
-      "qsos": 4596
+      "attempts": 132,
+      "activations": 128,
+      "qsos": 4644
     },
     {
       "reference": "US-6323",
@@ -13363,9 +13603,9 @@
       "longitude": -81.4069,
       "grid": "EL96ho",
       "status": "corridor",
-      "attempts": 68,
-      "activations": 67,
-      "qsos": 2071
+      "attempts": 69,
+      "activations": 68,
+      "qsos": 2115
     },
     {
       "reference": "US-6324",
@@ -13376,9 +13616,9 @@
       "longitude": -81.2111,
       "grid": "EL98ji",
       "status": "corridor",
-      "attempts": 493,
-      "activations": 456,
-      "qsos": 28327
+      "attempts": 494,
+      "activations": 457,
+      "qsos": 28364
     },
     {
       "reference": "US-6326",
@@ -13389,9 +13629,9 @@
       "longitude": -80.7125,
       "grid": "EL97pu",
       "status": "corridor",
-      "attempts": 115,
-      "activations": 114,
-      "qsos": 7237
+      "attempts": 116,
+      "activations": 115,
+      "qsos": 7470
     },
     {
       "reference": "US-6328",
@@ -13415,9 +13655,9 @@
       "longitude": -80.9796,
       "grid": "EL98ml",
       "status": "corridor",
-      "attempts": 178,
-      "activations": 176,
-      "qsos": 6696
+      "attempts": 182,
+      "activations": 180,
+      "qsos": 6857
     },
     {
       "reference": "US-6330",
@@ -13441,9 +13681,9 @@
       "longitude": -80.6443,
       "grid": "EL97qp",
       "status": "corridor",
-      "attempts": 132,
-      "activations": 130,
-      "qsos": 6570
+      "attempts": 133,
+      "activations": 131,
+      "qsos": 6625
     },
     {
       "reference": "US-8339",
@@ -13454,9 +13694,9 @@
       "longitude": -80.9717,
       "grid": "EL98mq",
       "status": "corridor",
-      "attempts": 97,
-      "activations": 94,
-      "qsos": 2999
+      "attempts": 98,
+      "activations": 95,
+      "qsos": 3082
     },
     {
       "reference": "US-8340",
@@ -13467,9 +13707,9 @@
       "longitude": -80.8965,
       "grid": "EL98nn",
       "status": "corridor",
-      "attempts": 244,
-      "activations": 239,
-      "qsos": 11264
+      "attempts": 246,
+      "activations": 240,
+      "qsos": 11285
     },
     {
       "reference": "US-8341",
@@ -13493,9 +13733,9 @@
       "longitude": -81.4697,
       "grid": "EL99gi",
       "status": "corridor",
-      "attempts": 44,
-      "activations": 44,
-      "qsos": 1206
+      "attempts": 45,
+      "activations": 45,
+      "qsos": 1222
     },
     {
       "reference": "US-8343",
@@ -13532,9 +13772,9 @@
       "longitude": -80.6717,
       "grid": "EL97pt",
       "status": "corridor",
-      "attempts": 128,
-      "activations": 127,
-      "qsos": 6750
+      "attempts": 131,
+      "activations": 130,
+      "qsos": 6959
     },
     {
       "reference": "US-8348",
@@ -13597,9 +13837,9 @@
       "longitude": -81.2949,
       "grid": "EL99is",
       "status": "corridor",
-      "attempts": 88,
-      "activations": 87,
-      "qsos": 2103
+      "attempts": 89,
+      "activations": 88,
+      "qsos": 2120
     },
     {
       "reference": "US-8366",
@@ -13636,9 +13876,9 @@
       "longitude": -80.8112,
       "grid": "EL98of",
       "status": "corridor",
-      "attempts": 169,
-      "activations": 159,
-      "qsos": 8470
+      "attempts": 171,
+      "activations": 161,
+      "qsos": 8590
     },
     {
       "reference": "US-8370",
@@ -13675,9 +13915,9 @@
       "longitude": -80.7549,
       "grid": "EL97ox",
       "status": "corridor",
-      "attempts": 528,
-      "activations": 505,
-      "qsos": 24054
+      "attempts": 537,
+      "activations": 514,
+      "qsos": 24617
     },
     {
       "reference": "US-8376",
@@ -13701,9 +13941,9 @@
       "longitude": -80.4401,
       "grid": "EL97sd",
       "status": "corridor",
-      "attempts": 184,
-      "activations": 183,
-      "qsos": 8407
+      "attempts": 186,
+      "activations": 185,
+      "qsos": 8451
     },
     {
       "reference": "US-8718",
@@ -13714,9 +13954,9 @@
       "longitude": -80.6727,
       "grid": "EL97pc",
       "status": "corridor",
-      "attempts": 77,
-      "activations": 76,
-      "qsos": 3135
+      "attempts": 78,
+      "activations": 77,
+      "qsos": 3195
     },
     {
       "reference": "US-8720",
@@ -13857,9 +14097,9 @@
       "longitude": -80.4276,
       "grid": "EL96sq",
       "status": "corridor",
-      "attempts": 24,
-      "activations": 24,
-      "qsos": 662
+      "attempts": 25,
+      "activations": 25,
+      "qsos": 708
     },
     {
       "reference": "US-12128",
@@ -13870,9 +14110,9 @@
       "longitude": -80.3512,
       "grid": "EL96tq",
       "status": "corridor",
-      "attempts": 26,
-      "activations": 26,
-      "qsos": 780
+      "attempts": 27,
+      "activations": 27,
+      "qsos": 846
     },
     {
       "reference": "US-12129",
@@ -13896,9 +14136,9 @@
       "longitude": -80.7385,
       "grid": "EL97pe",
       "status": "corridor",
-      "attempts": 33,
-      "activations": 33,
-      "qsos": 830
+      "attempts": 34,
+      "activations": 34,
+      "qsos": 884
     },
     {
       "reference": "US-12131",

@@ -6,9 +6,9 @@
     "longitude": -76.5025,
     "grid": "FM17rf",
     "locationDesc": "US-VA",
-    "attempts": 454,
-    "activations": 428,
-    "qsos": 16640
+    "attempts": 462,
+    "activations": 436,
+    "qsos": 16771
   },
   {
     "reference": "US-0019",
@@ -28,9 +28,9 @@
     "longitude": -78.1988,
     "grid": "FM08vv",
     "locationDesc": "US-VA",
-    "attempts": 1432,
-    "activations": 1324,
-    "qsos": 45296
+    "attempts": 1439,
+    "activations": 1329,
+    "qsos": 45415
   },
   {
     "reference": "US-0560",
@@ -50,9 +50,9 @@
     "longitude": -75.3167,
     "grid": "FM27iw",
     "locationDesc": "US-VA",
-    "attempts": 110,
-    "activations": 100,
-    "qsos": 4182
+    "attempts": 112,
+    "activations": 102,
+    "qsos": 4216
   },
   {
     "reference": "US-0562",
@@ -72,9 +72,9 @@
     "longitude": -77.1654,
     "grid": "FM18kp",
     "locationDesc": "US-VA",
-    "attempts": 67,
-    "activations": 65,
-    "qsos": 1844
+    "attempts": 68,
+    "activations": 66,
+    "qsos": 1859
   },
   {
     "reference": "US-0564",
@@ -105,9 +105,9 @@
     "longitude": -76.5517,
     "grid": "FM16ro",
     "locationDesc": "US-NC,US-VA",
-    "attempts": 160,
-    "activations": 153,
-    "qsos": 6239
+    "attempts": 161,
+    "activations": 154,
+    "qsos": 6288
   },
   {
     "reference": "US-0567",
@@ -127,9 +127,9 @@
     "longitude": -77.2261,
     "grid": "FM18jp",
     "locationDesc": "US-VA",
-    "attempts": 136,
-    "activations": 135,
-    "qsos": 3939
+    "attempts": 138,
+    "activations": 137,
+    "qsos": 3992
   },
   {
     "reference": "US-0572",
@@ -138,9 +138,9 @@
     "longitude": -76.8873,
     "grid": "FM17nw",
     "locationDesc": "US-VA",
-    "attempts": 76,
-    "activations": 75,
-    "qsos": 3461
+    "attempts": 78,
+    "activations": 77,
+    "qsos": 3562
   },
   {
     "reference": "US-0573",
@@ -160,9 +160,9 @@
     "longitude": -82.3213,
     "grid": "EM86uv",
     "locationDesc": "US-VA",
-    "attempts": 29,
-    "activations": 27,
-    "qsos": 961
+    "attempts": 30,
+    "activations": 28,
+    "qsos": 1043
   },
   {
     "reference": "US-0670",
@@ -171,9 +171,9 @@
     "longitude": -77.1478,
     "grid": "FM18kx",
     "locationDesc": "US-DC,US-MD,US-VA",
-    "attempts": 2042,
-    "activations": 1998,
-    "qsos": 94352
+    "attempts": 2056,
+    "activations": 2012,
+    "qsos": 95133
   },
   {
     "reference": "US-0671",
@@ -182,9 +182,9 @@
     "longitude": -75.1624,
     "grid": "FM28ke",
     "locationDesc": "US-MD,US-VA",
-    "attempts": 277,
-    "activations": 259,
-    "qsos": 10897
+    "attempts": 279,
+    "activations": 261,
+    "qsos": 10931
   },
   {
     "reference": "US-0691",
@@ -193,9 +193,9 @@
     "longitude": -77.4166,
     "grid": "FM18hn",
     "locationDesc": "US-VA",
-    "attempts": 311,
-    "activations": 280,
-    "qsos": 10736
+    "attempts": 313,
+    "activations": 282,
+    "qsos": 11212
   },
   {
     "reference": "US-0692",
@@ -215,9 +215,9 @@
     "longitude": -77.6223,
     "grid": "FM17ed",
     "locationDesc": "US-VA",
-    "attempts": 184,
-    "activations": 178,
-    "qsos": 6236
+    "attempts": 187,
+    "activations": 181,
+    "qsos": 6304
   },
   {
     "reference": "US-0712",
@@ -226,9 +226,9 @@
     "longitude": -77.5493,
     "grid": "FM18ft",
     "locationDesc": "US-VA",
-    "attempts": 710,
-    "activations": 686,
-    "qsos": 27376
+    "attempts": 714,
+    "activations": 690,
+    "qsos": 27471
   },
   {
     "reference": "US-0713",
@@ -248,9 +248,9 @@
     "longitude": -77.7426,
     "grid": "FM18dg",
     "locationDesc": "US-VA",
-    "attempts": 342,
-    "activations": 330,
-    "qsos": 15654
+    "attempts": 343,
+    "activations": 331,
+    "qsos": 15687
   },
   {
     "reference": "US-0726",
@@ -259,9 +259,9 @@
     "longitude": -78.7918,
     "grid": "FM07oj",
     "locationDesc": "US-VA",
-    "attempts": 141,
-    "activations": 136,
-    "qsos": 4307
+    "attempts": 143,
+    "activations": 138,
+    "qsos": 4341
   },
   {
     "reference": "US-0730",
@@ -281,9 +281,9 @@
     "longitude": -77.7298,
     "grid": "FM19dh",
     "locationDesc": "US-MD,US-VA,US-WV",
-    "attempts": 421,
-    "activations": 405,
-    "qsos": 11028
+    "attempts": 424,
+    "activations": 407,
+    "qsos": 11072
   },
   {
     "reference": "US-0844",
@@ -292,9 +292,9 @@
     "longitude": -77.4383,
     "grid": "FM17gn",
     "locationDesc": "US-VA",
-    "attempts": 14,
-    "activations": 13,
-    "qsos": 394
+    "attempts": 15,
+    "activations": 14,
+    "qsos": 407
   },
   {
     "reference": "US-0905",
@@ -314,9 +314,9 @@
     "longitude": -76.3111,
     "grid": "FM17ua",
     "locationDesc": "US-VA",
-    "attempts": 298,
-    "activations": 285,
-    "qsos": 15474
+    "attempts": 318,
+    "activations": 305,
+    "qsos": 18140
   },
   {
     "reference": "US-0935",
@@ -336,9 +336,9 @@
     "longitude": -78.27,
     "grid": "FM07um",
     "locationDesc": "US-VA",
-    "attempts": 44,
-    "activations": 40,
-    "qsos": 1635
+    "attempts": 46,
+    "activations": 42,
+    "qsos": 1667
   },
   {
     "reference": "US-1291",
@@ -369,9 +369,9 @@
     "longitude": -77.1558,
     "grid": "FM18ki",
     "locationDesc": "US-VA",
-    "attempts": 223,
-    "activations": 222,
-    "qsos": 7011
+    "attempts": 226,
+    "activations": 224,
+    "qsos": 7053
   },
   {
     "reference": "US-1294",
@@ -380,9 +380,9 @@
     "longitude": -76.7404,
     "grid": "FM17pd",
     "locationDesc": "US-VA",
-    "attempts": 178,
-    "activations": 170,
-    "qsos": 6569
+    "attempts": 182,
+    "activations": 174,
+    "qsos": 6677
   },
   {
     "reference": "US-1295",
@@ -391,9 +391,9 @@
     "longitude": -80.6275,
     "grid": "EM97qb",
     "locationDesc": "US-VA",
-    "attempts": 197,
-    "activations": 191,
-    "qsos": 9728
+    "attempts": 199,
+    "activations": 193,
+    "qsos": 9768
   },
   {
     "reference": "US-1296",
@@ -402,9 +402,9 @@
     "longitude": -79.8023,
     "grid": "FM07cv",
     "locationDesc": "US-VA",
-    "attempts": 353,
-    "activations": 329,
-    "qsos": 17949
+    "attempts": 354,
+    "activations": 330,
+    "qsos": 17970
   },
   {
     "reference": "US-1297",
@@ -435,9 +435,9 @@
     "longitude": -76.0218,
     "grid": "FM16xv",
     "locationDesc": "US-VA",
-    "attempts": 759,
-    "activations": 720,
-    "qsos": 33221
+    "attempts": 776,
+    "activations": 737,
+    "qsos": 34405
   },
   {
     "reference": "US-1300",
@@ -446,9 +446,9 @@
     "longitude": -81.4845,
     "grid": "EM96go",
     "locationDesc": "US-VA",
-    "attempts": 99,
-    "activations": 92,
-    "qsos": 3183
+    "attempts": 106,
+    "activations": 99,
+    "qsos": 3390
   },
   {
     "reference": "US-1301",
@@ -457,9 +457,9 @@
     "longitude": -78.4161,
     "grid": "FM07th",
     "locationDesc": "US-VA",
-    "attempts": 68,
-    "activations": 67,
-    "qsos": 1820
+    "attempts": 69,
+    "activations": 68,
+    "qsos": 1835
   },
   {
     "reference": "US-1302",
@@ -468,9 +468,9 @@
     "longitude": -78.6408,
     "grid": "FM07qj",
     "locationDesc": "US-VA",
-    "attempts": 114,
-    "activations": 111,
-    "qsos": 5620
+    "attempts": 115,
+    "activations": 112,
+    "qsos": 5636
   },
   {
     "reference": "US-1303",
@@ -479,9 +479,9 @@
     "longitude": -81.5265,
     "grid": "EM96fv",
     "locationDesc": "US-VA",
-    "attempts": 148,
-    "activations": 132,
-    "qsos": 4050
+    "attempts": 151,
+    "activations": 135,
+    "qsos": 4175
   },
   {
     "reference": "US-1304",
@@ -523,9 +523,9 @@
     "longitude": -77.2563,
     "grid": "FM18io",
     "locationDesc": "US-VA",
-    "attempts": 116,
-    "activations": 112,
-    "qsos": 3728
+    "attempts": 117,
+    "activations": 113,
+    "qsos": 3777
   },
   {
     "reference": "US-1308",
@@ -534,9 +534,9 @@
     "longitude": -77.1988,
     "grid": "FM18jp",
     "locationDesc": "US-VA",
-    "attempts": 124,
-    "activations": 120,
-    "qsos": 4517
+    "attempts": 125,
+    "activations": 121,
+    "qsos": 4535
   },
   {
     "reference": "US-1309",
@@ -556,9 +556,9 @@
     "longitude": -80.8631,
     "grid": "EM96nu",
     "locationDesc": "US-VA",
-    "attempts": 193,
-    "activations": 189,
-    "qsos": 5570
+    "attempts": 195,
+    "activations": 191,
+    "qsos": 5635
   },
   {
     "reference": "US-1311",
@@ -567,9 +567,9 @@
     "longitude": -78.4956,
     "grid": "FM06so",
     "locationDesc": "US-VA",
-    "attempts": 60,
-    "activations": 56,
-    "qsos": 2949
+    "attempts": 63,
+    "activations": 59,
+    "qsos": 3014
   },
   {
     "reference": "US-1312",
@@ -578,9 +578,9 @@
     "longitude": -77.5677,
     "grid": "FM17fj",
     "locationDesc": "US-VA",
-    "attempts": 484,
-    "activations": 459,
-    "qsos": 16364
+    "attempts": 489,
+    "activations": 464,
+    "qsos": 16447
   },
   {
     "reference": "US-1313",
@@ -589,9 +589,9 @@
     "longitude": -77.9259,
     "grid": "FM17aq",
     "locationDesc": "US-VA",
-    "attempts": 268,
-    "activations": 255,
-    "qsos": 10531
+    "attempts": 269,
+    "activations": 256,
+    "qsos": 10566
   },
   {
     "reference": "US-1314",
@@ -600,9 +600,9 @@
     "longitude": -78.2292,
     "grid": "FM07vh",
     "locationDesc": "US-VA",
-    "attempts": 52,
-    "activations": 50,
-    "qsos": 1721
+    "attempts": 53,
+    "activations": 51,
+    "qsos": 1758
   },
   {
     "reference": "US-1315",
@@ -611,9 +611,9 @@
     "longitude": -78.4911,
     "grid": "FM08su",
     "locationDesc": "US-VA",
-    "attempts": 91,
-    "activations": 87,
-    "qsos": 2555
+    "attempts": 92,
+    "activations": 88,
+    "qsos": 2567
   },
   {
     "reference": "US-1316",
@@ -622,9 +622,9 @@
     "longitude": -78.3074,
     "grid": "FM08uu",
     "locationDesc": "US-VA",
-    "attempts": 228,
-    "activations": 220,
-    "qsos": 9024
+    "attempts": 230,
+    "activations": 222,
+    "qsos": 9101
   },
   {
     "reference": "US-1317",
@@ -633,9 +633,9 @@
     "longitude": -80.8703,
     "grid": "EM96nu",
     "locationDesc": "US-VA",
-    "attempts": 174,
-    "activations": 170,
-    "qsos": 4610
+    "attempts": 178,
+    "activations": 174,
+    "qsos": 4803
   },
   {
     "reference": "US-1318",
@@ -655,9 +655,9 @@
     "longitude": -79.5968,
     "grid": "FM07ec",
     "locationDesc": "US-VA",
-    "attempts": 879,
-    "activations": 872,
-    "qsos": 76407
+    "attempts": 884,
+    "activations": 877,
+    "qsos": 76822
   },
   {
     "reference": "US-1320",
@@ -732,9 +732,9 @@
     "longitude": -76.7245,
     "grid": "FM17pj",
     "locationDesc": "US-VA",
-    "attempts": 118,
-    "activations": 116,
-    "qsos": 3302
+    "attempts": 119,
+    "activations": 117,
+    "qsos": 3317
   },
   {
     "reference": "US-2364",
@@ -754,9 +754,9 @@
     "longitude": -80.9358,
     "grid": "EM96mm",
     "locationDesc": "US-NC,US-VA",
-    "attempts": 2234,
-    "activations": 2105,
-    "qsos": 92122
+    "attempts": 2249,
+    "activations": 2120,
+    "qsos": 92965
   },
   {
     "reference": "US-3972",
@@ -765,9 +765,9 @@
     "longitude": -79.5452,
     "grid": "FM07fp",
     "locationDesc": "US-VA",
-    "attempts": 132,
-    "activations": 130,
-    "qsos": 4831
+    "attempts": 136,
+    "activations": 134,
+    "qsos": 4922
   },
   {
     "reference": "US-4526",
@@ -776,9 +776,9 @@
     "longitude": -79.6509,
     "grid": "FM08ec",
     "locationDesc": "US-KY,US-VA,US-WV",
-    "attempts": 2178,
-    "activations": 2073,
-    "qsos": 91136
+    "attempts": 2191,
+    "activations": 2085,
+    "qsos": 91491
   },
   {
     "reference": "US-4556",
@@ -787,9 +787,9 @@
     "longitude": -84.1937,
     "grid": "EM74vp",
     "locationDesc": "US-CT,US-GA,US-MA,US-MD,US-ME,US-NC,US-NH,US-NJ,US-NY,US-PA,US-TN,US-VA,US-VT,US-WV",
-    "attempts": 5694,
-    "activations": 5461,
-    "qsos": 200585
+    "attempts": 5706,
+    "activations": 5473,
+    "qsos": 200848
   },
   {
     "reference": "US-4564",
@@ -798,9 +798,9 @@
     "longitude": -77.2748,
     "grid": "FM18io",
     "locationDesc": "US-DC,US-MD,US-PA,US-VA",
-    "attempts": 3010,
-    "activations": 2964,
-    "qsos": 124208
+    "attempts": 3034,
+    "activations": 2988,
+    "qsos": 125691
   },
   {
     "reference": "US-4567",
@@ -809,9 +809,9 @@
     "longitude": -77.0681,
     "grid": "FM18lv",
     "locationDesc": "US-DC,US-DE,US-MD,US-NY,US-PA,US-VA",
-    "attempts": 6375,
-    "activations": 6273,
-    "qsos": 265367
+    "attempts": 6463,
+    "activations": 6361,
+    "qsos": 271243
   },
   {
     "reference": "US-4577",
@@ -820,9 +820,9 @@
     "longitude": -81.4076,
     "grid": "EM95hd",
     "locationDesc": "US-NC,US-SC,US-TN,US-VA",
-    "attempts": 1229,
-    "activations": 1214,
-    "qsos": 47614
+    "attempts": 1241,
+    "activations": 1226,
+    "qsos": 48738
   },
   {
     "reference": "US-4581",
@@ -831,9 +831,9 @@
     "longitude": -76.5836,
     "grid": "FM19qg",
     "locationDesc": "US-DC,US-MD,US-VA",
-    "attempts": 5249,
-    "activations": 5204,
-    "qsos": 233885
+    "attempts": 5312,
+    "activations": 5267,
+    "qsos": 236934
   },
   {
     "reference": "US-4582",
@@ -842,9 +842,9 @@
     "longitude": -73.9709,
     "grid": "FN31ah",
     "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
-    "attempts": 2522,
-    "activations": 2475,
-    "qsos": 102891
+    "attempts": 2560,
+    "activations": 2513,
+    "qsos": 104546
   },
   {
     "reference": "US-5503",
@@ -853,9 +853,9 @@
     "longitude": -78.6694,
     "grid": "FM07pk",
     "locationDesc": "US-VA",
-    "attempts": 156,
-    "activations": 151,
-    "qsos": 7345
+    "attempts": 157,
+    "activations": 152,
+    "qsos": 7361
   },
   {
     "reference": "US-5506",
@@ -875,9 +875,9 @@
     "longitude": -81.9621,
     "grid": "EM96at",
     "locationDesc": "US-VA",
-    "attempts": 27,
-    "activations": 27,
-    "qsos": 1242
+    "attempts": 29,
+    "activations": 29,
+    "qsos": 1511
   },
   {
     "reference": "US-5508",
@@ -886,9 +886,9 @@
     "longitude": -77.5378,
     "grid": "FM17fh",
     "locationDesc": "US-VA",
-    "attempts": 158,
-    "activations": 158,
-    "qsos": 7024
+    "attempts": 159,
+    "activations": 159,
+    "qsos": 7040
   },
   {
     "reference": "US-5509",
@@ -930,9 +930,9 @@
     "longitude": -78.2961,
     "grid": "FM07um",
     "locationDesc": "US-VA",
-    "attempts": 40,
-    "activations": 37,
-    "qsos": 1604
+    "attempts": 42,
+    "activations": 39,
+    "qsos": 1634
   },
   {
     "reference": "US-5514",
@@ -963,9 +963,9 @@
     "longitude": -78.9686,
     "grid": "FM07mu",
     "locationDesc": "US-VA",
-    "attempts": 34,
-    "activations": 33,
-    "qsos": 1308
+    "attempts": 35,
+    "activations": 34,
+    "qsos": 1329
   },
   {
     "reference": "US-5517",
@@ -1161,9 +1161,9 @@
     "longitude": -79.4603,
     "grid": "FM07gw",
     "locationDesc": "US-VA",
-    "attempts": 22,
-    "activations": 22,
-    "qsos": 742
+    "attempts": 23,
+    "activations": 23,
+    "qsos": 758
   },
   {
     "reference": "US-7795",
@@ -1172,9 +1172,9 @@
     "longitude": -79.894,
     "grid": "FM07ba",
     "locationDesc": "US-VA",
-    "attempts": 74,
-    "activations": 74,
-    "qsos": 5130
+    "attempts": 76,
+    "activations": 76,
+    "qsos": 5214
   },
   {
     "reference": "US-7797",
@@ -1216,9 +1216,9 @@
     "longitude": -82.0552,
     "grid": "EM86xw",
     "locationDesc": "US-VA",
-    "attempts": 25,
-    "activations": 24,
-    "qsos": 1104
+    "attempts": 28,
+    "activations": 27,
+    "qsos": 1352
   },
   {
     "reference": "US-7802",
@@ -1260,9 +1260,9 @@
     "longitude": -76.0083,
     "grid": "FM16xw",
     "locationDesc": "US-VA",
-    "attempts": 123,
-    "activations": 122,
-    "qsos": 3086
+    "attempts": 125,
+    "activations": 124,
+    "qsos": 3112
   },
   {
     "reference": "US-8204",
@@ -1271,9 +1271,9 @@
     "longitude": -76.5106,
     "grid": "FM17rf",
     "locationDesc": "US-VA",
-    "attempts": 174,
-    "activations": 169,
-    "qsos": 5848
+    "attempts": 180,
+    "activations": 175,
+    "qsos": 5953
   },
   {
     "reference": "US-9897",
@@ -1293,9 +1293,9 @@
     "longitude": -77.0496,
     "grid": "FM18lt",
     "locationDesc": "US-DC,US-VA",
-    "attempts": 1315,
-    "activations": 1304,
-    "qsos": 55635
+    "attempts": 1328,
+    "activations": 1317,
+    "qsos": 56352
   },
   {
     "reference": "US-9899",
@@ -1304,9 +1304,9 @@
     "longitude": -77.0528,
     "grid": "FM18lr",
     "locationDesc": "US-VA",
-    "attempts": 106,
+    "attempts": 107,
     "activations": 99,
-    "qsos": 5652
+    "qsos": 5656
   },
   {
     "reference": "US-9900",
@@ -1326,9 +1326,9 @@
     "longitude": -77.126,
     "grid": "FM18kw",
     "locationDesc": "US-DC,US-MD,US-VA",
-    "attempts": 1032,
-    "activations": 1019,
-    "qsos": 45691
+    "attempts": 1038,
+    "activations": 1025,
+    "qsos": 46177
   },
   {
     "reference": "US-9902",
@@ -1337,9 +1337,9 @@
     "longitude": -76.5565,
     "grid": "FM17rg",
     "locationDesc": "US-VA",
-    "attempts": 216,
-    "activations": 205,
-    "qsos": 7419
+    "attempts": 217,
+    "activations": 206,
+    "qsos": 7431
   },
   {
     "reference": "US-9903",
@@ -1392,9 +1392,9 @@
     "longitude": -76.0531,
     "grid": "FM16xw",
     "locationDesc": "US-VA",
-    "attempts": 518,
-    "activations": 508,
-    "qsos": 25545
+    "attempts": 535,
+    "activations": 525,
+    "qsos": 26729
   },
   {
     "reference": "US-9908",
@@ -1403,9 +1403,9 @@
     "longitude": -79.8932,
     "grid": "FM07bq",
     "locationDesc": "US-VA",
-    "attempts": 17,
-    "activations": 16,
-    "qsos": 1133
+    "attempts": 18,
+    "activations": 17,
+    "qsos": 1147
   },
   {
     "reference": "US-9909",
@@ -1458,9 +1458,9 @@
     "longitude": -81.6451,
     "grid": "EM96eo",
     "locationDesc": "US-VA",
-    "attempts": 64,
-    "activations": 64,
-    "qsos": 3321
+    "attempts": 66,
+    "activations": 66,
+    "qsos": 3437
   },
   {
     "reference": "US-9925",
@@ -1557,9 +1557,9 @@
     "longitude": -78.6751,
     "grid": "FM06pq",
     "locationDesc": "US-VA",
-    "attempts": 639,
-    "activations": 632,
-    "qsos": 48124
+    "attempts": 659,
+    "activations": 652,
+    "qsos": 49983
   },
   {
     "reference": "US-9934",
@@ -1568,9 +1568,9 @@
     "longitude": -79.1124,
     "grid": "FM07kj",
     "locationDesc": "US-VA",
-    "attempts": 386,
-    "activations": 380,
-    "qsos": 14426
+    "attempts": 399,
+    "activations": 392,
+    "qsos": 15333
   },
   {
     "reference": "US-9935",
@@ -1579,9 +1579,9 @@
     "longitude": -77.8235,
     "grid": "FM18cc",
     "locationDesc": "US-VA",
-    "attempts": 6116,
-    "activations": 6006,
-    "qsos": 330018
+    "attempts": 6204,
+    "activations": 6093,
+    "qsos": 336789
   },
   {
     "reference": "US-9936",
@@ -1601,9 +1601,9 @@
     "longitude": -77.1978,
     "grid": "FM18jq",
     "locationDesc": "US-VA",
-    "attempts": 86,
-    "activations": 85,
-    "qsos": 2470
+    "attempts": 88,
+    "activations": 87,
+    "qsos": 2583
   },
   {
     "reference": "US-9938",
@@ -1612,9 +1612,9 @@
     "longitude": -80.0887,
     "grid": "EM97wo",
     "locationDesc": "US-VA",
-    "attempts": 9,
-    "activations": 9,
-    "qsos": 631
+    "attempts": 10,
+    "activations": 10,
+    "qsos": 655
   },
   {
     "reference": "US-9939",
@@ -1755,9 +1755,9 @@
     "longitude": -79.0625,
     "grid": "FM07lt",
     "locationDesc": "US-VA",
-    "attempts": 23,
-    "activations": 22,
-    "qsos": 521
+    "attempts": 24,
+    "activations": 23,
+    "qsos": 533
   },
   {
     "reference": "US-9952",
@@ -1810,9 +1810,9 @@
     "longitude": -80.1905,
     "grid": "EM97vo",
     "locationDesc": "US-VA",
-    "attempts": 7,
-    "activations": 7,
-    "qsos": 393
+    "attempts": 8,
+    "activations": 8,
+    "qsos": 417
   },
   {
     "reference": "US-9957",
@@ -1843,9 +1843,9 @@
     "longitude": -78.9931,
     "grid": "FM07mu",
     "locationDesc": "US-VA",
-    "attempts": 11,
-    "activations": 10,
-    "qsos": 319
+    "attempts": 12,
+    "activations": 11,
+    "qsos": 335
   },
   {
     "reference": "US-9960",
@@ -1865,9 +1865,9 @@
     "longitude": -77.05,
     "grid": "FM18ls",
     "locationDesc": "US-VA",
-    "attempts": 271,
-    "activations": 264,
-    "qsos": 9647
+    "attempts": 278,
+    "activations": 271,
+    "qsos": 9874
   },
   {
     "reference": "US-9966",
@@ -1898,9 +1898,9 @@
     "longitude": -81.5396,
     "grid": "EM96fs",
     "locationDesc": "US-VA",
-    "attempts": 6,
-    "activations": 6,
-    "qsos": 177
+    "attempts": 7,
+    "activations": 7,
+    "qsos": 227
   },
   {
     "reference": "US-9969",
@@ -1920,9 +1920,9 @@
     "longitude": -81.4773,
     "grid": "EM96gt",
     "locationDesc": "US-VA",
-    "attempts": 39,
-    "activations": 39,
-    "qsos": 1347
+    "attempts": 40,
+    "activations": 40,
+    "qsos": 1392
   },
   {
     "reference": "US-9971",
@@ -1942,9 +1942,9 @@
     "longitude": -79.5813,
     "grid": "FM08fe",
     "locationDesc": "US-VA",
-    "attempts": 4,
-    "activations": 4,
-    "qsos": 101
+    "attempts": 5,
+    "activations": 5,
+    "qsos": 118
   },
   {
     "reference": "US-9973",
@@ -1975,9 +1975,9 @@
     "longitude": -77.1767,
     "grid": "FM18jq",
     "locationDesc": "US-VA",
-    "attempts": 31,
-    "activations": 30,
-    "qsos": 768
+    "attempts": 32,
+    "activations": 31,
+    "qsos": 828
   },
   {
     "reference": "US-10507",
@@ -2008,9 +2008,9 @@
     "longitude": -77.8661,
     "grid": "FM18bm",
     "locationDesc": "US-VA",
-    "attempts": 103,
-    "activations": 101,
-    "qsos": 3851
+    "attempts": 104,
+    "activations": 102,
+    "qsos": 3908
   },
   {
     "reference": "US-12716",
@@ -2019,8 +2019,8 @@
     "longitude": -79.5564,
     "grid": "FM08fg",
     "locationDesc": "US-VA",
-    "attempts": 5,
-    "activations": 5,
-    "qsos": 305
+    "attempts": 6,
+    "activations": 6,
+    "qsos": 329
   }
 ]
