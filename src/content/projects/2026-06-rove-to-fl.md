@@ -1,7 +1,7 @@
 ---
 title: 2026 Southeast POTA Road Trip
 status: active
-updated: 2026-06-09
+updated: 2026-06-10
 summary: "A week-long POTA activation drive from Rhode Island down the I-95 corridor, arriving at Singer Island, FL on June 26 for Field Day 2026."
 tags:
   - radio
@@ -16,11 +16,10 @@ activations along the way. The trip arrives Friday, June 26 for Field Day 2026
 in the Palm Beach area.
 
 The working goal is to activate every state crossed on the selected route plus
-Washington, DC: RI, CT, NY, NJ, DE, MD, DC, VA, NC, SC, GA, and FL. PA is an
-optional branch: it only becomes required if the route deliberately goes through
-the Philadelphia / John Heinz area. For broad planning, non-overnight parks are
-budgeted as two-hour stops to cover leaving the highway, operating, packing up,
-and returning to the route.
+Washington, DC: RI, CT, NY, NJ, PA, DE, MD, DC, VA, NC, SC, GA, and FL. PA is
+now part of the route because Saturday deliberately includes John Heinz. For
+broad planning, non-overnight parks are budgeted as two-hour stops to cover
+leaving the highway, operating, packing up, and returning to the route.
 
 For rove planning, the count is unique POTA entities on a UTC day. Multi-entity
 activations count once per entity, so a 2-fer counts as two; evening activations
@@ -43,45 +42,43 @@ should not double back north just to make the meetup work.
 
 Current working shape:
 
-- Friday: activate RI before work. Leave Hope, RI around 17:00, activate CT at
-  Silver Sands around 19:00, charge the Tesla, then stop westbound by about
-  21:30. Tarrytown / Nyack is preferred if the evening stays on pace; Stamford /
-  White Plains is the fatigue-aware fallback.
-- Saturday: activate NY, NJ, DE, and MD before the fixed Foggy Bottom hotel.
-  Use the NJ Turnpike / Delaware Memorial Bridge line by default to avoid PA.
-  Add `US-0512` John Heinz only if the extra entity is worth another stop.
+- Friday: activate RI and CT in the morning, then position near Stamford /
+  White Plains / Tallman before the 13:00 work window. After work, activate
+  Tallman while waiting out rush hour, then continue south to the booked Edison,
+  NJ hotel.
+- Saturday: start from Edison, activate NJ at Cheesequake, PA at John Heinz, DE
+  at Fox Point, then arrive near Fort McHenry around 19:30 and start activating
+  at 20:00 EDT so MD counts on the Sunday UTC day. Stay in Foggy Bottom.
 - Sunday: make DC / NoVA the large rove day, then finish at the booked
-  Fredericksburg hotel. The current best line is LBJ Memorial Grove -> Dyke
-  Marsh if verified -> Mason Neck -> Prince William Forest.
-- Monday: use the workday margins to drive from Fredericksburg to the booked
-  Florence, SC stop while covering NC / SC with low-detour parks.
-- Tuesday and Wednesday: solve the open Florence-to-Ocala segment with hotel
-  positioning based on where the GA and FL activation stops land.
-- Thursday: stay at mother's house in Ocala, FL, or arrive Wednesday if the
-  southern segment runs early.
-- Friday: short destination arrival day, with Florida ideally already banked.
+  Fredericksburg hotel. Exact Cheetah/Ostrich route planning is next.
+- Monday: drive from Fredericksburg to the booked Florence, SC stop. NC and SC
+  parks still need selection.
+- Tuesday: activate `US-0522` Savannah National Wildlife Refuge, then stay in or
+  near Pooler.
+- Wednesday: drive to Ocala, FL and stay there.
+- Thursday: activate either `US-1915` Silver Springs State Park or `US-4471`
+  Ocala National Forest from Ocala.
+- Friday: activate `US-1884` John D. MacArthur Beach State Park in the evening
+  if timing allows, then arrive at Singer Island / Riviera Beach.
 
 Current Friday / Saturday recommendation:
 
-- Friday morning: activate RI near Hope. Current short list is `US-6992` JL
-  Curran State Park first, with `US-6982` Big River WMA or `US-2880` Snake Den
-  State Park as backups.
-- Friday after work: Hope -> `US-1716` Silver Sands State Park -> Tesla
-  Supercharger near Milford / Fairfield -> Tarrytown or Nyack if still
-  comfortable. Google Maps estimates Hope to Silver Sands at about 1h47, then
-  Silver Sands to the Milford Supercharger to Tarrytown at about 1h07.
-- Saturday from Tarrytown / Nyack: `US-2149` Tallman Mountain State Park ->
-  `US-1611` Cheesequake State Park -> `US-1738` Fox Point State Park +
-  `US-9878` Northern Delaware Greenway -> `US-0928` Fort McHenry plus trail
-  overlaps -> Foggy Bottom.
+- Friday morning: activate RI near Hope, then CT at `US-1716` Silver Sands.
+  Current RI target is `US-6992` JL Curran State Park.
+- Friday work positioning: Hope -> RI park -> Silver Sands -> Stamford /
+  White Plains / Tallman corridor before the 13:00 work window. The mapped
+  drive through Stamford and on to Tallman is about 3h14 before activation and
+  charge time.
+- Friday after work: activate `US-2149` Tallman Mountain State Park while
+  waiting out rush hour, then drive about 1h06 to the booked Edison hotel.
+- Saturday from Edison: `US-1611` Cheesequake State Park -> `US-0512` John Heinz
+  National Wildlife Refuge -> `US-1738` Fox Point State Park -> `US-0928` Fort
+  McHenry plus trail overlaps -> Foggy Bottom.
 
-That default Saturday line is about 5h27m of mapped driving before activation
-time, Tesla Supercharger stops, food, and buffer. It keeps the route coherent
-without driving into New Jersey Friday night and then backtracking to NY on
-Saturday. The PA branch inserts `US-0512` John Heinz National Wildlife Refuge
-between Cheesequake and Fox Point; it only adds about 10 minutes of mapped
-driving, but it adds another full activation stop and makes PA a required
-jurisdiction for the day.
+That Saturday line is about 4h37m of mapped driving before activation time,
+Tesla Supercharger stops, food, and buffer. Moving Tallman to Friday removes the
+NY obligation from Saturday. John Heinz is no longer optional; PA is part of the
+selected route.
 
 The Saturday timing target is Maryland at about 20:00 EDT. If Fort McHenry
 starts after the UTC rollover, Maryland counts toward the Sunday UTC rove day
@@ -89,22 +86,18 @@ while the route still continues naturally to the Foggy Bottom hotel.
 
 Known anchor drive estimates:
 
-- Hope, RI -> Silver Sands State Park: 1h47m.
-- Silver Sands -> Milford Tesla Supercharger: 10m.
-- Milford Tesla Supercharger -> Tarrytown: 59m.
-- Tarrytown -> Tallman -> Cheesequake -> Fox Point -> Fort McHenry -> Foggy
-  Bottom: 5h27m mapped driving.
-- Optional PA branch through `US-0512` John Heinz: about 5h37m mapped driving
-  before activation time.
-- Foggy Bottom -> LBJ Grove -> Mason Neck -> Prince William Forest ->
-  Fredericksburg: 1h29m mapped driving.
-- Foggy Bottom -> LBJ Grove -> Dyke Marsh -> Mason Neck -> Prince William
-  Forest -> Fredericksburg: 2h07m mapped driving.
-- Foggy Bottom -> Rock Creek -> LBJ Grove -> Dyke Marsh -> Mason Neck ->
-  Prince William Forest -> Fredericksburg: 2h27m mapped driving.
+- Hope, RI -> JL Curran State Park: 22m.
+- JL Curran State Park -> Silver Sands State Park: 1h44m.
+- Silver Sands -> Stamford: 35m.
+- Stamford -> Tallman Mountain State Park: 33m.
+- Tallman -> Edison hotel: 1h06m.
+- Edison -> Cheesequake -> John Heinz -> Fox Point -> Fort McHenry -> Foggy
+  Bottom: 4h37m mapped driving.
 - Fredericksburg -> Florence: 5h12m before activation or charging stops.
-- Florence -> Ocala: 6h11m before activation or charging stops.
-- Ocala -> Singer Island / Riviera Beach: 3h48m.
+- Florence -> Savannah National Wildlife Refuge -> Pooler: 2h49m.
+- Pooler -> Ocala: 3h40m.
+- Ocala -> Silver Springs State Park: 13m; Ocala -> Ocala National Forest: 40m.
+- Ocala -> John D. MacArthur Beach State Park -> Singer Island: 4h05m.
 
 Current best Sunday lead:
 
@@ -132,17 +125,8 @@ William, the plan is about 12 unique entities. Dyke Marsh could push that toward
 
 Open verification items:
 
-- Insert the offline planned stops into the structured itinerary and route them
-  with real drive times.
-- Pick the Friday hotel area: Tarrytown / Nyack preferred, Stamford / White
-  Plains fallback, Milford / Fairfield only as a safety fallback.
-- Decide whether to avoid PA by default or deliberately add `US-0512` John
-  Heinz for another Saturday entity.
-- Verify the Fort McHenry 4-fer operating position.
-- Verify the exact LBJ Memorial Grove 7-fer position and whether the easier
-  parking-lot / picnic-table position is enough.
-- Verify whether the Dyke Marsh / Mount Vernon corridor can add `US-9961` and
-  `US-9935` as unique entities without requiring an awkward operating position.
-- Find a legal Saturday after-20:00 DC-area activation close to Foggy Bottom.
-- Insert low-detour NC, SC, GA, and FL stops into the known hotel-to-hotel
-  southern anchor legs.
+- Build the exact Sunday DC Cheetah/Ostrich flow.
+- Choose NC and SC parks for the Monday Fredericksburg -> Florence leg.
+- Verify exact Fox Point and Fort McHenry n-fer operating positions.
+- Confirm Savannah National Wildlife Refuge operating-position state credit.
+- Identify Tesla Supercharger pairings for Saturday and the southern hotel legs.

@@ -1,15 +1,7 @@
 ---
 import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import trackerData from "../../data/pota/rove-to-fl.json";
 import itinerary from "../../../data/pota/rove-to-fl/itinerary.json";
-
-const trackerJson = JSON.stringify(trackerData);
-
-// Build a map of POTA ref → park name for itinerary tooltips
-const parkByRef = Object.fromEntries(
-  trackerData.parks.map((p) => [p.reference, p])
-);
 
 type OvernightType = "hotel" | "home" | "tbd";
 interface BookingInfo {
@@ -32,30 +24,6 @@ interface ItineraryDay {
   parkTargets: string[];
   notes?: string;
   approxDriveMiles?: number;
-}
-interface TimelineDraftDay {
-  date: string;
-  area: string;
-  focus: string;
-  jurisdictions: string[];
-  notes?: string;
-}
-interface TimelineDraft {
-  name: string;
-  status: string;
-  recommendation: string;
-  days: TimelineDraftDay[];
-}
-interface AreaBudget {
-  from: string;
-  to: string;
-  approxMiles: number;
-  driveHours: number;
-  chargingHours: number;
-  minimumActivationEntities: number;
-  roughBlockHours: number;
-  jurisdictions: string[];
-  notes?: string;
 }
 interface FridayNightAnchor {
   name: string;
@@ -184,23 +152,6 @@ interface RestOfTripDraft {
   days: RestOfTripDay[];
   risk?: string;
 }
-interface NferLead {
-  status: string;
-  summary: string;
-  references: string[];
-  notes?: string;
-  routingNote?: string;
-  exampleActivator?: string;
-  exampleActivators?: string[];
-  exampleDate?: string;
-}
-interface NferEvidence {
-  sourceDescription: string;
-  recordCount: number;
-  currentRead: string;
-  saturday: NferLead[];
-  sunday: NferLead[];
-}
 interface RoadmapDay {
   date: string;
   route: string;
@@ -260,27 +211,6 @@ function formatDate(iso: string) {
     timeZone: "UTC",
   });
 }
-
-const OVERNIGHT_ICON: Record<OvernightType, string> = {
-  hotel: "🏨",
-  home: "🏠",
-  tbd: "?",
-};
-
-// Colors assigned in route order (CT → FL)
-const STATE_COLORS: Record<string, string> = {
-  "US-CT": "#4e79a7",
-  "US-NY": "#f28e2b",
-  "US-NJ": "#e15759",
-  "US-PA": "#7f7f7f",
-  "US-DE": "#76b7b2",
-  "US-MD": "#59a14f",
-  "US-VA": "#edc948",
-  "US-NC": "#b07aa1",
-  "US-SC": "#ff9da7",
-  "US-GA": "#9c755f",
-  "US-FL": "#bab0ac",
-};
 
 const tripConstraints = itinerary.constraints as Record<string, unknown>;
 const departureWindow = Array.isArray(tripConstraints.departureWindow)
@@ -352,12 +282,6 @@ const departureLabel =
 const workingDepartureLabel = workingDeparture?.date
   ? `${formatShortDate(workingDeparture.date)} ${workingDeparture.localWindow ?? ""}`.trim()
   : null;
-const timelineDrafts = Array.isArray((itinerary as { timelineDrafts?: unknown }).timelineDrafts)
-  ? ((itinerary as { timelineDrafts: TimelineDraft[] }).timelineDrafts)
-  : [];
-const areaBudgets = Array.isArray((itinerary as { areaBudgets?: unknown }).areaBudgets)
-  ? ((itinerary as { areaBudgets: AreaBudget[] }).areaBudgets)
-  : [];
 const planningConclusions = Array.isArray(
   (itinerary as { planningConclusions?: unknown }).planningConclusions
 )
@@ -373,49 +297,24 @@ const restOfTripDraft =
   (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft
     ? ((itinerary as { restOfTripDraft: RestOfTripDraft }).restOfTripDraft)
     : null;
-const nferEvidence =
-  typeof (itinerary as { nferEvidence?: unknown }).nferEvidence === "object" &&
-  (itinerary as { nferEvidence?: unknown }).nferEvidence
-    ? ((itinerary as { nferEvidence: NferEvidence }).nferEvidence)
-    : null;
 const driveEstimates =
   typeof (itinerary as { driveEstimates?: unknown }).driveEstimates === "object" &&
   (itinerary as { driveEstimates?: unknown }).driveEstimates
     ? ((itinerary as { driveEstimates: DriveEstimates }).driveEstimates)
     : null;
 const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
-const roadmapDays: RoadmapDay[] = [
-  {
-    date: "2026-06-19",
-    route: "Hope → Silver Sands → lower Hudson / southwest CT",
-    focus: "Activate RI before work, then activate CT at Silver Sands, charge, and drive west only until the 21:30 comfort limit.",
-    jurisdictions: ["US-RI", "US-CT"],
-    overnightType: "hotel",
-    overnightArea: "Tarrytown / Nyack preferred",
-    roughTotalHours: 5,
-    notes: "Stamford / White Plains is the fatigue-aware fallback; Milford / Fairfield is the safety fallback if CT or charging runs long.",
-  },
-  {
-    date: "2026-06-20",
-    route: "Lower Hudson / southwest CT → Foggy Bottom",
-    focus: "Cover NY, NJ, DE, and MD before the fixed Foggy Bottom hotel, with PA as an optional branch.",
-    jurisdictions: ["US-NY", "US-NJ", "US-DE", "US-MD", "US-DC"],
-    overnightType: "hotel",
-    overnightArea: "Foggy Bottom / Washington, DC",
-    roughTotalHours: 11.5,
-    notes: "Default route is Tallman, Cheesequake, Fox Point, and Fort McHenry. Optional PA branch inserts US-0512 John Heinz between Cheesequake and Fox Point.",
-  },
-  ...(restOfTripDraft?.days ?? []).map((day) => ({
-    date: day.date,
-    route: `${day.startArea} → ${day.endArea}`,
-    focus: day.focus,
-    jurisdictions: day.jurisdictions,
-    overnightType: day.overnightType,
-    overnightArea: day.endArea,
-    roughTotalHours: day.roughTotalHours,
-    notes: day.notes,
-  })),
-];
+const itineraryDays = Array.isArray((itinerary as { days?: unknown }).days)
+  ? ((itinerary as { days: ItineraryDay[] }).days)
+  : [];
+const roadmapDays: RoadmapDay[] = itineraryDays.map((day) => ({
+  date: day.date,
+  route: `${day.states.map((s) => s.replace("US-", "")).join(" / ")} → ${day.overnight.name}`,
+  focus: day.notes ?? "",
+  jurisdictions: day.states,
+  overnightType: day.overnight.type,
+  overnightArea: day.overnight.name,
+  notes: day.parkTargets.length > 0 ? `Targets: ${day.parkTargets.join(" / ")}` : undefined,
+}));
 const parkStopPlanning =
   typeof tripConstraints.parkStopPlanning === "object" && tripConstraints.parkStopPlanning
     ? (tripConstraints.parkStopPlanning as {
@@ -440,8 +339,9 @@ const parkStopPlanning =
         along the way and arriving June 26 for Field Day 2026.
       </p>
       <p class="lede">
-        {trackerData.parks.length} parks along the corridor across {trackerData.route.length} states.
-        Targets TBD.
+        Fixed hotel anchors and selected POTA targets are now set through
+        Florida. The remaining open park choices are NC, SC, and the exact
+        Sunday DC rove flow.
       </p>
     </div>
 
@@ -456,8 +356,8 @@ const parkStopPlanning =
           <span>Field Day</span>
         </div>
         <div>
-          <strong>{trackerData.parks.length}</strong>
-          <span>corridor parks</span>
+          <strong>{mapOverlays.parkPoints.length}</strong>
+          <span>target parks</span>
         </div>
         <p>Singer Island / Riviera Beach, FL</p>
       </aside>
@@ -465,38 +365,15 @@ const parkStopPlanning =
       <section class="pota-map-section" aria-labelledby="map-title">
         <div class="section-heading">
           <p class="section-label">Map</p>
-          <h2 id="map-title">I-95 corridor parks</h2>
+          <h2 id="map-title">Trip anchors and targets</h2>
         </div>
-        <div id="rove-map" class="pota-map" aria-label="Map of I-95 corridor POTA parks"></div>
-        <div class="pota-map-legend rove-map-legend" aria-label="State color legend">
-          {trackerData.route.map((s) => (
-            <span>
-              <i style={`background:${STATE_COLORS[s.code] ?? "#888"};border-color:#172026`}></i>
-              {s.code.replace("US-", "")}
-            </span>
-          ))}
+        <div id="rove-map" class="pota-map" aria-label="Map of trip hotel anchors and selected POTA targets"></div>
+        <div class="pota-map-legend rove-map-legend" aria-label="Map marker legend">
+          <span><i style="background:#1f6feb;border-color:#172026"></i>Hotels / anchors</span>
+          <span><i style="background:#167246;border-color:#172026"></i>Target parks</span>
+          <span><i style="background:#f28e2b;border-color:#172026"></i>Alternate park</span>
         </div>
       </section>
-    </div>
-  </section>
-
-  <section class="section-block wide" aria-labelledby="states-title">
-    <div class="section-heading">
-      <h2 id="states-title">Parks by state</h2>
-    </div>
-    <div class="rove-state-grid">
-      {trackerData.route.map((s) => (
-        <div class="rove-state-card">
-          <span
-            class="rove-state-dot"
-            style={`background:${STATE_COLORS[s.code] ?? "#888"}`}
-            aria-hidden="true"
-          ></span>
-          <span class="rove-state-abbr">{s.code.replace("US-", "")}</span>
-          <span class="rove-state-name">{s.name}</span>
-          <span class="rove-state-count">{s.corridorCount}</span>
-        </div>
-      ))}
     </div>
   </section>
 
@@ -564,8 +441,8 @@ const parkStopPlanning =
         <div>
           <dt>Weekend load</dt>
           <dd>
-            No work window; {weekendPlanning.candidateHighRoveDay?.parkCount ?? 10}-park
-            rove idea to evaluate
+            {weekendPlanning.candidateHighRoveDay?.status ??
+              "No work window; use the weekend for the highest-density rove work."}
           </dd>
         </div>
       )}
@@ -671,7 +548,7 @@ const parkStopPlanning =
     <section class="section-block wide" aria-labelledby="weekend-title">
       <div class="section-heading">
         <p class="section-label">{firstWeekendPlan.status}</p>
-        <h2 id="weekend-title">First weekend candidates</h2>
+        <h2 id="weekend-title">Selected route targets</h2>
       </div>
 
       <p class="rove-weekend-note">{firstWeekendPlan.utcNote}</p>
@@ -684,7 +561,7 @@ const parkStopPlanning =
 
       {firstWeekendPlan.parkShortlist && (
         <section aria-labelledby="shortlist-title" class="rove-shortlist-section">
-          <h3 id="shortlist-title">RI to MD shortlist</h3>
+          <h3 id="shortlist-title">Selected parks by leg</h3>
           <div class="rove-shortlist-grid">
             {firstWeekendPlan.parkShortlist.map((group) => (
               <article>
@@ -874,7 +751,7 @@ const parkStopPlanning =
         </p>
       )}
 
-      {firstWeekendPlan.sundayDcRove.recommendedRoute && (
+      {firstWeekendPlan.sundayDcRove.recommendedRoute?.length > 0 && (
         <div class="rove-candidate-grid" aria-label="Recommended Sunday DC route">
           {firstWeekendPlan.sundayDcRove.recommendedRoute.map((stop) => (
             <article class="rove-candidate">
@@ -886,7 +763,7 @@ const parkStopPlanning =
         </div>
       )}
 
-      {firstWeekendPlan.sundayDcRove.timingModels && (
+      {firstWeekendPlan.sundayDcRove.timingModels?.length > 0 && (
         <div class="rove-timing-models">
           {firstWeekendPlan.sundayDcRove.timingModels.map((model) => (
             <article>
@@ -925,79 +802,16 @@ const parkStopPlanning =
     </section>
   )}
 
-  {nferEvidence && (
-    <section class="section-block wide" aria-labelledby="nfer-title">
-      <div class="section-heading">
-        <p class="section-label">Evidence</p>
-        <h2 id="nfer-title">N-fer leads</h2>
-      </div>
-
-      <p class="rove-weekend-note">
-        {nferEvidence.sourceDescription} {nferEvidence.recordCount} records imported.{" "}
-        {nferEvidence.currentRead}
-      </p>
-
-      <div class="rove-nfer-grid">
-        <section aria-labelledby="nfer-saturday-title">
-          <h3 id="nfer-saturday-title">Saturday implications</h3>
-          {nferEvidence.saturday.map((lead) => (
-            <article class="rove-nfer-card">
-              <span>{lead.status}</span>
-              <strong>{lead.references.join(" + ")}</strong>
-              <p>{lead.summary}</p>
-              {lead.notes && <p>{lead.notes}</p>}
-              {lead.routingNote && <p>{lead.routingNote}</p>}
-            </article>
-          ))}
-        </section>
-
-        <section aria-labelledby="nfer-sunday-title">
-          <h3 id="nfer-sunday-title">Sunday leads</h3>
-          {nferEvidence.sunday.map((lead) => (
-            <article class="rove-nfer-card">
-              <span>{lead.status}</span>
-              <strong>{lead.references.join(" + ")}</strong>
-              <p>{lead.summary}</p>
-              {lead.routingNote && <p>{lead.routingNote}</p>}
-              {(lead.exampleActivator || lead.exampleActivators) && (
-                <p>
-                  Seen from {(lead.exampleActivators ?? [lead.exampleActivator]).filter(Boolean).join(", ")}
-                  {lead.exampleDate ? ` on ${lead.exampleDate}` : ""}.
-                </p>
-              )}
-            </article>
-          ))}
-        </section>
-      </div>
-    </section>
-  )}
-
-  <script type="application/json" id="rove-tracker-data" set:html={trackerJson} />
   <script type="application/json" id="rove-map-overlays" set:html={mapOverlaysJson} />
   <script>
     import L from "leaflet";
 
-    const STATE_COLORS: Record<string, string> = {
-      "US-CT": "#4e79a7",
-      "US-NY": "#f28e2b",
-      "US-NJ": "#e15759",
-      "US-DE": "#76b7b2",
-      "US-MD": "#59a14f",
-      "US-VA": "#edc948",
-      "US-NC": "#b07aa1",
-      "US-SC": "#ff9da7",
-      "US-GA": "#9c755f",
-      "US-FL": "#bab0ac",
-    };
+    const overlayEl = document.getElementById("rove-map-overlays");
+    const mapEl = document.getElementById("rove-map");
 
-      const dataEl = document.getElementById("rove-tracker-data");
-      const overlayEl = document.getElementById("rove-map-overlays");
-      const mapEl = document.getElementById("rove-map");
-
-      if (dataEl && mapEl) {
-        const tracker = JSON.parse(dataEl.textContent ?? "{}");
-        const overlays = overlayEl ? JSON.parse(overlayEl.textContent ?? "{}") : { anchors: [], parkPoints: [] };
-        const map = L.map(mapEl, { scrollWheelZoom: false });
+    if (overlayEl && mapEl) {
+      const overlays = JSON.parse(overlayEl.textContent ?? "{}");
+      const map = L.map(mapEl, { scrollWheelZoom: false });
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -1007,24 +821,10 @@ const parkStopPlanning =
 
       const bounds = L.latLngBounds([]);
 
-      for (const park of tracker.parks) {
-        const color = STATE_COLORS[park.state] ?? "#888";
-        const marker = L.circleMarker([park.latitude, park.longitude], {
-          radius: 3,
-          color: "#172026",
-          weight: 1,
-          fillColor: color,
-          fillOpacity: 0.25,
-        }).addTo(map);
-
-        bounds.extend([park.latitude, park.longitude]);
-        marker.bindPopup(popupHtml(park));
-      }
-
       for (const point of overlays.parkPoints ?? []) {
         const color = priorityColor(point.priority);
         const marker = L.circleMarker([point.latitude, point.longitude], {
-          radius: point.priority === "default" ? 8 : 6,
+          radius: point.priority === "alternate" ? 6 : 8,
           color: "#172026",
           weight: 2,
           fillColor: color,
@@ -1036,8 +836,12 @@ const parkStopPlanning =
       }
 
       for (const anchor of overlays.anchors ?? []) {
-        const marker = L.marker([anchor.latitude, anchor.longitude], {
-          title: anchor.label,
+        const marker = L.circleMarker([anchor.latitude, anchor.longitude], {
+          radius: 7,
+          color: "#172026",
+          weight: 2,
+          fillColor: "#1f6feb",
+          fillOpacity: 0.95,
         }).addTo(map);
 
         bounds.extend([anchor.latitude, anchor.longitude]);
@@ -1056,20 +860,10 @@ const parkStopPlanning =
       });
     }
 
-    function popupHtml(park: { reference: string; name: string; stateName: string; activations: number; qsos: number }) {
-      return `
-        <strong>${escapeHtml(park.reference)}</strong>
-        <span>${escapeHtml(park.name)}</span>
-        <em>${escapeHtml(park.stateName)}</em>
-        <span>${park.activations} activations · ${park.qsos} QSOs</span>
-        <a href="https://pota.app/#/park/${escapeHtml(park.reference)}" target="_blank" rel="noreferrer">POTA page</a>
-      `;
-    }
-
     function priorityColor(priority?: string) {
-      if (priority === "default") return "#167246";
+      if (priority === "target" || priority === "default") return "#167246";
       if (priority === "linked") return "#4e79a7";
-      if (priority === "optional") return "#f28e2b";
+      if (priority === "alternate" || priority === "optional") return "#f28e2b";
       return "#7f7f7f";
     }
 
@@ -1108,43 +902,6 @@ const parkStopPlanning =
 </BaseLayout>
 
 <style>
-  .rove-state-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    max-width: 32rem;
-  }
-
-  .rove-state-card {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.4rem 0.5rem;
-    border-radius: 4px;
-    background: var(--color-surface-raised, #f5f0e8);
-  }
-
-  .rove-state-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    border: 1.5px solid #172026;
-  }
-
-  .rove-state-abbr {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    width: 2rem;
-    flex-shrink: 0;
-  }
-
-  .rove-state-name {
-    flex: 1;
-    font-size: 0.9rem;
-  }
-
   .rove-map-legend {
     flex-wrap: wrap;
   }
@@ -1178,27 +935,6 @@ const parkStopPlanning =
     color: var(--color-text-muted, #666);
     font-size: 0.9rem;
     margin: 1rem 0 0;
-  }
-
-  .rove-timeline-drafts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
-    gap: 1rem;
-  }
-
-  .rove-timeline-draft {
-    border: 1px solid var(--color-border, #ddd);
-    border-radius: 6px;
-    padding: 1rem;
-  }
-
-  .rove-timeline-draft h3 {
-    margin: 0;
-  }
-
-  .rove-timeline-draft header p:last-child {
-    color: var(--color-text-muted, #666);
-    margin: 0.35rem 0 0;
   }
 
   .rove-timeline-list {
@@ -1260,71 +996,6 @@ const parkStopPlanning =
   .rove-roadmap-meta dd {
     font-size: 0.85rem;
     margin: 0.1rem 0 0;
-  }
-
-  .rove-budget-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-    gap: 0.75rem;
-  }
-
-  .rove-budget-block {
-    border: 1px solid var(--color-border, #ddd);
-    border-radius: 6px;
-    padding: 0.85rem;
-  }
-
-  .rove-budget-block header {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    justify-content: space-between;
-  }
-
-  .rove-budget-block h3 {
-    font-size: 0.95rem;
-    margin: 0;
-  }
-
-  .rove-budget-block header span {
-    color: var(--color-text-muted, #666);
-    flex-shrink: 0;
-    font-size: 0.8rem;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .rove-budget-block dl {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.35rem;
-    margin: 0.75rem 0;
-  }
-
-  .rove-budget-block dt {
-    color: var(--color-text-muted, #666);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .rove-budget-block dd {
-    margin: 0;
-    font-size: 0.9rem;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .rove-budget-block p {
-    color: var(--color-text-muted, #666);
-    font-size: 0.85rem;
-    margin: 0.4rem 0 0;
-  }
-
-  .rove-budget-jurisdictions {
-    color: var(--color-accent, #167246) !important;
-    font-size: 0.75rem !important;
-    font-weight: 700;
-    letter-spacing: 0.04em;
   }
 
   .rove-conclusions {
@@ -1414,7 +1085,8 @@ const parkStopPlanning =
     width: fit-content;
   }
 
-  .rove-priority-default {
+  .rove-priority-default,
+  .rove-priority-target {
     background: #d1e7dd;
     color: #0a3622;
   }
@@ -1429,7 +1101,8 @@ const parkStopPlanning =
     color: #1e3a8a;
   }
 
-  .rove-priority-optional {
+  .rove-priority-optional,
+  .rove-priority-alternate {
     background: #fff3cd;
     color: #856404;
   }
@@ -1622,48 +1295,6 @@ const parkStopPlanning =
     border-top: 1px solid var(--color-border, #ddd);
     margin-top: 1rem;
     padding-top: 0.75rem;
-  }
-
-  .rove-nfer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-    gap: 1rem;
-  }
-
-  .rove-nfer-grid h3 {
-    font-size: 1rem;
-    margin: 0 0 0.75rem;
-  }
-
-  .rove-nfer-card {
-    border: 1px solid var(--color-border, #ddd);
-    border-radius: 6px;
-    padding: 0.85rem;
-  }
-
-  .rove-nfer-card + .rove-nfer-card {
-    margin-top: 0.75rem;
-  }
-
-  .rove-nfer-card span {
-    color: var(--color-accent, #167246);
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.25rem;
-    text-transform: uppercase;
-  }
-
-  .rove-nfer-card strong {
-    display: block;
-    font-size: 0.9rem;
-  }
-
-  .rove-nfer-card p {
-    color: var(--color-text-muted, #666);
-    font-size: 0.85rem;
-    margin: 0.45rem 0 0;
   }
 
   .rove-rest-days {
@@ -1864,9 +1495,4 @@ const parkStopPlanning =
     margin: 0;
   }
 
-  .rove-state-count {
-    font-size: 0.85rem;
-    font-variant-numeric: tabular-nums;
-    color: var(--color-text-muted, #666);
-  }
 </style>

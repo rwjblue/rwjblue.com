@@ -15,15 +15,15 @@
     ],
     "workingDeparture": {
       "date": "2026-06-19",
-      "localWindow": "17:00 from Hope, RI",
+      "localWindow": "morning departure from Hope, RI",
       "status": "assumed for planning",
-      "notes": "Assume RI is activated Friday morning before work. Friday evening starts from Hope around 17:00, targets Silver Sands around 19:00, then charges and continues only as far west as is comfortable by about 21:30."
+      "notes": "Friday uses the morning for RI and CT, then positions near Stamford / White Plains / Tallman before the 13:00 work window. After work, activate Tallman, then continue to the booked Edison, NJ hotel."
     },
     "riActivation": {
       "preferredTiming": "Friday morning before work from Rhode Island",
       "fallbackTiming": "Only if the morning activation fails; otherwise do not spend Friday evening on RI.",
       "status": "assumed for planning",
-      "notes": "Current plan assumes RI is complete before the 17:00 Friday road departure from Hope."
+      "notes": "Current plan assumes RI is complete Friday morning before continuing to CT and the lower-Hudson work position."
     },
     "activationTimeMinutes": 60,
     "parkStopPlanning": {
@@ -43,7 +43,7 @@
       "chargingNetworkRule": "Prefer Tesla Superchargers only for planned charging stops; do not treat generic EV chargers as equivalent when judging feasibility.",
       "chargingStopMinutes": 30,
       "drivingHoursBetweenChargingStops": 2.5,
-      "notes": "Account for roughly 30 minutes at Tesla Superchargers after each 2.5 hours of driving. Friday likely needs a charge after Silver Sands, with Milford, Fairfield, Darien, Stamford, Greenwich, Dobbs Ferry, and Tarrytown all appearing along the westbound line."
+      "notes": "Account for roughly 30 minutes at Tesla Superchargers after each 2.5 hours of driving. Friday likely needs charging in the CT / lower-Hudson corridor before work, then can top up near Edison / Woodbridge after the Tallman-to-NJ move."
     },
     "weekendPlanning": {
       "workExemptDates": [
@@ -53,8 +53,8 @@
       "notes": "Saturday and Sunday have no work window, so they can carry more driving and more activations than weekdays.",
       "candidateHighRoveDay": {
         "targetDate": "2026-06-21",
-        "parkCount": 10,
-        "status": "current working plan: make DC the large rove day because of the dense n-fer opportunities"
+        "parkCount": 15,
+        "status": "current working plan: make Sunday the DC Cheetah baseline day, with Ostrich as the stretch if the n-fer flow supports it"
       }
     },
     "requiredJurisdictions": [
@@ -62,6 +62,7 @@
       "US-CT",
       "US-NY",
       "US-NJ",
+      "US-PA",
       "US-DE",
       "US-MD",
       "US-DC",
@@ -71,7 +72,7 @@
       "US-GA",
       "US-FL"
     ],
-    "jurisdictionActivationGoal": "Activate every state and Washington, DC, actually crossed on the selected route. Pennsylvania is optional: it is only required if the route deliberately goes through the Philadelphia / John Heinz branch.",
+    "jurisdictionActivationGoal": "Activate every state and Washington, DC, actually crossed on the selected route. Pennsylvania is now included because the Saturday route deliberately uses the John Heinz branch.",
     "multiParkActivationPriority": "Nice to have; do not optimize the route around 2/3/4-fers unless they are convenient.",
     "dcActivation": {
       "timing": "Handle DC on Sunday June 21 from the Foggy Bottom hotel, with an optional friend meetup if timing works.",
@@ -86,104 +87,108 @@
       "notes": "The friend activation is nice to have, not a route constraint. Saturday night is already in DC, so Sunday should use the local density and then continue south to the Fredericksburg hotel."
     },
     "outreach": {
-      "purpose": "Contact common activators near short-listed corridor parks for practical access, parking, antenna, and operating vibe checks.",
+      "purpose": "Contact common activators near short-listed target parks for practical access, parking, antenna, and operating vibe checks.",
       "emailDraft": "Hi <name>, I am planning a June 2026 POTA road trip from Rhode Island to Florida and noticed you have activated <park/reference>. I am considering it for a brief activation while passing through and would appreciate any practical advice: easy parking, good operating spots, antenna constraints, safety/access issues, and whether it is realistic for about an hour on site. Thanks and 73, Rob / N1RWJ"
     }
   },
   "timelineDrafts": [
     {
       "name": "Fixed-anchor southbound plan",
-      "status": "active rough plan",
-      "recommendation": "Use Friday to bank RI and CT, charge after Silver Sands, then stop in the lower Hudson / southwest Connecticut corridor by about 21:30. Saturday covers NY, NJ, DE, and MD before the Foggy Bottom hotel, with PA as an optional Philadelphia branch, with MD allowed to slide after 20:00 EDT if needed for Sunday UTC credit.",
+      "status": "active plan",
+      "recommendation": "Use Friday to bank RI, CT, and NY before the booked Edison overnight. Saturday starts at Cheesequake, deliberately adds John Heinz for PA, then goes to Fox Point and Fort McHenry for a post-20:00 EDT Maryland activation before the Foggy Bottom hotel.",
       "assumptions": [
-        "RI is activated Friday morning before work.",
-        "Friday road departure is from Hope, RI around 17:00 local.",
-        "Hope to Silver Sands is about 1h47 by Google Maps at the Friday departure time, so a roughly 19:00 CT arrival is realistic.",
-        "After the Silver Sands activation, charge the Tesla and keep driving only until roughly 21:30 local.",
-        "Friday does not need to cover NY; Saturday can start with a lower-Hudson NY activation.",
-        "Saturday must cover NY, NJ, DE, and MD before the Foggy Bottom hotel. PA is only required if the selected route goes through Pennsylvania; if MD happens after 20:00 EDT, it counts toward the Sunday UTC day.",
-        "Sunday remains the large DC / NoVA rove day, ending at the booked Fredericksburg hotel."
+        "RI is activated early Friday morning near Hope.",
+        "CT is activated Friday morning at Silver Sands.",
+        "The work window remains 13:00-17:00, so the car should be positioned near Stamford / White Plains / Tallman before work starts.",
+        "Tallman is activated after work, then the evening drive continues to the booked Edison, NJ hotel.",
+        "Saturday covers NJ, PA, DE, and MD before the Foggy Bottom hotel; Fort McHenry is targeted for 19:30 arrival and 20:00 EDT activation start so it counts on the Sunday UTC rove day.",
+        "Sunday remains the large DC / NoVA rove day, ending at the booked Fredericksburg hotel.",
+        "Monday night is fixed in Florence, Tuesday night in or near Pooler, Wednesday night in Ocala, and Thursday night remains Ocala/family positioning."
       ],
       "days": [
         {
           "date": "2026-06-19",
-          "area": "Hope, RI to Silver Sands, then lower Hudson / southwest Connecticut",
-          "focus": "RI in the morning, CT at Silver Sands after work, Tesla charge, then a modest westbound hotel by about 21:30.",
+          "area": "Hope, RI to Edison, NJ",
+          "focus": "Activate RI and CT in the morning, work near the lower-Hudson corridor, activate Tallman after work, then sleep at the booked Edison hotel.",
           "jurisdictions": [
             "US-RI",
-            "US-CT"
+            "US-CT",
+            "US-NY",
+            "US-NJ"
           ],
-          "notes": "Tarrytown/Nyack is ideal if the post-charge drive feels fine; Stamford/White Plains are acceptable if fatigue or charging timing pushes back."
+          "notes": "Edison is close enough to Cheesequake for a simple Saturday start and has strong Tesla Supercharger coverage nearby."
         },
         {
           "date": "2026-06-20",
-          "area": "Lower Hudson / southwest Connecticut to Foggy Bottom",
-          "focus": "Activate NY, NJ, DE, and MD on the way to the fixed DC hotel; add PA only if choosing the Philadelphia / John Heinz branch.",
+          "area": "Edison, NJ to Foggy Bottom, DC",
+          "focus": "Activate Cheesequake, John Heinz, Fox Point, and Fort McHenry, then continue to the fixed Foggy Bottom hotel.",
           "jurisdictions": [
-            "US-NY",
             "US-NJ",
+            "US-PA",
             "US-DE",
             "US-MD",
             "US-DC"
           ],
-          "notes": "Default route candidate: Tallman for NY, Cheesequake for NJ, Fox Point for DE, Fort McHenry for MD, then Foggy Bottom. Optional PA branch inserts US-0512 John Heinz NWR between Cheesequake and Fox Point."
+          "notes": "Fort McHenry should be reached by about 19:30 for a 20:00 EDT activation start, banking MD for Sunday UTC."
         },
         {
           "date": "2026-06-21",
           "area": "Washington, DC / NoVA to Fredericksburg",
-          "focus": "Make this the large rove day using the DC density, then continue south to the booked Fredericksburg hotel.",
+          "focus": "Large DC rove day for Cheetah/Ostrich planning, then continue south to the booked Fredericksburg hotel.",
           "jurisdictions": [
             "US-DC",
             "US-VA"
           ],
-          "notes": "LBJ Grove 7-fer is the top verification item; Mason Neck and Prince William Forest are southbound add-ons if energy and timing allow."
+          "notes": "Exact DC flow intentionally deferred to the next planning pass."
         },
         {
           "date": "2026-06-22",
-          "area": "Fredericksburg to Florence",
-          "focus": "Workday southbound push to the booked Florence stop while covering NC/SC as needed.",
+          "area": "Fredericksburg, VA to Florence, SC",
+          "focus": "Workday southbound push; NC and SC parks still need final selection.",
           "jurisdictions": [
             "US-VA",
             "US-NC",
             "US-SC"
           ],
-          "notes": "Because Monday has a 13:00-17:00 work block, park choices need to be low-detour and close to the I-95 line."
+          "notes": "Monday night is booked in Florence."
         },
         {
           "date": "2026-06-23",
-          "area": "Florence toward Georgia / north Florida",
-          "focus": "Use Tuesday to reduce the southern schedule risk and decide where the GA activation and hotel positioning should land.",
+          "area": "Florence, SC to Pooler / Savannah, GA",
+          "focus": "Activate Savannah National Wildlife Refuge and overnight in or near Pooler.",
           "jurisdictions": [
             "US-SC",
             "US-GA"
           ],
-          "notes": "Exact overnight remains open; choose it based on charging, hotel availability, and how much distance remains to Ocala."
+          "notes": "Savannah NWR is listed for both SC and GA in local POTA data; exact operating-position credit still needs verification."
         },
         {
           "date": "2026-06-24",
-          "area": "Georgia / north Florida toward Ocala",
-          "focus": "Continue south; reaching Ocala Wednesday is acceptable but not required.",
+          "area": "Pooler, GA to Ocala, FL",
+          "focus": "Drive to Ocala and stay there Wednesday night.",
           "jurisdictions": [
             "US-GA",
             "US-FL"
           ],
-          "notes": "If Florida is not banked earlier, pick a reliable low-detour Florida activation before or near Ocala."
+          "notes": "No required activation selected for this leg yet; it is a positioning day."
         },
         {
           "date": "2026-06-25",
-          "area": "Ocala / central Florida",
-          "focus": "Stay at mother's house in Ocala and protect the final arrival day.",
+          "area": "Ocala local",
+          "focus": "Activate either Silver Springs State Park or Ocala National Forest in the morning.",
           "jurisdictions": [
             "US-FL"
           ],
-          "notes": "This can be the low-stress Florida buffer night. If already in Ocala Wednesday, Thursday becomes flexible."
+          "notes": "Silver Springs is much closer to Ocala; Ocala National Forest is the longer alternate."
         },
         {
           "date": "2026-06-26",
           "area": "Ocala to Singer Island / Riviera Beach",
-          "focus": "Final arrival for Field Day weekend.",
-          "jurisdictions": [],
-          "notes": "Florida should ideally be complete before this day so arrival is not dependent on another park stop."
+          "focus": "Evening activation at John D. MacArthur Beach State Park, then Field Day weekend arrival.",
+          "jurisdictions": [
+            "US-FL"
+          ],
+          "notes": "John D. MacArthur is very close to Singer Island."
         }
       ]
     }
@@ -202,7 +207,7 @@
         "US-RI",
         "US-CT"
       ],
-      "notes": "Working Friday 17:00-18:00 departure block. If RI is activated Friday morning, this can be a simple CT reposition or CT activation near the first overnight; otherwise add about 1 hour for an outbound RI activation."
+      "notes": "Current Friday model uses the morning for RI and CT, then positions near Stamford / White Plains / Tallman before the 13:00 work block."
     },
     {
       "from": "CT coast",
@@ -328,223 +333,117 @@
     }
   ],
   "planningConclusions": [
-    "The large rove day should remain Sunday June 21 in DC / NoVA, because the DC n-fer density is much stronger than the Friday/Saturday corridor.",
-    "Friday should assume RI is already complete, then run Hope -> Silver Sands -> Tesla charge -> lower Hudson / southwest Connecticut hotel, stopping by about 21:30.",
-    "Do not push to Meadowlands Friday if it makes the night too late; Tarrytown/Nyack is enough westward progress and avoids a Saturday NJ-to-NY double-back.",
-    "If Friday stops in Stamford or White Plains instead, Saturday remains possible but has about 20 extra minutes of mapped driving versus Tarrytown/Nyack.",
-    "Saturday must cover NY, NJ, DE, and MD before DC. PA is optional; it only becomes required if the selected route goes through the Philadelphia / US-0512 John Heinz branch.",
-    "The PA optional branch adds only about 10 minutes of mapped driving versus the no-PA chain, but it adds another physical activation stop. Use it only if the extra entity is worth the stop time.",
-    "John Heinz NWR is the practical PA routing candidate near I-95, but its exact POTA reference must be verified before treating it as final.",
-    "If Saturday runs late, let Fort McHenry / MD happen after 20:00 EDT; that banks MD for the Sunday UTC day while still keeping the southbound route coherent."
+    "Friday now banks RI, CT, and NY before the Edison overnight.",
+    "Saturday starts near Cheesequake, deliberately routes through John Heinz for PA, then uses Fox Point for DE and Fort McHenry for MD.",
+    "Fort McHenry is targeted for a 19:30 arrival and 20:00 EDT activation start so it counts toward the Sunday UTC rove day.",
+    "Sunday remains the large DC / NoVA rove day; exact Cheetah/Ostrich flow is deferred to the next pass.",
+    "Monday night is fixed in Florence, Tuesday night in or near Pooler, Wednesday night in Ocala, and Florida has local Thursday/Friday targets selected.",
+    "NC and SC park choices are still open and should be selected after the DC flow is nailed down."
   ],
   "firstWeekendPlan": {
-    "status": "current first-weekend route",
-    "utcNote": "In June EDT, the UTC day changes at 20:00 local. Friday evening activations after 20:00 local count toward the next UTC day.",
+    "status": "fixed first-weekend route",
+    "utcNote": "In June EDT, the UTC day changes at 20:00 local. Friday evening activations before 20:00 count on Friday UTC; activations after 20:00 count on Saturday UTC.",
     "fridayNightAnchors": [
       {
-        "name": "Tarrytown / Nyack, NY",
+        "name": "Edison, NJ hotel",
         "reference": null,
-        "state": "US-NY",
+        "state": "US-NJ",
         "overnightType": "hotel",
         "driveFromProvidenceMinutes": null,
-        "role": "preferred Friday hotel area if Silver Sands and charging stay tight enough for a roughly 21:30 stop",
+        "role": "booked Friday overnight after the post-work Tallman activation",
         "pros": [
-          "Gets into NY without requiring a Friday night NY activation",
-          "Starts Saturday close to Tallman Mountain State Park",
-          "Avoids driving to New Jersey and then backtracking for NY"
+          "Close enough to Cheesequake for a simple Saturday start",
+          "Strong Tesla Supercharger coverage in Edison / Woodbridge"
         ],
         "cons": [
-          "Requires about 59 minutes of driving after the Milford Supercharger",
-          "Can push too late if Silver Sands, charging, or dinner runs long"
+          "Requires a short Saturday morning hop to Cheesequake",
+          "Requires the full Tallman-to-NJ move after work"
         ],
-        "saturdayImpact": "Best current balance for Saturday: Tallman -> Cheesequake -> John Heinz (US-0512) -> Fox Point -> Fort McHenry -> Foggy Bottom."
-      },
-      {
-        "name": "Stamford / White Plains",
-        "reference": null,
-        "state": "US-CT/US-NY",
-        "overnightType": "hotel",
-        "driveFromProvidenceMinutes": null,
-        "role": "fatigue-aware fallback if the Friday night westward push needs to end earlier",
-        "pros": [
-          "Keeps Friday closer to the 21:30 comfort limit",
-          "Still starts Saturday close enough to Tallman",
-          "Preserves a coherent Saturday route without forcing Meadowlands"
-        ],
-        "cons": [
-          "Adds about 20 minutes to Saturday versus Tarrytown/Nyack",
-          "Leaves a little more lower-Hudson movement for Saturday morning"
-        ],
-        "saturdayImpact": "Still viable; the Saturday chain grows to roughly 5h55m of mapped driving before stops."
-      },
-      {
-        "name": "Milford / Fairfield, CT",
-        "reference": null,
-        "state": "US-CT",
-        "overnightType": "hotel",
-        "driveFromProvidenceMinutes": null,
-        "role": "safety fallback if the Silver Sands activation or charging consumes the evening",
-        "pros": [
-          "Lowest-risk Friday night",
-          "Keeps charging simple",
-          "Avoids fatigue-driven late driving"
-        ],
-        "cons": [
-          "Leaves NY, NJ, DE, MD, and DC for Saturday, plus the optional PA branch if selected",
-          "Likely requires an earlier Saturday start"
-        ],
-        "saturdayImpact": "Use only if Friday timing or fatigue makes the westward hotel options unattractive."
+        "saturdayImpact": "Edison -> Cheesequake is about 21 minutes Saturday morning."
       }
     ],
     "saturdayRove": {
       "targetDate": "2026-06-20",
-      "baselineEntityTarget": 5,
-      "stretchEntityTarget": 8,
-      "strategy": "Saturday June 20 defaults to the no-PA southbound chain: start with NY near the lower Hudson, then activate NJ, DE, and MD before the fixed Foggy Bottom hotel. PA is an optional Philadelphia / US-0512 John Heinz branch if the extra entity is worth another physical stop. MD can happen after the 20:00 EDT UTC rollover if the day runs late.",
+      "baselineEntityTarget": 7,
+      "stretchEntityTarget": 9,
+      "strategy": "Saturday June 20 is now a fixed positioning route from the booked Edison hotel: Cheesequake for NJ, John Heinz for PA, Fox Point for DE, and Fort McHenry for MD at the UTC rollover before continuing to the Foggy Bottom hotel.",
       "timingAssumptions": {
-        "source": "Google Maps MCP route checks from Hope to Silver Sands, Friday post-activation hotel anchors, and Saturday lower-Hudson-to-DC chains; park hours and exact POTA references still need confirmation.",
+        "source": "Google Maps MCP route checks for Edison -> Cheesequake -> John Heinz -> Fox Point -> Fort McHenry -> Foggy Bottom; park hours and exact n-fer positions still need confirmation.",
         "activationMinutesPerPhysicalStop": 60,
-        "fridayActivationTiming": "RI is assumed complete Friday morning. Silver Sands around 19:00 should be workable, with the official after-hours fishing parking as a useful access detail if the operation reaches the sunset boundary.",
-        "saturdayEveningTiming": "If Fort McHenry / MD happens after 20:00 EDT Saturday, it counts toward the Sunday UTC rove day and reduces Sunday pressure.",
+        "fridayActivationTiming": "RI and CT are now planned for Friday morning. Position near Stamford / White Plains / Tallman before the 13:00 work window, activate Tallman after work, then continue to the booked Edison overnight.",
+        "saturdayEveningTiming": "Target Fort McHenry arrival around 19:30 EDT and start activating at 20:00 EDT so MD counts on Sunday UTC.",
         "chargingNetwork": "Tesla Superchargers only",
-        "chargingStopsIncluded": "Friday likely needs a 30-minute Tesla Supercharger stop after Silver Sands. Saturday likely needs one or two additional 30-minute Supercharger stops depending on starting charge and hotel charging.",
+        "chargingStopsIncluded": "Friday can use CT / lower-Hudson charging before work and Edison / Woodbridge charging near the overnight. Saturday likely needs one or two additional 30-minute Supercharger stops depending on starting charge.",
         "bufferMinutesBaseline": 60,
         "utcDayRolloverLocal": "20:00 EDT",
-        "accessNotes": "Silver Sands is listed as 08:00-sunset, and CT Parks notes after-hours fishing parking. Tallman is dawn-to-dusk, so it is a Saturday morning NY stop, not a Friday night solution. If the optional PA branch is selected, John Heinz NWR trails are sunrise-to-sundown and need to be a daytime stop."
+        "accessNotes": "Tallman is dawn-to-dusk, so the Friday after-work activation should start promptly and stay before dark. John Heinz NWR trails are sunrise-to-sundown and need to be a daytime stop."
       },
       "timingModels": [
         {
-          "name": "Default: no-PA Saturday chain",
-          "entityCount": 6,
+          "name": "Fixed Saturday: Edison to Foggy Bottom via NJ/PA/DE/MD",
+          "entityCount": 7,
           "physicalStops": 4,
-          "startAnchor": "Tarrytown / Nyack hotel",
+          "startAnchor": "Edison, NJ hotel",
           "endAnchor": "Foggy Bottom / DC hotel",
-          "estimatedDriveMinutes": 327,
+          "estimatedDriveMinutes": 277,
           "activationMinutes": 240,
           "chargingMinutes": 60,
           "bufferMinutes": 60,
-          "estimatedTotalMinutes": 687,
-          "estimatedTotalLabel": "about 11h 30m from Saturday departure before any extra DC night activation",
-          "comfort": "preferred default because it avoids an unnecessary jurisdiction and one physical stop",
+          "estimatedTotalMinutes": 637,
+          "estimatedTotalLabel": "about 10h 40m before dinner/check-in variation",
+          "comfort": "reasonable but timing-sensitive because Fort McHenry should not start before 20:00 EDT",
           "route": [
             {
-              "from": "Tarrytown / Nyack",
-              "to": "Tallman Mountain State Park",
-              "estimatedDriveMinutes": 13
-            },
-            {
-              "from": "Tallman Mountain State Park",
+              "from": "Edison, NJ hotel",
               "to": "Cheesequake State Park",
-              "estimatedDriveMinutes": 61
-            },
-            {
-              "from": "Cheesequake State Park",
-              "to": "Fox Point State Park",
-              "estimatedDriveMinutes": 102
-            },
-            {
-              "from": "Fox Point State Park",
-              "to": "Fort McHenry",
-              "estimatedDriveMinutes": 75
-            },
-            {
-              "from": "Fort McHenry",
-              "to": "Foggy Bottom / DC hotel",
-              "estimatedDriveMinutes": 76
-            }
-          ],
-          "entities": [
-            "US-2149 Tallman Mountain State Park",
-            "US-1611 Cheesequake State Park",
-            "US-1738 Fox Point State Park",
-            "US-9878 Northern Delaware Greenway National Recreation Trail",
-            "US-0928 Fort McHenry National Monument",
-            "US-4581 / US-4567 / US-4582 trail overlaps to verify at Fort McHenry"
-          ],
-          "notes": "This uses the NJ Turnpike / Delaware Memorial Bridge line and does not require a Pennsylvania activation."
-        },
-        {
-          "name": "Optional: Philadelphia / US-0512 PA branch",
-          "entityCount": 8,
-          "physicalStops": 5,
-          "startAnchor": "Tarrytown / Nyack hotel",
-          "endAnchor": "Foggy Bottom / DC hotel",
-          "estimatedDriveMinutes": 337,
-          "activationMinutes": 300,
-          "chargingMinutes": 60,
-          "bufferMinutes": 60,
-          "estimatedTotalMinutes": 757,
-          "estimatedTotalLabel": "about 12h 40m from Saturday departure before any extra DC night activation",
-          "comfort": "optional stretch if the extra PA entity is worth another stop",
-          "route": [
-            {
-              "from": "Tarrytown / Nyack",
-              "to": "Tallman Mountain State Park",
-              "estimatedDriveMinutes": 13
-            },
-            {
-              "from": "Tallman Mountain State Park",
-              "to": "Cheesequake State Park",
-              "estimatedDriveMinutes": 61
+              "estimatedDriveMinutes": 21
             },
             {
               "from": "Cheesequake State Park",
               "to": "US-0512 John Heinz NWR",
-              "estimatedDriveMinutes": 86
+              "estimatedDriveMinutes": 84
             },
             {
               "from": "US-0512 John Heinz NWR",
               "to": "Fox Point State Park",
-              "estimatedDriveMinutes": 26
+              "estimatedDriveMinutes": 25
             },
             {
               "from": "Fox Point State Park",
               "to": "Fort McHenry",
-              "estimatedDriveMinutes": 75
+              "estimatedDriveMinutes": 74
             },
             {
               "from": "Fort McHenry",
               "to": "Foggy Bottom / DC hotel",
-              "estimatedDriveMinutes": 76
+              "estimatedDriveMinutes": 74
             }
           ],
           "entities": [
-            "US-2149 Tallman Mountain State Park",
             "US-1611 Cheesequake State Park",
             "US-0512 John Heinz National Wildlife Refuge",
             "US-1738 Fox Point State Park",
-            "US-9878 Northern Delaware Greenway National Recreation Trail",
+            "US-9878 Northern Delaware Greenway National Recreation Trail if the Fox Point position verifies",
             "US-0928 Fort McHenry National Monument",
             "US-4581 / US-4567 / US-4582 trail overlaps to verify at Fort McHenry"
           ],
-          "notes": "Mapped drive time is only about 10 minutes longer than the no-PA chain, but it adds one full activation stop and makes PA a required jurisdiction for the day."
+          "notes": "This is the selected Saturday route. Fort McHenry should be held until the 20:00 EDT UTC rollover."
         }
       ],
       "fridayEveningOptions": [
         {
-          "name": "Recommended Friday: Hope -> Silver Sands -> Milford charge -> Tarrytown/Nyack hotel",
-          "route": "Hope -> Silver Sands -> Tesla Supercharger near Milford/Fairfield -> Tarrytown or Nyack",
-          "estimatedDriveMinutes": 178,
+          "name": "Friday fixed: Tallman -> Edison hotel",
+          "route": "Tallman Mountain State Park -> booked Edison, NJ hotel",
+          "estimatedDriveMinutes": 66,
           "activationMinutes": 60,
           "bufferMinutes": 30,
-          "estimatedTotalMinutes": 298,
-          "estimatedTotalLabel": "about 5h from a 17:00 departure, including a 30-minute charge but excluding dinner variation",
-          "comfort": "best if the post-charge drive still feels good",
-          "notes": "Hope to Silver Sands is about 1h47. Silver Sands to Milford Supercharger to Tarrytown is about 1h07; to Nyack is about 1h11. This fits a 21:30-ish stop only if the activation and charge stay tight."
-        },
-        {
-          "name": "Fallback Friday: Hope -> Silver Sands -> charge -> Stamford/White Plains hotel",
-          "route": "Hope -> Silver Sands -> Tesla Supercharger near Milford/Fairfield/Darien -> Stamford or White Plains",
-          "estimatedDriveMinutes": 167,
-          "activationMinutes": 60,
-          "bufferMinutes": 30,
-          "estimatedTotalMinutes": 287,
-          "estimatedTotalLabel": "about 4h45-5h from a 17:00 departure depending on charging location",
-          "comfort": "best fatigue-aware fallback",
-          "notes": "Stamford is about 46 minutes from Silver Sands via the Milford charger; White Plains is about 60 minutes. This preserves Saturday feasibility without forcing a too-late Friday."
+          "estimatedTotalMinutes": 156,
+          "estimatedTotalLabel": "about 2h 35m after work before hotel settling/charging variation",
+          "comfort": "good if Tallman starts promptly after work",
+          "notes": "Tallman banks NY on Friday; Edison positions Saturday about 21 minutes from Cheesequake."
         }
       ],
-      "restOfTripComfortRule": "Saturday should protect the Foggy Bottom hotel arrival and Sunday DC rove. Default to the no-PA route unless the extra US-0512 stop is clearly worth the time.",
+      "restOfTripComfortRule": "Saturday should protect the Foggy Bottom hotel arrival and Sunday DC rove. John Heinz is now part of the selected route; avoid adding extra nonessential stops.",
       "saturdayOvernight": {
         "type": "hotel",
         "area": "Foggy Bottom / Washington, DC",
@@ -553,22 +452,16 @@
       },
       "baselineCandidates": [
         {
-          "reference": "US-1716",
-          "name": "Silver Sands State Park",
-          "state": "US-CT",
-          "role": "Friday CT activation before the post-activation charge"
-        },
-        {
-          "reference": "US-2149",
-          "name": "Tallman Mountain State Park",
-          "state": "US-NY",
-          "role": "Saturday NY activation from lower-Hudson hotel"
-        },
-        {
           "reference": "US-1611",
           "name": "Cheesequake State Park",
           "state": "US-NJ",
-          "role": "Saturday NJ activation on the default southbound line"
+          "role": "Saturday morning NJ activation from Edison"
+        },
+        {
+          "reference": "US-0512",
+          "name": "John Heinz National Wildlife Refuge",
+          "state": "US-PA",
+          "role": "selected Saturday PA activation"
         },
         {
           "reference": "US-1738",
@@ -580,19 +473,10 @@
           "reference": "US-0928",
           "name": "Fort McHenry National Monument",
           "state": "US-MD",
-          "role": "Saturday MD activation; trail overlaps still need position verification"
+          "role": "Saturday 20:00 EDT MD activation for Sunday UTC credit"
         }
       ],
       "stretchCandidates": [
-        {
-          "references": [
-            "US-0512"
-          ],
-          "name": "John Heinz National Wildlife Refuge",
-          "state": "US-PA",
-          "role": "Optional Philadelphia / PA branch between Cheesequake and Fox Point",
-          "risk": "Adds another physical stop and makes PA a required jurisdiction for the day."
-        },
         {
           "references": [
             "US-9878"
@@ -612,272 +496,51 @@
           "state": "US-MD",
           "role": "Potential extra entities from the Fort McHenry stop",
           "risk": "Needs exact-position verification before relying on the count."
-        },
-        {
-          "references": [
-            "US-0784",
-            "US-9901",
-            "US-4581",
-            "US-4567",
-            "US-4564",
-            "US-9898",
-            "US-0670"
-          ],
-          "name": "LBJ Grove DC overlap",
-          "state": "US-DC",
-          "role": "Sunday high-density rove anchor, not a Saturday requirement",
-          "risk": "Exact 7-fer position still needs verification."
         }
       ],
       "openQuestions": [
-        "Decide whether to avoid PA by using the NJ Turnpike / Delaware Memorial Bridge line, or deliberately add the US-0512 John Heinz branch for another entity.",
-        "Pick the Friday hotel area after checking availability: Tarrytown/Nyack preferred, Stamford/White Plains fallback, Milford/Fairfield only as a safety fallback.",
+        "Confirm exact Fox Point operating position for the Northern Delaware Greenway overlap.",
         "Confirm exact Fort McHenry operating position and whether it reliably counts US-0928 plus the relevant trail references.",
-        "Identify Saturday Tesla Supercharger pairings around central NJ / Philadelphia and Delaware / Baltimore.",
-        "Find a legal Saturday after-20:00 DC-area activation close to Foggy Bottom only if Saturday arrives early enough."
+        "Identify Saturday Tesla Supercharger pairings between Edison, Philadelphia / Delaware, and Baltimore / DC.",
+        "Do not start Fort McHenry before 20:00 EDT if the goal is Sunday UTC credit."
       ]
     },
     "sundayDcRove": {
-      "status": "high-value branch to verify",
+      "status": "next planning pass",
       "targetDate": "2026-06-21",
-      "strategy": "Use Sunday June 21 for the true dense rove from the Foggy Bottom hotel. Start with the LBJ Memorial Grove overlap in DC, add Dyke Marsh if the imported 7-fer evidence verifies, then continue south through Mason Neck and Prince William before the fixed Fredericksburg hotel night.",
+      "strategy": "Sunday June 21 remains the large DC / NoVA rove day from Foggy Bottom to Fredericksburg. Exact Cheetah/Ostrich flow is intentionally deferred to the next cleanup pass.",
       "timingAssumptions": {
         "source": "Google Maps route checks plus imported n-fer evidence and the February 2026 CWops article about a DC POTA 7-fer. Sunday routes were checked at a June 21 afternoon departure.",
         "departureArea": "Foggy Bottom hotel",
         "utcDayRolloverLocal": "20:00 EDT"
       },
-      "recommendedRoute": [
-        {
-          "stop": "LBJ Memorial Grove",
-          "references": [
-            "US-0784",
-            "US-9901",
-            "US-4581",
-            "US-4567",
-            "US-4564",
-            "US-9898",
-            "US-0670"
-          ],
-          "role": "Primary DC n-fer anchor. Exact 7-fer position still needs verification; easier parking-lot operation may be fewer entities."
-        },
-        {
-          "stop": "Dyke Marsh / Mount Vernon corridor",
-          "references": [
-            "US-9961",
-            "US-9935",
-            "US-9898",
-            "US-4581",
-            "US-4567",
-            "US-4564",
-            "US-0670"
-          ],
-          "role": "Imported top-activator evidence shows a 7-reference cluster here. It overlaps heavily with LBJ, but could add Dyke Marsh and Virginia Bird & Wildlife Trail as unique entities."
-        },
-        {
-          "stop": "Mason Neck",
-          "references": [
-            "US-1308",
-            "US-0563"
-          ],
-          "role": "Strong southbound Virginia 2-fer candidate with imported n-fer evidence."
-        },
-        {
-          "stop": "Prince William Forest",
-          "references": [
-            "US-0691"
-          ],
-          "role": "Low-detour Virginia add-on before the Fredericksburg hotel."
-        }
-      ],
-      "timingModels": [
-        {
-          "name": "DC/NoVA 10-entity Sunday",
-          "entityCount": 10,
-          "physicalStops": 3,
-          "startAnchor": "Foggy Bottom hotel",
-          "endAnchor": "Fredericksburg hotel",
-          "estimatedDriveMinutes": 89,
-          "activationMinutes": 180,
-          "chargingMinutes": 0,
-          "bufferMinutes": 60,
-          "estimatedTotalMinutes": 341,
-          "estimatedTotalLabel": "about 5h 40m before extra DC time",
-          "comfort": "very strong if the LBJ Grove 7-fer is verified",
-          "route": [
-            {
-              "from": "Foggy Bottom hotel",
-              "to": "US-0784 / LBJ Grove",
-              "estimatedDriveMinutes": 10
-            },
-            {
-              "from": "US-0784 / LBJ Grove",
-              "to": "US-1308 / Mason Neck",
-              "estimatedDriveMinutes": 31
-            },
-            {
-              "from": "US-1308 / Mason Neck",
-              "to": "US-0691 / Prince William Forest",
-              "estimatedDriveMinutes": 24
-            },
-            {
-              "from": "US-0691 / Prince William Forest",
-              "to": "Fredericksburg hotel",
-              "estimatedDriveMinutes": 24
-            }
-          ],
-          "entities": [
-            "US-0784 Lyndon Baines Johnson Memorial Grove on the Potomac",
-            "US-9901",
-            "US-4581 Star-Spangled Banner National Historic Trail",
-            "US-4567 Captain John Smith Chesapeake National Historic Trail",
-            "US-4564 Potomac Heritage Trail National Scenic Trail",
-            "US-9898 Mount Vernon National Historic Trail",
-            "US-0670 George Washington Memorial Parkway",
-            "US-1308 Mason Neck State Park",
-            "US-0563 Elizabeth Hartwell Mason Neck National Wildlife Refuge",
-            "US-0691 Prince William Forest Park"
-          ],
-          "notes": "The CWops article says the parking-lot/picnic-table option at LBJ Grove is a 4-fer and the exact walk-out spot is a 7-fer. Treat this as the top outreach/verification item because it could make Sunday dramatically easier. Sunday must still end at the booked Fredericksburg hotel."
-        },
-        {
-          "name": "DC/NoVA 12-entity Sunday with Saturday MD banked",
-          "entityCount": 12,
-          "physicalStops": 4,
-          "startAnchor": "Fort McHenry after 20:00 Saturday, then Foggy Bottom Sunday start",
-          "endAnchor": "Fredericksburg hotel",
-          "estimatedDriveMinutes": 127,
-          "activationMinutes": 240,
-          "chargingMinutes": 0,
-          "bufferMinutes": 60,
-          "estimatedTotalMinutes": 427,
-          "estimatedTotalLabel": "about 7h 05m plus any extra DC/social time",
-          "comfort": "strong if Fort McHenry and LBJ overlaps verify; still reasonable because the route is short and southbound",
-          "route": [
-            {
-              "from": "Foggy Bottom hotel",
-              "to": "US-0784 / LBJ Grove",
-              "estimatedDriveMinutes": 8
-            },
-            {
-              "from": "US-0784 / LBJ Grove",
-              "to": "US-9961 / Dyke Marsh",
-              "estimatedDriveMinutes": 18
-            },
-            {
-              "from": "US-9961 / Dyke Marsh",
-              "to": "US-1308 / Mason Neck",
-              "estimatedDriveMinutes": 34
-            },
-            {
-              "from": "US-1308 / Mason Neck",
-              "to": "US-0691 / Prince William Forest",
-              "estimatedDriveMinutes": 40
-            },
-            {
-              "from": "US-0691 / Prince William Forest",
-              "to": "Fredericksburg hotel",
-              "estimatedDriveMinutes": 27
-            }
-          ],
-          "entities": [
-            "US-0928 Fort McHenry National Monument if started after 20:00 EDT Saturday",
-            "US-4582 Washington-Rochambeau Revolutionary Route National Historic Trail if Fort McHenry overlap verifies",
-            "US-0784 Lyndon Baines Johnson Memorial Grove on the Potomac",
-            "US-9901 Civil War Defenses of Washington National Historic Trail",
-            "US-4581 Star-Spangled Banner National Historic Trail",
-            "US-4567 Captain John Smith Chesapeake National Historic Trail",
-            "US-4564 Potomac Heritage Trail National Scenic Trail",
-            "US-9898 Mount Vernon National Historic Trail",
-            "US-0670 George Washington Memorial Parkway",
-            "US-1308 Mason Neck State Park",
-            "US-0563 Elizabeth Hartwell Mason Neck National Wildlife Refuge",
-            "US-0691 Prince William Forest Park"
-          ],
-          "notes": "This model treats Saturday Fort McHenry after the UTC rollover as part of the Sunday UTC rove day. Fort McHenry and LBJ duplicate US-4581 and US-4567, so the count only improves if Fort McHenry adds unique US-0928 and/or US-4582."
-        },
-        {
-          "name": "DC/NoVA stretch with Dyke Marsh and Rock Creek",
-          "entityCount": 14,
-          "physicalStops": 5,
-          "startAnchor": "Foggy Bottom hotel",
-          "endAnchor": "Fredericksburg hotel",
-          "estimatedDriveMinutes": 147,
-          "activationMinutes": 300,
-          "chargingMinutes": 0,
-          "bufferMinutes": 60,
-          "estimatedTotalMinutes": 507,
-          "estimatedTotalLabel": "about 8h 25m plus lunch/friend timing",
-          "comfort": "plausible as a stretch route, but only worth it if Dyke Marsh adds unique entities and Rock Creek is socially useful or uniquely countable",
-          "route": [
-            {
-              "from": "Foggy Bottom hotel",
-              "to": "Rock Creek Park",
-              "estimatedDriveMinutes": 9
-            },
-            {
-              "from": "Rock Creek Park",
-              "to": "US-0784 / LBJ Grove",
-              "estimatedDriveMinutes": 19
-            },
-            {
-              "from": "US-0784 / LBJ Grove",
-              "to": "US-9961 / Dyke Marsh",
-              "estimatedDriveMinutes": 18
-            },
-            {
-              "from": "US-9961 / Dyke Marsh",
-              "to": "US-1308 / Mason Neck",
-              "estimatedDriveMinutes": 35
-            },
-            {
-              "from": "US-1308 / Mason Neck",
-              "to": "US-0691 / Prince William Forest",
-              "estimatedDriveMinutes": 39
-            },
-            {
-              "from": "US-0691 / Prince William Forest",
-              "to": "Fredericksburg hotel",
-              "estimatedDriveMinutes": 27
-            }
-          ],
-          "entities": [
-            "All verified LBJ entities",
-            "US-9961 Dyke Marsh Wildlife Reserve if the exact overlap position verifies",
-            "US-9935 Virginia Bird & Wildlife State Trail if the exact overlap position verifies",
-            "US-1308 Mason Neck State Park",
-            "US-0563 Elizabeth Hartwell Mason Neck National Wildlife Refuge",
-            "US-0691 Prince William Forest Park",
-            "Rock Creek Park reference still needs lookup/verification before counting"
-          ],
-          "notes": "Rock Creek is not currently the count-efficient anchor; it is best treated as a friend-meetup option unless a clean POTA reference and access plan makes it worth the extra stop."
-        }
-      ],
+      "recommendedRoute": [],
+      "timingModels": [],
       "openQuestions": [
-        "Confirm the exact LBJ Grove 7-fer position and whether it is practical with the Tesla / portable gear.",
-        "Confirm whether Dyke Marsh can add US-9961 and US-9935 as unique entities without duplicating too much of the LBJ cluster.",
-        "Find the best legal post-20:00 Saturday DC-area activation near Foggy Bottom or Fort McHenry to bank Sunday UTC entities early.",
-        "Confirm whether the friend in DC prefers Rock Creek or can meet at the LBJ Grove / National Mall overlap instead.",
-        "Confirm Mason Neck 2-fer access and whether it is worth adding before the Fredericksburg hotel."
+        "Build the exact Cheetah (15 entities) and Ostrich (20 entities) DC flow.",
+        "Verify the best DC n-fer positions and access details."
       ]
     },
     "mdTarget": {
       "date": "2026-06-20",
       "localTime": "20:00 EDT",
-      "meaning": "Aim to make Fort McHenry / Maryland the evening activation at or after the UTC rollover. If it starts after 20:00 EDT, it counts toward the Sunday UTC rove day while still keeping the route southbound to DC.",
+      "meaning": "Arrive near Fort McHenry around 19:30 and start the activation at or after 20:00 EDT so Maryland counts toward the Sunday UTC rove day.",
       "defaultRouteBeforeTarget": [
-        "US-6992 or US-6982 in RI Friday morning",
-        "US-1716 Silver Sands Friday evening",
-        "US-2149 Tallman Saturday",
-        "US-1611 Cheesequake Saturday",
+        "US-6992 or nearby RI park Friday morning",
+        "US-1716 Silver Sands Friday morning",
+        "US-2149 Tallman Friday after work",
+        "Booked Edison, NJ hotel Friday night",
+        "US-1611 Cheesequake Saturday morning",
+        "US-0512 John Heinz Saturday",
         "US-1738 Fox Point Saturday",
-        "US-0928 Fort McHenry Saturday evening"
+        "US-0928 Fort McHenry Saturday evening at/after 20:00 EDT"
       ],
-      "optionalBranch": "Insert US-0512 John Heinz between Cheesequake and Fox Point only if deliberately routing through PA."
+      "optionalBranch": "None for PA now: John Heinz is part of the selected Saturday route."
     },
     "parkShortlist": [
       {
         "state": "US-RI",
-        "goal": "Friday morning before work from Hope",
+        "goal": "Friday morning near Hope",
         "defaultReferences": [
           "US-6992"
         ],
@@ -885,32 +548,16 @@
           {
             "reference": "US-6992",
             "name": "JL Curran State Park",
-            "role": "default near-home RI morning activation",
+            "role": "default near-home RI activation",
             "latitude": 41.7507,
             "longitude": -71.5516,
-            "priority": "default"
-          },
-          {
-            "reference": "US-6982",
-            "name": "Big River Wildlife Management Area",
-            "role": "nearby fallback if JL Curran access/timing is poor",
-            "latitude": 41.6311,
-            "longitude": -71.5714,
-            "priority": "backup"
-          },
-          {
-            "reference": "US-2880",
-            "name": "Snake Den State Park",
-            "role": "northwest RI fallback near the Hope / Scituate area",
-            "latitude": 41.8303,
-            "longitude": -71.5373,
-            "priority": "backup"
+            "priority": "target"
           }
         ]
       },
       {
         "state": "US-CT",
-        "goal": "Friday evening before the westbound charge",
+        "goal": "Friday morning before work positioning",
         "defaultReferences": [
           "US-1716"
         ],
@@ -918,24 +565,16 @@
           {
             "reference": "US-1716",
             "name": "Silver Sands State Park",
-            "role": "default CT stop; target arrival around 19:00",
+            "role": "selected CT activation",
             "latitude": 41.2009,
             "longitude": -73.0721,
-            "priority": "default"
-          },
-          {
-            "reference": "US-1715",
-            "name": "Sherwood Island State Park",
-            "role": "backup CT shoreline stop if Silver Sands access fails",
-            "latitude": 41.1146,
-            "longitude": -73.3296,
-            "priority": "backup"
+            "priority": "target"
           }
         ]
       },
       {
         "state": "US-NY",
-        "goal": "Saturday morning from lower Hudson hotel",
+        "goal": "Friday after work",
         "defaultReferences": [
           "US-2149"
         ],
@@ -943,24 +582,16 @@
           {
             "reference": "US-2149",
             "name": "Tallman Mountain State Park",
-            "role": "default NY start from Tarrytown/Nyack",
+            "role": "selected NY activation while rush hour clears",
             "latitude": 41.0305,
             "longitude": -73.914,
-            "priority": "default"
-          },
-          {
-            "reference": "US-8319",
-            "name": "Palisades Interstate Park",
-            "role": "backup/optional lower-Hudson entity if access is better than Tallman",
-            "latitude": 40.915,
-            "longitude": -73.925,
-            "priority": "backup"
+            "priority": "target"
           }
         ]
       },
       {
         "state": "US-NJ",
-        "goal": "Saturday NJ stop on the default southbound line",
+        "goal": "Saturday morning from Edison",
         "defaultReferences": [
           "US-1611"
         ],
@@ -968,51 +599,44 @@
           {
             "reference": "US-1611",
             "name": "Cheesequake State Park",
-            "role": "default NJ stop",
+            "role": "selected NJ activation",
             "latitude": 40.4377,
             "longitude": -74.2666,
-            "priority": "default"
+            "priority": "target"
           }
         ]
       },
       {
         "state": "US-PA",
-        "goal": "Optional branch only if routing through Philadelphia",
-        "defaultReferences": [],
+        "goal": "Saturday Pennsylvania stop",
+        "defaultReferences": [
+          "US-0512"
+        ],
         "options": [
           {
             "reference": "US-0512",
             "name": "John Heinz National Wildlife Refuge",
-            "role": "optional PA branch; adds another activation stop",
+            "role": "selected PA activation",
             "latitude": 39.8929,
             "longitude": -75.2575,
-            "priority": "optional"
+            "priority": "target"
           }
         ]
       },
       {
         "state": "US-DE",
-        "goal": "Saturday afternoon Delaware stop",
+        "goal": "Saturday Delaware stop",
         "defaultReferences": [
-          "US-1738",
-          "US-9878"
+          "US-1738"
         ],
         "options": [
           {
             "reference": "US-1738",
             "name": "Fox Point State Park",
-            "role": "default DE physical stop",
+            "role": "selected DE activation",
             "latitude": 39.7561,
             "longitude": -75.4897,
-            "priority": "default"
-          },
-          {
-            "reference": "US-9878",
-            "name": "Northern Delaware Greenway National Recreation Trail",
-            "role": "likely 2-fer with Fox Point if the operating position is valid",
-            "latitude": 39.7764,
-            "longitude": -75.5455,
-            "priority": "linked"
+            "priority": "target"
           }
         ]
       },
@@ -1026,34 +650,61 @@
           {
             "reference": "US-0928",
             "name": "Fort McHenry National Monument",
-            "role": "default MD evening target near the UTC rollover",
+            "role": "selected MD activation at/after UTC rollover",
             "latitude": 39.2633,
             "longitude": -76.5799,
-            "priority": "default"
+            "priority": "target"
+          }
+        ]
+      },
+      {
+        "state": "US-GA",
+        "goal": "Tuesday Savannah / Pooler leg",
+        "defaultReferences": [
+          "US-0522"
+        ],
+        "options": [
+          {
+            "reference": "US-0522",
+            "name": "Savannah National Wildlife Refuge",
+            "role": "selected GA/SC-area activation; exact state credit to verify",
+            "latitude": 32.1655,
+            "longitude": -81.1514,
+            "priority": "target"
+          }
+        ]
+      },
+      {
+        "state": "US-FL",
+        "goal": "Thursday / Friday Florida targets",
+        "defaultReferences": [
+          "US-1915",
+          "US-1884"
+        ],
+        "options": [
+          {
+            "reference": "US-1915",
+            "name": "Silver Springs State Park",
+            "role": "preferred Thursday morning Ocala-area activation",
+            "latitude": 29.2128,
+            "longitude": -82.0543,
+            "priority": "target"
           },
           {
-            "reference": "US-4581",
-            "name": "Star-Spangled Banner National Historic Trail",
-            "role": "possible Fort McHenry overlap; verify exact position",
-            "latitude": 39.2633,
-            "longitude": -76.5799,
-            "priority": "linked"
+            "reference": "US-4471",
+            "name": "Ocala National Forest",
+            "role": "Thursday morning alternate from Ocala",
+            "latitude": 29.1838,
+            "longitude": -81.7141,
+            "priority": "alternate"
           },
           {
-            "reference": "US-4567",
-            "name": "Captain John Smith Chesapeake National Historic Trail",
-            "role": "possible Fort McHenry overlap; verify exact position",
-            "latitude": 39.2633,
-            "longitude": -76.5799,
-            "priority": "linked"
-          },
-          {
-            "reference": "US-4582",
-            "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
-            "role": "possible Fort McHenry overlap; verify exact position",
-            "latitude": 39.2633,
-            "longitude": -76.5799,
-            "priority": "linked"
+            "reference": "US-1884",
+            "name": "John D. MacArthur Beach State Park",
+            "role": "target Friday evening destination-area activation",
+            "latitude": 26.8246,
+            "longitude": -80.044,
+            "priority": "target"
           }
         ]
       }
@@ -1143,44 +794,48 @@
   "restOfTripDraft": {
     "status": "rough",
     "assumptions": [
-      "Friday road departure is from Hope, RI around 17:00 after RI has been activated in the morning.",
-      "All overnights are now hotels or family/home stays; camping is no longer part of the plan.",
+      "All overnights are hotels or family/home stays; camping is no longer part of the plan.",
+      "Friday night is booked in Edison, NJ.",
       "Saturday night is fixed at a hotel in the Foggy Bottom area of Washington, DC.",
       "Sunday night is fixed at a hotel in Fredericksburg, VA.",
       "Monday June 22 is fixed in Florence, SC.",
-      "Thursday night is planned at mother's house in Ocala, FL; arriving Wednesday is acceptable but not required.",
-      "Broad planning uses 2 hours per non-overnight park stop, including detour, setup, activation, teardown, and return to the highway.",
+      "Tuesday June 23 is in or near Pooler after Savannah National Wildlife Refuge.",
+      "Wednesday June 24 is in Ocala, FL.",
+      "NC and SC park choices still need to be selected.",
       "Weekdays still have a 13:00-17:00 work block unless explicitly changed."
     ],
     "overnightStrategy": {
-      "goal": "Use hotel and family/home anchors to keep the drive predictable while inserting only the required jurisdiction activations.",
+      "goal": "Use fixed hotel and family/home anchors to keep the drive predictable while inserting the selected jurisdiction activations.",
       "recommendedPattern": [
-        "2026-06-19 lower Hudson / southwest CT hotel",
+        "2026-06-19 Edison, NJ hotel",
         "2026-06-20 Foggy Bottom hotel",
         "2026-06-21 Fredericksburg hotel",
         "2026-06-22 Florence hotel",
-        "2026-06-23 TBD hotel between Florence and Ocala",
-        "2026-06-24 TBD hotel or Ocala if early",
-        "2026-06-25 Ocala home"
+        "2026-06-23 Pooler / Savannah-area hotel",
+        "2026-06-24 Ocala",
+        "2026-06-25 Ocala / local Florida activation",
+        "2026-06-26 Singer Island / Riviera Beach arrival"
       ],
-      "summary": "Camping has been removed from the plan. The remaining open overnight decisions are Friday after Silver Sands and the Tuesday/Wednesday hotel positioning between Florence and Ocala.",
+      "summary": "Camping has been removed. The remaining open park decisions are the exact Sunday DC rove flow and NC/SC stops.",
       "nights": [
         {
           "date": "2026-06-19",
           "preferredType": "hotel",
-          "area": "Tarrytown/Nyack preferred; Stamford/White Plains fallback; Milford/Fairfield safety fallback",
-          "why": "Friday should bank RI and CT without forcing a too-late push to Meadowlands.",
+          "area": "Edison, NJ",
+          "why": "Booked Friday night after RI/CT/NY are banked.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-RI",
-            "US-CT"
+            "US-CT",
+            "US-NY",
+            "US-NJ"
           ]
         },
         {
           "date": "2026-06-20",
           "preferredType": "hotel",
           "area": "Foggy Bottom / Washington, DC",
-          "why": "Fixed Saturday anchor after NY/NJ/PA/DE/MD.",
+          "why": "Fixed Saturday anchor after NJ/PA/DE/MD.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-DC"
@@ -1210,8 +865,8 @@
         {
           "date": "2026-06-23",
           "preferredType": "hotel",
-          "area": "TBD between Florence and Ocala",
-          "why": "Open positioning slot for GA and north Florida coverage.",
+          "area": "Pooler / Savannah, GA",
+          "why": "Position after Savannah National Wildlife Refuge.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-GA"
@@ -1219,9 +874,9 @@
         },
         {
           "date": "2026-06-24",
-          "preferredType": "hotel",
-          "area": "TBD or Ocala if early",
-          "why": "Buffer night if the southern route needs more time before Ocala.",
+          "preferredType": "home",
+          "area": "Ocala, FL",
+          "why": "Wednesday night Ocala anchor.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-FL"
@@ -1231,14 +886,14 @@
           "date": "2026-06-25",
           "preferredType": "home",
           "area": "Ocala, FL",
-          "why": "Mother's house protects the Friday Field Day arrival.",
+          "why": "Protects Friday Field Day arrival and allows a local morning activation.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-FL"
           ]
         }
       ],
-      "fallbackNote": "If Tuesday/Wednesday routing runs ahead, go to Ocala early and keep Thursday flexible."
+      "fallbackNote": "If Wednesday runs late, protect Ocala first; Thursday morning Silver Springs is the easiest Florida activation."
     },
     "days": [
       {
@@ -1246,7 +901,7 @@
         "overnightType": "hotel",
         "startArea": "Foggy Bottom hotel",
         "endArea": "Fredericksburg hotel",
-        "focus": "Use the DC / NoVA density for the large rove day, then finish at the booked Fredericksburg hotel.",
+        "focus": "Large DC / NoVA rove day, exact Cheetah/Ostrich flow TBD.",
         "jurisdictions": [
           "US-DC",
           "US-VA"
@@ -1254,130 +909,136 @@
         "roughMiles": 70,
         "roughDriveHours": 1.5,
         "chargingHours": 0,
-        "minimumEntities": 3,
-        "parkStopHours": 4,
-        "roughTotalHours": 5.5,
-        "notes": "A Saturday post-20:00 DC activation can bank one Sunday UTC entity early. Sunday then prioritizes LBJ Grove, possible friend meetup, and southbound VA add-ons only while they fit Fredericksburg."
+        "minimumEntities": 15,
+        "parkStopHours": 6,
+        "roughTotalHours": 7.5,
+        "notes": "Exact DC route will be nailed down next."
       },
       {
         "date": "2026-06-22",
         "overnightType": "hotel",
         "startArea": "Fredericksburg hotel",
         "endArea": "Florence, SC",
-        "focus": "Workday southbound push; cover NC and/or SC with low-detour stops while preserving the Florence arrival.",
+        "focus": "Workday southbound push; NC and SC parks still need final selection.",
         "jurisdictions": [
           "US-VA",
           "US-NC",
           "US-SC"
         ],
         "roughMiles": 350,
-        "roughDriveHours": 5.6,
+        "roughDriveHours": 5.2,
         "chargingHours": 1,
         "minimumEntities": 2,
         "parkStopHours": 4,
-        "roughTotalHours": 10.6,
-        "notes": "This is likely a hard day with the 13:00-17:00 work block, so exact NC/SC parks need routing before booking anything else."
+        "roughTotalHours": 10.2,
+        "notes": "Monday night is fixed in Florence."
       },
       {
         "date": "2026-06-23",
         "overnightType": "hotel",
         "startArea": "Florence, SC",
-        "endArea": "TBD hotel between Florence and Ocala",
-        "focus": "Use Tuesday to cover any remaining SC and get GA handled while positioning toward Ocala.",
+        "endArea": "Pooler / Savannah, GA",
+        "focus": "Activate Savannah National Wildlife Refuge, then overnight near Pooler.",
         "jurisdictions": [
           "US-SC",
           "US-GA"
         ],
-        "roughMiles": 250,
-        "roughDriveHours": 4.2,
+        "roughMiles": 184,
+        "roughDriveHours": 2.8,
         "chargingHours": 0.5,
         "minimumEntities": 1,
         "parkStopHours": 2,
-        "roughTotalHours": 6.7,
-        "notes": "Camping is no longer in scope; choose this hotel based on where the GA stop lands and how much drive remains to Ocala."
+        "roughTotalHours": 5.3,
+        "notes": "Savannah NWR is listed locally under both SC and GA; state-credit details need confirmation."
       },
       {
         "date": "2026-06-24",
-        "overnightType": "hotel",
-        "startArea": "Georgia / north Florida corridor",
-        "endArea": "TBD hotel or Ocala if early",
-        "focus": "Continue south, finish GA/FL coverage, and optionally reach Ocala early.",
+        "overnightType": "home",
+        "startArea": "Pooler / Savannah, GA",
+        "endArea": "Ocala, FL",
+        "focus": "Drive to Ocala and stay there Wednesday night.",
         "jurisdictions": [
           "US-GA",
           "US-FL"
         ],
-        "roughMiles": 240,
-        "roughDriveHours": 4,
+        "roughMiles": 232,
+        "roughDriveHours": 3.7,
         "chargingHours": 0.5,
-        "minimumEntities": 1,
-        "parkStopHours": 2,
-        "roughTotalHours": 6.5,
-        "notes": "If Ocala is reached Wednesday, Thursday becomes flexible. Otherwise keep the hotel close enough that Thursday is easy."
+        "minimumEntities": 0,
+        "parkStopHours": 0,
+        "roughTotalHours": 4.2,
+        "notes": "Positioning day; Florida activation can wait for Thursday morning."
       },
       {
         "date": "2026-06-25",
         "overnightType": "home",
-        "startArea": "North Florida / Ocala approach",
+        "startArea": "Ocala, FL",
         "endArea": "Ocala, FL",
-        "focus": "Stay at mother's house and protect the final arrival day.",
+        "focus": "Activate Silver Springs State Park or Ocala National Forest in the morning.",
         "jurisdictions": [
           "US-FL"
         ],
-        "roughMiles": 120,
-        "roughDriveHours": 2,
+        "roughMiles": 25,
+        "roughDriveHours": 0.7,
         "chargingHours": 0,
-        "minimumEntities": 0,
-        "parkStopHours": 0,
-        "roughTotalHours": 2,
-        "notes": "If Florida still is not activated, use a nearby low-risk park before settling in."
+        "minimumEntities": 1,
+        "parkStopHours": 2,
+        "roughTotalHours": 2.7,
+        "notes": "Silver Springs is the easier local target; Ocala National Forest is the alternate."
       },
       {
         "date": "2026-06-26",
         "overnightType": "hotel",
         "startArea": "Ocala, FL",
         "endArea": "Singer Island / Riviera Beach",
-        "focus": "Destination day and hotel arrival for Field Day weekend.",
-        "jurisdictions": [],
-        "roughMiles": 190,
-        "roughDriveHours": 3.2,
+        "focus": "Activate John D. MacArthur Beach State Park in the evening if timing allows.",
+        "jurisdictions": [
+          "US-FL"
+        ],
+        "roughMiles": 236,
+        "roughDriveHours": 4.1,
         "chargingHours": 0.5,
-        "minimumEntities": 0,
-        "parkStopHours": 0,
-        "roughTotalHours": 3.7,
-        "notes": "Keep this as an arrival day, not a required activation day."
+        "minimumEntities": 1,
+        "parkStopHours": 2,
+        "roughTotalHours": 6.6,
+        "notes": "John D. MacArthur is about 9 minutes from Singer Island after activation."
       }
     ],
-    "risk": "The immediate planning risk is Friday night positioning and Saturday stop discipline. If Friday stops too far east, Saturday has too much to do before DC; if Saturday chases extra entities, it can compromise the Sunday DC rove."
+    "risk": "Remaining planning risk is now concentrated in the exact Sunday DC rove flow plus final NC/SC park selection."
   },
   "days": [
     {
       "date": "2026-06-19",
       "states": [
         "US-RI",
-        "US-CT"
+        "US-CT",
+        "US-NY",
+        "US-NJ"
       ],
       "overnight": {
         "type": "hotel",
-        "name": "TBD - Tarrytown/Nyack preferred, Stamford/White Plains fallback",
+        "name": "Edison, NJ hotel",
         "reference": null,
         "booking": {
-          "status": "planned",
+          "status": "booked",
           "confirmation": null,
           "url": null,
-          "notes": "Stop by about 21:30. Do not force Meadowlands Friday night."
+          "notes": "Booked Friday night."
         }
       },
       "parkTargets": [
-        "US-1716"
+        "US-6992",
+        "US-1716",
+        "US-2149"
       ],
-      "notes": "Activate RI Friday morning. Leave Hope around 17:00, activate Silver Sands around 19:00, charge, then drive west only as far as is comfortable.",
-      "approxDriveMiles": 170
+      "notes": "RI and CT in the morning, work near lower Hudson, Tallman after work, then Edison hotel.",
+      "approxDriveMiles": 250
     },
     {
       "date": "2026-06-20",
       "states": [
-        "US-NY",
         "US-NJ",
+        "US-PA",
         "US-DE",
         "US-MD",
         "US-DC"
@@ -1394,14 +1055,13 @@
         }
       },
       "parkTargets": [
-        "US-2149",
         "US-1611",
+        "US-0512",
         "US-1738",
-        "US-9878",
         "US-0928"
       ],
-      "notes": "Default route covers NY, NJ, DE, and MD before the Foggy Bottom hotel. PA / US-0512 is optional only if deliberately routing through Philadelphia.",
-      "approxDriveMiles": 278
+      "notes": "Cheesequake, John Heinz, Fox Point, and Fort McHenry at/after 20:00 EDT before Foggy Bottom.",
+      "approxDriveMiles": 246
     },
     {
       "date": "2026-06-21",
@@ -1420,15 +1080,8 @@
           "notes": "Sunday night fixed anchor."
         }
       },
-      "parkTargets": [
-        "US-0784",
-        "US-9961",
-        "US-9935",
-        "US-1308",
-        "US-0563",
-        "US-0691"
-      ],
-      "notes": "Large DC / NoVA rove day: LBJ first, Dyke Marsh if the imported n-fer lead verifies, then Mason Neck and Prince William before Fredericksburg.",
+      "parkTargets": [],
+      "notes": "Large DC / NoVA Cheetah/Ostrich rove day; exact park flow TBD.",
       "approxDriveMiles": 70
     },
     {
@@ -1450,8 +1103,52 @@
         }
       },
       "parkTargets": [],
-      "notes": "Workday southbound push; exact NC/SC parks still need routing.",
+      "notes": "Workday southbound push; NC/SC parks still need routing.",
       "approxDriveMiles": 350
+    },
+    {
+      "date": "2026-06-23",
+      "states": [
+        "US-SC",
+        "US-GA"
+      ],
+      "overnight": {
+        "type": "hotel",
+        "name": "Pooler / Savannah, GA",
+        "reference": null,
+        "booking": {
+          "status": "planned",
+          "confirmation": null,
+          "url": null,
+          "notes": "Tuesday night in or near Pooler."
+        }
+      },
+      "parkTargets": [
+        "US-0522"
+      ],
+      "notes": "Savannah National Wildlife Refuge, then Pooler-area hotel.",
+      "approxDriveMiles": 184
+    },
+    {
+      "date": "2026-06-24",
+      "states": [
+        "US-GA",
+        "US-FL"
+      ],
+      "overnight": {
+        "type": "home",
+        "name": "Ocala, FL",
+        "reference": null,
+        "booking": {
+          "status": "n/a",
+          "confirmation": null,
+          "url": null,
+          "notes": "Wednesday night Ocala anchor."
+        }
+      },
+      "parkTargets": [],
+      "notes": "Pooler to Ocala positioning day.",
+      "approxDriveMiles": 232
     },
     {
       "date": "2026-06-25",
@@ -1466,152 +1163,132 @@
           "status": "n/a",
           "confirmation": null,
           "url": null,
-          "notes": "Mother's house."
+          "notes": "Thursday night Ocala / family anchor."
         }
       },
-      "parkTargets": [],
-      "notes": "Ocala Thursday anchor, or Wednesday if the trip runs early.",
-      "approxDriveMiles": 0
+      "parkTargets": [
+        "US-1915",
+        "US-4471"
+      ],
+      "notes": "Thursday morning local Florida activation: Silver Springs preferred or Ocala National Forest alternate.",
+      "approxDriveMiles": 25
+    },
+    {
+      "date": "2026-06-26",
+      "states": [
+        "US-FL"
+      ],
+      "overnight": {
+        "type": "hotel",
+        "name": "Singer Island / Riviera Beach",
+        "reference": null,
+        "booking": {
+          "status": "planned",
+          "confirmation": null,
+          "url": null,
+          "notes": "Field Day arrival area."
+        }
+      },
+      "parkTargets": [
+        "US-1884"
+      ],
+      "notes": "Friday evening John D. MacArthur Beach activation if timing allows.",
+      "approxDriveMiles": 236
     }
   ],
   "driveEstimates": {
     "source": "Google Maps MCP route checks with traffic-aware departure times where known. Distances and times are planning estimates, not commitments.",
-    "updated": "2026-06-09",
+    "updated": "2026-06-10",
     "legs": [
       {
         "date": "2026-06-19",
         "from": "Hope, RI",
+        "to": "JL Curran State Park, RI",
+        "distance": "25.1 km",
+        "estimatedDriveMinutes": 22,
+        "estimatedDriveLabel": "22m",
+        "notes": "Default near-home Friday morning RI activation leg."
+      },
+      {
+        "date": "2026-06-19",
+        "from": "JL Curran State Park, RI",
         "to": "Silver Sands State Park, Milford, CT",
-        "distance": "168.3 km",
-        "estimatedDriveMinutes": 107,
-        "estimatedDriveLabel": "1h 47m",
-        "notes": "Route check from a 17:00 Friday departure; supports the assumed roughly 19:00 Silver Sands arrival."
+        "distance": "168.1 km",
+        "estimatedDriveMinutes": 104,
+        "estimatedDriveLabel": "1h 44m",
+        "notes": "Friday morning RI-to-CT activation leg."
       },
       {
         "date": "2026-06-19",
         "from": "Silver Sands State Park",
-        "to": "Tesla Supercharger, 1201 Boston Post Rd, Milford, CT",
-        "distance": "8.5 km",
-        "estimatedDriveMinutes": 10,
-        "estimatedDriveLabel": "10m",
-        "notes": "Nearest known Friday post-activation Tesla Supercharger option used in the current model."
-      },
-      {
-        "date": "2026-06-19",
-        "from": "Milford Tesla Supercharger",
-        "to": "Tarrytown, NY",
-        "distance": "86.7 km",
-        "estimatedDriveMinutes": 59,
-        "estimatedDriveLabel": "59m",
-        "notes": "Preferred Friday hotel target if Silver Sands and charging stay tight enough for the 21:30 comfort limit."
-      },
-      {
-        "date": "2026-06-19",
-        "from": "Milford Tesla Supercharger",
         "to": "Stamford, CT",
-        "distance": "51.7 km",
-        "estimatedDriveMinutes": 39,
-        "estimatedDriveLabel": "39m",
-        "notes": "Fatigue-aware fallback if Tarrytown/Nyack pushes the evening too late."
+        "distance": "48.0 km",
+        "estimatedDriveMinutes": 35,
+        "estimatedDriveLabel": "35m",
+        "notes": "Friday pre-work positioning leg; reach lower-Hudson work position before 13:00."
       },
       {
-        "date": "2026-06-20",
-        "from": "Tarrytown, NY",
+        "date": "2026-06-19",
+        "from": "Stamford, CT",
         "to": "Tallman Mountain State Park, NY",
-        "distance": "14.5 km",
-        "estimatedDriveMinutes": 13,
-        "estimatedDriveLabel": "13m",
-        "notes": "Default Saturday NY activation start."
+        "distance": "47.4 km",
+        "estimatedDriveMinutes": 33,
+        "estimatedDriveLabel": "33m",
+        "notes": "Friday post-work move to the NY activation."
       },
       {
-        "date": "2026-06-20",
+        "date": "2026-06-19",
         "from": "Tallman Mountain State Park",
+        "to": "Edison, NJ hotel",
+        "distance": "86.7 km",
+        "estimatedDriveMinutes": 66,
+        "estimatedDriveLabel": "1h 06m",
+        "notes": "Friday evening positioning after the NY activation."
+      },
+      {
+        "date": "2026-06-20",
+        "from": "Edison, NJ hotel",
         "to": "Cheesequake State Park, NJ",
-        "distance": "88.6 km",
-        "estimatedDriveMinutes": 61,
-        "estimatedDriveLabel": "1h 1m",
-        "notes": "Default NY-to-NJ move."
+        "distance": "24.2 km",
+        "estimatedDriveMinutes": 21,
+        "estimatedDriveLabel": "21m",
+        "notes": "Saturday morning NJ activation start from booked hotel."
       },
       {
         "date": "2026-06-20",
         "from": "Cheesequake State Park",
-        "to": "Fox Point State Park, DE",
-        "distance": "172.5 km",
-        "estimatedDriveMinutes": 102,
-        "estimatedDriveLabel": "1h 42m",
-        "notes": "Default no-PA line via NJ Turnpike / Delaware Memorial Bridge."
-      },
-      {
-        "date": "2026-06-20",
-        "from": "Fox Point State Park",
-        "to": "Fort McHenry, MD",
-        "distance": "121.4 km",
-        "estimatedDriveMinutes": 75,
-        "estimatedDriveLabel": "1h 15m",
-        "notes": "MD may slide after 20:00 EDT if Saturday runs late, which would count it toward Sunday UTC."
-      },
-      {
-        "date": "2026-06-20",
-        "from": "Fort McHenry",
-        "to": "Foggy Bottom, DC",
-        "distance": "68.9 km",
-        "estimatedDriveMinutes": 76,
-        "estimatedDriveLabel": "1h 16m",
-        "notes": "Final Saturday positioning leg to the fixed DC hotel."
-      },
-      {
-        "date": "2026-06-20",
-        "from": "Cheesequake State Park",
-        "to": "US-0512 John Heinz National Wildlife Refuge, PA",
+        "to": "US-0512 John Heinz NWR, PA",
         "distance": "142.0 km",
-        "estimatedDriveMinutes": 86,
-        "estimatedDriveLabel": "1h 26m",
-        "notes": "Optional PA branch if deliberately routing through Philadelphia."
+        "estimatedDriveMinutes": 84,
+        "estimatedDriveLabel": "1h 24m",
+        "notes": "Selected PA activation branch."
       },
       {
         "date": "2026-06-20",
         "from": "US-0512 John Heinz NWR",
         "to": "Fox Point State Park, DE",
         "distance": "33.7 km",
-        "estimatedDriveMinutes": 26,
-        "estimatedDriveLabel": "26m",
-        "notes": "Return from optional PA branch to the DE stop."
-      },
-      {
-        "date": "2026-06-21",
-        "from": "Foggy Bottom",
-        "to": "LBJ Memorial Grove",
-        "distance": "4.3 km",
-        "estimatedDriveMinutes": 7,
-        "estimatedDriveLabel": "7m",
-        "notes": "Sunday DC n-fer start."
-      },
-      {
-        "date": "2026-06-21",
-        "from": "LBJ Memorial Grove",
-        "to": "Mason Neck State Park, VA",
-        "distance": "39.4 km",
-        "estimatedDriveMinutes": 32,
-        "estimatedDriveLabel": "32m",
-        "notes": "Southbound NoVA add-on candidate."
-      },
-      {
-        "date": "2026-06-21",
-        "from": "Mason Neck State Park",
-        "to": "Prince William Forest Park, VA",
-        "distance": "30.3 km",
         "estimatedDriveMinutes": 25,
         "estimatedDriveLabel": "25m",
-        "notes": "Optional southbound VA add-on."
+        "notes": "PA-to-DE leg."
       },
       {
-        "date": "2026-06-21",
-        "from": "Prince William Forest Park",
-        "to": "Fredericksburg, VA",
-        "distance": "34.5 km",
-        "estimatedDriveMinutes": 25,
-        "estimatedDriveLabel": "25m",
-        "notes": "Sunday finish at the booked Fredericksburg hotel."
+        "date": "2026-06-20",
+        "from": "Fox Point State Park",
+        "to": "Fort McHenry, MD",
+        "distance": "121.4 km",
+        "estimatedDriveMinutes": 74,
+        "estimatedDriveLabel": "1h 14m",
+        "notes": "Target arrival around 19:30 EDT."
+      },
+      {
+        "date": "2026-06-20",
+        "from": "Fort McHenry",
+        "to": "Foggy Bottom, DC",
+        "distance": "74.6 km",
+        "estimatedDriveMinutes": 74,
+        "estimatedDriveLabel": "1h 14m",
+        "notes": "Final Saturday positioning after the 20:00 EDT Maryland activation."
       },
       {
         "date": "2026-06-22",
@@ -1625,20 +1302,65 @@
       {
         "date": "2026-06-23",
         "from": "Florence, SC",
+        "to": "Savannah National Wildlife Refuge",
+        "distance": "273.2 km",
+        "estimatedDriveMinutes": 149,
+        "estimatedDriveLabel": "2h 29m",
+        "notes": "Tuesday selected GA/SC-area activation leg."
+      },
+      {
+        "date": "2026-06-23",
+        "from": "Savannah National Wildlife Refuge",
+        "to": "Pooler, GA",
+        "distance": "23.4 km",
+        "estimatedDriveMinutes": 20,
+        "estimatedDriveLabel": "20m",
+        "notes": "Short leg to Tuesday overnight area."
+      },
+      {
+        "date": "2026-06-24",
+        "from": "Pooler, GA",
         "to": "Ocala, FL",
-        "distance": "659.6 km",
-        "estimatedDriveMinutes": 371,
-        "estimatedDriveLabel": "6h 11m",
-        "notes": "Broad southern anchor estimate; likely needs a GA and/or FL stop inserted before finalizing."
+        "distance": "373.9 km",
+        "estimatedDriveMinutes": 220,
+        "estimatedDriveLabel": "3h 40m",
+        "notes": "Wednesday positioning to Ocala."
+      },
+      {
+        "date": "2026-06-25",
+        "from": "Ocala, FL",
+        "to": "Silver Springs State Park, FL",
+        "distance": "9.1 km",
+        "estimatedDriveMinutes": 13,
+        "estimatedDriveLabel": "13m",
+        "notes": "Preferred Thursday morning Florida activation."
+      },
+      {
+        "date": "2026-06-25",
+        "from": "Ocala, FL",
+        "to": "Ocala National Forest, FL",
+        "distance": "37.7 km",
+        "estimatedDriveMinutes": 40,
+        "estimatedDriveLabel": "40m",
+        "notes": "Thursday morning alternate Florida activation."
       },
       {
         "date": "2026-06-26",
         "from": "Ocala, FL",
+        "to": "John D. MacArthur Beach State Park, FL",
+        "distance": "373.6 km",
+        "estimatedDriveMinutes": 236,
+        "estimatedDriveLabel": "3h 56m",
+        "notes": "Friday evening target activation near destination."
+      },
+      {
+        "date": "2026-06-26",
+        "from": "John D. MacArthur Beach State Park",
         "to": "Singer Island / Riviera Beach, FL",
-        "distance": "406.7 km",
-        "estimatedDriveMinutes": 228,
-        "estimatedDriveLabel": "3h 48m",
-        "notes": "Final arrival anchor."
+        "distance": "5.9 km",
+        "estimatedDriveMinutes": 9,
+        "estimatedDriveLabel": "9m",
+        "notes": "Final arrival leg."
       }
     ]
   },
@@ -1647,38 +1369,20 @@
       {
         "id": "home-hope",
         "label": "Hope, RI",
-        "type": "home",
+        "type": "start",
         "status": "start",
         "latitude": 41.7507118,
         "longitude": -71.5514039,
-        "notes": "Friday 17:00 road departure after RI morning activation."
+        "notes": "Friday morning start."
       },
       {
-        "id": "tarrytown",
-        "label": "Tarrytown, NY",
-        "type": "hotel-option",
-        "status": "preferred friday",
-        "latitude": 41.0762077,
-        "longitude": -73.8587461,
-        "notes": "Preferred Friday hotel area if timing allows."
-      },
-      {
-        "id": "nyack",
-        "label": "Nyack, NY",
-        "type": "hotel-option",
-        "status": "preferred friday",
-        "latitude": 41.0906519,
-        "longitude": -73.9179146,
-        "notes": "Alternative lower-Hudson Friday hotel area."
-      },
-      {
-        "id": "stamford",
-        "label": "Stamford, CT",
-        "type": "hotel-option",
-        "status": "fallback friday",
-        "latitude": 41.0527986,
-        "longitude": -73.5394821,
-        "notes": "Fatigue-aware Friday hotel fallback."
+        "id": "edison",
+        "label": "Edison, NJ hotel",
+        "type": "hotel",
+        "status": "booked friday",
+        "latitude": 40.5187,
+        "longitude": -74.4121,
+        "notes": "Booked Friday night; Saturday starts at Cheesequake."
       },
       {
         "id": "foggy-bottom",
@@ -1708,13 +1412,22 @@
         "notes": "Fixed Monday night anchor."
       },
       {
+        "id": "pooler",
+        "label": "Pooler / Savannah, GA",
+        "type": "hotel",
+        "status": "planned tuesday",
+        "latitude": 32.1155,
+        "longitude": -81.2471,
+        "notes": "Tuesday overnight area after Savannah NWR."
+      },
+      {
         "id": "ocala",
         "label": "Ocala, FL",
         "type": "home",
-        "status": "family thursday",
+        "status": "wednesday/thursday",
         "latitude": 29.1850783,
         "longitude": -82.1342596,
-        "notes": "Mother's house Thursday, or Wednesday if early."
+        "notes": "Wednesday and Thursday anchor."
       },
       {
         "id": "singer-island",
@@ -1730,262 +1443,112 @@
       {
         "reference": "US-6992",
         "name": "JL Curran State Park",
-        "role": "default near-home RI morning activation",
+        "role": "selected RI activation",
         "latitude": 41.7507,
         "longitude": -71.5516,
-        "priority": "default",
+        "priority": "target",
         "state": "US-RI",
-        "goal": "Friday morning before work from Hope"
-      },
-      {
-        "reference": "US-6982",
-        "name": "Big River Wildlife Management Area",
-        "role": "nearby fallback if JL Curran access/timing is poor",
-        "latitude": 41.6311,
-        "longitude": -71.5714,
-        "priority": "backup",
-        "state": "US-RI",
-        "goal": "Friday morning before work from Hope"
-      },
-      {
-        "reference": "US-2880",
-        "name": "Snake Den State Park",
-        "role": "northwest RI fallback near the Hope / Scituate area",
-        "latitude": 41.8303,
-        "longitude": -71.5373,
-        "priority": "backup",
-        "state": "US-RI",
-        "goal": "Friday morning before work from Hope"
+        "goal": "Friday morning"
       },
       {
         "reference": "US-1716",
         "name": "Silver Sands State Park",
-        "role": "default CT stop; target arrival around 19:00",
+        "role": "selected CT activation",
         "latitude": 41.2009,
         "longitude": -73.0721,
-        "priority": "default",
+        "priority": "target",
         "state": "US-CT",
-        "goal": "Friday evening before the westbound charge"
-      },
-      {
-        "reference": "US-1715",
-        "name": "Sherwood Island State Park",
-        "role": "backup CT shoreline stop if Silver Sands access fails",
-        "latitude": 41.1146,
-        "longitude": -73.3296,
-        "priority": "backup",
-        "state": "US-CT",
-        "goal": "Friday evening before the westbound charge"
+        "goal": "Friday morning"
       },
       {
         "reference": "US-2149",
         "name": "Tallman Mountain State Park",
-        "role": "default NY start from Tarrytown/Nyack",
+        "role": "selected NY activation",
         "latitude": 41.0305,
         "longitude": -73.914,
-        "priority": "default",
+        "priority": "target",
         "state": "US-NY",
-        "goal": "Saturday morning from lower Hudson hotel"
-      },
-      {
-        "reference": "US-8319",
-        "name": "Palisades Interstate Park",
-        "role": "backup/optional lower-Hudson entity if access is better than Tallman",
-        "latitude": 40.915,
-        "longitude": -73.925,
-        "priority": "backup",
-        "state": "US-NY",
-        "goal": "Saturday morning from lower Hudson hotel"
+        "goal": "Friday after work"
       },
       {
         "reference": "US-1611",
         "name": "Cheesequake State Park",
-        "role": "default NJ stop",
+        "role": "selected NJ activation",
         "latitude": 40.4377,
         "longitude": -74.2666,
-        "priority": "default",
+        "priority": "target",
         "state": "US-NJ",
-        "goal": "Saturday NJ stop on the default southbound line"
+        "goal": "Saturday morning"
       },
       {
         "reference": "US-0512",
         "name": "John Heinz National Wildlife Refuge",
-        "role": "optional PA branch; adds another activation stop",
+        "role": "selected PA activation",
         "latitude": 39.8929,
         "longitude": -75.2575,
-        "priority": "optional",
+        "priority": "target",
         "state": "US-PA",
-        "goal": "Optional branch only if routing through Philadelphia"
+        "goal": "Saturday"
       },
       {
         "reference": "US-1738",
         "name": "Fox Point State Park",
-        "role": "default DE physical stop",
+        "role": "selected DE activation",
         "latitude": 39.7561,
         "longitude": -75.4897,
-        "priority": "default",
+        "priority": "target",
         "state": "US-DE",
-        "goal": "Saturday afternoon Delaware stop"
-      },
-      {
-        "reference": "US-9878",
-        "name": "Northern Delaware Greenway National Recreation Trail",
-        "role": "likely 2-fer with Fox Point if the operating position is valid",
-        "latitude": 39.7764,
-        "longitude": -75.5455,
-        "priority": "linked",
-        "state": "US-DE",
-        "goal": "Saturday afternoon Delaware stop"
+        "goal": "Saturday"
       },
       {
         "reference": "US-0928",
         "name": "Fort McHenry National Monument",
-        "role": "default MD evening target near the UTC rollover",
+        "role": "selected MD activation at/after 20:00 EDT",
         "latitude": 39.2633,
         "longitude": -76.5799,
-        "priority": "default",
+        "priority": "target",
         "state": "US-MD",
-        "goal": "Saturday 20:00 EDT target activation"
+        "goal": "Saturday 20:00 EDT / Sunday UTC"
       },
       {
-        "reference": "US-4581",
-        "name": "Star-Spangled Banner National Historic Trail",
-        "role": "possible Fort McHenry overlap; verify exact position",
-        "latitude": 39.2633,
-        "longitude": -76.5799,
-        "priority": "linked",
-        "state": "US-MD",
-        "goal": "Saturday 20:00 EDT target activation"
+        "reference": "US-0522",
+        "name": "Savannah National Wildlife Refuge",
+        "role": "selected Savannah / Pooler activation",
+        "latitude": 32.1655,
+        "longitude": -81.1514,
+        "priority": "target",
+        "state": "US-GA",
+        "goal": "Tuesday"
       },
       {
-        "reference": "US-4567",
-        "name": "Captain John Smith Chesapeake National Historic Trail",
-        "role": "possible Fort McHenry overlap; verify exact position",
-        "latitude": 39.2633,
-        "longitude": -76.5799,
-        "priority": "linked",
-        "state": "US-MD",
-        "goal": "Saturday 20:00 EDT target activation"
+        "reference": "US-1915",
+        "name": "Silver Springs State Park",
+        "role": "preferred Ocala-area Florida activation",
+        "latitude": 29.2128,
+        "longitude": -82.0543,
+        "priority": "target",
+        "state": "US-FL",
+        "goal": "Thursday morning"
       },
       {
-        "reference": "US-4582",
-        "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
-        "role": "possible Fort McHenry overlap; verify exact position",
-        "latitude": 39.2633,
-        "longitude": -76.5799,
-        "priority": "linked",
-        "state": "US-MD",
-        "goal": "Saturday 20:00 EDT target activation"
+        "reference": "US-4471",
+        "name": "Ocala National Forest",
+        "role": "alternate Ocala-area Florida activation",
+        "latitude": 29.1838,
+        "longitude": -81.7141,
+        "priority": "alternate",
+        "state": "US-FL",
+        "goal": "Thursday morning alternate"
       },
       {
-        "reference": "US-0784",
-        "name": "Lyndon Baines Johnson Memorial Grove on the Potomac",
-        "role": "primary Sunday DC n-fer anchor; exact 7-fer position still needs verification",
-        "latitude": 38.8786,
-        "longitude": -77.0515,
-        "priority": "default",
-        "state": "US-DC",
-        "goal": "Sunday DC rove anchor from Foggy Bottom"
-      },
-      {
-        "reference": "US-9901",
-        "name": "Civil War Defenses of Washington National Historic Trail",
-        "role": "possible LBJ Grove overlap",
-        "latitude": 38.8786,
-        "longitude": -77.0515,
-        "priority": "linked",
-        "state": "US-DC",
-        "goal": "Sunday DC rove anchor from Foggy Bottom"
-      },
-      {
-        "reference": "US-4564",
-        "name": "Potomac Heritage Trail National Scenic Trail",
-        "role": "possible LBJ Grove / Dyke Marsh overlap",
-        "latitude": 38.8786,
-        "longitude": -77.0515,
-        "priority": "linked",
-        "state": "US-DC",
-        "goal": "Sunday DC rove anchor from Foggy Bottom"
-      },
-      {
-        "reference": "US-9898",
-        "name": "Mount Vernon National Historic Trail",
-        "role": "possible LBJ Grove / Dyke Marsh overlap",
-        "latitude": 38.8786,
-        "longitude": -77.0515,
-        "priority": "linked",
-        "state": "US-DC",
-        "goal": "Sunday DC rove anchor from Foggy Bottom"
-      },
-      {
-        "reference": "US-0670",
-        "name": "George Washington Memorial Parkway",
-        "role": "possible LBJ Grove / Dyke Marsh overlap",
-        "latitude": 38.8786,
-        "longitude": -77.0515,
-        "priority": "linked",
-        "state": "US-DC",
-        "goal": "Sunday DC rove anchor from Foggy Bottom"
-      },
-      {
-        "reference": "US-9961",
-        "name": "Dyke Marsh Wildlife Reserve",
-        "role": "Sunday stretch add-on; imported top-activator 7-fer lead",
-        "latitude": 38.7661,
-        "longitude": -77.0492,
-        "priority": "default",
-        "state": "US-VA",
-        "goal": "Sunday southbound DC / NoVA rove"
-      },
-      {
-        "reference": "US-9935",
-        "name": "Virginia Bird & Wildlife State Trail",
-        "role": "possible unique add from the Dyke Marsh overlap",
-        "latitude": 38.7661,
-        "longitude": -77.0492,
-        "priority": "linked",
-        "state": "US-VA",
-        "goal": "Sunday southbound DC / NoVA rove"
-      },
-      {
-        "reference": "US-1308",
-        "name": "Mason Neck State Park",
-        "role": "Sunday Virginia 2-fer physical stop",
-        "latitude": 38.6465,
-        "longitude": -77.1862,
-        "priority": "default",
-        "state": "US-VA",
-        "goal": "Sunday southbound DC / NoVA rove"
-      },
-      {
-        "reference": "US-0563",
-        "name": "Elizabeth Hartwell Mason Neck National Wildlife Refuge",
-        "role": "linked 2-fer with Mason Neck State Park",
-        "latitude": 38.6465,
-        "longitude": -77.1862,
-        "priority": "linked",
-        "state": "US-VA",
-        "goal": "Sunday southbound DC / NoVA rove"
-      },
-      {
-        "reference": "US-0691",
-        "name": "Prince William Forest Park",
-        "role": "southbound Sunday add-on before Fredericksburg",
-        "latitude": 38.5883,
-        "longitude": -77.3873,
-        "priority": "default",
-        "state": "US-VA",
-        "goal": "Sunday southbound DC / NoVA rove"
-      },
-      {
-        "reference": "TBD-ROCK-CREEK",
-        "name": "Rock Creek Park",
-        "role": "friend-meetup option; POTA reference and count value still need verification",
-        "latitude": 38.9675,
-        "longitude": -77.0452,
-        "priority": "optional",
-        "state": "US-DC",
-        "goal": "Optional Sunday friend activation"
+        "reference": "US-1884",
+        "name": "John D. MacArthur Beach State Park",
+        "role": "target destination-area Florida activation",
+        "latitude": 26.8246,
+        "longitude": -80.044,
+        "priority": "target",
+        "state": "US-FL",
+        "goal": "Friday evening"
       }
     ]
   }
