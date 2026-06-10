@@ -51,7 +51,8 @@ Current working shape:
   Use the NJ Turnpike / Delaware Memorial Bridge line by default to avoid PA.
   Add `US-0512` John Heinz only if the extra entity is worth another stop.
 - Sunday: make DC / NoVA the large rove day, then finish at the booked
-  Fredericksburg hotel.
+  Fredericksburg hotel. The current best line is LBJ Memorial Grove -> Dyke
+  Marsh if verified -> Mason Neck -> Prince William Forest.
 - Monday: use the workday margins to drive from Fredericksburg to the booked
   Florence, SC stop while covering NC / SC with low-detour parks.
 - Tuesday and Wednesday: solve the open Florence-to-Ocala segment with hotel
@@ -97,6 +98,10 @@ Known anchor drive estimates:
   before activation time.
 - Foggy Bottom -> LBJ Grove -> Mason Neck -> Prince William Forest ->
   Fredericksburg: 1h29m mapped driving.
+- Foggy Bottom -> LBJ Grove -> Dyke Marsh -> Mason Neck -> Prince William
+  Forest -> Fredericksburg: 2h07m mapped driving.
+- Foggy Bottom -> Rock Creek -> LBJ Grove -> Dyke Marsh -> Mason Neck ->
+  Prince William Forest -> Fredericksburg: 2h27m mapped driving.
 - Fredericksburg -> Florence: 5h12m before activation or charging stops.
 - Florence -> Ocala: 6h11m before activation or charging stops.
 - Ocala -> Singer Island / Riviera Beach: 3h48m.
@@ -105,10 +110,25 @@ Current best Sunday lead:
 
 - LBJ Memorial Grove / DC overlap: possible 7-fer from the exact position
   described in the February 2026 CWops _Solid Copy_ article.
+- Dyke Marsh / Mount Vernon corridor: imported top-activator data shows a
+  7-reference cluster including `US-9961` Dyke Marsh Wildlife Reserve and
+  `US-9935` Virginia Bird & Wildlife State Trail. It overlaps heavily with the
+  LBJ trail entities, so the main question is whether it adds those two unique
+  entities cleanly.
 - Mason Neck State Park + Elizabeth Hartwell Mason Neck NWR: verified local
   n-fer evidence in the imported top-activator data.
 - Prince William Forest Park: southbound add-on that keeps the day pointed
   toward the Virginia overnight.
+- Rock Creek Park: good friend-meetup option, but not currently the
+  count-efficient anchor until its POTA reference/count value is verified.
+
+The conservative Sunday route is already a 10-ish entity candidate if the LBJ
+7-fer verifies. If Fort McHenry starts after 20:00 EDT Saturday, the Sunday UTC
+day can start with Maryland banked; because Fort McHenry and LBJ duplicate
+`US-4581` and `US-4567`, the useful Saturday adds are likely `US-0928` and
+possibly `US-4582`. With Saturday MD, verified LBJ, Mason Neck, and Prince
+William, the plan is about 12 unique entities. Dyke Marsh could push that toward
+14; Rock Creek is a stretch/social stop unless it proves count-useful.
 
 Open verification items:
 
@@ -121,6 +141,8 @@ Open verification items:
 - Verify the Fort McHenry 4-fer operating position.
 - Verify the exact LBJ Memorial Grove 7-fer position and whether the easier
   parking-lot / picnic-table position is enough.
+- Verify whether the Dyke Marsh / Mount Vernon corridor can add `US-9961` and
+  `US-9935` as unique entities without requiring an awkward operating position.
 - Find a legal Saturday after-20:00 DC-area activation close to Foggy Bottom.
 - Insert low-detour NC, SC, GA, and FL stops into the known hotel-to-hotel
   southern anchor legs.

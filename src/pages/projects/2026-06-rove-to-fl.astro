@@ -138,6 +138,11 @@ interface FirstWeekendPlan {
       departureArea?: string;
       utcDayRolloverLocal?: string;
     };
+    recommendedRoute?: Array<{
+      stop: string;
+      references: string[];
+      role: string;
+    }>;
     timingModels?: RoveTimingModel[];
     openQuestions: string[];
   };
@@ -867,6 +872,18 @@ const parkStopPlanning =
           {firstWeekendPlan.sundayDcRove.timingAssumptions.departureArea &&
             ` Starts from ${firstWeekendPlan.sundayDcRove.timingAssumptions.departureArea}.`}
         </p>
+      )}
+
+      {firstWeekendPlan.sundayDcRove.recommendedRoute && (
+        <div class="rove-candidate-grid" aria-label="Recommended Sunday DC route">
+          {firstWeekendPlan.sundayDcRove.recommendedRoute.map((stop) => (
+            <article class="rove-candidate">
+              <strong>{stop.stop}</strong>
+              <p>{stop.role}</p>
+              <span>{stop.references.join(" · ")}</span>
+            </article>
+          ))}
+        </div>
       )}
 
       {firstWeekendPlan.sundayDcRove.timingModels && (

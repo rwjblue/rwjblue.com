@@ -640,12 +640,55 @@
     "sundayDcRove": {
       "status": "high-value branch to verify",
       "targetDate": "2026-06-21",
-      "strategy": "Use Sunday June 21 for the true dense rove from the Foggy Bottom hotel. Start with the LBJ Memorial Grove overlap in DC, then add nearby or southbound NoVA entities only if they fit the fixed Fredericksburg hotel night.",
+      "strategy": "Use Sunday June 21 for the true dense rove from the Foggy Bottom hotel. Start with the LBJ Memorial Grove overlap in DC, add Dyke Marsh if the imported 7-fer evidence verifies, then continue south through Mason Neck and Prince William before the fixed Fredericksburg hotel night.",
       "timingAssumptions": {
-        "source": "Google Maps route checks plus imported n-fer evidence and the February 2026 CWops article about a DC POTA 7-fer.",
+        "source": "Google Maps route checks plus imported n-fer evidence and the February 2026 CWops article about a DC POTA 7-fer. Sunday routes were checked at a June 21 afternoon departure.",
         "departureArea": "Foggy Bottom hotel",
         "utcDayRolloverLocal": "20:00 EDT"
       },
+      "recommendedRoute": [
+        {
+          "stop": "LBJ Memorial Grove",
+          "references": [
+            "US-0784",
+            "US-9901",
+            "US-4581",
+            "US-4567",
+            "US-4564",
+            "US-9898",
+            "US-0670"
+          ],
+          "role": "Primary DC n-fer anchor. Exact 7-fer position still needs verification; easier parking-lot operation may be fewer entities."
+        },
+        {
+          "stop": "Dyke Marsh / Mount Vernon corridor",
+          "references": [
+            "US-9961",
+            "US-9935",
+            "US-9898",
+            "US-4581",
+            "US-4567",
+            "US-4564",
+            "US-0670"
+          ],
+          "role": "Imported top-activator evidence shows a 7-reference cluster here. It overlaps heavily with LBJ, but could add Dyke Marsh and Virginia Bird & Wildlife Trail as unique entities."
+        },
+        {
+          "stop": "Mason Neck",
+          "references": [
+            "US-1308",
+            "US-0563"
+          ],
+          "role": "Strong southbound Virginia 2-fer candidate with imported n-fer evidence."
+        },
+        {
+          "stop": "Prince William Forest",
+          "references": [
+            "US-0691"
+          ],
+          "role": "Low-detour Virginia add-on before the Fredericksburg hotel."
+        }
+      ],
       "timingModels": [
         {
           "name": "DC/NoVA 10-entity Sunday",
@@ -695,11 +738,124 @@
             "US-0691 Prince William Forest Park"
           ],
           "notes": "The CWops article says the parking-lot/picnic-table option at LBJ Grove is a 4-fer and the exact walk-out spot is a 7-fer. Treat this as the top outreach/verification item because it could make Sunday dramatically easier. Sunday must still end at the booked Fredericksburg hotel."
+        },
+        {
+          "name": "DC/NoVA 12-entity Sunday with Saturday MD banked",
+          "entityCount": 12,
+          "physicalStops": 4,
+          "startAnchor": "Fort McHenry after 20:00 Saturday, then Foggy Bottom Sunday start",
+          "endAnchor": "Fredericksburg hotel",
+          "estimatedDriveMinutes": 127,
+          "activationMinutes": 240,
+          "chargingMinutes": 0,
+          "bufferMinutes": 60,
+          "estimatedTotalMinutes": 427,
+          "estimatedTotalLabel": "about 7h 05m plus any extra DC/social time",
+          "comfort": "strong if Fort McHenry and LBJ overlaps verify; still reasonable because the route is short and southbound",
+          "route": [
+            {
+              "from": "Foggy Bottom hotel",
+              "to": "US-0784 / LBJ Grove",
+              "estimatedDriveMinutes": 8
+            },
+            {
+              "from": "US-0784 / LBJ Grove",
+              "to": "US-9961 / Dyke Marsh",
+              "estimatedDriveMinutes": 18
+            },
+            {
+              "from": "US-9961 / Dyke Marsh",
+              "to": "US-1308 / Mason Neck",
+              "estimatedDriveMinutes": 34
+            },
+            {
+              "from": "US-1308 / Mason Neck",
+              "to": "US-0691 / Prince William Forest",
+              "estimatedDriveMinutes": 40
+            },
+            {
+              "from": "US-0691 / Prince William Forest",
+              "to": "Fredericksburg hotel",
+              "estimatedDriveMinutes": 27
+            }
+          ],
+          "entities": [
+            "US-0928 Fort McHenry National Monument if started after 20:00 EDT Saturday",
+            "US-4582 Washington-Rochambeau Revolutionary Route National Historic Trail if Fort McHenry overlap verifies",
+            "US-0784 Lyndon Baines Johnson Memorial Grove on the Potomac",
+            "US-9901 Civil War Defenses of Washington National Historic Trail",
+            "US-4581 Star-Spangled Banner National Historic Trail",
+            "US-4567 Captain John Smith Chesapeake National Historic Trail",
+            "US-4564 Potomac Heritage Trail National Scenic Trail",
+            "US-9898 Mount Vernon National Historic Trail",
+            "US-0670 George Washington Memorial Parkway",
+            "US-1308 Mason Neck State Park",
+            "US-0563 Elizabeth Hartwell Mason Neck National Wildlife Refuge",
+            "US-0691 Prince William Forest Park"
+          ],
+          "notes": "This model treats Saturday Fort McHenry after the UTC rollover as part of the Sunday UTC rove day. Fort McHenry and LBJ duplicate US-4581 and US-4567, so the count only improves if Fort McHenry adds unique US-0928 and/or US-4582."
+        },
+        {
+          "name": "DC/NoVA stretch with Dyke Marsh and Rock Creek",
+          "entityCount": 14,
+          "physicalStops": 5,
+          "startAnchor": "Foggy Bottom hotel",
+          "endAnchor": "Fredericksburg hotel",
+          "estimatedDriveMinutes": 147,
+          "activationMinutes": 300,
+          "chargingMinutes": 0,
+          "bufferMinutes": 60,
+          "estimatedTotalMinutes": 507,
+          "estimatedTotalLabel": "about 8h 25m plus lunch/friend timing",
+          "comfort": "plausible as a stretch route, but only worth it if Dyke Marsh adds unique entities and Rock Creek is socially useful or uniquely countable",
+          "route": [
+            {
+              "from": "Foggy Bottom hotel",
+              "to": "Rock Creek Park",
+              "estimatedDriveMinutes": 9
+            },
+            {
+              "from": "Rock Creek Park",
+              "to": "US-0784 / LBJ Grove",
+              "estimatedDriveMinutes": 19
+            },
+            {
+              "from": "US-0784 / LBJ Grove",
+              "to": "US-9961 / Dyke Marsh",
+              "estimatedDriveMinutes": 18
+            },
+            {
+              "from": "US-9961 / Dyke Marsh",
+              "to": "US-1308 / Mason Neck",
+              "estimatedDriveMinutes": 35
+            },
+            {
+              "from": "US-1308 / Mason Neck",
+              "to": "US-0691 / Prince William Forest",
+              "estimatedDriveMinutes": 39
+            },
+            {
+              "from": "US-0691 / Prince William Forest",
+              "to": "Fredericksburg hotel",
+              "estimatedDriveMinutes": 27
+            }
+          ],
+          "entities": [
+            "All verified LBJ entities",
+            "US-9961 Dyke Marsh Wildlife Reserve if the exact overlap position verifies",
+            "US-9935 Virginia Bird & Wildlife State Trail if the exact overlap position verifies",
+            "US-1308 Mason Neck State Park",
+            "US-0563 Elizabeth Hartwell Mason Neck National Wildlife Refuge",
+            "US-0691 Prince William Forest Park",
+            "Rock Creek Park reference still needs lookup/verification before counting"
+          ],
+          "notes": "Rock Creek is not currently the count-efficient anchor; it is best treated as a friend-meetup option unless a clean POTA reference and access plan makes it worth the extra stop."
         }
       ],
       "openQuestions": [
         "Confirm the exact LBJ Grove 7-fer position and whether it is practical with the Tesla / portable gear.",
-        "Find the best legal post-20:00 Saturday DC-area activation near Foggy Bottom to bank one Sunday UTC entity early.",
+        "Confirm whether Dyke Marsh can add US-9961 and US-9935 as unique entities without duplicating too much of the LBJ cluster.",
+        "Find the best legal post-20:00 Saturday DC-area activation near Foggy Bottom or Fort McHenry to bank Sunday UTC entities early.",
         "Confirm whether the friend in DC prefers Rock Creek or can meet at the LBJ Grove / National Mall overlap instead.",
         "Confirm Mason Neck 2-fer access and whether it is worth adding before the Fredericksburg hotel."
       ]
@@ -1266,11 +1422,13 @@
       },
       "parkTargets": [
         "US-0784",
+        "US-9961",
+        "US-9935",
         "US-1308",
         "US-0563",
         "US-0691"
       ],
-      "notes": "Large DC / NoVA rove day, then continue south to Fredericksburg.",
+      "notes": "Large DC / NoVA rove day: LBJ first, Dyke Marsh if the imported n-fer lead verifies, then Mason Neck and Prince William before Fredericksburg.",
       "approxDriveMiles": 70
     },
     {
@@ -1718,6 +1876,116 @@
         "priority": "linked",
         "state": "US-MD",
         "goal": "Saturday 20:00 EDT target activation"
+      },
+      {
+        "reference": "US-0784",
+        "name": "Lyndon Baines Johnson Memorial Grove on the Potomac",
+        "role": "primary Sunday DC n-fer anchor; exact 7-fer position still needs verification",
+        "latitude": 38.8786,
+        "longitude": -77.0515,
+        "priority": "default",
+        "state": "US-DC",
+        "goal": "Sunday DC rove anchor from Foggy Bottom"
+      },
+      {
+        "reference": "US-9901",
+        "name": "Civil War Defenses of Washington National Historic Trail",
+        "role": "possible LBJ Grove overlap",
+        "latitude": 38.8786,
+        "longitude": -77.0515,
+        "priority": "linked",
+        "state": "US-DC",
+        "goal": "Sunday DC rove anchor from Foggy Bottom"
+      },
+      {
+        "reference": "US-4564",
+        "name": "Potomac Heritage Trail National Scenic Trail",
+        "role": "possible LBJ Grove / Dyke Marsh overlap",
+        "latitude": 38.8786,
+        "longitude": -77.0515,
+        "priority": "linked",
+        "state": "US-DC",
+        "goal": "Sunday DC rove anchor from Foggy Bottom"
+      },
+      {
+        "reference": "US-9898",
+        "name": "Mount Vernon National Historic Trail",
+        "role": "possible LBJ Grove / Dyke Marsh overlap",
+        "latitude": 38.8786,
+        "longitude": -77.0515,
+        "priority": "linked",
+        "state": "US-DC",
+        "goal": "Sunday DC rove anchor from Foggy Bottom"
+      },
+      {
+        "reference": "US-0670",
+        "name": "George Washington Memorial Parkway",
+        "role": "possible LBJ Grove / Dyke Marsh overlap",
+        "latitude": 38.8786,
+        "longitude": -77.0515,
+        "priority": "linked",
+        "state": "US-DC",
+        "goal": "Sunday DC rove anchor from Foggy Bottom"
+      },
+      {
+        "reference": "US-9961",
+        "name": "Dyke Marsh Wildlife Reserve",
+        "role": "Sunday stretch add-on; imported top-activator 7-fer lead",
+        "latitude": 38.7661,
+        "longitude": -77.0492,
+        "priority": "default",
+        "state": "US-VA",
+        "goal": "Sunday southbound DC / NoVA rove"
+      },
+      {
+        "reference": "US-9935",
+        "name": "Virginia Bird & Wildlife State Trail",
+        "role": "possible unique add from the Dyke Marsh overlap",
+        "latitude": 38.7661,
+        "longitude": -77.0492,
+        "priority": "linked",
+        "state": "US-VA",
+        "goal": "Sunday southbound DC / NoVA rove"
+      },
+      {
+        "reference": "US-1308",
+        "name": "Mason Neck State Park",
+        "role": "Sunday Virginia 2-fer physical stop",
+        "latitude": 38.6465,
+        "longitude": -77.1862,
+        "priority": "default",
+        "state": "US-VA",
+        "goal": "Sunday southbound DC / NoVA rove"
+      },
+      {
+        "reference": "US-0563",
+        "name": "Elizabeth Hartwell Mason Neck National Wildlife Refuge",
+        "role": "linked 2-fer with Mason Neck State Park",
+        "latitude": 38.6465,
+        "longitude": -77.1862,
+        "priority": "linked",
+        "state": "US-VA",
+        "goal": "Sunday southbound DC / NoVA rove"
+      },
+      {
+        "reference": "US-0691",
+        "name": "Prince William Forest Park",
+        "role": "southbound Sunday add-on before Fredericksburg",
+        "latitude": 38.5883,
+        "longitude": -77.3873,
+        "priority": "default",
+        "state": "US-VA",
+        "goal": "Sunday southbound DC / NoVA rove"
+      },
+      {
+        "reference": "TBD-ROCK-CREEK",
+        "name": "Rock Creek Park",
+        "role": "friend-meetup option; POTA reference and count value still need verification",
+        "latitude": 38.9675,
+        "longitude": -77.0452,
+        "priority": "optional",
+        "state": "US-DC",
+        "goal": "Optional Sunday friend activation"
       }
     ]
   }
