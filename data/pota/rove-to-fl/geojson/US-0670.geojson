@@ -1,0 +1,76 @@
+{
+  "type": "Feature",
+  "properties": {
+    "reference": "US-0670",
+    "query": "George Washington Memorial Parkway",
+    "source": "OpenStreetMap Nominatim",
+    "osm_type": "way",
+    "osm_id": 26707543,
+    "display_name": "George Washington Memorial Parkway, Parkview Hills, Langley, McLean, Fairfax County, Virginia, 20818, United States",
+    "category": "highway",
+    "type": "motorway",
+    "importance": 0.44834032972390014,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright"
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -77.1804187,
+        38.9632055
+      ],
+      [
+        -77.1800706,
+        38.9632093
+      ],
+      [
+        -77.1798902,
+        38.963217
+      ],
+      [
+        -77.1797015,
+        38.9632323
+      ],
+      [
+        -77.1794637,
+        38.9632591
+      ],
+      [
+        -77.1791487,
+        38.9633075
+      ],
+      [
+        -77.17886,
+        38.9633649
+      ],
+      [
+        -77.1785451,
+        38.9634363
+      ],
+      [
+        -77.176479,
+        38.963943
+      ],
+      [
+        -77.176213,
+        38.964003
+      ],
+      [
+        -77.17568,
+        38.964097
+      ],
+      [
+        -77.175329,
+        38.964146
+      ],
+      [
+        -77.1750602,
+        38.964169
+      ],
+      [
+        -77.174662,
+        38.9641977
+      ]
+    ]
+  }
+}

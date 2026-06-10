@@ -1,0 +1,223 @@
+{
+  "updated": "2026-06-10",
+  "source": "OpenStreetMap Nominatim search with polygon_geojson=1",
+  "items": [
+    {
+      "reference": "US-0784",
+      "query": "Lady Bird Johnson Park, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0784.geojson",
+      "displayName": "Lady Bird Johnson Park (Columbia Island), Georgetown, Ward 2, Washington, District of Columbia, United States",
+      "osmType": "relation",
+      "osmId": 20393219,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0776",
+      "query": "Franklin Delano Roosevelt Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0776.geojson",
+      "displayName": "Franklin Delano Roosevelt Memorial, 400, Ward 2, Washington, District of Columbia, 20002, United States",
+      "osmType": "way",
+      "osmId": 471998865,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0785",
+      "query": "Martin Luther King Jr. Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0785.geojson",
+      "displayName": "Martin Luther King, Jr. Memorial, Foggy Bottom, Ward 2, Washington, District of Columbia, United States",
+      "osmType": "way",
+      "osmId": 398822975,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0655",
+      "query": "National Mall, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0655.geojson",
+      "displayName": "National Mall, Ward 2, Washington, District of Columbia, United States",
+      "osmType": "relation",
+      "osmId": 11158003,
+      "geometryType": "MultiPolygon"
+    },
+    {
+      "reference": "US-0653",
+      "query": "Constitution Gardens, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0653.geojson",
+      "displayName": "Constitution Gardens, Foggy Bottom, Ward 2, Washington, District of Columbia, United States",
+      "osmType": "way",
+      "osmId": 897999944,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0780",
+      "query": "Korean War Veterans Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0780.geojson",
+      "displayName": "Korean War Veterans Memorial, Daniel French Drive Southwest, Foggy Bottom, Ward 2, Washington, District of Columbia, 20418, United States",
+      "osmType": "way",
+      "osmId": 173927230,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0793",
+      "query": "Vietnam Veterans Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0793.geojson",
+      "displayName": "Vietnam Veterans Memorial, Henry Bacon Drive Northwest, Ward 2, Washington, District of Columbia, 20418, United States",
+      "osmType": "way",
+      "osmId": 173932971,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0796",
+      "query": "World War II Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0796.geojson",
+      "displayName": "World War II Memorial, 1964, Independence Avenue Southwest, Downtown, Ward 2, Washington, District of Columbia, 20227, United States",
+      "osmType": "way",
+      "osmId": 66418767,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0794",
+      "query": "Washington Monument, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0794.geojson",
+      "displayName": "Washington Monument, 2, 15th Street Northwest, Ward 2, Washington, District of Columbia, 20024, United States",
+      "osmType": "way",
+      "osmId": 766761337,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0928",
+      "query": "Fort McHenry National Monument and Historic Shrine, Baltimore, MD",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0928.geojson",
+      "displayName": "Fort McHenry National Monument and Historic Shrine, Baltimore, Maryland, United States",
+      "osmType": "relation",
+      "osmId": 11085022,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-1308",
+      "query": "Mason Neck State Park, Virginia",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-1308.geojson",
+      "displayName": "Mason Neck State Park, Mason Neck, Fairfax County, Virginia, United States",
+      "osmType": "relation",
+      "osmId": 1922813,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0563",
+      "query": "Mason Neck National Wildlife Refuge, Virginia",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0563.geojson",
+      "displayName": "Mason Neck National Wildlife Refuge, Mason Neck, Fairfax County, Virginia, United States",
+      "osmType": "relation",
+      "osmId": 1922811,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-9961",
+      "query": "Dyke Marsh Wildlife Preserve, Virginia",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-9961.geojson",
+      "displayName": "Dyke Marsh Wildlife Preserve, Belle Haven, Fairfax County, Virginia, United States",
+      "osmType": "relation",
+      "osmId": 14488150,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-9901",
+      "query": "Civil War Defenses of Washington Trail",
+      "found": false,
+      "file": null,
+      "displayName": null,
+      "osmType": null,
+      "osmId": null,
+      "geometryType": null,
+      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+    },
+    {
+      "reference": "US-4581",
+      "query": "Star-Spangled Banner National Historic Trail",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-4581.geojson",
+      "displayName": "Star-Spangled Banner National Historic Trail, brown trail, Charles County, Maryland, 20612, United States",
+      "osmType": "node",
+      "osmId": 6090549619,
+      "geometryType": "Point",
+      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+    },
+    {
+      "reference": "US-4567",
+      "query": "Captain John Smith Chesapeake National Historic Trail",
+      "found": false,
+      "file": null,
+      "displayName": null,
+      "osmType": null,
+      "osmId": null,
+      "geometryType": null,
+      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+    },
+    {
+      "reference": "US-0670",
+      "query": "George Washington Memorial Parkway",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0670.geojson",
+      "displayName": "George Washington Memorial Parkway, Parkview Hills, Langley, McLean, Fairfax County, Virginia, 20818, United States",
+      "osmType": "way",
+      "osmId": 26707543,
+      "geometryType": "LineString",
+      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+    },
+    {
+      "reference": "US-9898",
+      "query": "Mount Vernon Trail, Virginia",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-9898.geojson",
+      "displayName": "Mount Vernon Trail, Ward 6, Washington, Arlington County, District of Columbia, 20310, United States",
+      "osmType": "way",
+      "osmId": 58673545,
+      "geometryType": "LineString",
+      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+    },
+    {
+      "reference": "US-4564",
+      "query": "Potomac Heritage National Scenic Trail",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-4564.geojson",
+      "displayName": "Potomac Heritage National Scenic Trail, Neabsco Road, Harbor of Newport, Leesylvania, Prince William County, Virginia, 22191, United States",
+      "osmType": "node",
+      "osmId": 10929909051,
+      "geometryType": "Point",
+      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+    },
+    {
+      "reference": "US-4582",
+      "query": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "found": false,
+      "file": null,
+      "displayName": null,
+      "osmType": null,
+      "osmId": null,
+      "geometryType": null,
+      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+    },
+    {
+      "reference": "US-0783",
+      "query": "Lincoln Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0783.geojson",
+      "displayName": "Lincoln Memorial, Lincoln Steps, Foggy Bottom, Ward 2, Washington, District of Columbia, 20418, United States",
+      "osmType": "way",
+      "osmId": 398769543,
+      "geometryType": "Polygon"
+    }
+  ]
+}

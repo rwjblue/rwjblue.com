@@ -506,19 +506,241 @@
       ]
     },
     "sundayDcRove": {
-      "status": "next planning pass",
+      "status": "working Cheetah/Ostrich route",
       "targetDate": "2026-06-21",
-      "strategy": "Sunday June 21 remains the large DC / NoVA rove day from Foggy Bottom to Fredericksburg. Exact Cheetah/Ostrich flow is intentionally deferred to the next cleanup pass.",
+      "strategy": "Sunday June 21 uses the Saturday 20:00 EDT Fort McHenry activation as the first Sunday-UTC stop, then follows the CWops/W8WZ DC Cheetah pattern: LBJ 7-fer, FDR, MLK, Korean, Constitution Gardens, Vietnam, WWII, Washington Monument, with Lincoln and Mason Neck as the clean Ostrich stretch.",
       "timingAssumptions": {
-        "source": "Google Maps route checks plus imported n-fer evidence and the February 2026 CWops article about a DC POTA 7-fer. Sunday routes were checked at a June 21 afternoon departure.",
+        "source": "CWops Solid Copy No. 193 W8WZ article, POTA API reference metadata, imported top-activator n-fer evidence, OSM/Nominatim GeoJSON attempts, and Google Maps route checks on 2026-06-10.",
         "departureArea": "Foggy Bottom hotel",
         "utcDayRolloverLocal": "20:00 EDT"
       },
-      "recommendedRoute": [],
-      "timingModels": [],
+      "recommendedRoute": [
+        {
+          "stop": "Fort McHenry Saturday 20:00 EDT",
+          "references": [
+            "US-0928",
+            "US-4581",
+            "US-4567",
+            "US-4582"
+          ],
+          "role": "Bank Maryland and likely four total entities on the Sunday UTC day before driving to Foggy Bottom."
+        },
+        {
+          "stop": "LBJ Memorial Grove exact 7-fer",
+          "references": [
+            "US-0784",
+            "US-9901",
+            "US-4581",
+            "US-4567",
+            "US-0670",
+            "US-9898",
+            "US-4564"
+          ],
+          "role": "Primary Sunday morning jackpot; exact tree/overlap point still needs field verification."
+        },
+        {
+          "stop": "FDR Memorial",
+          "references": [
+            "US-0776",
+            "US-0655"
+          ],
+          "role": "Article-backed 2-fer with National Mall."
+        },
+        {
+          "stop": "MLK Memorial",
+          "references": [
+            "US-0785",
+            "US-0655"
+          ],
+          "role": "Article-backed Mall stop; adds MLK after National Mall is already counted."
+        },
+        {
+          "stop": "Korean War Veterans Memorial",
+          "references": [
+            "US-0780",
+            "US-0655"
+          ],
+          "role": "Article-backed Mall stop."
+        },
+        {
+          "stop": "Constitution Gardens",
+          "references": [
+            "US-0653",
+            "US-0655"
+          ],
+          "role": "Article-backed Mall stop."
+        },
+        {
+          "stop": "Vietnam Veterans Memorial",
+          "references": [
+            "US-0793",
+            "US-0655"
+          ],
+          "role": "Cheetah threshold if Fort and LBJ verify."
+        },
+        {
+          "stop": "WWII Memorial",
+          "references": [
+            "US-0796",
+            "US-0655"
+          ],
+          "role": "Article-backed buffer beyond Cheetah."
+        },
+        {
+          "stop": "Washington Monument",
+          "references": [
+            "US-0794",
+            "US-0655"
+          ],
+          "role": "Article-backed buffer beyond Cheetah and natural end of Mall walk."
+        },
+        {
+          "stop": "Lincoln Memorial",
+          "references": [
+            "US-0783",
+            "US-0655"
+          ],
+          "role": "Nearby Ostrich add-on; crowd/bench risk."
+        },
+        {
+          "stop": "Mason Neck State Park / Mason Neck NWR",
+          "references": [
+            "US-1308",
+            "US-0563"
+          ],
+          "role": "Southbound 2-fer that can push the day to Ostrich if reached before dusk."
+        }
+      ],
+      "timingModels": [
+        {
+          "name": "Cheetah baseline: Fort + LBJ + Mall through Vietnam",
+          "entityCount": 15,
+          "physicalStops": 7,
+          "endAnchor": "National Mall / Washington Monument area",
+          "estimatedDriveMinutes": 102,
+          "estimatedTotalLabel": "about 8h 45m split across Saturday evening and Sunday, before food/parking variance",
+          "comfort": "reasonable if exact n-fer positions verify",
+          "notes": "Cheetah threshold is reached at Vietnam if Fort McHenry 4-fer and LBJ 7-fer verify.",
+          "entities": [
+            "US-0928",
+            "US-4581",
+            "US-4567",
+            "US-4582",
+            "US-0784",
+            "US-9901",
+            "US-0670",
+            "US-9898",
+            "US-4564",
+            "US-0776",
+            "US-0655",
+            "US-0785",
+            "US-0780",
+            "US-0653",
+            "US-0793"
+          ]
+        },
+        {
+          "name": "Full W8WZ route plus Fort McHenry",
+          "entityCount": 17,
+          "physicalStops": 9,
+          "endAnchor": "National Mall / Washington Monument area",
+          "estimatedDriveMinutes": 102,
+          "estimatedTotalLabel": "about 10h 45m split across Saturday evening and Sunday",
+          "comfort": "reasonable if exact n-fer positions verify",
+          "notes": "This mirrors the article sequence and leaves room for one southbound add-on if the day is moving well.",
+          "entities": [
+            "US-0928",
+            "US-4581",
+            "US-4567",
+            "US-4582",
+            "US-0784",
+            "US-9901",
+            "US-0670",
+            "US-9898",
+            "US-4564",
+            "US-0776",
+            "US-0655",
+            "US-0785",
+            "US-0780",
+            "US-0653",
+            "US-0793",
+            "US-0796",
+            "US-0794"
+          ]
+        },
+        {
+          "name": "Ostrich stretch: full route + Lincoln + Mason Neck",
+          "entityCount": 20,
+          "physicalStops": 11,
+          "endAnchor": "Fredericksburg hotel via Mason Neck",
+          "estimatedDriveMinutes": 188,
+          "estimatedTotalLabel": "about 14h 10m split across Saturday evening and Sunday; stretch but plausible with disciplined 45-60 minute stops",
+          "comfort": "stretch",
+          "notes": "Mason Neck should be before dusk; this model may need a morning start and no long social pause.",
+          "entities": [
+            "US-0928",
+            "US-4581",
+            "US-4567",
+            "US-4582",
+            "US-0784",
+            "US-9901",
+            "US-0670",
+            "US-9898",
+            "US-4564",
+            "US-0776",
+            "US-0655",
+            "US-0785",
+            "US-0780",
+            "US-0653",
+            "US-0793",
+            "US-0796",
+            "US-0794",
+            "US-0783",
+            "US-1308",
+            "US-0563"
+          ]
+        },
+        {
+          "name": "Ostrich high-confidence buffer: add Dyke Marsh before Mason Neck",
+          "entityCount": 22,
+          "physicalStops": 12,
+          "endAnchor": "Fredericksburg hotel via Mason Neck",
+          "estimatedDriveMinutes": 220,
+          "estimatedTotalLabel": "about 15h 40m split across Saturday evening and Sunday; likely too heavy unless using shorter activations",
+          "comfort": "stretch",
+          "notes": "Dyke Marsh adds margin but also pushes Mason Neck later; keep as backup unless exact access and pace are excellent.",
+          "entities": [
+            "US-0928",
+            "US-4581",
+            "US-4567",
+            "US-4582",
+            "US-0784",
+            "US-9901",
+            "US-0670",
+            "US-9898",
+            "US-4564",
+            "US-0776",
+            "US-0655",
+            "US-0785",
+            "US-0780",
+            "US-0653",
+            "US-0793",
+            "US-0796",
+            "US-0794",
+            "US-0783",
+            "US-9961",
+            "US-9935",
+            "US-1308",
+            "US-0563"
+          ]
+        }
+      ],
       "openQuestions": [
-        "Build the exact Cheetah (15 entities) and Ostrich (20 entities) DC flow.",
-        "Verify the best DC n-fer positions and access details."
+        "Confirm the exact LBJ 7-fer tree/overlap point against imagery or with a local activator before relying on all seven references.",
+        "Confirm Fort McHenry exact position for US-4582 in addition to US-0928, US-4581, and US-4567.",
+        "Confirm Mason Neck NWR operating restrictions: POTA cache says free-standing antennas only, no vegetation attachment, no off-trail operating, and no tables in parking areas.",
+        "Check closing/dusk times for Mason Neck if using it as the Ostrich add-on.",
+        "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure."
       ]
     },
     "mdTarget": {
@@ -1549,6 +1771,116 @@
         "priority": "target",
         "state": "US-FL",
         "goal": "Friday evening"
+      },
+      {
+        "reference": "US-0784",
+        "name": "LBJ Memorial Grove exact 7-fer position",
+        "role": "LBJ 7-fer physical anchor; exact tree/overlap point still needs field verification",
+        "latitude": 38.8789,
+        "longitude": -77.0492,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0776",
+        "name": "Franklin Delano Roosevelt Memorial",
+        "role": "article-backed",
+        "latitude": 38.8834579,
+        "longitude": -77.0429536,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0785",
+        "name": "Martin Luther King Jr. Memorial",
+        "role": "article-backed",
+        "latitude": 38.8862795,
+        "longitude": -77.0442553,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0780",
+        "name": "Korean War Veterans Memorial",
+        "role": "article-backed",
+        "latitude": 38.8878422,
+        "longitude": -77.0477385,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0653",
+        "name": "Constitution Gardens",
+        "role": "article-backed",
+        "latitude": 38.8909409,
+        "longitude": -77.0445292,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0793",
+        "name": "Vietnam Veterans Memorial",
+        "role": "article-backed; Cheetah threshold reached here if Fort and LBJ verify",
+        "latitude": 38.8912933,
+        "longitude": -77.0477132,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0796",
+        "name": "World War II Memorial",
+        "role": "article-backed buffer beyond Cheetah",
+        "latitude": 38.888967,
+        "longitude": -77.0405119,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0794",
+        "name": "Washington Monument",
+        "role": "article-backed buffer beyond Cheetah",
+        "latitude": 38.8894838,
+        "longitude": -77.0352791,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-0783",
+        "name": "Lincoln Memorial",
+        "role": "good Ostrich add-on but crowd/bench availability risk; W8WZ skipped it",
+        "latitude": 38.8893,
+        "longitude": -77.0502,
+        "priority": "target",
+        "state": "US-DC",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-1308",
+        "name": "Mason Neck State Park / Elizabeth Hartwell Mason Neck NWR",
+        "role": "imported n-fer evidence; verify refuge restrictions and park hours",
+        "latitude": 38.6465022,
+        "longitude": -77.1861893,
+        "priority": "target",
+        "state": "US-VA",
+        "goal": "Sunday DC rove"
+      },
+      {
+        "reference": "US-9961",
+        "name": "Dyke Marsh Wildlife Preserve",
+        "role": "imported K4NYM n-fer record; exact public position needs verification",
+        "latitude": 38.7661394,
+        "longitude": -77.0492459,
+        "priority": "alternate",
+        "state": "US-VA",
+        "goal": "Sunday Ostrich backup"
       }
     ]
   }

@@ -1,0 +1,58 @@
+{
+  "type": "Feature",
+  "properties": {
+    "reference": "US-0793",
+    "query": "Vietnam Veterans Memorial, Washington, DC",
+    "source": "OpenStreetMap Nominatim",
+    "osm_type": "way",
+    "osm_id": 173932971,
+    "display_name": "Vietnam Veterans Memorial, Henry Bacon Drive Northwest, Ward 2, Washington, District of Columbia, 20418, United States",
+    "category": "historic",
+    "type": "monument",
+    "importance": 0.46799433978285576,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -77.0483449,
+          38.8908257
+        ],
+        [
+          -77.0483173,
+          38.8908058
+        ],
+        [
+          -77.0482899,
+          38.8907858
+        ],
+        [
+          -77.04768,
+          38.8912348
+        ],
+        [
+          -77.0468561,
+          38.8911345
+        ],
+        [
+          -77.0468476,
+          38.8911652
+        ],
+        [
+          -77.046839,
+          38.8911951
+        ],
+        [
+          -77.0477155,
+          38.8913171
+        ],
+        [
+          -77.0483449,
+          38.8908257
+        ]
+      ]
+    ]
+  }
+}

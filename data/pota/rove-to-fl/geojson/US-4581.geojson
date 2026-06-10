@@ -1,0 +1,22 @@
+{
+  "type": "Feature",
+  "properties": {
+    "reference": "US-4581",
+    "query": "Star-Spangled Banner National Historic Trail",
+    "source": "OpenStreetMap Nominatim",
+    "osm_type": "node",
+    "osm_id": 6090549619,
+    "display_name": "Star-Spangled Banner National Historic Trail, brown trail, Charles County, Maryland, 20612, United States",
+    "category": "information",
+    "type": "board",
+    "importance": 0.00003965896086056332,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -76.7006369,
+      38.534757
+    ]
+  }
+}

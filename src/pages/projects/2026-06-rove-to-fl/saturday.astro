@@ -1,0 +1,324 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import itinerary from "../../../../data/pota/rove-to-fl/itinerary.json";
+
+interface CandidateStop {
+  reference?: string | null;
+  references?: string[];
+  name: string;
+  state?: string;
+  role: string;
+  risk?: string;
+}
+interface TimingRouteLeg {
+  from: string;
+  to: string;
+  estimatedDriveMinutes: number;
+}
+interface SaturdayTimingModel {
+  name: string;
+  entityCount: number;
+  physicalStops: number;
+  startAnchor: string;
+  endAnchor: string;
+  estimatedDriveMinutes: number;
+  activationMinutes: number;
+  chargingMinutes: number;
+  bufferMinutes: number;
+  estimatedTotalLabel: string;
+  comfort: string;
+  route: TimingRouteLeg[];
+  entities: string[];
+  notes?: string;
+}
+interface SaturdayRove {
+  targetDate: string;
+  baselineEntityTarget: number;
+  stretchEntityTarget: number;
+  strategy: string;
+  timingAssumptions?: Record<string, string | number>;
+  timingModels?: SaturdayTimingModel[];
+  baselineCandidates: CandidateStop[];
+  stretchCandidates: CandidateStop[];
+  openQuestions: string[];
+}
+
+const firstWeekendPlan = itinerary.firstWeekendPlan;
+const saturdayRove = firstWeekendPlan.saturdayRove as SaturdayRove;
+const model = saturdayRove.timingModels?.[0];
+
+function formatShortDate(iso: string) {
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+function formatMinutes(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return hours > 0 ? `${hours}h ${mins.toString().padStart(2, "0")}m` : `${mins}m`;
+}
+
+function potaUrl(reference: string) {
+  return `https://pota.app/#/park/${reference}`;
+}
+
+function referencesFor(stop: CandidateStop) {
+  return (stop.references ?? [stop.reference]).filter(Boolean) as string[];
+}
+---
+
+<BaseLayout
+  title="Saturday Rove / 2026 Rove to FL / N1RWJ"
+  description="Saturday POTA positioning rove from Edison, NJ to Foggy Bottom, DC by way of NJ, PA, DE, and MD."
+  canonicalPath="/projects/2026-06-rove-to-fl/saturday/"
+>
+  <section class="pota-tracker-hero" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow">Project / POTA / Saturday</p>
+      <h1 id="page-title">Saturday positioning rove</h1>
+      <p class="lede strong">
+        {formatShortDate(saturdayRove.targetDate)}: Edison to Foggy Bottom via
+        Cheesequake, John Heinz, Fox Point, and Fort McHenry.
+      </p>
+      <p class="lede">
+        The goal is a controlled southbound day, not a max-count day. Fort
+        McHenry should start after 20:00 EDT so Maryland counts on the Sunday
+        UTC rove day.
+      </p>
+    </div>
+
+    <aside class="pota-tracker-panel rove-summary-panel">
+      <nav class="rove-subnav" aria-label="Rove planning pages">
+        <a href="/projects/2026-06-rove-to-fl/">Overview</a>
+        <a href="/projects/2026-06-rove-to-fl/saturday/">Saturday rove</a>
+        <a href="/projects/2026-06-rove-to-fl/sunday/">Sunday DC rove</a>
+      </nav>
+      <dl class="rove-summary-grid">
+        <div>
+          <dt>Baseline</dt>
+          <dd>{saturdayRove.baselineEntityTarget} entities</dd>
+        </div>
+        <div>
+          <dt>Stretch</dt>
+          <dd>{saturdayRove.stretchEntityTarget} entities</dd>
+        </div>
+        {model && (
+          <>
+            <div>
+              <dt>Drive</dt>
+              <dd>{formatMinutes(model.estimatedDriveMinutes)}</dd>
+            </div>
+            <div>
+              <dt>Total</dt>
+              <dd>{model.estimatedTotalLabel}</dd>
+            </div>
+          </>
+        )}
+      </dl>
+    </aside>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="route-title">
+    <div class="section-heading">
+      <p class="section-label">{firstWeekendPlan.status}</p>
+      <h2 id="route-title">Operating route</h2>
+    </div>
+
+    <p class="rove-note">{saturdayRove.strategy}</p>
+    {saturdayRove.timingAssumptions?.saturdayEveningTiming && (
+      <p class="rove-note rove-important">
+        {String(saturdayRove.timingAssumptions.saturdayEveningTiming)}
+      </p>
+    )}
+
+    {model && (
+      <ol class="rove-route-list">
+        {model.route.map((leg, index) => (
+          <li>
+            <span>Leg {index + 1}</span>
+            <strong>{leg.from} -> {leg.to}</strong>
+            <p>{formatMinutes(leg.estimatedDriveMinutes)} estimated drive time</p>
+          </li>
+        ))}
+      </ol>
+    )}
+  </section>
+
+  <section class="section-block wide" aria-labelledby="parks-title">
+    <div class="section-heading">
+      <p class="section-label">Selected parks</p>
+      <h2 id="parks-title">Saturday activation stops</h2>
+    </div>
+
+    <div class="rove-card-grid">
+      {saturdayRove.baselineCandidates.map((stop) => (
+        <article>
+          <span>{stop.state?.replace("US-", "")}</span>
+          <h3>{stop.name}</h3>
+          <p>{stop.role}</p>
+          <p class="rove-reference-list">
+            {referencesFor(stop).map((reference) => (
+              <a href={potaUrl(reference)} target="_blank" rel="noreferrer">{reference}</a>
+            ))}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="checks-title">
+    <div class="section-heading">
+      <p class="section-label">Verification</p>
+      <h2 id="checks-title">N-fer and timing checks</h2>
+    </div>
+
+    <div class="rove-card-grid">
+      {saturdayRove.stretchCandidates.map((stop) => (
+        <article>
+          <span>{stop.state?.replace("US-", "")}</span>
+          <h3>{stop.name}</h3>
+          <p>{stop.role}</p>
+          {stop.risk && <p>{stop.risk}</p>}
+          <p class="rove-reference-list">
+            {referencesFor(stop).map((reference) => (
+              <a href={potaUrl(reference)} target="_blank" rel="noreferrer">{reference}</a>
+            ))}
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <ul class="rove-check-list">
+      {saturdayRove.openQuestions.map((question) => <li>{question}</li>)}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .rove-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .rove-subnav a {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 4px;
+    color: var(--color-accent, #167246);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.35rem 0.55rem;
+    text-decoration: none;
+  }
+
+  .rove-summary-panel {
+    align-self: start;
+  }
+
+  .rove-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .rove-summary-grid div,
+  .rove-route-list li,
+  .rove-card-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-summary-grid dt,
+  .rove-route-list span,
+  .rove-card-grid span {
+    color: var(--color-text-muted, #666);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-summary-grid dd {
+    font-size: 0.95rem;
+    margin: 0.15rem 0 0;
+  }
+
+  .rove-note {
+    color: var(--color-text-muted, #666);
+    font-size: 0.92rem;
+    margin: 0 0 1rem;
+  }
+
+  .rove-important {
+    border-top: 1px solid var(--color-border, #ddd);
+    padding-top: 0.75rem;
+  }
+
+  .rove-route-list {
+    display: grid;
+    gap: 0.65rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rove-route-list strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+  }
+
+  .rove-route-list p,
+  .rove-card-grid p,
+  .rove-check-list {
+    color: var(--color-text-muted, #666);
+    font-size: 0.86rem;
+  }
+
+  .rove-route-list p {
+    margin: 0.25rem 0 0;
+  }
+
+  .rove-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-card-grid h3 {
+    font-size: 1rem;
+    margin: 0.25rem 0 0.4rem;
+  }
+
+  .rove-card-grid p {
+    margin: 0.35rem 0;
+  }
+
+  .rove-reference-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .rove-reference-list a {
+    color: var(--color-accent, #167246);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .rove-check-list {
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .rove-check-list li + li {
+    margin-top: 0.35rem;
+  }
+</style>

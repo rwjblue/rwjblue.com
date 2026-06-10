@@ -1,0 +1,22 @@
+{
+  "type": "Feature",
+  "properties": {
+    "reference": "US-4564",
+    "query": "Potomac Heritage National Scenic Trail",
+    "source": "OpenStreetMap Nominatim",
+    "osm_type": "node",
+    "osm_id": 10929909051,
+    "display_name": "Potomac Heritage National Scenic Trail, Neabsco Road, Harbor of Newport, Leesylvania, Prince William County, Virginia, 22191, United States",
+    "category": "information",
+    "type": "board",
+    "importance": 0.00005032349126416445,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -77.2831238,
+      38.6072645
+    ]
+  }
+}

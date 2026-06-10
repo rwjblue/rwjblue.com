@@ -1,0 +1,58 @@
+{
+  "type": "Feature",
+  "properties": {
+    "reference": "US-0783",
+    "query": "Lincoln Memorial, Washington, DC",
+    "source": "OpenStreetMap Nominatim",
+    "osm_type": "way",
+    "osm_id": 398769543,
+    "display_name": "Lincoln Memorial, Lincoln Steps, Foggy Bottom, Ward 2, Washington, District of Columbia, 20418, United States",
+    "category": "historic",
+    "type": "monument",
+    "importance": 0.5218041310273654,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -77.0503866,
+          38.8890127
+        ],
+        [
+          -77.0499573,
+          38.8890125
+        ],
+        [
+          -77.0499572,
+          38.8891514
+        ],
+        [
+          -77.0499578,
+          38.8892729
+        ],
+        [
+          -77.0499573,
+          38.8893349
+        ],
+        [
+          -77.0499568,
+          38.8894029
+        ],
+        [
+          -77.049957,
+          38.8895315
+        ],
+        [
+          -77.0503862,
+          38.8895317
+        ],
+        [
+          -77.0503866,
+          38.8890127
+        ]
+      ]
+    ]
+  }
+}

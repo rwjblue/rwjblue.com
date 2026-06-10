@@ -3,164 +3,17 @@ import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import itinerary from "../../../data/pota/rove-to-fl/itinerary.json";
 
-type OvernightType = "hotel" | "home" | "tbd";
-interface BookingInfo {
-  status: "planned" | "booked" | "n/a";
-  confirmation?: string | null;
-  url?: string | null;
-  notes?: string | null;
-}
-interface ItineraryDay {
-  date: string;
-  states: string[];
-  overnight: {
-    type: OvernightType;
-    name: string;
-    reference?: string;
-    lat?: number;
-    lon?: number;
-    booking: BookingInfo;
-  };
-  parkTargets: string[];
-  notes?: string;
-  approxDriveMiles?: number;
-}
-interface FridayNightAnchor {
-  name: string;
-  reference?: string | null;
-  state: string;
-  overnightType?: string;
-  driveFromProvidenceMinutes?: number | null;
-  role: string;
-  pros: string[];
-  cons: string[];
-  saturdayImpact?: string;
-}
-interface CandidateStop {
-  reference?: string | null;
-  references?: string[];
-  name: string;
-  state?: string;
-  role: string;
-  risk?: string;
-}
-interface RoveTimingModel {
-  name: string;
-  entityCount: number;
-  physicalStops?: number;
-  endAnchor: string;
-  estimatedDriveMinutes: number;
-  estimatedTotalLabel: string;
-  comfort: string;
-  notes?: string;
-  entities?: string[];
-}
-interface FirstWeekendPlan {
-  status: string;
-  utcNote: string;
-  mdTarget?: {
-    localTime: string;
-    meaning: string;
-    optionalBranch?: string;
-  };
-  fridayNightAnchors: FridayNightAnchor[];
-  parkShortlist?: Array<{
-    state: string;
-    goal: string;
-    defaultReferences: string[];
-    options: Array<CandidateStop & {
-      latitude: number;
-      longitude: number;
-      priority: string;
-    }>;
-  }>;
-  saturdayRove: {
-    targetDate: string;
-    baselineEntityTarget: number;
-    stretchEntityTarget: number;
-    strategy: string;
-    timingAssumptions?: {
-      source?: string;
-      utcDayRolloverLocal?: string;
-    };
-    timingModels?: RoveTimingModel[];
-    fridayEveningOptions?: Array<{
-      name: string;
-      route: string;
-      estimatedDriveMinutes: number;
-      estimatedTotalLabel: string;
-      comfort: string;
-      notes?: string;
-    }>;
-    restOfTripComfortRule?: string;
-    baselineCandidates: CandidateStop[];
-    stretchCandidates: CandidateStop[];
-    openQuestions: string[];
-  };
-  sundayDcRove?: {
-    status: string;
-    targetDate: string;
-    strategy: string;
-    timingAssumptions?: {
-      source?: string;
-      departureArea?: string;
-      utcDayRolloverLocal?: string;
-    };
-    recommendedRoute?: Array<{
-      stop: string;
-      references: string[];
-      role: string;
-    }>;
-    timingModels?: RoveTimingModel[];
-    openQuestions: string[];
-  };
-}
-interface RestOfTripDay {
-  date: string;
-  overnightType: string;
-  startArea: string;
-  endArea: string;
-  focus: string;
-  jurisdictions: string[];
-  roughMiles: number;
-  roughDriveHours: number;
-  chargingHours: number;
-  minimumEntities: number;
-  parkStopHours?: number;
-  roughTotalHours: number;
-  notes?: string;
-}
-interface OvernightStrategyNight {
-  date: string;
-  preferredType: string;
-  area: string;
-  why: string;
-  savesSeparateParkStop: boolean;
-  likelyJurisdictionCoverage: string[];
-}
 interface OvernightStrategy {
   goal: string;
   recommendedPattern: string[];
   summary: string;
-  nights: OvernightStrategyNight[];
   fallbackNote?: string;
 }
 interface RestOfTripDraft {
   status: string;
   assumptions: string[];
   overnightStrategy?: OvernightStrategy;
-  days: RestOfTripDay[];
   risk?: string;
-}
-interface RoadmapDay {
-  date: string;
-  route: string;
-  focus: string;
-  jurisdictions: string[];
-  overnightType: string;
-  overnightArea: string;
-  roughTotalHours?: number;
-  notes?: string;
 }
 interface DriveEstimateLeg {
   date: string;
@@ -195,6 +48,15 @@ interface MapOverlays {
   anchors: MapOverlayPoint[];
   parkPoints: MapOverlayPoint[];
 }
+interface OverviewStop {
+  date: string;
+  destination: string;
+  type: string;
+  driveFromPrior?: string;
+  expectedStay: string;
+  references?: string[];
+  notes: string;
+}
 
 const mapOverlays =
   typeof (itinerary as { mapOverlays?: unknown }).mapOverlays === "object" &&
@@ -202,15 +64,6 @@ const mapOverlays =
     ? ((itinerary as { mapOverlays: MapOverlays }).mapOverlays)
     : { anchors: [], parkPoints: [] };
 const mapOverlaysJson = JSON.stringify(mapOverlays);
-
-function formatDate(iso: string) {
-  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    timeZone: "UTC",
-  });
-}
 
 const tripConstraints = itinerary.constraints as Record<string, unknown>;
 const departureWindow = Array.isArray(tripConstraints.departureWindow)
@@ -287,11 +140,6 @@ const planningConclusions = Array.isArray(
 )
   ? ((itinerary as { planningConclusions: string[] }).planningConclusions)
   : [];
-const firstWeekendPlan =
-  typeof (itinerary as { firstWeekendPlan?: unknown }).firstWeekendPlan === "object" &&
-  (itinerary as { firstWeekendPlan?: unknown }).firstWeekendPlan
-    ? ((itinerary as { firstWeekendPlan: FirstWeekendPlan }).firstWeekendPlan)
-    : null;
 const restOfTripDraft =
   typeof (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft === "object" &&
   (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft
@@ -303,18 +151,6 @@ const driveEstimates =
     ? ((itinerary as { driveEstimates: DriveEstimates }).driveEstimates)
     : null;
 const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
-const itineraryDays = Array.isArray((itinerary as { days?: unknown }).days)
-  ? ((itinerary as { days: ItineraryDay[] }).days)
-  : [];
-const roadmapDays: RoadmapDay[] = itineraryDays.map((day) => ({
-  date: day.date,
-  route: `${day.states.map((s) => s.replace("US-", "")).join(" / ")} → ${day.overnight.name}`,
-  focus: day.notes ?? "",
-  jurisdictions: day.states,
-  overnightType: day.overnight.type,
-  overnightArea: day.overnight.name,
-  notes: day.parkTargets.length > 0 ? `Targets: ${day.parkTargets.join(" / ")}` : undefined,
-}));
 const parkStopPlanning =
   typeof tripConstraints.parkStopPlanning === "object" && tripConstraints.parkStopPlanning
     ? (tripConstraints.parkStopPlanning as {
@@ -323,6 +159,182 @@ const parkStopPlanning =
         overnightParkException?: string;
       })
     : null;
+const overviewStops: OverviewStop[] = [
+  {
+    date: "2026-06-19",
+    destination: "Hope, RI",
+    type: "Start",
+    expectedStay: "Depart Friday morning",
+    notes: "Home base before the RI activation and southbound work-positioning day.",
+  },
+  {
+    date: "2026-06-19",
+    destination: "JL Curran State Park, RI",
+    type: "POTA",
+    driveFromPrior: "22m from Hope",
+    expectedStay: "~1h activation",
+    references: ["US-6992"],
+    notes: "Default near-home Rhode Island activation before leaving the state.",
+  },
+  {
+    date: "2026-06-19",
+    destination: "Silver Sands State Park, CT",
+    type: "POTA",
+    driveFromPrior: "1h 44m from JL Curran",
+    expectedStay: "~1h activation",
+    references: ["US-1716"],
+    notes: "Friday morning Connecticut activation before the lower-Hudson work position.",
+  },
+  {
+    date: "2026-06-19",
+    destination: "Stamford / White Plains work position",
+    type: "Work block",
+    driveFromPrior: "35m from Silver Sands",
+    expectedStay: "13:00-17:00 work window",
+    notes: "Position near the NY activation while avoiding the thickest NYC-area traffic.",
+  },
+  {
+    date: "2026-06-19",
+    destination: "Tallman Mountain State Park, NY",
+    type: "POTA",
+    driveFromPrior: "33m from Stamford",
+    expectedStay: "~1h activation",
+    references: ["US-2149"],
+    notes: "New York activation after work; start promptly because the park is dawn-to-dusk.",
+  },
+  {
+    date: "2026-06-19",
+    destination: "Edison, NJ hotel",
+    type: "Hotel",
+    driveFromPrior: "1h 06m from Tallman",
+    expectedStay: "Friday overnight",
+    notes: "Booked Friday anchor close to Cheesequake, with good Tesla Supercharger coverage nearby.",
+  },
+  {
+    date: "2026-06-20",
+    destination: "Cheesequake State Park, NJ",
+    type: "POTA",
+    driveFromPrior: "21m from Edison",
+    expectedStay: "~1h activation",
+    references: ["US-1611"],
+    notes: "Saturday morning New Jersey activation.",
+  },
+  {
+    date: "2026-06-20",
+    destination: "John Heinz National Wildlife Refuge, PA",
+    type: "POTA",
+    driveFromPrior: "1h 24m from Cheesequake",
+    expectedStay: "~1h activation",
+    references: ["US-0512"],
+    notes: "Selected Pennsylvania branch; trails are sunrise-to-sundown.",
+  },
+  {
+    date: "2026-06-20",
+    destination: "Fox Point State Park, DE",
+    type: "POTA",
+    driveFromPrior: "25m from John Heinz",
+    expectedStay: "~1h activation",
+    references: ["US-1738", "US-9878"],
+    notes: "Delaware activation; Northern Delaware Greenway overlap still needs exact-position verification.",
+  },
+  {
+    date: "2026-06-20",
+    destination: "Fort McHenry, MD",
+    type: "POTA",
+    driveFromPrior: "1h 14m from Fox Point",
+    expectedStay: "Arrive ~19:30; activate after 20:00",
+    references: ["US-0928", "US-4581", "US-4567", "US-4582"],
+    notes: "Maryland activation intentionally counts on the Sunday UTC rove day.",
+  },
+  {
+    date: "2026-06-20",
+    destination: "Foggy Bottom, DC hotel",
+    type: "Hotel",
+    driveFromPrior: "1h 14m from Fort McHenry",
+    expectedStay: "Saturday overnight",
+    notes: "Fixed DC anchor for the Sunday rove.",
+  },
+  {
+    date: "2026-06-21",
+    destination: "DC / NoVA rove sequence",
+    type: "Detailed rove",
+    driveFromPrior: "Starts from Foggy Bottom",
+    expectedStay: "Cheetah baseline ~8h45; Ostrich stretch ~14h10",
+    references: ["US-0784", "US-9901", "US-0670", "US-9898", "US-4564", "US-0776", "US-0655"],
+    notes: "Detailed stop order lives on the Sunday rove page; end southbound toward Fredericksburg.",
+  },
+  {
+    date: "2026-06-21",
+    destination: "Fredericksburg, VA hotel",
+    type: "Hotel",
+    driveFromPrior: "50m from Mason Neck if used",
+    expectedStay: "Sunday overnight",
+    notes: "Booked anchor after the DC/NoVA rove.",
+  },
+  {
+    date: "2026-06-22",
+    destination: "Florence, SC hotel",
+    type: "Hotel",
+    driveFromPrior: "5h 12m from Fredericksburg before NC/SC stops",
+    expectedStay: "Monday overnight",
+    notes: "NC and SC park choices still need to be inserted into this workday leg.",
+  },
+  {
+    date: "2026-06-23",
+    destination: "Savannah National Wildlife Refuge",
+    type: "POTA",
+    driveFromPrior: "2h 29m from Florence",
+    expectedStay: "~1h activation",
+    references: ["US-0522"],
+    notes: "Selected GA/SC-area activation; exact jurisdiction credit still needs verification.",
+  },
+  {
+    date: "2026-06-23",
+    destination: "Pooler / Savannah, GA",
+    type: "Hotel area",
+    driveFromPrior: "20m from Savannah NWR",
+    expectedStay: "Tuesday overnight",
+    notes: "Planned overnight area after the Savannah refuge stop.",
+  },
+  {
+    date: "2026-06-24",
+    destination: "Ocala, FL",
+    type: "Family anchor",
+    driveFromPrior: "3h 40m from Pooler",
+    expectedStay: "Wednesday/Thursday nights",
+    notes: "Family positioning before local Florida activations and Field Day arrival.",
+  },
+  {
+    date: "2026-06-25",
+    destination: "Silver Springs State Park or Ocala National Forest, FL",
+    type: "POTA",
+    driveFromPrior: "13m or 40m from Ocala",
+    expectedStay: "~1h activation",
+    references: ["US-1915", "US-4471"],
+    notes: "Silver Springs is the preferred close option; Ocala National Forest remains the longer alternate.",
+  },
+  {
+    date: "2026-06-26",
+    destination: "John D. MacArthur Beach State Park, FL",
+    type: "POTA",
+    driveFromPrior: "3h 56m from Ocala",
+    expectedStay: "Friday evening activation",
+    references: ["US-1884"],
+    notes: "Final target activation near Singer Island.",
+  },
+  {
+    date: "2026-06-26",
+    destination: "Singer Island / Riviera Beach, FL",
+    type: "Destination",
+    driveFromPrior: "9m from John D. MacArthur",
+    expectedStay: "Field Day weekend",
+    notes: "Arrival target for the June 27-28 Field Day weekend.",
+  },
+];
+
+function potaUrl(reference: string) {
+  return `https://pota.app/#/park/${reference}`;
+}
 ---
 
 <BaseLayout
@@ -361,6 +373,12 @@ const parkStopPlanning =
         </div>
         <p>Singer Island / Riviera Beach, FL</p>
       </aside>
+
+      <nav class="rove-subnav" aria-label="Rove planning pages">
+        <a href="/projects/2026-06-rove-to-fl/">Overview</a>
+        <a href="/projects/2026-06-rove-to-fl/saturday/">Saturday rove</a>
+        <a href="/projects/2026-06-rove-to-fl/sunday/">Sunday DC rove</a>
+      </nav>
 
       <section class="pota-map-section" aria-labelledby="map-title">
         <div class="section-heading">
@@ -481,30 +499,33 @@ const parkStopPlanning =
     )}
 
     <ol class="rove-timeline-list rove-roadmap-list">
-      {roadmapDays.map((day) => (
+      {overviewStops.map((stop) => (
         <li>
-          <div class="rove-timeline-date">{formatShortDate(day.date)}</div>
+          <div class="rove-timeline-date">{formatShortDate(stop.date)}</div>
           <div>
-            <strong>{day.route}</strong>
-            <p>{day.focus}</p>
+            <strong>{stop.destination}</strong>
             <dl class="rove-roadmap-meta">
               <div>
-                <dt>Night</dt>
-                <dd>{day.overnightType}</dd>
+                <dt>Type</dt>
+                <dd>{stop.type}</dd>
               </div>
               <div>
-                <dt>Area</dt>
-                <dd>{day.overnightArea}</dd>
+                <dt>Drive</dt>
+                <dd>{stop.driveFromPrior ?? "start"}</dd>
               </div>
-              {day.roughTotalHours != null && (
-                <div>
-                  <dt>Budget</dt>
-                  <dd>{day.roughTotalHours.toFixed(day.roughTotalHours % 1 === 0 ? 0 : 1)}h</dd>
-                </div>
-              )}
+              <div>
+                <dt>Stay</dt>
+                <dd>{stop.expectedStay}</dd>
+              </div>
             </dl>
-            <span>{day.jurisdictions.map((s) => s.replace("US-", "")).join(" / ") || "buffer"}</span>
-            {day.notes && <p>{day.notes}</p>}
+            {stop.references?.length > 0 && (
+              <p class="rove-reference-list">
+                {stop.references.map((reference) => (
+                  <a href={potaUrl(reference)} target="_blank" rel="noreferrer">{reference}</a>
+                ))}
+              </p>
+            )}
+            <p>{stop.notes}</p>
           </div>
         </li>
       ))}
@@ -544,263 +565,31 @@ const parkStopPlanning =
     </section>
   )}
 
-  {firstWeekendPlan && (
-    <section class="section-block wide" aria-labelledby="weekend-title">
-      <div class="section-heading">
-        <p class="section-label">{firstWeekendPlan.status}</p>
-        <h2 id="weekend-title">Selected route targets</h2>
-      </div>
+  <section class="section-block wide" aria-labelledby="detail-pages-title">
+    <div class="section-heading">
+      <p class="section-label">Detailed roves</p>
+      <h2 id="detail-pages-title">Breakout pages</h2>
+    </div>
 
-      <p class="rove-weekend-note">{firstWeekendPlan.utcNote}</p>
-      {firstWeekendPlan.mdTarget && (
-        <p class="rove-weekend-note rove-weekend-rule">
-          Maryland target: {firstWeekendPlan.mdTarget.localTime}.{" "}
-          {firstWeekendPlan.mdTarget.meaning}
+    <div class="rove-detail-page-grid">
+      <article>
+        <h3>Saturday positioning rove</h3>
+        <p>
+          Edison to Cheesequake, John Heinz, Fox Point, Fort McHenry, then Foggy Bottom.
+          This page carries the lighter Saturday route, UTC rollover target, and remaining access checks.
         </p>
-      )}
-
-      {firstWeekendPlan.parkShortlist && (
-        <section aria-labelledby="shortlist-title" class="rove-shortlist-section">
-          <h3 id="shortlist-title">Selected parks by leg</h3>
-          <div class="rove-shortlist-grid">
-            {firstWeekendPlan.parkShortlist.map((group) => (
-              <article>
-                <header>
-                  <strong>{group.state.replace("US-", "")}</strong>
-                  <span>{group.goal}</span>
-                </header>
-                <ul>
-                  {group.options.map((option) => (
-                    <li>
-                      <span class={`rove-priority rove-priority-${option.priority}`}>
-                        {option.priority}
-                      </span>
-                      <strong>
-                        {option.reference}
-                        {" "}
-                        {option.name}
-                      </strong>
-                      <em>{option.role}</em>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <div class="rove-weekend-grid">
-        <section aria-labelledby="friday-anchor-title">
-          <h3 id="friday-anchor-title">Friday night anchors</h3>
-          <div class="rove-anchor-list">
-            {firstWeekendPlan.fridayNightAnchors.map((anchor) => (
-              <article class="rove-anchor-card">
-                <header>
-                  <h4>{anchor.name}</h4>
-                  {anchor.reference ? (
-                    <a
-                      href={`https://pota.app/#/park/${anchor.reference}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {anchor.reference}
-                    </a>
-                  ) : (
-                    <span>{anchor.state.replace("US-", "")}</span>
-                  )}
-                </header>
-                <p>{anchor.role}</p>
-                <p>
-                  {anchor.overnightType ? `${anchor.overnightType} · ` : ""}
-                  {anchor.driveFromProvidenceMinutes
-                    ? `${Math.floor(anchor.driveFromProvidenceMinutes / 60)}h ${anchor.driveFromProvidenceMinutes % 60}m from Providence`
-                    : anchor.state.replace("US-", "")}
-                </p>
-                <ul>
-                  {anchor.pros.slice(0, 2).map((pro) => <li>{pro}</li>)}
-                </ul>
-                {anchor.saturdayImpact && <p>{anchor.saturdayImpact}</p>}
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section aria-labelledby="saturday-candidates-title">
-          <h3 id="saturday-candidates-title">Saturday rove shape</h3>
-          <p class="rove-weekend-note">{firstWeekendPlan.saturdayRove.strategy}</p>
-          {firstWeekendPlan.saturdayRove.timingAssumptions?.source && (
-            <p class="rove-weekend-note">
-              {firstWeekendPlan.saturdayRove.timingAssumptions.source}
-              {firstWeekendPlan.saturdayRove.timingAssumptions.utcDayRolloverLocal &&
-                ` UTC rolls at ${firstWeekendPlan.saturdayRove.timingAssumptions.utcDayRolloverLocal}.`}
-            </p>
-          )}
-          <div class="rove-entity-targets">
-            <span>{firstWeekendPlan.saturdayRove.baselineEntityTarget} baseline</span>
-            <span>{firstWeekendPlan.saturdayRove.stretchEntityTarget} stretch</span>
-          </div>
-          {firstWeekendPlan.saturdayRove.fridayEveningOptions && (
-            <div class="rove-timing-models">
-              {firstWeekendPlan.saturdayRove.fridayEveningOptions.map((option) => (
-                <article>
-                  <strong>{option.name}</strong>
-                  <dl>
-                    <div>
-                      <dt>Drive</dt>
-                      <dd>{Math.floor(option.estimatedDriveMinutes / 60)}h {option.estimatedDriveMinutes % 60}m</dd>
-                    </div>
-                    <div>
-                      <dt>Total</dt>
-                      <dd>{option.estimatedTotalLabel}</dd>
-                    </div>
-                  </dl>
-                  <p>{option.comfort}. {option.notes}</p>
-                </article>
-              ))}
-            </div>
-          )}
-          {firstWeekendPlan.saturdayRove.timingModels && (
-            <div class="rove-timing-models">
-              {firstWeekendPlan.saturdayRove.timingModels.map((model) => (
-                <article>
-                  <strong>{model.name}</strong>
-                  <dl>
-                    <div>
-                      <dt>Entities</dt>
-                      <dd>{model.entityCount}</dd>
-                    </div>
-                    {model.physicalStops && (
-                      <div>
-                        <dt>Stops</dt>
-                        <dd>{model.physicalStops}</dd>
-                      </div>
-                    )}
-                    <div>
-                      <dt>Drive</dt>
-                      <dd>{Math.floor(model.estimatedDriveMinutes / 60)}h {model.estimatedDriveMinutes % 60}m</dd>
-                    </div>
-                    <div>
-                      <dt>Total</dt>
-                      <dd>{model.estimatedTotalLabel}</dd>
-                    </div>
-                  </dl>
-                  <p>{model.comfort}; ends near {model.endAnchor}</p>
-                  {model.entities && (
-                    <p>{model.entities.join(" · ")}</p>
-                  )}
-                </article>
-              ))}
-            </div>
-          )}
-          <ol class="rove-candidate-list">
-            {firstWeekendPlan.saturdayRove.baselineCandidates.map((candidate) => (
-              <li>
-                <strong>
-                  {candidate.reference ?? "TBD"}
-                  {" "}
-                  {candidate.name}
-                </strong>
-                <span>{candidate.state.replace("US-", "")} · {candidate.role}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      </div>
-
-      <section aria-labelledby="stretch-title" class="rove-stretch-section">
-        <h3 id="stretch-title">Stretch and verification items</h3>
-        <div class="rove-stretch-grid">
-          {firstWeekendPlan.saturdayRove.stretchCandidates.map((candidate) => (
-            <article>
-              <strong>
-                {(candidate.references ?? [candidate.reference]).filter(Boolean).join(" + ")}
-                {" "}
-                {candidate.name}
-              </strong>
-              <p>{candidate.role}</p>
-              {candidate.risk && <span>{candidate.risk}</span>}
-            </article>
-          ))}
-        </div>
-        <ul class="rove-conclusions">
-          {firstWeekendPlan.saturdayRove.openQuestions.map((question) => <li>{question}</li>)}
-        </ul>
-      </section>
-      {firstWeekendPlan.saturdayRove.restOfTripComfortRule && (
-        <p class="rove-weekend-note rove-weekend-rule">
-          {firstWeekendPlan.saturdayRove.restOfTripComfortRule}
+        <a href="/projects/2026-06-rove-to-fl/saturday/">Open Saturday details</a>
+      </article>
+      <article>
+        <h3>Sunday DC / NoVA rove</h3>
+        <p>
+          Fort McHenry as the Sunday-UTC opener, then the W8WZ-inspired DC Cheetah
+          baseline with Ostrich stretch options toward Mason Neck and Fredericksburg.
         </p>
-      )}
-    </section>
-  )}
-
-  {firstWeekendPlan?.sundayDcRove && (
-    <section class="section-block wide" aria-labelledby="sunday-dc-title">
-      <div class="section-heading">
-        <p class="section-label">{firstWeekendPlan.sundayDcRove.status}</p>
-        <h2 id="sunday-dc-title">Sunday DC rove branch</h2>
-      </div>
-
-      <p class="rove-weekend-note">{firstWeekendPlan.sundayDcRove.strategy}</p>
-      {firstWeekendPlan.sundayDcRove.timingAssumptions?.source && (
-        <p class="rove-weekend-note">
-          {firstWeekendPlan.sundayDcRove.timingAssumptions.source}
-          {firstWeekendPlan.sundayDcRove.timingAssumptions.departureArea &&
-            ` Starts from ${firstWeekendPlan.sundayDcRove.timingAssumptions.departureArea}.`}
-        </p>
-      )}
-
-      {firstWeekendPlan.sundayDcRove.recommendedRoute?.length > 0 && (
-        <div class="rove-candidate-grid" aria-label="Recommended Sunday DC route">
-          {firstWeekendPlan.sundayDcRove.recommendedRoute.map((stop) => (
-            <article class="rove-candidate">
-              <strong>{stop.stop}</strong>
-              <p>{stop.role}</p>
-              <span>{stop.references.join(" · ")}</span>
-            </article>
-          ))}
-        </div>
-      )}
-
-      {firstWeekendPlan.sundayDcRove.timingModels?.length > 0 && (
-        <div class="rove-timing-models">
-          {firstWeekendPlan.sundayDcRove.timingModels.map((model) => (
-            <article>
-              <strong>{model.name}</strong>
-              <dl>
-                <div>
-                  <dt>Entities</dt>
-                  <dd>{model.entityCount}</dd>
-                </div>
-                {model.physicalStops && (
-                  <div>
-                    <dt>Stops</dt>
-                    <dd>{model.physicalStops}</dd>
-                  </div>
-                )}
-                <div>
-                  <dt>Drive</dt>
-                  <dd>{Math.floor(model.estimatedDriveMinutes / 60)}h {model.estimatedDriveMinutes % 60}m</dd>
-                </div>
-                <div>
-                  <dt>Total</dt>
-                  <dd>{model.estimatedTotalLabel}</dd>
-                </div>
-              </dl>
-              <p>{model.comfort}; ends near {model.endAnchor}</p>
-              {model.notes && <p>{model.notes}</p>}
-              {model.entities && <p>{model.entities.join(" · ")}</p>}
-            </article>
-          ))}
-        </div>
-      )}
-
-      <ul class="rove-conclusions">
-        {firstWeekendPlan.sundayDcRove.openQuestions.map((question) => <li>{question}</li>)}
-      </ul>
-    </section>
-  )}
+        <a href="/projects/2026-06-rove-to-fl/sunday/">Open Sunday details</a>
+      </article>
+    </div>
+  </section>
 
   <script type="application/json" id="rove-map-overlays" set:html={mapOverlaysJson} />
   <script>
@@ -906,6 +695,24 @@ const parkStopPlanning =
     flex-wrap: wrap;
   }
 
+  .rove-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+  }
+
+  .rove-subnav a,
+  .rove-detail-page-grid a {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 4px;
+    color: var(--color-accent, #167246);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.35rem 0.55rem;
+    text-decoration: none;
+  }
+
   .rove-constraint-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
@@ -996,6 +803,41 @@ const parkStopPlanning =
   .rove-roadmap-meta dd {
     font-size: 0.85rem;
     margin: 0.1rem 0 0;
+  }
+
+  .rove-reference-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .rove-reference-list a {
+    color: var(--color-accent, #167246);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .rove-detail-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-detail-page-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.9rem;
+  }
+
+  .rove-detail-page-grid h3 {
+    font-size: 1rem;
+    margin: 0 0 0.4rem;
+  }
+
+  .rove-detail-page-grid p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.88rem;
+    margin: 0 0 0.75rem;
   }
 
   .rove-conclusions {

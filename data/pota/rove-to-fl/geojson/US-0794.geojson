@@ -1,0 +1,50 @@
+{
+  "type": "Feature",
+  "properties": {
+    "reference": "US-0794",
+    "query": "Washington Monument, Washington, DC",
+    "source": "OpenStreetMap Nominatim",
+    "osm_type": "way",
+    "osm_id": 766761337,
+    "display_name": "Washington Monument, 2, 15th Street Northwest, Ward 2, Washington, District of Columbia, 20024, United States",
+    "category": "tourism",
+    "type": "attraction",
+    "importance": 0.5215312534069724,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -77.0353412,
+          38.8895517
+        ],
+        [
+          -77.0353406,
+          38.8893989
+        ],
+        [
+          -77.0351439,
+          38.8893984
+        ],
+        [
+          -77.0351441,
+          38.8894341
+        ],
+        [
+          -77.0351445,
+          38.8895166
+        ],
+        [
+          -77.0351447,
+          38.8895521
+        ],
+        [
+          -77.0353412,
+          38.8895517
+        ]
+      ]
+    ]
+  }
+}

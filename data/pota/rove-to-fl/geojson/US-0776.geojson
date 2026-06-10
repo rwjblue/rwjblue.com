@@ -1,0 +1,106 @@
+{
+  "type": "Feature",
+  "properties": {
+    "reference": "US-0776",
+    "query": "Franklin Delano Roosevelt Memorial, Washington, DC",
+    "source": "OpenStreetMap Nominatim",
+    "osm_type": "way",
+    "osm_id": 471998865,
+    "display_name": "Franklin Delano Roosevelt Memorial, 400, Ward 2, Washington, District of Columbia, 20002, United States",
+    "category": "boundary",
+    "type": "national_park",
+    "importance": 0.45093570615149653,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -77.0445556,
+          38.8838163
+        ],
+        [
+          -77.0441874,
+          38.8835566
+        ],
+        [
+          -77.0438316,
+          38.8834879
+        ],
+        [
+          -77.0432094,
+          38.8830539
+        ],
+        [
+          -77.043069,
+          38.8831652
+        ],
+        [
+          -77.0418886,
+          38.8823775
+        ],
+        [
+          -77.0411449,
+          38.8824379
+        ],
+        [
+          -77.0411794,
+          38.8825003
+        ],
+        [
+          -77.0412885,
+          38.8826978
+        ],
+        [
+          -77.0413362,
+          38.8827907
+        ],
+        [
+          -77.0414946,
+          38.883
+        ],
+        [
+          -77.04175,
+          38.8832051
+        ],
+        [
+          -77.0420829,
+          38.8833887
+        ],
+        [
+          -77.0425007,
+          38.8835797
+        ],
+        [
+          -77.0429241,
+          38.8837284
+        ],
+        [
+          -77.0433538,
+          38.8838743
+        ],
+        [
+          -77.0435984,
+          38.8839824
+        ],
+        [
+          -77.0436736,
+          38.8840246
+        ],
+        [
+          -77.0438532,
+          38.8841323
+        ],
+        [
+          -77.044017,
+          38.8842432
+        ],
+        [
+          -77.0445556,
+          38.8838163
+        ]
+      ]
+    ]
+  }
+}

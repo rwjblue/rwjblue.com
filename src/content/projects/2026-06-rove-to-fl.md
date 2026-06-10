@@ -49,8 +49,10 @@ Current working shape:
 - Saturday: start from Edison, activate NJ at Cheesequake, PA at John Heinz, DE
   at Fox Point, then arrive near Fort McHenry around 19:30 and start activating
   at 20:00 EDT so MD counts on the Sunday UTC day. Stay in Foggy Bottom.
-- Sunday: make DC / NoVA the large rove day, then finish at the booked
-  Fredericksburg hotel. Exact Cheetah/Ostrich route planning is next.
+- Sunday: make DC / NoVA the large rove day, using the Saturday Fort McHenry
+  activation as the first Sunday-UTC count. Follow the CWops/W8WZ Cheetah
+  pattern from LBJ through the National Mall, then decide whether Lincoln and
+  Mason Neck make the Ostrich stretch practical before the Fredericksburg hotel.
 - Monday: drive from Fredericksburg to the booked Florence, SC stop. NC and SC
   parks still need selection.
 - Tuesday: activate `US-0522` Savannah National Wildlife Refuge, then stay in or
@@ -99,34 +101,62 @@ Known anchor drive estimates:
 - Ocala -> Silver Springs State Park: 13m; Ocala -> Ocala National Forest: 40m.
 - Ocala -> John D. MacArthur Beach State Park -> Singer Island: 4h05m.
 
-Current best Sunday lead:
+Current Sunday DC rove model:
 
-- LBJ Memorial Grove / DC overlap: possible 7-fer from the exact position
-  described in the February 2026 CWops _Solid Copy_ article.
-- Dyke Marsh / Mount Vernon corridor: imported top-activator data shows a
-  7-reference cluster including `US-9961` Dyke Marsh Wildlife Reserve and
-  `US-9935` Virginia Bird & Wildlife State Trail. It overlaps heavily with the
-  LBJ trail entities, so the main question is whether it adds those two unique
-  entities cleanly.
-- Mason Neck State Park + Elizabeth Hartwell Mason Neck NWR: verified local
-  n-fer evidence in the imported top-activator data.
-- Prince William Forest Park: southbound add-on that keeps the day pointed
-  toward the Virginia overnight.
-- Rock Creek Park: good friend-meetup option, but not currently the
-  count-efficient anchor until its POTA reference/count value is verified.
+- Saturday evening: activate Fort McHenry at or after 20:00 EDT. Imported
+  top-activator evidence repeatedly shows `US-0928`, `US-4581`, `US-4567`, and
+  `US-4582` from that stop; exact public operating position still needs
+  verification.
+- Sunday morning: start with the LBJ Memorial Grove exact-position 7-fer from
+  the February 2026 CWops _Solid Copy_ article: `US-0784`, `US-9901`,
+  `US-4581`, `US-4567`, `US-0670`, `US-9898`, and `US-4564`. The article says
+  the marina parking lot / nearby picnic tables are a 4-fer fallback, while the
+  7-fer requires walking from the marina toward the LBJ stone monument, then
+  toward the Washington Monument, crossing the parkway, and setting up under a
+  tree between the parkway and the Potomac.
+- Cheetah baseline: after Fort and LBJ, follow the article route through FDR
+  (`US-0776` + `US-0655`), MLK (`US-0785` + `US-0655`), Korean War
+  (`US-0780` + `US-0655`), Constitution Gardens (`US-0653` + `US-0655`), and
+  Vietnam (`US-0793` + `US-0655`). That reaches 15 unique Sunday-UTC entities
+  if Fort and LBJ both verify.
+- Full article route: add WWII (`US-0796` + `US-0655`) and Washington Monument
+  (`US-0794` + `US-0655`) for a 17-entity buffer.
+- Ostrich stretch: add Lincoln (`US-0783` + `US-0655`) and Mason Neck State
+  Park / Elizabeth Hartwell Mason Neck NWR (`US-1308` + `US-0563`) to reach 20
+  unique entities. Dyke Marsh (`US-9961`, `US-9935`, plus several LBJ
+  duplicates) is a backup buffer, but it likely makes the day too long unless
+  pace and access are excellent.
 
-The conservative Sunday route is already a 10-ish entity candidate if the LBJ
-7-fer verifies. If Fort McHenry starts after 20:00 EDT Saturday, the Sunday UTC
-day can start with Maryland banked; because Fort McHenry and LBJ duplicate
-`US-4581` and `US-4567`, the useful Saturday adds are likely `US-0928` and
-possibly `US-4582`. With Saturday MD, verified LBJ, Mason Neck, and Prince
-William, the plan is about 12 unique entities. Dyke Marsh could push that toward
-14; Rock Creek is a stretch/social stop unless it proves count-useful.
+DC route timing checks so far:
+
+- Fort McHenry -> Foggy Bottom after the Saturday activation: 59m.
+- Foggy Bottom -> Columbia Island Marina / LBJ: 12m.
+- Columbia Island Marina / LBJ -> FDR Memorial: 10m.
+- FDR Memorial -> Washington Monument by foot through the Mall sequence: 21m.
+- Washington Monument -> Mason Neck State Park: 36m; Mason Neck ->
+  Fredericksburg: about 50m.
+- Washington Monument -> Dyke Marsh -> Mason Neck: about 52m total driving,
+  before any activation time.
+
+Downloaded / cached planning data:
+
+- `data/pota/rove-to-fl/dc-rove.json` now carries the detailed DC route model,
+  reference list, route legs, and verification notes.
+- `data/pota/rove-to-fl/cache/parks-US-DC.json` caches the DC POTA reference
+  list.
+- `data/pota/parks/cache/US-*.json` has individual metadata for the DC rove
+  references.
+- `data/pota/rove-to-fl/geojson/` has OpenStreetMap/Nominatim GeoJSON for the
+  main physical stops where available. Trail geometry remains lower-confidence
+  and still needs exact-position verification.
 
 Open verification items:
 
-- Build the exact Sunday DC Cheetah/Ostrich flow.
+- Confirm the exact LBJ 7-fer point against imagery or with a local activator.
+- Decide whether Sunday targets Cheetah-only, full W8WZ + Fort, or Ostrich via
+  Lincoln + Mason Neck.
 - Choose NC and SC parks for the Monday Fredericksburg -> Florence leg.
 - Verify exact Fox Point and Fort McHenry n-fer operating positions.
+- Check Mason Neck hours and restrictions before relying on it for Ostrich.
 - Confirm Savannah National Wildlife Refuge operating-position state credit.
 - Identify Tesla Supercharger pairings for Saturday and the southern hotel legs.

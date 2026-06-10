@@ -1,0 +1,353 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import dcRove from "../../../../data/pota/rove-to-fl/dc-rove.json";
+
+interface OperatingStop {
+  id: string;
+  timing?: string;
+  name: string;
+  parking?: string;
+  references: string[];
+  uniqueAddsIfFirst?: string[];
+  uniqueAddsAfterFort?: string[];
+  uniqueAddsAfterFortAndLbj?: string[];
+  uniqueAddsAfterFortLbjFdr?: string[];
+  uniqueAddsAfterPrior?: string[];
+  uniqueAddsAfterLbj?: string[];
+  confidence: string;
+}
+interface RouteModel {
+  name: string;
+  entityCount: number;
+  physicalStops: number;
+  references: string[];
+  driveAndWalkMinutes: number;
+  activationMinutesAt60Each: number;
+  totalLabel: string;
+  notes: string;
+}
+interface MappedLeg {
+  from: string;
+  to: string;
+  mode: string;
+  distance: string;
+  minutes: number;
+  notes?: string;
+}
+
+const operatingStops = dcRove.operatingStops as OperatingStop[];
+const routeModels = dcRove.routeModels as RouteModel[];
+const mappedLegs = dcRove.mappedLegs as MappedLeg[];
+const cheetahModel = routeModels.find((model) => model.name.includes("Cheetah"));
+const ostrichModel = routeModels.find((model) => model.name.includes("Ostrich stretch"));
+
+function formatMinutes(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return hours > 0 ? `${hours}h ${mins.toString().padStart(2, "0")}m` : `${mins}m`;
+}
+
+function potaUrl(reference: string) {
+  return `https://pota.app/#/park/${reference}`;
+}
+
+function uniqueAdds(stop: OperatingStop) {
+  return (
+    stop.uniqueAddsIfFirst ??
+    stop.uniqueAddsAfterFort ??
+    stop.uniqueAddsAfterFortAndLbj ??
+    stop.uniqueAddsAfterFortLbjFdr ??
+    stop.uniqueAddsAfterPrior ??
+    stop.uniqueAddsAfterLbj ??
+    []
+  );
+}
+---
+
+<BaseLayout
+  title="Sunday DC Rove / 2026 Rove to FL / N1RWJ"
+  description="Detailed DC and NoVA Cheetah/Ostrich POTA rove plan for the 2026 Rhode Island to Florida trip."
+  canonicalPath="/projects/2026-06-rove-to-fl/sunday/"
+>
+  <section class="pota-tracker-hero" aria-labelledby="page-title">
+    <div>
+      <p class="eyebrow">Project / POTA / Sunday</p>
+      <h1 id="page-title">Sunday DC / NoVA rove</h1>
+      <p class="lede strong">
+        Fort McHenry opens the Sunday UTC day Saturday evening; DC density
+        carries the Cheetah baseline, with Mason Neck as the clean Ostrich stretch.
+      </p>
+      <p class="lede">
+        This route is based on the CWops/W8WZ DC article, local POTA metadata,
+        imported n-fer evidence, GeoJSON checks, and route estimates captured on
+        June 10, 2026.
+      </p>
+    </div>
+
+    <aside class="pota-tracker-panel rove-summary-panel">
+      <nav class="rove-subnav" aria-label="Rove planning pages">
+        <a href="/projects/2026-06-rove-to-fl/">Overview</a>
+        <a href="/projects/2026-06-rove-to-fl/saturday/">Saturday rove</a>
+        <a href="/projects/2026-06-rove-to-fl/sunday/">Sunday DC rove</a>
+      </nav>
+      <dl class="rove-summary-grid">
+        <div>
+          <dt>UTC day</dt>
+          <dd>{dcRove.utcDay}</dd>
+        </div>
+        {cheetahModel && (
+          <div>
+            <dt>Cheetah</dt>
+            <dd>{cheetahModel.entityCount} entities</dd>
+          </div>
+        )}
+        {ostrichModel && (
+          <div>
+            <dt>Ostrich</dt>
+            <dd>{ostrichModel.entityCount} entities</dd>
+          </div>
+        )}
+        <div>
+          <dt>Status</dt>
+          <dd>{dcRove.status}</dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="models-title">
+    <div class="section-heading">
+      <p class="section-label">Count models</p>
+      <h2 id="models-title">Cheetah and Ostrich budget</h2>
+    </div>
+
+    <div class="rove-model-grid">
+      {routeModels.map((model) => (
+        <article>
+          <h3>{model.name}</h3>
+          <dl>
+            <div>
+              <dt>Entities</dt>
+              <dd>{model.entityCount}</dd>
+            </div>
+            <div>
+              <dt>Stops</dt>
+              <dd>{model.physicalStops}</dd>
+            </div>
+            <div>
+              <dt>Move time</dt>
+              <dd>{formatMinutes(model.driveAndWalkMinutes)}</dd>
+            </div>
+            <div>
+              <dt>Total</dt>
+              <dd>{model.totalLabel}</dd>
+            </div>
+          </dl>
+          <p>{model.notes}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="stops-title">
+    <div class="section-heading">
+      <p class="section-label">Operating sequence</p>
+      <h2 id="stops-title">Stop list</h2>
+    </div>
+
+    <ol class="rove-stop-list">
+      {operatingStops.map((stop, index) => (
+        <li>
+          <span>{index === 0 ? "Saturday evening" : `Stop ${index + 1}`}</span>
+          <h3>{stop.name}</h3>
+          {stop.timing && <p>{stop.timing}</p>}
+          {stop.parking && <p>Parking: {stop.parking}</p>}
+          <p>{stop.confidence}</p>
+          <div class="rove-reference-block">
+            <strong>References</strong>
+            <p class="rove-reference-list">
+              {stop.references.map((reference) => (
+                <a href={potaUrl(reference)} target="_blank" rel="noreferrer">{reference}</a>
+              ))}
+            </p>
+          </div>
+          {uniqueAdds(stop).length > 0 && (
+            <div class="rove-reference-block">
+              <strong>Likely unique adds at this point</strong>
+              <p class="rove-reference-list">
+                {uniqueAdds(stop).map((reference) => (
+                  <a href={potaUrl(reference)} target="_blank" rel="noreferrer">{reference}</a>
+                ))}
+              </p>
+            </div>
+          )}
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="legs-title">
+    <div class="section-heading">
+      <p class="section-label">Movement</p>
+      <h2 id="legs-title">Mapped drive and walk legs</h2>
+    </div>
+
+    <div class="rove-leg-grid">
+      {mappedLegs.map((leg) => (
+        <article>
+          <span>{leg.mode}</span>
+          <strong>{leg.from} -> {leg.to}</strong>
+          <dl>
+            <div>
+              <dt>Time</dt>
+              <dd>{formatMinutes(leg.minutes)}</dd>
+            </div>
+            <div>
+              <dt>Distance</dt>
+              <dd>{leg.distance}</dd>
+            </div>
+          </dl>
+          {leg.notes && <p>{leg.notes}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="verification-title">
+    <div class="section-heading">
+      <p class="section-label">Before relying on the count</p>
+      <h2 id="verification-title">Open verification</h2>
+    </div>
+
+    <ul class="rove-check-list">
+      {dcRove.openVerification.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .rove-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .rove-subnav a {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 4px;
+    color: var(--color-accent, #167246);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.35rem 0.55rem;
+    text-decoration: none;
+  }
+
+  .rove-summary-panel {
+    align-self: start;
+  }
+
+  .rove-summary-grid,
+  .rove-model-grid,
+  .rove-leg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .rove-summary-grid div,
+  .rove-model-grid article,
+  .rove-stop-list li,
+  .rove-leg-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-summary-grid dt,
+  .rove-model-grid dt,
+  .rove-leg-grid dt,
+  .rove-stop-list > li > span,
+  .rove-leg-grid span {
+    color: var(--color-text-muted, #666);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-summary-grid dd,
+  .rove-model-grid dd,
+  .rove-leg-grid dd {
+    font-size: 0.85rem;
+    margin: 0.1rem 0 0;
+  }
+
+  .rove-model-grid h3,
+  .rove-stop-list h3 {
+    font-size: 1rem;
+    margin: 0.25rem 0 0.45rem;
+  }
+
+  .rove-model-grid dl,
+  .rove-leg-grid dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    margin: 0.6rem 0 0;
+  }
+
+  .rove-model-grid p,
+  .rove-stop-list p,
+  .rove-leg-grid p,
+  .rove-check-list {
+    color: var(--color-text-muted, #666);
+    font-size: 0.86rem;
+  }
+
+  .rove-stop-list {
+    display: grid;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rove-reference-block {
+    margin-top: 0.55rem;
+  }
+
+  .rove-reference-block strong {
+    display: block;
+    font-size: 0.8rem;
+  }
+
+  .rove-reference-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.25rem 0 0;
+  }
+
+  .rove-reference-list a {
+    color: var(--color-accent, #167246);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .rove-leg-grid strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+  }
+
+  .rove-check-list {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .rove-check-list li + li {
+    margin-top: 0.35rem;
+  }
+</style>

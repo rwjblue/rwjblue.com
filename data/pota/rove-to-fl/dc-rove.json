@@ -1,0 +1,575 @@
+{
+  "updated": "2026-06-10",
+  "status": "working DC rove plan",
+  "timezone": "America/New_York",
+  "utcDay": "Sunday UTC day begins Saturday 2026-06-20 at 20:00 EDT",
+  "sources": [
+    {
+      "label": "CWops Solid Copy No. 193, February 2026, W8WZ “Activating DC”",
+      "url": "https://cwops.org/wp-content/uploads/2026/02/Solid-Copy_2026_February_-FINAL.pdf",
+      "notes": "Article describes the LBJ 7-fer, the 4-fer fallback at Columbia Island Marina/picnic tables, and the 15-park Cheetah route completed on 2025-12-22."
+    },
+    {
+      "label": "POTA API park metadata",
+      "files": [
+        "data/pota/rove-to-fl/cache/parks-US-DC.json",
+        "data/pota/parks/cache/US-0784.json",
+        "data/pota/parks/cache/US-0928.json"
+      ]
+    },
+    {
+      "label": "OpenStreetMap/Nominatim GeoJSON attempts",
+      "file": "data/pota/rove-to-fl/geojson/manifest.json",
+      "notes": "Physical park polygons were found for the main Mall/DC/VA stops. Trail GeoJSON is incomplete or low-confidence and still needs exact-position verification."
+    },
+    {
+      "label": "Imported n-fer evidence from top activators",
+      "file": "data/pota/rove-to-fl/external/nfer_from_top_activators.json"
+    }
+  ],
+  "countingNotes": [
+    "Count unique POTA entities on the Sunday UTC day, not local calendar day.",
+    "Fort McHenry at/after 20:00 EDT Saturday is part of the Sunday UTC rove count.",
+    "Trail references require operating within the POTA trail rule and on public land; imported n-fer data is evidence, not boundary proof.",
+    "The LBJ exact 7-fer operating point is approximate until confirmed on imagery/GPS: from Columbia Island Marina parking, walk to the LBJ stone monument, continue toward the Washington Monument, cross the parkway, and set up under a tree between the parkway and the Potomac as described by W8WZ."
+  ],
+  "referenceCatalog": [
+    {
+      "reference": "US-0928",
+      "name": "Fort McHenry National Monument",
+      "jurisdiction": "MD",
+      "role": "Saturday 20:00 EDT anchor"
+    },
+    {
+      "reference": "US-4582",
+      "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "jurisdiction": "multi-state trail",
+      "role": "Fort McHenry likely unique add; verify exact position"
+    },
+    {
+      "reference": "US-4581",
+      "name": "Star-Spangled Banner National Historic Trail",
+      "jurisdiction": "multi-state trail",
+      "role": "Fort McHenry and LBJ overlap; duplicate after first logged"
+    },
+    {
+      "reference": "US-4567",
+      "name": "Captain John Smith Chesapeake National Historic Trail",
+      "jurisdiction": "multi-state trail",
+      "role": "Fort McHenry and LBJ overlap; duplicate after first logged"
+    },
+    {
+      "reference": "US-0784",
+      "name": "Lyndon Baines Johnson Memorial Grove on the Potomac",
+      "jurisdiction": "DC",
+      "role": "LBJ 7-fer physical anchor"
+    },
+    {
+      "reference": "US-9901",
+      "name": "Civil War Defenses of Washington National Historic Trail",
+      "jurisdiction": "DC/MD/VA trail",
+      "role": "LBJ 7-fer"
+    },
+    {
+      "reference": "US-0670",
+      "name": "George Washington Memorial Parkway",
+      "jurisdiction": "DC/MD/VA",
+      "role": "LBJ 7-fer"
+    },
+    {
+      "reference": "US-9898",
+      "name": "Mount Vernon National Historic Trail",
+      "jurisdiction": "DC/VA trail",
+      "role": "LBJ 7-fer"
+    },
+    {
+      "reference": "US-4564",
+      "name": "Potomac Heritage Trail National Scenic Trail",
+      "jurisdiction": "DC/MD/PA/VA trail",
+      "role": "LBJ 7-fer"
+    },
+    {
+      "reference": "US-0776",
+      "name": "Franklin Delano Roosevelt National Memorial",
+      "jurisdiction": "DC",
+      "role": "W8WZ Cheetah stop; 2-fer with National Mall"
+    },
+    {
+      "reference": "US-0655",
+      "name": "National Mall Park",
+      "jurisdiction": "DC",
+      "role": "2-fer overlay for Mall memorial stops"
+    },
+    {
+      "reference": "US-0785",
+      "name": "Martin Luther King Jr. National Memorial",
+      "jurisdiction": "DC",
+      "role": "W8WZ Cheetah stop"
+    },
+    {
+      "reference": "US-0780",
+      "name": "Korean War Veterans National Memorial",
+      "jurisdiction": "DC",
+      "role": "W8WZ Cheetah stop"
+    },
+    {
+      "reference": "US-0653",
+      "name": "Constitution Gardens National Park",
+      "jurisdiction": "DC",
+      "role": "W8WZ Cheetah stop"
+    },
+    {
+      "reference": "US-0793",
+      "name": "Vietnam Veterans National Memorial",
+      "jurisdiction": "DC",
+      "role": "W8WZ Cheetah stop"
+    },
+    {
+      "reference": "US-0796",
+      "name": "World War II National Memorial",
+      "jurisdiction": "DC",
+      "role": "W8WZ full route stop"
+    },
+    {
+      "reference": "US-0794",
+      "name": "Washington Monument National Memorial",
+      "jurisdiction": "DC",
+      "role": "W8WZ full route stop"
+    },
+    {
+      "reference": "US-0783",
+      "name": "Lincoln National Memorial",
+      "jurisdiction": "DC",
+      "role": "nearby Ostrich add-on; W8WZ skipped due crowd"
+    },
+    {
+      "reference": "US-1308",
+      "name": "Mason Neck State Park",
+      "jurisdiction": "VA",
+      "role": "southbound 2-fer add-on"
+    },
+    {
+      "reference": "US-0563",
+      "name": "Elizabeth Hartwell Mason Neck National Wildlife Refuge",
+      "jurisdiction": "VA",
+      "role": "southbound 2-fer add-on; antenna restrictions"
+    },
+    {
+      "reference": "US-9961",
+      "name": "Dyke Marsh Wildlife Reserve",
+      "jurisdiction": "VA",
+      "role": "possible 7-reference cluster but mostly duplicates LBJ"
+    },
+    {
+      "reference": "US-9935",
+      "name": "Virginia Bird & Wildlife State Trail",
+      "jurisdiction": "VA",
+      "role": "possible Dyke Marsh unique add"
+    }
+  ],
+  "operatingStops": [
+    {
+      "id": "fort-mchenry-saturday",
+      "timing": "Saturday 2026-06-20, arrive ~19:30 EDT, activate at/after 20:00 EDT",
+      "name": "Fort McHenry National Monument",
+      "latitude": 39.2641007,
+      "longitude": -76.5806414,
+      "references": [
+        "US-0928",
+        "US-4581",
+        "US-4567",
+        "US-4582"
+      ],
+      "uniqueAddsIfFirst": [
+        "US-0928",
+        "US-4581",
+        "US-4567",
+        "US-4582"
+      ],
+      "evidence": "Repeated imported top-activator records from KB3WAV and KC3RW show US-0928 + US-4581 + US-4567 + US-4582.",
+      "confidence": "strong evidence; exact public operating position still needs confirmation"
+    },
+    {
+      "id": "lbj-7fer",
+      "timing": "Sunday morning first stop",
+      "name": "LBJ Memorial Grove exact 7-fer position",
+      "parking": "Columbia Island Marina parking lot",
+      "parkingLatitude": 38.875198,
+      "parkingLongitude": -77.048943,
+      "latitude": 38.8789,
+      "longitude": -77.0492,
+      "references": [
+        "US-4581",
+        "US-9901",
+        "US-4567",
+        "US-0670",
+        "US-0784",
+        "US-9898",
+        "US-4564"
+      ],
+      "uniqueAddsAfterFort": [
+        "US-9901",
+        "US-0670",
+        "US-0784",
+        "US-9898",
+        "US-4564"
+      ],
+      "fallbackReferencesFromParkingOrPicnicTables": [
+        "US-0784",
+        "US-0670",
+        "US-9898",
+        "US-4564"
+      ],
+      "evidence": "CWops/W8WZ article gives walking instructions and reference list; POTA API comments for trails emphasize exact-location verification.",
+      "confidence": "high if exact tree/overlap point is found; fallback is 4-fer"
+    },
+    {
+      "id": "fdr",
+      "name": "Franklin Delano Roosevelt Memorial",
+      "latitude": 38.8834579,
+      "longitude": -77.0429536,
+      "references": [
+        "US-0776",
+        "US-0655"
+      ],
+      "uniqueAddsAfterFortAndLbj": [
+        "US-0776",
+        "US-0655"
+      ],
+      "confidence": "article-backed"
+    },
+    {
+      "id": "mlk",
+      "name": "Martin Luther King Jr. Memorial",
+      "latitude": 38.8862795,
+      "longitude": -77.0442553,
+      "references": [
+        "US-0785",
+        "US-0655"
+      ],
+      "uniqueAddsAfterFortLbjFdr": [
+        "US-0785"
+      ],
+      "confidence": "article-backed"
+    },
+    {
+      "id": "korean",
+      "name": "Korean War Veterans Memorial",
+      "latitude": 38.8878422,
+      "longitude": -77.0477385,
+      "references": [
+        "US-0780",
+        "US-0655"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0780"
+      ],
+      "confidence": "article-backed"
+    },
+    {
+      "id": "constitution-gardens",
+      "name": "Constitution Gardens",
+      "latitude": 38.8909409,
+      "longitude": -77.0445292,
+      "references": [
+        "US-0653",
+        "US-0655"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0653"
+      ],
+      "confidence": "article-backed"
+    },
+    {
+      "id": "vietnam",
+      "name": "Vietnam Veterans Memorial",
+      "latitude": 38.8912933,
+      "longitude": -77.0477132,
+      "references": [
+        "US-0793",
+        "US-0655"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0793"
+      ],
+      "confidence": "article-backed; Cheetah threshold reached here if Fort and LBJ verify"
+    },
+    {
+      "id": "wwii",
+      "name": "World War II Memorial",
+      "latitude": 38.888967,
+      "longitude": -77.0405119,
+      "references": [
+        "US-0796",
+        "US-0655"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0796"
+      ],
+      "confidence": "article-backed buffer beyond Cheetah"
+    },
+    {
+      "id": "washington-monument",
+      "name": "Washington Monument",
+      "latitude": 38.8894838,
+      "longitude": -77.0352791,
+      "references": [
+        "US-0794",
+        "US-0655"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0794"
+      ],
+      "confidence": "article-backed buffer beyond Cheetah"
+    },
+    {
+      "id": "lincoln",
+      "name": "Lincoln Memorial",
+      "latitude": 38.8893,
+      "longitude": -77.0502,
+      "references": [
+        "US-0783",
+        "US-0655"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0783"
+      ],
+      "confidence": "good Ostrich add-on but crowd/bench availability risk; W8WZ skipped it"
+    },
+    {
+      "id": "mason-neck",
+      "name": "Mason Neck State Park / Elizabeth Hartwell Mason Neck NWR",
+      "latitude": 38.6465022,
+      "longitude": -77.1861893,
+      "references": [
+        "US-1308",
+        "US-0563"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-1308",
+        "US-0563"
+      ],
+      "confidence": "imported n-fer evidence; verify refuge restrictions and park hours"
+    },
+    {
+      "id": "dyke-marsh",
+      "name": "Dyke Marsh Wildlife Preserve",
+      "latitude": 38.7661394,
+      "longitude": -77.0492459,
+      "references": [
+        "US-9961",
+        "US-9935",
+        "US-9898",
+        "US-4581",
+        "US-4567",
+        "US-4564",
+        "US-0670"
+      ],
+      "uniqueAddsAfterLbj": [
+        "US-9961",
+        "US-9935"
+      ],
+      "confidence": "imported K4NYM n-fer record; exact public position needs verification"
+    }
+  ],
+  "routeModels": [
+    {
+      "name": "Cheetah baseline: Fort + LBJ + Mall through Vietnam",
+      "entityCount": 15,
+      "physicalStops": 7,
+      "references": [
+        "US-0928",
+        "US-4581",
+        "US-4567",
+        "US-4582",
+        "US-0784",
+        "US-9901",
+        "US-0670",
+        "US-9898",
+        "US-4564",
+        "US-0776",
+        "US-0655",
+        "US-0785",
+        "US-0780",
+        "US-0653",
+        "US-0793"
+      ],
+      "driveAndWalkMinutes": 102,
+      "activationMinutesAt60Each": 420,
+      "totalLabel": "about 8h 45m split across Saturday evening and Sunday, before food/parking variance",
+      "notes": "Cheetah threshold is reached at Vietnam if Fort McHenry 4-fer and LBJ 7-fer verify."
+    },
+    {
+      "name": "Full W8WZ route plus Fort McHenry",
+      "entityCount": 17,
+      "physicalStops": 9,
+      "references": [
+        "US-0928",
+        "US-4581",
+        "US-4567",
+        "US-4582",
+        "US-0784",
+        "US-9901",
+        "US-0670",
+        "US-9898",
+        "US-4564",
+        "US-0776",
+        "US-0655",
+        "US-0785",
+        "US-0780",
+        "US-0653",
+        "US-0793",
+        "US-0796",
+        "US-0794"
+      ],
+      "driveAndWalkMinutes": 102,
+      "activationMinutesAt60Each": 540,
+      "totalLabel": "about 10h 45m split across Saturday evening and Sunday",
+      "notes": "This mirrors the article sequence and leaves room for one southbound add-on if the day is moving well."
+    },
+    {
+      "name": "Ostrich stretch: full route + Lincoln + Mason Neck",
+      "entityCount": 20,
+      "physicalStops": 11,
+      "references": [
+        "US-0928",
+        "US-4581",
+        "US-4567",
+        "US-4582",
+        "US-0784",
+        "US-9901",
+        "US-0670",
+        "US-9898",
+        "US-4564",
+        "US-0776",
+        "US-0655",
+        "US-0785",
+        "US-0780",
+        "US-0653",
+        "US-0793",
+        "US-0796",
+        "US-0794",
+        "US-0783",
+        "US-1308",
+        "US-0563"
+      ],
+      "driveAndWalkMinutes": 188,
+      "activationMinutesAt60Each": 660,
+      "totalLabel": "about 14h 10m split across Saturday evening and Sunday; stretch but plausible with disciplined 45-60 minute stops",
+      "notes": "Mason Neck should be before dusk; this model may need a morning start and no long social pause."
+    },
+    {
+      "name": "Ostrich high-confidence buffer: add Dyke Marsh before Mason Neck",
+      "entityCount": 22,
+      "physicalStops": 12,
+      "references": [
+        "US-0928",
+        "US-4581",
+        "US-4567",
+        "US-4582",
+        "US-0784",
+        "US-9901",
+        "US-0670",
+        "US-9898",
+        "US-4564",
+        "US-0776",
+        "US-0655",
+        "US-0785",
+        "US-0780",
+        "US-0653",
+        "US-0793",
+        "US-0796",
+        "US-0794",
+        "US-0783",
+        "US-9961",
+        "US-9935",
+        "US-1308",
+        "US-0563"
+      ],
+      "driveAndWalkMinutes": 220,
+      "activationMinutesAt60Each": 720,
+      "totalLabel": "about 15h 40m split across Saturday evening and Sunday; likely too heavy unless using shorter activations",
+      "notes": "Dyke Marsh adds margin but also pushes Mason Neck later; keep as backup unless exact access and pace are excellent."
+    }
+  ],
+  "mappedLegs": [
+    {
+      "from": "Fort McHenry",
+      "to": "Foggy Bottom hotel",
+      "mode": "drive",
+      "distance": "74.6 km",
+      "minutes": 59,
+      "notes": "Saturday after the 20:00 EDT activation."
+    },
+    {
+      "from": "Foggy Bottom",
+      "to": "Columbia Island Marina / LBJ",
+      "mode": "drive",
+      "distance": "7.0 km",
+      "minutes": 12
+    },
+    {
+      "from": "Columbia Island Marina / LBJ",
+      "to": "FDR Memorial",
+      "mode": "drive",
+      "distance": "4.5 km",
+      "minutes": 10
+    },
+    {
+      "from": "FDR Memorial",
+      "to": "Washington Monument via Mall memorial sequence",
+      "mode": "walk",
+      "distance": "1.5 km",
+      "minutes": 21
+    },
+    {
+      "from": "Washington Monument",
+      "to": "Dyke Marsh",
+      "mode": "drive",
+      "distance": "15.3 km",
+      "minutes": 20
+    },
+    {
+      "from": "Dyke Marsh",
+      "to": "Mason Neck State Park",
+      "mode": "drive",
+      "distance": "27.3 km",
+      "minutes": 32
+    },
+    {
+      "from": "Washington Monument",
+      "to": "Mason Neck State Park direct",
+      "mode": "drive",
+      "distance": "41.0 km",
+      "minutes": 36
+    },
+    {
+      "from": "Mason Neck State Park",
+      "to": "Fredericksburg",
+      "mode": "drive",
+      "distance": "64.0 km",
+      "minutes": 50
+    },
+    {
+      "from": "Washington Monument",
+      "to": "Prince William Forest Park",
+      "mode": "drive",
+      "distance": "50.3 km",
+      "minutes": 47
+    },
+    {
+      "from": "Prince William Forest Park",
+      "to": "Fredericksburg",
+      "mode": "drive",
+      "distance": "34.5 km",
+      "minutes": 25
+    }
+  ],
+  "openVerification": [
+    "Confirm the exact LBJ 7-fer tree/overlap point against imagery or with a local activator before relying on all seven references.",
+    "Confirm Fort McHenry exact position for US-4582 in addition to US-0928, US-4581, and US-4567.",
+    "Confirm Mason Neck NWR operating restrictions: POTA cache says free-standing antennas only, no vegetation attachment, no off-trail operating, and no tables in parking areas.",
+    "Check closing/dusk times for Mason Neck if using it as the Ostrich add-on.",
+    "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure."
+  ]
+}
