@@ -144,7 +144,7 @@
         {
           "date": "2026-06-22",
           "area": "Fredericksburg, VA to Florence, SC",
-          "focus": "Workday southbound push; NC and SC parks still need final selection.",
+          "focus": "Workday southbound push; NC park still needs final selection.",
           "jurisdictions": [
             "US-VA",
             "US-NC",
@@ -155,17 +155,16 @@
         {
           "date": "2026-06-23",
           "area": "Florence, SC to Pooler / Savannah, GA",
-          "focus": "Activate Savannah National Wildlife Refuge and overnight in or near Pooler.",
+          "focus": "Activate Savannah National Wildlife Refuge for South Carolina and overnight in or near Pooler.",
           "jurisdictions": [
-            "US-SC",
-            "US-GA"
+            "US-SC"
           ],
-          "notes": "Savannah NWR is listed for both SC and GA in local POTA data; exact operating-position credit still needs verification."
+          "notes": "Treat Savannah NWR as the South Carolina activation before crossing into the Pooler / Savannah hotel area."
         },
         {
           "date": "2026-06-24",
           "area": "Pooler, GA to Ocala, FL",
-          "focus": "Drive to Ocala and stay there Wednesday night.",
+          "focus": "Select a Georgia morning park, then drive to Ocala and stay there Wednesday night.",
           "jurisdictions": [
             "US-GA",
             "US-FL"
@@ -889,7 +888,7 @@
           {
             "reference": "US-0522",
             "name": "Savannah National Wildlife Refuge",
-            "role": "selected GA/SC-area activation; exact state credit to verify",
+            "role": "selected South Carolina activation",
             "latitude": 32.1655,
             "longitude": -81.1514,
             "priority": "target"
@@ -1038,7 +1037,7 @@
         "2026-06-25 Ocala / local Florida activation",
         "2026-06-26 Singer Island / Riviera Beach arrival"
       ],
-      "summary": "Camping has been removed. The remaining open park decisions are the exact Sunday DC rove flow and NC/SC stops.",
+      "summary": "Camping has been removed. The remaining open park decisions are the exact Sunday DC rove flow, the NC stop, and the GA morning stop.",
       "nights": [
         {
           "date": "2026-06-19",
@@ -1077,7 +1076,7 @@
           "date": "2026-06-22",
           "preferredType": "hotel",
           "area": "Florence, SC",
-          "why": "Fixed Monday anchor. NC/SC stops still need to be inserted.",
+          "why": "Fixed Monday anchor. The NC stop still needs to be inserted.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-NC",
@@ -1160,10 +1159,9 @@
         "overnightType": "hotel",
         "startArea": "Florence, SC",
         "endArea": "Pooler / Savannah, GA",
-        "focus": "Activate Savannah National Wildlife Refuge, then overnight near Pooler.",
+        "focus": "Activate Savannah National Wildlife Refuge for South Carolina, then overnight near Pooler.",
         "jurisdictions": [
-          "US-SC",
-          "US-GA"
+          "US-SC"
         ],
         "roughMiles": 184,
         "roughDriveHours": 2.8,
@@ -1171,14 +1169,14 @@
         "minimumEntities": 1,
         "parkStopHours": 2,
         "roughTotalHours": 5.3,
-        "notes": "Savannah NWR is listed locally under both SC and GA; state-credit details need confirmation."
+        "notes": "Treat Savannah NWR as the South Carolina activation before crossing into the Pooler / Savannah hotel area."
       },
       {
         "date": "2026-06-24",
         "overnightType": "home",
         "startArea": "Pooler / Savannah, GA",
         "endArea": "Ocala, FL",
-        "focus": "Drive to Ocala and stay there Wednesday night.",
+        "focus": "Select a Georgia morning park, then drive to Ocala and stay there Wednesday night.",
         "jurisdictions": [
           "US-GA",
           "US-FL"
@@ -1226,7 +1224,7 @@
         "notes": "John D. MacArthur is about 9 minutes from Singer Island after activation."
       }
     ],
-    "risk": "Remaining planning risk is now concentrated in the exact Sunday DC rove flow plus final NC/SC park selection."
+    "risk": "Remaining planning risk is now concentrated in the exact Sunday DC rove flow plus final NC and GA park selection."
   },
   "days": [
     {
@@ -1325,7 +1323,7 @@
         }
       },
       "parkTargets": [],
-      "notes": "Workday southbound push; NC/SC parks still need routing.",
+      "notes": "Workday southbound push; NC park still needs routing.",
       "approxDriveMiles": 350
     },
     {
@@ -1348,7 +1346,7 @@
       "parkTargets": [
         "US-0522"
       ],
-      "notes": "Savannah National Wildlife Refuge, then Pooler-area hotel.",
+      "notes": "Savannah National Wildlife Refuge for South Carolina, then Pooler-area hotel.",
       "approxDriveMiles": 184
     },
     {
@@ -1519,7 +1517,7 @@
         "distance": "564.7 km",
         "estimatedDriveMinutes": 312,
         "estimatedDriveLabel": "5h 12m",
-        "notes": "Known Monday hotel-to-hotel anchor; NC/SC activation stops still need to be inserted."
+        "notes": "Known Monday hotel-to-hotel anchor; NC activation stop still needs to be inserted."
       },
       {
         "date": "2026-06-23",
@@ -1528,7 +1526,7 @@
         "distance": "273.2 km",
         "estimatedDriveMinutes": 149,
         "estimatedDriveLabel": "2h 29m",
-        "notes": "Tuesday selected GA/SC-area activation leg."
+        "notes": "Tuesday selected South Carolina activation leg."
       },
       {
         "date": "2026-06-23",
@@ -1735,11 +1733,11 @@
       {
         "reference": "US-0522",
         "name": "Savannah National Wildlife Refuge",
-        "role": "selected Savannah / Pooler activation",
+        "role": "selected South Carolina activation before Pooler",
         "latitude": 32.1655,
         "longitude": -81.1514,
         "priority": "target",
-        "state": "US-GA",
+        "state": "US-SC",
         "goal": "Tuesday"
       },
       {
