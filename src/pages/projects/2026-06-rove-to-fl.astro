@@ -15,20 +15,6 @@ interface RestOfTripDraft {
   overnightStrategy?: OvernightStrategy;
   risk?: string;
 }
-interface DriveEstimateLeg {
-  date: string;
-  from: string;
-  to: string;
-  distance: string;
-  estimatedDriveMinutes: number;
-  estimatedDriveLabel: string;
-  notes?: string;
-}
-interface DriveEstimates {
-  source: string;
-  updated: string;
-  legs: DriveEstimateLeg[];
-}
 interface MapOverlayPoint {
   id?: string;
   label?: string;
@@ -55,6 +41,7 @@ interface OverviewStop {
   driveFromPrior?: string;
   expectedStay: string;
   references?: string[];
+  detailUrl?: string;
   status?: "set" | "placeholder";
   notes: string;
 }
@@ -146,11 +133,6 @@ const restOfTripDraft =
   (itinerary as { restOfTripDraft?: unknown }).restOfTripDraft
     ? ((itinerary as { restOfTripDraft: RestOfTripDraft }).restOfTripDraft)
     : null;
-const driveEstimates =
-  typeof (itinerary as { driveEstimates?: unknown }).driveEstimates === "object" &&
-  (itinerary as { driveEstimates?: unknown }).driveEstimates
-    ? ((itinerary as { driveEstimates: DriveEstimates }).driveEstimates)
-    : null;
 const overnightStrategy = restOfTripDraft?.overnightStrategy ?? null;
 const parkStopPlanning =
   typeof tripConstraints.parkStopPlanning === "object" && tripConstraints.parkStopPlanning
@@ -172,7 +154,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-19",
     destination: "JL Curran State Park, RI",
     type: "POTA",
-    driveFromPrior: "22m from Hope",
+    driveFromPrior: "22m / 15.6 mi from Hope",
     expectedStay: "~1h activation",
     references: ["US-6992"],
     notes: "Default near-home Rhode Island activation before leaving the state.",
@@ -181,7 +163,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-19",
     destination: "Silver Sands State Park, CT",
     type: "POTA",
-    driveFromPrior: "1h 44m from JL Curran",
+    driveFromPrior: "1h 44m / 104.5 mi from JL Curran",
     expectedStay: "~1h activation",
     references: ["US-1716"],
     notes: "Friday morning Connecticut activation before the lower-Hudson work position.",
@@ -190,7 +172,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-19",
     destination: "Stamford / White Plains work position",
     type: "Work block",
-    driveFromPrior: "35m from Silver Sands",
+    driveFromPrior: "35m / 29.8 mi from Silver Sands",
     expectedStay: "13:00-17:00 work window",
     notes: "Position near the NY activation while avoiding the thickest NYC-area traffic.",
   },
@@ -198,7 +180,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-19",
     destination: "Tallman Mountain State Park, NY",
     type: "POTA",
-    driveFromPrior: "33m from Stamford",
+    driveFromPrior: "33m / 29.5 mi from Stamford",
     expectedStay: "~1h activation",
     references: ["US-2149"],
     notes: "New York activation after work; start promptly because the park is dawn-to-dusk.",
@@ -207,7 +189,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-19",
     destination: "Edison, NJ hotel",
     type: "Hotel",
-    driveFromPrior: "1h 06m from Tallman",
+    driveFromPrior: "1h 06m / 53.9 mi from Tallman",
     expectedStay: "Friday overnight",
     notes: "Booked Friday anchor close to Cheesequake, with good Tesla Supercharger coverage nearby.",
   },
@@ -215,7 +197,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-20",
     destination: "Cheesequake State Park, NJ",
     type: "POTA",
-    driveFromPrior: "21m from Edison",
+    driveFromPrior: "21m / 15.0 mi from Edison",
     expectedStay: "~1h activation",
     references: ["US-1611"],
     notes: "Saturday morning New Jersey activation.",
@@ -224,7 +206,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-20",
     destination: "John Heinz National Wildlife Refuge, PA",
     type: "POTA",
-    driveFromPrior: "1h 24m from Cheesequake",
+    driveFromPrior: "1h 24m / 88.2 mi from Cheesequake",
     expectedStay: "~1h activation",
     references: ["US-0512"],
     notes: "Selected Pennsylvania branch; trails are sunrise-to-sundown.",
@@ -233,7 +215,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-20",
     destination: "Fox Point State Park, DE",
     type: "POTA",
-    driveFromPrior: "25m from John Heinz",
+    driveFromPrior: "25m / 20.9 mi from John Heinz",
     expectedStay: "~1h activation",
     references: ["US-1738", "US-9878"],
     notes: "Delaware activation; Northern Delaware Greenway overlap still needs exact-position verification.",
@@ -242,7 +224,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-20",
     destination: "Fort McHenry, MD",
     type: "POTA",
-    driveFromPrior: "1h 14m from Fox Point",
+    driveFromPrior: "1h 14m / 75.4 mi from Fox Point",
     expectedStay: "Arrive ~19:30; activate after 20:00",
     references: ["US-0928", "US-4581", "US-4567", "US-4582"],
     notes: "Maryland activation intentionally counts on the Sunday UTC rove day.",
@@ -251,7 +233,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-20",
     destination: "Foggy Bottom, DC hotel",
     type: "Hotel",
-    driveFromPrior: "1h 14m from Fort McHenry",
+    driveFromPrior: "1h 14m / 46.4 mi from Fort McHenry",
     expectedStay: "Saturday overnight",
     notes: "Fixed DC anchor for the Sunday rove.",
   },
@@ -261,7 +243,7 @@ const overviewStops: OverviewStop[] = [
     type: "Detailed rove",
     driveFromPrior: "Starts from Foggy Bottom",
     expectedStay: "Cheetah baseline ~8h45; Ostrich stretch ~14h10",
-    references: ["US-0784", "US-9901", "US-0670", "US-9898", "US-4564", "US-0776", "US-0655"],
+    detailUrl: "/projects/2026-06-rove-to-fl/sunday/",
     notes: "Detailed stop order lives on the Sunday rove page; end southbound toward Fredericksburg.",
   },
   {
@@ -285,7 +267,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-22",
     destination: "Florence, SC hotel",
     type: "Hotel",
-    driveFromPrior: "5h 12m from Fredericksburg before NC stop insertion",
+    driveFromPrior: "5h 12m / 350.9 mi from Fredericksburg before NC stop insertion",
     expectedStay: "Monday overnight",
     notes: "NC park choice still needs to be inserted into this workday leg.",
   },
@@ -293,33 +275,25 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-23",
     destination: "Savannah National Wildlife Refuge",
     type: "POTA",
-    driveFromPrior: "2h 29m from Florence",
+    driveFromPrior: "2h 29m / 169.8 mi from Florence",
     expectedStay: "~1h activation",
     references: ["US-0522"],
-    notes: "Selected South Carolina activation before crossing into the Pooler / Savannah hotel area.",
+    notes: "Selected South Carolina activation before crossing into Georgia.",
   },
   {
     date: "2026-06-23",
-    destination: "Pooler / Savannah, GA",
-    type: "Hotel area",
-    driveFromPrior: "20m from Savannah NWR",
-    expectedStay: "Tuesday overnight",
-    notes: "Planned overnight area after the Savannah refuge stop.",
-  },
-  {
-    date: "2026-06-24",
-    destination: "Georgia morning park TBD",
-    type: "POTA placeholder",
-    driveFromPrior: "depends on Pooler / Savannah hotel",
-    expectedStay: "~1h activation once selected",
-    status: "placeholder",
-    notes: "Hold this slot for the Wednesday morning Georgia activation once the Pooler/Savannah hotel area is nailed down.",
+    destination: "Jekyll Island, GA hotel / Jekyll Island State Park",
+    type: "Hotel + POTA",
+    driveFromPrior: "1h 43m / 96.7 mi from Savannah NWR",
+    expectedStay: "Tuesday overnight; activate on island",
+    references: ["US-0636"],
+    notes: "Booked Tuesday anchor; the island is the Georgia POTA park, so this covers GA without a separate morning detour.",
   },
   {
     date: "2026-06-24",
     destination: "Ocala, FL",
     type: "Family anchor",
-    driveFromPrior: "3h 40m from Pooler",
+    driveFromPrior: "2h 58m / 173.3 mi from Jekyll Island",
     expectedStay: "Wednesday/Thursday nights",
     notes: "Family positioning before local Florida activations and Field Day arrival.",
   },
@@ -327,7 +301,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-25",
     destination: "Silver Springs State Park or Ocala National Forest, FL",
     type: "POTA",
-    driveFromPrior: "13m or 40m from Ocala",
+    driveFromPrior: "13m / 5.7 mi or 40m / 23.4 mi from Ocala",
     expectedStay: "~1h activation",
     references: ["US-1915", "US-4471"],
     notes: "Silver Springs is the preferred close option; Ocala National Forest remains the longer alternate.",
@@ -336,7 +310,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-26",
     destination: "John D. MacArthur Beach State Park, FL",
     type: "POTA",
-    driveFromPrior: "3h 56m from Ocala",
+    driveFromPrior: "3h 56m / 232.1 mi from Ocala",
     expectedStay: "Friday evening activation",
     references: ["US-1884"],
     notes: "Final target activation near Singer Island.",
@@ -345,7 +319,7 @@ const overviewStops: OverviewStop[] = [
     date: "2026-06-26",
     destination: "Singer Island / Riviera Beach, FL",
     type: "Destination",
-    driveFromPrior: "9m from John D. MacArthur",
+    driveFromPrior: "9m / 3.7 mi from John D. MacArthur",
     expectedStay: "Field Day weekend",
     notes: "Arrival target for the June 27-28 Field Day weekend.",
   },
@@ -371,8 +345,8 @@ function potaUrl(reference: string) {
       </p>
       <p class="lede">
         Fixed hotel anchors and selected POTA targets are now set through
-        Florida. The remaining open park choices are NC, SC, and the exact
-        Sunday DC rove flow.
+        Florida. The remaining open park choice is NC, with the exact Sunday
+        DC rove flow still being refined.
       </p>
     </div>
 
@@ -516,6 +490,10 @@ function potaUrl(reference: string) {
         Overnight rhythm: {overnightStrategy.recommendedPattern.join(" · ")}.
       </p>
     )}
+    <p class="rove-weekend-note">
+      Drive times and distances are planning estimates from route checks; park
+      activation time is shown separately as the stay budget.
+    </p>
 
     <ol class="rove-timeline-list rove-roadmap-list">
       {overviewStops.map((stop) => (
@@ -526,7 +504,13 @@ function potaUrl(reference: string) {
               <span>{stop.type}</span>
               {stop.status === "placeholder" && <span>needs selection</span>}
             </div>
-            <strong>{stop.destination}</strong>
+            {stop.detailUrl ? (
+              <strong>
+                <a class="rove-roadmap-title-link" href={stop.detailUrl}>{stop.destination}</a>
+              </strong>
+            ) : (
+              <strong>{stop.destination}</strong>
+            )}
             <dl class="rove-roadmap-meta">
               <div>
                 <dt>Drive</dt>
@@ -552,37 +536,6 @@ function potaUrl(reference: string) {
 
     {restOfTripDraft?.risk && <p class="rove-weekend-note rove-weekend-rule">{restOfTripDraft.risk}</p>}
   </section>
-
-  {driveEstimates && (
-    <section class="section-block wide" aria-labelledby="drive-estimates-title">
-      <div class="section-heading">
-        <p class="section-label">Route budget</p>
-        <h2 id="drive-estimates-title">Drive estimates</h2>
-      </div>
-
-      <p class="rove-weekend-note">{driveEstimates.source}</p>
-
-      <div class="rove-drive-grid">
-        {driveEstimates.legs.map((leg) => (
-          <article>
-            <span>{formatShortDate(leg.date)}</span>
-            <strong>{leg.from} -> {leg.to}</strong>
-            <dl>
-              <div>
-                <dt>Drive</dt>
-                <dd>{leg.estimatedDriveLabel}</dd>
-              </div>
-              <div>
-                <dt>Distance</dt>
-                <dd>{leg.distance}</dd>
-              </div>
-            </dl>
-            {leg.notes && <p>{leg.notes}</p>}
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
 
   <section class="section-block wide" aria-labelledby="detail-pages-title">
     <div class="section-heading">
@@ -786,6 +739,12 @@ function potaUrl(reference: string) {
 
   .rove-roadmap-placeholder .rove-roadmap-card {
     background: var(--color-surface-raised, #f5f0e8);
+  }
+
+  .rove-roadmap-title-link {
+    color: var(--color-accent, #167246);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.16em;
   }
 
   .rove-card-topline {
@@ -1088,59 +1047,6 @@ function potaUrl(reference: string) {
   }
 
   .rove-timing-models p {
-    color: var(--color-text-muted, #666);
-    font-size: 0.8rem;
-    margin: 0.45rem 0 0;
-  }
-
-  .rove-drive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-    gap: 0.75rem;
-  }
-
-  .rove-drive-grid article {
-    border: 1px solid var(--color-border, #ddd);
-    border-radius: 6px;
-    padding: 0.85rem;
-  }
-
-  .rove-drive-grid span {
-    color: var(--color-accent, #167246);
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.25rem;
-    text-transform: uppercase;
-  }
-
-  .rove-drive-grid strong {
-    display: block;
-    font-size: 0.9rem;
-  }
-
-  .rove-drive-grid dl {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.35rem;
-    margin: 0.55rem 0 0;
-  }
-
-  .rove-drive-grid dt {
-    color: var(--color-text-muted, #666);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .rove-drive-grid dd {
-    font-size: 0.85rem;
-    margin: 0;
-  }
-
-  .rove-drive-grid p {
     color: var(--color-text-muted, #666);
     font-size: 0.8rem;
     margin: 0.45rem 0 0;

@@ -103,7 +103,7 @@
         "Tallman is activated after work, then the evening drive continues to the booked Edison, NJ hotel.",
         "Saturday covers NJ, PA, DE, and MD before the Foggy Bottom hotel; Fort McHenry is targeted for 19:30 arrival and 20:00 EDT activation start so it counts on the Sunday UTC rove day.",
         "Sunday remains the large DC / NoVA rove day, ending at the booked Fredericksburg hotel.",
-        "Monday night is fixed in Florence, Tuesday night in or near Pooler, Wednesday night in Ocala, and Thursday night remains Ocala/family positioning."
+        "Monday night is fixed in Florence, Tuesday night is booked on Jekyll Island, Wednesday night is in Ocala, and Thursday night remains Ocala/family positioning."
       ],
       "days": [
         {
@@ -154,22 +154,23 @@
         },
         {
           "date": "2026-06-23",
-          "area": "Florence, SC to Pooler / Savannah, GA",
-          "focus": "Activate Savannah National Wildlife Refuge for South Carolina and overnight in or near Pooler.",
+          "area": "Florence, SC to Jekyll Island, GA",
+          "focus": "Activate Savannah National Wildlife Refuge for South Carolina, then overnight on Jekyll Island and activate US-0636 for Georgia.",
           "jurisdictions": [
-            "US-SC"
+            "US-SC",
+            "US-GA"
           ],
-          "notes": "Treat Savannah NWR as the South Carolina activation before crossing into the Pooler / Savannah hotel area."
+          "notes": "Jekyll Island State Park covers the whole island, so the booked hotel anchor also covers the Georgia activation."
         },
         {
           "date": "2026-06-24",
-          "area": "Pooler, GA to Ocala, FL",
-          "focus": "Select a Georgia morning park, then drive to Ocala and stay there Wednesday night.",
+          "area": "Jekyll Island, GA to Ocala, FL",
+          "focus": "Drive from the Jekyll Island park/hotel anchor to Ocala and stay there Wednesday night.",
           "jurisdictions": [
             "US-GA",
             "US-FL"
           ],
-          "notes": "No required activation selected for this leg yet; it is a positioning day."
+          "notes": "Georgia is already covered by the Jekyll Island overnight; Florida activation can wait for Thursday morning."
         },
         {
           "date": "2026-06-25",
@@ -287,7 +288,7 @@
     },
     {
       "from": "Fayetteville / eastern NC",
-      "to": "Savannah / coastal GA",
+      "to": "Jekyll Island, GA",
       "approxMiles": 260,
       "driveHours": 4.3,
       "chargingHours": 0.5,
@@ -299,10 +300,10 @@
         "US-SC",
         "US-GA"
       ],
-      "notes": "Likely the hardest southern block. SC and GA should use very low-detour parks or multi-entity opportunities if available."
+      "notes": "Savannah NWR covers SC and Jekyll Island State Park covers GA with the hotel anchor."
     },
     {
-      "from": "Savannah / coastal GA",
+      "from": "Jekyll Island, GA",
       "to": "Jacksonville / north FL",
       "approxMiles": 140,
       "driveHours": 2.3,
@@ -336,8 +337,8 @@
     "Saturday starts near Cheesequake, deliberately routes through John Heinz for PA, then uses Fox Point for DE and Fort McHenry for MD.",
     "Fort McHenry is targeted for a 19:30 arrival and 20:00 EDT activation start so it counts toward the Sunday UTC rove day.",
     "Sunday remains the large DC / NoVA rove day; exact Cheetah/Ostrich flow is deferred to the next pass.",
-    "Monday night is fixed in Florence, Tuesday night in or near Pooler, Wednesday night in Ocala, and Florida has local Thursday/Friday targets selected.",
-    "NC and SC park choices are still open and should be selected after the DC flow is nailed down."
+    "Monday night is fixed in Florence, Tuesday night is booked on Jekyll Island, Wednesday night is in Ocala, and Florida has local Thursday/Friday targets selected.",
+    "The NC park choice is still open and should be selected after the DC flow is nailed down."
   ],
   "firstWeekendPlan": {
     "status": "fixed first-weekend route",
@@ -880,17 +881,17 @@
       },
       {
         "state": "US-GA",
-        "goal": "Tuesday Savannah / Pooler leg",
+        "goal": "Tuesday Jekyll Island overnight",
         "defaultReferences": [
-          "US-0522"
+          "US-0636"
         ],
         "options": [
           {
-            "reference": "US-0522",
-            "name": "Savannah National Wildlife Refuge",
-            "role": "selected South Carolina activation",
-            "latitude": 32.1655,
-            "longitude": -81.1514,
+            "reference": "US-0636",
+            "name": "Jekyll Island State Park",
+            "role": "booked Georgia hotel/park anchor",
+            "latitude": 31.04,
+            "longitude": -81.42,
             "priority": "target"
           }
         ]
@@ -1020,9 +1021,9 @@
       "Saturday night is fixed at a hotel in the Foggy Bottom area of Washington, DC.",
       "Sunday night is fixed at a hotel in Fredericksburg, VA.",
       "Monday June 22 is fixed in Florence, SC.",
-      "Tuesday June 23 is in or near Pooler after Savannah National Wildlife Refuge.",
+      "Tuesday June 23 is booked on Jekyll Island after Savannah National Wildlife Refuge.",
       "Wednesday June 24 is in Ocala, FL.",
-      "NC and SC park choices still need to be selected.",
+      "The NC park choice still needs to be selected.",
       "Weekdays still have a 13:00-17:00 work block unless explicitly changed."
     ],
     "overnightStrategy": {
@@ -1032,12 +1033,12 @@
         "2026-06-20 Foggy Bottom hotel",
         "2026-06-21 Fredericksburg hotel",
         "2026-06-22 Florence hotel",
-        "2026-06-23 Pooler / Savannah-area hotel",
+        "2026-06-23 Jekyll Island hotel / US-0636",
         "2026-06-24 Ocala",
         "2026-06-25 Ocala / local Florida activation",
         "2026-06-26 Singer Island / Riviera Beach arrival"
       ],
-      "summary": "Camping has been removed. The remaining open park decisions are the exact Sunday DC rove flow, the NC stop, and the GA morning stop.",
+      "summary": "Camping has been removed. The remaining open park decisions are the exact Sunday DC rove flow and the NC stop.",
       "nights": [
         {
           "date": "2026-06-19",
@@ -1086,9 +1087,9 @@
         {
           "date": "2026-06-23",
           "preferredType": "hotel",
-          "area": "Pooler / Savannah, GA",
-          "why": "Position after Savannah National Wildlife Refuge.",
-          "savesSeparateParkStop": false,
+          "area": "Jekyll Island, GA",
+          "why": "Booked Tuesday anchor; the whole island is Jekyll Island State Park US-0636.",
+          "savesSeparateParkStop": true,
           "likelyJurisdictionCoverage": [
             "US-GA"
           ]
@@ -1140,7 +1141,7 @@
         "overnightType": "hotel",
         "startArea": "Fredericksburg hotel",
         "endArea": "Florence, SC",
-        "focus": "Workday southbound push; NC and SC parks still need final selection.",
+        "focus": "Workday southbound push; NC park still needs final selection.",
         "jurisdictions": [
           "US-VA",
           "US-NC",
@@ -1158,36 +1159,37 @@
         "date": "2026-06-23",
         "overnightType": "hotel",
         "startArea": "Florence, SC",
-        "endArea": "Pooler / Savannah, GA",
-        "focus": "Activate Savannah National Wildlife Refuge for South Carolina, then overnight near Pooler.",
+        "endArea": "Jekyll Island, GA",
+        "focus": "Activate Savannah National Wildlife Refuge for South Carolina, then overnight on Jekyll Island and activate US-0636 for Georgia.",
         "jurisdictions": [
-          "US-SC"
+          "US-SC",
+          "US-GA"
         ],
-        "roughMiles": 184,
-        "roughDriveHours": 2.8,
+        "roughMiles": 267,
+        "roughDriveHours": 4.2,
         "chargingHours": 0.5,
-        "minimumEntities": 1,
-        "parkStopHours": 2,
-        "roughTotalHours": 5.3,
-        "notes": "Treat Savannah NWR as the South Carolina activation before crossing into the Pooler / Savannah hotel area."
+        "minimumEntities": 2,
+        "parkStopHours": 3,
+        "roughTotalHours": 7.7,
+        "notes": "Jekyll Island State Park covers the whole island, so the booked hotel anchor also covers the Georgia activation."
       },
       {
         "date": "2026-06-24",
         "overnightType": "home",
-        "startArea": "Pooler / Savannah, GA",
+        "startArea": "Jekyll Island, GA",
         "endArea": "Ocala, FL",
-        "focus": "Select a Georgia morning park, then drive to Ocala and stay there Wednesday night.",
+        "focus": "Drive from Jekyll Island to Ocala and stay there Wednesday night.",
         "jurisdictions": [
           "US-GA",
           "US-FL"
         ],
-        "roughMiles": 232,
-        "roughDriveHours": 3.7,
+        "roughMiles": 173,
+        "roughDriveHours": 3.0,
         "chargingHours": 0.5,
         "minimumEntities": 0,
         "parkStopHours": 0,
         "roughTotalHours": 4.2,
-        "notes": "Positioning day; Florida activation can wait for Thursday morning."
+        "notes": "Georgia is already covered by Jekyll Island; Florida activation can wait for Thursday morning."
       },
       {
         "date": "2026-06-25",
@@ -1334,20 +1336,21 @@
       ],
       "overnight": {
         "type": "hotel",
-        "name": "Pooler / Savannah, GA",
-        "reference": null,
+        "name": "Jekyll Island, GA",
+        "reference": "US-0636",
         "booking": {
-          "status": "planned",
+          "status": "booked",
           "confirmation": null,
           "url": null,
-          "notes": "Tuesday night in or near Pooler."
+          "notes": "Tuesday night on Jekyll Island; whole island is US-0636."
         }
       },
       "parkTargets": [
-        "US-0522"
+        "US-0522",
+        "US-0636"
       ],
-      "notes": "Savannah National Wildlife Refuge for South Carolina, then Pooler-area hotel.",
-      "approxDriveMiles": 184
+      "notes": "Savannah National Wildlife Refuge for South Carolina, then Jekyll Island State Park for Georgia.",
+      "approxDriveMiles": 267
     },
     {
       "date": "2026-06-24",
@@ -1367,8 +1370,8 @@
         }
       },
       "parkTargets": [],
-      "notes": "Pooler to Ocala positioning day.",
-      "approxDriveMiles": 232
+      "notes": "Jekyll Island to Ocala positioning day.",
+      "approxDriveMiles": 173
     },
     {
       "date": "2026-06-25",
@@ -1531,19 +1534,19 @@
       {
         "date": "2026-06-23",
         "from": "Savannah National Wildlife Refuge",
-        "to": "Pooler, GA",
-        "distance": "23.4 km",
-        "estimatedDriveMinutes": 20,
-        "estimatedDriveLabel": "20m",
-        "notes": "Short leg to Tuesday overnight area."
+        "to": "Jekyll Island State Park, GA",
+        "distance": "155.7 km",
+        "estimatedDriveMinutes": 103,
+        "estimatedDriveLabel": "1h 43m",
+        "notes": "Tuesday drive from the South Carolina activation to the booked Georgia hotel/park anchor."
       },
       {
         "date": "2026-06-24",
-        "from": "Pooler, GA",
+        "from": "Jekyll Island State Park, GA",
         "to": "Ocala, FL",
-        "distance": "373.9 km",
-        "estimatedDriveMinutes": 220,
-        "estimatedDriveLabel": "3h 40m",
+        "distance": "278.9 km",
+        "estimatedDriveMinutes": 178,
+        "estimatedDriveLabel": "2h 58m",
         "notes": "Wednesday positioning to Ocala."
       },
       {
@@ -1632,13 +1635,13 @@
         "notes": "Fixed Monday night anchor."
       },
       {
-        "id": "pooler",
-        "label": "Pooler / Savannah, GA",
+        "id": "jekyll-island",
+        "label": "Jekyll Island, GA hotel",
         "type": "hotel",
-        "status": "planned tuesday",
-        "latitude": 32.1155,
-        "longitude": -81.2471,
-        "notes": "Tuesday overnight area after Savannah NWR."
+        "status": "booked tuesday",
+        "latitude": 31.04,
+        "longitude": -81.42,
+        "notes": "Tuesday overnight on Jekyll Island; whole island is US-0636."
       },
       {
         "id": "ocala",
@@ -1733,12 +1736,22 @@
       {
         "reference": "US-0522",
         "name": "Savannah National Wildlife Refuge",
-        "role": "selected South Carolina activation before Pooler",
+        "role": "selected South Carolina activation before Jekyll Island",
         "latitude": 32.1655,
         "longitude": -81.1514,
         "priority": "target",
         "state": "US-SC",
         "goal": "Tuesday"
+      },
+      {
+        "reference": "US-0636",
+        "name": "Jekyll Island State Park",
+        "role": "booked Georgia hotel/park anchor",
+        "latitude": 31.04,
+        "longitude": -81.42,
+        "priority": "target",
+        "state": "US-GA",
+        "goal": "Tuesday overnight"
       },
       {
         "reference": "US-1915",
