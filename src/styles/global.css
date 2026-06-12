@@ -464,6 +464,28 @@ p {
   margin-bottom: 16px;
 }
 
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: 38px;
+  align-items: start;
+  max-width: none;
+}
+
+.about-portrait {
+  margin: 0;
+  border-top: 2px solid var(--ink);
+  background: rgb(255 253 250 / 58%);
+}
+
+.about-portrait img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 34% 50%;
+}
+
 .glossary-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
@@ -1923,6 +1945,7 @@ p {
   }
 
   .hero,
+  .about-hero,
   .section-grid,
   .home-grid,
   .split-list,
@@ -1937,6 +1960,20 @@ p {
 
   .hero {
     gap: 34px;
+  }
+
+  .about-hero {
+    gap: 24px;
+    align-items: start;
+  }
+
+  .about-portrait {
+    max-width: 420px;
+  }
+
+  .about-portrait img {
+    aspect-ratio: 16 / 10;
+    object-position: 28% 46%;
   }
 
   h1 {

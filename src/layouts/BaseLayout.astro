@@ -28,6 +28,7 @@ const nav = [
   { href: "/notes/", label: "Notes" },
   { href: "/projects/", label: "Projects" },
   { href: "/radio/", label: "Radio" },
+  { href: "/about/", label: "About" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -98,6 +99,13 @@ const isActive = (href: string) =>
 
       <footer class="site-footer">
         <a href="/rss.xml">RSS</a>
+        <a href="/about/">About</a>
+        <a href="https://bsky.app/profile/rwjblue.com" target="_blank" rel="noreferrer">
+          Bluesky
+        </a>
+        <a href="https://mstdn.social/@rwjblue" target="_blank" rel="me noreferrer">
+          Mastodon
+        </a>
         <span>N1RWJ · rwjblue</span>
       </footer>
     </div>

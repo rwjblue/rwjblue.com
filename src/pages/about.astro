@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About / Robert Jackson"
+  description="About Robert Jackson, rwjblue, and N1RWJ: software, open source, amateur radio, notes, projects, and contact links."
+  canonicalPath="/about/"
+  image="/images/pota/2026-06-04-sachuest-point-national-wildlife-refuge-pota/operator-rocky-shoreline.jpg"
+  imageAlt="Robert Jackson, N1RWJ, at a rocky shoreline during a portable radio activation."
+>
+  <section class="about-hero page-intro">
+    <div>
+      <p class="eyebrow">About</p>
+      <h1>Robert Jackson</h1>
+      <p>
+        I am Robert Jackson, rwjblue online and N1RWJ on the air. This site is a
+        public notebook for software work, open source maintenance, amateur radio,
+        portable HF, CW, POTA activations, station projects, and the practical
+        details that are useful to find again later.
+      </p>
+    </div>
+    <figure class="about-portrait">
+      <img
+        src="/images/pota/2026-06-04-sachuest-point-national-wildlife-refuge-pota/operator-rocky-shoreline.jpg"
+        alt="Robert Jackson, N1RWJ, at a rocky shoreline during a portable radio activation."
+      />
+    </figure>
+  </section>
+
+  <section class="section-block wide" aria-labelledby="about-work-title">
+    <div class="section-heading">
+      <p class="section-label">Work</p>
+      <h2 id="about-work-title">What I write about</h2>
+    </div>
+    <div class="split-list">
+      <div>
+        <h3>Software</h3>
+        <p>
+          Tooling, debugging notes, open source maintenance, CLI design, and
+          small decisions that make systems easier to operate.
+        </p>
+      </div>
+      <div>
+        <h3>Radio</h3>
+        <p>
+          Portable HF, CW, POTA, station design, antennas, logging, and field
+          workflows from N1RWJ.
+        </p>
+      </div>
+      <div>
+        <h3>Projects</h3>
+        <p>
+          Active project logs, plans, experiments, and context that does not fit
+          cleanly into one-off notes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bridge" aria-labelledby="contact-title">
+    <p class="section-label">Contact</p>
+    <h2 id="contact-title">Where to find me</h2>
+    <p>
+      The best public contact routes are the profiles below. Email is available
+      through my GitHub and QRZ profiles.
+    </p>
+    <nav class="path-links" aria-label="Contact links">
+      <a href="https://github.com/rwjblue" target="_blank" rel="noreferrer">
+        GitHub
+      </a>
+      <a href="https://www.qrz.com/db/N1RWJ" target="_blank" rel="noreferrer">
+        QRZ
+      </a>
+      <a href="https://bsky.app/profile/rwjblue.com" target="_blank" rel="noreferrer">
+        Bluesky
+      </a>
+      <a href="https://mstdn.social/@rwjblue" target="_blank" rel="me noreferrer">
+        Mastodon
+      </a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
+  </section>
+</BaseLayout>
