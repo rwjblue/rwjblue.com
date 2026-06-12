@@ -15,7 +15,6 @@ interface OperatingStop {
   uniqueAddsAfterFortLbjFdr?: string[];
   uniqueAddsAfterPrior?: string[];
   uniqueAddsAfterLbj?: string[];
-  confidence: string;
 }
 interface TimelineAssumptions {
   activationMinutes: number;
@@ -66,7 +65,6 @@ interface RouteWaypoint {
   latitude: number;
   longitude: number;
   type: "activation" | "parking" | "hotel" | "optional";
-  confidence: string;
   notes: string;
 }
 
@@ -78,7 +76,6 @@ const optionalTimelineAddOns = dcRove.optionalTimelineAddOns as OptionalTimeline
 const routeWaypoints = dcRove.routeWaypoints as RouteWaypoint[];
 const routeWaypointsJson = JSON.stringify(routeWaypoints);
 const primaryRouteWaypointIds = [
-  "fort-mchenry-saturday",
   "foggy-bottom",
   "lbj-parking",
   "lbj-7fer",
@@ -89,9 +86,7 @@ const primaryRouteWaypointIds = [
   "vietnam",
   "wwii",
   "washington-monument",
-  "lincoln",
-  "mason-neck",
-  "fredericksburg",
+  "lincoln"
 ];
 const primaryRouteJson = JSON.stringify(primaryRouteWaypointIds);
 
@@ -233,15 +228,14 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
   <section class="section-block wide" aria-labelledby="route-map-title">
     <div class="section-heading">
       <p class="section-label">Route map</p>
-      <h2 id="route-map-title">Point-to-point rove path</h2>
+      <h2 id="route-map-title">DC operating map</h2>
     </div>
 
-    <div id="dc-rove-map" class="rove-map" aria-label="Map of the Sunday DC and NoVA rove route"></div>
+    <div id="dc-rove-map" class="rove-map" aria-label="Map of the Sunday DC rove operating stops"></div>
     <div class="rove-map-legend" aria-label="Map marker legend">
       <span><i style="background:#167246"></i>Activation</span>
       <span><i style="background:#1f6feb"></i>Hotel / anchor</span>
       <span><i style="background:#7f7f7f"></i>Parking</span>
-      <span><i style="background:#f28e2b"></i>Optional</span>
     </div>
   </section>
 
@@ -293,14 +287,11 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
             {directionsHref(timelineStop) && (
               <p class="rove-directions-link">
                 <a href={directionsHref(timelineStop)} target="_blank" rel="noreferrer">
-                  Open directions in Apple Maps
+                  Directions
                 </a>
               </p>
             )}
             <p>{timelineStop.timelineNote}</p>
-            {waypointForTimeline(timelineStop)?.confidence && (
-              <p class="rove-confidence-note">{waypointForTimeline(timelineStop)?.confidence}</p>
-            )}
             {referencesFor(timelineStop).length > 0 && (
               <p class="rove-reference-list">
                 {referencesFor(timelineStop).map((reference) => (
@@ -346,7 +337,7 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
                 target="_blank"
                 rel="noreferrer"
               >
-                Open directions in Apple Maps
+                Directions
               </a>
             </p>
             <p class="rove-reference-list">
@@ -415,7 +406,7 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       </li>
       <li>
         Official NPS/FWS pages provide park access context; exact POTA trail
-        overlap and antenna-rule compliance still need field verification.
+        overlap and antenna-rule compliance are tracked in the data file.
       </li>
     </ul>
   </section>
@@ -436,6 +427,19 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       const routePoints = routeIds
         .map((id: string) => pointById.get(id))
         .filter(Boolean);
+      const stopNumbers: Record<string, string> = {
+        "foggy-bottom": "H",
+        "lbj-parking": "P",
+        "lbj-7fer": "2",
+        fdr: "3",
+        mlk: "4",
+        korean: "5",
+        "constitution-gardens": "6",
+        vietnam: "7",
+        wwii: "8",
+        "washington-monument": "9",
+        lincoln: "10",
+      };
       const map = L.map(mapEl, { scrollWheelZoom: false });
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -461,27 +465,13 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       for (const point of routePoints) {
         const latLng: [number, number] = [point.latitude, point.longitude];
         bounds.extend(latLng);
-        L.circleMarker(latLng, {
-          radius: point.type === "parking" ? 6 : 8,
-          color: "#172026",
-          weight: 2,
-          fillColor: waypointColor(point.type),
-          fillOpacity: 0.95,
-        })
-          .bindPopup(waypointPopup(point))
-          .addTo(map);
-      }
-
-      const optional = waypoints.filter((point: { type: string }) => point.type === "optional");
-      for (const point of optional) {
-        const latLng: [number, number] = [point.latitude, point.longitude];
-        bounds.extend(latLng);
-        L.circleMarker(latLng, {
-          radius: 7,
-          color: "#172026",
-          weight: 2,
-          fillColor: waypointColor(point.type),
-          fillOpacity: 0.95,
+        L.marker(latLng, {
+          icon: L.divIcon({
+            className: "rove-numbered-marker",
+            html: `<span style="background:${waypointColor(point.type)}">${escapeHtml(stopNumbers[point.id] ?? "")}</span>`,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+          }),
         })
           .bindPopup(waypointPopup(point))
           .addTo(map);
@@ -509,14 +499,10 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       type: string;
       latitude: number;
       longitude: number;
-      confidence?: string;
-      notes?: string;
     }) {
       return `
         <strong>${escapeHtml(point.label)}</strong>
         <em>${escapeHtml(point.type)} · ${point.latitude.toFixed(5)}, ${point.longitude.toFixed(5)}</em>
-        <span>${escapeHtml(point.confidence ?? "")}</span>
-        <span>${escapeHtml(point.notes ?? "")}</span>
       `;
     }
   </script>
@@ -545,10 +531,24 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
   }
 
   .rove-map {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
     border: 1px solid var(--color-border, #ddd);
     min-height: 22rem;
     width: 100%;
+  }
+
+  :global(.rove-numbered-marker span) {
+    align-items: center;
+    border: 2px solid #172026;
+    border-radius: 999px;
+    color: #fff;
+    display: inline-flex;
+    font-size: 0.72rem;
+    font-weight: 800;
+    height: 1.45rem;
+    justify-content: center;
+    line-height: 1;
+    width: 1.45rem;
   }
 
   .rove-map-legend {
@@ -734,15 +734,14 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
   }
 
   .rove-directions-link a {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 4px;
     color: var(--color-accent, #167246);
-    font-size: 0.82rem;
+    display: inline-flex;
+    font-size: 0.78rem;
     font-weight: 700;
-  }
-
-  .rove-confidence-note {
-    border-left: 2px solid var(--color-border, #ddd);
-    margin: 0.55rem 0 0;
-    padding-left: 0.6rem;
+    padding: 0.22rem 0.45rem;
+    text-decoration: none;
   }
 
   .rove-addon-grid {

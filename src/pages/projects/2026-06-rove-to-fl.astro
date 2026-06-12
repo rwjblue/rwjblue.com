@@ -55,6 +55,7 @@ interface OverviewStop {
   driveFromPrior?: string;
   expectedStay: string;
   references?: string[];
+  status?: "set" | "placeholder";
   notes: string;
 }
 
@@ -273,11 +274,29 @@ const overviewStops: OverviewStop[] = [
   },
   {
     date: "2026-06-22",
+    destination: "North Carolina park stop TBD",
+    type: "POTA placeholder",
+    driveFromPrior: "between Fredericksburg and Florence",
+    expectedStay: "~1h activation once selected",
+    status: "placeholder",
+    notes: "Needed to cover NC on the Monday workday leg; choose after checking route timing and Tesla Supercharger placement.",
+  },
+  {
+    date: "2026-06-22",
     destination: "Florence, SC hotel",
     type: "Hotel",
-    driveFromPrior: "5h 12m from Fredericksburg before NC/SC stops",
+    driveFromPrior: "5h 12m from Fredericksburg before NC/SC stop insertion",
     expectedStay: "Monday overnight",
     notes: "NC and SC park choices still need to be inserted into this workday leg.",
+  },
+  {
+    date: "2026-06-23",
+    destination: "Georgia morning park TBD",
+    type: "POTA placeholder",
+    driveFromPrior: "depends on Pooler / Savannah hotel",
+    expectedStay: "~1h activation once selected",
+    status: "placeholder",
+    notes: "Hold this slot for the Tuesday morning Georgia activation once the Pooler/Savannah hotel area is nailed down.",
   },
   {
     date: "2026-06-23",
@@ -500,15 +519,15 @@ function potaUrl(reference: string) {
 
     <ol class="rove-timeline-list rove-roadmap-list">
       {overviewStops.map((stop) => (
-        <li>
+        <li class={stop.status === "placeholder" ? "rove-roadmap-placeholder" : ""}>
           <div class="rove-timeline-date">{formatShortDate(stop.date)}</div>
-          <div>
+          <article class="rove-roadmap-card">
+            <div class="rove-card-topline">
+              <span>{stop.type}</span>
+              {stop.status === "placeholder" && <span>needs selection</span>}
+            </div>
             <strong>{stop.destination}</strong>
             <dl class="rove-roadmap-meta">
-              <div>
-                <dt>Type</dt>
-                <dd>{stop.type}</dd>
-              </div>
               <div>
                 <dt>Drive</dt>
                 <dd>{stop.driveFromPrior ?? "start"}</dd>
@@ -526,7 +545,7 @@ function potaUrl(reference: string) {
               </p>
             )}
             <p>{stop.notes}</p>
-          </div>
+          </article>
         </li>
       ))}
     </ol>
@@ -759,6 +778,32 @@ function potaUrl(reference: string) {
     gap: 0.75rem;
   }
 
+  .rove-roadmap-card {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+
+  .rove-roadmap-placeholder .rove-roadmap-card {
+    background: var(--color-surface-raised, #f5f0e8);
+  }
+
+  .rove-card-topline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: space-between;
+    margin-bottom: 0.35rem;
+  }
+
+  .rove-card-topline span {
+    color: var(--color-accent, #167246);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
   .rove-timeline-date {
     color: var(--color-text-muted, #666);
     font-size: 0.85rem;
@@ -780,9 +825,7 @@ function potaUrl(reference: string) {
   }
 
   .rove-roadmap-list {
-    border: 1px solid var(--color-border, #ddd);
-    border-radius: 6px;
-    padding: 1rem;
+    margin-top: 1rem;
   }
 
   .rove-roadmap-meta {

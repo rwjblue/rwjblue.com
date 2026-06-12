@@ -233,7 +233,7 @@
       "activationMinutes": 45,
       "entityAdds": 2,
       "timelineImpact": "Adds about 1h 35m before Mason Neck when including the activation and extra driving.",
-      "timelineNote": "Useful high-confidence buffer for Ostrich only if exact public access and pace are excellent."
+      "timelineNote": "Useful Ostrich buffer if public access and pace are excellent."
     }
   ],
   "routeWaypoints": [

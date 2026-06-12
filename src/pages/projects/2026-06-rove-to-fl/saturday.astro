@@ -139,9 +139,12 @@ function referencesFor(stop: CandidateStop) {
       <ol class="rove-route-list">
         {model.route.map((leg, index) => (
           <li>
-            <span>Leg {index + 1}</span>
+            <div class="rove-card-topline">
+              <span>Leg {index + 1}</span>
+              <span>{formatMinutes(leg.estimatedDriveMinutes)}</span>
+            </div>
             <strong>{leg.from} -> {leg.to}</strong>
-            <p>{formatMinutes(leg.estimatedDriveMinutes)} estimated drive time</p>
+            <p>Estimated drive time before the next stop.</p>
           </li>
         ))}
       </ol>
@@ -157,7 +160,10 @@ function referencesFor(stop: CandidateStop) {
     <div class="rove-card-grid">
       {saturdayRove.baselineCandidates.map((stop) => (
         <article>
-          <span>{stop.state?.replace("US-", "")}</span>
+          <div class="rove-card-topline">
+            <span>{stop.state?.replace("US-", "")}</span>
+            <span>selected</span>
+          </div>
           <h3>{stop.name}</h3>
           <p>{stop.role}</p>
           <p class="rove-reference-list">
@@ -179,7 +185,10 @@ function referencesFor(stop: CandidateStop) {
     <div class="rove-card-grid">
       {saturdayRove.stretchCandidates.map((stop) => (
         <article>
-          <span>{stop.state?.replace("US-", "")}</span>
+          <div class="rove-card-topline">
+            <span>{stop.state?.replace("US-", "")}</span>
+            <span>verify</span>
+          </div>
           <h3>{stop.name}</h3>
           <p>{stop.role}</p>
           {stop.risk && <p>{stop.risk}</p>}
@@ -236,13 +245,24 @@ function referencesFor(stop: CandidateStop) {
   }
 
   .rove-summary-grid dt,
-  .rove-route-list span,
-  .rove-card-grid span {
+  .rove-card-topline span {
     color: var(--color-text-muted, #666);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+
+  .rove-card-topline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: space-between;
+    margin-bottom: 0.35rem;
+  }
+
+  .rove-card-topline span {
+    color: var(--color-accent, #167246);
   }
 
   .rove-summary-grid dd {
