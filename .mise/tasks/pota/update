@@ -8,7 +8,7 @@ set -euo pipefail
 args=("$@")
 
 if [[ "${usage_full_backfill:-false}" == "true" ]]; then
-  args=(--full-backfill "${args[@]}")
+  args=(--full-backfill ${args[@]+"${args[@]}"})
 fi
 
-node scripts/pota/update.mjs "${args[@]}"
+node scripts/pota/update.mjs ${args[@]+"${args[@]}"}

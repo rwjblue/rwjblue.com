@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-06-04T22:01:14.915Z",
+  "generatedAt": "2026-06-12T23:29:18.981Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 45,
-    "remaining": 16,
+    "completed": 46,
+    "remaining": 15,
     "total": 61,
-    "percentComplete": 74
+    "percentComplete": 75
   },
   "references": [
     {
@@ -213,26 +213,6 @@
       }
     },
     {
-      "reference": "US-6989",
-      "name": "Black Farm Wildlife Management Area",
-      "latitude": 41.4674,
-      "longitude": -71.7285,
-      "grid": "FN41dl",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "href": "/radio/pota/US-6989/",
-      "potaUrl": "https://pota.app/#/park/US-6989",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 64,
-        "activations": 63,
-        "qsos": 2384
-      }
-    },
-    {
       "reference": "US-6991",
       "name": "Rockville Wildlife Management Area",
       "latitude": 41.5054,
@@ -330,6 +310,94 @@
         "attempts": 55,
         "activations": 52,
         "qsos": 1616
+      }
+    },
+    {
+      "reference": "US-2880",
+      "name": "Snake Den State Park",
+      "latitude": 41.8303,
+      "longitude": -71.5373,
+      "grid": "FN41ft",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-2880/",
+      "potaUrl": "https://pota.app/#/park/US-2880",
+      "firstActivation": {
+        "reference": "US-2880",
+        "park": "Snake Den State Park",
+        "date": "2025-10-29",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 18,
+          "cw": 0,
+          "data": 0,
+          "phone": 18
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-2880",
+        "park": "Snake Den State Park",
+        "date": "2026-06-09",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 19,
+          "cw": 19,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 3,
+      "notes": [],
+      "publicStats": {
+        "attempts": 152,
+        "activations": 149,
+        "qsos": 5364
+      }
+    },
+    {
+      "reference": "US-6989",
+      "name": "Black Farm Wildlife Management Area",
+      "latitude": 41.4674,
+      "longitude": -71.7285,
+      "grid": "FN41dl",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6989/",
+      "potaUrl": "https://pota.app/#/park/US-6989",
+      "firstActivation": {
+        "reference": "US-6989",
+        "park": "Black Farm Wildlife Management Area",
+        "date": "2026-06-08",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 15,
+          "cw": 15,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6989",
+        "park": "Black Farm Wildlife Management Area",
+        "date": "2026-06-08",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 15,
+          "cw": 15,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [],
+      "publicStats": {
+        "attempts": 64,
+        "activations": 63,
+        "qsos": 2384
       }
     },
     {
@@ -1257,50 +1325,6 @@
         "attempts": 54,
         "activations": 53,
         "qsos": 1253
-      }
-    },
-    {
-      "reference": "US-2880",
-      "name": "Snake Den State Park",
-      "latitude": 41.8303,
-      "longitude": -71.5373,
-      "grid": "FN41ft",
-      "locationDesc": "US-RI",
-      "status": "completed",
-      "href": "/radio/pota/US-2880/",
-      "potaUrl": "https://pota.app/#/park/US-2880",
-      "firstActivation": {
-        "reference": "US-2880",
-        "park": "Snake Den State Park",
-        "date": "2025-10-29",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 18,
-          "cw": 0,
-          "data": 0,
-          "phone": 18
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-2880",
-        "park": "Snake Den State Park",
-        "date": "2026-05-21",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 27,
-          "cw": 27,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 2,
-      "notes": [],
-      "publicStats": {
-        "attempts": 152,
-        "activations": 149,
-        "qsos": 5364
       }
     },
     {

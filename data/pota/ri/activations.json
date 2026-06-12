@@ -1052,6 +1052,32 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-2880",
+      "park": "Snake Den State Park",
+      "date": "2026-06-09",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 19,
+        "cw": 19,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6989",
+      "park": "Black Farm Wildlife Management Area",
+      "date": "2026-06-08",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 15,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

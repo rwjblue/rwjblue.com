@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T22:01:15.476Z",
+  "generatedAt": "2026-06-12T23:29:20.521Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -1103,9 +1103,30 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-2880/",
       "potaUrl": "https://pota.app/#/park/US-2880",
-      "activationCount": 2,
-      "qsoTotal": 45,
+      "activationCount": 3,
+      "qsoTotal": 64,
       "activations": [
+        {
+          "reference": "US-2880",
+          "park": "Snake Den State Park",
+          "date": "2026-06-09",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 19,
+            "cw": 19,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-2880",
           "park": "Snake Den State Park",
@@ -1171,10 +1192,9 @@
     },
     {
       "reference": "US-4582",
-      "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+      "name": "Washington-Rochambeau Revolutionary Route",
       "latitude": 41.312,
       "longitude": -73.9709,
-      "grid": "FN31ah",
       "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
       "href": "/radio/pota/US-4582/",
       "potaUrl": "https://pota.app/#/park/US-4582",
@@ -1220,9 +1240,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 2522,
-        "activations": 2475,
-        "qsos": 102891
+        "attempts": null,
+        "activations": null,
+        "qsos": null
       }
     },
     {
@@ -1772,9 +1792,31 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6989/",
       "potaUrl": "https://pota.app/#/park/US-6989",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 15,
+      "activations": [
+        {
+          "reference": "US-6989",
+          "park": "Black Farm Wildlife Management Area",
+          "date": "2026-06-08",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 15,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [],
       "publicStats": {
         "attempts": 64,

@@ -241,6 +241,7 @@ test("pota park page workflow is documented for agents", () => {
 
   assert.match(updateTask, /#USAGE flag "--full-backfill"/);
   assert.match(updateTask, /usage_full_backfill/);
+  assert.match(updateTask, /\$\{args\[@\]\+"\$\{args\[@\]\}"\}/);
   assert.match(updateTask, /scripts\/pota\/update\.mjs/);
   assert.match(ensureTask, /scripts\/pota\/parks\.mjs ensure/);
   assert.match(fieldReportSkill, /mise run pota:park:ensure -- US-1234/);
