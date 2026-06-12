@@ -1,4 +1,5 @@
 ---
+import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import dcRove from "../../../../data/pota/rove-to-fl/dc-rove.json";
 
@@ -26,6 +27,8 @@ interface TimelineAssumptions {
 interface TimelineStop {
   id: string;
   label?: string;
+  directionsOriginId?: string;
+  directionsDestinationId?: string;
   localStart: string;
   localEnd: string;
   utcStart: string;
@@ -39,6 +42,8 @@ interface TimelineStop {
 }
 interface OptionalTimelineAddOn {
   id: string;
+  directionsOriginId: string;
+  directionsDestinationId: string;
   placement: string;
   movementMode: "drive" | "walk";
   movementMinutes: number;
@@ -55,12 +60,40 @@ interface MappedLeg {
   minutes: number;
   notes?: string;
 }
+interface RouteWaypoint {
+  id: string;
+  label: string;
+  latitude: number;
+  longitude: number;
+  type: "activation" | "parking" | "hotel" | "optional";
+  confidence: string;
+  notes: string;
+}
 
 const operatingStops = dcRove.operatingStops as OperatingStop[];
 const mappedLegs = dcRove.mappedLegs as MappedLeg[];
 const timelineAssumptions = dcRove.timelineAssumptions as TimelineAssumptions;
 const primaryTimeline = dcRove.primaryTimeline as TimelineStop[];
 const optionalTimelineAddOns = dcRove.optionalTimelineAddOns as OptionalTimelineAddOn[];
+const routeWaypoints = dcRove.routeWaypoints as RouteWaypoint[];
+const routeWaypointsJson = JSON.stringify(routeWaypoints);
+const primaryRouteWaypointIds = [
+  "fort-mchenry-saturday",
+  "foggy-bottom",
+  "lbj-parking",
+  "lbj-7fer",
+  "fdr",
+  "mlk",
+  "korean",
+  "constitution-gardens",
+  "vietnam",
+  "wwii",
+  "washington-monument",
+  "lincoln",
+  "mason-neck",
+  "fredericksburg",
+];
+const primaryRouteJson = JSON.stringify(primaryRouteWaypointIds);
 
 function formatMinutes(minutes: number) {
   if (minutes === 0) return "on site";
@@ -71,6 +104,53 @@ function formatMinutes(minutes: number) {
 
 function potaUrl(reference: string) {
   return `https://pota.app/#/park/${reference}`;
+}
+
+function waypoint(id?: string) {
+  return routeWaypoints.find((point) => point.id === id);
+}
+
+function coordinateLabel(point?: RouteWaypoint) {
+  if (!point) return null;
+  return `${point.latitude.toFixed(5)}, ${point.longitude.toFixed(5)} · ${maidenheadGrid(point.latitude, point.longitude)}`;
+}
+
+function appleMapsUrl(destination?: RouteWaypoint, origin?: RouteWaypoint, mode: "drive" | "walk" = "drive") {
+  if (!destination) return null;
+  const params = new URLSearchParams();
+  params.set("daddr", `${destination.latitude},${destination.longitude}`);
+  params.set("q", destination.label);
+  params.set("dirflg", mode === "walk" ? "w" : "d");
+  if (origin) params.set("saddr", `${origin.latitude},${origin.longitude}`);
+  return `https://maps.apple.com/?${params.toString()}`;
+}
+
+function directionsHref(timelineStop: TimelineStop) {
+  return appleMapsUrl(
+    waypoint(timelineStop.directionsDestinationId ?? timelineStop.id),
+    waypoint(timelineStop.directionsOriginId),
+    timelineStop.movementMode
+  );
+}
+
+function waypointForTimeline(timelineStop: TimelineStop) {
+  return waypoint(timelineStop.id) ?? waypoint(timelineStop.directionsDestinationId);
+}
+
+function maidenheadGrid(latitude: number, longitude: number) {
+  let lon = longitude + 180;
+  let lat = latitude + 90;
+  const fieldLon = Math.floor(lon / 20);
+  const fieldLat = Math.floor(lat / 10);
+  lon -= fieldLon * 20;
+  lat -= fieldLat * 10;
+  const squareLon = Math.floor(lon / 2);
+  const squareLat = Math.floor(lat);
+  lon -= squareLon * 2;
+  lat -= squareLat;
+  const subsquareLon = Math.floor(lon * 12);
+  const subsquareLat = Math.floor(lat * 24);
+  return `${String.fromCharCode(65 + fieldLon)}${String.fromCharCode(65 + fieldLat)}${squareLon}${squareLat}${String.fromCharCode(97 + subsquareLon)}${String.fromCharCode(97 + subsquareLat)}`;
 }
 
 function uniqueAdds(stop: OperatingStop) {
@@ -150,6 +230,21 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
     </aside>
   </section>
 
+  <section class="section-block wide" aria-labelledby="route-map-title">
+    <div class="section-heading">
+      <p class="section-label">Route map</p>
+      <h2 id="route-map-title">Point-to-point rove path</h2>
+    </div>
+
+    <div id="dc-rove-map" class="rove-map" aria-label="Map of the Sunday DC and NoVA rove route"></div>
+    <div class="rove-map-legend" aria-label="Map marker legend">
+      <span><i style="background:#167246"></i>Activation</span>
+      <span><i style="background:#1f6feb"></i>Hotel / anchor</span>
+      <span><i style="background:#7f7f7f"></i>Parking</span>
+      <span><i style="background:#f28e2b"></i>Optional</span>
+    </div>
+  </section>
+
   <section class="section-block wide rove-timeline-section" aria-labelledby="timeline-title">
     <div class="section-heading">
       <p class="section-label">Estimated timeline</p>
@@ -174,6 +269,9 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
               <span>{timelineStop.movementMode} · {formatMinutes(timelineStop.movementMinutes)}</span>
             </div>
             <h3>{stopName(timelineStop)}</h3>
+            {coordinateLabel(waypointForTimeline(timelineStop)) && (
+              <p class="rove-coordinate-line">{coordinateLabel(waypointForTimeline(timelineStop))}</p>
+            )}
             <dl class="rove-stop-meta">
               <div>
                 <dt>Activate</dt>
@@ -192,7 +290,17 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
                 <dd>{timelineStop.cumulativeEntities} entities</dd>
               </div>
             </dl>
+            {directionsHref(timelineStop) && (
+              <p class="rove-directions-link">
+                <a href={directionsHref(timelineStop)} target="_blank" rel="noreferrer">
+                  Open directions in Apple Maps
+                </a>
+              </p>
+            )}
             <p>{timelineStop.timelineNote}</p>
+            {waypointForTimeline(timelineStop)?.confidence && (
+              <p class="rove-confidence-note">{waypointForTimeline(timelineStop)?.confidence}</p>
+            )}
             {referencesFor(timelineStop).length > 0 && (
               <p class="rove-reference-list">
                 {referencesFor(timelineStop).map((reference) => (
@@ -227,8 +335,20 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
               <span>{formatMinutes(addOn.movementMinutes)} movement</span>
             </div>
             <h3>{stop?.name ?? addOn.id}</h3>
+            {coordinateLabel(waypoint(addOn.id)) && (
+              <p class="rove-coordinate-line">{coordinateLabel(waypoint(addOn.id))}</p>
+            )}
             <p>{addOn.placement}. {addOn.timelineImpact}</p>
             <p>{addOn.timelineNote}</p>
+            <p class="rove-directions-link">
+              <a
+                href={appleMapsUrl(waypoint(addOn.directionsDestinationId), waypoint(addOn.directionsOriginId), addOn.movementMode)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open directions in Apple Maps
+              </a>
+            </p>
             <p class="rove-reference-list">
               {(stop?.references ?? []).map((reference) => (
                 <a href={potaUrl(reference)} target="_blank" rel="noreferrer">{reference}</a>
@@ -277,6 +397,129 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       {dcRove.openVerification.map((item) => <li>{item}</li>)}
     </ul>
   </section>
+
+  <section class="section-block wide" aria-labelledby="sources-title">
+    <div class="section-heading">
+      <p class="section-label">Source notes</p>
+      <h2 id="sources-title">Activation spot evidence</h2>
+    </div>
+
+    <ul class="rove-check-list">
+      <li>
+        CWops/W8WZ gives the DC activation sequence, the LBJ 7-fer walking
+        instructions, and the low-profile bench/AX1 approach for the Mall stops.
+      </li>
+      <li>
+        The local n-fer export provides repeated top-activator evidence for the
+        Fort McHenry, Mason Neck, and Dyke Marsh multi-reference clusters.
+      </li>
+      <li>
+        Official NPS/FWS pages provide park access context; exact POTA trail
+        overlap and antenna-rule compliance still need field verification.
+      </li>
+    </ul>
+  </section>
+
+  <script type="application/json" id="dc-rove-waypoints" set:html={routeWaypointsJson} />
+  <script type="application/json" id="dc-rove-primary-route" set:html={primaryRouteJson} />
+  <script>
+    import L from "leaflet";
+
+    const mapEl = document.getElementById("dc-rove-map");
+    const waypointsEl = document.getElementById("dc-rove-waypoints");
+    const routeEl = document.getElementById("dc-rove-primary-route");
+
+    if (mapEl && waypointsEl && routeEl) {
+      const waypoints = JSON.parse(waypointsEl.textContent ?? "[]");
+      const routeIds = JSON.parse(routeEl.textContent ?? "[]");
+      const pointById = new Map(waypoints.map((point: { id: string }) => [point.id, point]));
+      const routePoints = routeIds
+        .map((id: string) => pointById.get(id))
+        .filter(Boolean);
+      const map = L.map(mapEl, { scrollWheelZoom: false });
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      const bounds = L.latLngBounds([]);
+      const line = routePoints.map((point: { latitude: number; longitude: number }) => [
+        point.latitude,
+        point.longitude,
+      ]);
+
+      if (line.length > 1) {
+        L.polyline(line, {
+          color: "#167246",
+          opacity: 0.8,
+          weight: 3,
+        }).addTo(map);
+      }
+
+      for (const point of routePoints) {
+        const latLng: [number, number] = [point.latitude, point.longitude];
+        bounds.extend(latLng);
+        L.circleMarker(latLng, {
+          radius: point.type === "parking" ? 6 : 8,
+          color: "#172026",
+          weight: 2,
+          fillColor: waypointColor(point.type),
+          fillOpacity: 0.95,
+        })
+          .bindPopup(waypointPopup(point))
+          .addTo(map);
+      }
+
+      const optional = waypoints.filter((point: { type: string }) => point.type === "optional");
+      for (const point of optional) {
+        const latLng: [number, number] = [point.latitude, point.longitude];
+        bounds.extend(latLng);
+        L.circleMarker(latLng, {
+          radius: 7,
+          color: "#172026",
+          weight: 2,
+          fillColor: waypointColor(point.type),
+          fillOpacity: 0.95,
+        })
+          .bindPopup(waypointPopup(point))
+          .addTo(map);
+      }
+
+      if (bounds.isValid()) map.fitBounds(bounds, { padding: [24, 24] });
+    }
+
+    function waypointColor(type: string) {
+      if (type === "hotel") return "#1f6feb";
+      if (type === "parking") return "#7f7f7f";
+      if (type === "optional") return "#f28e2b";
+      return "#167246";
+    }
+
+    function escapeHtml(value: string) {
+      return String(value).replace(/[&<>"']/g, (c: string) => {
+        const e: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+        return e[c] ?? c;
+      });
+    }
+
+    function waypointPopup(point: {
+      label: string;
+      type: string;
+      latitude: number;
+      longitude: number;
+      confidence?: string;
+      notes?: string;
+    }) {
+      return `
+        <strong>${escapeHtml(point.label)}</strong>
+        <em>${escapeHtml(point.type)} · ${point.latitude.toFixed(5)}, ${point.longitude.toFixed(5)}</em>
+        <span>${escapeHtml(point.confidence ?? "")}</span>
+        <span>${escapeHtml(point.notes ?? "")}</span>
+      `;
+    }
+  </script>
 </BaseLayout>
 
 <style>
@@ -299,6 +542,37 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
 
   .rove-summary-panel {
     align-self: start;
+  }
+
+  .rove-map {
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--color-border, #ddd);
+    min-height: 22rem;
+    width: 100%;
+  }
+
+  .rove-map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.65rem;
+  }
+
+  .rove-map-legend span {
+    align-items: center;
+    color: var(--color-text-muted, #666);
+    display: inline-flex;
+    font-size: 0.78rem;
+    font-weight: 700;
+    gap: 0.35rem;
+  }
+
+  .rove-map-legend i {
+    border: 2px solid #172026;
+    border-radius: 999px;
+    display: inline-block;
+    height: 0.75rem;
+    width: 0.75rem;
   }
 
   .rove-summary-grid,
@@ -424,6 +698,13 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
     margin: 0 0 0.55rem;
   }
 
+  .rove-coordinate-line {
+    color: var(--color-text-muted, #666);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    margin: -0.2rem 0 0.55rem;
+  }
+
   .rove-stop-meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
@@ -446,6 +727,22 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
 
   .rove-unique-adds {
     margin: 0.45rem 0 0;
+  }
+
+  .rove-directions-link {
+    margin: 0.45rem 0;
+  }
+
+  .rove-directions-link a {
+    color: var(--color-accent, #167246);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .rove-confidence-note {
+    border-left: 2px solid var(--color-border, #ddd);
+    margin: 0.55rem 0 0;
+    padding-left: 0.6rem;
   }
 
   .rove-addon-grid {
@@ -494,6 +791,11 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       padding-left: 0.65rem;
       padding-right: 0;
       text-align: left;
+    }
+
+    .rove-map {
+      aspect-ratio: 4 / 5;
+      min-height: 20rem;
     }
   }
 </style>

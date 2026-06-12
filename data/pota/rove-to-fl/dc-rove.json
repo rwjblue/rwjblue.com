@@ -43,6 +43,7 @@
   "primaryTimeline": [
     {
       "id": "fort-mchenry-saturday",
+      "directionsDestinationId": "fort-mchenry-saturday",
       "localStart": "Sat 20:00",
       "localEnd": "Sat 20:45",
       "utcStart": "Sun 00:00",
@@ -56,6 +57,8 @@
     },
     {
       "id": "lbj-7fer",
+      "directionsOriginId": "foggy-bottom",
+      "directionsDestinationId": "lbj-parking",
       "localStart": "Sun 08:15",
       "localEnd": "Sun 09:00",
       "utcStart": "Sun 12:15",
@@ -69,6 +72,8 @@
     },
     {
       "id": "fdr",
+      "directionsOriginId": "lbj-parking",
+      "directionsDestinationId": "fdr",
       "localStart": "Sun 09:10",
       "localEnd": "Sun 09:55",
       "utcStart": "Sun 13:10",
@@ -82,6 +87,8 @@
     },
     {
       "id": "mlk",
+      "directionsOriginId": "fdr",
+      "directionsDestinationId": "mlk",
       "localStart": "Sun 10:00",
       "localEnd": "Sun 10:45",
       "utcStart": "Sun 14:00",
@@ -95,6 +102,8 @@
     },
     {
       "id": "korean",
+      "directionsOriginId": "mlk",
+      "directionsDestinationId": "korean",
       "localStart": "Sun 10:55",
       "localEnd": "Sun 11:40",
       "utcStart": "Sun 14:55",
@@ -108,6 +117,8 @@
     },
     {
       "id": "constitution-gardens",
+      "directionsOriginId": "korean",
+      "directionsDestinationId": "constitution-gardens",
       "localStart": "Sun 11:50",
       "localEnd": "Sun 12:35",
       "utcStart": "Sun 15:50",
@@ -121,6 +132,8 @@
     },
     {
       "id": "vietnam",
+      "directionsOriginId": "constitution-gardens",
+      "directionsDestinationId": "vietnam",
       "localStart": "Sun 12:45",
       "localEnd": "Sun 13:30",
       "utcStart": "Sun 16:45",
@@ -134,6 +147,8 @@
     },
     {
       "id": "wwii",
+      "directionsOriginId": "vietnam",
+      "directionsDestinationId": "wwii",
       "localStart": "Sun 13:45",
       "localEnd": "Sun 14:30",
       "utcStart": "Sun 17:45",
@@ -147,6 +162,8 @@
     },
     {
       "id": "washington-monument",
+      "directionsOriginId": "wwii",
+      "directionsDestinationId": "washington-monument",
       "localStart": "Sun 14:40",
       "localEnd": "Sun 15:25",
       "utcStart": "Sun 18:40",
@@ -160,6 +177,8 @@
     },
     {
       "id": "lincoln",
+      "directionsOriginId": "washington-monument",
+      "directionsDestinationId": "lincoln",
       "localStart": "Sun 15:45",
       "localEnd": "Sun 16:30",
       "utcStart": "Sun 19:45",
@@ -173,6 +192,8 @@
     },
     {
       "id": "mason-neck",
+      "directionsOriginId": "lincoln",
+      "directionsDestinationId": "mason-neck",
       "localStart": "Sun 17:15",
       "localEnd": "Sun 18:00",
       "utcStart": "Sun 21:15",
@@ -187,6 +208,8 @@
     {
       "id": "fredericksburg-arrival",
       "label": "Fredericksburg hotel",
+      "directionsOriginId": "mason-neck",
+      "directionsDestinationId": "fredericksburg",
       "localStart": "Sun 18:50",
       "localEnd": "Sun 18:50",
       "utcStart": "Sun 22:50",
@@ -202,6 +225,8 @@
   "optionalTimelineAddOns": [
     {
       "id": "dyke-marsh",
+      "directionsOriginId": "washington-monument",
+      "directionsDestinationId": "dyke-marsh",
       "placement": "between Washington Monument or Lincoln and Mason Neck",
       "movementMode": "drive",
       "movementMinutes": 52,
@@ -209,6 +234,143 @@
       "entityAdds": 2,
       "timelineImpact": "Adds about 1h 35m before Mason Neck when including the activation and extra driving.",
       "timelineNote": "Useful high-confidence buffer for Ostrich only if exact public access and pace are excellent."
+    }
+  ],
+  "routeWaypoints": [
+    {
+      "id": "fort-mchenry-saturday",
+      "label": "Fort McHenry",
+      "latitude": 39.2641007,
+      "longitude": -76.5806414,
+      "type": "activation",
+      "confidence": "strong n-fer evidence; exact US-4582 position still needs field confirmation",
+      "notes": "Use an on-grounds public operating position after the 20:00 EDT UTC rollover."
+    },
+    {
+      "id": "foggy-bottom",
+      "label": "Foggy Bottom hotel",
+      "latitude": 38.9006918,
+      "longitude": -77.0518254,
+      "type": "hotel",
+      "confidence": "known anchor",
+      "notes": "Saturday night hotel and Sunday morning departure point."
+    },
+    {
+      "id": "lbj-parking",
+      "label": "Columbia Island Marina parking",
+      "latitude": 38.875198,
+      "longitude": -77.048943,
+      "type": "parking",
+      "confidence": "article-backed access point",
+      "notes": "Drive here, then walk toward the exact LBJ 7-fer point."
+    },
+    {
+      "id": "lbj-7fer",
+      "label": "LBJ exact 7-fer operating area",
+      "latitude": 38.8789,
+      "longitude": -77.0492,
+      "type": "activation",
+      "confidence": "approximate article-derived point",
+      "notes": "W8WZ describes walking from the marina to the LBJ stone monument, continuing toward the Washington Monument, crossing the parkway, and setting up under a tree between the parkway and Potomac."
+    },
+    {
+      "id": "fdr",
+      "label": "FDR Memorial",
+      "latitude": 38.8834579,
+      "longitude": -77.0429536,
+      "type": "activation",
+      "confidence": "article-backed Mall 2-fer stop",
+      "notes": "Use a low-profile bench or tabletop operating spot."
+    },
+    {
+      "id": "mlk",
+      "label": "MLK Memorial",
+      "latitude": 38.8862795,
+      "longitude": -77.0442553,
+      "type": "activation",
+      "confidence": "article-backed Mall 2-fer stop",
+      "notes": "Use a low-profile bench operating spot."
+    },
+    {
+      "id": "korean",
+      "label": "Korean War Veterans Memorial",
+      "latitude": 38.8878422,
+      "longitude": -77.0477385,
+      "type": "activation",
+      "confidence": "article-backed Mall 2-fer stop",
+      "notes": "W8WZ notes a successful low-profile AX1/kneeboard activation here."
+    },
+    {
+      "id": "constitution-gardens",
+      "label": "Constitution Gardens",
+      "latitude": 38.8909409,
+      "longitude": -77.0445292,
+      "type": "activation",
+      "confidence": "article-backed Mall 2-fer stop",
+      "notes": "Bench availability likely drives the exact operating point."
+    },
+    {
+      "id": "vietnam",
+      "label": "Vietnam Veterans Memorial",
+      "latitude": 38.8912933,
+      "longitude": -77.0477132,
+      "type": "activation",
+      "confidence": "article-backed Mall 2-fer stop",
+      "notes": "Cheetah threshold if Fort and LBJ validate as planned."
+    },
+    {
+      "id": "wwii",
+      "label": "World War II Memorial",
+      "latitude": 38.888967,
+      "longitude": -77.0405119,
+      "type": "activation",
+      "confidence": "article-backed Mall 2-fer stop",
+      "notes": "Buffer beyond Cheetah."
+    },
+    {
+      "id": "washington-monument",
+      "label": "Washington Monument",
+      "latitude": 38.8894838,
+      "longitude": -77.0352791,
+      "type": "activation",
+      "confidence": "article-backed Mall 2-fer stop",
+      "notes": "W8WZ finished the Cheetah route here in late afternoon."
+    },
+    {
+      "id": "lincoln",
+      "label": "Lincoln Memorial",
+      "latitude": 38.8893,
+      "longitude": -77.0502,
+      "type": "activation",
+      "confidence": "good overlay; operating-space risk",
+      "notes": "W8WZ skipped this because it was crowded and lacked a nearby bench."
+    },
+    {
+      "id": "mason-neck",
+      "label": "Mason Neck State Park / Mason Neck NWR",
+      "latitude": 38.6465022,
+      "longitude": -77.1861893,
+      "type": "activation",
+      "confidence": "top-activator n-fer evidence; restrictions need confirmation",
+      "notes": "Use only a compliant public operating position; verify refuge and state park antenna rules before relying on the 2-fer."
+    },
+    {
+      "id": "dyke-marsh",
+      "label": "Dyke Marsh Wildlife Preserve",
+      "latitude": 38.7661394,
+      "longitude": -77.0492459,
+      "type": "optional",
+      "confidence": "top-activator n-fer evidence; exact position needs confirmation",
+      "notes": "Optional buffer stop near the Haul Road/Belle Haven access area."
+    },
+    {
+      "id": "fredericksburg",
+      "label": "Fredericksburg hotel",
+      "latitude": 38.3003751,
+      "longitude": -77.4588059,
+      "type": "hotel",
+      "confidence": "known anchor",
+      "notes": "Booked Sunday night endpoint."
     }
   ],
   "referenceCatalog": [
