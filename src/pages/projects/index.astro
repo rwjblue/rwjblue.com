@@ -2,13 +2,17 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import riPotaTrackerData from "../../data/pota/ri-tracker.json";
+import roveToFlData from "../../data/pota/rove-to-fl.json";
 import { formatDate } from "../../lib/format";
 import { effectiveProjectUpdatedDate } from "../../lib/project-updates";
 
 const projects = (await getCollection("projects"))
   .map((project) => ({
     project,
-    updated: effectiveProjectUpdatedDate(project, { riPotaTrackerData }),
+    updated: effectiveProjectUpdatedDate(project, {
+      riPotaTrackerData,
+      roveToFlData,
+    }),
   }))
   .sort((a, b) => b.updated.valueOf() - a.updated.valueOf());
 ---
