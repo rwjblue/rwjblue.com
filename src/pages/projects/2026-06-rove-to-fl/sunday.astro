@@ -32,7 +32,7 @@ interface TimelineStop {
   localEnd: string;
   utcStart: string;
   utcEnd: string;
-  movementMode: "drive" | "walk";
+  movementMode: "drive" | "walk" | "ride";
   movementFromPrior: string;
   movementMinutes: number;
   activationMinutes: number;
@@ -44,7 +44,7 @@ interface OptionalTimelineAddOn {
   directionsOriginId: string;
   directionsDestinationId: string;
   placement: string;
-  movementMode: "drive" | "walk";
+  movementMode: "drive" | "walk" | "ride";
   movementMinutes: number;
   activationMinutes: number;
   entityAdds: number;
@@ -64,7 +64,7 @@ interface RouteWaypoint {
   label: string;
   latitude: number;
   longitude: number;
-  type: "activation" | "parking" | "hotel" | "optional";
+  type: "activation" | "hotel" | "optional";
   notes: string;
 }
 interface ExpandedMallCandidate {
@@ -84,6 +84,30 @@ interface ExpandedMallRoute {
   countMilestones: { label: string; entities: number }[];
   caution: string;
 }
+interface RouteOptimizationStep {
+  label: string;
+  mode?: string;
+  movement?: string;
+  value?: string;
+  finding?: string;
+  minutesFromPrior?: number;
+  cumulativeWalkMinutes?: number;
+}
+interface MapsEvidence {
+  scenario: string;
+  mode: string;
+  distance: string;
+  minutes: number;
+  order?: string;
+}
+interface RouteOptimization {
+  summary: string;
+  constraints: string[];
+  recommendedCoreOrder: RouteOptimizationStep[];
+  expandedWalkOrder: RouteOptimizationStep[];
+  addOnFindings: RouteOptimizationStep[];
+  mapsEvidence: MapsEvidence[];
+}
 
 const operatingStops = dcRove.operatingStops as OperatingStop[];
 const mappedLegs = dcRove.mappedLegs as MappedLeg[];
@@ -93,19 +117,20 @@ const optionalTimelineAddOns = dcRove.optionalTimelineAddOns as OptionalTimeline
 const routeWaypoints = dcRove.routeWaypoints as RouteWaypoint[];
 const expandedMallInventory = dcRove.expandedMallInventory as ExpandedMallInventory | undefined;
 const expandedMallRoute = dcRove.expandedMallRoute as ExpandedMallRoute | undefined;
+const routeOptimization = dcRove.routeOptimization as RouteOptimization | undefined;
 const routeWaypointsJson = JSON.stringify(routeWaypoints);
 const primaryRouteWaypointIds = [
   "foggy-bottom",
-  "lbj-parking",
+  "theodore-roosevelt-island",
   "lbj-7fer",
   "fdr",
   "mlk",
   "korean",
-  "constitution-gardens",
+  "lincoln",
   "vietnam",
+  "constitution-gardens",
   "wwii",
-  "washington-monument",
-  "lincoln"
+  "washington-monument"
 ];
 const primaryRouteJson = JSON.stringify(primaryRouteWaypointIds);
 
@@ -129,7 +154,7 @@ function coordinateLabel(point?: RouteWaypoint) {
   return `${point.latitude.toFixed(5)}, ${point.longitude.toFixed(5)} · ${maidenheadGrid(point.latitude, point.longitude)}`;
 }
 
-function appleMapsUrl(destination?: RouteWaypoint, origin?: RouteWaypoint, mode: "drive" | "walk" = "drive") {
+function appleMapsUrl(destination?: RouteWaypoint, origin?: RouteWaypoint, mode: "drive" | "walk" | "ride" = "drive") {
   if (!destination) return null;
   const params = new URLSearchParams();
   params.set("daddr", `${destination.latitude},${destination.longitude}`);
@@ -254,7 +279,7 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
     <div class="rove-map-legend" aria-label="Map marker legend">
       <span><i style="background:#167246"></i>Activation</span>
       <span><i style="background:#1f6feb"></i>Hotel / anchor</span>
-      <span><i style="background:#7f7f7f"></i>Parking</span>
+      <span><i style="background:#f28e2b"></i>Optional</span>
     </div>
   </section>
 
@@ -328,6 +353,76 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       ))}
     </ol>
   </section>
+
+  {routeOptimization && (
+    <section class="section-block wide" aria-labelledby="route-optimization-title">
+      <div class="section-heading">
+        <p class="section-label">Google Maps optimization</p>
+        <h2 id="route-optimization-title">Best order from Foggy Bottom</h2>
+      </div>
+
+      <p class="rove-note">{routeOptimization.summary}</p>
+
+      <div class="rove-addon-grid rove-route-optimization-grid">
+        <article>
+          <div class="rove-card-topline">
+            <span>recommended core</span>
+            <span>value first</span>
+          </div>
+          <ol class="rove-ordered-compact-list">
+            {routeOptimization.recommendedCoreOrder.map((step) => (
+              <li>
+                <strong>{step.label}</strong>
+                {step.movement && <span>{step.movement}</span>}
+                {step.value && <em>{step.value}</em>}
+              </li>
+            ))}
+          </ol>
+        </article>
+        <article>
+          <div class="rove-card-topline">
+            <span>decision rules</span>
+            <span>walk vs ride</span>
+          </div>
+          <ul class="rove-compact-list">
+            {routeOptimization.addOnFindings.map((finding) => (
+              <li><strong>{finding.label}:</strong> {finding.finding}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+
+      <div class="rove-optimization-columns">
+        <article>
+          <h3>Expanded walk order</h3>
+          <ol class="rove-walk-order-list">
+            {routeOptimization.expandedWalkOrder.map((step) => (
+              <li>
+                <strong>{step.label}</strong>
+                {typeof step.minutesFromPrior === "number" && (
+                  <span>
+                    +{step.minutesFromPrior}m / {step.cumulativeWalkMinutes}m total
+                  </span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </article>
+        <article>
+          <h3>Mapped evidence</h3>
+          <dl class="rove-evidence-list">
+            {routeOptimization.mapsEvidence.map((evidence) => (
+              <div>
+                <dt>{evidence.scenario}</dt>
+                <dd>{evidence.mode} · {evidence.distance} · {formatMinutes(evidence.minutes)}</dd>
+                {evidence.order && <dd>{evidence.order}</dd>}
+              </div>
+            ))}
+          </dl>
+        </article>
+      </div>
+    </section>
+  )}
 
   <section class="section-block wide" aria-labelledby="optional-title">
     <div class="section-heading">
@@ -440,7 +535,7 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
   <section class="section-block wide" aria-labelledby="legs-title">
     <div class="section-heading">
       <p class="section-label">Movement</p>
-      <h2 id="legs-title">Mapped drive and walk legs</h2>
+      <h2 id="legs-title">Mapped movement legs</h2>
     </div>
 
     <div class="rove-leg-grid">
@@ -515,16 +610,16 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
         .filter(Boolean);
       const stopNumbers: Record<string, string> = {
         "foggy-bottom": "H",
-        "lbj-parking": "P",
-        "lbj-7fer": "2",
-        fdr: "3",
-        mlk: "4",
-        korean: "5",
-        "constitution-gardens": "6",
-        vietnam: "7",
+        "theodore-roosevelt-island": "T",
+        "lbj-7fer": "1",
+        fdr: "2",
+        mlk: "3",
+        korean: "4",
+        lincoln: "5",
+        vietnam: "6",
+        "constitution-gardens": "7",
         wwii: "8",
         "washington-monument": "9",
-        lincoln: "10",
       };
       const map = L.map(mapEl, { scrollWheelZoom: false });
 
@@ -858,6 +953,78 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
     min-width: 2rem;
   }
 
+  .rove-route-optimization-grid {
+    margin-top: 1rem;
+  }
+
+  .rove-ordered-compact-list,
+  .rove-walk-order-list {
+    color: var(--color-text-muted, #666);
+    font-size: 0.84rem;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .rove-ordered-compact-list li + li,
+  .rove-walk-order-list li + li {
+    margin-top: 0.5rem;
+  }
+
+  .rove-ordered-compact-list strong,
+  .rove-walk-order-list strong {
+    color: var(--color-text, #172026);
+    display: block;
+  }
+
+  .rove-ordered-compact-list span,
+  .rove-ordered-compact-list em,
+  .rove-walk-order-list span {
+    display: block;
+    margin-top: 0.08rem;
+  }
+
+  .rove-ordered-compact-list em {
+    color: var(--color-accent, #167246);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .rove-optimization-columns {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    margin-top: 0.75rem;
+  }
+
+  .rove-optimization-columns article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.9rem;
+  }
+
+  .rove-optimization-columns h3 {
+    font-size: 1rem;
+    margin: 0 0 0.65rem;
+  }
+
+  .rove-evidence-list {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+  }
+
+  .rove-evidence-list dt {
+    color: var(--color-text, #172026);
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .rove-evidence-list dd {
+    color: var(--color-text-muted, #666);
+    font-size: 0.82rem;
+    margin: 0.1rem 0 0;
+  }
+
   .rove-candidate-reference-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
@@ -934,6 +1101,10 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
     .rove-map {
       aspect-ratio: 4 / 5;
       min-height: 20rem;
+    }
+
+    .rove-optimization-columns {
+      grid-template-columns: 1fr;
     }
   }
 </style>

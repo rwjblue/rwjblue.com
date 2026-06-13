@@ -58,32 +58,32 @@
     {
       "id": "lbj-7fer",
       "directionsOriginId": "foggy-bottom",
-      "directionsDestinationId": "lbj-parking",
+      "directionsDestinationId": "lbj-7fer",
       "localStart": "Sun 08:15",
       "localEnd": "Sun 09:00",
       "utcStart": "Sun 12:15",
       "utcEnd": "Sun 13:00",
-      "movementMode": "drive",
+      "movementMode": "ride",
       "movementFromPrior": "Foggy Bottom hotel",
       "movementMinutes": 12,
       "activationMinutes": 45,
       "cumulativeEntities": 9,
-      "timelineNote": "Sunday morning jackpot stop; fallback is four references if the exact 7-fer point cannot be found."
+      "timelineNote": "Sunday morning jackpot stop. Use rideshare from the hotel; Columbia Island Marina is only access context, not a car stop."
     },
     {
       "id": "fdr",
-      "directionsOriginId": "lbj-parking",
+      "directionsOriginId": "lbj-7fer",
       "directionsDestinationId": "fdr",
       "localStart": "Sun 09:10",
       "localEnd": "Sun 09:55",
       "utcStart": "Sun 13:10",
       "utcEnd": "Sun 13:55",
-      "movementMode": "drive",
-      "movementFromPrior": "Columbia Island Marina / LBJ",
-      "movementMinutes": 10,
+      "movementMode": "ride",
+      "movementFromPrior": "LBJ operating area",
+      "movementMinutes": 7,
       "activationMinutes": 45,
       "cumulativeEntities": 11,
-      "timelineNote": "Adds FDR and National Mall if National Mall has not already been counted."
+      "timelineNote": "Adds FDR and National Mall if National Mall has not already been counted. Walking from LBJ is about 29 minutes; rideshare is about 7 minutes."
     },
     {
       "id": "mlk",
@@ -116,107 +116,123 @@
       "timelineNote": "Adds Korean War Veterans Memorial."
     },
     {
-      "id": "constitution-gardens",
+      "id": "lincoln",
       "directionsOriginId": "korean",
-      "directionsDestinationId": "constitution-gardens",
-      "localStart": "Sun 11:50",
-      "localEnd": "Sun 12:35",
-      "utcStart": "Sun 15:50",
-      "utcEnd": "Sun 16:35",
+      "directionsDestinationId": "lincoln",
+      "localStart": "Sun 11:45",
+      "localEnd": "Sun 12:30",
+      "utcStart": "Sun 15:45",
+      "utcEnd": "Sun 16:30",
       "movementMode": "walk",
       "movementFromPrior": "Korean War Veterans Memorial",
-      "movementMinutes": 8,
+      "movementMinutes": 3,
       "activationMinutes": 45,
       "cumulativeEntities": 14,
-      "timelineNote": "Adds Constitution Gardens."
+      "timelineNote": "Adds Lincoln while it is only a short west Mall walk; skip only if crowds or operating space are bad."
     },
     {
       "id": "vietnam",
-      "directionsOriginId": "constitution-gardens",
+      "directionsOriginId": "lincoln",
       "directionsDestinationId": "vietnam",
-      "localStart": "Sun 12:45",
-      "localEnd": "Sun 13:30",
-      "utcStart": "Sun 16:45",
-      "utcEnd": "Sun 17:30",
+      "localStart": "Sun 12:35",
+      "localEnd": "Sun 13:20",
+      "utcStart": "Sun 16:35",
+      "utcEnd": "Sun 17:20",
       "movementMode": "walk",
-      "movementFromPrior": "Constitution Gardens",
-      "movementMinutes": 6,
+      "movementFromPrior": "Lincoln Memorial",
+      "movementMinutes": 5,
       "activationMinutes": 45,
       "cumulativeEntities": 15,
       "timelineNote": "Cheetah threshold if Fort McHenry and LBJ verify as planned."
     },
     {
-      "id": "wwii",
+      "id": "constitution-gardens",
       "directionsOriginId": "vietnam",
-      "directionsDestinationId": "wwii",
-      "localStart": "Sun 13:45",
-      "localEnd": "Sun 14:30",
-      "utcStart": "Sun 17:45",
-      "utcEnd": "Sun 18:30",
+      "directionsDestinationId": "constitution-gardens",
+      "localStart": "Sun 13:30",
+      "localEnd": "Sun 14:15",
+      "utcStart": "Sun 17:30",
+      "utcEnd": "Sun 18:15",
       "movementMode": "walk",
       "movementFromPrior": "Vietnam Veterans Memorial",
-      "movementMinutes": 12,
+      "movementMinutes": 9,
       "activationMinutes": 45,
       "cumulativeEntities": 16,
+      "timelineNote": "Adds Constitution Gardens."
+    },
+    {
+      "id": "wwii",
+      "directionsOriginId": "constitution-gardens",
+      "directionsDestinationId": "wwii",
+      "localStart": "Sun 14:20",
+      "localEnd": "Sun 15:05",
+      "utcStart": "Sun 18:20",
+      "utcEnd": "Sun 19:05",
+      "movementMode": "walk",
+      "movementFromPrior": "Constitution Gardens",
+      "movementMinutes": 3,
+      "activationMinutes": 45,
+      "cumulativeEntities": 17,
       "timelineNote": "Buffer beyond Cheetah."
     },
     {
       "id": "washington-monument",
       "directionsOriginId": "wwii",
       "directionsDestinationId": "washington-monument",
-      "localStart": "Sun 14:40",
-      "localEnd": "Sun 15:25",
-      "utcStart": "Sun 18:40",
-      "utcEnd": "Sun 19:25",
+      "localStart": "Sun 15:15",
+      "localEnd": "Sun 16:00",
+      "utcStart": "Sun 19:15",
+      "utcEnd": "Sun 20:00",
       "movementMode": "walk",
       "movementFromPrior": "World War II Memorial",
-      "movementMinutes": 10,
+      "movementMinutes": 8,
       "activationMinutes": 45,
-      "cumulativeEntities": 17,
+      "cumulativeEntities": 18,
       "timelineNote": "End of the W8WZ article-backed Mall sequence."
     },
     {
-      "id": "lincoln",
+      "id": "foggy-bottom-return",
+      "label": "Return to Foggy Bottom hotel / get car",
       "directionsOriginId": "washington-monument",
-      "directionsDestinationId": "lincoln",
-      "localStart": "Sun 15:45",
-      "localEnd": "Sun 16:30",
-      "utcStart": "Sun 19:45",
-      "utcEnd": "Sun 20:30",
+      "directionsDestinationId": "foggy-bottom",
+      "localStart": "Sun 16:35",
+      "localEnd": "",
+      "utcStart": "Sun 20:35",
+      "utcEnd": "",
       "movementMode": "walk",
       "movementFromPrior": "Washington Monument",
-      "movementMinutes": 18,
-      "activationMinutes": 45,
+      "movementMinutes": 31,
+      "activationMinutes": 0,
       "cumulativeEntities": 18,
-      "timelineNote": "Useful Ostrich add-on if crowds and operating space cooperate."
+      "timelineNote": "Walk back to the hotel to pick up the car. Rideshare is about 9 minutes if schedule or weather makes the walk unattractive."
     },
     {
       "id": "mason-neck",
-      "directionsOriginId": "lincoln",
+      "directionsOriginId": "foggy-bottom",
       "directionsDestinationId": "mason-neck",
       "localStart": "Sun 17:15",
       "localEnd": "Sun 18:00",
       "utcStart": "Sun 21:15",
       "utcEnd": "Sun 22:00",
       "movementMode": "drive",
-      "movementFromPrior": "Lincoln Memorial / Mall area",
+      "movementFromPrior": "Foggy Bottom hotel car pickup",
       "movementMinutes": 40,
       "activationMinutes": 45,
       "cumulativeEntities": 20,
-      "timelineNote": "Clean Ostrich finish if park/refuge access and antenna restrictions check out."
+      "timelineNote": "Clean Ostrich finish if park/refuge access and antenna restrictions check out. This assumes the car stays at the hotel during the DC rove."
     },
     {
       "id": "fredericksburg-arrival",
       "label": "Fredericksburg hotel",
       "directionsOriginId": "mason-neck",
       "directionsDestinationId": "fredericksburg",
-      "localStart": "Sun 18:50",
-      "localEnd": "Sun 18:50",
-      "utcStart": "Sun 22:50",
-      "utcEnd": "Sun 22:50",
+      "localStart": "Sun 19:00",
+      "localEnd": "",
+      "utcStart": "Sun 23:00",
+      "utcEnd": "",
       "movementMode": "drive",
       "movementFromPrior": "Mason Neck",
-      "movementMinutes": 50,
+      "movementMinutes": 59,
       "activationMinutes": 0,
       "cumulativeEntities": 20,
       "timelineNote": "Booked Sunday night anchor after the rove."
@@ -254,15 +270,6 @@
       "type": "hotel",
       "confidence": "known anchor",
       "notes": "Saturday night hotel and Sunday morning departure point."
-    },
-    {
-      "id": "lbj-parking",
-      "label": "Columbia Island Marina parking",
-      "latitude": 38.875198,
-      "longitude": -77.048943,
-      "type": "parking",
-      "confidence": "article-backed access point",
-      "notes": "Drive here, then walk toward the exact LBJ 7-fer point."
     },
     {
       "id": "lbj-7fer",
@@ -371,6 +378,69 @@
       "type": "hotel",
       "confidence": "known anchor",
       "notes": "Booked Sunday night endpoint."
+    },
+    {
+      "id": "theodore-roosevelt-island",
+      "label": "Theodore Roosevelt Island",
+      "latitude": 38.895784,
+      "longitude": -77.062564,
+      "type": "optional",
+      "confidence": "good boundary; early add-on",
+      "notes": "Optional early add-on. Best attempted before LBJ by rideshare from Foggy Bottom, or skipped if keeping costs low."
+    },
+    {
+      "id": "jefferson",
+      "label": "Thomas Jefferson Memorial",
+      "latitude": 38.88166,
+      "longitude": -77.036816,
+      "type": "activation",
+      "confidence": "point GeoJSON only; strong landmark",
+      "notes": "Good south/east start for the expanded Mall walk."
+    },
+    {
+      "id": "wwi",
+      "label": "World War I Memorial",
+      "latitude": 38.89594,
+      "longitude": -77.032808,
+      "type": "activation",
+      "confidence": "GeoJSON boundary cached",
+      "notes": "Fits after President’s Park in optimized expanded walk."
+    },
+    {
+      "id": "presidents-park",
+      "label": "President's Park",
+      "latitude": 38.897334,
+      "longitude": -77.037036,
+      "type": "activation",
+      "confidence": "GeoJSON boundary cached",
+      "notes": "Fits after Washington Monument in optimized expanded walk."
+    },
+    {
+      "id": "fords-theatre",
+      "label": "Ford's Theatre",
+      "latitude": 38.896678,
+      "longitude": -77.025818,
+      "type": "activation",
+      "confidence": "point GeoJSON only",
+      "notes": "Downtown add-on after WWI; long eastward commitment."
+    },
+    {
+      "id": "eisenhower",
+      "label": "Dwight D. Eisenhower Memorial",
+      "latitude": 38.88715,
+      "longitude": -77.019044,
+      "type": "activation",
+      "confidence": "GeoJSON boundary cached",
+      "notes": "East/south Mall endpoint before rideshare pickup or Capitol Hill add-on."
+    },
+    {
+      "id": "belmont-paul",
+      "label": "Belmont-Paul Women's Equality NM",
+      "latitude": 38.892354,
+      "longitude": -77.003884,
+      "type": "activation",
+      "confidence": "GeoJSON boundary cached",
+      "notes": "Capitol Hill add-on; better by rideshare/car than on foot from west Mall."
     }
   ],
   "referenceCatalog": [
@@ -842,67 +912,76 @@
       "notes": "Saturday after the 20:00 EDT activation."
     },
     {
-      "from": "Foggy Bottom",
-      "to": "Columbia Island Marina / LBJ",
-      "mode": "drive",
-      "distance": "7.0 km",
-      "minutes": 12
+      "from": "Foggy Bottom hotel",
+      "to": "Theodore Roosevelt Island",
+      "mode": "ride",
+      "distance": "2.1 km",
+      "minutes": 4,
+      "notes": "Optional early add-on if chasing 20+ entities."
     },
     {
-      "from": "Columbia Island Marina / LBJ",
+      "from": "Foggy Bottom hotel",
+      "to": "LBJ exact 7-fer operating area",
+      "mode": "ride",
+      "distance": "6.2 km",
+      "minutes": 12,
+      "notes": "Primary Sunday morning jump; car remains parked at the hotel."
+    },
+    {
+      "from": "Theodore Roosevelt Island",
+      "to": "LBJ exact 7-fer operating area",
+      "mode": "ride",
+      "distance": "8.3 km",
+      "minutes": 9,
+      "notes": "Use only if Theodore Roosevelt Island is included."
+    },
+    {
+      "from": "LBJ exact 7-fer operating area",
       "to": "FDR Memorial",
-      "mode": "drive",
-      "distance": "4.5 km",
-      "minutes": 10
+      "mode": "ride",
+      "distance": "3.1 km",
+      "minutes": 7,
+      "notes": "Walking is about 29 minutes; rideshare preserves rove time."
     },
     {
       "from": "FDR Memorial",
-      "to": "Washington Monument via Mall memorial sequence",
+      "to": "Washington Monument via optimized core Mall walk",
       "mode": "walk",
-      "distance": "1.5 km",
-      "minutes": 21
+      "distance": "2.9 km",
+      "minutes": 39,
+      "notes": "FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution -> WWII -> Washington Monument."
     },
     {
       "from": "Washington Monument",
-      "to": "Dyke Marsh",
-      "mode": "drive",
-      "distance": "15.3 km",
-      "minutes": 20
+      "to": "Foggy Bottom hotel",
+      "mode": "walk",
+      "distance": "2.2 km",
+      "minutes": 31,
+      "notes": "Default low-cost return to the car; rideshare is about 9 minutes."
     },
     {
-      "from": "Dyke Marsh",
+      "from": "Eisenhower Memorial",
+      "to": "Foggy Bottom hotel",
+      "mode": "ride",
+      "distance": "5.4 km",
+      "minutes": 11,
+      "notes": "Use this if the east Mall expansion is attempted; walking back is about 54 minutes."
+    },
+    {
+      "from": "Foggy Bottom hotel",
       "to": "Mason Neck State Park",
       "mode": "drive",
-      "distance": "27.3 km",
-      "minutes": 32
-    },
-    {
-      "from": "Washington Monument",
-      "to": "Mason Neck State Park direct",
-      "mode": "drive",
-      "distance": "41.0 km",
-      "minutes": 36
+      "distance": "43.8 km",
+      "minutes": 40,
+      "notes": "Southbound car move after returning to the hotel."
     },
     {
       "from": "Mason Neck State Park",
-      "to": "Fredericksburg",
+      "to": "Fredericksburg hotel",
       "mode": "drive",
       "distance": "64.0 km",
-      "minutes": 50
-    },
-    {
-      "from": "Washington Monument",
-      "to": "Prince William Forest Park",
-      "mode": "drive",
-      "distance": "50.3 km",
-      "minutes": 47
-    },
-    {
-      "from": "Prince William Forest Park",
-      "to": "Fredericksburg",
-      "mode": "drive",
-      "distance": "34.5 km",
-      "minutes": 25
+      "minutes": 59,
+      "notes": "Sunday night endpoint."
     }
   ],
   "openVerification": [
@@ -954,7 +1033,7 @@
         "reference": "US-0784",
         "name": "Lyndon Baines Johnson Memorial Grove on the Potomac",
         "group": "LBJ 7-fer",
-        "routeUse": "Anchor stop from Columbia Island Marina."
+        "routeUse": "Anchor stop at the exact LBJ operating area; Columbia Island Marina is access context only."
       },
       {
         "reference": "US-9901",
@@ -1074,13 +1153,13 @@
         "reference": "US-7892",
         "name": "Belmont-Paul Women's Equality National Monument",
         "group": "Capitol Hill add-on",
-        "routeUse": "Short drive/rideshare from Eisenhower; probably too far to include by walking unless ahead of schedule."
+        "routeUse": "Short rideshare from Eisenhower; probably too far to include by walking unless ahead of schedule."
       },
       {
         "reference": "US-0791",
         "name": "Theodore Roosevelt Island National Memorial",
         "group": "Foggy Bottom / Potomac add-on",
-        "routeUse": "Useful with rideshare/car; awkward to combine with south/east Mall walking."
+        "routeUse": "Optional early add-on before LBJ; useful only if a rideshare hop fits the budget and schedule."
       },
       {
         "reference": "US-9961",
@@ -1110,7 +1189,7 @@
   },
   "expandedMallRoute": {
     "name": "Aggressive Mall/downtown expansion from Foggy Bottom",
-    "strategy": "Uber/drive from Foggy Bottom to Columbia Island Marina for the LBJ cluster, then drive/rideshare across the river to Jefferson/FDR and walk the Mall/downtown sequence. Use rideshare again for Belmont-Paul, Theodore Roosevelt Island, Dyke Marsh, or Mason Neck add-ons.",
+    "strategy": "Rideshare from Foggy Bottom to the exact LBJ operating area, rideshare to FDR or Jefferson, walk the Mall/downtown sequence, then return to the Foggy Bottom hotel to get the car before any southbound add-ons.",
     "mapsChecks": [
       {
         "from": "Foggy Bottom",
@@ -1165,8 +1244,9 @@
     "recommendedOrder": [
       "Fort McHenry after 20:00 EDT Saturday",
       "Foggy Bottom hotel",
-      "Columbia Island Marina / exact LBJ 7-fer",
-      "Thomas Jefferson Memorial",
+      "Optional early: Theodore Roosevelt Island by car/rideshare if chasing 20+",
+      "Exact LBJ 7-fer operating area",
+      "Thomas Jefferson Memorial or FDR Memorial rideshare drop",
       "FDR Memorial",
       "MLK Memorial",
       "Korean War Veterans Memorial",
@@ -1175,15 +1255,13 @@
       "Constitution Gardens",
       "World War II Memorial",
       "Washington Monument",
-      "World War I Memorial",
       "President's Park",
-      "Pennsylvania Avenue NHS",
+      "World War I Memorial",
       "Ford's Theatre NHS",
       "Dwight D. Eisenhower Memorial",
-      "Optional rideshare: Belmont-Paul",
-      "Optional rideshare: Theodore Roosevelt Island",
+      "Optional rideshare/car: Belmont-Paul",
       "Optional southbound: Dyke Marsh",
-      "Optional southbound: Mason Neck",
+      "Return to Foggy Bottom hotel, then drive to Mason Neck",
       "Fredericksburg hotel"
     ],
     "countMilestones": [
@@ -1220,6 +1298,218 @@
         "entities": 30
       }
     ],
-    "caution": "The expanded downtown walk is 9.8 km before activation time. At 45 minutes per stop, the whole downtown expansion is too heavy unless activations are closer to 30 minutes and several crowded/bench-poor stops are skipped."
+    "caution": "The optimized expanded downtown walk is about 8.2 km / 112 minutes from Jefferson through Eisenhower before activation time. If you push east, plan a rideshare back to the Foggy Bottom hotel; walking back from Eisenhower is about 54 minutes."
+  },
+  "routeOptimization": {
+    "updated": "2026-06-13",
+    "summary": "With the car parked at the Foggy Bottom hotel, the best structure is hotel-anchored: rideshare to the LBJ operating area, rideshare to the Mall, walk the dense memorial sequence, return to the hotel to get the car, then drive south. Columbia Island Marina is access context for LBJ, not a stop.",
+    "constraints": [
+      "The Tesla stays parked at the Foggy Bottom hotel during the DC rove.",
+      "Prefer walking when the time penalty is modest and it avoids another rideshare.",
+      "Use rideshare for the hotel -> LBJ and LBJ -> Mall jumps; those crossings are not worth walking during a count-focused rove.",
+      "Return to the hotel before Mason Neck, because the southbound car move starts there."
+    ],
+    "recommendedCoreOrder": [
+      {
+        "label": "Foggy Bottom hotel",
+        "mode": "walk/ride",
+        "movement": "start with car parked at hotel",
+        "value": "single car anchor"
+      },
+      {
+        "label": "Optional Theodore Roosevelt Island",
+        "mode": "ride",
+        "movement": "4 min from hotel; 9 min onward to LBJ",
+        "value": "+1 entity, but costs an extra early stop/ride"
+      },
+      {
+        "label": "LBJ exact 7-fer operating area",
+        "mode": "ride",
+        "movement": "about 12 min from hotel direct",
+        "value": "+5 unique after Fort McHenry, 7 refs total at the spot"
+      },
+      {
+        "label": "FDR rideshare drop / Mall start",
+        "mode": "ride",
+        "movement": "about 7 min from LBJ; walking is about 29 min",
+        "value": "starts the Mall overlay"
+      },
+      {
+        "label": "FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution -> WWII -> Washington Monument",
+        "mode": "walk",
+        "movement": "about 2.9 km / 39 min for this core sequence from FDR",
+        "value": "reaches 18 entities after Washington Monument if Fort/LBJ validate"
+      },
+      {
+        "label": "Return to Foggy Bottom hotel",
+        "mode": "walk or ride",
+        "movement": "31 min walk or about 9 min rideshare from Washington Monument",
+        "value": "retrieve car for southbound route"
+      },
+      {
+        "label": "Mason Neck",
+        "mode": "drive",
+        "movement": "about 40 min from the hotel",
+        "value": "+2 clean southbound entities"
+      },
+      {
+        "label": "Fredericksburg hotel",
+        "mode": "drive",
+        "movement": "about 59 min from Mason Neck",
+        "value": "Sunday night anchor"
+      }
+    ],
+    "expandedWalkOrder": [
+      {
+        "label": "Jefferson",
+        "minutesFromPrior": 0,
+        "cumulativeWalkMinutes": 0
+      },
+      {
+        "label": "FDR",
+        "minutesFromPrior": 13,
+        "cumulativeWalkMinutes": 13
+      },
+      {
+        "label": "MLK",
+        "minutesFromPrior": 6,
+        "cumulativeWalkMinutes": 19
+      },
+      {
+        "label": "Korean",
+        "minutesFromPrior": 6,
+        "cumulativeWalkMinutes": 25
+      },
+      {
+        "label": "Lincoln",
+        "minutesFromPrior": 3,
+        "cumulativeWalkMinutes": 28
+      },
+      {
+        "label": "Vietnam",
+        "minutesFromPrior": 5,
+        "cumulativeWalkMinutes": 33
+      },
+      {
+        "label": "Constitution Gardens",
+        "minutesFromPrior": 9,
+        "cumulativeWalkMinutes": 42
+      },
+      {
+        "label": "World War II",
+        "minutesFromPrior": 3,
+        "cumulativeWalkMinutes": 45
+      },
+      {
+        "label": "Washington Monument",
+        "minutesFromPrior": 8,
+        "cumulativeWalkMinutes": 53
+      },
+      {
+        "label": "President's Park",
+        "minutesFromPrior": 21,
+        "cumulativeWalkMinutes": 74
+      },
+      {
+        "label": "World War I",
+        "minutesFromPrior": 8,
+        "cumulativeWalkMinutes": 82
+      },
+      {
+        "label": "Ford's Theatre",
+        "minutesFromPrior": 9,
+        "cumulativeWalkMinutes": 91
+      },
+      {
+        "label": "Eisenhower",
+        "minutesFromPrior": 22,
+        "cumulativeWalkMinutes": 113
+      }
+    ],
+    "addOnFindings": [
+      {
+        "label": "Theodore Roosevelt Island",
+        "finding": "Only do it before LBJ if chasing 20+. Walking hotel -> TR -> LBJ is about 88 minutes; rideshare movement is about 13 minutes before activation time."
+      },
+      {
+        "label": "LBJ to FDR",
+        "finding": "Treat this as a rideshare jump. Walking is about 29 minutes; rideshare/driving directions are about 7 minutes."
+      },
+      {
+        "label": "Return to hotel",
+        "finding": "After the Washington Monument core finish, walking back to Foggy Bottom is about 31 minutes; rideshare is about 9 minutes. Either way, get the car at the hotel before going south."
+      },
+      {
+        "label": "East Mall expansion",
+        "finding": "If you push to Eisenhower, rideshare back to the hotel is about 11 minutes; walking back is about 54 minutes and should not be the default."
+      },
+      {
+        "label": "Mason Neck",
+        "finding": "Keep as the clean southbound finish, but route it from the Foggy Bottom hotel car pickup rather than from the final DC walking stop."
+      }
+    ],
+    "mapsEvidence": [
+      {
+        "scenario": "Foggy Bottom hotel to LBJ exact operating area",
+        "mode": "rideshare",
+        "distance": "6.2 km",
+        "minutes": 12
+      },
+      {
+        "scenario": "LBJ exact operating area to FDR",
+        "mode": "rideshare",
+        "distance": "3.1 km",
+        "minutes": 7
+      },
+      {
+        "scenario": "LBJ exact operating area to FDR",
+        "mode": "walking",
+        "distance": "2.1 km",
+        "minutes": 29
+      },
+      {
+        "scenario": "Optimized core Mall walk from FDR to Washington Monument",
+        "mode": "walking",
+        "distance": "2.9 km",
+        "minutes": 39,
+        "order": "FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution Gardens -> WWII -> Washington Monument"
+      },
+      {
+        "scenario": "Washington Monument to Foggy Bottom hotel",
+        "mode": "walking",
+        "distance": "2.2 km",
+        "minutes": 31
+      },
+      {
+        "scenario": "Washington Monument to Foggy Bottom hotel",
+        "mode": "rideshare",
+        "distance": "4.1 km",
+        "minutes": 9
+      },
+      {
+        "scenario": "Eisenhower to Foggy Bottom hotel",
+        "mode": "rideshare",
+        "distance": "5.4 km",
+        "minutes": 11
+      },
+      {
+        "scenario": "Eisenhower to Foggy Bottom hotel",
+        "mode": "walking",
+        "distance": "3.8 km",
+        "minutes": 54
+      },
+      {
+        "scenario": "Foggy Bottom hotel to Mason Neck",
+        "mode": "driving",
+        "distance": "43.8 km",
+        "minutes": 40
+      },
+      {
+        "scenario": "Mason Neck to Fredericksburg hotel",
+        "mode": "driving",
+        "distance": "64.0 km",
+        "minutes": 59
+      }
+    ]
   }
 }
