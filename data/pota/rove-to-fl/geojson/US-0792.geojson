@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "reference": "US-0792",
+        "query": "Thomas Jefferson Memorial, Washington, DC",
+        "display_name": "Thomas Jefferson Memorial bookstore, West Basin Drive SW Cycletrack, Ward 2, Washington, District of Columbia, 20228, United States",
+        "osm_type": "node",
+        "osm_id": 3558400942
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.036816,
+          38.8816596
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "reference": "US-7892",
+        "query": "Belmont-Paul Women's Equality National Monument, Washington, DC",
+        "display_name": "Belmont-Paul Women's Equality National Monument, 144, Capitol Hill, Ward 6, Washington, District of Columbia, United States",
+        "osm_type": "way",
+        "osm_id": 801299564
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.0040651,
+              38.8925078
+            ],
+            [
+              -77.0040605,
+              38.8921189
+            ],
+            [
+              -77.0036114,
+              38.8921221
+            ],
+            [
+              -77.003616,
+              38.892511
+            ],
+            [
+              -77.0040651,
+              38.8925078
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

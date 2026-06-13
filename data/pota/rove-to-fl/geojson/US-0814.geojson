@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "reference": "US-0814",
+        "query": "Ford's Theatre National Historic Site, Washington, DC",
+        "display_name": "Ford's Theatre National Historic Site, 511, 10th Street Northwest, Penn Quarter, Ward 2, Washington, District of Columbia, 20463, United States",
+        "osm_type": "node",
+        "osm_id": 358958511
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0258178,
+          38.896678
+        ]
+      }
+    }
+  ]
+}

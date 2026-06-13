@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-10",
+  "updated": "2026-06-13",
   "source": "OpenStreetMap Nominatim search with polygon_geojson=1",
   "items": [
     {
@@ -218,6 +218,96 @@
       "osmType": "way",
       "osmId": 398769543,
       "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0792",
+      "query": "Thomas Jefferson Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0792.geojson",
+      "displayName": "Thomas Jefferson Memorial bookstore, West Basin Drive SW Cycletrack, Ward 2, Washington, District of Columbia, 20228, United States",
+      "osmType": "node",
+      "osmId": 3558400942,
+      "geometryType": "Point"
+    },
+    {
+      "reference": "US-0795",
+      "query": "World War I Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0795.geojson",
+      "displayName": "National World War I Memorial, Pennsylvania Avenue Northwest, Downtown, Ward 2, Washington, District of Columbia, 20004, United States",
+      "osmType": "way",
+      "osmId": 298811004,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0657",
+      "query": "President's Park, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0657.geojson",
+      "displayName": "President's Park, Ward 2, Washington, District of Columbia, United States",
+      "osmType": "relation",
+      "osmId": 7399196,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0853",
+      "query": "Pennsylvania Avenue National Historic Site, Washington, DC",
+      "found": false,
+      "file": null,
+      "displayName": null,
+      "osmType": null,
+      "osmId": null,
+      "geometryType": null
+    },
+    {
+      "reference": "US-0814",
+      "query": "Ford's Theatre National Historic Site, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0814.geojson",
+      "displayName": "Ford's Theatre National Historic Site, 511, 10th Street Northwest, Penn Quarter, Ward 2, Washington, District of Columbia, 20463, United States",
+      "osmType": "node",
+      "osmId": 358958511,
+      "geometryType": "Point"
+    },
+    {
+      "reference": "US-7499",
+      "query": "Dwight D. Eisenhower Memorial, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-7499.geojson",
+      "displayName": "Dwight D. Eisenhower Memorial, 6th Street Southwest, Southwest Employment Area, Ward 6, Washington, District of Columbia, 20202, United States",
+      "osmType": "way",
+      "osmId": 847351296,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-7892",
+      "query": "Belmont-Paul Women's Equality National Monument, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-7892.geojson",
+      "displayName": "Belmont-Paul Women's Equality National Monument, 144, Capitol Hill, Ward 6, Washington, District of Columbia, United States",
+      "osmType": "way",
+      "osmId": 801299564,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0791",
+      "query": "Theodore Roosevelt Island, Washington, DC",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0791.geojson",
+      "displayName": "Theodore Roosevelt Island, Georgetown, Ward 2, Washington, District of Columbia, United States",
+      "osmType": "relation",
+      "osmId": 20393232,
+      "geometryType": "Polygon"
+    },
+    {
+      "reference": "US-0015",
+      "query": "Chesapeake and Ohio Canal National Historical Park Georgetown Washington DC",
+      "found": false,
+      "file": null,
+      "displayName": null,
+      "osmType": null,
+      "osmId": null,
+      "geometryType": null
     }
   ]
 }

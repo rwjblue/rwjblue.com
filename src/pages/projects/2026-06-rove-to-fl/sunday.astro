@@ -67,6 +67,23 @@ interface RouteWaypoint {
   type: "activation" | "parking" | "hotel" | "optional";
   notes: string;
 }
+interface ExpandedMallCandidate {
+  reference: string;
+  name: string;
+  group: string;
+  routeUse: string;
+}
+interface ExpandedMallInventory {
+  summary: string;
+  counts: Record<string, number>;
+  candidateReferences: ExpandedMallCandidate[];
+}
+interface ExpandedMallRoute {
+  name: string;
+  strategy: string;
+  countMilestones: { label: string; entities: number }[];
+  caution: string;
+}
 
 const operatingStops = dcRove.operatingStops as OperatingStop[];
 const mappedLegs = dcRove.mappedLegs as MappedLeg[];
@@ -74,6 +91,8 @@ const timelineAssumptions = dcRove.timelineAssumptions as TimelineAssumptions;
 const primaryTimeline = dcRove.primaryTimeline as TimelineStop[];
 const optionalTimelineAddOns = dcRove.optionalTimelineAddOns as OptionalTimelineAddOn[];
 const routeWaypoints = dcRove.routeWaypoints as RouteWaypoint[];
+const expandedMallInventory = dcRove.expandedMallInventory as ExpandedMallInventory | undefined;
+const expandedMallRoute = dcRove.expandedMallRoute as ExpandedMallRoute | undefined;
 const routeWaypointsJson = JSON.stringify(routeWaypoints);
 const primaryRouteWaypointIds = [
   "foggy-bottom",
@@ -350,6 +369,73 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       })}
     </div>
   </section>
+
+  {expandedMallInventory && expandedMallRoute && (
+    <section class="section-block wide" aria-labelledby="expanded-mall-title">
+      <div class="section-heading">
+        <p class="section-label">Optimization inventory</p>
+        <h2 id="expanded-mall-title">Expanded Mall and downtown list</h2>
+      </div>
+
+      <p class="rove-note">{expandedMallInventory.summary}</p>
+      <p class="rove-note rove-important">{expandedMallRoute.caution}</p>
+
+      <dl class="rove-summary-grid rove-count-grid">
+        <div>
+          <dt>DC cache</dt>
+          <dd>{expandedMallInventory.counts.dcCacheReferences} refs</dd>
+        </div>
+        <div>
+          <dt>Downtown max</dt>
+          <dd>{expandedMallInventory.counts.downtownTotalWithFortAndLbj} entities</dd>
+        </div>
+        <div>
+          <dt>With Dyke Marsh</dt>
+          <dd>{expandedMallInventory.counts.downtownPlusDykeMarsh} entities</dd>
+        </div>
+        <div>
+          <dt>With Mason Neck</dt>
+          <dd>{expandedMallInventory.counts.downtownPlusDykeMarshAndMasonNeck} entities</dd>
+        </div>
+      </dl>
+
+      <div class="rove-addon-grid">
+        <article>
+          <div class="rove-card-topline">
+            <span>route shape</span>
+            <span>aggressive</span>
+          </div>
+          <h3>{expandedMallRoute.name}</h3>
+          <p>{expandedMallRoute.strategy}</p>
+        </article>
+        <article>
+          <div class="rove-card-topline">
+            <span>count milestones</span>
+            <span>Sunday UTC</span>
+          </div>
+          <h3>Entity ladder</h3>
+          <ul class="rove-compact-list">
+            {expandedMallRoute.countMilestones.map((milestone) => (
+              <li><strong>{milestone.entities}</strong> {milestone.label}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+
+      <div class="rove-candidate-reference-grid">
+        {expandedMallInventory.candidateReferences.map((candidate) => (
+          <article>
+            <div class="rove-card-topline">
+              <span>{candidate.group}</span>
+              <a href={potaUrl(candidate.reference)} target="_blank" rel="noreferrer">{candidate.reference}</a>
+            </div>
+            <h3>{candidate.name}</h3>
+            <p>{candidate.routeUse}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
 
   <section class="section-block wide" aria-labelledby="legs-title">
     <div class="section-heading">
@@ -748,6 +834,59 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
     gap: 0.75rem;
+  }
+
+  .rove-count-grid {
+    margin: 1rem 0;
+  }
+
+  .rove-compact-list {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rove-compact-list li + li {
+    margin-top: 0.35rem;
+  }
+
+  .rove-compact-list strong {
+    color: var(--color-text, #172026);
+    display: inline-block;
+    min-width: 2rem;
+  }
+
+  .rove-candidate-reference-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .rove-candidate-reference-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.8rem;
+  }
+
+  .rove-candidate-reference-grid h3 {
+    font-size: 0.95rem;
+    margin: 0 0 0.35rem;
+  }
+
+  .rove-candidate-reference-grid p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.82rem;
+    margin: 0;
+  }
+
+  .rove-candidate-reference-grid a {
+    color: var(--color-accent, #167246);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
   }
 
   .rove-reference-list {

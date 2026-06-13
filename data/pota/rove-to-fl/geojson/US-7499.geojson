@@ -1,0 +1,86 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "reference": "US-7499",
+        "query": "Dwight D. Eisenhower Memorial, Washington, DC",
+        "display_name": "Dwight D. Eisenhower Memorial, 6th Street Southwest, Southwest Employment Area, Ward 6, Washington, District of Columbia, 20202, United States",
+        "osm_type": "way",
+        "osm_id": 847351296
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.0197659,
+              38.8874061
+            ],
+            [
+              -77.0197658,
+              38.8872115
+            ],
+            [
+              -77.0197657,
+              38.8870062
+            ],
+            [
+              -77.0197657,
+              38.8868564
+            ],
+            [
+              -77.0197656,
+              38.8868351
+            ],
+            [
+              -77.0197656,
+              38.8868102
+            ],
+            [
+              -77.0189724,
+              38.8868103
+            ],
+            [
+              -77.0184924,
+              38.8868104
+            ],
+            [
+              -77.017752,
+              38.8868105
+            ],
+            [
+              -77.0177522,
+              38.8874067
+            ],
+            [
+              -77.0179041,
+              38.8874067
+            ],
+            [
+              -77.0179398,
+              38.8874067
+            ],
+            [
+              -77.0183289,
+              38.8874066
+            ],
+            [
+              -77.0195821,
+              38.8874062
+            ],
+            [
+              -77.0196218,
+              38.8874062
+            ],
+            [
+              -77.0197659,
+              38.8874061
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

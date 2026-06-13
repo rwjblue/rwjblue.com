@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-10",
+  "updated": "2026-06-13",
   "status": "working DC rove plan",
   "timezone": "America/New_York",
   "utcDay": "Sunday UTC day begins Saturday 2026-06-20 at 20:00 EDT",
@@ -910,6 +910,316 @@
     "Confirm Fort McHenry exact position for US-4582 in addition to US-0928, US-4581, and US-4567.",
     "Confirm Mason Neck NWR operating restrictions: POTA cache says free-standing antennas only, no vegetation attachment, no off-trail operating, and no tables in parking areas.",
     "Check closing/dusk times for Mason Neck if using it as the Ostrich add-on.",
-    "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure."
-  ]
+    "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure.",
+    "Pennsylvania Avenue NHS and C&O Canal did not return clean OSM GeoJSON in the first fetch pass; verify boundaries before relying on those as easy add-ons.",
+    "Jefferson and Ford resolved as point GeoJSON rather than full polygons; use POTA/NPS context and on-site signage before treating the point as the whole activatable area."
+  ],
+  "expandedMallInventory": {
+    "summary": "DC cache has 32 references total. For the Foggy Bottom / National Mall rove, the practical inventory is the LBJ trail cluster plus 17 Mall/downtown references; Fort McHenry adds four Sunday-UTC references before the local DC walk begins.",
+    "counts": {
+      "dcCacheReferences": 32,
+      "lbjClusterReferences": 7,
+      "lbjUniqueAfterFortMcHenry": 5,
+      "mallAndDowntownUniqueReferences": 17,
+      "downtownTotalWithFortAndLbj": 26,
+      "downtownPlusDykeMarsh": 28,
+      "downtownPlusDykeMarshAndMasonNeck": 30
+    },
+    "candidateReferences": [
+      {
+        "reference": "US-0928",
+        "name": "Fort McHenry National Monument",
+        "group": "Saturday UTC opener",
+        "routeUse": "Bank before DC; unique unless already activated earlier."
+      },
+      {
+        "reference": "US-4581",
+        "name": "Star-Spangled Banner National Historic Trail",
+        "group": "Trail overlap",
+        "routeUse": "Counts at Fort and LBJ; duplicate after first logged."
+      },
+      {
+        "reference": "US-4567",
+        "name": "Captain John Smith Chesapeake National Historic Trail",
+        "group": "Trail overlap",
+        "routeUse": "Counts at Fort and LBJ; duplicate after first logged."
+      },
+      {
+        "reference": "US-4582",
+        "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+        "group": "Trail overlap",
+        "routeUse": "Fort McHenry likely unique; confirm exact position."
+      },
+      {
+        "reference": "US-0784",
+        "name": "Lyndon Baines Johnson Memorial Grove on the Potomac",
+        "group": "LBJ 7-fer",
+        "routeUse": "Anchor stop from Columbia Island Marina."
+      },
+      {
+        "reference": "US-9901",
+        "name": "Civil War Defenses of Washington National Historic Trail",
+        "group": "LBJ 7-fer",
+        "routeUse": "Trail overlap at exact LBJ position; boundary still needs field confirmation."
+      },
+      {
+        "reference": "US-0670",
+        "name": "George Washington Memorial Parkway",
+        "group": "LBJ 7-fer",
+        "routeUse": "Parkway/trail overlap; confirm compliant public position."
+      },
+      {
+        "reference": "US-9898",
+        "name": "Mount Vernon National Historic Trail",
+        "group": "LBJ 7-fer",
+        "routeUse": "Trail overlap at exact LBJ position."
+      },
+      {
+        "reference": "US-4564",
+        "name": "Potomac Heritage Trail National Scenic Trail",
+        "group": "LBJ 7-fer",
+        "routeUse": "Trail overlap at exact LBJ position."
+      },
+      {
+        "reference": "US-0655",
+        "name": "National Mall Park",
+        "group": "Mall overlay",
+        "routeUse": "Counts once at the first qualifying Mall memorial stop."
+      },
+      {
+        "reference": "US-0792",
+        "name": "Thomas Jefferson National Memorial",
+        "group": "Tidal Basin / Mall",
+        "routeUse": "Good first Mall stop after LBJ if starting from south/east side."
+      },
+      {
+        "reference": "US-0776",
+        "name": "Franklin Delano Roosevelt National Memorial",
+        "group": "Tidal Basin / Mall",
+        "routeUse": "Existing primary route stop; also overlaps National Mall."
+      },
+      {
+        "reference": "US-0785",
+        "name": "Martin Luther King Jr. National Memorial",
+        "group": "Tidal Basin / Mall",
+        "routeUse": "Short walk from FDR."
+      },
+      {
+        "reference": "US-0780",
+        "name": "Korean War Veterans National Memorial",
+        "group": "West Mall",
+        "routeUse": "Short walk from MLK / Lincoln area."
+      },
+      {
+        "reference": "US-0783",
+        "name": "Lincoln National Memorial",
+        "group": "West Mall",
+        "routeUse": "Useful if crowds/operating space cooperate."
+      },
+      {
+        "reference": "US-0793",
+        "name": "Vietnam Veterans National Memorial",
+        "group": "West Mall",
+        "routeUse": "Cheetah threshold in current route."
+      },
+      {
+        "reference": "US-0653",
+        "name": "Constitution Gardens National Park",
+        "group": "West Mall",
+        "routeUse": "Bench-dependent but very close to Vietnam/WWII."
+      },
+      {
+        "reference": "US-0796",
+        "name": "World War II National Memorial",
+        "group": "Central Mall",
+        "routeUse": "Buffer beyond Cheetah."
+      },
+      {
+        "reference": "US-0794",
+        "name": "Washington Monument National Memorial",
+        "group": "Central Mall",
+        "routeUse": "Strong central route pivot."
+      },
+      {
+        "reference": "US-0795",
+        "name": "World War I National Memorial",
+        "group": "Downtown / Mall fringe",
+        "routeUse": "Adds one unique reference north/east of Washington Monument."
+      },
+      {
+        "reference": "US-0657",
+        "name": "President's Park (White House) Park",
+        "group": "Downtown / Mall fringe",
+        "routeUse": "Possible downtown add-on after WWI."
+      },
+      {
+        "reference": "US-0853",
+        "name": "Pennsylvania Avenue National Historic Site",
+        "group": "Downtown / Mall fringe",
+        "routeUse": "Possible add-on, but OSM GeoJSON did not resolve cleanly."
+      },
+      {
+        "reference": "US-0814",
+        "name": "Ford's Theatre National Historic Site",
+        "group": "Downtown / Mall fringe",
+        "routeUse": "Walkable but adds a long eastbound leg."
+      },
+      {
+        "reference": "US-7499",
+        "name": "Dwight D. Eisenhower National Memorial",
+        "group": "South/east Mall fringe",
+        "routeUse": "Good endpoint if continuing toward Capitol Hill or rideshare pickup."
+      },
+      {
+        "reference": "US-7892",
+        "name": "Belmont-Paul Women's Equality National Monument",
+        "group": "Capitol Hill add-on",
+        "routeUse": "Short drive/rideshare from Eisenhower; probably too far to include by walking unless ahead of schedule."
+      },
+      {
+        "reference": "US-0791",
+        "name": "Theodore Roosevelt Island National Memorial",
+        "group": "Foggy Bottom / Potomac add-on",
+        "routeUse": "Useful with rideshare/car; awkward to combine with south/east Mall walking."
+      },
+      {
+        "reference": "US-9961",
+        "name": "Dyke Marsh Wildlife Preserve",
+        "group": "Southbound add-on",
+        "routeUse": "Adds US-9961 plus likely US-9935; useful buffer before Mason Neck if time allows."
+      },
+      {
+        "reference": "US-9935",
+        "name": "Virginia Bird & Wildlife State Trail",
+        "group": "Southbound add-on",
+        "routeUse": "Dyke Marsh companion unique add."
+      },
+      {
+        "reference": "US-1308",
+        "name": "Mason Neck State Park",
+        "group": "Southbound finish",
+        "routeUse": "Clean Ostrich southbound add-on."
+      },
+      {
+        "reference": "US-0563",
+        "name": "Elizabeth Hartwell Mason Neck National Wildlife Refuge",
+        "group": "Southbound finish",
+        "routeUse": "Mason Neck companion; verify antenna restrictions."
+      }
+    ]
+  },
+  "expandedMallRoute": {
+    "name": "Aggressive Mall/downtown expansion from Foggy Bottom",
+    "strategy": "Uber/drive from Foggy Bottom to Columbia Island Marina for the LBJ cluster, then drive/rideshare across the river to Jefferson/FDR and walk the Mall/downtown sequence. Use rideshare again for Belmont-Paul, Theodore Roosevelt Island, Dyke Marsh, or Mason Neck add-ons.",
+    "mapsChecks": [
+      {
+        "from": "Foggy Bottom",
+        "to": "Columbia Island Marina / LBJ",
+        "mode": "drive",
+        "distance": "7.0 km",
+        "minutes": 10
+      },
+      {
+        "from": "LBJ Memorial Grove",
+        "to": "Thomas Jefferson Memorial",
+        "mode": "drive",
+        "distance": "3.9 km",
+        "minutes": 6
+      },
+      {
+        "from": "Thomas Jefferson Memorial",
+        "to": "Dwight D. Eisenhower Memorial via expanded Mall walk",
+        "mode": "walk",
+        "distance": "9.8 km",
+        "minutes": 137
+      },
+      {
+        "from": "Eisenhower Memorial",
+        "to": "Belmont-Paul",
+        "mode": "drive",
+        "distance": "1.8 km",
+        "minutes": 5
+      },
+      {
+        "from": "Belmont-Paul",
+        "to": "Theodore Roosevelt Island",
+        "mode": "drive",
+        "distance": "9.4 km",
+        "minutes": 15
+      },
+      {
+        "from": "Theodore Roosevelt Island",
+        "to": "Mason Neck State Park",
+        "mode": "drive",
+        "distance": "46.9 km",
+        "minutes": 44
+      },
+      {
+        "from": "Mason Neck State Park",
+        "to": "Fredericksburg",
+        "mode": "drive",
+        "distance": "64.0 km",
+        "minutes": 59
+      }
+    ],
+    "recommendedOrder": [
+      "Fort McHenry after 20:00 EDT Saturday",
+      "Foggy Bottom hotel",
+      "Columbia Island Marina / exact LBJ 7-fer",
+      "Thomas Jefferson Memorial",
+      "FDR Memorial",
+      "MLK Memorial",
+      "Korean War Veterans Memorial",
+      "Lincoln Memorial",
+      "Vietnam Veterans Memorial",
+      "Constitution Gardens",
+      "World War II Memorial",
+      "Washington Monument",
+      "World War I Memorial",
+      "President's Park",
+      "Pennsylvania Avenue NHS",
+      "Ford's Theatre NHS",
+      "Dwight D. Eisenhower Memorial",
+      "Optional rideshare: Belmont-Paul",
+      "Optional rideshare: Theodore Roosevelt Island",
+      "Optional southbound: Dyke Marsh",
+      "Optional southbound: Mason Neck",
+      "Fredericksburg hotel"
+    ],
+    "countMilestones": [
+      {
+        "label": "After Fort + LBJ",
+        "entities": 9
+      },
+      {
+        "label": "After Jefferson starts the Mall overlay",
+        "entities": 11
+      },
+      {
+        "label": "After Vietnam",
+        "entities": 16
+      },
+      {
+        "label": "After Washington Monument",
+        "entities": 19
+      },
+      {
+        "label": "After Eisenhower",
+        "entities": 24
+      },
+      {
+        "label": "After Belmont-Paul + Theodore Roosevelt Island",
+        "entities": 26
+      },
+      {
+        "label": "After Dyke Marsh",
+        "entities": 28
+      },
+      {
+        "label": "After Mason Neck",
+        "entities": 30
+      }
+    ],
+    "caution": "The expanded downtown walk is 9.8 km before activation time. At 45 minutes per stop, the whole downtown expansion is too heavy unless activations are closer to 30 minutes and several crowded/bench-poor stops are skipped."
+  }
 }
