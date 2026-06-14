@@ -746,6 +746,61 @@ p {
   background: var(--ink);
 }
 
+.boundary-map-section {
+  margin: 28px 0 34px;
+}
+
+.boundary-map-heading {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 12px;
+}
+
+.boundary-map-heading h2 {
+  margin-bottom: 4px;
+}
+
+.boundary-map-heading p {
+  margin-bottom: 0;
+}
+
+.boundary-map-source {
+  flex: 0 0 auto;
+  color: var(--quiet);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.boundary-map {
+  z-index: 0;
+  width: 100%;
+  min-height: 430px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+}
+
+.boundary-map[data-map-error="true"] {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  color: var(--quiet);
+  font-size: 0.9rem;
+}
+
+.boundary-map .leaflet-popup-content {
+  min-width: 150px;
+  margin: 10px 12px;
+}
+
+.boundary-map .leaflet-popup-content strong {
+  display: block;
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
 .tag-hint {
   margin-bottom: 28px;
   padding: 10px 14px;

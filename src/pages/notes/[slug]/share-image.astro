@@ -20,23 +20,25 @@ export async function getStaticPaths() {
   const notes = await getCollection("notes");
 
   return notes
-    .filter((note) => contactMapForNote(note))
+    .filter((note) => contactMapForNote(note) || note.data.boundaryMap)
     .map((note) => ({ params: { slug: note.id }, props: { note } }));
 }
 
 const { note } = Astro.props;
 const map = contactMapForNote(note);
+const boundaryMap = note.data.boundaryMap;
 
-if (!map) {
-  throw new Error(`No contact map registered for note ${note.id}`);
+if (!map && !boundaryMap) {
+  throw new Error(`No share map registered for note ${note.id}`);
 }
 
 const formattedDate = formatDate(note.data.date, "long");
-const mapJson = JSON.stringify(map);
+const mapJson = JSON.stringify(map ?? null);
+const boundaryMapJson = JSON.stringify(boundaryMap ?? null);
 const bandColorsJson = JSON.stringify(BAND_COLORS);
 const heroImage = note.data.shareImageHero;
-const hasHeroLayout = Boolean(heroImage);
-const bandCounts = collectBandCounts(map.contacts);
+const hasHeroLayout = Boolean(heroImage && map);
+const bandCounts = map ? collectBandCounts(map.contacts) : {};
 ---
 
 <!doctype html>
@@ -316,11 +318,69 @@ const bandCounts = collectBandCounts(map.contacts);
         position: relative;
         background: var(--panel);
       }
+
+      .boundary-card {
+        display: grid;
+        grid-template-columns: 410px 1fr;
+        height: 630px;
+      }
+
+      .boundary-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 38px 34px;
+        border-right: 2px solid var(--ink);
+        background: var(--panel);
+      }
+
+      .boundary-copy .site-name {
+        color: var(--muted);
+      }
+
+      .boundary-copy .eyebrow {
+        margin-bottom: 14px;
+      }
+
+      .boundary-copy .summary {
+        margin-top: 18px;
+        color: var(--muted);
+      }
+
+      .boundary-meta {
+        padding-top: 18px;
+        border-top: 2px solid var(--ink);
+      }
+
+      .boundary-meta strong {
+        display: block;
+        font-size: 1.2rem;
+        line-height: 1.15;
+      }
+
+      .boundary-meta span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.35;
+      }
+
+      .boundary-map-panel {
+        position: relative;
+        background: var(--panel);
+      }
+
+      #share-boundary-map {
+        width: 100%;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
     {
-      hasHeroLayout ? (
+      map && hasHeroLayout ? (
         <div class="share-card--hero">
           <section class="hero-panel">
             <img src={heroImage} alt="" />
@@ -368,7 +428,7 @@ const bandCounts = collectBandCounts(map.contacts);
             </div>
           </aside>
         </div>
-      ) : (
+      ) : map ? (
         <div class="share-card--map">
           <div class="map-copy">
             <div>
@@ -406,17 +466,41 @@ const bandCounts = collectBandCounts(map.contacts);
             <div id="share-map"></div>
           </div>
         </div>
+      ) : (
+        <div class="boundary-card">
+          <div class="boundary-copy">
+            <div>
+              <div class="site-name">rwjblue / N1RWJ</div>
+              <div class="eyebrow">Note / POTA</div>
+              <h1>{note.data.title}</h1>
+              <p class="summary">{note.data.summary}</p>
+            </div>
+
+            <div class="boundary-meta">
+              <strong>{boundaryMap?.title}</strong>
+              <span>{boundaryMap?.subtitle}</span>
+              <span class="meta-label">{formattedDate}</span>
+            </div>
+          </div>
+
+          <div class="boundary-map-panel">
+            <div id="share-boundary-map"></div>
+          </div>
+        </div>
       )
     }
 
     <script type="application/json" id="share-contact-map" set:html={mapJson} />
+    <script type="application/json" id="share-boundary-map-data" set:html={boundaryMapJson} />
     <script type="application/json" id="share-band-colors" set:html={bandColorsJson} />
     <script>
       import L from "leaflet";
 
       const dataEl = document.getElementById("share-contact-map");
+      const boundaryDataEl = document.getElementById("share-boundary-map-data");
       const bandColorsEl = document.getElementById("share-band-colors");
       const mapEl = document.getElementById("share-map");
+      const boundaryMapEl = document.getElementById("share-boundary-map");
 
       if (dataEl && bandColorsEl && mapEl) {
         const contactMap = JSON.parse(dataEl.textContent ?? "{}");
@@ -470,6 +554,41 @@ const bandCounts = collectBandCounts(map.contacts);
 
         if (bounds.isValid()) {
           map.fitBounds(bounds, { padding: [20, 20] });
+        }
+      }
+
+      if (boundaryDataEl && boundaryMapEl) {
+        const boundaryMap = JSON.parse(boundaryDataEl.textContent ?? "null");
+
+        if (boundaryMap) {
+          const map = L.map(boundaryMapEl, {
+            scrollWheelZoom: false,
+            zoomControl: false,
+            attributionControl: false,
+          });
+
+          L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19,
+          }).addTo(map);
+
+          fetch(boundaryMap.geoJson)
+            .then((response) => response.json())
+            .then((geoJson) => {
+              const boundaryLayer = L.geoJSON(geoJson, {
+                style: {
+                  color: "#8f3f2b",
+                  fillColor: "#d98c4a",
+                  fillOpacity: 0.24,
+                  opacity: 0.95,
+                  weight: 3,
+                },
+              }).addTo(map);
+
+              const bounds = boundaryLayer.getBounds();
+              if (bounds.isValid()) {
+                map.fitBounds(bounds, { padding: [26, 26] });
+              }
+            });
         }
       }
 

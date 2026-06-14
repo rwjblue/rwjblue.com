@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-12T23:29:20.521Z",
+  "generatedAt": "2026-06-14T16:05:10.888Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -32,7 +32,14 @@
       "activationCount": 0,
       "qsoTotal": 0,
       "activations": [],
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-06-13-john-h-chafee-national-wildlife-refuge-pota-attempt",
+          "title": "John H. Chafee NWR access reconnaissance",
+          "date": "2026-06-13",
+          "href": "/notes/2026-06-13-john-h-chafee-national-wildlife-refuge-pota-attempt/"
+        }
+      ],
       "publicStats": {
         "attempts": 49,
         "activations": 49,
@@ -1893,9 +1900,45 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 26,
-      "qsoTotal": 762,
+      "activationCount": 28,
+      "qsoTotal": 777,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-06-12",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-06-11",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 5,
+            "cw": 5,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",

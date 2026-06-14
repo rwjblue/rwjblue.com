@@ -12,14 +12,14 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 80,
+      "activations": 81,
       "parks": 51,
-      "qsos": 1998
+      "qsos": 2008
     },
     "attempts": {
-      "activations": 88,
+      "activations": 90,
       "parks": 51,
-      "qsos": 2025
+      "qsos": 2040
     },
     "hunter": {
       "parks": 454,
@@ -30,6 +30,26 @@
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-06-12",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 10,
+        "data": 0,
+        "phone": 0,
+        "total": 10
+      },
+      {
+        "date": "2026-06-11",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 5,
+        "data": 0,
+        "phone": 0,
+        "total": 5
+      },
       {
         "date": "2026-06-09",
         "reference": "US-2880",
@@ -202,13 +222,13 @@
       },
       {
         "date": "2026-05-23",
-        "reference": "US-7718",
-        "park": "East Matunuck State Beach",
+        "reference": "US-7721",
+        "park": "Salty Brine State Beach",
         "location": "US-RI",
-        "cw": 25,
+        "cw": 12,
         "data": 0,
         "phone": 0,
-        "total": 25
+        "total": 12
       },
       {
         "date": "2026-05-23",
@@ -222,13 +242,13 @@
       },
       {
         "date": "2026-05-23",
-        "reference": "US-7721",
-        "park": "Salty Brine State Beach",
+        "reference": "US-7718",
+        "park": "East Matunuck State Beach",
         "location": "US-RI",
-        "cw": 12,
+        "cw": 25,
         "data": 0,
         "phone": 0,
-        "total": 12
+        "total": 25
       },
       {
         "date": "2026-05-23",
@@ -259,26 +279,6 @@
         "data": 0,
         "phone": 0,
         "total": 19
-      },
-      {
-        "date": "2026-05-21",
-        "reference": "US-2880",
-        "park": "Snake Den State Park",
-        "location": "US-RI",
-        "cw": 27,
-        "data": 0,
-        "phone": 0,
-        "total": 27
-      },
-      {
-        "date": "2026-05-20",
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "location": "US-RI",
-        "cw": 23,
-        "data": 0,
-        "phone": 0,
-        "total": 23
       }
     ],
     "hunter_qsos": [

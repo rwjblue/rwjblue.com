@@ -13,12 +13,13 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 OUTPUT="$REPO_ROOT/public/images/pota/$NOTE_SLUG/share.png"
 PORT=4398
 URL="http://localhost:$PORT/notes/$NOTE_SLUG/share-image/"
+SESSION_NAME="note-share-$(printf '%s' "$NOTE_SLUG" | shasum | cut -c1-12)"
 
 cd "$REPO_ROOT"
 mkdir -p "$(dirname "$OUTPUT")"
 
 cleanup() {
-  agent-browser close --session "note-share-$NOTE_SLUG" 2>/dev/null || true
+  agent-browser close --session "$SESSION_NAME" 2>/dev/null || true
   if [[ -n "${DEV_PID:-}" ]]; then
     kill "$DEV_PID" 2>/dev/null || true
   fi
@@ -43,10 +44,10 @@ for i in $(seq 1 30); do
 done
 
 echo "Capturing share image for $NOTE_SLUG..."
-agent-browser --session "note-share-$NOTE_SLUG" set viewport 1200 630
-agent-browser --session "note-share-$NOTE_SLUG" open "$URL"
-agent-browser --session "note-share-$NOTE_SLUG" wait --load networkidle
-agent-browser --session "note-share-$NOTE_SLUG" wait 3000
-agent-browser --session "note-share-$NOTE_SLUG" screenshot "$OUTPUT"
+agent-browser --session "$SESSION_NAME" set viewport 1200 630
+agent-browser --session "$SESSION_NAME" open "$URL"
+agent-browser --session "$SESSION_NAME" wait --load networkidle
+agent-browser --session "$SESSION_NAME" wait 3000
+agent-browser --session "$SESSION_NAME" screenshot "$OUTPUT"
 
 echo "Saved: $OUTPUT"

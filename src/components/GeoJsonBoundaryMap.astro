@@ -1,0 +1,106 @@
+---
+import "leaflet/dist/leaflet.css";
+
+interface BoundaryMapData {
+  title: string;
+  subtitle?: string;
+  geoJson: string;
+  sourceLabel?: string;
+  sourceUrl?: string;
+}
+
+const { map } = Astro.props as { map: BoundaryMapData };
+const mapId = `geojson-boundary-map-${map.geoJson.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}`;
+const dataId = `${mapId}-data`;
+---
+
+<section class="boundary-map-section" aria-labelledby={`${mapId}-title`}>
+  <div class="boundary-map-heading">
+    <div>
+      <p class="section-label">Boundary map</p>
+      <h2 id={`${mapId}-title`}>{map.title}</h2>
+      {map.subtitle && <p>{map.subtitle}</p>}
+    </div>
+    {
+      map.sourceUrl && (
+        <a class="boundary-map-source" href={map.sourceUrl}>
+          {map.sourceLabel ?? "Source data"}
+        </a>
+      )
+    }
+  </div>
+
+  <div id={mapId} class="boundary-map" aria-label={`${map.title} boundary map`}></div>
+</section>
+
+<script type="application/json" id={dataId} set:html={JSON.stringify(map)} />
+<script>
+  import L from "leaflet";
+
+  const mapElements = document.querySelectorAll(".boundary-map");
+
+  for (const mapElement of mapElements) {
+    const dataElement = document.getElementById(`${mapElement.id}-data`);
+    if (!dataElement) {
+      continue;
+    }
+
+    const boundaryMap = JSON.parse(dataElement.textContent ?? "{}");
+    const leafletMap = L.map(mapElement, {
+      scrollWheelZoom: false,
+    });
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(leafletMap);
+
+    fetch(boundaryMap.geoJson)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Unable to load boundary GeoJSON: ${response.status}`);
+        }
+
+        return response.json();
+      })
+      .then((geoJson) => {
+        const boundaryLayer = L.geoJSON(geoJson, {
+          style: {
+            color: "#8f3f2b",
+            fillColor: "#d98c4a",
+            fillOpacity: 0.2,
+            opacity: 0.95,
+            weight: 2,
+          },
+          onEachFeature(feature, layer) {
+            const name = feature?.properties?.ORGNAME ?? boundaryMap.title;
+            layer.bindPopup(`<strong>${escapeHtml(name)}</strong>`);
+          },
+        }).addTo(leafletMap);
+
+        const bounds = boundaryLayer.getBounds();
+        if (bounds.isValid()) {
+          leafletMap.fitBounds(bounds, { padding: [22, 22] });
+        }
+      })
+      .catch((error) => {
+        mapElement.setAttribute("data-map-error", "true");
+        mapElement.textContent = error instanceof Error ? error.message : "Unable to load boundary map.";
+      });
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (char) => {
+      const entities = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      };
+
+      return entities[char];
+    });
+  }
+</script>

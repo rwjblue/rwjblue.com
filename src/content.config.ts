@@ -10,6 +10,15 @@ const notes = defineCollection({
     summary: z.string(),
     shareImageHero: z.string().optional(),
     contactMap: z.string().optional(),
+    boundaryMap: z
+      .object({
+        title: z.string(),
+        subtitle: z.string().optional(),
+        geoJson: z.string(),
+        sourceLabel: z.string().optional(),
+        sourceUrl: z.string().url().optional(),
+      })
+      .optional(),
     tags: z.array(z.string()).default([]),
   }),
 });

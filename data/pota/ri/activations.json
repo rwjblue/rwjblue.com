@@ -1078,6 +1078,32 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-06-12",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 10,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-06-11",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 5,
+        "cw": 5,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }
