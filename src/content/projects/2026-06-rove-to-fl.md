@@ -53,10 +53,13 @@ Current working shape:
   activation as the first Sunday-UTC count. Follow the CWops/W8WZ Cheetah
   pattern from LBJ through the National Mall, then decide whether Lincoln and
   Mason Neck make the Ostrich stretch practical before the Fredericksburg hotel.
-- Monday: drive from Fredericksburg to the booked Florence, SC stop. NC and SC
-  parks still need selection.
-- Tuesday: activate `US-0522` Savannah National Wildlife Refuge, then stay in or
-  near Pooler.
+  Use `US-9937` Meadowood BLM SRMA as the simpler Virginia backup if Mason Neck
+  is too late or too constrained.
+- Monday: activate `US-2744` Medoc Mountain State Park for North Carolina, then
+  continue to the booked Florence, SC stop.
+- Tuesday: use `US-2915` Woods Bay State Park as an earlier South Carolina
+  backup/add-on if useful, then activate `US-0522` Savannah National Wildlife
+  Refuge and continue to the booked Jekyll Island `US-0636` Georgia anchor.
 - Wednesday: drive to Ocala, FL and stay there.
 - Thursday: activate either `US-1915` Silver Springs State Park or `US-4471`
   Ocala National Forest from Ocala.
@@ -95,9 +98,14 @@ Known anchor drive estimates:
 - Tallman -> Edison hotel: 1h06m.
 - Edison -> Cheesequake -> John Heinz -> Fox Point -> Fort McHenry -> Foggy
   Bottom: 4h37m mapped driving.
-- Fredericksburg -> Florence: 5h12m before activation or charging stops.
-- Florence -> Savannah National Wildlife Refuge -> Pooler: 2h49m.
-- Pooler -> Ocala: 3h40m.
+- Washington Monument -> Mason Neck State Park -> Fredericksburg: 1h34m before
+  activation time; Washington Monument -> Meadowood BLM SRMA -> Fredericksburg:
+  1h16m.
+- Fredericksburg -> Medoc Mountain State Park -> Florence: 5h45m before
+  activation or charging stops.
+- Florence -> Woods Bay State Park -> Savannah National Wildlife Refuge ->
+  Jekyll Island: 4h18m before activation or charging stops.
+- Jekyll Island -> Ocala: 2h58m.
 - Ocala -> Silver Springs State Park: 13m; Ocala -> Ocala National Forest: 40m.
 - Ocala -> John D. MacArthur Beach State Park -> Singer Island: 4h05m.
 
@@ -133,8 +141,10 @@ DC route timing checks so far:
 - Foggy Bottom -> Columbia Island Marina / LBJ: 12m.
 - Columbia Island Marina / LBJ -> FDR Memorial: 10m.
 - FDR Memorial -> Washington Monument by foot through the Mall sequence: 21m.
-- Washington Monument -> Mason Neck State Park: 36m; Mason Neck ->
-  Fredericksburg: about 50m.
+- Washington Monument -> Mason Neck State Park: 41m; Mason Neck ->
+  Fredericksburg: about 53m.
+- Washington Monument -> Meadowood BLM SRMA: 31m; Meadowood -> Fredericksburg:
+  about 45m.
 - Washington Monument -> Dyke Marsh -> Mason Neck: about 52m total driving,
   before any activation time.
 
@@ -153,9 +163,10 @@ Downloaded / cached planning data:
 Open verification items:
 
 - Confirm the exact LBJ 7-fer point against imagery or with a local activator.
-- Decide whether Sunday targets Cheetah-only, full W8WZ + Fort, or Ostrich via
-  Lincoln + Mason Neck.
-- Choose NC and SC parks for the Monday Fredericksburg -> Florence leg.
+- Decide whether Sunday targets Cheetah-only, full W8WZ + Fort, Ostrich via
+  Lincoln + Mason Neck, or the simpler Meadowood VA backup.
+- Decide whether Woods Bay is used as an early SC backup/add-on before Savannah
+  NWR.
 - Verify exact Fox Point and Fort McHenry n-fer operating positions.
 - Check Mason Neck hours and restrictions before relying on it for Ostrich.
 - Confirm Savannah National Wildlife Refuge operating-position state credit.

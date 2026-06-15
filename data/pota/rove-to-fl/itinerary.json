@@ -134,33 +134,33 @@
         {
           "date": "2026-06-21",
           "area": "Washington, DC / NoVA to Fredericksburg",
-          "focus": "Large DC rove day for Cheetah/Ostrich planning, then continue south to the booked Fredericksburg hotel.",
+          "focus": "Large DC rove day for Cheetah/Ostrich planning, then use Mason Neck or Meadowood before the booked Fredericksburg hotel.",
           "jurisdictions": [
             "US-DC",
             "US-VA"
           ],
-          "notes": "Exact DC flow intentionally deferred to the next planning pass."
+          "notes": "Mason Neck is the preferred VA 2-fer; Meadowood is the simpler single-reference fallback."
         },
         {
           "date": "2026-06-22",
           "area": "Fredericksburg, VA to Florence, SC",
-          "focus": "Workday southbound push; NC park still needs final selection.",
+          "focus": "Workday southbound push with Medoc Mountain selected for North Carolina before the Florence overnight.",
           "jurisdictions": [
             "US-VA",
             "US-NC",
             "US-SC"
           ],
-          "notes": "Monday night is booked in Florence."
+          "notes": "Google Maps check: Fredericksburg -> Medoc -> Florence is about 5h45 driving before activation, charging, food, and buffer."
         },
         {
           "date": "2026-06-23",
           "area": "Florence, SC to Jekyll Island, GA",
-          "focus": "Activate Savannah National Wildlife Refuge for South Carolina, then overnight on Jekyll Island and activate US-0636 for Georgia.",
+          "focus": "Use Woods Bay as an early South Carolina backup/add-on if useful, then Savannah National Wildlife Refuge and the Jekyll Island US-0636 hotel anchor.",
           "jurisdictions": [
             "US-SC",
             "US-GA"
           ],
-          "notes": "Jekyll Island State Park covers the whole island, so the booked hotel anchor also covers the Georgia activation."
+          "notes": "Florence -> Woods Bay -> Savannah NWR -> Jekyll is about 4h18 driving, only slightly heavier than the direct Savannah NWR line."
         },
         {
           "date": "2026-06-24",
@@ -336,9 +336,9 @@
     "Friday now banks RI, CT, and NY before the Edison overnight.",
     "Saturday starts near Cheesequake, deliberately routes through John Heinz for PA, then uses Fox Point for DE and Fort McHenry for MD.",
     "Fort McHenry is targeted for a 19:30 arrival and 20:00 EDT activation start so it counts toward the Sunday UTC rove day.",
-    "Sunday remains the large DC / NoVA rove day; exact Cheetah/Ostrich flow is deferred to the next pass.",
-    "Monday night is fixed in Florence, Tuesday night is booked on Jekyll Island, Wednesday night is in Ocala, and Florida has local Thursday/Friday targets selected.",
-    "The NC park choice is still open and should be selected after the DC flow is nailed down."
+    "Sunday remains the large DC / NoVA rove day, with Mason Neck as the preferred Virginia 2-fer and Meadowood as the simpler single-reference backup.",
+    "Monday uses Medoc Mountain for North Carolina before the fixed Florence overnight; Tuesday can use Woods Bay as an earlier South Carolina backup/add-on before Savannah NWR and Jekyll Island.",
+    "Jekyll Island remains the Georgia park/hotel anchor, and Florida has local Thursday/Friday targets selected."
   ],
   "firstWeekendPlan": {
     "status": "fixed first-weekend route",
@@ -508,7 +508,7 @@
     "sundayDcRove": {
       "status": "working Cheetah/Ostrich route",
       "targetDate": "2026-06-21",
-      "strategy": "Sunday June 21 uses the Saturday 20:00 EDT Fort McHenry activation as the first Sunday-UTC stop, then follows the CWops/W8WZ DC Cheetah pattern: LBJ 7-fer, FDR, MLK, Korean, Constitution Gardens, Vietnam, WWII, Washington Monument, with Lincoln and Mason Neck as the clean Ostrich stretch.",
+      "strategy": "Sunday June 21 uses the Saturday 20:00 EDT Fort McHenry activation as the first Sunday-UTC stop, then follows the CWops/W8WZ DC Cheetah pattern: LBJ 7-fer, FDR, MLK, Korean, Constitution Gardens, Vietnam, WWII, Washington Monument, with Lincoln and Mason Neck as the clean Ostrich stretch and Meadowood as the simpler VA backup.",
       "timingAssumptions": {
         "source": "CWops Solid Copy No. 193 W8WZ article, POTA API reference metadata, imported top-activator n-fer evidence, OSM/Nominatim GeoJSON attempts, and Google Maps route checks on 2026-06-10.",
         "departureArea": "Foggy Bottom hotel",
@@ -880,6 +880,75 @@
         ]
       },
       {
+        "state": "US-VA",
+        "goal": "Sunday southbound NoVA finish",
+        "defaultReferences": [
+          "US-1308",
+          "US-0563"
+        ],
+        "options": [
+          {
+            "reference": "US-1308",
+            "name": "Mason Neck State Park / Elizabeth Hartwell Mason Neck NWR",
+            "role": "preferred Virginia 2-fer Ostrich stretch if hours and access work",
+            "latitude": 38.6465022,
+            "longitude": -77.1861893,
+            "priority": "target"
+          },
+          {
+            "reference": "US-9937",
+            "name": "Meadowood BLM Special Recreation Management Area",
+            "role": "single-reference Virginia backup if Mason Neck is skipped",
+            "latitude": 38.6724,
+            "longitude": -77.1978,
+            "priority": "backup"
+          }
+        ]
+      },
+      {
+        "state": "US-NC",
+        "goal": "Monday southbound workday leg",
+        "defaultReferences": [
+          "US-2744"
+        ],
+        "options": [
+          {
+            "reference": "US-2744",
+            "name": "Medoc Mountain State Park",
+            "role": "selected North Carolina activation on the Monday Fredericksburg-to-Florence leg",
+            "latitude": 36.2466,
+            "longitude": -77.8888,
+            "priority": "target"
+          }
+        ]
+      },
+      {
+        "state": "US-SC",
+        "goal": "Tuesday from Florence before Georgia",
+        "defaultReferences": [
+          "US-2915",
+          "US-0522"
+        ],
+        "options": [
+          {
+            "reference": "US-2915",
+            "name": "Woods Bay State Park",
+            "role": "earlier South Carolina backup/add-on before Savannah NWR",
+            "latitude": 33.9489,
+            "longitude": -79.9769,
+            "priority": "backup"
+          },
+          {
+            "reference": "US-0522",
+            "name": "Savannah National Wildlife Refuge",
+            "role": "selected South Carolina/Georgia-border target before Jekyll Island",
+            "latitude": 32.1655,
+            "longitude": -81.1514,
+            "priority": "target"
+          }
+        ]
+      },
+      {
         "state": "US-GA",
         "goal": "Tuesday Jekyll Island overnight",
         "defaultReferences": [
@@ -1023,7 +1092,7 @@
       "Monday June 22 is fixed in Florence, SC.",
       "Tuesday June 23 is booked on Jekyll Island after Savannah National Wildlife Refuge.",
       "Wednesday June 24 is in Ocala, FL.",
-      "The NC park choice still needs to be selected.",
+      "Medoc Mountain State Park is selected for North Carolina.",
       "Weekdays still have a 13:00-17:00 work block unless explicitly changed."
     ],
     "overnightStrategy": {
@@ -1038,7 +1107,7 @@
         "2026-06-25 Ocala / local Florida activation",
         "2026-06-26 Singer Island / Riviera Beach arrival"
       ],
-      "summary": "Camping has been removed. The remaining open park decisions are the exact Sunday DC rove flow and the NC stop.",
+      "summary": "Camping has been removed. Park choices are now selected through Florida; remaining planning risk is Sunday DC/NoVA flow, access verification, and whether Woods Bay is used as an SC backup/add-on.",
       "nights": [
         {
           "date": "2026-06-19",
@@ -1077,7 +1146,7 @@
           "date": "2026-06-22",
           "preferredType": "hotel",
           "area": "Florence, SC",
-          "why": "Fixed Monday anchor. The NC stop still needs to be inserted.",
+          "why": "Fixed Monday anchor after the Medoc Mountain NC activation.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-NC",
@@ -1123,55 +1192,55 @@
         "overnightType": "hotel",
         "startArea": "Foggy Bottom hotel",
         "endArea": "Fredericksburg hotel",
-        "focus": "Large DC / NoVA rove day, exact Cheetah/Ostrich flow TBD.",
+        "focus": "Large DC / NoVA rove day, with Mason Neck preferred and Meadowood available as a simpler VA backup.",
         "jurisdictions": [
           "US-DC",
           "US-VA"
         ],
-        "roughMiles": 70,
-        "roughDriveHours": 1.5,
+        "roughMiles": 68,
+        "roughDriveHours": 1.6,
         "chargingHours": 0,
         "minimumEntities": 15,
         "parkStopHours": 6,
         "roughTotalHours": 7.5,
-        "notes": "Exact DC route will be nailed down next."
+        "notes": "Mason Neck keeps the 2-fer/Ostrich path; Meadowood saves about 18 minutes of driving but only adds one VA entity."
       },
       {
         "date": "2026-06-22",
         "overnightType": "hotel",
         "startArea": "Fredericksburg hotel",
         "endArea": "Florence, SC",
-        "focus": "Workday southbound push; NC park still needs final selection.",
+        "focus": "Workday southbound push with Medoc Mountain selected for NC before the Florence overnight.",
         "jurisdictions": [
           "US-VA",
           "US-NC",
           "US-SC"
         ],
-        "roughMiles": 350,
-        "roughDriveHours": 5.2,
+        "roughMiles": 367,
+        "roughDriveHours": 5.75,
         "chargingHours": 1,
-        "minimumEntities": 2,
-        "parkStopHours": 4,
-        "roughTotalHours": 10.2,
-        "notes": "Monday night is fixed in Florence."
+        "minimumEntities": 1,
+        "parkStopHours": 2,
+        "roughTotalHours": 8.75,
+        "notes": "Fredericksburg -> Medoc -> Florence is about 5h45 driving before activation, charging, food, and buffer."
       },
       {
         "date": "2026-06-23",
         "overnightType": "hotel",
         "startArea": "Florence, SC",
         "endArea": "Jekyll Island, GA",
-        "focus": "Activate Savannah National Wildlife Refuge for South Carolina, then overnight on Jekyll Island and activate US-0636 for Georgia.",
+        "focus": "Use Woods Bay as an earlier South Carolina backup/add-on if useful, then Savannah National Wildlife Refuge, then Jekyll Island US-0636.",
         "jurisdictions": [
           "US-SC",
           "US-GA"
         ],
-        "roughMiles": 267,
-        "roughDriveHours": 4.2,
+        "roughMiles": 275,
+        "roughDriveHours": 4.3,
         "chargingHours": 0.5,
         "minimumEntities": 2,
-        "parkStopHours": 3,
-        "roughTotalHours": 7.7,
-        "notes": "Jekyll Island State Park covers the whole island, so the booked hotel anchor also covers the Georgia activation."
+        "parkStopHours": 4,
+        "roughTotalHours": 8.8,
+        "notes": "Woods Bay gives an SC option near Florence before relying on Savannah NWR near the Georgia border; Jekyll Island remains the GA anchor."
       },
       {
         "date": "2026-06-24",
@@ -1184,7 +1253,7 @@
           "US-FL"
         ],
         "roughMiles": 173,
-        "roughDriveHours": 3.0,
+        "roughDriveHours": 3,
         "chargingHours": 0.5,
         "minimumEntities": 0,
         "parkStopHours": 0,
@@ -1226,7 +1295,7 @@
         "notes": "John D. MacArthur is about 9 minutes from Singer Island after activation."
       }
     ],
-    "risk": "Remaining planning risk is now concentrated in the exact Sunday DC rove flow plus final NC and GA park selection."
+    "risk": "Remaining planning risk is concentrated in Sunday DC/NoVA access and timing, Mason Neck versus Meadowood, Woods Bay versus Savannah NWR sequencing, and Tesla Supercharger pairings."
   },
   "days": [
     {
@@ -1302,8 +1371,12 @@
           "notes": "Sunday night fixed anchor."
         }
       },
-      "parkTargets": [],
-      "notes": "Large DC / NoVA Cheetah/Ostrich rove day; exact park flow TBD.",
+      "parkTargets": [
+        "US-1308",
+        "US-0563",
+        "US-9937"
+      ],
+      "notes": "Mason Neck is preferred for the VA 2-fer; Meadowood is the simpler single-reference backup.",
       "approxDriveMiles": 70
     },
     {
@@ -1324,9 +1397,11 @@
           "notes": "Monday night fixed anchor."
         }
       },
-      "parkTargets": [],
-      "notes": "Workday southbound push; NC park still needs routing.",
-      "approxDriveMiles": 350
+      "parkTargets": [
+        "US-2744"
+      ],
+      "notes": "Workday southbound push via Medoc Mountain for NC before the Florence overnight.",
+      "approxDriveMiles": 367
     },
     {
       "date": "2026-06-23",
@@ -1346,11 +1421,12 @@
         }
       },
       "parkTargets": [
+        "US-2915",
         "US-0522",
         "US-0636"
       ],
-      "notes": "Savannah National Wildlife Refuge for South Carolina, then Jekyll Island State Park for Georgia.",
-      "approxDriveMiles": 267
+      "notes": "Woods Bay is the early SC backup/add-on; Savannah NWR remains the border-area SC target; Jekyll Island remains the GA anchor.",
+      "approxDriveMiles": 275
     },
     {
       "date": "2026-06-24",
@@ -1421,7 +1497,7 @@
   ],
   "driveEstimates": {
     "source": "Google Maps MCP route checks with traffic-aware departure times where known. Distances and times are planning estimates, not commitments.",
-    "updated": "2026-06-10",
+    "updated": "2026-06-15",
     "legs": [
       {
         "date": "2026-06-19",
@@ -1514,31 +1590,85 @@
         "notes": "Final Saturday positioning after the 20:00 EDT Maryland activation."
       },
       {
+        "date": "2026-06-21",
+        "from": "Washington Monument",
+        "to": "Mason Neck State Park",
+        "distance": "43.5 km",
+        "estimatedDriveMinutes": 41,
+        "estimatedDriveLabel": "41m",
+        "notes": "Preferred VA 2-fer/Ostrich stretch after the DC walking route if hours and access work."
+      },
+      {
+        "date": "2026-06-21",
+        "from": "Mason Neck State Park",
+        "to": "Fredericksburg, VA hotel",
+        "distance": "65.6 km",
+        "estimatedDriveMinutes": 53,
+        "estimatedDriveLabel": "53m",
+        "notes": "Southbound finish after the Mason Neck activation."
+      },
+      {
+        "date": "2026-06-21",
+        "from": "Washington Monument",
+        "to": "Meadowood BLM SRMA",
+        "distance": "35.2 km",
+        "estimatedDriveMinutes": 31,
+        "estimatedDriveLabel": "31m",
+        "notes": "Simpler single-reference VA backup if Mason Neck is skipped."
+      },
+      {
+        "date": "2026-06-21",
+        "from": "Meadowood BLM SRMA",
+        "to": "Fredericksburg, VA hotel",
+        "distance": "57.2 km",
+        "estimatedDriveMinutes": 45,
+        "estimatedDriveLabel": "45m",
+        "notes": "Southbound finish after the Meadowood backup activation."
+      },
+      {
         "date": "2026-06-22",
         "from": "Fredericksburg, VA",
+        "to": "Medoc Mountain State Park, NC",
+        "distance": "269.5 km",
+        "estimatedDriveMinutes": 156,
+        "estimatedDriveLabel": "2h 36m",
+        "notes": "Selected North Carolina activation leg."
+      },
+      {
+        "date": "2026-06-22",
+        "from": "Medoc Mountain State Park, NC",
         "to": "Florence, SC",
-        "distance": "564.7 km",
-        "estimatedDriveMinutes": 312,
-        "estimatedDriveLabel": "5h 12m",
-        "notes": "Known Monday hotel-to-hotel anchor; NC activation stop still needs to be inserted."
+        "distance": "320.9 km",
+        "estimatedDriveMinutes": 189,
+        "estimatedDriveLabel": "3h 09m",
+        "notes": "Continue to the booked Florence overnight after Medoc."
       },
       {
         "date": "2026-06-23",
         "from": "Florence, SC",
+        "to": "Woods Bay State Park, SC",
+        "distance": "44.6 km",
+        "estimatedDriveMinutes": 33,
+        "estimatedDriveLabel": "33m",
+        "notes": "Early South Carolina backup/add-on near Florence."
+      },
+      {
+        "date": "2026-06-23",
+        "from": "Woods Bay State Park, SC",
         "to": "Savannah National Wildlife Refuge",
-        "distance": "273.2 km",
-        "estimatedDriveMinutes": 149,
-        "estimatedDriveLabel": "2h 29m",
-        "notes": "Tuesday selected South Carolina activation leg."
+        "distance": "244.9 km",
+        "estimatedDriveMinutes": 133,
+        "estimatedDriveLabel": "2h 13m",
+        "notes": "Continue to the border-area Savannah NWR target if keeping both SC stops."
       },
       {
         "date": "2026-06-23",
         "from": "Savannah National Wildlife Refuge",
         "to": "Jekyll Island State Park, GA",
-        "distance": "155.7 km",
-        "estimatedDriveMinutes": 103,
-        "estimatedDriveLabel": "1h 43m",
-        "notes": "Tuesday drive from the South Carolina activation to the booked Georgia hotel/park anchor."
+        "distance": "152.8 km",
+        "estimatedDriveMinutes": 91,
+        "estimatedDriveLabel": "1h 31m",
+        "notes": "Tuesday drive from Savannah NWR to the booked Georgia hotel/park anchor."
       },
       {
         "date": "2026-06-24",
@@ -1892,6 +2022,36 @@
         "priority": "alternate",
         "state": "US-VA",
         "goal": "Sunday Ostrich backup"
+      },
+      {
+        "reference": "US-9937",
+        "name": "Meadowood BLM Special Recreation Management Area",
+        "role": "single-reference Virginia backup if Mason Neck is skipped",
+        "latitude": 38.6724,
+        "longitude": -77.1978,
+        "priority": "alternate",
+        "state": "US-VA",
+        "goal": "Sunday VA backup"
+      },
+      {
+        "reference": "US-2744",
+        "name": "Medoc Mountain State Park",
+        "role": "selected North Carolina activation",
+        "latitude": 36.2466,
+        "longitude": -77.8888,
+        "priority": "target",
+        "state": "US-NC",
+        "goal": "Monday southbound"
+      },
+      {
+        "reference": "US-2915",
+        "name": "Woods Bay State Park",
+        "role": "earlier South Carolina backup/add-on before Savannah NWR",
+        "latitude": 33.9489,
+        "longitude": -79.9769,
+        "priority": "alternate",
+        "state": "US-SC",
+        "goal": "Tuesday backup/add-on"
       }
     ]
   }

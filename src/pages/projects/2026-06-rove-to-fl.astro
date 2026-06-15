@@ -256,35 +256,44 @@ const overviewStops: OverviewStop[] = [
   },
   {
     date: "2026-06-22",
-    destination: "North Carolina park stop TBD",
-    type: "POTA placeholder",
+    destination: "Medoc Mountain State Park, NC",
+    type: "POTA",
     driveFromPrior: "between Fredericksburg and Florence",
     expectedStay: "~1h activation once selected",
-    status: "placeholder",
-    notes: "Needed to cover NC on the Monday workday leg; choose after checking route timing and Tesla Supercharger placement.",
+    references: ["US-2744"],
+    notes: "Selected North Carolina activation on the Monday workday leg.",
   },
   {
     date: "2026-06-22",
     destination: "Florence, SC hotel",
     type: "Hotel",
-    driveFromPrior: "5h 12m / 350.9 mi from Fredericksburg before NC stop insertion",
+    driveFromPrior: "3h 09m / 199.4 mi from Medoc Mountain",
     expectedStay: "Monday overnight",
-    notes: "NC park choice still needs to be inserted into this workday leg.",
+    notes: "Booked Monday anchor after the Medoc Mountain activation.",
+  },
+  {
+    date: "2026-06-23",
+    destination: "Woods Bay State Park, SC",
+    type: "POTA backup",
+    driveFromPrior: "33m / 27.7 mi from Florence",
+    expectedStay: "~1h activation if used",
+    references: ["US-2915"],
+    notes: "Early South Carolina backup/add-on before relying on Savannah NWR near the Georgia border.",
   },
   {
     date: "2026-06-23",
     destination: "Savannah National Wildlife Refuge",
     type: "POTA",
-    driveFromPrior: "2h 29m / 169.8 mi from Florence",
+    driveFromPrior: "2h 13m / 152.2 mi from Woods Bay if used",
     expectedStay: "~1h activation",
     references: ["US-0522"],
-    notes: "Selected South Carolina activation before crossing into Georgia.",
+    notes: "Border-area South Carolina target before crossing toward Georgia.",
   },
   {
     date: "2026-06-23",
     destination: "Jekyll Island, GA hotel / Jekyll Island State Park",
     type: "Hotel + POTA",
-    driveFromPrior: "1h 43m / 96.7 mi from Savannah NWR",
+    driveFromPrior: "1h 31m / 94.9 mi from Savannah NWR",
     expectedStay: "Tuesday overnight; activate on island",
     references: ["US-0636"],
     notes: "Booked Tuesday anchor; the island is the Georgia POTA park, so this covers GA without a separate morning detour.",
@@ -345,8 +354,9 @@ function potaUrl(reference: string) {
       </p>
       <p class="lede">
         Fixed hotel anchors and selected POTA targets are now set through
-        Florida. The remaining open park choice is NC, with the exact Sunday
-        DC rove flow still being refined.
+        Florida. Medoc Mountain now covers NC, Woods Bay is the early SC
+        backup/add-on, and the exact Sunday DC/NoVA flow still controls whether
+        Mason Neck or Meadowood handles VA.
       </p>
     </div>
 

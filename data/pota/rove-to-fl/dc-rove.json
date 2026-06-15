@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-13",
+  "updated": "2026-06-15",
   "status": "working DC rove plan",
   "timezone": "America/New_York",
   "utcDay": "Sunday UTC day begins Saturday 2026-06-20 at 20:00 EDT",
@@ -31,7 +31,8 @@
     "Count unique POTA entities on the Sunday UTC day, not local calendar day.",
     "Fort McHenry at/after 20:00 EDT Saturday is part of the Sunday UTC rove count.",
     "Trail references require operating within the POTA trail rule and on public land; imported n-fer data is evidence, not boundary proof.",
-    "The LBJ exact 7-fer operating point is approximate until confirmed on imagery/GPS: from Columbia Island Marina parking, walk to the LBJ stone monument, continue toward the Washington Monument, cross the parkway, and set up under a tree between the parkway and the Potomac as described by W8WZ."
+    "The LBJ exact 7-fer operating point is approximate until confirmed on imagery/GPS: from Columbia Island Marina parking, walk to the LBJ stone monument, continue toward the Washington Monument, cross the parkway, and set up under a tree between the parkway and the Potomac as described by W8WZ.",
+    "Meadowood BLM SRMA is a single-reference Virginia fallback if Mason Neck hours, restrictions, or Sunday pace make the 2-fer impractical."
   ],
   "timelineAssumptions": {
     "activationMinutes": 45,
@@ -240,6 +241,18 @@
   ],
   "optionalTimelineAddOns": [
     {
+      "id": "meadowood",
+      "directionsOriginId": "washington-monument",
+      "directionsDestinationId": "meadowood",
+      "placement": "Use instead of Mason Neck if the day is running late or refuge/park restrictions make the 2-fer unattractive.",
+      "movementMode": "drive",
+      "movementMinutes": 31,
+      "activationMinutes": 45,
+      "entityAdds": 1,
+      "timelineImpact": "Adds about 1h16 before the Fredericksburg drive; about 18 minutes less driving than the Mason Neck option but one fewer entity.",
+      "timelineNote": "Meadowood is the simpler VA backup, not an Ostrich-equivalent replacement for Mason Neck."
+    },
+    {
       "id": "dyke-marsh",
       "directionsOriginId": "washington-monument",
       "directionsDestinationId": "dyke-marsh",
@@ -360,6 +373,14 @@
       "type": "activation",
       "confidence": "top-activator n-fer evidence; restrictions need confirmation",
       "notes": "Use only a compliant public operating position; verify refuge and state park antenna rules before relying on the 2-fer."
+    },
+    {
+      "id": "meadowood",
+      "label": "Meadowood BLM SRMA",
+      "latitude": 38.6724,
+      "longitude": -77.1978,
+      "type": "optional",
+      "notes": "Single-reference Virginia backup if Mason Neck is skipped."
     },
     {
       "id": "dyke-marsh",
@@ -565,6 +586,12 @@
       "role": "southbound 2-fer add-on; antenna restrictions"
     },
     {
+      "reference": "US-9937",
+      "name": "Meadowood BLM Special Recreation Management Area",
+      "jurisdiction": "VA",
+      "role": "single-reference Mason Neck backup"
+    },
+    {
       "reference": "US-9961",
       "name": "Dyke Marsh Wildlife Reserve",
       "jurisdiction": "VA",
@@ -760,6 +787,19 @@
         "US-0563"
       ],
       "confidence": "imported n-fer evidence; verify refuge restrictions and park hours"
+    },
+    {
+      "id": "meadowood",
+      "name": "Meadowood BLM Special Recreation Management Area",
+      "latitude": 38.6724,
+      "longitude": -77.1978,
+      "references": [
+        "US-9937"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-9937"
+      ],
+      "confidence": "simple single-reference Virginia backup; easier route than Mason Neck but not a 2-fer"
     },
     {
       "id": "dyke-marsh",
@@ -982,6 +1022,22 @@
       "distance": "64.0 km",
       "minutes": 59,
       "notes": "Sunday night endpoint."
+    },
+    {
+      "from": "Washington Monument",
+      "to": "Meadowood BLM SRMA",
+      "mode": "drive",
+      "distance": "35.2 km",
+      "minutes": 31,
+      "notes": "Google Maps route check on 2026-06-15; simpler single-reference VA backup."
+    },
+    {
+      "from": "Meadowood BLM SRMA",
+      "to": "Fredericksburg",
+      "mode": "drive",
+      "distance": "57.2 km",
+      "minutes": 45,
+      "notes": "Google Maps route check on 2026-06-15; southbound finish after Meadowood."
     }
   ],
   "openVerification": [
@@ -991,7 +1047,8 @@
     "Check closing/dusk times for Mason Neck if using it as the Ostrich add-on.",
     "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure.",
     "Pennsylvania Avenue NHS and C&O Canal did not return clean OSM GeoJSON in the first fetch pass; verify boundaries before relying on those as easy add-ons.",
-    "Jefferson and Ford resolved as point GeoJSON rather than full polygons; use POTA/NPS context and on-site signage before treating the point as the whole activatable area."
+    "Jefferson and Ford resolved as point GeoJSON rather than full polygons; use POTA/NPS context and on-site signage before treating the point as the whole activatable area.",
+    "Keep Meadowood BLM SRMA as the simple VA backup if Mason Neck access, hours, or pace do not work."
   ],
   "expandedMallInventory": {
     "summary": "DC cache has 32 references total. For the Foggy Bottom / National Mall rove, the practical inventory is the LBJ trail cluster plus 17 Mall/downtown references; Fort McHenry adds four Sunday-UTC references before the local DC walk begins.",
@@ -1445,7 +1502,11 @@
       },
       {
         "label": "Mason Neck",
-        "finding": "Keep as the clean southbound finish, but route it from the Foggy Bottom hotel car pickup rather than from the final DC walking stop."
+        "finding": "Preferred clean southbound 2-fer finish. From Washington Monument, current route check is about 41 minutes to Mason Neck and 53 minutes onward to Fredericksburg."
+      },
+      {
+        "label": "Meadowood",
+        "finding": "Use as the simpler Virginia backup if Mason Neck is too late or too constrained. Washington Monument -> Meadowood -> Fredericksburg is about 1h16 driving, roughly 18 minutes less than the Mason Neck line, but it only adds US-9937."
       }
     ],
     "mapsEvidence": [
@@ -1509,6 +1570,30 @@
         "mode": "driving",
         "distance": "64.0 km",
         "minutes": 59
+      },
+      {
+        "scenario": "Washington Monument to Mason Neck",
+        "mode": "driving",
+        "distance": "43.5 km",
+        "minutes": 41
+      },
+      {
+        "scenario": "Mason Neck to Fredericksburg hotel",
+        "mode": "driving",
+        "distance": "65.6 km",
+        "minutes": 53
+      },
+      {
+        "scenario": "Washington Monument to Meadowood",
+        "mode": "driving",
+        "distance": "35.2 km",
+        "minutes": 31
+      },
+      {
+        "scenario": "Meadowood to Fredericksburg hotel",
+        "mode": "driving",
+        "distance": "57.2 km",
+        "minutes": 45
       }
     ]
   }
