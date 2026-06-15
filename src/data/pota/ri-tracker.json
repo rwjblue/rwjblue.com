@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-14T16:05:09.960Z",
+  "generatedAt": "2026-06-15T00:47:14.551Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -312,7 +312,14 @@
       "firstActivation": null,
       "latestActivation": null,
       "activationCount": 0,
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-06-14-blackstone-river-valley-national-historical-park-pota",
+          "title": "Blackstone River Valley NHP from the Rhode Island side",
+          "date": "2026-06-14",
+          "href": "/notes/2026-06-14-blackstone-river-valley-national-historical-park-pota/"
+        }
+      ],
       "publicStats": {
         "attempts": 55,
         "activations": 52,
