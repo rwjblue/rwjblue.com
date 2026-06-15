@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T00:47:15.373Z",
+  "generatedAt": "2026-06-15T03:22:38.276Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -3018,9 +3018,53 @@
       "locationDesc": "US-MA,US-RI",
       "href": "/radio/pota/US-7971/",
       "potaUrl": "https://pota.app/#/park/US-7971",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 2,
+      "qsoTotal": 18,
+      "activations": [
+        {
+          "reference": "US-7971",
+          "park": "Blackstone River Valley National Historical Park",
+          "date": "2026-06-15",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-7971",
+          "park": "Blackstone River Valley National Historical Park",
+          "date": "2026-06-14",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 6,
+            "cw": 6,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-14-blackstone-river-valley-national-historical-park-pota",
+              "title": "Blackstone River Valley NHP from the Rhode Island side",
+              "date": "2026-06-14",
+              "href": "/notes/2026-06-14-blackstone-river-valley-national-historical-park-pota/"
+            }
+          ],
+          "projects": []
+        }
+      ],
       "notes": [
         {
           "id": "2026-06-14-blackstone-river-valley-national-historical-park-pota",

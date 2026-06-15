@@ -12,14 +12,14 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 81,
-      "parks": 51,
-      "qsos": 2008
+      "activations": 82,
+      "parks": 52,
+      "qsos": 2020
     },
     "attempts": {
-      "activations": 90,
-      "parks": 51,
-      "qsos": 2040
+      "activations": 92,
+      "parks": 52,
+      "qsos": 2058
     },
     "hunter": {
       "parks": 454,
@@ -30,6 +30,26 @@
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-06-15",
+        "reference": "US-7971",
+        "park": "Blackstone River Valley National Historical Park",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-06-14",
+        "reference": "US-7971",
+        "park": "Blackstone River Valley National Historical Park",
+        "location": "US-RI",
+        "cw": 6,
+        "data": 0,
+        "phone": 0,
+        "total": 6
+      },
       {
         "date": "2026-06-12",
         "reference": "US-6992",
@@ -152,8 +172,8 @@
       },
       {
         "date": "2026-05-25",
-        "reference": "US-7865",
-        "park": "East State Beach",
+        "reference": "US-7719",
+        "park": "Misquamicut State Beach",
         "location": "US-RI",
         "cw": 15,
         "data": 0,
@@ -162,8 +182,8 @@
       },
       {
         "date": "2026-05-25",
-        "reference": "US-7719",
-        "park": "Misquamicut State Beach",
+        "reference": "US-7865",
+        "park": "East State Beach",
         "location": "US-RI",
         "cw": 15,
         "data": 0,
@@ -252,16 +272,6 @@
       },
       {
         "date": "2026-05-23",
-        "reference": "US-2873",
-        "park": "Fishermen's Memorial State Park",
-        "location": "US-RI",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-05-23",
         "reference": "US-7717",
         "park": "Charlestown Breachway State Park",
         "location": "US-RI",
@@ -269,16 +279,6 @@
         "data": 0,
         "phone": 0,
         "total": 2
-      },
-      {
-        "date": "2026-05-23",
-        "reference": "US-0517",
-        "park": "Trustom Pond National Wildlife Refuge",
-        "location": "US-RI",
-        "cw": 19,
-        "data": 0,
-        "phone": 0,
-        "total": 19
       }
     ],
     "hunter_qsos": [

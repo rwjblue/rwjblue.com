@@ -1104,6 +1104,32 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-7971",
+      "park": "Blackstone River Valley National Historical Park",
+      "date": "2026-06-15",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7971",
+      "park": "Blackstone River Valley National Historical Park",
+      "date": "2026-06-14",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 6,
+        "cw": 6,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }
