@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T03:22:37.512Z",
+  "generatedAt": "2026-06-16T15:29:56.137Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -1446,7 +1446,14 @@
         "source": "profile"
       },
       "activationCount": 1,
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-06-16-big-river-wildlife-management-area-pota",
+          "title": "Big River shakedown before the rove",
+          "date": "2026-06-16",
+          "href": "/notes/2026-06-16-big-river-wildlife-management-area-pota/"
+        }
+      ],
       "publicStats": {
         "attempts": 327,
         "activations": 326,

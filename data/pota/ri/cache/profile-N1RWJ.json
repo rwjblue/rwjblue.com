@@ -22,8 +22,8 @@
       "qsos": 2058
     },
     "hunter": {
-      "parks": 454,
-      "qsos": 661
+      "parks": 460,
+      "qsos": 669
     },
     "awards": 24,
     "endorsements": 50
@@ -283,6 +283,78 @@
     ],
     "hunter_qsos": [
       {
+        "date": "2026-06-15T22:13:14",
+        "callsign": "WB0RLJ",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4011",
+        "park": "Chalco Hills State Recreation Area",
+        "location": "US-NE"
+      },
+      {
+        "date": "2026-06-15T15:02:03",
+        "callsign": "N1TJC",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2085",
+        "park": "John Boyd Thacher State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-06-15T14:58:00",
+        "callsign": "N9JF/VY2",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "CA-6172",
+        "park": "Seacow Head Lighthouse National Heritage Site",
+        "location": "CA-PE"
+      },
+      {
+        "date": "2026-06-15T14:44:00",
+        "callsign": "W4ID",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3872",
+        "park": "Charles Towne Landing State Historic Site",
+        "location": "US-SC"
+      },
+      {
+        "date": "2026-06-15T14:27:02",
+        "callsign": "N1BS",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2876",
+        "park": "Goddard Memorial State Park",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-06-15T14:15:08",
+        "callsign": "K8FC",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2203",
+        "park": "Tugaloo State Park",
+        "location": "US-GA"
+      },
+      {
+        "date": "2026-06-15T13:58:58",
+        "callsign": "N3WT",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-6390",
+        "park": "South Mountain State Battlefield State Park",
+        "location": "US-MD"
+      },
+      {
+        "date": "2026-06-15T00:07:05",
+        "callsign": "KR4IIB",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2744",
+        "park": "Medoc Mountain State Park",
+        "location": "US-NC"
+      },
+      {
         "date": "2026-06-11T14:17:10",
         "callsign": "N3WT",
         "band": "40M",
@@ -314,8 +386,8 @@
         "callsign": "W3GTR",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-4567",
-        "park": "Captain John Smith Chesapeake National Historic Trail",
+        "reference": "US-4581",
+        "park": "Star-Spangled Banner National Historic Trail",
         "location": "US-MD"
       },
       {
@@ -323,8 +395,8 @@
         "callsign": "W3GTR",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-4581",
-        "park": "Star-Spangled Banner National Historic Trail",
+        "reference": "US-4567",
+        "park": "Captain John Smith Chesapeake National Historic Trail",
         "location": "US-MD"
       },
       {
@@ -395,8 +467,8 @@
         "callsign": "W4BD",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-5507",
-        "park": "Channels State Forest",
+        "reference": "US-9935",
+        "park": "Virginia Bird & Wildlife State Trail",
         "location": "US-VA"
       },
       {
@@ -404,8 +476,8 @@
         "callsign": "W4BD",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-9935",
-        "park": "Virginia Bird & Wildlife State Trail",
+        "reference": "US-5507",
+        "park": "Channels State Forest",
         "location": "US-VA"
       },
       {
@@ -422,26 +494,8 @@
         "callsign": "W4WJE",
         "band": "40M",
         "mode": "CW",
-        "reference": "US-4581",
-        "park": "Star-Spangled Banner National Historic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-03T13:23:47",
-        "callsign": "W4WJE",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-4564",
-        "park": "Potomac Heritage Trail National Scenic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-03T13:23:47",
-        "callsign": "W4WJE",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-0784",
-        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
+        "reference": "US-9898",
+        "park": "Mount Vernon National Historic Trail",
         "location": "US-DC"
       },
       {
@@ -452,60 +506,6 @@
         "reference": "US-4567",
         "park": "Captain John Smith Chesapeake National Historic Trail",
         "location": "US-DC"
-      },
-      {
-        "date": "2026-06-03T13:23:47",
-        "callsign": "W4WJE",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-0670",
-        "park": "George Washington Memorial Parkway",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-03T13:23:47",
-        "callsign": "W4WJE",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-9898",
-        "park": "Mount Vernon National Historic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-01T16:03:06",
-        "callsign": "NQ8T",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-9392",
-        "park": "Augusta-Anne Olsen State Nature Preserve",
-        "location": "US-OH"
-      },
-      {
-        "date": "2026-06-01T15:49:18",
-        "callsign": "KU3J",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-8900",
-        "park": "PA 203 State Game Land",
-        "location": "US-PA"
-      },
-      {
-        "date": "2026-06-01T15:48:08",
-        "callsign": "K1NW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6981",
-        "park": "Great Swamp Wildlife Management Area",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-05-31T15:05:35",
-        "callsign": "KD3D",
-        "band": "30M",
-        "mode": "CW",
-        "reference": "US-5217",
-        "park": "North Harmony State Forest",
-        "location": "US-NY"
       }
     ]
   },
