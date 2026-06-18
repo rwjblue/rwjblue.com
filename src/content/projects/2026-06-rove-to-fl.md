@@ -69,10 +69,10 @@ Current working shape:
 Current Friday / Saturday recommendation:
 
 - Friday morning: activate RI near Hope, then CT at `US-1716` Silver Sands.
-  Current RI target is `US-6992` JL Curran State Park.
+  Current RI target is `US-6991` Rockville Wildlife Management Area.
 - Friday work positioning: Hope -> RI park -> Silver Sands -> Stamford /
   White Plains / Tallman corridor before the 13:00 work window. The mapped
-  drive through Stamford and on to Tallman is about 3h14 before activation and
+  drive through Stamford and on to Tallman is about 3h22 before activation and
   charge time.
 - Friday after work: activate `US-2149` Tallman Mountain State Park while
   waiting out rush hour, then drive about 1h06 to the booked Edison hotel.
@@ -91,8 +91,8 @@ while the route still continues naturally to the Foggy Bottom hotel.
 
 Known anchor drive estimates:
 
-- Hope, RI -> JL Curran State Park: 22m.
-- JL Curran State Park -> Silver Sands State Park: 1h44m.
+- Hope, RI -> Rockville Wildlife Management Area: 45m.
+- Rockville Wildlife Management Area -> Silver Sands State Park: 1h29m.
 - Silver Sands -> Stamford: 35m.
 - Stamford -> Tallman Mountain State Park: 33m.
 - Tallman -> Edison hotel: 1h06m.

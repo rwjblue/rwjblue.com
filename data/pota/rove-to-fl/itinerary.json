@@ -748,7 +748,7 @@
       "localTime": "20:00 EDT",
       "meaning": "Arrive near Fort McHenry around 19:30 and start the activation at or after 20:00 EDT so Maryland counts toward the Sunday UTC rove day.",
       "defaultRouteBeforeTarget": [
-        "US-6992 or nearby RI park Friday morning",
+        "US-6991 Rockville Friday morning",
         "US-1716 Silver Sands Friday morning",
         "US-2149 Tallman Friday after work",
         "Booked Edison, NJ hotel Friday night",
@@ -764,15 +764,15 @@
         "state": "US-RI",
         "goal": "Friday morning near Hope",
         "defaultReferences": [
-          "US-6992"
+          "US-6991"
         ],
         "options": [
           {
-            "reference": "US-6992",
-            "name": "JL Curran State Park",
-            "role": "default near-home RI activation",
-            "latitude": 41.7507,
-            "longitude": -71.5516,
+            "reference": "US-6991",
+            "name": "Rockville Wildlife Management Area",
+            "role": "selected unactivated RI activation on the I-95 southbound route",
+            "latitude": 41.5054,
+            "longitude": -71.7591,
             "priority": "target"
           }
         ]
@@ -1318,12 +1318,12 @@
         }
       },
       "parkTargets": [
-        "US-6992",
+        "US-6991",
         "US-1716",
         "US-2149"
       ],
       "notes": "RI and CT in the morning, work near lower Hudson, Tallman after work, then Edison hotel.",
-      "approxDriveMiles": 250
+      "approxDriveMiles": 254
     },
     {
       "date": "2026-06-20",
@@ -1502,19 +1502,19 @@
       {
         "date": "2026-06-19",
         "from": "Hope, RI",
-        "to": "JL Curran State Park, RI",
-        "distance": "25.1 km",
-        "estimatedDriveMinutes": 22,
-        "estimatedDriveLabel": "22m",
-        "notes": "Default near-home Friday morning RI activation leg."
+        "to": "Rockville Wildlife Management Area, RI",
+        "distance": "60.4 km",
+        "estimatedDriveMinutes": 45,
+        "estimatedDriveLabel": "45m",
+        "notes": "Selected unactivated Friday morning RI activation leg near the I-95 southbound route."
       },
       {
         "date": "2026-06-19",
-        "from": "JL Curran State Park, RI",
+        "from": "Rockville Wildlife Management Area, RI",
         "to": "Silver Sands State Park, Milford, CT",
-        "distance": "168.1 km",
-        "estimatedDriveMinutes": 104,
-        "estimatedDriveLabel": "1h 44m",
+        "distance": "138.8 km",
+        "estimatedDriveMinutes": 89,
+        "estimatedDriveLabel": "1h 29m",
         "notes": "Friday morning RI-to-CT activation leg."
       },
       {
@@ -1794,11 +1794,11 @@
     ],
     "parkPoints": [
       {
-        "reference": "US-6992",
-        "name": "JL Curran State Park",
+        "reference": "US-6991",
+        "name": "Rockville Wildlife Management Area",
         "role": "selected RI activation",
-        "latitude": 41.7507,
-        "longitude": -71.5516,
+        "latitude": 41.5054,
+        "longitude": -71.7591,
         "priority": "target",
         "state": "US-RI",
         "goal": "Friday morning"
