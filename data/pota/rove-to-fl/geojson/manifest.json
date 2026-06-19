@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-13",
-  "source": "OpenStreetMap Nominatim search with polygon_geojson=1",
+  "updated": "2026-06-19",
+  "source": "Mixed NPS ArcGIS and OpenStreetMap/Nominatim GeoJSON sources; see each item.",
   "items": [
     {
       "reference": "US-0784",
@@ -145,14 +145,16 @@
     },
     {
       "reference": "US-4581",
-      "query": "Star-Spangled Banner National Historic Trail",
+      "query": "Star-Spangled Banner National Historic Trail Official Centerline",
       "found": true,
       "file": "data/pota/rove-to-fl/geojson/US-4581.geojson",
-      "displayName": "Star-Spangled Banner National Historic Trail, brown trail, Charles County, Maryland, 20612, United States",
+      "displayName": "Star-Spangled Banner National Historic Trail Official Centerline",
       "osmType": "node",
       "osmId": 6090549619,
-      "geometryType": "Point",
-      "note": "Trail/parkway boundary from OSM search; verify exact POTA 100-foot/public-land position manually."
+      "geometryType": "MultiLineString",
+      "note": "Official centerline is about 774 m / 2,540 ft from Sweetgum; no sampled centerline segment intersects Greenbelt Park, so Sweetgum fails the 100-foot trail rule for this reference.",
+      "source": "NPS ArcGIS Star-Spangled Banner National Historic Trail Official Centerline",
+      "sourceUrl": "https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/Sta_Spangled_Banner_National_Historic_Trail_Official_Centerline/FeatureServer/0/query"
     },
     {
       "reference": "US-4567",
@@ -308,6 +310,39 @@
       "osmType": null,
       "osmId": null,
       "geometryType": null
+    },
+    {
+      "reference": "US-0668",
+      "query": "NPS LRD boundary UNIT_CODE='GREE'",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0668.geojson",
+      "displayName": "Greenbelt Park",
+      "geometryType": "MultiPolygon",
+      "source": "NPS Land Resources Division Boundary and Tract Data Service",
+      "sourceUrl": "https://services1.arcgis.com/fBc8EJBxQRMcHlei/ArcGIS/rest/services/NPS_Land_Resources_Division_Boundary_and_Tract_Data_Service/FeatureServer/2/query",
+      "note": "Sweetgum test point is inside this Greenbelt boundary."
+    },
+    {
+      "reference": "US-0654",
+      "query": "NPS LRD boundary UNIT_CODE='NACA'",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-0654.geojson",
+      "displayName": "National Capital Parks",
+      "geometryType": "MultiPolygon",
+      "source": "NPS Land Resources Division Boundary and Tract Data Service",
+      "sourceUrl": "https://services1.arcgis.com/fBc8EJBxQRMcHlei/ArcGIS/rest/services/NPS_Land_Resources_Division_Boundary_and_Tract_Data_Service/FeatureServer/2/query",
+      "note": "Sweetgum test point is not inside this National Capital Parks boundary."
+    },
+    {
+      "reference": "US-7973",
+      "query": "Baltimore-Washington Parkway, Cheverly, Prince George's County, Maryland",
+      "found": true,
+      "file": "data/pota/rove-to-fl/geojson/US-7973.geojson",
+      "displayName": "Baltimore-Washington Parkway, Cheverly, Prince George's County, Maryland, United States",
+      "geometryType": "MultiPolygon",
+      "source": "OpenStreetMap Nominatim search with polygon_geojson=1",
+      "sourceUrl": "https://nominatim.openstreetmap.org/search",
+      "note": "Sweetgum test point is not inside this Baltimore-Washington Parkway polygon."
     }
   ]
 }

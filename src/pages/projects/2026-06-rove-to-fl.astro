@@ -222,18 +222,18 @@ const overviewStops: OverviewStop[] = [
   },
   {
     date: "2026-06-20",
-    destination: "Fort McHenry, MD",
+    destination: "Greenbelt / Baltimore-Washington Parkway overlap, MD",
     type: "POTA",
-    driveFromPrior: "1h 14m / 75.4 mi from Fox Point",
-    expectedStay: "Arrive ~19:30; activate after 20:00",
-    references: ["US-0928", "US-4581", "US-4567", "US-4582"],
-    notes: "Maryland activation intentionally counts on the Sunday UTC rove day.",
+    driveFromPrior: "1h 36m / 99.8 mi from Fox Point",
+    expectedStay: "Activate after 20:00 if legal access is available",
+    references: ["US-0668", "US-7973"],
+    notes: "Maryland Sunday-UTC opener after Fort McHenry hours check; US-0654 and US-4581 remain unconfirmed at Greenbelt.",
   },
   {
     date: "2026-06-20",
     destination: "Foggy Bottom, DC hotel",
     type: "Hotel",
-    driveFromPrior: "1h 14m / 46.4 mi from Fort McHenry",
+    driveFromPrior: "28m / 17.5 mi from Greenbelt",
     expectedStay: "Saturday overnight",
     notes: "Fixed DC anchor for the Sunday rove.",
   },
@@ -557,7 +557,7 @@ function potaUrl(reference: string) {
       <article>
         <h3>Saturday positioning rove</h3>
         <p>
-          Edison to Cheesequake, John Heinz, Fox Point, Fort McHenry, then Foggy Bottom.
+          Edison to Cheesequake, John Heinz, Fox Point, Greenbelt, then Foggy Bottom.
           This page carries the lighter Saturday route, UTC rollover target, and remaining access checks.
         </p>
         <a href="/projects/2026-06-rove-to-fl/saturday/">Open Saturday details</a>
@@ -565,8 +565,8 @@ function potaUrl(reference: string) {
       <article>
         <h3>Sunday DC / NoVA rove</h3>
         <p>
-          Fort McHenry as the Sunday-UTC opener, then the W8WZ-inspired DC Cheetah
-          baseline with Ostrich stretch options toward Mason Neck and Fredericksburg.
+          Greenbelt as the Sunday-UTC Maryland 2-fer opener, then the W8WZ-inspired DC
+          Cheetah baseline with Dyke Marsh / Mason Neck stretch options toward Fredericksburg.
         </p>
         <a href="/projects/2026-06-rove-to-fl/sunday/">Open Sunday details</a>
       </article>

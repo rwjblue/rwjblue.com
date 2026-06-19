@@ -1,8 +1,8 @@
 {
-  "updated": "2026-06-15",
-  "status": "working DC rove plan",
+  "updated": "2026-06-19",
+  "status": "revised DC rove plan after Fort McHenry and Greenbelt GeoJSON checks",
   "timezone": "America/New_York",
-  "utcDay": "Sunday UTC day begins Saturday 2026-06-20 at 20:00 EDT",
+  "utcDay": "Sunday UTC day begins Saturday 2026-06-20 at 20:00 EDT; Greenbelt/Baltimore-Washington Parkway overlap is the primary Maryland opener because Fort McHenry gates close at 18:00. Count Greenbelt as two confirmed references: US-0668 and US-7973.",
   "sources": [
     {
       "label": "CWops Solid Copy No. 193, February 2026, W8WZ “Activating DC”",
@@ -18,20 +18,41 @@
       ]
     },
     {
-      "label": "OpenStreetMap/Nominatim GeoJSON attempts",
+      "label": "GeoJSON boundary and trail checks",
       "file": "data/pota/rove-to-fl/geojson/manifest.json",
-      "notes": "Physical park polygons were found for the main Mall/DC/VA stops. Trail GeoJSON is incomplete or low-confidence and still needs exact-position verification."
+      "notes": "Fresh NPS ArcGIS/OSM GeoJSON files were cached for Greenbelt, National Capital Parks, Baltimore-Washington Parkway, and Star-Spangled Banner NHT. Sweetgum is inside Greenbelt, outside the NACA and BW Parkway polygons, and about 774 m / 2,540 ft from the official STSP centerline."
     },
     {
       "label": "Imported n-fer evidence from top activators",
       "file": "data/pota/rove-to-fl/external/nfer_from_top_activators.json"
+    },
+    {
+      "label": "NPS Fort McHenry operating hours",
+      "url": "https://www.nps.gov/fomc/planyourvisit/hours.htm",
+      "notes": "Official NPS page updated 2026-05-20 says summer weekend grounds and parking lot hours end at 18:00, gates close then, and last weekend entry is 17:45."
+    },
+    {
+      "label": "NPS LBJ Memorial Grove operating hours",
+      "url": "https://www.nps.gov/lyba/planyourvisit/hours.htm",
+      "notes": "Official NPS page says LBJ Memorial Grove is open year round from 06:00 to 22:00 and Columbia Island Marina is open 06:00 to midnight."
+    },
+    {
+      "label": "Greenbelt Park Sweetgum and campground access",
+      "url": "https://www.nps.gov/gree/planyourvisit/picnicking.htm",
+      "notes": "Sweetgum is first-come, year-round, and day-use; separate NPS material says the park is dawn-to-dusk and the campground has 24/7 camper access. At 20:00 EDT on 2026-06-20, sunset is about 20:36 EDT. Do not treat Sweetgum as the four-fer point; use a legal public point inside the Greenbelt/BW Parkway overlap."
+    },
+    {
+      "label": "Local activator email feedback, June 2026",
+      "url": ".superpowers/pota-rove-outreach-feedback.md",
+      "notes": "KB3WAV corroborated Fort McHenry gate closure; W3LAM corroborated LBJ vehicle access and seven-reference right-side parking-area operation; N2NWK suggested Greenbelt as a four-reference MD/DC-area option."
     }
   ],
   "countingNotes": [
     "Count unique POTA entities on the Sunday UTC day, not local calendar day.",
-    "Fort McHenry at/after 20:00 EDT Saturday is part of the Sunday UTC rove count.",
-    "Trail references require operating within the POTA trail rule and on public land; imported n-fer data is evidence, not boundary proof.",
-    "The LBJ exact 7-fer operating point is approximate until confirmed on imagery/GPS: from Columbia Island Marina parking, walk to the LBJ stone monument, continue toward the Washington Monument, cross the parkway, and set up under a tree between the parkway and the Potomac as described by W8WZ.",
+    "Greenbelt/Baltimore-Washington Parkway is the primary Maryland opener for the Sunday UTC rove. Count US-0668 + US-7973 only from a legal public point in the overlap; US-0654 and US-4581 remain unconfirmed at Greenbelt unless an exact activator coordinate verifies under POTA rules.",
+    "Fort McHenry is not usable at/after 20:00 EDT: official NPS summer weekend gate closure is 18:00. Treat it as a pre-18:00 optional Saturday-local stop only.",
+    "POTA multi-loc activations require the activator and all station equipment to be inside the overlapping valid area for every declared reference; trail references require public land within 30.5 m / 100 ft of the trail.",
+    "The LBJ 7-fer is corroborated by W8WZ article evidence and local W3LAM feedback: the right side of the parking area / LBJ operating area is inside US-0784, US-0670, US-4564, US-4567, US-4581, US-9901, and US-9898.",
     "Meadowood BLM SRMA is a single-reference Virginia fallback if Mason Neck hours, restrictions, or Sunday pace make the 2-fer impractical."
   ],
   "timelineAssumptions": {
@@ -43,18 +64,18 @@
   },
   "primaryTimeline": [
     {
-      "id": "fort-mchenry-saturday",
-      "directionsDestinationId": "fort-mchenry-saturday",
+      "id": "greenbelt-saturday",
+      "directionsDestinationId": "greenbelt-saturday",
       "localStart": "Sat 20:00",
       "localEnd": "Sat 20:45",
       "utcStart": "Sun 00:00",
       "utcEnd": "Sun 00:45",
       "movementMode": "drive",
-      "movementFromPrior": "Saturday route arrival; target on site by ~19:30",
+      "movementFromPrior": "Saturday route arrival from Fox Point; use a legal public point in the Greenbelt/BW Parkway overlap, only while access is lawful before dusk",
       "movementMinutes": 0,
       "activationMinutes": 45,
-      "cumulativeEntities": 4,
-      "timelineNote": "Opens the Sunday UTC day. Do not start before 20:00 EDT if the goal is Sunday UTC credit."
+      "cumulativeEntities": 2,
+      "timelineNote": "Primary Maryland opener after Fort McHenry access check. GeoJSON supports a Greenbelt/Baltimore-Washington Parkway 2-fer (US-0668 + US-7973); US-0654 and US-4581 remain unconfirmed at Greenbelt."
     },
     {
       "id": "lbj-7fer",
@@ -69,7 +90,7 @@
       "movementMinutes": 12,
       "activationMinutes": 45,
       "cumulativeEntities": 9,
-      "timelineNote": "Sunday morning jackpot stop. Use rideshare from the hotel; Columbia Island Marina is only access context, not a car stop."
+      "timelineNote": "Sunday morning jackpot after Greenbelt. Adds seven unique references after the Greenbelt 2-fer; local feedback says this can be vehicle/base-station friendly."
     },
     {
       "id": "fdr",
@@ -129,7 +150,7 @@
       "movementMinutes": 3,
       "activationMinutes": 45,
       "cumulativeEntities": 14,
-      "timelineNote": "Adds Lincoln while it is only a short west Mall walk; skip only if crowds or operating space are bad."
+      "timelineNote": "Adds Lincoln; still before the Cheetah threshold in the Greenbelt 2-fer route."
     },
     {
       "id": "vietnam",
@@ -144,7 +165,7 @@
       "movementMinutes": 5,
       "activationMinutes": 45,
       "cumulativeEntities": 15,
-      "timelineNote": "Cheetah threshold if Fort McHenry and LBJ verify as planned."
+      "timelineNote": "Cheetah threshold with the Greenbelt 2-fer and LBJ 7-fer."
     },
     {
       "id": "constitution-gardens",
@@ -159,7 +180,7 @@
       "movementMinutes": 9,
       "activationMinutes": 45,
       "cumulativeEntities": 16,
-      "timelineNote": "Adds Constitution Gardens."
+      "timelineNote": "Buffer beyond Cheetah."
     },
     {
       "id": "wwii",
@@ -220,7 +241,7 @@
       "movementMinutes": 40,
       "activationMinutes": 45,
       "cumulativeEntities": 20,
-      "timelineNote": "Clean Ostrich finish if park/refuge access and antenna restrictions check out. This assumes the car stays at the hotel during the DC rove."
+      "timelineNote": "Ostrich finish if the Mason Neck 2-fer verifies and park/refuge access and antenna restrictions check out. This assumes the car stays at the hotel during the DC rove."
     },
     {
       "id": "fredericksburg-arrival",
@@ -267,13 +288,22 @@
   ],
   "routeWaypoints": [
     {
+      "id": "greenbelt-saturday",
+      "label": "Greenbelt / Baltimore-Washington Parkway MD opener",
+      "latitude": 38.9927921,
+      "longitude": -76.8880143,
+      "type": "activation",
+      "confidence": "confirmed two-reference GeoJSON overlap; exact legal parking/operating access still needs field confirmation",
+      "notes": "Target after 20:00 EDT for Sunday UTC credit. Count US-0668 + US-7973 only; US-0654 and US-4581 need exact local confirmation."
+    },
+    {
       "id": "fort-mchenry-saturday",
-      "label": "Fort McHenry",
+      "label": "Fort McHenry optional before 18:00",
       "latitude": 39.2641007,
       "longitude": -76.5806414,
-      "type": "activation",
-      "confidence": "strong n-fer evidence; exact US-4582 position still needs field confirmation",
-      "notes": "Use an on-grounds public operating position after the 20:00 EDT UTC rollover."
+      "type": "optional",
+      "confidence": "not viable after 18:00 gate closure",
+      "notes": "Official NPS hours close the gates at 18:00 on summer weekends, so this cannot be the Sunday UTC opener."
     },
     {
       "id": "foggy-bottom",
@@ -336,7 +366,7 @@
       "longitude": -77.0477132,
       "type": "activation",
       "confidence": "article-backed Mall 2-fer stop",
-      "notes": "Cheetah threshold if Fort and LBJ validate as planned."
+      "notes": "Buffer beyond Cheetah after Greenbelt/LBJ; bench availability likely drives the exact operating point."
     },
     {
       "id": "wwii",
@@ -466,16 +496,34 @@
   ],
   "referenceCatalog": [
     {
+      "reference": "US-0654",
+      "name": "National Capital Parks",
+      "jurisdiction": "DC/MD",
+      "role": "Greenbelt Saturday-night likely unique add; not the National Mall"
+    },
+    {
+      "reference": "US-7973",
+      "name": "Baltimore-Washington Parkway",
+      "jurisdiction": "MD",
+      "role": "Greenbelt Saturday-night likely unique add"
+    },
+    {
+      "reference": "US-0668",
+      "name": "Greenbelt Park",
+      "jurisdiction": "MD",
+      "role": "Greenbelt Saturday-night MD opener"
+    },
+    {
       "reference": "US-0928",
       "name": "Fort McHenry National Monument",
       "jurisdiction": "MD",
-      "role": "Saturday 20:00 EDT anchor"
+      "role": "Fort McHenry optional pre-18:00 only; not Sunday UTC opener"
     },
     {
       "reference": "US-4582",
       "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
       "jurisdiction": "multi-state trail",
-      "role": "Fort McHenry likely unique add; verify exact position"
+      "role": "Fort McHenry unique add if visited before 18:00; not part of Greenbelt/LBJ primary plan"
     },
     {
       "reference": "US-4581",
@@ -606,8 +654,34 @@
   ],
   "operatingStops": [
     {
+      "id": "greenbelt-saturday",
+      "timing": "Saturday 2026-06-20, activate at/after 20:00 EDT only from a legal public point in the Greenbelt/BW Parkway overlap and before access closes",
+      "name": "Greenbelt Park / Baltimore-Washington Parkway overlap",
+      "latitude": 38.9927921,
+      "longitude": -76.8880143,
+      "references": [
+        "US-0668",
+        "US-7973"
+      ],
+      "uniqueAddsIfFirst": [
+        "US-0668",
+        "US-7973"
+      ],
+      "uniqueAddsAfterLbj": [
+        "US-0668",
+        "US-7973"
+      ],
+      "evidence": "N2NWK email suggested a Greenbelt four-fer (US-0668 + US-7973 + US-0654 + US-4581). Fresh GeoJSON confirms a practical Greenbelt/Baltimore-Washington Parkway overlap for US-0668 + US-7973; strict four-way overlap is empty, and the best US-0668/US-0654/US-7973 component misses the official Star-Spangled Banner NHT 100-foot trail buffer by about 35 feet.",
+      "access": "Use only a legal public operating point in the confirmed overlap and only while park access is lawful before dusk. Sweetgum is not the decision point for the overlap; campground access is not needed unless the only legal access after dusk is through a reserved campsite.",
+      "confidence": "high-confidence two-reference Maryland opener; US-0654 and US-4581 remain unconfirmed at Greenbelt",
+      "possibleButUnconfirmedReferences": [
+        "US-0654",
+        "US-4581"
+      ]
+    },
+    {
       "id": "fort-mchenry-saturday",
-      "timing": "Saturday 2026-06-20, arrive ~19:30 EDT, activate at/after 20:00 EDT",
+      "timing": "Optional Saturday-local stop only if arrival is early enough for a real activation before the 18:00 EDT gate closure; not available for Sunday UTC rollover",
       "name": "Fort McHenry National Monument",
       "latitude": 39.2641007,
       "longitude": -76.5806414,
@@ -619,16 +693,14 @@
       ],
       "uniqueAddsIfFirst": [
         "US-0928",
-        "US-4581",
-        "US-4567",
         "US-4582"
       ],
-      "evidence": "Repeated imported top-activator records from KB3WAV and KC3RW show US-0928 + US-4581 + US-4567 + US-4582.",
-      "confidence": "strong evidence; exact public operating position still needs confirmation"
+      "evidence": "Repeated imported top-activator records show US-0928 + US-4581 + US-4567 + US-4582, but official NPS access hours rule out an at/after-20:00 Sunday UTC activation.",
+      "confidence": "strong n-fer evidence before closing; skip if Fox Point cannot be left by about 16:00 for a useful activation window"
     },
     {
       "id": "lbj-7fer",
-      "timing": "Sunday morning first stop",
+      "timing": "Sunday morning; primary jackpot after the Greenbelt MD opener",
       "name": "LBJ Memorial Grove exact 7-fer position",
       "parking": "Columbia Island Marina parking lot",
       "parkingLatitude": 38.875198,
@@ -657,8 +729,26 @@
         "US-9898",
         "US-4564"
       ],
-      "evidence": "CWops/W8WZ article gives walking instructions and reference list; POTA API comments for trails emphasize exact-location verification.",
-      "confidence": "high if exact tree/overlap point is found; fallback is 4-fer"
+      "evidence": "CWops/W8WZ article gives reference list; W3LAM email corroborates the right-side parking-area/LBJ operation and says vehicle, wires, stakes, tripods, and larger portable setups have worked there.",
+      "confidence": "high after local activator feedback; bring headphones for DCA/Pentagon-area noise",
+      "uniqueAddsAfterGreenbelt": [
+        "US-0784",
+        "US-9901",
+        "US-4581",
+        "US-4567",
+        "US-0670",
+        "US-9898",
+        "US-4564"
+      ],
+      "uniqueAddsIfFirst": [
+        "US-4581",
+        "US-9901",
+        "US-4567",
+        "US-0670",
+        "US-0784",
+        "US-9898",
+        "US-4564"
+      ]
     },
     {
       "id": "fdr",
@@ -729,7 +819,7 @@
       "uniqueAddsAfterPrior": [
         "US-0793"
       ],
-      "confidence": "article-backed; Cheetah threshold reached here if Fort and LBJ verify"
+      "confidence": "article-backed; buffer beyond Cheetah after Greenbelt and LBJ"
     },
     {
       "id": "wwii",
@@ -824,16 +914,16 @@
   ],
   "routeModels": [
     {
-      "name": "Cheetah baseline: Fort + LBJ + Mall through Vietnam",
+      "name": "Cheetah baseline: Greenbelt 2-fer + LBJ + Mall through Vietnam",
       "entityCount": 15,
       "physicalStops": 7,
       "references": [
-        "US-0928",
-        "US-4581",
-        "US-4567",
-        "US-4582",
+        "US-0668",
+        "US-7973",
         "US-0784",
         "US-9901",
+        "US-4581",
+        "US-4567",
         "US-0670",
         "US-9898",
         "US-4564",
@@ -841,25 +931,25 @@
         "US-0655",
         "US-0785",
         "US-0780",
-        "US-0653",
+        "US-0783",
         "US-0793"
       ],
-      "driveAndWalkMinutes": 102,
+      "driveAndWalkMinutes": 94,
       "activationMinutesAt60Each": 420,
-      "totalLabel": "about 8h 45m split across Saturday evening and Sunday, before food/parking variance",
-      "notes": "Cheetah threshold is reached at Vietnam if Fort McHenry 4-fer and LBJ 7-fer verify."
+      "totalPlanningMinutes": 514,
+      "notes": "Cheetah threshold is reached at Vietnam when the Greenbelt US-0668/US-7973 opener and LBJ 7-fer verify."
     },
     {
-      "name": "Full W8WZ route plus Fort McHenry",
-      "entityCount": 17,
-      "physicalStops": 9,
+      "name": "Full W8WZ route plus Greenbelt 2-fer opener",
+      "entityCount": 18,
+      "physicalStops": 10,
       "references": [
-        "US-0928",
-        "US-4581",
-        "US-4567",
-        "US-4582",
+        "US-0668",
+        "US-7973",
         "US-0784",
         "US-9901",
+        "US-4581",
+        "US-4567",
         "US-0670",
         "US-9898",
         "US-4564",
@@ -867,27 +957,28 @@
         "US-0655",
         "US-0785",
         "US-0780",
-        "US-0653",
+        "US-0783",
         "US-0793",
+        "US-0653",
         "US-0796",
         "US-0794"
       ],
       "driveAndWalkMinutes": 102,
-      "activationMinutesAt60Each": 540,
-      "totalLabel": "about 10h 45m split across Saturday evening and Sunday",
-      "notes": "This mirrors the article sequence and leaves room for one southbound add-on if the day is moving well."
+      "activationMinutesAt60Each": 600,
+      "totalPlanningMinutes": 702,
+      "notes": "Full Mall sequence reaches 18 before the Virginia finish with Greenbelt counted as a confirmed 2-fer."
     },
     {
-      "name": "Ostrich stretch: full route + Lincoln + Mason Neck",
+      "name": "Ostrich stretch: Greenbelt 2-fer + full route + Mason Neck",
       "entityCount": 20,
       "physicalStops": 11,
       "references": [
-        "US-0928",
-        "US-4581",
-        "US-4567",
-        "US-4582",
+        "US-0668",
+        "US-7973",
         "US-0784",
         "US-9901",
+        "US-4581",
+        "US-4567",
         "US-0670",
         "US-9898",
         "US-4564",
@@ -895,30 +986,30 @@
         "US-0655",
         "US-0785",
         "US-0780",
-        "US-0653",
+        "US-0783",
         "US-0793",
+        "US-0653",
         "US-0796",
         "US-0794",
-        "US-0783",
         "US-1308",
         "US-0563"
       ],
       "driveAndWalkMinutes": 188,
       "activationMinutesAt60Each": 660,
-      "totalLabel": "about 14h 10m split across Saturday evening and Sunday; stretch but plausible with disciplined 45-60 minute stops",
-      "notes": "Mason Neck should be before dusk; this model may need a morning start and no long social pause."
+      "totalPlanningMinutes": 848,
+      "notes": "Mason Neck reaches Ostrich exactly if the 2-fer verifies and hours/access work."
     },
     {
-      "name": "Ostrich high-confidence buffer: add Dyke Marsh before Mason Neck",
+      "name": "Ostrich buffer: Greenbelt 2-fer + Dyke Marsh + Mason Neck",
       "entityCount": 22,
       "physicalStops": 12,
       "references": [
-        "US-0928",
-        "US-4581",
-        "US-4567",
-        "US-4582",
+        "US-0668",
+        "US-7973",
         "US-0784",
         "US-9901",
+        "US-4581",
+        "US-4567",
         "US-0670",
         "US-9898",
         "US-4564",
@@ -926,11 +1017,11 @@
         "US-0655",
         "US-0785",
         "US-0780",
-        "US-0653",
+        "US-0783",
         "US-0793",
+        "US-0653",
         "US-0796",
         "US-0794",
-        "US-0783",
         "US-9961",
         "US-9935",
         "US-1308",
@@ -938,18 +1029,34 @@
       ],
       "driveAndWalkMinutes": 220,
       "activationMinutesAt60Each": 720,
-      "totalLabel": "about 15h 40m split across Saturday evening and Sunday; likely too heavy unless using shorter activations",
-      "notes": "Dyke Marsh adds margin but also pushes Mason Neck later; keep as backup unless exact access and pace are excellent."
+      "totalPlanningMinutes": 940,
+      "notes": "Dyke Marsh plus Mason Neck provides a two-entity buffer, but pushes the day later."
     }
   ],
   "mappedLegs": [
     {
-      "from": "Fort McHenry",
+      "from": "Fox Point State Park",
+      "to": "Greenbelt Park",
+      "mode": "drive",
+      "distance": "160.6 km",
+      "minutes": 96,
+      "notes": "Fresh Google Maps check on 2026-06-19 for the direct Greenbelt target."
+    },
+    {
+      "from": "Greenbelt Park",
       "to": "Foggy Bottom hotel",
       "mode": "drive",
-      "distance": "74.6 km",
-      "minutes": 59,
-      "notes": "Saturday after the 20:00 EDT activation."
+      "distance": "28.1 km",
+      "minutes": 28,
+      "notes": "Fresh Google Maps check on 2026-06-19 after the Greenbelt activation."
+    },
+    {
+      "from": "Greenbelt Park",
+      "to": "LBJ Memorial Grove",
+      "mode": "drive",
+      "distance": "26.8 km",
+      "minutes": 30,
+      "notes": "Alternative if activating LBJ Saturday night immediately after Greenbelt."
     },
     {
       "from": "Foggy Bottom hotel",
@@ -1038,20 +1145,39 @@
       "distance": "57.2 km",
       "minutes": 45,
       "notes": "Google Maps route check on 2026-06-15; southbound finish after Meadowood."
+    },
+    {
+      "from": "Fox Point State Park",
+      "to": "Fort McHenry National Monument",
+      "mode": "drive",
+      "distance": "121.4 km",
+      "minutes": 72,
+      "notes": "Fresh Google Maps check on 2026-06-19 for the optional Fort branch."
+    },
+    {
+      "from": "Fort McHenry National Monument",
+      "to": "Greenbelt Park",
+      "mode": "drive",
+      "distance": "44.8 km",
+      "minutes": 43,
+      "notes": "Fresh Google Maps check on 2026-06-19; this is the optional Fort-to-Greenbelt branch."
     }
   ],
   "openVerification": [
-    "Confirm the exact LBJ 7-fer tree/overlap point against imagery or with a local activator before relying on all seven references.",
-    "Confirm Fort McHenry exact position for US-4582 in addition to US-0928, US-4581, and US-4567.",
+    "Confirm the exact LBJ 7-fer/right-side parking-area operating position in the field, but local W3LAM feedback significantly raises confidence.",
+    "Do not rely on Fort McHenry for Sunday UTC: official NPS summer weekend gate closure is 18:00. Treat Fort only as optional Saturday-local if arriving before last entry.",
     "Confirm Mason Neck NWR operating restrictions: POTA cache says free-standing antennas only, no vegetation attachment, no off-trail operating, and no tables in parking areas.",
     "Check closing/dusk times for Mason Neck if using it as the Ostrich add-on.",
     "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure.",
     "Pennsylvania Avenue NHS and C&O Canal did not return clean OSM GeoJSON in the first fetch pass; verify boundaries before relying on those as easy add-ons.",
     "Jefferson and Ford resolved as point GeoJSON rather than full polygons; use POTA/NPS context and on-site signage before treating the point as the whole activatable area.",
-    "Keep Meadowood BLM SRMA as the simple VA backup if Mason Neck access, hours, or pace do not work."
+    "Keep Meadowood BLM SRMA as the simple VA backup if Mason Neck access, hours, or pace do not work.",
+    "Confirm legal public access/parking for the Greenbelt/Baltimore-Washington Parkway overlap at or near 38.9927921,-76.8880143; count only US-0668 + US-7973 unless exact local confirmation supports more.",
+    "Ask N2NWK or another local activator for exact Greenbelt coordinates before relying on US-0654 or US-4581 there; strict four-way GeoJSON overlap is empty.",
+    "Fort McHenry decision rule: only go if Fox Point is finished early enough to reach Fort by about 17:00-17:15; otherwise skip it and protect the 20:00 Greenbelt opener."
   ],
   "expandedMallInventory": {
-    "summary": "DC cache has 32 references total. For the Foggy Bottom / National Mall rove, the practical inventory is the LBJ trail cluster plus 17 Mall/downtown references; Fort McHenry adds four Sunday-UTC references before the local DC walk begins.",
+    "summary": "DC cache has 32 references total. For the revised Foggy Bottom / National Mall rove, the practical inventory is the Greenbelt/BW Parkway 2-fer opener, the LBJ trail cluster, and 17 Mall/downtown references; Fort McHenry is optional before 18:00 only.",
     "counts": {
       "dcCacheReferences": 32,
       "lbjClusterReferences": 7,
@@ -1059,32 +1185,43 @@
       "mallAndDowntownUniqueReferences": 17,
       "downtownTotalWithFortAndLbj": 26,
       "downtownPlusDykeMarsh": 28,
-      "downtownPlusDykeMarshAndMasonNeck": 30
+      "downtownPlusDykeMarshAndMasonNeck": 30,
+      "greenbeltOpenerReferences": 2,
+      "greenbeltUniqueAfterLbj": 2,
+      "lbjUniqueAfterGreenbelt": 7,
+      "downtownTotalWithGreenbeltAndLbj": 26,
+      "greenbeltPossibleUnconfirmedReferences": 2
     },
     "candidateReferences": [
       {
-        "reference": "US-0928",
-        "name": "Fort McHenry National Monument",
+        "reference": "US-0668",
+        "name": "Greenbelt Park",
         "group": "Saturday UTC opener",
-        "routeUse": "Bank before DC; unique unless already activated earlier."
+        "routeUse": "Primary Maryland opener from a legal Greenbelt/BW Parkway overlap point; confirmed with US-7973."
+      },
+      {
+        "reference": "US-7973",
+        "name": "Baltimore-Washington Parkway",
+        "group": "Greenbelt overlap",
+        "routeUse": "Confirmed Greenbelt-area 2-fer companion from the Greenbelt/BW Parkway overlap; field-confirm legal public access."
+      },
+      {
+        "reference": "US-0654",
+        "name": "National Capital Parks",
+        "group": "Greenbelt overlap",
+        "routeUse": "Unconfirmed at Greenbelt; only count if an exact legal Greenbelt-area coordinate is confirmed."
       },
       {
         "reference": "US-4581",
         "name": "Star-Spangled Banner National Historic Trail",
         "group": "Trail overlap",
-        "routeUse": "Counts at Fort and LBJ; duplicate after first logged."
+        "routeUse": "Counts at LBJ; Greenbelt use remains unconfirmed because strict four-way overlap is empty and the official STSP centerline buffer does not align with the practical 2-fer."
       },
       {
         "reference": "US-4567",
         "name": "Captain John Smith Chesapeake National Historic Trail",
         "group": "Trail overlap",
-        "routeUse": "Counts at Fort and LBJ; duplicate after first logged."
-      },
-      {
-        "reference": "US-4582",
-        "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
-        "group": "Trail overlap",
-        "routeUse": "Fort McHenry likely unique; confirm exact position."
+        "routeUse": "Counts at LBJ; not expected to be unique from Greenbelt."
       },
       {
         "reference": "US-0784",
@@ -1150,19 +1287,19 @@
         "reference": "US-0783",
         "name": "Lincoln National Memorial",
         "group": "West Mall",
-        "routeUse": "Useful if crowds/operating space cooperate."
+        "routeUse": "Needed before Vietnam in the Greenbelt 2-fer Cheetah route."
       },
       {
         "reference": "US-0793",
         "name": "Vietnam Veterans National Memorial",
         "group": "West Mall",
-        "routeUse": "Cheetah threshold in current route."
+        "routeUse": "Cheetah threshold in the Greenbelt 2-fer route."
       },
       {
         "reference": "US-0653",
         "name": "Constitution Gardens National Park",
         "group": "West Mall",
-        "routeUse": "Bench-dependent but very close to Vietnam/WWII."
+        "routeUse": "Buffer beyond Cheetah in the Greenbelt 2-fer route."
       },
       {
         "reference": "US-0796",
@@ -1245,8 +1382,8 @@
     ]
   },
   "expandedMallRoute": {
-    "name": "Aggressive Mall/downtown expansion from Foggy Bottom",
-    "strategy": "Rideshare from Foggy Bottom to the exact LBJ operating area, rideshare to FDR or Jefferson, walk the Mall/downtown sequence, then return to the Foggy Bottom hotel to get the car before any southbound add-ons.",
+    "name": "Greenbelt 2-fer + LBJ + expanded Mall route",
+    "strategy": "Use the Greenbelt/BW Parkway overlap as the Saturday-night Maryland opener, LBJ as the Sunday jackpot, then walk the W8WZ Mall sequence. Greenbelt plus LBJ reaches 9 unique references before the Mall; Cheetah is reached at Vietnam and the full Mall route reaches 18 before the Virginia finish.",
     "mapsChecks": [
       {
         "from": "Foggy Bottom",
@@ -1299,7 +1436,7 @@
       }
     ],
     "recommendedOrder": [
-      "Fort McHenry after 20:00 EDT Saturday",
+      "Greenbelt/Baltimore-Washington Parkway overlap after 20:00 EDT Saturday",
       "Foggy Bottom hotel",
       "Optional early: Theodore Roosevelt Island by car/rideshare if chasing 20+",
       "Exact LBJ 7-fer operating area",
@@ -1323,43 +1460,43 @@
     ],
     "countMilestones": [
       {
-        "label": "After Fort + LBJ",
+        "label": "After Greenbelt + LBJ",
         "entities": 9
       },
       {
-        "label": "After Jefferson starts the Mall overlay",
+        "label": "After FDR starts the Mall overlay",
         "entities": 11
       },
       {
+        "label": "After Lincoln",
+        "entities": 14
+      },
+      {
         "label": "After Vietnam",
+        "entities": 15
+      },
+      {
+        "label": "After Constitution Gardens",
         "entities": 16
       },
       {
         "label": "After Washington Monument",
-        "entities": 19
-      },
-      {
-        "label": "After Eisenhower",
-        "entities": 24
-      },
-      {
-        "label": "After Belmont-Paul + Theodore Roosevelt Island",
-        "entities": 26
-      },
-      {
-        "label": "After Dyke Marsh",
-        "entities": 28
+        "entities": 18
       },
       {
         "label": "After Mason Neck",
-        "entities": 30
+        "entities": 20
+      },
+      {
+        "label": "After Dyke Marsh + Mason Neck",
+        "entities": 22
       }
     ],
-    "caution": "The optimized expanded downtown walk is about 8.2 km / 112 minutes from Jefferson through Eisenhower before activation time. If you push east, plan a rideshare back to the Foggy Bottom hotel; walking back from Eisenhower is about 54 minutes."
+    "caution": "Greenbelt is a confirmed 2-fer only for US-0668 + US-7973 from a legal overlap point; US-0654 and US-4581 need exact confirmation. Fort McHenry is no longer viable after 18:00."
   },
   "routeOptimization": {
-    "updated": "2026-06-13",
-    "summary": "With the car parked at the Foggy Bottom hotel, the best structure is hotel-anchored: rideshare to the LBJ operating area, rideshare to the Mall, walk the dense memorial sequence, return to the hotel to get the car, then drive south. Columbia Island Marina is access context for LBJ, not a stop.",
+    "updated": "2026-06-19",
+    "summary": "Revised after Fort McHenry access and Greenbelt GeoJSON checks: Greenbelt/BW Parkway is the primary Maryland opener as a confirmed 2-fer, LBJ is the high-confidence Sunday jackpot, Cheetah is reached at Vietnam, and Mason Neck reaches Ostrich exactly if it verifies.",
     "constraints": [
       "The Tesla stays parked at the Foggy Bottom hotel during the DC rove.",
       "Prefer walking when the time penalty is modest and it avoids another rideshare.",
@@ -1383,7 +1520,7 @@
         "label": "LBJ exact 7-fer operating area",
         "mode": "ride",
         "movement": "about 12 min from hotel direct",
-        "value": "+5 unique after Fort McHenry, 7 refs total at the spot"
+        "value": "+7 unique after Greenbelt, 7 refs total at the spot"
       },
       {
         "label": "FDR rideshare drop / Mall start",
@@ -1395,7 +1532,7 @@
         "label": "FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution -> WWII -> Washington Monument",
         "mode": "walk",
         "movement": "about 2.9 km / 39 min for this core sequence from FDR",
-        "value": "reaches 18 entities after Washington Monument if Fort/LBJ validate"
+        "value": "reaches 18 entities after Washington Monument with Greenbelt counted as a 2-fer and LBJ validated; Cheetah is reached at Vietnam"
       },
       {
         "label": "Return to Foggy Bottom hotel",
@@ -1407,7 +1544,7 @@
         "label": "Mason Neck",
         "mode": "drive",
         "movement": "about 40 min from the hotel",
-        "value": "+2 clean southbound entities"
+        "value": "+2 clean southbound entities; reaches Ostrich exactly if the 2-fer verifies"
       },
       {
         "label": "Fredericksburg hotel",
@@ -1507,6 +1644,10 @@
       {
         "label": "Meadowood",
         "finding": "Use as the simpler Virginia backup if Mason Neck is too late or too constrained. Washington Monument -> Meadowood -> Fredericksburg is about 1h16 driving, roughly 18 minutes less than the Mason Neck line, but it only adds US-9937."
+      },
+      {
+        "label": "Fort McHenry Saturday branch",
+        "finding": "Fox Point -> Fort is about 1h12 and Fort -> Greenbelt about 43m. Only attempt Fort if Fox Point is finished by about 16:00 and Fort arrival is around 17:00-17:15 or earlier; otherwise skip it and protect the 20:00 Greenbelt opener."
       }
     ],
     "mapsEvidence": [
@@ -1594,6 +1735,30 @@
         "mode": "driving",
         "distance": "57.2 km",
         "minutes": 45
+      },
+      {
+        "scenario": "Fox Point to Fort McHenry",
+        "mode": "driving",
+        "distance": "121.4 km",
+        "minutes": 72
+      },
+      {
+        "scenario": "Fort McHenry to Greenbelt Park",
+        "mode": "driving",
+        "distance": "44.8 km",
+        "minutes": 43
+      },
+      {
+        "scenario": "Fox Point to Greenbelt Park direct",
+        "mode": "driving",
+        "distance": "160.6 km",
+        "minutes": 96
+      },
+      {
+        "scenario": "Greenbelt Park to Foggy Bottom hotel",
+        "mode": "driving",
+        "distance": "28.1 km",
+        "minutes": 28
       }
     ]
   }

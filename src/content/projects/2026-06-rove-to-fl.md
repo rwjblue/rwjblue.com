@@ -47,9 +47,11 @@ Current working shape:
   Tallman while waiting out rush hour, then continue south to the booked Edison,
   NJ hotel.
 - Saturday: start from Edison, activate NJ at Cheesequake, PA at John Heinz, DE
-  at Fox Point, then arrive near Fort McHenry around 19:30 and start activating
-  at 20:00 EDT so MD counts on the Sunday UTC day. Stay in Foggy Bottom.
-- Sunday: make DC / NoVA the large rove day, using the Saturday Fort McHenry
+  at Fox Point, then use the Greenbelt Park / Baltimore-Washington Parkway
+  overlap after 20:00 EDT as the Maryland Sunday-UTC 2-fer if legal access is
+  available before dusk. Fort McHenry is optional only before its 18:00 summer
+  weekend gate closure, and only if Fox Point runs early. Stay in Foggy Bottom.
+- Sunday: make DC / NoVA the large rove day, using the Saturday Greenbelt
   activation as the first Sunday-UTC count. Follow the CWops/W8WZ Cheetah
   pattern from LBJ through the National Mall, then decide whether Lincoln and
   Mason Neck make the Ostrich stretch practical before the Fredericksburg hotel.
@@ -77,17 +79,20 @@ Current Friday / Saturday recommendation:
 - Friday after work: activate `US-2149` Tallman Mountain State Park while
   waiting out rush hour, then drive about 1h06 to the booked Edison hotel.
 - Saturday from Edison: `US-1611` Cheesequake State Park -> `US-0512` John Heinz
-  National Wildlife Refuge -> `US-1738` Fox Point State Park -> `US-0928` Fort
-  McHenry plus trail overlaps -> Foggy Bottom.
+  National Wildlife Refuge -> `US-1738` Fox Point State Park -> `US-0668` +
+  `US-7973` Greenbelt / Baltimore-Washington Parkway overlap -> Foggy Bottom.
 
 That Saturday line is about 4h37m of mapped driving before activation time,
 Tesla Supercharger stops, food, and buffer. Moving Tallman to Friday removes the
 NY obligation from Saturday. John Heinz is no longer optional; PA is part of the
 selected route.
 
-The Saturday timing target is Maryland at about 20:00 EDT. If Fort McHenry
-starts after the UTC rollover, Maryland counts toward the Sunday UTC rove day
-while the route still continues naturally to the Foggy Bottom hotel.
+The Saturday timing target is Maryland at about 20:00 EDT. Official NPS hours
+rule out Fort McHenry after 18:00, so the revised target is a legal public point
+in the Greenbelt Park / Baltimore-Washington Parkway overlap. GeoJSON checks
+support counting `US-0668` and `US-7973` from that overlap. `US-0654` and
+`US-4581` remain unconfirmed at Greenbelt; do not count them without an exact
+local coordinate that verifies under POTA rules.
 
 Known anchor drive estimates:
 
@@ -96,8 +101,12 @@ Known anchor drive estimates:
 - Silver Sands -> Stamford: 35m.
 - Stamford -> Tallman Mountain State Park: 33m.
 - Tallman -> Edison hotel: 1h06m.
-- Edison -> Cheesequake -> John Heinz -> Fox Point -> Fort McHenry -> Foggy
-  Bottom: 4h37m mapped driving.
+- Edison -> Cheesequake -> John Heinz -> Fox Point -> Greenbelt -> Foggy
+  Bottom: about 4h37m mapped driving.
+- Optional Fort McHenry branch from Fox Point: Fox Point -> Fort McHenry is
+  about 1h12m, Fort McHenry -> Greenbelt is about 43m. Only do it if Fox Point
+  finishes early enough to reach Fort McHenry around 17:00-17:15; otherwise
+  skip it and protect the 20:00 Greenbelt opener.
 - Washington Monument -> Mason Neck State Park -> Fredericksburg: 1h34m before
   activation time; Washington Monument -> Meadowood BLM SRMA -> Fredericksburg:
   1h16m.
@@ -111,10 +120,12 @@ Known anchor drive estimates:
 
 Current Sunday DC rove model:
 
-- Saturday evening: activate Fort McHenry at or after 20:00 EDT. Imported
-  top-activator evidence repeatedly shows `US-0928`, `US-4581`, `US-4567`, and
-  `US-4582` from that stop; exact public operating position still needs
-  verification.
+- Saturday evening: activate from a legal public point in the Greenbelt Park /
+  Baltimore-Washington Parkway overlap at or after 20:00 EDT only if access is
+  still lawful before dusk. Count confirmed `US-0668` + `US-7973`. Treat
+  `US-0654` and `US-4581` as unconfirmed unless N2NWK or another local
+  activator provides an exact legal coordinate. Fort McHenry has strong n-fer
+  evidence but is pre-18:00 optional only.
 - Sunday morning: start with the LBJ Memorial Grove exact-position 7-fer from
   the February 2026 CWops _Solid Copy_ article: `US-0784`, `US-9901`,
   `US-4581`, `US-4567`, `US-0670`, `US-9898`, and `US-4564`. The article says
@@ -122,22 +133,22 @@ Current Sunday DC rove model:
   7-fer requires walking from the marina toward the LBJ stone monument, then
   toward the Washington Monument, crossing the parkway, and setting up under a
   tree between the parkway and the Potomac.
-- Cheetah baseline: after Fort and LBJ, follow the article route through FDR
+- Cheetah baseline: after Greenbelt and LBJ, follow the article route through FDR
   (`US-0776` + `US-0655`), MLK (`US-0785` + `US-0655`), Korean War
-  (`US-0780` + `US-0655`), Constitution Gardens (`US-0653` + `US-0655`), and
-  Vietnam (`US-0793` + `US-0655`). That reaches 15 unique Sunday-UTC entities
-  if Fort and LBJ both verify.
+  (`US-0780` + `US-0655`), Lincoln (`US-0783` + `US-0655`), and Vietnam
+  (`US-0793` + `US-0655`). That reaches 15 unique Sunday-UTC entities with
+  Greenbelt counted as a confirmed 2-fer.
 - Full article route: add WWII (`US-0796` + `US-0655`) and Washington Monument
-  (`US-0794` + `US-0655`) for a 17-entity buffer.
-- Ostrich stretch: add Lincoln (`US-0783` + `US-0655`) and Mason Neck State
-  Park / Elizabeth Hartwell Mason Neck NWR (`US-1308` + `US-0563`) to reach 20
-  unique entities. Dyke Marsh (`US-9961`, `US-9935`, plus several LBJ
-  duplicates) is a backup buffer, but it likely makes the day too long unless
-  pace and access are excellent.
+  (`US-0794` + `US-0655`) for 18 entities before the Virginia finish.
+- Ostrich stretch: Mason Neck State Park / Elizabeth Hartwell Mason Neck NWR
+  (`US-1308` + `US-0563`) brings the day to 20 if the Mason Neck 2-fer verifies.
+  Dyke Marsh (`US-9961`, `US-9935`, plus several LBJ duplicates) is the clean
+  buffer past 20, but it likely makes the day too long unless pace and access
+  are excellent.
 
 DC route timing checks so far:
 
-- Fort McHenry -> Foggy Bottom after the Saturday activation: 59m.
+- Greenbelt -> Foggy Bottom after the Saturday activation: about 28m.
 - Foggy Bottom -> Columbia Island Marina / LBJ: 12m.
 - Columbia Island Marina / LBJ -> FDR Memorial: 10m.
 - FDR Memorial -> Washington Monument by foot through the Mall sequence: 21m.
@@ -163,11 +174,13 @@ Downloaded / cached planning data:
 Open verification items:
 
 - Confirm the exact LBJ 7-fer point against imagery or with a local activator.
-- Decide whether Sunday targets Cheetah-only, full W8WZ + Fort, Ostrich via
-  Lincoln + Mason Neck, or the simpler Meadowood VA backup.
+- Decide whether Sunday targets Cheetah-only, full W8WZ + Mason Neck, Ostrich
+  via Dyke Marsh + Mason Neck, or the simpler Meadowood VA backup.
 - Decide whether Woods Bay is used as an early SC backup/add-on before Savannah
   NWR.
-- Verify exact Fox Point and Fort McHenry n-fer operating positions.
+- Verify exact Fox Point n-fer position and ask N2NWK for the exact Greenbelt
+  coordinates before relying on `US-0654` or `US-4581`; current confirmed
+  Greenbelt count is `US-0668` + `US-7973`.
 - Check Mason Neck hours and restrictions before relying on it for Ostrich.
 - Confirm Savannah National Wildlife Refuge operating-position state credit.
 - Identify Tesla Supercharger pairings for Saturday and the southern hotel legs.
