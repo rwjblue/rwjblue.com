@@ -1,0 +1,849 @@
+{
+  "title": "N1RWJ Rove Day 1",
+  "subtitle": "Rockville, Silver Sands, and Tallman Mountain - 56 QSOs - June 19-20, 2026",
+  "stationCallsign": "N1RWJ",
+  "date": "20260619",
+  "dateLabel": "Jun 19, 2026",
+  "contacts": [
+    {
+      "timestamp": "2026-06-19T13:31:46Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 42.72916666666667,
+        "lon": -83.79166666666666
+      },
+      "band": "40m",
+      "source": "grid",
+      "destinationGrid": "EN82cr"
+    },
+    {
+      "timestamp": "2026-06-19T13:33:02Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 40.0625,
+        "lon": -74.875
+      },
+      "band": "40m",
+      "source": "grid",
+      "destinationGrid": "FN20nb"
+    },
+    {
+      "timestamp": "2026-06-19T13:34:17Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 40.645833333333336,
+        "lon": -75.29166666666666
+      },
+      "band": "40m",
+      "source": "grid",
+      "destinationGrid": "FN20ip"
+    },
+    {
+      "timestamp": "2026-06-19T13:36:08Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 30.229166666666664,
+        "lon": -81.375
+      },
+      "band": "40m",
+      "source": "grid",
+      "destinationGrid": "EM90hf"
+    },
+    {
+      "timestamp": "2026-06-19T13:39:49Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 39.97916666666667,
+        "lon": -75.29166666666666
+      },
+      "band": "40m",
+      "source": "grid",
+      "destinationGrid": "FM29ix"
+    },
+    {
+      "timestamp": "2026-06-19T13:46:15Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 41.10416666666667,
+        "lon": -85.125
+      },
+      "band": "30m",
+      "source": "grid",
+      "destinationGrid": "EN71kc"
+    },
+    {
+      "timestamp": "2026-06-19T13:51:39Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 36.020833333333336,
+        "lon": -78.54166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FM06ra"
+    },
+    {
+      "timestamp": "2026-06-19T13:52:57Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 38.22916666666667,
+        "lon": -85.70833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM78df"
+    },
+    {
+      "timestamp": "2026-06-19T13:54:50Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 30.479166666666664,
+        "lon": -87.04166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM60ll"
+    },
+    {
+      "timestamp": "2026-06-19T13:57:14Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 40.85416666666667,
+        "lon": -81.375
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EN90hu"
+    },
+    {
+      "timestamp": "2026-06-19T13:59:01Z",
+      "originGrid": "FN41cm81",
+      "origin": {
+        "lat": 41.50625,
+        "lon": -71.7625
+      },
+      "destination": {
+        "lat": 37.0625,
+        "lon": -100.95833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "DM97mb"
+    },
+    {
+      "timestamp": "2026-06-19T16:56:18Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 37.35416666666667,
+        "lon": -77.45833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FM17gi"
+    },
+    {
+      "timestamp": "2026-06-19T17:01:19Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 28.0625,
+        "lon": -82.04166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EL88xb"
+    },
+    {
+      "timestamp": "2026-06-19T17:02:54Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 38.85416666666667,
+        "lon": -77.45833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FM18gu"
+    },
+    {
+      "timestamp": "2026-06-19T17:09:26Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 39.520833333333336,
+        "lon": -77.95833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FM19am"
+    },
+    {
+      "timestamp": "2026-06-19T17:12:00Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 38.85416666666667,
+        "lon": -77.45833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FM18gu"
+    },
+    {
+      "timestamp": "2026-06-19T17:12:40Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 38.395833333333336,
+        "lon": -80.45833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM98sj"
+    },
+    {
+      "timestamp": "2026-06-19T17:14:05Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 35.72916666666667,
+        "lon": -83.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM85br"
+    },
+    {
+      "timestamp": "2026-06-19T17:15:57Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 45.97916666666667,
+        "lon": -84.29166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EN75ux"
+    },
+    {
+      "timestamp": "2026-06-19T17:17:26Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 44.72916666666667,
+        "lon": -104.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "DN74nr"
+    },
+    {
+      "timestamp": "2026-06-19T17:17:44Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 44.8125,
+        "lon": -91.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EN44et"
+    },
+    {
+      "timestamp": "2026-06-19T17:18:05Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 37.97916666666667,
+        "lon": -75.79166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FM27cx"
+    },
+    {
+      "timestamp": "2026-06-19T17:18:55Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 39.645833333333336,
+        "lon": -80.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM99np"
+    },
+    {
+      "timestamp": "2026-06-19T17:26:41Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 41.645833333333336,
+        "lon": -73.95833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FN31ap"
+    },
+    {
+      "timestamp": "2026-06-19T17:29:27Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 43.60416666666667,
+        "lon": -84.20833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EN73vo"
+    },
+    {
+      "timestamp": "2026-06-19T17:33:13Z",
+      "originGrid": "FN31le18",
+      "origin": {
+        "lat": 41.20208333333333,
+        "lon": -73.07083333333333
+      },
+      "destination": {
+        "lat": 28.145833333333332,
+        "lon": -80.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EL98qd"
+    },
+    {
+      "timestamp": "2026-06-19T23:12:26Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 48.9375,
+        "lon": -54.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "GN28qw"
+    },
+    {
+      "timestamp": "2026-06-19T23:14:04Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 33.10416666666667,
+        "lon": -97.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM13ec"
+    },
+    {
+      "timestamp": "2026-06-19T23:16:01Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 25.8125,
+        "lon": -80.375
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EL95tt"
+    },
+    {
+      "timestamp": "2026-06-19T23:19:14Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 44.9375,
+        "lon": -123.125
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "CN84kw"
+    },
+    {
+      "timestamp": "2026-06-19T23:22:37Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 34.0625,
+        "lon": -117.125
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "DM14kb"
+    },
+    {
+      "timestamp": "2026-06-19T23:23:56Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 37.770833333333336,
+        "lon": -97.29166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM17is"
+    },
+    {
+      "timestamp": "2026-06-19T23:25:13Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 32.22916666666667,
+        "lon": -95.20833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM22jf"
+    },
+    {
+      "timestamp": "2026-06-19T23:27:03Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 18.0625,
+        "lon": -66.375
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FK68tb"
+    },
+    {
+      "timestamp": "2026-06-19T23:28:16Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 37.85416666666667,
+        "lon": -122.20833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "CM87vu"
+    },
+    {
+      "timestamp": "2026-06-19T23:29:51Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 36.770833333333336,
+        "lon": -90.375
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM46ts"
+    },
+    {
+      "timestamp": "2026-06-19T23:34:17Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 40.9375,
+        "lon": -73.95833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FN30aw"
+    },
+    {
+      "timestamp": "2026-06-19T23:37:01Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 33.020833333333336,
+        "lon": -97.04166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM13la"
+    },
+    {
+      "timestamp": "2026-06-19T23:39:22Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 32.9375,
+        "lon": -97.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM12ew"
+    },
+    {
+      "timestamp": "2026-06-19T23:48:28Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 34.35416666666667,
+        "lon": -86.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM64ni"
+    },
+    {
+      "timestamp": "2026-06-19T23:50:07Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 34.6875,
+        "lon": -118.20833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "DM04vq"
+    },
+    {
+      "timestamp": "2026-06-19T23:51:25Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 36.10416666666667,
+        "lon": -96.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM16nc"
+    },
+    {
+      "timestamp": "2026-06-19T23:52:44Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 33.60416666666667,
+        "lon": -117.54166666666666
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "DM13fo"
+    },
+    {
+      "timestamp": "2026-06-19T23:59:13Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 45.5625,
+        "lon": 8.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "JN45hn"
+    },
+    {
+      "timestamp": "2026-06-20T00:00:12Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 51.47916666666667,
+        "lon": 7.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "JO31tl"
+    },
+    {
+      "timestamp": "2026-06-20T00:00:42Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 36.22916666666667,
+        "lon": -86.375
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM66tf"
+    },
+    {
+      "timestamp": "2026-06-20T00:01:29Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 33.10416666666667,
+        "lon": -97.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM13ec"
+    },
+    {
+      "timestamp": "2026-06-20T00:01:59Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 37.9375,
+        "lon": -104.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "DM77nw"
+    },
+    {
+      "timestamp": "2026-06-20T00:02:55Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 41.0625,
+        "lon": -73.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "FN31bb"
+    },
+    {
+      "timestamp": "2026-06-20T00:11:45Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 28.270833333333332,
+        "lon": -82.70833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EL88pg"
+    },
+    {
+      "timestamp": "2026-06-20T00:12:38Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 32.5625,
+        "lon": -92.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM32qn"
+    },
+    {
+      "timestamp": "2026-06-20T00:20:59Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 36.1875,
+        "lon": -86.70833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM66pe"
+    },
+    {
+      "timestamp": "2026-06-20T00:22:22Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 29.645833333333332,
+        "lon": -82.45833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EL89sp"
+    },
+    {
+      "timestamp": "2026-06-20T00:25:02Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 38.645833333333336,
+        "lon": -27.208333333333332
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "HM68jp"
+    },
+    {
+      "timestamp": "2026-06-20T00:27:51Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 64.77083333333333,
+        "lon": -147.29166666666669
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "BP64is"
+    },
+    {
+      "timestamp": "2026-06-20T00:29:18Z",
+      "originGrid": "FN31aa98",
+      "origin": {
+        "lat": 41.03541666666666,
+        "lon": -73.92083333333333
+      },
+      "destination": {
+        "lat": 33.10416666666667,
+        "lon": -97.625
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationGrid": "EM13ec"
+    }
+  ]
+}

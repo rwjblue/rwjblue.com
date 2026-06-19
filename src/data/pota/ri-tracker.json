@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-16T15:29:56.137Z",
+  "generatedAt": "2026-06-20T03:03:12.599Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -232,7 +232,14 @@
       "firstActivation": null,
       "latestActivation": null,
       "activationCount": 0,
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+          "title": "Rhode Island-to-Florida rove, day one",
+          "date": "2026-06-19",
+          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+        }
+      ],
       "publicStats": {
         "attempts": 54,
         "activations": 52,
@@ -300,6 +307,108 @@
       }
     },
     {
+      "reference": "US-6992",
+      "name": "JL Curran State Park",
+      "latitude": 41.7507,
+      "longitude": -71.5516,
+      "grid": "FN41fs",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6992/",
+      "potaUrl": "https://pota.app/#/park/US-6992",
+      "firstActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2025-09-21",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 0,
+          "data": 0,
+          "phone": 10
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2026-06-18",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 21,
+          "cw": 21,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 26,
+      "notes": [
+        {
+          "id": "2026-06-03-jl-curran-state-park-pota",
+          "title": "JL Curran State Park Pack Mule Activation",
+          "date": "2026-06-03",
+          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 73,
+        "activations": 70,
+        "qsos": 2260
+      }
+    },
+    {
+      "reference": "US-6982",
+      "name": "Big River Wildlife Management Area",
+      "latitude": 41.6311,
+      "longitude": -71.5714,
+      "grid": "FN41fp",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6982/",
+      "potaUrl": "https://pota.app/#/park/US-6982",
+      "firstActivation": {
+        "reference": "US-6982",
+        "park": "Big River Wildlife Management Area",
+        "date": "2026-05-14",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 20,
+          "cw": 20,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6982",
+        "park": "Big River Wildlife Management Area",
+        "date": "2026-06-16",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 17,
+          "cw": 13,
+          "data": 0,
+          "phone": 4
+        },
+        "source": "profile"
+      },
+      "activationCount": 2,
+      "notes": [
+        {
+          "id": "2026-06-16-big-river-wildlife-management-area-pota",
+          "title": "Big River shakedown before the rove",
+          "date": "2026-06-16",
+          "href": "/notes/2026-06-16-big-river-wildlife-management-area-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 327,
+        "activations": 326,
+        "qsos": 13818
+      }
+    },
+    {
       "reference": "US-7971",
       "name": "Blackstone River Valley National Historical Park",
       "latitude": 42.015,
@@ -348,57 +457,6 @@
         "attempts": 55,
         "activations": 52,
         "qsos": 1616
-      }
-    },
-    {
-      "reference": "US-6992",
-      "name": "JL Curran State Park",
-      "latitude": 41.7507,
-      "longitude": -71.5516,
-      "grid": "FN41fs",
-      "locationDesc": "US-RI",
-      "status": "completed",
-      "href": "/radio/pota/US-6992/",
-      "potaUrl": "https://pota.app/#/park/US-6992",
-      "firstActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2025-09-21",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 10,
-          "cw": 0,
-          "data": 0,
-          "phone": 10
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2026-06-12",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 10,
-          "cw": 10,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 25,
-      "notes": [
-        {
-          "id": "2026-06-03-jl-curran-state-park-pota",
-          "title": "JL Curran State Park Pack Mule Activation",
-          "date": "2026-06-03",
-          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 73,
-        "activations": 70,
-        "qsos": 2260
       }
     },
     {
@@ -1407,57 +1465,6 @@
         "attempts": 512,
         "activations": 482,
         "qsos": 21397
-      }
-    },
-    {
-      "reference": "US-6982",
-      "name": "Big River Wildlife Management Area",
-      "latitude": 41.6311,
-      "longitude": -71.5714,
-      "grid": "FN41fp",
-      "locationDesc": "US-RI",
-      "status": "completed",
-      "href": "/radio/pota/US-6982/",
-      "potaUrl": "https://pota.app/#/park/US-6982",
-      "firstActivation": {
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "date": "2026-05-14",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 20,
-          "cw": 20,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "latestActivation": {
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "date": "2026-05-14",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 20,
-          "cw": 20,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 1,
-      "notes": [
-        {
-          "id": "2026-06-16-big-river-wildlife-management-area-pota",
-          "title": "Big River shakedown before the rove",
-          "date": "2026-06-16",
-          "href": "/notes/2026-06-16-big-river-wildlife-management-area-pota/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 327,
-        "activations": 326,
-        "qsos": 13818
       }
     },
     {

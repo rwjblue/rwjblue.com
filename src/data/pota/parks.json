@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-16T15:29:56.814Z",
+  "generatedAt": "2026-06-20T03:03:13.302Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -549,6 +549,119 @@
         "attempts": 48,
         "activations": 46,
         "qsos": 1537
+      }
+    },
+    {
+      "reference": "US-1716",
+      "name": "Silver Sands State Park",
+      "latitude": 41.2009,
+      "longitude": -73.0721,
+      "grid": "FN31le",
+      "locationDesc": "US-CT",
+      "href": "/radio/pota/US-1716/",
+      "potaUrl": "https://pota.app/#/park/US-1716",
+      "activationCount": 1,
+      "qsoTotal": 15,
+      "activations": [
+        {
+          "reference": "US-1716",
+          "park": "Silver Sands State Park",
+          "date": "2026-06-19",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 15,
+            "cw": 6,
+            "data": 0,
+            "phone": 9
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+              "title": "Rhode Island-to-Florida rove, day one",
+              "date": "2026-06-19",
+              "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+          "title": "Rhode Island-to-Florida rove, day one",
+          "date": "2026-06-19",
+          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 288,
+        "activations": 280,
+        "qsos": 10106
+      }
+    },
+    {
+      "reference": "US-2149",
+      "name": "Tallman Mountain State Park",
+      "latitude": 41.0305,
+      "longitude": -73.914,
+      "grid": "FN31ba",
+      "locationDesc": "US-NY",
+      "href": "/radio/pota/US-2149/",
+      "potaUrl": "https://pota.app/#/park/US-2149",
+      "activationCount": 2,
+      "qsoTotal": 30,
+      "activations": [
+        {
+          "reference": "US-2149",
+          "park": "Tallman Mountain State Park",
+          "date": "2026-06-20",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 5,
+            "data": 0,
+            "phone": 7
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-2149",
+          "park": "Tallman Mountain State Park",
+          "date": "2026-06-19",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 18,
+            "cw": 17,
+            "data": 0,
+            "phone": 1
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+              "title": "Rhode Island-to-Florida rove, day one",
+              "date": "2026-06-19",
+              "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+          "title": "Rhode Island-to-Florida rove, day one",
+          "date": "2026-06-19",
+          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 469,
+        "activations": 458,
+        "qsos": 15484
       }
     },
     {
@@ -1499,9 +1612,37 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6982/",
       "potaUrl": "https://pota.app/#/park/US-6982",
-      "activationCount": 2,
-      "qsoTotal": 23,
+      "activationCount": 3,
+      "qsoTotal": 40,
       "activations": [
+        {
+          "reference": "US-6982",
+          "park": "Big River Wildlife Management Area",
+          "date": "2026-06-16",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 17,
+            "cw": 13,
+            "data": 0,
+            "phone": 4
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-16-big-river-wildlife-management-area-pota",
+              "title": "Big River shakedown before the rove",
+              "date": "2026-06-16",
+              "href": "/notes/2026-06-16-big-river-wildlife-management-area-pota/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6982",
           "park": "Big River Wildlife Management Area",
@@ -1891,7 +2032,14 @@
       "activationCount": 0,
       "qsoTotal": 0,
       "activations": [],
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+          "title": "Rhode Island-to-Florida rove, day one",
+          "date": "2026-06-19",
+          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+        }
+      ],
       "publicStats": {
         "attempts": 54,
         "activations": 52,
@@ -1907,9 +2055,30 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 28,
-      "qsoTotal": 777,
+      "activationCount": 29,
+      "qsoTotal": 798,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-06-18",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 21,
+            "cw": 21,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",

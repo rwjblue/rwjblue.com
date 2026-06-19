@@ -1130,6 +1130,71 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-2149",
+      "park": "Tallman Mountain State Park",
+      "date": "2026-06-20",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 5,
+        "data": 0,
+        "phone": 7
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1716",
+      "park": "Silver Sands State Park",
+      "date": "2026-06-19",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 15,
+        "cw": 6,
+        "data": 0,
+        "phone": 9
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2149",
+      "park": "Tallman Mountain State Park",
+      "date": "2026-06-19",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 18,
+        "cw": 17,
+        "data": 0,
+        "phone": 1
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-06-18",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 21,
+        "cw": 21,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6982",
+      "park": "Big River Wildlife Management Area",
+      "date": "2026-06-16",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 17,
+        "cw": 13,
+        "data": 0,
+        "phone": 4
+      },
+      "source": "profile"
     }
   ]
 }
