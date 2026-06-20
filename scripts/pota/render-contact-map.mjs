@@ -2,6 +2,7 @@
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { DXCC_BY_CODE } from "@ham2k/lib-dxcc-data";
 import { adifToQSON } from "./ham2k-qson-adif.mjs";
 import { bandColor } from "../../src/data/pota/band-colors.mjs";
 
@@ -206,20 +207,66 @@ export function stateToLatLon(state, dxcc) {
   return US_STATE_CENTROIDS[state.trim().toUpperCase()] ?? null;
 }
 
-const DXCC_CENTROIDS = {
-  "1": { lat: 56.130366, lon: -106.346771 }, // Canada
-  "6": { lat: 64.200841, lon: -149.493673 }, // Alaska
-  "50": { lat: 23.634501, lon: -102.552784 }, // Mexico
-  "110": { lat: 19.8986829, lon: -155.6658568 }, // Hawaii
-  "291": { lat: 39.8283, lon: -98.5795 }, // United States
-};
+function dxccCodeForValue(dxcc) {
+  if (dxcc === undefined || dxcc === null || dxcc === "") {
+    return undefined;
+  }
 
-export function countryToLatLon(dxcc) {
-  if (!dxcc) {
+  const code = Number.parseInt(String(dxcc), 10);
+  return Number.isNaN(code) ? String(dxcc) : code;
+}
+
+function dxccEntityForCode(dxcc) {
+  const code = dxccCodeForValue(dxcc);
+  if (typeof code !== "number") {
     return null;
   }
 
-  return DXCC_CENTROIDS[String(dxcc)] ?? null;
+  return DXCC_BY_CODE[code] ?? null;
+}
+
+export function countryToLatLon(dxcc) {
+  const entity = dxccEntityForCode(dxcc);
+  if (!entity || typeof entity.lat !== "number" || typeof entity.lon !== "number") {
+    return null;
+  }
+
+  return { lat: entity.lat, lon: entity.lon };
+}
+
+export function collectDxccEntities(contacts) {
+  const entitiesByCode = new Map();
+
+  for (const contact of contacts) {
+    if (!contact.destinationDxccName || contact.destinationDxccCode === undefined) {
+      continue;
+    }
+
+    const current = entitiesByCode.get(contact.destinationDxccCode) ?? {
+      dxccCode: contact.destinationDxccCode,
+      name: contact.destinationDxccName,
+      flag: contact.destinationDxccFlag,
+      count: 0,
+    };
+    current.count += 1;
+    entitiesByCode.set(contact.destinationDxccCode, current);
+  }
+
+  return [...entitiesByCode.values()].sort((a, b) => {
+    return a.name.localeCompare(b.name) || a.dxccCode - b.dxccCode;
+  });
+}
+
+export function shouldRenderDxccSummary(map) {
+  if (!map.dxccEntities || map.dxccEntities.length === 0) {
+    return false;
+  }
+
+  if (map.originDxccCode === undefined || map.originDxccCode === null) {
+    return map.dxccEntities.length >= 2;
+  }
+
+  return map.dxccEntities.some((entity) => entity.dxccCode !== map.originDxccCode);
 }
 
 export function collectBandCounts(contacts) {
@@ -248,7 +295,7 @@ function uniqueOrigins(contacts) {
   return [...seen.values()];
 }
 
-export function buildContactMapData(content, { title, subtitle } = {}) {
+export function buildContactMapData(content, { title, subtitle, sourceAdi = [] } = {}) {
   const qson = parseAdif(content);
   const contacts = qson.qsos
     .map((qso) => {
@@ -260,7 +307,10 @@ export function buildContactMapData(content, { title, subtitle } = {}) {
 
       const destinationGrid = qso.their?.grid;
       const destinationState = qso.their?.state;
-      const destinationCountry = qso.their?.dxccCode ? String(qso.their.dxccCode) : undefined;
+      const destinationDxccCode = dxccCodeForValue(qso.their?.dxccCode);
+      const destinationCountry =
+        destinationDxccCode === undefined ? undefined : String(destinationDxccCode);
+      const destinationDxccEntity = dxccEntityForCode(destinationDxccCode);
       const destination =
         gridToLatLon(destinationGrid) ??
         stateToLatLon(destinationState, qso.their?.dxccCode) ??
@@ -282,6 +332,14 @@ export function buildContactMapData(content, { title, subtitle } = {}) {
             : "country",
       };
 
+      if (destinationDxccCode !== undefined) {
+        contact.destinationDxccCode = destinationDxccCode;
+      }
+      if (destinationDxccEntity) {
+        contact.destinationDxccName = destinationDxccEntity.name;
+        contact.destinationDxccFlag = destinationDxccEntity.flag;
+      }
+
       if (destinationGrid) {
         contact.destinationGrid = destinationGrid;
       } else if (destinationState && String(qso.their?.dxccCode) === "291") {
@@ -300,8 +358,10 @@ export function buildContactMapData(content, { title, subtitle } = {}) {
 
   const firstQso = qson.qsos.find((qso) => qso.our?.grid);
   const stationCallsign = firstQso?.our?.call || firstQso?.our?.operator || "N1RWJ";
+  const originDxccCode = dxccCodeForValue(firstQso?.our?.dxccCode) ?? 291;
   const date = firstQso?.startAt?.slice(0, 10).replaceAll("-", "") ?? "";
   const dateLabel = formatDate(date);
+  const dxccEntities = collectDxccEntities(contacts);
 
   return {
     title: title || "Contact map",
@@ -309,6 +369,9 @@ export function buildContactMapData(content, { title, subtitle } = {}) {
     stationCallsign,
     date,
     dateLabel,
+    originDxccCode,
+    dxccEntities,
+    sourceAdi,
     contacts,
   };
 }

@@ -4,9 +4,12 @@ import { readFileSync } from "node:fs";
 
 import {
   buildContactMapData,
+  collectDxccEntities,
+  countryToLatLon,
   gridToLatLon,
   parseAdif,
   renderSvg,
+  shouldRenderDxccSummary,
   stateToLatLon,
 } from "../scripts/pota/render-contact-map.mjs";
 import { BAND_COLORS, bandColor } from "../src/data/pota/band-colors.mjs";
@@ -36,6 +39,14 @@ const ham2kMetadataAdif = `
 <CALL:7>WEATHER <BAND:3>20m <QSO_DATE:8>20260604 <TIME_ON:6>141900 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl03 <GRIDSQUARE:6>FN41jl <DXCC:3>291 <STATE:2>RI <EOR>
 <CALL:5>START <BAND:3>20m <QSO_DATE:8>20260604 <TIME_ON:6>142000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41jl03 <GRIDSQUARE:6>FN41jl <DXCC:3>291 <STATE:2>RI <EOR>
 <X_HAM2K_SOLAR:26>2026-06-04T15:41:54Z SFI <X_HAM2K_WEATHER:29>2026-06-04T15:41:57Z Sunny <EOR>
+`;
+
+const mixedDxccAdif = `
+<ADIF_VER:5>3.1.5
+<EOH>
+<CALL:5>USONE <BAND:3>40m <QSO_DATE:8>20260605 <TIME_ON:6>140000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <GRIDSQUARE:6>EM85jx <DXCC:3>291 <STATE:2>TN <EOR>
+<CALL:5>VEONE <BAND:3>20m <QSO_DATE:8>20260605 <TIME_ON:6>141000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <DXCC:1>1 <EOR>
+<CALL:5>IZONE <BAND:3>15m <QSO_DATE:8>20260605 <TIME_ON:6>142000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <DXCC:3>248 <EOR>
 `;
 
 test("parseAdif extracts records and fields", () => {
@@ -74,6 +85,11 @@ test("stateToLatLon only falls back for US DXCC records", () => {
   assert.equal(stateToLatLon("", "291"), null);
 });
 
+test("countryToLatLon uses DXCC entity coordinates", () => {
+  assert.deepEqual(countryToLatLon("230"), { lat: 51.3, lon: 9.7 });
+  assert.equal(countryToLatLon("999999"), null);
+});
+
 test("buildContactMapData uses grids first and state centroids as fallback", () => {
   const map = buildContactMapData(sampleAdif, {
     title: "Sample map",
@@ -95,6 +111,61 @@ test("buildContactMapData uses grids first and state centroids as fallback", () 
   assert.ok(!("originGrid" in map));
   assert.ok(!("origin" in map));
   assert.ok(!("summary" in map));
+});
+
+test("buildContactMapData enriches mixed DXCC contact map data", () => {
+  const sourceAdi = ["logs/mixed-dxcc.adi"];
+  const map = buildContactMapData(mixedDxccAdif, {
+    title: "DXCC map",
+    subtitle: "DXCC subtitle",
+    sourceAdi,
+  });
+
+  assert.equal(map.originDxccCode, 291);
+  assert.deepEqual(map.sourceAdi, sourceAdi);
+  assert.equal(shouldRenderDxccSummary(map), true);
+  assert.deepEqual(
+    map.contacts.map((contact) => [
+      contact.destinationDxccCode,
+      contact.destinationDxccName,
+      contact.destinationDxccFlag,
+    ]),
+    [
+      [291, "United States", "🇺🇸"],
+      [1, "Canada", "🇨🇦"],
+      [248, "Italy", "🇮🇹"],
+    ],
+  );
+  assert.deepEqual(map.dxccEntities, [
+    { dxccCode: 1, name: "Canada", flag: "🇨🇦", count: 1 },
+    { dxccCode: 248, name: "Italy", flag: "🇮🇹", count: 1 },
+    { dxccCode: 291, name: "United States", flag: "🇺🇸", count: 1 },
+  ]);
+  assert.deepEqual(collectDxccEntities(map.contacts), map.dxccEntities);
+});
+
+test("shouldRenderDxccSummary hides home-only maps and handles unknown origins", () => {
+  const homeOnlyMap = buildContactMapData(sampleAdif, {
+    title: "Home only map",
+    subtitle: "Home only subtitle",
+  });
+  const mixedMap = buildContactMapData(mixedDxccAdif, {
+    title: "Mixed map",
+    subtitle: "Mixed subtitle",
+  });
+  const unknownOriginHomeOnlyMap = {
+    ...homeOnlyMap,
+    originDxccCode: undefined,
+  };
+  const unknownOriginMixedMap = {
+    ...mixedMap,
+    originDxccCode: undefined,
+  };
+
+  assert.equal(shouldRenderDxccSummary(homeOnlyMap), false);
+  assert.equal(shouldRenderDxccSummary(mixedMap), true);
+  assert.equal(shouldRenderDxccSummary(unknownOriginHomeOnlyMap), false);
+  assert.equal(shouldRenderDxccSummary(unknownOriginMixedMap), true);
 });
 
 test("buildContactMapData preserves per-contact origins and country fallback for roves", () => {
