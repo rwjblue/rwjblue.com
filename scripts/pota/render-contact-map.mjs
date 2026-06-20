@@ -9,13 +9,14 @@ import { bandColor } from "../../src/data/pota/band-colors.mjs";
 function usage() {
   console.error(`Usage:
   node scripts/pota/render-contact-map.mjs \\
-    --input <adi> \\
+    --input <adi> [--input <adi> ...] \\
     --output <file> \\
     [--title <title>] \\
     [--subtitle <subtitle>]
 
-Reads an ADI/ADIF log and writes public contact-map data as JSON, or a static SVG
-when the output path ends in .svg.`);
+Reads one or more ADI/ADIF logs and writes public contact-map data as JSON, or a
+static SVG when the output path ends in .svg. Repeated --input flags are read in
+order.`);
 }
 
 function escapeXml(value) {
@@ -37,8 +38,9 @@ function escapeXml(value) {
   });
 }
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const options = {
+    inputs: [],
     title: "Contact map",
     subtitle: "",
   };
@@ -47,7 +49,7 @@ function parseArgs(argv) {
     const arg = argv[i];
     switch (arg) {
       case "--input":
-        options.input = argv[++i];
+        options.inputs.push(argv[++i]);
         break;
       case "--output":
         options.output = argv[++i];
@@ -63,11 +65,100 @@ function parseArgs(argv) {
     }
   }
 
-  if (!options.input || !options.output) {
+  if (options.inputs.length === 0 || !options.output) {
     throw new Error("Both --input and --output are required.");
   }
 
   return options;
+}
+
+function archiveDatePartsFromMtime(mtime) {
+  return {
+    year: String(mtime.getUTCFullYear()),
+    month: String(mtime.getUTCMonth() + 1).padStart(2, "0"),
+  };
+}
+
+function archiveDatePartsFromAdif(content, mtime) {
+  try {
+    const qson = parseAdif(content);
+    const firstQso = qson.qsos.find((qso) => qso.startAt || qso.endAt);
+    const isoDate = firstQso?.startAt ?? firstQso?.endAt;
+    if (isoDate) {
+      const [year, month] = isoDate.slice(0, 10).split("-");
+      if (year && month) {
+        return { year, month };
+      }
+    }
+  } catch {
+    // Fall back to mtime when the source cannot be parsed.
+  }
+
+  return archiveDatePartsFromMtime(mtime);
+}
+
+async function writeArchiveCandidate(target, content) {
+  try {
+    const existing = await fs.readFile(target);
+    if (Buffer.compare(existing, content) === 0) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    if (error.code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  try {
+    await fs.writeFile(target, content, { flag: "wx" });
+    return true;
+  } catch (error) {
+    if (error.code === "EEXIST") {
+      return false;
+    }
+    throw error;
+  }
+}
+
+export async function buildContactMapDataFromInputs(inputs, options = {}) {
+  const archivedInputs = [];
+  const contents = [];
+
+  for (const input of inputs) {
+    const archivedInput = await archiveSourceAdif(input, options);
+    archivedInputs.push(archivedInput);
+    contents.push(await fs.readFile(archivedInput, "utf8"));
+  }
+
+  return buildContactMapData(contents.join("\n"), {
+    title: options.title,
+    subtitle: options.subtitle,
+    sourceAdi: archivedInputs,
+  });
+}
+
+export async function archiveSourceAdif(
+  inputPath,
+  { archiveRoot = "data/pota/source-adi" } = {},
+) {
+  const content = await fs.readFile(inputPath);
+  const stat = await fs.stat(inputPath);
+  const { year, month } = archiveDatePartsFromAdif(content.toString("utf8"), stat.mtime);
+  const archiveDir = path.join(archiveRoot, year, month);
+  const parsedPath = path.parse(path.basename(inputPath));
+
+  await fs.mkdir(archiveDir, { recursive: true });
+
+  for (let index = 1; ; index += 1) {
+    const fileName =
+      index === 1 ? parsedPath.base : `${parsedPath.name}-${index}${parsedPath.ext}`;
+    const target = path.join(archiveDir, fileName);
+    const archived = await writeArchiveCandidate(target, content);
+    if (archived) {
+      return target;
+    }
+  }
 }
 
 export function parseAdif(content) {
@@ -497,8 +588,7 @@ export function renderSvg({
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const input = await fs.readFile(options.input, "utf8");
-  const mapData = buildContactMapData(input, {
+  const mapData = await buildContactMapDataFromInputs(options.inputs, {
     title: options.title,
     subtitle: options.subtitle,
   });

@@ -1,12 +1,24 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
 
 import {
+  archiveSourceAdif,
   buildContactMapData,
+  buildContactMapDataFromInputs,
   collectDxccEntities,
   countryToLatLon,
   gridToLatLon,
+  parseArgs,
   parseAdif,
   renderSvg,
   shouldRenderDxccSummary,
@@ -50,6 +62,22 @@ const mixedDxccAdif = `
 <CALL:5>IZONE <BAND:3>15m <QSO_DATE:8>20260605 <TIME_ON:6>142000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <DXCC:3>248 <EOR>
 `;
 
+function tempDir() {
+  return mkdtempSync(path.join(tmpdir(), "pota-contact-map-"));
+}
+
+function writeAdif(filePath, { call = "TEST", date = "20260612", state = "TN" } = {}) {
+  writeFileSync(
+    filePath,
+    `
+<ADIF_VER:5>3.1.5
+<EOH>
+<CALL:${call.length}>${call} <BAND:3>20m <QSO_DATE:8>${date} <TIME_ON:6>140000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <DXCC:3>291 <STATE:2>${state} <EOR>
+`,
+    "utf8",
+  );
+}
+
 test("parseAdif extracts records and fields", () => {
   const qson = parseAdif(sampleAdif);
 
@@ -59,6 +87,102 @@ test("parseAdif extracts records and fields", () => {
   assert.equal(qson.qsos[1].their.state, "IN");
   assert.equal(qson.qsos[0].our.grid, "FN41dx97");
   assert.equal(qson.qsos[0].our.dxccCode, 291);
+});
+
+test("parseArgs accepts multiple ordered input flags", () => {
+  assert.deepEqual(
+    parseArgs([
+      "--input",
+      "first.adi",
+      "--input",
+      "second.adi",
+      "--output",
+      "contact-map.json",
+      "--title",
+      "Activation map",
+      "--subtitle",
+      "Two logs",
+    ]),
+    {
+      inputs: ["first.adi", "second.adi"],
+      output: "contact-map.json",
+      title: "Activation map",
+      subtitle: "Two logs",
+    },
+  );
+});
+
+test("archiveSourceAdif copies an input into a date-based archive and reuses identical content", async () => {
+  const dir = tempDir();
+  try {
+    const input = path.join(dir, "source.adi");
+    const archiveRoot = path.join(dir, "archive");
+    writeAdif(input, { date: "20260612" });
+
+    const firstArchived = await archiveSourceAdif(input, { archiveRoot });
+    const secondArchived = await archiveSourceAdif(input, { archiveRoot });
+
+    assert.equal(firstArchived, path.join(archiveRoot, "2026", "06", "source.adi"));
+    assert.equal(secondArchived, firstArchived);
+    assert.equal(readFileSync(firstArchived, "utf8"), readFileSync(input, "utf8"));
+    assert.equal(statSync(firstArchived).isFile(), true);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("archiveSourceAdif avoids silent overwrite for different content", async () => {
+  const dir = tempDir();
+  try {
+    const firstInput = path.join(dir, "same-name.adi");
+    const nestedDir = path.join(dir, "nested");
+    mkdirSync(nestedDir, { recursive: true });
+    const secondInput = path.join(nestedDir, "same-name.adi");
+    const archiveRoot = path.join(dir, "archive");
+    writeAdif(firstInput, { call: "FIRST", date: "20260612", state: "TN" });
+    writeAdif(secondInput, { call: "SECOND", date: "20260612", state: "CA" });
+
+    const firstArchived = await archiveSourceAdif(firstInput, { archiveRoot });
+    const secondArchived = await archiveSourceAdif(secondInput, { archiveRoot });
+
+    assert.equal(firstArchived, path.join(archiveRoot, "2026", "06", "same-name.adi"));
+    assert.equal(secondArchived, path.join(archiveRoot, "2026", "06", "same-name-2.adi"));
+    assert.equal(readFileSync(firstArchived, "utf8"), readFileSync(firstInput, "utf8"));
+    assert.equal(readFileSync(secondArchived, "utf8"), readFileSync(secondInput, "utf8"));
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("buildContactMapDataFromInputs merges archived inputs and records all source paths", async () => {
+  const dir = tempDir();
+  try {
+    const firstInput = path.join(dir, "first.adi");
+    const secondInput = path.join(dir, "second.adi");
+    const archiveRoot = path.join(dir, "archive");
+    writeAdif(firstInput, { call: "FIRST", date: "20260612", state: "TN" });
+    writeAdif(secondInput, { call: "SECOND", date: "20260613", state: "CA" });
+
+    const map = await buildContactMapDataFromInputs([firstInput, secondInput], {
+      archiveRoot,
+      title: "Merged map",
+      subtitle: "Two logs",
+    });
+
+    assert.equal(map.title, "Merged map");
+    assert.equal(map.subtitle, "Two logs");
+    assert.equal(map.contacts.length, 2);
+    assert.deepEqual(map.sourceAdi, [
+      path.join(archiveRoot, "2026", "06", "first.adi"),
+      path.join(archiveRoot, "2026", "06", "second.adi"),
+    ]);
+    assert.deepEqual(
+      map.contacts.map((contact) => contact.destinationState),
+      ["TN", "CA"],
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test("parseAdif excludes Ham2K PoLo metadata entries from QSOs", () => {
