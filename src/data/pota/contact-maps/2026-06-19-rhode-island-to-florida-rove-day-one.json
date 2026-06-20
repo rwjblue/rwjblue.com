@@ -4,6 +4,56 @@
   "stationCallsign": "N1RWJ",
   "date": "20260619",
   "dateLabel": "Jun 19, 2026",
+  "originDxccCode": 291,
+  "dxccEntities": [
+    {
+      "dxccCode": 291,
+      "name": "United States",
+      "flag": "🇺🇸",
+      "count": 50
+    },
+    {
+      "dxccCode": 6,
+      "name": "Alaska",
+      "flag": "🇺🇸",
+      "count": 1
+    },
+    {
+      "dxccCode": 149,
+      "name": "Azores",
+      "flag": "🇵🇹",
+      "count": 1
+    },
+    {
+      "dxccCode": 1,
+      "name": "Canada",
+      "flag": "🇨🇦",
+      "count": 1
+    },
+    {
+      "dxccCode": 230,
+      "name": "Germany",
+      "flag": "🇩🇪",
+      "count": 1
+    },
+    {
+      "dxccCode": 248,
+      "name": "Italy",
+      "flag": "🇮🇹",
+      "count": 1
+    },
+    {
+      "dxccCode": 202,
+      "name": "Puerto Rico",
+      "flag": "🇵🇷",
+      "count": 1
+    }
+  ],
+  "sourceAdi": [
+    "data/pota/source-adi/2026/06/2026-06-19 N1RWJ at US-6991 Full.adi",
+    "data/pota/source-adi/2026/06/2026-06-19 N1RWJ at US-1716 Full.adi",
+    "data/pota/source-adi/2026/06/2026-06-20 N1RWJ at US-2149 Full.adi"
+  ],
   "contacts": [
     {
       "timestamp": "2026-06-19T13:31:46Z",
@@ -18,6 +68,9 @@
       },
       "band": "40m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EN82cr"
     },
     {
@@ -33,6 +86,9 @@
       },
       "band": "40m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FN20nb"
     },
     {
@@ -48,6 +104,9 @@
       },
       "band": "40m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FN20ip"
     },
     {
@@ -63,6 +122,9 @@
       },
       "band": "40m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM90hf"
     },
     {
@@ -78,6 +140,9 @@
       },
       "band": "40m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM29ix"
     },
     {
@@ -93,6 +158,9 @@
       },
       "band": "30m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EN71kc"
     },
     {
@@ -108,6 +176,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM06ra"
     },
     {
@@ -123,6 +194,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM78df"
     },
     {
@@ -138,6 +212,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM60ll"
     },
     {
@@ -153,6 +230,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EN90hu"
     },
     {
@@ -168,6 +248,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM97mb"
     },
     {
@@ -183,6 +266,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM17gi"
     },
     {
@@ -198,6 +284,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL88xb"
     },
     {
@@ -213,6 +302,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM18gu"
     },
     {
@@ -228,6 +320,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM19am"
     },
     {
@@ -243,6 +338,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM18gu"
     },
     {
@@ -258,6 +356,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM98sj"
     },
     {
@@ -273,6 +374,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM85br"
     },
     {
@@ -288,6 +392,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EN75ux"
     },
     {
@@ -303,6 +410,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DN74nr"
     },
     {
@@ -318,6 +428,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EN44et"
     },
     {
@@ -333,6 +446,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM27cx"
     },
     {
@@ -348,6 +464,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM99np"
     },
     {
@@ -363,6 +482,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FN31ap"
     },
     {
@@ -378,6 +500,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EN73vo"
     },
     {
@@ -393,6 +518,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL98qd"
     },
     {
@@ -408,6 +536,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 1,
+      "destinationDxccName": "Canada",
+      "destinationDxccFlag": "🇨🇦",
       "destinationGrid": "GN28qw"
     },
     {
@@ -423,6 +554,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM13ec"
     },
     {
@@ -438,6 +572,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL95tt"
     },
     {
@@ -453,6 +590,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "CN84kw"
     },
     {
@@ -468,6 +608,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM14kb"
     },
     {
@@ -483,6 +626,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM17is"
     },
     {
@@ -498,6 +644,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM22jf"
     },
     {
@@ -513,6 +662,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 202,
+      "destinationDxccName": "Puerto Rico",
+      "destinationDxccFlag": "🇵🇷",
       "destinationGrid": "FK68tb"
     },
     {
@@ -528,6 +680,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "CM87vu"
     },
     {
@@ -543,6 +698,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM46ts"
     },
     {
@@ -558,6 +716,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FN30aw"
     },
     {
@@ -573,6 +734,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM13la"
     },
     {
@@ -588,6 +752,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM12ew"
     },
     {
@@ -603,6 +770,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM64ni"
     },
     {
@@ -618,6 +788,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM04vq"
     },
     {
@@ -633,6 +806,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM16nc"
     },
     {
@@ -648,6 +824,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM13fo"
     },
     {
@@ -663,6 +842,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 248,
+      "destinationDxccName": "Italy",
+      "destinationDxccFlag": "🇮🇹",
       "destinationGrid": "JN45hn"
     },
     {
@@ -678,6 +860,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 230,
+      "destinationDxccName": "Germany",
+      "destinationDxccFlag": "🇩🇪",
       "destinationGrid": "JO31tl"
     },
     {
@@ -693,6 +878,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM66tf"
     },
     {
@@ -708,6 +896,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM13ec"
     },
     {
@@ -723,6 +914,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM77nw"
     },
     {
@@ -738,6 +932,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FN31bb"
     },
     {
@@ -753,6 +950,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL88pg"
     },
     {
@@ -768,6 +968,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM32qn"
     },
     {
@@ -783,6 +986,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM66pe"
     },
     {
@@ -798,6 +1004,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL89sp"
     },
     {
@@ -813,6 +1022,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 149,
+      "destinationDxccName": "Azores",
+      "destinationDxccFlag": "🇵🇹",
       "destinationGrid": "HM68jp"
     },
     {
@@ -828,6 +1040,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 6,
+      "destinationDxccName": "Alaska",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "BP64is"
     },
     {
@@ -843,6 +1058,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM13ec"
     }
   ]

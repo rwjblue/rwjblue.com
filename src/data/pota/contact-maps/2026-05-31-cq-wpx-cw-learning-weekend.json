@@ -4,6 +4,144 @@
   "stationCallsign": "N1RWJ",
   "date": "20260530",
   "dateLabel": "May 30, 2026",
+  "originDxccCode": 291,
+  "dxccEntities": [
+    {
+      "dxccCode": 291,
+      "name": "United States",
+      "flag": "🇺🇸",
+      "count": 15
+    },
+    {
+      "dxccCode": 504,
+      "name": "Slovakia",
+      "flag": "🇸🇰",
+      "count": 2
+    },
+    {
+      "dxccCode": 209,
+      "name": "Belgium",
+      "flag": "🇧🇪",
+      "count": 1
+    },
+    {
+      "dxccCode": 520,
+      "name": "Bonaire",
+      "flag": "🇧🇶",
+      "count": 1
+    },
+    {
+      "dxccCode": 501,
+      "name": "Bosnia-Herzegovina",
+      "flag": "🇧🇦",
+      "count": 1
+    },
+    {
+      "dxccCode": 212,
+      "name": "Bulgaria",
+      "flag": "🇧🇬",
+      "count": 1
+    },
+    {
+      "dxccCode": 1,
+      "name": "Canada",
+      "flag": "🇨🇦",
+      "count": 1
+    },
+    {
+      "dxccCode": 69,
+      "name": "Cayman Is.",
+      "flag": "🇰🇾",
+      "count": 1
+    },
+    {
+      "dxccCode": 40,
+      "name": "Crete",
+      "flag": "🇬🇷",
+      "count": 1
+    },
+    {
+      "dxccCode": 215,
+      "name": "Cyprus",
+      "flag": "🇨🇾",
+      "count": 1
+    },
+    {
+      "dxccCode": 503,
+      "name": "Czech Republic",
+      "flag": "🇨🇿",
+      "count": 1
+    },
+    {
+      "dxccCode": 221,
+      "name": "Denmark",
+      "flag": "🇩🇰",
+      "count": 1
+    },
+    {
+      "dxccCode": 52,
+      "name": "Estonia",
+      "flag": "🇪🇪",
+      "count": 1
+    },
+    {
+      "dxccCode": 75,
+      "name": "Georgia",
+      "flag": "🇬🇪",
+      "count": 1
+    },
+    {
+      "dxccCode": 236,
+      "name": "Greece",
+      "flag": "🇬🇷",
+      "count": 1
+    },
+    {
+      "dxccCode": 110,
+      "name": "Hawaii",
+      "flag": "🇺🇸",
+      "count": 1
+    },
+    {
+      "dxccCode": 114,
+      "name": "Isle of Man",
+      "flag": "🇮🇲",
+      "count": 1
+    },
+    {
+      "dxccCode": 446,
+      "name": "Morocco",
+      "flag": "🇲🇦",
+      "count": 1
+    },
+    {
+      "dxccCode": 269,
+      "name": "Poland",
+      "flag": "🇵🇱",
+      "count": 1
+    },
+    {
+      "dxccCode": 296,
+      "name": "Serbia",
+      "flag": "🇷🇸",
+      "count": 1
+    },
+    {
+      "dxccCode": 284,
+      "name": "Sweden",
+      "flag": "🇸🇪",
+      "count": 1
+    },
+    {
+      "dxccCode": 90,
+      "name": "Trinidad and Tobago",
+      "flag": "🇹🇹",
+      "count": 1
+    }
+  ],
+  "sourceAdi": [
+    "data/pota/source-adi/2026/05/2026 CQ WPX CW.adi"
+  ],
   "contacts": [
     {
       "timestamp": "2026-05-30T00:56:00Z",
@@ -18,6 +156,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL95ww"
     },
     {
@@ -33,6 +174,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "FM03kk"
     },
     {
@@ -48,6 +192,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM79ko"
     },
     {
@@ -63,6 +210,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 503,
+      "destinationDxccName": "Czech Republic",
+      "destinationDxccFlag": "🇨🇿",
       "destinationGrid": "JN89sj"
     },
     {
@@ -78,6 +228,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL99na"
     },
     {
@@ -93,6 +246,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EN62db"
     },
     {
@@ -108,6 +264,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "CN87ts"
     },
     {
@@ -123,6 +282,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM48to"
     },
     {
@@ -138,6 +300,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM33xt"
     },
     {
@@ -153,6 +318,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 504,
+      "destinationDxccName": "Slovakia",
+      "destinationDxccFlag": "🇸🇰",
       "destinationGrid": "JN98ep"
     },
     {
@@ -168,6 +336,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "CM87vd"
     },
     {
@@ -183,6 +354,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "CN97ax"
     },
     {
@@ -198,6 +372,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 520,
+      "destinationDxccName": "Bonaire",
+      "destinationDxccFlag": "🇧🇶",
       "destinationGrid": "FK52vd"
     },
     {
@@ -213,6 +390,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DM13bw"
     },
     {
@@ -228,6 +408,9 @@
       },
       "band": "40m",
       "source": "grid",
+      "destinationDxccCode": 114,
+      "destinationDxccName": "Isle of Man",
+      "destinationDxccFlag": "🇮🇲",
       "destinationGrid": "IO74qd"
     },
     {
@@ -243,6 +426,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 110,
+      "destinationDxccName": "Hawaii",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "BK29mj"
     },
     {
@@ -258,6 +444,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 446,
+      "destinationDxccName": "Morocco",
+      "destinationDxccFlag": "🇲🇦",
       "destinationGrid": "IM61ap"
     },
     {
@@ -273,6 +462,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM00uf"
     },
     {
@@ -288,6 +480,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "DN45jp"
     },
     {
@@ -303,6 +498,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EM74rd"
     },
     {
@@ -318,6 +516,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 1,
+      "destinationDxccName": "Canada",
+      "destinationDxccFlag": "🇨🇦",
       "destinationGrid": "FN04jm"
     },
     {
@@ -333,6 +534,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
       "destinationGrid": "EL98hn"
     },
     {
@@ -348,6 +552,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 75,
+      "destinationDxccName": "Georgia",
+      "destinationDxccFlag": "🇬🇪",
       "destinationGrid": "LN21jq"
     },
     {
@@ -363,6 +570,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 69,
+      "destinationDxccName": "Cayman Is.",
+      "destinationDxccFlag": "🇰🇾",
       "destinationGrid": "FK09cr"
     },
     {
@@ -378,6 +588,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 212,
+      "destinationDxccName": "Bulgaria",
+      "destinationDxccFlag": "🇧🇬",
       "destinationGrid": "KN22dq"
     },
     {
@@ -393,6 +606,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 504,
+      "destinationDxccName": "Slovakia",
+      "destinationDxccFlag": "🇸🇰",
       "destinationGrid": "JN88tf"
     },
     {
@@ -408,6 +624,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 209,
+      "destinationDxccName": "Belgium",
+      "destinationDxccFlag": "🇧🇪",
       "destinationGrid": "JO20lw"
     },
     {
@@ -423,6 +642,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 236,
+      "destinationDxccName": "Greece",
+      "destinationDxccFlag": "🇬🇷",
       "destinationGrid": "KM27aw"
     },
     {
@@ -438,6 +660,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 90,
+      "destinationDxccName": "Trinidad and Tobago",
+      "destinationDxccFlag": "🇹🇹",
       "destinationGrid": "FK90gg"
     },
     {
@@ -453,6 +678,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 296,
+      "destinationDxccName": "Serbia",
+      "destinationDxccFlag": "🇷🇸",
       "destinationGrid": "KN03hg"
     },
     {
@@ -468,6 +696,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 52,
+      "destinationDxccName": "Estonia",
+      "destinationDxccFlag": "🇪🇪",
       "destinationGrid": "KO38cs"
     },
     {
@@ -483,6 +714,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 269,
+      "destinationDxccName": "Poland",
+      "destinationDxccFlag": "🇵🇱",
       "destinationGrid": "JO90jw"
     },
     {
@@ -498,6 +732,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 221,
+      "destinationDxccName": "Denmark",
+      "destinationDxccFlag": "🇩🇰",
       "destinationGrid": "JO45rj"
     },
     {
@@ -513,6 +750,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 284,
+      "destinationDxccName": "Sweden",
+      "destinationDxccFlag": "🇸🇪",
       "destinationGrid": "JO77ga"
     },
     {
@@ -528,6 +768,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 215,
+      "destinationDxccName": "Cyprus",
+      "destinationDxccFlag": "🇨🇾",
       "destinationGrid": "KM64ox"
     },
     {
@@ -543,6 +786,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 501,
+      "destinationDxccName": "Bosnia-Herzegovina",
+      "destinationDxccFlag": "🇧🇦",
       "destinationGrid": "JN83sx"
     },
     {
@@ -558,6 +804,9 @@
       },
       "band": "20m",
       "source": "grid",
+      "destinationDxccCode": 40,
+      "destinationDxccName": "Crete",
+      "destinationDxccFlag": "🇬🇷",
       "destinationGrid": "KM24sx"
     }
   ]
