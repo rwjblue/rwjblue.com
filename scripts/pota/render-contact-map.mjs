@@ -216,7 +216,7 @@ function dxccCodeForValue(dxcc) {
   return Number.isNaN(code) ? String(dxcc) : code;
 }
 
-function dxccEntityForCode(dxcc) {
+export function dxccEntityForCode(dxcc) {
   const code = dxccCodeForValue(dxcc);
   if (typeof code !== "number") {
     return null;
