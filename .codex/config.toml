@@ -16,6 +16,10 @@ command = "qrz-mcp"
 [mcp_servers.lotw]
 command = "lotw-mcp"
 
+[mcp_servers.fastmail]
+url = "https://api.fastmail.com/mcp"
+bearer_token_env_var = "FASTMAIL_MCP_API_TOKEN"
+
 [mcp_servers.googleMaps]
 command = "npx"
 args = ["-y", "@cablate/mcp-google-map", "--stdio"]

@@ -18,6 +18,13 @@
     "lotw": {
       "command": "lotw-mcp"
     },
+    "fastmail": {
+      "type": "http",
+      "url": "https://api.fastmail.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${FASTMAIL_MCP_API_TOKEN}"
+      }
+    },
     "google-maps": {
       "command": "npx",
       "args": [
