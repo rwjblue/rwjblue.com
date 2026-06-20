@@ -38,6 +38,14 @@ function escapeXml(value) {
   });
 }
 
+function optionValue(argv, index, flag) {
+  const value = argv[index + 1];
+  if (value === undefined || value === "" || value.startsWith("--")) {
+    throw new Error(`Missing value for ${flag}.`);
+  }
+  return value;
+}
+
 export function parseArgs(argv) {
   const options = {
     inputs: [],
@@ -49,16 +57,20 @@ export function parseArgs(argv) {
     const arg = argv[i];
     switch (arg) {
       case "--input":
-        options.inputs.push(argv[++i]);
+        options.inputs.push(optionValue(argv, i, arg));
+        i += 1;
         break;
       case "--output":
-        options.output = argv[++i];
+        options.output = optionValue(argv, i, arg);
+        i += 1;
         break;
       case "--title":
-        options.title = argv[++i];
+        options.title = optionValue(argv, i, arg);
+        i += 1;
         break;
       case "--subtitle":
-        options.subtitle = argv[++i];
+        options.subtitle = optionValue(argv, i, arg);
+        i += 1;
         break;
       default:
         throw new Error(`Unknown argument: ${arg}`);
@@ -79,16 +91,32 @@ function archiveDatePartsFromMtime(mtime) {
   };
 }
 
+function datePartsFromAdifDate(value) {
+  const date = String(value ?? "").slice(0, 10).replaceAll("-", "");
+  if (!/^\d{8}$/.test(date)) {
+    return null;
+  }
+
+  const year = date.slice(0, 4);
+  const month = date.slice(4, 6);
+  const day = date.slice(6, 8);
+  const monthNumber = Number.parseInt(month, 10);
+  const dayNumber = Number.parseInt(day, 10);
+  if (monthNumber < 1 || monthNumber > 12 || dayNumber < 1 || dayNumber > 31) {
+    return null;
+  }
+
+  return { year, month };
+}
+
 function archiveDatePartsFromAdif(content, mtime) {
   try {
     const qson = parseAdif(content);
     const firstQso = qson.qsos.find((qso) => qso.startAt || qso.endAt);
     const isoDate = firstQso?.startAt ?? firstQso?.endAt;
-    if (isoDate) {
-      const [year, month] = isoDate.slice(0, 10).split("-");
-      if (year && month) {
-        return { year, month };
-      }
+    const dateParts = datePartsFromAdifDate(isoDate);
+    if (dateParts) {
+      return dateParts;
     }
   } catch {
     // Fall back to mtime when the source cannot be parsed.

@@ -6,6 +6,7 @@ import {
   readFileSync,
   rmSync,
   statSync,
+  utimesSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -112,6 +113,24 @@ test("parseArgs accepts multiple ordered input flags", () => {
   );
 });
 
+test("parseArgs rejects input flags without values", () => {
+  assert.throws(
+    () => parseArgs(["--input"]),
+    /Missing value for --input\./,
+  );
+  assert.throws(
+    () => parseArgs(["--input", "--output", "contact-map.json"]),
+    /Missing value for --input\./,
+  );
+});
+
+test("parseArgs rejects output flags without values", () => {
+  assert.throws(
+    () => parseArgs(["--input", "source.adi", "--output"]),
+    /Missing value for --output\./,
+  );
+});
+
 test("archiveSourceAdif copies an input into a date-based archive and reuses identical content", async () => {
   const dir = tempDir();
   try {
@@ -126,6 +145,23 @@ test("archiveSourceAdif copies an input into a date-based archive and reuses ide
     assert.equal(secondArchived, firstArchived);
     assert.equal(readFileSync(firstArchived, "utf8"), readFileSync(input, "utf8"));
     assert.equal(statSync(firstArchived).isFile(), true);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("archiveSourceAdif falls back to mtime for invalid ADIF QSO dates", async () => {
+  const dir = tempDir();
+  try {
+    const input = path.join(dir, "invalid-date.adi");
+    const archiveRoot = path.join(dir, "archive");
+    writeAdif(input, { date: "20261312" });
+    const mtime = new Date("2026-04-15T12:00:00Z");
+    utimesSync(input, mtime, mtime);
+
+    const archived = await archiveSourceAdif(input, { archiveRoot });
+
+    assert.equal(archived, path.join(archiveRoot, "2026", "04", "invalid-date.adi"));
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
