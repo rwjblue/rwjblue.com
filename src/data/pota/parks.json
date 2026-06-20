@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-20T03:03:13.302Z",
+  "generatedAt": "2026-06-20T03:51:36.389Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -2029,9 +2029,38 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6991/",
       "potaUrl": "https://pota.app/#/park/US-6991",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-6991",
+          "park": "Rockville Wildlife Management Area",
+          "date": "2026-06-19",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+              "title": "Rhode Island-to-Florida rove, day one",
+              "date": "2026-06-19",
+              "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [
         {
           "id": "2026-06-19-rhode-island-to-florida-rove-day-one",

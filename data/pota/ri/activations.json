@@ -1195,6 +1195,19 @@
         "phone": 4
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-6991",
+      "park": "Rockville Wildlife Management Area",
+      "date": "2026-06-19",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

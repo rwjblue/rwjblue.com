@@ -12,14 +12,14 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 87,
-      "parks": 54,
-      "qsos": 2103
+      "activations": 88,
+      "parks": 55,
+      "qsos": 2114
     },
     "attempts": {
-      "activations": 97,
-      "parks": 54,
-      "qsos": 2141
+      "activations": 98,
+      "parks": 55,
+      "qsos": 2152
     },
     "hunter": {
       "parks": 461,
@@ -39,6 +39,16 @@
         "data": 0,
         "phone": 7,
         "total": 12
+      },
+      {
+        "date": "2026-06-19",
+        "reference": "US-6991",
+        "park": "Rockville Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
       },
       {
         "date": "2026-06-19",
@@ -264,16 +274,6 @@
         "date": "2026-05-25",
         "reference": "US-7719",
         "park": "Misquamicut State Beach",
-        "location": "US-RI",
-        "cw": 15,
-        "data": 0,
-        "phone": 0,
-        "total": 15
-      },
-      {
-        "date": "2026-05-25",
-        "reference": "US-7865",
-        "park": "East State Beach",
         "location": "US-RI",
         "cw": 15,
         "data": 0,

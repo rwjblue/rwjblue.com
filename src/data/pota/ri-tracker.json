@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-06-20T03:03:12.599Z",
+  "generatedAt": "2026-06-20T03:51:35.605Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 47,
-    "remaining": 14,
+    "completed": 48,
+    "remaining": 13,
     "total": 61,
-    "percentComplete": 77
+    "percentComplete": 79
   },
   "references": [
     {
@@ -220,33 +220,6 @@
       }
     },
     {
-      "reference": "US-6991",
-      "name": "Rockville Wildlife Management Area",
-      "latitude": 41.5054,
-      "longitude": -71.7591,
-      "grid": "FN41cm",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "href": "/radio/pota/US-6991/",
-      "potaUrl": "https://pota.app/#/park/US-6991",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [
-        {
-          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
-          "title": "Rhode Island-to-Florida rove, day one",
-          "date": "2026-06-19",
-          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 54,
-        "activations": 52,
-        "qsos": 2335
-      }
-    },
-    {
       "reference": "US-7508",
       "name": "Pulaski State Park",
       "latitude": 41.9281,
@@ -304,6 +277,57 @@
         "attempts": 71,
         "activations": 70,
         "qsos": 3396
+      }
+    },
+    {
+      "reference": "US-6991",
+      "name": "Rockville Wildlife Management Area",
+      "latitude": 41.5054,
+      "longitude": -71.7591,
+      "grid": "FN41cm",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6991/",
+      "potaUrl": "https://pota.app/#/park/US-6991",
+      "firstActivation": {
+        "reference": "US-6991",
+        "park": "Rockville Wildlife Management Area",
+        "date": "2026-06-19",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 11,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6991",
+        "park": "Rockville Wildlife Management Area",
+        "date": "2026-06-19",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 11,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [
+        {
+          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+          "title": "Rhode Island-to-Florida rove, day one",
+          "date": "2026-06-19",
+          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 54,
+        "activations": 52,
+        "qsos": 2335
       }
     },
     {
