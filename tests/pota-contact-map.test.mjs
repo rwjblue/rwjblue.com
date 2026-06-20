@@ -167,6 +167,23 @@ test("archiveSourceAdif falls back to mtime for invalid ADIF QSO dates", async (
   }
 });
 
+test("archiveSourceAdif falls back to mtime for impossible ADIF calendar dates", async () => {
+  const dir = tempDir();
+  try {
+    const input = path.join(dir, "impossible-date.adi");
+    const archiveRoot = path.join(dir, "archive");
+    writeAdif(input, { date: "20260231" });
+    const mtime = new Date("2026-04-15T12:00:00Z");
+    utimesSync(input, mtime, mtime);
+
+    const archived = await archiveSourceAdif(input, { archiveRoot });
+
+    assert.equal(archived, path.join(archiveRoot, "2026", "04", "impossible-date.adi"));
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("archiveSourceAdif avoids silent overwrite for different content", async () => {
   const dir = tempDir();
   try {

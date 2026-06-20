@@ -100,9 +100,19 @@ function datePartsFromAdifDate(value) {
   const year = date.slice(0, 4);
   const month = date.slice(4, 6);
   const day = date.slice(6, 8);
+  const yearNumber = Number.parseInt(year, 10);
   const monthNumber = Number.parseInt(month, 10);
   const dayNumber = Number.parseInt(day, 10);
   if (monthNumber < 1 || monthNumber > 12 || dayNumber < 1 || dayNumber > 31) {
+    return null;
+  }
+
+  const calendarDate = new Date(Date.UTC(yearNumber, monthNumber - 1, dayNumber));
+  if (
+    calendarDate.getUTCFullYear() !== yearNumber ||
+    calendarDate.getUTCMonth() !== monthNumber - 1 ||
+    calendarDate.getUTCDate() !== dayNumber
+  ) {
     return null;
   }
 
