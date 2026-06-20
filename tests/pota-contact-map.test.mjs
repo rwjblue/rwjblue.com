@@ -45,6 +45,7 @@ const mixedDxccAdif = `
 <ADIF_VER:5>3.1.5
 <EOH>
 <CALL:5>USONE <BAND:3>40m <QSO_DATE:8>20260605 <TIME_ON:6>140000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <GRIDSQUARE:6>EM85jx <DXCC:3>291 <STATE:2>TN <EOR>
+<CALL:5>USTWO <BAND:3>20m <QSO_DATE:8>20260605 <TIME_ON:6>140500 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <DXCC:3>291 <STATE:2>CA <EOR>
 <CALL:5>VEONE <BAND:3>20m <QSO_DATE:8>20260605 <TIME_ON:6>141000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <DXCC:1>1 <EOR>
 <CALL:5>IZONE <BAND:3>15m <QSO_DATE:8>20260605 <TIME_ON:6>142000 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:6>FN41jl <MY_DXCC:3>291 <DXCC:3>248 <EOR>
 `;
@@ -132,14 +133,15 @@ test("buildContactMapData enriches mixed DXCC contact map data", () => {
     ]),
     [
       [291, "United States", "🇺🇸"],
+      [291, "United States", "🇺🇸"],
       [1, "Canada", "🇨🇦"],
       [248, "Italy", "🇮🇹"],
     ],
   );
   assert.deepEqual(map.dxccEntities, [
+    { dxccCode: 291, name: "United States", flag: "🇺🇸", count: 2 },
     { dxccCode: 1, name: "Canada", flag: "🇨🇦", count: 1 },
     { dxccCode: 248, name: "Italy", flag: "🇮🇹", count: 1 },
-    { dxccCode: 291, name: "United States", flag: "🇺🇸", count: 1 },
   ]);
   assert.deepEqual(collectDxccEntities(map.contacts), map.dxccEntities);
 });

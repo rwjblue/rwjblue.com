@@ -253,7 +253,7 @@ export function collectDxccEntities(contacts) {
   }
 
   return [...entitiesByCode.values()].sort((a, b) => {
-    return a.name.localeCompare(b.name) || a.dxccCode - b.dxccCode;
+    return b.count - a.count || a.name.localeCompare(b.name) || a.dxccCode - b.dxccCode;
   });
 }
 
