@@ -45,6 +45,12 @@ interface OverviewStop {
   status?: "set" | "placeholder";
   notes: string;
 }
+interface FieldNote {
+  date: string;
+  title: string;
+  href: string;
+  summary: string;
+}
 
 const mapOverlays =
   typeof (itinerary as { mapOverlays?: unknown }).mapOverlays === "object" &&
@@ -334,6 +340,16 @@ const overviewStops: OverviewStop[] = [
   },
 ];
 
+const fieldNotes: FieldNote[] = [
+  {
+    date: "2026-06-19",
+    title: "Rhode Island-to-Florida rove, day one",
+    href: "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/",
+    summary:
+      "Rockville, Silver Sands, and Tallman Mountain opened the southbound rove with 56 QSOs.",
+  },
+];
+
 function potaUrl(reference: string) {
   return `https://pota.app/#/park/${reference}`;
 }
@@ -487,6 +503,22 @@ function potaUrl(reference: string) {
     )}
     {riActivation?.notes && <p class="rove-jurisdictions">{riActivation.notes}</p>}
     {parkStopPlanning?.meaning && <p class="rove-jurisdictions">{parkStopPlanning.meaning}</p>}
+  </section>
+
+  <section class="section-block wide" aria-labelledby="field-notes-title">
+    <div class="section-heading">
+      <p class="section-label">Field notes</p>
+      <h2 id="field-notes-title">Published trip notes</h2>
+    </div>
+
+    <div class="pota-note-links">
+      {fieldNotes.map((note) => (
+        <a href={note.href}>
+          {formatShortDate(note.date)}: {note.title}
+        </a>
+      ))}
+    </div>
+    {fieldNotes.map((note) => <p class="rove-weekend-note">{note.summary}</p>)}
   </section>
 
   <section class="section-block wide" aria-labelledby="roadmap-title">

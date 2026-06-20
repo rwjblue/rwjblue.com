@@ -48,6 +48,35 @@ test("project listings use effective project update dates", () => {
   assert.match(projects, /formatDate\(updated\)/);
 });
 
+test("rove to FL project links the day-one field note", () => {
+  const projectPage = read("src/pages/projects/2026-06-rove-to-fl.astro");
+
+  assert.match(projectPage, /Field notes/);
+  assert.match(
+    projectPage,
+    /\/notes\/2026-06-19-rhode-island-to-florida-rove-day-one\//,
+  );
+});
+
+test("Rockville WMA activation is associated with the day-one field note", () => {
+  const parksData = JSON.parse(read("src/data/pota/parks.json"));
+  const rockville = parksData.parks.find((park) => park.reference === "US-6991");
+  const activation = rockville?.activations.find(
+    (entry) => entry.date === "2026-06-19",
+  );
+
+  assert.ok(rockville, "expected US-6991 in generated park data");
+  assert.ok(activation, "expected the 2026-06-19 Rockville activation");
+  assert.equal(activation.qsos.total, 11);
+  assert.ok(
+    activation.notes.some(
+      (note) =>
+        note.href ===
+        "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/",
+    ),
+  );
+});
+
 test("new section routes exist", () => {
   assert.ok(existsSync("src/pages/notes/index.astro"));
   assert.ok(existsSync("src/pages/projects/index.astro"));
