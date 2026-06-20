@@ -19,11 +19,20 @@ interface ContactMapContact {
   source: "grid" | "state" | "country";
 }
 
+interface ContactMapDxccEntity {
+  dxccCode: string | number;
+  name: string;
+  flag?: string;
+  count: number;
+}
+
 interface ContactMapData {
   title: string;
   subtitle: string;
   date: string;
   stationCallsign: string;
+  originDxccCode?: string | number;
+  dxccEntities?: ContactMapDxccEntity[];
   contacts: ContactMapContact[];
 }
 
@@ -35,6 +44,34 @@ function collectBandCounts(contacts: ContactMapContact[]) {
   }
 
   return bandCounts;
+}
+
+function dxccCodeForValue(dxcc: string | number | null | undefined) {
+  if (dxcc === undefined || dxcc === null || dxcc === "") {
+    return undefined;
+  }
+
+  const code = Number.parseInt(String(dxcc), 10);
+  return Number.isNaN(code) ? String(dxcc) : code;
+}
+
+function shouldRenderDxccSummary(map: ContactMapData) {
+  if (!map.dxccEntities || map.dxccEntities.length === 0) {
+    return false;
+  }
+
+  if (map.originDxccCode === undefined || map.originDxccCode === null) {
+    return map.dxccEntities.length >= 2;
+  }
+
+  const originDxccCode = dxccCodeForValue(map.originDxccCode);
+  return map.dxccEntities.some((entity) => {
+    return dxccCodeForValue(entity.dxccCode) !== originDxccCode;
+  });
+}
+
+function formatDxccCount(entity: ContactMapDxccEntity) {
+  return entity.count > 1 ? ` (${entity.count})` : "";
 }
 
 const { map } = Astro.props as { map: ContactMapData };
@@ -63,6 +100,25 @@ const bandCounts = collectBandCounts(map.contacts);
       ))
     }
   </div>
+  {
+    shouldRenderDxccSummary(map) && (
+      <div class="contact-map-dxcc" aria-label="DXCC entity summary">
+        <span class="contact-map-dxcc-heading">{map.dxccEntities?.length} DXCC Entities</span>
+        {
+          map.dxccEntities?.map((entity) => (
+            <span class="contact-map-dxcc-entity">
+              {
+                entity.flag && (
+                  <span class="contact-map-dxcc-flag" aria-hidden="true">{entity.flag}</span>
+                )
+              }
+              <span>{entity.name}{formatDxccCount(entity)}</span>
+            </span>
+          ))
+        }
+      </div>
+    )
+  }
 </section>
 
 <script type="application/json" id={dataId} set:html={JSON.stringify(map)} />

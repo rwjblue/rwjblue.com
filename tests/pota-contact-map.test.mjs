@@ -436,6 +436,9 @@ test("contact map UI uses QSO summary and omits state fallback legend copy", () 
   assert.match(componentSource, /type="application\/json" id=\{bandColorsId\}/);
   assert.match(componentSource, /JSON\.parse\(bandColorsElement\.textContent \?\? "\{\}"\)/);
   assert.match(componentSource, /collectBandCounts\(map\.contacts\)/);
+  assert.match(componentSource, /shouldRenderDxccSummary\(map\)/);
+  assert.match(componentSource, /contact-map-dxcc/);
+  assert.match(componentSource, /DXCC Entities/);
   assert.doesNotMatch(componentSource, /State centroid fallback/);
   assert.doesNotMatch(componentSource, /plotted ·/);
 });

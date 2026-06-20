@@ -746,6 +746,33 @@ p {
   background: var(--ink);
 }
 
+.contact-map-dxcc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.contact-map-dxcc-heading {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.contact-map-dxcc-entity {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  font-weight: 750;
+}
+
+.contact-map-dxcc-flag {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .boundary-map-section {
   margin: 28px 0 34px;
 }
