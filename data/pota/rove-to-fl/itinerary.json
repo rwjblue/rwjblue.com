@@ -129,12 +129,12 @@
             "US-MD",
             "US-DC"
           ],
-          "notes": "Official NPS Fort McHenry hours rule out a 20:00 activation. Greenbelt/BW Parkway is geometry-confirmed for US-0668 + US-7973; US-0654 and US-4581 remain unconfirmed at Greenbelt."
+          "notes": "Official NPS Fort McHenry hours rule out a 20:00 activation. Greenbelt/BW Parkway is geometry-confirmed for US-0668 + US-7973; US-0654 and US-4581 remain local-interpretation stretch counts at Greenbelt."
         },
         {
           "date": "2026-06-21",
           "area": "Washington, DC / NoVA to Fredericksburg",
-          "focus": "Large DC rove day for Cheetah/Ostrich planning, starting from the Greenbelt opener plus LBJ jackpot, then using Mason Neck or Meadowood before the booked Fredericksburg hotel.",
+          "focus": "Large DC rove day for Cheetah/Ostrich planning, starting from the Greenbelt opener plus LBJ jackpot, then using Meadowood as the practical VA finish or Mason Neck as the stretch before the booked Fredericksburg hotel.",
           "jurisdictions": [
             "US-DC",
             "US-VA"
@@ -335,7 +335,7 @@
   "planningConclusions": [
     "Friday now banks RI, CT, and NY before the Edison overnight.",
     "Saturday still covers NJ, PA, and DE, but Fort McHenry is no longer viable after 18:00; use the Greenbelt/Baltimore-Washington Parkway overlap as the Sunday-UTC Maryland 2-fer opener.",
-    "Sunday remains the large DC / NoVA rove day, now starting from a Greenbelt MD opener and LBJ jackpot, with Mason Neck as the preferred Virginia finish and Meadowood as the simpler backup.",
+    "Sunday remains the large DC / NoVA rove day, now starting from a Greenbelt MD opener and LBJ jackpot, with Meadowood as the practical Virginia finish and Mason Neck as the Ostrich stretch.",
     "Monday uses Medoc Mountain for North Carolina before the fixed Florence overnight; Tuesday can use Woods Bay as an earlier South Carolina backup/add-on before Savannah NWR and Jekyll Island.",
     "Jekyll Island remains the Georgia park/hotel anchor, and Florida has local Thursday/Friday targets selected."
   ],
@@ -375,7 +375,7 @@
         "chargingStopsIncluded": "Friday can use CT / lower-Hudson charging before work and Edison / Woodbridge charging near the overnight. Saturday likely needs one or two additional 30-minute Supercharger stops depending on starting charge.",
         "bufferMinutesBaseline": 60,
         "utcDayRolloverLocal": "20:00 EDT",
-        "accessNotes": "Tallman is dawn-to-dusk, John Heinz is sunrise-to-sunset, Fort McHenry summer weekend gates close at 18:00, and Greenbelt should use a legal public point in the confirmed US-0668/US-7973 overlap before access closes."
+        "accessNotes": "Cheesequake is a flexible car-adjacent stop but weekend parking can be tight. John Heinz should use the Lindbergh Boulevard entrance and main parking/pavilion area; local feedback says an hour is realistic if spotted. Fox Point should use the northeast corner of the first/main lot for the Northern Delaware Greenway 2-fer and avoid stakes outside tenting areas. Fort McHenry summer weekend gates close at 18:00. Greenbelt should use a legal public point in the confirmed US-0668/US-7973 overlap after the 20:00 EDT UTC rollover; N2NWK locally treats the area as a 4-fer, but US-0654 and US-4581 remain optional/local-interpretation counts until an exact coordinate verifies."
       },
       "timingModels": [
         {
@@ -422,11 +422,11 @@
             "US-1611 Cheesequake State Park",
             "US-0512 John Heinz National Wildlife Refuge",
             "US-1738 Fox Point State Park",
-            "US-9878 Northern Delaware Greenway National Recreation Trail if the Fox Point position verifies",
+            "US-9878 Northern Delaware Greenway National Recreation Trail from the northeast corner of the first/main Fox Point lot per local advice",
             "US-0668 Greenbelt Park",
             "US-7973 Baltimore-Washington Parkway from a legal Greenbelt overlap point"
           ],
-          "notes": "This is the selected Saturday route after the Fort McHenry hours check. Greenbelt should be held until the 20:00 EDT UTC rollover and counted as US-0668 + US-7973 only."
+          "notes": "This is the selected Saturday route after the Fort McHenry hours check. Greenbelt should be held until the 20:00 EDT UTC rollover and counted conservatively as US-0668 + US-7973; N2NWK's local 4-fer practice can be used only if the exact operating position and access feel defensible on site."
         }
       ],
       "fridayEveningOptions": [
@@ -454,25 +454,25 @@
           "reference": "US-1611",
           "name": "Cheesequake State Park",
           "state": "US-NJ",
-          "role": "Saturday morning NJ activation from Edison"
+          "role": "Saturday morning NJ activation from Edison; use any available parking lot, keep it car-adjacent, and stay clear of playground, lake, and BBQ areas if crowded"
         },
         {
           "reference": "US-0512",
           "name": "John Heinz National Wildlife Refuge",
           "state": "US-PA",
-          "role": "selected Saturday PA activation"
+          "role": "selected Saturday PA activation; use the Lindbergh Boulevard entrance, main parking/pavilion area, and nearby open grass/restrooms"
         },
         {
           "reference": "US-1738",
           "name": "Fox Point State Park",
           "state": "US-DE",
-          "role": "Saturday DE activation and likely Northern Delaware Greenway 2-fer"
+          "role": "Saturday DE activation and local-advice Northern Delaware Greenway 2-fer from the northeast corner of the first/main lot"
         },
         {
           "reference": "US-0668",
           "name": "Greenbelt Park",
           "state": "US-MD",
-          "role": "Saturday 20:00 EDT MD activation for Sunday UTC credit, paired with US-7973 from a legal Greenbelt/BW Parkway overlap point"
+          "role": "Saturday 20:00 EDT MD activation for Sunday UTC credit, paired with US-7973 from a legal Greenbelt/BW Parkway overlap point; US-0654/US-4581 remain local-interpretation stretch counts"
         },
         {
           "reference": "US-7973",
@@ -488,8 +488,8 @@
           ],
           "name": "Northern Delaware Greenway National Recreation Trail",
           "state": "US-DE",
-          "role": "Likely 2-fer with Fox Point if the exact operating position is valid",
-          "risk": "Verify practical position before counting it as guaranteed."
+          "role": "Local activator says the northeast corner of the first/main Fox Point lot is less than 100 feet from the trail",
+          "risk": "Treat as the planned Delaware 2-fer; avoid stakes outside tenting areas and expect an out-of-state park fee."
         },
         {
           "references": [
@@ -498,8 +498,8 @@
           ],
           "name": "Unconfirmed Greenbelt-area overlaps",
           "state": "US-MD",
-          "role": "Do not count unless an exact legal coordinate is confirmed",
-          "risk": "Strict four-way GeoJSON overlap is empty; US-0654 and US-4581 need local/exact-coordinate confirmation."
+          "role": "N2NWK locally treats Greenbelt/BW Parkway as a 4-fer, including these references",
+          "risk": "Strict four-way GeoJSON overlap is empty; keep the published count conservative at US-0668 + US-7973 unless the on-site coordinate and access are defensible."
         },
         {
           "references": [
@@ -513,7 +513,6 @@
         }
       ],
       "openQuestions": [
-        "Confirm exact Fox Point operating position for the Northern Delaware Greenway overlap.",
         "Confirm legal public access/parking for the Greenbelt/BW Parkway overlap; count only US-0668 + US-7973 unless exact confirmation supports US-0654 or US-4581.",
         "Identify Saturday Tesla Supercharger pairings between Edison, Philadelphia / Delaware, and Baltimore / DC."
       ]
@@ -521,7 +520,7 @@
     "sundayDcRove": {
       "status": "working Cheetah/Ostrich route",
       "targetDate": "2026-06-21",
-      "strategy": "Sunday June 21 uses the Saturday 20:00 EDT Greenbelt 2-fer as the first Sunday-UTC Maryland stop, then follows the LBJ jackpot and CWops/W8WZ DC Cheetah pattern: FDR, MLK, Korean, Lincoln, Vietnam, Constitution Gardens, WWII, Washington Monument, with Mason Neck as the clean Ostrich stretch and Meadowood as the simpler VA backup.",
+      "strategy": "Sunday June 21 uses the Saturday 20:00 EDT Greenbelt 2-fer as the first Sunday-UTC Maryland stop, then follows the LBJ jackpot and CWops/W8WZ DC Cheetah pattern: FDR, MLK, Korean, Lincoln, Vietnam, Constitution Gardens, WWII, Washington Monument. Meadowood's Mustang Equestrian Trailhead is the practical Virginia finish; Mason Neck remains the Ostrich stretch if time, access, and restrictions all line up.",
       "timingAssumptions": {
         "source": "CWops Solid Copy No. 193 W8WZ article, POTA API reference metadata, imported top-activator n-fer evidence, OSM/Nominatim GeoJSON checks, and Google Maps route checks updated on 2026-06-19.",
         "departureArea": "Foggy Bottom hotel",
@@ -534,10 +533,10 @@
             "US-0668",
             "US-7973"
           ],
-          "role": "Bank Maryland on the Sunday UTC day before driving to Foggy Bottom; count US-0668 + US-7973 only. US-0654 and US-4581 remain unconfirmed at Greenbelt."
+          "role": "Bank Maryland on the Sunday UTC day before driving to Foggy Bottom; count US-0668 + US-7973 conservatively. US-0654 and US-4581 remain local-interpretation stretch counts at Greenbelt."
         },
         {
-          "stop": "LBJ Memorial Grove exact 7-fer",
+          "stop": "Lady Bird Johnson Park / Columbia Island Marina right-side parking-area 7-fer",
           "references": [
             "US-0784",
             "US-9901",
@@ -547,7 +546,7 @@
             "US-9898",
             "US-4564"
           ],
-          "role": "Primary Sunday morning jackpot; adds seven unique references after the Greenbelt 2-fer."
+          "role": "Primary Sunday morning jackpot; local W3LAM feedback says the right side of the parking area is inside all seven references and is vehicle/base-station friendly. Signs may say Lady Bird Johnson Park and Columbia Island Marina."
         },
         {
           "stop": "FDR Memorial",
@@ -614,12 +613,19 @@
           "role": "Needed before Vietnam in the Greenbelt 2-fer Cheetah route."
         },
         {
+          "stop": "Meadowood BLM SRMA / Mustang Equestrian Trailhead",
+          "references": [
+            "US-9937"
+          ],
+          "role": "Practical Virginia finish; local advice says the Mustang Equestrian Trailhead is the best reliable radio spot with free parking."
+        },
+        {
           "stop": "Mason Neck State Park / Mason Neck NWR",
           "references": [
             "US-1308",
             "US-0563"
           ],
-          "role": "Southbound 2-fer that reaches Ostrich exactly if it verifies before dusk."
+          "role": "Ostrich stretch only. Mason Neck/Hartwell are adjacent but separate parks, Hartwell has stricter setup limits, and Mason Neck adds time plus an entry fee."
         }
       ],
       "timingModels": [
@@ -748,10 +754,10 @@
         }
       ],
       "openQuestions": [
-        "Confirm the exact LBJ 7-fer tree/overlap point against imagery or with a local activator before relying on all seven references.",
+        "Confirm the Lady Bird Johnson Park / Columbia Island Marina right-side parking-area operating position on site; local W3LAM feedback supports all seven references there.",
         "Confirm legal public access/parking for the Greenbelt/BW Parkway overlap; count only US-0668 + US-7973 unless exact confirmation supports US-0654 or US-4581.",
-        "Confirm Mason Neck NWR operating restrictions: POTA cache says free-standing antennas only, no vegetation attachment, no off-trail operating, and no tables in parking areas.",
-        "Check closing/dusk times for Mason Neck if using it as the Ostrich add-on.",
+        "Use Meadowood's Mustang Equestrian Trailhead as the default Virginia finish unless the day is running well enough to justify Mason Neck.",
+        "Confirm Mason Neck NWR operating restrictions and closing/dusk times before relying on it as the Ostrich add-on.",
         "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure."
       ]
     },
@@ -1061,7 +1067,7 @@
     "sunday": [
       {
         "status": "top lead to verify",
-        "summary": "The February 2026 CWops Solid Copy article describes an exact LBJ Memorial Grove position in DC that counts as a 7-fer.",
+        "summary": "The February 2026 CWops Solid Copy article and local W3LAM feedback support a Lady Bird Johnson Park / Columbia Island Marina right-side parking-area 7-fer.",
         "references": [
           "US-0784",
           "US-9901",
@@ -1072,7 +1078,7 @@
           "US-0670"
         ],
         "exampleActivator": "W8WZ",
-        "routingNote": "Foggy Bottom to LBJ Grove should be a short local hop; the nearby parking-lot/picnic-table option is described as a 4-fer if the exact 7-fer walk-out spot is not practical."
+        "routingNote": "Foggy Bottom to Lady Bird Johnson Park / Columbia Island Marina should be a short local hop; use the right side of the parking area and expect DCA aircraft noise."
       },
       {
         "status": "strong lead",
@@ -1221,7 +1227,7 @@
         "overnightType": "hotel",
         "startArea": "Foggy Bottom hotel",
         "endArea": "Fredericksburg hotel",
-        "focus": "Large DC / NoVA rove day, with Mason Neck preferred and Meadowood available as a simpler VA backup.",
+        "focus": "Large DC / NoVA rove day, with Meadowood's Mustang Equestrian Trailhead as the practical Virginia finish and Mason Neck as the Ostrich stretch.",
         "jurisdictions": [
           "US-DC",
           "US-VA"
@@ -1232,7 +1238,7 @@
         "minimumEntities": 15,
         "parkStopHours": 6,
         "roughTotalHours": 7.5,
-        "notes": "Mason Neck keeps the 2-fer/Ostrich path; Meadowood saves about 18 minutes of driving but only adds one VA entity."
+        "notes": "Meadowood is the reliable local-advice finish with free parking; Mason Neck keeps the 2-fer/Ostrich path only if the day is running well and restrictions/hours check out."
       },
       {
         "date": "2026-06-22",
@@ -1963,8 +1969,8 @@
       },
       {
         "reference": "US-0784",
-        "name": "LBJ Memorial Grove exact 7-fer position",
-        "role": "LBJ 7-fer physical anchor; exact tree/overlap point still needs field verification",
+        "name": "Lady Bird Johnson Park / Columbia Island Marina right-side 7-fer",
+        "role": "LBJ 7-fer physical anchor; local W3LAM feedback says the right side of the parking area is inside all seven references",
         "latitude": 38.8789,
         "longitude": -77.0492,
         "priority": "target",

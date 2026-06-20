@@ -229,49 +229,49 @@
       "timelineNote": "Walk back to the hotel to pick up the car. Rideshare is about 9 minutes if schedule or weather makes the walk unattractive."
     },
     {
-      "id": "mason-neck",
+      "id": "meadowood",
       "directionsOriginId": "foggy-bottom",
-      "directionsDestinationId": "mason-neck",
-      "localStart": "Sun 17:15",
-      "localEnd": "Sun 18:00",
-      "utcStart": "Sun 21:15",
-      "utcEnd": "Sun 22:00",
+      "directionsDestinationId": "meadowood",
+      "localStart": "Sun 17:10",
+      "localEnd": "Sun 17:55",
+      "utcStart": "Sun 21:10",
+      "utcEnd": "Sun 21:55",
       "movementMode": "drive",
       "movementFromPrior": "Foggy Bottom hotel car pickup",
-      "movementMinutes": 40,
+      "movementMinutes": 31,
       "activationMinutes": 45,
-      "cumulativeEntities": 20,
-      "timelineNote": "Ostrich finish if the Mason Neck 2-fer verifies and park/refuge access and antenna restrictions check out. This assumes the car stays at the hotel during the DC rove."
+      "cumulativeEntities": 19,
+      "timelineNote": "Practical Virginia finish. Local advice says Meadowood's Mustang Equestrian Trailhead is the best reliable radio spot, with free parking and a straightforward car-adjacent setup."
     },
     {
       "id": "fredericksburg-arrival",
       "label": "Fredericksburg hotel",
-      "directionsOriginId": "mason-neck",
+      "directionsOriginId": "meadowood",
       "directionsDestinationId": "fredericksburg",
-      "localStart": "Sun 19:00",
+      "localStart": "Sun 18:40",
       "localEnd": "",
-      "utcStart": "Sun 23:00",
+      "utcStart": "Sun 22:40",
       "utcEnd": "",
       "movementMode": "drive",
-      "movementFromPrior": "Mason Neck",
-      "movementMinutes": 59,
+      "movementFromPrior": "Meadowood BLM SRMA",
+      "movementMinutes": 45,
       "activationMinutes": 0,
-      "cumulativeEntities": 20,
+      "cumulativeEntities": 19,
       "timelineNote": "Booked Sunday night anchor after the rove."
     }
   ],
   "optionalTimelineAddOns": [
     {
-      "id": "meadowood",
-      "directionsOriginId": "washington-monument",
-      "directionsDestinationId": "meadowood",
-      "placement": "Use instead of Mason Neck if the day is running late or refuge/park restrictions make the 2-fer unattractive.",
+      "id": "mason-neck",
+      "directionsOriginId": "foggy-bottom",
+      "directionsDestinationId": "mason-neck",
+      "placement": "Use instead of Meadowood only if the day is running well enough for the extra complexity.",
       "movementMode": "drive",
-      "movementMinutes": 31,
+      "movementMinutes": 40,
       "activationMinutes": 45,
-      "entityAdds": 1,
-      "timelineImpact": "Adds about 1h16 before the Fredericksburg drive; about 18 minutes less driving than the Mason Neck option but one fewer entity.",
-      "timelineNote": "Meadowood is the simpler VA backup, not an Ostrich-equivalent replacement for Mason Neck."
+      "entityAdds": 2,
+      "timelineImpact": "Replaces Meadowood with about 18 more driving minutes and one more entity, reaching 20 if the 2-fer verifies.",
+      "timelineNote": "Mason Neck/Hartwell are adjacent but separate parks, Hartwell has stricter setup limits, and Mason Neck State Park adds an entry fee."
     },
     {
       "id": "dyke-marsh",
@@ -293,8 +293,8 @@
       "latitude": 38.9927921,
       "longitude": -76.8880143,
       "type": "activation",
-      "confidence": "confirmed two-reference GeoJSON overlap; exact legal parking/operating access still needs field confirmation",
-      "notes": "Target after 20:00 EDT for Sunday UTC credit. Count US-0668 + US-7973 only; US-0654 and US-4581 need exact local confirmation."
+      "confidence": "confirmed two-reference GeoJSON overlap; local N2NWK feedback treats the area as a 4-fer but exact legal access still needs field confirmation",
+      "notes": "Target after 20:00 EDT for Sunday UTC credit. Count US-0668 + US-7973 conservatively; US-0654 and US-4581 need an exact defensible operating position."
     },
     {
       "id": "fort-mchenry-saturday",
@@ -316,12 +316,12 @@
     },
     {
       "id": "lbj-7fer",
-      "label": "LBJ exact 7-fer operating area",
+      "label": "Lady Bird Johnson / Columbia Island right-side lot",
       "latitude": 38.8789,
       "longitude": -77.0492,
       "type": "activation",
-      "confidence": "approximate article-derived point",
-      "notes": "W8WZ describes walking from the marina to the LBJ stone monument, continuing toward the Washington Monument, crossing the parkway, and setting up under a tree between the parkway and Potomac."
+      "confidence": "high after W3LAM local feedback",
+      "notes": "Signs may say Lady Bird Johnson Park and Columbia Island Marina. Local feedback says the right side of the parking area is inside all seven references and can support larger portable setups; bring headphones for aircraft noise."
     },
     {
       "id": "fdr",
@@ -401,16 +401,17 @@
       "latitude": 38.6465022,
       "longitude": -77.1861893,
       "type": "activation",
-      "confidence": "top-activator n-fer evidence; restrictions need confirmation",
-      "notes": "Use only a compliant public operating position; verify refuge and state park antenna rules before relying on the 2-fer."
+      "confidence": "stretch only; local advice says Mason Neck/Hartwell require separate positions and Hartwell has stricter setup limits",
+      "notes": "Use only a compliant public operating position; verify refuge and state park antenna rules before relying on the 2-fer. Mason Neck State Park adds an entry fee and extra driving."
     },
     {
       "id": "meadowood",
       "label": "Meadowood BLM SRMA",
       "latitude": 38.6724,
       "longitude": -77.1978,
-      "type": "optional",
-      "notes": "Single-reference Virginia backup if Mason Neck is skipped."
+      "type": "activation",
+      "confidence": "local-advice practical Virginia finish",
+      "notes": "Use the Mustang Equestrian Trailhead for the best reliable radio spot with free parking."
     },
     {
       "id": "dyke-marsh",
@@ -671,9 +672,9 @@
         "US-0668",
         "US-7973"
       ],
-      "evidence": "N2NWK email suggested a Greenbelt four-fer (US-0668 + US-7973 + US-0654 + US-4581). Fresh GeoJSON confirms a practical Greenbelt/Baltimore-Washington Parkway overlap for US-0668 + US-7973; strict four-way overlap is empty, and the best US-0668/US-0654/US-7973 component misses the official Star-Spangled Banner NHT 100-foot trail buffer by about 35 feet.",
-      "access": "Use only a legal public operating point in the confirmed overlap and only while park access is lawful before dusk. Sweetgum is not the decision point for the overlap; campground access is not needed unless the only legal access after dusk is through a reserved campsite.",
-      "confidence": "high-confidence two-reference Maryland opener; US-0654 and US-4581 remain unconfirmed at Greenbelt",
+      "evidence": "N2NWK email suggested a Greenbelt four-fer (US-0668 + US-7973 + US-0654 + US-4581) and described after-hours campground/parkway-style access patterns. Fresh GeoJSON confirms a practical Greenbelt/Baltimore-Washington Parkway overlap for US-0668 + US-7973; strict four-way overlap is empty, and the best US-0668/US-0654/US-7973 component misses the official Star-Spangled Banner NHT 100-foot trail buffer by about 35 feet.",
+      "access": "Use only a legal public operating point in the confirmed overlap after the 20:00 EDT UTC rollover. Sweetgum is not the decision point for the overlap; campground or parkway-style access needs on-site judgment.",
+      "confidence": "high-confidence two-reference Maryland opener; US-0654 and US-4581 are local-interpretation stretch counts",
       "possibleButUnconfirmedReferences": [
         "US-0654",
         "US-4581"
@@ -701,8 +702,8 @@
     {
       "id": "lbj-7fer",
       "timing": "Sunday morning; primary jackpot after the Greenbelt MD opener",
-      "name": "LBJ Memorial Grove exact 7-fer position",
-      "parking": "Columbia Island Marina parking lot",
+      "name": "Lady Bird Johnson Park / Columbia Island Marina right-side 7-fer",
+      "parking": "Right side of the Columbia Island Marina / Lady Bird Johnson Park parking area",
       "parkingLatitude": 38.875198,
       "parkingLongitude": -77.048943,
       "latitude": 38.8789,
@@ -729,7 +730,7 @@
         "US-9898",
         "US-4564"
       ],
-      "evidence": "CWops/W8WZ article gives reference list; W3LAM email corroborates the right-side parking-area/LBJ operation and says vehicle, wires, stakes, tripods, and larger portable setups have worked there.",
+      "evidence": "CWops/W8WZ article gives reference list; W3LAM email corroborates the right-side parking-area/LBJ operation and says vehicle, wires, stakes, tripods, and larger portable setups have worked there. W3LAM also notes entrance signs may say Lady Bird Johnson Park and Columbia Island Marina.",
       "confidence": "high after local activator feedback; bring headphones for DCA/Pentagon-area noise",
       "uniqueAddsAfterGreenbelt": [
         "US-0784",
@@ -876,7 +877,7 @@
         "US-1308",
         "US-0563"
       ],
-      "confidence": "imported n-fer evidence; verify refuge restrictions and park hours"
+      "confidence": "Ostrich stretch only; local advice says Mason Neck/Hartwell require separate positions and Hartwell has stricter setup limits"
     },
     {
       "id": "meadowood",
@@ -889,7 +890,7 @@
       "uniqueAddsAfterPrior": [
         "US-9937"
       ],
-      "confidence": "simple single-reference Virginia backup; easier route than Mason Neck but not a 2-fer"
+      "confidence": "practical default Virginia finish; use Mustang Equestrian Trailhead per local advice"
     },
     {
       "id": "dyke-marsh",
@@ -1068,7 +1069,7 @@
     },
     {
       "from": "Foggy Bottom hotel",
-      "to": "LBJ exact 7-fer operating area",
+      "to": "Lady Bird Johnson / Columbia Island operating area",
       "mode": "ride",
       "distance": "6.2 km",
       "minutes": 12,
@@ -1076,14 +1077,14 @@
     },
     {
       "from": "Theodore Roosevelt Island",
-      "to": "LBJ exact 7-fer operating area",
+      "to": "Lady Bird Johnson / Columbia Island operating area",
       "mode": "ride",
       "distance": "8.3 km",
       "minutes": 9,
       "notes": "Use only if Theodore Roosevelt Island is included."
     },
     {
-      "from": "LBJ exact 7-fer operating area",
+      "from": "Lady Bird Johnson / Columbia Island operating area",
       "to": "FDR Memorial",
       "mode": "ride",
       "distance": "3.1 km",
@@ -1164,16 +1165,16 @@
     }
   ],
   "openVerification": [
-    "Confirm the exact LBJ 7-fer/right-side parking-area operating position in the field, but local W3LAM feedback significantly raises confidence.",
+    "Confirm the Lady Bird Johnson Park / Columbia Island Marina right-side parking-area position in the field, but local W3LAM feedback supports all seven references there.",
     "Do not rely on Fort McHenry for Sunday UTC: official NPS summer weekend gate closure is 18:00. Treat Fort only as optional Saturday-local if arriving before last entry.",
-    "Confirm Mason Neck NWR operating restrictions: POTA cache says free-standing antennas only, no vegetation attachment, no off-trail operating, and no tables in parking areas.",
-    "Check closing/dusk times for Mason Neck if using it as the Ostrich add-on.",
+    "Use Meadowood's Mustang Equestrian Trailhead as the default Virginia finish unless the day is running well enough to justify Mason Neck.",
+    "Confirm Mason Neck NWR operating restrictions and closing/dusk times before relying on it as the Ostrich add-on.",
     "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure.",
     "Pennsylvania Avenue NHS and C&O Canal did not return clean OSM GeoJSON in the first fetch pass; verify boundaries before relying on those as easy add-ons.",
     "Jefferson and Ford resolved as point GeoJSON rather than full polygons; use POTA/NPS context and on-site signage before treating the point as the whole activatable area.",
-    "Keep Meadowood BLM SRMA as the simple VA backup if Mason Neck access, hours, or pace do not work.",
-    "Confirm legal public access/parking for the Greenbelt/Baltimore-Washington Parkway overlap at or near 38.9927921,-76.8880143; count only US-0668 + US-7973 unless exact local confirmation supports more.",
-    "Ask N2NWK or another local activator for exact Greenbelt coordinates before relying on US-0654 or US-4581 there; strict four-way GeoJSON overlap is empty.",
+    "Keep Mason Neck as a stretch: it can reach Ostrich, but Hartwell has stricter setup limits and Mason Neck State Park adds time plus an entry fee.",
+    "Confirm legal public access/parking for the Greenbelt/Baltimore-Washington Parkway overlap at or near 38.9927921,-76.8880143; count US-0668 + US-7973 conservatively unless exact local confirmation supports more.",
+    "N2NWK locally treats Greenbelt/BW Parkway as a 4-fer; rely on US-0654 or US-4581 only if the on-site coordinate and access are defensible.",
     "Fort McHenry decision rule: only go if Fox Point is finished early enough to reach Fort by about 17:00-17:15; otherwise skip it and protect the 20:00 Greenbelt opener."
   ],
   "expandedMallInventory": {
@@ -1227,13 +1228,13 @@
         "reference": "US-0784",
         "name": "Lyndon Baines Johnson Memorial Grove on the Potomac",
         "group": "LBJ 7-fer",
-        "routeUse": "Anchor stop at the exact LBJ operating area; Columbia Island Marina is access context only."
+        "routeUse": "Anchor stop at the Lady Bird Johnson Park / Columbia Island Marina right-side parking area."
       },
       {
         "reference": "US-9901",
         "name": "Civil War Defenses of Washington National Historic Trail",
         "group": "LBJ 7-fer",
-        "routeUse": "Trail overlap at exact LBJ position; boundary still needs field confirmation."
+        "routeUse": "Trail overlap at the right-side parking-area LBJ position; confirm in the field."
       },
       {
         "reference": "US-0670",
@@ -1245,13 +1246,13 @@
         "reference": "US-9898",
         "name": "Mount Vernon National Historic Trail",
         "group": "LBJ 7-fer",
-        "routeUse": "Trail overlap at exact LBJ position."
+        "routeUse": "Trail overlap at the right-side parking-area LBJ position."
       },
       {
         "reference": "US-4564",
         "name": "Potomac Heritage Trail National Scenic Trail",
         "group": "LBJ 7-fer",
-        "routeUse": "Trail overlap at exact LBJ position."
+        "routeUse": "Trail overlap at the right-side parking-area LBJ position."
       },
       {
         "reference": "US-0655",
@@ -1496,12 +1497,12 @@
   },
   "routeOptimization": {
     "updated": "2026-06-19",
-    "summary": "Revised after Fort McHenry access and Greenbelt GeoJSON checks: Greenbelt/BW Parkway is the primary Maryland opener as a confirmed 2-fer, LBJ is the high-confidence Sunday jackpot, Cheetah is reached at Vietnam, and Mason Neck reaches Ostrich exactly if it verifies.",
+    "summary": "Revised after Fort McHenry access, Greenbelt GeoJSON checks, and local activator feedback: Greenbelt/BW Parkway is the primary Maryland opener as a conservative 2-fer, LBJ is the high-confidence Sunday jackpot, Cheetah is reached at Vietnam, Meadowood is the practical Virginia finish, and Mason Neck remains the Ostrich stretch.",
     "constraints": [
       "The Tesla stays parked at the Foggy Bottom hotel during the DC rove.",
       "Prefer walking when the time penalty is modest and it avoids another rideshare.",
       "Use rideshare for the hotel -> LBJ and LBJ -> Mall jumps; those crossings are not worth walking during a count-focused rove.",
-      "Return to the hotel before Mason Neck, because the southbound car move starts there."
+      "Return to the hotel before the Virginia finish, because the southbound car move starts there."
     ],
     "recommendedCoreOrder": [
       {
@@ -1517,7 +1518,7 @@
         "value": "+1 entity, but costs an extra early stop/ride"
       },
       {
-        "label": "LBJ exact 7-fer operating area",
+        "label": "Lady Bird Johnson / Columbia Island operating area",
         "mode": "ride",
         "movement": "about 12 min from hotel direct",
         "value": "+7 unique after Greenbelt, 7 refs total at the spot"
@@ -1639,11 +1640,11 @@
       },
       {
         "label": "Mason Neck",
-        "finding": "Preferred clean southbound 2-fer finish. From Washington Monument, current route check is about 41 minutes to Mason Neck and 53 minutes onward to Fredericksburg."
+        "finding": "Clean 2-fer stretch if the day is running well. Local advice says Mason Neck/Hartwell require separate positions, Hartwell has stricter setup limits, and Mason Neck State Park adds time plus an entry fee."
       },
       {
         "label": "Meadowood",
-        "finding": "Use as the simpler Virginia backup if Mason Neck is too late or too constrained. Washington Monument -> Meadowood -> Fredericksburg is about 1h16 driving, roughly 18 minutes less than the Mason Neck line, but it only adds US-9937."
+        "finding": "Use as the practical Virginia finish. Local advice recommends the Mustang Equestrian Trailhead as the best reliable radio spot with free parking; Washington Monument -> Meadowood -> Fredericksburg is about 1h16 driving."
       },
       {
         "label": "Fort McHenry Saturday branch",
@@ -1652,7 +1653,7 @@
     ],
     "mapsEvidence": [
       {
-        "scenario": "Foggy Bottom hotel to LBJ exact operating area",
+        "scenario": "Foggy Bottom hotel to Lady Bird Johnson / Columbia Island operating area",
         "mode": "rideshare",
         "distance": "6.2 km",
         "minutes": 12

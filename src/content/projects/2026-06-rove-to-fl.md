@@ -1,7 +1,7 @@
 ---
 title: 2026 Southeast POTA Road Trip
 status: active
-updated: 2026-06-10
+updated: 2026-06-20
 summary: "A week-long POTA activation drive from Rhode Island down the I-95 corridor, arriving at Singer Island, FL on June 26 for Field Day 2026."
 tags:
   - radio
@@ -53,10 +53,9 @@ Current working shape:
   weekend gate closure, and only if Fox Point runs early. Stay in Foggy Bottom.
 - Sunday: make DC / NoVA the large rove day, using the Saturday Greenbelt
   activation as the first Sunday-UTC count. Follow the CWops/W8WZ Cheetah
-  pattern from LBJ through the National Mall, then decide whether Lincoln and
-  Mason Neck make the Ostrich stretch practical before the Fredericksburg hotel.
-  Use `US-9937` Meadowood BLM SRMA as the simpler Virginia backup if Mason Neck
-  is too late or too constrained.
+  pattern from LBJ through the National Mall, then use `US-9937` Meadowood BLM
+  SRMA as the practical Virginia finish. Mason Neck remains the Ostrich stretch
+  if timing, access, and restrictions all line up.
 - Monday: activate `US-2744` Medoc Mountain State Park for North Carolina, then
   continue to the booked Florence, SC stop.
 - Tuesday: use `US-2915` Woods Bay State Park as an earlier South Carolina
@@ -91,8 +90,17 @@ The Saturday timing target is Maryland at about 20:00 EDT. Official NPS hours
 rule out Fort McHenry after 18:00, so the revised target is a legal public point
 in the Greenbelt Park / Baltimore-Washington Parkway overlap. GeoJSON checks
 support counting `US-0668` and `US-7973` from that overlap. `US-0654` and
-`US-4581` remain unconfirmed at Greenbelt; do not count them without an exact
-local coordinate that verifies under POTA rules.
+`US-4581` remain conservative/stretch counts at Greenbelt; N2NWK locally treats
+the area as a 4-fer, but do not count them unless the on-site coordinate and
+access are defensible under POTA rules.
+
+Local activator notes tightened the Saturday stops. Treat Cheesequake as a
+flexible car-adjacent parking-lot activation and avoid playground, lake, and
+BBQ areas if crowded. At John Heinz, use the Lindbergh Boulevard entrance and
+main parking/pavilion area; the stop has nearby restrooms and an hour is
+realistic if spotted. At Fox Point, use the northeast corner of the first/main
+lot for the `US-1738` + `US-9878` 2-fer, avoid stakes outside tenting areas,
+and expect the out-of-state park fee.
 
 Known anchor drive estimates:
 
@@ -126,13 +134,12 @@ Current Sunday DC rove model:
   `US-0654` and `US-4581` as unconfirmed unless N2NWK or another local
   activator provides an exact legal coordinate. Fort McHenry has strong n-fer
   evidence but is pre-18:00 optional only.
-- Sunday morning: start with the LBJ Memorial Grove exact-position 7-fer from
-  the February 2026 CWops _Solid Copy_ article: `US-0784`, `US-9901`,
-  `US-4581`, `US-4567`, `US-0670`, `US-9898`, and `US-4564`. The article says
-  the marina parking lot / nearby picnic tables are a 4-fer fallback, while the
-  7-fer requires walking from the marina toward the LBJ stone monument, then
-  toward the Washington Monument, crossing the parkway, and setting up under a
-  tree between the parkway and the Potomac.
+- Sunday morning: start with the Lady Bird Johnson Park / Columbia Island
+  Marina right-side parking-area 7-fer: `US-0784`, `US-9901`, `US-4581`,
+  `US-4567`, `US-0670`, `US-9898`, and `US-4564`. Local W3LAM feedback says the
+  right side of the parking area is inside all seven references and can support
+  a larger portable setup; signs may say Lady Bird Johnson Park and Columbia
+  Island Marina. Bring headphones for DCA aircraft noise.
 - Cheetah baseline: after Greenbelt and LBJ, follow the article route through FDR
   (`US-0776` + `US-0655`), MLK (`US-0785` + `US-0655`), Korean War
   (`US-0780` + `US-0655`), Lincoln (`US-0783` + `US-0655`), and Vietnam
@@ -140,11 +147,13 @@ Current Sunday DC rove model:
   Greenbelt counted as a confirmed 2-fer.
 - Full article route: add WWII (`US-0796` + `US-0655`) and Washington Monument
   (`US-0794` + `US-0655`) for 18 entities before the Virginia finish.
-- Ostrich stretch: Mason Neck State Park / Elizabeth Hartwell Mason Neck NWR
-  (`US-1308` + `US-0563`) brings the day to 20 if the Mason Neck 2-fer verifies.
-  Dyke Marsh (`US-9961`, `US-9935`, plus several LBJ duplicates) is the clean
-  buffer past 20, but it likely makes the day too long unless pace and access
-  are excellent.
+- Virginia finish: Meadowood BLM SRMA (`US-9937`) at the Mustang Equestrian
+  Trailhead is the practical default finish. Mason Neck State Park / Elizabeth
+  Hartwell Mason Neck NWR (`US-1308` + `US-0563`) brings the day to 20 if the
+  2-fer verifies, but local advice says Mason Neck and Hartwell require
+  separate positions, Hartwell has stricter setup limits, and Mason Neck State
+  Park adds time plus an entry fee. Dyke Marsh (`US-9961`, `US-9935`, plus
+  several LBJ duplicates) remains a buffer only if pace and access are excellent.
 
 DC route timing checks so far:
 
@@ -169,18 +178,19 @@ Downloaded / cached planning data:
   references.
 - `data/pota/rove-to-fl/geojson/` has OpenStreetMap/Nominatim GeoJSON for the
   main physical stops where available. Trail geometry remains lower-confidence
-  and still needs exact-position verification.
+  and still needs on-site coordinate verification for stretch counts.
 
 Open verification items:
 
-- Confirm the exact LBJ 7-fer point against imagery or with a local activator.
-- Decide whether Sunday targets Cheetah-only, full W8WZ + Mason Neck, Ostrich
-  via Dyke Marsh + Mason Neck, or the simpler Meadowood VA backup.
+- Confirm the Lady Bird Johnson Park / Columbia Island Marina right-side
+  parking-area 7-fer on site; local W3LAM feedback supports all seven
+  references there.
+- Decide whether Sunday ends at the practical Meadowood finish or stretches to
+  Mason Neck / Dyke Marsh for Ostrich.
 - Decide whether Woods Bay is used as an early SC backup/add-on before Savannah
   NWR.
-- Verify exact Fox Point n-fer position and ask N2NWK for the exact Greenbelt
-  coordinates before relying on `US-0654` or `US-4581`; current confirmed
-  Greenbelt count is `US-0668` + `US-7973`.
+- Ask N2NWK for exact Greenbelt coordinates before relying on `US-0654` or
+  `US-4581`; current conservative Greenbelt count is `US-0668` + `US-7973`.
 - Check Mason Neck hours and restrictions before relying on it for Ostrich.
 - Confirm Savannah National Wildlife Refuge operating-position state credit.
 - Identify Tesla Supercharger pairings for Saturday and the southern hotel legs.
