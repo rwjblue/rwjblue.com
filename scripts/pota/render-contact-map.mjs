@@ -242,14 +242,15 @@ export function collectDxccEntities(contacts) {
       continue;
     }
 
-    const current = entitiesByCode.get(contact.destinationDxccCode) ?? {
-      dxccCode: contact.destinationDxccCode,
+    const dxccCode = dxccCodeForValue(contact.destinationDxccCode);
+    const current = entitiesByCode.get(dxccCode) ?? {
+      dxccCode,
       name: contact.destinationDxccName,
       flag: contact.destinationDxccFlag,
       count: 0,
     };
     current.count += 1;
-    entitiesByCode.set(contact.destinationDxccCode, current);
+    entitiesByCode.set(dxccCode, current);
   }
 
   return [...entitiesByCode.values()].sort((a, b) => {
@@ -266,7 +267,10 @@ export function shouldRenderDxccSummary(map) {
     return map.dxccEntities.length >= 2;
   }
 
-  return map.dxccEntities.some((entity) => entity.dxccCode !== map.originDxccCode);
+  const originDxccCode = dxccCodeForValue(map.originDxccCode);
+  return map.dxccEntities.some((entity) => {
+    return dxccCodeForValue(entity.dxccCode) !== originDxccCode;
+  });
 }
 
 export function collectBandCounts(contacts) {

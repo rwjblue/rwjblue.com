@@ -146,6 +146,32 @@ test("buildContactMapData enriches mixed DXCC contact map data", () => {
   assert.deepEqual(collectDxccEntities(map.contacts), map.dxccEntities);
 });
 
+test("collectDxccEntities merges string and numeric DXCC codes", () => {
+  assert.deepEqual(
+    collectDxccEntities([
+      {
+        destinationDxccCode: "1",
+        destinationDxccName: "Canada",
+        destinationDxccFlag: "🇨🇦",
+      },
+      {
+        destinationDxccCode: 1,
+        destinationDxccName: "Canada",
+        destinationDxccFlag: "🇨🇦",
+      },
+      {
+        destinationDxccCode: 248,
+        destinationDxccName: "Italy",
+        destinationDxccFlag: "🇮🇹",
+      },
+    ]),
+    [
+      { dxccCode: 1, name: "Canada", flag: "🇨🇦", count: 2 },
+      { dxccCode: 248, name: "Italy", flag: "🇮🇹", count: 1 },
+    ],
+  );
+});
+
 test("shouldRenderDxccSummary hides home-only maps and handles unknown origins", () => {
   const homeOnlyMap = buildContactMapData(sampleAdif, {
     title: "Home only map",
@@ -163,11 +189,16 @@ test("shouldRenderDxccSummary hides home-only maps and handles unknown origins",
     ...mixedMap,
     originDxccCode: undefined,
   };
+  const stringOriginHomeOnlyMap = {
+    ...homeOnlyMap,
+    originDxccCode: "291",
+  };
 
   assert.equal(shouldRenderDxccSummary(homeOnlyMap), false);
   assert.equal(shouldRenderDxccSummary(mixedMap), true);
   assert.equal(shouldRenderDxccSummary(unknownOriginHomeOnlyMap), false);
   assert.equal(shouldRenderDxccSummary(unknownOriginMixedMap), true);
+  assert.equal(shouldRenderDxccSummary(stringOriginHomeOnlyMap), false);
 });
 
 test("buildContactMapData preserves per-contact origins and country fallback for roves", () => {
