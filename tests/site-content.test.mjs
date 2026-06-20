@@ -251,8 +251,11 @@ test("pota image sanitizer and contact-map bootstrap are available as file-based
   assert.match(bootstrapTask, /#USAGE flag "--output <json>"/);
   assert.match(bootstrapTask, /node scripts\/pota\/render-contact-map\.mjs/);
   assert.match(bootstrapSkill, /mise run pota:contact-map:from-adi/);
+  assert.match(bootstrapSkill, /archives the source ADIF/);
+  assert.match(bootstrapSkill, /repeat --input/);
   assert.match(skill, /mise run pota:images:sanitize/);
   assert.match(skill, /mise run pota:contact-map:from-adi/);
+  assert.match(skill, /archives the source ADIF/);
   assert.match(skill, /mise run pota:images:generate-note-share-image/);
 });
 

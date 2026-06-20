@@ -178,21 +178,30 @@ For a single supporting photo that should be smaller than the lead image:
 ```
 
 For a contact map, prefer generating checked-in JSON from the ADI log when
-`GRIDSQUARE` data is available. Use the `pota-contact-map-bootstrap` skill for
-this flow:
+`GRIDSQUARE` data is available. The contact-map task archives the source ADIF
+automatically and writes the public JSON consumed by `PotaContactMap.astro`.
+Use the `pota-contact-map-bootstrap` skill for this flow:
 
 ```bash
+slug="2026-06-19-rhode-island-to-florida-rove-day-one"
+rockville_adi="$HOME/Downloads/2026-06-19 N1RWJ at US-6991 Full.adi"
+pachaug_adi="$HOME/Downloads/2026-06-19 N1RWJ at US-1716 Full.adi"
+sleepy_hollow_adi="$HOME/Downloads/2026-06-20 N1RWJ at US-2149 Full.adi"
+
 mise run pota:contact-map:from-adi -- \
-  --input <log.adi> \
-  --output src/data/pota/contact-maps/<slug>.json \
-  --title "N1RWJ at US-1234" \
-  --subtitle "Park Name - 25 QSOs - May 27, 2026"
+  --input "$rockville_adi" \
+  --input "$pachaug_adi" \
+  --input "$sleepy_hollow_adi" \
+  --output "src/data/pota/contact-maps/${slug}.json" \
+  --title "N1RWJ Rove to Florida Day One" \
+  --subtitle "3 parks - 32 QSOs - June 19-20, 2026"
 ```
 
-Wire the generated JSON through `PotaContactMap.astro` from the note page rather
-than committing the ADI. For a route screenshot or other tall utility image that
-should be more compact than a field photo, combine the single-image grid with
-the compact modifier:
+For split rove logs, repeat --input in operating order so the generated map
+preserves the activation sequence. Wire the generated JSON through
+`PotaContactMap.astro` from the note page rather than committing the ADI. For a
+route screenshot or other tall utility image that should be more compact than a
+field photo, combine the single-image grid with the compact modifier:
 
 ```html
 <div class="photo-grid photo-grid--single photo-grid--compact">
