@@ -14,7 +14,7 @@ import { BAND_COLORS, bandColor } from "../src/data/pota/band-colors.mjs";
 const sampleAdif = `
 <ADIF_VER:5>3.1.5
 <EOH>
-<CALL:4>GRID <BAND:3>40m <QSO_DATE:8>20260527 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41dx97 <GRIDSQUARE:6>EM86sn <DXCC:3>291 <STATE:2>TN <EOR>
+<CALL:4>GRID <BAND:3>40m <QSO_DATE:8>20260527 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41dx97 <MY_DXCC:3>291 <GRIDSQUARE:6>EM86sn <DXCC:3>291 <STATE:2>TN <EOR>
 <CALL:5>STATE <BAND:3>20m <QSO_DATE:8>20260527 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41dx97 <DXCC:3>291 <STATE:2>IN <EOR>
 <CALL:4>NONE <BAND:3>20m <QSO_DATE:8>20260527 <STATION_CALLSIGN:5>N1RWJ <MY_GRIDSQUARE:8>FN41dx97 <DXCC:3>291 <EOR>
 `;
@@ -46,6 +46,7 @@ test("parseAdif extracts records and fields", () => {
   assert.equal(qson.qsos[0].their.grid, "EM86sn");
   assert.equal(qson.qsos[1].their.state, "IN");
   assert.equal(qson.qsos[0].our.grid, "FN41dx97");
+  assert.equal(qson.qsos[0].our.dxccCode, 291);
 });
 
 test("parseAdif excludes Ham2K PoLo metadata entries from QSOs", () => {

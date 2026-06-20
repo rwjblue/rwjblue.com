@@ -115,6 +115,7 @@ function parseAdifQSO(adifQSO) {
     condSet(adifQSO, qso.our, "operator", "call", normalizeCallsign);
     condSet(adifQSO, qso.our, "station_callsign", "call", normalizeCallsign);
     condSet(adifQSO, qso.our, "my_gridsquare", "grid");
+    condSet(adifQSO, qso.our, "my_dxcc", "dxccCode", (value) => parseInt(value, 10));
 
     qso.freq = parseFrequency(adifQSO.freq);
     qso.band = (adifQSO.band && adifQSO.band.toLowerCase()) || bandForFrequency(qso.freq);
