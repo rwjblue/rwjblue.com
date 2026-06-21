@@ -120,9 +120,10 @@ const expandedMallRoute = dcRove.expandedMallRoute as ExpandedMallRoute | undefi
 const routeOptimization = dcRove.routeOptimization as RouteOptimization | undefined;
 const routeWaypointsJson = JSON.stringify(routeWaypoints);
 const primaryRouteWaypointIds = [
+  "co-canal-anglers",
   "foggy-bottom",
-  "theodore-roosevelt-island",
   "lbj-7fer",
+  "jefferson",
   "fdr",
   "mlk",
   "korean",
@@ -130,7 +131,11 @@ const primaryRouteWaypointIds = [
   "vietnam",
   "constitution-gardens",
   "wwii",
-  "washington-monument"
+  "washington-monument",
+  "presidents-park",
+  "wwi",
+  "meadowood",
+  "fredericksburg"
 ];
 const primaryRouteJson = JSON.stringify(primaryRouteWaypointIds);
 
@@ -232,10 +237,10 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       <p class="eyebrow">Project / POTA / Sunday</p>
       <h1 id="page-title">Sunday DC / NoVA rove</h1>
       <p class="lede strong">
-        Greenbelt opens the Sunday UTC day Saturday evening as a confirmed
-        Maryland 2-fer; LBJ and the Mall sequence carry the Cheetah baseline,
-        Meadowood is the practical Virginia finish, and Mason Neck remains the
-        Ostrich stretch if its 2-fer verifies.
+        C&O Canal at Anglers opens the Sunday UTC day Saturday evening as the
+        clean Maryland all-states anchor; LBJ and the expanded Mall sequence
+        carry the Cheetah/Ostrich count, and Meadowood is the practical Virginia
+        finish.
       </p>
       <p class="lede">
         This route is based on the CWops/W8WZ DC article, local POTA metadata,
@@ -265,7 +270,7 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
         </div>
         <div>
           <dt>Target shape</dt>
-          <dd>15 by Vietnam; 19 by Meadowood; 20 by Mason Neck stretch</dd>
+          <dd>15 by Vietnam; 20 by WWI; VA at Meadowood</dd>
         </div>
       </dl>
     </aside>
@@ -586,11 +591,11 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       </li>
       <li>
         The local n-fer export and outreach feedback provide evidence for the
-        Greenbelt, LBJ, Mason Neck, Dyke Marsh, and Meadowood clusters. Fresh
-        GeoJSON checks support a Greenbelt / Baltimore-Washington Parkway
-        2-fer, while N2NWK locally treats Greenbelt as a 4-fer. Keep `US-0654`
-        and `US-4581` as stretch counts unless the on-site position verifies.
-        Fort McHenry remains pre-18:00 optional only after the official hours check.
+        Greenbelt, LBJ, Mason Neck, Dyke Marsh, and Meadowood clusters. The
+        selected late-night Maryland stop is now C&O Canal at Anglers because
+        all-states credit is higher priority than Greenbelt's extra entity, and
+        there is no Greenbelt campsite. Greenbelt remains a fallback only if
+        legal access and the exact overlap position are defensible.
       </li>
       <li>
         NoVA local advice makes Meadowood's Mustang Equestrian Trailhead the
@@ -620,18 +625,22 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
       const routePoints = routeIds
         .map((id: string) => pointById.get(id))
         .filter(Boolean);
-      const stopNumbers: Record<string, string> = {
+        const stopNumbers: Record<string, string> = {
+        "co-canal-anglers": "M",
         "foggy-bottom": "H",
-        "theodore-roosevelt-island": "T",
         "lbj-7fer": "1",
-        fdr: "2",
-        mlk: "3",
-        korean: "4",
-        lincoln: "5",
-        vietnam: "6",
-        "constitution-gardens": "7",
-        wwii: "8",
-        "washington-monument": "9",
+        jefferson: "2",
+        fdr: "3",
+        mlk: "4",
+        korean: "5",
+        lincoln: "6",
+        vietnam: "7",
+        "constitution-gardens": "8",
+        wwii: "9",
+        "washington-monument": "10",
+        "presidents-park": "11",
+        wwi: "12",
+        meadowood: "VA",
       };
       const map = L.map(mapEl, { scrollWheelZoom: false });
 

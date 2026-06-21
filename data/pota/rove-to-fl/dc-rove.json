@@ -1,8 +1,8 @@
 {
-  "updated": "2026-06-19",
-  "status": "revised DC rove plan after Fort McHenry and Greenbelt GeoJSON checks",
+  "updated": "2026-06-20",
+  "status": "revised DC rove plan after late-arrival C&O Maryland opener",
   "timezone": "America/New_York",
-  "utcDay": "Sunday UTC day begins Saturday 2026-06-20 at 20:00 EDT; Greenbelt/Baltimore-Washington Parkway overlap is the primary Maryland opener because Fort McHenry gates close at 18:00. Count Greenbelt as two confirmed references: US-0668 and US-7973.",
+  "utcDay": "Sunday UTC day begins Saturday 2026-06-20 at 20:00 EDT; the late-arrival Maryland opener is Chesapeake and Ohio Canal NHP at Anglers because all-states credit is higher priority than the Greenbelt/BW Parkway 2-fer. Count C&O as US-0015, then use LBJ and the expanded Mall route to reach 20 before the Sunday UTC rollover if pace holds.",
   "sources": [
     {
       "label": "CWops Solid Copy No. 193, February 2026, W8WZ “Activating DC”",
@@ -38,8 +38,13 @@
     },
     {
       "label": "Greenbelt Park Sweetgum and campground access",
-      "url": "https://www.nps.gov/gree/planyourvisit/picnicking.htm",
-      "notes": "Sweetgum is first-come, year-round, and day-use; separate NPS material says the park is dawn-to-dusk and the campground has 24/7 camper access. At 20:00 EDT on 2026-06-20, sunset is about 20:36 EDT. Do not treat Sweetgum as the four-fer point; use a legal public point inside the Greenbelt/BW Parkway overlap."
+      "url": "https://www.nps.gov/thingstodo/experience-an-urban-oasis-at-greenbelt-park.htm",
+      "notes": "NPS material says Greenbelt Park is dawn-to-dusk and campground 24/7 access is framed around campers. Without a campsite, do not use Greenbelt as the late-night all-states Maryland anchor."
+    },
+    {
+      "label": "C&O Canal current conditions and Anglers access",
+      "url": "https://www.nps.gov/choh/planyourvisit/conditions.htm",
+      "notes": "Current NPS conditions list the Anglers/Carderock/Great Falls corridor access points and parking as open; Anglers is the cleaner late-arrival Maryland fallback for US-0015."
     },
     {
       "label": "Local activator email feedback, June 2026",
@@ -49,33 +54,33 @@
   ],
   "countingNotes": [
     "Count unique POTA entities on the Sunday UTC day, not local calendar day.",
-    "Greenbelt/Baltimore-Washington Parkway is the primary Maryland opener for the Sunday UTC rove. Count US-0668 + US-7973 only from a legal public point in the overlap; US-0654 and US-4581 remain unconfirmed at Greenbelt unless an exact activator coordinate verifies under POTA rules.",
+    "For the late-arrival all-states plan, Chesapeake and Ohio Canal NHP at Anglers is the primary Maryland opener. Count US-0015 as the clean Maryland entity; Greenbelt/BW Parkway remains a higher-count fallback only with legal access and a defensible exact position.",
     "Fort McHenry is not usable at/after 20:00 EDT: official NPS summer weekend gate closure is 18:00. Treat it as a pre-18:00 optional Saturday-local stop only.",
     "POTA multi-loc activations require the activator and all station equipment to be inside the overlapping valid area for every declared reference; trail references require public land within 30.5 m / 100 ft of the trail.",
     "The LBJ 7-fer is corroborated by W8WZ article evidence and local W3LAM feedback: the right side of the parking area / LBJ operating area is inside US-0784, US-0670, US-4564, US-4567, US-4581, US-9901, and US-9898.",
-    "Meadowood BLM SRMA is a single-reference Virginia fallback if Mason Neck hours, restrictions, or Sunday pace make the 2-fer impractical."
+    "With C&O instead of the Greenbelt 2-fer, the expanded Mall route needs Jefferson, President’s Park, and WWI to reach 20 Sunday-UTC entities; Meadowood remains the practical Virginia state finish even if it spills past 20:00 EDT."
   ],
   "timelineAssumptions": {
     "activationMinutes": 45,
     "minimumActivationMinutes": 30,
     "sundayStartLocal": "Sun 08:00",
     "sundayStartUtc": "Sun 12:00",
-    "notes": "Timeline is a planning model, not a schedule commitment. Use 45 minutes per activation stop for planning, with 30 minutes as the absolute floor if the day needs to compress."
+    "notes": "Timeline is a planning model, not a schedule commitment. Use 45 minutes per activation stop for planning, with 30 minutes as the absolute floor if the day needs to compress. The C&O opener banks Maryland for all-states; the expanded Mall route supplies the Sunday-UTC count."
   },
   "primaryTimeline": [
     {
-      "id": "greenbelt-saturday",
-      "directionsDestinationId": "greenbelt-saturday",
-      "localStart": "Sat 20:00",
-      "localEnd": "Sat 20:45",
-      "utcStart": "Sun 00:00",
-      "utcEnd": "Sun 00:45",
+      "id": "co-canal-anglers",
+      "directionsDestinationId": "co-canal-anglers",
+      "localStart": "Sat 21:55",
+      "localEnd": "Sat 22:40",
+      "utcStart": "Sun 01:55",
+      "utcEnd": "Sun 02:40",
       "movementMode": "drive",
-      "movementFromPrior": "Saturday route arrival from Fox Point; use a legal public point in the Greenbelt/BW Parkway overlap, only while access is lawful before dusk",
+      "movementFromPrior": "Late Saturday route arrival from Bear, DE / Fox Point corridor; use Anglers parking for a clean Maryland C&O Canal activation",
       "movementMinutes": 0,
       "activationMinutes": 45,
-      "cumulativeEntities": 2,
-      "timelineNote": "Primary Maryland opener after Fort McHenry access check. GeoJSON supports a Greenbelt/Baltimore-Washington Parkway 2-fer (US-0668 + US-7973); US-0654 and US-4581 remain unconfirmed at Greenbelt."
+      "cumulativeEntities": 1,
+      "timelineNote": "All-states Maryland anchor. Count US-0015 only; this replaces the Greenbelt/BW Parkway 2-fer because there is no Greenbelt campsite and legal late access matters more than the extra entity."
     },
     {
       "id": "lbj-7fer",
@@ -86,50 +91,65 @@
       "utcStart": "Sun 12:15",
       "utcEnd": "Sun 13:00",
       "movementMode": "ride",
-      "movementFromPrior": "Foggy Bottom hotel",
+      "movementFromPrior": "Foggy Bottom hotel, or count this earlier Saturday night from the Columbia Island Marina side if timing still works",
       "movementMinutes": 12,
       "activationMinutes": 45,
-      "cumulativeEntities": 9,
-      "timelineNote": "Sunday morning jackpot after Greenbelt. Adds seven unique references after the Greenbelt 2-fer; local feedback says this can be vehicle/base-station friendly."
+      "cumulativeEntities": 8,
+      "timelineNote": "Jackpot after the C&O Maryland opener. Adds seven unique references; local feedback says this can be vehicle/base-station friendly from the right side of the marina/LBJ parking area."
     },
     {
-      "id": "fdr",
+      "id": "jefferson",
       "directionsOriginId": "lbj-7fer",
-      "directionsDestinationId": "fdr",
+      "directionsDestinationId": "jefferson",
       "localStart": "Sun 09:10",
       "localEnd": "Sun 09:55",
       "utcStart": "Sun 13:10",
       "utcEnd": "Sun 13:55",
       "movementMode": "ride",
       "movementFromPrior": "LBJ operating area",
-      "movementMinutes": 7,
+      "movementMinutes": 6,
+      "activationMinutes": 45,
+      "cumulativeEntities": 10,
+      "timelineNote": "Starts the expanded Mall walk from the south/east side. Adds Jefferson plus National Mall if National Mall has not already been counted."
+    },
+    {
+      "id": "fdr",
+      "directionsOriginId": "jefferson",
+      "directionsDestinationId": "fdr",
+      "localStart": "Sun 10:05",
+      "localEnd": "Sun 10:50",
+      "utcStart": "Sun 14:05",
+      "utcEnd": "Sun 14:50",
+      "movementMode": "walk",
+      "movementFromPrior": "Jefferson Memorial",
+      "movementMinutes": 10,
       "activationMinutes": 45,
       "cumulativeEntities": 11,
-      "timelineNote": "Adds FDR and National Mall if National Mall has not already been counted. Walking from LBJ is about 29 minutes; rideshare is about 7 minutes."
+      "timelineNote": "Adds FDR; National Mall is already duplicate after Jefferson."
     },
     {
       "id": "mlk",
       "directionsOriginId": "fdr",
       "directionsDestinationId": "mlk",
-      "localStart": "Sun 10:00",
-      "localEnd": "Sun 10:45",
-      "utcStart": "Sun 14:00",
-      "utcEnd": "Sun 14:45",
+      "localStart": "Sun 10:56",
+      "localEnd": "Sun 11:41",
+      "utcStart": "Sun 14:56",
+      "utcEnd": "Sun 15:41",
       "movementMode": "walk",
       "movementFromPrior": "FDR Memorial",
       "movementMinutes": 6,
       "activationMinutes": 45,
       "cumulativeEntities": 12,
-      "timelineNote": "Short Mall walk; National Mall is already duplicate after FDR."
+      "timelineNote": "Short Mall walk; National Mall is already duplicate after Jefferson."
     },
     {
       "id": "korean",
       "directionsOriginId": "mlk",
       "directionsDestinationId": "korean",
-      "localStart": "Sun 10:55",
-      "localEnd": "Sun 11:40",
-      "utcStart": "Sun 14:55",
-      "utcEnd": "Sun 15:40",
+      "localStart": "Sun 11:47",
+      "localEnd": "Sun 12:32",
+      "utcStart": "Sun 15:47",
+      "utcEnd": "Sun 16:32",
       "movementMode": "walk",
       "movementFromPrior": "MLK Memorial",
       "movementMinutes": 6,
@@ -141,40 +161,40 @@
       "id": "lincoln",
       "directionsOriginId": "korean",
       "directionsDestinationId": "lincoln",
-      "localStart": "Sun 11:45",
-      "localEnd": "Sun 12:30",
-      "utcStart": "Sun 15:45",
-      "utcEnd": "Sun 16:30",
-      "movementMode": "walk",
-      "movementFromPrior": "Korean War Veterans Memorial",
-      "movementMinutes": 3,
-      "activationMinutes": 45,
-      "cumulativeEntities": 14,
-      "timelineNote": "Adds Lincoln; still before the Cheetah threshold in the Greenbelt 2-fer route."
-    },
-    {
-      "id": "vietnam",
-      "directionsOriginId": "lincoln",
-      "directionsDestinationId": "vietnam",
       "localStart": "Sun 12:35",
       "localEnd": "Sun 13:20",
       "utcStart": "Sun 16:35",
       "utcEnd": "Sun 17:20",
       "movementMode": "walk",
+      "movementFromPrior": "Korean War Veterans Memorial",
+      "movementMinutes": 3,
+      "activationMinutes": 45,
+      "cumulativeEntities": 14,
+      "timelineNote": "Adds Lincoln; this is still before the Cheetah threshold in the C&O opener route."
+    },
+    {
+      "id": "vietnam",
+      "directionsOriginId": "lincoln",
+      "directionsDestinationId": "vietnam",
+      "localStart": "Sun 13:25",
+      "localEnd": "Sun 14:10",
+      "utcStart": "Sun 17:25",
+      "utcEnd": "Sun 18:10",
+      "movementMode": "walk",
       "movementFromPrior": "Lincoln Memorial",
       "movementMinutes": 5,
       "activationMinutes": 45,
       "cumulativeEntities": 15,
-      "timelineNote": "Cheetah threshold with the Greenbelt 2-fer and LBJ 7-fer."
+      "timelineNote": "Cheetah threshold with the C&O opener and LBJ 7-fer."
     },
     {
       "id": "constitution-gardens",
       "directionsOriginId": "vietnam",
       "directionsDestinationId": "constitution-gardens",
-      "localStart": "Sun 13:30",
-      "localEnd": "Sun 14:15",
-      "utcStart": "Sun 17:30",
-      "utcEnd": "Sun 18:15",
+      "localStart": "Sun 14:19",
+      "localEnd": "Sun 15:04",
+      "utcStart": "Sun 18:19",
+      "utcEnd": "Sun 19:04",
       "movementMode": "walk",
       "movementFromPrior": "Vietnam Veterans Memorial",
       "movementMinutes": 9,
@@ -186,10 +206,10 @@
       "id": "wwii",
       "directionsOriginId": "constitution-gardens",
       "directionsDestinationId": "wwii",
-      "localStart": "Sun 14:20",
-      "localEnd": "Sun 15:05",
-      "utcStart": "Sun 18:20",
-      "utcEnd": "Sun 19:05",
+      "localStart": "Sun 15:07",
+      "localEnd": "Sun 15:52",
+      "utcStart": "Sun 19:07",
+      "utcEnd": "Sun 19:52",
       "movementMode": "walk",
       "movementFromPrior": "Constitution Gardens",
       "movementMinutes": 3,
@@ -201,62 +221,92 @@
       "id": "washington-monument",
       "directionsOriginId": "wwii",
       "directionsDestinationId": "washington-monument",
-      "localStart": "Sun 15:15",
-      "localEnd": "Sun 16:00",
-      "utcStart": "Sun 19:15",
-      "utcEnd": "Sun 20:00",
+      "localStart": "Sun 16:00",
+      "localEnd": "Sun 16:45",
+      "utcStart": "Sun 20:00",
+      "utcEnd": "Sun 20:45",
       "movementMode": "walk",
       "movementFromPrior": "World War II Memorial",
       "movementMinutes": 8,
       "activationMinutes": 45,
       "cumulativeEntities": 18,
-      "timelineNote": "End of the W8WZ article-backed Mall sequence."
+      "timelineNote": "End of the W8WZ article-backed core sequence. In the C&O opener route this gets the count to 18, so President’s Park and WWI are still needed for 20."
+    },
+    {
+      "id": "presidents-park",
+      "directionsOriginId": "washington-monument",
+      "directionsDestinationId": "presidents-park",
+      "localStart": "Sun 16:55",
+      "localEnd": "Sun 17:40",
+      "utcStart": "Sun 20:55",
+      "utcEnd": "Sun 21:40",
+      "movementMode": "walk",
+      "movementFromPrior": "Washington Monument",
+      "movementMinutes": 10,
+      "activationMinutes": 45,
+      "cumulativeEntities": 19,
+      "timelineNote": "Expanded Mall/downtown add-on required after replacing Greenbelt with C&O. Use the south/Ellipse side when that is the more defensible public operating area."
+    },
+    {
+      "id": "wwi",
+      "directionsOriginId": "presidents-park",
+      "directionsDestinationId": "wwi",
+      "localStart": "Sun 17:48",
+      "localEnd": "Sun 18:33",
+      "utcStart": "Sun 21:48",
+      "utcEnd": "Sun 22:33",
+      "movementMode": "walk",
+      "movementFromPrior": "President’s Park",
+      "movementMinutes": 8,
+      "activationMinutes": 45,
+      "cumulativeEntities": 20,
+      "timelineNote": "Reaches 20 unique references in the C&O opener route if all prior stops hold. Ford’s Theatre is the first practical downtown buffer beyond this."
     },
     {
       "id": "foggy-bottom-return",
       "label": "Return to Foggy Bottom hotel / get car",
-      "directionsOriginId": "washington-monument",
+      "directionsOriginId": "wwi",
       "directionsDestinationId": "foggy-bottom",
-      "localStart": "Sun 16:35",
+      "localStart": "Sun 18:45",
       "localEnd": "",
-      "utcStart": "Sun 20:35",
+      "utcStart": "Sun 22:45",
       "utcEnd": "",
-      "movementMode": "walk",
-      "movementFromPrior": "Washington Monument",
-      "movementMinutes": 31,
+      "movementMode": "ride",
+      "movementFromPrior": "World War I Memorial",
+      "movementMinutes": 11,
       "activationMinutes": 0,
-      "cumulativeEntities": 18,
-      "timelineNote": "Walk back to the hotel to pick up the car. Rideshare is about 9 minutes if schedule or weather makes the walk unattractive."
+      "cumulativeEntities": 20,
+      "timelineNote": "Return to the hotel to pick up the car. Walking back is about an hour; use rideshare if protecting the Virginia state finish."
     },
     {
       "id": "meadowood",
       "directionsOriginId": "foggy-bottom",
       "directionsDestinationId": "meadowood",
-      "localStart": "Sun 17:10",
-      "localEnd": "Sun 17:55",
-      "utcStart": "Sun 21:10",
-      "utcEnd": "Sun 21:55",
+      "localStart": "Sun 19:20",
+      "localEnd": "Sun 20:05",
+      "utcStart": "Sun 23:20",
+      "utcEnd": "Mon 00:05",
       "movementMode": "drive",
       "movementFromPrior": "Foggy Bottom hotel car pickup",
       "movementMinutes": 31,
       "activationMinutes": 45,
-      "cumulativeEntities": 19,
-      "timelineNote": "Practical Virginia finish. Local advice says Meadowood's Mustang Equestrian Trailhead is the best reliable radio spot, with free parking and a straightforward car-adjacent setup."
+      "cumulativeEntities": 21,
+      "timelineNote": "Practical Virginia all-states finish. Local advice says Meadowood’s Mustang Equestrian Trailhead is the best reliable radio spot, with free parking and a straightforward car-adjacent setup."
     },
     {
       "id": "fredericksburg-arrival",
       "label": "Fredericksburg hotel",
       "directionsOriginId": "meadowood",
       "directionsDestinationId": "fredericksburg",
-      "localStart": "Sun 18:40",
+      "localStart": "Sun 20:50",
       "localEnd": "",
-      "utcStart": "Sun 22:40",
+      "utcStart": "Mon 00:50",
       "utcEnd": "",
       "movementMode": "drive",
       "movementFromPrior": "Meadowood BLM SRMA",
       "movementMinutes": 45,
       "activationMinutes": 0,
-      "cumulativeEntities": 19,
+      "cumulativeEntities": 21,
       "timelineNote": "Booked Sunday night anchor after the rove."
     }
   ],
@@ -288,13 +338,22 @@
   ],
   "routeWaypoints": [
     {
+      "id": "co-canal-anglers",
+      "label": "C&O Canal / Anglers MD opener",
+      "latitude": 38.9824756,
+      "longitude": -77.2272566,
+      "type": "activation",
+      "confidence": "selected all-states Maryland opener after late-arrival access check",
+      "notes": "Target after 20:00 EDT for Sunday UTC credit. Count US-0015 only; lower count than Greenbelt but cleaner without a campsite."
+    },
+    {
       "id": "greenbelt-saturday",
       "label": "Greenbelt / Baltimore-Washington Parkway MD opener",
       "latitude": 38.9927921,
       "longitude": -76.8880143,
-      "type": "activation",
-      "confidence": "confirmed two-reference GeoJSON overlap; local N2NWK feedback treats the area as a 4-fer but exact legal access still needs field confirmation",
-      "notes": "Target after 20:00 EDT for Sunday UTC credit. Count US-0668 + US-7973 conservatively; US-0654 and US-4581 need an exact defensible operating position."
+      "type": "optional",
+      "confidence": "fallback only without campsite; legal late access must be defensible",
+      "notes": "Higher-count fallback if legal public access is available. Not the selected all-states Maryland anchor."
     },
     {
       "id": "fort-mchenry-saturday",
@@ -497,6 +556,12 @@
   ],
   "referenceCatalog": [
     {
+      "reference": "US-0015",
+      "name": "Chesapeake and Ohio Canal National Historical Park",
+      "jurisdiction": "DC/MD/WV",
+      "role": "selected late-night Maryland all-states opener at Anglers"
+    },
+    {
       "reference": "US-0654",
       "name": "National Capital Parks",
       "jurisdiction": "DC/MD",
@@ -506,13 +571,13 @@
       "reference": "US-7973",
       "name": "Baltimore-Washington Parkway",
       "jurisdiction": "MD",
-      "role": "Greenbelt Saturday-night likely unique add"
+      "role": "Greenbelt fallback companion if legal overlap access is available"
     },
     {
       "reference": "US-0668",
       "name": "Greenbelt Park",
       "jurisdiction": "MD",
-      "role": "Greenbelt Saturday-night MD opener"
+      "role": "Greenbelt fallback only without campsite"
     },
     {
       "reference": "US-0928",
@@ -655,8 +720,66 @@
   ],
   "operatingStops": [
     {
+      "id": "wwi",
+      "name": "World War I Memorial",
+      "latitude": 38.89594,
+      "longitude": -77.032808,
+      "references": [
+        "US-0795"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0795"
+      ],
+      "confidence": "expanded downtown add-on needed to reach 20 with the C&O opener"
+    },
+    {
+      "id": "presidents-park",
+      "name": "President’s Park",
+      "latitude": 38.897334,
+      "longitude": -77.037036,
+      "references": [
+        "US-0657"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0657"
+      ],
+      "confidence": "expanded downtown add-on after Washington Monument"
+    },
+    {
+      "id": "jefferson",
+      "name": "Thomas Jefferson Memorial",
+      "latitude": 38.88166,
+      "longitude": -77.036816,
+      "references": [
+        "US-0792",
+        "US-0655"
+      ],
+      "uniqueAddsAfterPrior": [
+        "US-0792",
+        "US-0655"
+      ],
+      "confidence": "expanded Mall add-on; point GeoJSON only but strong landmark context"
+    },
+    {
+      "id": "co-canal-anglers",
+      "timing": "Saturday 2026-06-20 late evening, after the 20:00 EDT UTC rollover",
+      "name": "Chesapeake and Ohio Canal NHP / Anglers parking lot",
+      "parking": "Billy Goat sections B / Anglers parking lot",
+      "latitude": 38.9824756,
+      "longitude": -77.2272566,
+      "references": [
+        "US-0015"
+      ],
+      "uniqueAddsIfFirst": [
+        "US-0015"
+      ],
+      "evidence": "NPS C&O current conditions list the Anglers/Carderock corridor access points and parking as open, and Google Maps resolved Anglers parking as the clean late-arrival C&O access point. Use this as the all-states Maryland anchor when Greenbelt campground access is not available.",
+      "access": "Use the public Anglers parking/towpath access. Count only US-0015 unless a separate verified overlap is established on site.",
+      "confidence": "clean late-arrival Maryland single-reference opener; lower count than Greenbelt but better all-states reliability"
+    },
+    {
       "id": "greenbelt-saturday",
-      "timing": "Saturday 2026-06-20, activate at/after 20:00 EDT only from a legal public point in the Greenbelt/BW Parkway overlap and before access closes",
+      "timing": "Fallback only: Saturday 2026-06-20 at/after 20:00 EDT if legal public access is available without relying on campground access",
       "name": "Greenbelt Park / Baltimore-Washington Parkway overlap",
       "latitude": 38.9927921,
       "longitude": -76.8880143,
@@ -674,7 +797,7 @@
       ],
       "evidence": "N2NWK email suggested a Greenbelt four-fer (US-0668 + US-7973 + US-0654 + US-4581) and described after-hours campground/parkway-style access patterns. Fresh GeoJSON confirms a practical Greenbelt/Baltimore-Washington Parkway overlap for US-0668 + US-7973; strict four-way overlap is empty, and the best US-0668/US-0654/US-7973 component misses the official Star-Spangled Banner NHT 100-foot trail buffer by about 35 feet.",
       "access": "Use only a legal public operating point in the confirmed overlap after the 20:00 EDT UTC rollover. Sweetgum is not the decision point for the overlap; campground or parkway-style access needs on-site judgment.",
-      "confidence": "high-confidence two-reference Maryland opener; US-0654 and US-4581 are local-interpretation stretch counts",
+      "confidence": "higher-count fallback, but not the selected late-night all-states anchor without a campsite",
       "possibleButUnconfirmedReferences": [
         "US-0654",
         "US-4581"
@@ -701,7 +824,7 @@
     },
     {
       "id": "lbj-7fer",
-      "timing": "Sunday morning; primary jackpot after the Greenbelt MD opener",
+      "timing": "Saturday late from the Columbia Island Marina side if timing works, or Sunday morning as the primary jackpot after the C&O Maryland opener",
       "name": "Lady Bird Johnson Park / Columbia Island Marina right-side 7-fer",
       "parking": "Right side of the Columbia Island Marina / Lady Bird Johnson Park parking area",
       "parkingLatitude": 38.875198,
@@ -749,6 +872,15 @@
         "US-0784",
         "US-9898",
         "US-4564"
+      ],
+      "uniqueAddsAfterCo": [
+        "US-0784",
+        "US-9901",
+        "US-4581",
+        "US-4567",
+        "US-0670",
+        "US-9898",
+        "US-4564"
       ]
     },
     {
@@ -761,10 +893,12 @@
         "US-0655"
       ],
       "uniqueAddsAfterFortAndLbj": [
-        "US-0776",
-        "US-0655"
+        "US-0776"
       ],
-      "confidence": "article-backed"
+      "confidence": "article-backed",
+      "uniqueAddsAfterPrior": [
+        "US-0776"
+      ]
     },
     {
       "id": "mlk",
@@ -915,67 +1049,11 @@
   ],
   "routeModels": [
     {
-      "name": "Cheetah baseline: Greenbelt 2-fer + LBJ + Mall through Vietnam",
-      "entityCount": 15,
-      "physicalStops": 7,
-      "references": [
-        "US-0668",
-        "US-7973",
-        "US-0784",
-        "US-9901",
-        "US-4581",
-        "US-4567",
-        "US-0670",
-        "US-9898",
-        "US-4564",
-        "US-0776",
-        "US-0655",
-        "US-0785",
-        "US-0780",
-        "US-0783",
-        "US-0793"
-      ],
-      "driveAndWalkMinutes": 94,
-      "activationMinutesAt60Each": 420,
-      "totalPlanningMinutes": 514,
-      "notes": "Cheetah threshold is reached at Vietnam when the Greenbelt US-0668/US-7973 opener and LBJ 7-fer verify."
-    },
-    {
-      "name": "Full W8WZ route plus Greenbelt 2-fer opener",
-      "entityCount": 18,
-      "physicalStops": 10,
-      "references": [
-        "US-0668",
-        "US-7973",
-        "US-0784",
-        "US-9901",
-        "US-4581",
-        "US-4567",
-        "US-0670",
-        "US-9898",
-        "US-4564",
-        "US-0776",
-        "US-0655",
-        "US-0785",
-        "US-0780",
-        "US-0783",
-        "US-0793",
-        "US-0653",
-        "US-0796",
-        "US-0794"
-      ],
-      "driveAndWalkMinutes": 102,
-      "activationMinutesAt60Each": 600,
-      "totalPlanningMinutes": 702,
-      "notes": "Full Mall sequence reaches 18 before the Virginia finish with Greenbelt counted as a confirmed 2-fer."
-    },
-    {
-      "name": "Ostrich stretch: Greenbelt 2-fer + full route + Mason Neck",
+      "name": "All-states baseline: C&O + LBJ + Mall through WWI",
       "entityCount": 20,
-      "physicalStops": 11,
+      "physicalStops": 13,
       "references": [
-        "US-0668",
-        "US-7973",
+        "US-0015",
         "US-0784",
         "US-9901",
         "US-4581",
@@ -983,8 +1061,9 @@
         "US-0670",
         "US-9898",
         "US-4564",
-        "US-0776",
+        "US-0792",
         "US-0655",
+        "US-0776",
         "US-0785",
         "US-0780",
         "US-0783",
@@ -992,21 +1071,20 @@
         "US-0653",
         "US-0796",
         "US-0794",
-        "US-1308",
-        "US-0563"
+        "US-0657",
+        "US-0795"
       ],
-      "driveAndWalkMinutes": 188,
-      "activationMinutesAt60Each": 660,
-      "totalPlanningMinutes": 848,
-      "notes": "Mason Neck reaches Ostrich exactly if the 2-fer verifies and hours/access work."
+      "driveAndWalkMinutes": 137,
+      "activationMinutesAt60Each": 780,
+      "totalPlanningMinutes": 917,
+      "notes": "C&O gives the clean Maryland state credit; Jefferson, President’s Park, and WWI replace the lost Greenbelt entity and reach 20 before leaving downtown if all stops hold."
     },
     {
-      "name": "Ostrich buffer: Greenbelt 2-fer + Dyke Marsh + Mason Neck",
-      "entityCount": 22,
-      "physicalStops": 12,
+      "name": "All-states finish: C&O + LBJ + Mall + Meadowood",
+      "entityCount": 21,
+      "physicalStops": 14,
       "references": [
-        "US-0668",
-        "US-7973",
+        "US-0015",
         "US-0784",
         "US-9901",
         "US-4581",
@@ -1014,8 +1092,9 @@
         "US-0670",
         "US-9898",
         "US-4564",
-        "US-0776",
+        "US-0792",
         "US-0655",
+        "US-0776",
         "US-0785",
         "US-0780",
         "US-0783",
@@ -1023,49 +1102,65 @@
         "US-0653",
         "US-0796",
         "US-0794",
-        "US-9961",
-        "US-9935",
-        "US-1308",
-        "US-0563"
+        "US-0657",
+        "US-0795",
+        "US-9937"
       ],
-      "driveAndWalkMinutes": 220,
-      "activationMinutesAt60Each": 720,
-      "totalPlanningMinutes": 940,
-      "notes": "Dyke Marsh plus Mason Neck provides a two-entity buffer, but pushes the day later."
+      "driveAndWalkMinutes": 213,
+      "activationMinutesAt60Each": 840,
+      "totalPlanningMinutes": 1053,
+      "notes": "Meadowood is the practical Virginia finish for all-states; it may be after the Sunday UTC rollover, but it protects the trip goal."
+    },
+    {
+      "name": "Ostrich buffer: add Ford’s Theatre before Meadowood",
+      "entityCount": 22,
+      "physicalStops": 15,
+      "references": [
+        "US-0015",
+        "US-0784",
+        "US-9901",
+        "US-4581",
+        "US-4567",
+        "US-0670",
+        "US-9898",
+        "US-4564",
+        "US-0792",
+        "US-0655",
+        "US-0776",
+        "US-0785",
+        "US-0780",
+        "US-0783",
+        "US-0793",
+        "US-0653",
+        "US-0796",
+        "US-0794",
+        "US-0657",
+        "US-0795",
+        "US-0814",
+        "US-9937"
+      ],
+      "driveAndWalkMinutes": 228,
+      "activationMinutesAt60Each": 900,
+      "totalPlanningMinutes": 1128,
+      "notes": "Ford’s Theatre is the first practical downtown buffer if the C&O/LBJ/Mall route needs padding before the Virginia finish."
     }
   ],
   "mappedLegs": [
     {
-      "from": "Fox Point State Park",
-      "to": "Greenbelt Park",
+      "from": "Bear, DE charging stop",
+      "to": "C&O Canal / Anglers parking lot",
       "mode": "drive",
-      "distance": "160.6 km",
-      "minutes": 96,
-      "notes": "Fresh Google Maps check on 2026-06-19 for the direct Greenbelt target."
+      "distance": "182.3 km",
+      "minutes": 112,
+      "notes": "Google Maps check on 2026-06-20 for the late-arrival Maryland all-states opener."
     },
     {
-      "from": "Greenbelt Park",
-      "to": "Foggy Bottom hotel",
+      "from": "C&O Canal / Anglers parking lot",
+      "to": "Lady Bird Johnson / Columbia Island operating area",
       "mode": "drive",
-      "distance": "28.1 km",
-      "minutes": 28,
-      "notes": "Fresh Google Maps check on 2026-06-19 after the Greenbelt activation."
-    },
-    {
-      "from": "Greenbelt Park",
-      "to": "LBJ Memorial Grove",
-      "mode": "drive",
-      "distance": "26.8 km",
-      "minutes": 30,
-      "notes": "Alternative if activating LBJ Saturday night immediately after Greenbelt."
-    },
-    {
-      "from": "Foggy Bottom hotel",
-      "to": "Theodore Roosevelt Island",
-      "mode": "ride",
-      "distance": "2.1 km",
-      "minutes": 4,
-      "notes": "Optional early add-on if chasing 20+ entities."
+      "distance": "23.5 km",
+      "minutes": 19,
+      "notes": "Late-night bonus path if LBJ/Columbia Island Marina timing still works."
     },
     {
       "from": "Foggy Bottom hotel",
@@ -1076,68 +1171,36 @@
       "notes": "Primary Sunday morning jump; car remains parked at the hotel."
     },
     {
-      "from": "Theodore Roosevelt Island",
-      "to": "Lady Bird Johnson / Columbia Island operating area",
-      "mode": "ride",
-      "distance": "8.3 km",
-      "minutes": 9,
-      "notes": "Use only if Theodore Roosevelt Island is included."
-    },
-    {
       "from": "Lady Bird Johnson / Columbia Island operating area",
-      "to": "FDR Memorial",
+      "to": "Thomas Jefferson Memorial",
       "mode": "ride",
-      "distance": "3.1 km",
-      "minutes": 7,
-      "notes": "Walking is about 29 minutes; rideshare preserves rove time."
+      "distance": "3.9 km",
+      "minutes": 6,
+      "notes": "Use Jefferson as the south/east start to replace the lost Greenbelt entity."
     },
     {
-      "from": "FDR Memorial",
-      "to": "Washington Monument via optimized core Mall walk",
+      "from": "Thomas Jefferson Memorial",
+      "to": "World War I Memorial via expanded Mall walk",
       "mode": "walk",
-      "distance": "2.9 km",
-      "minutes": 39,
-      "notes": "FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution -> WWII -> Washington Monument."
+      "distance": "5.1 km",
+      "minutes": 69,
+      "notes": "Jefferson -> FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution Gardens -> WWII -> Washington Monument -> President’s Park -> WWI."
     },
     {
-      "from": "Washington Monument",
-      "to": "Foggy Bottom hotel",
-      "mode": "walk",
-      "distance": "2.2 km",
-      "minutes": 31,
-      "notes": "Default low-cost return to the car; rideshare is about 9 minutes."
-    },
-    {
-      "from": "Eisenhower Memorial",
+      "from": "World War I Memorial",
       "to": "Foggy Bottom hotel",
       "mode": "ride",
       "distance": "5.4 km",
       "minutes": 11,
-      "notes": "Use this if the east Mall expansion is attempted; walking back is about 54 minutes."
+      "notes": "Use rideshare if protecting the Meadowood Virginia finish; walking back is about an hour."
     },
     {
       "from": "Foggy Bottom hotel",
-      "to": "Mason Neck State Park",
-      "mode": "drive",
-      "distance": "43.8 km",
-      "minutes": 40,
-      "notes": "Southbound car move after returning to the hotel."
-    },
-    {
-      "from": "Mason Neck State Park",
-      "to": "Fredericksburg hotel",
-      "mode": "drive",
-      "distance": "64.0 km",
-      "minutes": 59,
-      "notes": "Sunday night endpoint."
-    },
-    {
-      "from": "Washington Monument",
       "to": "Meadowood BLM SRMA",
       "mode": "drive",
       "distance": "35.2 km",
       "minutes": 31,
-      "notes": "Google Maps route check on 2026-06-15; simpler single-reference VA backup."
+      "notes": "Google Maps route check on 2026-06-15; simpler single-reference VA finish."
     },
     {
       "from": "Meadowood BLM SRMA",
@@ -1146,39 +1209,20 @@
       "distance": "57.2 km",
       "minutes": 45,
       "notes": "Google Maps route check on 2026-06-15; southbound finish after Meadowood."
-    },
-    {
-      "from": "Fox Point State Park",
-      "to": "Fort McHenry National Monument",
-      "mode": "drive",
-      "distance": "121.4 km",
-      "minutes": 72,
-      "notes": "Fresh Google Maps check on 2026-06-19 for the optional Fort branch."
-    },
-    {
-      "from": "Fort McHenry National Monument",
-      "to": "Greenbelt Park",
-      "mode": "drive",
-      "distance": "44.8 km",
-      "minutes": 43,
-      "notes": "Fresh Google Maps check on 2026-06-19; this is the optional Fort-to-Greenbelt branch."
     }
   ],
   "openVerification": [
+    "Use C&O Canal / Anglers as the selected late-night Maryland anchor for all-states. Count US-0015 only unless a separate verified overlap is established.",
     "Confirm the Lady Bird Johnson Park / Columbia Island Marina right-side parking-area position in the field, but local W3LAM feedback supports all seven references there.",
     "Do not rely on Fort McHenry for Sunday UTC: official NPS summer weekend gate closure is 18:00. Treat Fort only as optional Saturday-local if arriving before last entry.",
-    "Use Meadowood's Mustang Equestrian Trailhead as the default Virginia finish unless the day is running well enough to justify Mason Neck.",
-    "Confirm Mason Neck NWR operating restrictions and closing/dusk times before relying on it as the Ostrich add-on.",
-    "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure.",
-    "Pennsylvania Avenue NHS and C&O Canal did not return clean OSM GeoJSON in the first fetch pass; verify boundaries before relying on those as easy add-ons.",
-    "Jefferson and Ford resolved as point GeoJSON rather than full polygons; use POTA/NPS context and on-site signage before treating the point as the whole activatable area.",
-    "Keep Mason Neck as a stretch: it can reach Ostrich, but Hartwell has stricter setup limits and Mason Neck State Park adds time plus an entry fee.",
-    "Confirm legal public access/parking for the Greenbelt/Baltimore-Washington Parkway overlap at or near 38.9927921,-76.8880143; count US-0668 + US-7973 conservatively unless exact local confirmation supports more.",
-    "N2NWK locally treats Greenbelt/BW Parkway as a 4-fer; rely on US-0654 or US-4581 only if the on-site coordinate and access are defensible.",
-    "Fort McHenry decision rule: only go if Fox Point is finished early enough to reach Fort by about 17:00-17:15; otherwise skip it and protect the 20:00 Greenbelt opener."
+    "Greenbelt/BW Parkway remains a higher-count fallback only with legal public access and a defensible exact operating point; without a campsite, do not use it as the all-states anchor.",
+    "Use Meadowood’s Mustang Equestrian Trailhead as the default Virginia finish unless the day is running well enough to justify Mason Neck.",
+    "Confirm Mason Neck NWR operating restrictions and closing/dusk times before relying on it as an add-on.",
+    "Ford’s Theatre is the first practical downtown buffer if Jefferson/President’s Park/WWI pacing or access slips.",
+    "Jefferson and Ford resolved as point GeoJSON rather than full polygons; use POTA/NPS context and on-site signage before treating the point as the whole activatable area."
   ],
   "expandedMallInventory": {
-    "summary": "DC cache has 32 references total. For the revised Foggy Bottom / National Mall rove, the practical inventory is the Greenbelt/BW Parkway 2-fer opener, the LBJ trail cluster, and 17 Mall/downtown references; Fort McHenry is optional before 18:00 only.",
+    "summary": "DC cache has 32 references total. For the revised all-states-first rove, the practical inventory is the C&O Canal Maryland opener, the LBJ trail cluster, and the expanded Mall/downtown references needed to replace the lost Greenbelt entity; Fort McHenry is optional before 18:00 only.",
     "counts": {
       "dcCacheReferences": 32,
       "lbjClusterReferences": 7,
@@ -1191,20 +1235,30 @@
       "greenbeltUniqueAfterLbj": 2,
       "lbjUniqueAfterGreenbelt": 7,
       "downtownTotalWithGreenbeltAndLbj": 26,
-      "greenbeltPossibleUnconfirmedReferences": 2
+      "greenbeltPossibleUnconfirmedReferences": 2,
+      "coCanalOpenerReferences": 1,
+      "coCanalUniqueAfterLbj": 1,
+      "lbjUniqueAfterCoCanal": 7,
+      "downtownTotalWithCoCanalAndLbj": 25
     },
     "candidateReferences": [
+      {
+        "reference": "US-0015",
+        "name": "Chesapeake and Ohio Canal National Historical Park",
+        "group": "Saturday UTC opener",
+        "routeUse": "Selected late-arrival Maryland opener at Anglers for all-states priority; lower count than Greenbelt but cleaner access without a campsite."
+      },
       {
         "reference": "US-0668",
         "name": "Greenbelt Park",
         "group": "Saturday UTC opener",
-        "routeUse": "Primary Maryland opener from a legal Greenbelt/BW Parkway overlap point; confirmed with US-7973."
+        "routeUse": "Higher-count Greenbelt fallback only if legal public access is available without relying on campground access."
       },
       {
         "reference": "US-7973",
         "name": "Baltimore-Washington Parkway",
         "group": "Greenbelt overlap",
-        "routeUse": "Confirmed Greenbelt-area 2-fer companion from the Greenbelt/BW Parkway overlap; field-confirm legal public access."
+        "routeUse": "Greenbelt fallback companion from the BW Parkway overlap; not the selected late-night all-states anchor."
       },
       {
         "reference": "US-0654",
@@ -1270,7 +1324,7 @@
         "reference": "US-0776",
         "name": "Franklin Delano Roosevelt National Memorial",
         "group": "Tidal Basin / Mall",
-        "routeUse": "Existing primary route stop; also overlaps National Mall."
+        "routeUse": "Expanded route stop after Jefferson; National Mall is already counted at Jefferson."
       },
       {
         "reference": "US-0785",
@@ -1288,19 +1342,19 @@
         "reference": "US-0783",
         "name": "Lincoln National Memorial",
         "group": "West Mall",
-        "routeUse": "Needed before Vietnam in the Greenbelt 2-fer Cheetah route."
+        "routeUse": "Needed before Vietnam in the C&O opener Cheetah route."
       },
       {
         "reference": "US-0793",
         "name": "Vietnam Veterans National Memorial",
         "group": "West Mall",
-        "routeUse": "Cheetah threshold in the Greenbelt 2-fer route."
+        "routeUse": "Cheetah threshold in the C&O opener route."
       },
       {
         "reference": "US-0653",
         "name": "Constitution Gardens National Park",
         "group": "West Mall",
-        "routeUse": "Buffer beyond Cheetah in the Greenbelt 2-fer route."
+        "routeUse": "Buffer beyond Cheetah in the C&O opener route."
       },
       {
         "reference": "US-0796",
@@ -1318,13 +1372,13 @@
         "reference": "US-0795",
         "name": "World War I National Memorial",
         "group": "Downtown / Mall fringe",
-        "routeUse": "Adds one unique reference north/east of Washington Monument."
+        "routeUse": "Required downtown add-on to reach 20 with the C&O opener route."
       },
       {
         "reference": "US-0657",
         "name": "President's Park (White House) Park",
         "group": "Downtown / Mall fringe",
-        "routeUse": "Possible downtown add-on after WWI."
+        "routeUse": "Required downtown add-on after Washington Monument in the C&O opener route."
       },
       {
         "reference": "US-0853",
@@ -1336,7 +1390,7 @@
         "reference": "US-0814",
         "name": "Ford's Theatre National Historic Site",
         "group": "Downtown / Mall fringe",
-        "routeUse": "Walkable but adds a long eastbound leg."
+        "routeUse": "First practical downtown buffer beyond 20 if the C&O opener route needs padding."
       },
       {
         "reference": "US-7499",
@@ -1383,8 +1437,8 @@
     ]
   },
   "expandedMallRoute": {
-    "name": "Greenbelt 2-fer + LBJ + expanded Mall route",
-    "strategy": "Use the Greenbelt/BW Parkway overlap as the Saturday-night Maryland opener, LBJ as the Sunday jackpot, then walk the W8WZ Mall sequence. Greenbelt plus LBJ reaches 9 unique references before the Mall; Cheetah is reached at Vietnam and the full Mall route reaches 18 before the Virginia finish.",
+    "name": "C&O + LBJ + expanded Mall route",
+    "strategy": "Use C&O Canal at Anglers as the clean late-night Maryland opener, then LBJ as the jackpot and the expanded Mall sequence through Jefferson, President’s Park, and WWI. C&O plus LBJ reaches 8 unique references before the Mall; Cheetah is reached at Vietnam and the route reaches 20 at WWI if all stops hold.",
     "mapsChecks": [
       {
         "from": "Foggy Bottom",
@@ -1437,11 +1491,11 @@
       }
     ],
     "recommendedOrder": [
-      "Greenbelt/Baltimore-Washington Parkway overlap after 20:00 EDT Saturday",
+      "C&O Canal / Anglers parking lot after 20:00 EDT Saturday",
+      "Optional late: LBJ / Columbia Island Marina right-side parking area if timing still works",
       "Foggy Bottom hotel",
-      "Optional early: Theodore Roosevelt Island by car/rideshare if chasing 20+",
-      "Exact LBJ 7-fer operating area",
-      "Thomas Jefferson Memorial or FDR Memorial rideshare drop",
+      "Exact LBJ 7-fer operating area if not done Saturday night",
+      "Thomas Jefferson Memorial rideshare drop",
       "FDR Memorial",
       "MLK Memorial",
       "Korean War Veterans Memorial",
@@ -1450,23 +1504,20 @@
       "Constitution Gardens",
       "World War II Memorial",
       "Washington Monument",
-      "President's Park",
+      "President’s Park",
       "World War I Memorial",
-      "Ford's Theatre NHS",
-      "Dwight D. Eisenhower Memorial",
-      "Optional rideshare/car: Belmont-Paul",
-      "Optional southbound: Dyke Marsh",
-      "Return to Foggy Bottom hotel, then drive to Mason Neck",
+      "Ford’s Theatre NHS buffer if needed",
+      "Return to Foggy Bottom hotel, then drive to Meadowood",
       "Fredericksburg hotel"
     ],
     "countMilestones": [
       {
-        "label": "After Greenbelt + LBJ",
-        "entities": 9
+        "label": "After C&O + LBJ",
+        "entities": 8
       },
       {
-        "label": "After FDR starts the Mall overlay",
-        "entities": 11
+        "label": "After Jefferson starts the Mall overlay",
+        "entities": 10
       },
       {
         "label": "After Lincoln",
@@ -1485,19 +1536,23 @@
         "entities": 18
       },
       {
-        "label": "After Mason Neck",
+        "label": "After President’s Park",
+        "entities": 19
+      },
+      {
+        "label": "After WWI",
         "entities": 20
       },
       {
-        "label": "After Dyke Marsh + Mason Neck",
-        "entities": 22
+        "label": "After Meadowood Virginia finish",
+        "entities": 21
       }
     ],
-    "caution": "Greenbelt is a confirmed 2-fer only for US-0668 + US-7973 from a legal overlap point; US-0654 and US-4581 need exact confirmation. Fort McHenry is no longer viable after 18:00."
+    "caution": "C&O/Anglers is selected because all-states credit is higher priority than Greenbelt’s extra entity. Greenbelt remains a fallback only with legal access; Ford’s Theatre is the first downtown buffer if a Mall stop slips."
   },
   "routeOptimization": {
     "updated": "2026-06-19",
-    "summary": "Revised after Fort McHenry access, Greenbelt GeoJSON checks, and local activator feedback: Greenbelt/BW Parkway is the primary Maryland opener as a conservative 2-fer, LBJ is the high-confidence Sunday jackpot, Cheetah is reached at Vietnam, Meadowood is the practical Virginia finish, and Mason Neck remains the Ostrich stretch.",
+    "summary": "Revised after the late-arrival all-states decision: C&O Canal at Anglers is the clean Maryland opener, LBJ is the high-confidence jackpot, Cheetah is reached at Vietnam, the expanded Mall route reaches 20 at WWI, and Meadowood remains the practical Virginia finish.",
     "constraints": [
       "The Tesla stays parked at the Foggy Bottom hotel during the DC rove.",
       "Prefer walking when the time penalty is modest and it avoids another rideshare.",
@@ -1506,52 +1561,40 @@
     ],
     "recommendedCoreOrder": [
       {
-        "label": "Foggy Bottom hotel",
-        "mode": "walk/ride",
-        "movement": "start with car parked at hotel",
-        "value": "single car anchor"
+        "label": "C&O Canal / Anglers",
+        "mode": "drive",
+        "movement": "late Saturday Maryland opener",
+        "value": "US-0015 and all-states credit"
       },
       {
-        "label": "Optional Theodore Roosevelt Island",
+        "label": "LBJ / Columbia Island",
+        "mode": "ride/drive",
+        "movement": "late Saturday if possible, otherwise Sunday morning",
+        "value": "+7 unique"
+      },
+      {
+        "label": "Thomas Jefferson Memorial",
         "mode": "ride",
-        "movement": "4 min from hotel; 9 min onward to LBJ",
-        "value": "+1 entity, but costs an extra early stop/ride"
+        "movement": "start expanded Mall walk",
+        "value": "+2 including National Mall"
       },
       {
-        "label": "Lady Bird Johnson / Columbia Island operating area",
-        "mode": "ride",
-        "movement": "about 12 min from hotel direct",
-        "value": "+7 unique after Greenbelt, 7 refs total at the spot"
-      },
-      {
-        "label": "FDR rideshare drop / Mall start",
-        "mode": "ride",
-        "movement": "about 7 min from LBJ; walking is about 29 min",
-        "value": "starts the Mall overlay"
-      },
-      {
-        "label": "FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution -> WWII -> Washington Monument",
+        "label": "FDR -> MLK -> Korean -> Lincoln -> Vietnam",
         "mode": "walk",
-        "movement": "about 2.9 km / 39 min for this core sequence from FDR",
-        "value": "reaches 18 entities after Washington Monument with Greenbelt counted as a 2-fer and LBJ validated; Cheetah is reached at Vietnam"
+        "movement": "core Mall sequence",
+        "value": "Cheetah at Vietnam"
       },
       {
-        "label": "Return to Foggy Bottom hotel",
-        "mode": "walk or ride",
-        "movement": "31 min walk or about 9 min rideshare from Washington Monument",
-        "value": "retrieve car for southbound route"
+        "label": "Constitution -> WWII -> Washington -> President’s Park -> WWI",
+        "mode": "walk",
+        "movement": "expanded count ladder",
+        "value": "20 at WWI"
       },
       {
-        "label": "Mason Neck",
+        "label": "Meadowood Mustang Equestrian Trailhead",
         "mode": "drive",
-        "movement": "about 40 min from the hotel",
-        "value": "+2 clean southbound entities; reaches Ostrich exactly if the 2-fer verifies"
-      },
-      {
-        "label": "Fredericksburg hotel",
-        "mode": "drive",
-        "movement": "about 59 min from Mason Neck",
-        "value": "Sunday night anchor"
+        "movement": "Virginia finish",
+        "value": "all-states protection"
       }
     ],
     "expandedWalkOrder": [
@@ -1627,12 +1670,12 @@
         "finding": "Only do it before LBJ if chasing 20+. Walking hotel -> TR -> LBJ is about 88 minutes; rideshare movement is about 13 minutes before activation time."
       },
       {
-        "label": "LBJ to FDR",
-        "finding": "Treat this as a rideshare jump. Walking is about 29 minutes; rideshare/driving directions are about 7 minutes."
+        "label": "LBJ to Jefferson",
+        "finding": "Treat this as a rideshare jump. Driving/rideshare is about 6 minutes and sets up the expanded Mall walk needed after the C&O opener."
       },
       {
         "label": "Return to hotel",
-        "finding": "After the Washington Monument core finish, walking back to Foggy Bottom is about 31 minutes; rideshare is about 9 minutes. Either way, get the car at the hotel before going south."
+        "finding": "After the WWI downtown finish, use rideshare back to Foggy Bottom if protecting the Meadowood Virginia stop; walking is too expensive late in the day."
       },
       {
         "label": "East Mall expansion",
@@ -1648,10 +1691,22 @@
       },
       {
         "label": "Fort McHenry Saturday branch",
-        "finding": "Fox Point -> Fort is about 1h12 and Fort -> Greenbelt about 43m. Only attempt Fort if Fox Point is finished by about 16:00 and Fort arrival is around 17:00-17:15 or earlier; otherwise skip it and protect the 20:00 Greenbelt opener."
+        "finding": "Fort is still pre-18:00 only. With the late-arrival adjustment, skip it and protect the C&O / Anglers Maryland opener instead."
       }
     ],
     "mapsEvidence": [
+      {
+        "scenario": "Bear, DE to C&O Canal / Anglers parking lot",
+        "mode": "driving",
+        "distance": "182.3 km",
+        "minutes": 112
+      },
+      {
+        "scenario": "C&O Canal / Anglers parking lot to LBJ / Columbia Island",
+        "mode": "driving",
+        "distance": "23.5 km",
+        "minutes": 19
+      },
       {
         "scenario": "Foggy Bottom hotel to Lady Bird Johnson / Columbia Island operating area",
         "mode": "rideshare",
@@ -1659,74 +1714,26 @@
         "minutes": 12
       },
       {
-        "scenario": "LBJ exact operating area to FDR",
+        "scenario": "LBJ exact operating area to Thomas Jefferson Memorial",
         "mode": "rideshare",
-        "distance": "3.1 km",
-        "minutes": 7
+        "distance": "3.9 km",
+        "minutes": 6
       },
       {
-        "scenario": "LBJ exact operating area to FDR",
+        "scenario": "Expanded Mall walk from Jefferson to WWI",
         "mode": "walking",
-        "distance": "2.1 km",
-        "minutes": 29
+        "distance": "5.1 km",
+        "minutes": 69,
+        "order": "Jefferson -> FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution Gardens -> WWII -> Washington Monument -> President’s Park -> WWI"
       },
       {
-        "scenario": "Optimized core Mall walk from FDR to Washington Monument",
-        "mode": "walking",
-        "distance": "2.9 km",
-        "minutes": 39,
-        "order": "FDR -> MLK -> Korean -> Lincoln -> Vietnam -> Constitution Gardens -> WWII -> Washington Monument"
-      },
-      {
-        "scenario": "Washington Monument to Foggy Bottom hotel",
-        "mode": "walking",
-        "distance": "2.2 km",
-        "minutes": 31
-      },
-      {
-        "scenario": "Washington Monument to Foggy Bottom hotel",
-        "mode": "rideshare",
-        "distance": "4.1 km",
-        "minutes": 9
-      },
-      {
-        "scenario": "Eisenhower to Foggy Bottom hotel",
+        "scenario": "World War I Memorial to Foggy Bottom hotel",
         "mode": "rideshare",
         "distance": "5.4 km",
         "minutes": 11
       },
       {
-        "scenario": "Eisenhower to Foggy Bottom hotel",
-        "mode": "walking",
-        "distance": "3.8 km",
-        "minutes": 54
-      },
-      {
-        "scenario": "Foggy Bottom hotel to Mason Neck",
-        "mode": "driving",
-        "distance": "43.8 km",
-        "minutes": 40
-      },
-      {
-        "scenario": "Mason Neck to Fredericksburg hotel",
-        "mode": "driving",
-        "distance": "64.0 km",
-        "minutes": 59
-      },
-      {
-        "scenario": "Washington Monument to Mason Neck",
-        "mode": "driving",
-        "distance": "43.5 km",
-        "minutes": 41
-      },
-      {
-        "scenario": "Mason Neck to Fredericksburg hotel",
-        "mode": "driving",
-        "distance": "65.6 km",
-        "minutes": 53
-      },
-      {
-        "scenario": "Washington Monument to Meadowood",
+        "scenario": "Foggy Bottom hotel to Meadowood",
         "mode": "driving",
         "distance": "35.2 km",
         "minutes": 31
@@ -1736,30 +1743,6 @@
         "mode": "driving",
         "distance": "57.2 km",
         "minutes": 45
-      },
-      {
-        "scenario": "Fox Point to Fort McHenry",
-        "mode": "driving",
-        "distance": "121.4 km",
-        "minutes": 72
-      },
-      {
-        "scenario": "Fort McHenry to Greenbelt Park",
-        "mode": "driving",
-        "distance": "44.8 km",
-        "minutes": 43
-      },
-      {
-        "scenario": "Fox Point to Greenbelt Park direct",
-        "mode": "driving",
-        "distance": "160.6 km",
-        "minutes": 96
-      },
-      {
-        "scenario": "Greenbelt Park to Foggy Bottom hotel",
-        "mode": "driving",
-        "distance": "28.1 km",
-        "minutes": 28
       }
     ]
   }

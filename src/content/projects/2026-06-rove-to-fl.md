@@ -47,15 +47,17 @@ Current working shape:
   Tallman while waiting out rush hour, then continue south to the booked Edison,
   NJ hotel.
 - Saturday: start from Edison, activate NJ at Cheesequake, PA at John Heinz, DE
-  at Fox Point, then use the Greenbelt Park / Baltimore-Washington Parkway
-  overlap after 20:00 EDT as the Maryland Sunday-UTC 2-fer if legal access is
-  available before dusk. Fort McHenry is optional only before its 18:00 summer
-  weekend gate closure, and only if Fox Point runs early. Stay in Foggy Bottom.
-- Sunday: make DC / NoVA the large rove day, using the Saturday Greenbelt
-  activation as the first Sunday-UTC count. Follow the CWops/W8WZ Cheetah
-  pattern from LBJ through the National Mall, then use `US-9937` Meadowood BLM
-  SRMA as the practical Virginia finish. Mason Neck remains the Ostrich stretch
-  if timing, access, and restrictions all line up.
+  at Fox Point, then use `US-0015` Chesapeake and Ohio Canal NHP at Anglers as
+  the late-arrival Maryland Sunday-UTC opener. Greenbelt / Baltimore-Washington
+  Parkway remains a higher-count fallback only with legal access and a
+  defensible exact position. Fort McHenry is optional only before its 18:00
+  summer weekend gate closure, and only if Fox Point runs early. Stay in Foggy
+  Bottom.
+- Sunday: make DC / NoVA the large rove day, using the Saturday C&O activation
+  as the first Sunday-UTC count. Follow the CWops/W8WZ pattern from LBJ through
+  the expanded National Mall / downtown route to WWI, then use `US-9937`
+  Meadowood BLM SRMA as the practical Virginia finish. Mason Neck remains a
+  stretch only if timing, access, and restrictions all line up.
 - Monday: activate `US-2744` Medoc Mountain State Park for North Carolina, then
   continue to the booked Florence, SC stop.
 - Tuesday: use `US-2915` Woods Bay State Park as an earlier South Carolina
@@ -78,21 +80,21 @@ Current Friday / Saturday recommendation:
 - Friday after work: activate `US-2149` Tallman Mountain State Park while
   waiting out rush hour, then drive about 1h06 to the booked Edison hotel.
 - Saturday from Edison: `US-1611` Cheesequake State Park -> `US-0512` John Heinz
-  National Wildlife Refuge -> `US-1738` Fox Point State Park -> `US-0668` +
-  `US-7973` Greenbelt / Baltimore-Washington Parkway overlap -> Foggy Bottom.
+  National Wildlife Refuge -> `US-1738` Fox Point State Park -> `US-0015` C&O
+  Canal / Anglers as the late Maryland all-states anchor -> Foggy Bottom.
 
 That Saturday line is about 4h37m of mapped driving before activation time,
 Tesla Supercharger stops, food, and buffer. Moving Tallman to Friday removes the
 NY obligation from Saturday. John Heinz is no longer optional; PA is part of the
 selected route.
 
-The Saturday timing target is Maryland at about 20:00 EDT. Official NPS hours
-rule out Fort McHenry after 18:00, so the revised target is a legal public point
-in the Greenbelt Park / Baltimore-Washington Parkway overlap. GeoJSON checks
-support counting `US-0668` and `US-7973` from that overlap. `US-0654` and
-`US-4581` remain conservative/stretch counts at Greenbelt; N2NWK locally treats
-the area as a 4-fer, but do not count them unless the on-site coordinate and
-access are defensible under POTA rules.
+The Saturday timing target is Maryland after the 20:00 EDT UTC rollover.
+Official NPS hours rule out Fort McHenry after 18:00. Because there is no
+Greenbelt campsite and all-states credit is higher priority than the extra
+Greenbelt entity, the selected late target is C&O Canal at Anglers for `US-0015`.
+Greenbelt / Baltimore-Washington Parkway remains a fallback: GeoJSON checks
+support `US-0668` and `US-7973` from the overlap, but only count them if the
+on-site coordinate and legal access are defensible.
 
 Local activator notes tightened the Saturday stops. Treat Cheesequake as a
 flexible car-adjacent parking-lot activation and avoid playground, lake, and
@@ -109,12 +111,13 @@ Known anchor drive estimates:
 - Silver Sands -> Stamford: 35m.
 - Stamford -> Tallman Mountain State Park: 33m.
 - Tallman -> Edison hotel: 1h06m.
-- Edison -> Cheesequake -> John Heinz -> Fox Point -> Greenbelt -> Foggy
-  Bottom: about 4h37m mapped driving.
+- Bear, DE -> C&O Canal / Anglers: about 1h52m in the late-arrival adjustment.
+- C&O Canal / Anglers -> LBJ / Columbia Island: about 19m if LBJ is still
+  possible Saturday night.
 - Optional Fort McHenry branch from Fox Point: Fox Point -> Fort McHenry is
   about 1h12m, Fort McHenry -> Greenbelt is about 43m. Only do it if Fox Point
   finishes early enough to reach Fort McHenry around 17:00-17:15; otherwise
-  skip it and protect the 20:00 Greenbelt opener.
+  skip it and protect the late C&O / Anglers Maryland opener.
 - Washington Monument -> Mason Neck State Park -> Fredericksburg: 1h34m before
   activation time; Washington Monument -> Meadowood BLM SRMA -> Fredericksburg:
   1h16m.
@@ -128,25 +131,27 @@ Known anchor drive estimates:
 
 Current Sunday DC rove model:
 
-- Saturday evening: activate from a legal public point in the Greenbelt Park /
-  Baltimore-Washington Parkway overlap at or after 20:00 EDT only if access is
-  still lawful before dusk. Count confirmed `US-0668` + `US-7973`. Treat
-  `US-0654` and `US-4581` as unconfirmed unless N2NWK or another local
-  activator provides an exact legal coordinate. Fort McHenry has strong n-fer
-  evidence but is pre-18:00 optional only.
+- Saturday evening: activate `US-0015` Chesapeake and Ohio Canal NHP from the
+  Anglers parking / towpath access after 20:00 EDT. This is the selected
+  all-states Maryland opener because it is cleaner late at night without a
+  Greenbelt campsite. Greenbelt / Baltimore-Washington Parkway remains a
+  fallback 2-fer only if legal public access and the exact overlap are
+  defensible. Fort McHenry has strong n-fer evidence but is pre-18:00 optional
+  only.
 - Sunday morning: start with the Lady Bird Johnson Park / Columbia Island
   Marina right-side parking-area 7-fer: `US-0784`, `US-9901`, `US-4581`,
   `US-4567`, `US-0670`, `US-9898`, and `US-4564`. Local W3LAM feedback says the
   right side of the parking area is inside all seven references and can support
   a larger portable setup; signs may say Lady Bird Johnson Park and Columbia
   Island Marina. Bring headphones for DCA aircraft noise.
-- Cheetah baseline: after Greenbelt and LBJ, follow the article route through FDR
-  (`US-0776` + `US-0655`), MLK (`US-0785` + `US-0655`), Korean War
-  (`US-0780` + `US-0655`), Lincoln (`US-0783` + `US-0655`), and Vietnam
-  (`US-0793` + `US-0655`). That reaches 15 unique Sunday-UTC entities with
-  Greenbelt counted as a confirmed 2-fer.
-- Full article route: add WWII (`US-0796` + `US-0655`) and Washington Monument
-  (`US-0794` + `US-0655`) for 18 entities before the Virginia finish.
+- Cheetah baseline: after C&O and LBJ, start the Mall route at Jefferson
+  (`US-0792` + `US-0655`), then follow FDR (`US-0776`), MLK (`US-0785`),
+  Korean War (`US-0780`), Lincoln (`US-0783`), and Vietnam (`US-0793`). That
+  reaches 15 unique Sunday-UTC entities with the clean C&O opener.
+- Expanded Ostrich route: add Constitution Gardens (`US-0653`), WWII
+  (`US-0796`), Washington Monument (`US-0794`), President's Park (`US-0657`),
+  and WWI (`US-0795`) for 20 entities before the Virginia finish. Ford's
+  Theatre is the first practical downtown buffer if a stop slips.
 - Virginia finish: Meadowood BLM SRMA (`US-9937`) at the Mustang Equestrian
   Trailhead is the practical default finish. Mason Neck State Park / Elizabeth
   Hartwell Mason Neck NWR (`US-1308` + `US-0563`) brings the day to 20 if the
@@ -157,7 +162,8 @@ Current Sunday DC rove model:
 
 DC route timing checks so far:
 
-- Greenbelt -> Foggy Bottom after the Saturday activation: about 28m.
+- C&O Canal / Anglers -> LBJ / Columbia Island: about 19m.
+- Bear, DE -> C&O Canal / Anglers: about 1h52m.
 - Foggy Bottom -> Columbia Island Marina / LBJ: 12m.
 - Columbia Island Marina / LBJ -> FDR Memorial: 10m.
 - FDR Memorial -> Washington Monument by foot through the Mall sequence: 21m.
@@ -189,8 +195,8 @@ Open verification items:
   Mason Neck / Dyke Marsh for Ostrich.
 - Decide whether Woods Bay is used as an early SC backup/add-on before Savannah
   NWR.
-- Ask N2NWK for exact Greenbelt coordinates before relying on `US-0654` or
-  `US-4581`; current conservative Greenbelt count is `US-0668` + `US-7973`.
+- Treat Greenbelt as a fallback only without a campsite; current selected
+  Maryland count is C&O Canal `US-0015`.
 - Check Mason Neck hours and restrictions before relying on it for Ostrich.
 - Confirm Savannah National Wildlife Refuge operating-position state credit.
 - Identify Tesla Supercharger pairings for Saturday and the southern hotel legs.
