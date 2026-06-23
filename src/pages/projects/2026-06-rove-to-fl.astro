@@ -51,6 +51,15 @@ interface FieldNote {
   href: string;
   summary: string;
 }
+interface NavigationCoordinate {
+  label: string;
+  context: string;
+  latitude: number;
+  longitude: number;
+  reference?: string;
+  address?: string;
+  notes: string;
+}
 
 const mapOverlays =
   typeof (itinerary as { mapOverlays?: unknown }).mapOverlays === "object" &&
@@ -302,7 +311,7 @@ const overviewStops: OverviewStop[] = [
     driveFromPrior: "2h 13m / 152.2 mi from Woods Bay if used",
     expectedStay: "~1h activation",
     references: ["US-0522"],
-    notes: "Border-area South Carolina target before crossing toward Georgia.",
+    notes: "Use Abercorn Landing for the low-friction stop: a boat-ramp lot just inside the refuge boundary with a picnic table and no facilities. No wires or ropes in trees, and no ground stakes in the refuge.",
   },
   {
     date: "2026-06-23",
@@ -359,8 +368,53 @@ const fieldNotes: FieldNote[] = [
   },
 ];
 
+const navigationCoordinates: NavigationCoordinate[] = [
+  {
+    label: "Woods Bay State Park",
+    context: "Tuesday optional SC backup/add-on",
+    reference: "US-2915",
+    latitude: 33.9494394,
+    longitude: -79.9762942,
+    address: "11020 Woods Bay Rd, Olanta, SC 29114",
+    notes: "Use if the day has enough slack before Savannah NWR.",
+  },
+  {
+    label: "Abercorn Landing",
+    context: "Savannah NWR operating spot",
+    reference: "US-0522",
+    latitude: 32.2586944,
+    longitude: -81.1784167,
+    address: "112 Abercorn Landing Rd, Rincon, GA 31326",
+    notes:
+      "Recommended by Bill W4ZDP and Stacy WA4IDS as the simple quiet activation spot just inside the refuge boundary.",
+  },
+  {
+    label: "Courtyard by Marriott Jekyll Island",
+    context: "Tuesday hotel / Jekyll Island State Park anchor",
+    reference: "US-0636",
+    latitude: 31.0374673,
+    longitude: -81.4141493,
+    address: "178 S Beachview Dr, Jekyll Island, GA 31527",
+    notes: "Booked overnight; the whole island counts as Jekyll Island State Park.",
+  },
+];
+
 function potaUrl(reference: string) {
   return `https://pota.app/#/park/${reference}`;
+}
+
+function formatCoordinate(value: number) {
+  return value.toFixed(7);
+}
+
+function coordinatePair(point: NavigationCoordinate) {
+  return `${formatCoordinate(point.latitude)}, ${formatCoordinate(point.longitude)}`;
+}
+
+function googleMapsUrl(point: NavigationCoordinate) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${point.latitude},${point.longitude}`
+  )}`;
 }
 ---
 
@@ -527,6 +581,48 @@ function potaUrl(reference: string) {
       ))}
     </div>
     {fieldNotes.map((note) => <p class="rove-weekend-note">{note.summary}</p>)}
+  </section>
+
+  <section class="section-block wide" aria-labelledby="navigation-title">
+    <div class="section-heading">
+      <p class="section-label">Navigation</p>
+      <h2 id="navigation-title">Coordinates to punch in</h2>
+    </div>
+
+    <div class="rove-coordinate-grid">
+      {navigationCoordinates.map((point) => (
+        <article>
+          <header>
+            <span>{point.context}</span>
+            <strong>{point.label}</strong>
+          </header>
+          <dl>
+            <div>
+              <dt>GPS</dt>
+              <dd>
+                <a href={googleMapsUrl(point)} target="_blank" rel="noreferrer">
+                  {coordinatePair(point)}
+                </a>
+              </dd>
+            </div>
+            {point.address && (
+              <div>
+                <dt>Address</dt>
+                <dd>{point.address}</dd>
+              </div>
+            )}
+          </dl>
+          {point.reference && (
+            <p class="rove-reference-list">
+              <a href={potaUrl(point.reference)} target="_blank" rel="noreferrer">
+                {point.reference}
+              </a>
+            </p>
+          )}
+          <p>{point.notes}</p>
+        </article>
+      ))}
+    </div>
   </section>
 
   <section class="section-block wide" aria-labelledby="roadmap-title">
@@ -881,6 +977,66 @@ function potaUrl(reference: string) {
     border: 1px solid var(--color-border, #ddd);
     border-radius: 6px;
     padding: 0.9rem;
+  }
+
+  .rove-coordinate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  .rove-coordinate-grid article {
+    border: 1px solid var(--color-border, #ddd);
+    border-radius: 6px;
+    padding: 0.9rem;
+  }
+
+  .rove-coordinate-grid header {
+    display: grid;
+    gap: 0.2rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .rove-coordinate-grid header span {
+    color: var(--color-text-muted, #666);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-coordinate-grid header strong {
+    font-size: 1rem;
+  }
+
+  .rove-coordinate-grid dl {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0.5rem 0;
+  }
+
+  .rove-coordinate-grid dt {
+    color: var(--color-text-muted, #666);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .rove-coordinate-grid dd {
+    font-size: 0.85rem;
+    margin: 0.1rem 0 0;
+  }
+
+  .rove-coordinate-grid a {
+    color: var(--color-accent, #167246);
+    font-weight: 700;
+  }
+
+  .rove-coordinate-grid p {
+    color: var(--color-text-muted, #666);
+    font-size: 0.85rem;
+    margin: 0.35rem 0 0;
   }
 
   .rove-detail-page-grid h3 {
