@@ -64,6 +64,9 @@ ASCII, and hyphenated.
   leave it unresolved and ask or mark it as uncertain.
 - When later evidence resolves uncertainty, update the prose directly and
   remove stale "to confirm" notes.
+- Treat ADI and log data as evidence, not as the narrator. Prefer first-person
+  activation prose such as "I made 12 CW QSOs..." over "The log shows..." or
+  "The log has...".
 - Do not over-polish. The report should still sound like the operator made a
   note soon after the activation.
 
@@ -79,6 +82,9 @@ For each park subsection:
   `## [Park Name, US-1234](/radio/pota/US-1234/)`.
 - Include the park name, POTA reference, QSO count, bands, modes, UTC window,
   and equipment that changed at that stop.
+- Use approximate time windows in narrative prose unless exact timing matters
+  for a UTC rollover, access deadline, propagation event, or other specific
+  point.
 - Mention setup and teardown time when the user gave it, especially for quick
   rove logistics.
 - Add frontmatter tags for every park reference, lowercased:

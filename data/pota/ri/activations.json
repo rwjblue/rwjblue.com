@@ -1208,6 +1208,214 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-0783",
+      "park": "Lincoln National Memorial",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 10,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0655",
+      "park": "National Mall Park",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 52,
+        "cw": 52,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0015",
+      "park": "Chesapeake and Ohio Canal National Historical Park",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0776",
+      "park": "Franklin Delano Roosevelt National Memorial",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 10,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0670",
+      "park": "George Washington Memorial Parkway",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 45,
+        "cw": 24,
+        "data": 0,
+        "phone": 21
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0653",
+      "park": "Constitution Gardens National Park",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 20,
+        "cw": 0,
+        "data": 0,
+        "phone": 20
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-9901",
+      "park": "Civil War Defenses of Washington National Historic Trail",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 33,
+        "cw": 12,
+        "data": 0,
+        "phone": 21
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-9898",
+      "park": "Mount Vernon National Historic Trail",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 33,
+        "cw": 12,
+        "data": 0,
+        "phone": 21
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-4567",
+      "park": "Captain John Smith Chesapeake National Historic Trail",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 33,
+        "cw": 12,
+        "data": 0,
+        "phone": 21
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0780",
+      "park": "Korean War Veterans National Memorial",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0784",
+      "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 33,
+        "cw": 12,
+        "data": 0,
+        "phone": 21
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0792",
+      "park": "Thomas Jefferson National Memorial",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0785",
+      "park": "Martin Luther King Jr. National Memorial",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 10,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0793",
+      "park": "Vietnam Veterans National Memorial",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 20,
+        "cw": 0,
+        "data": 0,
+        "phone": 20
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-4564",
+      "park": "Potomac Heritage Trail National Scenic Trail",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 33,
+        "cw": 12,
+        "data": 0,
+        "phone": 21
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-4581",
+      "park": "Star-Spangled Banner National Historic Trail",
+      "date": "2026-06-21",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 33,
+        "cw": 12,
+        "data": 0,
+        "phone": 21
+      },
+      "source": "profile"
     }
   ]
 }

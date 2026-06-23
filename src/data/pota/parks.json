@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T10:38:51.816Z",
+  "generatedAt": "2026-06-23T02:22:30.232Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -10,15 +10,44 @@
       "locationDesc": "US-DC,US-MD,US-WV",
       "href": "/radio/pota/US-0015/",
       "potaUrl": "https://pota.app/#/park/US-0015",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-0015",
+          "park": "Chesapeake and Ohio Canal National Historical Park",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
       "notes": [
         {
           "id": "2026-06-20-rhode-island-to-florida-rove-day-two",
           "title": "Rhode Island-to-Florida rove, day two",
           "date": "2026-06-20",
           "href": "/notes/2026-06-20-rhode-island-to-florida-rove-day-two/"
+        },
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
         }
       ],
       "publicStats": {
@@ -250,6 +279,102 @@
       }
     },
     {
+      "reference": "US-0653",
+      "name": "Constitution Gardens",
+      "latitude": 38.8904,
+      "longitude": -77.0436,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0653/",
+      "potaUrl": "https://pota.app/#/park/US-0653",
+      "activationCount": 1,
+      "qsoTotal": 20,
+      "activations": [
+        {
+          "reference": "US-0653",
+          "park": "Constitution Gardens National Park",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 20,
+            "cw": 0,
+            "data": 0,
+            "phone": 20
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-0655",
+      "name": "National Mall",
+      "latitude": 38.8897,
+      "longitude": -77.0282,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0655/",
+      "potaUrl": "https://pota.app/#/park/US-0655",
+      "activationCount": 1,
+      "qsoTotal": 52,
+      "activations": [
+        {
+          "reference": "US-0655",
+          "park": "National Mall Park",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 52,
+            "cw": 52,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
       "reference": "US-0670",
       "name": "George Washington",
       "latitude": 38.9618,
@@ -257,15 +382,284 @@
       "locationDesc": "US-DC,US-MD,US-VA",
       "href": "/radio/pota/US-0670/",
       "potaUrl": "https://pota.app/#/park/US-0670",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 45,
+      "activations": [
+        {
+          "reference": "US-0670",
+          "park": "George Washington Memorial Parkway",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 45,
+            "cw": 24,
+            "data": 0,
+            "phone": 21
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
       "notes": [
         {
           "id": "2026-06-20-rhode-island-to-florida-rove-day-two",
           "title": "Rhode Island-to-Florida rove, day two",
           "date": "2026-06-20",
           "href": "/notes/2026-06-20-rhode-island-to-florida-rove-day-two/"
+        },
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-0776",
+      "name": "Franklin Delano Roosevelt",
+      "latitude": 38.8835,
+      "longitude": -77.043,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0776/",
+      "potaUrl": "https://pota.app/#/park/US-0776",
+      "activationCount": 1,
+      "qsoTotal": 10,
+      "activations": [
+        {
+          "reference": "US-0776",
+          "park": "Franklin Delano Roosevelt National Memorial",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-0780",
+      "name": "Korean War Veterans",
+      "latitude": 38.8878,
+      "longitude": -77.0478,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0780/",
+      "potaUrl": "https://pota.app/#/park/US-0780",
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-0780",
+          "park": "Korean War Veterans National Memorial",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-0783",
+      "name": "Lincoln",
+      "latitude": 38.8893,
+      "longitude": -77.0502,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0783/",
+      "potaUrl": "https://pota.app/#/park/US-0783",
+      "activationCount": 1,
+      "qsoTotal": 10,
+      "activations": [
+        {
+          "reference": "US-0783",
+          "park": "Lincoln National Memorial",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-0784",
+      "name": "Lyndon Baines Johnson Memorial Grove on the Potomac",
+      "latitude": 38.8779,
+      "longitude": -77.0509,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0784/",
+      "potaUrl": "https://pota.app/#/park/US-0784",
+      "activationCount": 1,
+      "qsoTotal": 33,
+      "activations": [
+        {
+          "reference": "US-0784",
+          "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 33,
+            "cw": 12,
+            "data": 0,
+            "phone": 21
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-0785",
+      "name": "Martin Luther King Jr.",
+      "latitude": 38.8864,
+      "longitude": -77.0444,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0785/",
+      "potaUrl": "https://pota.app/#/park/US-0785",
+      "activationCount": 1,
+      "qsoTotal": 10,
+      "activations": [
+        {
+          "reference": "US-0785",
+          "park": "Martin Luther King Jr. National Memorial",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
         }
       ],
       "publicStats": {
@@ -328,6 +722,103 @@
         "attempts": 75,
         "activations": 68,
         "qsos": 1626
+      }
+    },
+    {
+      "reference": "US-0792",
+      "name": "Thomas Jefferson National Memorial",
+      "latitude": 38.8814,
+      "longitude": -77.0365,
+      "grid": "FM18lv",
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0792/",
+      "potaUrl": "https://pota.app/#/park/US-0792",
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-0792",
+          "park": "Thomas Jefferson National Memorial",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 60,
+        "activations": 58,
+        "qsos": 2034
+      }
+    },
+    {
+      "reference": "US-0793",
+      "name": "Vietnam Veterans",
+      "latitude": 38.8913,
+      "longitude": -77.0477,
+      "locationDesc": "US-DC",
+      "href": "/radio/pota/US-0793/",
+      "potaUrl": "https://pota.app/#/park/US-0793",
+      "activationCount": 1,
+      "qsoTotal": 20,
+      "activations": [
+        {
+          "reference": "US-0793",
+          "park": "Vietnam Veterans National Memorial",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 20,
+            "cw": 0,
+            "data": 0,
+            "phone": 20
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
       }
     },
     {
@@ -1437,6 +1928,150 @@
         "attempts": 53,
         "activations": 51,
         "qsos": 1288
+      }
+    },
+    {
+      "reference": "US-4564",
+      "name": "Potomac Heritage Trail",
+      "latitude": 38.6148,
+      "longitude": -77.2748,
+      "locationDesc": "US-DC,US-MD,US-PA,US-VA",
+      "href": "/radio/pota/US-4564/",
+      "potaUrl": "https://pota.app/#/park/US-4564",
+      "activationCount": 1,
+      "qsoTotal": 33,
+      "activations": [
+        {
+          "reference": "US-4564",
+          "park": "Potomac Heritage Trail National Scenic Trail",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 33,
+            "cw": 12,
+            "data": 0,
+            "phone": 21
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-4567",
+      "name": "Captain John Smith Chesapeake",
+      "latitude": 38.9049,
+      "longitude": -77.0681,
+      "locationDesc": "US-DC,US-DE,US-MD,US-NY,US-PA,US-VA",
+      "href": "/radio/pota/US-4567/",
+      "potaUrl": "https://pota.app/#/park/US-4567",
+      "activationCount": 1,
+      "qsoTotal": 33,
+      "activations": [
+        {
+          "reference": "US-4567",
+          "park": "Captain John Smith Chesapeake National Historic Trail",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 33,
+            "cw": 12,
+            "data": 0,
+            "phone": 21
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-4581",
+      "name": "Star-Spangled Banner",
+      "latitude": 39.2652,
+      "longitude": -76.5836,
+      "locationDesc": "US-DC,US-MD,US-VA",
+      "href": "/radio/pota/US-4581/",
+      "potaUrl": "https://pota.app/#/park/US-4581",
+      "activationCount": 1,
+      "qsoTotal": 33,
+      "activations": [
+        {
+          "reference": "US-4581",
+          "park": "Star-Spangled Banner National Historic Trail",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 33,
+            "cw": 12,
+            "data": 0,
+            "phone": 21
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
       }
     },
     {
@@ -3459,6 +4094,102 @@
         "attempts": 140,
         "activations": 134,
         "qsos": 6750
+      }
+    },
+    {
+      "reference": "US-9898",
+      "name": "Mount Vernon",
+      "latitude": 38.793,
+      "longitude": -77.0496,
+      "locationDesc": "US-DC,US-VA",
+      "href": "/radio/pota/US-9898/",
+      "potaUrl": "https://pota.app/#/park/US-9898",
+      "activationCount": 1,
+      "qsoTotal": 33,
+      "activations": [
+        {
+          "reference": "US-9898",
+          "park": "Mount Vernon National Historic Trail",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 33,
+            "cw": 12,
+            "data": 0,
+            "phone": 21
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
+      "reference": "US-9901",
+      "name": "Civil War Defenses of Washington",
+      "latitude": 38.9346,
+      "longitude": -77.126,
+      "locationDesc": "US-DC,US-MD,US-VA",
+      "href": "/radio/pota/US-9901/",
+      "potaUrl": "https://pota.app/#/park/US-9901",
+      "activationCount": 1,
+      "qsoTotal": 33,
+      "activations": [
+        {
+          "reference": "US-9901",
+          "park": "Civil War Defenses of Washington National Historic Trail",
+          "date": "2026-06-21",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 33,
+            "cw": 12,
+            "data": 0,
+            "phone": 21
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-21-washington-dc-pota-rove",
+              "title": "Washington DC POTA rove",
+              "date": "2026-06-21",
+              "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-21-washington-dc-pota-rove",
+          "title": "Washington DC POTA rove",
+          "date": "2026-06-21",
+          "href": "/notes/2026-06-21-washington-dc-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
       }
     }
   ]
