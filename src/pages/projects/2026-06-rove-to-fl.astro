@@ -248,26 +248,35 @@ const overviewStops: OverviewStop[] = [
     destination: "DC / NoVA rove sequence",
     type: "Detailed rove",
     driveFromPrior: "Starts from Foggy Bottom",
-    expectedStay: "Cheetah baseline, Meadowood finish, Mason Neck stretch",
+    expectedStay: "Cheetah baseline; VA missed, now Monday fallback",
     detailUrl: "/projects/2026-06-rove-to-fl/sunday/",
-    notes: "Detailed stop order lives on the Sunday rove page; Meadowood is the practical VA finish and Mason Neck is the Ostrich stretch.",
+    notes: "Detailed stop order lives on the Sunday rove page; Meadowood and Mason Neck were the planned VA finishes, but VA now moves to Petersburg Monday morning.",
   },
   {
     date: "2026-06-21",
     destination: "Fredericksburg, VA hotel",
     type: "Hotel",
-    driveFromPrior: "50m from Mason Neck if used",
+    driveFromPrior: "after DC / NoVA rove",
     expectedStay: "Sunday overnight",
-    notes: "Booked anchor after the DC/NoVA rove.",
+    notes: "Booked anchor before the Monday VA/NC southbound leg.",
+  },
+  {
+    date: "2026-06-22",
+    destination: "Petersburg National Battlefield, VA",
+    type: "POTA",
+    driveFromPrior: "1h 21m / 85.6 mi from Fredericksburg",
+    expectedStay: "~1h quick morning activation",
+    references: ["US-0707"],
+    notes: "Selected Virginia activation on the way to Medoc Mountain; use the Eastern Front visitor-center area for a low-friction stop.",
   },
   {
     date: "2026-06-22",
     destination: "Medoc Mountain State Park, NC",
     type: "POTA",
-    driveFromPrior: "between Fredericksburg and Florence",
-    expectedStay: "~1h activation once selected",
+    driveFromPrior: "1h 23m / 87.1 mi from Petersburg",
+    expectedStay: "~1h activation",
     references: ["US-2744"],
-    notes: "Selected North Carolina activation on the Monday workday leg.",
+    notes: "Selected North Carolina activation after banking VA at Petersburg.",
   },
   {
     date: "2026-06-22",
@@ -370,9 +379,8 @@ function potaUrl(reference: string) {
       </p>
       <p class="lede">
         Fixed hotel anchors and selected POTA targets are now set through
-        Florida. Medoc Mountain now covers NC, Woods Bay is the early SC
-        backup/add-on, and the exact Sunday DC/NoVA flow still controls whether
-        Mason Neck or Meadowood handles VA.
+        Florida. Petersburg National Battlefield now covers VA, Medoc Mountain
+        covers NC, and Woods Bay is the early SC backup/add-on.
       </p>
     </div>
 
@@ -599,8 +607,8 @@ function potaUrl(reference: string) {
         <h3>Sunday DC / NoVA rove</h3>
         <p>
           C&O Canal as the Sunday-UTC Maryland opener, then LBJ and the
-          W8WZ-inspired expanded DC route through WWI, with Meadowood as the
-          practical VA finish toward Fredericksburg.
+          W8WZ-inspired expanded DC route through WWI. Meadowood and Mason Neck
+          remain Sunday context; Petersburg now carries the VA requirement.
         </p>
         <a href="/projects/2026-06-rove-to-fl/sunday/">Open Sunday details</a>
       </article>

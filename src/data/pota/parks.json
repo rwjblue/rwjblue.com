@@ -1,6 +1,58 @@
 {
-  "generatedAt": "2026-06-20T03:51:36.389Z",
+  "generatedAt": "2026-06-21T10:38:51.816Z",
   "parks": [
+    {
+      "reference": "US-0015",
+      "name": "Chesapeake and Ohio Canal National Historical Park",
+      "latitude": 39.6007,
+      "longitude": -77.8265,
+      "grid": "FM19co",
+      "locationDesc": "US-DC,US-MD,US-WV",
+      "href": "/radio/pota/US-0015/",
+      "potaUrl": "https://pota.app/#/park/US-0015",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-06-20-rhode-island-to-florida-rove-day-two",
+          "title": "Rhode Island-to-Florida rove, day two",
+          "date": "2026-06-20",
+          "href": "/notes/2026-06-20-rhode-island-to-florida-rove-day-two/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 617,
+        "activations": 605,
+        "qsos": 18371
+      }
+    },
+    {
+      "reference": "US-0512",
+      "name": "John Heinz National Wildlife Refuge",
+      "latitude": 39.8929,
+      "longitude": -75.2575,
+      "grid": "FM29iv",
+      "locationDesc": "US-PA",
+      "href": "/radio/pota/US-0512/",
+      "potaUrl": "https://pota.app/#/park/US-0512",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-06-20-rhode-island-to-florida-rove-day-two",
+          "title": "Rhode Island-to-Florida rove, day two",
+          "date": "2026-06-20",
+          "href": "/notes/2026-06-20-rhode-island-to-florida-rove-day-two/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 125,
+        "activations": 120,
+        "qsos": 3836
+      }
+    },
     {
       "reference": "US-0513",
       "name": "Block Island National Wildlife Refuge",
@@ -195,6 +247,31 @@
         "attempts": 49,
         "activations": 49,
         "qsos": 1339
+      }
+    },
+    {
+      "reference": "US-0670",
+      "name": "George Washington",
+      "latitude": 38.9618,
+      "longitude": -77.1478,
+      "locationDesc": "US-DC,US-MD,US-VA",
+      "href": "/radio/pota/US-0670/",
+      "potaUrl": "https://pota.app/#/park/US-0670",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-06-20-rhode-island-to-florida-rove-day-two",
+          "title": "Rhode Island-to-Florida rove, day two",
+          "date": "2026-06-20",
+          "href": "/notes/2026-06-20-rhode-island-to-florida-rove-day-two/"
+        }
+      ],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
       }
     },
     {
@@ -552,6 +629,32 @@
       }
     },
     {
+      "reference": "US-1611",
+      "name": "Cheesequake State Park",
+      "latitude": 40.4377,
+      "longitude": -74.2666,
+      "grid": "FN20uk",
+      "locationDesc": "US-NJ",
+      "href": "/radio/pota/US-1611/",
+      "potaUrl": "https://pota.app/#/park/US-1611",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-06-20-rhode-island-to-florida-rove-day-two",
+          "title": "Rhode Island-to-Florida rove, day two",
+          "date": "2026-06-20",
+          "href": "/notes/2026-06-20-rhode-island-to-florida-rove-day-two/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 1147,
+        "activations": 1125,
+        "qsos": 76663
+      }
+    },
+    {
       "reference": "US-1716",
       "name": "Silver Sands State Park",
       "latitude": 41.2009,
@@ -598,6 +701,32 @@
         "attempts": 288,
         "activations": 280,
         "qsos": 10106
+      }
+    },
+    {
+      "reference": "US-1738",
+      "name": "Fox Point State Park",
+      "latitude": 39.7561,
+      "longitude": -75.4897,
+      "grid": "FM29gs",
+      "locationDesc": "US-DE",
+      "href": "/radio/pota/US-1738/",
+      "potaUrl": "https://pota.app/#/park/US-1738",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-06-20-rhode-island-to-florida-rove-day-two",
+          "title": "Rhode Island-to-Florida rove, day two",
+          "date": "2026-06-20",
+          "href": "/notes/2026-06-20-rhode-island-to-florida-rove-day-two/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 196,
+        "activations": 191,
+        "qsos": 10682
       }
     },
     {

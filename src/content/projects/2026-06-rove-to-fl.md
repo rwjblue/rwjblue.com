@@ -55,11 +55,12 @@ Current working shape:
   Bottom.
 - Sunday: make DC / NoVA the large rove day, using the Saturday C&O activation
   as the first Sunday-UTC count. Follow the CWops/W8WZ pattern from LBJ through
-  the expanded National Mall / downtown route to WWI, then use `US-9937`
-  Meadowood BLM SRMA as the practical Virginia finish. Mason Neck remains a
-  stretch only if timing, access, and restrictions all line up.
-- Monday: activate `US-2744` Medoc Mountain State Park for North Carolina, then
-  continue to the booked Florence, SC stop.
+  the expanded National Mall / downtown route to WWI. Meadowood or Mason Neck
+  were the planned Virginia finishes, but VA is still open after the
+  Fredericksburg overnight.
+- Monday: activate `US-0707` Petersburg National Battlefield for Virginia, then
+  activate `US-2744` Medoc Mountain State Park for North Carolina and continue
+  to the booked Florence, SC stop.
 - Tuesday: use `US-2915` Woods Bay State Park as an earlier South Carolina
   backup/add-on if useful, then activate `US-0522` Savannah National Wildlife
   Refuge and continue to the booked Jekyll Island `US-0636` Georgia anchor.
@@ -121,8 +122,10 @@ Known anchor drive estimates:
 - Washington Monument -> Mason Neck State Park -> Fredericksburg: 1h34m before
   activation time; Washington Monument -> Meadowood BLM SRMA -> Fredericksburg:
   1h16m.
-- Fredericksburg -> Medoc Mountain State Park -> Florence: 5h45m before
-  activation or charging stops.
+- Fredericksburg -> Petersburg National Battlefield -> Medoc Mountain State
+  Park -> Florence: about 5h55m before activation or charging stops. The
+  Petersburg stop adds only a small route penalty compared with the direct
+  Medoc line and cleanly banks VA.
 - Florence -> Woods Bay State Park -> Savannah National Wildlife Refuge ->
   Jekyll Island: 4h18m before activation or charging stops.
 - Jekyll Island -> Ocala: 2h58m.
@@ -153,12 +156,11 @@ Current Sunday DC rove model:
   and WWI (`US-0795`) for 20 entities before the Virginia finish. Ford's
   Theatre is the first practical downtown buffer if a stop slips.
 - Virginia finish: Meadowood BLM SRMA (`US-9937`) at the Mustang Equestrian
-  Trailhead is the practical default finish. Mason Neck State Park / Elizabeth
-  Hartwell Mason Neck NWR (`US-1308` + `US-0563`) brings the day to 20 if the
-  2-fer verifies, but local advice says Mason Neck and Hartwell require
-  separate positions, Hartwell has stricter setup limits, and Mason Neck State
-  Park adds time plus an entry fee. Dyke Marsh (`US-9961`, `US-9935`, plus
-  several LBJ duplicates) remains a buffer only if pace and access are excellent.
+  Trailhead was the practical default finish, with Mason Neck State Park /
+  Elizabeth Hartwell Mason Neck NWR (`US-1308` + `US-0563`) as the Ostrich
+  stretch. Because VA is still unactivated at the Fredericksburg overnight, the
+  working VA target is now `US-0707` Petersburg National Battlefield on Monday
+  morning.
 
 DC route timing checks so far:
 
@@ -191,12 +193,13 @@ Open verification items:
 - Confirm the Lady Bird Johnson Park / Columbia Island Marina right-side
   parking-area 7-fer on site; local W3LAM feedback supports all seven
   references there.
-- Decide whether Sunday ends at the practical Meadowood finish or stretches to
-  Mason Neck / Dyke Marsh for Ostrich.
+- VA is still open after the Sunday Fredericksburg overnight; use `US-0707`
+  Petersburg National Battlefield on Monday morning before Medoc Mountain.
 - Decide whether Woods Bay is used as an early SC backup/add-on before Savannah
   NWR.
 - Treat Greenbelt as a fallback only without a campsite; current selected
   Maryland count is C&O Canal `US-0015`.
-- Check Mason Neck hours and restrictions before relying on it for Ostrich.
+- Treat Mason Neck and Meadowood as historical/optional Sunday context, not the
+  current VA requirement.
 - Confirm Savannah National Wildlife Refuge operating-position state credit.
 - Identify Tesla Supercharger pairings for Saturday and the southern hotel legs.

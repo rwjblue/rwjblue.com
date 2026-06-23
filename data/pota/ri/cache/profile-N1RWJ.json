@@ -22,8 +22,8 @@
       "qsos": 2152
     },
     "hunter": {
-      "parks": 461,
-      "qsos": 676
+      "parks": 476,
+      "qsos": 700
     },
     "awards": 24,
     "endorsements": 51
@@ -42,13 +42,13 @@
       },
       {
         "date": "2026-06-19",
-        "reference": "US-6991",
-        "park": "Rockville Wildlife Management Area",
-        "location": "US-RI",
-        "cw": 11,
+        "reference": "US-2149",
+        "park": "Tallman Mountain State Park",
+        "location": "US-NY",
+        "cw": 17,
         "data": 0,
-        "phone": 0,
-        "total": 11
+        "phone": 1,
+        "total": 18
       },
       {
         "date": "2026-06-19",
@@ -62,13 +62,13 @@
       },
       {
         "date": "2026-06-19",
-        "reference": "US-2149",
-        "park": "Tallman Mountain State Park",
-        "location": "US-NY",
-        "cw": 17,
+        "reference": "US-6991",
+        "park": "Rockville Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 11,
         "data": 0,
-        "phone": 1,
-        "total": 18
+        "phone": 0,
+        "total": 11
       },
       {
         "date": "2026-06-18",
@@ -283,6 +283,123 @@
     ],
     "hunter_qsos": [
       {
+        "date": "2026-06-20T21:42:11",
+        "callsign": "N3RT",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-1738",
+        "park": "Fox Point State Park",
+        "location": "US-DE"
+      },
+      {
+        "date": "2026-06-20T21:42:11",
+        "callsign": "N3RT",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-9878",
+        "park": "Northern Delaware Greenway National Recreation Trail",
+        "location": "US-DE"
+      },
+      {
+        "date": "2026-06-20T21:42:10",
+        "callsign": "N3RT",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-9878",
+        "park": "Northern Delaware Greenway National Recreation Trail",
+        "location": "US-DE"
+      },
+      {
+        "date": "2026-06-20T21:42:10",
+        "callsign": "N3RT",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-1738",
+        "park": "Fox Point State Park",
+        "location": "US-DE"
+      },
+      {
+        "date": "2026-06-20T18:52:00",
+        "callsign": "VE2KLW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "CA-0964",
+        "park": "Parc Cartier-Roberval Archeological Reserve",
+        "location": "CA-QC"
+      },
+      {
+        "date": "2026-06-20T18:38:00",
+        "callsign": "KF0UVL",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1782",
+        "park": "Rock Bridge Memorial State Park",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-06-20T18:16:00",
+        "callsign": "NL5Y",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-8333",
+        "park": "Garcon Point State Conservation Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-06-20T18:11:01",
+        "callsign": "AI4ZD",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6848",
+        "park": "President James K. Polk State Historic Site",
+        "location": "US-NC"
+      },
+      {
+        "date": "2026-06-20T17:24:31",
+        "callsign": "N8JMS",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1931",
+        "park": "A.W. Marion State Park",
+        "location": "US-OH"
+      },
+      {
+        "date": "2026-06-20T14:37:13",
+        "callsign": "N9LJM",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-4162",
+        "park": "Mounds on Brookville Lake State Recreation Area",
+        "location": "US-IN"
+      },
+      {
+        "date": "2026-06-20T14:14:40",
+        "callsign": "KG5YRP",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-5730",
+        "park": "Blood Run State Historic Site",
+        "location": "US-IA"
+      },
+      {
+        "date": "2026-06-20T14:02:00",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-06-20T13:58:48",
+        "callsign": "N1BS",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2876",
+        "park": "Goddard Memorial State Park",
+        "location": "US-RI"
+      },
+      {
         "date": "2026-06-20T00:11:33",
         "callsign": "K4YZI",
         "band": "20M",
@@ -389,123 +506,6 @@
         "reference": "US-1889",
         "park": "Lake Griffin State Park",
         "location": "US-FL"
-      },
-      {
-        "date": "2026-06-16T14:08:00",
-        "callsign": "K4LOX",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-6282",
-        "park": "Newnans Lake State Forest",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-06-16T13:45:00",
-        "callsign": "K0GLG",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-9862",
-        "park": "Peter Helland State Wildlife Area",
-        "location": "US-WI"
-      },
-      {
-        "date": "2026-06-16T13:40:00",
-        "callsign": "KG1A",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-06-16T13:26:23",
-        "callsign": "N1BS",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-10545",
-        "park": "Hillsdale Preserve Management Area",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-06-15T22:13:14",
-        "callsign": "WB0RLJ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-4011",
-        "park": "Chalco Hills State Recreation Area",
-        "location": "US-NE"
-      },
-      {
-        "date": "2026-06-15T15:02:03",
-        "callsign": "N1TJC",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-2085",
-        "park": "John Boyd Thacher State Park",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-06-15T14:58:00",
-        "callsign": "N9JF/VY2",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "CA-6172",
-        "park": "Seacow Head Lighthouse National Heritage Site",
-        "location": "CA-PE"
-      },
-      {
-        "date": "2026-06-15T14:55:47",
-        "callsign": "WC1N",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-11625",
-        "park": "Erwin S. Wilder Wildlife Management Area",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-06-15T14:44:00",
-        "callsign": "W4ID",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3872",
-        "park": "Charles Towne Landing State Historic Site",
-        "location": "US-SC"
-      },
-      {
-        "date": "2026-06-15T14:27:02",
-        "callsign": "N1BS",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2876",
-        "park": "Goddard Memorial State Park",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-06-15T14:15:08",
-        "callsign": "K8FC",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2203",
-        "park": "Tugaloo State Park",
-        "location": "US-GA"
-      },
-      {
-        "date": "2026-06-15T14:02:06",
-        "callsign": "WA1VEI",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-8408",
-        "park": "Elm Bank State Reserve",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-06-15T13:58:58",
-        "callsign": "N3WT",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-6390",
-        "park": "South Mountain State Battlefield State Park",
-        "location": "US-MD"
       }
     ]
   },

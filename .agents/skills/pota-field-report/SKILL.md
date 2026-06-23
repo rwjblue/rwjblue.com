@@ -57,6 +57,9 @@ ASCII, and hyphenated.
 - Convert spoken punctuation and section labels into clean Markdown.
 - Keep radio terms intact: POTA, QRP, CW, SSB, HF, EFHW, QSO, RBN, SOTA, park
   references, callsigns, bands, modes, and rig names.
+- Link callsigns mentioned in body prose to QRZ using
+  `[CALL](https://www.qrz.com/db/CALL)`. Do not link callsigns inside code
+  snippets, file paths, raw logs, or frontmatter.
 - If a callsign, park reference, frequency, band, or QSO count is ambiguous,
   leave it unresolved and ask or mark it as uncertain.
 - When later evidence resolves uncertainty, update the prose directly and

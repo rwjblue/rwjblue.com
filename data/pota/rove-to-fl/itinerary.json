@@ -134,7 +134,7 @@
         {
           "date": "2026-06-21",
           "area": "Washington, DC / NoVA to Fredericksburg",
-          "focus": "Large DC rove day for Cheetah/Ostrich planning, starting from the Greenbelt opener plus LBJ jackpot, then using Meadowood as the practical VA finish or Mason Neck as the stretch before the booked Fredericksburg hotel.",
+          "focus": "Large DC rove day for Cheetah/Ostrich planning, starting from the Greenbelt opener plus LBJ jackpot. Meadowood and Mason Neck were the planned VA finishes, but VA is still open at the Fredericksburg overnight.",
           "jurisdictions": [
             "US-DC",
             "US-VA"
@@ -144,13 +144,13 @@
         {
           "date": "2026-06-22",
           "area": "Fredericksburg, VA to Florence, SC",
-          "focus": "Workday southbound push with Medoc Mountain selected for North Carolina before the Florence overnight.",
+          "focus": "Workday southbound push with Petersburg National Battlefield selected for Virginia and Medoc Mountain selected for North Carolina before the Florence overnight.",
           "jurisdictions": [
             "US-VA",
             "US-NC",
             "US-SC"
           ],
-          "notes": "Google Maps check: Fredericksburg -> Medoc -> Florence is about 5h45 driving before activation, charging, food, and buffer."
+          "notes": "Google Maps check: Fredericksburg -> Petersburg National Battlefield -> Medoc Mountain -> Florence is about 5h55 driving before activation, charging, food, and buffer."
         },
         {
           "date": "2026-06-23",
@@ -335,8 +335,8 @@
   "planningConclusions": [
     "Friday now banks RI, CT, and NY before the Edison overnight.",
     "Saturday still covers NJ, PA, and DE, but Fort McHenry is no longer viable after 18:00; use the Greenbelt/Baltimore-Washington Parkway overlap as the Sunday-UTC Maryland 2-fer opener.",
-    "Sunday remains the large DC / NoVA rove day, now starting from a Greenbelt MD opener and LBJ jackpot, with Meadowood as the practical Virginia finish and Mason Neck as the Ostrich stretch.",
-    "Monday uses Medoc Mountain for North Carolina before the fixed Florence overnight; Tuesday can use Woods Bay as an earlier South Carolina backup/add-on before Savannah NWR and Jekyll Island.",
+    "Sunday remains the large DC / NoVA rove day, now starting from a Greenbelt MD opener and LBJ jackpot; the planned Meadowood/Mason Neck Virginia finish did not become the current VA anchor.",
+    "Monday uses Petersburg National Battlefield for Virginia and Medoc Mountain for North Carolina before the fixed Florence overnight; Tuesday can use Woods Bay as an earlier South Carolina backup/add-on before Savannah NWR and Jekyll Island.",
     "Jekyll Island remains the Georgia park/hotel anchor, and Florida has local Thursday/Friday targets selected."
   ],
   "firstWeekendPlan": {
@@ -520,7 +520,7 @@
     "sundayDcRove": {
       "status": "working Cheetah/Ostrich route",
       "targetDate": "2026-06-21",
-      "strategy": "Sunday June 21 uses the Saturday 20:00 EDT Greenbelt 2-fer as the first Sunday-UTC Maryland stop, then follows the LBJ jackpot and CWops/W8WZ DC Cheetah pattern: FDR, MLK, Korean, Lincoln, Vietnam, Constitution Gardens, WWII, Washington Monument. Meadowood's Mustang Equestrian Trailhead is the practical Virginia finish; Mason Neck remains the Ostrich stretch if time, access, and restrictions all line up.",
+      "strategy": "Sunday June 21 uses the Saturday 20:00 EDT Greenbelt 2-fer as the first Sunday-UTC Maryland stop, then follows the LBJ jackpot and CWops/W8WZ DC Cheetah pattern: FDR, MLK, Korean, Lincoln, Vietnam, Constitution Gardens, WWII, Washington Monument. Meadowood and Mason Neck remain useful Sunday VA context, but the current VA target is now Petersburg National Battlefield on Monday morning.",
       "timingAssumptions": {
         "source": "CWops Solid Copy No. 193 W8WZ article, POTA API reference metadata, imported top-activator n-fer evidence, OSM/Nominatim GeoJSON checks, and Google Maps route checks updated on 2026-06-19.",
         "departureArea": "Foggy Bottom hotel",
@@ -617,7 +617,7 @@
           "references": [
             "US-9937"
           ],
-          "role": "Practical Virginia finish; local advice says the Mustang Equestrian Trailhead is the best reliable radio spot with free parking."
+          "role": "Optional Sunday Virginia finish if the DC/NoVA rove resumes; local advice says the Mustang Equestrian Trailhead is the best reliable radio spot with free parking."
         },
         {
           "stop": "Mason Neck State Park / Mason Neck NWR",
@@ -664,7 +664,7 @@
           "estimatedDriveMinutes": 102,
           "estimatedTotalLabel": "about 10h 45m split across Saturday evening and Sunday",
           "comfort": "reasonable if exact n-fer positions verify",
-          "notes": "Full Mall sequence reaches 18 before the Virginia finish when Greenbelt is counted as a confirmed 2-fer.",
+          "notes": "Full Mall sequence reaches 18 before any optional Virginia finish when Greenbelt is counted as a confirmed 2-fer.",
           "entities": [
             "US-0668",
             "US-7973",
@@ -756,8 +756,8 @@
       "openQuestions": [
         "Confirm the Lady Bird Johnson Park / Columbia Island Marina right-side parking-area operating position on site; local W3LAM feedback supports all seven references there.",
         "Confirm legal public access/parking for the Greenbelt/BW Parkway overlap; count only US-0668 + US-7973 unless exact confirmation supports US-0654 or US-4581.",
-        "Use Meadowood's Mustang Equestrian Trailhead as the default Virginia finish unless the day is running well enough to justify Mason Neck.",
-        "Confirm Mason Neck NWR operating restrictions and closing/dusk times before relying on it as the Ostrich add-on.",
+        "Treat Meadowood and Mason Neck as optional Sunday context; the current VA target is Petersburg National Battlefield on Monday morning.",
+        "Confirm Mason Neck NWR operating restrictions and closing/dusk times only if reviving the Sunday Ostrich add-on.",
         "Decide whether the friend meetup happens inside the rove sequence or after the Cheetah count is already secure."
       ]
     },
@@ -916,27 +916,34 @@
       },
       {
         "state": "US-VA",
-        "goal": "Sunday southbound NoVA finish",
+        "goal": "Monday morning southbound leg from Fredericksburg",
         "defaultReferences": [
-          "US-1308",
-          "US-0563"
+          "US-0707"
         ],
         "options": [
           {
+            "reference": "US-0707",
+            "name": "Petersburg National Battlefield",
+            "role": "selected Virginia activation on the Fredericksburg-to-Medoc route; use the Eastern Front visitor-center area for a low-friction morning stop",
+            "latitude": 37.1332,
+            "longitude": -77.6223,
+            "priority": "target"
+          },
+          {
             "reference": "US-1308",
             "name": "Mason Neck State Park / Elizabeth Hartwell Mason Neck NWR",
-            "role": "preferred Virginia 2-fer Ostrich stretch if hours and access work",
+            "role": "Sunday Ostrich stretch if hours and access work; no longer the current VA requirement",
             "latitude": 38.6465022,
             "longitude": -77.1861893,
-            "priority": "target"
+            "priority": "alternate"
           },
           {
             "reference": "US-9937",
             "name": "Meadowood BLM Special Recreation Management Area",
-            "role": "single-reference Virginia backup if Mason Neck is skipped",
+            "role": "Sunday single-reference VA backup if the DC/NoVA day resumes",
             "latitude": 38.6724,
             "longitude": -77.1978,
-            "priority": "backup"
+            "priority": "alternate"
           }
         ]
       },
@@ -1127,6 +1134,7 @@
       "Monday June 22 is fixed in Florence, SC.",
       "Tuesday June 23 is booked on Jekyll Island after Savannah National Wildlife Refuge.",
       "Wednesday June 24 is in Ocala, FL.",
+      "Petersburg National Battlefield is selected for Virginia on Monday morning because VA is still open after the Fredericksburg overnight.",
       "Medoc Mountain State Park is selected for North Carolina.",
       "Weekdays still have a 13:00-17:00 work block unless explicitly changed."
     ],
@@ -1142,7 +1150,7 @@
         "2026-06-25 Ocala / local Florida activation",
         "2026-06-26 Singer Island / Riviera Beach arrival"
       ],
-      "summary": "Camping has been removed. Park choices are now selected through Florida; remaining planning risk is Sunday DC/NoVA flow, access verification, and whether Woods Bay is used as an SC backup/add-on.",
+      "summary": "Camping has been removed. Park choices are now selected through Florida; remaining planning risk is Monday weather/pace, whether Woods Bay is used as an SC backup/add-on, and Tesla Supercharger pairings.",
       "nights": [
         {
           "date": "2026-06-19",
@@ -1171,7 +1179,7 @@
           "date": "2026-06-21",
           "preferredType": "hotel",
           "area": "Fredericksburg, VA",
-          "why": "Booked Sunday night after the DC/NoVA rove day.",
+          "why": "Booked Sunday night after the DC/NoVA rove day and before the Monday Petersburg/Medoc leg.",
           "savesSeparateParkStop": false,
           "likelyJurisdictionCoverage": [
             "US-VA"
@@ -1227,7 +1235,7 @@
         "overnightType": "hotel",
         "startArea": "Foggy Bottom hotel",
         "endArea": "Fredericksburg hotel",
-        "focus": "Large DC / NoVA rove day, with Meadowood's Mustang Equestrian Trailhead as the practical Virginia finish and Mason Neck as the Ostrich stretch.",
+        "focus": "Large DC / NoVA rove day. Meadowood and Mason Neck were the planned VA finishes, but the current route banks VA Monday morning at Petersburg.",
         "jurisdictions": [
           "US-DC",
           "US-VA"
@@ -1238,26 +1246,26 @@
         "minimumEntities": 15,
         "parkStopHours": 6,
         "roughTotalHours": 7.5,
-        "notes": "Meadowood is the reliable local-advice finish with free parking; Mason Neck keeps the 2-fer/Ostrich path only if the day is running well and restrictions/hours check out."
+        "notes": "Meadowood remains useful local-advice context and Mason Neck remains an Ostrich stretch, but neither is required now that Petersburg is the Monday VA target."
       },
       {
         "date": "2026-06-22",
         "overnightType": "hotel",
         "startArea": "Fredericksburg hotel",
         "endArea": "Florence, SC",
-        "focus": "Workday southbound push with Medoc Mountain selected for NC before the Florence overnight.",
+        "focus": "Workday southbound push with Petersburg National Battlefield selected for VA and Medoc Mountain selected for NC before the Florence overnight.",
         "jurisdictions": [
           "US-VA",
           "US-NC",
           "US-SC"
         ],
-        "roughMiles": 367,
-        "roughDriveHours": 5.75,
+        "roughMiles": 372,
+        "roughDriveHours": 5.9,
         "chargingHours": 1,
-        "minimumEntities": 1,
-        "parkStopHours": 2,
-        "roughTotalHours": 8.75,
-        "notes": "Fredericksburg -> Medoc -> Florence is about 5h45 driving before activation, charging, food, and buffer."
+        "minimumEntities": 2,
+        "parkStopHours": 4,
+        "roughTotalHours": 10.9,
+        "notes": "Fredericksburg -> Petersburg -> Medoc -> Florence is about 5h55 driving before activation, charging, food, and buffer. Keep Petersburg short if morning weather is wet."
       },
       {
         "date": "2026-06-23",
@@ -1408,11 +1416,11 @@
         }
       },
       "parkTargets": [
+        "US-9937",
         "US-1308",
-        "US-0563",
-        "US-9937"
+        "US-0563"
       ],
-      "notes": "Mason Neck is preferred for the VA 2-fer; Meadowood is the simpler single-reference backup.",
+      "notes": "Meadowood and Mason Neck were the Sunday VA options, but the current plan now banks VA Monday morning at Petersburg.",
       "approxDriveMiles": 70
     },
     {
@@ -1434,10 +1442,11 @@
         }
       },
       "parkTargets": [
+        "US-0707",
         "US-2744"
       ],
-      "notes": "Workday southbound push via Medoc Mountain for NC before the Florence overnight.",
-      "approxDriveMiles": 367
+      "notes": "Workday southbound push via Petersburg National Battlefield for VA and Medoc Mountain for NC before the Florence overnight.",
+      "approxDriveMiles": 372
     },
     {
       "date": "2026-06-23",
@@ -1664,11 +1673,20 @@
       {
         "date": "2026-06-22",
         "from": "Fredericksburg, VA",
+        "to": "Petersburg National Battlefield, VA",
+        "distance": "137.8 km",
+        "estimatedDriveMinutes": 81,
+        "estimatedDriveLabel": "1h 21m",
+        "notes": "Selected Virginia activation leg from the Fredericksburg overnight."
+      },
+      {
+        "date": "2026-06-22",
+        "from": "Petersburg National Battlefield, VA",
         "to": "Medoc Mountain State Park, NC",
-        "distance": "269.5 km",
-        "estimatedDriveMinutes": 156,
-        "estimatedDriveLabel": "2h 36m",
-        "notes": "Selected North Carolina activation leg."
+        "distance": "140.2 km",
+        "estimatedDriveMinutes": 83,
+        "estimatedDriveLabel": "1h 23m",
+        "notes": "Continue to the selected North Carolina activation after banking VA."
       },
       {
         "date": "2026-06-22",
@@ -2060,10 +2078,10 @@
       {
         "reference": "US-1308",
         "name": "Mason Neck State Park / Elizabeth Hartwell Mason Neck NWR",
-        "role": "imported n-fer evidence; verify refuge restrictions and park hours",
+        "role": "imported n-fer evidence; now optional Sunday context because VA moves to Petersburg Monday",
         "latitude": 38.6465022,
         "longitude": -77.1861893,
-        "priority": "target",
+        "priority": "alternate",
         "state": "US-VA",
         "goal": "Sunday DC rove"
       },
@@ -2080,7 +2098,7 @@
       {
         "reference": "US-9937",
         "name": "Meadowood BLM Special Recreation Management Area",
-        "role": "single-reference Virginia backup if Mason Neck is skipped",
+        "role": "single-reference Virginia backup if the Sunday DC/NoVA day resumes",
         "latitude": 38.6724,
         "longitude": -77.1978,
         "priority": "alternate",
@@ -2088,9 +2106,19 @@
         "goal": "Sunday VA backup"
       },
       {
+        "reference": "US-0707",
+        "name": "Petersburg National Battlefield",
+        "role": "selected Virginia activation before Medoc Mountain",
+        "latitude": 37.1332,
+        "longitude": -77.6223,
+        "priority": "target",
+        "state": "US-VA",
+        "goal": "Monday morning southbound"
+      },
+      {
         "reference": "US-2744",
         "name": "Medoc Mountain State Park",
-        "role": "selected North Carolina activation",
+        "role": "selected North Carolina activation after Petersburg",
         "latitude": 36.2466,
         "longitude": -77.8888,
         "priority": "target",
