@@ -12,24 +12,84 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 105,
-      "parks": 71,
-      "qsos": 2526
+      "activations": 111,
+      "parks": 76,
+      "qsos": 2661
     },
     "attempts": {
-      "activations": 115,
-      "parks": 71,
-      "qsos": 2564
+      "activations": 121,
+      "parks": 76,
+      "qsos": 2699
     },
     "hunter": {
-      "parks": 491,
-      "qsos": 762
+      "parks": 498,
+      "qsos": 778
     },
-    "awards": 25,
-    "endorsements": 55
+    "awards": 27,
+    "endorsements": 56
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-06-24",
+        "reference": "US-0636",
+        "park": "Jekyll Island State Park",
+        "location": "US-GA",
+        "cw": 66,
+        "data": 0,
+        "phone": 0,
+        "total": 66
+      },
+      {
+        "date": "2026-06-23",
+        "reference": "US-2915",
+        "park": "Woods Bay State Park",
+        "location": "US-SC",
+        "cw": 14,
+        "data": 0,
+        "phone": 0,
+        "total": 14
+      },
+      {
+        "date": "2026-06-23",
+        "reference": "US-0636",
+        "park": "Jekyll Island State Park",
+        "location": "US-GA",
+        "cw": 20,
+        "data": 0,
+        "phone": 0,
+        "total": 20
+      },
+      {
+        "date": "2026-06-23",
+        "reference": "US-0522",
+        "park": "Savannah National Wildlife Refuge",
+        "location": "US-GA",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-06-22",
+        "reference": "US-0717",
+        "park": "Fredericksburg and Spotsylvania National Military Park",
+        "location": "US-VA",
+        "cw": 10,
+        "data": 0,
+        "phone": 0,
+        "total": 10
+      },
+      {
+        "date": "2026-06-22",
+        "reference": "US-2744",
+        "park": "Medoc Mountain State Park",
+        "location": "US-NC",
+        "cw": 13,
+        "data": 0,
+        "phone": 0,
+        "total": 13
+      },
       {
         "date": "2026-06-21",
         "reference": "US-0783",
@@ -122,8 +182,68 @@
       },
       {
         "date": "2026-06-21",
+        "reference": "US-4581",
+        "park": "Star-Spangled Banner National Historic Trail",
+        "location": "US-DC",
+        "cw": 12,
+        "data": 0,
+        "phone": 21,
+        "total": 33
+      },
+      {
+        "date": "2026-06-21",
         "reference": "US-4567",
         "park": "Captain John Smith Chesapeake National Historic Trail",
+        "location": "US-DC",
+        "cw": 12,
+        "data": 0,
+        "phone": 21,
+        "total": 33
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-4564",
+        "park": "Potomac Heritage Trail National Scenic Trail",
+        "location": "US-DC",
+        "cw": 12,
+        "data": 0,
+        "phone": 21,
+        "total": 33
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-0793",
+        "park": "Vietnam Veterans National Memorial",
+        "location": "US-DC",
+        "cw": 0,
+        "data": 0,
+        "phone": 20,
+        "total": 20
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-0785",
+        "park": "Martin Luther King Jr. National Memorial",
+        "location": "US-DC",
+        "cw": 10,
+        "data": 0,
+        "phone": 0,
+        "total": 10
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-0792",
+        "park": "Thomas Jefferson National Memorial",
+        "location": "US-DC",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-0784",
+        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
         "location": "US-DC",
         "cw": 12,
         "data": 0,
@@ -141,66 +261,6 @@
         "total": 11
       },
       {
-        "date": "2026-06-21",
-        "reference": "US-0784",
-        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0792",
-        "park": "Thomas Jefferson National Memorial",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0785",
-        "park": "Martin Luther King Jr. National Memorial",
-        "location": "US-DC",
-        "cw": 10,
-        "data": 0,
-        "phone": 0,
-        "total": 10
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0793",
-        "park": "Vietnam Veterans National Memorial",
-        "location": "US-DC",
-        "cw": 0,
-        "data": 0,
-        "phone": 20,
-        "total": 20
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-4564",
-        "park": "Potomac Heritage Trail National Scenic Trail",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-4581",
-        "park": "Star-Spangled Banner National Historic Trail",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
         "date": "2026-06-20",
         "reference": "US-2149",
         "park": "Tallman Mountain State Park",
@@ -212,26 +272,6 @@
       },
       {
         "date": "2026-06-19",
-        "reference": "US-2149",
-        "park": "Tallman Mountain State Park",
-        "location": "US-NY",
-        "cw": 17,
-        "data": 0,
-        "phone": 1,
-        "total": 18
-      },
-      {
-        "date": "2026-06-19",
-        "reference": "US-1716",
-        "park": "Silver Sands State Park",
-        "location": "US-CT",
-        "cw": 6,
-        "data": 0,
-        "phone": 9,
-        "total": 15
-      },
-      {
-        "date": "2026-06-19",
         "reference": "US-6991",
         "park": "Rockville Wildlife Management Area",
         "location": "US-RI",
@@ -239,49 +279,99 @@
         "data": 0,
         "phone": 0,
         "total": 11
-      },
-      {
-        "date": "2026-06-18",
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "location": "US-RI",
-        "cw": 21,
-        "data": 0,
-        "phone": 0,
-        "total": 21
-      },
-      {
-        "date": "2026-06-16",
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "location": "US-RI",
-        "cw": 13,
-        "data": 0,
-        "phone": 4,
-        "total": 17
-      },
-      {
-        "date": "2026-06-15",
-        "reference": "US-7971",
-        "park": "Blackstone River Valley National Historical Park",
-        "location": "US-RI",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-06-14",
-        "reference": "US-7971",
-        "park": "Blackstone River Valley National Historical Park",
-        "location": "US-RI",
-        "cw": 6,
-        "data": 0,
-        "phone": 0,
-        "total": 6
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-06-24T11:19:25",
+        "callsign": "K1NW",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-4708",
+        "park": "Sutton State Forest",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-06-24T11:19:25",
+        "callsign": "K1NW",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-8423",
+        "park": "Purgatory Chasm State Reserve",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-06-23T23:47:53",
+        "callsign": "N9ANA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-7256",
+        "park": "Midewin National Grassland",
+        "location": "US-IL"
+      },
+      {
+        "date": "2026-06-23T23:43:00",
+        "callsign": "N9JF",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-8414",
+        "park": "Middlesex Fells State Reserve",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-06-23T23:14:00",
+        "callsign": "N3CU",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1425",
+        "park": "Susquehannock State Park",
+        "location": "US-PA"
+      },
+      {
+        "date": "2026-06-23T17:35:00",
+        "callsign": "VE2KLW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "CA-0964",
+        "park": "Parc Cartier-Roberval Archeological Reserve",
+        "location": "CA-QC"
+      },
+      {
+        "date": "2026-06-23T17:10:00",
+        "callsign": "K2JVB",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2153",
+        "park": "Valley Stream State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-06-23T17:04:04",
+        "callsign": "WW9R",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-13247",
+        "park": "Big Muskego Lake State Wildlife Area",
+        "location": "US-WI"
+      },
+      {
+        "date": "2026-06-23T16:56:18",
+        "callsign": "WI0S",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2504",
+        "park": "Lake Maria State Park",
+        "location": "US-MN"
+      },
+      {
+        "date": "2026-06-23T13:27:00",
+        "callsign": "KG1A",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
       {
         "date": "2026-06-22T20:24:32",
         "callsign": "W8TMB",
@@ -290,6 +380,24 @@
         "reference": "US-3315",
         "park": "Island Lake State Recreation Area",
         "location": "US-MI"
+      },
+      {
+        "date": "2026-06-22T20:22:00",
+        "callsign": "K8EKO",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-13184",
+        "park": "Iron Belle State Trail",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-06-22T19:52:43",
+        "callsign": "WC1D",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4953",
+        "park": "Russell-Abbott State Forest",
+        "location": "US-NH"
       },
       {
         "date": "2026-06-22T14:56:00",
@@ -314,6 +422,15 @@
         "callsign": "KD3ALB",
         "band": "70CM",
         "mode": "PHONE",
+        "reference": "US-9901",
+        "park": "Civil War Defenses of Washington National Historic Trail",
+        "location": "US-DC"
+      },
+      {
+        "date": "2026-06-21T22:34:44",
+        "callsign": "KD3ALB",
+        "band": "70CM",
+        "mode": "PHONE",
         "reference": "US-4581",
         "park": "Star-Spangled Banner National Historic Trail",
         "location": "US-DC"
@@ -359,71 +476,8 @@
         "callsign": "KD3ALB",
         "band": "70CM",
         "mode": "PHONE",
-        "reference": "US-9901",
-        "park": "Civil War Defenses of Washington National Historic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-21T22:34:44",
-        "callsign": "KD3ALB",
-        "band": "70CM",
-        "mode": "PHONE",
         "reference": "US-4567",
         "park": "Captain John Smith Chesapeake National Historic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-21T22:33:03",
-        "callsign": "KD3ALB",
-        "band": "2M",
-        "mode": "PHONE",
-        "reference": "US-0670",
-        "park": "George Washington Memorial Parkway",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-21T22:33:03",
-        "callsign": "KD3ALB",
-        "band": "2M",
-        "mode": "PHONE",
-        "reference": "US-4567",
-        "park": "Captain John Smith Chesapeake National Historic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-21T22:33:03",
-        "callsign": "KD3ALB",
-        "band": "2M",
-        "mode": "PHONE",
-        "reference": "US-4581",
-        "park": "Star-Spangled Banner National Historic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-21T22:33:03",
-        "callsign": "KD3ALB",
-        "band": "2M",
-        "mode": "PHONE",
-        "reference": "US-9898",
-        "park": "Mount Vernon National Historic Trail",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-21T22:33:03",
-        "callsign": "KD3ALB",
-        "band": "2M",
-        "mode": "PHONE",
-        "reference": "US-0784",
-        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-06-21T22:33:03",
-        "callsign": "KD3ALB",
-        "band": "2M",
-        "mode": "PHONE",
-        "reference": "US-9901",
-        "park": "Civil War Defenses of Washington National Historic Trail",
         "location": "US-DC"
       },
       {
@@ -436,76 +490,22 @@
         "location": "US-DC"
       },
       {
-        "date": "2026-06-21T22:22:57",
-        "callsign": "KC0MO",
-        "band": "20M",
+        "date": "2026-06-21T22:33:03",
+        "callsign": "KD3ALB",
+        "band": "2M",
         "mode": "PHONE",
-        "reference": "US-0831",
-        "park": "Harry S. Truman Family Farm National Historic Site",
-        "location": "US-MO"
+        "reference": "US-9901",
+        "park": "Civil War Defenses of Washington National Historic Trail",
+        "location": "US-DC"
       },
       {
-        "date": "2026-06-21T22:14:49",
-        "callsign": "W9AV",
-        "band": "20M",
+        "date": "2026-06-21T22:33:03",
+        "callsign": "KD3ALB",
+        "band": "2M",
         "mode": "PHONE",
-        "reference": "US-5643",
-        "park": "Lower Wisconsin State Riverway State Park",
-        "location": "US-WI"
-      },
-      {
-        "date": "2026-06-21T22:12:46",
-        "callsign": "W4SFD",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2939",
-        "park": "Cumberland Mountain State Park",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-06-21T22:12:45",
-        "callsign": "W4SFD",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2939",
-        "park": "Cumberland Mountain State Park",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-06-21T22:12:44",
-        "callsign": "W4SFD",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2939",
-        "park": "Cumberland Mountain State Park",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-06-21T22:12:43",
-        "callsign": "W4SFD",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2939",
-        "park": "Cumberland Mountain State Park",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-06-21T22:12:42",
-        "callsign": "W4SFD",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2939",
-        "park": "Cumberland Mountain State Park",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-06-21T22:12:41",
-        "callsign": "W4SFD",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2939",
-        "park": "Cumberland Mountain State Park",
-        "location": "US-TN"
+        "reference": "US-0784",
+        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
+        "location": "US-DC"
       }
     ]
   },
@@ -550,8 +550,14 @@
       "name": "Diamond Activator",
       "granted": "2026-06-04T21:39:18",
       "endorsements": [
-        "20M"
+        "20M",
+        "CW"
       ]
+    },
+    {
+      "name": "Sapphire Activator",
+      "granted": "2026-06-24T14:21:28",
+      "endorsements": []
     },
     {
       "name": "Bronze Hunter",
@@ -647,6 +653,11 @@
     {
       "name": "Stenogyne Kanehoana Hunter",
       "granted": "2026-05-12T22:51:10",
+      "endorsements": []
+    },
+    {
+      "name": "Howells Spectacular Thelypody Hunter",
+      "granted": "2026-06-24T11:47:04",
       "endorsements": []
     },
     {

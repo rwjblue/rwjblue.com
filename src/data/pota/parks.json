@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-23T02:22:30.232Z",
+  "generatedAt": "2026-06-24T14:45:38.338Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -279,6 +279,119 @@
       }
     },
     {
+      "reference": "US-0522",
+      "name": "Savannah National Wildlife Refuge",
+      "latitude": 32.1655,
+      "longitude": -81.1514,
+      "grid": "EM92kd",
+      "locationDesc": "US-GA,US-SC",
+      "href": "/radio/pota/US-0522/",
+      "potaUrl": "https://pota.app/#/park/US-0522",
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-0522",
+          "park": "Savannah National Wildlife Refuge",
+          "date": "2026-06-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-23-rhode-island-to-florida-rove-day-five",
+              "title": "Rhode Island-to-Florida rove, day five",
+              "date": "2026-06-23",
+              "href": "/notes/2026-06-23-rhode-island-to-florida-rove-day-five/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-23-rhode-island-to-florida-rove-day-five",
+          "title": "Rhode Island-to-Florida rove, day five",
+          "date": "2026-06-23",
+          "href": "/notes/2026-06-23-rhode-island-to-florida-rove-day-five/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 574,
+        "activations": 563,
+        "qsos": 20414
+      }
+    },
+    {
+      "reference": "US-0636",
+      "name": "Jekyll Island State Park",
+      "latitude": 31.04,
+      "longitude": -81.42,
+      "grid": "EM91ga",
+      "locationDesc": "US-GA",
+      "href": "/radio/pota/US-0636/",
+      "potaUrl": "https://pota.app/#/park/US-0636",
+      "activationCount": 2,
+      "qsoTotal": 86,
+      "activations": [
+        {
+          "reference": "US-0636",
+          "park": "Jekyll Island State Park",
+          "date": "2026-06-24",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 66,
+            "cw": 66,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-0636",
+          "park": "Jekyll Island State Park",
+          "date": "2026-06-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 20,
+            "cw": 20,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-23-rhode-island-to-florida-rove-day-five",
+              "title": "Rhode Island-to-Florida rove, day five",
+              "date": "2026-06-23",
+              "href": "/notes/2026-06-23-rhode-island-to-florida-rove-day-five/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-23-rhode-island-to-florida-rove-day-five",
+          "title": "Rhode Island-to-Florida rove, day five",
+          "date": "2026-06-23",
+          "href": "/notes/2026-06-23-rhode-island-to-florida-rove-day-five/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 286,
+        "activations": 262,
+        "qsos": 11565
+      }
+    },
+    {
       "reference": "US-0653",
       "name": "Constitution Gardens",
       "latitude": 38.8904,
@@ -426,6 +539,55 @@
         "attempts": null,
         "activations": null,
         "qsos": null
+      }
+    },
+    {
+      "reference": "US-0717",
+      "name": "Fredericksburg and Spotsylvania National Military Park",
+      "latitude": 38.2812,
+      "longitude": -77.7426,
+      "grid": "FM18dg",
+      "locationDesc": "US-VA",
+      "href": "/radio/pota/US-0717/",
+      "potaUrl": "https://pota.app/#/park/US-0717",
+      "activationCount": 1,
+      "qsoTotal": 10,
+      "activations": [
+        {
+          "reference": "US-0717",
+          "park": "Fredericksburg and Spotsylvania National Military Park",
+          "date": "2026-06-22",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-22-rhode-island-to-florida-rove-day-four",
+              "title": "Rhode Island-to-Florida rove, day four",
+              "date": "2026-06-22",
+              "href": "/notes/2026-06-22-rhode-island-to-florida-rove-day-four/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-22-rhode-island-to-florida-rove-day-four",
+          "title": "Rhode Island-to-Florida rove, day four",
+          "date": "2026-06-22",
+          "href": "/notes/2026-06-22-rhode-island-to-florida-rove-day-four/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 343,
+        "activations": 331,
+        "qsos": 15687
       }
     },
     {
@@ -1285,6 +1447,55 @@
       }
     },
     {
+      "reference": "US-2744",
+      "name": "Medoc Mountain State Park",
+      "latitude": 36.2466,
+      "longitude": -77.8888,
+      "grid": "FM16bf",
+      "locationDesc": "US-NC",
+      "href": "/radio/pota/US-2744/",
+      "potaUrl": "https://pota.app/#/park/US-2744",
+      "activationCount": 1,
+      "qsoTotal": 13,
+      "activations": [
+        {
+          "reference": "US-2744",
+          "park": "Medoc Mountain State Park",
+          "date": "2026-06-22",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 13,
+            "cw": 13,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-22-rhode-island-to-florida-rove-day-four",
+              "title": "Rhode Island-to-Florida rove, day four",
+              "date": "2026-06-22",
+              "href": "/notes/2026-06-22-rhode-island-to-florida-rove-day-four/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-22-rhode-island-to-florida-rove-day-four",
+          "title": "Rhode Island-to-Florida rove, day four",
+          "date": "2026-06-22",
+          "href": "/notes/2026-06-22-rhode-island-to-florida-rove-day-four/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 120,
+        "activations": 112,
+        "qsos": 5716
+      }
+    },
+    {
       "reference": "US-2868",
       "name": "Beavertail State Park",
       "latitude": 41.446,
@@ -1928,6 +2139,55 @@
         "attempts": 53,
         "activations": 51,
         "qsos": 1288
+      }
+    },
+    {
+      "reference": "US-2915",
+      "name": "Woods Bay State Park",
+      "latitude": 33.9489,
+      "longitude": -79.9769,
+      "grid": "FM03aw",
+      "locationDesc": "US-SC",
+      "href": "/radio/pota/US-2915/",
+      "potaUrl": "https://pota.app/#/park/US-2915",
+      "activationCount": 1,
+      "qsoTotal": 14,
+      "activations": [
+        {
+          "reference": "US-2915",
+          "park": "Woods Bay State Park",
+          "date": "2026-06-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 14,
+            "cw": 14,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-23-rhode-island-to-florida-rove-day-five",
+              "title": "Rhode Island-to-Florida rove, day five",
+              "date": "2026-06-23",
+              "href": "/notes/2026-06-23-rhode-island-to-florida-rove-day-five/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-23-rhode-island-to-florida-rove-day-five",
+          "title": "Rhode Island-to-Florida rove, day five",
+          "date": "2026-06-23",
+          "href": "/notes/2026-06-23-rhode-island-to-florida-rove-day-five/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 202,
+        "activations": 194,
+        "qsos": 5468
       }
     },
     {

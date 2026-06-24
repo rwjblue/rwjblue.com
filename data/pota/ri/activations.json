@@ -1416,6 +1416,84 @@
         "phone": 21
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-0636",
+      "park": "Jekyll Island State Park",
+      "date": "2026-06-24",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 66,
+        "cw": 66,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2915",
+      "park": "Woods Bay State Park",
+      "date": "2026-06-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 14,
+        "cw": 14,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0636",
+      "park": "Jekyll Island State Park",
+      "date": "2026-06-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 20,
+        "cw": 20,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0522",
+      "park": "Savannah National Wildlife Refuge",
+      "date": "2026-06-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0717",
+      "park": "Fredericksburg and Spotsylvania National Military Park",
+      "date": "2026-06-22",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 10,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2744",
+      "park": "Medoc Mountain State Park",
+      "date": "2026-06-22",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 13,
+        "cw": 13,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }
