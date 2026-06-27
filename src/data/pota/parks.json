@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-24T14:45:38.338Z",
+  "generatedAt": "2026-06-27T11:54:07.240Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -2191,6 +2191,55 @@
       }
     },
     {
+      "reference": "US-3637",
+      "name": "Marjorie Harris Carr Cross State Park",
+      "latitude": 29.1427,
+      "longitude": -82.0528,
+      "grid": "EL89xd",
+      "locationDesc": "US-FL",
+      "href": "/radio/pota/US-3637/",
+      "potaUrl": "https://pota.app/#/park/US-3637",
+      "activationCount": 1,
+      "qsoTotal": 13,
+      "activations": [
+        {
+          "reference": "US-3637",
+          "park": "Marjorie Harris Carr Cross State Park",
+          "date": "2026-06-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 13,
+            "cw": 13,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-25-ross-prairie-twofer-pota",
+              "title": "Ross Prairie morning twofer",
+              "date": "2026-06-25",
+              "href": "/notes/2026-06-25-ross-prairie-twofer-pota/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-25-ross-prairie-twofer-pota",
+          "title": "Ross Prairie morning twofer",
+          "date": "2026-06-25",
+          "href": "/notes/2026-06-25-ross-prairie-twofer-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 427,
+        "activations": 415,
+        "qsos": 14105
+      }
+    },
+    {
       "reference": "US-4564",
       "name": "Potomac Heritage Trail",
       "latitude": 38.6148,
@@ -2387,6 +2436,55 @@
         "attempts": null,
         "activations": null,
         "qsos": null
+      }
+    },
+    {
+      "reference": "US-4638",
+      "name": "Ross Prairie State Forest",
+      "latitude": 29.0367,
+      "longitude": -82.295,
+      "grid": "EL89ua",
+      "locationDesc": "US-FL",
+      "href": "/radio/pota/US-4638/",
+      "potaUrl": "https://pota.app/#/park/US-4638",
+      "activationCount": 1,
+      "qsoTotal": 13,
+      "activations": [
+        {
+          "reference": "US-4638",
+          "park": "Ross Prairie State Forest",
+          "date": "2026-06-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 13,
+            "cw": 13,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-06-25-ross-prairie-twofer-pota",
+              "title": "Ross Prairie morning twofer",
+              "date": "2026-06-25",
+              "href": "/notes/2026-06-25-ross-prairie-twofer-pota/"
+            }
+          ],
+          "projects": []
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-06-25-ross-prairie-twofer-pota",
+          "title": "Ross Prairie morning twofer",
+          "date": "2026-06-25",
+          "href": "/notes/2026-06-25-ross-prairie-twofer-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 161,
+        "activations": 158,
+        "qsos": 5249
       }
     },
     {

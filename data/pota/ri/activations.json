@@ -1494,6 +1494,32 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-4638",
+      "park": "Ross Prairie State Forest",
+      "date": "2026-06-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 13,
+        "cw": 13,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-3637",
+      "park": "Marjorie Harris Carr Cross State Park",
+      "date": "2026-06-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 13,
+        "cw": 13,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }
