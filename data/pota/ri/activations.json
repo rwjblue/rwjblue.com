@@ -1520,6 +1520,45 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-07-01",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-06-30",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 90,
+        "cw": 70,
+        "data": 0,
+        "phone": 20
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-06-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 29,
+        "cw": 29,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

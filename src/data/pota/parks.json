@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-27T11:54:07.240Z",
+  "generatedAt": "2026-07-08T15:51:48.083Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -1383,6 +1383,97 @@
       }
     },
     {
+      "reference": "US-1884",
+      "name": "John D. MacArthur Beach State Park",
+      "latitude": 26.8246,
+      "longitude": -80.044,
+      "grid": "EL96xt",
+      "locationDesc": "US-FL",
+      "href": "/radio/pota/US-1884/",
+      "potaUrl": "https://pota.app/#/park/US-1884",
+      "activationCount": 3,
+      "qsoTotal": 131,
+      "activations": [
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-07-01",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-06-30",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 90,
+            "cw": 70,
+            "data": 0,
+            "phone": 20
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-06-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 29,
+            "cw": 29,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": 263,
+        "activations": 253,
+        "qsos": 9977
+      }
+    },
+    {
+      "reference": "US-1887",
+      "name": "Jonathan Dickinson State Park",
+      "latitude": 27.0035,
+      "longitude": -80.1013,
+      "grid": "EL97wa",
+      "locationDesc": "US-FL",
+      "href": "/radio/pota/US-1887/",
+      "potaUrl": "https://pota.app/#/park/US-1887",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-07-06-jonathan-dickinson-twofer-pota",
+          "title": "Jonathan Dickinson twofer with KO4WTM",
+          "date": "2026-07-06",
+          "href": "/notes/2026-07-06-jonathan-dickinson-twofer-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 862,
+        "activations": 836,
+        "qsos": 51444
+      }
+    },
+    {
       "reference": "US-2149",
       "name": "Tallman Mountain State Park",
       "latitude": 41.0305,
@@ -2644,6 +2735,32 @@
         "attempts": 63,
         "activations": 61,
         "qsos": 2297
+      }
+    },
+    {
+      "reference": "US-6281",
+      "name": "Loxahatchee River National Wild and Scenic River",
+      "latitude": 26.9881,
+      "longitude": -80.1429,
+      "grid": "EL96wx",
+      "locationDesc": "US-FL",
+      "href": "/radio/pota/US-6281/",
+      "potaUrl": "https://pota.app/#/park/US-6281",
+      "activationCount": 0,
+      "qsoTotal": 0,
+      "activations": [],
+      "notes": [
+        {
+          "id": "2026-07-06-jonathan-dickinson-twofer-pota",
+          "title": "Jonathan Dickinson twofer with KO4WTM",
+          "date": "2026-07-06",
+          "href": "/notes/2026-07-06-jonathan-dickinson-twofer-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 600,
+        "activations": 593,
+        "qsos": 39436
       }
     },
     {

@@ -12,24 +12,54 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 116,
-      "parks": 81,
-      "qsos": 2726
+      "activations": 119,
+      "parks": 82,
+      "qsos": 2857
     },
     "attempts": {
-      "activations": 126,
-      "parks": 81,
-      "qsos": 2764
+      "activations": 129,
+      "parks": 82,
+      "qsos": 2895
     },
     "hunter": {
-      "parks": 508,
-      "qsos": 794
+      "parks": 519,
+      "qsos": 816
     },
     "awards": 28,
     "endorsements": 56
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-07-01",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-06-30",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 70,
+        "data": 0,
+        "phone": 20,
+        "total": 90
+      },
+      {
+        "date": "2026-06-28",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 29,
+        "data": 0,
+        "phone": 0,
+        "total": 29
+      },
       {
         "date": "2026-06-25",
         "reference": "US-4638",
@@ -92,16 +122,6 @@
       },
       {
         "date": "2026-06-22",
-        "reference": "US-2744",
-        "park": "Medoc Mountain State Park",
-        "location": "US-NC",
-        "cw": 13,
-        "data": 0,
-        "phone": 0,
-        "total": 13
-      },
-      {
-        "date": "2026-06-22",
         "reference": "US-0717",
         "park": "Fredericksburg and Spotsylvania National Military Park",
         "location": "US-VA",
@@ -111,14 +131,14 @@
         "total": 10
       },
       {
-        "date": "2026-06-21",
-        "reference": "US-0780",
-        "park": "Korean War Veterans National Memorial",
-        "location": "US-DC",
-        "cw": 11,
+        "date": "2026-06-22",
+        "reference": "US-2744",
+        "park": "Medoc Mountain State Park",
+        "location": "US-NC",
+        "cw": 13,
         "data": 0,
         "phone": 0,
-        "total": 11
+        "total": 13
       },
       {
         "date": "2026-06-21",
@@ -132,8 +152,18 @@
       },
       {
         "date": "2026-06-21",
-        "reference": "US-0776",
-        "park": "Franklin Delano Roosevelt National Memorial",
+        "reference": "US-4564",
+        "park": "Potomac Heritage Trail National Scenic Trail",
+        "location": "US-DC",
+        "cw": 12,
+        "data": 0,
+        "phone": 21,
+        "total": 33
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-0783",
+        "park": "Lincoln National Memorial",
         "location": "US-DC",
         "cw": 10,
         "data": 0,
@@ -172,23 +202,33 @@
       },
       {
         "date": "2026-06-21",
-        "reference": "US-0783",
-        "park": "Lincoln National Memorial",
+        "reference": "US-0780",
+        "park": "Korean War Veterans National Memorial",
         "location": "US-DC",
-        "cw": 10,
+        "cw": 11,
         "data": 0,
         "phone": 0,
-        "total": 10
+        "total": 11
       },
       {
         "date": "2026-06-21",
-        "reference": "US-0785",
-        "park": "Martin Luther King Jr. National Memorial",
+        "reference": "US-0784",
+        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
         "location": "US-DC",
-        "cw": 10,
+        "cw": 12,
+        "data": 0,
+        "phone": 21,
+        "total": 33
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-0792",
+        "park": "Thomas Jefferson National Memorial",
+        "location": "US-DC",
+        "cw": 12,
         "data": 0,
         "phone": 0,
-        "total": 10
+        "total": 12
       },
       {
         "date": "2026-06-21",
@@ -202,13 +242,13 @@
       },
       {
         "date": "2026-06-21",
-        "reference": "US-0784",
-        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
+        "reference": "US-0793",
+        "park": "Vietnam Veterans National Memorial",
         "location": "US-DC",
-        "cw": 12,
+        "cw": 0,
         "data": 0,
-        "phone": 21,
-        "total": 33
+        "phone": 20,
+        "total": 20
       },
       {
         "date": "2026-06-21",
@@ -239,87 +279,47 @@
         "data": 0,
         "phone": 21,
         "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-4567",
-        "park": "Captain John Smith Chesapeake National Historic Trail",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-4564",
-        "park": "Potomac Heritage Trail National Scenic Trail",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0793",
-        "park": "Vietnam Veterans National Memorial",
-        "location": "US-DC",
-        "cw": 0,
-        "data": 0,
-        "phone": 20,
-        "total": 20
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0792",
-        "park": "Thomas Jefferson National Memorial",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
       }
     ],
     "hunter_qsos": [
       {
-        "date": "2026-06-25T13:27:38",
-        "callsign": "KG5OWB",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3045",
-        "park": "Palmetto State Park",
-        "location": "US-TX"
-      },
-      {
-        "date": "2026-06-25T13:04:07",
-        "callsign": "K8BHS",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-2190",
-        "park": "Magnolia Springs State Park",
-        "location": "US-GA"
-      },
-      {
-        "date": "2026-06-25T12:54:00",
-        "callsign": "KG1A",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-06-25T12:53:00",
+        "date": "2026-07-07T23:45:00",
         "callsign": "NL5Y",
-        "band": "40M",
+        "band": "30M",
         "mode": "CW",
         "reference": "US-3670",
         "park": "Yellow River Marsh Preserve State Park",
         "location": "US-FL"
       },
       {
-        "date": "2026-06-24T12:52:00",
+        "date": "2026-07-07T23:32:37",
+        "callsign": "K3MTO",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-6313",
+        "park": "John C. and Mariana Jones/Hungryland Wildlife Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-07-07T23:17:57",
+        "callsign": "K3MTO",
+        "band": "17M",
+        "mode": "CW",
+        "reference": "US-6313",
+        "park": "John C. and Mariana Jones/Hungryland Wildlife Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-07-07T23:04:19",
+        "callsign": "K3MTO",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6313",
+        "park": "John C. and Mariana Jones/Hungryland Wildlife Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-07-07T22:24:01",
         "callsign": "KG1A",
         "band": "20M",
         "mode": "CW",
@@ -328,160 +328,70 @@
         "location": "US-FL"
       },
       {
-        "date": "2026-06-24T11:43:00",
-        "callsign": "NC4GK",
-        "band": "40M",
+        "date": "2026-07-07T14:14:26",
+        "callsign": "K4NYX",
+        "band": "20M",
         "mode": "CW",
-        "reference": "US-0682",
-        "park": "Cape Hatteras National Seashore",
-        "location": "US-NC"
-      },
-      {
-        "date": "2026-06-24T11:36:34",
-        "callsign": "WZ3J",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-1742",
-        "park": "Trap Pond State Park",
-        "location": "US-DE"
-      },
-      {
-        "date": "2026-06-24T11:26:00",
-        "callsign": "NL5Y",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-3670",
-        "park": "Yellow River Marsh Preserve State Park",
+        "reference": "US-3654",
+        "park": "Savannas Preserve State Park",
         "location": "US-FL"
       },
       {
-        "date": "2026-06-24T11:19:25",
-        "callsign": "K1NW",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-8423",
-        "park": "Purgatory Chasm State Reserve",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-06-24T11:19:25",
-        "callsign": "K1NW",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-4708",
-        "park": "Sutton State Forest",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-06-24T11:17:00",
-        "callsign": "KG1A",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-06-24T10:51:00",
-        "callsign": "K2JVB",
-        "band": "40M",
+        "date": "2026-07-07T14:11:23",
+        "callsign": "N2YC",
+        "band": "20M",
         "mode": "CW",
         "reference": "US-2072",
         "park": "Hempstead Lake State Park",
         "location": "US-NY"
       },
       {
-        "date": "2026-06-23T23:47:53",
-        "callsign": "N9ANA",
+        "date": "2026-07-07T14:08:43",
+        "callsign": "K0GLG",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-7256",
-        "park": "Midewin National Grassland",
-        "location": "US-IL"
-      },
-      {
-        "date": "2026-06-23T23:43:00",
-        "callsign": "N9JF",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-8414",
-        "park": "Middlesex Fells State Reserve",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-06-23T23:14:00",
-        "callsign": "N3CU",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1425",
-        "park": "Susquehannock State Park",
-        "location": "US-PA"
-      },
-      {
-        "date": "2026-06-23T17:35:00",
-        "callsign": "VE2KLW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "CA-0964",
-        "park": "Parc Cartier-Roberval Archeological Reserve",
-        "location": "CA-QC"
-      },
-      {
-        "date": "2026-06-23T17:32:23",
-        "callsign": "K8EKO",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-13184",
-        "park": "Iron Belle State Trail",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-06-23T17:10:00",
-        "callsign": "K2JVB",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2153",
-        "park": "Valley Stream State Park",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-06-23T17:04:04",
-        "callsign": "WW9R",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-13247",
-        "park": "Big Muskego Lake State Wildlife Area",
+        "reference": "US-9862",
+        "park": "Peter Helland State Wildlife Area",
         "location": "US-WI"
       },
       {
-        "date": "2026-06-23T16:56:18",
-        "callsign": "WI0S",
+        "date": "2026-07-06T14:42:20",
+        "callsign": "KG1A",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-2504",
-        "park": "Lake Maria State Park",
-        "location": "US-MN"
-      },
-      {
-        "date": "2026-06-23T13:42:44",
-        "callsign": "KQ4BFO",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-3637",
-        "park": "Marjorie Harris Carr Cross State Park",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
         "location": "US-FL"
       },
       {
-        "date": "2026-06-23T13:42:44",
-        "callsign": "KQ4BFO",
-        "band": "40M",
+        "date": "2026-07-05T19:33:43",
+        "callsign": "W1RMW",
+        "band": "20M",
         "mode": "CW",
-        "reference": "US-4559",
-        "park": "Florida Trail National Scenic Trail",
-        "location": "US-FL"
+        "reference": "US-0282",
+        "park": "Crab Orchard National Wildlife Refuge",
+        "location": "US-IL"
       },
       {
-        "date": "2026-06-23T13:27:00",
+        "date": "2026-07-05T19:29:00",
+        "callsign": "W2D",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6532",
+        "park": "Erie Canalway Corridor National Heritage Area",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-07-05T13:47:00",
+        "callsign": "WD5GRW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4423",
+        "park": "Spring Creek Forest State Preserve",
+        "location": "US-TX"
+      },
+      {
+        "date": "2026-07-05T13:10:23",
         "callsign": "KG1A",
         "band": "40M",
         "mode": "CW",
@@ -490,22 +400,112 @@
         "location": "US-FL"
       },
       {
-        "date": "2026-06-22T20:24:32",
-        "callsign": "W8TMB",
+        "date": "2026-07-03T01:35:03",
+        "callsign": "W7DZ",
         "band": "20M",
         "mode": "CW",
+        "reference": "US-4529",
+        "park": "Gifford Pinchot National Forest",
+        "location": "US-WA"
+      },
+      {
+        "date": "2026-07-03T00:55:08",
+        "callsign": "W1WC",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-12962",
+        "park": "TVA Veterans Park Regional Park",
+        "location": "US-AL"
+      },
+      {
+        "date": "2026-07-01T13:48:48",
+        "callsign": "WA1TOM",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-11614",
+        "park": "Burrage Pond Wildlife Management Area",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-07-01T13:47:42",
+        "callsign": "N1BS",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10545",
+        "park": "Hillsdale Preserve Management Area",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-07-01T13:46:00",
+        "callsign": "AD9FW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2256",
+        "park": "Fort Harrison State Park",
+        "location": "US-IN"
+      },
+      {
+        "date": "2026-07-01T13:08:00",
+        "callsign": "K2JVB",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2014",
+        "park": "Bethpage State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-06-30T22:48:53",
+        "callsign": "W8TMB",
+        "band": "20M",
+        "mode": "PHONE",
         "reference": "US-3315",
         "park": "Island Lake State Recreation Area",
         "location": "US-MI"
       },
       {
-        "date": "2026-06-22T20:22:00",
-        "callsign": "K8EKO",
+        "date": "2026-06-30T22:33:33",
+        "callsign": "K3PJS",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-0932",
+        "park": "Fort Sumter and Fort Moultrie National Historic Site",
+        "location": "US-SC"
+      },
+      {
+        "date": "2026-06-30T22:31:29",
+        "callsign": "K4AKA",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-9935",
+        "park": "Virginia Bird & Wildlife State Trail",
+        "location": "US-VA"
+      },
+      {
+        "date": "2026-06-30T00:35:00",
+        "callsign": "NL5Y",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-13184",
-        "park": "Iron Belle State Trail",
-        "location": "US-MI"
+        "reference": "US-3670",
+        "park": "Yellow River Marsh Preserve State Park",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-06-28T20:12:14",
+        "callsign": "VA3EKR",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "CA-0146",
+        "park": "Bass Lake Provincial Park",
+        "location": "CA-ON"
+      },
+      {
+        "date": "2026-06-28T20:08:00",
+        "callsign": "NL5Y",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3670",
+        "park": "Yellow River Marsh Preserve State Park",
+        "location": "US-FL"
       }
     ]
   },
