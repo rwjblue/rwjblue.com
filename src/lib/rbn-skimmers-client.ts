@@ -1,11 +1,13 @@
 import L from "leaflet";
 import {
+  gridToLatLon,
+  type LatLon,
+} from "./geo";
+import {
   buildRbnMainUrl,
   defaultSelectedSkimmers,
-  gridToLatLon,
   parseTargetCalls,
   rankSkimmers,
-  type LatLon,
   type RankedSkimmer,
   type RbnNodeRecord,
 } from "./rbn-skimmers";

@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@ham2k/lib-dxcc-data": "^1.0.1",
+    "@ham2k/lib-geo-tools": "^1.1.1",
     "@ham2k/lib-qson-adif": "^0.5.1",
     "leaflet": "^1.9.4"
   }

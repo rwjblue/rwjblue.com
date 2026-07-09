@@ -1,7 +1,9 @@
-export interface LatLon {
-  lat: number;
-  lon: number;
-}
+import {
+  distanceKilometers,
+  distanceMiles,
+  gridToLatLon,
+  type LatLon,
+} from "./geo.ts";
 
 export interface RbnNodeRecord {
   call?: string;
@@ -33,8 +35,6 @@ export interface RbnMainUrlOptions {
   rows?: number;
 }
 
-const EARTH_RADIUS_KM = 6371;
-const KM_TO_MILES = 0.62137119;
 const BAND_ORDER = [
   "630m",
   "160m",
@@ -51,42 +51,6 @@ const BAND_ORDER = [
   "4m",
   "2m",
 ];
-
-export function gridToLatLon(grid: string): LatLon | null {
-  const value = grid.trim().toUpperCase();
-  if (!/^[A-R]{2}\d{2}([A-X]{2}(\d{2})?)?$/.test(value)) {
-    return null;
-  }
-
-  let lon = -180 + (value.charCodeAt(0) - 65) * 20;
-  let lat = -90 + (value.charCodeAt(1) - 65) * 10;
-  let lonSize = 20;
-  let latSize = 10;
-
-  lon += Number.parseInt(value[2], 10) * 2;
-  lat += Number.parseInt(value[3], 10);
-  lonSize = 2;
-  latSize = 1;
-
-  if (value.length >= 6) {
-    lon += (value.charCodeAt(4) - 65) * (5 / 60);
-    lat += (value.charCodeAt(5) - 65) * (2.5 / 60);
-    lonSize = 5 / 60;
-    latSize = 2.5 / 60;
-  }
-
-  if (value.length >= 8) {
-    lon += Number.parseInt(value[6], 10) * (5 / 600);
-    lat += Number.parseInt(value[7], 10) * (2.5 / 600);
-    lonSize = 5 / 600;
-    latSize = 2.5 / 600;
-  }
-
-  return {
-    lat: lat + latSize / 2,
-    lon: lon + lonSize / 2,
-  };
-}
 
 export function normalizeRbnNode(
   node: RbnNodeRecord,
@@ -106,7 +70,7 @@ export function normalizeRbnNode(
     grid,
     lat: point.lat,
     lon: point.lon,
-    distanceMiles: distanceKm * KM_TO_MILES,
+    distanceMiles: distanceMiles(origin, point),
     distanceKm,
     spotPolicy: spotPolicy(node.sk_opt),
     bands: bandList(node.band),
@@ -161,22 +125,6 @@ export function buildRbnMainUrl(options: RbnMainUrlOptions): string {
   url.searchParams.set("rows", String(rows));
 
   return url.toString();
-}
-
-function distanceKilometers(origin: LatLon, destination: LatLon): number {
-  const lat1 = toRadians(origin.lat);
-  const lat2 = toRadians(destination.lat);
-  const dLat = toRadians(destination.lat - origin.lat);
-  const dLon = toRadians(destination.lon - origin.lon);
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
-
-  return EARTH_RADIUS_KM * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function toRadians(degrees: number): number {
-  return degrees * (Math.PI / 180);
 }
 
 function bandList(bands: RbnNodeRecord["band"]): string[] {

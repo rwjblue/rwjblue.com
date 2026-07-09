@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import {
   buildRbnMainUrl,
   defaultSelectedSkimmers,
-  gridToLatLon,
   normalizeRbnNode,
   parseTargetCalls,
   rankSkimmers,
@@ -38,20 +37,6 @@ const aa0o = {
     8: ["CW", "20m", "14000~14070"],
   },
 };
-
-test("gridToLatLon returns the center of 4- and 6-character grids", () => {
-  assert.deepEqual(roundPoint(gridToLatLon("EL96")), { lat: 26.5, lon: -81 });
-  assert.deepEqual(roundPoint(gridToLatLon("EL96WD")), {
-    lat: 26.1458,
-    lon: -80.125,
-  });
-});
-
-test("gridToLatLon rejects invalid grids", () => {
-  assert.equal(gridToLatLon("EL9"), null);
-  assert.equal(gridToLatLon("EL9XWD"), null);
-  assert.equal(gridToLatLon("ZZ99AA"), null);
-});
 
 test("normalizeRbnNode extracts spot policy and ordered unique bands", () => {
   const normalized = normalizeRbnNode(nu4f, origin);
@@ -99,11 +84,3 @@ test("buildRbnMainUrl builds readable RBN query parameters", () => {
     "https://www.reversebeacon.net/main.php?spotter_call=NU4F%2CAA0O&spotted_call=K2A%2CK2H&max_age=6%2Chours&rows=50",
   );
 });
-
-function roundPoint(point) {
-  if (!point) return null;
-  return {
-    lat: Number(point.lat.toFixed(4)),
-    lon: Number(point.lon.toFixed(4)),
-  };
-}
