@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Deploy the static site to Cloudflare Workers"
+#MISE raw=true
+#USAGE flag "--dry-run" help="Build and compile without deploying"
+
+set -euo pipefail
+
+wrangler=(npx wrangler)
+
+if [[ "${usage_dry_run:-false}" == "true" ]]; then
+  "${wrangler[@]}" deploy --dry-run
+  exit 0
+fi
+
+"${wrangler[@]}" deploy

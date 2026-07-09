@@ -1,65 +1,89 @@
 # Deployment
 
-This site is deployed as a static Astro build on Cloudflare Pages. GitHub Pages
-and Cloudflare Workers are intentionally not used for v1.
+This site is built with Astro and deploys as static assets on Cloudflare
+Workers. `wrangler.jsonc` is the source of truth for the deployed Worker.
 
 ## Current Setup
 
-The Cloudflare Pages project is connected to the GitHub repository:
-
 ```text
-Pages project: rwjblue-com
+Worker name: rwjblue-com
 Repository: rwjblue/rwjblue.com
-Production branch: main
-Framework preset: Astro
 Build command: npm run build
 Build output directory: dist
+Wrangler config: wrangler.jsonc
 ```
+
+`wrangler.jsonc` intentionally has no `main` entry. The Worker serves only the
+Astro static asset output through `assets.directory`.
 
 The local Node version is managed by mise and locked in `.mise/mise.lock`.
-Cloudflare Pages should use the same version via the `NODE_VERSION` Pages
-environment variable.
 
-## How Deployments Work
+## Local Validation
 
-GitHub Actions validates the site on pull requests and pushes to `main`.
-Cloudflare Pages handles deployment through its GitHub integration.
+Before deploying, run:
 
-```text
-Push to main -> production deployment
-Push to another branch -> preview deployment
+```bash
+mise run check
+mise run build
+mise run deploy -- --dry-run
 ```
 
-No deploy command is required in the repository. Do not add `npx wrangler deploy`
-or a Cloudflare Worker adapter unless the site starts needing request-time
-server behavior.
+Dry-run mode builds and compiles the Worker without uploading a new version.
 
-To redeploy without a code change, use **Retry deployment** from the Cloudflare
-Pages project's **Deployments** view.
+## Deploy
+
+Use the project mise task:
+
+```bash
+mise run deploy
+```
+
+The deploy task runs `npx wrangler deploy`. Wrangler runs `npm run build` from
+`wrangler.jsonc` before packaging the static assets.
+
+Wrangler authentication must be configured outside this repository with either
+`npx wrangler login` or a `CLOUDFLARE_API_TOKEN` in the shell/CI environment.
+Do not commit account IDs, API tokens, `.env`, `.dev.vars`, or other secrets.
+
+## GitHub Deployments
+
+Cloudflare Workers Builds can be connected to `rwjblue/rwjblue.com` for push and
+pull-request deployments. Configure the Worker build settings in the Cloudflare
+dashboard:
+
+```text
+Production branch: main
+Build command: npm run build
+Deploy command: npx wrangler deploy
+Non-production deploy command: npx wrangler versions upload
+```
+
+Enable non-production branch builds if pull requests should receive preview
+versions. `preview_urls` is enabled in `wrangler.jsonc`, so uploaded Worker
+versions can be viewed at generated `workers.dev` preview URLs even though the
+production `workers.dev` route is disabled.
+
+Workers Builds does not read `build.command` from `wrangler.jsonc`; keep the
+dashboard build command set to `npm run build`.
 
 ## Custom Domains
 
-The same Pages project serves all hostnames:
+The site should serve these Cloudflare-managed hostnames:
 
 ```text
 rwjblue.com
-www.rwjblue.com
 n1rwj.com
-www.n1rwj.com
-n1rwj.radio
-www.n1rwj.radio
 ```
 
-There is no canonical redirect in v1. A visitor who enters `n1rwj.radio` should
-continue to see `n1rwj.radio` in the browser address bar, and a visitor who
-enters `rwjblue.com` should continue to see `rwjblue.com`.
+There is no canonical redirect. A visitor who enters `n1rwj.com` should continue
+to see `n1rwj.com` in the browser address bar, and a visitor who enters
+`rwjblue.com` should continue to see `rwjblue.com`.
+
+`n1rwj.radio` is not part of the Workers cutover yet. Workers custom domains
+require Cloudflare-managed nameservers, so attach `n1rwj.radio` only after that
+zone is moved to Cloudflare DNS.
 
 ## DNS
-
-Cloudflare Pages custom domains work best when the apex domain's DNS zone uses
-Cloudflare nameservers. That is required for root hostnames such as
-`rwjblue.com`, `n1rwj.com`, and `n1rwj.radio` to be attached directly to the
-Pages project.
 
 Current DNS ownership:
 
@@ -69,23 +93,18 @@ n1rwj.com: Cloudflare DNS
 n1rwj.radio: external DNS until moved
 ```
 
-Subdomains such as `www.example.com` can be attached while using an external DNS
-provider by creating the `CNAME` record Cloudflare Pages provides.
+Do not add DNS or route configuration for `n1rwj.radio` until its DNS is managed
+by Cloudflare.
 
-## Future Deployment Changes
+## Redirects And Headers
 
-The checked-in `.env.example` reserves names for a possible future manual or CI
-deployment flow:
+Astro copies `public/_redirects` into `dist/`. Cloudflare Workers Static Assets
+supports `_redirects` and `_headers` files when they are present in the static
+asset directory.
 
-```text
-CLOUDFLARE_ACCOUNT_ID
-CLOUDFLARE_API_TOKEN
-CLOUDFLARE_PROJECT_NAME
-```
-
-Those values are not needed for the current Git-connected Pages deployment.
-Real secret values must stay out of the repository.
+## Future Changes
 
 If the site later needs hostname-specific rendering, API routes, form handling,
-auth, or other request-time behavior, reevaluate Cloudflare Workers or Pages
-Functions at that point.
+auth, or other request-time behavior, add a Worker script and route only those
+paths through Worker code. Keep static assets served directly unless request-time
+logic is required.

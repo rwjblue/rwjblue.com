@@ -1,7 +1,7 @@
 # rwjblue.com
 
-Personal landing page for `rwjblue.com`, also served at `n1rwj.com` and
-`n1rwj.radio`.
+Personal landing page for `rwjblue.com` and `n1rwj.com`. `n1rwj.radio` is
+planned but is not currently attached.
 
 ## Content Model
 
@@ -111,5 +111,5 @@ mise run build
 
 ## Deployment
 
-The site is designed for Cloudflare Pages. See
+The site deploys to Cloudflare Workers Static Assets. See
 [docs/deployment.md](docs/deployment.md).

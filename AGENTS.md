@@ -6,14 +6,14 @@
 - Personal static landing page for `rwjblue.com`, `n1rwj.com`, and
   `n1rwj.radio`.
 - Keep the site simple, fast, and deployable as a static Astro build on
-  Cloudflare Pages.
+  Cloudflare Workers Static Assets.
 
 ## Project Structure
 - `src/pages/index.astro` contains the public landing page markup and page data.
 - `src/styles/global.css` contains global styling for the current single-page
   experience.
 - `public/` contains source static assets copied into the build output.
-- `docs/deployment.md` documents the Cloudflare Pages setup and domain model.
+- `docs/deployment.md` documents the Cloudflare Workers setup and domain model.
 - `.mise/config.toml` and `.mise/tasks/` define the local toolchain and task
   wrappers.
 - `dist/` is generated output; do not edit it by hand.
@@ -25,6 +25,7 @@
 - `mise run check`: run Astro validation.
 - `mise run build`: build the static site into `dist/`.
 - `mise run preview`: preview the production build locally.
+- `mise run deploy`: deploy the static site to Cloudflare Workers.
 
 ## Coding Style
 - Follow the existing Astro and CSS style before introducing new patterns.
@@ -42,11 +43,13 @@
   and desktop widths.
 
 ## Deployment Notes
-- Deployment is handled by Cloudflare Pages through the GitHub integration.
-- Production deploys come from `main`; non-main branches create preview
-  deployments.
-- Do not add Wrangler deployment commands, Cloudflare Worker adapters, or Pages
-  Functions unless the site starts needing request-time behavior.
+- Deployment is handled by Cloudflare Workers Static Assets with Wrangler.
+- `wrangler.jsonc` is the source of truth for the Worker name, static asset
+  directory, custom domains, and preview URL setting.
+- Production serves `rwjblue.com` and `n1rwj.com` as Worker custom domains.
+- `n1rwj.radio` is not attached until its DNS is managed by Cloudflare.
+- Keep the Worker static-only unless the site starts needing request-time
+  behavior.
 - Keep real Cloudflare credentials and other secrets out of the repository.
 
 ## Version Control
