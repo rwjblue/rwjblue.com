@@ -109,6 +109,8 @@ test("radio page keeps static context, links shack notes, and lists radio notes"
 test("radio page links the RBN skimmer finder utility", () => {
   const radio = read("src/pages/radio/index.astro");
 
+  assert.match(radio, /Radio tools/);
+  assert.match(radio, /Operating tools/);
   assert.match(radio, /\/radio\/rbn-skimmers\//);
   assert.match(radio, /RBN Skimmer Finder/);
 });

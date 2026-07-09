@@ -2,7 +2,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   buildRbnMainUrl,
+  buildSearchWithGrid,
   defaultSelectedSkimmers,
+  gridFromUrlSearch,
   normalizeRbnNode,
   parseTargetCalls,
   rankSkimmers,
@@ -83,4 +85,23 @@ test("buildRbnMainUrl builds readable RBN query parameters", () => {
     url,
     "https://www.reversebeacon.net/main.php?spotter_call=NU4F%2CAA0O&spotted_call=K2A%2CK2H&max_age=6%2Chours&rows=50",
   );
+});
+
+test("gridFromUrlSearch reads and normalizes valid grid parameters", () => {
+  assert.equal(gridFromUrlSearch("?grid=el96wd"), "EL96WD");
+  assert.equal(gridFromUrlSearch("?targets=K2A&grid=EL96"), "EL96");
+});
+
+test("gridFromUrlSearch ignores missing and invalid grid parameters", () => {
+  assert.equal(gridFromUrlSearch(""), null);
+  assert.equal(gridFromUrlSearch("?grid=not-a-grid"), null);
+});
+
+test("buildSearchWithGrid preserves other parameters and writes normalized grids", () => {
+  assert.equal(buildSearchWithGrid("?targets=K2A&grid=EL96", "el96wd"), "?targets=K2A&grid=EL96WD");
+});
+
+test("buildSearchWithGrid removes the grid parameter when no valid grid is available", () => {
+  assert.equal(buildSearchWithGrid("?targets=K2A&grid=EL96", null), "?targets=K2A");
+  assert.equal(buildSearchWithGrid("?grid=not-a-grid", "still-bad"), "");
 });

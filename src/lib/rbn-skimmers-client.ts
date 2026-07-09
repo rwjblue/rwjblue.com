@@ -5,7 +5,9 @@ import {
 } from "./geo";
 import {
   buildRbnMainUrl,
+  buildSearchWithGrid,
   defaultSelectedSkimmers,
+  gridFromUrlSearch,
   parseTargetCalls,
   rankSkimmers,
   type RankedSkimmer,
@@ -39,10 +41,14 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   let leafletMap: L.Map | null = null;
   let markerLayer: L.LayerGroup | null = null;
 
-  gridInput.value = readStorage(STORAGE_GRID) ?? "";
+  const initialUrlGrid = gridFromUrlSearch(window.location.search);
+  gridInput.value = initialUrlGrid ?? readStorage(STORAGE_GRID) ?? "";
   targetsInput.value = readStorage(STORAGE_TARGETS) ?? "";
   setupMap();
   updateRbnLink();
+  if (initialUrlGrid) {
+    applyGrid();
+  }
   void fetchNodes();
 
   useLocationButton.addEventListener("click", () => {
@@ -58,6 +64,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
           lat: position.coords.latitude,
           lon: position.coords.longitude,
         };
+        writeGridToUrl(null);
         setStatus("Location set from this browser. Ranking active skimmers...");
         render();
       },
@@ -110,6 +117,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
 
     gridInput.value = grid;
     writeStorage(STORAGE_GRID, grid);
+    writeGridToUrl(grid);
     origin = point;
     setStatus(`Location set from grid ${grid}. Ranking active skimmers...`);
     render();
@@ -307,6 +315,12 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   function setStatus(message: string): void {
     status.textContent = message;
   }
+}
+
+function writeGridToUrl(grid: string | null): void {
+  const nextSearch = buildSearchWithGrid(window.location.search, grid);
+  const nextUrl = `${window.location.pathname}${nextSearch}${window.location.hash}`;
+  window.history.replaceState(window.history.state, "", nextUrl);
 }
 
 function getElement<T extends Element>(root: ParentNode, selector: string): T {

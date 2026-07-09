@@ -35,6 +35,7 @@ export interface RbnMainUrlOptions {
   rows?: number;
 }
 
+const GRID_QUERY_PARAM = "grid";
 const BAND_ORDER = [
   "630m",
   "160m",
@@ -105,6 +106,25 @@ export function parseTargetCalls(value: string): string[] {
   );
 }
 
+export function gridFromUrlSearch(search: string): string | null {
+  const params = new URLSearchParams(search);
+  return normalizeGrid(params.get(GRID_QUERY_PARAM));
+}
+
+export function buildSearchWithGrid(search: string, grid: string | null): string {
+  const params = new URLSearchParams(search);
+  const normalizedGrid = normalizeGrid(grid);
+
+  if (normalizedGrid) {
+    params.set(GRID_QUERY_PARAM, normalizedGrid);
+  } else {
+    params.delete(GRID_QUERY_PARAM);
+  }
+
+  const nextSearch = params.toString();
+  return nextSearch ? `?${nextSearch}` : "";
+}
+
 export function buildRbnMainUrl(options: RbnMainUrlOptions): string {
   const url = new URL("https://www.reversebeacon.net/main.php");
   const spotterCalls = uniqueValues(options.spotterCalls.map(normalizeCall).filter(Boolean));
@@ -125,6 +145,11 @@ export function buildRbnMainUrl(options: RbnMainUrlOptions): string {
   url.searchParams.set("rows", String(rows));
 
   return url.toString();
+}
+
+function normalizeGrid(value: string | null | undefined): string | null {
+  const grid = String(value ?? "").trim().toUpperCase();
+  return grid && gridToLatLon(grid) ? grid : null;
 }
 
 function bandList(bands: RbnNodeRecord["band"]): string[] {
