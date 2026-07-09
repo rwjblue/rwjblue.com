@@ -1,0 +1,121 @@
+---
+import "leaflet/dist/leaflet.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="RBN Skimmer Finder / N1RWJ"
+  description="Find nearby active Reverse Beacon Network skimmers from your current location or Maidenhead grid, then open RBN with spot filters prefilled."
+  canonicalPath="/radio/rbn-skimmers/"
+>
+  <section class="page-intro">
+    <p class="eyebrow">Radio utility</p>
+    <h1>RBN Skimmer Finder</h1>
+    <p>
+      Find active Reverse Beacon Network skimmers near your operating position,
+      then jump to RBN with those skimmers and target calls prefilled.
+    </p>
+  </section>
+
+  <section class="section-block wide rbn-skimmer-tool" id="rbn-skimmer-tool">
+    <div class="section-heading">
+      <p class="section-label">Skimmer range check</p>
+      <h2>Pick an operating location.</h2>
+    </div>
+
+    <div class="rbn-controls">
+      <div class="rbn-panel">
+        <h3>Location</h3>
+        <p>
+          Use browser location or enter a Maidenhead grid. Coordinates stay in
+          this browser and are only used for distance calculations.
+        </p>
+        <div class="rbn-location-row">
+          <button id="rbn-use-location" class="rbn-primary" type="button">
+            Use browser location
+          </button>
+          <label class="rbn-grid-field" for="rbn-grid">
+            <span>Grid</span>
+            <input
+              id="rbn-grid"
+              type="text"
+              inputmode="text"
+              autocomplete="off"
+              placeholder="EL96WD"
+            />
+          </label>
+          <button id="rbn-apply-grid" class="rbn-secondary" type="button">
+            Apply grid
+          </button>
+        </div>
+      </div>
+
+      <div class="rbn-panel rbn-status-panel">
+        <h3>RBN data</h3>
+        <p id="rbn-status">Waiting for a location.</p>
+      </div>
+    </div>
+
+    <div class="rbn-results-layout">
+      <div class="rbn-results-panel">
+        <div class="rbn-results-heading">
+          <div>
+            <p class="section-label">Nearest active skimmers</p>
+            <h2>Use the closest one or two first.</h2>
+          </div>
+          <p id="rbn-count" class="rbn-count"></p>
+        </div>
+        <div id="rbn-results" class="rbn-results" aria-live="polite">
+          <p class="rbn-empty">Enter a grid or use browser location to rank active skimmers.</p>
+        </div>
+      </div>
+
+      <div class="rbn-map-panel">
+        <p class="section-label">Map</p>
+        <div id="rbn-map" class="rbn-map" aria-label="Nearest RBN skimmers map"></div>
+      </div>
+    </div>
+
+    <div class="rbn-handoff">
+      <div>
+        <p class="section-label">RBN handoff</p>
+        <h2>Build a live spot filter.</h2>
+        <p>
+          Selected skimmers become the RBN spotter filter. Target calls are
+          optional and can include wildcards.
+        </p>
+      </div>
+      <label class="rbn-target-field" for="rbn-targets">
+        <span>Target calls</span>
+        <input
+          id="rbn-targets"
+          type="text"
+          autocomplete="off"
+          placeholder="K2A,K2B,K2C or K2*"
+        />
+      </label>
+      <a id="rbn-open-link" class="rbn-open-link" href="https://www.reversebeacon.net/main.php">
+        Open on RBN
+      </a>
+      <p id="rbn-link-summary" class="rbn-link-summary">
+        Select skimmers to build an RBN link.
+      </p>
+    </div>
+
+    <nav class="path-links" aria-label="Radio utility navigation">
+      <a href="/radio/">Back to radio</a>
+      <a href="https://www.reversebeacon.net/nodes/detail.php" target="_blank" rel="noreferrer">
+        RBN active nodes
+      </a>
+      <a href="https://www.reversebeacon.net/main.php" target="_blank" rel="noreferrer">
+        RBN spots
+      </a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initRbnSkimmerTool } from "../../lib/rbn-skimmers-client";
+
+  initRbnSkimmerTool();
+</script>

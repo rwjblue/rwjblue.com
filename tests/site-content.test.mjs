@@ -106,6 +106,36 @@ test("radio page keeps static context, links shack notes, and lists radio notes"
   assert.match(radio, /My shack/);
 });
 
+test("radio page links the RBN skimmer finder utility", () => {
+  const radio = read("src/pages/radio/index.astro");
+
+  assert.match(radio, /\/radio\/rbn-skimmers\//);
+  assert.match(radio, /RBN Skimmer Finder/);
+});
+
+test("rbn skimmer finder page provides utility markup and client boot script", () => {
+  assert.ok(existsSync("src/pages/radio/rbn-skimmers.astro"));
+
+  const page = read("src/pages/radio/rbn-skimmers.astro");
+
+  assert.match(page, /title="RBN Skimmer Finder \/ N1RWJ"/);
+  assert.match(page, /id="rbn-skimmer-tool"/);
+  assert.match(page, /id="rbn-use-location"/);
+  assert.match(page, /id="rbn-grid"/);
+  assert.match(page, /id="rbn-map"/);
+  assert.match(page, /id="rbn-open-link"/);
+  assert.match(page, /initRbnSkimmerTool/);
+
+  const client = read("src/lib/rbn-skimmers-client.ts");
+
+  assert.match(client, /RBN_NODES_URL/);
+  assert.match(client, /navigator\.geolocation/);
+  assert.match(client, /rankSkimmers/);
+  assert.match(client, /buildRbnMainUrl/);
+  assert.match(client, /L\.map/);
+  assert.match(client, /localStorage/);
+});
+
 test("shack page documents station and portable setup", () => {
   assert.ok(existsSync("src/pages/radio/shack.astro"));
 
