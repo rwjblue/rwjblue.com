@@ -17,6 +17,7 @@ import {
 import {
   decodeRbnNodeCache,
   encodeRbnNodeCache,
+  rbnCacheStatus,
 } from "./rbn-node-cache";
 
 const RBN_NODES_URL = "https://www.reversebeacon.net/nodes/detail_json.php";
@@ -48,6 +49,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   let markerLayer: L.LayerGroup | null = null;
   let nodesFetchedAt: number | null = null;
   let nodesFromCache = false;
+  let nodesRefreshing = false;
 
   const initialUrlGrid = gridFromUrlSearch(window.location.search);
   const initialGrid = initialUrlGrid ?? readStorage(STORAGE_GRID);
@@ -56,6 +58,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
     nodes = cachedNodes.nodes;
     nodesFetchedAt = cachedNodes.fetchedAt;
     nodesFromCache = true;
+    nodesRefreshing = !cachedNodes.isFresh;
   }
 
   gridInput.value = initialGrid ?? "";
@@ -65,8 +68,11 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   if (initialGrid) {
     applyGrid();
   } else if (cachedNodes) {
+    const cacheMessage = cachedNodes.isFresh
+      ? rbnCacheStatus(cachedNodes.ageMs, "fresh")
+      : rbnCacheStatus(cachedNodes.ageMs, "refreshing");
     setStatus(
-      `Loaded ${nodes.length} cached RBN nodes from ${formatCacheAge(cachedNodes.ageMs)} ago. Enter a grid or use browser location.`,
+      `Loaded ${nodes.length} RBN nodes. ${cacheMessage} Enter a grid or use browser location.`,
     );
   }
   if (!cachedNodes?.isFresh) {
@@ -186,6 +192,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   }
 
   async function fetchNodes(): Promise<void> {
+    nodesRefreshing = true;
     if (nodes.length === 0) {
       setStatus("Fetching active RBN skimmers...");
     }
@@ -202,6 +209,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
       nodes = json as RbnNodeRecord[];
       nodesFetchedAt = Date.now();
       nodesFromCache = false;
+      nodesRefreshing = false;
       writeStorage(STORAGE_NODES, encodeRbnNodeCache(nodes, nodesFetchedAt));
       if (origin) {
         render();
@@ -209,11 +217,10 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
         setStatus(`Loaded ${nodes.length} active RBN nodes. Enter a grid or use browser location.`);
       }
     } catch {
+      nodesRefreshing = false;
       if (nodes.length > 0 && nodesFetchedAt !== null) {
         const ageMs = Math.max(0, Date.now() - nodesFetchedAt);
-        setStatus(
-          `Using cached RBN data from ${formatCacheAge(ageMs)} ago; the live refresh failed.`,
-        );
+        setStatus(rbnCacheStatus(ageMs, "unavailable"));
         return;
       }
 
@@ -263,7 +270,9 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
     results.innerHTML = renderTable(ranked, selectedCalls);
     const cacheStatus =
       nodesFromCache && nodesFetchedAt !== null
-        ? ` Cached ${formatCacheAge(Date.now() - nodesFetchedAt)} ago.`
+        ? nodesRefreshing
+          ? ` ${rbnCacheStatus(Date.now() - nodesFetchedAt, "refreshing")}`
+          : ` ${rbnCacheStatus(Date.now() - nodesFetchedAt, "fresh")}`
         : "";
     setStatus(
       `Ranked ${ranked.length} nearest active skimmers from ${nodes.length} RBN nodes.${cacheStatus}`,
@@ -416,12 +425,6 @@ function formatMiles(value: number): string {
 
 function formatBands(bands: string[]): string {
   return bands.length > 0 ? bands.join(", ") : "-";
-}
-
-function formatCacheAge(ageMs: number): string {
-  const minutes = Math.max(0, Math.floor(ageMs / (60 * 1000)));
-  if (minutes < 1) return "less than a minute";
-  return `${minutes} minute${minutes === 1 ? "" : "s"}`;
 }
 
 function readStorage(key: string): string | null {
