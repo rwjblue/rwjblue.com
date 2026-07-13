@@ -1,0 +1,185 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { CW_CALENDAR_PATH, cwActivities } from "../../lib/cw-practice";
+
+const calendarUrl = `https://rwjblue.com${CW_CALENDAR_PATH}`;
+const webcalUrl = `webcal://rwjblue.com${CW_CALENDAR_PATH}`;
+---
+
+<BaseLayout
+  title="CW Practice Schedule / N1RWJ"
+  description="A local-time schedule for the weekly K1USN SST, ICWC MST, and CWops CWT on-air Morse code activities."
+  canonicalPath="/radio/cw-practice/"
+>
+  <section class="cw-clock-intro">
+    <div>
+      <p class="eyebrow">Radio / CW practice</p>
+      <h1>CW Practice Schedule</h1>
+      <p class="lede">
+        The next Slow Speed Test, Medium Speed Test, and CWops Test sessions,
+        shown in your current local time or UTC.
+      </p>
+    </div>
+    <p class="cw-clock-zone" id="cw-clock-zone" aria-live="polite">Finding your time zone...</p>
+  </section>
+
+  <section class="cw-clock-tool" id="cw-practice-clock" aria-label="Upcoming CW practice sessions">
+    <div class="cw-clock-controls">
+      <div class="cw-clock-zone-toggle" role="radiogroup" aria-label="Time zone">
+        <button type="button" data-zone="local" aria-checked="true" role="radio">Local time</button>
+        <button type="button" data-zone="utc" aria-checked="false" role="radio">UTC</button>
+      </div>
+      <a class="cw-clock-calendar-link" href={webcalUrl}>Subscribe to calendar</a>
+    </div>
+
+    <div class="cw-clock-status-grid">
+      <button class="cw-clock-primary" id="cw-clock-primary" type="button">
+        <span class="cw-clock-kicker" id="cw-clock-primary-kicker">Next up</span>
+        <span class="cw-clock-activity" id="cw-clock-primary-activity">Loading schedule...</span>
+        <span class="cw-clock-primary-time" id="cw-clock-primary-time"></span>
+        <span class="cw-clock-countdown" id="cw-clock-primary-countdown"></span>
+        <span class="cw-clock-progress" id="cw-clock-progress" aria-hidden="true">
+          <span id="cw-clock-progress-fill"></span>
+        </span>
+        <span class="cw-clock-open-hint">Open exchange walkthrough <span aria-hidden="true">→</span></span>
+      </button>
+
+      <button class="cw-clock-next" id="cw-clock-next" type="button">
+        <span class="cw-clock-kicker">After that</span>
+        <span class="cw-clock-next-activity" id="cw-clock-next-activity"></span>
+        <span class="cw-clock-next-time" id="cw-clock-next-time"></span>
+        <span class="cw-clock-open-hint">Open exchange walkthrough <span aria-hidden="true">→</span></span>
+      </button>
+    </div>
+
+    <section class="cw-clock-agenda" aria-labelledby="cw-clock-agenda-title">
+      <div class="cw-clock-section-heading">
+        <div>
+          <p class="section-label">Coming up</p>
+          <h2 id="cw-clock-agenda-title">The next few sessions</h2>
+        </div>
+        <p>Each session lasts one hour.</p>
+      </div>
+      <ol id="cw-clock-agenda-list"></ol>
+    </section>
+
+    <noscript>
+      <p class="cw-clock-noscript">
+        This clock needs JavaScript to translate the fixed UTC schedule into
+        your local time. The calendar subscription works without it.
+      </p>
+    </noscript>
+  </section>
+
+  <section class="cw-clock-subscribe" aria-labelledby="cw-clock-subscribe-title">
+    <div>
+      <p class="section-label">Calendar feed</p>
+      <h2 id="cw-clock-subscribe-title">Let your calendar do the conversion.</h2>
+      <p>
+        Subscribe once and your calendar app will periodically refresh this
+        server-managed feed. Sessions are stored in UTC, so they follow local
+        daylight-saving changes and travel with your calendar automatically.
+      </p>
+    </div>
+    <div class="cw-clock-subscribe-actions">
+      <a href={webcalUrl}>Subscribe</a>
+      <button type="button" id="cw-clock-copy-feed" data-url={calendarUrl}>Copy feed URL</button>
+      <span id="cw-clock-copy-status" role="status"></span>
+    </div>
+  </section>
+
+  <section class="cw-clock-reference" aria-labelledby="cw-clock-reference-title">
+    <p class="section-label">At a glance</p>
+    <h2 id="cw-clock-reference-title">A progression, not a speed requirement.</h2>
+    <div class="cw-clock-reference-list">
+      {
+        cwActivities.map((activity) => (
+          <button
+            class={`cw-clock-reference-item cw-clock-reference-item--${activity.id}`}
+            type="button"
+            data-activity={activity.id}
+          >
+            <span>{activity.abbreviation}</span>
+            <strong>{activity.speed}</strong>
+            <p>{activity.name} · {activity.exchange}</p>
+          </button>
+        ))
+      }
+    </div>
+  </section>
+
+  <dialog class="cw-clock-dialog" id="cw-dialog-sst" aria-labelledby="cw-dialog-sst-title">
+    <div class="cw-clock-dialog-head">
+      <div>
+        <p class="section-label">K1USN Radio Club · up to 20 WPM</p>
+        <h2 id="cw-dialog-sst-title">SST exchange walkthrough</h2>
+      </div>
+      <button type="button" class="cw-clock-dialog-close" aria-label="Close dialog">×</button>
+    </div>
+    <p class="cw-clock-dialog-summary">Send your first name and state, province, or DX country. There is no RST in the suggested exchange.</p>
+    <ol class="cw-clock-walkthrough">
+      <li><span>1</span><div><strong>Find a caller</strong><code>CQ SST K1ABC</code><p>Or call <code>CQ SST</code> yourself on a clear frequency.</p></div></li>
+      <li><span>2</span><div><strong>Answer with your call</strong><code>N1RWJ</code><p>Send it once or twice, then listen for your call.</p></div></li>
+      <li><span>3</span><div><strong>Copy their exchange</strong><code>N1RWJ ALEX MA</code><p>Log the other operator's first name and location.</p></div></li>
+      <li><span>4</span><div><strong>Send yours</strong><code>GE ALEX ROB RI</code><p>A short greeting is welcome. Match the other operator's speed.</p></div></li>
+      <li><span>5</span><div><strong>Finish the contact</strong><code>TU 73</code><p>Listen for confirmation before moving on.</p></div></li>
+    </ol>
+    <div class="cw-clock-dialog-notes">
+      <p><strong>Suggested frequencies</strong><br />1.810-1.825, 3.528-3.545, 7.028-7.045, 14.028-14.045, 21.028-21.045, and 28.028-28.045 MHz.</p>
+      <p>SST has no lower speed limit. Operators are asked to be patient and slow down as needed.</p>
+    </div>
+    <a class="cw-clock-rules-link" href="https://www.k1usn.com/sst" target="_blank" rel="noreferrer">K1USN SST details and rules <span aria-hidden="true">↗</span></a>
+  </dialog>
+
+  <dialog class="cw-clock-dialog" id="cw-dialog-mst" aria-labelledby="cw-dialog-mst-title">
+    <div class="cw-clock-dialog-head">
+      <div>
+        <p class="section-label">International CW Council · 20-25 WPM</p>
+        <h2 id="cw-dialog-mst-title">MST exchange walkthrough</h2>
+      </div>
+      <button type="button" class="cw-clock-dialog-close" aria-label="Close dialog">×</button>
+    </div>
+    <p class="cw-clock-dialog-summary">Send your first name and the next sequential number in your log. There is no RST in the required exchange.</p>
+    <ol class="cw-clock-walkthrough">
+      <li><span>1</span><div><strong>Find a caller</strong><code>CQ MST K1ABC</code><p>Or find a clear frequency and call <code>CQ MST</code>.</p></div></li>
+      <li><span>2</span><div><strong>Answer with your call</strong><code>N1RWJ</code><p>Wait for the running station to send your call back.</p></div></li>
+      <li><span>3</span><div><strong>Copy their exchange</strong><code>N1RWJ ALEX 027</code><p>Log their first name and serial number.</p></div></li>
+      <li><span>4</span><div><strong>Send yours</strong><code>ROB 001</code><p>Start at 001 and increment your number for each QSO.</p></div></li>
+      <li><span>5</span><div><strong>Confirm and continue</strong><code>TU</code><p>The running station confirms the QSO and calls again.</p></div></li>
+    </ol>
+    <div class="cw-clock-dialog-notes">
+      <p><strong>Suggested frequencies in the Americas</strong><br />1.812-1.828, 3.528-3.550, 7.028-7.050, 14.028-14.050, 21.028-21.050, and 28.028-28.050 MHz.</p>
+      <p>Keep speeds around 20-25 WPM and slow down when requested. Running stations near 7.030 MHz should observe the event's QRP note.</p>
+    </div>
+    <a class="cw-clock-rules-link" href="https://internationalcwcouncil.org/mst-contest/" target="_blank" rel="noreferrer">Official ICWC MST rules <span aria-hidden="true">↗</span></a>
+  </dialog>
+
+  <dialog class="cw-clock-dialog" id="cw-dialog-cwt" aria-labelledby="cw-dialog-cwt-title">
+    <div class="cw-clock-dialog-head">
+      <div>
+        <p class="section-label">CWops · usually 25+ WPM</p>
+        <h2 id="cw-dialog-cwt-title">CWT exchange walkthrough</h2>
+      </div>
+      <button type="button" class="cw-clock-dialog-close" aria-label="Close dialog">×</button>
+    </div>
+    <p class="cw-clock-dialog-summary">Everyone is welcome. Members send their first name and CWops number; non-members send their first name and state, province, or DX prefix. CW Academy students send their first name and CWA instead of a location.</p>
+    <ol class="cw-clock-walkthrough">
+      <li><span>1</span><div><strong>Find a caller</strong><code>CQ CWT K1ABC</code><p>Or call <code>CQ CWT</code> on a clear frequency.</p></div></li>
+      <li><span>2</span><div><strong>Answer with your call</strong><code>N1RWJ</code><p>Listen for the running station to send your call.</p></div></li>
+      <li><span>3</span><div><strong>Copy their exchange</strong><code>N1RWJ ALEX 1234</code><p>A member sends a name and CWops number. A non-member sends a location instead.</p></div></li>
+      <li><span>4</span><div><strong>Send the right version</strong><code>ROB RI</code><p>As a member, send <code>ROB 1234</code>. As a CW Academy student, send <code>ROB CWA</code> instead of your state, province, or country.</p></div></li>
+      <li><span>5</span><div><strong>Confirm and continue</strong><code>TU</code><p>The running station confirms and returns to calling.</p></div></li>
+    </ol>
+    <div class="cw-clock-dialog-notes">
+      <p><strong>Suggested frequencies</strong><br />Generally 28-45 kHz above the lower band edge on 10, 15, 20, 40, 80, and 160 meters.</p>
+      <p>CWT can be fast, but the official guidance asks operators to slow down when called at a slower speed.</p>
+    </div>
+    <a class="cw-clock-rules-link" href="https://cwops.org/cwops-tests/" target="_blank" rel="noreferrer">Official CWops CWT rules <span aria-hidden="true">↗</span></a>
+  </dialog>
+
+  <script>
+    import { initCwPracticeClock } from "../../lib/cw-practice-client";
+
+    initCwPracticeClock();
+  </script>
+</BaseLayout>

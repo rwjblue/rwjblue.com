@@ -115,6 +115,28 @@ test("radio page links the RBN skimmer finder utility", () => {
   assert.match(radio, /RBN Skimmer Finder/);
 });
 
+test("radio page links the CW Practice Schedule without adding top-level navigation", () => {
+  const radio = read("src/pages/radio/index.astro");
+  const layout = read("src/layouts/BaseLayout.astro");
+
+  assert.ok(existsSync("src/pages/radio/cw-practice.astro"));
+  assert.match(radio, /\/radio\/cw-practice\//);
+  assert.match(radio, /CW Practice Schedule/);
+  assert.doesNotMatch(layout, /\/radio\/cw-practice\//);
+});
+
+test("CW Practice Schedule offers only local time and UTC views", () => {
+  const clock = read("src/pages/radio/cw-practice.astro");
+
+  assert.match(clock, /data-zone="local"[^>]*>Local time</);
+  assert.match(clock, /data-zone="utc"[^>]*>UTC</);
+  assert.doesNotMatch(clock, /data-zone="home"/);
+  assert.doesNotMatch(clock, /Here now/);
+  assert.doesNotMatch(clock, /cw-clock-primary-utc/);
+  assert.doesNotMatch(clock, /cw-clock-next-utc/);
+  assert.match(clock, /CW Academy students send their first name and CWA/);
+});
+
 test("rbn skimmer finder page provides utility markup and client boot script", () => {
   assert.ok(existsSync("src/pages/radio/rbn-skimmers.astro"));
 
