@@ -773,20 +773,76 @@ p {
   line-height: 1;
 }
 
-.rbn-skimmer-tool {
+.rbn-utility-intro {
   display: grid;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: 48px;
+  align-items: end;
+  padding-bottom: 28px;
 }
 
-.rbn-controls,
+.rbn-utility-intro h1 {
+  max-width: none;
+  margin-bottom: 14px;
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  line-height: 0.98;
+}
+
+.rbn-utility-intro .lede {
+  max-width: 680px;
+  margin-bottom: 0;
+}
+
+.rbn-signal-note {
+  padding-left: 24px;
+  border-left: 2px solid var(--ink);
+}
+
+.rbn-signal-note h2 {
+  margin-bottom: 8px;
+  font-size: 1.18rem;
+}
+
+.rbn-signal-note p:last-child {
+  margin-bottom: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.section-block.wide.rbn-skimmer-tool {
+  display: grid;
+  gap: 30px;
+  width: min(1240px, calc(100vw - 40px));
+  margin-top: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.rbn-setup {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.38fr) minmax(0, 1fr);
+  gap: 42px;
+  align-items: end;
+}
+
+.rbn-setup-heading h2 {
+  margin-bottom: 7px;
+}
+
+.rbn-setup-heading p:last-child {
+  max-width: 360px;
+  margin-bottom: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 .rbn-results-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
-  gap: 22px;
+  grid-template-columns: minmax(760px, 2.05fr) minmax(330px, 1fr);
+  gap: 28px;
   align-items: start;
 }
 
-.rbn-panel,
 .rbn-results-panel,
 .rbn-map-panel,
 .rbn-handoff {
@@ -795,15 +851,15 @@ p {
   padding-top: 16px;
 }
 
-.rbn-panel h3,
 .rbn-handoff h2,
-.rbn-results-heading h2 {
+.rbn-results-heading h2,
+.rbn-map-panel h2 {
   margin-bottom: 8px;
 }
 
 .rbn-location-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   align-items: end;
 }
@@ -816,6 +872,11 @@ p {
   color: var(--ink);
   font-size: 0.82rem;
   font-weight: 800;
+}
+
+.rbn-grid-field {
+  flex: 1 1 220px;
+  max-width: 260px;
 }
 
 .rbn-grid-field span,
@@ -874,10 +935,35 @@ p {
   border-color: var(--blue);
 }
 
-.rbn-status-panel p,
 .rbn-link-summary,
 .rbn-empty {
   margin-bottom: 0;
+}
+
+.rbn-status-line {
+  display: flex;
+  gap: 10px 14px;
+  align-items: baseline;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.rbn-status-line span {
+  flex: none;
+  color: var(--rust);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.rbn-status-line p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
 .rbn-results-heading {
@@ -886,6 +972,13 @@ p {
   align-items: start;
   justify-content: space-between;
   margin-bottom: 14px;
+}
+
+.rbn-results-help,
+.rbn-map-help {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
 .rbn-count {
@@ -945,6 +1038,16 @@ p {
   min-height: 360px;
   border: 1px solid var(--line-strong);
   background: var(--panel);
+}
+
+.rbn-map-panel {
+  position: sticky;
+  top: 18px;
+}
+
+.rbn-map-help {
+  margin-top: -2px;
+  margin-bottom: 12px;
 }
 
 .rbn-map .leaflet-popup-content strong,
@@ -2210,6 +2313,20 @@ p {
   font-weight: 800;
 }
 
+@media (max-width: 1120px) {
+  .rbn-results-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .rbn-map-panel {
+    position: static;
+  }
+
+  .rbn-map {
+    min-height: 340px;
+  }
+}
+
 @media (max-width: 820px) {
   .shell {
     width: min(100% - 28px, 680px);
@@ -2323,10 +2440,32 @@ p {
     min-height: 390px;
   }
 
-  .rbn-controls,
+  .rbn-utility-intro,
+  .rbn-setup,
   .rbn-results-layout,
   .rbn-handoff {
     grid-template-columns: 1fr;
+  }
+
+  .rbn-utility-intro {
+    gap: 26px;
+    padding-bottom: 24px;
+  }
+
+  .rbn-utility-intro h1 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+  }
+
+  .rbn-signal-note {
+    max-width: 560px;
+  }
+
+  .section-block.wide.rbn-skimmer-tool {
+    width: 100%;
+  }
+
+  .rbn-setup {
+    gap: 22px;
   }
 
   .rbn-map {
@@ -2438,5 +2577,34 @@ p {
 
   .cw-log-body {
     overflow-x: auto;
+  }
+
+  .rbn-signal-note {
+    padding-left: 18px;
+  }
+
+  .rbn-location-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .rbn-location-row .rbn-primary {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .rbn-grid-field {
+    min-width: 0;
+    max-width: none;
+  }
+
+  .rbn-status-line {
+    display: grid;
+    gap: 5px;
+  }
+
+  .rbn-target-field,
+  .rbn-open-link {
+    width: 100%;
   }
 }

@@ -8,28 +8,36 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   description="Find nearby active Reverse Beacon Network skimmers from your current location or Maidenhead grid, then open RBN with spot filters prefilled."
   canonicalPath="/radio/rbn-skimmers/"
 >
-  <section class="page-intro">
-    <p class="eyebrow">Radio utility</p>
-    <h1>RBN Skimmer Finder</h1>
-    <p>
-      Find active Reverse Beacon Network skimmers near your operating position,
-      then jump to RBN with those skimmers and target calls prefilled.
-    </p>
+  <section class="rbn-utility-intro">
+    <div class="rbn-utility-copy">
+      <p class="eyebrow">Operating tool</p>
+      <h1>RBN Skimmer Finder</h1>
+      <p class="lede">
+        Rank active Reverse Beacon Network receivers by distance from your
+        operating position, then open a focused RBN spot feed.
+      </p>
+    </div>
+    <aside class="rbn-signal-note" aria-labelledby="rbn-signal-note-title">
+      <p class="section-label">Range, not a forecast</p>
+      <h2 id="rbn-signal-note-title">Start with the nearest ears.</h2>
+      <p>
+        Distance is a useful first filter. What a skimmer hears still depends
+        on the band, path, antenna, and local noise.
+      </p>
+    </aside>
   </section>
 
   <section class="section-block wide rbn-skimmer-tool" id="rbn-skimmer-tool">
-    <div class="section-heading">
-      <p class="section-label">Skimmer range check</p>
-      <h2>Pick an operating location.</h2>
-    </div>
-
-    <div class="rbn-controls">
-      <div class="rbn-panel">
-        <h3>Location</h3>
+    <div class="rbn-setup">
+      <div class="rbn-setup-heading">
+        <p class="section-label">Operating position</p>
+        <h2>Set your location.</h2>
         <p>
-          Use browser location or enter a Maidenhead grid. Coordinates stay in
-          this browser and are only used for distance calculations.
+          Browser coordinates stay on this device. The six-character grid is
+          added to the URL so the result can be shared.
         </p>
+      </div>
+      <div class="rbn-setup-controls">
         <div class="rbn-location-row">
           <button id="rbn-use-location" class="rbn-primary" type="button">
             Use browser location
@@ -48,11 +56,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             Apply grid
           </button>
         </div>
-      </div>
-
-      <div class="rbn-panel rbn-status-panel">
-        <h3>RBN data</h3>
-        <p id="rbn-status">Waiting for a location.</p>
+        <div class="rbn-status-line">
+          <span>Live RBN status</span>
+          <p id="rbn-status" aria-live="polite">Waiting for a location.</p>
+        </div>
       </div>
     </div>
 
@@ -61,7 +68,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <div class="rbn-results-heading">
           <div>
             <p class="section-label">Nearest active skimmers</p>
-            <h2>Use the closest one or two first.</h2>
+            <h2>Ranked receivers</h2>
+            <p class="rbn-results-help">
+              Sorted by distance, with the closest two selected to start.
+            </p>
           </div>
           <p id="rbn-count" class="rbn-count"></p>
         </div>
@@ -72,6 +82,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
       <div class="rbn-map-panel">
         <p class="section-label">Map</p>
+        <h2>Receiver locations</h2>
+        <p class="rbn-map-help">Selected skimmers use the darker markers.</p>
         <div id="rbn-map" class="rbn-map" aria-label="Nearest RBN skimmers map"></div>
       </div>
     </div>
@@ -79,10 +91,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <div class="rbn-handoff">
       <div>
         <p class="section-label">RBN handoff</p>
-        <h2>Build a live spot filter.</h2>
+        <h2>Open a focused spot feed.</h2>
         <p>
-          Selected skimmers become the RBN spotter filter. Target calls are
-          optional and can include wildcards.
+          Checked skimmers become the spotter filter. Target calls are optional
+          and can include wildcards.
         </p>
       </div>
       <label class="rbn-target-field" for="rbn-targets">
