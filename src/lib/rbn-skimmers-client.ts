@@ -14,9 +14,14 @@ import {
   type RankedSkimmer,
   type RbnNodeRecord,
 } from "./rbn-skimmers";
+import {
+  decodeRbnNodeCache,
+  encodeRbnNodeCache,
+} from "./rbn-node-cache";
 
 const RBN_NODES_URL = "https://www.reversebeacon.net/nodes/detail_json.php";
 const STORAGE_GRID = "rbnSkimmers.grid";
+const STORAGE_NODES = "rbnSkimmers.nodes.v1";
 const STORAGE_TARGETS = "rbnSkimmers.targets";
 const RESULT_LIMIT = 10;
 
@@ -41,24 +46,62 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   let selectedCalls = new Set<string>();
   let leafletMap: L.Map | null = null;
   let markerLayer: L.LayerGroup | null = null;
+  let nodesFetchedAt: number | null = null;
+  let nodesFromCache = false;
 
   const initialUrlGrid = gridFromUrlSearch(window.location.search);
-  gridInput.value = initialUrlGrid ?? readStorage(STORAGE_GRID) ?? "";
+  const initialGrid = initialUrlGrid ?? readStorage(STORAGE_GRID);
+  const cachedNodes = decodeRbnNodeCache(readStorage(STORAGE_NODES));
+  if (cachedNodes) {
+    nodes = cachedNodes.nodes;
+    nodesFetchedAt = cachedNodes.fetchedAt;
+    nodesFromCache = true;
+  }
+
+  gridInput.value = initialGrid ?? "";
   targetsInput.value = readStorage(STORAGE_TARGETS) ?? "";
   setupMap();
   updateRbnLink();
-  if (initialUrlGrid) {
+  if (initialGrid) {
     applyGrid();
+  } else if (cachedNodes) {
+    setStatus(
+      `Loaded ${nodes.length} cached RBN nodes from ${formatCacheAge(cachedNodes.ageMs)} ago. Enter a grid or use browser location.`,
+    );
   }
-  void fetchNodes();
+  if (!cachedNodes?.isFresh) {
+    void fetchNodes();
+  }
+  if (!initialUrlGrid) {
+    void useGrantedBrowserLocation();
+  }
 
-  useLocationButton.addEventListener("click", () => {
+  useLocationButton.addEventListener("click", () => requestBrowserLocation(true));
+
+  async function useGrantedBrowserLocation(): Promise<void> {
+    if (!navigator.geolocation || !navigator.permissions) return;
+
+    try {
+      const permission = await navigator.permissions.query({ name: "geolocation" });
+      if (permission.state === "granted") {
+        requestBrowserLocation(false);
+      }
+    } catch {
+      // Some browsers expose Permissions but do not support geolocation queries.
+    }
+  }
+
+  function requestBrowserLocation(reportErrors: boolean): void {
     if (!navigator.geolocation) {
-      setStatus("Browser location is unavailable. Enter a Maidenhead grid instead.");
+      if (reportErrors) {
+        setStatus("Browser location is unavailable. Enter a Maidenhead grid instead.");
+      }
       return;
     }
 
-    setStatus("Requesting browser location...");
+    if (reportErrors) {
+      setStatus("Requesting browser location...");
+    }
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const point = {
@@ -78,7 +121,9 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
         );
       },
       () => {
-        setStatus("Browser location was not available. Enter a Maidenhead grid instead.");
+        if (reportErrors) {
+          setStatus("Browser location was not available. Enter a Maidenhead grid instead.");
+        }
       },
       {
         enableHighAccuracy: false,
@@ -86,7 +131,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
         timeout: 10000,
       },
     );
-  });
+  }
 
   applyGridButton.addEventListener("click", applyGrid);
   gridInput.addEventListener("keydown", (event) => {
@@ -141,7 +186,9 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   }
 
   async function fetchNodes(): Promise<void> {
-    setStatus("Fetching active RBN skimmers...");
+    if (nodes.length === 0) {
+      setStatus("Fetching active RBN skimmers...");
+    }
 
     try {
       const response = await fetch(RBN_NODES_URL, {
@@ -153,12 +200,23 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
       if (!Array.isArray(json)) throw new Error("RBN response was not a node list");
 
       nodes = json as RbnNodeRecord[];
+      nodesFetchedAt = Date.now();
+      nodesFromCache = false;
+      writeStorage(STORAGE_NODES, encodeRbnNodeCache(nodes, nodesFetchedAt));
       if (origin) {
         render();
       } else {
         setStatus(`Loaded ${nodes.length} active RBN nodes. Enter a grid or use browser location.`);
       }
     } catch {
+      if (nodes.length > 0 && nodesFetchedAt !== null) {
+        const ageMs = Math.max(0, Date.now() - nodesFetchedAt);
+        setStatus(
+          `Using cached RBN data from ${formatCacheAge(ageMs)} ago; the live refresh failed.`,
+        );
+        return;
+      }
+
       setStatus("Could not fetch active RBN nodes. Try again later or open RBN directly.");
       results.innerHTML =
         '<p class="rbn-empty">RBN active-node data is unavailable right now.</p>';
@@ -203,7 +261,13 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
 
     count.textContent = `${ranked.length} shown`;
     results.innerHTML = renderTable(ranked, selectedCalls);
-    setStatus(`Ranked ${ranked.length} nearest active skimmers from ${nodes.length} RBN nodes.`);
+    const cacheStatus =
+      nodesFromCache && nodesFetchedAt !== null
+        ? ` Cached ${formatCacheAge(Date.now() - nodesFetchedAt)} ago.`
+        : "";
+    setStatus(
+      `Ranked ${ranked.length} nearest active skimmers from ${nodes.length} RBN nodes.${cacheStatus}`,
+    );
     updateRbnLink();
     updateMap();
   }
@@ -352,6 +416,12 @@ function formatMiles(value: number): string {
 
 function formatBands(bands: string[]): string {
   return bands.length > 0 ? bands.join(", ") : "-";
+}
+
+function formatCacheAge(ageMs: number): string {
+  const minutes = Math.max(0, Math.floor(ageMs / (60 * 1000)));
+  if (minutes < 1) return "less than a minute";
+  return `${minutes} minute${minutes === 1 ? "" : "s"}`;
 }
 
 function readStorage(key: string): string | null {
