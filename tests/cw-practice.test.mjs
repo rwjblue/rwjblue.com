@@ -53,7 +53,7 @@ test("calendar feed contains stable weekly UTC events", () => {
   assert.equal(new Set(uids).size, 9);
   assert.match(calendar, /DTSTART:20260713T190000Z/);
   assert.match(calendar, /DTSTART:20260716T070000Z/);
-  assert.match(calendar, /SEQUENCE:2/);
+  assert.match(calendar, /SEQUENCE:3/);
   assert.match(calendar, /or CWA/);
   assert.ok(physicalLines.every((line) => line.length <= 75));
   assert.ok(calendar.endsWith("END:VCALENDAR\r\n"));
@@ -68,6 +68,23 @@ test("calendar endpoint returns a cacheable iCalendar response", async () => {
   assert.match(response.headers.get("Content-Disposition"), /cw-practice-schedule\.ics/);
   assert.match(response.headers.get("Cache-Control"), /s-maxage=3600/);
   assert.match(await response.text(), /BEGIN:VCALENDAR/);
+});
+
+test("calendar events link back to the feed's site domain", async () => {
+  const n1rwjResponse = calendarResponse(
+    new Request(`https://n1rwj.com${CW_CALENDAR_PATH}`),
+  );
+  const rwjblueResponse = calendarResponse(
+    new Request(`https://rwjblue.com${CW_CALENDAR_PATH}`),
+  );
+  const calendar = await n1rwjResponse.text();
+
+  assert.equal(
+    (calendar.match(/URL:https:\/\/n1rwj\.com\/radio\/cw-practice\//g) ?? []).length,
+    9,
+  );
+  assert.match(calendar, /Schedule and exchange walkthrough/);
+  assert.notEqual(n1rwjResponse.headers.get("ETag"), rwjblueResponse.headers.get("ETag"));
 });
 
 test("calendar endpoint supports HEAD, conditional requests, and method rejection", async () => {

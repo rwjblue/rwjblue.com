@@ -2,8 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { CW_CALENDAR_PATH, cwActivities } from "../../lib/cw-practice";
 
-const calendarUrl = `https://rwjblue.com${CW_CALENDAR_PATH}`;
-const webcalUrl = `webcal://rwjblue.com${CW_CALENDAR_PATH}`;
+const calendarPath = CW_CALENDAR_PATH;
 ---
 
 <BaseLayout
@@ -29,7 +28,7 @@ const webcalUrl = `webcal://rwjblue.com${CW_CALENDAR_PATH}`;
         <button type="button" data-zone="local" aria-checked="true" role="radio">Local time</button>
         <button type="button" data-zone="utc" aria-checked="false" role="radio">UTC</button>
       </div>
-      <a class="cw-clock-calendar-link" href={webcalUrl}>Subscribe to calendar</a>
+      <a class="cw-clock-calendar-link" href={calendarPath} data-calendar-subscribe>Subscribe to calendar</a>
     </div>
 
     <div class="cw-clock-status-grid">
@@ -65,7 +64,7 @@ const webcalUrl = `webcal://rwjblue.com${CW_CALENDAR_PATH}`;
 
     <noscript>
       <p class="cw-clock-noscript">
-        This clock needs JavaScript to translate the fixed UTC schedule into
+        This schedule needs JavaScript to translate the fixed UTC sessions into
         your local time. The calendar subscription works without it.
       </p>
     </noscript>
@@ -82,8 +81,8 @@ const webcalUrl = `webcal://rwjblue.com${CW_CALENDAR_PATH}`;
       </p>
     </div>
     <div class="cw-clock-subscribe-actions">
-      <a href={webcalUrl}>Subscribe</a>
-      <button type="button" id="cw-clock-copy-feed" data-url={calendarUrl}>Copy feed URL</button>
+      <a href={calendarPath} data-calendar-subscribe>Subscribe</a>
+      <button type="button" id="cw-clock-copy-feed" data-calendar-path={calendarPath}>Copy feed URL</button>
       <span id="cw-clock-copy-status" role="status"></span>
     </div>
   </section>

@@ -253,10 +253,19 @@ export function initCwPracticeClock(): void {
 
   const copyButton = element<HTMLButtonElement>("cw-clock-copy-feed");
   const copyStatus = element("cw-clock-copy-status");
+  const calendarUrl = new URL(
+    copyButton.dataset.calendarPath ?? "/radio/cw-practice/calendar.ics",
+    window.location.href,
+  );
+  const webcalUrl = `webcal://${calendarUrl.host}${calendarUrl.pathname}${calendarUrl.search}`;
+
+  for (const link of document.querySelectorAll<HTMLAnchorElement>("[data-calendar-subscribe]")) {
+    link.href = webcalUrl;
+  }
 
   copyButton.addEventListener("click", async () => {
     try {
-      await navigator.clipboard.writeText(copyButton.dataset.url ?? "");
+      await navigator.clipboard.writeText(calendarUrl.toString());
       copyStatus.textContent = "Copied";
     } catch {
       copyStatus.textContent = "Copy failed; open the feed link instead.";

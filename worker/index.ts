@@ -5,8 +5,6 @@ import {
   CW_CALENDAR_VERSION,
 } from "../src/lib/cw-practice.ts";
 
-const calendarEtag = `"cw-practice-${CW_CALENDAR_VERSION}-${CW_CALENDAR_SEQUENCE}"`;
-
 export function calendarResponse(request: Request): Response {
   if (request.method !== "GET" && request.method !== "HEAD") {
     return new Response("Method not allowed", {
@@ -15,6 +13,8 @@ export function calendarResponse(request: Request): Response {
     });
   }
 
+  const requestUrl = new URL(request.url);
+  const calendarEtag = `"cw-practice-${CW_CALENDAR_VERSION}-${CW_CALENDAR_SEQUENCE}-${requestUrl.host}"`;
   const headers = new Headers({
     "Access-Control-Allow-Origin": "*",
     "Cache-Control": "public, max-age=300, s-maxage=3600",
@@ -29,7 +29,7 @@ export function calendarResponse(request: Request): Response {
     return new Response(null, { status: 304, headers });
   }
 
-  return new Response(request.method === "HEAD" ? null : buildCwCalendar(), {
+  return new Response(request.method === "HEAD" ? null : buildCwCalendar(requestUrl.origin), {
     headers,
   });
 }

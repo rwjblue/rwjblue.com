@@ -29,7 +29,7 @@ const WEEK_MS = 7 * 24 * HOUR_MS;
 export const CW_CALENDAR_PATH = "/radio/cw-practice/calendar.ics";
 export const CW_CALENDAR_VERSION = "2026-07-13";
 // Increment whenever a deployed calendar change should replace subscribed events.
-export const CW_CALENDAR_SEQUENCE = 2;
+export const CW_CALENDAR_SEQUENCE = 3;
 
 export const cwActivities: readonly CwActivity[] = [
   {
@@ -173,9 +173,10 @@ function foldIcsLine(line: string): string[] {
   return folded;
 }
 
-export function buildCwCalendar(): string {
+export function buildCwCalendar(siteOrigin = "https://rwjblue.com"): string {
   const calendarUpdated = new Date(`${CW_CALENDAR_VERSION}T00:00:00.000Z`);
   const anchorMonday = new Date("2026-07-13T00:00:00.000Z");
+  const scheduleUrl = new URL("/radio/cw-practice/", siteOrigin).toString();
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
@@ -201,6 +202,7 @@ export function buildCwCalendar(): string {
       const description = [
         activity.speed,
         `Exchange: ${activity.exchange}`,
+        `Schedule and exchange walkthrough: ${scheduleUrl}`,
         `Official rules: ${activity.rulesUrl}`,
       ].join("\n");
 
@@ -214,7 +216,7 @@ export function buildCwCalendar(): string {
         "RRULE:FREQ=WEEKLY",
         `SUMMARY:${escapeIcsText(`${activity.abbreviation} - ${activity.name}`)}`,
         `DESCRIPTION:${escapeIcsText(description)}`,
-        `URL:${activity.rulesUrl}`,
+        `URL:${scheduleUrl}`,
         "STATUS:CONFIRMED",
         "TRANSP:TRANSPARENT",
         `SEQUENCE:${CW_CALENDAR_SEQUENCE}`,

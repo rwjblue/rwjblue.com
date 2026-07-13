@@ -57,6 +57,12 @@ Events use UTC `DTSTART` and `DTEND` values, stable `UID` values, and a shared
 `CW_CALENDAR_SEQUENCE`, allowing subscribed clients to update existing events
 instead of creating duplicates.
 
+Subscription links are built in the browser from the current page host. A
+visitor on `n1rwj.com` therefore subscribes to the `n1rwj.com` feed, while a
+visitor on `rwjblue.com` stays on `rwjblue.com`. The Worker uses the requested
+feed origin for each event's `URL` and schedule link, so calendar items return
+to the same site domain from which the calendar was subscribed.
+
 `worker/index.ts` handles only the calendar path. On each calendar request it
 builds the small iCalendar document in memory from the same `cwActivities` data
 used by the page. Every other request bypasses Worker code and is served from

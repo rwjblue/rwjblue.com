@@ -135,6 +135,13 @@ test("CW Practice Schedule offers only local time and UTC views", () => {
   assert.doesNotMatch(clock, /cw-clock-primary-utc/);
   assert.doesNotMatch(clock, /cw-clock-next-utc/);
   assert.match(clock, /CW Academy students send their first name and CWA/);
+  assert.match(clock, /data-calendar-subscribe/);
+  assert.doesNotMatch(clock, /webcal:\/\/rwjblue\.com/);
+
+  const client = read("src/lib/cw-practice-client.ts");
+
+  assert.match(client, /window\.location\.href/);
+  assert.match(client, /webcal:\/\//);
 });
 
 test("rbn skimmer finder page provides utility markup and client boot script", () => {
