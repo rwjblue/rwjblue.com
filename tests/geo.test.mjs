@@ -4,6 +4,7 @@ import {
   distanceKilometers,
   distanceMiles,
   gridToLatLon,
+  latLonToGrid,
 } from "../src/lib/geo.ts";
 
 test("gridToLatLon returns normalized lat/lon objects for valid grids", () => {
@@ -18,6 +19,19 @@ test("gridToLatLon returns null for invalid grids", () => {
   assert.equal(gridToLatLon("EL9"), null);
   assert.equal(gridToLatLon("ZZ99AA"), null);
   assert.equal(gridToLatLon("not-a-grid"), null);
+});
+
+test("latLonToGrid returns a normalized six-character grid", () => {
+  assert.equal(
+    latLonToGrid({ lat: 26.7886381, lon: -80.0337704 }),
+    "EL96XS",
+  );
+});
+
+test("latLonToGrid returns null for invalid coordinates", () => {
+  assert.equal(latLonToGrid({ lat: Number.NaN, lon: -80 }), null);
+  assert.equal(latLonToGrid({ lat: 91, lon: 0 }), null);
+  assert.equal(latLonToGrid({ lat: 0, lon: 181 }), null);
 });
 
 test("distance helpers return great-circle distances in expected units", () => {

@@ -1,6 +1,7 @@
 import {
   distanceOnEarth,
   gridToLocation,
+  locationToGrid6,
   type EarthLocationInput,
 } from "@ham2k/lib-geo-tools";
 
@@ -21,6 +22,11 @@ export function gridToLatLon(grid: string): LatLon | null {
   } catch {
     return null;
   }
+}
+
+export function latLonToGrid(location: LatLon): string | null {
+  const grid = locationToGrid6(toHam2kLocation(location));
+  return grid?.toUpperCase() ?? null;
 }
 
 export function distanceKilometers(origin: LatLon, destination: LatLon): number {

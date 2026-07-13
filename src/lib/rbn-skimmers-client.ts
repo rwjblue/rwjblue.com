@@ -1,6 +1,7 @@
 import L from "leaflet";
 import {
   gridToLatLon,
+  latLonToGrid,
   type LatLon,
 } from "./geo";
 import {
@@ -60,13 +61,21 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
     setStatus("Requesting browser location...");
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        origin = {
+        const point = {
           lat: position.coords.latitude,
           lon: position.coords.longitude,
         };
-        writeGridToUrl(null);
-        setStatus("Location set from this browser. Ranking active skimmers...");
-        render();
+        const grid = latLonToGrid(point);
+        if (!grid) {
+          setStatus("Browser location was invalid. Enter a Maidenhead grid instead.");
+          return;
+        }
+
+        setOperatingLocation(
+          point,
+          grid,
+          `Location set from this browser (${grid}). Ranking active skimmers...`,
+        );
       },
       () => {
         setStatus("Browser location was not available. Enter a Maidenhead grid instead.");
@@ -115,11 +124,19 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
       return;
     }
 
+    setOperatingLocation(
+      point,
+      grid,
+      `Location set from grid ${grid}. Ranking active skimmers...`,
+    );
+  }
+
+  function setOperatingLocation(point: LatLon, grid: string, message: string): void {
+    origin = point;
     gridInput.value = grid;
     writeStorage(STORAGE_GRID, grid);
     writeGridToUrl(grid);
-    origin = point;
-    setStatus(`Location set from grid ${grid}. Ranking active skimmers...`);
+    setStatus(message);
     render();
   }
 
