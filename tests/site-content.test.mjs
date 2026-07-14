@@ -134,6 +134,10 @@ test("CW Practice Schedule offers only local time and UTC views", () => {
   assert.doesNotMatch(clock, /Here now/);
   assert.doesNotMatch(clock, /cw-clock-primary-utc/);
   assert.doesNotMatch(clock, /cw-clock-next-utc/);
+  assert.match(clock, /literal <code>DX<\/code>/);
+  assert.match(clock, /Do not send a country prefix/);
+  assert.match(clock, /DX country prefix/);
+  assert.doesNotMatch(clock, /state, province, or DX country\./);
   assert.match(clock, /CW Academy students send their first name and CWA/);
   assert.match(clock, /data-calendar-subscribe/);
   assert.doesNotMatch(clock, /webcal:\/\/rwjblue\.com/);

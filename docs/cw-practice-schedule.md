@@ -16,14 +16,21 @@ Schedule last verified July 13, 2026:
 
 | Activity | Weekly UTC sessions | Official source |
 | --- | --- | --- |
-| K1USN SST | Monday 0000-0100Z; Friday 2000-2100Z | [K1USN SST](https://www.k1usn.com/sst) |
+| K1USN SST | Monday 0000-0100Z; Friday 2000-2100Z | [K1USN SST rules](https://www.k1usn.com/sst_rules.html) |
 | ICWC MST | Monday 1300-1400Z and 1900-2000Z; Tuesday 0300-0400Z | [ICWC MST rules](https://internationalcwcouncil.org/mst-contest/) |
 | CWops CWT | Wednesday 1300-1400Z and 1900-2000Z; Thursday 0300-0400Z and 0700-0800Z | [CWops CWT rules](https://cwops.org/cwops-tests/) |
 
 The exchange and frequency summaries in the UI and calendar also come from
-those pages. For CWT, members send a first name and CWops number, non-members
-send a first name and state, province, or DX prefix, and CW Academy students
-send a first name and `CWA` instead of a location.
+those pages:
+
+- SST stations send a first name and a state from the lower 48, a Canadian
+  province, or the literal `DX` from anywhere else, including Alaska and
+  Hawaii. The current rules explicitly say not to send a country prefix; they
+  supersede the older summary on the SST landing page.
+- MST stations send a first name and sequential QSO serial number.
+- CWT members send a first name and CWops number. Non-members send a first name
+  and state, province, or DX country prefix. CW Academy students send a first
+  name and `CWA` instead of a location.
 
 ## Browser Schedule Calculation
 

@@ -29,7 +29,7 @@ const WEEK_MS = 7 * 24 * HOUR_MS;
 export const CW_CALENDAR_PATH = "/radio/cw-practice/calendar.ics";
 export const CW_CALENDAR_VERSION = "2026-07-13";
 // Increment whenever a deployed calendar change should replace subscribed events.
-export const CW_CALENDAR_SEQUENCE = 3;
+export const CW_CALENDAR_SEQUENCE = 4;
 
 export const cwActivities: readonly CwActivity[] = [
   {
@@ -38,10 +38,10 @@ export const cwActivities: readonly CwActivity[] = [
     name: "Slow Speed Test",
     sponsor: "K1USN Radio Club",
     speed: "Up to 20 WPM",
-    exchange: "First name + state, province, or DX country",
-    rulesUrl: "https://www.k1usn.com/sst",
+    exchange: "First name + state, province, or DX",
+    rulesUrl: "https://www.k1usn.com/sst_rules.html",
     frequencies:
-      "1.810-1.825, 3.528-3.545, 7.028-7.045, 14.028-14.045, 21.028-21.045, and 28.028-28.045 MHz",
+      "1.812-1.828, 3.528-3.545, 7.028-7.045, 14.028-14.045, 21.028-21.045, and 28.028-28.045 MHz",
     sessions: [
       { weekdayUtc: 1, hourUtc: 0 },
       { weekdayUtc: 5, hourUtc: 20 },
@@ -69,7 +69,7 @@ export const cwActivities: readonly CwActivity[] = [
     name: "CWops Test",
     sponsor: "CWops",
     speed: "Usually 25+ WPM; slow down for slower callers",
-    exchange: "First name + CWops number, state/province/DX prefix, or CWA",
+    exchange: "First name + CWops number, state/province/DX country prefix, or CWA",
     rulesUrl: "https://cwops.org/cwops-tests/",
     frequencies:
       "Generally 28-45 kHz above the lower band edge on 10, 15, 20, 40, 80, and 160 meters",

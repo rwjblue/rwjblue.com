@@ -23,6 +23,19 @@ test("CW activity data defines all nine weekly sessions", () => {
   );
 });
 
+test("CW activity exchanges match the current organizer rules", () => {
+  assert.deepEqual(
+    cwActivities.map(({ id, exchange }) => [id, exchange]),
+    [
+      ["sst", "First name + state, province, or DX"],
+      ["mst", "First name + sequential QSO number"],
+      ["cwt", "First name + CWops number, state/province/DX country prefix, or CWA"],
+    ],
+  );
+  assert.equal(cwActivities[0].rulesUrl, "https://www.k1usn.com/sst_rules.html");
+  assert.match(cwActivities[0].frequencies, /^1\.812-1\.828/);
+});
+
 test("upcoming sessions include the currently on-air session", () => {
   const now = new Date("2026-07-13T19:30:00.000Z");
   const sessions = upcomingCwSessions(now, 3);
@@ -53,7 +66,7 @@ test("calendar feed contains stable weekly UTC events", () => {
   assert.equal(new Set(uids).size, 9);
   assert.match(calendar, /DTSTART:20260713T190000Z/);
   assert.match(calendar, /DTSTART:20260716T070000Z/);
-  assert.match(calendar, /SEQUENCE:3/);
+  assert.match(calendar, /SEQUENCE:4/);
   assert.match(calendar, /or CWA/);
   assert.ok(physicalLines.every((line) => line.length <= 75));
   assert.ok(calendar.endsWith("END:VCALENDAR\r\n"));
