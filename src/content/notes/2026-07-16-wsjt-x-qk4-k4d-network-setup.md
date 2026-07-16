@@ -125,6 +125,22 @@ one. The exact installation and naming steps depend on the virtual-audio tool;
 the important part for QK4 and WSJT-X is the two-direction signal path, not the
 specific product used to create it.
 
+## Switching back to CW or voice
+
+QK4 does not currently have a quick way to toggle between the virtual audio
+devices used for digital modes and the normal devices used for CW or voice. For
+WSJT-X operation, I select `K4 RX to WSJT-X` as QK4's output and `WSJT-X TX to
+K4` as its input. When I return to CW or voice, I have to open QK4's audio
+settings and manually restore the usual speaker, headphones, or microphone.
+
+[QK4 PR #91](https://github.com/mikeg-dal/QK4/pull/91) proposes separate
+microphone and speaker selections for DATA and DATA-R modes. QK4 would use
+those devices while the transmit VFO is in a data mode, then automatically
+return to its primary devices in other modes. As of July 16, 2026, the PR
+remains open with no reviews. Until something like it lands, moving between
+WSJT-X and ordinary CW or voice operation includes a manual audio-device change
+in QK4.
+
 ## Audio-level adjustment is otherwise normal WSJT-X setup
 
 Once QK4 has been restarted and the Loopback devices are visible and selected,
@@ -167,100 +183,19 @@ QK4 connects to the K4 using the radio's remote protocol. QK4 then presents a
 local CAT server for applications such as WSJT-X. The two Loopback devices act
 as virtual patch cables between QK4 and WSJT-X.
 
-## Snapshot on July 16, 2026
+## Software used
 
-Software:
+This setup was confirmed on July 16, 2026, with:
 
-- macOS on Apple silicon
+- macOS `26.5.1` on Apple silicon
 - QK4 `0.7.0-beta.3`
 - WSJT-X `3.1.0`
-- Rogue Amoeba Loopback for the virtual audio devices
 
-What was running and connected when I confirmed the setup:
+## If CAT does not connect
 
-- QK4 had an encrypted connection to the K4 on network port `9204`.
-- QK4's CAT server was enabled on `127.0.0.1:9299`.
-- WSJT-X had an active TCP connection to that CAT server.
-- A read-only CAT query through QK4 reported the K4 at `14.095600 MHz`, in the
-  K4 data mode, matching the 20-meter WSPR setup.
-- WSJT-X was running in WSPR mode, decoding multiple stations during each
-  two-minute receive cycle.
-- Scheduled WSPR transmit cycles were keying the K4 through CAT and sending
-  audio back through QK4.
-
-## QK4 settings observed
-
-- CAT server: enabled
-- CAT server port: `9299`
-- Radio connection: TLS enabled on port `9204`
-- Streaming latency: `3`
-- Speaker/output device: `K4 RX to WSJT-X`
-- Microphone/input device: `WSJT-X TX to K4`
-- Mono mix: enabled
-- QK4 audio volume: `47`
-
-I have both local and remote radio profiles saved in QK4. Their addresses,
-identities, and pre-shared keys are intentionally omitted here.
-
-## Loopback devices
-
-Both devices are stereo, 48 kHz virtual devices using Loopback's pass-through
-source.
-
-### K4 RX to WSJT-X
-
-This is selected as:
-
-- QK4's speaker/output device
-- WSJT-X's sound input
-
-The intended direction is QK4 receive audio into WSJT-X.
-
-### WSJT-X TX to K4
-
-This is selected as:
-
-- WSJT-X's sound output
-- QK4's microphone/input device
-
-The intended direction is WSJT-X transmit tones into QK4 and then across the
-network to the K4.
-
-## WSJT-X radio settings observed
-
-- Rig: `Elecraft K4`
-- Network CAT endpoint: `127.0.0.1:9299`
-- PTT method: CAT
-- Mode: Data
-- Split operation: Rig
-- Transmit audio source: Rear
-- Audio input: `K4 RX to WSJT-X`, mono
-- Audio output: `WSJT-X TX to K4`, mono
-- PSK Reporter reporting: enabled
-
-For the WSPR session, WSJT-X was set to:
-
-- Transmit percentage: `20%`
-- Reported power: `37 dBm` (5 watts)
-
-The K4's front-panel/CAT power setting and the RF output produced by an
-audio-driven data signal are not necessarily the same thing. I still use the
-normal WSJT-X transmit-level procedure to confirm RF power, ALC, and waveform
-cleanliness rather than treating the K4 power setting alone as proof.
-
-## Failure seen during setup
-
-WSJT-X was started before QK4's CAT server was available. Its log showed:
-
-- a broken CAT connection
-- `Connection reset by peer`
-- repeated connection attempts to `127.0.0.1:9299`
-- `Connection refused` while nothing was listening on that port
-
-After QK4 was running with its CAT server enabled, the TCP connection from
-WSJT-X to QK4 was established.
-
-Working startup order:
+If WSJT-X starts before QK4's CAT server is available, it may report
+`Connection reset by peer` or `Connection refused` for `127.0.0.1:9299`. This
+startup order has been reliable:
 
 1. Start QK4.
 2. Connect QK4 to the K4D and confirm receive audio.
@@ -268,37 +203,18 @@ Working startup order:
 4. Start WSJT-X, or use its radio-test/reconnect control if it was already
    running.
 
-## What works
+## What remains to test
 
-- QK4 can connect to and control the K4D over the network.
-- QK4 exposes a local CAT server that WSJT-X can connect to.
-- Frequency and mode information make it from the K4 through QK4 to WSJT-X.
-- The QK4-to-WSJT-X receive audio route has produced WSPR decodes.
-- CAT PTT keys and unkeys the K4 through QK4.
-- WSJT-X transmit audio reaches the K4 through the second Loopback device.
-- WSJT-X is completing WSPR receive and transmit cycles.
+WSPR receive and transmit cycles are working. I still want to test:
 
-## What I still want to test
-
-- A complete FT8 or FT4 contact works through the same paths.
-- QK4 and WSJT-X recover cleanly if either application or the network connection
-  drops.
-- The same settings work when using the remote radio profile instead of the
-  local-network profile.
-- A longer unattended WSPR session remains stable.
-
-## Questions to answer as this develops
-
-- Does QK4 require mono mix for WSJT-X, or is selecting the main receiver
-  channel explicitly better?
-- Does QK4's audio volume affect the stream sent to the Loopback receive
-  device, or only monitor volume?
-- Which control gives the most repeatable transmit level: WSJT-X output
-  attenuation, the Loopback device level, QK4 microphone level, or a
-  combination?
-- Does changing bands or modes in WSJT-X reliably update the K4 through QK4?
-- Does changing frequency or mode at the K4/QK4 reliably update WSJT-X?
-- What is the cleanest recovery procedure after QK4 reconnects to the radio?
+- completing FT8 and FT4 contacts through the same paths
+- using QK4's remote-radio profile rather than the local-network profile
+- recovery and frequency/mode synchronization after an application or network
+  connection drops
+- longer unattended WSPR sessions
+- whether mono mix or the main receiver channel is the better receive source,
+  and which combination of WSJT-X, Loopback, and QK4 gain controls gives the
+  most repeatable clean transmit level
 
 ## References
 
