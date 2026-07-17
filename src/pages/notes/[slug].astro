@@ -14,24 +14,14 @@ export async function getStaticPaths() {
 
 const { note } = Astro.props;
 const { Content } = await render(note);
-const firstMarkdownImage = note.body.match(
-  /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/,
-);
-const firstHtmlImage = note.body.match(
-  /<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/i,
-);
-const firstHtmlImageAlt = note.body.match(
-  /<img\b[^>]*\balt=["']([^"']*)["'][^>]*>/i,
-);
 const formattedDate = formatDate(note.data.date, "long");
 const contactMap = contactMapForNote(note);
 const shouldUseGeneratedShareImage = contactMap || note.data.boundaryMap;
-const shareImage = shouldUseGeneratedShareImage
+const generatedShareImage = shouldUseGeneratedShareImage
   ? `/images/pota/${note.id}/share.png`
-  : firstMarkdownImage?.[2] ?? firstHtmlImage?.[1];
-const shareImageAlt = shouldUseGeneratedShareImage
-  ? `${note.data.title} social share image`
-  : firstMarkdownImage?.[1] ?? firstHtmlImageAlt?.[1];
+  : `/notes/${note.id}/share.png`;
+const shareImage = note.data.shareImage ?? generatedShareImage;
+const shareImageAlt = `${note.data.title} social share image`;
 ---
 
 <BaseLayout
