@@ -2,6 +2,7 @@
 title: Running WSJT-X through QK4 with an Elecraft K4D
 date: 2026-07-16
 summary: "A network-only setup for WSPR, FT8, and other WSJT-X modes using QK4, Loopback, and an Elecraft K4D."
+shareImage: /images/radio/2026-07-16-wsjt-x-qk4-k4d/share.png
 tags:
   - radio
   - wsjt-x
