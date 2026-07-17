@@ -252,7 +252,7 @@ test("cq wpx note is wired to a checked-in contact map artifact", () => {
   );
 });
 
-test("legacy note slugs redirect to their current urls", () => {
+test("legacy paths redirect to their current urls", () => {
   assert.ok(existsSync("public/_redirects"));
 
   const redirects = read("public/_redirects");
@@ -261,6 +261,8 @@ test("legacy note slugs redirect to their current urls", () => {
     redirects,
     /^\/notes\/2026-05-25-rhode-island-pota-rove\/\s+\/notes\/2026-05-25-pota-rove\/\s+301$/m,
   );
+  assert.match(redirects, /^\/rss\s+\/rss\.xml\s+301$/m);
+  assert.match(redirects, /^\/rss\/\s+\/rss\.xml\s+301$/m);
 });
 
 test("ri pota tracker uses file-based mise tasks", () => {
