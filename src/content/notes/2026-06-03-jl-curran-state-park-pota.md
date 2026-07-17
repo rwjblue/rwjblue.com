@@ -2,7 +2,7 @@
 title: JL Curran State Park Pack Mule Activation
 date: 2026-06-03
 summary: "A local Pack Mule outing at US-6992 with the freshly reassembled KX2, a high 51-foot random wire, and 23 CW QSOs through heavy QSB."
-shareImageHero: /images/pota/2026-06-03-jl-curran-state-park-pota/operator-station-boulders.jpg
+shareImage: /images/pota/2026-06-03-jl-curran-state-park-pota/operator-station-boulders.jpg
 contactMap: src/data/pota/contact-maps/2026-06-03-jl-curran-state-park-pota.json
 tags:
   - radio

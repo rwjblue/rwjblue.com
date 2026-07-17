@@ -2,7 +2,7 @@
 title: Rhode Island-to-Florida rove, day one
 date: 2026-06-19
 summary: "The southbound POTA rove started with three parks, 56 QSOs, a noisy Connecticut stop, and a relaxed evening activation at Tallman Mountain."
-shareImageHero: /images/pota/2026-06-19-rhode-island-to-florida-rove-day-one/tallman-hudson-river-view.jpg
+shareImage: /images/pota/2026-06-19-rhode-island-to-florida-rove-day-one/tallman-hudson-river-view.jpg
 contactMap: src/data/pota/contact-maps/2026-06-19-rhode-island-to-florida-rove-day-one.json
 tags:
   - radio

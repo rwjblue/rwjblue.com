@@ -2,7 +2,7 @@
 title: Ross Prairie morning twofer
 date: 2026-06-25
 summary: "A humid Florida hike-in twofer at Ross Prairie with the KX2, a 51-foot end-fed random wire, and 13 CW QSOs across 40, 30, and 20 meters."
-shareImageHero: /images/pota/2026-06-25-ross-prairie-twofer-pota/operator-at-ross-prairie.jpg
+shareImage: /images/pota/2026-06-25-ross-prairie-twofer-pota/operator-at-ross-prairie.jpg
 contactMap: src/data/pota/contact-maps/2026-06-25-ross-prairie-twofer-pota.json
 tags:
   - radio

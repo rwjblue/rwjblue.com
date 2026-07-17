@@ -36,7 +36,7 @@ const formattedDate = formatDate(note.data.date, "long");
 const mapJson = JSON.stringify(map ?? null);
 const boundaryMapJson = JSON.stringify(boundaryMap ?? null);
 const bandColorsJson = JSON.stringify(BAND_COLORS);
-const heroImage = note.data.shareImageHero;
+const heroImage = note.data.shareImage;
 const hasHeroLayout = Boolean(heroImage && map);
 const bandCounts = map ? collectBandCounts(map.contacts) : {};
 ---

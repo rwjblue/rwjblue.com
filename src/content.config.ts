@@ -9,7 +9,6 @@ const notes = defineCollection({
     date: z.coerce.date(),
     summary: z.string(),
     shareImage: z.string().optional(),
-    shareImageHero: z.string().optional(),
     contactMap: z.string().optional(),
     boundaryMap: z
       .object({

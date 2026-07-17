@@ -1,0 +1,4 @@
+interface:
+  display_name: "Note Authoring"
+  short_description: "Draft and publish notes for rwjblue.com"
+  default_prompt: "Use $note-authoring to turn my rough notes into a publishable rwjblue.com note."

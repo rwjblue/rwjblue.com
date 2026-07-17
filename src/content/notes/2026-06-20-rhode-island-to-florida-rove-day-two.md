@@ -2,7 +2,7 @@
 title: Rhode Island-to-Florida rove, day two
 date: 2026-06-20
 summary: "Day two added New Jersey, Pennsylvania, Delaware, Maryland, and the DC-area twofer to the rove, with 51 QSOs, an activator meetup, and a late legal-access pivot."
-shareImageHero: /images/pota/2026-06-20-rhode-island-to-florida-rove-day-two/img-9308.jpg
+shareImage: /images/pota/2026-06-20-rhode-island-to-florida-rove-day-two/img-9308.jpg
 contactMap: src/data/pota/contact-maps/2026-06-20-rhode-island-to-florida-rove-day-two.json
 tags:
   - radio

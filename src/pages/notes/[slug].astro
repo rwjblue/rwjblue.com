@@ -17,10 +17,9 @@ const { Content } = await render(note);
 const formattedDate = formatDate(note.data.date, "long");
 const contactMap = contactMapForNote(note);
 const shouldUseGeneratedShareImage = contactMap || note.data.boundaryMap;
-const generatedShareImage = shouldUseGeneratedShareImage
+const shareImage = shouldUseGeneratedShareImage
   ? `/images/pota/${note.id}/share.png`
-  : `/notes/${note.id}/share.png`;
-const shareImage = note.data.shareImage ?? generatedShareImage;
+  : note.data.shareImage ?? `/notes/${note.id}/share.png`;
 const shareImageAlt = `${note.data.title} social share image`;
 ---
 

@@ -2,7 +2,7 @@
 title: Big River shakedown before the rove
 date: 2026-06-16
 summary: "A quick US-6982 activation to test the hitch-supported Challenger setup, try SSB on the KX2, and make 17 QSOs before the Rhode Island-to-Florida POTA rove."
-shareImageHero: /images/pota/2026-06-16-big-river-wildlife-management-area-pota/hitch-supported-challenger-station.jpg
+shareImage: /images/pota/2026-06-16-big-river-wildlife-management-area-pota/hitch-supported-challenger-station.jpg
 contactMap: src/data/pota/contact-maps/2026-06-16-big-river-wildlife-management-area-pota.json
 tags:
   - radio

@@ -10,7 +10,7 @@ CW weekend, while keeping the existing K4D hero photo as the primary visual.
 
 - Notes with a contact map already render through
   `src/pages/notes/[slug]/share-image.astro`.
-- When a note has `shareImageHero`, the share card uses a hero-photo layout:
+- When a note has `shareImage`, the share card uses a hero-photo layout:
   large image on the left, map and summary content on the right.
 - The current CQ WPX note has a hero image but no contact map, so the existing
   template does not yet support a DXCC-focused achievement layout for it.

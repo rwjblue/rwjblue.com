@@ -2,7 +2,7 @@
 title: 2026-06-04 Sachuest Point
 date: 2026-06-04
 summary: "A breezy Pack Mule activation at US-0516 with the KX2, the KJ6ER Challenger, and 38 quick CW QSOs from the rocks at Sachuest Point."
-shareImageHero: /images/pota/2026-06-04-sachuest-point-national-wildlife-refuge-pota/kx2-challenger-operating-position.jpg
+shareImage: /images/pota/2026-06-04-sachuest-point-national-wildlife-refuge-pota/kx2-challenger-operating-position.jpg
 contactMap: src/data/pota/contact-maps/2026-06-04-sachuest-point-national-wildlife-refuge-pota.json
 tags:
   - radio

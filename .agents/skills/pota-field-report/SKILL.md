@@ -1,175 +1,128 @@
 ---
 name: pota-field-report
-description: Draft publishable Astro notes for Parks on the Air (POTA) activations from dictated or rough mobile field notes. Use when the user wants to record, clean up, or publish a POTA operation recap, activation report, QRP field note, radio field log, portable HF outing, CW activation note, or post-operation field report for rwjblue.com.
+description: Draft publishable Astro notes for Parks on the Air (POTA) activations from dictated or rough mobile field notes. Use when the user wants to record, clean up, or publish a POTA operation recap, activation report, QRP field note, radio field log, portable HF outing, CW activation note, rove, or post-operation field report for rwjblue.com. Extends the repository's note-authoring workflow with POTA-specific links, tags, images, contact maps, and tracker updates.
 ---
 
 # POTA Field Report
 
-Turn rough, dictated, or fragmentary POTA operation notes into a site-ready Astro
-note draft for this repository.
+Turn rough activation notes into a site-ready field report without inventing
+contacts, conditions, equipment, or park facts.
 
-## Output Target
+## Base Workflow
 
-Create a Markdown note in `src/content/notes/` using this site's current content
-schema:
+This skill extends `note-authoring`. Before taking action, read
+`../note-authoring/SKILL.md` completely and follow its requirements. This skill
+adds the POTA-specific rules below; it does not replace the base editorial,
+asset, social-image, or validation workflow.
+
+Also read `references/report-template.md` before drafting the report body.
+
+## POTA Frontmatter and Filename
+
+Start with the base note frontmatter and add the applicable POTA fields:
 
 ```yaml
 ---
-title: ...
+title: <Park or trip> POTA field report
 date: YYYY-MM-DD
-summary: ...
-shareImageHero: /images/pota/<slug>/<filename>.jpg # optional
+summary: "One concise sentence about the activation, setup, or lesson."
+shareImage: /images/pota/<slug>/<hero-photo>.jpg # optional
+contactMap: src/data/pota/contact-maps/<slug>.json # optional
 tags:
   - radio
   - pota
+  - field-notes
+  - us-1234
 ---
 ```
 
-Use a filename like `YYYY-MM-DD-park-or-place-pota.md`. Keep the slug lowercase,
-ASCII, and hyphenated.
+Use a filename such as `YYYY-MM-DD-park-or-place-pota.md`. Add every activated
+POTA reference as a lowercase tag so field notes attach to activation rows.
+
+For contact-map notes, `shareImage` is the optional hero photo used inside the
+generated map card; the generated card remains the published social image. Do
+not add a separate hero-image field.
 
 ## Workflow
 
-1. Extract facts from the user's dictated notes.
-2. Ask for missing essentials only when they are needed to create a credible
-   draft: location or park, operation date, and a basic activation summary.
-3. Preserve uncertainty instead of inventing facts. Mark uncertain details with
-   plain prose such as "I need to confirm..." or "I think...".
-4. For a rove or multiple related stops on one day, prefer one combined note
-   unless the user asks for separate posts. Summarize the whole route first,
-   then give each park its own subsection.
-5. Read `references/report-template.md` before drafting the report body.
-6. Ensure every referenced POTA park has local metadata before linking it:
-   `mise run pota:park:ensure -- US-1234`. For a rove, run this for every
-   stop/reference in the note.
-7. Write the Astro note draft into `src/content/notes/`.
-8. If images are provided or mentioned, sanitize them with
-   `mise run pota:images:sanitize -- --slug <slug> <image>...` before
-   referencing files in `public/images/pota/<slug>/`.
-9. After writing, refresh generated POTA tracker and park page data:
-   `mise run pota:update`.
-10. After writing, run the repository's normal validation for content changes
-   when practical: `mise run check` and `mise run build`.
+1. Extract facts from the user's notes and preserve unresolved uncertainty.
+2. Ask for missing essentials only when needed for a credible draft: park or
+   location, operation date, and a basic activation result.
+3. For each referenced park, run
+   `mise run pota:park:ensure -- US-1234` before linking it.
+4. Draft the note in `src/content/notes/`, following the base skill and report
+   template.
+5. Sanitize supplied images with
+   `mise run pota:images:sanitize -- --slug <slug> <image>...` before using the
+   results from `public/images/pota/<slug>/`.
+6. When suitable ADI/ADIF logs are available, use the
+   `pota-contact-map-bootstrap` skill to create the checked-in contact map.
+7. If the note has a contact map, generate its checked-in social card with
+   `mise run pota:images:generate-note-share-image -- <slug>`.
+8. Refresh generated tracker and park-page data with `mise run pota:update`.
+9. Complete the base skill's validation and visual checks.
 
-## Dictation Cleanup
+For a rove or multiple related stops on one day, prefer one combined note unless
+the user asks for separate posts. Summarize the full route first, then give each
+park or twofer its own subsection.
 
-- Normalize obvious speech-to-text artifacts without changing the meaning.
-- Convert spoken punctuation and section labels into clean Markdown.
-- Keep radio terms intact: POTA, QRP, CW, SSB, HF, EFHW, QSO, RBN, SOTA, park
-  references, callsigns, bands, modes, and rig names.
-- Link callsigns mentioned in body prose to QRZ using
-  `[CALL](https://www.qrz.com/db/CALL)`. Do not link callsigns inside code
-  snippets, file paths, raw logs, or frontmatter.
-- If a callsign, park reference, frequency, band, or QSO count is ambiguous,
-  leave it unresolved and ask or mark it as uncertain.
-- When later evidence resolves uncertainty, update the prose directly and
-  remove stale "to confirm" notes.
-- Treat ADI and log data as evidence, not as the narrator. Prefer first-person
-  activation prose such as "I made 12 CW QSOs..." over "The log shows..." or
-  "The log has...".
-- Do not over-polish. The report should still sound like the operator made a
-  note soon after the activation.
+## Evidence and Dictation Cleanup
 
-## Rove Notes
+- Normalize obvious speech-to-text artifacts without changing meaning.
+- Keep POTA, QRP, CW, SSB, HF, EFHW, QSO, RBN, SOTA, callsigns, bands, modes,
+  and rig names intact.
+- Link callsigns in prose to QRZ with
+  `[CALL](https://www.qrz.com/db/CALL)`. Do not link callsigns in code, raw logs,
+  file paths, or frontmatter.
+- Treat ADI and log data as evidence. Prefer “I made 12 CW QSOs” over “the log
+  shows 12 QSOs.”
+- If a callsign, park reference, frequency, band, time, or QSO count remains
+  ambiguous, ask or mark it as uncertain.
+- When evidence resolves an uncertainty, update the prose and remove the stale
+  qualification.
 
-For a multi-park rove, use a single flowing narrative with one subsection per
-park or twofer. Open with the total result when known: number of stops, park
-references, total QSOs, mode, and the main lesson or texture of the day.
+## Field-Report Content
 
-For each park subsection:
+Connect the operator's intent, site constraints, station choices, on-air
+result, and repeatable lessons. Include the details that were actually supplied:
 
-- Link the heading to the local canonical POTA park page:
-  `## [Park Name, US-1234](/radio/pota/US-1234/)`.
-- Include the park name, POTA reference, QSO count, bands, modes, UTC window,
-  and equipment that changed at that stop.
-- Use approximate time windows in narrative prose unless exact timing matters
-  for a UTC rollover, access deadline, propagation event, or other specific
-  point.
-- Mention setup and teardown time when the user gave it, especially for quick
-  rove logistics.
-- Add frontmatter tags for every park reference, lowercased:
-  `us-7719`, `us-6983`, etc.
-- For twofers, put both linked park references in the same heading and explain
-  the shared operating position once.
+- why the park, site, time window, or setup was chosen
+- what changed after arrival
+- radio, antenna, support, power, logging, operating position, and CW gear
+- bands, modes, contact pace, problems, and stopping point
+- conditions, ergonomics, or workflow observations
+- what to repeat or adjust next time
 
-## Editorial Voice
+Do not imply QRP unless the source notes establish it. State corrected field
+mistakes plainly rather than turning them into drama or a moral.
 
-Write from first principles for useful portable radio field notes. The report
-should connect the operator's intent, the site constraints, the station choices,
-the on-air result, and the lessons worth remembering. Keep it in Robert's
-public-site style: plain, technical, concise, modest, and useful later.
+## Park Links and Roves
 
-Write from Robert's perspective. Prefer direct first-person prose over detached
-phrases like "the station" when "I used..." or "the KX3..." sounds more natural.
-Do not imitate another writer's style directly, but it is fine to aim for a
-practical field-notes feel: grounded observations, useful details, and no hype.
-
-Good field reports usually include:
-
-- Why this park, site, time window, or setup was chosen.
-- What the operator expected before arriving.
-- What changed once the site was actually seen.
-- How the station was deployed: radio, antenna, support, power, logging, and
-  operating position.
-- What happened on the air: bands, modes, contact pace, problems, and stopping
-  point.
-- One or two grounded observations about conditions, ergonomics, or workflow.
-- A short note about what to repeat or adjust next time.
-
-When naming a POTA park with its reference anywhere in the note, link that
-park/reference text to the local canonical POTA park page, not only section headings. This
-includes first mentions, "At a glance" location bullets, and later repeated
-references when the park name/reference is useful to the reader:
-`[Park Name, US-1234](/radio/pota/US-1234/)`.
-
-The canonical page at `/radio/pota/US-1234/` provides the external POTA.app
-link, park metadata, map, and activation ledger. Keep lowercased reference tags
-such as `us-1234` in frontmatter so field notes can attach to matching
-activation rows by date and reference.
-
-Prefer:
-
-- "I set the wire low because the site was busy..."
-- "The station worked, but the logging flow still needs cleanup."
-- "Next time I would bring..."
-
-Avoid:
-
-- Inflated adventure writing.
-- Generic ham-radio filler.
-- Stiff phrasing such as "the station was deployed" when a simpler sentence
-  would sound more like Robert.
-- Treating QRP as implied. Mention QRP only when the user's notes identify the
-  operation as QRP.
-- Invented drama, contacts, weather, park facts, or equipment details.
-- Making a corrected field mistake sound like a moral. State what happened, why
-  it matters, and what to remember.
-
-## Image Handling
-
-If images are attached and accessible, run them through the local sanitizer
-before placing or replacing files under `public/images/pota/<slug>/`:
-
-```bash
-mise run pota:images:sanitize -- --slug <slug> <image>...
-```
-
-The sanitizer writes web-sized JPEGs with lowercase hyphenated filenames,
-auto-orients the image, and strips metadata, including location metadata. Use
-`--max-edge 900` for tall contact maps or route screenshots, and the default
-1600px max edge for normal field photos. Reference the sanitized files in
-Markdown with root-relative paths:
+Link park names and references to the local canonical page, not directly to
+POTA.app:
 
 ```markdown
-![Portable station setup at <place>](/images/pota/<slug>/station-setup.jpg)
+[Park Name, US-1234](/radio/pota/US-1234/)
 ```
 
-For roves, put the final route or contact map near the top of the note if one is
-provided. Put park photos inline with the park subsection they describe instead
-of collecting them at the bottom.
+Do this in headings, first mentions, “At a glance” location bullets, and later
+mentions where the name/reference helps the reader.
 
-When a subsection has several photos, use the site's compact photo grid pattern
-instead of a long run of full-width images:
+For each rove stop:
+
+- Use a linked park/reference heading.
+- Include QSO count, bands, modes, approximate UTC window, and equipment that
+  changed at that stop.
+- Mention setup or teardown time when it affected the rove.
+- Put twofer references in one heading and explain the shared position once.
+
+## POTA Images and Maps
+
+Use the sanitizer's default 1600px maximum edge for ordinary photos and
+`--max-edge 900` for tall route or contact-map screenshots.
+
+Place photos with the relevant stop or observation. For multiple photos, use
+the site's compact grid:
 
 ```html
 <div class="photo-grid">
@@ -178,66 +131,37 @@ instead of a long run of full-width images:
 </div>
 ```
 
-For a single supporting photo that should be smaller than the lead image:
+For one supporting image, use `photo-grid photo-grid--single`; add
+`photo-grid--compact` for a tall utility image.
 
-```html
-<div class="photo-grid photo-grid--single">
-  <img src="/images/pota/<slug>/station-setup.jpg" alt="Descriptive alt text">
-</div>
-```
-
-For a contact map, prefer generating checked-in JSON from the ADI log when
-`GRIDSQUARE` data is available. The contact-map task archives the source ADIF
-automatically and writes the public JSON consumed by `PotaContactMap.astro`.
-Use the `pota-contact-map-bootstrap` skill for this flow:
+When `GRIDSQUARE` data is available, prefer a checked-in contact-map JSON built
+from the source log. Repeat `--input` in operating order for split rove logs so
+the activation sequence is preserved. The task archives the source ADIF and
+writes the JSON consumed by the site; do not commit a separate raw ADIF beside
+the note. Use the bootstrap skill to choose the title and subtitle, then run its
+generated command in this form:
 
 ```bash
-slug="2026-06-19-rhode-island-to-florida-rove-day-one"
-rockville_adi="$HOME/Downloads/2026-06-19 N1RWJ at US-6991 Full.adi"
-pachaug_adi="$HOME/Downloads/2026-06-19 N1RWJ at US-1716 Full.adi"
-sleepy_hollow_adi="$HOME/Downloads/2026-06-20 N1RWJ at US-2149 Full.adi"
-
 mise run pota:contact-map:from-adi -- \
-  --input "$rockville_adi" \
-  --input "$pachaug_adi" \
-  --input "$sleepy_hollow_adi" \
-  --output "src/data/pota/contact-maps/${slug}.json" \
-  --title "N1RWJ Rove to Florida Day One" \
-  --subtitle "3 parks - 32 QSOs - June 19-20, 2026"
+  --input "$HOME/Downloads/activation.adi" \
+  --output "src/data/pota/contact-maps/<slug>.json" \
+  --title "N1RWJ at US-1234" \
+  --subtitle "12 QSOs - June 1, 2026"
 ```
 
-For split rove logs, repeat --input in operating order so the generated map
-preserves the activation sequence. Wire the generated JSON through
-`PotaContactMap.astro` from the note page rather than committing the ADI. For a
-route screenshot or other tall utility image that should be more compact than a
-field photo, combine the single-image grid with the compact modifier:
+If a contact map has `shareImage`, its selected photo is composed with the map.
+Without `shareImage`, the generator uses the map-only card. Regenerate the card
+after changing the title, summary, map, selected photo, or contact data.
 
-```html
-<div class="photo-grid photo-grid--single photo-grid--compact">
-  <img src="/images/pota/<slug>/route-map.jpg" alt="Descriptive alt text">
-</div>
-```
+## POTA Completion Checklist
 
-If the note has a dedicated contact map and should use that map in social
-previews, generate the checked-in share image too:
+In addition to the base checklist, confirm:
 
-```bash
-mise run pota:images:generate-note-share-image -- <slug>
-```
-
-When a field photo should dominate the social card, set `shareImageHero` in the
-note frontmatter to the root-relative path for that image. The share card will
-use a hero-primary layout with a smaller contact map panel.
-
-If images are only mentioned during dictation, add a short "Images to add" list
-with expected filenames or captions. Do not pretend missing images exist.
-
-## Completion Checklist
-
-Before reporting completion, confirm:
-
-- The note has valid frontmatter for the `notes` collection.
-- The report includes where, when, equipment, and a prose walkthrough.
-- CW-specific equipment such as keyer or paddle is included when relevant.
-- Unknown facts are marked as unknown instead of fabricated.
-- Image paths or placeholders are clear.
+- Park/reference text links to local canonical pages.
+- Every reference has a lowercase frontmatter tag.
+- Local park metadata exists.
+- Where, when, equipment, activation result, and useful field lessons are
+  present when known.
+- Images have been sanitized and stripped of location metadata.
+- Contact-map data and its checked-in share card are current when applicable.
+- `mise run pota:update` has refreshed the tracker and park pages.

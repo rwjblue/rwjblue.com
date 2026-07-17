@@ -2,7 +2,7 @@
 title: East Bay Three-Park POTA Rove
 date: 2026-05-30
 summary: "Three Rhode Island parks with the KX2: 43 CW QSOs, contest congestion at the first stop, a preventable SWR problem at the second, and a fast saltwater finish at sunset."
-shareImageHero: /images/pota/2026-05-30-east-bay-pota-rove/img-8978.jpg
+shareImage: /images/pota/2026-05-30-east-bay-pota-rove/img-8978.jpg
 contactMap: src/data/pota/contact-maps/2026-05-30-east-bay-pota-rove.json
 tags:
   - radio

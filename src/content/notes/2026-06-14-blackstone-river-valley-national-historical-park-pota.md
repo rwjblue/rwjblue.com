@@ -2,7 +2,7 @@
 title: Blackstone River Valley NHP from the Rhode Island side
 date: 2026-06-14
 summary: "A Rhode Island-side activation of US-7971 with 18 CW QSOs, one Alaska contact on 10 watts, and one preventable walk back to the car for missing dipole pigtails."
-shareImageHero: /images/pota/2026-06-14-blackstone-river-valley-national-historical-park-pota/4-photo-4.jpg
+shareImage: /images/pota/2026-06-14-blackstone-river-valley-national-historical-park-pota/4-photo-4.jpg
 contactMap: src/data/pota/contact-maps/2026-06-14-blackstone-river-valley-national-historical-park-pota.json
 tags:
   - radio

@@ -2,7 +2,7 @@
 title: Installing USB-C Charging and Side Rails on My KX2
 date: 2026-06-03
 summary: "A first-pass walkthrough of adding USB-C charging and protective side rails to a new Elecraft KX2."
-shareImageHero: /images/radio/2026-06-03-kx2-usb-c-side-rails-install/img-9040.jpg
+shareImage: /images/radio/2026-06-03-kx2-usb-c-side-rails-install/img-9040.jpg
 tags:
   - radio
   - field-notes

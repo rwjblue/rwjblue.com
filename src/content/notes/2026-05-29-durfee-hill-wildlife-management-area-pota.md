@@ -2,7 +2,7 @@
 title: Durfee Hill Wildlife Management Area POTA
 date: 2026-05-29
 summary: "First outing with the KX2 at US-7715: a hike up the hill to clear the valley, a first-throw throw-line success, and 19 CW QSOs across 40, 30, and 20 meters."
-shareImageHero: /images/pota/2026-05-29-durfee-hill-wildlife-management-area-pota/arrival-selfie.jpg
+shareImage: /images/pota/2026-05-29-durfee-hill-wildlife-management-area-pota/arrival-selfie.jpg
 contactMap: src/data/pota/contact-maps/2026-05-29-durfee-hill-wildlife-management-area-pota.json
 tags:
   - radio

@@ -2,7 +2,7 @@
 title: Jonathan Dickinson twofer with KO4WTM
 date: 2026-07-06
 summary: "A shared Florida twofer at Jonathan Dickinson State Park with KO4WTM, 11 CW QSOs on 20 meters, and a close look at a compact EFHW field setup."
-shareImageHero: /images/pota/2026-07-06-jonathan-dickinson-twofer-pota/robert-randy-kitching-creek-pavilion.jpg
+shareImage: /images/pota/2026-07-06-jonathan-dickinson-twofer-pota/robert-randy-kitching-creek-pavilion.jpg
 contactMap: src/data/pota/contact-maps/2026-07-06-jonathan-dickinson-twofer-pota.json
 tags:
   - radio

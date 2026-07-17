@@ -32,8 +32,10 @@ test("content collections support notes and updated projects", () => {
   assert.match(config, /notes/);
   assert.match(config, /projects/);
   assert.match(config, /updated/);
-  assert.match(config, /shareImageHero/);
-  assert.match(blackHutNote, /shareImageHero:/);
+  assert.match(config, /shareImage/);
+  assert.doesNotMatch(config, /shareImageH[e]ro/);
+  assert.match(blackHutNote, /shareImage:/);
+  assert.doesNotMatch(blackHutNote, /shareImageH[e]ro:/);
   assert.ok(existsSync("src/content/notes/public-workshop.md"));
   assert.ok(existsSync("src/content/projects/developer-tooling.md"));
 });
@@ -227,7 +229,8 @@ test("notes provide social share metadata", () => {
   assert.match(noteSharePage, /getStaticPaths/);
   assert.match(noteSharePage, /contactMapForNote/);
   assert.match(noteSharePage, /share-map/);
-  assert.match(noteSharePage, /note\.data\.shareImageHero/);
+  assert.match(noteSharePage, /note\.data\.shareImage/);
+  assert.doesNotMatch(noteSharePage, /shareImageH[e]ro/);
   assert.match(noteSharePage, /share-card--hero/);
   assert.match(noteSharePage, /share-card--map/);
   assert.match(roveNote, /contactMap: src\/data\/pota\/contact-maps\/2026-05-25-pota-rove\.json/);
