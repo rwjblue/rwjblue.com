@@ -15,8 +15,15 @@
     "run_worker_first": ["/radio/cw-practice/calendar.ics"]
   },
   "observability": {
-    "enabled": true,
-    "head_sampling_rate": 0.1
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 0.1,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false,
+      "head_sampling_rate": 0.1
+    }
   },
   "routes": [
     {
