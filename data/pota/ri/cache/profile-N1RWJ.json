@@ -12,24 +12,104 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 119,
-      "parks": 82,
-      "qsos": 2857
+      "activations": 127,
+      "parks": 84,
+      "qsos": 3014
     },
     "attempts": {
-      "activations": 129,
-      "parks": 82,
-      "qsos": 2895
+      "activations": 137,
+      "parks": 84,
+      "qsos": 3052
     },
     "hunter": {
-      "parks": 519,
-      "qsos": 816
+      "parks": 531,
+      "qsos": 843
     },
     "awards": 28,
-    "endorsements": 56
+    "endorsements": 57
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-07-15",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 14,
+        "data": 0,
+        "phone": 0,
+        "total": 14
+      },
+      {
+        "date": "2026-07-10",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 35,
+        "data": 0,
+        "phone": 0,
+        "total": 35
+      },
+      {
+        "date": "2026-07-09",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 14,
+        "data": 0,
+        "phone": 0,
+        "total": 14
+      },
+      {
+        "date": "2026-07-08",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-07-07",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 34,
+        "data": 0,
+        "phone": 0,
+        "total": 34
+      },
+      {
+        "date": "2026-07-06",
+        "reference": "US-1887",
+        "park": "Jonathan Dickinson State Park",
+        "location": "US-FL",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-07-06",
+        "reference": "US-6281",
+        "park": "Loxahatchee River National Wild and Scenic River",
+        "location": "US-FL",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-07-05",
+        "reference": "US-1884",
+        "park": "John D. MacArthur Beach State Park",
+        "location": "US-FL",
+        "cw": 26,
+        "data": 0,
+        "phone": 0,
+        "total": 26
+      },
       {
         "date": "2026-07-01",
         "reference": "US-1884",
@@ -142,98 +222,8 @@
       },
       {
         "date": "2026-06-21",
-        "reference": "US-0670",
-        "park": "George Washington Memorial Parkway",
-        "location": "US-MD",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-06-21",
         "reference": "US-4564",
         "park": "Potomac Heritage Trail National Scenic Trail",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0783",
-        "park": "Lincoln National Memorial",
-        "location": "US-DC",
-        "cw": 10,
-        "data": 0,
-        "phone": 0,
-        "total": 10
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0655",
-        "park": "National Mall Park",
-        "location": "US-DC",
-        "cw": 52,
-        "data": 0,
-        "phone": 0,
-        "total": 52
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0015",
-        "park": "Chesapeake and Ohio Canal National Historical Park",
-        "location": "US-MD",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0653",
-        "park": "Constitution Gardens National Park",
-        "location": "US-DC",
-        "cw": 0,
-        "data": 0,
-        "phone": 20,
-        "total": 20
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0780",
-        "park": "Korean War Veterans National Memorial",
-        "location": "US-DC",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0784",
-        "park": "Lyndon Baines Johnson Memorial Grove on the Potomac National Memorial",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0792",
-        "park": "Thomas Jefferson National Memorial",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-9901",
-        "park": "Civil War Defenses of Washington National Historic Trail",
         "location": "US-DC",
         "cw": 12,
         "data": 0,
@@ -252,36 +242,163 @@
       },
       {
         "date": "2026-06-21",
-        "reference": "US-0670",
-        "park": "George Washington Memorial Parkway",
+        "reference": "US-0653",
+        "park": "Constitution Gardens National Park",
         "location": "US-DC",
-        "cw": 24,
+        "cw": 0,
         "data": 0,
-        "phone": 21,
-        "total": 45
+        "phone": 20,
+        "total": 20
       },
       {
         "date": "2026-06-21",
-        "reference": "US-9898",
-        "park": "Mount Vernon National Historic Trail",
-        "location": "US-DC",
+        "reference": "US-0015",
+        "park": "Chesapeake and Ohio Canal National Historical Park",
+        "location": "US-MD",
         "cw": 12,
         "data": 0,
-        "phone": 21,
-        "total": 33
+        "phone": 0,
+        "total": 12
       },
       {
         "date": "2026-06-21",
-        "reference": "US-4581",
-        "park": "Star-Spangled Banner National Historic Trail",
+        "reference": "US-0792",
+        "park": "Thomas Jefferson National Memorial",
         "location": "US-DC",
         "cw": 12,
         "data": 0,
-        "phone": 21,
-        "total": 33
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-06-21",
+        "reference": "US-0780",
+        "park": "Korean War Veterans National Memorial",
+        "location": "US-DC",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-07-15T14:07:46",
+        "callsign": "KB5YZY",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6492",
+        "park": "Weldon Spring State Conservation Area",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-07-15T14:07:46",
+        "callsign": "KB5YZY",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1766",
+        "park": "Katy Trail State Park",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-07-15T14:07:46",
+        "callsign": "KB5YZY",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4572",
+        "park": "Lewis and Clark National Historic Trail",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-07-15T13:12:40",
+        "callsign": "N8JMS",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-1973",
+        "park": "Madison Lake State Park",
+        "location": "US-OH"
+      },
+      {
+        "date": "2026-07-15T12:55:41",
+        "callsign": "N8JMS",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1973",
+        "park": "Madison Lake State Park",
+        "location": "US-OH"
+      },
+      {
+        "date": "2026-07-15T12:53:56",
+        "callsign": "W3CT",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1409",
+        "park": "Raccoon Creek State Park",
+        "location": "US-PA"
+      },
+      {
+        "date": "2026-07-15T12:51:00",
+        "callsign": "NA9M",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-9773",
+        "park": "Capital City State Trail",
+        "location": "US-WI"
+      },
+      {
+        "date": "2026-07-15T12:45:00",
+        "callsign": "KB1WCK",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-11613",
+        "park": "Black Brook Wildlife Management Area",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-07-12T23:58:23",
+        "callsign": "N8JMS",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1985",
+        "park": "Punderson State Park",
+        "location": "US-OH"
+      },
+      {
+        "date": "2026-07-09T15:58:10",
+        "callsign": "N4NN",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3769",
+        "park": "River Bend Wildlife Management Area",
+        "location": "US-GA"
+      },
+      {
+        "date": "2026-07-09T15:56:49",
+        "callsign": "WZ3J",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6396",
+        "park": "Soldier's Delight Natural Area",
+        "location": "US-MD"
+      },
+      {
+        "date": "2026-07-09T15:52:32",
+        "callsign": "KF8FCC",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3322",
+        "park": "Pinckney State Recreation Area",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-07-09T15:35:12",
+        "callsign": "NI8M",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1985",
+        "park": "Punderson State Park",
+        "location": "US-OH"
+      },
       {
         "date": "2026-07-07T23:45:00",
         "callsign": "NL5Y",
@@ -317,6 +434,15 @@
         "reference": "US-6313",
         "park": "John C. and Mariana Jones/Hungryland Wildlife Area",
         "location": "US-FL"
+      },
+      {
+        "date": "2026-07-07T22:40:00",
+        "callsign": "NR1Z",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-0794",
+        "park": "Washington Monument National Memorial",
+        "location": "US-DC"
       },
       {
         "date": "2026-07-07T22:24:01",
@@ -380,132 +506,6 @@
         "reference": "US-6532",
         "park": "Erie Canalway Corridor National Heritage Area",
         "location": "US-NY"
-      },
-      {
-        "date": "2026-07-05T13:47:00",
-        "callsign": "WD5GRW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-4423",
-        "park": "Spring Creek Forest State Preserve",
-        "location": "US-TX"
-      },
-      {
-        "date": "2026-07-05T13:10:23",
-        "callsign": "KG1A",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-03T01:35:03",
-        "callsign": "W7DZ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-4529",
-        "park": "Gifford Pinchot National Forest",
-        "location": "US-WA"
-      },
-      {
-        "date": "2026-07-03T00:55:08",
-        "callsign": "W1WC",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-12962",
-        "park": "TVA Veterans Park Regional Park",
-        "location": "US-AL"
-      },
-      {
-        "date": "2026-07-01T13:48:48",
-        "callsign": "WA1TOM",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-11614",
-        "park": "Burrage Pond Wildlife Management Area",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-07-01T13:47:42",
-        "callsign": "N1BS",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-10545",
-        "park": "Hillsdale Preserve Management Area",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-07-01T13:46:00",
-        "callsign": "AD9FW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2256",
-        "park": "Fort Harrison State Park",
-        "location": "US-IN"
-      },
-      {
-        "date": "2026-07-01T13:08:00",
-        "callsign": "K2JVB",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-2014",
-        "park": "Bethpage State Park",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-06-30T22:48:53",
-        "callsign": "W8TMB",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-3315",
-        "park": "Island Lake State Recreation Area",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-06-30T22:33:33",
-        "callsign": "K3PJS",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-0932",
-        "park": "Fort Sumter and Fort Moultrie National Historic Site",
-        "location": "US-SC"
-      },
-      {
-        "date": "2026-06-30T22:31:29",
-        "callsign": "K4AKA",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-9935",
-        "park": "Virginia Bird & Wildlife State Trail",
-        "location": "US-VA"
-      },
-      {
-        "date": "2026-06-30T00:35:00",
-        "callsign": "NL5Y",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3670",
-        "park": "Yellow River Marsh Preserve State Park",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-06-28T20:12:14",
-        "callsign": "VA3EKR",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "CA-0146",
-        "park": "Bass Lake Provincial Park",
-        "location": "CA-ON"
-      },
-      {
-        "date": "2026-06-28T20:08:00",
-        "callsign": "NL5Y",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3670",
-        "park": "Yellow River Marsh Preserve State Park",
-        "location": "US-FL"
       }
     ]
   },
@@ -579,6 +579,7 @@
       "endorsements": [
         "17M",
         "20M",
+        "30M",
         "40M",
         "CW",
         "PHONE"

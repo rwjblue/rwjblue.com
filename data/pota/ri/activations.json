@@ -1559,6 +1559,110 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-07-15",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 14,
+        "cw": 14,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-07-10",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 35,
+        "cw": 35,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-07-09",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 14,
+        "cw": 14,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-07-08",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 12,
+        "cw": 12,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-07-07",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 34,
+        "cw": 34,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1887",
+      "park": "Jonathan Dickinson State Park",
+      "date": "2026-07-06",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6281",
+      "park": "Loxahatchee River National Wild and Scenic River",
+      "date": "2026-07-06",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1884",
+      "park": "John D. MacArthur Beach State Park",
+      "date": "2026-07-05",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 26,
+        "cw": 26,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

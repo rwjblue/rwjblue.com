@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T15:51:48.083Z",
+  "generatedAt": "2026-07-18T16:29:20.564Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -1391,9 +1391,84 @@
       "locationDesc": "US-FL",
       "href": "/radio/pota/US-1884/",
       "potaUrl": "https://pota.app/#/park/US-1884",
-      "activationCount": 3,
-      "qsoTotal": 131,
+      "activationCount": 8,
+      "qsoTotal": 252,
       "activations": [
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-07-10",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 35,
+            "cw": 35,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-07-09",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 14,
+            "cw": 14,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-07-08",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-07-07",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 34,
+            "cw": 34,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-1884",
+          "park": "John D. MacArthur Beach State Park",
+          "date": "2026-07-05",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 26,
+            "cw": 26,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
         {
           "reference": "US-1884",
           "park": "John D. MacArthur Beach State Park",
@@ -1456,9 +1531,32 @@
       "locationDesc": "US-FL",
       "href": "/radio/pota/US-1887/",
       "potaUrl": "https://pota.app/#/park/US-1887",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-1887",
+          "park": "Jonathan Dickinson State Park",
+          "date": "2026-07-06",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-07-06-jonathan-dickinson-twofer-pota",
+              "title": "Jonathan Dickinson twofer with KO4WTM",
+              "date": "2026-07-06",
+              "href": "/notes/2026-07-06-jonathan-dickinson-twofer-pota/"
+            }
+          ],
+          "projects": []
+        }
+      ],
       "notes": [
         {
           "id": "2026-07-06-jonathan-dickinson-twofer-pota",
@@ -2746,9 +2844,32 @@
       "locationDesc": "US-FL",
       "href": "/radio/pota/US-6281/",
       "potaUrl": "https://pota.app/#/park/US-6281",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-6281",
+          "park": "Loxahatchee River National Wild and Scenic River",
+          "date": "2026-07-06",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-07-06-jonathan-dickinson-twofer-pota",
+              "title": "Jonathan Dickinson twofer with KO4WTM",
+              "date": "2026-07-06",
+              "href": "/notes/2026-07-06-jonathan-dickinson-twofer-pota/"
+            }
+          ],
+          "projects": []
+        }
+      ],
       "notes": [
         {
           "id": "2026-07-06-jonathan-dickinson-twofer-pota",
@@ -3323,9 +3444,30 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 29,
-      "qsoTotal": 798,
+      "activationCount": 30,
+      "qsoTotal": 812,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-07-15",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 14,
+            "cw": 14,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",
@@ -3907,6 +4049,12 @@
           "title": "JL Curran State Park Pack Mule Activation",
           "date": "2026-06-03",
           "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        },
+        {
+          "id": "2026-07-18-k2hrc-rhode-island-pota",
+          "title": "Taking K2HRC to Rhode Island",
+          "date": "2026-07-18",
+          "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
         }
       ],
       "publicStats": {

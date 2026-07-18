@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T15:51:46.974Z",
+  "generatedAt": "2026-07-18T16:29:19.333Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -280,6 +280,63 @@
       }
     },
     {
+      "reference": "US-6992",
+      "name": "JL Curran State Park",
+      "latitude": 41.7507,
+      "longitude": -71.5516,
+      "grid": "FN41fs",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6992/",
+      "potaUrl": "https://pota.app/#/park/US-6992",
+      "firstActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2025-09-21",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 0,
+          "data": 0,
+          "phone": 10
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2026-07-15",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 14,
+          "cw": 14,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 27,
+      "notes": [
+        {
+          "id": "2026-06-03-jl-curran-state-park-pota",
+          "title": "JL Curran State Park Pack Mule Activation",
+          "date": "2026-06-03",
+          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        },
+        {
+          "id": "2026-07-18-k2hrc-rhode-island-pota",
+          "title": "Taking K2HRC to Rhode Island",
+          "date": "2026-07-18",
+          "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 73,
+        "activations": 70,
+        "qsos": 2260
+      }
+    },
+    {
       "reference": "US-6991",
       "name": "Rockville Wildlife Management Area",
       "latitude": 41.5054,
@@ -328,57 +385,6 @@
         "attempts": 54,
         "activations": 52,
         "qsos": 2335
-      }
-    },
-    {
-      "reference": "US-6992",
-      "name": "JL Curran State Park",
-      "latitude": 41.7507,
-      "longitude": -71.5516,
-      "grid": "FN41fs",
-      "locationDesc": "US-RI",
-      "status": "completed",
-      "href": "/radio/pota/US-6992/",
-      "potaUrl": "https://pota.app/#/park/US-6992",
-      "firstActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2025-09-21",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 10,
-          "cw": 0,
-          "data": 0,
-          "phone": 10
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2026-06-18",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 21,
-          "cw": 21,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 26,
-      "notes": [
-        {
-          "id": "2026-06-03-jl-curran-state-park-pota",
-          "title": "JL Curran State Park Pack Mule Activation",
-          "date": "2026-06-03",
-          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 73,
-        "activations": 70,
-        "qsos": 2260
       }
     },
     {
