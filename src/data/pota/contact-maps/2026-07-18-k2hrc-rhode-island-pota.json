@@ -349,15 +349,15 @@
         "lon": -71.54583333333333
       },
       "destination": {
-        "lat": 46.5625,
-        "lon": -120.70833333333333
+        "lat": 37.769337,
+        "lon": -78.169968
       },
       "band": "20m",
-      "source": "grid",
+      "source": "state",
       "destinationDxccCode": 291,
       "destinationDxccName": "United States",
       "destinationDxccFlag": "🇺🇸",
-      "destinationGrid": "CN96pn"
+      "destinationState": "VA"
     },
     {
       "timestamp": "2026-07-18T16:11:16Z",
