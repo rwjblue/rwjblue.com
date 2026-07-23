@@ -1,7 +1,7 @@
 ---
 title: Running WSJT-X through QK4 with an Elecraft K4D
 date: 2026-07-16
-summary: "A network-only setup for WSPR, FT8, and other WSJT-X modes using QK4, Loopback, and an Elecraft K4D."
+summary: "A network-only setup for confirmed WSPR and FT8 operation using QK4, Loopback, and an Elecraft K4D."
 shareImage: /images/radio/2026-07-16-wsjt-x-qk4-k4d/share.png
 tags:
   - radio
@@ -12,7 +12,7 @@ tags:
   - k4d
 ---
 
-I now have WSPR working from the Mac while the
+I now have WSPR and FT8 working from the Mac while the
 Elecraft K4D is reached over the network through QK4. The goal is for QK4 to
 provide both the radio-control path and the streamed receive/transmit audio,
 without a direct USB audio or serial connection from this Mac to the radio.
@@ -99,7 +99,8 @@ In WSJT-X Settings, select the **Audio** tab:
 
 At this point the control and audio routes are all represented in the
 configuration. WSJT-X is decoding WSPR signals and completing scheduled WSPR
-transmit cycles through QK4.
+transmit cycles through QK4. I later used the same paths for completed
+20-meter FT8 contacts.
 
 ![A working WSJT-X session showing decoded 20-meter WSPR signals and transmit cycles](/images/radio/2026-07-16-wsjt-x-qk4-k4d/wsjt-x-wspr-results.png)
 
@@ -186,11 +187,12 @@ as virtual patch cables between QK4 and WSJT-X.
 
 ## Software used
 
-This setup was confirmed on July 16, 2026, with:
+The WSPR setup was confirmed on July 16, 2026, and FT8 contacts were completed
+through the same paths on July 22, with:
 
 - macOS `26.5.1` on Apple silicon
 - QK4 `0.7.0-beta.3`
-- WSJT-X `3.1.0`
+- WSJT-X Improved PLUS `3.1.0`
 
 ## If CAT does not connect
 
@@ -206,9 +208,10 @@ startup order has been reliable:
 
 ## What remains to test
 
-WSPR receive and transmit cycles are working. I still want to test:
+WSPR receive/transmit cycles and two-way FT8 contacts are working. I still want
+to test:
 
-- completing FT8 and FT4 contacts through the same paths
+- completing FT4 contacts through the same paths
 - using QK4's remote-radio profile rather than the local-network profile
 - recovery and frequency/mode synchronization after an application or network
   connection drops
