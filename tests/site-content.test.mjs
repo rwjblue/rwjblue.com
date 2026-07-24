@@ -173,6 +173,31 @@ test("rbn skimmer finder page provides utility markup and client boot script", (
   assert.match(client, /localStorage/);
 });
 
+test("NCDXF beacon guide links the field note and provides both listening workflows", () => {
+  assert.ok(existsSync("src/pages/radio/beacons.astro"));
+
+  const radio = read("src/pages/radio/index.astro");
+  const page = read("src/pages/radio/beacons.astro");
+  const client = read("src/lib/ncdxf-beacons-client.ts");
+  const note = read(
+    "src/content/notes/2026-07-23-learning-to-read-the-bands-with-ncdxf-beacons.md",
+  );
+
+  assert.match(radio, /\/radio\/beacons\//);
+  assert.match(radio, /NCDXF Beacon Guide/);
+  assert.match(page, /id="ncdxf-beacon-tool"/);
+  assert.match(page, /data-beacon-panel="scan"/);
+  assert.match(page, /data-beacon-panel="path"/);
+  assert.match(page, /2026-07-23-learning-to-read-the-bands-with-ncdxf-beacons/);
+  assert.match(page, /initNcdxfBeaconTool/);
+  assert.match(client, /navigator\.geolocation/);
+  assert.match(client, /localStorage/);
+  assert.match(client, /transmissionAt/);
+  assert.match(client, /beaconWindowAt/);
+  assert.match(note, /\[NCDXF Beacon Guide\]\(\/radio\/beacons\/\)/);
+  assert.match(note, /I have not completed a full field test yet/);
+});
+
 test("shack page documents station and portable setup", () => {
   assert.ok(existsSync("src/pages/radio/shack.astro"));
 

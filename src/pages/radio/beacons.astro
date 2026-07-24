@@ -1,0 +1,285 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  NCDXF_BANDS,
+  NCDXF_BEACONS,
+  NCDXF_STATUS_CHECKED_AT,
+} from "../../lib/ncdxf-beacons";
+
+const statusDate = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+}).format(new Date(NCDXF_STATUS_CHECKED_AT));
+---
+
+<BaseLayout
+  title="NCDXF Beacon Guide / N1RWJ"
+  description="Use the synchronized NCDXF/IARU beacon network to check HF paths, compare bands, and record the weakest signal heard from the field."
+  canonicalPath="/radio/beacons/"
+>
+  <section class="beacon-utility-intro">
+    <div>
+      <p class="eyebrow">Field operating tool</p>
+      <h1>NCDXF Beacon Guide</h1>
+      <p class="lede">
+        Follow the synchronized worldwide beacons, record the weakest power
+        step you hear, and turn a quick listen into a practical band choice.
+      </p>
+    </div>
+    <aside class="beacon-primer" aria-labelledby="beacon-primer-title">
+      <p class="section-label">New to the network?</p>
+      <h2 id="beacon-primer-title">A three-minute view of the bands.</h2>
+      <p>
+        Eighteen beacons share five frequencies. Each sends a callsign and
+        signals at 100 W, 10 W, 1 W, and 100 mW.
+      </p>
+      <a href="/notes/2026-07-23-learning-to-read-the-bands-with-ncdxf-beacons/">
+        Read how the system works
+      </a>
+    </aside>
+  </section>
+
+  <section class="section-block wide ncdxf-beacon-tool" id="ncdxf-beacon-tool">
+    <div class="beacon-tool-bar">
+      <div class="beacon-location-controls">
+        <button id="beacon-use-location" class="beacon-primary" type="button">
+          Use my location
+        </button>
+        <label for="beacon-grid">
+          <span>Grid</span>
+          <input
+            id="beacon-grid"
+            type="text"
+            inputmode="text"
+            autocomplete="off"
+            placeholder="FN41FR"
+          />
+        </label>
+        <button id="beacon-apply-grid" class="beacon-secondary" type="button">
+          Apply
+        </button>
+      </div>
+      <div class="beacon-clock">
+        <span>Device clock</span>
+        <strong id="beacon-utc-clock">--:--:-- UTC</strong>
+      </div>
+      <p id="beacon-location-status" class="beacon-location-status" aria-live="polite">
+        Add a grid for bearings and distances.
+      </p>
+    </div>
+
+    <nav class="beacon-view-tabs" aria-label="Beacon tool views">
+      <button class="is-active" type="button" data-beacon-view="now" aria-pressed="true">
+        On now
+      </button>
+      <button type="button" data-beacon-view="scan" aria-pressed="false">
+        Scan one band
+      </button>
+      <button type="button" data-beacon-view="path" aria-pressed="false">
+        Compare bands
+      </button>
+    </nav>
+
+    <section class="beacon-panel" data-beacon-panel="now" aria-labelledby="beacon-now-title">
+      <div class="beacon-panel-heading">
+        <div>
+          <p class="section-label">Live schedule</p>
+          <h2 id="beacon-now-title">What is transmitting now</h2>
+          <p>Choose a band to begin a guided three-minute listen.</p>
+        </div>
+        <p class="beacon-clock-note">Accurate device time is required.</p>
+      </div>
+      <div id="beacon-now-grid" class="beacon-now-grid" aria-live="off"></div>
+      <div id="beacon-recommendation" class="beacon-recommendation" aria-live="polite">
+        <strong>No local band result yet.</strong>
+        <span>Run a path check or scan one band.</span>
+      </div>
+      <div class="beacon-now-actions">
+        <button class="beacon-primary" type="button" data-beacon-jump="path">
+          Compare bands toward one beacon
+        </button>
+        <button class="beacon-secondary" type="button" data-beacon-jump="scan">
+          Start a three-minute band scan
+        </button>
+      </div>
+    </section>
+
+    <section
+      class="beacon-panel"
+      data-beacon-panel="scan"
+      aria-labelledby="beacon-scan-title"
+      hidden
+    >
+      <div class="beacon-panel-heading beacon-scan-heading">
+        <div>
+          <p class="section-label">Where is this band open?</p>
+          <h2 id="beacon-scan-title">Stay on one frequency for three minutes</h2>
+        </div>
+        <label for="beacon-scan-band">
+          <span>Band</span>
+          <select id="beacon-scan-band">
+            {
+              NCDXF_BANDS.map((band, index) => (
+                <option value={index} selected={index === 1}>
+                  {band.label} · {band.frequencyMHz.toFixed(3)} MHz
+                </option>
+              ))
+            }
+          </select>
+        </label>
+      </div>
+
+      <div class="beacon-listen-now">
+        <div class="beacon-listen-frequency">
+          <span>Tune CW</span>
+          <strong id="beacon-scan-frequency">18.110 MHz CW</strong>
+          <small id="beacon-scan-slot">--</small>
+        </div>
+        <div class="beacon-listen-identity">
+          <span>Listen now</span>
+          <strong id="beacon-scan-call">--</strong>
+          <p id="beacon-scan-location">--</p>
+          <p id="beacon-scan-path">--</p>
+        </div>
+      </div>
+
+      <div id="beacon-scan-progress" class="beacon-scan-progress" aria-label="Beacon scan progress">
+      </div>
+      <p id="beacon-scan-status" class="beacon-listen-help">
+        Callsign and first dash are 100 W, followed by 10 W, 1 W, and 100 mW.
+      </p>
+
+      <fieldset class="beacon-power-fieldset">
+        <legend>Weakest step heard</legend>
+        <div class="beacon-power-buttons">
+          <button type="button" data-beacon-mode="scan" data-beacon-power="none">None</button>
+          <button type="button" data-beacon-mode="scan" data-beacon-power="100">100 W</button>
+          <button type="button" data-beacon-mode="scan" data-beacon-power="10">10 W</button>
+          <button type="button" data-beacon-mode="scan" data-beacon-power="1">1 W</button>
+          <button type="button" data-beacon-mode="scan" data-beacon-power="0.1">100 mW</button>
+        </div>
+      </fieldset>
+      <p id="beacon-scan-recorded" class="beacon-recorded" aria-live="polite">
+        Tap once during each ten-second transmission.
+      </p>
+
+      <div class="beacon-session-results">
+        <div>
+          <p class="section-label">This band</p>
+          <h3>Recent observations</h3>
+        </div>
+        <div id="beacon-scan-log" class="beacon-scan-log">
+          <p class="beacon-empty">No observations recorded on this band yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="beacon-panel"
+      data-beacon-panel="path"
+      aria-labelledby="beacon-path-title"
+      hidden
+    >
+      <div class="beacon-panel-heading beacon-scan-heading">
+        <div>
+          <p class="section-label">Which band reaches there?</p>
+          <h2 id="beacon-path-title">Follow one beacon across five bands</h2>
+          <p>Its five transmissions take 50 seconds once the sequence begins.</p>
+        </div>
+        <label for="beacon-path-beacon">
+          <span>Beacon</span>
+          <select id="beacon-path-beacon">
+            {
+              NCDXF_BEACONS.map((beacon, index) => (
+                <option value={index} selected={beacon.call === "CS3B"}>
+                  {beacon.call} · {beacon.entity}
+                  {beacon.status === "off" ? " · reported off" : ""}
+                </option>
+              ))
+            }
+          </select>
+        </label>
+      </div>
+
+      <div class="beacon-path-identity">
+        <strong id="beacon-path-call">CS3B</strong>
+        <p id="beacon-path-location">Madeira · São Jorge</p>
+      </div>
+
+      <div class="beacon-path-tune">
+        <span id="beacon-path-prompt">Next: 20 m</span>
+        <strong id="beacon-path-frequency">14.100 MHz CW</strong>
+        <small id="beacon-path-countdown">--</small>
+      </div>
+
+      <fieldset class="beacon-power-fieldset">
+        <legend>Weakest step heard on the active band</legend>
+        <div class="beacon-power-buttons">
+          <button type="button" data-beacon-mode="path" data-beacon-power="none">None</button>
+          <button type="button" data-beacon-mode="path" data-beacon-power="100">100 W</button>
+          <button type="button" data-beacon-mode="path" data-beacon-power="10">10 W</button>
+          <button type="button" data-beacon-mode="path" data-beacon-power="1">1 W</button>
+          <button type="button" data-beacon-mode="path" data-beacon-power="0.1">100 mW</button>
+        </div>
+      </fieldset>
+      <p id="beacon-path-recorded" class="beacon-recorded" aria-live="polite">
+        Controls activate while the selected beacon is transmitting.
+      </p>
+
+      <div id="beacon-path-bands" class="beacon-path-bands"></div>
+      <div class="beacon-path-result">
+        <p class="section-label">Local result</p>
+        <p id="beacon-path-recommendation">
+          Follow the beacon through its five transmissions and record each band.
+        </p>
+      </div>
+    </section>
+
+    <div class="beacon-tool-footer">
+      <p>
+        Observations and your grid stay in this browser. Results expire from the
+        recommendation after 30 minutes.
+      </p>
+      <button id="beacon-clear-observations" class="beacon-text-button" type="button">
+        Clear local observations
+      </button>
+    </div>
+
+    <noscript>
+      <p class="beacon-noscript">
+        This schedule needs JavaScript to follow the current ten-second slot.
+      </p>
+    </noscript>
+  </section>
+
+  <section class="bridge beacon-reference" aria-labelledby="beacon-reference-title">
+    <p class="section-label">Reference</p>
+    <h2 id="beacon-reference-title">What the result means</h2>
+    <p>
+      Hearing a lower-power dash suggests more path margin, but it is not a
+      guarantee that another station will hear you. Antennas, local noise,
+      propagation, and interference still matter. NCDXF beacon status in this
+      static tool was checked on {statusDate}.
+    </p>
+    <nav class="path-links" aria-label="Beacon references">
+      <a href="/notes/2026-07-23-learning-to-read-the-bands-with-ncdxf-beacons/">
+        Read the field note
+      </a>
+      <a href="https://www.ncdxf.org/beacon/" target="_blank" rel="noreferrer">
+        Official NCDXF beacon project
+      </a>
+      <a href="https://www.ncdxf.org/beacon/index.html" target="_blank" rel="noreferrer">
+        Official live schedule and status
+      </a>
+      <a href="/radio/">Back to radio</a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initNcdxfBeaconTool } from "../../lib/ncdxf-beacons-client";
+
+  initNcdxfBeaconTool();
+</script>
