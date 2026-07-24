@@ -2,6 +2,7 @@
 title: Learning to Read the Bands with NCDXF Beacons
 date: 2026-07-23
 summary: "A first look at the synchronized NCDXF/IARU beacon network, its stepped-power signals, and two quick ways to choose an HF band from the field."
+beaconMap: true
 tags:
   - radio
   - field-notes
@@ -23,18 +24,39 @@ made the network click for me, the way I expect to use it, and the
 [NCDXF Beacon Guide](/radio/beacons/) I built to make the timing manageable
 beside the radio.
 
-## Eighteen stations sharing five frequencies
+## A beacon network from before today's digital modes
 
-The project has 18 beacon locations distributed around the world. They transmit
-on five frequencies:
+The network has roots in the earliest years of NCDXF. The foundation formed in
+1972 and wanted to support a scientific project that could involve amateurs
+whether or not they were DXers. One early idea was to place expensive drifting
+beacons in Arctic currents so amateurs could help track them. The drifting
+hardware was far beyond the foundation's budget, but the underlying idea of
+coordinated, worldwide beacon observations survived.
 
-| Band | Frequency |
-| --- | ---: |
-| 20 meters | 14.100 MHz |
-| 17 meters | 18.110 MHz |
-| 15 meters | 21.150 MHz |
-| 12 meters | 24.930 MHz |
-| 10 meters | 28.200 MHz |
+The first fixed NCDXF beacon went on the air in 1979 from a trailer near
+Stanford University. It signed WB6ZNL on 14.100 MHz and sent a one-minute
+message every ten minutes. The IARU became involved during the 1980s, and the
+modern five-band system began deployment in 1995.
+
+That history puts this network decades ahead of WSPR, FT8, internet-connected
+SDRs, and the Reverse Beacon Network. Its approach is almost startlingly
+direct: carefully coordinated transmitters, UTC, Morse code, and known power
+levels. The detailed
+[early history](https://www.ncdxf.org/beacon/earlyhistory.html) is worth
+reading; it includes the original drifting-beacon idea, the first Stanford
+installation, and the transition to the current 18-slot design.
+
+### Frequencies and timing
+
+The 18 scheduled locations share five frequencies:
+
+<div class="beacon-frequency-grid" aria-label="NCDXF beacon frequencies">
+  <div><strong>20 m</strong><span>14.100 MHz</span></div>
+  <div><strong>17 m</strong><span>18.110 MHz</span></div>
+  <div><strong>15 m</strong><span>21.150 MHz</span></div>
+  <div><strong>12 m</strong><span>24.930 MHz</span></div>
+  <div><strong>10 m</strong><span>28.200 MHz</span></div>
+</div>
 
 The coordination is the clever part. Each beacon gets a ten-second slot, and
 the complete sequence repeats every three minutes. At the end of its slot, a
@@ -48,11 +70,49 @@ The official
 current reference data. An accurate clock matters because the time slot can
 identify a signal even when the callsign is too weak or too fast to copy.
 
+### Stations and locations
+
+The map and station list above use the official NCDXF transmission order. The
+network starts with 4U1UN at the United Nations in New York, continues west
+through Canada, California, Hawaii, New Zealand, Australia, and Asia, then
+crosses Africa, Europe, and South America before ending with YV5B in Venezuela.
+The geographic order is not a perfect trip around the globe, but it makes the
+three-minute sequence easier to understand.
+
+These are scheduled slots, not a promise that all 18 signals are on the air.
+Remote sites contend with lightning, corrosion, storms, power problems, aging
+radios, antenna failures, and occasional theft. The
+[official live schedule and status](https://www.ncdxf.org/beacon/index.html)
+remains the source of truth before treating a missing signal as a propagation
+result.
+
+### Radios, timing, and antennas
+
+The first beacon was custom hardware, followed by a generation built around the
+Kenwood TS-120. For the 1995 five-band network, Kenwood donated 16 TS-50
+transceivers. Those stations paired a TS-50 with a custom controller, GPS
+timing, and generally a Cushcraft MA5V multiband vertical.
+
+The network is no longer perfectly uniform. Aging TS-50s and increasingly
+difficult controller repairs led to the open-source
+[Beacon Controller 2.0](https://www.ncdxf.org/beacon/beaconcontroller.html),
+an Arduino-based design used with Icom IC-7200 radios. The first beta system
+went to W6WX in 2015 and the second to KH6RS in 2016. Aging MA5V antennas have
+also driven replacement work, including a dual-band discone design now used at
+W6WX.
+
+I could not find a reliable current radio-and-antenna inventory for every
+location. NCDXF's
+[current reception page](https://www.ncdxf.org/beacon/RBN.html) still identifies
+RR9O as a version-one controller with a TS-50, while many other sites report
+version-two controllers. The honest description is therefore a mixed network
+being modernized in place, not 18 identical stations.
+
 ## Four signals hiding inside each slot
 
-Each transmission starts with the beacon's callsign at 22 words per minute.
-The callsign and first one-second dash use 100 watts. Three more one-second
-dashes follow at:
+Each transmission starts with the beacon's callsign sent as Morse code at 22
+words per minute. The callsign and first one-second dash use 100 watts. Three
+more one-second dashes follow at:
 
 - 10 watts
 - 1 watt
@@ -98,6 +158,14 @@ If I care about a particular direction, I can instead follow one beacon as it
 moves through 20, 17, 15, 12, and 10 meters. Once its sequence begins, that
 takes 50 seconds.
 
+That is neat on paper and demanding with a manually tuned field radio. Changing
+bands or entering five frequencies inside consecutive ten-second slots leaves
+little time to listen for the callsign and four power steps. CAT control makes
+this mode practical; carefully prepared memories or direct band buttons may
+make it possible without CAT. For a completely manual station, the three-minute
+single-band scan is the dependable workflow, while the five-band comparison is
+still an experiment.
+
 For a Rhode Island portable operation, CS3B in Madeira is an interesting proxy
 for a transatlantic path. LU4AA in Argentina offers a South American path.
 W6WX in California provides a path toward the western United States. The
@@ -134,14 +202,15 @@ frequency. A Maidenhead grid adds approximate bearing and distance.
 
 In the one-band view, I leave the radio on a selected beacon frequency and tap
 the weakest power step I hear during each slot. In the band-comparison view, I
-choose one beacon and the guide walks through its five frequencies. The
-observations stay in the browser and produce a local recommendation for 30
-minutes.
+choose one beacon and the guide supplies the five-frequency timing. It cannot
+tune the radio yet, so that mode currently assumes CAT software, prepared
+memories, or very fast manual operation. The observations stay in the browser
+and produce a local recommendation for 30 minutes.
 
-The first version is intentionally manual. It does not need CAT control, audio
-decoding, an account, or a backend. Manual input also keeps the central
-question visible: what did I actually hear through the station I am using
-right now?
+The first version does not need audio decoding, an account, or a backend.
+Manual signal input also keeps the central question visible: what did I
+actually hear through the station I am using right now? CAT control is the
+obvious next step if the focused comparison proves useful.
 
 ## What I still want to test
 

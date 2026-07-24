@@ -4066,3 +4066,226 @@ p {
     border-bottom: 0;
   }
 }
+
+.beacon-map-section {
+  margin: 28px 0 36px;
+  padding-top: 18px;
+  border-top: 2px solid var(--ink);
+}
+
+.beacon-map-heading {
+  display: flex;
+  gap: 18px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.beacon-map-heading h2 {
+  margin-bottom: 4px;
+}
+
+.beacon-map-heading p {
+  margin-bottom: 0;
+}
+
+.beacon-map-summary {
+  flex: 0 0 auto;
+  color: var(--quiet);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.beacon-network-map {
+  z-index: 0;
+  width: 100%;
+  min-height: 460px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+}
+
+.beacon-network-map .leaflet-popup-content {
+  display: grid;
+  gap: 4px;
+  min-width: 190px;
+  margin: 10px 12px;
+}
+
+.beacon-network-map .leaflet-popup-content strong,
+.beacon-network-map .leaflet-popup-content span {
+  display: block;
+  line-height: 1.35;
+}
+
+.beacon-network-map .leaflet-popup-content span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.beacon-network-map .leaflet-tooltip {
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.beacon-station-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 18px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.beacon-station-list li {
+  min-width: 0;
+}
+
+.beacon-station-list button {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  gap: 4px 9px;
+  width: 100%;
+  min-height: 66px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  padding: 10px 2px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.beacon-station-list button:hover {
+  color: var(--blue);
+}
+
+.beacon-station-slot,
+.beacon-station-grid,
+.beacon-station-offline {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.beacon-station-slot {
+  grid-row: 1 / span 2;
+  color: var(--rust);
+}
+
+.beacon-station-identity {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.beacon-station-identity strong {
+  line-height: 1.2;
+}
+
+.beacon-station-identity span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.beacon-station-grid {
+  color: var(--quiet);
+}
+
+.beacon-station-offline {
+  grid-column: 2 / -1;
+  color: var(--rust);
+}
+
+.document .beacon-frequency-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.document .beacon-frequency-grid div {
+  display: grid;
+  gap: 4px;
+  border-right: 1px solid var(--line);
+  padding: 13px 10px;
+}
+
+.document .beacon-frequency-grid div:last-child {
+  border-right: 0;
+}
+
+.document .beacon-frequency-grid strong {
+  color: var(--rust);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.document .beacon-frequency-grid span {
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  .beacon-station-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .beacon-map-heading {
+    display: grid;
+    gap: 8px;
+  }
+
+  .beacon-map-summary {
+    line-height: 1.4;
+  }
+
+  .beacon-network-map {
+    min-height: 340px;
+  }
+
+  .beacon-station-list {
+    grid-template-columns: 1fr;
+  }
+
+  .beacon-station-list button {
+    min-height: 58px;
+  }
+
+  .document .beacon-frequency-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .document .beacon-frequency-grid div {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .document .beacon-frequency-grid div:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .document .beacon-frequency-grid div:last-child {
+    grid-column: 1 / -1;
+    border-bottom: 0;
+  }
+}

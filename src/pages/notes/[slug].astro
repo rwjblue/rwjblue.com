@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GeoJsonBoundaryMap from "../../components/GeoJsonBoundaryMap.astro";
+import NcdxfBeaconMap from "../../components/NcdxfBeaconMap.astro";
 import PotaContactMap from "../../components/PotaContactMap.astro";
 import TagHints from "../../components/TagHints.astro";
 import { contactMapForNote } from "../../data/pota/contact-maps";
@@ -42,6 +43,7 @@ const shareImageAlt = `${note.data.title} social share image`;
       </div>
     </header>
     <TagHints tags={note.data.tags} />
+    {note.data.beaconMap && <NcdxfBeaconMap />}
     {contactMap && <PotaContactMap map={contactMap} />}
     {note.data.boundaryMap && <GeoJsonBoundaryMap map={note.data.boundaryMap} />}
     <Content />

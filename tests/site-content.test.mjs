@@ -179,6 +179,9 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   const radio = read("src/pages/radio/index.astro");
   const page = read("src/pages/radio/beacons.astro");
   const client = read("src/lib/ncdxf-beacons-client.ts");
+  const map = read("src/components/NcdxfBeaconMap.astro");
+  const notePage = read("src/pages/notes/[slug].astro");
+  const shareImage = read("src/lib/note-share-image.ts");
   const note = read(
     "src/content/notes/2026-07-23-learning-to-read-the-bands-with-ncdxf-beacons.md",
   );
@@ -194,8 +197,16 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   assert.match(client, /localStorage/);
   assert.match(client, /transmissionAt/);
   assert.match(client, /beaconWindowAt/);
+  assert.match(map, /NCDXF_BEACONS/);
+  assert.match(map, /class="beacon-network-map"/);
+  assert.match(map, /class="beacon-station-list"/);
+  assert.match(notePage, /note\.data\.beaconMap && <NcdxfBeaconMap/);
+  assert.match(shareImage, /renderNcdxfBeaconShareImage/);
+  assert.match(note, /beaconMap: true/);
   assert.match(note, /\[NCDXF Beacon Guide\]\(\/radio\/beacons\/\)/);
   assert.match(note, /I have not completed a full field test yet/);
+  assert.match(note, /callsign sent as Morse code at 22/);
+  assert.match(note, /CAT control makes\s+this mode practical/);
 });
 
 test("shack page documents station and portable setup", () => {
