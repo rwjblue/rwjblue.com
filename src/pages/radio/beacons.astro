@@ -1,4 +1,5 @@
 ---
+import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import {
   NCDXF_BANDS,
@@ -71,15 +72,20 @@ const statusDate = new Intl.DateTimeFormat("en-US", {
     </div>
 
     <nav class="beacon-view-tabs" aria-label="Beacon tool views">
-      <button class="is-active" type="button" data-beacon-view="now" aria-pressed="true">
+      <a
+        class="is-active"
+        href="/radio/beacons/?view=now"
+        data-beacon-view="now"
+        aria-current="page"
+      >
         On now
-      </button>
-      <button type="button" data-beacon-view="scan" aria-pressed="false">
+      </a>
+      <a href="/radio/beacons/?view=scan" data-beacon-view="scan">
         Scan one band
-      </button>
-      <button type="button" data-beacon-view="path" aria-pressed="false">
+      </a>
+      <a href="/radio/beacons/?view=path" data-beacon-view="path">
         Compare bands
-      </button>
+      </a>
     </nav>
 
     <section class="beacon-panel" data-beacon-panel="now" aria-labelledby="beacon-now-title">
@@ -90,6 +96,24 @@ const statusDate = new Intl.DateTimeFormat("en-US", {
           <p>Choose a band to begin a guided three-minute listen.</p>
         </div>
         <p class="beacon-clock-note">Accurate device time is required.</p>
+      </div>
+      <div class="beacon-live-map-shell">
+        <div class="beacon-live-map-heading">
+          <p class="section-label">Worldwide now</p>
+          <p>
+            <span class="beacon-live-pulse" aria-hidden="true"></span>
+            Five scheduled transmitters · one on each band
+          </p>
+        </div>
+        <div
+          id="beacon-live-map"
+          class="beacon-live-map"
+          aria-label="World map showing the five currently scheduled NCDXF beacon transmissions"
+        >
+        </div>
+        <p id="beacon-live-summary" class="beacon-live-summary" aria-live="off">
+          Loading the current five transmissions.
+        </p>
       </div>
       <div id="beacon-now-grid" class="beacon-now-grid" aria-live="off"></div>
       <div id="beacon-recommendation" class="beacon-recommendation" aria-live="polite">

@@ -1,3 +1,4 @@
+import L from "leaflet";
 import {
   gridToLatLon,
   latLonToGrid,
@@ -21,6 +22,8 @@ import {
 const STORAGE_GRID = "ncdxfBeacons.grid";
 const STORAGE_OBSERVATIONS = "ncdxfBeacons.observations.v1";
 const RECENT_OBSERVATION_MS = 30 * 60 * 1000;
+const BEACON_VIEWS = ["now", "scan", "path"] as const;
+type BeaconView = (typeof BEACON_VIEWS)[number];
 
 export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   const root = document.getElementById(rootId);
@@ -31,9 +34,11 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   const gridInput = getElement<HTMLInputElement>(root, "#beacon-grid");
   const applyGridButton = getElement<HTMLButtonElement>(root, "#beacon-apply-grid");
   const locationStatus = getElement<HTMLElement>(root, "#beacon-location-status");
-  const viewButtons = [...root.querySelectorAll<HTMLButtonElement>("[data-beacon-view]")];
+  const viewButtons = [...root.querySelectorAll<HTMLAnchorElement>("[data-beacon-view]")];
   const viewPanels = [...root.querySelectorAll<HTMLElement>("[data-beacon-panel]")];
   const nowGrid = getElement<HTMLElement>(root, "#beacon-now-grid");
+  const liveMapElement = getElement<HTMLElement>(root, "#beacon-live-map");
+  const liveSummary = getElement<HTMLElement>(root, "#beacon-live-summary");
   const recommendation = getElement<HTMLElement>(root, "#beacon-recommendation");
   const scanBand = getElement<HTMLSelectElement>(root, "#beacon-scan-band");
   const scanFrequency = getElement<HTMLElement>(root, "#beacon-scan-frequency");
@@ -58,8 +63,48 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
 
   let origin: LatLon | null = null;
   let observations = readObservations();
-  let activeView = "now";
+  let activeView = viewFromUrl();
+  let lastLiveMapSlot = -1;
 
+  const liveMap = L.map(liveMapElement, {
+    attributionControl: true,
+    boxZoom: false,
+    doubleClickZoom: false,
+    dragging: false,
+    keyboard: false,
+    scrollWheelZoom: false,
+    touchZoom: false,
+    zoomControl: false,
+    zoomSnap: 0.25,
+  });
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(liveMap);
+  const liveMarkers = NCDXF_BEACONS.map((beacon) => {
+    const point = gridToLatLon(beacon.grid) ?? { lat: 0, lon: 0 };
+    return L.circleMarker([point.lat, point.lon], {
+      radius: 4,
+      color: "#fffdfa",
+      weight: 1,
+      fillColor: beacon.status === "off" ? "#8a4b2b" : "#7a858c",
+      fillOpacity: 0.72,
+    })
+      .addTo(liveMap)
+      .bindTooltip(`${beacon.call} · ${beacon.entity}`, {
+        direction: "top",
+        offset: [0, -4],
+      });
+  });
+  const mapWidth = Math.max(256, liveMapElement.clientWidth - 32);
+  const initialMapZoom = Math.max(
+    0,
+    Math.min(2.25, Math.floor(Math.log2(mapWidth / 256) * 4) / 4),
+  );
+  liveMap.setView([0, 8], initialMapZoom);
+
+  applyUrlSelections();
   const urlGrid = normalizeGrid(new URLSearchParams(window.location.search).get("grid"));
   const initialGrid = urlGrid ?? normalizeGrid(readStorage(STORAGE_GRID));
   if (initialGrid) {
@@ -70,34 +115,43 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
     void useGrantedBrowserLocation();
   }
 
-  viewButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const view = button.dataset.beaconView;
+  viewButtons.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const view = parseView(link.dataset.beaconView);
       if (!view) return;
-      activeView = view;
-      updateViews();
-      render(new Date());
+      event.preventDefault();
+      setActiveView(view, true);
     });
   });
 
   root.querySelectorAll<HTMLButtonElement>("[data-beacon-jump]").forEach((button) => {
     button.addEventListener("click", () => {
-      const view = button.dataset.beaconJump;
+      const view = parseView(button.dataset.beaconJump);
       if (!view) return;
-      activeView = view;
-      updateViews();
-      render(new Date());
+      setActiveView(view, true);
     });
   });
 
-  scanBand.addEventListener("change", () => render(new Date()));
-  pathBeacon.addEventListener("change", () => render(new Date()));
+  scanBand.addEventListener("change", () => {
+    updateUrl(false);
+    render(new Date());
+  });
+  pathBeacon.addEventListener("change", () => {
+    updateUrl(false);
+    render(new Date());
+  });
   useLocationButton.addEventListener("click", () => requestBrowserLocation(true));
   applyGridButton.addEventListener("click", applyGrid);
   gridInput.addEventListener("keydown", (event) => {
     if (event.key !== "Enter") return;
     event.preventDefault();
     applyGrid();
+  });
+  window.addEventListener("popstate", () => {
+    activeView = viewFromUrl();
+    applyUrlSelections();
+    updateViews();
+    render(new Date());
   });
 
   clearButton.addEventListener("click", () => {
@@ -152,14 +206,61 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   window.setInterval(() => render(new Date()), 250);
 
   function updateViews(): void {
-    viewButtons.forEach((button) => {
-      const isActive = button.dataset.beaconView === activeView;
-      button.classList.toggle("is-active", isActive);
-      button.setAttribute("aria-pressed", String(isActive));
+    viewButtons.forEach((link) => {
+      const isActive = link.dataset.beaconView === activeView;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
     viewPanels.forEach((panel) => {
       panel.hidden = panel.dataset.beaconPanel !== activeView;
     });
+    if (activeView === "now") {
+      window.requestAnimationFrame(() => liveMap.invalidateSize());
+    }
+  }
+
+  function setActiveView(view: BeaconView, pushHistory: boolean): void {
+    activeView = view;
+    updateUrl(pushHistory);
+    updateViews();
+    render(new Date());
+  }
+
+  function updateUrl(pushHistory: boolean): void {
+    const url = new URL(window.location.href);
+    url.searchParams.set("view", activeView);
+    url.searchParams.delete("band");
+    url.searchParams.delete("beacon");
+    if (activeView === "scan") {
+      url.searchParams.set("band", bandSlug(scanBand.selectedIndex));
+    }
+    if (activeView === "path") {
+      url.searchParams.set("beacon", NCDXF_BEACONS[pathBeacon.selectedIndex].call);
+    }
+    if (pushHistory) {
+      window.history.pushState({}, "", url);
+    } else {
+      window.history.replaceState({}, "", url);
+    }
+  }
+
+  function applyUrlSelections(): void {
+    const search = new URLSearchParams(window.location.search);
+    const requestedBand = search.get("band")?.toLowerCase();
+    const bandIndex = NCDXF_BANDS.findIndex(
+      (_, index) => bandSlug(index).toLowerCase() === requestedBand,
+    );
+    if (bandIndex >= 0) scanBand.selectedIndex = bandIndex;
+
+    const requestedBeacon = search.get("beacon")?.toUpperCase();
+    const beaconIndex = NCDXF_BEACONS.findIndex(
+      (beacon) => beacon.call === requestedBeacon,
+    );
+    if (beaconIndex >= 0) pathBeacon.selectedIndex = beaconIndex;
   }
 
   function render(now: Date): void {
@@ -170,6 +271,7 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   }
 
   function renderNow(now: Date): void {
+    renderLiveMap(now);
     nowGrid.innerHTML = NCDXF_BANDS.map((band, bandIndex) => {
       const transmission = transmissionAt(now, bandIndex);
       const path = formatPath(transmission.beacon);
@@ -190,9 +292,7 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
     nowGrid.querySelectorAll<HTMLButtonElement>("[data-now-band]").forEach((button) => {
       button.addEventListener("click", () => {
         scanBand.selectedIndex = Number(button.dataset.nowBand ?? 0);
-        activeView = "scan";
-        updateViews();
-        render(new Date());
+        setActiveView("scan", true);
       });
     });
 
@@ -212,6 +312,66 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
       )} in the last 30 minutes.</span>`;
   }
 
+  function renderLiveMap(now: Date): void {
+    const transmissions = NCDXF_BANDS.map((_, bandIndex) =>
+      transmissionAt(now, bandIndex),
+    );
+    const currentSlot = transmissions[0].beaconIndex;
+    if (currentSlot === lastLiveMapSlot) return;
+    lastLiveMapSlot = currentSlot;
+
+    const activeByBeacon = new Map(
+      transmissions.map((transmission) => [
+        transmission.beaconIndex,
+        transmission,
+      ]),
+    );
+    liveMarkers.forEach((marker, beaconIndex) => {
+      const transmission = activeByBeacon.get(beaconIndex);
+      const beacon = NCDXF_BEACONS[beaconIndex];
+      marker.unbindTooltip();
+      if (transmission) {
+        const isOff = beacon.status === "off";
+        const labelOnLeft = marker.getLatLng().lng > 110;
+        marker.setRadius(8);
+        marker.setStyle({
+          color: "#fffdfa",
+          weight: 2,
+          fillColor: isOff ? "#8a4b2b" : "#2f6f4e",
+          fillOpacity: 1,
+        });
+        marker.bindTooltip(
+          `${transmission.band.label} · ${beacon.call}${isOff ? " · reported off" : ""}`,
+          {
+            className: "beacon-live-label",
+            direction: labelOnLeft ? "left" : "right",
+            offset: [labelOnLeft ? -8 : 8, 0],
+            permanent: true,
+          },
+        );
+      } else {
+        marker.setRadius(4);
+        marker.setStyle({
+          color: "#fffdfa",
+          weight: 1,
+          fillColor: beacon.status === "off" ? "#8a4b2b" : "#7a858c",
+          fillOpacity: 0.72,
+        });
+        marker.bindTooltip(`${beacon.call} · ${beacon.entity}`, {
+          direction: "top",
+          offset: [0, -4],
+        });
+      }
+    });
+
+    liveSummary.textContent = transmissions
+      .map(
+        (transmission) =>
+          `${transmission.band.label}: ${transmission.beacon.call} in ${transmission.beacon.entity}`,
+      )
+      .join(" · ");
+  }
+
   function renderScan(now: Date): void {
     const bandIndex = scanBand.selectedIndex;
     const transmission = transmissionAt(now, bandIndex);
@@ -227,38 +387,42 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
         ? "NCDXF currently reports this beacon off the air."
         : "Callsign and first dash are 100 W, followed by 10 W, 1 W, and 100 mW.";
 
-    scanProgress.innerHTML = NCDXF_BEACONS.map((beacon, beaconIndex) => {
-      const currentClass = beaconIndex === transmission.beaconIndex ? " is-current" : "";
-      const heard = observations.some(
-        (observation) =>
-          observation.bandIndex === bandIndex &&
-          observation.beaconIndex === beaconIndex &&
-          Date.parse(observation.observedAt) >= now.getTime() - RECENT_OBSERVATION_MS,
-      );
-      return `<span class="${heard ? "is-checked" : ""}${currentClass}" aria-label="${escapeHtml(
-        beacon.call,
-      )}${heard ? " checked" : ""}"></span>`;
-    }).join("");
-
     const recentForBand = recentObservations(now)
       .filter((observation) => observation.bandIndex === bandIndex)
+      .slice(-18);
+    scanProgress.innerHTML = NCDXF_BEACONS.map((beacon, beaconIndex) => {
+      const currentClass = beaconIndex === transmission.beaconIndex ? " is-current" : "";
+      const latest = [...recentForBand]
+        .reverse()
+        .find((observation) => observation.beaconIndex === beaconIndex);
+      const observationClass = latest
+        ? ` has-observation ${powerClass(latest.power)}`
+        : "";
+      return `<span class="${observationClass}${currentClass}" aria-label="${escapeHtml(
+        beacon.call,
+      )}${latest ? `: ${escapeHtml(powerLabel(latest.power))}` : ": not checked"}"></span>`;
+    }).join("");
+
+    const recentForBandLog = recentForBand
       .slice(-6)
       .reverse();
     scanLog.innerHTML =
-      recentForBand.length === 0
+      recentForBandLog.length === 0
         ? '<p class="beacon-empty">No observations recorded on this band yet.</p>'
-        : `<ol>${recentForBand
+        : `<ol>${recentForBandLog
             .map((observation) => {
               const beacon = NCDXF_BEACONS[observation.beaconIndex];
-              return `<li><strong>${escapeHtml(beacon.call)}</strong><span>${escapeHtml(
-                powerLabel(observation.power),
-              )}</span></li>`;
+              return `<li><strong>${escapeHtml(
+                beacon.call,
+              )}</strong><span class="beacon-power-result ${powerClass(
+                observation.power,
+              )}">${escapeHtml(powerLabel(observation.power))}</span></li>`;
             })
             .join("")}</ol>`;
 
     updatePowerSelection(
       "scan",
-      recentForBand.find(
+      recentForBandLog.find(
         (observation) => observation.beaconIndex === transmission.beaconIndex,
       )?.power ?? null,
       false,
@@ -300,7 +464,9 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
           <strong>${escapeHtml(band.label)}</strong>
           <span>${formatFrequency(band.frequencyMHz)} MHz</span>
         </div>
-        <span>${escapeHtml(powerLabel(latest?.power ?? null))}</span>
+        <span class="${
+          latest ? `beacon-power-result ${powerClass(latest.power)}` : ""
+        }">${escapeHtml(powerLabel(latest?.power ?? null))}</span>
       </div>`;
     }).join("");
 
@@ -476,6 +642,26 @@ function isObservation(value: unknown): value is BeaconObservation {
 function normalizeGrid(value: string | null): string | null {
   const grid = String(value ?? "").trim().toUpperCase();
   return grid && gridToLatLon(grid) ? grid : null;
+}
+
+function parseView(value: string | undefined | null): BeaconView | null {
+  return BEACON_VIEWS.includes(value as BeaconView)
+    ? (value as BeaconView)
+    : null;
+}
+
+function viewFromUrl(): BeaconView {
+  return (
+    parseView(new URLSearchParams(window.location.search).get("view")) ?? "now"
+  );
+}
+
+function bandSlug(bandIndex: number): string {
+  return NCDXF_BANDS[bandIndex]?.label.replace(/\s+/g, "") ?? "17m";
+}
+
+function powerClass(power: BeaconPower): string {
+  return `beacon-power-${power === "0.1" ? "01" : power}`;
 }
 
 function formatFrequency(frequencyMHz: number): string {
