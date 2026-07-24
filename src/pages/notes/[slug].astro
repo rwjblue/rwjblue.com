@@ -21,7 +21,7 @@ const shouldUseGeneratedShareImage = contactMap || note.data.boundaryMap;
 const shareImage = shouldUseGeneratedShareImage
   ? `/images/pota/${note.id}/share.png`
   : note.data.shareImage ??
-    `/notes/${note.id}/share.png${note.data.beaconMap ? "?v=2" : ""}`;
+    `/notes/${note.id}/share.png${note.data.beaconMap ? "?v=3" : ""}`;
 const shareImageAlt = `${note.data.title} social share image`;
 ---
 
