@@ -40,6 +40,13 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   const viewButtons = [...root.querySelectorAll<HTMLAnchorElement>("[data-beacon-view]")];
   const viewPanels = [...root.querySelectorAll<HTMLElement>("[data-beacon-panel]")];
   const nowGrid = getElement<HTMLElement>(root, "#beacon-now-grid");
+  const nowBandToggles = [
+    ...root.querySelectorAll<HTMLInputElement>("[data-beacon-now-band]"),
+  ];
+  const nowBandFilterStatus = getElement<HTMLElement>(
+    root,
+    "#beacon-band-filter-status",
+  );
   const liveMapElement = getElement<HTMLElement>(root, "#beacon-live-map");
   const mapKicker = getElement<HTMLElement>(root, "#beacon-map-kicker");
   const mapStatus = getElement<HTMLElement>(root, "#beacon-map-status");
@@ -69,10 +76,13 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   let origin: LatLon | null = null;
   let observations = readObservations();
   let activeView = viewFromUrl();
+  let selectedNowBandIndexes = new Set(NCDXF_BANDS.map((_, index) => index));
+  let nowBandFilterNotice: string | null = null;
   let lastMapSignature = "";
   const beaconMap = createNcdxfBeaconMap(liveMapElement);
 
   applyUrlSelections();
+  syncNowBandToggles();
   const urlGrid = normalizeGrid(new URLSearchParams(window.location.search).get("grid"));
   const initialGrid = urlGrid ?? readSavedOperatingGrid();
   if (initialGrid) {
@@ -100,6 +110,29 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
     });
   });
 
+  nowBandToggles.forEach((toggle) => {
+    toggle.addEventListener("change", () => {
+      const bandIndex = Number(toggle.dataset.beaconNowBand);
+      const nextBandIndexes = new Set(selectedNowBandIndexes);
+      if (toggle.checked) {
+        nextBandIndexes.add(bandIndex);
+      } else {
+        nextBandIndexes.delete(bandIndex);
+      }
+      if (nextBandIndexes.size === 0) {
+        toggle.checked = true;
+        nowBandFilterNotice = "Keep at least one band selected.";
+        render(new Date());
+        return;
+      }
+      selectedNowBandIndexes = nextBandIndexes;
+      nowBandFilterNotice = null;
+      lastMapSignature = "";
+      updateUrl(false);
+      render(new Date());
+    });
+  });
+
   scanBand.addEventListener("change", () => {
     updateUrl(false);
     render(new Date());
@@ -118,6 +151,9 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   window.addEventListener("popstate", () => {
     activeView = viewFromUrl();
     applyUrlSelections();
+    syncNowBandToggles();
+    nowBandFilterNotice = null;
+    lastMapSignature = "";
     updateViews();
     render(new Date());
   });
@@ -200,7 +236,17 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
     const url = new URL(window.location.href);
     url.searchParams.set("view", activeView);
     url.searchParams.delete("band");
+    url.searchParams.delete("bands");
     url.searchParams.delete("beacon");
+    if (
+      activeView === "now" &&
+      selectedNowBandIndexes.size !== NCDXF_BANDS.length
+    ) {
+      url.searchParams.set(
+        "bands",
+        selectedNowBandIndexesArray().map(bandSlug).join(","),
+      );
+    }
     if (activeView === "scan") {
       url.searchParams.set("band", bandSlug(scanBand.selectedIndex));
     }
@@ -216,6 +262,9 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
 
   function applyUrlSelections(): void {
     const search = new URLSearchParams(window.location.search);
+    if (activeView === "now") {
+      selectedNowBandIndexes = nowBandIndexesFromSearch(search);
+    }
     const requestedBand = search.get("band")?.toLowerCase();
     const bandIndex = NCDXF_BANDS.findIndex(
       (_, index) => bandSlug(index).toLowerCase() === requestedBand,
@@ -238,7 +287,17 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   }
 
   function renderNow(now: Date): void {
-    nowGrid.innerHTML = NCDXF_BANDS.map((band, bandIndex) => {
+    const selectedBandIndexes = selectedNowBandIndexesArray();
+    nowGrid.dataset.bandCount = String(selectedBandIndexes.length);
+    nowBandFilterStatus.textContent =
+      nowBandFilterNotice ??
+      (selectedBandIndexes.length === NCDXF_BANDS.length
+        ? "Showing all five beacon frequencies."
+        : `Showing ${selectedBandIndexes
+            .map((bandIndex) => NCDXF_BANDS[bandIndex].label)
+            .join(", ")}.`);
+    nowGrid.innerHTML = selectedBandIndexes.map((bandIndex) => {
+      const band = NCDXF_BANDS[bandIndex];
       const transmission = transmissionAt(now, bandIndex);
       const path = formatPath(transmission.beacon);
       const status =
@@ -263,7 +322,9 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
     });
 
     const recent = recentObservations(now);
-    const ranked = summarizeBandObservations(recent);
+    const ranked = summarizeBandObservations(recent).filter((summary) =>
+      selectedNowBandIndexes.has(summary.bandIndex),
+    );
     const best = ranked.find((summary) => summary.bestPower && summary.bestPower !== "none");
 
     if (!best) {
@@ -285,10 +346,13 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
       : "no-origin";
 
     if (activeView === "now") {
-      const transmissions = NCDXF_BANDS.map((_, bandIndex) =>
+      const selectedBandIndexes = selectedNowBandIndexesArray();
+      const transmissions = selectedBandIndexes.map((bandIndex) =>
         transmissionAt(now, bandIndex),
       );
-      const signature = `now:${transmissions[0].beaconIndex}`;
+      const signature = `now:${selectedBandIndexes.join(",")}:${transmissions
+        .map((transmission) => transmission.beaconIndex)
+        .join(",")}`;
       if (signature !== lastMapSignature) {
         beaconMap.setState({
           mode: "now",
@@ -302,7 +366,9 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
         lastMapSignature = signature;
       }
       mapKicker.textContent = "Worldwide now";
-      mapStatus.textContent = "Five scheduled transmitters · one on each band";
+      mapStatus.textContent = `${transmissions.length} scheduled transmitter${
+        transmissions.length === 1 ? "" : "s"
+      } · one on each selected band`;
       liveSummary.textContent = transmissions
         .map(
           (transmission) =>
@@ -613,6 +679,18 @@ export function initNcdxfBeaconTool(rootId = "ncdxf-beacon-tool"): void {
   function setLocationStatus(message: string): void {
     locationStatus.textContent = message;
   }
+
+  function selectedNowBandIndexesArray(): number[] {
+    return [...selectedNowBandIndexes].sort((a, b) => a - b);
+  }
+
+  function syncNowBandToggles(): void {
+    nowBandToggles.forEach((toggle) => {
+      toggle.checked = selectedNowBandIndexes.has(
+        Number(toggle.dataset.beaconNowBand),
+      );
+    });
+  }
 }
 
 function readObservations(): BeaconObservation[] {
@@ -653,6 +731,29 @@ function parseView(value: string | undefined | null): BeaconView | null {
 function viewFromUrl(): BeaconView {
   return (
     parseView(new URLSearchParams(window.location.search).get("view")) ?? "now"
+  );
+}
+
+function nowBandIndexesFromSearch(search: URLSearchParams): Set<number> {
+  const requestedBands = search.get("bands");
+  if (!requestedBands) {
+    return new Set(NCDXF_BANDS.map((_, index) => index));
+  }
+
+  const requestedSlugs = new Set(
+    requestedBands
+      .split(",")
+      .map((value) => value.trim().toLowerCase())
+      .filter(Boolean),
+  );
+  const bandIndexes = NCDXF_BANDS
+    .map((_, index) => index)
+    .filter((index) => requestedSlugs.has(bandSlug(index).toLowerCase()));
+
+  return new Set(
+    bandIndexes.length > 0
+      ? bandIndexes
+      : NCDXF_BANDS.map((_, index) => index),
   );
 }
 

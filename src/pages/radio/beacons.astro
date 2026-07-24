@@ -88,34 +88,36 @@ const statusDate = new Intl.DateTimeFormat("en-US", {
       </a>
     </nav>
 
-    <div class="beacon-live-map-shell">
-      <div class="beacon-live-map-heading">
-        <p id="beacon-map-kicker" class="section-label">Worldwide now</p>
-        <p id="beacon-map-status">
-          <span class="beacon-live-pulse" aria-hidden="true"></span>
-          Five scheduled transmitters · one on each band
-        </p>
-      </div>
-      <div
-        id="beacon-live-map"
-        class="beacon-live-map"
-        aria-label="World map of NCDXF beacon stations and current listening results"
-      >
-      </div>
-      <p id="beacon-live-summary" class="beacon-live-summary" aria-live="polite">
-        Loading the beacon map.
-      </p>
-    </div>
-
     <section class="beacon-panel" data-beacon-panel="now" aria-labelledby="beacon-now-title">
       <div class="beacon-panel-heading">
         <div>
           <p class="section-label">Live schedule</p>
           <h2 id="beacon-now-title">What is transmitting now</h2>
-          <p>Choose a band to begin a guided three-minute listen.</p>
+          <p>Watch only the bands your field antenna can use.</p>
         </div>
         <p class="beacon-clock-note">Accurate device time is required.</p>
       </div>
+      <fieldset class="beacon-band-filter">
+        <legend>Bands to watch</legend>
+        <div>
+          {
+            NCDXF_BANDS.map((band, index) => (
+              <label>
+                <input
+                  type="checkbox"
+                  value={index}
+                  data-beacon-now-band={index}
+                  checked
+                />
+                <span>{band.label}</span>
+              </label>
+            ))
+          }
+        </div>
+        <p id="beacon-band-filter-status" aria-live="polite">
+          Showing all five beacon frequencies.
+        </p>
+      </fieldset>
       <div id="beacon-now-grid" class="beacon-now-grid" aria-live="off"></div>
       <div id="beacon-recommendation" class="beacon-recommendation" aria-live="polite">
         <strong>No local band result yet.</strong>
@@ -273,6 +275,25 @@ const statusDate = new Intl.DateTimeFormat("en-US", {
       <button id="beacon-clear-observations" class="beacon-text-button" type="button">
         Clear local observations
       </button>
+    </div>
+
+    <div class="beacon-live-map-shell">
+      <div class="beacon-live-map-heading">
+        <p id="beacon-map-kicker" class="section-label">Worldwide now</p>
+        <p id="beacon-map-status">
+          <span class="beacon-live-pulse" aria-hidden="true"></span>
+          Five scheduled transmitters · one on each band
+        </p>
+      </div>
+      <div
+        id="beacon-live-map"
+        class="beacon-live-map"
+        aria-label="World map of NCDXF beacon stations and current listening results"
+      >
+      </div>
+      <p id="beacon-live-summary" class="beacon-live-summary" aria-live="polite">
+        Loading the beacon map.
+      </p>
     </div>
 
     <noscript>

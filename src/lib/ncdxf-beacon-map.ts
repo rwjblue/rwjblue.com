@@ -72,12 +72,13 @@ export function createNcdxfBeaconMap(
       });
   });
 
-  const mapWidth = Math.max(256, element.clientWidth - 32);
-  const initialZoom = Math.max(
-    0,
-    Math.min(2.25, Math.floor(Math.log2(mapWidth / 256) * 4) / 4),
+  const beaconBounds = L.latLngBounds(
+    BEACON_POINTS.map((point) => [point.lat, point.lon] as L.LatLngTuple),
   );
-  map.setView([0, 8], initialZoom);
+  map.fitBounds(beaconBounds, {
+    padding: [22, 22],
+    maxZoom: 2.25,
+  });
   map.on("zoomend", render);
   render();
 

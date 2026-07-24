@@ -196,7 +196,12 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   assert.match(page, /href="\/radio\/beacons\/\?view=now"/);
   assert.match(page, /href="\/radio\/beacons\/\?view=scan"/);
   assert.match(page, /href="\/radio\/beacons\/\?view=path"/);
+  assert.match(page, /data-beacon-now-band=/);
   assert.match(page, /id="beacon-live-map"/);
+  assert.ok(
+    page.indexOf('class="beacon-tool-footer"') <
+      page.indexOf('class="beacon-live-map-shell"'),
+  );
   assert.match(page, /2026-07-23-learning-to-read-the-bands-with-ncdxf-beacons/);
   assert.match(page, /initNcdxfBeaconTool/);
   assert.match(client, /navigator\.geolocation/);
@@ -205,12 +210,15 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   assert.match(client, /beaconWindowAt/);
   assert.match(client, /window\.history\.pushState/);
   assert.match(client, /window\.addEventListener\("popstate"/);
+  assert.match(client, /searchParams\.set\(\s*"bands"/);
+  assert.match(client, /Keep at least one band selected/);
   assert.match(client, /beacon-power-/);
   assert.match(client, /createNcdxfBeaconMap\(liveMapElement/);
   assert.match(client, /readSavedOperatingGrid/);
   assert.match(sharedMap, /bindTooltip\(card/);
   assert.match(sharedMap, /bindPopup\(card/);
   assert.match(sharedMap, /beacon-observed-path/);
+  assert.match(sharedMap, /map\.fitBounds\(beaconBounds/);
   assert.match(operatingLocation, /radioTools\.operatingGrid/);
   assert.match(operatingLocation, /rbnSkimmers\.grid/);
   assert.match(operatingLocation, /ncdxfBeacons\.grid/);
