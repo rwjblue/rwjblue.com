@@ -43,6 +43,7 @@ const isActive = (href: string) =>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta id="theme-color" name="theme-color" content="#f7f4ee" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -67,6 +68,31 @@ const isActive = (href: string) =>
     <meta name="twitter:description" content={description} />
     {socialImage && <meta name="twitter:image" content={socialImage} />}
     {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+    <script is:inline>
+      (() => {
+        const storageKey = "rwjblue-theme";
+        const root = document.documentElement;
+        const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        let savedTheme = null;
+
+        try {
+          const storedTheme = window.localStorage.getItem(storageKey);
+          if (storedTheme === "light" || storedTheme === "dark") {
+            savedTheme = storedTheme;
+            root.dataset.theme = storedTheme;
+          }
+        } catch {
+          // A blocked storage API should not prevent system theme detection.
+        }
+
+        const resolvedTheme = savedTheme ?? (darkQuery.matches ? "dark" : "light");
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        themeColor?.setAttribute(
+          "content",
+          resolvedTheme === "dark" ? "#111719" : "#f7f4ee",
+        );
+      })();
+    </script>
     <title>{title}</title>
     <script
       defer
@@ -80,19 +106,25 @@ const isActive = (href: string) =>
         <a class="site-name" href="/" aria-label="Robert Jackson home">
           rwjblue / N1RWJ
         </a>
-        <nav class="site-nav" aria-label="Primary navigation">
-          {nav.map((item) => (
-            <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
-              {item.label}
+        <div class="site-header-actions">
+          <nav class="site-nav" aria-label="Primary navigation">
+            {nav.map((item) => (
+              <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
+            ))}
+            <a href="https://github.com/rwjblue" target="_blank" rel="noreferrer">
+              GitHub
             </a>
-          ))}
-          <a href="https://github.com/rwjblue" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a href="https://www.qrz.com/db/N1RWJ" target="_blank" rel="noreferrer">
-            QRZ
-          </a>
-        </nav>
+            <a href="https://www.qrz.com/db/N1RWJ" target="_blank" rel="noreferrer">
+              QRZ
+            </a>
+          </nav>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <span aria-hidden="true" class="theme-toggle-mark"></span>
+            <span data-theme-label>System</span>
+          </button>
+        </div>
       </header>
 
       <main>
@@ -111,5 +143,92 @@ const isActive = (href: string) =>
         <span>N1RWJ · rwjblue</span>
       </footer>
     </div>
+    <script>
+      const storageKey = "rwjblue-theme";
+      const root = document.documentElement;
+      const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+      const label = toggle?.querySelector<HTMLElement>("[data-theme-label]");
+      const modes = ["system", "light", "dark"] as const;
+      type ThemeMode = (typeof modes)[number];
+
+      const currentMode = (): ThemeMode => {
+        const theme = root.dataset.theme;
+        return theme === "light" || theme === "dark" ? theme : "system";
+      };
+
+      const resolvedMode = (): "light" | "dark" =>
+        currentMode() === "system"
+          ? darkQuery.matches
+            ? "dark"
+            : "light"
+          : (currentMode() as "light" | "dark");
+
+      const updateThemeUi = () => {
+        const mode = currentMode();
+        const resolved = resolvedMode();
+        const nextMode = modes[(modes.indexOf(mode) + 1) % modes.length];
+        const displayMode = mode[0].toUpperCase() + mode.slice(1);
+        const displayNext = nextMode[0].toUpperCase() + nextMode.slice(1);
+
+        if (toggle && label) {
+          toggle.hidden = false;
+          toggle.dataset.mode = mode;
+          toggle.setAttribute(
+            "aria-label",
+            `Theme: ${displayMode}${mode === "system" ? ` (${resolved})` : ""}. Activate to use ${displayNext} mode.`,
+          );
+          toggle.title = `Theme: ${displayMode}${mode === "system" ? ` (${resolved})` : ""}`;
+          label.textContent = displayMode;
+        }
+
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute("content", resolved === "dark" ? "#111719" : "#f7f4ee");
+      };
+
+      const setTheme = (mode: ThemeMode) => {
+        if (mode === "system") {
+          delete root.dataset.theme;
+        } else {
+          root.dataset.theme = mode;
+        }
+
+        try {
+          if (mode === "system") {
+            window.localStorage.removeItem(storageKey);
+          } else {
+            window.localStorage.setItem(storageKey, mode);
+          }
+        } catch {
+          // The control still works for this page when storage is unavailable.
+        }
+
+        updateThemeUi();
+        window.dispatchEvent(
+          new CustomEvent("themechange", {
+            detail: { mode, resolved: resolvedMode() },
+          }),
+        );
+      };
+
+      toggle?.addEventListener("click", () => {
+        const mode = currentMode();
+        setTheme(modes[(modes.indexOf(mode) + 1) % modes.length]);
+      });
+
+      darkQuery.addEventListener("change", () => {
+        if (currentMode() === "system") {
+          updateThemeUi();
+          window.dispatchEvent(
+            new CustomEvent("themechange", {
+              detail: { mode: "system", resolved: resolvedMode() },
+            }),
+          );
+        }
+      });
+
+      updateThemeUi();
+    </script>
   </body>
 </html>
