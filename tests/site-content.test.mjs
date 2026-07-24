@@ -290,7 +290,7 @@ test("notes provide social share metadata", () => {
   assert.match(layout, /name="twitter:card"/);
   assert.match(notePage, /description=\{note\.data\.summary\}/);
   assert.match(notePage, /socialTitle=\{note\.data\.title\}/);
-  assert.match(notePage, /share\.png\$\{note\.data\.beaconMap \? "\?v=3" : ""\}/);
+  assert.match(notePage, /share\.png\$\{note\.data\.beaconMap \? "\?v=4" : ""\}/);
   assert.match(notePage, /canonicalPath=\{`\/notes\/\$\{note\.id\}\/`\}/);
   assert.match(notePage, /\/images\/pota\/\$\{note\.id\}\/share\.png/);
   assert.match(notePage, /type="article"/);

@@ -133,10 +133,18 @@ async function renderNcdxfBeaconShareImage(note: CollectionEntry<"notes">) {
   const mapY = 96;
   const mapWidth = 540;
   const mapHeight = 327;
-  const bandLabels = ["20 M", "17 M", "15 M", "12 M", "10 M"]
+  const bandLabels = [
+    { band: "20 M", frequency: "14.100 MHz" },
+    { band: "17 M", frequency: "18.110 MHz" },
+    { band: "15 M", frequency: "21.150 MHz" },
+    { band: "12 M", frequency: "24.930 MHz" },
+    { band: "10 M", frequency: "28.200 MHz" },
+  ]
     .map(
-      (label, index) =>
-        `<text x="${mapX + 54 + index * 108}" y="459" text-anchor="middle" class="band-label">${label}</text>`,
+      ({ band, frequency }, index) => `
+        <text x="${mapX + 54 + index * 108}" y="452" text-anchor="middle" class="band-label">${band}</text>
+        <text x="${mapX + 54 + index * 108}" y="471" text-anchor="middle" class="band-frequency">${frequency}</text>
+      `,
     )
     .join("");
   const mapImage = await sharp(await readFile(NCDXF_WORLD_MAP))
@@ -152,7 +160,8 @@ async function renderNcdxfBeaconShareImage(note: CollectionEntry<"notes">) {
         .title { font: 800 53px Inter, ui-sans-serif, system-ui, sans-serif; fill: #172026; }
         .meta { font: 700 15px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 1px; fill: #5f6f79; }
         .map-title { font: 800 15px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #78b494; letter-spacing: 1.5px; }
-        .band-label { font: 800 13px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #f7f4ee; letter-spacing: 1px; }
+        .band-label { font: 800 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #f7f4ee; letter-spacing: 1px; }
+        .band-frequency { font: 700 10px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #aebbb4; letter-spacing: 0.2px; }
         .map-caption { font: 800 14px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #f7f4ee; letter-spacing: 1px; }
       </style>
       <rect width="1200" height="630" fill="#f7f4ee" />
