@@ -96,6 +96,15 @@ versions. `preview_urls` is enabled in `wrangler.jsonc`, so uploaded Worker
 versions can be viewed at generated `workers.dev` preview URLs even though the
 production `workers.dev` route is disabled.
 
+Draft notes are excluded from ordinary builds. To include `visibility: draft`
+notes in an intentional non-production preview, set the build-time environment
+variable `INCLUDE_DRAFTS=true` for that preview build. Draft-enabled previews
+show a working-drafts section on `/notes/`, add a visible banner to each draft,
+and emit `noindex, nofollow` metadata. Never set this variable on the production
+branch. Cloudflare preview URLs are public unless Cloudflare Access is enabled.
+Note visibility does not filter files in `public/`; Astro copies those assets
+into every build.
+
 Workers Builds does not read `build.command` from `wrangler.jsonc`; keep the
 dashboard build command set to `npm run build`.
 

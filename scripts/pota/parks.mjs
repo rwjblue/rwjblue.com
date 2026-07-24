@@ -67,6 +67,14 @@ async function readNotes() {
       continue;
     }
 
+    const visibility =
+      readFrontmatterScalar(frontmatter.groups.frontmatter, "visibility") ||
+      "public";
+
+    if (visibility !== "public") {
+      continue;
+    }
+
     notes.push({
       id: file.replace(/\.md$/, ""),
       title: readFrontmatterScalar(frontmatter.groups.frontmatter, "title"),

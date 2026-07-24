@@ -40,6 +40,7 @@ Use the current collection schema from `src/content.config.ts`:
 title: A clear reader-facing title
 date: YYYY-MM-DD
 summary: "One concise sentence that works in indexes and link previews."
+visibility: draft # omit for public notes
 shareImage: /images/<topic>/<slug>/share.png # optional
 tags:
   - relevant-tag
@@ -49,6 +50,26 @@ tags:
 `title`, `date`, and `summary` are required. Keep tags lowercase and reuse the
 site's established vocabulary. Specialized notes may also use `contactMap` or
 `boundaryMap`; follow the owning feature's guidance before adding them.
+
+`visibility` defaults to `public` and supports three states:
+
+- `public` appears everywhere.
+- `unlisted` receives a production route with `noindex` metadata but is omitted
+  from indexes, RSS, and generated POTA data. Treat it as public to anyone who
+  has or guesses the URL.
+- `draft` renders during `mise run dev` and opt-in draft preview builds, but is
+  omitted from normal production route generation and all public discovery
+  surfaces.
+
+Keep drafts in `src/content/notes/` so they use the real note layout. Drafts
+appear in a preview-only section on the local notes index. Set
+`INCLUDE_DRAFTS=true` for an explicit static preview build. Change visibility
+to `public` only when the publication checklist is complete.
+
+Files under `public/` are copied into every build regardless of note
+visibility. Do not put sensitive draft-only material there. Keep private assets
+off the production branch or introduce an explicit processed-asset workflow
+before relying on draft visibility for them.
 
 ## Editorial Standard
 
@@ -106,6 +127,7 @@ Do not add another frontmatter field for a hero or preview image. Use
 ## Completion Checklist
 
 - Frontmatter matches `src/content.config.ts`.
+- Visibility matches the intended publication state.
 - The filename, asset directory, title, summary, and tags agree.
 - Claims and unresolved questions accurately reflect what was tested.
 - Links, image paths, and alt text are valid.

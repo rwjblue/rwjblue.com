@@ -731,6 +731,18 @@ p {
   margin-bottom: 16px;
 }
 
+.draft-index {
+  max-width: 780px;
+  padding: 24px;
+  margin-bottom: 40px;
+  border: 1px solid var(--line-strong);
+  background: var(--rust-wash);
+}
+
+.draft-index .section-heading p:last-child {
+  margin-bottom: 0;
+}
+
 .about-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
@@ -890,6 +902,31 @@ p {
   width: 100%;
   max-width: 760px;
   overflow-wrap: anywhere;
+}
+
+.note-visibility {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  margin-bottom: 28px;
+  border: 1px solid var(--line-strong);
+  background: var(--status-info-bg);
+  color: var(--status-info-ink);
+}
+
+.note-visibility--draft {
+  background: var(--status-warning-bg);
+  color: var(--status-warning-ink);
+}
+
+.note-visibility strong {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.note-visibility span {
+  line-height: 1.5;
 }
 
 .document header {

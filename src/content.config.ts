@@ -8,6 +8,7 @@ const notes = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     summary: z.string(),
+    visibility: z.enum(["public", "unlisted", "draft"]).default("public"),
     shareImage: z.string().optional(),
     beaconMap: z.boolean().optional(),
     contactMap: z.string().optional(),

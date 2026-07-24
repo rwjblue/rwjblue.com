@@ -1,9 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { formatDate, displayTags } from "../../lib/format";
+import { getPublicNotes } from "../../lib/notes";
 
-const radioNotes = (await getCollection("notes"))
+const radioNotes = (await getPublicNotes())
   .filter((note) => note.data.tags.includes("radio"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---

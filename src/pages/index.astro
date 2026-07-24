@@ -4,9 +4,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import riPotaTrackerData from "../data/pota/ri-tracker.json";
 import roveToFlData from "../data/pota/rove-to-fl.json";
 import { formatDate } from "../lib/format";
+import { getPublicNotes } from "../lib/notes";
 import { effectiveProjectUpdatedDate } from "../lib/project-updates";
 
-const allNotes = (await getCollection("notes")).sort(
+const allNotes = (await getPublicNotes()).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 

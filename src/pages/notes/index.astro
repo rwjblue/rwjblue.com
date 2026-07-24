@@ -1,9 +1,12 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { formatDate, displayTags } from "../../lib/format";
+import { getDraftNotes, getPublicNotes } from "../../lib/notes";
 
-const notes = (await getCollection("notes")).sort(
+const notes = (await getPublicNotes()).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const drafts = (await getDraftNotes()).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---
@@ -17,6 +20,36 @@ const notes = (await getCollection("notes")).sort(
       being able to find again.
     </p>
   </section>
+
+  {
+    drafts.length > 0 && (
+      <section class="draft-index" aria-labelledby="draft-index-title">
+        <div class="section-heading">
+          <p class="section-label">Preview only</p>
+          <h2 id="draft-index-title">Working drafts</h2>
+          <p>
+            These notes are available in this preview environment but are not
+            included in the production site.
+          </p>
+        </div>
+        <ol class="entry-list full">
+          {drafts.map((note) => (
+            <li>
+              <time datetime={note.data.date.toISOString()}>
+                {formatDate(note.data.date)}
+              </time>
+              <a href={`/notes/${note.id}/`}>{note.data.title}</a>
+              <p>{note.data.summary}</p>
+              <div class="tags">
+                <em>Draft</em>
+                {displayTags(note.data.tags).map((tag) => <span>{tag}</span>)}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
 
   <ol class="entry-list full">
     {

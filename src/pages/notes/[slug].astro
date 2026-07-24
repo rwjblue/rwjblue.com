@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GeoJsonBoundaryMap from "../../components/GeoJsonBoundaryMap.astro";
 import NcdxfBeaconMap from "../../components/NcdxfBeaconMap.astro";
@@ -7,9 +7,10 @@ import PotaContactMap from "../../components/PotaContactMap.astro";
 import TagHints from "../../components/TagHints.astro";
 import { contactMapForNote } from "../../data/pota/contact-maps";
 import { formatDate, displayTags } from "../../lib/format";
+import { getRenderableNotes } from "../../lib/notes";
 
 export async function getStaticPaths() {
-  const notes = await getCollection("notes");
+  const notes = await getRenderableNotes();
   return notes.map((note) => ({ params: { slug: note.id }, props: { note } }));
 }
 
@@ -23,6 +24,13 @@ const shareImage = shouldUseGeneratedShareImage
   : note.data.shareImage ??
     `/notes/${note.id}/share.png${note.data.beaconMap ? "?v=4" : ""}`;
 const shareImageAlt = `${note.data.title} social share image`;
+const isPreview = note.data.visibility !== "public";
+const visibilityLabel =
+  note.data.visibility === "draft" ? "Draft preview" : "Unlisted note";
+const visibilityDescription =
+  note.data.visibility === "draft"
+    ? "This working draft is only available in draft-enabled preview environments."
+    : "This note is available by direct URL but is omitted from indexes, feeds, and search results.";
 ---
 
 <BaseLayout
@@ -33,8 +41,17 @@ const shareImageAlt = `${note.data.title} social share image`;
   image={shareImage}
   imageAlt={shareImageAlt}
   type="article"
+  robots={isPreview ? "noindex, nofollow" : undefined}
 >
   <article class="document">
+    {
+      isPreview && (
+        <aside class={`note-visibility note-visibility--${note.data.visibility}`}>
+          <strong>{visibilityLabel}</strong>
+          <span>{visibilityDescription}</span>
+        </aside>
+      )
+    }
     <header>
       <p class="eyebrow">Note</p>
       <h1>{note.data.title}</h1>

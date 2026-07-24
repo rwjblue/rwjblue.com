@@ -2,6 +2,7 @@
 title: A Portable OCFD Experiment with Reliance Antennas
 date: 2026-07-21
 summary: "Why a compact OCFD fits my portable antenna toolkit, how Reliance helped investigate the first wire, and what an experimental 80/20 replacement changed."
+visibility: draft
 shareImage: /images/radio/2026-07-21-reliance-ocfd-replacement-wire-testing/original-transformer-closeup.jpg
 tags:
   - radio
@@ -12,10 +13,9 @@ tags:
 <!--
 UNPUBLISHED WORKING DRAFT
 
-This file intentionally lives outside src/content/notes so it cannot appear on
-the site. The likely publication target is:
-
-src/content/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md
+The `visibility: draft` frontmatter keeps this note out of production builds,
+indexes, feeds, and generated POTA data while allowing it to render in preview
+environments.
 
 Before publishing, complete the orange 64/36 comparison and on-air testing,
 update the measurements and comparison chart, resolve the remaining questions,

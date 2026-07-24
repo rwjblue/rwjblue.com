@@ -1,9 +1,9 @@
 import type { APIRoute, GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
 import { renderNoteShareImage } from "../../../lib/note-share-image";
+import { getRenderableNotes } from "../../../lib/notes";
 
 export const getStaticPaths = (async () => {
-  const notes = await getCollection("notes");
+  const notes = await getRenderableNotes();
 
   return notes
     .filter(

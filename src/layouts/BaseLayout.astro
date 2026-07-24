@@ -9,6 +9,7 @@ interface Props {
   image?: string;
   imageAlt?: string;
   type?: "website" | "article";
+  robots?: "noindex, nofollow";
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   image,
   imageAlt,
   type = "website",
+  robots,
 } = Astro.props;
 
 const absoluteUrl = (path: string) => new URL(path, Astro.url).toString();
@@ -45,6 +47,7 @@ const isActive = (href: string) =>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta id="theme-color" name="theme-color" content="#f7f4ee" />
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link

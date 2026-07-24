@@ -2,6 +2,7 @@
 title: Helping Rhode Island Show Up for America250 as W1AW/1
 date: 2026-07-28
 summary: "Using sustainable CW, Phone, and FT8 sessions to help a small Rhode Island operator group provide dependable W1AW/1 coverage."
+visibility: draft
 tags:
   - radio
   - field-notes
@@ -13,10 +14,9 @@ tags:
 <!--
 UNPUBLISHED WORKING DRAFT
 
-This file intentionally lives outside src/content/notes so it cannot appear on
-the site. The likely publication target is:
-
-src/content/notes/2026-07-28-operating-w1aw-1-for-america250.md
+The `visibility: draft` frontmatter keeps this note out of production builds,
+indexes, feeds, and generated POTA data while allowing it to render in preview
+environments.
 
 Before publishing, remove the working journal, source notes, private links,
 and this comment. Confirm the final title, summary, tags, date, and equipment.
@@ -377,5 +377,5 @@ depend on the temporary attachment or this conversation.
    on continuously. Keep the tone constructive toward the coordinator and the
    other volunteers.
 8. Remove working-only sections and private links.
-9. Move the result into `src/content/notes/`, add selected sanitized assets,
-   and run `mise run check` and `mise run build` before publication.
+9. Add selected sanitized assets, change `visibility` to `public`, and run
+   `mise run check` and `mise run build` before publication.

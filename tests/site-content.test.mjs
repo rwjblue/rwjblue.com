@@ -33,6 +33,8 @@ test("content collections support notes and updated projects", () => {
   assert.match(config, /projects/);
   assert.match(config, /updated/);
   assert.match(config, /shareImage/);
+  assert.match(config, /visibility/);
+  assert.match(config, /\["public", "unlisted", "draft"\]/);
   assert.doesNotMatch(config, /shareImageH[e]ro/);
   assert.match(blackHutNote, /shareImage:/);
   assert.doesNotMatch(blackHutNote, /shareImageH[e]ro:/);
@@ -100,7 +102,7 @@ test("primary navigation omits now", () => {
 test("radio page keeps static context, links shack notes, and lists radio notes", () => {
   const radio = read("src/pages/radio/index.astro");
 
-  assert.match(radio, /getCollection\("notes"\)/);
+  assert.match(radio, /getPublicNotes\(\)/);
   assert.match(radio, /note\.data\.tags\.includes\("radio"\)/);
   assert.match(radio, /Radio notes/);
   assert.match(radio, /href=\{`\/notes\/\$\{note\.id\}\/`\}/);
@@ -258,13 +260,50 @@ test("rss endpoint publishes notes with canonical domains", () => {
   const rssEndpoint = read("src/pages/rss.xml.ts");
 
   assert.match(rssEndpoint, /@astrojs\/rss/);
-  assert.match(rssEndpoint, /getCollection\("notes"\)/);
+  assert.match(rssEndpoint, /getPublicNotes\(\)/);
   assert.match(rssEndpoint, /markdown-it/);
   assert.match(rssEndpoint, /sanitize-html/);
   assert.match(rssEndpoint, /note\.data\.tags\.includes\("radio"\)/);
   assert.match(rssEndpoint, /https:\/\/n1rwj\.com/);
   assert.match(rssEndpoint, /https:\/\/rwjblue\.com/);
   assert.doesNotMatch(rssEndpoint, /getCollection\("projects"\)/);
+});
+
+test("note visibility keeps drafts previewable without publishing them", () => {
+  const notesLibrary = read("src/lib/notes.ts");
+  const notesIndex = read("src/pages/notes/index.astro");
+  const notePage = read("src/pages/notes/[slug].astro");
+  const layout = read("src/layouts/BaseLayout.astro");
+  const parksScript = read("scripts/pota/parks.mjs");
+  const trackerScript = read("scripts/pota/ri-tracker.mjs");
+  const buildVerifier = read("scripts/verify-note-visibility.mjs");
+  const relianceDraft = read(
+    "src/content/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md",
+  );
+  const america250Draft = read(
+    "src/content/notes/2026-07-28-operating-w1aw-1-for-america250.md",
+  );
+
+  assert.match(notesLibrary, /getPublicNotes/);
+  assert.match(notesLibrary, /getRenderableNotes/);
+  assert.match(notesLibrary, /getDraftNotes/);
+  assert.match(notesLibrary, /import\.meta\.env\.DEV/);
+  assert.match(notesLibrary, /import\.meta\.env\.INCLUDE_DRAFTS === "true"/);
+  assert.match(notesIndex, /Working drafts/);
+  assert.match(notesIndex, /getPublicNotes\(\)/);
+  assert.match(notePage, /getRenderableNotes\(\)/);
+  assert.match(notePage, /Draft preview/);
+  assert.match(notePage, /Unlisted note/);
+  assert.match(notePage, /robots=\{isPreview \? "noindex, nofollow"/);
+  assert.match(layout, /name="robots"/);
+  assert.match(parksScript, /visibility !== "public"/);
+  assert.match(trackerScript, /visibility !== "public"/);
+  assert.match(buildVerifier, /INCLUDE_DRAFTS/);
+  assert.match(buildVerifier, /noindex, nofollow/);
+  assert.match(relianceDraft, /visibility: draft/);
+  assert.match(america250Draft, /visibility: draft/);
+  assert.ok(!existsSync("drafts/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md"));
+  assert.ok(!existsSync("drafts/notes/2026-america250-w1aw-1.md"));
 });
 
 test("layout advertises the notes rss feed", () => {
