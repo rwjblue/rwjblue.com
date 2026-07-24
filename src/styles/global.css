@@ -206,7 +206,7 @@ a {
 
 .site-header-actions {
   display: flex;
-  gap: 14px;
+  gap: 0;
   align-items: center;
   justify-content: flex-end;
 }
@@ -242,6 +242,15 @@ a {
   color: var(--ink);
 }
 
+.theme-control {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  padding-left: 20px;
+  margin-left: 20px;
+  border-left: 1px solid var(--line);
+}
+
 .theme-toggle {
   display: inline-flex;
   flex: 0 0 auto;
@@ -273,29 +282,28 @@ a {
   outline-offset: 2px;
 }
 
-.theme-toggle-mark {
-  position: relative;
-  display: inline-block;
-  width: 13px;
-  height: 13px;
-  overflow: hidden;
-  border: 2px solid currentColor;
-  border-radius: 50%;
+.theme-toggle-icon,
+.theme-toggle-icon svg {
+  display: block;
+  width: 15px;
+  height: 15px;
 }
 
-.theme-toggle-mark::after {
-  position: absolute;
-  inset: -2px -2px -2px 50%;
-  background: currentColor;
-  content: "";
+.theme-toggle-icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
 
-.theme-toggle[data-mode="light"] .theme-toggle-mark::after {
+.theme-toggle-icon [data-theme-icon] {
   display: none;
 }
 
-.theme-toggle[data-mode="dark"] .theme-toggle-mark {
-  background: currentColor;
+.theme-toggle[data-resolved="light"] [data-theme-icon="light"],
+.theme-toggle[data-resolved="dark"] [data-theme-icon="dark"] {
+  display: block;
 }
 
 main {
@@ -2572,6 +2580,11 @@ p {
     width: 100%;
     align-items: flex-start;
     justify-content: space-between;
+  }
+
+  .theme-control {
+    padding-left: 12px;
+    margin-left: 12px;
   }
 
   .site-nav {
