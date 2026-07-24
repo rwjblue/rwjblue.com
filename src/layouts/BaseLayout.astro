@@ -3,6 +3,7 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  socialTitle?: string;
   description?: string;
   canonicalPath?: string;
   image?: string;
@@ -12,6 +13,7 @@ interface Props {
 
 const {
   title = "Robert Jackson / rwjblue / N1RWJ",
+  socialTitle = title,
   description = "Robert Jackson, rwjblue, and N1RWJ. Software, open source, amateur radio, notes, and experiments.",
   canonicalPath = Astro.url.pathname,
   image,
@@ -52,7 +54,7 @@ const isActive = (href: string) =>
     />
     <meta property="og:site_name" content="Robert Jackson / rwjblue / N1RWJ" />
     <meta property="og:type" content={type} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={socialTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     {socialImage && <meta property="og:image" content={socialImage} />}
@@ -61,7 +63,7 @@ const isActive = (href: string) =>
       name="twitter:card"
       content={socialImage ? "summary_large_image" : "summary"}
     />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={socialTitle} />
     <meta name="twitter:description" content={description} />
     {socialImage && <meta name="twitter:image" content={socialImage} />}
     {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}

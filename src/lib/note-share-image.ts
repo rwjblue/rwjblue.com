@@ -5,6 +5,35 @@ import { NCDXF_BEACONS } from "./ncdxf-beacons.ts";
 
 const WIDTH = 1200;
 const HEIGHT = 630;
+const WORLD_LAND_POLYGONS = [
+  [
+    [-168, 72], [-145, 70], [-125, 58], [-105, 54], [-85, 50],
+    [-62, 48], [-72, 32], [-88, 18], [-104, 20], [-118, 32],
+    [-128, 48], [-152, 58],
+  ],
+  [
+    [-82, 12], [-66, 8], [-50, -5], [-36, -12], [-48, -30],
+    [-61, -55], [-72, -42], [-78, -18],
+  ],
+  [
+    [-52, 82], [-24, 76], [-18, 62], [-42, 58], [-58, 68],
+  ],
+  [
+    [-10, 36], [3, 48], [24, 61], [52, 69], [88, 75], [122, 68],
+    [158, 58], [178, 50], [154, 38], [130, 32], [120, 18],
+    [100, 7], [82, 20], [62, 27], [44, 35], [27, 38], [12, 42],
+  ],
+  [
+    [-18, 35], [4, 37], [28, 31], [49, 12], [42, -11],
+    [30, -34], [10, -36], [-5, -20], [-15, 5],
+  ],
+  [
+    [112, -10], [134, -9], [153, -20], [149, -39], [124, -35],
+    [113, -21],
+  ],
+  [[47, -13], [51, -18], [48, -26], [44, -21]],
+  [[166, -34], [179, -42], [173, -47], [164, -40]],
+] as const;
 
 function escapeXml(value: string) {
   return value
@@ -127,9 +156,9 @@ async function renderNcdxfBeaconShareImage(note: CollectionEntry<"notes">) {
   const titleStartY = titleLines.length <= 2 ? 244 : 182;
   const tags = note.data.tags.slice(0, 4).join(" · ").toUpperCase();
   const mapX = 650;
-  const mapY = 86;
+  const mapY = 116;
   const mapWidth = 510;
-  const mapHeight = 424;
+  const mapHeight = 270;
   const gridLines = [
     ...[-120, -60, 0, 60, 120].map((lon) => {
       const x = projectLongitude(lon, mapX, mapWidth);
@@ -140,20 +169,31 @@ async function renderNcdxfBeaconShareImage(note: CollectionEntry<"notes">) {
       return `<path d="M${mapX} ${y} H${mapX + mapWidth}" />`;
     }),
   ].join("");
-  const markers = NCDXF_BEACONS.map((beacon, index) => {
+  const land = WORLD_LAND_POLYGONS.map((polygon) => {
+    const points = polygon
+      .map(([lon, lat]) => {
+        const x = projectLongitude(lon, mapX, mapWidth);
+        const y = projectLatitude(lat, mapY, mapHeight);
+        return `${x},${y}`;
+      })
+      .join(" ");
+    return `<polygon points="${points}" />`;
+  }).join("");
+  const markers = NCDXF_BEACONS.map((beacon) => {
     const point = gridToLatLon(beacon.grid);
     if (!point) return "";
     const x = projectLongitude(point.lon, mapX, mapWidth);
     const y = projectLatitude(point.lat, mapY, mapHeight);
-    const labelY = index % 2 === 0 ? y - 10 : y + 18;
-    const textAnchor = x > mapX + mapWidth - 55 ? "end" : "start";
-    const labelX = textAnchor === "end" ? x - 7 : x + 7;
-
     return `
-      <circle cx="${x}" cy="${y}" r="6" class="${beacon.status === "off" ? "map-off" : "map-point"}" />
-      <text x="${labelX}" y="${labelY}" text-anchor="${textAnchor}" class="map-label">${escapeXml(beacon.call)}</text>
+      <circle cx="${x}" cy="${y}" r="7" class="${beacon.status === "off" ? "map-off" : "map-point"}" />
     `;
   }).join("");
+  const bandLabels = ["20 M", "17 M", "15 M", "12 M", "10 M"]
+    .map(
+      (label, index) =>
+        `<text x="${mapX + 25 + index * 103}" y="446" text-anchor="middle" class="band-label">${label}</text>`,
+    )
+    .join("");
 
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
@@ -162,10 +202,12 @@ async function renderNcdxfBeaconShareImage(note: CollectionEntry<"notes">) {
         .eyebrow { font: 800 17px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 1.6px; fill: #2f6f4e; }
         .title { font: 800 53px Inter, ui-sans-serif, system-ui, sans-serif; fill: #172026; }
         .meta { font: 700 15px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 1px; fill: #5f6f79; }
-        .map-grid { fill: none; stroke: #60736a; stroke-width: 1.5; opacity: 0.45; }
+        .map-grid { fill: none; stroke: #60736a; stroke-width: 1.2; opacity: 0.28; }
+        .map-land { fill: #35464b; stroke: #60736a; stroke-width: 1.4; }
         .map-point { fill: #d98c4a; stroke: #f7f4ee; stroke-width: 2; }
         .map-off { fill: #8a4b2b; stroke: #f7f4ee; stroke-width: 2; }
-        .map-label { font: 800 10px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #f7f4ee; }
+        .map-title { font: 800 15px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #78b494; letter-spacing: 1.5px; }
+        .band-label { font: 800 13px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #f7f4ee; letter-spacing: 1px; }
         .map-caption { font: 800 14px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #f7f4ee; letter-spacing: 1px; }
       </style>
       <rect width="1200" height="630" fill="#f7f4ee" />
@@ -178,10 +220,13 @@ async function renderNcdxfBeaconShareImage(note: CollectionEntry<"notes">) {
       <line x1="62" y1="558" x2="570" y2="558" stroke="#c5ccc4" stroke-width="2" />
       <text x="62" y="592" class="meta">${escapeXml(tags || "RADIO")}</text>
 
+      <text x="${mapX}" y="72" class="map-title">NCDXF / IARU WORLDWIDE BEACON NETWORK</text>
       <g class="map-grid">${gridLines}</g>
+      <g class="map-land">${land}</g>
       ${markers}
-      <text x="${mapX}" y="560" class="map-caption">18 SYNCHRONIZED LOCATIONS · FIVE HF BANDS</text>
-      <text x="1158" y="592" text-anchor="end" class="brand" fill="#f7f4ee">RWJBLUE.COM</text>
+      ${bandLabels}
+      <text x="${mapX}" y="504" class="map-caption">18 LOCATIONS · 10-SECOND SLOTS · 3-MINUTE CYCLE</text>
+      <text x="1158" y="592" text-anchor="end" class="brand" fill="#f7f4ee">N1RWJ · RWJBLUE</text>
     </svg>
   `;
 

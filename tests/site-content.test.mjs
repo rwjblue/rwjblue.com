@@ -227,6 +227,7 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   assert.match(map, /class="beacon-station-list"/);
   assert.match(notePage, /note\.data\.beaconMap && <NcdxfBeaconMap/);
   assert.match(shareImage, /renderNcdxfBeaconShareImage/);
+  assert.match(shareImage, /WORLD_LAND_POLYGONS/);
   assert.match(note, /beaconMap: true/);
   assert.match(note, /\[NCDXF Beacon Guide\]\(\/radio\/beacons\/\)/);
   assert.match(note, /I have not completed a full field test yet/);
@@ -280,10 +281,13 @@ test("notes provide social share metadata", () => {
 
   assert.match(layout, /rel="canonical"/);
   assert.match(layout, /property="og:title"/);
+  assert.match(layout, /content=\{socialTitle\}/);
   assert.match(layout, /property="og:description"/);
   assert.match(layout, /property="og:image"/);
   assert.match(layout, /name="twitter:card"/);
   assert.match(notePage, /description=\{note\.data\.summary\}/);
+  assert.match(notePage, /socialTitle=\{note\.data\.title\}/);
+  assert.match(notePage, /share\.png\$\{note\.data\.beaconMap \? "\?v=2" : ""\}/);
   assert.match(notePage, /canonicalPath=\{`\/notes\/\$\{note\.id\}\/`\}/);
   assert.match(notePage, /\/images\/pota\/\$\{note\.id\}\/share\.png/);
   assert.match(notePage, /type="article"/);
