@@ -19,9 +19,12 @@ import {
   encodeRbnNodeCache,
   rbnCacheStatus,
 } from "./rbn-node-cache";
+import {
+  readSavedOperatingGrid,
+  saveOperatingGrid,
+} from "./operating-location.ts";
 
 const RBN_NODES_URL = "https://www.reversebeacon.net/nodes/detail_json.php";
-const STORAGE_GRID = "rbnSkimmers.grid";
 const STORAGE_NODES = "rbnSkimmers.nodes.v1";
 const STORAGE_TARGETS = "rbnSkimmers.targets";
 const RESULT_LIMIT = 10;
@@ -52,7 +55,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   let nodesRefreshing = false;
 
   const initialUrlGrid = gridFromUrlSearch(window.location.search);
-  const initialGrid = initialUrlGrid ?? readStorage(STORAGE_GRID);
+  const initialGrid = initialUrlGrid ?? readSavedOperatingGrid();
   const cachedNodes = decodeRbnNodeCache(readStorage(STORAGE_NODES));
   if (cachedNodes) {
     nodes = cachedNodes.nodes;
@@ -185,7 +188,7 @@ export function initRbnSkimmerTool(rootId = "rbn-skimmer-tool"): void {
   function setOperatingLocation(point: LatLon, grid: string, message: string): void {
     origin = point;
     gridInput.value = grid;
-    writeStorage(STORAGE_GRID, grid);
+    saveOperatingGrid(grid);
     writeGridToUrl(grid);
     setStatus(message);
     render();

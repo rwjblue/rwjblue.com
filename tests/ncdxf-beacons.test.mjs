@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { gridToLatLon } from "../src/lib/geo.ts";
 import {
   NCDXF_BANDS,
   NCDXF_BEACONS,
@@ -18,6 +19,42 @@ test("NCDXF data defines the five bands and eighteen scheduled beacons", () => {
     NCDXF_BANDS.map((band) => band.frequencyMHz),
     [14.1, 18.11, 21.15, 24.93, 28.2],
   );
+});
+
+test("official beacon grids resolve to their expected world locations", () => {
+  const expected = {
+    "4U1UN": [40.771, -73.958],
+    VE8AT: [68.313, -133.458],
+    W6WX: [37.146, -121.875],
+    KH6RS: [20.771, -156.375],
+    ZL6B: [-41.063, 175.625],
+    VK6RBP: [-32.104, 116.042],
+    JA2IGY: [34.438, 136.792],
+    RR9O: [54.979, 82.875],
+    VR2B: [22.271, 114.125],
+    "4S7B": [6.896, 79.875],
+    ZS6DN: [-26.646, 27.958],
+    "5Z4B": [-1.271, 36.625],
+    "4X6TU": [32.063, 34.792],
+    OH2B: [60.313, 24.375],
+    CS3B: [32.813, -17.208],
+    LU4AA: [-34.604, -58.375],
+    OA4B: [-12.063, -76.958],
+    YV5B: [10.146, -66.875],
+  };
+
+  const resolved = Object.fromEntries(
+    NCDXF_BEACONS.map((beacon) => {
+      const point = gridToLatLon(beacon.grid);
+      assert.ok(point, `${beacon.call} should have a valid grid`);
+      return [
+        beacon.call,
+        [Number(point.lat.toFixed(3)), Number(point.lon.toFixed(3))],
+      ];
+    }),
+  );
+
+  assert.deepEqual(resolved, expected);
 });
 
 test("transmissionAt follows the staggered ten-second schedule", () => {

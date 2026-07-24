@@ -89,17 +89,21 @@ result.
 ### Radios, timing, and antennas
 
 The first beacon was custom hardware, followed by a generation built around the
-Kenwood TS-120. For the 1995 five-band network, Kenwood donated 16 TS-50
-transceivers. Those stations paired a TS-50 with a custom controller, GPS
-timing, and generally a Cushcraft MA5V multiband vertical.
+[Kenwood TS-120S](https://www.rigpix.com/kenwood/ts120s.htm). For the 1995
+five-band network, Kenwood donated 16
+[TS-50S transceivers](https://www.rigpix.com/kenwood/ts50s.htm). Those stations
+paired a TS-50S with a custom controller, GPS timing, and generally a
+[Cushcraft MA5V multiband vertical](https://www.manuals.repeater-builder.com/Cushcraft/MA-5VA/MA-5VA.pdf).
 
 The network is no longer perfectly uniform. Aging TS-50s and increasingly
 difficult controller repairs led to the open-source
 [Beacon Controller 2.0](https://www.ncdxf.org/beacon/beaconcontroller.html),
-an Arduino-based design used with Icom IC-7200 radios. The first beta system
-went to W6WX in 2015 and the second to KH6RS in 2016. Aging MA5V antennas have
-also driven replacement work, including a dual-band discone design now used at
-W6WX.
+an Arduino-based design used with
+[Icom IC-7200 radios](https://www.rigpix.com/icom/ic7200.htm). The first beta
+system went to W6WX in 2015 and the second to KH6RS in 2016. Aging MA5V antennas
+have also driven replacement work, including an
+[NCDXF dual-band discone design](https://wavenodedevelop.com/wp-content/uploads/2019/02/NCDXF-Beacon-Replacement-Antenna-Summary.pdf)
+now used at W6WX.
 
 I could not find a reliable current radio-and-antenna inventory for every
 location. NCDXF's

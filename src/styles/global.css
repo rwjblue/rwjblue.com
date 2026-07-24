@@ -3619,21 +3619,90 @@ p {
   font-size: 0.58rem;
 }
 
-.beacon-live-map .leaflet-tooltip {
+.beacon-live-map .beacon-map-card-shell {
+  padding: 10px 12px;
   border: 1px solid var(--line-strong);
+  border-radius: 2px;
   background: var(--panel);
   color: var(--ink);
   font-family:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     monospace;
-  font-size: 0.67rem;
-  font-weight: 800;
+  font-size: 0.72rem;
   box-shadow: none;
 }
 
-.beacon-live-map .beacon-live-label {
-  border-color: var(--green);
+.beacon-live-map .beacon-map-popup-shell .leaflet-popup-content-wrapper {
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: var(--panel);
+  box-shadow: 0 4px 18px rgb(23 32 38 / 16%);
+}
+
+.beacon-live-map .beacon-map-popup-shell .leaflet-popup-content {
+  margin: 10px 12px;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.72rem;
+}
+
+.beacon-live-map .beacon-map-popup-shell .leaflet-popup-tip {
+  background: var(--panel);
+}
+
+.beacon-map-card {
+  display: grid;
+  gap: 3px;
+  line-height: 1.35;
+}
+
+.beacon-map-card > * {
+  display: block;
+}
+
+.beacon-map-card strong {
+  color: var(--ink);
+  font-size: 0.82rem;
+}
+
+.beacon-map-card span {
+  color: var(--muted);
+}
+
+.beacon-map-label-marker {
+  width: max-content !important;
+  height: 0 !important;
+  background: transparent;
+}
+
+.beacon-map-label-marker span {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: max-content;
+  max-width: 180px;
+  padding: 4px 6px;
+  transform: translateY(-50%);
+  border: 1px solid var(--green);
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
   color: var(--green);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.67rem;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.beacon-map-label-marker.is-left span {
+  right: 10px;
+  left: auto;
+}
+
+.beacon-observed-path {
+  stroke-linecap: round;
 }
 
 .beacon-live-summary {
@@ -4139,7 +4208,7 @@ p {
     min-height: 300px;
   }
 
-  .beacon-live-map .beacon-live-label {
+  .beacon-map-label-marker {
     display: none;
   }
 
@@ -4275,35 +4344,6 @@ p {
   min-height: 460px;
   border: 1px solid var(--line-strong);
   background: var(--panel);
-}
-
-.beacon-network-map .leaflet-popup-content {
-  display: grid;
-  gap: 4px;
-  min-width: 190px;
-  margin: 10px 12px;
-}
-
-.beacon-network-map .leaflet-popup-content strong,
-.beacon-network-map .leaflet-popup-content span {
-  display: block;
-  line-height: 1.35;
-}
-
-.beacon-network-map .leaflet-popup-content span {
-  color: var(--muted);
-  font-size: 0.84rem;
-}
-
-.beacon-network-map .leaflet-tooltip {
-  border: 1px solid var(--line-strong);
-  background: var(--panel);
-  color: var(--ink);
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    monospace;
-  font-size: 0.74rem;
-  font-weight: 800;
 }
 
 .beacon-station-list {

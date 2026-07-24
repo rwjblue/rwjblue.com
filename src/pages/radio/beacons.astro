@@ -88,6 +88,25 @@ const statusDate = new Intl.DateTimeFormat("en-US", {
       </a>
     </nav>
 
+    <div class="beacon-live-map-shell">
+      <div class="beacon-live-map-heading">
+        <p id="beacon-map-kicker" class="section-label">Worldwide now</p>
+        <p id="beacon-map-status">
+          <span class="beacon-live-pulse" aria-hidden="true"></span>
+          Five scheduled transmitters · one on each band
+        </p>
+      </div>
+      <div
+        id="beacon-live-map"
+        class="beacon-live-map"
+        aria-label="World map of NCDXF beacon stations and current listening results"
+      >
+      </div>
+      <p id="beacon-live-summary" class="beacon-live-summary" aria-live="polite">
+        Loading the beacon map.
+      </p>
+    </div>
+
     <section class="beacon-panel" data-beacon-panel="now" aria-labelledby="beacon-now-title">
       <div class="beacon-panel-heading">
         <div>
@@ -96,24 +115,6 @@ const statusDate = new Intl.DateTimeFormat("en-US", {
           <p>Choose a band to begin a guided three-minute listen.</p>
         </div>
         <p class="beacon-clock-note">Accurate device time is required.</p>
-      </div>
-      <div class="beacon-live-map-shell">
-        <div class="beacon-live-map-heading">
-          <p class="section-label">Worldwide now</p>
-          <p>
-            <span class="beacon-live-pulse" aria-hidden="true"></span>
-            Five scheduled transmitters · one on each band
-          </p>
-        </div>
-        <div
-          id="beacon-live-map"
-          class="beacon-live-map"
-          aria-label="World map showing the five currently scheduled NCDXF beacon transmissions"
-        >
-        </div>
-        <p id="beacon-live-summary" class="beacon-live-summary" aria-live="off">
-          Loading the current five transmissions.
-        </p>
       </div>
       <div id="beacon-now-grid" class="beacon-now-grid" aria-live="off"></div>
       <div id="beacon-recommendation" class="beacon-recommendation" aria-live="polite">

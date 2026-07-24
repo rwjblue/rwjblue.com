@@ -179,6 +179,8 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   const radio = read("src/pages/radio/index.astro");
   const page = read("src/pages/radio/beacons.astro");
   const client = read("src/lib/ncdxf-beacons-client.ts");
+  const sharedMap = read("src/lib/ncdxf-beacon-map.ts");
+  const operatingLocation = read("src/lib/operating-location.ts");
   const map = read("src/components/NcdxfBeaconMap.astro");
   const notePage = read("src/pages/notes/[slug].astro");
   const shareImage = read("src/lib/note-share-image.ts");
@@ -204,9 +206,16 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   assert.match(client, /window\.history\.pushState/);
   assert.match(client, /window\.addEventListener\("popstate"/);
   assert.match(client, /beacon-power-/);
-  assert.match(client, /L\.map\(liveMapElement/);
+  assert.match(client, /createNcdxfBeaconMap\(liveMapElement/);
+  assert.match(client, /readSavedOperatingGrid/);
+  assert.match(sharedMap, /bindTooltip\(card/);
+  assert.match(sharedMap, /bindPopup\(card/);
+  assert.match(sharedMap, /beacon-observed-path/);
+  assert.match(operatingLocation, /radioTools\.operatingGrid/);
+  assert.match(operatingLocation, /rbnSkimmers\.grid/);
+  assert.match(operatingLocation, /ncdxfBeacons\.grid/);
   assert.match(map, /NCDXF_BEACONS/);
-  assert.match(map, /class="beacon-network-map"/);
+  assert.match(map, /class="beacon-network-map beacon-live-map"/);
   assert.match(map, /class="beacon-station-list"/);
   assert.match(notePage, /note\.data\.beaconMap && <NcdxfBeaconMap/);
   assert.match(shareImage, /renderNcdxfBeaconShareImage/);

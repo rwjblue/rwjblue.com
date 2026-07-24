@@ -1,24 +1,13 @@
 ---
 import "leaflet/dist/leaflet.css";
-import { gridToLatLon } from "../lib/geo.ts";
 import { NCDXF_BEACONS } from "../lib/ncdxf-beacons.ts";
 
-const stations = NCDXF_BEACONS.map((beacon, index) => {
-  const point = gridToLatLon(beacon.grid);
-  if (!point) {
-    throw new Error(`Invalid NCDXF beacon grid: ${beacon.call} ${beacon.grid}`);
-  }
-
-  return {
-    ...beacon,
-    slot: index + 1,
-    lat: point.lat,
-    lon: point.lon,
-  };
-});
+const stations = NCDXF_BEACONS.map((beacon, index) => ({
+  ...beacon,
+  slot: index + 1,
+}));
 const operationalCount = stations.filter((station) => station.status === "ok").length;
 const mapId = "ncdxf-beacon-network-map";
-const dataId = `${mapId}-data`;
 ---
 
 <section class="beacon-map-section" aria-labelledby={`${mapId}-title`}>
@@ -38,7 +27,7 @@ const dataId = `${mapId}-data`;
 
   <div
     id={mapId}
-    class="beacon-network-map"
+    class="beacon-network-map beacon-live-map"
     aria-label="World map of NCDXF beacon locations"
   >
   </div>
@@ -66,82 +55,20 @@ const dataId = `${mapId}-data`;
   </ol>
 </section>
 
-<script type="application/json" id={dataId} set:html={JSON.stringify(stations)} />
 <script>
-  import L from "leaflet";
+  import { createNcdxfBeaconMap } from "../lib/ncdxf-beacon-map";
 
   const mapElement = document.getElementById("ncdxf-beacon-network-map");
-  const dataElement = document.getElementById("ncdxf-beacon-network-map-data");
-
-  if (mapElement && dataElement) {
-    const stations = JSON.parse(dataElement.textContent ?? "[]");
-    const leafletMap = L.map(mapElement, {
-      scrollWheelZoom: false,
-      worldCopyJump: true,
-      minZoom: 0,
-      zoomSnap: 0.25,
-    });
-    const markers = new Map();
-
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(leafletMap);
-
-    for (const station of stations) {
-      const marker = L.circleMarker([station.lat, station.lon], {
-        radius: 7,
-        color: "#fffdfa",
-        weight: 2,
-        fillColor: station.status === "off" ? "#8a4b2b" : "#172026",
-        fillOpacity: 1,
-      })
-        .addTo(leafletMap)
-        .bindTooltip(`${station.slot}. ${station.call}`, {
-          direction: "top",
-          offset: [0, -6],
-        })
-        .bindPopup(
-          `<strong>${escapeHtml(station.call)}</strong><span>${escapeHtml(
-            `${station.entity} · ${station.location}`,
-          )}</span><span>${escapeHtml(station.grid)} · slot ${station.slot}${
-            station.status === "off" ? " · reported off" : ""
-          }</span>`,
-        );
-      markers.set(station.slot, marker);
-    }
-
-    const mapWidth = Math.max(256, mapElement.clientWidth - 32);
-    const initialZoom = Math.max(
-      0,
-      Math.min(2, Math.floor(Math.log2(mapWidth / 256) * 4) / 4),
-    );
-    leafletMap.setView([0, 8], initialZoom);
+  if (mapElement) {
+    const beaconMap = createNcdxfBeaconMap(mapElement, { mode: "network" });
 
     document.querySelectorAll("[data-beacon-slot]").forEach((button) => {
       button.addEventListener("click", () => {
         const slot = Number(button.getAttribute("data-beacon-slot"));
-        const marker = markers.get(slot);
-        if (!marker) return;
-        leafletMap.setView(marker.getLatLng(), Math.max(leafletMap.getZoom(), 3));
-        marker.openPopup();
+        if (!Number.isInteger(slot) || slot < 1) return;
+        beaconMap.focusBeacon(slot - 1);
         mapElement.scrollIntoView({ behavior: "smooth", block: "center" });
       });
-    });
-  }
-
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, (char) => {
-      const entities = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;",
-      };
-
-      return entities[char];
     });
   }
 </script>
