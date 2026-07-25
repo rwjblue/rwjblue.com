@@ -26,7 +26,11 @@ const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
 });
 ---
 
-<BaseLayout title={`${project.data.title} / Projects / Robert Jackson`}>
+<BaseLayout
+  title={`${project.data.title} / Projects / Robert Jackson`}
+  canonicalPath={`/projects/${project.id}/`}
+  backlinks
+>
   <Breadcrumbs
     items={[
       { name: "Home", path: "/" },

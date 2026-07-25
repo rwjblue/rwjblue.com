@@ -1,0 +1,27 @@
+---
+import { getBacklinks } from "../lib/backlinks";
+
+interface Props {
+  destination: string;
+}
+
+const { destination } = Astro.props;
+const backlinks = await getBacklinks(destination);
+---
+
+{
+  backlinks.length > 0 && (
+    <aside class="backlinks" aria-labelledby="backlinks-title">
+      <p class="section-label">Connections</p>
+      <h2 id="backlinks-title">Referenced by</h2>
+      <ul>
+        {backlinks.map((backlink) => (
+          <li>
+            <span>{backlink.label}</span>
+            <a href={backlink.href}>{backlink.title}</a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}
