@@ -1,0 +1,140 @@
+---
+import "leaflet/dist/leaflet.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import parksData from "../../data/pota/parks.json";
+import { buildFieldLog } from "../../lib/field-log";
+import { getPublicNotes } from "../../lib/notes";
+
+const notes = await getPublicNotes();
+const entries = buildFieldLog(
+  parksData.parks,
+  notes.map((note) => ({
+    id: note.id,
+    series: note.data.series
+      ? { slug: note.data.series.slug, title: note.data.series.title }
+      : undefined,
+  })),
+);
+const years = [...new Set(entries.map((entry) => entry.year))].sort().reverse();
+const trips = [
+  ...new Map(
+    entries
+      .filter((entry) => entry.series)
+      .map((entry) => [entry.series!.slug, entry.series!.title]),
+  ),
+].sort((a, b) => a[1].localeCompare(b[1]));
+const fieldLogJson = JSON.stringify(entries).replaceAll("<", "\\u003c");
+const formatDate = (date: string) =>
+  new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+---
+
+<BaseLayout
+  title="Field Log / Radio / N1RWJ"
+  description="Browse N1RWJ portable radio outings on a synchronized map and chronological timeline."
+  canonicalPath="/radio/field-log/"
+  backlinks
+>
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Radio", path: "/radio/" },
+      { name: "Field Log", path: "/radio/field-log/" },
+    ]}
+  />
+  <section class="page-intro" data-pagefind-filter="type:Radio guide">
+    <p class="eyebrow">Portable operating history</p>
+    <h1>Field Log</h1>
+    <p>
+      POTA activations from the maintained park ledger, paired with public field
+      reports and trips where those relationships are known.
+    </p>
+  </section>
+
+  <section class="field-log" data-field-log>
+    <form class="field-log-filters" aria-label="Filter field outings">
+      <label>
+        Year
+        <select data-field-filter="year">
+          <option value="">All years</option>
+          {years.map((year) => <option value={year}>{year}</option>)}
+        </select>
+      </label>
+      <label>
+        Mode
+        <select data-field-filter="mode">
+          <option value="">All modes</option>
+          <option value="cw">CW</option>
+          <option value="phone">Phone</option>
+          <option value="data">Data</option>
+        </select>
+      </label>
+      <label>
+        Trip
+        <select data-field-filter="trip">
+          <option value="">All outings</option>
+          {trips.map(([slug, title]) => <option value={slug}>{title}</option>)}
+          <option value="other">Not in a series</option>
+        </select>
+      </label>
+      <p data-field-log-status aria-live="polite">
+        {entries.length} outings shown.
+      </p>
+    </form>
+
+    <div class="field-log-layout">
+      <div class="field-log-map-shell">
+        <div
+          class="field-log-map"
+          data-field-log-map
+          aria-label="Map of portable radio outings"
+        ></div>
+        <p class="field-log-map-fallback">
+          The interactive map loads when JavaScript is available. The complete
+          chronological field log remains below.
+        </p>
+        <noscript>
+          <p>JavaScript is off, so the map is unavailable. Use the complete timeline.</p>
+        </noscript>
+      </div>
+
+      <div class="field-log-timeline">
+        <h2>Timeline</h2>
+        <p data-field-log-empty hidden>No outings match those filters.</p>
+        <ol>
+          {
+            entries.map((entry) => (
+              <li data-year={entry.year} data-mode={entry.modes.join(" ")} data-trip={entry.trip}>
+                <button
+                  type="button"
+                  data-field-entry={entry.id}
+                  aria-pressed="false"
+                  aria-label={`Show ${entry.reference} ${entry.park} on the map`}
+                >
+                  <time datetime={entry.date}>{formatDate(entry.date)}</time>
+                  <strong>{entry.park}</strong>
+                  <span>{entry.reference} · {entry.qsos} QSOs · {entry.modes.join(" / ").toUpperCase()}</span>
+                </button>
+                <div>
+                  <a href={entry.parkHref}>Park page</a>
+                  {entry.notes.map((note) => <a href={note.href}>{note.title}</a>)}
+                  {entry.series && <a href={`/series/${entry.series.slug}/`}>{entry.series.title}</a>}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+  <script type="application/json" id="field-log-data" set:html={fieldLogJson} />
+  <script>
+    import { initFieldLog } from "../../lib/field-log-client";
+    initFieldLog();
+  </script>
+</BaseLayout>

@@ -1034,6 +1034,154 @@ p {
   font-weight: 800;
 }
 
+.field-log {
+  margin-top: 36px;
+}
+
+.field-log-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: end;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+
+.field-log-filters label {
+  display: grid;
+  gap: 6px;
+  min-width: 10rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.field-log-filters select {
+  min-height: 42px;
+  padding: 8px 34px 8px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: var(--input-bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+.field-log-filters p {
+  margin: 0 0 10px auto;
+  color: var(--muted);
+}
+
+.field-log-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: 28px;
+  margin-top: 24px;
+}
+
+.field-log-map-shell {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+}
+
+.field-log-map {
+  min-height: 620px;
+  border: 1px solid var(--line);
+  background: var(--map-bg);
+}
+
+.field-log-map-fallback {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.field-log[data-enhanced="true"] .field-log-map-fallback {
+  display: none;
+}
+
+.field-log-timeline h2 {
+  margin-bottom: 14px;
+}
+
+.field-log-timeline ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.field-log-timeline li {
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.field-log-timeline li.is-selected {
+  padding-inline: 10px;
+  border-left: 3px solid var(--green);
+  background: var(--green-wash);
+}
+
+.field-log-timeline button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.field-log-timeline button time,
+.field-log-timeline button span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.field-log-timeline button strong {
+  font-size: 1rem;
+}
+
+.field-log-timeline li > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 8px;
+  font-size: 0.82rem;
+}
+
+.field-log-map .leaflet-popup-content {
+  display: grid;
+  gap: 3px;
+}
+
+.field-log-map .leaflet-popup-content strong,
+.field-log-map .leaflet-popup-content span,
+.field-log-map .leaflet-popup-content time {
+  display: block;
+}
+
+@media (max-width: 820px) {
+  .field-log-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .field-log-map-shell {
+    position: static;
+  }
+
+  .field-log-map {
+    min-height: 360px;
+  }
+
+  .field-log-filters p {
+    width: 100%;
+    margin: 0;
+  }
+}
+
 @media (max-width: 620px) {
   .series-navigation > div {
     grid-template-columns: 1fr;
