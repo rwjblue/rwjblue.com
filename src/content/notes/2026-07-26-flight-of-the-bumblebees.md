@@ -132,8 +132,7 @@ The practical checklist is short:
 - arrive early enough to solve antenna problems before 1700 UTC.
 
 This is the first planning part of the experiment. The next entry follows a
-last-minute change in location, while a later note can cover the actual antenna
-construction, banana-plug links, measurements, trimming, and deployment
-practice. After FOBB, a final field report can concentrate on the chosen
-location, station configuration, band conditions, contacts, and whatever the
-simple dipole teaches me.
+last-minute change in location that replaces the dipole with a beach vertical.
+After FOBB, a final field report can concentrate on the chosen location,
+station configuration, band conditions, contacts, and what the revised antenna
+plan teaches me.
