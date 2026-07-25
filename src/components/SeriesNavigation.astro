@@ -1,0 +1,36 @@
+---
+import type { SeriesContext } from "../lib/relationships";
+
+interface Props {
+  context: SeriesContext;
+}
+
+const { context } = Astro.props;
+---
+
+<nav class="series-navigation" aria-label={`${context.series.title} series`}>
+  <p>
+    Part of
+    <a href={`/series/${context.series.slug}/`}>{context.series.title}</a>
+  </p>
+  <div>
+    {
+      context.previous ? (
+        <a href={`/notes/${context.previous.id}/`} rel="prev">
+          <span>Previous</span>
+          {context.previous.data.title}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    {
+      context.next && (
+        <a href={`/notes/${context.next.id}/`} rel="next">
+          <span>Next</span>
+          {context.next.data.title}
+        </a>
+      )
+    }
+  </div>
+</nav>

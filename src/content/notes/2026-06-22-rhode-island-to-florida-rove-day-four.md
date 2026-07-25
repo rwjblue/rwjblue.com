@@ -4,6 +4,10 @@ date: 2026-06-22
 summary: "Day four moved the rove from Virginia toward South Carolina with two CW activations, a ranger-induced reset at Fredericksburg, and a quiet Medoc Mountain stop."
 shareImage: /images/pota/2026-06-22-rhode-island-to-florida-rove-day-four/lees-hill-car-station.jpg
 contactMap: src/data/pota/contact-maps/2026-06-22-rhode-island-to-florida-rove-day-four.json
+series:
+  slug: rhode-island-to-florida-rove
+  title: Rhode Island-to-Florida POTA rove
+  order: 4
 tags:
   - radio
   - pota

@@ -4,6 +4,10 @@ date: 2026-06-21
 summary: "A walking-and-driving DC rove produced 106 Sunday-route QSOs and cleared the 15-reference POTA Rover Cheetah threshold."
 shareImage: /images/pota/2026-06-21-washington-dc-pota-rove/lbj-picnic-table-station.jpg
 contactMap: src/data/pota/contact-maps/2026-06-21-washington-dc-pota-rove.json
+series:
+  slug: rhode-island-to-florida-rove
+  title: Rhode Island-to-Florida POTA rove
+  order: 3
 tags:
   - radio
   - pota

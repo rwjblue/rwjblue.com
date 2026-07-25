@@ -7,9 +7,15 @@ import NcdxfBeaconMap from "../../components/NcdxfBeaconMap.astro";
 import PotaContactMap from "../../components/PotaContactMap.astro";
 import TagHints from "../../components/TagHints.astro";
 import TagLinks from "../../components/TagLinks.astro";
+import RelatedContent from "../../components/RelatedContent.astro";
+import SeriesNavigation from "../../components/SeriesNavigation.astro";
 import { contactMapForNote } from "../../data/pota/contact-maps";
 import { formatDate } from "../../lib/format";
 import { getRenderableNotes } from "../../lib/notes";
+import {
+  getPublicSeries,
+  seriesContextForNote,
+} from "../../lib/relationships";
 import {
   articleStructuredData,
   personStructuredData,
@@ -55,6 +61,9 @@ const structuredData = isPreview
         image: shareImage.split("?")[0],
       }),
     ];
+const seriesContext = isPreview
+  ? undefined
+  : seriesContextForNote(note, await getPublicSeries());
 ---
 
 <BaseLayout
@@ -96,5 +105,7 @@ const structuredData = isPreview
     {contactMap && <PotaContactMap map={contactMap} />}
     {note.data.boundaryMap && <GeoJsonBoundaryMap map={note.data.boundaryMap} />}
     <Content />
+    {seriesContext && <SeriesNavigation context={seriesContext} />}
+    {!isPreview && <RelatedContent currentType="note" currentId={note.id} />}
   </article>
 </BaseLayout>

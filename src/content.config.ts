@@ -22,6 +22,13 @@ const notes = defineCollection({
       })
       .optional(),
     tags: z.array(z.string()).default([]),
+    series: z
+      .object({
+        slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+        title: z.string().min(1),
+        order: z.number().int().positive(),
+      })
+      .optional(),
   }),
 });
 

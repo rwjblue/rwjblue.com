@@ -4,6 +4,10 @@ date: 2026-06-23
 summary: "Day five added South Carolina and Georgia with three CW activations, a fast Woods Bay run, a quiet Savannah NWR picnic-table stop, and a Jekyll Island beach finish."
 shareImage: /images/pota/2026-06-23-rhode-island-to-florida-rove-day-five/img-9406.jpg
 contactMap: src/data/pota/contact-maps/2026-06-23-rhode-island-to-florida-rove-day-five.json
+series:
+  slug: rhode-island-to-florida-rove
+  title: Rhode Island-to-Florida POTA rove
+  order: 5
 tags:
   - radio
   - pota

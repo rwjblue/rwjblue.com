@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import TagLinks from "../../components/TagLinks.astro";
+import RelatedContent from "../../components/RelatedContent.astro";
 
 export async function getStaticPaths() {
   const DEDICATED_PAGES = ["2026-activate-all-ri-pota", "2026-06-rove-to-fl"];
@@ -44,5 +45,6 @@ const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
       </div>
     </header>
     <Content />
+    <RelatedContent currentType="project" currentId={project.id} />
   </article>
 </BaseLayout>

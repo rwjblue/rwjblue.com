@@ -4,6 +4,10 @@ date: 2026-06-19
 summary: "The southbound POTA rove started with three parks, 56 QSOs, a noisy Connecticut stop, and a relaxed evening activation at Tallman Mountain."
 shareImage: /images/pota/2026-06-19-rhode-island-to-florida-rove-day-one/tallman-hudson-river-view.jpg
 contactMap: src/data/pota/contact-maps/2026-06-19-rhode-island-to-florida-rove-day-one.json
+series:
+  slug: rhode-island-to-florida-rove
+  title: Rhode Island-to-Florida POTA rove
+  order: 1
 tags:
   - radio
   - pota

@@ -2,6 +2,7 @@
 import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedContent from "../../components/RelatedContent.astro";
 import itinerary from "../../../data/pota/rove-to-fl/itinerary.json";
 
 interface OvernightStrategy {
@@ -757,6 +758,7 @@ function googleMapsUrl(point: NavigationCoordinate) {
     </div>
   </section>
 
+  <RelatedContent currentType="project" currentId="2026-06-rove-to-fl" />
   <script type="application/json" id="rove-map-overlays" set:html={mapOverlaysJson} />
   <script>
     import L from "leaflet";

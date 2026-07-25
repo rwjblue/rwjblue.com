@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import TagLinks from "../../components/TagLinks.astro";
+import { formatDate } from "../../lib/format";
+import { getPublicSeries } from "../../lib/relationships";
+
+export async function getStaticPaths() {
+  return (await getPublicSeries()).map((series) => ({
+    params: { slug: series.slug },
+    props: { series },
+  }));
+}
+
+const { series } = Astro.props;
+---
+
+<BaseLayout
+  title={`${series.title} / Series / Robert Jackson`}
+  description={`Read ${series.title} in editorial order.`}
+  canonicalPath={`/series/${series.slug}/`}
+  searchable={false}
+>
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Notes", path: "/notes/" },
+      { name: series.title, path: `/series/${series.slug}/` },
+    ]}
+  />
+  <section class="page-intro">
+    <p class="eyebrow">Series</p>
+    <h1>{series.title}</h1>
+    <p>{series.entries.length} field notes, presented in editorial order.</p>
+  </section>
+  <ol class="entry-list full series-list">
+    {
+      series.entries.map((note) => (
+        <li>
+          <span class="series-order">Part {note.data.series.order}</span>
+          <time datetime={note.data.date.toISOString()}>
+            {formatDate(note.data.date)}
+          </time>
+          <a href={`/notes/${note.id}/`}>{note.data.title}</a>
+          <p>{note.data.summary}</p>
+          <div class="tags"><TagLinks tags={note.data.tags} /></div>
+        </li>
+      ))
+    }
+  </ol>
+</BaseLayout>

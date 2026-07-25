@@ -1,0 +1,30 @@
+---
+import TagLinks from "./TagLinks.astro";
+import { getRelatedContent } from "../lib/relationships";
+
+interface Props {
+  currentType: "note" | "project";
+  currentId: string;
+}
+
+const { currentType, currentId } = Astro.props;
+const related = await getRelatedContent(currentType, currentId);
+---
+
+{
+  related.length > 0 && (
+    <aside class="related-content" aria-labelledby="related-content-title">
+      <p class="section-label">Keep exploring</p>
+      <h2 id="related-content-title">Related content</h2>
+      <ul>
+        {related.map((item) => (
+          <li>
+            <span>{item.label}</span>
+            <a href={item.href}>{item.title}</a>
+            <div class="tags"><TagLinks tags={item.tags} /></div>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}
