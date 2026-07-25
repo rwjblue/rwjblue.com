@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import TagLinks from "../../components/TagLinks.astro";
 
 export async function getStaticPaths() {
@@ -25,6 +26,13 @@ const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
 ---
 
 <BaseLayout title={`${project.data.title} / Projects / Robert Jackson`}>
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Projects", path: "/projects/" },
+      { name: project.data.title, path: `/projects/${project.id}/` },
+    ]}
+  />
   <article class="document" data-pagefind-filter="type:Project">
     <header>
       <p class="eyebrow">Project</p>

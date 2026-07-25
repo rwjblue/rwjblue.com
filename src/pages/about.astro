@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { personStructuredData } from "../lib/structured-data";
 ---
 
 <BaseLayout
@@ -8,6 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   canonicalPath="/about/"
   image="/images/pota/2026-06-04-sachuest-point-national-wildlife-refuge-pota/operator-rocky-shoreline.jpg"
   imageAlt="Robert Jackson, N1RWJ, at a rocky shoreline during a portable radio activation."
+  structuredData={personStructuredData}
 >
   <section class="about-hero page-intro">
     <div>

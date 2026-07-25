@@ -1,0 +1,33 @@
+---
+import {
+  breadcrumbStructuredData,
+  type BreadcrumbItem,
+} from "../lib/structured-data";
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const jsonLd = JSON.stringify(breadcrumbStructuredData(items)).replaceAll(
+  "<",
+  "\\u003c",
+);
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {
+      items.map((item, index) => (
+        <li>
+          {index < items.length - 1 ? (
+            <a href={item.path}>{item.name}</a>
+          ) : (
+            <span aria-current="page">{item.name}</span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={jsonLd} />

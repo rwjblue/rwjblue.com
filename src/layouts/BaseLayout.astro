@@ -11,6 +11,7 @@ interface Props {
   type?: "website" | "article";
   robots?: "noindex, nofollow";
   searchable?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -23,11 +24,15 @@ const {
   type = "website",
   robots,
   searchable = true,
+  structuredData,
 } = Astro.props;
 
 const absoluteUrl = (path: string) => new URL(path, Astro.url).toString();
 const canonicalUrl = absoluteUrl(canonicalPath);
 const socialImage = image ? absoluteUrl(image) : undefined;
+const structuredDataJson = structuredData
+  ? JSON.stringify(structuredData).replaceAll("<", "\\u003c")
+  : undefined;
 
 const nav = [
   { href: "/", label: "Home" },
@@ -52,6 +57,7 @@ const isActive = (href: string) =>
     <meta name="description" content={description} />
     {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link
       rel="alternate"
@@ -74,6 +80,11 @@ const isActive = (href: string) =>
     <meta name="twitter:description" content={description} />
     {socialImage && <meta name="twitter:image" content={socialImage} />}
     {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+    {
+      structuredDataJson && (
+        <script type="application/ld+json" set:html={structuredDataJson} />
+      )
+    }
     <script is:inline>
       (() => {
         const storageKey = "rwjblue-theme";

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import itinerary from "../../../../data/pota/rove-to-fl/itinerary.json";
 
 interface CandidateStop {
@@ -76,6 +77,20 @@ function referencesFor(stop: CandidateStop) {
   description="Saturday POTA positioning rove from Edison, NJ to Foggy Bottom, DC by way of NJ, PA, DE, and MD."
   canonicalPath="/projects/2026-06-rove-to-fl/saturday/"
 >
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Projects", path: "/projects/" },
+      {
+        name: "Rhode Island to Florida rove",
+        path: "/projects/2026-06-rove-to-fl/",
+      },
+      {
+        name: "Saturday",
+        path: "/projects/2026-06-rove-to-fl/saturday/",
+      },
+    ]}
+  />
   <section class="pota-tracker-hero" aria-labelledby="page-title">
     <div>
       <p class="eyebrow">Project / POTA / Saturday</p>

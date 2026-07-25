@@ -2,6 +2,7 @@
 import "leaflet/dist/leaflet.css";
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import trackerData from "../../data/pota/ri-tracker.json";
 
 const shareDescription = `${trackerData.summary.completed} of ${trackerData.summary.total} Rhode Island POTA references activated. Interactive map and reference checklist for N1RWJ's 2026 challenge.`;
@@ -44,6 +45,16 @@ const formatModes = (activation: {
   image="/images/pota/ri-pota-challenge-share.png"
   imageAlt="RI POTA Challenge tracker — scoreboard and Rhode Island park map"
 >
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Projects", path: "/projects/" },
+      {
+        name: "2026 Activate All RI POTA",
+        path: "/projects/2026-activate-all-ri-pota/",
+      },
+    ]}
+  />
   <section class="pota-tracker-hero" aria-labelledby="page-title">
     <div>
       <p class="eyebrow">Project / POTA</p>

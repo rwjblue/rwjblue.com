@@ -1,6 +1,7 @@
 ---
 import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import dcRove from "../../../../data/pota/rove-to-fl/dc-rove.json";
 
 interface OperatingStop {
@@ -232,6 +233,20 @@ function uniqueAddsFor(timelineStop: TimelineStop) {
   description="Detailed DC and NoVA Cheetah/Ostrich POTA rove plan for the 2026 Rhode Island to Florida trip."
   canonicalPath="/projects/2026-06-rove-to-fl/sunday/"
 >
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Projects", path: "/projects/" },
+      {
+        name: "Rhode Island to Florida rove",
+        path: "/projects/2026-06-rove-to-fl/",
+      },
+      {
+        name: "Sunday",
+        path: "/projects/2026-06-rove-to-fl/sunday/",
+      },
+    ]}
+  />
   <section class="pota-tracker-hero" aria-labelledby="page-title">
     <div>
       <p class="eyebrow">Project / POTA / Sunday</p>

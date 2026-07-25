@@ -2,6 +2,7 @@
 import "leaflet/dist/leaflet.css";
 
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import parksData from "../../../data/pota/parks.json";
 
 export async function getStaticPaths() {
@@ -60,6 +61,13 @@ const description =
   description={description}
   canonicalPath={park.href}
 >
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Radio", path: "/radio/" },
+      { name: `${park.reference} ${park.name}`, path: park.href },
+    ]}
+  />
   <section class="pota-park-hero" aria-labelledby="park-title">
     <div>
       <p class="eyebrow">Radio / POTA</p>

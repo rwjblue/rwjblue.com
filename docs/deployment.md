@@ -34,6 +34,14 @@ and update procedure are documented in
 
 The local Node version is managed by mise and locked in `.mise/mise.lock`.
 
+## Crawl Discovery
+
+Production builds generate `sitemap-index.xml`, `sitemap-0.xml`, and
+`robots.txt` for the canonical `https://rwjblue.com` origin. The sitemap filter
+excludes draft and unlisted notes plus search, RSS, and generated share-image
+routes. `npm run build` verifies those exclusions and representative Article and
+BreadcrumbList JSON-LD before the output is considered complete.
+
 ## Local Validation
 
 Before deploying, run:

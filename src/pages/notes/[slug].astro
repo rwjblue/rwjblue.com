@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import GeoJsonBoundaryMap from "../../components/GeoJsonBoundaryMap.astro";
 import NcdxfBeaconMap from "../../components/NcdxfBeaconMap.astro";
 import PotaContactMap from "../../components/PotaContactMap.astro";
@@ -9,6 +10,10 @@ import TagLinks from "../../components/TagLinks.astro";
 import { contactMapForNote } from "../../data/pota/contact-maps";
 import { formatDate } from "../../lib/format";
 import { getRenderableNotes } from "../../lib/notes";
+import {
+  articleStructuredData,
+  personStructuredData,
+} from "../../lib/structured-data";
 
 export async function getStaticPaths() {
   const notes = await getRenderableNotes();
@@ -32,6 +37,24 @@ const visibilityDescription =
   note.data.visibility === "draft"
     ? "This working draft is only available in draft-enabled preview environments."
     : "This note is available by direct URL but is omitted from indexes, feeds, and search results.";
+const notePath = `/notes/${note.id}/`;
+const breadcrumbs = [
+  { name: "Home", path: "/" },
+  { name: "Notes", path: "/notes/" },
+  { name: note.data.title, path: notePath },
+];
+const structuredData = isPreview
+  ? undefined
+  : [
+      personStructuredData,
+      articleStructuredData({
+        title: note.data.title,
+        description: note.data.summary,
+        path: notePath,
+        published: note.data.date,
+        image: shareImage.split("?")[0],
+      }),
+    ];
 ---
 
 <BaseLayout
@@ -44,7 +67,9 @@ const visibilityDescription =
   type="article"
   robots={isPreview ? "noindex, nofollow" : undefined}
   searchable={!isPreview}
+  structuredData={structuredData}
 >
+  <Breadcrumbs items={breadcrumbs} />
   <article
     class="document"
     data-pagefind-filter={isPreview ? undefined : "type:Note"}

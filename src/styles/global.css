@@ -904,6 +904,31 @@ p {
   overflow-wrap: anywhere;
 }
 
+.breadcrumbs {
+  margin: 1.25rem 0 1.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  margin-left: 0.35rem;
+  color: var(--quiet);
+  content: "/";
+}
+
+.breadcrumbs a {
+  color: inherit;
+}
+
 .note-visibility {
   display: grid;
   gap: 4px;
