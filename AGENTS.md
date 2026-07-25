@@ -59,6 +59,36 @@
 
 jj-commit-default: auto
 
+## Planning And Issues
+- GitHub Issues are the durable source of truth for unfinished work and open
+  implementation decisions.
+- Evergreen documentation under `docs/` describes stable behavior and
+  architecture. Temporary plans under `docs/superpowers/` may help active work,
+  but they are not authoritative and should not be the only record of unfinished
+  intent.
+- Keep issues proportional to this content site. A focused implementation issue
+  should normally state the outcome, relevant context, bounded scope, non-goals,
+  and objectively verifiable acceptance criteria.
+- Do not add tracking issues, dependency graphs, decision templates, or workflow
+  labels unless the work is complex enough to benefit from them.
+- An issue explicitly handed to an agent is approved implementation scope.
+  Merely mentioning an issue or applying a label does not authorize work.
+- Stay within the issue contract and request direction before materially
+  expanding public behavior, content schemas, external services, or deployment
+  architecture.
+
+## Issue Workflow
+When explicitly handed a GitHub issue:
+- Confirm the issue is still current and that any blocking dependencies have
+  landed before implementing it.
+- Inspect the current checkout and treat the issue as the scope boundary.
+- Run the validation required by this repository before declaring completion.
+- Update maintained documentation when behavior or contributor workflow changes.
+- Record delivered behavior, the `jj` commit or change, verification results,
+  and any follow-up issues before closing the issue.
+- If implementation exposes an unresolved product or architecture decision,
+  leave the issue open, explain the decision needed, and request direction.
+
 <!-- codex: ham-mcp begin -->
 ## Ham Radio MCP Guidance
 
