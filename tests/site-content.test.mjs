@@ -123,6 +123,36 @@ test("primary navigation omits now", () => {
   assert.doesNotMatch(layout, /Now/);
 });
 
+test("Pagefind provides static site search without indexing listing pages", () => {
+  const packageJson = read("package.json");
+  const layout = read("src/layouts/BaseLayout.astro");
+  const searchPage = read("src/pages/search.astro");
+  const searchClient = read("src/lib/search-client.ts");
+  const notePage = read("src/pages/notes/[slug].astro");
+  const homepage = read("src/pages/index.astro");
+  const notesIndex = read("src/pages/notes/index.astro");
+  const tagsIndex = read("src/pages/tags/index.astro");
+  const buildVerifier = read("scripts/verify-note-visibility.mjs");
+
+  assert.ok(existsSync("src/pages/search.astro"));
+  assert.match(packageJson, /pagefind --site dist/);
+  assert.match(packageJson, /"pagefind":/);
+  assert.match(layout, /searchable\?: boolean/);
+  assert.match(layout, /data-pagefind-body=\{searchable/);
+  assert.match(layout, /href: "\/search\/"/);
+  assert.match(searchPage, /data-search-input/);
+  assert.match(searchPage, /searchable=\{false\}/);
+  assert.match(searchClient, /\/pagefind\/pagefind\.js/);
+  assert.match(searchClient, /debouncedSearch/);
+  assert.match(searchClient, /URLSearchParams/);
+  assert.match(notePage, /searchable=\{!isPreview\}/);
+  assert.match(notePage, /data-pagefind-filter/);
+  assert.match(homepage, /searchable=\{false\}/);
+  assert.match(notesIndex, /searchable=\{false\}/);
+  assert.match(tagsIndex, /searchable=\{false\}/);
+  assert.match(buildVerifier, /assertExcludes\(page, "data-pagefind-body"/);
+});
+
 test("radio page keeps static context, links shack notes, and lists radio notes", () => {
   const radio = read("src/pages/radio/index.astro");
 

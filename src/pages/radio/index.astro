@@ -9,7 +9,7 @@ const radioNotes = (await getPublicNotes())
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<BaseLayout title="Radio / N1RWJ">
+<BaseLayout title="Radio / N1RWJ" searchable={false}>
   <section class="page-intro">
     <p class="eyebrow">Radio</p>
     <h1>N1RWJ</h1>

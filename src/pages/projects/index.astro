@@ -18,7 +18,7 @@ const projects = (await getCollection("projects"))
   .sort((a, b) => b.updated.valueOf() - a.updated.valueOf());
 ---
 
-<BaseLayout title="Projects / Robert Jackson">
+<BaseLayout title="Projects / Robert Jackson" searchable={false}>
   <section class="page-intro">
     <p class="eyebrow">Projects</p>
     <h1>Projects</h1>

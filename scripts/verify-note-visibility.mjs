@@ -136,6 +136,7 @@ for (const note of nonPublicNotes) {
       `note-visibility--${note.visibility}`,
       routePath,
     );
+    assertExcludes(page, "data-pagefind-body", routePath);
   }
 }
 

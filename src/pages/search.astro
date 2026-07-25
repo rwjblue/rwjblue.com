@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Search / Robert Jackson"
+  description="Search notes, projects, radio guides, and tools on rwjblue.com."
+  searchable={false}
+>
+  <section class="page-intro">
+    <p class="eyebrow">Search</p>
+    <h1>Search</h1>
+    <p>
+      Search notes, project pages, radio guides, and tools without leaving the
+      site.
+    </p>
+  </section>
+
+  <section class="site-search" aria-labelledby="site-search-label">
+    <form class="search-form" role="search" data-search-form>
+      <label id="site-search-label" for="site-search">Search the site</label>
+      <div>
+        <input
+          id="site-search"
+          name="q"
+          type="search"
+          placeholder="Try POTA, CW, Astro..."
+          autocomplete="off"
+          data-search-input
+        />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+
+    <p class="search-status" role="status" aria-live="polite" data-search-status>
+      Enter a word or phrase to search the site.
+    </p>
+    <ol class="search-results" data-search-results></ol>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initSearchPage } from "../lib/search-client";
+
+  initSearchPage();
+</script>

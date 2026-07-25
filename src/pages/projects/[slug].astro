@@ -25,14 +25,14 @@ const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
 ---
 
 <BaseLayout title={`${project.data.title} / Projects / Robert Jackson`}>
-  <article class="document">
+  <article class="document" data-pagefind-filter="type:Project">
     <header>
       <p class="eyebrow">Project</p>
       <h1>{project.data.title}</h1>
       <p class="meta">{project.data.status} · updated {formattedUpdated}</p>
       <p>{project.data.summary}</p>
       <div class="tags">
-        <TagLinks tags={project.data.tags} />
+        <TagLinks tags={project.data.tags} pagefindFilters />
       </div>
     </header>
     <Content />

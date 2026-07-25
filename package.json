@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "check": "astro sync",
-    "build": "astro build && node scripts/verify-note-visibility.mjs",
+    "build": "astro build && pagefind --site dist && node scripts/verify-note-visibility.mjs",
     "preview": "astro preview"
   },
   "devDependencies": {
@@ -17,6 +17,7 @@
     "@types/sanitize-html": "^2.16.1",
     "astro": "^6.3.7",
     "markdown-it": "^14.2.0",
+    "pagefind": "^1.5.2",
     "sanitize-html": "^2.17.4",
     "sharp": "^0.34.5",
     "typescript": "^6.0.3",

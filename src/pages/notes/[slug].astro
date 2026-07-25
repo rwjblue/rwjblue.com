@@ -43,8 +43,12 @@ const visibilityDescription =
   imageAlt={shareImageAlt}
   type="article"
   robots={isPreview ? "noindex, nofollow" : undefined}
+  searchable={!isPreview}
 >
-  <article class="document">
+  <article
+    class="document"
+    data-pagefind-filter={isPreview ? undefined : "type:Note"}
+  >
     {
       isPreview && (
         <aside class={`note-visibility note-visibility--${note.data.visibility}`}>
@@ -59,7 +63,7 @@ const visibilityDescription =
       <p class="meta">{formattedDate}</p>
       <p>{note.data.summary}</p>
       <div class="tags">
-        <TagLinks tags={note.data.tags} />
+        <TagLinks tags={note.data.tags} pagefindFilters={!isPreview} />
       </div>
     </header>
     <TagHints tags={note.data.tags} />

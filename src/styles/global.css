@@ -1581,6 +1581,112 @@ p {
   font-size: clamp(2.7rem, 7vw, 5rem);
 }
 
+.site-search {
+  max-width: 780px;
+}
+
+.search-form {
+  padding: 18px 0 22px;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.search-form label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.search-form div {
+  display: flex;
+  gap: 10px;
+}
+
+.search-form input {
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 11px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+.search-form input:focus {
+  border-color: var(--blue);
+  outline: 3px solid color-mix(in srgb, var(--blue) 24%, transparent);
+  outline-offset: 1px;
+}
+
+.search-form button {
+  min-height: 44px;
+  padding: 9px 16px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: var(--inverse-bg);
+  color: var(--inverse-ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.search-form button:hover {
+  border-color: var(--blue);
+  background: var(--blue);
+}
+
+.search-form button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--blue) 36%, transparent);
+  outline-offset: 2px;
+}
+
+.search-status {
+  margin: 16px 0 0;
+  color: var(--quiet);
+  font-size: 0.86rem;
+}
+
+.search-results {
+  display: grid;
+  padding: 0;
+  margin: 8px 0 0;
+  list-style: none;
+}
+
+.search-results li {
+  display: grid;
+  gap: 6px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.search-results a {
+  width: fit-content;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.search-results a:hover {
+  color: var(--blue);
+}
+
+.search-results p {
+  margin: 0;
+}
+
+.search-results span {
+  color: var(--quiet);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.75rem;
+}
+
 .split-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2943,6 +3049,15 @@ p {
 }
 
 @media (max-width: 520px) {
+  .search-form div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search-form button {
+    width: 100%;
+  }
+
   .tag-index {
     grid-template-columns: 1fr;
   }
