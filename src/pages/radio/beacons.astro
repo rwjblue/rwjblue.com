@@ -45,6 +45,10 @@ const statusDate = new Intl.DateTimeFormat("en-US", {
   </section>
 
   <section class="section-block wide ncdxf-beacon-tool" id="ncdxf-beacon-tool">
+    <p class="offline-notice" data-offline-only hidden role="status">
+      You are offline. Beacon timing, station data, and local logging still
+      work; the background map tiles need a connection.
+    </p>
     <div class="beacon-tool-bar">
       <div class="beacon-location-controls">
         <button id="beacon-use-location" class="beacon-primary" type="button">

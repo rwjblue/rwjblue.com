@@ -4229,6 +4229,26 @@ p {
   }
 }
 
+.offline-field-kit p + p {
+  margin-top: 10px;
+}
+
+.offline-notice {
+  margin: 0 0 18px;
+  border: 1px solid color-mix(in srgb, var(--rust) 48%, var(--line));
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--rust) 8%, var(--panel));
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.offline-notice[hidden] {
+  display: none;
+}
+
 .beacon-utility-intro {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);

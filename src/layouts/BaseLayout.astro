@@ -64,6 +64,7 @@ const isActive = (href: string) =>
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -187,6 +188,7 @@ const isActive = (href: string) =>
       </footer>
     </div>
     <script>
+      import { initOfflineFieldKit } from "../lib/offline-client";
       import { initSearchShortcut } from "../lib/search-shortcut";
       const storageKey = "rwjblue-theme";
       const root = document.documentElement;
@@ -274,6 +276,7 @@ const isActive = (href: string) =>
 
       updateThemeUi();
       initSearchShortcut();
+      initOfflineFieldKit();
     </script>
   </body>
 </html>

@@ -42,6 +42,11 @@ excludes draft and unlisted notes plus search, RSS, and generated share-image
 routes. `npm run build` verifies those exclusions and representative Article and
 BreadcrumbList JSON-LD before the output is considered complete.
 
+The same build generates a content-versioned service worker for the bounded
+radio field kit and verifies its manifest, route allowlist, and cache limits.
+Its route and storage policy is documented in
+[`docs/offline-field-kit.md`](offline-field-kit.md).
+
 ## Local Validation
 
 Before deploying, run:

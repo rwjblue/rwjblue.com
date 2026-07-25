@@ -1,0 +1,20 @@
+{
+  "id": "/radio/",
+  "name": "N1RWJ Radio Field Kit",
+  "short_name": "N1RWJ Field Kit",
+  "description": "Offline-ready CW practice, radio references, field log, and operating tools from N1RWJ.",
+  "start_url": "/radio/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f4ee",
+  "theme_color": "#f7f4ee",
+  "categories": ["education", "utilities"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

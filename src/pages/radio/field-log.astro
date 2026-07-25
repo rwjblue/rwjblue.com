@@ -58,6 +58,10 @@ const formatDate = (date: string) =>
   </section>
 
   <section class="field-log" data-field-log>
+    <p class="offline-notice" data-offline-only hidden role="status">
+      You are offline. The complete timeline and filters still work; map tiles
+      need a connection and may appear blank.
+    </p>
     <form class="field-log-filters" aria-label="Filter field outings">
       <label>
         Year

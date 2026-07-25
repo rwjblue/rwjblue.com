@@ -30,6 +30,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   </section>
 
   <section class="section-block wide rbn-skimmer-tool" id="rbn-skimmer-tool">
+    <p class="offline-notice" data-offline-only hidden role="status">
+      You are offline. The tool shell is available, but current RBN nodes and
+      map tiles need a connection. Any locally stored node list is labeled by
+      age and may be stale.
+    </p>
     <div class="rbn-setup">
       <div class="rbn-setup-heading">
         <p class="section-label">Operating position</p>
