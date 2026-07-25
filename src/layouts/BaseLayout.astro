@@ -14,6 +14,7 @@ interface Props {
   searchable?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   backlinks?: boolean;
+  searchType?: "Note" | "Project" | "Radio guide" | "Tool";
 }
 
 const {
@@ -28,6 +29,7 @@ const {
   searchable = true,
   structuredData,
   backlinks = false,
+  searchType,
 } = Astro.props;
 
 const absoluteUrl = (path: string) => new URL(path, Astro.url).toString();
@@ -163,7 +165,10 @@ const isActive = (href: string) =>
         </div>
       </header>
 
-      <main data-pagefind-body={searchable ? "" : undefined}>
+      <main
+        data-pagefind-body={searchable ? "" : undefined}
+        data-pagefind-filter={searchable && searchType ? `type:${searchType}` : undefined}
+      >
         <slot />
         {backlinks && <Backlinks destination={canonicalPath} />}
       </main>
@@ -182,6 +187,7 @@ const isActive = (href: string) =>
       </footer>
     </div>
     <script>
+      import { initSearchShortcut } from "../lib/search-shortcut";
       const storageKey = "rwjblue-theme";
       const root = document.documentElement;
       const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -267,6 +273,7 @@ const isActive = (href: string) =>
       });
 
       updateThemeUi();
+      initSearchShortcut();
     </script>
   </body>
 </html>

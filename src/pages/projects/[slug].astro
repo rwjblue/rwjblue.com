@@ -30,6 +30,7 @@ const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
   title={`${project.data.title} / Projects / Robert Jackson`}
   canonicalPath={`/projects/${project.id}/`}
   backlinks
+  searchType="Project"
 >
   <Breadcrumbs
     items={[
@@ -38,7 +39,7 @@ const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
       { name: project.data.title, path: `/projects/${project.id}/` },
     ]}
   />
-  <article class="document" data-pagefind-filter="type:Project">
+  <article class="document">
     <header>
       <p class="eyebrow">Project</p>
       <h1>{project.data.title}</h1>

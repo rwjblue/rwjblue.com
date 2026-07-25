@@ -78,11 +78,11 @@ const seriesContext = isPreview
   searchable={!isPreview}
   structuredData={structuredData}
   backlinks={!isPreview}
+  searchType={!isPreview ? "Note" : undefined}
 >
   <Breadcrumbs items={breadcrumbs} />
   <article
     class="document"
-    data-pagefind-filter={isPreview ? undefined : "type:Note"}
   >
     {
       isPreview && (

@@ -1,9 +1,7 @@
 interface PagefindResultData {
   url: string;
   plain_excerpt: string;
-  meta: {
-    title?: string;
-  };
+  meta: { title?: string };
 }
 
 interface PagefindResult {
@@ -15,16 +13,52 @@ interface PagefindSearch {
 }
 
 interface PagefindApi {
-  debouncedSearch: (
-    query: string,
+  search: (
+    query: string | null,
+    options?: { filters?: Record<string, unknown> },
   ) => Promise<PagefindSearch | null>;
   init: () => Promise<void>;
 }
 
+export interface SearchState {
+  query: string;
+  types: string[];
+  tag: string;
+}
+
 const PAGEFIND_BUNDLE = "/pagefind/pagefind.js";
 const RESULT_LIMIT = 20;
-
 let pagefindPromise: Promise<PagefindApi> | undefined;
+
+export function parseSearchState(params: URLSearchParams): SearchState {
+  return {
+    query: params.get("q") ?? "",
+    types: [...new Set(params.getAll("type").filter(Boolean))],
+    tag: params.get("tag") ?? "",
+  };
+}
+
+export function searchStateUrl(state: SearchState, current: URL): URL {
+  const url = new URL(current);
+  url.searchParams.delete("q");
+  url.searchParams.delete("type");
+  url.searchParams.delete("tag");
+  url.searchParams.delete("focus");
+  if (state.query) url.searchParams.set("q", state.query);
+  for (const type of state.types) url.searchParams.append("type", type);
+  if (state.tag) url.searchParams.set("tag", state.tag);
+  return url;
+}
+
+export function pagefindFiltersFor(
+  state: SearchState,
+): Record<string, unknown> | undefined {
+  const filters: Record<string, unknown> = {};
+  if (state.types.length === 1) filters.type = state.types[0];
+  if (state.types.length > 1) filters.type = { any: state.types };
+  if (state.tag) filters.tag = state.tag;
+  return Object.keys(filters).length > 0 ? filters : undefined;
+}
 
 const loadPagefind = () => {
   pagefindPromise ??= import(
@@ -34,7 +68,6 @@ const loadPagefind = () => {
     await pagefind.init();
     return pagefind;
   });
-
   return pagefindPromise;
 };
 
@@ -43,12 +76,10 @@ const resultItem = (result: PagefindResultData) => {
   const link = document.createElement("a");
   const excerpt = document.createElement("p");
   const path = document.createElement("span");
-
   link.href = result.url;
   link.textContent = result.meta.title ?? result.url;
   excerpt.textContent = result.plain_excerpt;
   path.textContent = new URL(result.url, window.location.origin).pathname;
-
   item.append(link, excerpt, path);
   return item;
 };
@@ -58,100 +89,100 @@ export function initSearchPage() {
   const input = document.querySelector<HTMLInputElement>("[data-search-input]");
   const status = document.querySelector<HTMLElement>("[data-search-status]");
   const results = document.querySelector<HTMLOListElement>("[data-search-results]");
+  const typeInputs = [
+    ...document.querySelectorAll<HTMLInputElement>("[data-search-type]"),
+  ];
+  const tagSelect =
+    document.querySelector<HTMLSelectElement>("[data-search-tag]");
 
-  if (!form || !input || !status || !results) {
-    return;
-  }
+  if (!form || !input || !status || !results || !tagSelect) return;
 
   let activeSearch = 0;
+  let debounceTimer: number | undefined;
 
-  const updateUrl = (query: string) => {
-    const url = new URL(window.location.href);
+  const state = (): SearchState => ({
+    query: input.value.trim(),
+    types: typeInputs.filter((control) => control.checked).map((control) => control.value),
+    tag: tagSelect.value,
+  });
 
-    if (query) {
-      url.searchParams.set("q", query);
-    } else {
-      url.searchParams.delete("q");
-    }
-
-    window.history.replaceState({}, "", url);
+  const syncUrl = (searchState: SearchState) => {
+    window.history.replaceState({}, "", searchStateUrl(searchState, new URL(window.location.href)));
   };
 
-  const search = async (rawQuery: string, syncUrl = true) => {
-    const query = rawQuery.trim();
+  const search = async (sync = true) => {
+    const searchState = state();
     const searchId = ++activeSearch;
+    if (sync) syncUrl(searchState);
 
-    if (syncUrl) {
-      updateUrl(query);
-    }
-
-    if (!query) {
+    const hasFilters = searchState.types.length > 0 || Boolean(searchState.tag);
+    if (!searchState.query && !hasFilters) {
       results.replaceChildren();
-      status.textContent = "Enter a word or phrase to search the site.";
+      status.textContent = "Enter a word or phrase, or choose a filter.";
       return;
     }
 
-    status.textContent = `Searching for "${query}"...`;
+    const description = searchState.query
+      ? `"${searchState.query}"`
+      : "the selected filters";
+    status.textContent = `Searching for ${description}...`;
 
     try {
       const pagefind = await loadPagefind();
-      const response = await pagefind.debouncedSearch(query);
-
-      if (!response || searchId !== activeSearch) {
-        return;
-      }
+      const response = await pagefind.search(searchState.query || null, {
+        filters: pagefindFiltersFor(searchState),
+      });
+      if (!response || searchId !== activeSearch) return;
 
       const visibleResults = response.results.slice(0, RESULT_LIMIT);
       const resultData = await Promise.all(
         visibleResults.map((result) => result.data()),
       );
-
-      if (searchId !== activeSearch) {
-        return;
-      }
+      if (searchId !== activeSearch) return;
 
       results.replaceChildren(...resultData.map(resultItem));
-
-      if (response.results.length === 0) {
-        status.textContent = `No results for "${query}".`;
+      const total = response.results.length;
+      if (total === 0) {
+        status.textContent = `No results for ${description}.`;
         return;
       }
-
       const shown = visibleResults.length;
-      const total = response.results.length;
       status.textContent =
         total > shown
-          ? `${total} results for "${query}"; showing the first ${shown}.`
-          : `${total} ${total === 1 ? "result" : "results"} for "${query}".`;
+          ? `${total} results for ${description}; showing the first ${shown}.`
+          : `${total} ${total === 1 ? "result" : "results"} for ${description}.`;
     } catch (error) {
       console.error("Unable to load the static search index.", error);
       results.replaceChildren();
-      status.textContent =
-        "Search could not load. Refresh the page and try again.";
+      status.textContent = "Search could not load. Refresh the page and try again.";
     }
   };
 
-  input.addEventListener(
-    "focus",
-    () => {
-      void loadPagefind();
-    },
-    { once: true },
-  );
+  const scheduleSearch = () => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => void search(), 140);
+  };
 
-  input.addEventListener("input", () => {
-    void search(input.value);
-  });
-
+  input.addEventListener("focus", () => void loadPagefind(), { once: true });
+  input.addEventListener("input", scheduleSearch);
+  typeInputs.forEach((control) => control.addEventListener("change", () => void search()));
+  tagSelect.addEventListener("change", () => void search());
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    void search(input.value);
+    window.clearTimeout(debounceTimer);
+    void search();
   });
 
-  const initialQuery = new URLSearchParams(window.location.search).get("q") ?? "";
+  const initial = parseSearchState(new URLSearchParams(window.location.search));
+  input.value = initial.query;
+  typeInputs.forEach((control) => {
+    control.checked = initial.types.includes(control.value);
+  });
+  if ([...tagSelect.options].some((option) => option.value === initial.tag)) {
+    tagSelect.value = initial.tag;
+  }
 
-  if (initialQuery) {
-    input.value = initialQuery;
-    void search(initialQuery, false);
+  if (initial.query || initial.types.length > 0 || initial.tag) {
+    void search(false);
   }
 }

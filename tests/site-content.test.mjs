@@ -143,10 +143,12 @@ test("Pagefind provides static site search without indexing listing pages", () =
   assert.match(searchPage, /data-search-input/);
   assert.match(searchPage, /searchable=\{false\}/);
   assert.match(searchClient, /\/pagefind\/pagefind\.js/);
-  assert.match(searchClient, /debouncedSearch/);
+  assert.match(searchClient, /pagefind\.search/);
+  assert.match(searchClient, /filters: pagefindFiltersFor/);
   assert.match(searchClient, /URLSearchParams/);
   assert.match(notePage, /searchable=\{!isPreview\}/);
-  assert.match(notePage, /data-pagefind-filter/);
+  assert.match(notePage, /searchType=\{!isPreview/);
+  assert.match(layout, /data-pagefind-filter=\{searchable && searchType/);
   assert.match(homepage, /searchable=\{false\}/);
   assert.match(notesIndex, /searchable=\{false\}/);
   assert.match(tagsIndex, /searchable=\{false\}/);

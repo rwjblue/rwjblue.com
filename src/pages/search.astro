@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getTaggedItems, summarizeTags } from "../lib/tags";
+
+const tags = summarizeTags(await getTaggedItems());
 ---
 
 <BaseLayout
@@ -30,10 +33,37 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         />
         <button type="submit">Search</button>
       </div>
+      <div class="search-filter-row">
+        <fieldset>
+          <legend>Content type</legend>
+          {
+            ["Note", "Project", "Radio guide", "Tool"].map((type) => (
+              <label>
+                <input type="checkbox" value={type} data-search-type />
+                <span>{type}s</span>
+              </label>
+            ))
+          }
+        </fieldset>
+        <label class="search-tag-filter">
+          Tag
+          <select data-search-tag>
+            <option value="">All tags</option>
+            {
+              tags.map((tag) => (
+                <option value={tag.tag}>{tag.tag} ({tag.count})</option>
+              ))
+            }
+          </select>
+        </label>
+      </div>
+      <p class="search-shortcut-hint">
+        Press <kbd>/</kbd> from ordinary page content to open search.
+      </p>
     </form>
 
     <p class="search-status" role="status" aria-live="polite" data-search-status>
-      Enter a word or phrase to search the site.
+      Enter a word or phrase, or choose a filter.
     </p>
     <ol class="search-results" data-search-results></ol>
   </section>
