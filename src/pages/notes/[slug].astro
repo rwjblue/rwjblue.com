@@ -5,8 +5,9 @@ import GeoJsonBoundaryMap from "../../components/GeoJsonBoundaryMap.astro";
 import NcdxfBeaconMap from "../../components/NcdxfBeaconMap.astro";
 import PotaContactMap from "../../components/PotaContactMap.astro";
 import TagHints from "../../components/TagHints.astro";
+import TagLinks from "../../components/TagLinks.astro";
 import { contactMapForNote } from "../../data/pota/contact-maps";
-import { formatDate, displayTags } from "../../lib/format";
+import { formatDate } from "../../lib/format";
 import { getRenderableNotes } from "../../lib/notes";
 
 export async function getStaticPaths() {
@@ -58,7 +59,7 @@ const visibilityDescription =
       <p class="meta">{formattedDate}</p>
       <p>{note.data.summary}</p>
       <div class="tags">
-        {displayTags(note.data.tags).map((tag) => <span>{tag}</span>)}
+        <TagLinks tags={note.data.tags} />
       </div>
     </header>
     <TagHints tags={note.data.tags} />

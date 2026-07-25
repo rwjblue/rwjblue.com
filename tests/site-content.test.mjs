@@ -84,9 +84,33 @@ test("Rockville WMA activation is associated with the day-one field note", () =>
 test("new section routes exist", () => {
   assert.ok(existsSync("src/pages/notes/index.astro"));
   assert.ok(existsSync("src/pages/projects/index.astro"));
+  assert.ok(existsSync("src/pages/tags/index.astro"));
+  assert.ok(existsSync("src/pages/tags/[tag].astro"));
   assert.ok(existsSync("src/pages/radio/index.astro"));
   assert.ok(existsSync("src/pages/radio/shack.astro"));
   assert.ok(!existsSync("src/pages/now/index.astro"));
+});
+
+test("top-level tags connect public notes and projects", () => {
+  const tagsLibrary = read("src/lib/tags.ts");
+  const tagLinks = read("src/components/TagLinks.astro");
+  const tagIndex = read("src/pages/tags/index.astro");
+  const tagPage = read("src/pages/tags/[tag].astro");
+  const notesIndex = read("src/pages/notes/index.astro");
+  const projectsIndex = read("src/pages/projects/index.astro");
+
+  assert.match(tagsLibrary, /getPublicNotes\(\)/);
+  assert.match(tagsLibrary, /getCollection\("projects"\)/);
+  assert.match(tagsLibrary, /displayTags\(note\.data\.tags\)/);
+  assert.match(tagsLibrary, /displayTags\(project\.data\.tags\)/);
+  assert.match(tagLinks, /tagHref\(tag\)/);
+  assert.match(tagIndex, /summarizeTags\(await getTaggedItems\(\)\)/);
+  assert.match(tagPage, /params: \{ tag \}/);
+  assert.match(tagPage, /item\.tags\.includes\(tag\)/);
+  assert.match(tagPage, /<TagLinks tags=\{item\.tags\}/);
+  assert.match(notesIndex, /<TagLinks tags=\{note\.data\.tags\}/);
+  assert.match(projectsIndex, /<TagLinks tags=\{project\.data\.tags\}/);
+  assert.doesNotMatch(tagLinks, /\/notes\/tags\//);
 });
 
 test("primary navigation omits now", () => {

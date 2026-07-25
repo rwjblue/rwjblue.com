@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate, displayTags } from "../../lib/format";
+import TagLinks from "../../components/TagLinks.astro";
+import { formatDate } from "../../lib/format";
 import { getPublicNotes } from "../../lib/notes";
 
 const radioNotes = (await getPublicNotes())
@@ -120,7 +121,7 @@ const radioNotes = (await getPublicNotes())
             <a href={`/notes/${note.id}/`}>{note.data.title}</a>
             <p>{note.data.summary}</p>
             <div class="tags">
-              {displayTags(note.data.tags).map((tag) => <span>{tag}</span>)}
+              <TagLinks tags={note.data.tags} />
             </div>
           </li>
         ))

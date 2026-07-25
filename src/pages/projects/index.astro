@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TagLinks from "../../components/TagLinks.astro";
 import riPotaTrackerData from "../../data/pota/ri-tracker.json";
 import roveToFlData from "../../data/pota/rove-to-fl.json";
 import { formatDate } from "../../lib/format";
@@ -37,10 +38,14 @@ const projects = (await getCollection("projects"))
           <strong>{project.data.title}</strong>
           <p>{project.data.summary}</p>
           <div class="tags">
-            {project.data.tags.map((tag) => <em>{tag}</em>)}
+            <TagLinks tags={project.data.tags} />
           </div>
         </a>
       ))
     }
   </div>
+
+  <nav class="section-more" aria-label="Tag index">
+    <a href="/tags/">Browse all tags</a>
+  </nav>
 </BaseLayout>

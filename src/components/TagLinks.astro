@@ -1,0 +1,22 @@
+---
+import { displayTags } from "../lib/format";
+import { tagHref } from "../lib/tags";
+
+interface Props {
+  tags: string[];
+  pagefindFilters?: boolean;
+}
+
+const { tags, pagefindFilters = false } = Astro.props;
+---
+
+{
+  displayTags(tags).map((tag) => (
+    <a
+      href={tagHref(tag)}
+      data-pagefind-filter={pagefindFilters ? "tag" : undefined}
+    >
+      {tag}
+    </a>
+  ))
+}

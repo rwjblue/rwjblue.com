@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TagLinks from "../../components/TagLinks.astro";
 
 export async function getStaticPaths() {
   const DEDICATED_PAGES = ["2026-activate-all-ri-pota", "2026-06-rove-to-fl"];
@@ -31,7 +32,7 @@ const formattedUpdated = project.data.updated.toLocaleDateString("en-US", {
       <p class="meta">{project.data.status} · updated {formattedUpdated}</p>
       <p>{project.data.summary}</p>
       <div class="tags">
-        {project.data.tags.map((tag) => <span>{tag}</span>)}
+        <TagLinks tags={project.data.tags} />
       </div>
     </header>
     <Content />
