@@ -2,6 +2,7 @@ import {
   getCollection,
   type CollectionEntry,
 } from "astro:content";
+import { compareChronologicalItemsNewestFirst } from "./chronology";
 
 export type NoteEntry = CollectionEntry<"notes">;
 export type NoteVisibility = NoteEntry["data"]["visibility"];
@@ -17,6 +18,23 @@ export const isUnlistedNote = (note: NoteEntry): boolean =>
 
 export const isDraftNote = (note: NoteEntry): boolean =>
   note.data.visibility === "draft";
+
+export const compareNotesNewestFirst = (
+  left: NoteEntry,
+  right: NoteEntry,
+) =>
+  compareChronologicalItemsNewestFirst(
+    {
+      date: left.data.date,
+      series: left.data.series,
+      id: left.id,
+    },
+    {
+      date: right.data.date,
+      series: right.data.series,
+      id: right.id,
+    },
+  );
 
 export const getPublicNotes = () => getCollection("notes", isPublicNote);
 

@@ -2,7 +2,7 @@ import rss from "@astrojs/rss";
 import type { CollectionEntry } from "astro:content";
 import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
-import { getPublicNotes } from "../lib/notes";
+import { compareNotesNewestFirst, getPublicNotes } from "../lib/notes";
 
 const FEED_SITE = "https://rwjblue.com";
 const RADIO_SITE = "https://n1rwj.com";
@@ -61,9 +61,7 @@ const renderContent = (note: NoteEntry) => {
 };
 
 export async function GET() {
-  const notes = (await getPublicNotes()).sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-  );
+  const notes = (await getPublicNotes()).sort(compareNotesNewestFirst);
 
   return rss({
     title: FEED_TITLE,

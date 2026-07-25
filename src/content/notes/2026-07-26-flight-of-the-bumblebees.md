@@ -2,7 +2,6 @@
 title: Preparing for the 2026 Flight of the Bumblebees
 date: 2026-07-26
 summary: "Planning the location, bands, and a simple resonant wire antenna for my first Flight of the Bumblebees as Bumblebee number 121."
-visibility: unlisted
 series:
   slug: flight-of-the-bumblebees-2026
   title: Flight of the Bumblebees 2026
@@ -132,8 +131,9 @@ The practical checklist is short:
   insect protection;
 - arrive early enough to solve antenna problems before 1700 UTC.
 
-This is the planning part of the experiment. A second note will cover the
-actual antenna construction, banana-plug links, measurements, trimming, and
-deployment practice once I have the parts in hand. After FOBB, a final field
-report can concentrate on the chosen location, station configuration, band
-conditions, contacts, and whatever the simple dipole teaches me.
+This is the first planning part of the experiment. The next entry follows a
+last-minute change in location, while a later note can cover the actual antenna
+construction, banana-plug links, measurements, trimming, and deployment
+practice. After FOBB, a final field report can concentrate on the chosen
+location, station configuration, band conditions, contacts, and whatever the
+simple dipole teaches me.

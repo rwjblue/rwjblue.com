@@ -1762,6 +1762,18 @@ p {
   line-height: 1.35;
 }
 
+@media (max-width: 620px) {
+  .boundary-map-heading {
+    display: grid;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .boundary-map-source {
+    justify-self: start;
+  }
+}
+
 .tag-hint {
   margin-bottom: 28px;
   padding: 10px 14px;

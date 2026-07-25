@@ -3,18 +3,18 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import riPotaTrackerData from "../data/pota/ri-tracker.json";
 import roveToFlData from "../data/pota/rove-to-fl.json";
+import { compareChronologicalItemsNewestFirst } from "../lib/chronology";
 import { formatDate } from "../lib/format";
-import { getPublicNotes } from "../lib/notes";
+import { compareNotesNewestFirst, getPublicNotes } from "../lib/notes";
 import { effectiveProjectUpdatedDate } from "../lib/project-updates";
 
-const allNotes = (await getPublicNotes()).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const allNotes = (await getPublicNotes()).sort(compareNotesNewestFirst);
 
 const noteItems = allNotes.map((note) => ({
   type: "note" as const,
   label: "Note",
   date: note.data.date,
+  series: note.data.series,
   title: note.data.title,
   summary: note.data.summary,
   href: `/notes/${note.id}/`,
@@ -41,7 +41,7 @@ const projectItems = projects.map(({ project, updated }) => ({
 }));
 
 const activityItems = [...noteItems, ...projectItems]
-  .sort((a, b) => b.date.valueOf() - a.date.valueOf())
+  .sort(compareChronologicalItemsNewestFirst)
   .slice(0, 8);
 
 const activeProjects = projects

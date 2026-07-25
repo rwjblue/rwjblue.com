@@ -2,11 +2,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TagLinks from "../../components/TagLinks.astro";
 import { formatDate } from "../../lib/format";
-import { getPublicNotes } from "../../lib/notes";
+import { compareNotesNewestFirst, getPublicNotes } from "../../lib/notes";
 
 const radioNotes = (await getPublicNotes())
   .filter((note) => note.data.tags.includes("radio"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort(compareNotesNewestFirst);
 ---
 
 <BaseLayout title="Radio / N1RWJ" searchable={false}>

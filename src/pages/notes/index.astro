@@ -2,14 +2,14 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TagLinks from "../../components/TagLinks.astro";
 import { formatDate } from "../../lib/format";
-import { getDraftNotes, getPublicNotes } from "../../lib/notes";
+import {
+  compareNotesNewestFirst,
+  getDraftNotes,
+  getPublicNotes,
+} from "../../lib/notes";
 
-const notes = (await getPublicNotes()).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-const drafts = (await getDraftNotes()).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const notes = (await getPublicNotes()).sort(compareNotesNewestFirst);
+const drafts = (await getDraftNotes()).sort(compareNotesNewestFirst);
 ---
 
 <BaseLayout title="Notes / Robert Jackson" searchable={false}>
