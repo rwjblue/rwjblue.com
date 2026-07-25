@@ -2883,12 +2883,6 @@ p {
 }
 
 @media (max-width: 520px) {
-  .shell {
-    width: min(362px, calc(100% - 28px));
-    margin-right: 14px;
-    margin-left: 14px;
-  }
-
   .cw-fields,
   .cw-log-panel,
   .cw-step,
