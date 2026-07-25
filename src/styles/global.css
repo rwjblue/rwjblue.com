@@ -242,8 +242,9 @@ a {
   color: var(--ink);
 }
 
-.theme-control {
+.site-header-tools {
   display: flex;
+  gap: 8px;
   align-items: center;
   align-self: stretch;
   padding-left: 20px;
@@ -251,6 +252,12 @@ a {
   border-left: 1px solid var(--line);
 }
 
+.theme-control {
+  display: flex;
+  align-items: center;
+}
+
+.header-search-link,
 .theme-toggle {
   position: relative;
   display: inline-flex;
@@ -266,6 +273,30 @@ a {
   color: var(--muted);
   cursor: pointer;
   font: inherit;
+}
+
+.header-search-link {
+  text-decoration: none;
+}
+
+.header-search-link svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.9;
+}
+
+.header-search-link:hover,
+.header-search-link[aria-current="page"] {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.header-search-link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--blue) 36%, transparent);
+  outline-offset: 2px;
 }
 
 .theme-toggle[hidden] {
@@ -1873,6 +1904,30 @@ p {
   max-width: 780px;
 }
 
+.search-dev-notice {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 18px;
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--blue);
+  padding: 16px 18px;
+  background: var(--surface-soft);
+}
+
+.search-dev-notice > * {
+  margin: 0;
+}
+
+.search-dev-notice h2 {
+  font-size: 1.15rem;
+}
+
+.search-dev-notice code {
+  color: var(--ink);
+  font-size: 0.88em;
+  font-weight: 800;
+}
+
 .search-form {
   padding: 18px 0 22px;
   border-top: 2px solid var(--ink);
@@ -1907,6 +1962,11 @@ p {
   border-color: var(--blue);
   outline: 3px solid color-mix(in srgb, var(--blue) 24%, transparent);
   outline-offset: 1px;
+}
+
+.search-form :disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
 }
 
 .search-form button {
@@ -3188,7 +3248,7 @@ p {
     justify-content: space-between;
   }
 
-  .theme-control {
+  .site-header-tools {
     padding-left: 12px;
     margin-left: 12px;
   }

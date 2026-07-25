@@ -139,8 +139,13 @@ test("Pagefind provides static site search without indexing listing pages", () =
   assert.match(packageJson, /"pagefind":/);
   assert.match(layout, /searchable\?: boolean/);
   assert.match(layout, /data-pagefind-body=\{searchable/);
-  assert.match(layout, /href: "\/search\/"/);
+  assert.match(layout, /class="header-search-link"/);
+  assert.match(layout, /aria-label="Search"/);
+  assert.doesNotMatch(layout, /\{ href: "\/search\/", label: "Search" \}/);
   assert.match(searchPage, /data-search-input/);
+  assert.match(searchPage, /search-dev-notice/);
+  assert.match(searchPage, /import\.meta\.env\.DEV/);
+  assert.match(searchPage, /disabled=\{!searchAvailable\}/);
   assert.match(searchPage, /searchable=\{false\}/);
   assert.match(searchClient, /\/pagefind\/pagefind\.js/);
   assert.match(searchClient, /pagefind\.search/);

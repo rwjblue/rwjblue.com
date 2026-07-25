@@ -95,7 +95,7 @@ export function initSearchPage() {
   const tagSelect =
     document.querySelector<HTMLSelectElement>("[data-search-tag]");
 
-  if (!form || !input || !status || !results || !tagSelect) return;
+  if (!form || !input || !status || !results || !tagSelect || input.disabled) return;
 
   let activeSearch = 0;
   let debounceTimer: number | undefined;

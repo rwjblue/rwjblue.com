@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getTaggedItems, summarizeTags } from "../lib/tags";
 
 const tags = summarizeTags(await getTaggedItems());
+const searchAvailable = !import.meta.env.DEV;
 ---
 
 <BaseLayout
@@ -20,6 +21,19 @@ const tags = summarizeTags(await getTaggedItems());
   </section>
 
   <section class="site-search" aria-labelledby="site-search-label">
+    {
+      !searchAvailable && (
+        <aside class="search-dev-notice" aria-labelledby="search-dev-title">
+          <p class="section-label">Development mode</p>
+          <h2 id="search-dev-title">Search needs a production build.</h2>
+          <p>
+            Pagefind creates its index during <code>mise run build</code>, so
+            search is unavailable under <code>mise run dev</code>. Use
+            <code>mise run preview</code> after a build to test search locally.
+          </p>
+        </aside>
+      )
+    }
     <form class="search-form" role="search" data-search-form>
       <label id="site-search-label" for="site-search">Search the site</label>
       <div>
@@ -30,8 +44,9 @@ const tags = summarizeTags(await getTaggedItems());
           placeholder="Try POTA, CW, Astro..."
           autocomplete="off"
           data-search-input
+          disabled={!searchAvailable}
         />
-        <button type="submit">Search</button>
+        <button type="submit" disabled={!searchAvailable}>Search</button>
       </div>
       <div class="search-filter-row">
         <fieldset>
@@ -39,7 +54,12 @@ const tags = summarizeTags(await getTaggedItems());
           {
             ["Note", "Project", "Radio guide", "Tool"].map((type) => (
               <label>
-                <input type="checkbox" value={type} data-search-type />
+                <input
+                  type="checkbox"
+                  value={type}
+                  data-search-type
+                  disabled={!searchAvailable}
+                />
                 <span>{type}s</span>
               </label>
             ))
@@ -47,7 +67,7 @@ const tags = summarizeTags(await getTaggedItems());
         </fieldset>
         <label class="search-tag-filter">
           Tag
-          <select data-search-tag>
+          <select data-search-tag disabled={!searchAvailable}>
             <option value="">All tags</option>
             {
               tags.map((tag) => (
@@ -57,13 +77,21 @@ const tags = summarizeTags(await getTaggedItems());
           </select>
         </label>
       </div>
-      <p class="search-shortcut-hint">
-        Press <kbd>/</kbd> from ordinary page content to open search.
-      </p>
+      {
+        searchAvailable && (
+          <p class="search-shortcut-hint">
+            Press <kbd>/</kbd> from ordinary page content to open search.
+          </p>
+        )
+      }
     </form>
 
     <p class="search-status" role="status" aria-live="polite" data-search-status>
-      Enter a word or phrase, or choose a filter.
+      {
+        searchAvailable
+          ? "Enter a word or phrase, or choose a filter."
+          : "Search controls are disabled in Astro development mode."
+      }
     </p>
     <ol class="search-results" data-search-results></ol>
   </section>
