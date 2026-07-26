@@ -12,24 +12,44 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 127,
+      "activations": 129,
       "parks": 84,
-      "qsos": 3014
+      "qsos": 3059
     },
     "attempts": {
-      "activations": 137,
+      "activations": 139,
       "parks": 84,
-      "qsos": 3052
+      "qsos": 3097
     },
     "hunter": {
-      "parks": 531,
-      "qsos": 843
+      "parks": 539,
+      "qsos": 859
     },
     "awards": 28,
-    "endorsements": 57
+    "endorsements": 59
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-07-20",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 21,
+        "data": 0,
+        "phone": 0,
+        "total": 21
+      },
+      {
+        "date": "2026-07-18",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 0,
+        "data": 0,
+        "phone": 24,
+        "total": 24
+      },
       {
         "date": "2026-07-15",
         "reference": "US-6992",
@@ -82,8 +102,8 @@
       },
       {
         "date": "2026-07-06",
-        "reference": "US-1887",
-        "park": "Jonathan Dickinson State Park",
+        "reference": "US-6281",
+        "park": "Loxahatchee River National Wild and Scenic River",
         "location": "US-FL",
         "cw": 11,
         "data": 0,
@@ -92,8 +112,8 @@
       },
       {
         "date": "2026-07-06",
-        "reference": "US-6281",
-        "park": "Loxahatchee River National Wild and Scenic River",
+        "reference": "US-1887",
+        "park": "Jonathan Dickinson State Park",
         "location": "US-FL",
         "cw": 11,
         "data": 0,
@@ -142,8 +162,8 @@
       },
       {
         "date": "2026-06-25",
-        "reference": "US-4638",
-        "park": "Ross Prairie State Forest",
+        "reference": "US-3637",
+        "park": "Marjorie Harris Carr Cross State Park",
         "location": "US-FL",
         "cw": 13,
         "data": 0,
@@ -152,8 +172,8 @@
       },
       {
         "date": "2026-06-25",
-        "reference": "US-3637",
-        "park": "Marjorie Harris Carr Cross State Park",
+        "reference": "US-4638",
+        "park": "Ross Prairie State Forest",
         "location": "US-FL",
         "cw": 13,
         "data": 0,
@@ -222,26 +242,6 @@
       },
       {
         "date": "2026-06-21",
-        "reference": "US-4564",
-        "park": "Potomac Heritage Trail National Scenic Trail",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0793",
-        "park": "Vietnam Veterans National Memorial",
-        "location": "US-DC",
-        "cw": 0,
-        "data": 0,
-        "phone": 20,
-        "total": 20
-      },
-      {
-        "date": "2026-06-21",
         "reference": "US-0653",
         "park": "Constitution Gardens National Park",
         "location": "US-DC",
@@ -262,13 +262,13 @@
       },
       {
         "date": "2026-06-21",
-        "reference": "US-0792",
-        "park": "Thomas Jefferson National Memorial",
+        "reference": "US-4564",
+        "park": "Potomac Heritage Trail National Scenic Trail",
         "location": "US-DC",
         "cw": 12,
         "data": 0,
-        "phone": 0,
-        "total": 12
+        "phone": 21,
+        "total": 33
       },
       {
         "date": "2026-06-21",
@@ -283,13 +283,175 @@
     ],
     "hunter_qsos": [
       {
-        "date": "2026-07-15T14:07:46",
-        "callsign": "KB5YZY",
+        "date": "2026-07-26T19:03:34",
+        "callsign": "KO4ALY",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-6492",
-        "park": "Weldon Spring State Conservation Area",
+        "reference": "US-1048",
+        "park": "Monte Sano State Park",
+        "location": "US-AL"
+      },
+      {
+        "date": "2026-07-26T17:44:55",
+        "callsign": "KF0U",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-8280",
+        "park": "Three Creeks State Conservation Area",
         "location": "US-MO"
+      },
+      {
+        "date": "2026-07-25T16:51:30",
+        "callsign": "K1NW",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-10544",
+        "park": "Jerimoth Hill State Recreation Area",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-07-25T00:11:21",
+        "callsign": "W3GTR",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1573",
+        "park": "Gambrill State Park",
+        "location": "US-MD"
+      },
+      {
+        "date": "2026-07-24T14:41:00",
+        "callsign": "KE2BVB",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1625",
+        "park": "Monmouth Battlefield State Park",
+        "location": "US-NJ"
+      },
+      {
+        "date": "2026-07-24T14:36:57",
+        "callsign": "KG8CO",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1526",
+        "park": "Negwegon State Park",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-07-24T13:21:36",
+        "callsign": "KU3X",
+        "band": "40M",
+        "mode": "PHONE",
+        "reference": "US-1391",
+        "park": "Nockamixon State Park",
+        "location": "US-PA"
+      },
+      {
+        "date": "2026-07-24T12:55:00",
+        "callsign": "AD2MM",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-0680",
+        "park": "Gateway National Recreation Area",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-07-24T12:55:00",
+        "callsign": "AD2MM",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-8081",
+        "park": "Floyd Bennett Field National Historic District",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-07-23T12:30:20",
+        "callsign": "N1BS",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-6982",
+        "park": "Big River Wildlife Management Area",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-07-21T23:39:34",
+        "callsign": "N8JMS",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1973",
+        "park": "Madison Lake State Park",
+        "location": "US-OH"
+      },
+      {
+        "date": "2026-07-20T23:49:32",
+        "callsign": "K1NW",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10547",
+        "park": "Silver Spring State Recreation Area",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-07-20T23:25:00",
+        "callsign": "WC1D",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-8423",
+        "park": "Purgatory Chasm State Reserve",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-07-20T21:50:17",
+        "callsign": "K8JKU",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-3323",
+        "park": "Pontiac Lake State Recreation Area",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-07-20T14:34:09",
+        "callsign": "AE0YM",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4010",
+        "park": "Heron Haven State Park",
+        "location": "US-NE"
+      },
+      {
+        "date": "2026-07-20T14:27:00",
+        "callsign": "WB2ART",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2876",
+        "park": "Goddard Memorial State Park",
+        "location": "US-RI"
+      },
+      {
+        "date": "2026-07-20T14:21:08",
+        "callsign": "KB6NU",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-13184",
+        "park": "Iron Belle State Trail",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-07-20T13:43:00",
+        "callsign": "K4KVC",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6455",
+        "park": "Panasoffkee Outlet State Conservation Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-07-20T13:29:51",
+        "callsign": "N8JMS",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-9478",
+        "park": "Mackey Ford State Wildlife Area",
+        "location": "US-OH"
       },
       {
         "date": "2026-07-15T14:07:46",
@@ -307,6 +469,15 @@
         "mode": "CW",
         "reference": "US-4572",
         "park": "Lewis and Clark National Historic Trail",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-07-15T14:07:46",
+        "callsign": "KB5YZY",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6492",
+        "park": "Weldon Spring State Conservation Area",
         "location": "US-MO"
       },
       {
@@ -335,177 +506,6 @@
         "reference": "US-1409",
         "park": "Raccoon Creek State Park",
         "location": "US-PA"
-      },
-      {
-        "date": "2026-07-15T12:51:00",
-        "callsign": "NA9M",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-9773",
-        "park": "Capital City State Trail",
-        "location": "US-WI"
-      },
-      {
-        "date": "2026-07-15T12:45:00",
-        "callsign": "KB1WCK",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-11613",
-        "park": "Black Brook Wildlife Management Area",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-07-12T23:58:23",
-        "callsign": "N8JMS",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1985",
-        "park": "Punderson State Park",
-        "location": "US-OH"
-      },
-      {
-        "date": "2026-07-09T15:58:10",
-        "callsign": "N4NN",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3769",
-        "park": "River Bend Wildlife Management Area",
-        "location": "US-GA"
-      },
-      {
-        "date": "2026-07-09T15:56:49",
-        "callsign": "WZ3J",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6396",
-        "park": "Soldier's Delight Natural Area",
-        "location": "US-MD"
-      },
-      {
-        "date": "2026-07-09T15:52:32",
-        "callsign": "KF8FCC",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3322",
-        "park": "Pinckney State Recreation Area",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-07-09T15:35:12",
-        "callsign": "NI8M",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1985",
-        "park": "Punderson State Park",
-        "location": "US-OH"
-      },
-      {
-        "date": "2026-07-07T23:45:00",
-        "callsign": "NL5Y",
-        "band": "30M",
-        "mode": "CW",
-        "reference": "US-3670",
-        "park": "Yellow River Marsh Preserve State Park",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-07T23:32:37",
-        "callsign": "K3MTO",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-6313",
-        "park": "John C. and Mariana Jones/Hungryland Wildlife Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-07T23:17:57",
-        "callsign": "K3MTO",
-        "band": "17M",
-        "mode": "CW",
-        "reference": "US-6313",
-        "park": "John C. and Mariana Jones/Hungryland Wildlife Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-07T23:04:19",
-        "callsign": "K3MTO",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6313",
-        "park": "John C. and Mariana Jones/Hungryland Wildlife Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-07T22:40:00",
-        "callsign": "NR1Z",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-0794",
-        "park": "Washington Monument National Memorial",
-        "location": "US-DC"
-      },
-      {
-        "date": "2026-07-07T22:24:01",
-        "callsign": "KG1A",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-07T14:14:26",
-        "callsign": "K4NYX",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3654",
-        "park": "Savannas Preserve State Park",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-07T14:11:23",
-        "callsign": "N2YC",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2072",
-        "park": "Hempstead Lake State Park",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-07-07T14:08:43",
-        "callsign": "K0GLG",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-9862",
-        "park": "Peter Helland State Wildlife Area",
-        "location": "US-WI"
-      },
-      {
-        "date": "2026-07-06T14:42:20",
-        "callsign": "KG1A",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-05T19:33:43",
-        "callsign": "W1RMW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-0282",
-        "park": "Crab Orchard National Wildlife Refuge",
-        "location": "US-IL"
-      },
-      {
-        "date": "2026-07-05T19:29:00",
-        "callsign": "W2D",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6532",
-        "park": "Erie Canalway Corridor National Heritage Area",
-        "location": "US-NY"
       }
     ]
   },
@@ -640,6 +640,7 @@
       "granted": "2026-03-08T20:27:11",
       "endorsements": [
         "20M",
+        "CW",
         "PHONE"
       ]
     },
@@ -681,7 +682,8 @@
       "granted": "2025-10-18T20:55:58",
       "endorsements": [
         "Autumn 2025",
-        "Spring 2026"
+        "Spring 2026",
+        "Summer 2026"
       ]
     },
     {

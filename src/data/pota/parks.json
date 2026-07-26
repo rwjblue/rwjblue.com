@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T16:29:20.564Z",
+  "generatedAt": "2026-07-26T22:06:09.219Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -94,7 +94,20 @@
       "activationCount": 0,
       "qsoTotal": 0,
       "activations": [],
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-07-26-flight-of-the-bumblebees-block-island",
+          "title": "Taking Flight of the Bumblebees to Block Island",
+          "date": "2026-07-26",
+          "href": "/notes/2026-07-26-flight-of-the-bumblebees-block-island/"
+        },
+        {
+          "id": "2026-07-26-flight-of-the-bumblebees-from-block-island",
+          "title": "Flight of the Bumblebees from Block Island",
+          "date": "2026-07-26",
+          "href": "/notes/2026-07-26-flight-of-the-bumblebees-from-block-island/"
+        }
+      ],
       "publicStats": {
         "attempts": 28,
         "activations": 28,
@@ -3444,9 +3457,58 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 30,
-      "qsoTotal": 812,
+      "activationCount": 32,
+      "qsoTotal": 857,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-07-20",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 21,
+            "cw": 21,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-07-18",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 24,
+            "cw": 0,
+            "data": 0,
+            "phone": 24
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-07-18-k2hrc-rhode-island-pota",
+              "title": "Taking K2HRC to Rhode Island",
+              "date": "2026-07-18",
+              "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",
