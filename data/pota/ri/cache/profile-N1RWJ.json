@@ -12,24 +12,34 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 129,
-      "parks": 84,
-      "qsos": 3059
+      "activations": 130,
+      "parks": 85,
+      "qsos": 3120
     },
     "attempts": {
-      "activations": 139,
-      "parks": 84,
-      "qsos": 3097
+      "activations": 140,
+      "parks": 85,
+      "qsos": 3158
     },
     "hunter": {
-      "parks": 539,
-      "qsos": 859
+      "parks": 543,
+      "qsos": 871
     },
     "awards": 28,
-    "endorsements": 59
+    "endorsements": 60
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-07-26",
+        "reference": "US-0513",
+        "park": "Block Island National Wildlife Refuge",
+        "location": "US-RI",
+        "cw": 61,
+        "data": 0,
+        "phone": 0,
+        "total": 61
+      },
       {
         "date": "2026-07-20",
         "reference": "US-6992",
@@ -102,8 +112,8 @@
       },
       {
         "date": "2026-07-06",
-        "reference": "US-6281",
-        "park": "Loxahatchee River National Wild and Scenic River",
+        "reference": "US-1887",
+        "park": "Jonathan Dickinson State Park",
         "location": "US-FL",
         "cw": 11,
         "data": 0,
@@ -112,8 +122,8 @@
       },
       {
         "date": "2026-07-06",
-        "reference": "US-1887",
-        "park": "Jonathan Dickinson State Park",
+        "reference": "US-6281",
+        "park": "Loxahatchee River National Wild and Scenic River",
         "location": "US-FL",
         "cw": 11,
         "data": 0,
@@ -222,16 +232,6 @@
       },
       {
         "date": "2026-06-22",
-        "reference": "US-0717",
-        "park": "Fredericksburg and Spotsylvania National Military Park",
-        "location": "US-VA",
-        "cw": 10,
-        "data": 0,
-        "phone": 0,
-        "total": 10
-      },
-      {
-        "date": "2026-06-22",
         "reference": "US-2744",
         "park": "Medoc Mountain State Park",
         "location": "US-NC",
@@ -241,14 +241,14 @@
         "total": 13
       },
       {
-        "date": "2026-06-21",
-        "reference": "US-0653",
-        "park": "Constitution Gardens National Park",
-        "location": "US-DC",
-        "cw": 0,
+        "date": "2026-06-22",
+        "reference": "US-0717",
+        "park": "Fredericksburg and Spotsylvania National Military Park",
+        "location": "US-VA",
+        "cw": 10,
         "data": 0,
-        "phone": 20,
-        "total": 20
+        "phone": 0,
+        "total": 10
       },
       {
         "date": "2026-06-21",
@@ -283,6 +283,33 @@
     ],
     "hunter_qsos": [
       {
+        "date": "2026-07-27T17:09:00",
+        "callsign": "K4EGK",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-11266",
+        "park": "August G Beckmeier State Conservation Area",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-07-26T19:31:32",
+        "callsign": "KO6A",
+        "band": "15M",
+        "mode": "CW",
+        "reference": "US-7889",
+        "park": "Presidio of SF National Historic Site",
+        "location": "US-CA"
+      },
+      {
+        "date": "2026-07-26T19:31:32",
+        "callsign": "KO6A",
+        "band": "15M",
+        "mode": "CW",
+        "reference": "US-0647",
+        "park": "Golden Gate National Recreation Area",
+        "location": "US-CA"
+      },
+      {
         "date": "2026-07-26T19:03:34",
         "callsign": "KO4ALY",
         "band": "20M",
@@ -299,6 +326,33 @@
         "reference": "US-8280",
         "park": "Three Creeks State Conservation Area",
         "location": "US-MO"
+      },
+      {
+        "date": "2026-07-26T17:15:35",
+        "callsign": "WB8YYY",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3845",
+        "park": "Kerr Lake State Recreation Area",
+        "location": "US-NC"
+      },
+      {
+        "date": "2026-07-26T17:09:36",
+        "callsign": "WC5T",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1077",
+        "park": "Crowley's Ridge State Park",
+        "location": "US-AR"
+      },
+      {
+        "date": "2026-07-26T17:04:52",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
       },
       {
         "date": "2026-07-25T16:51:30",
@@ -452,60 +506,6 @@
         "reference": "US-9478",
         "park": "Mackey Ford State Wildlife Area",
         "location": "US-OH"
-      },
-      {
-        "date": "2026-07-15T14:07:46",
-        "callsign": "KB5YZY",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1766",
-        "park": "Katy Trail State Park",
-        "location": "US-MO"
-      },
-      {
-        "date": "2026-07-15T14:07:46",
-        "callsign": "KB5YZY",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-4572",
-        "park": "Lewis and Clark National Historic Trail",
-        "location": "US-MO"
-      },
-      {
-        "date": "2026-07-15T14:07:46",
-        "callsign": "KB5YZY",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6492",
-        "park": "Weldon Spring State Conservation Area",
-        "location": "US-MO"
-      },
-      {
-        "date": "2026-07-15T13:12:40",
-        "callsign": "N8JMS",
-        "band": "30M",
-        "mode": "CW",
-        "reference": "US-1973",
-        "park": "Madison Lake State Park",
-        "location": "US-OH"
-      },
-      {
-        "date": "2026-07-15T12:55:41",
-        "callsign": "N8JMS",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-1973",
-        "park": "Madison Lake State Park",
-        "location": "US-OH"
-      },
-      {
-        "date": "2026-07-15T12:53:56",
-        "callsign": "W3CT",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-1409",
-        "park": "Raccoon Creek State Park",
-        "location": "US-PA"
       }
     ]
   },
@@ -589,6 +589,7 @@
       "name": "Gold Hunter",
       "granted": "2025-09-21T21:22:50",
       "endorsements": [
+        "17M",
         "20M",
         "40M",
         "CW",

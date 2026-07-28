@@ -1689,6 +1689,19 @@
         "phone": 24
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-0513",
+      "park": "Block Island National Wildlife Refuge",
+      "date": "2026-07-26",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 61,
+        "cw": 61,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

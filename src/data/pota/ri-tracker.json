@@ -1,50 +1,17 @@
 {
-  "generatedAt": "2026-07-26T22:06:08.112Z",
+  "generatedAt": "2026-07-28T17:23:56.406Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 48,
-    "remaining": 13,
+    "completed": 49,
+    "remaining": 12,
     "total": 61,
-    "percentComplete": 79
+    "percentComplete": 80
   },
   "references": [
-    {
-      "reference": "US-0513",
-      "name": "Block Island National Wildlife Refuge",
-      "latitude": 41.2133,
-      "longitude": -71.5724,
-      "grid": "FN41ff",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "href": "/radio/pota/US-0513/",
-      "potaUrl": "https://pota.app/#/park/US-0513",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [
-        {
-          "id": "2026-07-26-flight-of-the-bumblebees-block-island",
-          "title": "Taking Flight of the Bumblebees to Block Island",
-          "date": "2026-07-26",
-          "href": "/notes/2026-07-26-flight-of-the-bumblebees-block-island/"
-        },
-        {
-          "id": "2026-07-26-flight-of-the-bumblebees-from-block-island",
-          "title": "Flight of the Bumblebees from Block Island",
-          "date": "2026-07-26",
-          "href": "/notes/2026-07-26-flight-of-the-bumblebees-from-block-island/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 28,
-        "activations": 28,
-        "qsos": 2391
-      }
-    },
     {
       "reference": "US-0514",
       "name": "John H. Chafee National Wildlife Refuge",
@@ -290,6 +257,63 @@
         "attempts": 71,
         "activations": 70,
         "qsos": 3396
+      }
+    },
+    {
+      "reference": "US-0513",
+      "name": "Block Island National Wildlife Refuge",
+      "latitude": 41.2133,
+      "longitude": -71.5724,
+      "grid": "FN41ff",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-0513/",
+      "potaUrl": "https://pota.app/#/park/US-0513",
+      "firstActivation": {
+        "reference": "US-0513",
+        "park": "Block Island National Wildlife Refuge",
+        "date": "2026-07-26",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 61,
+          "cw": 61,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-0513",
+        "park": "Block Island National Wildlife Refuge",
+        "date": "2026-07-26",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 61,
+          "cw": 61,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [
+        {
+          "id": "2026-07-26-flight-of-the-bumblebees-block-island",
+          "title": "Taking Flight of the Bumblebees to Block Island",
+          "date": "2026-07-26",
+          "href": "/notes/2026-07-26-flight-of-the-bumblebees-block-island/"
+        },
+        {
+          "id": "2026-07-26-flight-of-the-bumblebees-from-block-island",
+          "title": "Flight of the Bumblebees from Block Island",
+          "date": "2026-07-26",
+          "href": "/notes/2026-07-26-flight-of-the-bumblebees-from-block-island/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 28,
+        "activations": 28,
+        "qsos": 2391
       }
     },
     {

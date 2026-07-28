@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-26T22:06:09.219Z",
+  "generatedAt": "2026-07-28T17:23:57.428Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -91,9 +91,44 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-0513/",
       "potaUrl": "https://pota.app/#/park/US-0513",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 61,
+      "activations": [
+        {
+          "reference": "US-0513",
+          "park": "Block Island National Wildlife Refuge",
+          "date": "2026-07-26",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 61,
+            "cw": 61,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-07-26-flight-of-the-bumblebees-block-island",
+              "title": "Taking Flight of the Bumblebees to Block Island",
+              "date": "2026-07-26",
+              "href": "/notes/2026-07-26-flight-of-the-bumblebees-block-island/"
+            },
+            {
+              "id": "2026-07-26-flight-of-the-bumblebees-from-block-island",
+              "title": "Flight of the Bumblebees from Block Island",
+              "date": "2026-07-26",
+              "href": "/notes/2026-07-26-flight-of-the-bumblebees-from-block-island/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [
         {
           "id": "2026-07-26-flight-of-the-bumblebees-block-island",
