@@ -83,16 +83,27 @@ For example, 9 is `----.`. Keep its final dit and reduce the four dahs to one:
 
 ## What I expect to hear in practice
 
-The full table exists, but not every cut number is equally familiar on the air.
-`N` for 9 is common in signal reports such as `5NN`, and `T` for zero appears in
-serial numbers, times, and power values. `A` for 1 also appears in compact
-contest exchanges. The remaining forms are worth recognizing, but I would not
-assume every operator expects them.
+The full table exists, but three cut numbers account for most of what I am
+likely to copy:
 
-That is the practical limitation: cut numbers save time only when the receiving
-operator can identify the field. `2TW` was valid and efficient, but it was also
-unfamiliar enough that I could confirm the characters without understanding the
-value.
+- `T` for 0
+- `A` for 1
+- `N` for 9
+
+Andy [WI7M](https://www.qrz.com/db/WI7M) pointed out that these three appear
+frequently in [CWTs](https://cwops.org/cwops-tests/), where CWops member numbers
+are part of the exchange. `N` is also familiar from reports such as `5NN`, while
+`T` and `A` commonly shorten serial numbers and power values.
+
+There is related CW shorthand outside the cut-number table. `K` commonly means
+one thousand: a station may send `K` or `1K` for 1,000 watts. Andy also
+abbreviates his TS-2000 as `TS2K`, since that is much quicker than sending
+`TSTTT`. `K` is an abbreviation for “thousand,” not a Morse numeral
+substitution in the same sense as `A`, `N`, or `T`.
+
+The remaining cut forms are worth recognizing, but I would not assume every
+operator expects them. `2TW` was valid and efficient, yet unfamiliar enough
+that I could confirm the characters without understanding the value.
 
 I do not plan to start cutting every number I send. The more useful goal is to
 recognize the pattern quickly when someone else does, then ask for a targeted
