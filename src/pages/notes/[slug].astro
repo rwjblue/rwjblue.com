@@ -1,4 +1,5 @@
 ---
+import { createHash } from "node:crypto";
 import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
@@ -31,10 +32,28 @@ const { Content } = await render(note);
 const formattedDate = formatDate(note.data.date, "long");
 const contactMap = contactMapForNote(note);
 const shouldUseGeneratedShareImage = contactMap || note.data.boundaryMap;
-const shareImage = shouldUseGeneratedShareImage
+const defaultShareImage = `/notes/${note.id}/share.png${note.data.beaconMap ? "?v=4" : ""}`;
+const shareImageBase = shouldUseGeneratedShareImage
   ? `/images/pota/${note.id}/share.png`
-  : note.data.shareImage ??
-    `/notes/${note.id}/share.png${note.data.beaconMap ? "?v=4" : ""}`;
+  : note.data.shareImage ?? defaultShareImage;
+const shareImageCacheKey = createHash("sha256")
+  .update(
+    JSON.stringify({
+      id: note.id,
+      title: note.data.title,
+      summary: note.data.summary,
+      date: note.data.date.toISOString(),
+      visibility: note.data.visibility,
+      tags: note.data.tags,
+      shareImage: note.data.shareImage,
+      beaconMap: note.data.beaconMap,
+      contactMap: note.data.contactMap,
+      boundaryMap: note.data.boundaryMap,
+    }),
+  )
+  .digest("hex")
+  .slice(0, 12);
+const shareImage = `${shareImageBase}${shareImageBase.includes("?") ? "&" : "?"}h=${shareImageCacheKey}`;
 const shareImageAlt = `${note.data.title} social share image`;
 const isPreview = note.data.visibility !== "public";
 const visibilityLabel =
