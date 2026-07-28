@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cloudflare Analytics Report"
+  short_description: "Summarize readership and site-health signals"
+  default_prompt: "Use $cloudflare-analytics-report to summarize whether the site is being read and flag meaningful traffic or 404 issues."
