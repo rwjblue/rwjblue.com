@@ -1,6 +1,6 @@
 ---
 title: 2026 Southeast POTA Road Trip
-status: active
+status: historical
 updated: 2026-06-20
 summary: "A week-long POTA activation drive from Rhode Island down the I-95 corridor, arriving at Singer Island, FL on June 26 for Field Day 2026."
 tags:
