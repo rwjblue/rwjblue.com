@@ -43,7 +43,12 @@ power value may mean zero.
 
 ## The mnemonic
 
-The useful rule is:
+When I asked about cut numbers, Josh [AC9M](https://www.qrz.com/db/AC9M)
+pointed out the useful way to think about them: the shorter characters are
+fragments of the full five-element numerals. `A` (`.-`) is the beginning of 1
+(`.----`), while `D` (`-..`) is the end of 8 (`---..`).
+
+From there, the useful rule is:
 
 > **Except for 5, keep every dit and collapse a run of multiple dahs to one
 > dah. Five is E.**
