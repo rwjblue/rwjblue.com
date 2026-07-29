@@ -13,7 +13,7 @@ assert.match(sitemapIndex, /https:\/\/rwjblue\.com\/sitemap-0\.xml/);
 assert.match(robots, /Sitemap: https:\/\/rwjblue\.com\/sitemap-index\.xml/);
 assert.doesNotMatch(sitemap, /share-image|share\.png|\/search\//);
 assert.doesNotMatch(sitemap, /2026-07-21-reliance-ocfd/);
-assert.doesNotMatch(sitemap, /2026-07-28-operating-w1aw/);
+assert.match(sitemap, /2026-07-28-operating-w1aw/);
 
 const jsonLd = [...note.matchAll(
   /<script type="application\/ld\+json">(.*?)<\/script>/gs,

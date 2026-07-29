@@ -31,6 +31,7 @@ interface ContactMapData {
   subtitle: string;
   date: string;
   stationCallsign: string;
+  totalQsoCount?: number;
   originDxccCode?: string | number;
   dxccEntities?: ContactMapDxccEntity[];
   contacts: ContactMapContact[];
@@ -80,6 +81,7 @@ const dataId = `${mapId}-data`;
 const bandColorsId = `${mapId}-band-colors`;
 const bandColors = BAND_COLORS;
 const bandCounts = collectBandCounts(map.contacts);
+const totalQsoCount = map.totalQsoCount ?? map.contacts.length;
 ---
 
 <section class="contact-map-section" aria-labelledby={`${mapId}-title`}>
@@ -89,7 +91,7 @@ const bandCounts = collectBandCounts(map.contacts);
       <h2 id={`${mapId}-title`}>{map.title}</h2>
       <p>{map.subtitle}</p>
     </div>
-    <p class="contact-map-summary">{map.contacts.length} QSOs</p>
+    <p class="contact-map-summary">{totalQsoCount} QSOs</p>
   </div>
 
   <div id={mapId} class="contact-map" aria-label={`${map.title} contact map`}></div>

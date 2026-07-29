@@ -275,6 +275,7 @@ test("buildContactMapData uses grids first and state centroids as fallback", () 
   });
 
   assert.equal(map.title, "Sample map");
+  assert.equal(map.totalQsoCount, 3);
   assert.equal(map.contacts.length, 3);
   assert.equal(map.contacts[0].timestamp, "2026-05-27T00:00:00Z");
   assert.equal(map.contacts[0].originGrid, "FN41dx97");
@@ -432,7 +433,11 @@ test("contact map UI uses QSO summary and omits state fallback legend copy", () 
     "utf8",
   );
 
-  assert.match(componentSource, /map\.contacts\.length}\s+QSOs/);
+  assert.match(
+    componentSource,
+    /map\.totalQsoCount \?\? map\.contacts\.length/,
+  );
+  assert.match(componentSource, /\{totalQsoCount\} QSOs/);
   assert.match(componentSource, /type="application\/json" id=\{bandColorsId\}/);
   assert.match(componentSource, /JSON\.parse\(bandColorsElement\.textContent \?\? "\{\}"\)/);
   assert.match(componentSource, /collectBandCounts\(map\.contacts\)/);

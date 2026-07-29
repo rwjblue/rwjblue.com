@@ -39,6 +39,12 @@ const bandColorsJson = JSON.stringify(BAND_COLORS);
 const heroImage = note.data.shareImage;
 const hasHeroLayout = Boolean(heroImage && map);
 const bandCounts = map ? collectBandCounts(map.contacts) : {};
+const isPotaContactMap = Boolean(map && note.data.tags.includes("pota"));
+const contactMapEyebrow = isPotaContactMap ? "Note / POTA" : "Note / Radio";
+const contactMapSubjectLabel = isPotaContactMap ? "Reference" : "Operation";
+const contactMapQsoCount = map
+  ? map.totalQsoCount ?? map.contacts.length
+  : 0;
 ---
 
 <!doctype html>
@@ -387,20 +393,20 @@ const bandCounts = map ? collectBandCounts(map.contacts) : {};
             <div class="hero-overlay">
               <div class="hero-copy">
                 <div class="site-name">rwjblue / N1RWJ</div>
-                <div class="eyebrow">Note / POTA</div>
+                <div class="eyebrow">{contactMapEyebrow}</div>
                 <h1>{note.data.title}</h1>
                 <p class="summary">{note.data.summary}</p>
               </div>
 
               <div class="hero-meta">
                 <div class="hero-metric">
-                  <strong>{map.contacts.length}</strong>
+                  <strong>{contactMapQsoCount}</strong>
                   <span class="meta-label">QSOs</span>
                   <span class="meta-value">{formattedDate}</span>
                 </div>
                 <div class="hero-metric">
                   <strong>{map.title.replace("N1RWJ at ", "")}</strong>
-                  <span class="meta-label">Reference</span>
+                  <span class="meta-label">{contactMapSubjectLabel}</span>
                   <span class="meta-value">{map.subtitle}</span>
                 </div>
               </div>
@@ -433,7 +439,7 @@ const bandCounts = map ? collectBandCounts(map.contacts) : {};
           <div class="map-copy">
             <div>
               <div class="site-name">rwjblue / N1RWJ</div>
-              <div class="eyebrow">Note / POTA</div>
+              <div class="eyebrow">{contactMapEyebrow}</div>
               <h1>{note.data.title}</h1>
               <p class="summary">{note.data.summary}</p>
             </div>
@@ -441,13 +447,13 @@ const bandCounts = map ? collectBandCounts(map.contacts) : {};
             <div>
               <div class="meta">
                 <div class="meta-block">
-                  <strong>{map.contacts.length}</strong>
+                  <strong>{contactMapQsoCount}</strong>
                   <span class="meta-label">QSOs</span>
                   <span class="meta-value">{formattedDate}</span>
                 </div>
                 <div class="meta-block">
                   <strong>{map.title.replace("N1RWJ at ", "")}</strong>
-                  <span class="meta-label">Reference</span>
+                  <span class="meta-label">{contactMapSubjectLabel}</span>
                   <span class="meta-value">{map.subtitle}</span>
                 </div>
               </div>

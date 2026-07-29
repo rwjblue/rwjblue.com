@@ -350,9 +350,6 @@ test("note visibility keeps drafts previewable without publishing them", () => {
   const relianceDraft = read(
     "src/content/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md",
   );
-  const america250Draft = read(
-    "src/content/notes/2026-07-28-operating-w1aw-1-for-america250.md",
-  );
 
   assert.match(notesLibrary, /getPublicNotes/);
   assert.match(notesLibrary, /getRenderableNotes/);
@@ -371,7 +368,6 @@ test("note visibility keeps drafts previewable without publishing them", () => {
   assert.match(buildVerifier, /INCLUDE_DRAFTS/);
   assert.match(buildVerifier, /noindex, nofollow/);
   assert.match(relianceDraft, /visibility: draft/);
-  assert.match(america250Draft, /visibility: draft/);
   assert.ok(!existsSync("drafts/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md"));
   assert.ok(!existsSync("drafts/notes/2026-america250-w1aw-1.md"));
 });

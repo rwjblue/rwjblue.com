@@ -502,6 +502,7 @@ export function buildContactMapData(content, { title, subtitle, sourceAdi = [] }
     stationCallsign,
     date,
     dateLabel,
+    totalQsoCount: qson.qsos.length,
     originDxccCode,
     dxccEntities,
     sourceAdi,
