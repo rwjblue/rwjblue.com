@@ -1,0 +1,118 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import { EQUIPMENT_CATEGORIES } from "../../../lib/equipment";
+
+export async function getStaticPaths() {
+  const equipment = await getCollection("equipment");
+  return equipment.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonicalPath = `/radio/equipment/${entry.id}/`;
+const category = EQUIPMENT_CATEGORIES.find(
+  (candidate) => candidate.id === entry.data.category,
+);
+const statusLabel =
+  entry.data.status === "current"
+    ? "Current equipment"
+    : entry.data.status === "incoming"
+      ? "Incoming"
+      : "Retired equipment";
+---
+
+<BaseLayout
+  title={`${entry.data.name} / Radio equipment / N1RWJ`}
+  description={entry.data.summary}
+  canonicalPath={canonicalPath}
+  backlinks
+  searchType="Radio guide"
+>
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Radio", path: "/radio/" },
+      { name: "Equipment", path: "/radio/equipment/" },
+      { name: entry.data.name, path: canonicalPath },
+    ]}
+  />
+
+  <article class="document equipment-document">
+    <header>
+      <p class="eyebrow">Equipment</p>
+      <h1>{entry.data.name}</h1>
+      <p class="equipment-meta">
+        <span>{category?.label ?? entry.data.category}</span>
+        <span>{statusLabel}</span>
+        {
+          entry.data.quantity > 1 && (
+            <span>{entry.data.quantity} owned</span>
+          )
+        }
+        {entry.data.state && <span>{entry.data.state}</span>}
+      </p>
+      <p>{entry.data.summary}</p>
+    </header>
+
+    {
+      entry.data.image && (
+        <figure class="equipment-figure">
+          <img
+            src={entry.data.image}
+            alt={entry.data.imageAlt ?? entry.data.name}
+          />
+          {
+            entry.data.imageSourceName && entry.data.imageSourceUrl && (
+              <figcaption>
+                Product photo:{" "}
+                <a
+                  href={entry.data.imageSourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {entry.data.imageSourceName}
+                </a>
+              </figcaption>
+            )
+          }
+        </figure>
+      )
+    }
+
+    <Content />
+
+    {
+      (entry.data.externalUrl || entry.data.dxEngineeringUrl) && (
+        <nav class="path-links" aria-label="Equipment reference">
+          {
+            entry.data.externalUrl && (
+              <a
+                href={entry.data.externalUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Manufacturer product page
+              </a>
+            )
+          }
+          {
+            entry.data.dxEngineeringUrl && (
+              <a
+                href={entry.data.dxEngineeringUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                DX Engineering listing
+              </a>
+            )
+          }
+        </nav>
+      )
+    }
+  </article>
+</BaseLayout>

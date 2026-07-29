@@ -42,8 +42,8 @@ the evening stop made the activation feel a lot less like a rushed travel chore.
 - **Activation:** 56 QSOs total; 39 CW and 17 SSB on 40, 30, and 20 meters
 - **Radio:** Yaesu FT-891
 - **Power:** 60 watts on CW and 75 watts on SSB; 50 Ah LiFePO4 battery in the car, with a 12 Ah Bioenno battery that needed troubleshooting at Tallman Mountain
-- **CW gear:** N3ZN QRP-Lite II paddle
-- **Antennas:** PackTenna 29-foot end-fed random wire with a 17-foot counterpoise at Rockville; KJ6ER Challenger at Silver Sands and Tallman Mountain
+- **CW gear:** [N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/)
+- **Antennas:** [PackTenna 29-foot end-fed random wire](/radio/equipment/packtenna-pt-101/) with a 17-foot counterpoise at Rockville; KJ6ER Challenger at Silver Sands and Tallman Mountain
 
 ## [Rockville Wildlife Management Area, US-6991](/radio/pota/US-6991/)
 

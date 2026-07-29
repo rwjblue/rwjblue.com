@@ -24,9 +24,9 @@ contacts.
 - **When:** May 27, 2026, 13:23 to 15:13 UTC
 - **Activation:** 25 CW QSOs in 1 hour 50 minutes; 12 on 40 meters and 13 on 20 meters
 - **Radio:** Elecraft KX3
-- **Antenna:** Spooltenna Ultra 40m EFHW; far end in a tree around 35 to 40 feet up, feed point elevated on a POTA Explorer 20-foot mast
+- **Antenna:** [Spooltenna Ultra](/radio/equipment/spooltenna-ultra/) 40m EFHW; far end in a tree around 35 to 40 feet up, feed point elevated on a POTA Explorer 20-foot mast
 - **Power:** 5 watts
-- **CW gear:** VK3IL paddle
+- **CW gear:** [VK3IL paddle](/radio/equipment/vk3il-pressure-paddle/)
 
 ## Field notes
 

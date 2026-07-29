@@ -24,13 +24,15 @@ test("homepage presents a notes-first recent activity timeline", () => {
   assert.doesNotMatch(homepage, /\/now\//);
 });
 
-test("content collections support notes and updated projects", () => {
+test("content collections support notes, projects, and equipment", () => {
   const config = read("src/content.config.ts");
   const blackHutNote = read("src/content/notes/2026-05-27-black-hut-wildlife-management-area-pota.md");
 
   assert.match(config, /defineCollection/);
   assert.match(config, /notes/);
   assert.match(config, /projects/);
+  assert.match(config, /equipment/);
+  assert.match(config, /\["current", "incoming", "retired"\]/);
   assert.match(config, /updated/);
   assert.match(config, /shareImage/);
   assert.match(config, /visibility/);
@@ -88,6 +90,8 @@ test("new section routes exist", () => {
   assert.ok(existsSync("src/pages/tags/[tag].astro"));
   assert.ok(existsSync("src/pages/radio/index.astro"));
   assert.ok(existsSync("src/pages/radio/shack.astro"));
+  assert.ok(existsSync("src/pages/radio/equipment/index.astro"));
+  assert.ok(existsSync("src/pages/radio/equipment/[slug].astro"));
   assert.ok(!existsSync("src/pages/now/index.astro"));
 });
 
@@ -160,7 +164,7 @@ test("Pagefind provides static site search without indexing listing pages", () =
   assert.match(buildVerifier, /assertExcludes\(page, "data-pagefind-body"/);
 });
 
-test("radio page keeps static context, links shack notes, and lists radio notes", () => {
+test("radio page keeps static context, links station equipment, and lists radio notes", () => {
   const radio = read("src/pages/radio/index.astro");
 
   assert.match(radio, /getPublicNotes\(\)/);
@@ -168,7 +172,8 @@ test("radio page keeps static context, links shack notes, and lists radio notes"
   assert.match(radio, /Radio notes/);
   assert.match(radio, /href=\{`\/notes\/\$\{note\.id\}\/`\}/);
   assert.match(radio, /\/radio\/shack\//);
-  assert.match(radio, /My shack/);
+  assert.match(radio, /My station/);
+  assert.match(radio, /\/radio\/equipment\//);
 });
 
 test("radio page links the RBN skimmer finder utility", () => {
@@ -310,17 +315,51 @@ test("NCDXF beacon guide links the field note and provides both listening workfl
   assert.match(note, /CAT control makes\s+this mode practical/);
 });
 
-test("shack page documents station and portable setup", () => {
+test("station page documents home and portable setup and links equipment", () => {
   assert.ok(existsSync("src/pages/radio/shack.astro"));
 
   const shack = read("src/pages/radio/shack.astro");
 
-  assert.match(shack, /title="My shack \/ N1RWJ"/);
-  assert.match(shack, /<h1>My shack<\/h1>/);
+  assert.match(shack, /title="My station \/ N1RWJ"/);
+  assert.match(shack, /<h1>My station<\/h1>/);
   assert.match(shack, /Home station/);
   assert.match(shack, /Portable kit/);
+  assert.match(shack, /Equipment inventory/);
+  assert.match(shack, /\/radio\/equipment\//);
   assert.match(shack, /Operating focus/);
   assert.match(shack, /Last updated/);
+});
+
+test("equipment inventory provides curated categories and stable item pages", () => {
+  const inventory = read("src/pages/radio/equipment/index.astro");
+  const itemPage = read("src/pages/radio/equipment/[slug].astro");
+  const equipmentLibrary = read("src/lib/equipment.ts");
+  const kx2 = read("src/content/equipment/elecraft-kx2.md");
+  const signature = read(
+    "src/content/equipment/dx-commander-signature-12-4.md",
+  );
+  const spooltenna = read("src/content/equipment/spooltenna-ultra.md");
+  const powerGate = read(
+    "src/content/equipment/west-mountain-radio-epic-pwrgate.md",
+  );
+
+  assert.match(inventory, /Equipment/);
+  assert.match(inventory, /not to catalog every cable/);
+  assert.match(inventory, /equipmentByCategory/);
+  assert.match(inventory, /entry\.data\.quantity/);
+  assert.match(inventory, /Incoming/);
+  assert.match(inventory, /Retired equipment/);
+  assert.match(itemPage, /getCollection\("equipment"\)/);
+  assert.match(itemPage, /backlinks/);
+  assert.match(itemPage, /\/radio\/equipment\/\$\{entry\.id\}\//);
+  assert.match(itemPage, /DX Engineering listing/);
+  assert.match(itemPage, /equipment-figure/);
+  assert.match(equipmentLibrary, /EQUIPMENT_CATEGORIES/);
+  assert.match(kx2, /status: current/);
+  assert.match(signature, /state: Awaiting assembly/);
+  assert.match(spooltenna, /quantity: 2/);
+  assert.match(spooltenna, /PARKS 80-meter accessory wire/);
+  assert.match(powerGate, /litime-280ah/);
 });
 
 

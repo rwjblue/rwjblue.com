@@ -7,6 +7,7 @@ export const FIELD_KIT_ROUTES = [
   "/radio/",
   "/radio/glossary/",
   "/radio/shack/",
+  "/radio/equipment/",
   "/radio/cw-practice/",
   "/radio/cw-qso/",
   "/radio/beacons/",

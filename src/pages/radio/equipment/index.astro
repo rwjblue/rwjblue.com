@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import {
+  equipmentByCategory,
+  getEquipment,
+} from "../../../lib/equipment";
+
+const equipment = await getEquipment();
+const currentCategories = equipmentByCategory(
+  equipment.filter((entry) => entry.data.status !== "retired"),
+);
+const retiredEquipment = equipment.filter(
+  (entry) => entry.data.status === "retired",
+);
+---
+
+<BaseLayout
+  title="Radio equipment / N1RWJ"
+  description="A curated inventory of the radios, antennas, CW keys, power systems, supports, and test equipment used by N1RWJ."
+  canonicalPath="/radio/equipment/"
+  searchable={false}
+>
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Radio", path: "/radio/" },
+      { name: "Equipment", path: "/radio/equipment/" },
+    ]}
+  />
+
+  <section class="page-intro equipment-intro">
+    <p class="eyebrow">Radio reference</p>
+    <h1>Equipment</h1>
+    <p>
+      This is a curated inventory of the equipment that defines my home and
+      portable stations. It is meant to provide stable link targets and useful
+      context, not to catalog every cable, adapter, or stake.
+    </p>
+    <nav class="equipment-category-nav" aria-label="Equipment categories">
+      {
+        currentCategories.map((category) => (
+          <a href={`#${category.id}`}>{category.label}</a>
+        ))
+      }
+    </nav>
+  </section>
+
+  {
+    currentCategories.map((category) => (
+      <section
+        class="section-block wide equipment-category"
+        id={category.id}
+        aria-labelledby={`${category.id}-title`}
+      >
+        <div class="section-heading">
+          <p class="section-label">Current equipment</p>
+          <h2 id={`${category.id}-title`}>{category.label}</h2>
+          <p>{category.description}</p>
+        </div>
+        <div class="equipment-list">
+          {category.entries.map((entry) => (
+            <a
+              class="equipment-item"
+              href={`/radio/equipment/${entry.id}/`}
+            >
+              <span class="equipment-item-heading">
+                <strong>{entry.data.name}</strong>
+                {
+                  entry.data.quantity > 1 && (
+                    <span class="equipment-quantity">
+                      {entry.data.quantity} owned
+                    </span>
+                  )
+                }
+                {
+                  entry.data.status === "incoming" && (
+                    <span class="equipment-quantity">Incoming</span>
+                  )
+                }
+              </span>
+              <p>{entry.data.summary}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  {
+    retiredEquipment.length > 0 && (
+      <section class="bridge equipment-retired" aria-labelledby="retired-title">
+        <p class="section-label">Archive</p>
+        <h2 id="retired-title">Retired equipment</h2>
+        <p>
+          Equipment kept for historical context but no longer part of the
+          current station or field kits.
+        </p>
+        <ul>
+          {retiredEquipment.map((entry) => (
+            <li>
+              <a href={`/radio/equipment/${entry.id}/`}>
+                {entry.data.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</BaseLayout>

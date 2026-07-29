@@ -1,16 +1,25 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const updated = "June 2, 2026";
+const updated = "July 29, 2026";
 
-const homeStation = [
+const homeStation: Array<{
+  label: string;
+  name?: string;
+  href?: string;
+  text: string;
+}> = [
   {
     label: "Radio",
-    text: "Elecraft K4D at the desk for home operating, contest practice, CW work, and experiments that benefit from a stable station.",
+    name: "Elecraft K4D",
+    href: "/radio/equipment/elecraft-k4d/",
+    text: " at the desk for home operating, contest practice, CW work, and experiments that benefit from a stable station.",
   },
   {
     label: "Antenna",
-    text: "DX Commander Expedition, usually treated as the known-good home vertical when I want repeatable 20-meter performance.",
+    name: "DX Commander Expedition",
+    href: "/radio/equipment/dx-commander-expedition/",
+    text: ", usually treated as the known-good home vertical when I want repeatable 20-meter performance.",
   },
   {
     label: "Operating position",
@@ -18,10 +27,17 @@ const homeStation = [
   },
 ];
 
-const portableKit = [
+const portableKit: Array<{
+  label: string;
+  name?: string;
+  href?: string;
+  text: string;
+}> = [
   {
     label: "Field radios",
-    text: "Elecraft KX2 and KX3 for portable HF, POTA activations, quick experiments, and lightweight setups.",
+    name: "Elecraft KX2",
+    href: "/radio/equipment/elecraft-kx2/",
+    text: " and KX3 for portable HF, POTA activations, quick experiments, and lightweight setups.",
   },
   {
     label: "Antennas",
@@ -42,7 +58,7 @@ const operatingFocus = [
 ---
 
 <BaseLayout
-  title="My shack / N1RWJ"
+  title="My station / N1RWJ"
   description="The current N1RWJ home station, portable HF kit, antennas, and operating workflow notes."
   canonicalPath="/radio/shack/"
   backlinks
@@ -50,13 +66,16 @@ const operatingFocus = [
 >
   <section class="page-intro">
     <p class="eyebrow">N1RWJ</p>
-    <h1>My shack</h1>
+    <h1>My station</h1>
     <p>
       This is the current shape of my radio setup: the home station, portable
       HF kits, antennas, logging habits, and operating workflows behind the
       field notes on this site.
     </p>
     <p class="meta">Last updated {updated}</p>
+    <nav class="path-links" aria-label="Station references">
+      <a href="/radio/equipment/">Browse the equipment inventory</a>
+    </nav>
   </section>
 
   <section class="section-block wide" aria-labelledby="home-station-title">
@@ -69,7 +88,10 @@ const operatingFocus = [
         homeStation.map((item) => (
           <div>
             <h3>{item.label}</h3>
-            <p>{item.text}</p>
+            <p>
+              {item.href && item.name && <a href={item.href}>{item.name}</a>}
+              {item.text}
+            </p>
           </div>
         ))
       }
@@ -86,11 +108,27 @@ const operatingFocus = [
         portableKit.map((item) => (
           <div>
             <h3>{item.label}</h3>
-            <p>{item.text}</p>
+            <p>
+              {item.href && item.name && <a href={item.href}>{item.name}</a>}
+              {item.text}
+            </p>
           </div>
         ))
       }
     </div>
+  </section>
+
+  <section class="bridge" aria-labelledby="equipment-title">
+    <p class="section-label">Reference</p>
+    <h2 id="equipment-title">Equipment inventory</h2>
+    <p>
+      A curated list of the radios, antennas, paddles, power systems, supports,
+      and test equipment that make up these setups. Individual pages provide
+      stable links without turning this overview into a parts catalog.
+    </p>
+    <nav class="path-links" aria-label="Equipment inventory">
+      <a href="/radio/equipment/">Browse radio equipment</a>
+    </nav>
   </section>
 
   <section class="bridge" aria-labelledby="operating-focus-title">

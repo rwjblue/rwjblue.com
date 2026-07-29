@@ -12,7 +12,7 @@ tags:
 
 ![Elecraft KX2 charging through the new USB-C port](/images/radio/2026-06-03-kx2-usb-c-side-rails-install/img-9040.jpg)
 
-I finished two small upgrades to the KX2: the
+I finished two small upgrades to the [Elecraft KX2](/radio/equipment/elecraft-kx2/): the
 [KXUSBC2 internal USB-C charger from G7UFO](https://shop.g7ufo.radio/collections/kxusbc2-unofficial-internal-usb-c-charger-for-the-elecraft-kx2)
 and the Side KX rails from
 [Gems Products](https://gemsproducts.com/shop-kx/).

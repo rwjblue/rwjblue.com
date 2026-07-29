@@ -35,7 +35,7 @@ contest](/notes/2026-05-31-cq-wpx-cw-learning-weekend/).
 - **When:** May 30, 2026; rove start logged at 19:51 UTC, move to Eight Rod Farm at 21:14 UTC, move to Sapowet Marsh at 23:36 UTC
 - **Activation:** 43 CW QSOs total at 5 watts with the KX2; 14 at Simmons Mill, 14 at Eight Rod Farm, and 15 at Sapowet Marsh
 - **Radio:** Elecraft KX2
-- **CW gear:** N3ZN ZN-Lite II paddle on a magnetic base
+- **CW gear:** [N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/) on a magnetic base
 
 ## [Simmons Mill Wildlife Management Area, US-6986](https://pota.app/#/park/US-6986)
 

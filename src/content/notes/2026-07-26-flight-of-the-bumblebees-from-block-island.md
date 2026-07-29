@@ -46,9 +46,9 @@ Spain.
   and 1 on 40 meters
 - **FOBB:** Bumblebee number 121; 60 QSOs fell within the official event window
 - **Radio:** Elecraft KX3
-- **Antenna:** REZ Scout XF, 25-foot [Z]-25 whip, XFORM 4:1, and four 33-foot
+- **Antenna:** [REZ Scout XF](/radio/equipment/rez-scout-xf/), 25-foot [Z]-25 whip, XFORM 4:1, and four 33-foot
   radials, including two laid into the wet sand
-- **Power:** One 3 Ah Bioenno LiFePO4 battery for the entire operation,
+- **Power:** One [3 Ah Bioenno LiFePO4 battery](/radio/equipment/bioenno-3ah/) for the entire operation,
   including some phone charging
 - **CW gear:** Zippy key and Ham2K PoLo
 
