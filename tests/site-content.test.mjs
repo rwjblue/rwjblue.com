@@ -206,11 +206,20 @@ test("CW Practice Schedule offers only local time and UTC views", () => {
   assert.match(clock, /CW Academy students send their first name and CWA/);
   assert.match(clock, /data-calendar-subscribe/);
   assert.doesNotMatch(clock, /webcal:\/\/rwjblue\.com/);
+  assert.match(clock, /More ways to practice on air/);
+  assert.match(clock, /Nervous Novice CW Net/);
+  assert.match(clock, /id="cw-resource-nnn-time"/);
+  assert.match(clock, /data-activity="nnn"/);
+  assert.match(clock, /7\.033 MHz · 7\.035 backup/);
+  assert.match(clock, /CWops Giving Back/);
+  assert.match(clock, /data-activity="giving-back"/);
+  assert.match(clock, /Live volunteer roster/);
 
   const client = read("src/lib/cw-practice-client.ts");
 
   assert.match(client, /window\.location\.href/);
   assert.match(client, /webcal:\/\//);
+  assert.match(client, /nextNnnStart/);
 });
 
 test("rbn skimmer finder page provides utility markup and client boot script", () => {

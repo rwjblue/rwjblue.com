@@ -4,6 +4,7 @@ import {
   type CwActivityId,
   type CwSession,
 } from "./cw-practice.ts";
+import { nextNnnStart } from "./cw-practice-resources.ts";
 
 type ZoneChoice = "local" | "utc";
 
@@ -171,6 +172,8 @@ export function initCwPracticeClock(): void {
   const secondaryTime = element("cw-clock-next-time");
   const agenda = element<HTMLOListElement>("cw-clock-agenda-list");
   const zoneLabel = element("cw-clock-zone");
+  const nnnNextTime = element<HTMLTimeElement>("cw-resource-nnn-time");
+  const nnnCountdown = element("cw-resource-nnn-countdown");
   let zoneChoice = zoneChoiceFromStorage();
 
   function render(): void {
@@ -205,6 +208,12 @@ export function initCwPracticeClock(): void {
     secondaryTime.textContent = formatLongDateTime(second.start, now, timeZone);
     setActivity(secondary, second.activity.id);
     agenda.innerHTML = agendaMarkup(sessions.slice(2, 9), now, timeZone);
+
+    const nnnStart = nextNnnStart(now);
+
+    nnnNextTime.dateTime = nnnStart.toISOString();
+    nnnNextTime.textContent = formatLongDateTime(nnnStart, now, timeZone);
+    nnnCountdown.textContent = `starts in ${durationParts(nnnStart.getTime() - now.getTime())}`;
   }
 
   const zoneButtons = Array.from(

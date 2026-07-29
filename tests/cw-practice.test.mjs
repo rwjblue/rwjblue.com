@@ -7,6 +7,7 @@ import {
   isSessionOnAir,
   upcomingCwSessions,
 } from "../src/lib/cw-practice.ts";
+import { nextNnnStart } from "../src/lib/cw-practice-resources.ts";
 import worker, { calendarResponse } from "../worker/index.ts";
 
 test("CW activity data defines all nine weekly sessions", () => {
@@ -52,6 +53,21 @@ test("an ended session rolls forward to its next weekly occurrence", () => {
 
   assert.equal(sessions[0].start.toISOString(), "2026-07-14T03:00:00.000Z");
   assert.equal(sessions[1].start.toISOString(), "2026-07-15T13:00:00.000Z");
+});
+
+test("NNN follows Monday and Thursday at 7 PM Central across DST", () => {
+  assert.equal(
+    nextNnnStart(new Date("2026-07-27T23:00:00.000Z")).toISOString(),
+    "2026-07-28T00:00:00.000Z",
+  );
+  assert.equal(
+    nextNnnStart(new Date("2026-07-28T01:00:00.000Z")).toISOString(),
+    "2026-07-31T00:00:00.000Z",
+  );
+  assert.equal(
+    nextNnnStart(new Date("2026-01-05T23:00:00.000Z")).toISOString(),
+    "2026-01-06T01:00:00.000Z",
+  );
 });
 
 test("calendar feed contains stable weekly UTC events", () => {

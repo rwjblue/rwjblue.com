@@ -109,6 +109,71 @@ const calendarPath = CW_CALENDAR_PATH;
     </div>
   </section>
 
+  <section class="cw-clock-resources" aria-labelledby="cw-clock-resources-title">
+    <div class="cw-clock-resources-heading">
+      <div>
+        <p class="section-label">More ways to practice on air</p>
+        <h2 id="cw-clock-resources-title">Practice without a score.</h2>
+      </div>
+      <p>
+        These are guided or conversational contacts, so they sit outside the
+        fixed-session calendar above.
+      </p>
+    </div>
+
+    <div class="cw-clock-resource-grid">
+      <article class="cw-clock-resource-card cw-clock-resource-card--nnn">
+        <div class="cw-clock-resource-card-head">
+          <span>Guided net</span>
+          <code>CQ NNN</code>
+        </div>
+        <h3>Nervous Novice CW Net</h3>
+        <p>
+          A low-pressure place to make a standard contact or let it turn into a
+          ragchew, at whatever speed works.
+        </p>
+        <div class="cw-clock-resource-next">
+          <span>Next net</span>
+          <time id="cw-resource-nnn-time">Finding the next Monday or Thursday...</time>
+          <strong id="cw-resource-nnn-countdown"></strong>
+        </div>
+        <dl class="cw-clock-resource-facts">
+          <div><dt>Schedule</dt><dd>Mondays &amp; Thursdays · 7 PM Central</dd></div>
+          <div><dt>Listen near</dt><dd>7.033 MHz · 7.035 backup</dd></div>
+        </dl>
+        <div class="cw-clock-resource-actions">
+          <button type="button" data-activity="nnn">How to join <span aria-hidden="true">→</span></button>
+          <a href="https://w5ias.com/2026/06/29/cw-nets-change-frequencies/" target="_blank" rel="noreferrer">Current W5IAS notice <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="cw-clock-resource-card cw-clock-resource-card--giving-back">
+        <div class="cw-clock-resource-card-head">
+          <span>Conversational practice</span>
+          <code>GB K</code>
+        </div>
+        <h3>CWops Giving Back</h3>
+        <p>
+          Volunteers call for casual QSOs at a moderate pace. It is open to
+          anyone, not only CW Academy students.
+        </p>
+        <div class="cw-clock-resource-next">
+          <span>When to listen</span>
+          <strong>Around 7 PM in each volunteer's local time</strong>
+          <small>Check the live roster for a station near your time zone.</small>
+        </div>
+        <dl class="cw-clock-resource-facts">
+          <div><dt>Pace</dt><dd>Usually 15-20 WPM</dd></div>
+          <div><dt>Bands</dt><dd>Summer 20/40m · winter 40/80m</dd></div>
+        </dl>
+        <div class="cw-clock-resource-actions">
+          <button type="button" data-activity="giving-back">How to join <span aria-hidden="true">→</span></button>
+          <a href="https://cwops.org/giving-back/" target="_blank" rel="noreferrer">Live volunteer roster <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <dialog class="cw-clock-dialog" id="cw-dialog-sst" aria-labelledby="cw-dialog-sst-title">
     <div class="cw-clock-dialog-head">
       <div>
@@ -176,6 +241,55 @@ const calendarPath = CW_CALENDAR_PATH;
       <p>CWT can be fast, but the official guidance asks operators to slow down when called at a slower speed.</p>
     </div>
     <a class="cw-clock-rules-link" href="https://cwops.org/cwops-tests/" target="_blank" rel="noreferrer">Official CWops CWT rules <span aria-hidden="true">↗</span></a>
+  </dialog>
+
+  <dialog class="cw-clock-dialog cw-clock-dialog--nnn" id="cw-dialog-nnn" aria-labelledby="cw-dialog-nnn-title">
+    <div class="cw-clock-dialog-head">
+      <div>
+        <p class="section-label">W5IAS · all speeds welcome</p>
+        <h2 id="cw-dialog-nnn-title">Joining the Nervous Novice CW Net</h2>
+      </div>
+      <button type="button" class="cw-clock-dialog-close" aria-label="Close dialog">×</button>
+    </div>
+    <p class="cw-clock-dialog-summary">This is deliberately loose: make a basic contact, exchange a little more, or settle into a ragchew. Match a comfortable speed and ask for repeats whenever you need them.</p>
+    <ol class="cw-clock-walkthrough">
+      <li><span>1</span><div><strong>Tune and listen first</strong><code>7.033 MHz</code><p>Try 7.035 MHz if the primary frequency is busy or covered by QRM.</p></div></li>
+      <li><span>2</span><div><strong>Listen for the net call</strong><code>CQ NNN</code><p>The net meets Monday and Thursday evenings at 7 PM Central.</p></div></li>
+      <li><span>3</span><div><strong>Answer with your call</strong><code>N1RWJ</code><p>Send it once or twice, then wait for the other station to come back to you.</p></div></li>
+      <li><span>4</span><div><strong>Exchange the basics</strong><code>RST · STATE · NAME</code><p>There is no rigid exchange. A standard callsign, signal report, and location is enough; add your name or keep chatting if you like.</p></div></li>
+      <li><span>5</span><div><strong>Finish when ready</strong><code>TU 73</code><p>There is no score to submit. The successful contact is the point.</p></div></li>
+    </ol>
+    <div class="cw-clock-dialog-notes">
+      <p><strong>Before getting on</strong><br />Check W5IAS for a recent frequency change or cancellation notice. The net does not publish a dependable end time.</p>
+      <p><strong>Speed</strong><br />The organizer welcomes anything from very slow CW upward and asks operators to adjust to one another.</p>
+    </div>
+    <div class="cw-clock-dialog-links">
+      <a class="cw-clock-rules-link" href="https://w5ias.com/sooner-sprint/" target="_blank" rel="noreferrer">W5IAS net details <span aria-hidden="true">↗</span></a>
+      <a class="cw-clock-rules-link cw-clock-rules-link--secondary" href="https://w5ias.com/2026/06/29/cw-nets-change-frequencies/" target="_blank" rel="noreferrer">Current frequency notice <span aria-hidden="true">↗</span></a>
+    </div>
+  </dialog>
+
+  <dialog class="cw-clock-dialog cw-clock-dialog--giving-back" id="cw-dialog-giving-back" aria-labelledby="cw-dialog-giving-back-title">
+    <div class="cw-clock-dialog-head">
+      <div>
+        <p class="section-label">CWops · usually 15-20 WPM</p>
+        <h2 id="cw-dialog-giving-back-title">Finding a Giving Back QSO</h2>
+      </div>
+      <button type="button" class="cw-clock-dialog-close" aria-label="Close dialog">×</button>
+    </div>
+    <p class="cw-clock-dialog-summary">Giving Back volunteers make themselves available for relaxed, conversational CW contacts. Anyone can answer them; CWops and CW Academy membership are not required.</p>
+    <ol class="cw-clock-walkthrough">
+      <li><span>1</span><div><strong>Check the live roster</strong><code>DAY · CALL · ZONE</code><p>Choose a volunteer whose evening lines up with yours. Most begin around 7 PM in their own local time.</p></div></li>
+      <li><span>2</span><div><strong>Pick a seasonal band</strong><code>20/40m or 40/80m</code><p>Listen on 20 and 40 meters in summer, or 40 and 80 meters in winter, typically 30-39 kHz above the lower band edge.</p></div></li>
+      <li><span>3</span><div><strong>Recognize the call</strong><code>CQ DE K6RB GB K</code><p>The <code>GB</code> before the final <code>K</code> identifies a Giving Back volunteer.</p></div></li>
+      <li><span>4</span><div><strong>Answer with your call</strong><code>N1RWJ</code><p>Send at a speed you can copy comfortably. The volunteer is there to help you get a useful QSO.</p></div></li>
+      <li><span>5</span><div><strong>Have a normal conversation</strong><code>NAME · QTH · RIG</code><p>There is no contest exchange. Share as much or as little as you are comfortable copying.</p></div></li>
+    </ol>
+    <div class="cw-clock-dialog-notes">
+      <p><strong>Typical ranges</strong><br />14.030-14.039, 7.030-7.039, or 3.530-3.539 MHz, depending on season and conditions.</p>
+      <p><strong>Why there is no countdown</strong><br />Volunteers operate on different weekdays in their own time zones; the official live roster is the reliable source.</p>
+    </div>
+    <a class="cw-clock-rules-link" href="https://cwops.org/giving-back/" target="_blank" rel="noreferrer">CWops Giving Back roster <span aria-hidden="true">↗</span></a>
   </dialog>
 
   <script>

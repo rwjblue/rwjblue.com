@@ -32,6 +32,32 @@ those pages:
   and state, province, or DX country prefix. CW Academy students send a first
   name and `CWA` instead of a location.
 
+## Supplemental Practice Resources
+
+The page also presents two less-structured ways to practice. These are kept
+outside the featured SST/MST/CWT sequence and the iCalendar feed because they
+do not have the same dependable, fixed-duration event model.
+
+Supplemental resources last verified July 29, 2026:
+
+| Resource | Presentation | Official source |
+| --- | --- | --- |
+| Nervous Novice CW Net (NNN) | Next Monday or Thursday at 7 PM Central; 7.033 MHz primary and 7.035 MHz backup | [W5IAS net details](https://w5ias.com/sooner-sprint/) and [June 2026 frequency notice](https://w5ias.com/2026/06/29/cw-nets-change-frequencies/) |
+| CWops Giving Back | Evergreen guidance plus a link to the live volunteer roster | [CWops Giving Back](https://cwops.org/giving-back/) |
+
+`src/lib/cw-practice-resources.ts` calculates the next NNN start from a 7 PM
+`America/Chicago` wall-clock recurrence. This preserves the organizer's local
+evening schedule through CDT/CST changes and lets the existing Local time/UTC
+control format the result for the visitor. The UI does not claim an on-air
+window because W5IAS does not publish a dependable duration and occasionally
+posts cancellations or frequency changes.
+
+Giving Back is volunteer-based rather than one synchronized net. Most
+volunteers operate around 7 PM in their own local time, generally at 15-20 WPM,
+and the roster can change. The page therefore explains how to recognize a
+Giving Back call and links to the official live roster instead of copying that
+roster into the site or generating calendar events.
+
 ## Browser Schedule Calculation
 
 `src/lib/cw-practice.ts` stores each weekly session as a UTC weekday and hour.
@@ -101,6 +127,12 @@ subscribed feed. This is a read-only iCalendar subscription, not CalDAV.
 5. Run `npm test`, `mise run check`, `mise run build`, and
    `mise run deploy -- --dry-run`.
 6. Deploy with `mise run deploy`.
+
+For NNN or Giving Back changes, verify both official pages and update
+`src/lib/cw-practice-resources.ts`, the supplemental cards and walkthroughs,
+and this document. Do not add either resource to the calendar until its
+organizer publishes a stable recurrence and duration suitable for a subscribed
+event.
 
 The current model assumes every listed event recurs weekly without exceptions.
 One-off cancellations or special-time sessions would require explicit exception

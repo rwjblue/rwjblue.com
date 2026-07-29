@@ -3646,6 +3646,8 @@ p {
 .cw-clock-next:focus-visible,
 .cw-clock-agenda button:focus-visible,
 .cw-clock-reference-item:focus-visible,
+.cw-clock-resource-actions button:focus-visible,
+.cw-clock-resource-actions a:focus-visible,
 .cw-clock-dialog button:focus-visible,
 .cw-clock-subscribe-actions button:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--blue) 36%, transparent);
@@ -4029,6 +4031,184 @@ p {
   line-height: 1.45;
 }
 
+.cw-clock-resources {
+  margin-top: 48px;
+  padding: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--green) 7%, transparent), transparent 45%),
+    var(--surface-faint);
+}
+
+.cw-clock-resources-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.65fr);
+  gap: 30px;
+  align-items: end;
+}
+
+.cw-clock-resources-heading h2,
+.cw-clock-resources-heading p {
+  margin-bottom: 0;
+}
+
+.cw-clock-resources-heading > p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.cw-clock-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.cw-clock-resource-card {
+  --resource-color: var(--green);
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--resource-color);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px var(--shadow-soft);
+}
+
+.cw-clock-resource-card--giving-back {
+  --resource-color: var(--rust);
+}
+
+.cw-clock-resource-card-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cw-clock-resource-card-head span,
+.cw-clock-resource-next > span,
+.cw-clock-resource-facts dt {
+  color: var(--resource-color);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cw-clock-resource-card-head code {
+  padding: 4px 7px;
+  border: 1px solid color-mix(in srgb, var(--resource-color) 35%, var(--line));
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--resource-color) 7%, transparent);
+  color: var(--resource-color);
+  font-size: 0.77rem;
+  font-weight: 850;
+}
+
+.cw-clock-resource-card h3 {
+  margin: 14px 0 6px;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+}
+
+.cw-clock-resource-card > p {
+  max-width: 52ch;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 0.91rem;
+  line-height: 1.52;
+}
+
+.cw-clock-resource-next {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+  border-left: 3px solid var(--resource-color);
+  background: color-mix(in srgb, var(--resource-color) 6%, transparent);
+}
+
+.cw-clock-resource-next time,
+.cw-clock-resource-next strong {
+  color: var(--ink);
+  font-size: 1.04rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.cw-clock-resource-next strong:last-child,
+.cw-clock-resource-next small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.cw-clock-resource-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 17px 0 20px;
+}
+
+.cw-clock-resource-facts div {
+  min-width: 0;
+}
+
+.cw-clock-resource-facts dt {
+  margin-bottom: 4px;
+  color: var(--quiet);
+}
+
+.cw-clock-resource-facts dd {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.cw-clock-resource-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: auto;
+}
+
+.cw-clock-resource-actions button {
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid var(--resource-color);
+  border-radius: 7px;
+  background: var(--resource-color);
+  color: var(--bg);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.cw-clock-resource-actions button:hover {
+  filter: brightness(0.92);
+}
+
+.cw-clock-resource-actions a {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+}
+
+.cw-clock-resource-actions a:hover {
+  color: var(--resource-color);
+  text-decoration-color: currentColor;
+}
+
 .cw-clock-dialog {
   width: min(760px, calc(100% - 32px));
   max-height: min(86vh, 920px);
@@ -4052,6 +4232,14 @@ p {
 }
 
 #cw-dialog-cwt {
+  border-top-color: var(--rust);
+}
+
+#cw-dialog-nnn {
+  border-top-color: var(--green);
+}
+
+#cw-dialog-giving-back {
   border-top-color: var(--rust);
 }
 
@@ -4166,9 +4354,27 @@ p {
   margin: 0 24px 24px;
 }
 
+.cw-clock-dialog-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0 24px 24px;
+}
+
+.cw-clock-dialog-links .cw-clock-rules-link {
+  margin: 0;
+}
+
+.cw-clock-rules-link--secondary {
+  border-color: var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+}
+
 @media (max-width: 820px) {
   .cw-clock-intro,
-  .cw-clock-subscribe {
+  .cw-clock-subscribe,
+  .cw-clock-resources-heading {
     grid-template-columns: 1fr;
     gap: 14px;
   }
@@ -4198,6 +4404,10 @@ p {
   }
 
   .cw-clock-reference-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-clock-resource-grid {
     grid-template-columns: 1fr;
   }
 
@@ -4277,6 +4487,28 @@ p {
     grid-column: 1;
   }
 
+  .cw-clock-resources {
+    padding: 20px 16px;
+  }
+
+  .cw-clock-resource-card {
+    padding: 19px 17px;
+  }
+
+  .cw-clock-resource-facts {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .cw-clock-resource-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cw-clock-resource-actions button {
+    width: 100%;
+  }
+
   .cw-clock-dialog {
     width: calc(100% - 20px);
     max-height: 92vh;
@@ -4298,6 +4530,18 @@ p {
   .cw-clock-rules-link {
     margin-right: 16px;
     margin-left: 16px;
+  }
+
+  .cw-clock-dialog-links {
+    align-items: stretch;
+    flex-direction: column;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .cw-clock-dialog-links .cw-clock-rules-link {
+    justify-content: center;
+    width: 100%;
   }
 }
 
