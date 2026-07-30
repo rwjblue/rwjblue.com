@@ -66,13 +66,14 @@ rather than operating.
 
 I started with a vertical setup built around the
 [REZ 17-foot whip and loading coil](/radio/equipment/rez-scout-xf/) for
-40 meters, but the actual antenna was the POTA Performer by KJ6ER with the
-40-meter extension radials. That is why I needed the 40-meter coil in the first
-place. I made one or two contacts while trying 40 and maybe 30 meters, but the
-SWR was wildly wrong for a setup that should have been resonant. After chasing
-that for a while, I found the actual problem: a loose coupler at the connection
-between the choke and the whip assembly. Once I tightened that up, the SWR
-dropped to essentially 1:1 and the antenna behaved normally.
+40 meters, but the actual antenna was the
+[KJ6ER PERformer](/radio/equipment/kj6er-performer/) with the 40-meter
+extension radials. That is why I needed the 40-meter coil in the first place. I
+made one or two contacts while trying 40 and maybe 30 meters, but the SWR was
+wildly wrong for a setup that should have been resonant. After chasing that for
+a while, I found the actual problem: a loose coupler at the connection between
+the choke and the whip assembly. Once I tightened that up, the SWR dropped to
+essentially 1:1 and the antenna behaved normally.
 
 At the same time, band conditions were getting worse. The K-index had climbed from
 1 earlier in the outing to 5 by then, with a more negative Bz and higher solar
