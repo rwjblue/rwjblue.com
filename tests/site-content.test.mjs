@@ -89,6 +89,7 @@ test("new section routes exist", () => {
   assert.ok(existsSync("src/pages/tags/index.astro"));
   assert.ok(existsSync("src/pages/tags/[tag].astro"));
   assert.ok(existsSync("src/pages/radio/index.astro"));
+  assert.ok(existsSync("src/pages/radio/cw-journey.astro"));
   assert.ok(existsSync("src/pages/radio/shack.astro"));
   assert.ok(existsSync("src/pages/radio/equipment/index.astro"));
   assert.ok(existsSync("src/pages/radio/equipment/[slug].astro"));
@@ -193,6 +194,19 @@ test("radio page links the CW Practice Schedule without adding top-level navigat
   assert.match(radio, /\/radio\/cw-practice\//);
   assert.match(radio, /CW Practice Schedule/);
   assert.doesNotMatch(layout, /\/radio\/cw-practice\//);
+});
+
+test("About and radio pages make the CW journey discoverable", () => {
+  const about = read("src/pages/about.astro");
+  const radio = read("src/pages/radio/index.astro");
+  const journey = read("src/pages/radio/cw-journey.astro");
+
+  assert.match(about, /href="\/radio\/cw-journey\/"/);
+  assert.match(radio, /href="\/radio\/cw-journey\/"/);
+  assert.match(journey, /canonicalPath="\/radio\/cw-journey\/"/);
+  assert.match(journey, /searchType="Radio guide"/);
+  assert.match(journey, /First CW QSO/);
+  assert.match(journey, /CW Academy Intermediate/);
 });
 
 test("CW Practice Schedule offers only local time and UTC views", () => {
