@@ -93,6 +93,10 @@ result, and repeatable lessons. Include the details that were actually supplied:
 - conditions, ergonomics, or workflow observations
 - what to repeat or adjust next time
 
+When cataloged equipment was actually used, link its first meaningful mention
+to `/radio/equipment/<slug>/`. The equipment page's build-time backlinks then
+become its field-use history; do not add separate equipment tags.
+
 Do not imply QRP unless the source notes establish it. State corrected field
 mistakes plainly rather than turning them into drama or a moral.
 
@@ -162,6 +166,7 @@ In addition to the base checklist, confirm:
 - Local park metadata exists.
 - Where, when, equipment, activation result, and useful field lessons are
   present when known.
+- Cataloged equipment named in the report links to its equipment page.
 - Images have been sanitized and stripped of location metadata.
 - Contact-map data and its checked-in share card are current when applicable.
 - `mise run pota:update` has refreshed the tracker and park pages.

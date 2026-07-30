@@ -3,6 +3,8 @@ name: Elecraft KX3
 category: radios
 summary: A portable HF radio used for QRP field operating, flexible antenna experiments, and compact POTA stations.
 status: current
+useContexts:
+  - portable
 sortOrder: 30
 externalUrl: https://elecraft.com/products/kx3-all-mode-160-6-m-transceiver
 image: /images/pota/2026-05-27-black-hut-wildlife-management-area-pota/kx3-station-stone-table.jpg

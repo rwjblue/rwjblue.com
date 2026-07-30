@@ -339,6 +339,12 @@ test("equipment inventory provides curated categories and stable item pages", ()
     "src/content/equipment/dx-commander-signature-12-4.md",
   );
   const spooltenna = read("src/content/equipment/spooltenna-ultra.md");
+  const atticEfhw = read("src/content/equipment/homebrew-attic-efhw.md");
+  const receiveLoop = read(
+    "src/content/equipment/loop-on-ground-receive-antenna.md",
+  );
+  const qmx = read("src/content/equipment/qrp-labs-qmx.md");
+  const ft100d = read("src/content/equipment/yaesu-ft-100d.md");
   const powerGate = read(
     "src/content/equipment/west-mountain-radio-epic-pwrgate.md",
   );
@@ -347,18 +353,30 @@ test("equipment inventory provides curated categories and stable item pages", ()
   assert.match(inventory, /not to catalog every cable/);
   assert.match(inventory, /equipmentByCategory/);
   assert.match(inventory, /entry\.data\.quantity/);
+  assert.match(inventory, /entry\.data\.useContexts/);
   assert.match(inventory, /Incoming/);
   assert.match(inventory, /Retired equipment/);
-  assert.match(itemPage, /getCollection\("equipment"\)/);
+  assert.match(itemPage, /getEquipment\(\)/);
   assert.match(itemPage, /backlinks/);
   assert.match(itemPage, /\/radio\/equipment\/\$\{entry\.id\}\//);
   assert.match(itemPage, /DX Engineering listing/);
   assert.match(itemPage, /equipment-figure/);
+  assert.match(itemPage, /Connected equipment/);
+  assert.match(itemPage, /connectedEquipment/);
   assert.match(equipmentLibrary, /EQUIPMENT_CATEGORIES/);
+  assert.match(equipmentLibrary, /EQUIPMENT_USE_CONTEXT_LABELS/);
   assert.match(kx2, /status: current/);
   assert.match(signature, /state: Awaiting assembly/);
+  assert.match(signature, /useContexts:\n  - home/);
   assert.match(spooltenna, /quantity: 2/);
+  assert.match(spooltenna, /useContexts:\n  - portable/);
   assert.match(spooltenna, /PARKS 80-meter accessory wire/);
+  assert.match(atticEfhw, /TennTennas 49:1/);
+  assert.match(atticEfhw, /connections:\n  - elecraft-k4d/);
+  assert.match(receiveLoop, /DX Engineering BFS-1/);
+  assert.match(qmx, /quantity: 3/);
+  assert.match(qmx, /Two assembled; one kit unbuilt/);
+  assert.match(ft100d, /status: retired/);
   assert.match(powerGate, /litime-280ah/);
 });
 

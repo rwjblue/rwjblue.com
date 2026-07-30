@@ -46,9 +46,9 @@ different callsigns in 38 states, plus a little DX along the way.
 - **Contacts:** 253
 - **Modes:** 132 SSB, 79 CW, 42 FT8
 - **Bands:** 213 on 20 meters, 24 on 40 meters, 16 on 17 meters
-- **Radio:** Elecraft K4D
-- **Transmit antenna:** DX Commander Expedition for nearly all contacts
-- **Receive antenna:** Loop on the ground, sometimes with K4D diversity receive
+- **Radio:** [Elecraft K4D](/radio/equipment/elecraft-k4d/)
+- **Transmit antenna:** [DX Commander Expedition](/radio/equipment/dx-commander-expedition/) for nearly all contacts
+- **Receive antenna:** [Loop on the ground](/radio/equipment/loop-on-ground-receive-antenna/), sometimes with K4D diversity receive
 - **Logging:** Ham2K Portable Logger, with FT8 contacts imported from WSJT-X
 
 ## Planning enough coverage

@@ -2,6 +2,7 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import {
+  EQUIPMENT_USE_CONTEXT_LABELS,
   equipmentByCategory,
   getEquipment,
 } from "../../../lib/equipment";
@@ -77,6 +78,13 @@ const retiredEquipment = equipment.filter(
                   entry.data.status === "incoming" && (
                     <span class="equipment-quantity">Incoming</span>
                   )
+                }
+                {
+                  entry.data.useContexts.map((context) => (
+                    <span class="equipment-quantity">
+                      {EQUIPMENT_USE_CONTEXT_LABELS[context]}
+                    </span>
+                  ))
                 }
               </span>
               <p>{entry.data.summary}</p>

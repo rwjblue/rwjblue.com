@@ -30,3 +30,17 @@ ignored.
 Supported public notes, projects, radio tools, and canonical park pages opt into
 the shared `Referenced by` component. Draft and unlisted notes neither create
 backlinks nor render a backlink section.
+
+## Equipment
+
+Equipment frontmatter uses `useContexts` to distinguish `home` from `portable`
+use without splitting the inventory into duplicate catalogs. Items may list
+both contexts. `connections` contains equipment slugs that are intentionally
+connected in a station; the item page renders those relationships in both
+directions.
+
+When a note names cataloged equipment that was actually used, link its first
+meaningful mention to `/radio/equipment/<slug>/`. That ordinary link is the
+usage record: after the note is public, it appears automatically in the
+equipment page's `Referenced by` list. Do not add equipment tags or duplicate
+the note URL in equipment frontmatter.

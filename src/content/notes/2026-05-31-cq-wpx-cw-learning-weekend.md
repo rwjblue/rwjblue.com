@@ -32,8 +32,8 @@ log. It was awkward, but it totally worked.
 - **When:** May 30 to May 31, 2026
 - **Operating time:** Roughly eight hours total
 - **Result:** 37 CW QSOs, with all but one on 20m
-- **Radio:** Elecraft K4D at 100 watts
-- **Antenna:** DX Commander Expedition (native 1/4 wave for 20m)
+- **Radio:** [Elecraft K4D](/radio/equipment/elecraft-k4d/) at 100 watts
+- **Antenna:** [DX Commander Expedition](/radio/equipment/dx-commander-expedition/) (native 1/4 wave for 20m)
 - **Headphones:** Heil Pro 7
 
 I used the K4D at 100 watts into the DX Commander Expedition which is basically

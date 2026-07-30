@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const updated = "July 29, 2026";
+const updated = "July 30, 2026";
 
 const homeStation: Array<{
   label: string;
@@ -16,10 +16,28 @@ const homeStation: Array<{
     text: " at the desk for home operating, contest practice, CW work, and experiments that benefit from a stable station.",
   },
   {
-    label: "Antenna",
+    label: "Primary HF antenna",
     name: "DX Commander Expedition",
     href: "/radio/equipment/dx-commander-expedition/",
-    text: ", usually treated as the known-good home vertical when I want repeatable 20-meter performance.",
+    text: ", currently the main vertical at the QTH. The Signature 12.4 is intended to replace it as the permanent house vertical.",
+  },
+  {
+    label: "Attic HF antenna",
+    name: "Homebrew attic EFHW",
+    href: "/radio/equipment/homebrew-attic-efhw/",
+    text: ", arranged in a horseshoe around the attic perimeter and available as another transmit and receive path.",
+  },
+  {
+    label: "Receive antenna",
+    name: "Loop on the ground",
+    href: "/radio/equipment/loop-on-ground-receive-antenna/",
+    text: ", used for quieter receive and diversity comparisons with the K4D.",
+  },
+  {
+    label: "VHF and UHF",
+    name: "Diamond X50A",
+    href: "/radio/equipment/diamond-x50a/",
+    text: " in the attic as the primary fixed 2-meter and 70-centimeter antenna.",
   },
   {
     label: "Operating position",
@@ -38,6 +56,18 @@ const portableKit: Array<{
     name: "Elecraft KX2",
     href: "/radio/equipment/elecraft-kx2/",
     text: " and KX3 for portable HF, POTA activations, quick experiments, and lightweight setups.",
+  },
+  {
+    label: "Radios to rotate in",
+    name: "QRP Labs QMX",
+    href: "/radio/equipment/qrp-labs-qmx/",
+    text: " and QMX+ radios are available for field use but need deliberate operating time before they become familiar alternatives.",
+  },
+  {
+    label: "Longer portable stays",
+    name: "DX Commander Expedition",
+    href: "/radio/equipment/dx-commander-expedition/",
+    text: " is intended for camping, weekends away, and other extended setups once the Signature 12.4 takes over at home.",
   },
   {
     label: "Antennas",

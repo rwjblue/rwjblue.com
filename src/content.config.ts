@@ -59,6 +59,12 @@ const equipment = defineCollection({
     status: z.enum(["current", "incoming", "retired"]).default("current"),
     quantity: z.number().int().positive().default(1),
     state: z.string().optional(),
+    useContexts: z
+      .array(z.enum(["home", "portable"]))
+      .default([]),
+    connections: z
+      .array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/))
+      .default([]),
     sortOrder: z.number().int().nonnegative().default(100),
     externalUrl: z.string().url().optional(),
     dxEngineeringUrl: z.string().url().optional(),

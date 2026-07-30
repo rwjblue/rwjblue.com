@@ -20,8 +20,8 @@ tags:
 - **Where:** <park name, park reference if known, town/state, operating spot>
 - **When:** <date, local time window if known>
 - **Activation:** <bands, modes, rough QSO count, success/failure if known>
-- **Radio:** <radio>
-- **Antenna:** <antenna, support, height, orientation if useful>
+- **Radio:** [<radio>](/radio/equipment/<radio-slug>/)
+- **Antenna:** [<antenna>](/radio/equipment/<antenna-slug>/), support, height, orientation if useful
 - **Power:** <battery, output power, power constraints if useful>
 - **CW gear:** <key, paddle, keyer, logging setup if CW was used>
 

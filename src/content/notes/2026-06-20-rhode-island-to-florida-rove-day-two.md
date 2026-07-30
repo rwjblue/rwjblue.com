@@ -45,8 +45,8 @@ the Anglers Lot on the C&O Canal after the UTC rollover.
 - **Where:** [Cheesequake State Park, US-1611](/radio/pota/US-1611/), [John Heinz National Wildlife Refuge, US-0512](/radio/pota/US-0512/), [Fox Point State Park, US-1738](/radio/pota/US-1738/), [George Washington Memorial Parkway, US-0670](/radio/pota/US-0670/), and [Chesapeake and Ohio Canal National Historical Park, US-0015](/radio/pota/US-0015/)
 - **When:** June 20, 2026 local time; the final twofer crossed into June 21 UTC
 - **Activation:** 51 radio QSOs total; 50 CW and 1 SSB on 40, 30, and 20 meters
-- **Radio:** FT-891 at Cheesequake, Fox Point, and the late twofer; KX2 at John Heinz
-- **Antenna:** DX Commander Expedition pole as a 10-meter mast with a 29-foot random wire and 17-foot counterpoise for the quick wire setup
+- **Radio:** [FT-891](/radio/equipment/yaesu-ft-891/) at Cheesequake, Fox Point, and the late twofer; [KX2](/radio/equipment/elecraft-kx2/) at John Heinz
+- **Antenna:** [DX Commander Expedition](/radio/equipment/dx-commander-expedition/) pole as a 10-meter mast with a [PackTenna 29-foot random wire](/radio/equipment/packtenna-pt-101/) and 17-foot counterpoise for the quick wire setup
 - **CW gear:** Paddle on a longer cable for the in-car operating position; leg strap used later in the day
 
 ## [Cheesequake State Park, US-1611](/radio/pota/US-1611/)

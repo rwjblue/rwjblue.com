@@ -2298,6 +2298,16 @@ p {
   font-size: 0.78rem;
 }
 
+.equipment-connections {
+  padding-top: 24px;
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.equipment-connections p:not(.section-label) {
+  max-width: 680px;
+}
+
 .equipment-retired ul {
   display: grid;
   gap: 8px;

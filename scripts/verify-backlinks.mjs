@@ -7,6 +7,12 @@ const beacons = read("dist/radio/beacons/index.html");
 const kx2 = read("dist/radio/equipment/elecraft-kx2/index.html");
 const spooltenna = read("dist/radio/equipment/spooltenna-ultra/index.html");
 const znLite = read("dist/radio/equipment/n3zn-zn-lite-ii/index.html");
+const expedition = read(
+  "dist/radio/equipment/dx-commander-expedition/index.html",
+);
+const receiveLoop = read(
+  "dist/radio/equipment/loop-on-ground-receive-antenna/index.html",
+);
 const noBacklinks = read("dist/radio/cw-qso/index.html");
 
 assert.match(park, /Referenced by/);
@@ -33,5 +39,15 @@ assert.match(znLite, /Referenced by/);
 assert.match(
   znLite,
   /href="\/notes\/2026-05-30-east-bay-pota-rove\/"/,
+);
+assert.match(expedition, /Referenced by/);
+assert.match(
+  expedition,
+  /href="\/notes\/2026-07-28-operating-w1aw-1-for-america250\/"/,
+);
+assert.match(receiveLoop, /Referenced by/);
+assert.match(
+  receiveLoop,
+  /href="\/notes\/2026-07-28-operating-w1aw-1-for-america250\/"/,
 );
 assert.doesNotMatch(noBacklinks, /Referenced by/);

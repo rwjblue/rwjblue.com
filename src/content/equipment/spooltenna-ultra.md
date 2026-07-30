@@ -4,6 +4,8 @@ category: antennas
 summary: A compact 40-through-10-meter EFHW with an integrated spool, plus an interchangeable 80-meter accessory wire.
 status: current
 quantity: 2
+useContexts:
+  - portable
 sortOrder: 40
 externalUrl: https://www.spooltenna.com/products/spooltenna-ultra-efhw4010
 image: https://www.spooltenna.com/cdn/shop/files/IMG_9535.jpg?v=1771606811

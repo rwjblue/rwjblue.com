@@ -3,6 +3,9 @@ name: Yaesu FTDX10
 category: radios
 summary: A full-size HF and 6-meter transceiver kept for home operating, SSB work, and station experiments.
 status: current
+state: Stored; not currently connected
+useContexts:
+  - home
 sortOrder: 50
 externalUrl: https://www.yaesu.com/product-detail.aspx?CatName=HF+Transceivers%2FAmplifiers&Model=FTDX10
 dxEngineeringUrl: https://www.dxengineering.com/parts/ysu-ftdx-10
@@ -13,8 +16,8 @@ imageSourceUrl: https://www.dxengineering.com/parts/ysu-ftdx-10
 ---
 
 The FTDX10 is an alternate home-station radio and a useful comparison point for
-the Elecraft station. It is configured for SSB and digital-mode work and can be
+the Elecraft station. It can support SSB, CW, and digital-mode work and can be
 operated remotely through the Yaesu network-control hardware.
 
-It remains part of the equipment inventory even when the K4D is the radio
-connected at the main operating position.
+It is currently unplugged and not in active use. It remains part of the
+equipment inventory while the K4D is connected at the main operating position.

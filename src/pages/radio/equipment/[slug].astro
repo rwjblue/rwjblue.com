@@ -1,18 +1,26 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
-import { EQUIPMENT_CATEGORIES } from "../../../lib/equipment";
+import {
+  connectedEquipment,
+  EQUIPMENT_CATEGORIES,
+  EQUIPMENT_USE_CONTEXT_LABELS,
+  getEquipment,
+} from "../../../lib/equipment";
 
 export async function getStaticPaths() {
-  const equipment = await getCollection("equipment");
+  const equipment = await getEquipment();
   return equipment.map((entry) => ({
     params: { slug: entry.id },
-    props: { entry },
+    props: {
+      entry,
+      connections: connectedEquipment(entry, equipment),
+    },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, connections } = Astro.props;
 const { Content } = await render(entry);
 const canonicalPath = `/radio/equipment/${entry.id}/`;
 const category = EQUIPMENT_CATEGORIES.find(
@@ -55,6 +63,11 @@ const statusLabel =
           )
         }
         {entry.data.state && <span>{entry.data.state}</span>}
+        {
+          entry.data.useContexts.map((context) => (
+            <span>{EQUIPMENT_USE_CONTEXT_LABELS[context]}</span>
+          ))
+        }
       </p>
       <p>{entry.data.summary}</p>
     </header>
@@ -85,6 +98,29 @@ const statusLabel =
     }
 
     <Content />
+
+    {
+      connections.length > 0 && (
+        <section
+          class="equipment-connections"
+          aria-labelledby="equipment-connections-title"
+        >
+          <p class="section-label">Station relationships</p>
+          <h2 id="equipment-connections-title">Connected equipment</h2>
+          <p>
+            Equipment currently connected with this item as part of a home or
+            portable station.
+          </p>
+          <nav class="path-links" aria-label="Connected equipment">
+            {connections.map((connection) => (
+              <a href={`/radio/equipment/${connection.id}/`}>
+                {connection.data.name}
+              </a>
+            ))}
+          </nav>
+        </section>
+      )
+    }
 
     {
       (entry.data.externalUrl || entry.data.dxEngineeringUrl) && (

@@ -3,6 +3,8 @@ name: REZ Scout-XF antenna system
 category: antennas
 summary: A modular portable vertical system built around a mounting base, telescoping whips, radials, and optional loading coils.
 status: current
+useContexts:
+  - portable
 sortOrder: 40
 externalUrl: https://www.rezantenna.com/scout
 dxEngineeringUrl: https://www.dxengineering.com/parts/rez-scout-xf

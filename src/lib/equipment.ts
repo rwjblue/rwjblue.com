@@ -2,6 +2,16 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 export type EquipmentEntry = CollectionEntry<"equipment">;
 export type EquipmentCategory = EquipmentEntry["data"]["category"];
+export type EquipmentUseContext =
+  EquipmentEntry["data"]["useContexts"][number];
+
+export const EQUIPMENT_USE_CONTEXT_LABELS: Record<
+  EquipmentUseContext,
+  string
+> = {
+  home: "Home station",
+  portable: "Portable / field",
+};
 
 export interface EquipmentCategoryDefinition {
   id: EquipmentCategory;
@@ -69,4 +79,19 @@ export function equipmentByCategory(
     ...category,
     entries: entries.filter((entry) => entry.data.category === category.id),
   })).filter((category) => category.entries.length > 0);
+}
+
+export function connectedEquipment(
+  entry: EquipmentEntry,
+  entries: EquipmentEntry[],
+): EquipmentEntry[] {
+  const connectedIds = new Set(entry.data.connections);
+
+  for (const candidate of entries) {
+    if (candidate.data.connections.includes(entry.id)) {
+      connectedIds.add(candidate.id);
+    }
+  }
+
+  return entries.filter((candidate) => connectedIds.has(candidate.id));
 }

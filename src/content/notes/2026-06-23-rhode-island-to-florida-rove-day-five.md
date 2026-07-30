@@ -41,8 +41,8 @@ Savannah was a shaded picnic-table stop with the KX2, and Jekyll was a
 - **Where:** [Woods Bay State Park, US-2915](/radio/pota/US-2915/) in South Carolina, [Savannah National Wildlife Refuge, US-0522](/radio/pota/US-0522/) at Abercorn Landing, and [Jekyll Island State Park, US-0636](/radio/pota/US-0636/) in Georgia
 - **When:** June 23, 2026; roughly 1324-1343 UTC at Woods Bay, 1655-1738 UTC at Savannah NWR, and 2315-2348 UTC at Jekyll Island
 - **Activation:** 46 CW QSOs total; 14 on 40 meters and 32 on 20 meters
-- **Radios:** FT-891 at Woods Bay; KX2 at Savannah NWR and Jekyll Island
-- **Antennas:** DX Commander Expedition mast with the PackTenna 29-foot random wire and 17-foot counterpoise for Woods Bay and Savannah; 25-foot whip in a Rybakov-style setup at Jekyll Island
+- **Radios:** [FT-891](/radio/equipment/yaesu-ft-891/) at Woods Bay; [KX2](/radio/equipment/elecraft-kx2/) at Savannah NWR and Jekyll Island
+- **Antennas:** [DX Commander Expedition](/radio/equipment/dx-commander-expedition/) mast with the [PackTenna 29-foot random wire](/radio/equipment/packtenna-pt-101/) and 17-foot counterpoise for Woods Bay and Savannah; [REZ Scout-XF with its 25-foot whip](/radio/equipment/rez-scout-xf/) in a Rybakov-style setup at Jekyll Island
 - **Power:** 60 W at Woods Bay; 5 W at Savannah NWR and Jekyll Island
 - **CW gear:** Paddle setup not recorded in my notes
 

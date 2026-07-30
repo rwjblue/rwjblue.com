@@ -3,6 +3,8 @@ name: Reliance 53-foot EFRW
 category: antennas
 summary: A compact 9:1 end-fed random-wire system for tuner-assisted portable operation from 160 through 6 meters.
 status: current
+useContexts:
+  - portable
 sortOrder: 70
 externalUrl: https://www.relianceantennas.com/product/efrw-9-to-1-bugout-mini-160-6m-53-ft-wire-antenna/
 image: https://www.relianceantennas.com/wp-content/uploads/2026/03/EFRW-Complete-Antenna-600x600.jpg

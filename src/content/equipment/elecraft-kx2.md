@@ -3,6 +3,8 @@ name: Elecraft KX2
 category: radios
 summary: A compact portable HF radio used for lightweight CW, POTA activations, and field experiments.
 status: current
+useContexts:
+  - portable
 sortOrder: 20
 externalUrl: https://elecraft.com/products/kx2-ssb-cw-data-80-10-m-transceiver
 image: /images/radio/2026-06-03-kx2-usb-c-side-rails-install/img-9040.jpg
