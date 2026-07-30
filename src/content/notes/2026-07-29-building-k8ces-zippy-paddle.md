@@ -2,6 +2,7 @@
 title: K8CES Zippy Paddle Guide
 date: 2026-07-29
 summary: "A detailed, photo-by-photo assembly guide for the 3D-printed K8CES Zippy paddle, developed while building a batch of 25."
+shareImage: /images/radio/2026-07-29-building-k8ces-zippy-paddle/completed-zippy-paddle.jpg
 tags:
   - radio
   - cw
