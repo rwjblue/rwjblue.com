@@ -1270,6 +1270,22 @@ p {
   margin: 24px 0;
 }
 
+.document p > a:only-child:has(> img:only-child) {
+  display: block;
+  width: min(100%, 520px);
+  margin: 24px auto;
+}
+
+.document p > a:only-child > img:only-child {
+  margin: 0;
+  cursor: zoom-in;
+}
+
+.document p > a:only-child:has(> img:only-child):focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
