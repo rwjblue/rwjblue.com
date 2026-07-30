@@ -31,10 +31,10 @@ made the activation feel like it fit the spirit of the project.
 - **Where:** [Blackstone River Valley National Historical Park, US-7971](/radio/pota/US-7971/), operating from the Rhode Island side after walking in from the main parking area
 - **When:** June 14, 2026, starting around 7:15 to 7:30 p.m. local
 - **Activation:** 18 CW QSOs on 20 meters; 6 before the UTC rollover and 12 after it
-- **Radio:** Elecraft KX2
-- **Antenna:** KJ6ER Challenger with the off-center-fed dipole, on a tripod
+- **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/)
+- **Antenna:** [KJ6ER Challenger](/radio/equipment/kj6er-challenger/) with the off-center-fed dipole, on a tripod
 - **Power:** 10 watts from the KX2 for 17 contacts; one contact at 5 watts
-- **CW gear:** Zippy paddle by K8CES
+- **CW gear:** [Zippy paddle by K8CES](/radio/equipment/k8ce-zippy-paddle/)
 
 ## Field notes
 

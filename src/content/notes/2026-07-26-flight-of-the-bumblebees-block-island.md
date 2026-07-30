@@ -100,8 +100,8 @@ saltwater immediately to the west. An
 helps explain why vertically polarized antennas beside seawater can produce
 especially useful low-angle radiation.
 
-Almost the entire antenna is one modular REZ system: the
-[Scout XF base](https://www.rezantenna.com/product-page/scout-xf),
+Almost the entire antenna is one
+[modular REZ system](/radio/equipment/rez-scout-xf/): the Scout XF base,
 [[Z]-25 whip](https://www.rezantenna.com/scout), and
 [XFORM 4:1](https://www.rezantenna.com/product-page/xform-4-1). I can use those
 parts in two configurations:
@@ -143,9 +143,9 @@ additional support without relying on a ground stake.
 
 ## Power in two stages
 
-The KX3 will run at five watts during FOBB. If the schedule leaves time for a
-POTA activation before the event, I may use up to ten watts for that and then
-turn it back down.
+The [KX3](/radio/equipment/elecraft-kx3/) will run at five watts during FOBB.
+If the schedule leaves time for a POTA activation before the event, I may use
+up to ten watts for that and then turn it back down.
 
 For a rough battery budget, I am assuming 0.2 amp while receiving, approximately
 1.2 amps while transmitting at five watts, and 1.8 amps at ten watts. At a
@@ -159,11 +159,11 @@ quotes 0.15 to 0.25 amp on receive and 1 to 3 amps on transmit, while a
 uses the same 25-percent duty cycle for active full-break-in CW.
 
 One battery should cover the shortened FOBB session, but I have two matching
-3 Ah LiFePO4 packs. I will use the first for setup and any earlier POTA
-operation, then swap in the fully charged second pack immediately before FOBB.
-Keeping them separate provides six amp-hours of total capacity without
-paralleling the packs, and a battery or connector problem does not end the
-activation.
+[3 Ah Bioenno LiFePO4 packs](/radio/equipment/bioenno-3ah/). I will use the
+first for setup and any earlier POTA operation, then swap in the fully charged
+second pack immediately before FOBB. Keeping them separate provides six
+amp-hours of total capacity without paralleling the packs, and a battery or
+connector problem does not end the activation.
 
 I will also carry a lightweight 5,000 mAh USB-C PD bank and trigger cable as a
 phone reserve and third way to power the radio. I have already confirmed that
@@ -237,6 +237,7 @@ With those settled, the ferry load becomes straightforward: the Scout XF,
 and strap, radio, two 3 Ah batteries, the small USB-C bank and trigger cable,
 key, headphones, logging gear, water, and sun and insect protection. If the
 practice setup works, the tarp, its lines, and one fiberglass mast join the
-load. The linked dipole, throw line, and Challenger can stay home. What began
-as a search for a tree has turned into a compact saltwater station with a very
+load. The linked dipole, [throw line](/radio/equipment/throw-line-kit/), and
+[Challenger](/radio/equipment/kj6er-challenger/) can stay home. What began as a
+search for a tree has turned into a compact saltwater station with a very
 promising western horizon.

@@ -45,9 +45,9 @@ portable operating, which is still my favorite part of POTA.
 - **When:** July 6, 2026; we met around 8:30-8:45 a.m. local, and my log ran from 14:37-15:09 UTC
 - **Activation:** 11 CW QSOs on 20 meters, all at 5 W
 - **Radios:** Randy's Yaesu FT-818 for the first part; my portable station for the final 11-QSO run
-- **Antennas:** Randy's EFHW on two crappie poles, then my KJ6ER Challenger setup for 20 meters
+- **Antennas:** Randy's EFHW on two crappie poles, then my [KJ6ER Challenger](/radio/equipment/kj6er-challenger/) setup for 20 meters
 - **Power:** 5 W
-- **CW gear:** Randy's Ashi paddle, I think from N6ARA, and a Bama Tech TP-III; my N3ZN portable paddle with the KX2 for my station
+- **CW gear:** Randy's Ashi paddle, I think from N6ARA, and a Bama Tech TP-III; my [N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/) with the [KX2](/radio/equipment/elecraft-kx2/) for my station
 
 ## Field notes
 

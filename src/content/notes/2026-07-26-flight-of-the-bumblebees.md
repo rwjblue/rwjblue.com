@@ -126,7 +126,8 @@ The practical checklist is short:
 
 - choose the park and confirm that the antenna layout is permitted;
 - finish and test the dipole in its intended inverted-V geometry;
-- pack a throw line or mast, end ropes, and a backup way to support the center;
+- pack a [throw line](/radio/equipment/throw-line-kit/) or mast, end ropes, and
+  a backup way to support the center;
 - bring the radio, key, battery, headphones, coax, logging gear, water, and
   insect protection;
 - arrive early enough to solve antenna problems before 1700 UTC.

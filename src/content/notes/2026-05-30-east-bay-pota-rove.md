@@ -34,16 +34,17 @@ contest](/notes/2026-05-31-cq-wpx-cw-learning-weekend/).
 - **Where:** Simmons Mill Wildlife Management Area, Eight Rod Farm Wildlife Management Area, and Sapowet Marsh State Wildlife Area in Rhode Island
 - **When:** May 30, 2026; rove start logged at 19:51 UTC, move to Eight Rod Farm at 21:14 UTC, move to Sapowet Marsh at 23:36 UTC
 - **Activation:** 43 CW QSOs total at 5 watts with the KX2; 14 at Simmons Mill, 14 at Eight Rod Farm, and 15 at Sapowet Marsh
-- **Radio:** Elecraft KX2
+- **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/)
 - **CW gear:** [N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/) on a magnetic base
 
 ## [Simmons Mill Wildlife Management Area, US-6986](https://pota.app/#/park/US-6986)
 
-I started at Simmons Mill with the KX2, 5 watts, and the Challenger 20-meter
-off-center-fed dipole. This was still early enough in the evening that the CQ WPX
-CW contest was filling a lot of the band, so the first problem was simply finding
-a place to operate POTA at a speed I could manage. I did
-not want to mix a POTA activation with contest-speed copying.
+I started at Simmons Mill with the KX2, 5 watts, and the
+[Challenger 20-meter off-center-fed dipole](/radio/equipment/kj6er-challenger/).
+This was still early enough in the evening that the CQ WPX CW contest was
+filling a lot of the band, so the first problem was simply finding a place to
+operate POTA at a speed I could manage. I did not want to mix a POTA activation
+with contest-speed copying.
 
 Once I found a spot, it came together, just not quickly. I got a burst of
 contacts early and then had to work through longer gaps before the activation was
@@ -63,14 +64,15 @@ Eight Rod Farm was the frustrating one. I reached that stop a little after
 already tells the story: a lot of that window went into setup and troubleshooting
 rather than operating.
 
-I started with a vertical setup built around the REZ 17-foot whip and a loading
-coil for 40 meters, but the actual antenna was the POTA Performer by KJ6ER with
-the 40-meter extension radials. That is why I needed the 40-meter coil in the
-first place. I made one or two contacts while trying 40 and maybe 30 meters, but
-the SWR was wildly wrong for a setup that should have been resonant. After
-chasing that for a while, I found the actual problem: a loose coupler at the
-connection between the choke and the whip assembly. Once I tightened that up, the
-SWR dropped to essentially 1:1 and the antenna behaved normally.
+I started with a vertical setup built around the
+[REZ 17-foot whip and loading coil](/radio/equipment/rez-scout-xf/) for
+40 meters, but the actual antenna was the POTA Performer by KJ6ER with the
+40-meter extension radials. That is why I needed the 40-meter coil in the first
+place. I made one or two contacts while trying 40 and maybe 30 meters, but the
+SWR was wildly wrong for a setup that should have been resonant. After chasing
+that for a while, I found the actual problem: a loose coupler at the connection
+between the choke and the whip assembly. Once I tightened that up, the SWR
+dropped to essentially 1:1 and the antenna behaved normally.
 
 At the same time, band conditions were getting worse. The K-index had climbed from
 1 earlier in the outing to 5 by then, with a more negative Bz and higher solar
@@ -87,9 +89,10 @@ UTC, with contacts on 40, 30, and 20 meters.
 This was also the first time the KX2's internal battery made me pay attention. I
 expected it to be full enough for the outing, but I do not think I had actually
 charged it long enough before taking it out the first time. It threw a low-battery
-warning, so I plugged in the 3 Ah pack and kept going. It never died, and it was
-not really a problem in the field, but it is a reminder that "probably charged"
-is not the same thing as charged.
+warning, so I plugged in the
+[3 Ah Bioenno pack](/radio/equipment/bioenno-3ah/) and kept going. It never
+died, and it was not really a problem in the field, but it is a reminder that
+"probably charged" is not the same thing as charged.
 
 <div class="photo-grid">
   <img src="/images/pota/2026-05-30-east-bay-pota-rove/img-8975.jpg" alt="Eight Rod Farm Wildlife Management Area entrance sign at the second stop of the rove">

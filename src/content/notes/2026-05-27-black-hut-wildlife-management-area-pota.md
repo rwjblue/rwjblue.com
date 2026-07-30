@@ -23,8 +23,8 @@ contacts.
 - **Where:** Black Hut Wildlife Management Area, US-6984, hike-in operating spot in the woods
 - **When:** May 27, 2026, 13:23 to 15:13 UTC
 - **Activation:** 25 CW QSOs in 1 hour 50 minutes; 12 on 40 meters and 13 on 20 meters
-- **Radio:** Elecraft KX3
-- **Antenna:** [Spooltenna Ultra](/radio/equipment/spooltenna-ultra/) 40m EFHW; far end in a tree around 35 to 40 feet up, feed point elevated on a POTA Explorer 20-foot mast
+- **Radio:** [Elecraft KX3](/radio/equipment/elecraft-kx3/)
+- **Antenna:** [Spooltenna Ultra](/radio/equipment/spooltenna-ultra/) 40m EFHW; far end in a tree around 35 to 40 feet up, feed point elevated on a [POTA Explorer 20-foot mast](/radio/equipment/gigaparts-explorer-pota20/)
 - **Power:** 5 watts
 - **CW gear:** [VK3IL paddle](/radio/equipment/vk3il-pressure-paddle/)
 
@@ -76,7 +76,7 @@ repeatable than it has on some earlier outings.
 
 ## What worked
 
-- The throw line finally felt reliable enough to make a higher wire deployment worth the effort.
+- The [throw line](/radio/equipment/throw-line-kit/) finally felt reliable enough to make a higher wire deployment worth the effort.
 - Starting on 40 meters and returning there at the end both paid off.
 - The stone structure made an unexpectedly good standing operating position.
 

@@ -51,6 +51,7 @@ const equipment = defineCollection({
       "radios",
       "antennas",
       "keys",
+      "station-accessories",
       "power",
       "supports",
       "test-equipment",

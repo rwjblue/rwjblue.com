@@ -40,10 +40,10 @@ the evening stop made the activation feel a lot less like a rushed travel chore.
 - **Where:** [Rockville Wildlife Management Area, US-6991](/radio/pota/US-6991/), [Silver Sands State Park, US-1716](/radio/pota/US-1716/), and [Tallman Mountain State Park, US-2149](/radio/pota/US-2149/)
 - **When:** June 19, 2026 local time; the Tallman Mountain log crossed 00:00 UTC on June 20
 - **Activation:** 56 QSOs total; 39 CW and 17 SSB on 40, 30, and 20 meters
-- **Radio:** Yaesu FT-891
-- **Power:** 60 watts on CW and 75 watts on SSB; 50 Ah LiFePO4 battery in the car, with a 12 Ah Bioenno battery that needed troubleshooting at Tallman Mountain
+- **Radio:** [Yaesu FT-891](/radio/equipment/yaesu-ft-891/)
+- **Power:** 60 watts on CW and 75 watts on SSB; [50 Ah LiTime LiFePO4 battery](/radio/equipment/litime-50ah/) in the car, with a [12 Ah Bioenno battery](/radio/equipment/bioenno-12ah/) that needed troubleshooting at Tallman Mountain
 - **CW gear:** [N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/)
-- **Antennas:** [PackTenna 29-foot end-fed random wire](/radio/equipment/packtenna-pt-101/) with a 17-foot counterpoise at Rockville; KJ6ER Challenger at Silver Sands and Tallman Mountain
+- **Antennas:** [PackTenna 29-foot end-fed random wire](/radio/equipment/packtenna-pt-101/) with a 17-foot counterpoise at Rockville; [KJ6ER Challenger](/radio/equipment/kj6er-challenger/) at Silver Sands and Tallman Mountain
 
 ## [Rockville Wildlife Management Area, US-6991](/radio/pota/US-6991/)
 

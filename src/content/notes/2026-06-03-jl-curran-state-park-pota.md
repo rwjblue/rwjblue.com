@@ -25,10 +25,10 @@ little over half a mile in to operate from a quiet spot in the woods.
 - **Where:** JL Curran State Park, US-6992, wooded operating spot off the trail
 - **When:** June 3, 2026, about 9:25 to 11:35 AM EDT
 - **Activation:** 23 CW QSOs; 3 on 40 meters and 20 on 20 meters
-- **Radio:** Elecraft KX2, freshly reassembled after the [USB-C charger and side rail install](/notes/2026-06-03-kx2-usb-c-side-rails-install/)
-- **Antenna:** 51-foot end-fed random wire, thrown roughly 35 to 40 feet high and running in an upside-down U shape through the trees
+- **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/), freshly reassembled after the [USB-C charger and side rail install](/notes/2026-06-03-kx2-usb-c-side-rails-install/)
+- **Antenna:** [Reliance 53-foot end-fed random wire](/radio/equipment/reliance-53-foot-efrw/), remembered in the field as 51 feet, thrown roughly 35 to 40 feet high and running in an upside-down U shape through the trees
 - **Power:** Mostly 5 watts; the last two QSOs were logged at 10 watts
-- **CW gear:** Zippy Key paddle by K8CES; headphones and the KX2 speaker
+- **CW gear:** [Zippy Key paddle by K8CES](/radio/equipment/k8ce-zippy-paddle/); headphones and the KX2 speaker
 
 ## Field notes
 
@@ -41,9 +41,10 @@ compressed before I even got on the trail.
 The weather was gorgeous, and I found another excellent operating spot in the
 woods where I could stand, move around, and not feel pinned to one position.
 There were boulders, a low stone wall, and enough tall trees to make the antenna
-worth the effort. The throw line went perfectly on the first throw, right where
-I wanted it. That has been a running skill to improve on recent outings, and
-this was one of the mornings where the practice showed up.
+worth the effort. The [throw line](/radio/equipment/throw-line-kit/) went
+perfectly on the first throw, right where I wanted it. That has been a running
+skill to improve on recent outings, and this was one of the mornings where the
+practice showed up.
 
 The 51-foot random wire went up high, maybe 35 to 40 feet, and the available
 supports made it run in an upside-down U shape through the trees. It was not the

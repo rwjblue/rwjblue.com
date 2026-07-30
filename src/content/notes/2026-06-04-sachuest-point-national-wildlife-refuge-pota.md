@@ -27,10 +27,10 @@ morning light, and a steady breeze coming in off the water.
 - **Where:** [Sachuest Point National Wildlife Refuge, US-0516](https://pota.app/#/park/US-0516), Aquidneck Island
 - **When:** June 4, 2026, 14:16 to 15:23 UTC
 - **Activation:** [Pack Mule](https://pota.news/pack-mule-award/); 38 CW QSOs on 20 meters
-- **Radio:** Elecraft KX2 with the internal battery
-- **Antenna:** KJ6ER Challenger 25-foot whip on the REZ Antenna Systems mini tripod
+- **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/) with the internal battery
+- **Antenna:** [KJ6ER Challenger](/radio/equipment/kj6er-challenger/) 25-foot whip on the [REZ Antenna Systems mini tripod](/radio/equipment/rez-scout-xf/)
 - **Power:** 5 watts from the KX2 internal battery, about 0.4 Ah used
-- **CW gear:** KXPD2 paddle/keyer, headphones
+- **CW gear:** [KXPD2 paddle/keyer](/radio/equipment/elecraft-kxpd2/), headphones
 
 ## Field notes
 

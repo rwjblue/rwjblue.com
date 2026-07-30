@@ -45,10 +45,9 @@ for a while. The products had a good reputation, the transformer boxes were
 made for portable work, and I am always happy to support a small ham-owned
 business.
 
-The [OCFD Bugout](https://www.relianceantennas.com/product/ocfd-bugout-antenna/)
-transformer is 3.5 by 2.5 by 0.75 inches and 2.5 ounces. It has a BNC
-connector, a 4:1 transformer, and power ratings of 100 watts SSB or 60 watts
-digital and CW. The
+The [OCFD Bugout](/radio/equipment/reliance-ocfd/) transformer is 3.5 by 2.5
+by 0.75 inches and 2.5 ounces. It has a BNC connector, a 4:1 transformer, and
+power ratings of 100 watts SSB or 60 watts digital and CW. The
 [EFHW Bugout Mini](https://www.relianceantennas.com/product/efhw-bugout-mini-antenna/)
 is smaller still at 2 by 1.5 by 0.75 inches. Reliance also builds a similarly
 pocketable
@@ -58,7 +57,8 @@ and a
 
 I believe I now have examples of all four transformer boxes. They take up
 remarkably little room in a field kit while still leaving me the option of
-using a 100-watt radio such as my FT-891.
+using a 100-watt radio such as my
+[FT-891](/radio/equipment/yaesu-ft-891/).
 
 ![Reliance OCFD Bugout transformer at the center of the original inverted-V installation](/images/radio/2026-07-21-reliance-ocfd-replacement-wire-testing/original-transformer-closeup.jpg)
 
@@ -74,8 +74,9 @@ It was a genuinely lovely way to meet the person behind the gear.
 ## A problem became a collaborative experiment
 
 When I tested the 40-through-10-meter OCFD after that weekend, it did not tune
-where either Matt or I expected. I sent him setup photos and analyzer readings,
-and he worked through the installation details with me: feedpoint height, end
+where either Matt or I expected. I sent him setup photos and
+[RigExpert analyzer](/radio/equipment/rigexpert-match-advanced/) readings, and
+he worked through the installation details with me: feedpoint height, end
 height, included angle, feedline, and the measured resistance and reactance.
 
 Matt and the Reliance team have been excellent throughout this process. They
@@ -100,10 +101,12 @@ experiment. He sent:
 ## The original wire as a baseline
 
 The original antenna was installed as an inverted V with the feedpoint near
-the top of a 20-foot mast, the ends about three to five feet high, and an
-included angle of roughly 120 degrees. I used approximately 25 feet of RG-316
-because I did not yet have RG-174. I do not remember installing a choke for
-that session, and the setup photos do not show ferrites at the feedpoint.
+the top of a
+[20-foot POTA Explorer mast](/radio/equipment/gigaparts-explorer-pota20/), the
+ends about three to five feet high, and an included angle of roughly
+120 degrees. I used approximately 25 feet of RG-316 because I did not yet have
+RG-174. I do not remember installing a choke for that session, and the setup
+photos do not show ferrites at the feedpoint.
 
 These measurements were made on a different day from the replacement tests,
 so they are a useful historical baseline rather than part of the controlled
@@ -228,8 +231,9 @@ Fifteen meters moved in the other direction: it measured 4.5:1 at 21.225 MHz,
 with substantial inductive reactance. That is exactly the harmonic tradeoff
 the experimental split was intended to explore.
 
-As a little victory lap before taking everything down, I connected my Elecraft
-KH1 and called CQ at 5 watts on 40 meters and 4 watts on 20 meters. The
+As a little victory lap before taking everything down, I connected my
+[Elecraft KH1](/radio/equipment/elecraft-kh1/) and called CQ at 5 watts on
+40 meters and 4 watts on 20 meters. The
 [Reverse Beacon Network](/radio/rbn-skimmers/) heard me on both, including one
 20-meter report from 2,083 miles away. It was not a scientific test, but it was
 fun to see the orange wire doing antenna things.

@@ -34,7 +34,7 @@ log. It was awkward, but it totally worked.
 - **Result:** 37 CW QSOs, with all but one on 20m
 - **Radio:** [Elecraft K4D](/radio/equipment/elecraft-k4d/) at 100 watts
 - **Antenna:** [DX Commander Expedition](/radio/equipment/dx-commander-expedition/) (native 1/4 wave for 20m)
-- **Headphones:** Heil Pro 7
+- **Headphones:** [Heil Pro 7](/radio/equipment/heil-pro-7/)
 
 I used the K4D at 100 watts into the DX Commander Expedition which is basically
 just a quarter wave vertical for 20m, and it did amazingly well. Most of the

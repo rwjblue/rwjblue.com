@@ -15,6 +15,9 @@ The KX2 is the portable radio I use when a small, self-contained station matters
 more than high power. Its internal battery and tuner support quick walking and
 picnic-table setups without a large power system.
 
-Mine has been adapted for regular field use with USB-C charging, protective
-side rails, and a small heat sink. The [installation note](/notes/2026-06-03-kx2-usb-c-side-rails-install/)
-records the changes and the lessons from opening a new radio.
+Mine has been adapted for regular field use with a G7UFO KXUSBC2 USB-C charger,
+Gems Products Side KX protective rails, and a small Pro Audio Engineering heat
+sink. The [installation note](/notes/2026-06-03-kx2-usb-c-side-rails-install/)
+records the changes and the lessons from opening a new radio. The detachable
+[KXPD2 paddle](/radio/equipment/elecraft-kxpd2/) keeps the radio self-contained
+for compact CW setups.

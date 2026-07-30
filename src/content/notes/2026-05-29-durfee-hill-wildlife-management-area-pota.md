@@ -19,10 +19,10 @@ tags:
 - **Where:** Durfee Hill Wildlife Management Area, [US-7715](https://pota.app/#/park/US-7715), hilltop above the main valley, Gloucester, RI
 - **When:** May 29, 2026, 13:12 to 14:16 UTC
 - **Activation:** 19 CW QSOs; 4 on 40 meters, 5 on 30 meters, 10 on 20 meters
-- **Radio:** Elecraft KX2 (first field outing)
-- **Antenna:** Reliance Antennas wire Rybakov; 25 ft wire supported ~30 ft up in a tree via throw line, four ~17 ft radials, 4:1 unun
+- **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/) (first field outing)
+- **Antenna:** [Reliance Antennas wire Rybakov](/radio/equipment/reliance-rybakov/); 25 ft wire supported ~30 ft up in a tree via [throw line](/radio/equipment/throw-line-kit/), four ~17 ft radials, 4:1 unun
 - **Power:** 5 watts, KX2 internal batteries
-- **CW gear:** KX2 built-in paddle
+- **CW gear:** [Elecraft KXPD2 paddle](/radio/equipment/elecraft-kxpd2/)
 
 ## Field notes
 

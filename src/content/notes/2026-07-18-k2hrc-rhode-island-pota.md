@@ -34,9 +34,9 @@ short window for the setup, activation, and teardown.
 - **Where:** [JL Curran State Park, US-6992](/radio/pota/US-6992/), Rhode Island
 - **When:** July 18, 2026, 15:41 to 16:12 UTC (11:41 AM to 12:12 PM EDT)
 - **Activation:** 23 SSB QSOs; 4 on 40 meters and 19 on 20 meters; 7 park-to-parks
-- **Radio:** Yaesu FT-891
+- **Radio:** [Yaesu FT-891](/radio/equipment/yaesu-ft-891/)
 - **Antenna:** [Spooltenna Ultra](/radio/equipment/spooltenna-ultra/) transformer and spool with the 80-meter accessory wire, about 135 feet long, oriented north to south in an attempt to favor paths westward
-- **Support:** Far end about 35 feet up in a tree; feed point on a [20-foot GigaParts Explorer POTA20 carbon-fiber mast](https://www.gigaparts.com/explorer-pota20-portable-handheld-20-ft-telescopic-carbon-fiber-mast.html)
+- **Support:** Far end about 35 feet up in a tree; feed point on a [20-foot GigaParts Explorer POTA20 carbon-fiber mast](/radio/equipment/gigaparts-explorer-pota20/)
 - **Feed line:** 25 feet of orange, sheathed ABR Industries RG-174 with an integrated five-bead common-mode choke
 - **Power:** 75 watts
 - **Logging:** Ham2K Portable Logger, with K2HRC as the station callsign and N1RWJ as the operator
@@ -89,10 +89,11 @@ to keep the higher part of the wire as taut as I wanted.
   <img src="/images/pota/2026-07-18-k2hrc-rhode-island-pota/80-meter-efhw-setup.jpg" alt="The 135-foot Spooltenna end-fed half-wave running high through the trees above the JL Curran operating site">
 </div>
 
-The first SWR sweep was confusing. I used the RigExpert analyzer's Multè
+The first SWR sweep was confusing. I used the
+[RigExpert MATCH Advanced](/radio/equipment/rigexpert-match-advanced/) Multè
 function, which sweeps the selected bands and presents a compact summary of
-which ones are resonant. The six-band view stayed below 3:1 on every band shown,
-even though the readings did not look as good as I expected:
+which ones are resonant. The six-band view stayed below 3:1 on every band
+shown, even though the readings did not look as good as I expected:
 
 | Band | Coax-only SWR |
 | --- | ---: |

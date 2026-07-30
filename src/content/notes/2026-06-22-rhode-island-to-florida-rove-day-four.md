@@ -39,9 +39,9 @@ parking lot looks empty.
 - **Where:** [Fredericksburg and Spotsylvania National Military Park, US-0717](/radio/pota/US-0717/) in Virginia and [Medoc Mountain State Park, US-2744](/radio/pota/US-2744/) in North Carolina
 - **When:** June 22, 2026 local date; roughly 1436-1501 UTC at Fredericksburg and 1952-2025 UTC at Medoc Mountain
 - **Activation:** 23 CW QSOs total; three on 40 meters and 20 on 20 meters
-- **Radio:** Yaesu FT-891
-- **Antenna:** PackTenna 29-foot random wire at both stops
-- **CW gear:** N3ZN paddle, with the leg strap used after a short handheld attempt
+- **Radio:** [Yaesu FT-891](/radio/equipment/yaesu-ft-891/)
+- **Antenna:** [PackTenna 29-foot random wire](/radio/equipment/packtenna-pt-101/) at both stops
+- **CW gear:** [N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/), with the leg strap used after a short handheld attempt
 
 ## [Fredericksburg and Spotsylvania National Military Park, US-0717](/radio/pota/US-0717/)
 

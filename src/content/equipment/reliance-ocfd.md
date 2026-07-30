@@ -20,5 +20,6 @@ wire assembly. The manufacturer sells that wire as a 40-through-10-meter
 assembly; I keep the broader 40-through-6-meter description here because that
 is how the complete tuned field setup is used.
 
-The [replacement-wire testing note](/notes/2026-07-21-reliance-ocfd-replacement-wire-testing/)
-records the original and experimental feed-point layouts.
+An unpublished replacement-wire testing note records the original and
+experimental feed-point layouts. Its backlink will appear here automatically
+when the draft is published.

@@ -199,9 +199,10 @@ points are not 24-hour lots, but Anglers is, presumably because people fish at
 odd hours. It also counted as a twofer with [George Washington Memorial Parkway,
 US-0670](/radio/pota/US-0670/).
 
-I set up the end-fed random wire again and used the FT-891 with the N3ZN paddle
-and leg strap. I started at 02:46 UTC on June 21 and made 12 CW contacts: eight
-on 40 meters and four on 20 meters.
+I set up the end-fed random wire again and used the FT-891 with the
+[N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/) and leg strap. I
+started at 02:46 UTC on June 21 and made 12 CW contacts: eight on 40 meters and
+four on 20 meters.
 
 The contacts came fast, which was exactly what I needed at that point. I was
 very tired. Rory, [W8KNX](https://www.qrz.com/db/W8KNX), found me again, and

@@ -36,6 +36,12 @@ export const EQUIPMENT_CATEGORIES: EquipmentCategoryDefinition[] = [
     description: "Desk and portable paddles used for CW operating.",
   },
   {
+    id: "station-accessories",
+    label: "Station accessories",
+    description:
+      "Durable operator-facing gear that materially shapes a station.",
+  },
+  {
     id: "power",
     label: "Power",
     description: "Power supplies and batteries that materially shape a setup.",

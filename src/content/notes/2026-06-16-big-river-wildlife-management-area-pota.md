@@ -26,8 +26,8 @@ especially the antenna and vehicle workflow.
 - **Where:** [Big River Wildlife Management Area, US-6982](/radio/pota/US-6982/), Rhode Island
 - **When:** June 16, 2026, 13:25 to 14:38 UTC
 - **Activation:** 17 QSOs total; 13 CW and 4 SSB on 20 and 17 meters
-- **Radio:** Elecraft KX2
-- **Antenna:** KJ6ER Challenger off-center-fed dipole, on a freestanding tripod strapped to a hitch-mounted flagpole holder
+- **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/)
+- **Antenna:** [KJ6ER Challenger](/radio/equipment/kj6er-challenger/) off-center-fed dipole, on a freestanding tripod strapped to a hitch-mounted flagpole holder
 - **Power:** 5 watts for most CW contacts; 10 watts for SSB and one later CW contact
 - **CW gear:** KX2 with field logging in Ham2K Portable Logger
 
