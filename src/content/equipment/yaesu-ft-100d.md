@@ -8,6 +8,8 @@ useContexts:
   - home
 sortOrder: 10
 externalUrl: https://www.yaesu.com/product-detail.aspx?CatName=Legacy&Model=FT-100D
+image: /images/equipment/yaesu-ft-100d/yaesu-ft-100d.jpg
+imageAlt: Yaesu FT-100D powered on at a desk and tuned to the 20-meter amateur band
 ---
 
 The FT-100D was my original HF radio when I first earned General in 2006. I did
