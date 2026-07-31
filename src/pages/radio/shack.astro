@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const updated = "July 30, 2026";
+const updated = "July 31, 2026";
 
 const homeStation: Array<{
   label: string;
@@ -45,37 +45,142 @@ const homeStation: Array<{
   },
 ];
 
-const portableKit: Array<{
-  label: string;
-  name?: string;
+type PortableBagItem = {
+  name: string;
   href?: string;
-  text: string;
+  detail?: string;
+};
+
+const portableBags: Array<{
+  label: string;
+  name: string;
+  summary: string;
+  groups: Array<{
+    label: string;
+    items: PortableBagItem[];
+  }>;
 }> = [
   {
-    label: "Field radios",
-    name: "Elecraft KX2",
-    href: "/radio/equipment/elecraft-kx2/",
-    text: " and KX3 for portable HF, POTA activations, quick experiments, and lightweight setups.",
+    label: "Mostly QRP",
+    name: "KX2 grab-and-go bag",
+    summary:
+      "The lighter of the two packed stations, built for walking, quick POTA stops, and low-friction CW or voice operating.",
+    groups: [
+      {
+        label: "Radio and power",
+        items: [
+          {
+            name: "Elecraft KX2",
+            href: "/radio/equipment/elecraft-kx2/",
+          },
+          {
+            name: "Bioenno 3 Ah battery",
+            href: "/radio/equipment/bioenno-3ah/",
+          },
+        ],
+      },
+      {
+        label: "Antennas and support",
+        items: [
+          {
+            name: "Spooltenna Ultra",
+            href: "/radio/equipment/spooltenna-ultra/",
+            detail: "— one of the two owned",
+          },
+          {
+            name: "GigaParts Explorer POTA20 mast",
+            href: "/radio/equipment/gigaparts-explorer-pota20/",
+            detail: "— with its ground stake",
+          },
+          {
+            name: "Reliance 53-foot end-fed random wire",
+            href: "/radio/equipment/reliance-53-foot-efrw/",
+          },
+          {
+            name: "Reliance Rybakov",
+            href: "/radio/equipment/reliance-rybakov/",
+          },
+        ],
+      },
+      {
+        label: "CW and voice",
+        items: [
+          {
+            name: "K8CE Zippy paddle",
+            href: "/radio/equipment/k8ce-zippy-paddle/",
+          },
+          {
+            name: "VK3IL pressure paddle",
+            href: "/radio/equipment/vk3il-pressure-paddle/",
+          },
+          {
+            name: "G7UFO Turret Mini Microphone",
+            href: "/radio/equipment/g7ufo-turret-mini-microphone/",
+            detail: "— KX2/KX3 version",
+          },
+        ],
+      },
+    ],
   },
   {
-    label: "Radios to rotate in",
-    name: "QRP Labs QMX",
-    href: "/radio/equipment/qrp-labs-qmx/",
-    text: " and QMX+ radios are available for field use but need deliberate operating time before they become familiar alternatives.",
-  },
-  {
-    label: "Longer portable stays",
-    name: "DX Commander Expedition",
-    href: "/radio/equipment/dx-commander-expedition/",
-    text: " is intended for camping, weekends away, and other extended setups once the Signature 12.4 takes over at home.",
-  },
-  {
-    label: "Antennas",
-    text: "Whips and wire antennas depending on the park, available supports, wind, time, and how much setup friction the outing can tolerate.",
-  },
-  {
-    label: "Logging",
-    text: "Portable logging is treated as part of the station: simple enough to use in the field, detailed enough to reconstruct what happened later.",
+    label: "Higher power",
+    name: "FT-891 / Scout-XF bag",
+    summary:
+      "A larger picnic-table and vehicle-adjacent station with a 100-watt radio, more battery reserve, and several antenna configurations.",
+    groups: [
+      {
+        label: "Radio, power, and matching",
+        items: [
+          {
+            name: "Yaesu FT-891",
+            href: "/radio/equipment/yaesu-ft-891/",
+          },
+          {
+            name: "Bioenno 12 Ah battery",
+            href: "/radio/equipment/bioenno-12ah/",
+          },
+          {
+            name: "LDG Z-11ProII tuner",
+            href: "/radio/equipment/ldg-z-11proii/",
+          },
+        ],
+      },
+      {
+        label: "Antennas and support",
+        items: [
+          {
+            name: "REZ Scout-XF",
+            href: "/radio/equipment/rez-scout-xf/",
+            detail:
+              "— X-Form 4:1 feedpoint, 25-foot whip, and four 33-foot radials",
+          },
+          {
+            name: "Spare 30-foot DX Commander Expedition mast",
+            href: "/radio/equipment/dx-commander-expedition/",
+            detail: "— the bare pole, used as a wire support",
+          },
+          {
+            name: "PackTenna PT-101 random wire",
+            href: "/radio/equipment/packtenna-pt-101/",
+            detail: "— the 29-foot end-fed wire",
+          },
+          {
+            name: "PackTenna 20 m EFHW",
+            href: "/radio/equipment/packtenna-20m-efhw/",
+          },
+        ],
+      },
+      {
+        label: "Accessories",
+        items: [
+          { name: "About 50 feet of bright-orange DX Engineering coax" },
+          {
+            name: "A couple of CW keys",
+            detail: "— the exact pair is not fixed yet",
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -133,19 +238,47 @@ const operatingFocus = [
       <p class="section-label">Field</p>
       <h2 id="portable-kit-title">Portable kit</h2>
     </div>
-    <div class="setup-list">
+    <div class="portable-bags">
       {
-        portableKit.map((item) => (
-          <div>
-            <h3>{item.label}</h3>
-            <p>
-              {item.href && item.name && <a href={item.href}>{item.name}</a>}
-              {item.text}
-            </p>
-          </div>
+        portableBags.map((bag) => (
+          <article class="portable-bag">
+            <p class="section-label">{bag.label}</p>
+            <h3>{bag.name}</h3>
+            <p>{bag.summary}</p>
+            <dl>
+              {bag.groups.map((group) => (
+                <div>
+                  <dt>{group.label}</dt>
+                  <dd>
+                    <ul>
+                      {group.items.map((item) => (
+                        <li>
+                          {item.href ? (
+                            <a href={item.href}>{item.name}</a>
+                          ) : (
+                            item.name
+                          )}
+                          {item.detail && <> {item.detail}</>}
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </article>
         ))
       }
     </div>
+    <p class="portable-kit-note">
+      The <a href="/radio/equipment/elecraft-kx3/">KX3</a>,
+      <a href="/radio/equipment/qrp-labs-qmx/">QMX</a>, and
+      <a href="/radio/equipment/qrp-labs-qmx-plus/">QMX+</a> remain portable
+      options, but they are not part of either currently packed bag. After the
+      Signature 12.4 takes over at home, the complete
+      <a href="/radio/equipment/dx-commander-expedition/">DX Commander Expedition</a>
+      will become the longer-stay camping setup.
+    </p>
   </section>
 
   <section class="bridge" aria-labelledby="equipment-title">
@@ -173,3 +306,71 @@ const operatingFocus = [
     </nav>
   </section>
 </BaseLayout>
+
+<style>
+  .portable-bags {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .portable-bag {
+    min-width: 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .portable-bag > h3 {
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .portable-bag > p:not(.section-label) {
+    margin-bottom: 22px;
+  }
+
+  .portable-bag dl,
+  .portable-bag dd,
+  .portable-bag ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .portable-bag dl > div {
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .portable-bag dt {
+    margin-bottom: 7px;
+    color: var(--quiet);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .portable-bag ul {
+    display: grid;
+    gap: 5px;
+    padding-left: 20px;
+  }
+
+  .portable-bag li {
+    padding-left: 2px;
+  }
+
+  .portable-kit-note {
+    max-width: 820px;
+    margin: 26px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--quiet);
+  }
+
+  @media (max-width: 760px) {
+    .portable-bags {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

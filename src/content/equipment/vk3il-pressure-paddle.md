@@ -3,6 +3,8 @@ name: VK3IL pressure paddle
 category: keys
 summary: A no-moving-parts pressure paddle built by VE6LK for lightweight dry-weather portable CW.
 status: current
+useContexts:
+  - portable
 sortOrder: 70
 externalUrl: https://ve6lk.com/shop/vk3il-morse-paddle/
 image: https://ve6lk.com/wp-content/uploads/2025/01/VK3IL-r2.jpg

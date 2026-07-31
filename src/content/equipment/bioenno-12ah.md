@@ -3,6 +3,8 @@ name: Bioenno 12 Ah LiFePO4 battery
 category: power
 summary: A medium field battery used when a portable station needs more reserve than the lightweight QRP pack.
 status: current
+useContexts:
+  - portable
 sortOrder: 30
 externalUrl: https://www.bioennopower.com/en-gb/products/12volt-12ah-lifepo4-battery
 dxEngineeringUrl: https://www.dxengineering.com/parts/bip-blf-1212a

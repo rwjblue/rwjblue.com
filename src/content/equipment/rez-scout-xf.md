@@ -21,7 +21,12 @@ The current module set includes:
 - 25-foot and 17-foot telescoping whips
 - a 40-meter loading coil for each whip length
 - the X-Form 4:1 transformer used for Rybakov-style configurations
-- the mini tripod, ground spike, and quick-disconnect radial kit
+- the mini tripod, ground spike, and four 33-foot quick-disconnect radials
+
+In the ready FT-891 bag, the X-Form is the main feedpoint and the 25-foot whip
+is the primary vertical radiator. The bag also carries alternate wire antennas
+and a separate support mast; those are part of the packed station rather than
+components of the Scout-XF system itself.
 
 The system has supported compact beach stations, including the [Flight of the Bumblebees operation from Block Island](/notes/2026-07-26-flight-of-the-bumblebees-from-block-island/),
 where the 25-foot whip and 4:1 transformer made a portable multiband vertical.

@@ -4,6 +4,8 @@ category: power
 summary: A small field battery used with QRP radios when minimizing carried weight matters.
 status: current
 quantity: 3
+useContexts:
+  - portable
 sortOrder: 20
 externalUrl: https://www.bioennopower.com/products/12v-3ah-lifepo4-battery-pvc
 dxEngineeringUrl: https://www.dxengineering.com/parts/bip-blf-1203ab

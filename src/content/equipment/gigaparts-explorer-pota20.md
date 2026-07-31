@@ -3,6 +3,8 @@ name: GigaParts Explorer POTA20 mast
 category: supports
 summary: A 20-foot carbon-fiber mast used for lightweight portable wire antennas and quick field supports.
 status: current
+useContexts:
+  - portable
 sortOrder: 20
 externalUrl: https://www.gigaparts.com/explorer-pota20-portable-handheld-20-ft-telescopic-carbon-fiber-mast.html
 image: /images/pota/2026-07-18-k2hrc-rhode-island-pota/80-meter-efhw-setup.jpg
