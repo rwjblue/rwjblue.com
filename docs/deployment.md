@@ -159,7 +159,8 @@ by Cloudflare.
 
 Astro copies `public/_redirects` into `dist/`. Cloudflare Workers Static Assets
 supports `_redirects` and `_headers` files when they are present in the static
-asset directory.
+asset directory. The Astro development server also reads `public/_redirects`,
+applies its static rules locally, and reloads them when the file changes.
 
 ## Request-time Changes
 
