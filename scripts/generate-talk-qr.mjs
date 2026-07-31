@@ -5,7 +5,7 @@ import jsQR from "jsqr";
 import QRCode from "qrcode";
 import sharp from "sharp";
 
-const siteUrl = "https://n1rwj.com/cw/";
+const siteUrl = "https://n1rwj.com/hamx-cw-2026/";
 const root = resolve(import.meta.dirname, "..");
 const paddleMarkPath = resolve(
   root,

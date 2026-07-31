@@ -507,6 +507,10 @@ test("legacy paths redirect to their current urls", () => {
   );
   assert.match(redirects, /^\/rss\s+\/rss\.xml\s+301$/m);
   assert.match(redirects, /^\/rss\/\s+\/rss\.xml\s+301$/m);
+  assert.match(
+    redirects,
+    /^\/hamx-cw-2026\/\s+\/notes\/2026-07-31-morse-code-for-the-technician-resources\/\s+302$/m,
+  );
 });
 
 test("ri pota tracker uses file-based mise tasks", () => {
