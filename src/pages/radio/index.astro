@@ -1,156 +1,154 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import TagLinks from "../../components/TagLinks.astro";
+import trackerData from "../../data/pota/ri-tracker.json";
 import { formatDate } from "../../lib/format";
 import { compareNotesNewestFirst, getPublicNotes } from "../../lib/notes";
 
 const radioNotes = (await getPublicNotes())
   .filter((note) => note.data.tags.includes("radio"))
-  .sort(compareNotesNewestFirst);
+  .sort(compareNotesNewestFirst)
+  .slice(0, 8);
 ---
 
 <BaseLayout title="Radio / N1RWJ" searchable={false}>
-  <section class="page-intro">
+  <section class="page-intro radio-intro">
     <p class="eyebrow">Radio</p>
     <h1>N1RWJ</h1>
     <p>
-      I operate amateur radio as N1RWJ. My radio interests are mostly technical
-      and practical: portable HF, CW, POTA, station design, remote operation,
-      antennas, logging, and field workflows.
+      I operate amateur radio as N1RWJ, with a practical focus on portable HF,
+      CW, POTA, station design, antennas, logging, and field workflows.
     </p>
-  </section>
-
-  <section class="bridge offline-field-kit" aria-labelledby="offline-field-kit-title">
-    <p class="section-label">Field kit</p>
-    <h2 id="offline-field-kit-title">Ready when the signal is not.</h2>
-    <p>
-      On supported browsers, visiting the radio section saves a small offline
-      kit: the glossary and shack references, CW tools, beacon guide, field log,
-      and RBN tool shell.
-    </p>
-    <p>
-      Live RBN data and map tiles still need a connection. Written references,
-      schedules, the field-log timeline, and local practice tools remain
-      available.
-    </p>
-  </section>
-
-  <section class="bridge" aria-labelledby="cw-journey-title">
-    <p class="section-label">CW</p>
-    <h2 id="cw-journey-title">From a failed Morse test to my favorite mode</h2>
-    <p>
-      I first learned Morse because the license required it, forgot it during
-      nearly two decades away from radio, and returned to it by choice. This is
-      the longer story of the tools, teachers, first contacts, and deliberate
-      repetition that got me on the air.
-    </p>
-    <nav class="path-links" aria-label="CW journey">
-      <a href="/radio/cw-journey/">Read my CW journey</a>
+    <nav class="radio-actions" aria-label="Explore the radio section">
+      <a href="/radio/field-log/">
+        <span>Field activity</span>
+        <strong>Browse the field log</strong>
+        <span class="radio-action-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a href="#operating-tools">
+        <span>On-air utilities</span>
+        <strong>Use operating tools</strong>
+        <span class="radio-action-arrow" aria-hidden="true">&darr;</span>
+      </a>
+      <a href="#radio-notes">
+        <span>Latest writing</span>
+        <strong>Read recent radio notes</strong>
+        <span class="radio-action-arrow" aria-hidden="true">&darr;</span>
+      </a>
     </nav>
   </section>
 
-  <section class="section-block wide">
-    <div class="section-heading">
-      <p class="section-label">Radio work</p>
-      <h2>What belongs here</h2>
+  <section class="radio-project" aria-labelledby="pota-project-title">
+    <div class="radio-project-copy">
+      <p class="section-label">Current project</p>
+      <h2 id="pota-project-title">2026 Activate All RI POTA</h2>
+      <p>
+        I am working to activate every POTA reference associated with Rhode
+        Island by the end of 2026.
+      </p>
     </div>
-    <div class="split-list">
-      <div>
-        <h3>Field notes</h3>
-        <p>POTA activations, portable station setup, operating constraints, and cleanup notes.</p>
+    <div class="radio-project-status">
+      <p>
+        <strong>{trackerData.summary.completed} of {trackerData.summary.total}</strong>
+        <span>{trackerData.summary.percentComplete}% complete</span>
+      </p>
+      <div class="radio-project-meter" aria-hidden="true">
+        <span style={`width: ${trackerData.summary.percentComplete}%`}></span>
       </div>
-      <div>
-        <h3>Station work</h3>
-        <p>Remote operation, antennas, RF debugging, logging, and equipment choices.</p>
-      </div>
-      <div>
-        <h3>Practice</h3>
-        <p>CW practice, repeatable workflows, and the small adjustments that make operating smoother.</p>
-      </div>
+      <a href="/projects/2026-activate-all-ri-pota/">
+        View the RI POTA tracker <span aria-hidden="true">&rarr;</span>
+      </a>
     </div>
   </section>
 
-  <section class="bridge" aria-labelledby="glossary-title">
-    <p class="section-label">Reference</p>
-    <h2 id="glossary-title">Radio glossary</h2>
-    <p>
-      Plain-language definitions for the radio terms that show up in field
-      notes and project pages here.
-    </p>
-    <nav class="path-links" aria-label="Radio glossary">
-      <a href="/radio/glossary/">Browse the glossary</a>
-    </nav>
-  </section>
-
-  <section class="bridge" aria-labelledby="shack-title">
-    <p class="section-label">Station</p>
-    <h2 id="shack-title">My station</h2>
-    <p>
-      The current home station, portable HF kit, antennas, logging habits, and
-      operating workflow notes behind the field reports, with a curated
-      inventory of the meaningful equipment.
-    </p>
-    <nav class="path-links" aria-label="Station setup">
-      <a href="/radio/shack/">View the setup</a>
-      <a href="/radio/equipment/">Browse the equipment</a>
-    </nav>
-  </section>
-
-  <section class="section-block wide">
+  <section class="section-block wide radio-tools" id="operating-tools">
     <div class="section-heading">
       <p class="section-label">Radio tools</p>
       <h2>Operating tools</h2>
     </div>
-    <div class="artifact-list full">
-      <a href="/radio/field-log/" class="artifact-item">
-        <span>Log · map and timeline</span>
+    <div class="radio-tool-grid">
+      <a href="/radio/field-log/" class="radio-tool-card radio-tool-card-featured">
+        <span>Field activity · map and timeline</span>
         <strong>Field Log</strong>
         <p>
-          Browse portable outings geographically and chronologically, with links
-          to public field reports and canonical park pages.
+          Browse portable outings geographically or chronologically, then open
+          the related field reports and park pages.
         </p>
+        <span class="radio-tool-action">
+          Browse the field log <span aria-hidden="true">&rarr;</span>
+        </span>
       </a>
-      <a href="/radio/cw-practice/" class="artifact-item">
-        <span>Tool · weekly schedule</span>
+      <a href="/radio/cw-practice/" class="radio-tool-card">
+        <span>CW · weekly schedule</span>
         <strong>CW Practice Schedule</strong>
         <p>
-          See the next SST, MST, and CWT sessions in local time, review each
-          exchange, and subscribe to the calendar feed.
+          See upcoming SST, MST, and CWT sessions in local time and subscribe to
+          the calendar feed.
         </p>
+        <span class="radio-tool-action">
+          Find a practice session <span aria-hidden="true">&rarr;</span>
+        </span>
       </a>
-      <a href="/radio/cw-qso/" class="artifact-item">
-        <span>Tool · live walkthrough</span>
+      <a href="/radio/cw-qso/" class="radio-tool-card">
+        <span>CW · live walkthrough</span>
         <strong>CW QSO Walkthrough</strong>
         <p>
-          A standard-contact practice page with live exchange prompts, copy
-          fields, and local ADIF export.
+          Practice a standard contact with live exchange prompts, copy fields,
+          and local ADIF export.
         </p>
+        <span class="radio-tool-action">
+          Practice a CW contact <span aria-hidden="true">&rarr;</span>
+        </span>
       </a>
-      <a href="/radio/rbn-skimmers/" class="artifact-item">
-        <span>Tool · RBN utility</span>
+      <a href="/radio/rbn-skimmers/" class="radio-tool-card">
+        <span>RBN · live utility</span>
         <strong>RBN Skimmer Finder</strong>
         <p>
-          Find nearby active skimmers from your current location or grid, then
-          open RBN with spotter and target-call filters prefilled.
+          Find nearby active skimmers by location or grid, then open prefilled
+          RBN spot filters.
         </p>
+        <span class="radio-tool-action">
+          Find nearby skimmers <span aria-hidden="true">&rarr;</span>
+        </span>
       </a>
-      <a href="/radio/beacons/" class="artifact-item">
-        <span>Tool · propagation beacons</span>
+      <a href="/radio/beacons/" class="radio-tool-card">
+        <span>Propagation · beacon timing</span>
         <strong>NCDXF Beacon Guide</strong>
         <p>
-          Follow the synchronized worldwide beacons, record the weakest power
-          step heard, and compare HF bands from the field.
+          Follow synchronized worldwide beacons and compare HF bands from the
+          field.
         </p>
+        <span class="radio-tool-action">
+          Check the beacon schedule <span aria-hidden="true">&rarr;</span>
+        </span>
       </a>
     </div>
+    <p class="radio-offline-note">
+      <strong>Offline use:</strong> Several references and practice tools remain
+      available after your first visit. Live maps and RBN data require an
+      internet connection.
+    </p>
   </section>
 
-  <section class="section-block wide">
-    <div class="section-heading">
-      <p class="section-label">Field reports</p>
-      <h2>Radio notes</h2>
+  <section class="radio-reference" aria-labelledby="glossary-title">
+    <div>
+      <p class="section-label">Reference</p>
+      <h2 id="glossary-title">Radio glossary</h2>
+      <p>
+        Plain-language definitions for terms used in field notes and project
+        pages.
+      </p>
     </div>
-    <ol class="entry-list full">
+    <a href="/radio/glossary/">
+      Browse the radio glossary <span aria-hidden="true">&rarr;</span>
+    </a>
+  </section>
+
+  <section class="section-block wide" id="radio-notes">
+    <div class="section-heading">
+      <p class="section-label">Latest</p>
+      <h2>Recent radio notes</h2>
+    </div>
+    <ol class="entry-list full radio-note-list">
       {
         radioNotes.map((note) => (
           <li>
@@ -159,24 +157,46 @@ const radioNotes = (await getPublicNotes())
             </time>
             <a href={`/notes/${note.id}/`}>{note.data.title}</a>
             <p>{note.data.summary}</p>
-            <div class="tags">
-              <TagLinks tags={note.data.tags} />
-            </div>
           </li>
         ))
       }
     </ol>
+    <nav class="section-more" aria-label="Radio note archive">
+      <a href="/tags/radio/">
+        View all radio notes <span aria-hidden="true">&rarr;</span>
+      </a>
+    </nav>
   </section>
 
-  <section class="bridge" aria-labelledby="pota-project-title">
-    <p class="section-label">POTA</p>
-    <h2 id="pota-project-title">2026 Activate All RI POTA</h2>
-    <p>
-      I am tracking the project to activate every POTA reference associated with
-      Rhode Island by the end of 2026.
-    </p>
-    <nav class="path-links" aria-label="POTA project">
-      <a href="/projects/2026-activate-all-ri-pota/">View the tracker</a>
-    </nav>
+  <section class="section-block wide radio-more" aria-labelledby="radio-more-title">
+    <div class="section-heading">
+      <p class="section-label">More</p>
+      <h2 id="radio-more-title">More about my radio work</h2>
+    </div>
+    <div class="radio-more-grid">
+      <article class="radio-more-card">
+        <p class="section-label">Station</p>
+        <h3>My station</h3>
+        <p>
+          The home station, portable HF kit, antennas, logging habits, and the
+          equipment that matters to how I operate.
+        </p>
+        <nav aria-label="Station and equipment">
+          <a href="/radio/shack/">See the station</a>
+          <a href="/radio/equipment/">Browse the equipment</a>
+        </nav>
+      </article>
+      <article class="radio-more-card">
+        <p class="section-label">CW</p>
+        <h3>From a failed Morse test to my favorite mode</h3>
+        <p>
+          The tools, teachers, first contacts, and deliberate repetition that
+          got me back on the air with CW.
+        </p>
+        <nav aria-label="CW journey">
+          <a href="/radio/cw-journey/">Read my CW journey</a>
+        </nav>
+      </article>
+    </div>
   </section>
 </BaseLayout>
