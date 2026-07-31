@@ -42,6 +42,7 @@ const badge = Buffer.from(`
 `);
 
 const paddleMark = await sharp(paddleMarkPath)
+  .trim({ background: "#ffffff", threshold: 10 })
   .resize(markSize, markSize, {
     fit: "contain",
     background: "#fffdf7",
