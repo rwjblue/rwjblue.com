@@ -37,9 +37,10 @@ to keep using.
 
 ## Practice that fits your day
 
-- [Morse Mania for iPhone and iPad](https://apps.apple.com/us/app/morse-mania-learn-morse-code/id1511042196)
-  and [Morse Mania for Android](https://play.google.com/store/apps/details?id=net.countrymania.morse)
-  provide focused, interactive character practice.
+- [Morse Mania](https://morse.countrymania.net/) provides focused, interactive
+  character practice on
+  [iPhone and iPad](https://apps.apple.com/us/app/morse-mania-learn-morse-code/id1511042196)
+  and [Android](https://play.google.com/store/apps/details?id=net.countrymania.morse).
 - [Morse Code Ninja](https://www.morsecode.ninja/learn/) provides incremental
   audio, podcast, and video practice. Its audio lessons fit especially well
   into a commute or walk.
@@ -72,6 +73,8 @@ parts.
 
 - [Parks on the Air](https://parksontheair.com/) gives a new operator a short,
   repeated, and predictable exchange to listen for.
+- [CW POTA: A Field Manual](https://potacw.guide/) walks through the exchange
+  line by line and includes a customizable activator and hunter cheat sheet.
 - [My first all-CW POTA activation](https://qrper.com/2026/04/n1rwj-my-first-cw-pota-activation-dont-wait-to-try-it/)
   is the field report behind the “do not wait” story in the talk.
 - [The K8CES Zippy Paddle guide](/notes/2026-07-29-building-k8ces-zippy-paddle/)

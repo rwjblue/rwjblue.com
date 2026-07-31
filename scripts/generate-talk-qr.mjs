@@ -7,9 +7,9 @@ import sharp from "sharp";
 
 const siteUrl = "https://n1rwj.com/cw/";
 const root = resolve(import.meta.dirname, "..");
-const paddlePath = resolve(
+const paddleMarkPath = resolve(
   root,
-  "public/images/radio/2026-07-29-building-k8ces-zippy-paddle/completed-zippy-paddle.jpg",
+  "public/images/radio/2026-07-31-morse-code-for-the-technician-resources/zippy-paddle-line-art.png",
 );
 const outputPath = resolve(
   root,
@@ -18,9 +18,9 @@ const outputPath = resolve(
 
 const size = 1600;
 const badgeSize = 250;
-const photoSize = 204;
+const markSize = 210;
 const badgeOffset = Math.round((size - badgeSize) / 2);
-const photoOffset = Math.round((size - photoSize) / 2);
+const markOffset = Math.round((size - markSize) / 2);
 
 await mkdir(dirname(outputPath), { recursive: true });
 
@@ -37,27 +37,23 @@ const qr = await QRCode.toBuffer(siteUrl, {
 
 const badge = Buffer.from(`
   <svg width="${badgeSize}" height="${badgeSize}" xmlns="http://www.w3.org/2000/svg">
-    <rect width="${badgeSize}" height="${badgeSize}" rx="48" fill="#fffdf7"/>
-    <circle cx="${badgeSize / 2}" cy="${badgeSize / 2}" r="111" fill="none" stroke="#e5b84b" stroke-width="8"/>
+    <rect width="${badgeSize}" height="${badgeSize}" rx="44" fill="#fffdf7"/>
   </svg>
 `);
 
-const mask = Buffer.from(`
-  <svg width="${photoSize}" height="${photoSize}" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="${photoSize / 2}" cy="${photoSize / 2}" r="${photoSize / 2}" fill="white"/>
-  </svg>
-`);
-
-const paddle = await sharp(paddlePath)
-  .resize(photoSize, photoSize, { fit: "cover", position: "centre" })
-  .composite([{ input: mask, blend: "dest-in" }])
+const paddleMark = await sharp(paddleMarkPath)
+  .resize(markSize, markSize, {
+    fit: "contain",
+    background: "#fffdf7",
+  })
+  .threshold(210)
   .png()
   .toBuffer();
 
 await sharp(qr)
   .composite([
     { input: badge, left: badgeOffset, top: badgeOffset },
-    { input: paddle, left: photoOffset, top: photoOffset },
+    { input: paddleMark, left: markOffset, top: markOffset },
   ])
   .png()
   .toFile(outputPath);
