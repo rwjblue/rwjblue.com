@@ -1,8 +1,23 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import trackerData from "../../data/pota/ri-tracker.json";
+import { getEquipment } from "../../lib/equipment";
 import { formatDate } from "../../lib/format";
 import { compareNotesNewestFirst, getPublicNotes } from "../../lib/notes";
+
+const onBenchOrder = new Map(
+  [
+    "pacific-antenna-dual-band-trap-dipoles",
+    "homebrew-six-band-linked-dipole",
+    "quansheng-uv-k1",
+  ].map((id, index) => [id, index]),
+);
+const onBenchEquipment = (await getEquipment())
+  .filter((entry) => onBenchOrder.has(entry.id))
+  .sort(
+    (left, right) =>
+      (onBenchOrder.get(left.id) ?? 0) - (onBenchOrder.get(right.id) ?? 0),
+  );
 
 const radioNotes = (await getPublicNotes())
   .filter((note) => note.data.tags.includes("radio"))
@@ -58,6 +73,42 @@ const radioNotes = (await getPublicNotes())
         View the RI POTA tracker <span aria-hidden="true">&rarr;</span>
       </a>
     </div>
+  </section>
+
+  <section
+    class="section-block wide radio-bench"
+    aria-labelledby="radio-bench-title"
+  >
+    <div class="section-heading">
+      <p class="section-label">Workbench</p>
+      <h2 id="radio-bench-title">On the bench</h2>
+      <p>
+        Antenna, firmware, and hardware builds currently queued. These stable
+        equipment pages hold the intent; dated notes will capture what actually
+        happens during assembly and field testing.
+      </p>
+    </div>
+    <div class="equipment-list">
+      {
+        onBenchEquipment.map((entry) => (
+          <a
+            class="equipment-item"
+            href={`/radio/equipment/${entry.id}/`}
+          >
+            <span class="equipment-item-heading">
+              <strong>{entry.data.name}</strong>
+              <span class="equipment-quantity">Build queued</span>
+            </span>
+            <p>{entry.data.summary}</p>
+          </a>
+        ))
+      }
+    </div>
+    <nav class="section-more" aria-label="Radio equipment inventory">
+      <a href="/radio/equipment/">
+        Browse all radio equipment <span aria-hidden="true">&rarr;</span>
+      </a>
+    </nav>
   </section>
 
   <section class="section-block wide radio-tools" id="operating-tools">
