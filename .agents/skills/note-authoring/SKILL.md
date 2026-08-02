@@ -48,8 +48,10 @@ tags:
 ```
 
 `title`, `date`, and `summary` are required. Keep tags lowercase and reuse the
-site's established vocabulary. Specialized notes may also use `contactMap` or
-`boundaryMap`; follow the owning feature's guidance before adding them.
+site's established vocabulary. Give recurring events and projects a stable,
+specific tag so reports can be found across years. Specialized notes may also
+use `contactMap` or `boundaryMap`; follow the owning feature's guidance before
+adding them.
 
 `visibility` defaults to `public` and supports three states:
 
@@ -80,11 +82,20 @@ before relying on draft visibility for them.
   turning the article into an unfiltered investigation log.
 - Preserve uncertainty instead of inventing facts. Distinguish confirmed
   behavior from inference and planned testing.
+- Use ADIF/Cabrillo logs, telemetry, repository inspection, and other research
+  artifacts silently to establish facts. Write the published narrative from
+  Robert's point of view; avoid phrases such as "the log shows," "the data
+  confirms," or descriptions of the verification process unless examining the
+  artifact is itself part of the story.
 - Prefer a compact troubleshooting section over a chronological list of every
   failed attempt.
 - Use descriptive headings and short paragraphs that read well on a phone.
 - Link primary projects, manuals, issues, and pull requests near the claims they
   support.
+- Link the first natural mention of every other amateur radio operator named
+  in prose to `https://www.qrz.com/db/CALLSIGN`, including when both their name
+  and callsign are given. Verify uncertain callsigns before publication. Do
+  not force QRZ links into code blocks or literal exchange examples.
 - Keep credentials, private network addresses, pre-shared keys, and other
   secrets out of prose and screenshots.
 
@@ -130,6 +141,8 @@ Do not add another frontmatter field for a hero or preview image. Use
 - Visibility matches the intended publication state.
 - The filename, asset directory, title, summary, and tags agree.
 - Claims and unresolved questions accurately reflect what was tested.
+- Research artifacts support the facts without becoming the narrator.
+- Other hams named in prose have a verified QRZ link at first mention.
 - Links, image paths, and alt text are valid.
 - Social-image selection is deliberate or the generated fallback is acceptable.
 - `mise run check` and `mise run build` pass.
