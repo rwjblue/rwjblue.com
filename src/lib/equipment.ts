@@ -33,7 +33,7 @@ export const EQUIPMENT_CATEGORIES: EquipmentCategoryDefinition[] = [
   {
     id: "keys",
     label: "CW keys",
-    description: "Desk and portable paddles used for CW operating.",
+    description: "CW keys and paddles used at home and in the field.",
   },
   {
     id: "station-accessories",
