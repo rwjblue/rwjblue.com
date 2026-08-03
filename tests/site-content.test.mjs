@@ -528,6 +528,10 @@ test("legacy paths redirect to their current urls", () => {
     redirects,
     /^\/hamx-cw-2026\/\s+\/notes\/2026-07-31-morse-code-for-the-technician-resources\/\s+302$/m,
   );
+  assert.match(
+    redirects,
+    /^\/radio\/equipment\/k8ce-zippy-paddle\/\s+\/radio\/equipment\/k8ces-zippy-paddle\/\s+301$/m,
+  );
 });
 
 test("ri pota tracker uses file-based mise tasks", () => {

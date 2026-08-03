@@ -13,7 +13,7 @@ const expedition = read(
 const receiveLoop = read(
   "dist/radio/equipment/loop-on-ground-receive-antenna/index.html",
 );
-const noBacklinks = read("dist/radio/cw-qso/index.html");
+const cwQso = read("dist/radio/cw-qso/index.html");
 
 assert.match(park, /Referenced by/);
 assert.match(
@@ -50,4 +50,8 @@ assert.match(
   receiveLoop,
   /href="\/notes\/2026-07-28-operating-w1aw-1-for-america250\/"/,
 );
-assert.doesNotMatch(noBacklinks, /Referenced by/);
+assert.match(cwQso, /Referenced by/);
+assert.match(
+  cwQso,
+  /href="\/notes\/2026-07-31-morse-code-for-the-technician-resources\/"/,
+);

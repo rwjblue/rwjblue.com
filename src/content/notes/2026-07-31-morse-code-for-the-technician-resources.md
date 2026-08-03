@@ -2,8 +2,6 @@
 title: "Morse Code for the Technician: resources"
 date: 2026-07-31
 summary: "Slides, learning paths, practice tools, and portable-CW inspiration from my 2026 Northeast HamXposition talk."
-visibility: unlisted
-shareImage: /images/radio/2026-07-31-morse-code-for-the-technician-resources/qr.png
 tags:
   - radio
   - cw
@@ -12,13 +10,13 @@ tags:
 ---
 
 This is the companion page for my **Morse Code for the Technician** session in
-the 2026 Northeast HamXposition Technician Toolkit. The central idea is simple:
-learn characters as sounds, build a short practice habit, and make the first
-contact small and safe.
+the 2026 Northeast HamXposition Technician Toolkit on Friday, August 14. The
+central idea is simple: learn characters as sounds, build a short practice
+habit, and make the first contact small and safe.
 
 ## Slides
 
-- [Open the working Google Slides deck](https://docs.google.com/presentation/d/1W2yvqE6-W7MwV_q8vwnG3nYzJad5NqsWhs_7tfr6Qc0/edit)
+- [View the working Google Slides deck](https://docs.google.com/presentation/d/1W2yvqE6-W7MwV_q8vwnG3nYzJad5NqsWhs_7tfr6Qc0/view?usp=sharing)
 - [Read my CW journey](/radio/cw-journey/)
 
 I will add a downloadable PDF after the talk deck is locked.
@@ -47,8 +45,10 @@ to keep using.
 - [Vail Morse](https://vailmorse.com/) combines a browser decoder with an
   internet repeater. The optional [Vail Adapter](https://vailadapter.com/)
   connects a physical key or paddle by USB.
-- [My CW practice tools](/radio/cw-practice/) include POTA exchanges and other
-  short operating patterns.
+- [My CW Practice Schedule](/radio/cw-practice/) finds the next SST, MST, and
+  CWT sessions in local time and walks through each exchange.
+- [My CW QSO Walkthrough](/radio/cw-qso/) provides interactive prompts for a
+  standard contact, with copy fields and local ADIF export.
 
 Start with one sound-based tool. Use a normal character speed with extra space
 between characters, rather than slowing each character until you can count its
