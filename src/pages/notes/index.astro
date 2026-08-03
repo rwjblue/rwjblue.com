@@ -1,15 +1,20 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TagLinks from "../../components/TagLinks.astro";
-import { formatDate } from "../../lib/format";
+import { formatDate, formatPublicationDateTime } from "../../lib/format";
 import {
   compareNotesNewestFirst,
   getDraftNotes,
   getPublicNotes,
+  getScheduledNotes,
 } from "../../lib/notes";
 
 const notes = (await getPublicNotes()).sort(compareNotesNewestFirst);
 const drafts = (await getDraftNotes()).sort(compareNotesNewestFirst);
+const scheduled = (await getScheduledNotes()).sort(
+  (left, right) =>
+    left.data.publishAt!.valueOf() - right.data.publishAt!.valueOf(),
+);
 ---
 
 <BaseLayout title="Notes / Robert Jackson" searchable={false}>
@@ -21,6 +26,36 @@ const drafts = (await getDraftNotes()).sort(compareNotesNewestFirst);
       being able to find again.
     </p>
   </section>
+
+  {
+    scheduled.length > 0 && (
+      <section class="draft-index" aria-labelledby="scheduled-index-title">
+        <div class="section-heading">
+          <p class="section-label">Preview only</p>
+          <h2 id="scheduled-index-title">Scheduled notes</h2>
+          <p>
+            These notes are ready to publish but remain absent from production
+            until their scheduled time.
+          </p>
+        </div>
+        <ol class="entry-list full">
+          {scheduled.map((note) => (
+            <li>
+              <time datetime={note.data.publishAt!.toISOString()}>
+                {formatPublicationDateTime(note.data.publishAt!)}
+              </time>
+              <a href={`/notes/${note.id}/`}>{note.data.title}</a>
+              <p>{note.data.summary}</p>
+              <div class="tags">
+                <em>Scheduled</em>
+                <TagLinks tags={note.data.tags} />
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
 
   {
     drafts.length > 0 && (

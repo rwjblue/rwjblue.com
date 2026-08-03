@@ -1729,6 +1729,11 @@ p {
   color: var(--status-warning-ink);
 }
 
+.note-visibility--scheduled {
+  background: var(--status-info-bg);
+  color: var(--status-info-ink);
+}
+
 .note-visibility strong {
   font-size: 0.8rem;
   letter-spacing: 0.04em;

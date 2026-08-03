@@ -6,6 +6,7 @@ import { createSitemapFilter } from "./scripts/sitemap-filter.mjs";
 
 const redirectsFile = new URL("./public/_redirects", import.meta.url);
 const redirectsPath = fileURLToPath(redirectsFile);
+const publicationCutoff = new Date().toISOString();
 
 function readRedirects() {
   return new Map(
@@ -50,10 +51,13 @@ export default defineConfig({
   site: "https://rwjblue.com",
   integrations: [
     sitemap({
-      filter: createSitemapFilter(),
+      filter: createSitemapFilter(undefined, new Date(publicationCutoff)),
     }),
   ],
   vite: {
+    define: {
+      __PUBLICATION_CUTOFF__: JSON.stringify(publicationCutoff),
+    },
     plugins: [cloudflareRedirectsDev()],
   },
 });

@@ -4,11 +4,25 @@ import "leaflet/dist/leaflet.css";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import parksData from "../../../data/pota/parks.json";
+import { getPublicNotes } from "../../../lib/notes";
 
 export async function getStaticPaths() {
+  const publicNoteIds = new Set(
+    (await getPublicNotes()).map((note) => note.id),
+  );
+
   return parksData.parks.map((park) => ({
     params: { reference: park.reference },
-    props: { park },
+    props: {
+      park: {
+        ...park,
+        notes: park.notes.filter((note) => publicNoteIds.has(note.id)),
+        activations: park.activations.map((activation) => ({
+          ...activation,
+          notes: activation.notes.filter((note) => publicNoteIds.has(note.id)),
+        })),
+      },
+    },
   }));
 }
 

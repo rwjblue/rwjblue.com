@@ -7,6 +7,11 @@ const notes = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    publishAt: z
+      .string()
+      .datetime({ offset: true })
+      .transform((value) => new Date(value))
+      .optional(),
     summary: z.string(),
     visibility: z.enum(["public", "unlisted", "draft"]).default("public"),
     shareImage: z.string().optional(),

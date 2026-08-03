@@ -38,9 +38,10 @@ The local Node version is managed by mise and locked in `.mise/mise.lock`.
 
 Production builds generate `sitemap-index.xml`, `sitemap-0.xml`, and
 `robots.txt` for the canonical `https://rwjblue.com` origin. The sitemap filter
-excludes draft and unlisted notes plus search, RSS, and generated share-image
-routes. `npm run build` verifies those exclusions and representative Article and
-BreadcrumbList JSON-LD before the output is considered complete.
+excludes draft, unlisted, and not-yet-due scheduled notes plus search, RSS, the
+publication-schedule manifest, and generated share-image routes. `npm run build`
+verifies those exclusions and representative Article and BreadcrumbList JSON-LD
+before the output is considered complete.
 
 The same build generates a content-versioned service worker for the bounded
 radio field kit and verifies its manifest, route allowlist, and cache limits.
@@ -109,14 +110,47 @@ versions. `preview_urls` is enabled in `wrangler.jsonc`, so uploaded Worker
 versions can be viewed at generated `workers.dev` preview URLs even though the
 production `workers.dev` route is disabled.
 
-Draft notes are excluded from ordinary builds. To include `visibility: draft`
-notes in an intentional non-production preview, set the build-time environment
-variable `INCLUDE_DRAFTS=true` for that preview build. Draft-enabled previews
-show a working-drafts section on `/notes/`, add a visible banner to each draft,
-and emit `noindex, nofollow` metadata. Never set this variable on the production
-branch. Cloudflare preview URLs are public unless Cloudflare Access is enabled.
-Note visibility does not filter files in `public/`; Astro copies those assets
-into every build.
+Draft notes and `visibility: public` notes with a future `publishAt` are excluded
+from ordinary builds. To include them in an intentional non-production preview,
+set the build-time environment variable `INCLUDE_DRAFTS=true` for that preview
+build. Draft-enabled previews show separate working-draft and scheduled sections
+on `/notes/`, add a visible banner to each non-public page, and emit
+`noindex, nofollow` metadata. Never set this variable on the production branch.
+Cloudflare preview URLs are public unless Cloudflare Access is enabled. Note
+visibility does not filter files in `public/`; Astro copies those assets into
+every build.
+
+## Scheduled Note Publication
+
+Scheduled notes use an explicit timestamp independent of the note's displayed
+or field-report date:
+
+```yaml
+date: 2026-08-03
+publishAt: "2026-08-07T09:00:00-04:00"
+visibility: public
+```
+
+The timestamp must include `Z` or a numeric UTC offset. A production build before
+`publishAt` omits the route and every discovery surface. The same build writes
+`/publication-schedule.json` with only the next pending timestamp. The Worker
+checks that manifest hourly and calls a Workers Builds Deploy Hook only when the
+timestamp is due. A successful rebuild publishes the route, RSS item, sitemap,
+search entry, backlinks, and POTA note relationships together. Publication can
+lag by the hourly check interval plus build time.
+
+Create a Workers Builds Deploy Hook for the `main` branch in the Cloudflare
+dashboard under **Settings > Builds > Deploy Hooks**. Store its URL as a Worker
+secret; the URL is itself a credential and must never be committed:
+
+```bash
+npx wrangler secret put PUBLICATION_DEPLOY_HOOK_URL
+```
+
+The hourly Cron Trigger is maintained in `wrangler.jsonc`. If the secret is not
+configured, the check exits without triggering a build. A failed publication
+build leaves the due timestamp in the deployed manifest, so the next hourly
+check retries it.
 
 Workers Builds does not read `build.command` from `wrangler.jsonc`; keep the
 dashboard build command set to `npm run build`.

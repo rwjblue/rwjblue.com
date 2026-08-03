@@ -5,6 +5,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import trackerData from "../../data/pota/ri-tracker.json";
+import { getPublicNotes } from "../../lib/notes";
+
+const publicNoteIds = new Set((await getPublicNotes()).map((note) => note.id));
+const publicTrackerData = {
+  ...trackerData,
+  references: trackerData.references.map((reference) => ({
+    ...reference,
+    notes: reference.notes.filter((note) => publicNoteIds.has(note.id)),
+  })),
+};
 
 const shareDescription = `${trackerData.summary.completed} of ${trackerData.summary.total} Rhode Island POTA references activated. Interactive map and reference checklist for N1RWJ's 2026 challenge.`;
 const generatedDate = new Date(trackerData.generatedAt).toLocaleDateString(
@@ -16,7 +26,7 @@ const generatedDate = new Date(trackerData.generatedAt).toLocaleDateString(
     timeZone: "UTC",
   },
 );
-const trackerJson = JSON.stringify(trackerData);
+const trackerJson = JSON.stringify(publicTrackerData);
 
 const formatActivationDate = (date: string) =>
   new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {

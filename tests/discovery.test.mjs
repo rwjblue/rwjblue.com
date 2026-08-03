@@ -18,6 +18,10 @@ test("sitemap filter excludes private notes and utility routes", () => {
   );
   assert.equal(filter("https://rwjblue.com/search/"), false);
   assert.equal(
+    filter("https://rwjblue.com/publication-schedule.json"),
+    false,
+  );
+  assert.equal(
     filter("https://rwjblue.com/notes/public-workshop/share-image/"),
     false,
   );

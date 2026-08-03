@@ -11,8 +11,12 @@ import TagLinks from "../../components/TagLinks.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import SeriesNavigation from "../../components/SeriesNavigation.astro";
 import { contactMapForNote } from "../../data/pota/contact-maps";
-import { formatDate } from "../../lib/format";
-import { getRenderableNotes } from "../../lib/notes";
+import { formatDate, formatPublicationDateTime } from "../../lib/format";
+import { notePublicationDate } from "../../lib/note-publication";
+import {
+  getRenderableNotes,
+  isScheduledNote,
+} from "../../lib/notes";
 import {
   getPublicSeries,
   seriesContextForNote,
@@ -43,6 +47,7 @@ const shareImageCacheKey = createHash("sha256")
       title: note.data.title,
       summary: note.data.summary,
       date: note.data.date.toISOString(),
+      publishAt: note.data.publishAt?.toISOString(),
       visibility: note.data.visibility,
       tags: note.data.tags,
       shareImage: note.data.shareImage,
@@ -55,11 +60,19 @@ const shareImageCacheKey = createHash("sha256")
   .slice(0, 12);
 const shareImage = `${shareImageBase}${shareImageBase.includes("?") ? "&" : "?"}h=${shareImageCacheKey}`;
 const shareImageAlt = `${note.data.title} social share image`;
-const isPreview = note.data.visibility !== "public";
-const visibilityLabel =
-  note.data.visibility === "draft" ? "Draft preview" : "Unlisted note";
-const visibilityDescription =
-  note.data.visibility === "draft"
+const isScheduled = isScheduledNote(note);
+const isPreview = note.data.visibility !== "public" || isScheduled;
+const visibilityState = isScheduled ? "scheduled" : note.data.visibility;
+const visibilityLabel = isScheduled
+  ? "Scheduled preview"
+  : note.data.visibility === "draft"
+    ? "Draft preview"
+    : "Unlisted note";
+const visibilityDescription = isScheduled
+  ? `This note is scheduled to publish on ${formatPublicationDateTime(
+      note.data.publishAt!,
+    )}.`
+  : note.data.visibility === "draft"
     ? "This working draft is only available in draft-enabled preview environments."
     : "This note is available by direct URL but is omitted from indexes, feeds, and search results.";
 const notePath = `/notes/${note.id}/`;
@@ -76,7 +89,7 @@ const structuredData = isPreview
         title: note.data.title,
         description: note.data.summary,
         path: notePath,
-        published: note.data.date,
+        published: notePublicationDate(note),
         image: shareImage.split("?")[0],
       }),
     ];
@@ -105,7 +118,7 @@ const seriesContext = isPreview
   >
     {
       isPreview && (
-        <aside class={`note-visibility note-visibility--${note.data.visibility}`}>
+        <aside class={`note-visibility note-visibility--${visibilityState}`}>
           <strong>{visibilityLabel}</strong>
           <span>{visibilityDescription}</span>
         </aside>

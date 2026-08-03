@@ -9,6 +9,9 @@
   "build": {
     "command": "npm run build"
   },
+  "triggers": {
+    "crons": ["0 * * * *"]
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

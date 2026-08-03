@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { notePublicationState } from "./note-frontmatter.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const notesDir = path.join(root, "src/content/notes");
@@ -37,14 +38,6 @@ async function readNoteFiles(directory) {
   return files;
 }
 
-function noteVisibility(markdown) {
-  return (
-    markdown.match(
-      /^visibility:\s*(public|unlisted|draft)\s*$/m,
-    )?.[1] ?? "public"
-  );
-}
-
 function noteId(filePath) {
   return path
     .relative(notesDir, filePath)
@@ -76,10 +69,14 @@ function assertExcludes(content, value, source) {
 
 const noteFiles = await readNoteFiles(notesDir);
 const nonPublicNotes = [];
+const schedule = JSON.parse(
+  await readBuiltFile("publication-schedule.json"),
+);
+const publicationCutoff = new Date(schedule.generatedAt);
 
 for (const filePath of noteFiles) {
   const markdown = await readFile(filePath, "utf8");
-  const visibility = noteVisibility(markdown);
+  const visibility = notePublicationState(markdown, publicationCutoff);
 
   if (visibility !== "public") {
     nonPublicNotes.push({ id: noteId(filePath), visibility });
@@ -100,7 +97,8 @@ for (const note of nonPublicNotes) {
   const routeExists = existsSync(path.join(distDir, routePath));
   const shouldRender =
     note.visibility === "unlisted" ||
-    (note.visibility === "draft" && includeDrafts);
+    ((note.visibility === "draft" || note.visibility === "scheduled") &&
+      includeDrafts);
 
   if (routeExists !== shouldRender) {
     throw new Error(
@@ -112,13 +110,18 @@ for (const note of nonPublicNotes) {
     assertExcludes(content, href, relativePath);
   }
 
-  for (const dataPath of generatedDataPaths) {
-    if (existsSync(dataPath)) {
-      assertExcludes(await readFile(dataPath, "utf8"), href, dataPath);
+  if (note.visibility !== "scheduled") {
+    for (const dataPath of generatedDataPaths) {
+      if (existsSync(dataPath)) {
+        assertExcludes(await readFile(dataPath, "utf8"), href, dataPath);
+      }
     }
   }
 
-  if (note.visibility === "draft" && includeDrafts) {
+  if (
+    (note.visibility === "draft" || note.visibility === "scheduled") &&
+    includeDrafts
+  ) {
     assertIncludes(notesIndex, href, "notes/index.html");
   } else {
     assertExcludes(notesIndex, href, "notes/index.html");

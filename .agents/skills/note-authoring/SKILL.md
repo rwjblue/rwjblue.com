@@ -39,6 +39,7 @@ Use the current collection schema from `src/content.config.ts`:
 ---
 title: A clear reader-facing title
 date: YYYY-MM-DD
+publishAt: "YYYY-MM-DDTHH:MM:SS-04:00" # optional scheduled publication
 summary: "One concise sentence that works in indexes and link previews."
 visibility: draft # omit for public notes
 shareImage: /images/<topic>/<slug>/share.png # optional
@@ -55,7 +56,7 @@ adding them.
 
 `visibility` defaults to `public` and supports three states:
 
-- `public` appears everywhere.
+- `public` appears everywhere unless it has a future `publishAt`.
 - `unlisted` receives a production route with `noindex` metadata but is omitted
   from indexes, RSS, and generated POTA data. Treat it as public to anyone who
   has or guesses the URL.
@@ -63,15 +64,25 @@ adding them.
   omitted from normal production route generation and all public discovery
   surfaces.
 
+Use `publishAt` only with `visibility: public` (or omitted visibility) when a
+finished note should publish automatically later. It must be a quoted ISO 8601
+timestamp with an explicit `Z` or numeric UTC offset. Before that timestamp the
+note is a scheduled preview: it renders in local development and
+`INCLUDE_DRAFTS=true` preview builds with `noindex`, but normal production
+builds omit its route and all public discovery links. The hourly Worker check
+triggers a production rebuild after the timestamp; expect publication within
+about one hour plus build time.
+
 Keep drafts in `src/content/notes/` so they use the real note layout. Drafts
-appear in a preview-only section on the local notes index. Set
-`INCLUDE_DRAFTS=true` for an explicit static preview build. Change visibility
-to `public` only when the publication checklist is complete.
+and scheduled notes appear in separate preview-only sections on the local notes
+index. Set `INCLUDE_DRAFTS=true` for an explicit static preview build. Change a
+draft to `public` only when the publication checklist is complete; add a future
+`publishAt` when that completed note should wait for automatic publication.
 
 Files under `public/` are copied into every build regardless of note
-visibility. Do not put sensitive draft-only material there. Keep private assets
-off the production branch or introduce an explicit processed-asset workflow
-before relying on draft visibility for them.
+visibility. Do not put sensitive draft- or scheduled-only material there. Keep
+private assets off the production branch or introduce an explicit
+processed-asset workflow before relying on publication gating for them.
 
 ## Editorial Standard
 

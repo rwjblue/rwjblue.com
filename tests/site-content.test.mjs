@@ -411,33 +411,50 @@ test("rss endpoint publishes notes with canonical domains", () => {
 });
 
 test("note visibility keeps drafts previewable without publishing them", () => {
+  const contentConfig = read("src/content.config.ts");
   const notesLibrary = read("src/lib/notes.ts");
   const notesIndex = read("src/pages/notes/index.astro");
   const notePage = read("src/pages/notes/[slug].astro");
+  const parkPage = read("src/pages/radio/pota/[reference].astro");
+  const trackerPage = read("src/pages/projects/2026-activate-all-ri-pota.astro");
   const layout = read("src/layouts/BaseLayout.astro");
   const parksScript = read("scripts/pota/parks.mjs");
   const trackerScript = read("scripts/pota/ri-tracker.mjs");
   const buildVerifier = read("scripts/verify-note-visibility.mjs");
+  const publicationSchedule = read("src/pages/publication-schedule.json.ts");
+  const worker = read("worker/index.ts");
+  const wrangler = read("wrangler.jsonc");
   const relianceDraft = read(
     "src/content/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md",
   );
 
+  assert.match(contentConfig, /publishAt/);
+  assert.match(contentConfig, /datetime\(\{ offset: true \}\)/);
   assert.match(notesLibrary, /getPublicNotes/);
   assert.match(notesLibrary, /getRenderableNotes/);
   assert.match(notesLibrary, /getDraftNotes/);
+  assert.match(notesLibrary, /getScheduledNotes/);
   assert.match(notesLibrary, /import\.meta\.env\.DEV/);
   assert.match(notesLibrary, /import\.meta\.env\.INCLUDE_DRAFTS === "true"/);
   assert.match(notesIndex, /Working drafts/);
+  assert.match(notesIndex, /Scheduled notes/);
   assert.match(notesIndex, /getPublicNotes\(\)/);
   assert.match(notePage, /getRenderableNotes\(\)/);
   assert.match(notePage, /Draft preview/);
   assert.match(notePage, /Unlisted note/);
+  assert.match(notePage, /Scheduled preview/);
+  assert.match(parkPage, /publicNoteIds/);
+  assert.match(trackerPage, /publicNoteIds/);
   assert.match(notePage, /robots=\{isPreview \? "noindex, nofollow"/);
   assert.match(layout, /name="robots"/);
   assert.match(parksScript, /visibility !== "public"/);
   assert.match(trackerScript, /visibility !== "public"/);
   assert.match(buildVerifier, /INCLUDE_DRAFTS/);
   assert.match(buildVerifier, /noindex, nofollow/);
+  assert.match(publicationSchedule, /nextScheduledPublicationAt/);
+  assert.match(worker, /PUBLICATION_DEPLOY_HOOK_URL/);
+  assert.match(worker, /shouldTriggerPublicationBuild/);
+  assert.match(wrangler, /"0 \* \* \* \*"/);
   assert.match(relianceDraft, /visibility: draft/);
   assert.ok(!existsSync("drafts/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md"));
   assert.ok(!existsSync("drafts/notes/2026-america250-w1aw-1.md"));
