@@ -28,7 +28,7 @@ little over half a mile in to operate from a quiet spot in the woods.
 - **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/), freshly reassembled after the [USB-C charger and side rail install](/notes/2026-06-03-kx2-usb-c-side-rails-install/)
 - **Antenna:** [Reliance 53-foot end-fed random wire](/radio/equipment/reliance-53-foot-efrw/), remembered in the field as 51 feet, thrown roughly 35 to 40 feet high and running in an upside-down U shape through the trees
 - **Power:** Mostly 5 watts; the last two QSOs were logged at 10 watts
-- **CW gear:** [Zippy Key paddle by K8CES](/radio/equipment/k8ce-zippy-paddle/); headphones and the KX2 speaker
+- **CW gear:** [Zippy Key paddle by K8CES](/radio/equipment/k8ces-zippy-paddle/); headphones and the KX2 speaker
 
 ## Field notes
 

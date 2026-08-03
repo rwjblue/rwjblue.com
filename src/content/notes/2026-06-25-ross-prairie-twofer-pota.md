@@ -38,7 +38,7 @@ that felt very familiar and very different at the same time.
 - **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/)
 - **Antenna:** [Reliance 53-foot end-fed random wire](/radio/equipment/reliance-53-foot-efrw/), remembered in the field as 51 feet, thrown roughly 35-40 feet into a tree and sloped back toward the operating position
 - **Power:** Mostly 5 W from the KX2 internal battery, then 12 W from an external Bioenno battery for the last two contacts
-- **CW gear:** [Zippy paddle](/radio/equipment/k8ce-zippy-paddle/) and headphones
+- **CW gear:** [Zippy paddle](/radio/equipment/k8ces-zippy-paddle/) and headphones
 
 ## Field notes
 

@@ -34,7 +34,7 @@ made the activation feel like it fit the spirit of the project.
 - **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/)
 - **Antenna:** [KJ6ER Challenger](/radio/equipment/kj6er-challenger/) with the off-center-fed dipole, on a tripod
 - **Power:** 10 watts from the KX2 for 17 contacts; one contact at 5 watts
-- **CW gear:** [Zippy paddle by K8CES](/radio/equipment/k8ce-zippy-paddle/)
+- **CW gear:** [Zippy paddle by K8CES](/radio/equipment/k8ces-zippy-paddle/)
 
 ## Field notes
 

@@ -50,7 +50,7 @@ Spain.
   radials, including two laid into the wet sand
 - **Power:** One [3 Ah Bioenno LiFePO4 battery](/radio/equipment/bioenno-3ah/) for the entire operation,
   including some phone charging
-- **CW gear:** [Zippy key](/radio/equipment/k8ce-zippy-paddle/) and Ham2K PoLo
+- **CW gear:** [Zippy key](/radio/equipment/k8ces-zippy-paddle/) and Ham2K PoLo
 
 ## Finding the West Beach parcel
 

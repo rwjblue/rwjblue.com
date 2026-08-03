@@ -63,7 +63,7 @@ award paths.
 - **Cheetah context:** 16 unique UTC-day references in the ADI; 15 needed for POTA Rover Cheetah
 - **Radios:** [Elecraft KX2](/radio/equipment/elecraft-kx2/) for the walking CW stops; [Yaesu FT-891](/radio/equipment/yaesu-ft-891/) for the higher-power SSB/CW work later in the day
 - **Antennas:** [REZ 25-foot whip, 40-meter coil, and Rybakov configurations](/radio/equipment/rez-scout-xf/); [KJ6ER Challenger](/radio/equipment/kj6er-challenger/); [Elecraft AX1/AXE1](/radio/equipment/elecraft-ax1-axe1/); and the [SpoolTenna Ultra](/radio/equipment/spooltenna-ultra/) 40/20/10 EFHW at LBJ
-- **CW gear:** [VK3IL paddle](/radio/equipment/vk3il-pressure-paddle/) for the early KX2 stops, [KXPD2 paddle](/radio/equipment/elecraft-kxpd2/) at Lincoln, and [Zippy paddle](/radio/equipment/k8ce-zippy-paddle/) with the FT-891 at LBJ
+- **CW gear:** [VK3IL paddle](/radio/equipment/vk3il-pressure-paddle/) for the early KX2 stops, [KXPD2 paddle](/radio/equipment/elecraft-kxpd2/) at Lincoln, and [Zippy paddle](/radio/equipment/k8ces-zippy-paddle/) with the FT-891 at LBJ
 
 ## [Thomas Jefferson National Memorial, US-0792](/radio/pota/US-0792/) and [National Mall, US-0655](/radio/pota/US-0655/)
 
