@@ -454,7 +454,9 @@ test("note visibility keeps drafts previewable without publishing them", () => {
   assert.match(publicationSchedule, /nextScheduledPublicationAt/);
   assert.match(worker, /PUBLICATION_DEPLOY_HOOK_URL/);
   assert.match(worker, /shouldTriggerPublicationBuild/);
+  assert.match(worker, /scheduled-publication-check/);
   assert.match(wrangler, /"0 \* \* \* \*"/);
+  assert.match(wrangler, /"head_sampling_rate": 1/);
   assert.match(relianceDraft, /visibility: draft/);
   assert.ok(!existsSync("drafts/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md"));
   assert.ok(!existsSync("drafts/notes/2026-america250-w1aw-1.md"));

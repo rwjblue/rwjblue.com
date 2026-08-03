@@ -33,8 +33,14 @@ async function scheduledPublicationCheck(
   scheduledTime: number,
   env: WorkerEnv,
 ): Promise<void> {
+  const scheduledAt = new Date(scheduledTime).toISOString();
+
   if (!env.PUBLICATION_DEPLOY_HOOK_URL) {
-    console.warn("Scheduled publication skipped: deploy hook is not configured");
+    console.warn({
+      event: "scheduled-publication-check",
+      outcome: "missing-deploy-hook",
+      scheduledAt,
+    });
     return;
   }
 
@@ -50,6 +56,12 @@ async function scheduledPublicationCheck(
 
   const schedule = await scheduleResponse.json<PublicationSchedule>();
   if (!shouldTriggerPublicationBuild(schedule, scheduledTime)) {
+    console.log({
+      event: "scheduled-publication-check",
+      outcome: "not-due",
+      scheduledAt,
+      nextPublishAt: schedule.nextPublishAt,
+    });
     return;
   }
 
@@ -62,6 +74,13 @@ async function scheduledPublicationCheck(
       `Unable to trigger publication build (${buildResponse.status})`,
     );
   }
+
+  console.log({
+    event: "scheduled-publication-check",
+    outcome: "build-triggered",
+    scheduledAt,
+    nextPublishAt: schedule.nextPublishAt,
+  });
 }
 
 export function calendarResponse(request: Request): Response {
