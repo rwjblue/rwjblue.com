@@ -1,6 +1,7 @@
 ---
 title: "Morse Code for the Technician: resources"
 date: 2026-07-31
+publishAt: "2026-08-12T09:00:00-04:00"
 summary: "Slides, learning paths, practice tools, and portable-CW inspiration from my 2026 Northeast HamXposition talk."
 tags:
   - radio

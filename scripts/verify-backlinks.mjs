@@ -14,6 +14,9 @@ const receiveLoop = read(
   "dist/radio/equipment/loop-on-ground-receive-antenna/index.html",
 );
 const cwQso = read("dist/radio/cw-qso/index.html");
+const rss = read("dist/rss.xml");
+const talkResourcePath =
+  "/notes/2026-07-31-morse-code-for-the-technician-resources/";
 
 assert.match(park, /Referenced by/);
 assert.match(
@@ -50,8 +53,9 @@ assert.match(
   receiveLoop,
   /href="\/notes\/2026-07-28-operating-w1aw-1-for-america250\/"/,
 );
-assert.match(cwQso, /Referenced by/);
-assert.match(
-  cwQso,
-  /href="\/notes\/2026-07-31-morse-code-for-the-technician-resources\/"/,
-);
+if (rss.includes(talkResourcePath)) {
+  assert.match(cwQso, /Referenced by/);
+  assert.match(cwQso, new RegExp(`href="${talkResourcePath}"`));
+} else {
+  assert.doesNotMatch(cwQso, new RegExp(`href="${talkResourcePath}"`));
+}
