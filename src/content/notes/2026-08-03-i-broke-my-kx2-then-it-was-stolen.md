@@ -2,6 +2,7 @@
 title: I Broke My KX2, Then It Was Stolen
 date: 2026-08-03
 summary: "How I damaged my KX2, got it repaired by Elecraft, and briefly thought its return shipment had been stolen beside the road."
+shareImage: /images/radio/2026-08-03-i-broke-my-kx2-then-it-was-stolen/share.png
 tags:
   - radio
   - field-notes
