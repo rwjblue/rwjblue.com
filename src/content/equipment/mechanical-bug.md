@@ -14,7 +14,7 @@ imageAlt: Circa-1958 Vibroplex Original Deluxe mechanical bug with red finger pi
 
 This is my first true mechanical bug, purchased to learn the manual-dash and
 self-repeating-dot technique on the real mechanism after getting started with a
-[Don Lawson WB9CYY Bug Emulator](/radio/equipment/don-lawson-bug-emulator/).
+[bug emulator](/radio/equipment/bug-emulator/).
 I got this bug from Bob Leichner WO6W, who helped develop the emulator from
 Don's original circuit, so a conversation about buying an old key unexpectedly
 became a bug lesson with one of the people behind the training tool I was
