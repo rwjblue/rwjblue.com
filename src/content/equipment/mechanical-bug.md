@@ -14,14 +14,19 @@ imageAlt: Circa-1958 Vibroplex Original Deluxe mechanical bug with red finger pi
 
 This is my first true mechanical bug, purchased to learn the manual-dash and
 self-repeating-dot technique on the real mechanism after getting started with a
-[Don Lawson WB9CYY Bug Emulator](https://qrper.com/2025/09/for-bug-fists-on-the-go-the-don-lawson-wb9cyy-bug-emulator/).
+[Don Lawson WB9CYY Bug Emulator](/radio/equipment/don-lawson-bug-emulator/).
 I got this bug from Bob Leichner WO6W, who helped develop the emulator from
 Don's original circuit, so a conversation about buying an old key unexpectedly
 became a bug lesson with one of the people behind the training tool I was
 already using.
 
-The first bug Bob showed me bottomed out around 30 words per minute—far too fast
-for where I am now. He instead offered this much more approachable "parts bug."
+This was the second time Bob had been generous with his time while I was
+learning. Rather than simply sell me the bug I first asked about, he set up a
+video call, demonstrated both keys, checked their timing, explained the
+adjustments, and steered me toward the one that fit where I was. The first bug
+bottomed out around 30 words per minute—far too fast for me—so he instead
+offered this much more approachable "parts bug."
+
 The serial-number plate and original weight are missing, and the key is a mix of
 parts rather than a collector piece. Bob estimated it as roughly 1958 vintage
 from the hardware. The chrome base, jeweled movement, red finger pieces, and
