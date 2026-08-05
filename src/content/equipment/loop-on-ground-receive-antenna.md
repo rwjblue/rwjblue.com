@@ -16,16 +16,18 @@ history:
 useContexts:
   - home
 connections:
-  - elecraft-k4d
+  - dx-engineering-receiver-guard-5000hd
 sortOrder: 50
 image: /images/equipment/loop-on-ground-receive-antenna/dxe-bfs-1-enclosure.jpg
 imageAlt: DX Engineering BFS-1 feedpoint transformer enclosure prepared for the loop-on-ground receive antenna
 ---
 
 The loop on the ground is a receive-only antenna built to provide a quieter
-alternative to the transmitting antennas at the QTH. It can feed the K4D's
-second receiver so the loop and a transmitting antenna can be compared
-directly or heard together in diversity receive.
+alternative to the transmitting antennas at the QTH. It feeds the K4D's second
+receiver through a
+[DX Engineering Receiver Guard 5000HD](/radio/equipment/dx-engineering-receiver-guard-5000hd/)
+so the loop and a transmitting antenna can be compared directly or heard
+together in diversity receive.
 
 I installed it on December 3, 2025, using 14 AWG THHN wire for the loop and
 RG-6 coax for the feed line. The first evening's checks compared it with the
@@ -34,7 +36,8 @@ attic EFHW on 80, 40, and 20 meters.
 The system uses a
 [DX Engineering BFS-1 Beverage transformer](https://www.dxengineering.com/parts/dxe-bfs-1),
 RG-6 feed line, receive-side amplification and attenuation, and switching that
-keeps transmitted power away from the receive path.
+keeps transmitted power away from the receive path. The Receiver Guard adds a
+final protective stage at the radio end of that path.
 
 ![Inside the DX Engineering BFS-1 enclosure, showing the feedpoint transformer circuit board](/images/equipment/loop-on-ground-receive-antenna/dxe-bfs-1-interior.jpg)
 
