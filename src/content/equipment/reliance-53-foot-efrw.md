@@ -3,6 +3,7 @@ name: Reliance 53-foot EFRW
 category: antennas
 summary: A compact 9:1 end-fed random-wire system for tuner-assisted portable operation from 160 through 6 meters.
 status: current
+acquired: "2026-05"
 useContexts:
   - portable
 sortOrder: 70

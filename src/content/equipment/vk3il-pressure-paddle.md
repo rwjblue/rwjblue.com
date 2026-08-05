@@ -3,6 +3,7 @@ name: VK3IL pressure paddle
 category: keys
 summary: A no-moving-parts pressure paddle built by VE6LK for lightweight dry-weather portable CW.
 status: current
+acquired: "2026-05"
 useContexts:
   - portable
 sortOrder: 70

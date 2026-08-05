@@ -3,6 +3,7 @@ name: PackTenna 20 m EFHW
 category: antennas
 summary: A compact resonant 20-meter end-fed half-wave for lightweight portable stations.
 status: current
+acquired: "2026-01"
 useContexts:
   - portable
 sortOrder: 35

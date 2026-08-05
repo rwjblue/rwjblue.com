@@ -3,6 +3,7 @@ name: Elecraft AX1 / AXE1 portable antenna system
 category: antennas
 summary: An ultracompact loaded whip and 40-meter extender kept as a quick-deploy or last-resort portable antenna.
 status: current
+acquired: "2026-05-28"
 useContexts:
   - portable
 connections:

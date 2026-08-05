@@ -3,6 +3,7 @@ name: K8CES Zippy paddle
 category: keys
 summary: A small portable dual-lever paddle used for CW activations when low weight and reliable handling matter.
 status: current
+acquired: "2026-04-15"
 useContexts:
   - portable
 sortOrder: 10

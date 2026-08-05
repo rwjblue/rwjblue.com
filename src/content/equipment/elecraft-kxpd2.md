@@ -3,6 +3,7 @@ name: Elecraft KXPD2 paddle
 category: keys
 summary: A compact mechanical paddle that attaches directly to the KX2 or KX3 for self-contained portable CW.
 status: current
+acquired: "2026-05-28"
 useContexts:
   - portable
 connections:

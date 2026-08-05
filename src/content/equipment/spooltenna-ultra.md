@@ -3,6 +3,7 @@ name: Spooltenna Ultra
 category: antennas
 summary: A compact 40-through-10-meter EFHW with an integrated spool, plus an interchangeable 80-meter accessory wire.
 status: current
+acquired: "2025-11-20"
 quantity: 2
 useContexts:
   - portable

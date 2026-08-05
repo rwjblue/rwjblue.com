@@ -3,6 +3,11 @@ name: Elecraft KX3
 category: radios
 summary: A portable HF radio used for QRP field operating, flexible antenna experiments, and compact POTA stations.
 status: current
+acquired: "2026-05-07"
+history:
+  - date: "2026-05-11"
+    title: KXFL3 roofing filter identified
+    details: Elecraft support reviewed internal photos and said the optional roofing filter appeared to be installed.
 useContexts:
   - portable
 sortOrder: 30

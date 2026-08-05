@@ -3,6 +3,8 @@ name: N3ZN ZN-9ZX paddle
 category: keys
 summary: A substantial dual-lever paddle used primarily at a stable operating position and for car-adjacent CW work.
 status: current
+acquired: "2026-04-17"
+serialNumber: "1448"
 sortOrder: 20
 externalUrl: https://www.n3znkeys.com/products/iambic-paddles/zn-9zx
 image: https://res.cloudinary.com/dewphcq19/image/upload/f_auto,q_auto,w_1200,h_630,c_fill/ZN-9ZX5-8_sorpfd

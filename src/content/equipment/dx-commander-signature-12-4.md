@@ -3,6 +3,7 @@ name: DX Commander Signature 12.4
 category: antennas
 summary: A full-size multiband vertical in the home-station inventory for broader permanent-station coverage.
 status: current
+acquired: "2026-01-17"
 state: Awaiting assembly
 useContexts:
   - home

@@ -3,6 +3,7 @@ name: Bioenno 12 Ah LiFePO4 battery
 category: power
 summary: A medium field battery used when a portable station needs more reserve than the lightweight QRP pack.
 status: current
+acquired: "2026-03"
 useContexts:
   - portable
 sortOrder: 30

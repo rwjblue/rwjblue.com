@@ -3,6 +3,7 @@ name: QRP Labs QMX+
 category: radios
 summary: A 160-through-6-meter QRP transceiver with room for experimentation, development access, and portable use.
 status: current
+acquired: "2026-05"
 quantity: 2
 state: One assembled; one kit unbuilt
 useContexts:

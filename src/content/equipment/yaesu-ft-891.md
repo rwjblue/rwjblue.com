@@ -3,6 +3,7 @@ name: Yaesu FT-891
 category: radios
 summary: A compact 100-watt HF and 6-meter radio used when portable work calls for more power than the QRP radios provide.
 status: current
+acquired: "2026-02-14"
 useContexts:
   - portable
 sortOrder: 40

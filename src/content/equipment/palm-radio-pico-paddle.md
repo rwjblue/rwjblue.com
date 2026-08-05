@@ -3,6 +3,7 @@ name: Palm Radio Pico paddle
 category: keys
 summary: A tiny retractable portable paddle kept for space-constrained CW stations.
 status: current
+acquired: "2026-05"
 useContexts:
   - portable
 sortOrder: 90

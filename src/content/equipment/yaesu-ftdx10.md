@@ -3,6 +3,8 @@ name: Yaesu FTDX10
 category: radios
 summary: A full-size HF and 6-meter transceiver kept for home operating, SSB work, and station experiments.
 status: current
+acquired: "2025-12"
+serialNumber: 5M460003
 state: Stored; not currently connected
 useContexts:
   - home

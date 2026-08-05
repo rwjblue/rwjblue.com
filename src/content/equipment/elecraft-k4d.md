@@ -3,6 +3,7 @@ name: Elecraft K4D
 category: radios
 summary: The primary home-station HF transceiver for CW, digital modes, contest practice, and repeatable station experiments.
 status: current
+acquired: "2026-05-11"
 useContexts:
   - home
 connections:

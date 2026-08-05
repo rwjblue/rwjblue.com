@@ -3,6 +3,11 @@ name: Reliance 40-6 m OCFD
 category: antennas
 summary: A portable off-center-fed dipole used when a center support and two low wire ends fit the site better than a vertical.
 status: current
+acquired: "2026-05"
+history:
+  - date: "2026-07-21"
+    title: Replacement wire tested
+    note: /notes/2026-07-21-reliance-ocfd-replacement-wire-testing/
 useContexts:
   - portable
 sortOrder: 60

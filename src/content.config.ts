@@ -2,6 +2,13 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+const equipmentDate = z
+  .string()
+  .regex(
+    /^\d{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?)?$/,
+    "Use YYYY, YYYY-MM, or YYYY-MM-DD",
+  );
+
 const notes = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/notes" }),
   schema: z.object({
@@ -63,6 +70,18 @@ const equipment = defineCollection({
     ]),
     summary: z.string(),
     status: z.enum(["current", "incoming", "retired"]).default("current"),
+    acquired: equipmentDate.optional(),
+    serialNumber: z.string().min(1).optional(),
+    history: z
+      .array(
+        z.object({
+          date: equipmentDate,
+          title: z.string().min(1),
+          details: z.string().min(1).optional(),
+          note: z.string().startsWith("/").optional(),
+        }),
+      )
+      .default([]),
     quantity: z.number().int().positive().default(1),
     state: z.string().optional(),
     useContexts: z

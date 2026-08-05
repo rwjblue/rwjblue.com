@@ -3,6 +3,7 @@ name: RigExpert MATCH Advanced
 category: test-equipment
 summary: The portable antenna and cable analyzer used for field sweeps, setup checks, and antenna troubleshooting.
 status: current
+acquired: "2026-03"
 sortOrder: 10
 externalUrl: https://rigexpert.com/products/antenna-analyzers/match/
 dxEngineeringUrl: https://www.dxengineering.com/parts/reu-match-adv

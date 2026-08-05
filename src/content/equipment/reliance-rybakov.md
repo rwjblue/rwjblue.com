@@ -3,6 +3,7 @@ name: Reliance Rybakov 4:1 Bugout
 category: antennas
 summary: A portable 40-through-6-meter Rybakov wire system with a 4:1 transformer, vertical element, and radials.
 status: current
+acquired: "2026-05"
 useContexts:
   - portable
 sortOrder: 50

@@ -3,6 +3,16 @@ name: Loop-on-ground receive antenna
 category: antennas
 summary: A low outdoor receive loop used at the home station for quieter signals and K4D diversity comparisons.
 status: current
+history:
+  - date: "2025-12-03"
+    title: Initial installation completed
+    details: Ran the feed line and put the receive loop into service.
+  - date: "2025-12-19"
+    title: Relocated away from the HVAC system
+    details: Moved the loop from the dog yard to the front side of the house to reduce local noise.
+  - date: "2025-12-20"
+    title: Reoriented for SSW coverage
+    details: Repositioned the loop to favor low-angle reception toward the south-southwest and Central Europe.
 useContexts:
   - home
 connections:

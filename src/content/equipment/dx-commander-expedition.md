@@ -3,6 +3,14 @@ name: DX Commander Expedition
 category: antennas
 summary: A portable multiband vertical used as both a field antenna and a repeatable home-station reference.
 status: current
+acquired: "2026-01-17"
+history:
+  - date: "2026-01-19"
+    title: Assembly started
+    details: Began assembling the plates, clamps, spreaders, tensioners, and wire elements.
+  - date: "2026-01-22"
+    title: First setup and tuning
+    details: Completed the initial outdoor setup and began tuning the five-band configuration.
 useContexts:
   - home
   - portable

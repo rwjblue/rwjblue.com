@@ -3,6 +3,7 @@ name: Elecraft KH1
 category: radios
 summary: An ultralight five-band CW transceiver for handheld, hiking, and minimal portable stations.
 status: current
+acquired: "2026-05"
 useContexts:
   - portable
 sortOrder: 25

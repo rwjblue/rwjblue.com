@@ -3,6 +3,7 @@ name: Modern Morse Nameless v0
 category: keys
 summary: A compact Sunrise Orange magnetic-return iambic paddle acquired used for portable CW.
 status: current
+acquired: "2026-05"
 sortOrder: 60
 externalUrl: https://www.modernmorse.com/products/nameless-v0-portable-key
 image: https://www.modernmorse.com/cdn/shop/files/orange_nameless_iso_shot.png?v=1719539720

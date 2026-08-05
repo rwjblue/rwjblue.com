@@ -3,6 +3,7 @@ name: Bug emulator
 category: keys
 summary: A compact electronic trainer that gives a paddle the timing and character of a mechanical bug.
 status: current
+acquired: "2026-05"
 state: Electronic bug trainer
 useContexts:
   - home

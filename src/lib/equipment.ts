@@ -101,3 +101,16 @@ export function connectedEquipment(
 
   return entries.filter((candidate) => connectedIds.has(candidate.id));
 }
+
+export function formatEquipmentDate(value: string): string {
+  const [year, month, day] = value.split("-").map(Number);
+
+  if (!month) return String(year);
+
+  return new Intl.DateTimeFormat(
+    "en-US",
+    day
+      ? { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }
+      : { month: "long", year: "numeric", timeZone: "UTC" },
+  ).format(new Date(Date.UTC(year, month - 1, day ?? 1)));
+}

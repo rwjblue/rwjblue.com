@@ -3,6 +3,7 @@ name: West Mountain Radio Epic PWRgate
 category: power
 summary: The shack power controller that switches between the supply and 280 Ah battery while managing battery charging.
 status: current
+acquired: "2026-03"
 sortOrder: 20
 externalUrl: https://www.westmountainradio.com/product_info.php?products_id=epic-pwrgate
 dxEngineeringUrl: https://www.dxengineering.com/parts/wmt-58404-1673

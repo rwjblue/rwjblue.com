@@ -3,6 +3,7 @@ name: QRP Labs QMX
 category: radios
 summary: Compact multiband QRP transceivers for portable CW, digital, and SSB experiments.
 status: current
+acquired: "2026-05"
 quantity: 3
 state: Two assembled; one kit unbuilt
 useContexts:

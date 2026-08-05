@@ -3,6 +3,7 @@ name: G7UFO Turret Mini Microphone
 category: station-accessories
 summary: A tiny handheld microphone for the KX2 and KX3, carried in the mostly-QRP portable bag.
 status: current
+acquired: "2026-05"
 useContexts:
   - portable
 connections:

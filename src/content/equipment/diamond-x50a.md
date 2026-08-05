@@ -3,6 +3,9 @@ name: Diamond X50A
 category: antennas
 summary: A dual-band VHF and UHF vertical used for local repeaters, nets, and fixed-station monitoring.
 status: current
+history:
+  - date: "2025-09-07"
+    title: Installed in the attic
 useContexts:
   - home
 sortOrder: 60

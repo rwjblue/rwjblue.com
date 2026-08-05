@@ -2794,6 +2794,45 @@ p {
   font-size: 0.78rem;
 }
 
+.equipment-history {
+  padding-top: 24px;
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.equipment-history ol {
+  padding: 0;
+  margin: 18px 0 0;
+  list-style: none;
+}
+
+.equipment-history li {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.28fr) minmax(0, 1fr);
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.equipment-history time {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.equipment-history h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.equipment-history p {
+  max-width: 680px;
+  margin: 5px 0 0;
+  color: var(--muted);
+}
+
 .equipment-connections {
   padding-top: 24px;
   margin-top: 32px;
@@ -2820,6 +2859,11 @@ p {
   .equipment-item:nth-child(even) {
     padding: 16px 0;
     border-right: 0;
+  }
+
+  .equipment-history li {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }
 

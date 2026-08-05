@@ -3,6 +3,7 @@ name: PackTenna PT-101 random wire
 category: antennas
 summary: A compact 29-foot end-fed random wire used for quick portable installations with a counterpoise and tuner.
 status: current
+acquired: "2026-01"
 useContexts:
   - portable
 sortOrder: 30

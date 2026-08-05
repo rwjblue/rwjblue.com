@@ -6,6 +6,7 @@ import {
   connectedEquipment,
   EQUIPMENT_CATEGORIES,
   EQUIPMENT_USE_CONTEXT_LABELS,
+  formatEquipmentDate,
   getEquipment,
 } from "../../../lib/equipment";
 
@@ -32,6 +33,21 @@ const statusLabel =
     : entry.data.status === "incoming"
       ? "Incoming"
       : "Retired equipment";
+const history = [
+  ...(entry.data.acquired
+    ? [
+        {
+          date: entry.data.acquired,
+          title: "Acquired",
+          details: undefined,
+          note: undefined,
+        },
+      ]
+    : []),
+  ...entry.data.history,
+].sort(
+  (left, right) => left.date.localeCompare(right.date),
+);
 ---
 
 <BaseLayout
@@ -63,6 +79,16 @@ const statusLabel =
           )
         }
         {entry.data.state && <span>{entry.data.state}</span>}
+        {
+          entry.data.acquired && (
+            <span>Acquired {formatEquipmentDate(entry.data.acquired)}</span>
+          )
+        }
+        {
+          entry.data.serialNumber && (
+            <span>Serial {entry.data.serialNumber}</span>
+          )
+        }
         {
           entry.data.useContexts.map((context) => (
             <span>{EQUIPMENT_USE_CONTEXT_LABELS[context]}</span>
@@ -98,6 +124,37 @@ const statusLabel =
     }
 
     <Content />
+
+    {
+  entry.data.history.length > 0 && (
+        <section
+          class="equipment-history"
+          aria-labelledby="equipment-history-title"
+        >
+          <p class="section-label">Lifecycle</p>
+          <h2 id="equipment-history-title">History</h2>
+          <ol>
+            {history.map((event) => (
+              <li>
+                <time datetime={event.date}>
+                  {formatEquipmentDate(event.date)}
+                </time>
+                <div>
+                  <h3>
+                    {event.note ? (
+                      <a href={event.note}>{event.title}</a>
+                    ) : (
+                      event.title
+                    )}
+                  </h3>
+                  {event.details && <p>{event.details}</p>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
 
     {
       connections.length > 0 && (
