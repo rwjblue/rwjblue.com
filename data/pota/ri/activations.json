@@ -1702,6 +1702,19 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-2879",
+      "park": "Rocky Point State Park",
+      "date": "2026-08-05",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 39,
+        "cw": 0,
+        "data": 0,
+        "phone": 39
+      },
+      "source": "profile"
     }
   ]
 }

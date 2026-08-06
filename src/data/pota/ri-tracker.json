@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-06T02:36:00.204Z",
+  "generatedAt": "2026-08-06T02:52:48.175Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -257,6 +257,57 @@
         "attempts": 71,
         "activations": 70,
         "qsos": 3396
+      }
+    },
+    {
+      "reference": "US-2879",
+      "name": "Rocky Point State Park",
+      "latitude": 41.6915,
+      "longitude": -71.3634,
+      "grid": "FN41hq",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-2879/",
+      "potaUrl": "https://pota.app/#/park/US-2879",
+      "firstActivation": {
+        "reference": "US-2879",
+        "park": "Rocky Point State Park",
+        "date": "2026-02-22",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 71,
+          "cw": 0,
+          "data": 0,
+          "phone": 71
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-2879",
+        "park": "Rocky Point State Park",
+        "date": "2026-08-05",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 39,
+          "cw": 0,
+          "data": 0,
+          "phone": 39
+        },
+        "source": "profile"
+      },
+      "activationCount": 2,
+      "notes": [
+        {
+          "id": "2026-08-05-rocky-point-with-ka5i",
+          "title": "Rocky Point with KA5I",
+          "date": "2026-08-05",
+          "href": "/notes/2026-08-05-rocky-point-with-ka5i/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 202,
+        "activations": 190,
+        "qsos": 8572
       }
     },
     {
@@ -2368,57 +2419,6 @@
         "attempts": 2552,
         "activations": 2505,
         "qsos": 104249
-      }
-    },
-    {
-      "reference": "US-2879",
-      "name": "Rocky Point State Park",
-      "latitude": 41.6915,
-      "longitude": -71.3634,
-      "grid": "FN41hq",
-      "locationDesc": "US-RI",
-      "status": "completed",
-      "href": "/radio/pota/US-2879/",
-      "potaUrl": "https://pota.app/#/park/US-2879",
-      "firstActivation": {
-        "reference": "US-2879",
-        "park": "Rocky Point State Park",
-        "date": "2026-02-22",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 71,
-          "cw": 0,
-          "data": 0,
-          "phone": 71
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-2879",
-        "park": "Rocky Point State Park",
-        "date": "2026-02-22",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 71,
-          "cw": 0,
-          "data": 0,
-          "phone": 71
-        },
-        "source": "backfill"
-      },
-      "activationCount": 1,
-      "notes": [
-        {
-          "id": "2026-08-05-rocky-point-with-ka5i",
-          "title": "Rocky Point with KA5I",
-          "date": "2026-08-05",
-          "href": "/notes/2026-08-05-rocky-point-with-ka5i/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 202,
-        "activations": 190,
-        "qsos": 8572
       }
     },
     {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-06T02:36:01.870Z",
+  "generatedAt": "2026-08-06T02:52:49.300Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -2250,9 +2250,37 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-2879/",
       "potaUrl": "https://pota.app/#/park/US-2879",
-      "activationCount": 1,
-      "qsoTotal": 71,
+      "activationCount": 2,
+      "qsoTotal": 110,
       "activations": [
+        {
+          "reference": "US-2879",
+          "park": "Rocky Point State Park",
+          "date": "2026-08-05",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 39,
+            "cw": 0,
+            "data": 0,
+            "phone": 39
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-08-05-rocky-point-with-ka5i",
+              "title": "Rocky Point with KA5I",
+              "date": "2026-08-05",
+              "href": "/notes/2026-08-05-rocky-point-with-ka5i/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-2879",
           "park": "Rocky Point State Park",

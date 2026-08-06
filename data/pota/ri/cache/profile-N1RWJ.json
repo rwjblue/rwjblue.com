@@ -12,14 +12,14 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 130,
+      "activations": 131,
       "parks": 85,
-      "qsos": 3120
+      "qsos": 3159
     },
     "attempts": {
-      "activations": 140,
+      "activations": 141,
       "parks": 85,
-      "qsos": 3158
+      "qsos": 3197
     },
     "hunter": {
       "parks": 548,
@@ -30,6 +30,16 @@
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-08-05",
+        "reference": "US-2879",
+        "park": "Rocky Point State Park",
+        "location": "US-RI",
+        "cw": 0,
+        "data": 0,
+        "phone": 39,
+        "total": 39
+      },
       {
         "date": "2026-07-26",
         "reference": "US-0513",
@@ -259,16 +269,6 @@
         "data": 0,
         "phone": 0,
         "total": 12
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-4564",
-        "park": "Potomac Heritage Trail National Scenic Trail",
-        "location": "US-DC",
-        "cw": 12,
-        "data": 0,
-        "phone": 21,
-        "total": 33
       },
       {
         "date": "2026-06-21",
