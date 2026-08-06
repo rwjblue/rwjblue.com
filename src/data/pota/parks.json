@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T13:43:16.184Z",
+  "generatedAt": "2026-08-06T02:36:01.870Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -2275,7 +2275,14 @@
           ]
         }
       ],
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-08-05-rocky-point-with-ka5i",
+          "title": "Rocky Point with KA5I",
+          "date": "2026-08-05",
+          "href": "/notes/2026-08-05-rocky-point-with-ka5i/"
+        }
+      ],
       "publicStats": {
         "attempts": 202,
         "activations": 190,

@@ -22,8 +22,8 @@
       "qsos": 3158
     },
     "hunter": {
-      "parks": 544,
-      "qsos": 872
+      "parks": 548,
+      "qsos": 878
     },
     "awards": 28,
     "endorsements": 60
@@ -283,6 +283,114 @@
     ],
     "hunter_qsos": [
       {
+        "date": "2026-08-05T23:19:56",
+        "callsign": "K4YZI",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-1928",
+        "park": "Werner-Boyce Salt Springs State Park",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-08-05T22:57:00",
+        "callsign": "KT5H",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-6931",
+        "park": "Nicholson Creek State Game Land",
+        "location": "US-NC"
+      },
+      {
+        "date": "2026-08-05T22:57:00",
+        "callsign": "KT5H",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-8226",
+        "park": "Upchurch Lake State Fishing Lake",
+        "location": "US-NC"
+      },
+      {
+        "date": "2026-08-05T22:45:15",
+        "callsign": "KR4KRW",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-1928",
+        "park": "Werner-Boyce Salt Springs State Park",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-08-05T22:24:47",
+        "callsign": "KF0REN",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-2287",
+        "park": "Elk Rock State Park",
+        "location": "US-IA"
+      },
+      {
+        "date": "2026-08-05T15:46:09",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-08-02T02:52:46",
+        "callsign": "W9AV",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-5643",
+        "park": "Lower Wisconsin State Riverway State Park",
+        "location": "US-WI"
+      },
+      {
+        "date": "2026-08-01T20:29:18",
+        "callsign": "W9AV",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-5643",
+        "park": "Lower Wisconsin State Riverway State Park",
+        "location": "US-WI"
+      },
+      {
+        "date": "2026-07-31T19:55:00",
+        "callsign": "AB9CA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10244",
+        "park": "Donaldson's Woods State Nature Preserve",
+        "location": "US-IN"
+      },
+      {
+        "date": "2026-07-31T19:55:00",
+        "callsign": "AB9CA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2269",
+        "park": "Spring Mill State Park",
+        "location": "US-IN"
+      },
+      {
+        "date": "2026-07-31T19:52:42",
+        "callsign": "NK2Y",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2080",
+        "park": "Hudson River Islands State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-07-31T19:52:42",
+        "callsign": "NK2Y",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-8098",
+        "park": "Empire State Trail",
+        "location": "US-NY"
+      },
+      {
         "date": "2026-07-27T17:09:00",
         "callsign": "K4EGK",
         "band": "20M",
@@ -292,13 +400,13 @@
         "location": "US-MO"
       },
       {
-        "date": "2026-07-26T19:31:32",
-        "callsign": "KO6A",
-        "band": "15M",
+        "date": "2026-07-26T19:58:56",
+        "callsign": "W4CMG",
+        "band": "20M",
         "mode": "CW",
-        "reference": "US-7889",
-        "park": "Presidio of SF National Historic Site",
-        "location": "US-CA"
+        "reference": "US-2954",
+        "park": "Johnsonville State Park",
+        "location": "US-TN"
       },
       {
         "date": "2026-07-26T19:31:32",
@@ -307,6 +415,15 @@
         "mode": "CW",
         "reference": "US-0647",
         "park": "Golden Gate National Recreation Area",
+        "location": "US-CA"
+      },
+      {
+        "date": "2026-07-26T19:31:32",
+        "callsign": "KO6A",
+        "band": "15M",
+        "mode": "CW",
+        "reference": "US-7889",
+        "park": "Presidio of SF National Historic Site",
         "location": "US-CA"
       },
       {
@@ -389,123 +506,6 @@
         "reference": "US-1526",
         "park": "Negwegon State Park",
         "location": "US-MI"
-      },
-      {
-        "date": "2026-07-24T13:21:36",
-        "callsign": "KU3X",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-1391",
-        "park": "Nockamixon State Park",
-        "location": "US-PA"
-      },
-      {
-        "date": "2026-07-24T12:55:00",
-        "callsign": "AD2MM",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-0680",
-        "park": "Gateway National Recreation Area",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-07-24T12:55:00",
-        "callsign": "AD2MM",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-8081",
-        "park": "Floyd Bennett Field National Historic District",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-07-23T12:30:20",
-        "callsign": "N1BS",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-07-21T23:39:34",
-        "callsign": "N8JMS",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1973",
-        "park": "Madison Lake State Park",
-        "location": "US-OH"
-      },
-      {
-        "date": "2026-07-20T23:49:32",
-        "callsign": "K1NW",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-10547",
-        "park": "Silver Spring State Recreation Area",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-07-20T23:25:00",
-        "callsign": "WC1D",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-8423",
-        "park": "Purgatory Chasm State Reserve",
-        "location": "US-MA"
-      },
-      {
-        "date": "2026-07-20T21:50:17",
-        "callsign": "K8JKU",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-3323",
-        "park": "Pontiac Lake State Recreation Area",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-07-20T14:34:09",
-        "callsign": "AE0YM",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-4010",
-        "park": "Heron Haven State Park",
-        "location": "US-NE"
-      },
-      {
-        "date": "2026-07-20T14:27:00",
-        "callsign": "WB2ART",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2876",
-        "park": "Goddard Memorial State Park",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-07-20T14:21:08",
-        "callsign": "KB6NU",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-13184",
-        "park": "Iron Belle State Trail",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-07-20T13:43:00",
-        "callsign": "K4KVC",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6455",
-        "park": "Panasoffkee Outlet State Conservation Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-20T13:29:51",
-        "callsign": "N8JMS",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-9478",
-        "park": "Mackey Ford State Wildlife Area",
-        "location": "US-OH"
       }
     ]
   },

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T13:43:14.821Z",
+  "generatedAt": "2026-08-06T02:36:00.204Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -2407,7 +2407,14 @@
         "source": "backfill"
       },
       "activationCount": 1,
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-08-05-rocky-point-with-ka5i",
+          "title": "Rocky Point with KA5I",
+          "date": "2026-08-05",
+          "href": "/notes/2026-08-05-rocky-point-with-ka5i/"
+        }
+      ],
       "publicStats": {
         "attempts": 202,
         "activations": 190,
