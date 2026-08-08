@@ -1,0 +1,244 @@
+{
+  "title": "N1RWJ at Pulaski State Park",
+  "subtitle": "12 CW QSOs - August 8, 2026",
+  "stationCallsign": "N1RWJ",
+  "date": "20260808",
+  "dateLabel": "Aug 8, 2026",
+  "totalQsoCount": 12,
+  "originDxccCode": 291,
+  "dxccEntities": [
+    {
+      "dxccCode": 291,
+      "name": "United States",
+      "flag": "🇺🇸",
+      "count": 11
+    },
+    {
+      "dxccCode": 281,
+      "name": "Spain",
+      "flag": "🇪🇸",
+      "count": 1
+    }
+  ],
+  "sourceAdi": [
+    "data/pota/source-adi/2026/08/4-2026-08-08-N1RWJ-at-US-7508-Full.adi"
+  ],
+  "contacts": [
+    {
+      "timestamp": "2026-08-08T16:41:30Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 35.520833333333336,
+        "lon": -78.45833333333333
+      },
+      "band": "15m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "FM05sm"
+    },
+    {
+      "timestamp": "2026-08-08T16:49:47Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 38.3125,
+        "lon": -85.79166666666666
+      },
+      "band": "15m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EM78ch"
+    },
+    {
+      "timestamp": "2026-08-08T16:55:07Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 37.97916666666667,
+        "lon": -0.6250000000000001
+      },
+      "band": "15m",
+      "source": "grid",
+      "destinationDxccCode": 281,
+      "destinationDxccName": "Spain",
+      "destinationDxccFlag": "🇪🇸",
+      "destinationGrid": "IM97qx"
+    },
+    {
+      "timestamp": "2026-08-08T17:08:31Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 40.145833333333336,
+        "lon": -86.45833333333333
+      },
+      "band": "17m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EN60sd"
+    },
+    {
+      "timestamp": "2026-08-08T17:13:22Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 36.395833333333336,
+        "lon": -78.125
+      },
+      "band": "17m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "FM06wj"
+    },
+    {
+      "timestamp": "2026-08-08T17:18:50Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 27.9375,
+        "lon": -81.95833333333333
+      },
+      "band": "17m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EL97aw"
+    },
+    {
+      "timestamp": "2026-08-08T18:00:47Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 42.60416666666667,
+        "lon": -83.54166666666666
+      },
+      "band": "17m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EN82fo"
+    },
+    {
+      "timestamp": "2026-08-08T18:13:46Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 40.645833333333336,
+        "lon": -80.625
+      },
+      "band": "30m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EN90qp"
+    },
+    {
+      "timestamp": "2026-08-08T18:17:03Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 42.60416666666667,
+        "lon": -83.54166666666666
+      },
+      "band": "30m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EN82fo"
+    },
+    {
+      "timestamp": "2026-08-08T18:38:48Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 38.72916666666667,
+        "lon": -86.375
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EM68tr"
+    },
+    {
+      "timestamp": "2026-08-08T18:44:13Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 44.47916666666667,
+        "lon": -68.875
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "FN54nl"
+    },
+    {
+      "timestamp": "2026-08-08T18:47:30Z",
+      "originGrid": "FN41cw43",
+      "origin": {
+        "lat": 41.93125,
+        "lon": -71.79583333333333
+      },
+      "destination": {
+        "lat": 42.72916666666667,
+        "lon": -83.70833333333333
+      },
+      "band": "20m",
+      "source": "grid",
+      "destinationDxccCode": 291,
+      "destinationDxccName": "United States",
+      "destinationDxccFlag": "🇺🇸",
+      "destinationGrid": "EN82dr"
+    }
+  ]
+}

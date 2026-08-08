@@ -22,8 +22,8 @@
       "qsos": 3197
     },
     "hunter": {
-      "parks": 548,
-      "qsos": 878
+      "parks": 550,
+      "qsos": 886
     },
     "awards": 28,
     "endorsements": 60
@@ -283,6 +283,24 @@
     ],
     "hunter_qsos": [
       {
+        "date": "2026-08-08T18:44:17",
+        "callsign": "KQ1S",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3893",
+        "park": "Cliff Pitts Wildlife Management Area",
+        "location": "US-SC"
+      },
+      {
+        "date": "2026-08-07T13:58:51",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
         "date": "2026-08-05T23:19:56",
         "callsign": "K4YZI",
         "band": "20M",
@@ -488,24 +506,6 @@
         "reference": "US-1573",
         "park": "Gambrill State Park",
         "location": "US-MD"
-      },
-      {
-        "date": "2026-07-24T14:41:00",
-        "callsign": "KE2BVB",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1625",
-        "park": "Monmouth Battlefield State Park",
-        "location": "US-NJ"
-      },
-      {
-        "date": "2026-07-24T14:36:57",
-        "callsign": "KG8CO",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1526",
-        "park": "Negwegon State Park",
-        "location": "US-MI"
       }
     ]
   },
