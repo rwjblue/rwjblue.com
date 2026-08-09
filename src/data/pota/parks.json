@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T23:00:13.379Z",
+  "generatedAt": "2026-08-10T01:40:52.267Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -3527,9 +3527,30 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 32,
-      "qsoTotal": 857,
+      "activationCount": 33,
+      "qsoTotal": 891,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-08-07",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 34,
+            "cw": 34,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",
@@ -4204,10 +4225,46 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-7508/",
       "potaUrl": "https://pota.app/#/park/US-7508",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
-      "notes": [],
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-7508",
+          "park": "Pulaski State Park",
+          "date": "2026-08-08",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [
+            {
+              "id": "2026-08-08-pulaski-state-park-doublet-test",
+              "title": "First Field Test of a 58-Foot Doublet at Pulaski State Park",
+              "date": "2026-08-08",
+              "href": "/notes/2026-08-08-pulaski-state-park-doublet-test/"
+            }
+          ],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "id": "2026-08-08-pulaski-state-park-doublet-test",
+          "title": "First Field Test of a 58-Foot Doublet at Pulaski State Park",
+          "date": "2026-08-08",
+          "href": "/notes/2026-08-08-pulaski-state-park-doublet-test/"
+        }
+      ],
       "publicStats": {
         "attempts": 112,
         "activations": 111,
@@ -4352,9 +4409,31 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-7716/",
       "potaUrl": "https://pota.app/#/park/US-7716",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-7716",
+          "park": "Carolina Wildlife Management Area",
+          "date": "2026-08-09",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [],
       "publicStats": {
         "attempts": 71,

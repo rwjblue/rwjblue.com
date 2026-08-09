@@ -118,9 +118,9 @@ KX2 -> 3 ft RG-8X jumper -> Mix 31 current choke
     -> 29 ft leg + 29 ft leg
 ```
 
-The choke is intended to keep the coax, radio, and operator from becoming an
-uncontrolled part of the antenna. I have not measured common-mode current yet,
-so that remains an intended function rather than a verified result.
+I added the choke to suppress common-mode current on the outside of the coax
+and keep the station from becoming part of the antenna. I have not measured
+common-mode current yet, so I do not know how effective it is in this setup.
 
 <div class="photo-grid">
   <img src="/images/pota/2026-08-08-pulaski-state-park-doublet-test/feedline-end-ferrules.jpg" alt="Two balanced-line conductors with ferrules crimped onto their ends beside an orange spacer">
@@ -139,8 +139,9 @@ zippered bag.
 ## Planning the deployment and radiation pattern
 
 I designed around center heights of 20 and 30 feet, with both ends at least
-five feet above ground and an included apex angle greater than 90 degrees. A
-symmetric 120-degree inverted V became the reference geometry.
+five feet above ground and an included apex angle greater than 90 degrees. For
+the calculations and radiation modeling, I used a symmetric 120-degree
+inverted V as the reference geometry.
 
 With 29-foot legs, that arrangement spans approximately 50.2 feet. A 20-foot
 center puts the ends near 5.5 feet; a 30-foot center puts them near 15.5 feet.

@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-08T23:00:12.240Z",
+  "generatedAt": "2026-08-10T01:40:51.083Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 49,
-    "remaining": 12,
+    "completed": 51,
+    "remaining": 10,
     "total": 61,
-    "percentComplete": 80
+    "percentComplete": 84
   },
   "references": [
     {
@@ -200,26 +200,6 @@
       }
     },
     {
-      "reference": "US-7508",
-      "name": "Pulaski State Park",
-      "latitude": 41.9281,
-      "longitude": -71.7969,
-      "grid": "FN41cw",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "href": "/radio/pota/US-7508/",
-      "potaUrl": "https://pota.app/#/park/US-7508",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 112,
-        "activations": 111,
-        "qsos": 3401
-      }
-    },
-    {
       "reference": "US-7714",
       "name": "Buck Hill Wildlife Management Area",
       "latitude": 41.9851,
@@ -246,17 +226,149 @@
       "longitude": -71.689,
       "grid": "FN41dl",
       "locationDesc": "US-RI",
-      "status": "remaining",
+      "status": "completed",
       "href": "/radio/pota/US-7716/",
       "potaUrl": "https://pota.app/#/park/US-7716",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
+      "firstActivation": {
+        "reference": "US-7716",
+        "park": "Carolina Wildlife Management Area",
+        "date": "2026-08-09",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-7716",
+        "park": "Carolina Wildlife Management Area",
+        "date": "2026-08-09",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
       "notes": [],
       "publicStats": {
         "attempts": 71,
         "activations": 70,
         "qsos": 3396
+      }
+    },
+    {
+      "reference": "US-7508",
+      "name": "Pulaski State Park",
+      "latitude": 41.9281,
+      "longitude": -71.7969,
+      "grid": "FN41cw",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-7508/",
+      "potaUrl": "https://pota.app/#/park/US-7508",
+      "firstActivation": {
+        "reference": "US-7508",
+        "park": "Pulaski State Park",
+        "date": "2026-08-08",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-7508",
+        "park": "Pulaski State Park",
+        "date": "2026-08-08",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [
+        {
+          "id": "2026-08-08-pulaski-state-park-doublet-test",
+          "title": "First Field Test of a 58-Foot Doublet at Pulaski State Park",
+          "date": "2026-08-08",
+          "href": "/notes/2026-08-08-pulaski-state-park-doublet-test/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 112,
+        "activations": 111,
+        "qsos": 3401
+      }
+    },
+    {
+      "reference": "US-6992",
+      "name": "JL Curran State Park",
+      "latitude": 41.7507,
+      "longitude": -71.5516,
+      "grid": "FN41fs",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6992/",
+      "potaUrl": "https://pota.app/#/park/US-6992",
+      "firstActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2025-09-21",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 0,
+          "data": 0,
+          "phone": 10
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2026-08-07",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 34,
+          "cw": 34,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 30,
+      "notes": [
+        {
+          "id": "2026-06-03-jl-curran-state-park-pota",
+          "title": "JL Curran State Park Pack Mule Activation",
+          "date": "2026-06-03",
+          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        },
+        {
+          "id": "2026-07-18-k2hrc-rhode-island-pota",
+          "title": "Taking K2HRC to Rhode Island",
+          "date": "2026-07-18",
+          "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 73,
+        "activations": 70,
+        "qsos": 2260
       }
     },
     {
@@ -365,63 +477,6 @@
         "attempts": 28,
         "activations": 28,
         "qsos": 2391
-      }
-    },
-    {
-      "reference": "US-6992",
-      "name": "JL Curran State Park",
-      "latitude": 41.7507,
-      "longitude": -71.5516,
-      "grid": "FN41fs",
-      "locationDesc": "US-RI",
-      "status": "completed",
-      "href": "/radio/pota/US-6992/",
-      "potaUrl": "https://pota.app/#/park/US-6992",
-      "firstActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2025-09-21",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 10,
-          "cw": 0,
-          "data": 0,
-          "phone": 10
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2026-07-20",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 21,
-          "cw": 21,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 29,
-      "notes": [
-        {
-          "id": "2026-06-03-jl-curran-state-park-pota",
-          "title": "JL Curran State Park Pack Mule Activation",
-          "date": "2026-06-03",
-          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
-        },
-        {
-          "id": "2026-07-18-k2hrc-rhode-island-pota",
-          "title": "Taking K2HRC to Rhode Island",
-          "date": "2026-07-18",
-          "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 73,
-        "activations": 70,
-        "qsos": 2260
       }
     },
     {

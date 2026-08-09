@@ -12,24 +12,54 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 131,
-      "parks": 85,
-      "qsos": 3159
+      "activations": 134,
+      "parks": 87,
+      "qsos": 3217
     },
     "attempts": {
-      "activations": 141,
-      "parks": 85,
-      "qsos": 3197
+      "activations": 144,
+      "parks": 87,
+      "qsos": 3255
     },
     "hunter": {
-      "parks": 550,
-      "qsos": 886
+      "parks": 551,
+      "qsos": 887
     },
     "awards": 28,
     "endorsements": 60
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-08-09",
+        "reference": "US-7716",
+        "park": "Carolina Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-08-08",
+        "reference": "US-7508",
+        "park": "Pulaski State Park",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-08-07",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 34,
+        "data": 0,
+        "phone": 0,
+        "total": 34
+      },
       {
         "date": "2026-08-05",
         "reference": "US-2879",
@@ -182,8 +212,8 @@
       },
       {
         "date": "2026-06-25",
-        "reference": "US-3637",
-        "park": "Marjorie Harris Carr Cross State Park",
+        "reference": "US-4638",
+        "park": "Ross Prairie State Forest",
         "location": "US-FL",
         "cw": 13,
         "data": 0,
@@ -192,8 +222,8 @@
       },
       {
         "date": "2026-06-25",
-        "reference": "US-4638",
-        "park": "Ross Prairie State Forest",
+        "reference": "US-3637",
+        "park": "Marjorie Harris Carr Cross State Park",
         "location": "US-FL",
         "cw": 13,
         "data": 0,
@@ -209,16 +239,6 @@
         "data": 0,
         "phone": 0,
         "total": 66
-      },
-      {
-        "date": "2026-06-23",
-        "reference": "US-0636",
-        "park": "Jekyll Island State Park",
-        "location": "US-GA",
-        "cw": 20,
-        "data": 0,
-        "phone": 0,
-        "total": 20
       },
       {
         "date": "2026-06-23",
@@ -241,6 +261,16 @@
         "total": 12
       },
       {
+        "date": "2026-06-23",
+        "reference": "US-0636",
+        "park": "Jekyll Island State Park",
+        "location": "US-GA",
+        "cw": 20,
+        "data": 0,
+        "phone": 0,
+        "total": 20
+      },
+      {
         "date": "2026-06-22",
         "reference": "US-2744",
         "park": "Medoc Mountain State Park",
@@ -249,39 +279,27 @@
         "data": 0,
         "phone": 0,
         "total": 13
-      },
-      {
-        "date": "2026-06-22",
-        "reference": "US-0717",
-        "park": "Fredericksburg and Spotsylvania National Military Park",
-        "location": "US-VA",
-        "cw": 10,
-        "data": 0,
-        "phone": 0,
-        "total": 10
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0015",
-        "park": "Chesapeake and Ohio Canal National Historical Park",
-        "location": "US-MD",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-06-21",
-        "reference": "US-0780",
-        "park": "Korean War Veterans National Memorial",
-        "location": "US-DC",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-08-09T14:40:59",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-08-09T14:27:30",
+        "callsign": "KG1A",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
       {
         "date": "2026-08-08T18:44:17",
         "callsign": "KQ1S",
@@ -290,6 +308,24 @@
         "reference": "US-3893",
         "park": "Cliff Pitts Wildlife Management Area",
         "location": "US-SC"
+      },
+      {
+        "date": "2026-08-08T18:39:00",
+        "callsign": "AB9CA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2269",
+        "park": "Spring Mill State Park",
+        "location": "US-IN"
+      },
+      {
+        "date": "2026-08-08T18:39:00",
+        "callsign": "AB9CA",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10244",
+        "park": "Donaldson's Woods State Nature Preserve",
+        "location": "US-IN"
       },
       {
         "date": "2026-08-07T13:58:51",
@@ -314,8 +350,8 @@
         "callsign": "KT5H",
         "band": "20M",
         "mode": "PHONE",
-        "reference": "US-6931",
-        "park": "Nicholson Creek State Game Land",
+        "reference": "US-8226",
+        "park": "Upchurch Lake State Fishing Lake",
         "location": "US-NC"
       },
       {
@@ -323,8 +359,8 @@
         "callsign": "KT5H",
         "band": "20M",
         "mode": "PHONE",
-        "reference": "US-8226",
-        "park": "Upchurch Lake State Fishing Lake",
+        "reference": "US-6931",
+        "park": "Nicholson Creek State Game Land",
         "location": "US-NC"
       },
       {
@@ -377,8 +413,8 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-10244",
-        "park": "Donaldson's Woods State Nature Preserve",
+        "reference": "US-2269",
+        "park": "Spring Mill State Park",
         "location": "US-IN"
       },
       {
@@ -386,18 +422,9 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-2269",
-        "park": "Spring Mill State Park",
+        "reference": "US-10244",
+        "park": "Donaldson's Woods State Nature Preserve",
         "location": "US-IN"
-      },
-      {
-        "date": "2026-07-31T19:52:42",
-        "callsign": "NK2Y",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-2080",
-        "park": "Hudson River Islands State Park",
-        "location": "US-NY"
       },
       {
         "date": "2026-07-31T19:52:42",
@@ -406,6 +433,15 @@
         "mode": "CW",
         "reference": "US-8098",
         "park": "Empire State Trail",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-07-31T19:52:42",
+        "callsign": "NK2Y",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2080",
+        "park": "Hudson River Islands State Park",
         "location": "US-NY"
       },
       {
@@ -470,42 +506,6 @@
         "reference": "US-3845",
         "park": "Kerr Lake State Recreation Area",
         "location": "US-NC"
-      },
-      {
-        "date": "2026-07-26T17:09:36",
-        "callsign": "WC5T",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1077",
-        "park": "Crowley's Ridge State Park",
-        "location": "US-AR"
-      },
-      {
-        "date": "2026-07-26T17:04:52",
-        "callsign": "KG1A",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-07-25T16:51:30",
-        "callsign": "K1NW",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-10544",
-        "park": "Jerimoth Hill State Recreation Area",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-07-25T00:11:21",
-        "callsign": "W3GTR",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-1573",
-        "park": "Gambrill State Park",
-        "location": "US-MD"
       }
     ]
   },
