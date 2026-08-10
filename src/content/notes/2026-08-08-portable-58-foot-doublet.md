@@ -2,6 +2,7 @@
 title: Building a 58-Foot Portable Doublet for the KX2
 date: 2026-08-08
 summary: "How I built a continuous-wire 58-foot portable doublet, what its first field measurements established, and the reversible experiment I plan to try next."
+shareImage: /images/radio/2026-08-08-portable-58-foot-doublet/share.png
 tags:
   - radio
   - antennas
