@@ -13,8 +13,9 @@ tags:
 
 I wanted one lightweight antenna that could live in my KX2 field kit and cover
 40 through 10 meters without traps, loading coils, or a transformer at the
-feedpoint. I built a 58-foot inverted-V doublet fed with 28 feet of homebrew
-balanced line, all made from the same two continuous wires.
+feedpoint. I built a [58-foot inverted-V
+doublet](/radio/equipment/homebrew-58-foot-doublet/) fed with 28 feet of
+homebrew balanced line, all made from the same two continuous wires.
 
 Its [first deployment at Pulaski State Park](/notes/2026-08-08-pulaski-state-park-doublet-test/)
 answered the most important questions. The antenna was easy to raise, fit into
@@ -109,8 +110,8 @@ in [`scad-lab` pull request #1](https://github.com/rwjblue/scad-lab/pull/1).
 </div>
 
 At the radio end, I crimped ferrules onto both conductors and clamped them into
-a BNC binding-post adapter. A Mix 31 current choke separates the balanced line
-from a three-foot RG-8X jumper to the KX2:
+a BNC binding-post adapter. A PackTenna Mix 31 current choke separates the
+balanced line from a three-foot RG-8X jumper to the KX2:
 
 ```text
 KX2 -> 3 ft RG-8X jumper -> Mix 31 current choke

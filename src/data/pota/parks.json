@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-10T01:40:52.267Z",
+  "generatedAt": "2026-08-10T02:48:29.285Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -4424,7 +4424,14 @@
             "phone": 0
           },
           "source": "profile",
-          "notes": [],
+          "notes": [
+            {
+              "id": "2026-08-09-carolina-management-area-doublet",
+              "title": "Mast-Supported Doublet at Carolina Management Area",
+              "date": "2026-08-09",
+              "href": "/notes/2026-08-09-carolina-management-area-doublet/"
+            }
+          ],
           "projects": [
             {
               "id": "2026-ri-pota",
@@ -4434,7 +4441,14 @@
           ]
         }
       ],
-      "notes": [],
+      "notes": [
+        {
+          "id": "2026-08-09-carolina-management-area-doublet",
+          "title": "Mast-Supported Doublet at Carolina Management Area",
+          "date": "2026-08-09",
+          "href": "/notes/2026-08-09-carolina-management-area-doublet/"
+        }
+      ],
       "publicStats": {
         "attempts": 71,
         "activations": 70,

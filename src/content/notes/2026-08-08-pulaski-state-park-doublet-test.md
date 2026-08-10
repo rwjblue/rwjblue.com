@@ -15,9 +15,10 @@ tags:
 
 I went to [Pulaski State Park, US-7508](/radio/pota/US-7508/) with two
 goals: activate another new-to-me Rhode Island park and find out whether my
-new 58-foot doublet was genuinely practical away from home. The antenna needed
-a center support and roughly 42 to 50 feet of horizontal room, so the site
-would matter almost as much as the radio.
+new [58-foot doublet](/radio/equipment/homebrew-58-foot-doublet/) was genuinely
+practical away from home. The antenna needed a center support and roughly 42
+to 50 feet of horizontal room, so the site would matter almost as much as the
+radio.
 
 Pulaski supplied an almost ideal answer. I found a shaded picnic table a little
 way back from the water and main recreation area, with a broad overhead branch
@@ -34,7 +35,7 @@ produced 12 five-watt CW contacts on four bands. The third contact was Spain on
 - **When:** August 8, 2026; contacts from 12:41 to 2:47 p.m. EDT
 - **Activation:** 12 CW QSOs on 15, 17, 30, and 20 meters
 - **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/) at 5 watts
-- **Antenna:** 58-foot doublet with two 29-foot legs and 28 feet of homebrew balanced feed line
+- **Antenna:** [Homebrew 58-foot portable doublet](/radio/equipment/homebrew-58-foot-doublet/) with two 29-foot legs and 28 feet of balanced feed line
 - **Support:** An overhead branch and [throw line](/radio/equipment/throw-line-kit/); center about 30 feet and ends about 10 feet high
 - **Orientation:** Broadside approximately northeast toward Europe and southwest toward the southeastern United States
 - **CW gear:** [N3ZN ZN-Lite II paddle](/radio/equipment/n3zn-zn-lite-ii/), also sold as the QRP-Lite II
@@ -72,9 +73,9 @@ picnic site remained comfortably apart from the busier part of the park.
 ## The station, and one misleading tune
 
 At the table, the balanced feed line terminated at a BNC binding-post adapter
-and a Mix 31 common-mode choke from the makers of the PAC-10A. A three-foot
-RG-8X jumper connected the choke to the KX2. The N3ZN paddle sat on its weighted
-magnetic base beside the radio.
+and a Mix 31 common-mode choke from PackTenna. A three-foot RG-8X jumper
+connected the choke to the KX2. The N3ZN paddle sat on its weighted magnetic
+base beside the radio.
 
 The KXAT2 found usable matches everywhere I intended to operate:
 

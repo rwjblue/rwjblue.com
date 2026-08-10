@@ -4,7 +4,6 @@ date: 2026-08-09
 summary: "The unchanged 58-foot doublet made 12 five-watt CW contacts from a pond-side picnic table and again found a usable match on 20 meters."
 shareImage: /images/pota/2026-08-09-carolina-management-area-doublet/picnic-table-station.jpg
 contactMap: src/data/pota/contact-maps/2026-08-09-carolina-management-area-doublet.json
-visibility: draft
 tags:
   - radio
   - pota
@@ -15,7 +14,8 @@ tags:
 ---
 
 I wanted a quick Sunday-morning activation and another field test of the
-58-foot doublet I had built the day before. Carolina Trout Pond, inside
+[58-foot doublet](/radio/equipment/homebrew-58-foot-doublet/) I had built the
+day before. Carolina Trout Pond, inside
 [Carolina Wildlife Management Area, US-7716](/radio/pota/US-7716/), turned out
 to be an excellent backup plan: a shaded picnic table at the edge of a quiet
 pond, with just enough room to weave the antenna through the trees.
@@ -32,7 +32,7 @@ that the KX2 could find a usable 20-meter match.
 - **When:** August 9, 2026; contacts from 10:26 to 10:50 a.m. EDT
 - **Activation:** 12 five-watt CW QSOs on 30 and 20 meters
 - **Radio:** [Elecraft KX2](/radio/equipment/elecraft-kx2/)
-- **Antenna:** Unmodified 58-foot doublet with two 29-foot legs and 28 feet of homebrew balanced feed line
+- **Antenna:** Unmodified [homebrew 58-foot portable doublet](/radio/equipment/homebrew-58-foot-doublet/) with two 29-foot legs and 28 feet of balanced feed line
 - **Support:** [20-foot GigaParts Explorer POTA20 carbon-fiber mast](/radio/equipment/gigaparts-explorer-pota20/), fully extended
 - **Geometry:** Feed point about 20 feet high; both wire ends roughly 5 feet high; radiator axis approximately 048/228 degrees but not perfectly straight
 - **Operating position:** A shaded picnic table beside Carolina Trout Pond
