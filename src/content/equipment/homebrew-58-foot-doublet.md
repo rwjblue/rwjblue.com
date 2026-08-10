@@ -12,8 +12,8 @@ connections:
   - throw-line-kit
   - rigexpert-match-advanced
 sortOrder: 32
-image: /images/pota/2026-08-08-pulaski-state-park-doublet-test/doublet-on-winder.jpg
-imageAlt: Homebrew 58-foot doublet and its orange balanced-line spacers wound onto a lightweight printed antenna winder
+image: /images/pota/2026-08-08-pulaski-state-park-doublet-test/antenna-center-support.jpg
+imageAlt: Balanced feed line with orange spacers rising to the doublet center suspended from a tree branch
 history:
   - date: "2026-08-08"
     title: Built and characterized
@@ -33,8 +33,20 @@ feedpoint to the operating position.
 The radiator and feed line use the same two continuous conductors. They pass
 through a printed center and spread into the radiating legs without a splice or
 connector. Small PETG spacers maintain approximately 12.7 mm conductor spacing
-along the balanced section, and the complete antenna winds onto a lightweight
-printed winder.
+along the balanced section. The parameterized parts are available in the
+[`lightweight_balanced_feedline` OpenSCAD model
+folder](https://github.com/rwjblue/scad-lab/tree/main/models/ham_radio/lightweight_balanced_feedline),
+including the
+[continuous-wire center](https://github.com/rwjblue/scad-lab/blob/main/models/ham_radio/lightweight_balanced_feedline/doublet_center_strain_relief.scad)
+and
+[snap-on feed-line spacer](https://github.com/rwjblue/scad-lab/blob/main/models/ham_radio/lightweight_balanced_feedline/balanced_feedline_spacer.scad).
+
+The complete antenna winds onto a lightweight printed winder and lives in a
+bright Hidden Woodsmen zippered bag.
+
+<div class="photo-grid photo-grid--single photo-grid--compact">
+  <img src="/images/pota/2026-08-08-pulaski-state-park-doublet-test/antenna-bag.jpg" alt="Bright orange and yellow Hidden Woodsmen bag used to carry the homebrew portable doublet">
+</div>
 
 At the radio end, a BNC binding-post adapter connects the balanced line to a
 PackTenna Mix 31 current choke, a short RG-8X jumper, and the KX2's internal
