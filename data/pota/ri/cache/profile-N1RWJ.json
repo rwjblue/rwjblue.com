@@ -22,8 +22,8 @@
       "qsos": 3255
     },
     "hunter": {
-      "parks": 551,
-      "qsos": 887
+      "parks": 552,
+      "qsos": 892
     },
     "awards": 28,
     "endorsements": 60
@@ -283,6 +283,24 @@
     ],
     "hunter_qsos": [
       {
+        "date": "2026-08-12T12:49:00",
+        "callsign": "KB1WCK",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-11613",
+        "park": "Black Brook Wildlife Management Area",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-08-12T12:38:40",
+        "callsign": "K8RLE",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-6701",
+        "park": "Haymarsh Lake State Game Land",
+        "location": "US-MI"
+      },
+      {
         "date": "2026-08-09T14:40:59",
         "callsign": "KG1A",
         "band": "20M",
@@ -346,13 +364,13 @@
         "location": "US-FL"
       },
       {
-        "date": "2026-08-05T22:57:00",
-        "callsign": "KT5H",
+        "date": "2026-08-05T23:11:21",
+        "callsign": "KQ4OTA",
         "band": "20M",
         "mode": "PHONE",
-        "reference": "US-8226",
-        "park": "Upchurch Lake State Fishing Lake",
-        "location": "US-NC"
+        "reference": "US-7852",
+        "park": "Richmond Hill Wildlife Management Area",
+        "location": "US-GA"
       },
       {
         "date": "2026-08-05T22:57:00",
@@ -361,6 +379,15 @@
         "mode": "PHONE",
         "reference": "US-6931",
         "park": "Nicholson Creek State Game Land",
+        "location": "US-NC"
+      },
+      {
+        "date": "2026-08-05T22:57:00",
+        "callsign": "KT5H",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-8226",
+        "park": "Upchurch Lake State Fishing Lake",
         "location": "US-NC"
       },
       {
@@ -413,8 +440,8 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-2269",
-        "park": "Spring Mill State Park",
+        "reference": "US-10244",
+        "park": "Donaldson's Woods State Nature Preserve",
         "location": "US-IN"
       },
       {
@@ -422,18 +449,9 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-10244",
-        "park": "Donaldson's Woods State Nature Preserve",
+        "reference": "US-2269",
+        "park": "Spring Mill State Park",
         "location": "US-IN"
-      },
-      {
-        "date": "2026-07-31T19:52:42",
-        "callsign": "NK2Y",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-8098",
-        "park": "Empire State Trail",
-        "location": "US-NY"
       },
       {
         "date": "2026-07-31T19:52:42",
@@ -442,6 +460,15 @@
         "mode": "CW",
         "reference": "US-2080",
         "park": "Hudson River Islands State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-07-31T19:52:42",
+        "callsign": "NK2Y",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-8098",
+        "park": "Empire State Trail",
         "location": "US-NY"
       },
       {
@@ -479,33 +506,6 @@
         "reference": "US-7889",
         "park": "Presidio of SF National Historic Site",
         "location": "US-CA"
-      },
-      {
-        "date": "2026-07-26T19:03:34",
-        "callsign": "KO4ALY",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1048",
-        "park": "Monte Sano State Park",
-        "location": "US-AL"
-      },
-      {
-        "date": "2026-07-26T17:44:55",
-        "callsign": "KF0U",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-8280",
-        "park": "Three Creeks State Conservation Area",
-        "location": "US-MO"
-      },
-      {
-        "date": "2026-07-26T17:15:35",
-        "callsign": "WB8YYY",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-3845",
-        "park": "Kerr Lake State Recreation Area",
-        "location": "US-NC"
       }
     ]
   },
