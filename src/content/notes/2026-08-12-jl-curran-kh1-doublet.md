@@ -2,7 +2,6 @@
 title: My First KH1 POTA Activation at JL Curran
 date: 2026-08-12
 summary: "My first full POTA activation with the KH1 produced 33 CW contacts and revealed useful field shortcuts, a power question, and the limits of its tuner with my 58-foot doublet."
-visibility: draft
 shareImage: /images/pota/2026-08-12-jl-curran-kh1-doublet/3-photo-3.jpg
 contactMap: src/data/pota/contact-maps/2026-08-12-jl-curran-kh1-doublet.json
 tags:

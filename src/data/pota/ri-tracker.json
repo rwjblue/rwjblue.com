@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T14:18:41.485Z",
+  "generatedAt": "2026-08-12T17:36:56.245Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -370,6 +370,12 @@
           "title": "Taking K2HRC to Rhode Island",
           "date": "2026-07-18",
           "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
+        },
+        {
+          "id": "2026-08-12-jl-curran-kh1-doublet",
+          "title": "My First KH1 POTA Activation at JL Curran",
+          "date": "2026-08-12",
+          "href": "/notes/2026-08-12-jl-curran-kh1-doublet/"
         }
       ],
       "publicStats": {

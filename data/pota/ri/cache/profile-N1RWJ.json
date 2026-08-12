@@ -283,6 +283,15 @@
     ],
     "hunter_qsos": [
       {
+        "date": "2026-08-12T14:01:00",
+        "callsign": "KJ7RPL",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1516",
+        "park": "Ludington State Park",
+        "location": "US-MI"
+      },
+      {
         "date": "2026-08-12T12:49:00",
         "callsign": "KB1WCK",
         "band": "40M",
@@ -377,8 +386,8 @@
         "callsign": "KT5H",
         "band": "20M",
         "mode": "PHONE",
-        "reference": "US-6931",
-        "park": "Nicholson Creek State Game Land",
+        "reference": "US-8226",
+        "park": "Upchurch Lake State Fishing Lake",
         "location": "US-NC"
       },
       {
@@ -386,8 +395,8 @@
         "callsign": "KT5H",
         "band": "20M",
         "mode": "PHONE",
-        "reference": "US-8226",
-        "park": "Upchurch Lake State Fishing Lake",
+        "reference": "US-6931",
+        "park": "Nicholson Creek State Game Land",
         "location": "US-NC"
       },
       {
@@ -440,8 +449,8 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-10244",
-        "park": "Donaldson's Woods State Nature Preserve",
+        "reference": "US-2269",
+        "park": "Spring Mill State Park",
         "location": "US-IN"
       },
       {
@@ -449,8 +458,8 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-2269",
-        "park": "Spring Mill State Park",
+        "reference": "US-10244",
+        "park": "Donaldson's Woods State Nature Preserve",
         "location": "US-IN"
       },
       {
@@ -496,15 +505,6 @@
         "mode": "CW",
         "reference": "US-0647",
         "park": "Golden Gate National Recreation Area",
-        "location": "US-CA"
-      },
-      {
-        "date": "2026-07-26T19:31:32",
-        "callsign": "KO6A",
-        "band": "15M",
-        "mode": "CW",
-        "reference": "US-7889",
-        "park": "Presidio of SF National Historic Site",
         "location": "US-CA"
       }
     ]
