@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import {
+  ferriteInventorySummary,
+  radioPartsByCategory,
+} from "../../../data/radio-parts";
+
+const categories = radioPartsByCategory();
+const ferriteSummary = ferriteInventorySummary();
+const ferriteTotal = ferriteSummary.reduce(
+  (total, material) => total + material.quantity,
+  0,
+);
+const ferriteMass = ferriteSummary.reduce(
+  (total, material) => total + material.massGrams,
+  0,
+);
+---
+
+<BaseLayout
+  title="Portable antenna parts bin / Radio equipment / N1RWJ"
+  description="A working inventory of ferrites, connectors, terminals, capacitors, heat shrink, and analyzer loads for portable antenna feedpoint projects."
+  canonicalPath="/radio/equipment/parts-bin/"
+  searchable={false}
+>
+  <Breadcrumbs
+    items={[
+      { name: "Home", path: "/" },
+      { name: "Radio", path: "/radio/" },
+      { name: "Equipment", path: "/radio/equipment/" },
+      { name: "Parts bin", path: "/radio/equipment/parts-bin/" },
+    ]}
+  />
+
+  <section class="page-intro parts-bin-intro">
+    <p class="eyebrow">Workshop reference</p>
+    <h1>Portable antenna parts bin</h1>
+    <p>
+      This is the small stock of electrical parts I keep for portable antenna
+      feedpoints, matching networks, and transformer tests. It sits beside the
+      curated equipment inventory without turning every resistor and ferrule
+      into a full equipment page.
+    </p>
+    <p class="parts-bin-status">
+      <strong>Inventory status:</strong> the quantities below were ordered on
+      August 13, 2026 and remain marked incoming until the shipment is received
+      and counted.
+    </p>
+    <nav class="equipment-category-nav" aria-label="Parts-bin categories">
+      {categories.map((category) => <a href={`#${category.id}`}>{category.label}</a>)}
+    </nav>
+  </section>
+
+  <section class="parts-bin-summary" aria-label="Ferrite inventory summary">
+    <div>
+      <span>Ferrite pieces</span>
+      <strong>{ferriteTotal}</strong>
+      <small>{(ferriteMass / 1000).toFixed(2)} kg total catalog mass</small>
+    </div>
+    {
+      ferriteSummary.map((material) => (
+        <div>
+          <span>Mix {material.material}</span>
+          <strong>{material.quantity}</strong>
+          <small>{material.massGrams.toFixed(0)} g catalog mass</small>
+        </div>
+      ))
+    }
+  </section>
+
+  {
+    categories.map((category) => (
+      <section
+        class="section-block wide parts-bin-category"
+        id={category.id}
+        aria-labelledby={`${category.id}-title`}
+      >
+        <div class="section-heading">
+          <p class="section-label">Parts bin</p>
+          <h2 id={`${category.id}-title`}>{category.label}</h2>
+          <p>{category.description}</p>
+        </div>
+        <div
+          class="parts-table-wrap"
+          role="region"
+          aria-label={`${category.label} inventory table`}
+          tabindex="0"
+        >
+          <table class="parts-table">
+            <thead>
+              <tr>
+                <th scope="col">Part</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Specification and size</th>
+                <th scope="col">Planned use</th>
+                <th scope="col">References</th>
+              </tr>
+            </thead>
+            <tbody>
+              {category.parts.map((part) => (
+                <tr>
+                  <th scope="row">
+                    <strong>{part.name}</strong>
+                    <span>{part.manufacturer}</span>
+                    <code>{part.manufacturerPartNumber}</code>
+                    <span>DigiKey {part.digikeyPartNumber}</span>
+                  </th>
+                  <td>
+                    {part.stock.onHand > 0 && <strong>{part.stock.onHand} on hand</strong>}
+                    {part.stock.incoming > 0 && <strong>{part.stock.incoming} incoming</strong>}
+                  </td>
+                  <td>
+                    <p>{part.specification}</p>
+                    {part.dimensions && <p class="parts-table-dimensions">{part.dimensions}</p>}
+                  </td>
+                  <td>{part.intendedUse}</td>
+                  <td>
+                    <a href={part.productUrl} target="_blank" rel="noreferrer">
+                      Product
+                    </a>
+                    {
+                      part.datasheetUrl && (
+                        <a
+                          href={part.datasheetUrl}
+                          target={part.datasheetUrl.startsWith("http") ? "_blank" : undefined}
+                          rel={part.datasheetUrl.startsWith("http") ? "noreferrer" : undefined}
+                        >
+                          Datasheet
+                        </a>
+                      )
+                    }
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="bridge parts-bin-notes" aria-labelledby="parts-bin-notes-title">
+    <p class="section-label">Scope and safety</p>
+    <h2 id="parts-bin-notes-title">A starting point, not a design rating</h2>
+    <p>
+      The intended-use column records why I bought each part. It does not assign
+      a transmitter power rating or guarantee a particular choke impedance.
+      Winding geometry, frequency, duty cycle, load mismatch, enclosure, and
+      temperature all matter. The quarter-watt resistors are analyzer loads
+      only and are not RF dummy loads.
+    </p>
+    <p>
+      Quantities are a practical reference rather than a real-time warehouse
+      system. I will update them when an order arrives or when a project uses a
+      meaningful portion of the stock.
+    </p>
+  </section>
+</BaseLayout>

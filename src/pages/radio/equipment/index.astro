@@ -44,6 +44,7 @@ const retiredEquipment = equipment.filter(
           <a href={`#${category.id}`}>{category.label}</a>
         ))
       }
+      <a href="#parts-bin">Parts bin</a>
     </nav>
   </section>
 
@@ -94,6 +95,22 @@ const retiredEquipment = equipment.filter(
       </section>
     ))
   }
+
+  <section class="bridge equipment-parts-bin" id="parts-bin" aria-labelledby="parts-bin-title">
+    <p class="section-label">Workshop inventory</p>
+    <h2 id="parts-bin-title">Portable antenna parts bin</h2>
+    <p>
+      Ferrites, feedpoint connectors, small-wire terminals, RF capacitors,
+      protective tubing, and transformer test loads live in a separate working
+      inventory. That keeps this page focused on durable station equipment
+      while preserving exact part numbers, sizes, intended uses, and datasheets.
+    </p>
+    <nav class="section-more" aria-label="Portable antenna parts inventory">
+      <a href="/radio/equipment/parts-bin/">
+        Browse the parts bin <span aria-hidden="true">&rarr;</span>
+      </a>
+    </nav>
+  </section>
 
   {
     retiredEquipment.length > 0 && (
