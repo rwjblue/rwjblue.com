@@ -52,6 +52,8 @@ to keep using.
   character practice on
   [iPhone and iPad](https://apps.apple.com/us/app/morse-mania-learn-morse-code/id1511042196)
   and [Android](https://play.google.com/store/apps/details?id=net.countrymania.morse).
+- [Learn CW](https://learncw.vailmorse.com/) provides similar interactive
+  character practice directly in a web browser.
 - [Morse Code Ninja](https://www.morsecode.ninja/learn/) provides incremental
   audio, podcast, and video practice. Its audio lessons fit especially well
   into a commute or walk.
@@ -98,12 +100,18 @@ move toward words and useful exchanges.
   repeated, and predictable exchange to listen for. The [official getting
   started guide](https://docs.pota.app/) begins with hunting, and the
   [POTA spot page](https://pota.app/) shows who is currently on the air.
+- No HF receiver yet? The public [WebSDR](http://www.websdr.org/) and
+  [KiwiSDR](http://kiwisdr.com/public/) directories list internet-connected
+  receivers you can tune in a browser. Take a frequency from the POTA spot
+  page, choose a receiver that covers that band, select CW, tune near the
+  listed frequency, and confirm the callsign you hear on the air.
 - The [POTA Hunter Guide](https://docs.pota.app/docs/hunter_guide-english.html)
   explains listening, calling, exchanges, spotting, and hunter credit.
 - The official [POTA CW Guide](https://docs.pota.app/docs/cw_guide.html) covers
   common CW exchanges from both sides of a park contact.
-- [`potacw.guide` — CW POTA: A Field Manual](https://potacw.guide/) walks through the exchange
-  line by line and includes a customizable activator and hunter cheat sheet.
+- [`potacw.guide` — CW POTA: A Field Manual](https://potacw.guide/) walks
+  through the exchange line by line and includes a customizable activator and
+  hunter cheat sheet.
 - [My first all-CW POTA activation](https://qrper.com/2026/04/n1rwj-my-first-cw-pota-activation-dont-wait-to-try-it/)
   is the field report behind the “do not wait” story in the talk.
 
