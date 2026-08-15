@@ -12,24 +12,34 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 136,
-      "parks": 89,
-      "qsos": 3238
+      "activations": 137,
+      "parks": 90,
+      "qsos": 3250
     },
     "attempts": {
-      "activations": 147,
-      "parks": 89,
-      "qsos": 3283
+      "activations": 148,
+      "parks": 90,
+      "qsos": 3295
     },
     "hunter": {
-      "parks": 554,
-      "qsos": 901
+      "parks": 560,
+      "qsos": 911
     },
     "awards": 28,
     "endorsements": 60
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-08-16",
+        "reference": "US-7714",
+        "park": "Buck Hill Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
       {
         "date": "2026-08-15",
         "reference": "US-6985",
@@ -269,19 +279,63 @@
         "data": 0,
         "phone": 0,
         "total": 66
-      },
-      {
-        "date": "2026-06-23",
-        "reference": "US-2915",
-        "park": "Woods Bay State Park",
-        "location": "US-SC",
-        "cw": 14,
-        "data": 0,
-        "phone": 0,
-        "total": 14
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-08-16T20:44:08",
+        "callsign": "K4NYX",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3654",
+        "park": "Savannas Preserve State Park",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-08-16T20:42:11",
+        "callsign": "N9QF",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1001",
+        "park": "James Pate Philip State Park",
+        "location": "US-IL"
+      },
+      {
+        "date": "2026-08-16T20:37:00",
+        "callsign": "N4DU",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-4451",
+        "park": "Tuskegee National Forest",
+        "location": "US-AL"
+      },
+      {
+        "date": "2026-08-16T20:28:49",
+        "callsign": "W2EQ",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-6609",
+        "park": "Pinelands Preserve National Conservation Area",
+        "location": "US-NJ"
+      },
+      {
+        "date": "2026-08-16T20:28:49",
+        "callsign": "W2EQ",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-11992",
+        "park": "Whiting State Conservation Area",
+        "location": "US-NJ"
+      },
+      {
+        "date": "2026-08-16T19:49:00",
+        "callsign": "K4ZGB",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3601",
+        "park": "Tannehill Ironworks State Historical Park",
+        "location": "US-AL"
+      },
       {
         "date": "2026-08-14T13:34:00",
         "callsign": "N3CU",
@@ -413,8 +467,8 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-2269",
-        "park": "Spring Mill State Park",
+        "reference": "US-10244",
+        "park": "Donaldson's Woods State Nature Preserve",
         "location": "US-IN"
       },
       {
@@ -422,8 +476,8 @@
         "callsign": "AB9CA",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-10244",
-        "park": "Donaldson's Woods State Nature Preserve",
+        "reference": "US-2269",
+        "park": "Spring Mill State Park",
         "location": "US-IN"
       },
       {
@@ -452,60 +506,6 @@
         "reference": "US-7852",
         "park": "Richmond Hill Wildlife Management Area",
         "location": "US-GA"
-      },
-      {
-        "date": "2026-08-05T22:57:00",
-        "callsign": "KT5H",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-8226",
-        "park": "Upchurch Lake State Fishing Lake",
-        "location": "US-NC"
-      },
-      {
-        "date": "2026-08-05T22:57:00",
-        "callsign": "KT5H",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-6931",
-        "park": "Nicholson Creek State Game Land",
-        "location": "US-NC"
-      },
-      {
-        "date": "2026-08-05T22:45:15",
-        "callsign": "KR4KRW",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-1928",
-        "park": "Werner-Boyce Salt Springs State Park",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-08-05T22:24:47",
-        "callsign": "KF0REN",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2287",
-        "park": "Elk Rock State Park",
-        "location": "US-IA"
-      },
-      {
-        "date": "2026-08-05T15:46:09",
-        "callsign": "KG1A",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6305",
-        "park": "Guana River Wildlife Management Area",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-08-02T02:52:46",
-        "callsign": "W9AV",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-5643",
-        "park": "Lower Wisconsin State Riverway State Park",
-        "location": "US-WI"
       }
     ]
   },

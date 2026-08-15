@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-15T03:58:19.181Z",
+  "generatedAt": "2026-08-17T13:22:24.442Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 53,
-    "remaining": 8,
+    "completed": 54,
+    "remaining": 7,
     "total": 61,
-    "percentComplete": 87
+    "percentComplete": 89
   },
   "references": [
     {
@@ -166,12 +166,36 @@
       "longitude": -71.7893,
       "grid": "FN41cx",
       "locationDesc": "US-RI",
-      "status": "remaining",
+      "status": "completed",
       "href": "/radio/pota/US-7714/",
       "potaUrl": "https://pota.app/#/park/US-7714",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
+      "firstActivation": {
+        "reference": "US-7714",
+        "park": "Buck Hill Wildlife Management Area",
+        "date": "2026-08-16",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-7714",
+        "park": "Buck Hill Wildlife Management Area",
+        "date": "2026-08-16",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
       "notes": [],
       "publicStats": {
         "attempts": 108,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-15T03:58:20.456Z",
+  "generatedAt": "2026-08-17T13:22:25.499Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -4400,9 +4400,31 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-7714/",
       "potaUrl": "https://pota.app/#/park/US-7714",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 12,
+      "activations": [
+        {
+          "reference": "US-7714",
+          "park": "Buck Hill Wildlife Management Area",
+          "date": "2026-08-16",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [],
       "publicStats": {
         "attempts": 108,
