@@ -1754,6 +1754,45 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-6985",
+      "park": "Round Top Wildlife Management Area",
+      "date": "2026-08-15",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 10,
+        "cw": 10,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-2881",
+      "park": "World War II Veterans Memorial State Park",
+      "date": "2026-08-14",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-6985",
+      "park": "Round Top Wildlife Management Area",
+      "date": "2026-08-14",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 7,
+        "cw": 7,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

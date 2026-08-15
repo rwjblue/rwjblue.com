@@ -12,24 +12,54 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 134,
-      "parks": 87,
-      "qsos": 3217
+      "activations": 136,
+      "parks": 89,
+      "qsos": 3238
     },
     "attempts": {
-      "activations": 144,
-      "parks": 87,
-      "qsos": 3255
+      "activations": 147,
+      "parks": 89,
+      "qsos": 3283
     },
     "hunter": {
-      "parks": 552,
-      "qsos": 892
+      "parks": 554,
+      "qsos": 901
     },
     "awards": 28,
     "endorsements": 60
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-08-15",
+        "reference": "US-6985",
+        "park": "Round Top Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 10,
+        "data": 0,
+        "phone": 0,
+        "total": 10
+      },
+      {
+        "date": "2026-08-14",
+        "reference": "US-2881",
+        "park": "World War II Veterans Memorial State Park",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
+      },
+      {
+        "date": "2026-08-14",
+        "reference": "US-6985",
+        "park": "Round Top Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 7,
+        "data": 0,
+        "phone": 0,
+        "total": 7
+      },
       {
         "date": "2026-08-09",
         "reference": "US-7716",
@@ -152,8 +182,8 @@
       },
       {
         "date": "2026-07-06",
-        "reference": "US-1887",
-        "park": "Jonathan Dickinson State Park",
+        "reference": "US-6281",
+        "park": "Loxahatchee River National Wild and Scenic River",
         "location": "US-FL",
         "cw": 11,
         "data": 0,
@@ -162,8 +192,8 @@
       },
       {
         "date": "2026-07-06",
-        "reference": "US-6281",
-        "park": "Loxahatchee River National Wild and Scenic River",
+        "reference": "US-1887",
+        "park": "Jonathan Dickinson State Park",
         "location": "US-FL",
         "cw": 11,
         "data": 0,
@@ -249,39 +279,54 @@
         "data": 0,
         "phone": 0,
         "total": 14
-      },
-      {
-        "date": "2026-06-23",
-        "reference": "US-0522",
-        "park": "Savannah National Wildlife Refuge",
-        "location": "US-GA",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-06-23",
-        "reference": "US-0636",
-        "park": "Jekyll Island State Park",
-        "location": "US-GA",
-        "cw": 20,
-        "data": 0,
-        "phone": 0,
-        "total": 20
-      },
-      {
-        "date": "2026-06-22",
-        "reference": "US-2744",
-        "park": "Medoc Mountain State Park",
-        "location": "US-NC",
-        "cw": 13,
-        "data": 0,
-        "phone": 0,
-        "total": 13
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-08-14T13:34:00",
+        "callsign": "N3CU",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1425",
+        "park": "Susquehannock State Park",
+        "location": "US-PA"
+      },
+      {
+        "date": "2026-08-14T13:10:38",
+        "callsign": "K1ECU",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-11340",
+        "park": "Higbee Beach Wildlife Management Area",
+        "location": "US-NJ"
+      },
+      {
+        "date": "2026-08-14T03:01:59",
+        "callsign": "AC9M",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1306",
+        "park": "Lake Anna State Park",
+        "location": "US-VA"
+      },
+      {
+        "date": "2026-08-14T03:01:59",
+        "callsign": "AC9M",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-9935",
+        "park": "Virginia Bird & Wildlife State Trail",
+        "location": "US-VA"
+      },
+      {
+        "date": "2026-08-12T14:04:09",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
       {
         "date": "2026-08-12T14:01:00",
         "callsign": "KJ7RPL",
@@ -290,6 +335,15 @@
         "reference": "US-1516",
         "park": "Ludington State Park",
         "location": "US-MI"
+      },
+      {
+        "date": "2026-08-12T12:54:33",
+        "callsign": "KG1A",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
       },
       {
         "date": "2026-08-12T12:49:00",
@@ -308,6 +362,24 @@
         "reference": "US-6701",
         "park": "Haymarsh Lake State Game Land",
         "location": "US-MI"
+      },
+      {
+        "date": "2026-08-12T12:17:51",
+        "callsign": "KG1A",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-08-12T11:49:05",
+        "callsign": "W4DHW",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-9935",
+        "park": "Virginia Bird & Wildlife State Trail",
+        "location": "US-VA"
       },
       {
         "date": "2026-08-09T14:40:59",
@@ -434,78 +506,6 @@
         "reference": "US-5643",
         "park": "Lower Wisconsin State Riverway State Park",
         "location": "US-WI"
-      },
-      {
-        "date": "2026-08-01T20:29:18",
-        "callsign": "W9AV",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-5643",
-        "park": "Lower Wisconsin State Riverway State Park",
-        "location": "US-WI"
-      },
-      {
-        "date": "2026-07-31T19:55:00",
-        "callsign": "AB9CA",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2269",
-        "park": "Spring Mill State Park",
-        "location": "US-IN"
-      },
-      {
-        "date": "2026-07-31T19:55:00",
-        "callsign": "AB9CA",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-10244",
-        "park": "Donaldson's Woods State Nature Preserve",
-        "location": "US-IN"
-      },
-      {
-        "date": "2026-07-31T19:52:42",
-        "callsign": "NK2Y",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-2080",
-        "park": "Hudson River Islands State Park",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-07-31T19:52:42",
-        "callsign": "NK2Y",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-8098",
-        "park": "Empire State Trail",
-        "location": "US-NY"
-      },
-      {
-        "date": "2026-07-27T17:09:00",
-        "callsign": "K4EGK",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-11266",
-        "park": "August G Beckmeier State Conservation Area",
-        "location": "US-MO"
-      },
-      {
-        "date": "2026-07-26T19:58:56",
-        "callsign": "W4CMG",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2954",
-        "park": "Johnsonville State Park",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-07-26T19:31:32",
-        "callsign": "KO6A",
-        "band": "15M",
-        "mode": "CW",
-        "reference": "US-0647",
-        "park": "Golden Gate National Recreation Area",
-        "location": "US-CA"
       }
     ]
   },

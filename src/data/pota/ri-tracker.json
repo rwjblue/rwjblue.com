@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-12T17:36:56.245Z",
+  "generatedAt": "2026-08-15T03:58:19.181Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 51,
-    "remaining": 10,
+    "completed": 53,
+    "remaining": 8,
     "total": 61,
-    "percentComplete": 84
+    "percentComplete": 87
   },
   "references": [
     {
@@ -100,26 +100,6 @@
       }
     },
     {
-      "reference": "US-2881",
-      "name": "World War II Veterans Memorial State Park",
-      "latitude": 42.0101,
-      "longitude": -71.5097,
-      "grid": "FN42fa",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "href": "/radio/pota/US-2881/",
-      "potaUrl": "https://pota.app/#/park/US-2881",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 53,
-        "activations": 51,
-        "qsos": 1288
-      }
-    },
-    {
       "reference": "US-6980",
       "name": "Beach Pond Wildlife Management Area",
       "latitude": 41.5739,
@@ -160,26 +140,6 @@
       }
     },
     {
-      "reference": "US-6985",
-      "name": "Round Top Wildlife Management Area",
-      "latitude": 42.0014,
-      "longitude": -71.7011,
-      "grid": "FN42da",
-      "locationDesc": "US-RI",
-      "status": "remaining",
-      "href": "/radio/pota/US-6985/",
-      "potaUrl": "https://pota.app/#/park/US-6985",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 63,
-        "activations": 62,
-        "qsos": 2301
-      }
-    },
-    {
       "reference": "US-6988",
       "name": "Grills State Preserve",
       "latitude": 41.3997,
@@ -217,6 +177,94 @@
         "attempts": 108,
         "activations": 108,
         "qsos": 4266
+      }
+    },
+    {
+      "reference": "US-6985",
+      "name": "Round Top Wildlife Management Area",
+      "latitude": 42.0014,
+      "longitude": -71.7011,
+      "grid": "FN42da",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-6985/",
+      "potaUrl": "https://pota.app/#/park/US-6985",
+      "firstActivation": {
+        "reference": "US-6985",
+        "park": "Round Top Wildlife Management Area",
+        "date": "2026-08-15",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 10,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6985",
+        "park": "Round Top Wildlife Management Area",
+        "date": "2026-08-15",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 10,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [],
+      "publicStats": {
+        "attempts": 63,
+        "activations": 62,
+        "qsos": 2301
+      }
+    },
+    {
+      "reference": "US-2881",
+      "name": "World War II Veterans Memorial State Park",
+      "latitude": 42.0101,
+      "longitude": -71.5097,
+      "grid": "FN42fa",
+      "locationDesc": "US-RI",
+      "status": "completed",
+      "href": "/radio/pota/US-2881/",
+      "potaUrl": "https://pota.app/#/park/US-2881",
+      "firstActivation": {
+        "reference": "US-2881",
+        "park": "World War II Veterans Memorial State Park",
+        "date": "2026-08-14",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 11,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-2881",
+        "park": "World War II Veterans Memorial State Park",
+        "date": "2026-08-14",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 11,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [],
+      "publicStats": {
+        "attempts": 53,
+        "activations": 51,
+        "qsos": 1288
       }
     },
     {

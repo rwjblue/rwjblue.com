@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T17:36:57.657Z",
+  "generatedAt": "2026-08-15T03:58:20.456Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -2403,9 +2403,31 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-2881/",
       "potaUrl": "https://pota.app/#/park/US-2881",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 11,
+      "activations": [
+        {
+          "reference": "US-2881",
+          "park": "World War II Veterans Memorial State Park",
+          "date": "2026-08-14",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [],
       "publicStats": {
         "attempts": 53,
@@ -3256,9 +3278,46 @@
       "locationDesc": "US-RI",
       "href": "/radio/pota/US-6985/",
       "potaUrl": "https://pota.app/#/park/US-6985",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 2,
+      "qsoTotal": 17,
+      "activations": [
+        {
+          "reference": "US-6985",
+          "park": "Round Top Wildlife Management Area",
+          "date": "2026-08-15",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
+        {
+          "reference": "US-6985",
+          "park": "Round Top Wildlife Management Area",
+          "date": "2026-08-14",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 7,
+            "cw": 7,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
       "notes": [],
       "publicStats": {
         "attempts": 63,
