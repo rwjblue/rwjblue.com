@@ -551,3 +551,39 @@ Clock checkpoints:
 - When describing mistakes, say “we” more often than “beginners.”
 - Avoid promising a speed or a timeline. The talk promises a path, not fluency in seven or fourteen days.
 - End on the exact final line before opening questions: “One sound. One call sign. One safe first contact.”
+
+## Post-talk review — August 14, 2026
+
+The canonical text above remains the prepared version of the talk. A separate [sanitized, edited transcript](./hamxposition-2026-cw-talk-transcript.md) records what was actually delivered.
+
+### Actual clock
+
+| Event | Recording time | Elapsed from QR preamble |
+| --- | ---: | ---: |
+| QR-code preamble begins | 0:16 | 0:00 |
+| Formal introduction begins | 0:49 | 0:33 |
+| First audience question begins | 38:32 | 38:16 |
+| Improvised closing thought | 41:12 | 40:56 |
+| General invitation to questions and table | 43:09 | 42:53 |
+
+The prepared talk reached audience participation before the 40-minute content limit. The first question arrived before Slide 22’s planned close, however, so the closing action and exact final line were not delivered. The recording then continued through questions, paddle distribution, and informal equipment discussion.
+
+### What worked
+
+- The cassette story established both humor and credibility. It made the sound-recognition lesson memorable.
+- The talk sounded like a recent learner helping other beginners, not an expert issuing rules.
+- Concrete personal details—the first QSO, repeated question marks, five watts at the beach, and practice streak—made the path feel attainable.
+- Audience members asked substantive questions about SKCC, slow-speed events, keys, CW Academy, and equipment. Several also shared relevant experiences, indicating that the material invited participation.
+- The structured talk and general invitation ended before 43:10, leaving almost seven minutes on the room clock for equipment handling and exit.
+
+### Changes to make before giving it again
+
+- Protect Slide 22 before taking questions. If someone begins a question on Slide 21, say, “Hold that thought for thirty seconds—I want to give you the closing action first.”
+- Keep the cassette story to the prepared 1:20. The delivered version took about 3:35 and created most of the early clock deficit.
+- Remove the contest signal-report aside from the POTA exchange. It interrupted the beginner contact sequence without helping the main lesson.
+- Keep the Rhode Island challenge to one sentence or move it to Q&A. The delivered tangent added roughly two minutes immediately before the protected close.
+- Use the full Slide 13 readiness checklist. In the room it was compressed to recognizing and sending one’s callsign; the prepared wording also includes the expected exchange and recovery requests.
+- Say “many patient activators” rather than promising that every activator will always slow down or persist.
+- Either perform the two sidetone demonstrations or remove “demo” from the framing. The recording contains the explanations but no clear evidence of the planned slow-versus-Farnsworth or complete exchange/recovery demonstrations.
+- Deliver the program callbacks from the speaker notes or explicitly defer them to the QR-code page. None of the planned HamXposition session references is evident in the recording.
+- Reduce repeated fillers—especially “um,” “you know,” and repeated sentence starts—by pausing silently at slide changes. The content is strongest when the short declarative lines have room to land.
