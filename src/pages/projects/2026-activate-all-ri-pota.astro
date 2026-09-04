@@ -76,8 +76,7 @@ const formatModes = (activation: {
         Activate every POTA reference associated with Rhode Island in 2026.
       </p>
       <p class="lede">
-        The reference list comes from POTA's Rhode Island park data, including
-        multi-state references that include Rhode Island.
+        The reference list comes from the reviewed <a href="https://github.com/ripota/parks">Rhode Island POTA park dataset</a>, based on official POTA metadata and including multi-state references that cross Rhode Island.
       </p>
     </div>
 
@@ -181,9 +180,10 @@ const formatModes = (activation: {
       }).addTo(map);
 
       for (const reference of tracker.references) {
+        const displayPoint = reference.mapPoint ?? reference;
         const color = reference.status === "completed" ? "#167246" : "#ffeb2f";
         const fillColor = color;
-        const marker = L.circleMarker([reference.latitude, reference.longitude], {
+        const marker = L.circleMarker([displayPoint.latitude, displayPoint.longitude], {
           radius: 8,
           color: "#172026",
           weight: 2,
@@ -191,9 +191,9 @@ const formatModes = (activation: {
           fillOpacity: 0.96,
         }).addTo(map);
 
-        bounds.extend([reference.latitude, reference.longitude]);
-        if (isNearRhodeIsland(reference)) {
-          rhodeIslandBounds.extend([reference.latitude, reference.longitude]);
+        bounds.extend([displayPoint.latitude, displayPoint.longitude]);
+        if (isNearRhodeIsland(displayPoint)) {
+          rhodeIslandBounds.extend([displayPoint.latitude, displayPoint.longitude]);
         }
         marker.bindPopup(popupHtml(reference));
       }

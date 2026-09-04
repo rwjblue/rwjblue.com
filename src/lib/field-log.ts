@@ -32,6 +32,10 @@ interface SourcePark {
   href: string;
   latitude: number;
   longitude: number;
+  mapPoint?: {
+    latitude: number;
+    longitude: number;
+  };
   activations: Array<{
     date: string;
     callsign: string;
@@ -75,8 +79,8 @@ export function buildFieldLog(
         reference: park.reference,
         park: park.name,
         parkHref: park.href,
-        latitude: park.latitude,
-        longitude: park.longitude,
+        latitude: park.mapPoint?.latitude ?? park.latitude,
+        longitude: park.mapPoint?.longitude ?? park.longitude,
         callsign: activation.callsign,
         qsos: activation.qsos.total,
         modes,

@@ -3375,6 +3375,23 @@ p {
   background: var(--panel);
 }
 
+.pota-park-map-stack {
+  display: grid;
+  gap: 9px;
+}
+
+.pota-park-map-note {
+  margin: 0;
+  color: var(--quiet);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.pota-park-map-note a {
+  color: var(--blue);
+  font-weight: 800;
+}
+
 .pota-park-map .leaflet-popup-content {
   display: grid;
   gap: 4px;

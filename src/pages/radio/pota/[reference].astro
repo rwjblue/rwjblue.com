@@ -1,5 +1,6 @@
 ---
 import "leaflet/dist/leaflet.css";
+import riParkCatalog from "@ripota/parks/catalog.json";
 
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
@@ -27,13 +28,19 @@ export async function getStaticPaths() {
 }
 
 const { park } = Astro.props;
+const riCatalogPark = riParkCatalog.references.find(
+  (reference) => reference.reference === park.reference,
+);
 const parkJson = JSON.stringify({
   reference: park.reference,
   name: park.name,
   latitude: park.latitude,
   longitude: park.longitude,
+  mapPoint: park.mapPoint,
   locationDesc: park.locationDesc,
-});
+  displayGeometry: riCatalogPark?.geojson ?? null,
+  geometryKind: riCatalogPark?.geometryKind ?? null,
+}).replaceAll("<", "\\u003c");
 
 const formattedGeneratedDate = new Date(
   parksData.generatedAt,
@@ -119,7 +126,16 @@ const description =
       <h2 id="park-map-title">Park location</h2>
     </div>
     <div class="pota-park-facts">
-      <div id="pota-park-map" class="pota-park-map" aria-label={`Map centered on ${park.name}`}></div>
+      <div class="pota-park-map-stack">
+        <div id="pota-park-map" class="pota-park-map" aria-label={`Map of ${park.name}`}></div>
+        {
+          riCatalogPark && (
+            <p class="pota-park-map-note">
+              Reviewed display geometry from the <a href="https://github.com/ripota/parks">Rhode Island POTA park dataset</a>. General reference only; not a legal boundary or access map.
+            </p>
+          )
+        }
+      </div>
       <dl>
         <div>
           <dt>Reference</dt>
@@ -133,6 +149,14 @@ const description =
           <dt>Region</dt>
           <dd>{park.locationDesc}</dd>
         </div>
+        {
+          park.counties.length > 0 && (
+            <div>
+              <dt>{park.counties.length === 1 ? "County" : "Counties"}</dt>
+              <dd>{park.counties.join(", ")}</dd>
+            </div>
+          )
+        }
         <div>
           <dt>Public attempts</dt>
           <dd>{park.publicStats.attempts ?? "—"}</dd>
@@ -216,6 +240,10 @@ const description =
       const map = L.map(mapElement, {
         scrollWheelZoom: false,
       });
+      const resizeObserver = new ResizeObserver(() => {
+        map.invalidateSize({ pan: false });
+      });
+      resizeObserver.observe(mapElement);
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -223,19 +251,26 @@ const description =
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      L.circleMarker([park.latitude, park.longitude], {
-        radius: 8,
-        color: "#172026",
-        weight: 2,
-        fillColor: "#2f6f4e",
-        fillOpacity: 0.96,
-      })
-        .addTo(map)
-        .bindPopup(
-          `<strong>${escapeHtml(park.reference)}</strong><span>${escapeHtml(park.name)}</span>`,
-        );
+      let displayLayer;
 
-      if (String(park.locationDesc ?? "").includes("US-RI")) {
+      if (park.displayGeometry) {
+        displayLayer = L.geoJSON(park.displayGeometry, {
+          style: {
+            color: "#2f6f4e",
+            weight: 2.5,
+            fillColor: "#84a98c",
+            fillOpacity: 0.28,
+          },
+        });
+      }
+
+      const displayPoint = park.mapPoint ?? park;
+      if (displayLayer?.getBounds().isValid()) {
+        map.fitBounds(displayLayer.getBounds(), {
+          padding: [24, 24],
+          maxZoom: 14,
+        });
+      } else if (String(park.locationDesc ?? "").includes("US-RI")) {
         map.fitBounds(
           [
             [41.05, -72.05],
@@ -246,6 +281,19 @@ const description =
       } else {
         map.setView([park.latitude, park.longitude], 9);
       }
+
+      displayLayer?.addTo(map);
+      L.circleMarker([displayPoint.latitude, displayPoint.longitude], {
+        radius: 8,
+        color: "#172026",
+        weight: 2,
+        fillColor: "#2f6f4e",
+        fillOpacity: 0.96,
+      })
+        .addTo(map)
+        .bindPopup(
+          `<strong>${escapeHtml(park.reference)}</strong><span>${escapeHtml(park.name)}</span>`,
+        );
     }
 
     function escapeHtml(value) {

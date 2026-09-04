@@ -8,8 +8,10 @@ public notes may be present in the checked-in relationship data so they are
 ready to publish, but rendered field-log and park pages filter those links
 against the build's publication cutoff.
 
-Each activation is one timeline entry and one map marker. The initial filters
-cover year, mode, and series. With JavaScript disabled, the complete
+Each activation is one timeline entry and one map marker. Rhode Island entries
+use reviewed presentation points from `@ripota/parks` when available while
+preserving official POTA coordinates in the underlying park data. The initial
+filters cover year, mode, and series. With JavaScript disabled, the complete
 chronological list and all park/report links remain available. JavaScript adds
 filtering, marker synchronization, Arrow Up/Down movement between visible
 timeline buttons, and URL-backed filter state.

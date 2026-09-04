@@ -68,3 +68,18 @@ test("field log filters combine year, mode, and trip", () => {
   assert.equal(matchesFieldLogFilters(entry, { mode: "data" }), false);
   assert.equal(matchesFieldLogFilters(entry, { year: "2025" }), false);
 });
+
+test("field log prefers a reviewed park map point", () => {
+  const [entry] = buildFieldLog(
+    [
+      {
+        ...park,
+        mapPoint: { latitude: 41.74, longitude: -71.59 },
+      },
+    ],
+    [],
+  );
+
+  assert.equal(entry.latitude, 41.74);
+  assert.equal(entry.longitude, -71.59);
+});

@@ -683,6 +683,10 @@ test("canonical POTA park pages are generated from local park data", () => {
   assert.match(page, /My activations/);
   assert.doesNotMatch(page, /park\.publicStats\.activations/);
   assert.match(page, /map\.fitBounds/);
+  assert.match(page, /@ripota\/parks\/catalog\.json/);
+  assert.match(page, /L\.geoJSON/);
+  assert.match(page, /displayGeometry/);
+  assert.match(page, /Rhode Island POTA park dataset/);
   assert.match(page, /US-RI/);
   assert.match(page, /tile\.openstreetmap\.org/);
   assert.match(page, /OpenStreetMap/);
