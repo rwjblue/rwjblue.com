@@ -121,6 +121,28 @@ test("tracker data includes all parks and keeps multi-state references", () => {
   );
 });
 
+test("tracker data preserves reviewed map points", () => {
+  const tracker = buildTrackerData({
+    parks: [
+      {
+        ...parks[1],
+        mapPoint: {
+          latitude: 41.7445710002769,
+          longitude: -71.594458000176,
+          notes: "Reviewed Rhode Island route point.",
+        },
+      },
+    ],
+    ledger: { activations: [] },
+    profile: { ...profile, recent_activity: { activations: [] } },
+    notes: [],
+    generatedAt: "2026-09-04T12:00:00.000Z",
+  });
+
+  assert.equal(tracker.references[0].latitude, 41.312);
+  assert.equal(tracker.references[0].mapPoint.latitude, 41.7445710002769);
+});
+
 test("completion can come from any known callsign and old ledger entries remain", () => {
   const tracker = buildTrackerData({
     parks,

@@ -1,3 +1,9 @@
+export interface PotaMapPoint {
+  latitude: number;
+  longitude: number;
+  notes: string;
+}
+
 export interface PotaPark {
   reference: string;
   name: string;
@@ -5,6 +11,8 @@ export interface PotaPark {
   longitude: number;
   grid: string;
   locationDesc: string;
+  counties?: string[];
+  mapPoint?: PotaMapPoint;
   attempts?: number;
   activations?: number;
   qsos?: number;
@@ -66,6 +74,8 @@ export interface PotaParkPage {
   longitude: number;
   grid: string;
   locationDesc: string;
+  counties: string[];
+  mapPoint?: PotaMapPoint;
   href: string;
   potaUrl: string;
   activationCount: number;
@@ -222,6 +232,8 @@ export function buildPotaParkPages({
           longitude: park.longitude,
           grid: park.grid,
           locationDesc: park.locationDesc,
+          counties: park.counties ?? [],
+          ...(park.mapPoint ? { mapPoint: park.mapPoint } : {}),
           href: potaParkHref(reference),
           potaUrl: potaParkUrl(reference),
           activationCount: pageActivations.length,

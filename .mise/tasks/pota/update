@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -*- mode: sh; sh-shell: bash; -*-
 #MISE description="Refresh POTA profile, tracker, and canonical park page data"
-#USAGE flag "--full-backfill" help="Refresh RI park list and backfill activation history too"
+#USAGE flag "--full-backfill" help="Backfill RI activation history before rebuilding"
 
 set -euo pipefail
 

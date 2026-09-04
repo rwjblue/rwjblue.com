@@ -10,15 +10,23 @@ import {
   collectKnownReferences,
   normalizeReference,
 } from "../../src/lib/pota/parks.ts";
+import {
+  readRiPotaParks,
+  riPotaReferenceIds,
+} from "../../src/lib/pota/ri-park-source.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const parkCacheDir = path.join(root, "data/pota/parks/cache");
 const parksDataPath = path.join(root, "src/data/pota/parks.json");
-const riParksCachePath = path.join(root, "data/pota/ri/cache/parks-US-RI.json");
+const riPublicStatsPath = path.join(
+  root,
+  "data/pota/ri/cache/public-stats.json",
+);
 const riActivationLedgerPath = path.join(root, "data/pota/ri/activations.json");
 const riTrackerPath = path.join(root, "src/data/pota/ri-tracker.json");
 const notesDir = path.join(root, "src/content/notes");
 const roveCacheDir = path.join(root, "data/pota/rove-to-fl/cache");
+const riReferenceSet = new Set(riPotaReferenceIds);
 
 async function readJson(filePath, fallback = null) {
   if (!existsSync(filePath)) {
@@ -114,9 +122,7 @@ async function readLedgerActivations() {
 }
 
 async function readRiReferences() {
-  const parks = await readJson(riParksCachePath, []);
-
-  return parks.map((park) => normalizeReference(park.reference));
+  return riPotaReferenceIds;
 }
 
 async function readKnownReferences() {
@@ -129,10 +135,6 @@ async function readKnownReferences() {
 
 async function readCachedParks() {
   const parksByReference = new Map();
-
-  for (const park of await readJson(riParksCachePath, [])) {
-    parksByReference.set(normalizeReference(park.reference), normalizePark(park));
-  }
 
   if (existsSync(roveCacheDir)) {
     for (const file of (await readdir(roveCacheDir)).filter((entry) =>
@@ -153,6 +155,12 @@ async function readCachedParks() {
     }
   }
 
+  const publicStats = await readJson(riPublicStatsPath);
+
+  for (const park of readRiPotaParks(publicStats)) {
+    parksByReference.set(normalizeReference(park.reference), park);
+  }
+
   return parksByReference;
 }
 
@@ -163,7 +171,10 @@ async function ensurePark(reference) {
   const cachedPark = cachedParks.get(normalizedReference);
 
   if (cachedPark) {
-    await writeJson(cachePath, cachedPark);
+    if (!riReferenceSet.has(normalizedReference)) {
+      await writeJson(cachePath, cachedPark);
+    }
+
     return cachedPark;
   }
 
@@ -203,6 +214,8 @@ function normalizePark(park) {
     longitude: Number(park.longitude),
     grid: park.grid,
     locationDesc: park.locationDesc ?? park.location ?? "",
+    counties: Array.isArray(park.counties) ? park.counties : undefined,
+    mapPoint: park.mapPoint,
     attempts: numberOrUndefined(park.attempts),
     activations: numberOrUndefined(park.activations),
     qsos: numberOrUndefined(park.qsos),

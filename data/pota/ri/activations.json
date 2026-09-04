@@ -1806,6 +1806,97 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-0647",
+      "park": "Golden Gate National Recreation Area",
+      "date": "2026-08-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 21,
+        "cw": 21,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7889",
+      "park": "Presidio of SF National Historic Site",
+      "date": "2026-08-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 21,
+        "cw": 21,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0757",
+      "park": "San Francisco Maritime National Historical Park",
+      "date": "2026-08-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 11,
+        "cw": 11,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-1196",
+      "park": "San Bruno Mountain State Park",
+      "date": "2026-08-28",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 14,
+        "cw": 14,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0757",
+      "park": "San Francisco Maritime National Historical Park",
+      "date": "2026-08-26",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 13,
+        "cw": 13,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-0647",
+      "park": "Golden Gate National Recreation Area",
+      "date": "2026-08-25",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 4,
+        "cw": 4,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
+    },
+    {
+      "reference": "US-7587",
+      "park": "Flintville Wildlife Management Area",
+      "date": "2026-08-23",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 13,
+        "cw": 13,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

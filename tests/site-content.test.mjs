@@ -170,7 +170,7 @@ test("radio page keeps static context, links station equipment, and lists radio 
 
   assert.match(radio, /getPublicNotes\(\)/);
   assert.match(radio, /note\.data\.tags\.includes\("radio"\)/);
-  assert.match(radio, /Radio notes/);
+  assert.match(radio, /Recent radio notes/);
   assert.match(radio, /href=\{`\/notes\/\$\{note\.id\}\/`\}/);
   assert.match(radio, /\/radio\/shack\//);
   assert.match(radio, /My station/);
@@ -538,7 +538,7 @@ test("legacy paths redirect to their current urls", () => {
 
 test("ri pota tracker uses file-based mise tasks", () => {
   const taskCommands = [
-    ["update-parks", "update-parks"],
+    ["update-public-stats", "update-public-stats"],
     ["update-profile", "update-profile"],
     ["backfill-activations", "backfill-activations"],
     ["build-tracker-data", "build-tracker-data"],
@@ -605,6 +605,8 @@ test("pota park page workflow is documented for agents", () => {
   assert.ok(existsSync(".mise/tasks/pota/park/ensure"));
   assert.ok(existsSync(".mise/tasks/pota/park/build-page-data"));
   assert.ok(existsSync(".mise/tasks/pota/park/backfill-known"));
+  assert.ok(existsSync(".mise/tasks/pota/ri/update-public-stats"));
+  assert.ok(!existsSync(".mise/tasks/pota/ri/update-parks"));
 
   const updateTask = read(".mise/tasks/pota/update");
   const ensureTask = read(".mise/tasks/pota/park/ensure");
@@ -625,6 +627,8 @@ test("pota park page workflow is documented for agents", () => {
   assert.match(riPotaSkill, /\/radio\/pota\/US-1234\//);
   assert.match(agents, /mise run pota:update/);
   assert.match(agents, /mise run pota:park:ensure -- US-1234/);
+  assert.match(agents, /@ripota\/parks/);
+  assert.match(agents, /pota:ri:update-public-stats/);
   assert.match(agents, /--full-backfill/);
   assert.match(agents, /\/radio\/pota\/US-1234\//);
 });
@@ -669,6 +673,7 @@ test("canonical POTA park pages are generated from local park data", () => {
   const page = read("src/pages/radio/pota/[reference].astro");
   const data = JSON.parse(read("src/data/pota/parks.json"));
   const sachuest = data.parks.find((park) => park.reference === "US-0516");
+  const route = data.parks.find((park) => park.reference === "US-4582");
 
   assert.match(page, /parks\.json/);
   assert.match(page, /getStaticPaths/);
@@ -682,6 +687,12 @@ test("canonical POTA park pages are generated from local park data", () => {
   assert.match(page, /tile\.openstreetmap\.org/);
   assert.match(page, /OpenStreetMap/);
   assert.equal(sachuest.href, "/radio/pota/US-0516/");
+  assert.equal(
+    route.name,
+    "Washington-Rochambeau Revolutionary Route National Historic Trail",
+  );
+  assert.equal(route.grid, "FN31ah");
+  assert.equal(route.mapPoint.longitude, -71.594458000176);
   assert.ok(
     sachuest.activations.some((activation) =>
       activation.notes.some(

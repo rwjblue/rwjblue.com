@@ -28,7 +28,7 @@ export function parsePotaUpdateArgs(args) {
 export function buildPotaUpdatePlan({ fullBackfill }) {
   if (fullBackfill) {
     return [
-      ["mise", "run", "pota:ri:update-parks"],
+      ["mise", "run", "pota:ri:update-public-stats"],
       ["mise", "run", "pota:ri:update-profile"],
       ["mise", "run", "pota:ri:backfill-activations"],
       ["mise", "run", "pota:ri:build-tracker-data"],
@@ -37,6 +37,7 @@ export function buildPotaUpdatePlan({ fullBackfill }) {
   }
 
   return [
+    ["mise", "run", "pota:ri:update-public-stats"],
     ["mise", "run", "pota:ri:update-profile"],
     ["mise", "run", "pota:ri:build-tracker-data"],
     ["mise", "run", "pota:park:backfill-known"],
@@ -91,7 +92,7 @@ function usage() {
   return `Usage: update.mjs [--full-backfill]\n\n` +
     `Refresh POTA profile, tracker, and canonical park-page data.\n\n` +
     `Options:\n` +
-    `  --full-backfill  Refresh RI park list and backfill activation history too.\n`;
+    `  --full-backfill  Backfill RI activation history before rebuilding.\n`;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {

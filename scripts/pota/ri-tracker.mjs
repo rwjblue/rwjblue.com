@@ -9,11 +9,15 @@ import {
   buildTrackerData,
   mergeProfileActivations,
 } from "../../src/lib/pota/ri-tracker.ts";
+import {
+  buildRiPotaPublicStats,
+  readRiPotaParks,
+} from "../../src/lib/pota/ri-park-source.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const cacheDir = path.join(root, "data/pota/ri/cache");
 const activationCacheDir = path.join(cacheDir, "activations");
-const parksCachePath = path.join(cacheDir, "parks-US-RI.json");
+const publicStatsCachePath = path.join(cacheDir, "public-stats.json");
 const profileCachePath = path.join(cacheDir, "profile-N1RWJ.json");
 const ledgerPath = path.join(root, "data/pota/ri/activations.json");
 const trackerDataPath = path.join(root, "src/data/pota/ri-tracker.json");
@@ -49,10 +53,16 @@ async function fetchJson(url) {
   return response.json();
 }
 
-async function updateParks() {
-  const parks = await fetchJson("https://api.pota.app/location/parks/US-RI");
-  await writeJson(parksCachePath, parks);
-  console.log(`Wrote ${parks.length} parks to ${relative(parksCachePath)}`);
+async function updatePublicStats() {
+  const apiParks = await fetchJson("https://api.pota.app/location/parks/US-RI");
+  const publicStats = buildRiPotaPublicStats(
+    apiParks,
+    new Date().toISOString(),
+  );
+  await writeJson(publicStatsCachePath, publicStats);
+  console.log(
+    `Wrote public statistics for ${publicStats.parks.length} parks to ${relative(publicStatsCachePath)}`,
+  );
 }
 
 async function updateProfile() {
@@ -68,11 +78,7 @@ async function updateProfile() {
 }
 
 async function backfillActivations() {
-  const parks = await readJson(parksCachePath);
-
-  if (!parks) {
-    throw new Error("Run pota:ri:update-parks before backfilling activations");
-  }
+  const parks = readRiPotaParks();
 
   const profile = await readJson(profileCachePath);
 
@@ -141,11 +147,8 @@ async function backfillActivations() {
 }
 
 async function buildTracker() {
-  const parks = await readJson(parksCachePath);
-
-  if (!parks || parks.length === 0) {
-    throw new Error("Run pota:ri:update-parks before building tracker data");
-  }
+  const publicStats = await readJson(publicStatsCachePath);
+  const parks = readRiPotaParks(publicStats);
 
   const profile = await readJson(profileCachePath, {
     callsign: "N1RWJ",
@@ -167,7 +170,7 @@ async function buildTracker() {
 }
 
 async function updateTracker() {
-  await updateParks();
+  await updatePublicStats();
   await updateProfile();
   await buildTracker();
 }
@@ -267,8 +270,8 @@ function relative(filePath) {
 const command = process.argv[2];
 
 switch (command) {
-  case "update-parks":
-    await updateParks();
+  case "update-public-stats":
+    await updatePublicStats();
     break;
   case "update-profile":
     await updateProfile();
@@ -284,7 +287,7 @@ switch (command) {
     break;
   default:
     console.error(
-      "Usage: ri-tracker.mjs <update-parks|update-profile|backfill-activations|build-tracker-data|update-tracker>",
+      "Usage: ri-tracker.mjs <update-public-stats|update-profile|backfill-activations|build-tracker-data|update-tracker>",
     );
     process.exitCode = 1;
 }

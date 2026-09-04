@@ -1,16 +1,4 @@
-import { potaParkHref } from "./parks.ts";
-
-export interface PotaPark {
-  reference: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-  grid: string;
-  locationDesc: string;
-  attempts?: number;
-  activations?: number;
-  qsos?: number;
-}
+import { potaParkHref, type PotaMapPoint, type PotaPark } from "./parks.ts";
 
 export interface PotaProfileActivation {
   date: string;
@@ -75,6 +63,8 @@ export interface TrackerReference {
   longitude: number;
   grid: string;
   locationDesc: string;
+  counties: string[];
+  mapPoint?: PotaMapPoint;
   status: "completed" | "remaining";
   href: string;
   potaUrl: string;
@@ -222,6 +212,8 @@ export function buildTrackerData({
       longitude: park.longitude,
       grid: park.grid,
       locationDesc: park.locationDesc,
+      counties: park.counties ?? [],
+      ...(park.mapPoint ? { mapPoint: park.mapPoint } : {}),
       status: firstActivation ? "completed" : "remaining",
       href: potaParkHref(reference),
       potaUrl: `https://pota.app/#/park/${reference}`,

@@ -27,15 +27,16 @@ test("parsePotaUpdateArgs rejects unknown flags", () => {
 
 test("buildPotaUpdatePlan returns the standard refresh command sequence", () => {
   assert.deepEqual(buildPotaUpdatePlan({ fullBackfill: false }), [
+    ["mise", "run", "pota:ri:update-public-stats"],
     ["mise", "run", "pota:ri:update-profile"],
     ["mise", "run", "pota:ri:build-tracker-data"],
     ["mise", "run", "pota:park:backfill-known"],
   ]);
 });
 
-test("buildPotaUpdatePlan includes RI park and activation backfills when requested", () => {
+test("buildPotaUpdatePlan includes RI activation backfills when requested", () => {
   assert.deepEqual(buildPotaUpdatePlan({ fullBackfill: true }), [
-    ["mise", "run", "pota:ri:update-parks"],
+    ["mise", "run", "pota:ri:update-public-stats"],
     ["mise", "run", "pota:ri:update-profile"],
     ["mise", "run", "pota:ri:backfill-activations"],
     ["mise", "run", "pota:ri:build-tracker-data"],

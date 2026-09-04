@@ -62,8 +62,10 @@ For a full historical refresh:
 mise run pota:update --full-backfill
 ```
 
-The full backfill refreshes the RI park list and activation history before
-rebuilding tracker and canonical park-page data.
+The full backfill refreshes RI activation history before rebuilding tracker and
+canonical park-page data. RI reference metadata and reviewed display geometry
+come from the pinned `@ripota/parks` release; update that repository and bump
+the dependency here when the reference inventory changes.
 
 The public RI checklist and map should link to canonical park pages such as
 `/radio/pota/US-1234/`. Keep POTA.app as the external reference from those park
@@ -83,9 +85,10 @@ project-owned detail pages.
 |------|---------|
 | `src/data/pota/ri-tracker.json` | Generated tracker state — source of truth for status |
 | `src/data/pota/parks.json` | Generated canonical POTA park-page data |
-| `data/pota/parks/cache/` | Cached POTA park metadata for `/radio/pota/US-1234/` pages |
+| `@ripota/parks` | Pinned source for RI metadata and reviewed display geometry |
+| `data/pota/parks/cache/` | Cached non-RI metadata for `/radio/pota/US-1234/` pages |
 | `data/pota/ri/activations.json` | Activation ledger (hand-editable if needed) |
-| `data/pota/ri/cache/` | Raw API response caches |
+| `data/pota/ri/cache/` | Public statistics, profile, and activation API caches |
 | `scripts/pota/parks.mjs` | Canonical park-page cache and data pipeline |
 | `scripts/pota/ri-tracker.mjs` | Tracker data pipeline |
 | `scripts/pota/travel-times.mjs` | Drive-time estimator (home → each park) |

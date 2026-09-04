@@ -110,23 +110,26 @@ POTA reference by December 31, 2026.
   parks are done and which remain.
 - `src/data/pota/parks.json` — generated canonical POTA park-page data for
   `/radio/pota/US-1234/` pages.
-- `data/pota/parks/cache/` — cached POTA park metadata used to render canonical
-  park pages.
-- `data/pota/ri/` — local caches (park list, profile, activation ledger) used to
-  regenerate tracker data.
+- `@ripota/parks` — pinned package source for RI reference metadata, reviewed
+  map points, and display geometry.
+- `data/pota/parks/cache/` — cached non-RI POTA park metadata used to render
+  canonical park pages.
+- `data/pota/ri/` — local public-statistics, profile, activation, and ledger
+  caches used to regenerate tracker data.
+- `docs/pota-data.md` — stable data ownership and package-upgrade workflow.
 
 ### Available scripts and tasks
 
 | Task | Script | Purpose |
 |------|--------|---------|
-| `mise run pota:update [--full-backfill]` | `scripts/pota/update.mjs` | One-command refresh for POTA profile, RI tracker data, park metadata, and canonical park pages. Use `--full-backfill` to refresh RI park list and back-fill activation history too. |
+| `mise run pota:update [--full-backfill]` | `scripts/pota/update.mjs` | One-command refresh for POTA statistics, profile, RI tracker data, non-RI park metadata, and canonical park pages. Use `--full-backfill` to back-fill RI activation history too. |
 | `mise run pota:ri:travel-times [-- --grid FN41fr]` | `scripts/pota/travel-times.mjs` | Estimate driving times from a home grid square to remaining parks. Uses OSRM routing (requires network); falls back to haversine × 1.4 / 80 km/h. |
-| `mise run pota:ri:update-tracker` | `scripts/pota/ri-tracker.mjs` | Refresh parks, profile, and rebuild tracker data in one step. |
-| `mise run pota:ri:update-parks` | `scripts/pota/ri-tracker.mjs` | Fetch the latest RI park list from POTA API. |
+| `mise run pota:ri:update-tracker` | `scripts/pota/ri-tracker.mjs` | Refresh public statistics and profile data, then rebuild tracker data. |
+| `mise run pota:ri:update-public-stats` | `scripts/pota/ri-tracker.mjs` | Refresh volatile POTA activity counts and verify the pinned package still matches the live reference inventory. |
 | `mise run pota:ri:update-profile` | `scripts/pota/ri-tracker.mjs` | Fetch N1RWJ profile and merge recent activations into the ledger. |
 | `mise run pota:ri:build-tracker-data` | `scripts/pota/ri-tracker.mjs` | Rebuild `ri-tracker.json` from local caches without hitting the network. |
 | `mise run pota:ri:backfill-activations` | `scripts/pota/ri-tracker.mjs` | Back-fill activation history for all RI references from the POTA API. |
-| `mise run pota:park:ensure -- US-1234` | `scripts/pota/parks.mjs` | Ensure local cached metadata for one or more POTA references before linking a field note. |
+| `mise run pota:park:ensure -- US-1234` | `scripts/pota/parks.mjs` | Resolve RI metadata from `@ripota/parks`, or ensure local cached metadata for non-RI references. |
 | `mise run pota:park:backfill-known` | `scripts/pota/parks.mjs` | Ensure park metadata for all references found in field-note tags, the activation ledger, and RI tracker data. |
 | `mise run pota:park:build-page-data` | `scripts/pota/parks.mjs` | Rebuild generated canonical park-page data from local caches. |
 
@@ -138,9 +141,11 @@ POTA reference by December 31, 2026.
   POTA.app link.
 - Before publishing a field note for a new reference, run
   `mise run pota:park:ensure -- US-1234`, then run `mise run pota:update`.
+- For a new or changed RI reference, update and release `ripota/parks`, then
+  bump the pinned package release before running the site update.
 - After a new activation, field note, or POTA profile change, run
   `mise run pota:update`. Use `mise run pota:update --full-backfill` when
-  the RI park list or historical activation history also needs to be refreshed.
+  historical RI activation history also needs to be refreshed.
 - Keep lowercased POTA reference tags such as `us-1234` in note frontmatter so
   field notes can attach to matching activation rows by date and reference.
 

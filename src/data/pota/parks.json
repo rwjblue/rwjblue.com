@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T13:22:25.499Z",
+  "generatedAt": "2026-09-04T14:07:09.743Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -8,6 +8,7 @@
       "longitude": -77.8265,
       "grid": "FM19co",
       "locationDesc": "US-DC,US-MD,US-WV",
+      "counties": [],
       "href": "/radio/pota/US-0015/",
       "potaUrl": "https://pota.app/#/park/US-0015",
       "activationCount": 1,
@@ -63,6 +64,7 @@
       "longitude": -75.2575,
       "grid": "FM29iv",
       "locationDesc": "US-PA",
+      "counties": [],
       "href": "/radio/pota/US-0512/",
       "potaUrl": "https://pota.app/#/park/US-0512",
       "activationCount": 0,
@@ -89,6 +91,9 @@
       "longitude": -71.5724,
       "grid": "FN41ff",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-0513/",
       "potaUrl": "https://pota.app/#/park/US-0513",
       "activationCount": 1,
@@ -144,9 +149,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 28,
-        "activations": 28,
-        "qsos": 2391
+        "attempts": 32,
+        "activations": 32,
+        "qsos": 2492
       }
     },
     {
@@ -156,6 +161,9 @@
       "longitude": -71.4707,
       "grid": "FN41gk",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-0514/",
       "potaUrl": "https://pota.app/#/park/US-0514",
       "activationCount": 0,
@@ -170,9 +178,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 49,
-        "activations": 49,
-        "qsos": 1838
+        "attempts": 60,
+        "activations": 60,
+        "qsos": 2068
       }
     },
     {
@@ -182,6 +190,9 @@
       "longitude": -71.6716,
       "grid": "FN41di",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-0515/",
       "potaUrl": "https://pota.app/#/park/US-0515",
       "activationCount": 1,
@@ -225,9 +236,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 145,
-        "activations": 129,
-        "qsos": 3723
+        "attempts": 154,
+        "activations": 136,
+        "qsos": 3871
       }
     },
     {
@@ -237,6 +248,9 @@
       "longitude": -71.2436,
       "grid": "FN41jl",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-0516/",
       "potaUrl": "https://pota.app/#/park/US-0516",
       "activationCount": 1,
@@ -280,9 +294,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 177,
-        "activations": 173,
-        "qsos": 7471
+        "attempts": 185,
+        "activations": 179,
+        "qsos": 7597
       }
     },
     {
@@ -292,6 +306,9 @@
       "longitude": -71.5846,
       "grid": "FN41ej",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-0517/",
       "potaUrl": "https://pota.app/#/park/US-0517",
       "activationCount": 1,
@@ -321,9 +338,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 49,
-        "activations": 49,
-        "qsos": 1339
+        "attempts": 54,
+        "activations": 54,
+        "qsos": 1507
       }
     },
     {
@@ -333,6 +350,7 @@
       "longitude": -81.1514,
       "grid": "EM92kd",
       "locationDesc": "US-GA,US-SC",
+      "counties": [],
       "href": "/radio/pota/US-0522/",
       "potaUrl": "https://pota.app/#/park/US-0522",
       "activationCount": 1,
@@ -382,6 +400,7 @@
       "longitude": -81.42,
       "grid": "EM91ga",
       "locationDesc": "US-GA",
+      "counties": [],
       "href": "/radio/pota/US-0636/",
       "potaUrl": "https://pota.app/#/park/US-0636",
       "activationCount": 2,
@@ -440,11 +459,62 @@
       }
     },
     {
+      "reference": "US-0647",
+      "name": "Golden Gate",
+      "latitude": 37.8308,
+      "longitude": -122.525,
+      "locationDesc": "US-CA",
+      "counties": [],
+      "href": "/radio/pota/US-0647/",
+      "potaUrl": "https://pota.app/#/park/US-0647",
+      "activationCount": 2,
+      "qsoTotal": 25,
+      "activations": [
+        {
+          "reference": "US-0647",
+          "park": "Golden Gate National Recreation Area",
+          "date": "2026-08-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 21,
+            "cw": 21,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-0647",
+          "park": "Golden Gate National Recreation Area",
+          "date": "2026-08-25",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 4,
+            "cw": 4,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
       "reference": "US-0653",
       "name": "Constitution Gardens",
       "latitude": 38.8904,
       "longitude": -77.0436,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0653/",
       "potaUrl": "https://pota.app/#/park/US-0653",
       "activationCount": 1,
@@ -493,6 +563,7 @@
       "latitude": 38.8897,
       "longitude": -77.0282,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0655/",
       "potaUrl": "https://pota.app/#/park/US-0655",
       "activationCount": 1,
@@ -541,6 +612,7 @@
       "latitude": 38.9618,
       "longitude": -77.1478,
       "locationDesc": "US-DC,US-MD,US-VA",
+      "counties": [],
       "href": "/radio/pota/US-0670/",
       "potaUrl": "https://pota.app/#/park/US-0670",
       "activationCount": 1,
@@ -596,6 +668,7 @@
       "longitude": -77.7426,
       "grid": "FM18dg",
       "locationDesc": "US-VA",
+      "counties": [],
       "href": "/radio/pota/US-0717/",
       "potaUrl": "https://pota.app/#/park/US-0717",
       "activationCount": 1,
@@ -639,11 +712,62 @@
       }
     },
     {
+      "reference": "US-0757",
+      "name": "San Francisco Maritime",
+      "latitude": 37.8064,
+      "longitude": -122.426,
+      "locationDesc": "US-CA",
+      "counties": [],
+      "href": "/radio/pota/US-0757/",
+      "potaUrl": "https://pota.app/#/park/US-0757",
+      "activationCount": 2,
+      "qsoTotal": 24,
+      "activations": [
+        {
+          "reference": "US-0757",
+          "park": "San Francisco Maritime National Historical Park",
+          "date": "2026-08-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 11,
+            "cw": 11,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
+        {
+          "reference": "US-0757",
+          "park": "San Francisco Maritime National Historical Park",
+          "date": "2026-08-26",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 13,
+            "cw": 13,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
       "reference": "US-0776",
       "name": "Franklin Delano Roosevelt",
       "latitude": 38.8835,
       "longitude": -77.043,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0776/",
       "potaUrl": "https://pota.app/#/park/US-0776",
       "activationCount": 1,
@@ -692,6 +816,7 @@
       "latitude": 38.8878,
       "longitude": -77.0478,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0780/",
       "potaUrl": "https://pota.app/#/park/US-0780",
       "activationCount": 1,
@@ -740,6 +865,7 @@
       "latitude": 38.8893,
       "longitude": -77.0502,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0783/",
       "potaUrl": "https://pota.app/#/park/US-0783",
       "activationCount": 1,
@@ -788,6 +914,7 @@
       "latitude": 38.8779,
       "longitude": -77.0509,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0784/",
       "potaUrl": "https://pota.app/#/park/US-0784",
       "activationCount": 1,
@@ -836,6 +963,7 @@
       "latitude": 38.8864,
       "longitude": -77.0444,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0785/",
       "potaUrl": "https://pota.app/#/park/US-0785",
       "activationCount": 1,
@@ -885,6 +1013,9 @@
       "longitude": -71.411,
       "grid": "FN41ht",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-0789/",
       "potaUrl": "https://pota.app/#/park/US-0789",
       "activationCount": 2,
@@ -929,9 +1060,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 75,
-        "activations": 68,
-        "qsos": 1626
+        "attempts": 77,
+        "activations": 69,
+        "qsos": 1644
       }
     },
     {
@@ -941,6 +1072,7 @@
       "longitude": -77.0365,
       "grid": "FM18lv",
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0792/",
       "potaUrl": "https://pota.app/#/park/US-0792",
       "activationCount": 1,
@@ -989,6 +1121,7 @@
       "latitude": 38.8913,
       "longitude": -77.0477,
       "locationDesc": "US-DC",
+      "counties": [],
       "href": "/radio/pota/US-0793/",
       "potaUrl": "https://pota.app/#/park/US-0793",
       "activationCount": 1,
@@ -1038,6 +1171,9 @@
       "longitude": -71.231,
       "grid": "FN41jp",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-10541/",
       "potaUrl": "https://pota.app/#/park/US-10541",
       "activationCount": 0,
@@ -1045,9 +1181,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 114,
-        "activations": 113,
-        "qsos": 4663
+        "attempts": 120,
+        "activations": 119,
+        "qsos": 4797
       }
     },
     {
@@ -1057,6 +1193,9 @@
       "longitude": -71.4873,
       "grid": "FN41gi",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-10542/",
       "potaUrl": "https://pota.app/#/park/US-10542",
       "activationCount": 1,
@@ -1086,9 +1225,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 86,
-        "activations": 83,
-        "qsos": 3916
+        "attempts": 96,
+        "activations": 93,
+        "qsos": 4249
       }
     },
     {
@@ -1098,6 +1237,9 @@
       "longitude": -71.2583,
       "grid": "FN41io",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-10543/",
       "potaUrl": "https://pota.app/#/park/US-10543",
       "activationCount": 1,
@@ -1127,9 +1269,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 84,
-        "activations": 84,
-        "qsos": 2887
+        "attempts": 87,
+        "activations": 87,
+        "qsos": 2935
       }
     },
     {
@@ -1139,6 +1281,9 @@
       "longitude": -71.7786,
       "grid": "FN41cu",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-10544/",
       "potaUrl": "https://pota.app/#/park/US-10544",
       "activationCount": 1,
@@ -1168,9 +1313,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 32,
-        "activations": 32,
-        "qsos": 916
+        "attempts": 36,
+        "activations": 36,
+        "qsos": 1016
       }
     },
     {
@@ -1180,6 +1325,9 @@
       "longitude": -71.6411,
       "grid": "FN41em",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-10545/",
       "potaUrl": "https://pota.app/#/park/US-10545",
       "activationCount": 0,
@@ -1187,9 +1335,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 266,
-        "activations": 266,
-        "qsos": 12867
+        "attempts": 294,
+        "activations": 293,
+        "qsos": 14044
       }
     },
     {
@@ -1199,6 +1347,9 @@
       "longitude": -71.1899,
       "grid": "FN41jn",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-10546/",
       "potaUrl": "https://pota.app/#/park/US-10546",
       "activationCount": 1,
@@ -1242,9 +1393,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 59,
-        "activations": 57,
-        "qsos": 2428
+        "attempts": 61,
+        "activations": 59,
+        "qsos": 2484
       }
     },
     {
@@ -1254,6 +1405,9 @@
       "longitude": -71.4705,
       "grid": "FN41gm",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-10547/",
       "potaUrl": "https://pota.app/#/park/US-10547",
       "activationCount": 1,
@@ -1283,9 +1437,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 85,
-        "activations": 84,
-        "qsos": 3202
+        "attempts": 101,
+        "activations": 100,
+        "qsos": 3659
       }
     },
     {
@@ -1295,6 +1449,9 @@
       "longitude": -71.5639,
       "grid": "FN41fl",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-10548/",
       "potaUrl": "https://pota.app/#/park/US-10548",
       "activationCount": 1,
@@ -1324,9 +1481,44 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 48,
-        "activations": 46,
-        "qsos": 1537
+        "attempts": 52,
+        "activations": 50,
+        "qsos": 1631
+      }
+    },
+    {
+      "reference": "US-1196",
+      "name": "San Bruno Mountain",
+      "latitude": 37.6969,
+      "longitude": -122.434,
+      "locationDesc": "US-CA",
+      "counties": [],
+      "href": "/radio/pota/US-1196/",
+      "potaUrl": "https://pota.app/#/park/US-1196",
+      "activationCount": 1,
+      "qsoTotal": 14,
+      "activations": [
+        {
+          "reference": "US-1196",
+          "park": "San Bruno Mountain State Park",
+          "date": "2026-08-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 14,
+            "cw": 14,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
       }
     },
     {
@@ -1336,6 +1528,7 @@
       "longitude": -74.2666,
       "grid": "FN20uk",
       "locationDesc": "US-NJ",
+      "counties": [],
       "href": "/radio/pota/US-1611/",
       "potaUrl": "https://pota.app/#/park/US-1611",
       "activationCount": 0,
@@ -1362,6 +1555,7 @@
       "longitude": -73.0721,
       "grid": "FN31le",
       "locationDesc": "US-CT",
+      "counties": [],
       "href": "/radio/pota/US-1716/",
       "potaUrl": "https://pota.app/#/park/US-1716",
       "activationCount": 1,
@@ -1411,6 +1605,7 @@
       "longitude": -75.4897,
       "grid": "FM29gs",
       "locationDesc": "US-DE",
+      "counties": [],
       "href": "/radio/pota/US-1738/",
       "potaUrl": "https://pota.app/#/park/US-1738",
       "activationCount": 0,
@@ -1437,6 +1632,7 @@
       "longitude": -80.044,
       "grid": "EL96xt",
       "locationDesc": "US-FL",
+      "counties": [],
       "href": "/radio/pota/US-1884/",
       "potaUrl": "https://pota.app/#/park/US-1884",
       "activationCount": 8,
@@ -1577,6 +1773,7 @@
       "longitude": -80.1013,
       "grid": "EL97wa",
       "locationDesc": "US-FL",
+      "counties": [],
       "href": "/radio/pota/US-1887/",
       "potaUrl": "https://pota.app/#/park/US-1887",
       "activationCount": 1,
@@ -1626,6 +1823,7 @@
       "longitude": -73.914,
       "grid": "FN31ba",
       "locationDesc": "US-NY",
+      "counties": [],
       "href": "/radio/pota/US-2149/",
       "potaUrl": "https://pota.app/#/park/US-2149",
       "activationCount": 2,
@@ -1690,6 +1888,7 @@
       "longitude": -77.8888,
       "grid": "FM16bf",
       "locationDesc": "US-NC",
+      "counties": [],
       "href": "/radio/pota/US-2744/",
       "potaUrl": "https://pota.app/#/park/US-2744",
       "activationCount": 1,
@@ -1739,6 +1938,9 @@
       "longitude": -71.3993,
       "grid": "FN41hk",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-2868/",
       "potaUrl": "https://pota.app/#/park/US-2868",
       "activationCount": 1,
@@ -1768,9 +1970,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 224,
-        "activations": 211,
-        "qsos": 37875
+        "attempts": 237,
+        "activations": 222,
+        "qsos": 38108
       }
     },
     {
@@ -1780,6 +1982,9 @@
       "longitude": -71.4343,
       "grid": "FN41gw",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-2869/",
       "potaUrl": "https://pota.app/#/park/US-2869",
       "activationCount": 1,
@@ -1803,9 +2008,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 74,
-        "activations": 73,
-        "qsos": 1993
+        "attempts": 77,
+        "activations": 75,
+        "qsos": 2041
       }
     },
     {
@@ -1815,6 +2020,9 @@
       "longitude": -71.3542,
       "grid": "FN41hk",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-2870/",
       "potaUrl": "https://pota.app/#/park/US-2870",
       "activationCount": 1,
@@ -1844,9 +2052,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 165,
-        "activations": 162,
-        "qsos": 6364
+        "attempts": 173,
+        "activations": 169,
+        "qsos": 6649
       }
     },
     {
@@ -1856,6 +2064,9 @@
       "longitude": -71.6986,
       "grid": "FN41dj",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-2871/",
       "potaUrl": "https://pota.app/#/park/US-2871",
       "activationCount": 2,
@@ -1914,9 +2125,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 110,
-        "activations": 104,
-        "qsos": 2828
+        "attempts": 114,
+        "activations": 108,
+        "qsos": 2969
       }
     },
     {
@@ -1926,6 +2137,9 @@
       "longitude": -71.2985,
       "grid": "FN41iq",
       "locationDesc": "US-RI",
+      "counties": [
+        "Bristol County"
+      ],
       "href": "/radio/pota/US-2872/",
       "potaUrl": "https://pota.app/#/park/US-2872",
       "activationCount": 0,
@@ -1933,9 +2147,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 326,
-        "activations": 321,
-        "qsos": 12679
+        "attempts": 346,
+        "activations": 340,
+        "qsos": 13251
       }
     },
     {
@@ -1945,6 +2159,9 @@
       "longitude": -71.4897,
       "grid": "FN41gj",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-2873/",
       "potaUrl": "https://pota.app/#/park/US-2873",
       "activationCount": 1,
@@ -1974,9 +2191,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 104,
-        "activations": 101,
-        "qsos": 4149
+        "attempts": 113,
+        "activations": 110,
+        "qsos": 4853
       }
     },
     {
@@ -1986,6 +2203,9 @@
       "longitude": -71.3355,
       "grid": "FN41hl",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-2874/",
       "potaUrl": "https://pota.app/#/park/US-2874",
       "activationCount": 2,
@@ -2036,9 +2256,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 167,
-        "activations": 156,
-        "qsos": 5938
+        "attempts": 172,
+        "activations": 161,
+        "qsos": 6043
       }
     },
     {
@@ -2048,6 +2268,9 @@
       "longitude": -71.3585,
       "grid": "FN41hl",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-2875/",
       "potaUrl": "https://pota.app/#/park/US-2875",
       "activationCount": 1,
@@ -2077,9 +2300,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 170,
-        "activations": 166,
-        "qsos": 6450
+        "attempts": 187,
+        "activations": 183,
+        "qsos": 7029
       }
     },
     {
@@ -2089,6 +2312,9 @@
       "longitude": -71.4377,
       "grid": "FN41gp",
       "locationDesc": "US-RI",
+      "counties": [
+        "Kent County"
+      ],
       "href": "/radio/pota/US-2876/",
       "potaUrl": "https://pota.app/#/park/US-2876",
       "activationCount": 1,
@@ -2118,9 +2344,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 512,
-        "activations": 482,
-        "qsos": 21397
+        "attempts": 574,
+        "activations": 538,
+        "qsos": 23450
       }
     },
     {
@@ -2130,6 +2356,10 @@
       "longitude": -71.3508,
       "grid": "FN41hs",
       "locationDesc": "US-RI",
+      "counties": [
+        "Bristol County",
+        "Providence County"
+      ],
       "href": "/radio/pota/US-2877/",
       "potaUrl": "https://pota.app/#/park/US-2877",
       "activationCount": 2,
@@ -2180,9 +2410,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 175,
-        "activations": 173,
-        "qsos": 6973
+        "attempts": 187,
+        "activations": 185,
+        "qsos": 7352
       }
     },
     {
@@ -2192,6 +2422,9 @@
       "longitude": -71.4329,
       "grid": "FN41gv",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-2878/",
       "potaUrl": "https://pota.app/#/park/US-2878",
       "activationCount": 2,
@@ -2236,9 +2469,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 84,
-        "activations": 80,
-        "qsos": 2764
+        "attempts": 97,
+        "activations": 89,
+        "qsos": 2905
       }
     },
     {
@@ -2248,6 +2481,9 @@
       "longitude": -71.3634,
       "grid": "FN41hq",
       "locationDesc": "US-RI",
+      "counties": [
+        "Kent County"
+      ],
       "href": "/radio/pota/US-2879/",
       "potaUrl": "https://pota.app/#/park/US-2879",
       "activationCount": 2,
@@ -2312,9 +2548,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 202,
-        "activations": 190,
-        "qsos": 8572
+        "attempts": 213,
+        "activations": 201,
+        "qsos": 8831
       }
     },
     {
@@ -2324,6 +2560,9 @@
       "longitude": -71.5373,
       "grid": "FN41ft",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-2880/",
       "potaUrl": "https://pota.app/#/park/US-2880",
       "activationCount": 3,
@@ -2389,9 +2628,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 152,
-        "activations": 149,
-        "qsos": 5364
+        "attempts": 158,
+        "activations": 155,
+        "qsos": 5630
       }
     },
     {
@@ -2401,6 +2640,9 @@
       "longitude": -71.5097,
       "grid": "FN42fa",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-2881/",
       "potaUrl": "https://pota.app/#/park/US-2881",
       "activationCount": 1,
@@ -2430,9 +2672,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 53,
-        "activations": 51,
-        "qsos": 1288
+        "attempts": 57,
+        "activations": 55,
+        "qsos": 1334
       }
     },
     {
@@ -2442,6 +2684,7 @@
       "longitude": -79.9769,
       "grid": "FM03aw",
       "locationDesc": "US-SC",
+      "counties": [],
       "href": "/radio/pota/US-2915/",
       "potaUrl": "https://pota.app/#/park/US-2915",
       "activationCount": 1,
@@ -2491,6 +2734,7 @@
       "longitude": -82.0528,
       "grid": "EL89xd",
       "locationDesc": "US-FL",
+      "counties": [],
       "href": "/radio/pota/US-3637/",
       "potaUrl": "https://pota.app/#/park/US-3637",
       "activationCount": 1,
@@ -2539,6 +2783,7 @@
       "latitude": 38.6148,
       "longitude": -77.2748,
       "locationDesc": "US-DC,US-MD,US-PA,US-VA",
+      "counties": [],
       "href": "/radio/pota/US-4564/",
       "potaUrl": "https://pota.app/#/park/US-4564",
       "activationCount": 1,
@@ -2587,6 +2832,7 @@
       "latitude": 38.9049,
       "longitude": -77.0681,
       "locationDesc": "US-DC,US-DE,US-MD,US-NY,US-PA,US-VA",
+      "counties": [],
       "href": "/radio/pota/US-4567/",
       "potaUrl": "https://pota.app/#/park/US-4567",
       "activationCount": 1,
@@ -2635,6 +2881,7 @@
       "latitude": 39.2652,
       "longitude": -76.5836,
       "locationDesc": "US-DC,US-MD,US-VA",
+      "counties": [],
       "href": "/radio/pota/US-4581/",
       "potaUrl": "https://pota.app/#/park/US-4581",
       "activationCount": 1,
@@ -2679,10 +2926,22 @@
     },
     {
       "reference": "US-4582",
-      "name": "Washington-Rochambeau Revolutionary Route",
+      "name": "Washington-Rochambeau Revolutionary Route National Historic Trail",
       "latitude": 41.312,
       "longitude": -73.9709,
+      "grid": "FN31ah",
       "locationDesc": "US-CT,US-DC,US-DE,US-MA,US-MD,US-NJ,US-NY,US-PA,US-RI,US-VA",
+      "counties": [
+        "Bristol County",
+        "Kent County",
+        "Newport County",
+        "Providence County"
+      ],
+      "mapPoint": {
+        "latitude": 41.7445710002769,
+        "longitude": -71.594458000176,
+        "notes": "Reviewed map point on the NPS Rhode Island route segment near the center of the state. The official POTA coordinate represents the multi-state trail and is outside Rhode Island."
+      },
       "href": "/radio/pota/US-4582/",
       "potaUrl": "https://pota.app/#/park/US-4582",
       "activationCount": 2,
@@ -2727,9 +2986,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": null,
-        "activations": null,
-        "qsos": null
+        "attempts": 2757,
+        "activations": 2705,
+        "qsos": 113684
       }
     },
     {
@@ -2739,6 +2998,7 @@
       "longitude": -82.295,
       "grid": "EL89ua",
       "locationDesc": "US-FL",
+      "counties": [],
       "href": "/radio/pota/US-4638/",
       "potaUrl": "https://pota.app/#/park/US-4638",
       "activationCount": 1,
@@ -2788,6 +3048,9 @@
       "longitude": -71.7359,
       "grid": "FN41dp",
       "locationDesc": "US-RI",
+      "counties": [
+        "Kent County"
+      ],
       "href": "/radio/pota/US-5482/",
       "potaUrl": "https://pota.app/#/park/US-5482",
       "activationCount": 1,
@@ -2817,9 +3080,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 69,
-        "activations": 68,
-        "qsos": 3053
+        "attempts": 73,
+        "activations": 72,
+        "qsos": 3127
       }
     },
     {
@@ -2829,6 +3092,9 @@
       "longitude": -71.4327,
       "grid": "FN41gv",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-5483/",
       "potaUrl": "https://pota.app/#/park/US-5483",
       "activationCount": 2,
@@ -2873,9 +3139,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 74,
-        "activations": 70,
-        "qsos": 2393
+        "attempts": 86,
+        "activations": 78,
+        "qsos": 2524
       }
     },
     {
@@ -2885,6 +3151,9 @@
       "longitude": -71.7359,
       "grid": "FN41dw",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-5484/",
       "potaUrl": "https://pota.app/#/park/US-5484",
       "activationCount": 2,
@@ -2935,9 +3204,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 63,
-        "activations": 61,
-        "qsos": 2297
+        "attempts": 64,
+        "activations": 62,
+        "qsos": 2308
       }
     },
     {
@@ -2947,6 +3216,7 @@
       "longitude": -80.1429,
       "grid": "EL96wx",
       "locationDesc": "US-FL",
+      "counties": [],
       "href": "/radio/pota/US-6281/",
       "potaUrl": "https://pota.app/#/park/US-6281",
       "activationCount": 1,
@@ -2996,6 +3266,10 @@
       "longitude": -71.685,
       "grid": "FN41dn",
       "locationDesc": "US-RI",
+      "counties": [
+        "Kent County",
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6979/",
       "potaUrl": "https://pota.app/#/park/US-6979",
       "activationCount": 1,
@@ -3025,9 +3299,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 430,
-        "activations": 425,
-        "qsos": 14681
+        "attempts": 442,
+        "activations": 437,
+        "qsos": 15126
       }
     },
     {
@@ -3037,6 +3311,9 @@
       "longitude": -71.7864,
       "grid": "FN41cn",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6980/",
       "potaUrl": "https://pota.app/#/park/US-6980",
       "activationCount": 0,
@@ -3044,9 +3321,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 382,
-        "activations": 379,
-        "qsos": 12737
+        "attempts": 389,
+        "activations": 386,
+        "qsos": 13068
       }
     },
     {
@@ -3056,6 +3333,9 @@
       "longitude": -71.5796,
       "grid": "FN41fl",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6981/",
       "potaUrl": "https://pota.app/#/park/US-6981",
       "activationCount": 0,
@@ -3063,9 +3343,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 60,
-        "activations": 58,
-        "qsos": 2026
+        "attempts": 65,
+        "activations": 63,
+        "qsos": 2177
       }
     },
     {
@@ -3075,6 +3355,10 @@
       "longitude": -71.5714,
       "grid": "FN41fp",
       "locationDesc": "US-RI",
+      "counties": [
+        "Kent County",
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6982/",
       "potaUrl": "https://pota.app/#/park/US-6982",
       "activationCount": 3,
@@ -3154,9 +3438,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 327,
-        "activations": 326,
-        "qsos": 13818
+        "attempts": 350,
+        "activations": 349,
+        "qsos": 14776
       }
     },
     {
@@ -3166,6 +3450,9 @@
       "longitude": -71.7448,
       "grid": "FN41di",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6983/",
       "potaUrl": "https://pota.app/#/park/US-6983",
       "activationCount": 1,
@@ -3209,9 +3496,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 46,
-        "activations": 46,
-        "qsos": 1409
+        "attempts": 52,
+        "activations": 51,
+        "qsos": 1495
       }
     },
     {
@@ -3221,6 +3508,9 @@
       "longitude": -71.6568,
       "grid": "FN41ex",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-6984/",
       "potaUrl": "https://pota.app/#/park/US-6984",
       "activationCount": 1,
@@ -3276,6 +3566,9 @@
       "longitude": -71.7011,
       "grid": "FN42da",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-6985/",
       "potaUrl": "https://pota.app/#/park/US-6985",
       "activationCount": 2,
@@ -3320,9 +3613,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 63,
-        "activations": 62,
-        "qsos": 2301
+        "attempts": 69,
+        "activations": 66,
+        "qsos": 2466
       }
     },
     {
@@ -3332,6 +3625,9 @@
       "longitude": -71.1341,
       "grid": "FN41km",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-6986/",
       "potaUrl": "https://pota.app/#/park/US-6986",
       "activationCount": 1,
@@ -3387,6 +3683,9 @@
       "longitude": -71.4599,
       "grid": "FN41gn",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6987/",
       "potaUrl": "https://pota.app/#/park/US-6987",
       "activationCount": 1,
@@ -3416,9 +3715,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 70,
-        "activations": 64,
-        "qsos": 2546
+        "attempts": 91,
+        "activations": 85,
+        "qsos": 3366
       }
     },
     {
@@ -3428,6 +3727,9 @@
       "longitude": -71.7591,
       "grid": "FN41cj",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6988/",
       "potaUrl": "https://pota.app/#/park/US-6988",
       "activationCount": 0,
@@ -3435,9 +3737,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 49,
-        "activations": 44,
-        "qsos": 1387
+        "attempts": 50,
+        "activations": 45,
+        "qsos": 1400
       }
     },
     {
@@ -3447,6 +3749,9 @@
       "longitude": -71.7285,
       "grid": "FN41dl",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6989/",
       "potaUrl": "https://pota.app/#/park/US-6989",
       "activationCount": 1,
@@ -3476,9 +3781,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 64,
-        "activations": 63,
-        "qsos": 2384
+        "attempts": 66,
+        "activations": 65,
+        "qsos": 2416
       }
     },
     {
@@ -3488,6 +3793,9 @@
       "longitude": -71.7739,
       "grid": "FN41cq",
       "locationDesc": "US-RI",
+      "counties": [
+        "Kent County"
+      ],
       "href": "/radio/pota/US-6990/",
       "potaUrl": "https://pota.app/#/park/US-6990",
       "activationCount": 1,
@@ -3517,9 +3825,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 63,
-        "activations": 62,
-        "qsos": 3068
+        "attempts": 68,
+        "activations": 67,
+        "qsos": 3181
       }
     },
     {
@@ -3529,6 +3837,9 @@
       "longitude": -71.7591,
       "grid": "FN41cm",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-6991/",
       "potaUrl": "https://pota.app/#/park/US-6991",
       "activationCount": 1,
@@ -3572,9 +3883,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 54,
-        "activations": 52,
-        "qsos": 2335
+        "attempts": 59,
+        "activations": 54,
+        "qsos": 2365
       }
     },
     {
@@ -3584,6 +3895,9 @@
       "longitude": -71.5516,
       "grid": "FN41fs",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
       "activationCount": 33,
@@ -4276,9 +4590,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 73,
-        "activations": 70,
-        "qsos": 2260
+        "attempts": 84,
+        "activations": 79,
+        "qsos": 2450
       }
     },
     {
@@ -4288,6 +4602,9 @@
       "longitude": -71.7969,
       "grid": "FN41cw",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-7508/",
       "potaUrl": "https://pota.app/#/park/US-7508",
       "activationCount": 1,
@@ -4331,9 +4648,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 112,
-        "activations": 111,
-        "qsos": 3401
+        "attempts": 122,
+        "activations": 121,
+        "qsos": 3525
       }
     },
     {
@@ -4343,6 +4660,9 @@
       "longitude": -71.6868,
       "grid": "FN41di",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7518/",
       "potaUrl": "https://pota.app/#/park/US-7518",
       "activationCount": 1,
@@ -4386,9 +4706,44 @@
         }
       ],
       "publicStats": {
-        "attempts": 40,
-        "activations": 40,
-        "qsos": 1004
+        "attempts": 41,
+        "activations": 41,
+        "qsos": 1014
+      }
+    },
+    {
+      "reference": "US-7587",
+      "name": "Flintville",
+      "latitude": 35.0843,
+      "longitude": -86.3757,
+      "locationDesc": "US-TN",
+      "counties": [],
+      "href": "/radio/pota/US-7587/",
+      "potaUrl": "https://pota.app/#/park/US-7587",
+      "activationCount": 1,
+      "qsoTotal": 13,
+      "activations": [
+        {
+          "reference": "US-7587",
+          "park": "Flintville Wildlife Management Area",
+          "date": "2026-08-23",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 13,
+            "cw": 13,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
       }
     },
     {
@@ -4398,6 +4753,9 @@
       "longitude": -71.7893,
       "grid": "FN41cx",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-7714/",
       "potaUrl": "https://pota.app/#/park/US-7714",
       "activationCount": 1,
@@ -4427,9 +4785,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 108,
-        "activations": 108,
-        "qsos": 4266
+        "attempts": 116,
+        "activations": 115,
+        "qsos": 4425
       }
     },
     {
@@ -4439,6 +4797,9 @@
       "longitude": -71.7841,
       "grid": "FN41cv",
       "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-7715/",
       "potaUrl": "https://pota.app/#/park/US-7715",
       "activationCount": 1,
@@ -4482,9 +4843,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 76,
-        "activations": 76,
-        "qsos": 2920
+        "attempts": 78,
+        "activations": 78,
+        "qsos": 2961
       }
     },
     {
@@ -4494,6 +4855,9 @@
       "longitude": -71.689,
       "grid": "FN41dl",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7716/",
       "potaUrl": "https://pota.app/#/park/US-7716",
       "activationCount": 1,
@@ -4537,9 +4901,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 71,
-        "activations": 70,
-        "qsos": 3396
+        "attempts": 76,
+        "activations": 75,
+        "qsos": 3540
       }
     },
     {
@@ -4549,6 +4913,9 @@
       "longitude": -71.6382,
       "grid": "FN41ei",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7717/",
       "potaUrl": "https://pota.app/#/park/US-7717",
       "activationCount": 2,
@@ -4593,9 +4960,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 55,
-        "activations": 53,
-        "qsos": 1959
+        "attempts": 59,
+        "activations": 57,
+        "qsos": 2035
       }
     },
     {
@@ -4605,6 +4972,9 @@
       "longitude": -71.5251,
       "grid": "FN41fj",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7718/",
       "potaUrl": "https://pota.app/#/park/US-7718",
       "activationCount": 1,
@@ -4634,9 +5004,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 58,
-        "activations": 58,
-        "qsos": 1913
+        "attempts": 67,
+        "activations": 67,
+        "qsos": 2140
       }
     },
     {
@@ -4646,6 +5016,9 @@
       "longitude": -71.8025,
       "grid": "FN41ch",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7719/",
       "potaUrl": "https://pota.app/#/park/US-7719",
       "activationCount": 1,
@@ -4689,9 +5062,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 80,
-        "activations": 77,
-        "qsos": 2200
+        "attempts": 89,
+        "activations": 83,
+        "qsos": 2302
       }
     },
     {
@@ -4701,6 +5074,9 @@
       "longitude": -71.5004,
       "grid": "FN41fi",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7720/",
       "potaUrl": "https://pota.app/#/park/US-7720",
       "activationCount": 1,
@@ -4730,9 +5106,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 78,
-        "activations": 77,
-        "qsos": 2132
+        "attempts": 81,
+        "activations": 80,
+        "qsos": 2222
       }
     },
     {
@@ -4742,6 +5118,9 @@
       "longitude": -71.5127,
       "grid": "FN41fj",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7721/",
       "potaUrl": "https://pota.app/#/park/US-7721",
       "activationCount": 1,
@@ -4771,9 +5150,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 54,
-        "activations": 53,
-        "qsos": 1253
+        "attempts": 58,
+        "activations": 57,
+        "qsos": 1332
       }
     },
     {
@@ -4783,6 +5162,9 @@
       "longitude": -71.4731,
       "grid": "FN41gj",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7722/",
       "potaUrl": "https://pota.app/#/park/US-7722",
       "activationCount": 1,
@@ -4812,9 +5194,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 95,
-        "activations": 95,
-        "qsos": 3369
+        "attempts": 97,
+        "activations": 97,
+        "qsos": 3392
       }
     },
     {
@@ -4824,6 +5206,9 @@
       "longitude": -71.4374,
       "grid": "FN41gm",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7723/",
       "potaUrl": "https://pota.app/#/park/US-7723",
       "activationCount": 1,
@@ -4853,9 +5238,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 66,
-        "activations": 66,
-        "qsos": 2480
+        "attempts": 72,
+        "activations": 72,
+        "qsos": 2572
       }
     },
     {
@@ -4865,6 +5250,9 @@
       "longitude": -71.6733,
       "grid": "FN41di",
       "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
       "href": "/radio/pota/US-7865/",
       "potaUrl": "https://pota.app/#/park/US-7865",
       "activationCount": 1,
@@ -4914,12 +5302,50 @@
       }
     },
     {
+      "reference": "US-7889",
+      "name": "Presidio of SF",
+      "latitude": 37.802,
+      "longitude": -122.457,
+      "locationDesc": "US-CA",
+      "counties": [],
+      "href": "/radio/pota/US-7889/",
+      "potaUrl": "https://pota.app/#/park/US-7889",
+      "activationCount": 1,
+      "qsoTotal": 21,
+      "activations": [
+        {
+          "reference": "US-7889",
+          "park": "Presidio of SF National Historic Site",
+          "date": "2026-08-28",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 21,
+            "cw": 21,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        }
+      ],
+      "notes": [],
+      "publicStats": {
+        "attempts": null,
+        "activations": null,
+        "qsos": null
+      }
+    },
+    {
       "reference": "US-7971",
       "name": "Blackstone River Valley National Historical Park",
       "latitude": 42.015,
       "longitude": -71.5529,
       "grid": "FN42fa",
       "locationDesc": "US-MA,US-RI",
+      "counties": [
+        "Providence County"
+      ],
       "href": "/radio/pota/US-7971/",
       "potaUrl": "https://pota.app/#/park/US-7971",
       "activationCount": 2,
@@ -4978,9 +5404,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 55,
-        "activations": 52,
-        "qsos": 1616
+        "attempts": 59,
+        "activations": 55,
+        "qsos": 1682
       }
     },
     {
@@ -4990,6 +5416,9 @@
       "longitude": -71.2089,
       "grid": "FN41jn",
       "locationDesc": "US-RI",
+      "counties": [
+        "Newport County"
+      ],
       "href": "/radio/pota/US-8293/",
       "potaUrl": "https://pota.app/#/park/US-8293",
       "activationCount": 1,
@@ -5026,9 +5455,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 140,
-        "activations": 134,
-        "qsos": 6750
+        "attempts": 143,
+        "activations": 137,
+        "qsos": 6984
       }
     },
     {
@@ -5037,6 +5466,7 @@
       "latitude": 38.793,
       "longitude": -77.0496,
       "locationDesc": "US-DC,US-VA",
+      "counties": [],
       "href": "/radio/pota/US-9898/",
       "potaUrl": "https://pota.app/#/park/US-9898",
       "activationCount": 1,
@@ -5085,6 +5515,7 @@
       "latitude": 38.9346,
       "longitude": -77.126,
       "locationDesc": "US-DC,US-MD,US-VA",
+      "counties": [],
       "href": "/radio/pota/US-9901/",
       "potaUrl": "https://pota.app/#/park/US-9901",
       "activationCount": 1,

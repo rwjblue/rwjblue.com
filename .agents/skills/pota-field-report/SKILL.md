@@ -49,7 +49,8 @@ not add a separate hero-image field.
 2. Ask for missing essentials only when needed for a credible draft: park or
    location, operation date, and a basic activation result.
 3. For each referenced park, run
-   `mise run pota:park:ensure -- US-1234` before linking it.
+   `mise run pota:park:ensure -- US-1234` before linking it. RI metadata resolves
+   from the pinned `@ripota/parks` package; non-RI metadata is cached locally.
 4. Draft the note in `src/content/notes/`, following the base skill and report
    template.
 5. Sanitize supplied images with
@@ -163,7 +164,7 @@ In addition to the base checklist, confirm:
 
 - Park/reference text links to local canonical pages.
 - Every reference has a lowercase frontmatter tag.
-- Local park metadata exists.
+- Park metadata exists in `@ripota/parks` or the non-RI local cache.
 - Where, when, equipment, activation result, and useful field lessons are
   present when known.
 - Cataloged equipment named in the report links to its equipment page.
