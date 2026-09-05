@@ -17,9 +17,9 @@
       "qsos": 3343
     },
     "attempts": {
-      "activations": 155,
+      "activations": 156,
       "parks": 93,
-      "qsos": 3392
+      "qsos": 3396
     },
     "hunter": {
       "parks": 570,
@@ -30,6 +30,16 @@
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-09-03",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 4,
+        "data": 0,
+        "phone": 0,
+        "total": 4
+      },
       {
         "date": "2026-08-28",
         "reference": "US-0647",
@@ -264,16 +274,6 @@
         "date": "2026-07-06",
         "reference": "US-6281",
         "park": "Loxahatchee River National Wild and Scenic River",
-        "location": "US-FL",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-07-06",
-        "reference": "US-1887",
-        "park": "Jonathan Dickinson State Park",
         "location": "US-FL",
         "cw": 11,
         "data": 0,

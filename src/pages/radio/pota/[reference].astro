@@ -1,6 +1,7 @@
 ---
 import "leaflet/dist/leaflet.css";
-import riParkCatalog from "@ripota/parks/catalog.json";
+import { getDisplayReference } from "@ripota/parks/display";
+import { readRiParkDisplayGeometry } from "../../../lib/pota/ri-park-geometry";
 
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
@@ -28,9 +29,7 @@ export async function getStaticPaths() {
 }
 
 const { park } = Astro.props;
-const riCatalogPark = riParkCatalog.references.find(
-  (reference) => reference.reference === park.reference,
-);
+const riDisplayPark = getDisplayReference(park.reference);
 const parkJson = JSON.stringify({
   reference: park.reference,
   name: park.name,
@@ -38,8 +37,8 @@ const parkJson = JSON.stringify({
   longitude: park.longitude,
   mapPoint: park.mapPoint,
   locationDesc: park.locationDesc,
-  displayGeometry: riCatalogPark?.geojson ?? null,
-  geometryKind: riCatalogPark?.geometryKind ?? null,
+  displayGeometry: await readRiParkDisplayGeometry(park.reference),
+  geometryKind: riDisplayPark?.geometryKind ?? null,
 }).replaceAll("<", "\\u003c");
 
 const formattedGeneratedDate = new Date(
@@ -129,7 +128,7 @@ const description =
       <div class="pota-park-map-stack">
         <div id="pota-park-map" class="pota-park-map" aria-label={`Map of ${park.name}`}></div>
         {
-          riCatalogPark && (
+          riDisplayPark && (
             <p class="pota-park-map-note">
               Reviewed display geometry from the <a href="https://github.com/ripota/parks">Rhode Island POTA park dataset</a>. General reference only; not a legal boundary or access map.
             </p>

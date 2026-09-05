@@ -62,3 +62,39 @@ test("RI public statistics reject metadata drift from the POTA API", () => {
     /changed US-0513\.name.*Release the updated park data and bump/,
   );
 });
+
+test("RI public statistics accept normalized IDs and coordinate strings", () => {
+  const parks = apiParks();
+  parks[0] = {
+    ...parks[0],
+    reference: parks[0].reference.toLowerCase(),
+    latitude: String(parks[0].latitude),
+    longitude: String(parks[0].longitude),
+  };
+
+  const stats = buildRiPotaPublicStats(parks, "2026-09-05T12:00:00.000Z");
+  assert.equal(stats.parks[0].reference, "US-0513");
+  assert.equal(stats.parks[0].attempts, 1);
+});
+
+test("RI public statistics reject ambiguous or malformed API inventories", () => {
+  const parks = apiParks();
+  const generatedAt = "2026-09-05T12:00:00.000Z";
+
+  assert.throws(
+    () => buildRiPotaPublicStats([...parks, { ...parks[0], reference: "us-0513" }], generatedAt),
+    /duplicate API references US-0513/,
+  );
+  assert.throws(
+    () => buildRiPotaPublicStats([...parks, { ...parks[0], reference: "invalid" }], generatedAt),
+    /invalid API references at indices 61/,
+  );
+  assert.throws(
+    () => buildRiPotaPublicStats(parks.slice(1), generatedAt),
+    /missing US-0513/,
+  );
+  assert.throws(
+    () => buildRiPotaPublicStats([...parks, { ...parks[0], reference: "US-99999" }], generatedAt),
+    /new US-99999/,
+  );
+});

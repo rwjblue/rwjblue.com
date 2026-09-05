@@ -1,7 +1,8 @@
 import { references } from "@ripota/parks";
-import catalog from "@ripota/parks/catalog.json" with { type: "json" };
+import { diffReferences } from "@ripota/parks/compare";
+import { getDisplayReference } from "@ripota/parks/display";
 
-import type { PotaMapPoint, PotaPark } from "./parks.ts";
+import type { PotaPark } from "./parks.ts";
 
 export interface RiPotaPublicStats {
   generatedAt: string;
@@ -11,11 +12,6 @@ export interface RiPotaPublicStats {
     activations?: number;
     qsos?: number;
   }>;
-}
-
-interface CatalogReference {
-  reference: string;
-  mapPoint?: PotaMapPoint;
 }
 
 interface PotaApiPark {
@@ -30,20 +26,6 @@ interface PotaApiPark {
   qsos?: number | string | null;
 }
 
-const metadataFields = [
-  "name",
-  "latitude",
-  "longitude",
-  "grid",
-  "locationDesc",
-] as const;
-
-const catalogReferences = (catalog as { references: CatalogReference[] })
-  .references;
-const catalogByReference = new Map(
-  catalogReferences.map((reference) => [reference.reference, reference]),
-);
-
 export const riPotaReferenceIds = references.map(
   (reference) => reference.reference,
 );
@@ -57,7 +39,14 @@ export function readRiPotaParks(
 
   return references.map((reference) => {
     const stats = statsByReference.get(reference.reference);
-    const mapPoint = catalogByReference.get(reference.reference)?.mapPoint;
+    const point = getDisplayReference(reference.reference)?.displayPoint;
+    const mapPoint = point?.source === "reviewed"
+      ? {
+          latitude: point.latitude,
+          longitude: point.longitude,
+          notes: point.notes ?? "",
+        }
+      : undefined;
 
     return {
       ...reference,
@@ -95,42 +84,29 @@ export function buildRiPotaPublicStats(
 }
 
 export function assertPackageMatchesApi(apiParks: PotaApiPark[]): void {
-  const packageByReference = new Map(
-    references.map((park) => [park.reference, park]),
+  const diff = diffReferences(references, apiParks);
+  const changed = diff.changed.flatMap(({ reference, fields }) =>
+    Object.keys(fields).map((field) => `${reference}.${field}`),
   );
-  const apiByReference = new Map(
-    apiParks.map((park) => [park.reference.toUpperCase(), park]),
-  );
-  const missing = references
-    .filter((park) => !apiByReference.has(park.reference))
-    .map((park) => park.reference);
-  const extra = apiParks
-    .map((park) => park.reference.toUpperCase())
-    .filter((reference) => !packageByReference.has(reference));
-  const changed: string[] = [];
+  const details = [
+    diff.missing.length > 0 ? `missing ${diff.missing.join(", ")}` : null,
+    diff.added.length > 0 ? `new ${diff.added.join(", ")}` : null,
+    changed.length > 0 ? `changed ${changed.join(", ")}` : null,
+    diff.duplicates.expected.length > 0
+      ? `duplicate package references ${diff.duplicates.expected.join(", ")}`
+      : null,
+    diff.duplicates.actual.length > 0
+      ? `duplicate API references ${diff.duplicates.actual.join(", ")}`
+      : null,
+    diff.invalid.expected.length > 0
+      ? `invalid package references at indices ${diff.invalid.expected.join(", ")}`
+      : null,
+    diff.invalid.actual.length > 0
+      ? `invalid API references at indices ${diff.invalid.actual.join(", ")}`
+      : null,
+  ].filter(Boolean);
 
-  for (const apiPark of apiParks) {
-    const reference = apiPark.reference.toUpperCase();
-    const packagePark = packageByReference.get(reference);
-
-    if (!packagePark) {
-      continue;
-    }
-
-    for (const field of metadataFields) {
-      if (apiPark[field] !== packagePark[field]) {
-        changed.push(`${reference}.${field}`);
-      }
-    }
-  }
-
-  if (missing.length > 0 || extra.length > 0 || changed.length > 0) {
-    const details = [
-      missing.length > 0 ? `missing ${missing.join(", ")}` : null,
-      extra.length > 0 ? `new ${extra.join(", ")}` : null,
-      changed.length > 0 ? `changed ${changed.join(", ")}` : null,
-    ].filter(Boolean);
-
+  if (details.length > 0) {
     throw new Error(
       `@ripota/parks does not match the current POTA API (${details.join("; ")}). ` +
         "Release the updated park data and bump the pinned dependency before refreshing the site.",

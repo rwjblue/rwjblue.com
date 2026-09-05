@@ -1897,6 +1897,19 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-6992",
+      "park": "JL Curran State Park",
+      "date": "2026-09-03",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 4,
+        "cw": 4,
+        "data": 0,
+        "phone": 0
+      },
+      "source": "profile"
     }
   ]
 }

@@ -13,7 +13,7 @@
   "devDependencies": {
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
-    "@ripota/parks": "https://github.com/ripota/parks/releases/download/v3.0.3/ripota-parks-3.0.3.tgz",
+    "@ripota/parks": "https://github.com/ripota/parks/releases/download/v3.1.1/ripota-parks-3.1.1.tgz",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^26.1.1",
     "@types/sanitize-html": "^2.16.1",

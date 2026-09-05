@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T14:07:09.743Z",
+  "generatedAt": "2026-09-05T13:15:46.238Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -3900,9 +3900,24 @@
       ],
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 33,
-      "qsoTotal": 891,
+      "activationCount": 34,
+      "qsoTotal": 895,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-09-03",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 4,
+            "cw": 4,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": []
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",

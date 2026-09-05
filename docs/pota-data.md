@@ -9,8 +9,10 @@ hand-edit a second Rhode Island park inventory in this repository.
 the stable package metadata with a small, generated public-statistics cache at
 `data/pota/ri/cache/public-stats.json`. Refreshing those counters verifies that
 the live POTA API still has the same reference inventory and core metadata as
-the pinned package. A mismatch stops the refresh so the shared dataset can be
-updated and released first.
+the pinned package. The package's `diffReferences` API normalizes inventory
+comparisons and reports duplicates and invalid reference IDs as well as metadata
+drift. A mismatch stops the refresh so the shared dataset can be updated and
+released first.
 
 The other durable and generated layers remain local:
 
@@ -21,11 +23,16 @@ The other durable and generated layers remain local:
 - `src/data/pota/ri-tracker.json` and `src/data/pota/parks.json` are generated
   site data and should not be edited by hand.
 
-Canonical Rhode Island park pages embed the package's reviewed display
-geometry at build time. The geometry does not enter the shared browser bundle,
-and non-Rhode Island pages keep their existing point maps. Where the package
-provides a reviewed `mapPoint`, map consumers use it for presentation while
-retaining the official POTA latitude and longitude as source metadata.
+Canonical Rhode Island park pages embed the package's `boundaries-web/*`
+geometry at build time through `src/lib/pota/ri-park-geometry.ts`. These smaller
+map artifacts preserve disconnected parcels and holes, and keep activation-zone
+coordinates unchanged. Detailed and source artifacts remain available in the
+package for closer inspection. The geometry does not enter the shared browser
+bundle, and non-Rhode Island pages keep their existing point maps. The adapter uses
+`@ripota/parks/display` for reviewed presentation points without importing the
+full geometry catalog. Map consumers retain the official POTA latitude and
+longitude as source metadata. The current inventory has no research-needed
+references, so it does not require the opt-in schema-v3 fallback catalog.
 
 Run `mise run pota:update` after a profile, activation, or field-note change.
 Use `--full-backfill` when historical RI activation data also needs refreshing.
