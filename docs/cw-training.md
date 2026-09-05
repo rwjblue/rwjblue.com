@@ -1,0 +1,173 @@
+# CW training companion
+
+`/radio/cw-training/` is the private CW Academy practice companion. The page
+shell is static; curriculum, instructor materials, preferences, and practice
+history come from an authenticated Worker API. It is excluded from search and
+sitemaps, and does not load the site's analytics beacon.
+
+## Daily use
+
+- Today recommends the next exercise that fits a 10- or 15-minute block.
+- Focus provides a timer, official audio player, source instructions, and
+  large sending text. Save for later preserves an unfinished block locally.
+- Week exposes all 16 meetings and 48 assignments, including later on-air work.
+- Materials accepts pasted instructions, text files, or links. Preparation,
+  class-only, reference, and unknown-purpose material remain distinct. Revisions
+  preserve previous text and never rewrite completed practice.
+- Preferences provides the block length, class join link, calendar reminder
+  time, data export, and device clearing.
+
+The imported course begins Saturday, September 5, 2026. Classes are Mondays and
+Thursdays, 3:30-4:30 p.m. in `America/New_York`, from September 7 through October
+29. Saturday/Sunday/Monday prepare for Monday; Tuesday/Wednesday/Thursday
+prepare for Thursday. Friday has no independent-practice quota. Class time does
+not count toward the 60-minute practice goal.
+
+Practice minutes and assignment coverage are separate. Whole audio passes are
+packed into blocks; seeking past an unheard section does not complete a pass.
+Coverage and the final completion check-in are both required. A prescribed
+15-minute simulator run cannot be replaced by two short interrupted runs.
+Earlier missed work is offered explicitly without creating an endless backlog;
+all assignments remain accessible in Week. Optional review fills a remaining
+daily time goal after required work is done. Live CWT tasks show eligible
+operating windows and are recommended only while a window is active.
+
+Official MP3s play directly in a native audio element, without a `crossorigin`
+attribute. The source supports playback and range requests but does not grant
+cross-origin fetch access. There is no audio proxy, mirror, waveform fetch, or
+automatic transcription. Initial playback needs a user gesture. Media Session
+controls are progressive enhancements; uninterrupted playback with a locked
+phone still requires real-device verification. Offline audio is not promised.
+
+Instant-recognition trainers, Morse Runner, a physical key/radio, and online
+class meetings remain external resources. The page guides and logs those
+exercises; it does not replace them or score live sending.
+
+## Private data and synchronization
+
+`src/lib/cw-training/types.ts` defines the course, assignment, attempt, material,
+and preference contracts. `plan.ts` derives the queue from those records.
+IndexedDB retains the downloaded snapshot, pending changes, and active block.
+The service worker caches only the generic shell and public code/assets, never
+API responses or instructor content. Use a trusted device and clear its training
+data before sharing it. Local data is not encrypted separately from browser
+storage; a lost device can expose its saved snapshot.
+
+D1 owns synced records. Attempts and material revisions are immutable and
+idempotent by ID. Preferences use their update timestamp to resolve stale
+device writes. API responses use `private, no-store`; mutations require a
+same-origin JSON request with bounded input. The Worker verifies the Access
+JWT's signature, issuer, audience, expiry, and configured owner email. Client
+identity headers cannot enroll another user.
+
+The calendar URL is a bearer capability. Its token is stored only as a SHA-256
+hash in D1 and can be rotated or revoked in preferences. It exposes generic
+practice reminders and a link to the page, never class links, instructor text,
+or history. Treat the subscription URL as private. Automatic Worker invocation
+logging is disabled because it would record the token-bearing request path.
+Calendar apps control refresh timing and whether subscribed alarms are shown.
+
+## Cloudflare setup
+
+`wrangler.jsonc` binds the `rwjblue-cw-training` database as `TRAINING_DB`.
+The database and course are provisioned. Access must be configured before a
+production user can sign in; empty Access variables intentionally return 503
+and never expose the seeded curriculum.
+
+Create a self-hosted Cloudflare Access application protecting
+`rwjblue.com/api/cw-training/*` and `n1rwj.com/api/cw-training/*`. Keep the shell
+and `/api/cw-training-calendar/*` outside Access. The latter performs its own
+capability validation. Permit only the owner's email, currently
+`me@rwjblue.com`, using an existing identity provider or one-time PIN.
+
+Set both application and allow-policy session duration to `720h` (30 days).
+This avoids a daily code prompt; clearing cookies, revocation, or changing
+browsers can still require earlier sign-in. Do not change unrelated global
+session settings. Set these non-secret Worker variables in `wrangler.jsonc`:
+
+```text
+TRAINING_ACCESS_TEAM=https://<team>.cloudflareaccess.com
+TRAINING_ACCESS_AUD=<Access application audience tag>
+TRAINING_OWNER_EMAIL=me@rwjblue.com
+```
+
+The current Wrangler OAuth deployment token does not grant Access organization
+configuration. Setup requires the dashboard or a locally supplied API token
+with account permissions `Access: Apps and Policies Write` and
+`Access: Organizations, Identity Providers, and Groups Write`. Never commit
+that token. Configure both hostnames in one application/audience, or use only
+the canonical hostname until both are protected. The Worker still rejects
+unsigned requests on preview/alternate hosts.
+
+See Cloudflare's [session management documentation](https://developers.cloudflare.com/cloudflare-one/access-controls/access-settings/session-management/)
+and [Access application API](https://developers.cloudflare.com/api/resources/zero_trust/subresources/access/subresources/applications/methods/create/).
+
+## Curriculum import and updates
+
+The importer uses the [official Intermediate curriculum](https://cwa.cwops.org/wp-content/uploads/Practice-Instructions-Intermediate-ver.2.2.htm),
+[practice-file index](https://cwops.org/intermediate-practice-files/), and
+[sending scales](https://cwops.org/wp-content/uploads/2024/08/Everyday-Send-Code-Web.htm).
+It preserves original wording and selected sending sections privately. Full
+curriculum text and recordings must not be checked into the public repository.
+Only generic parser/planner code and synthetic tests are tracked.
+
+```bash
+node scripts/cw-training/import.mjs \
+  --output .tmp/cw-training-course.json \
+  --sql .tmp/cw-training-course.sql \
+  --probe-audio
+npx wrangler d1 migrations apply rwjblue-cw-training --remote
+npx wrangler d1 execute rwjblue-cw-training --remote \
+  --file .tmp/cw-training-course.sql
+```
+
+Review changes to the private JSON before reimporting. Stable assignment/task
+IDs preserve existing attempts. SQL uses bounded staging chunks and publishes
+the final valid course atomically; a failed partial import leaves the previous
+course intact. The production import has 48 assignments, 214 tasks, and 117
+resolved recordings with measured durations.
+
+Two source discrepancies intentionally remain unresolved: `CWT209-20` versus
+the index's 25-WPM file, and `CWT213-25` versus its 30-WPM file. Ask the advisor
+which recording to use before updating these resource records. The importer
+never invents a substitute URL. Session/day speed exceptions are preserved.
+
+Instructor files are added through Materials, not by changing the curriculum.
+There is no inbox access or automatic email ingestion. Unknown file formats,
+rescheduled class dates, and a built-in instant-recognition trainer are future
+extensions; do not silently reinterpret instructor directions.
+
+## Local development and verification
+
+Create an ignored `.dev.vars` containing only:
+
+```dotenv
+TRAINING_DEV_USER="cw-training-local-qa"
+TRAINING_ACCESS_TEAM=""
+TRAINING_ACCESS_AUD=""
+```
+
+The development identity works only on loopback with both production Access
+settings empty. Never add `TRAINING_DEV_USER` to production configuration.
+
+```bash
+npx wrangler d1 migrations apply rwjblue-cw-training --local
+npx wrangler d1 execute rwjblue-cw-training --local \
+  --file .tmp/cw-training-course.sql
+npx wrangler dev --local --ip 127.0.0.1 --port 8787 \
+  --local-upstream 127.0.0.1:8787
+```
+
+The local upstream override is required: otherwise Wrangler substitutes the
+production hostname and the loopback-only identity correctly refuses access.
+Plain `mise run dev` serves the static shell without the Worker API.
+
+Run `npm test`, `npm run check:training`, `mise run check`, `mise run build`, and
+`mise run deploy -- --dry-run`. Regenerate Worker types after binding changes
+with `npx wrangler types --strict-vars=false`. Also check the live page at phone
+and desktop widths, pause/reload/resume, audio seeking and complete passes,
+offline logging/reconnect, instructor text revisions, calendar revocation,
+and unauthenticated API rejection before declaring a rollout ready.
+
+The remaining one-time sign-in setup and real-phone playback checks are tracked
+in [issue #14](https://github.com/rwjblue/rwjblue.com/issues/14).

@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "check": "astro sync",
+    "check:training": "tsc --project tsconfig.cw-training.json && tsc --project tsconfig.worker.json",
     "build": "astro build && node scripts/build-service-worker.mjs && pagefind --site dist && node scripts/verify-note-visibility.mjs && node scripts/verify-discovery.mjs && node scripts/verify-backlinks.mjs && node scripts/verify-offline.mjs",
     "preview": "astro preview"
   },
@@ -18,9 +19,12 @@
     "@types/node": "^26.1.1",
     "@types/sanitize-html": "^2.16.1",
     "astro": "^6.3.7",
+    "es-module-lexer": "^2.1.0",
     "jsqr": "^1.4.0",
     "markdown-it": "^14.2.0",
+    "miniflare": "^4.20260708.1",
     "pagefind": "^1.5.2",
+    "parse5": "^8.0.1",
     "qrcode": "^1.5.4",
     "sanitize-html": "^2.17.4",
     "sharp": "^0.34.5",
@@ -31,6 +35,7 @@
     "@ham2k/lib-dxcc-data": "^1.0.1",
     "@ham2k/lib-geo-tools": "^1.1.1",
     "@ham2k/lib-qson-adif": "^0.5.1",
+    "jose": "^6.2.12",
     "leaflet": "^1.9.4"
   }
 }

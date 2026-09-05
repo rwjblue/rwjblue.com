@@ -1,0 +1,457 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/cw-training.css";
+---
+
+<BaseLayout
+  title="CW training / N1RWJ"
+  description="A private practice companion for CW Academy."
+  searchable={false}
+  robots="noindex, nofollow"
+  analytics={false}
+>
+  <div id="cw-training" class="cw-training" data-pagefind-ignore>
+    <header class="training-heading">
+      <div>
+        <p class="eyebrow">N1RWJ / CW Academy</p><h1>One block at a time.</h1><p
+          id="training-course-title"
+        >
+          Your private training companion.
+        </p>
+      </div>
+      <span id="training-sync-state" class="training-status" role="status"
+        >Loading your plan</span
+      >
+    </header>
+    <div id="training-message" class="training-notice" role="status" hidden>
+    </div>
+    <div id="training-auth" class="training-card" hidden>
+      <h2>Your practice, ready when you are.</h2>
+      <p>
+        Sign in to load your private curriculum and training history. This
+        browser will remember your session.
+      </p>
+      <a class="training-button primary" href="/api/cw-training/login"
+        >Sign in</a
+      >
+    </div>
+    <div id="training-app" hidden>
+      <nav class="training-tabs" aria-label="Training views">
+        <button type="button" data-view="today" aria-current="page"
+          >Today</button
+        >
+        <button type="button" data-view="focus">Focus</button>
+        <button type="button" data-view="week">Week</button>
+        <button type="button" data-view="materials">Materials</button>
+      </nav>
+
+      <section id="training-today" aria-label="Today">
+        <div class="training-today-heading">
+          <div>
+            <p class="eyebrow" id="training-position"></p><h2
+              id="training-day-title"
+            >
+              Today's practice
+            </h2>
+          </div><p id="training-class-time"></p>
+        </div>
+        <div class="training-progress">
+          <div>
+            <strong id="training-minutes">0 / 60 min</strong><span
+              >Practice today</span
+            >
+          </div><progress
+            id="training-progress"
+            value="0"
+            max="60"
+            aria-label="Today's practice minutes"></progress><p
+            id="training-coverage"
+          >
+          </p>
+        </div>
+        <div id="training-resume" class="training-notice" hidden>
+          <p>A practice block is saved.</p><button
+            type="button"
+            data-action="resume">Return to your block</button
+          >
+        </div>
+        <div id="training-next" class="training-card training-next"></div>
+        <div id="training-preparation"></div>
+        <div class="training-section">
+          <h3>Your practice queue</h3><div id="training-queue"></div>
+        </div>
+        <div id="training-blocked"></div>
+        <details id="training-missed-panel" class="training-section">
+          <summary id="training-missed-label">Earlier practice</summary><div
+            id="training-missed"
+          >
+          </div>
+        </details>
+        <details class="training-section">
+          <summary>Original curriculum instructions</summary><p
+            class="training-small"
+          >
+            The supplied curriculum wording is preserved below.
+          </p><h3 id="training-assignment-label"></h3><div
+            id="training-assignment-instructions"
+            class="training-original"
+          >
+          </div><a
+            id="training-assignment-source"
+            target="_blank"
+            rel="noreferrer">Open the official assignment</a
+          ><details>
+            <summary>Course instructions</summary><div
+              id="training-course-instructions"
+              class="training-original"
+            >
+            </div><a
+              id="training-course-source"
+              target="_blank"
+              rel="noreferrer">Official curriculum</a
+            >
+          </details>
+        </details>
+        <div class="training-section training-actions">
+          <button type="button" data-action="add-material"
+            >Add instructor material</button
+          ><button type="button" data-action="manual"
+            >Log practice elsewhere</button
+          >
+        </div>
+      </section>
+
+      <section id="training-focus" aria-label="Practice focus" hidden>
+        <div id="training-focus-empty" class="training-card">
+          <h2>A little practice adds up.</h2><p>
+            Choose a block from Today to begin.
+          </p><button type="button" data-view="today">Go to Today</button>
+        </div>
+        <div id="training-focus-content" hidden>
+          <p class="eyebrow" id="training-focus-kind"></p><h2
+            id="training-focus-title"
+          >
+          </h2>
+          <p id="training-focus-objective"></p>
+          <div class="training-card">
+            <div class="training-focus-meta">
+              <div>
+                <span class="training-timer" id="training-timer">00:00</span
+                ><span class="training-small">active practice</span>
+              </div><p id="training-focus-target"></p>
+            </div>
+            <div id="training-audio-box" hidden>
+              <p id="training-pass-count" class="training-pass-count"></p>
+              <audio id="training-audio" controls preload="metadata"></audio>
+              <div class="training-actions">
+                <button type="button" data-action="replay">Replay 8 sec</button
+                ><button type="button" data-action="bookmark"
+                  >Mark difficult here</button
+                >
+              </div>
+              <p id="training-audio-state" class="training-small" role="status">
+                Tap play to begin listening.
+              </p>
+              <div id="training-bookmarks" class="training-actions"></div>
+              <label class="training-check"
+                ><input id="training-recall-pause" type="checkbox" /> Pause for recall
+                between passes</label
+              >
+              <p class="training-small">
+                Audio streams from the official source and needs a connection.
+                Played time and pass coverage are recorded separately.
+              </p>
+            </div>
+            <div id="training-timer-box">
+              <button
+                id="training-timer-toggle"
+                class="primary"
+                type="button"
+                data-action="toggle-timer">Start timer</button
+              ><p class="training-small">
+                Pause when you stop practicing. If you switch apps, confirm
+                those minutes when finishing.
+              </p>
+            </div>
+            <div id="training-focus-resource"></div>
+          </div>
+          <details class="training-section" open>
+            <summary>Exercise instructions</summary><div
+              id="training-focus-instructions"
+              class="training-original"
+            >
+            </div><div id="training-focus-settings" class="training-original">
+            </div><a id="training-focus-source" target="_blank" rel="noreferrer"
+              >View original source</a
+            >
+          </details>
+          <div id="training-focus-text" class="training-section" hidden>
+            <label
+              >Text size <input
+                id="training-focus-font"
+                type="range"
+                min="18"
+                max="48"
+                value="26"
+              /></label
+            ><pre id="training-sending-text" tabindex="0"></pre>
+          </div>
+          <div class="training-actions">
+            <button class="primary" type="button" data-action="finish"
+              >Finish block</button
+            ><button type="button" data-action="pause-block"
+              >Save for later</button
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="training-week" aria-label="Schedule and history" hidden>
+        <h2>The course ahead</h2><p>
+          Class and practice are separate. Preparation is due before each
+          meeting.
+        </p><div id="training-meetings"></div>
+        <details class="training-section">
+          <summary>Practice history</summary><div id="training-history"></div>
+        </details>
+      </section>
+
+      <section id="training-materials" aria-label="Instructor materials" hidden>
+        <div class="training-today-heading">
+          <div>
+            <h2>Class materials</h2><p>
+              Keep your instructor's wording and sending files close at hand.
+            </p>
+          </div><button type="button" data-action="add-material"
+            >Add material</button
+          >
+        </div>
+        <p class="training-small">
+          “Prepare before class” adds a practice task. Class-only, reference,
+          and unclassified material stay available without becoming homework.
+        </p>
+        <div id="training-material-list"></div>
+      </section>
+
+      <details class="training-section training-settings">
+        <summary>Preferences and your data</summary>
+        <label
+          >Usual block length <select id="training-block-preference"
+            ><option value="15">15 minutes</option><option value="10"
+              >10 minutes</option
+            ></select
+          ></label
+        >
+        <label
+          >Calendar practice time (Eastern)<input
+            id="training-reminder-time"
+            type="time"
+            value="09:00"
+          /></label
+        >
+        <label
+          >Private class join link (optional)<input
+            id="training-join-url"
+            type="url"
+            placeholder="https://"
+          /></label
+        >
+        <button type="button" data-action="save-preferences"
+          >Save preferences</button
+        >
+        <div class="training-section">
+          <h3>Practice reminders</h3><p class="training-small">
+            Create a private calendar subscription, then add its link in your
+            calendar app. Anyone with the link can see practice times, but not
+            your notes, scores, or curriculum. Replacing or revoking the link
+            stops the old subscription.
+          </p><div class="training-actions">
+            <button type="button" data-action="calendar-create"
+              >Create or replace calendar link</button
+            ><button type="button" data-action="calendar-revoke"
+              >Revoke calendar link</button
+            >
+          </div><div id="training-calendar-result" hidden>
+            <label
+              >Private calendar subscription URL<input
+                id="training-calendar-url"
+                type="url"
+                readonly
+              /></label
+            ><button type="button" data-action="calendar-copy"
+              >Copy calendar link</button
+            >
+          </div><p
+            id="training-calendar-status"
+            class="training-small"
+            role="status"
+          >
+          </p>
+        </div>
+        <p class="training-small">
+          Offline practice is saved on this device, then synced when you
+          reconnect. An expired sign-in will not discard your work.
+        </p>
+        <div class="training-actions">
+          <button type="button" data-action="sync">Sync now</button><button
+            type="button"
+            data-action="export">Export all training data</button
+          ><button type="button" data-action="clear">Clear this device</button
+          ><a href="/api/cw-training/login">Renew sign-in</a>
+        </div>
+      </details>
+    </div>
+    <noscript
+      ><p>
+        This practice companion needs JavaScript for its timer, player, and
+        private curriculum.
+      </p></noscript
+    >
+
+    <dialog id="training-finish-dialog">
+      <form id="training-finish-form">
+        <h2 id="training-finish-title">Finish this block</h2><label
+          >Minutes actually practiced<input
+            id="training-finish-minutes"
+            name="minutes"
+            type="number"
+            min="0"
+            max="240"
+            step="0.1"
+            required
+          /></label
+        ><label class="training-check"
+          ><input
+            id="training-finish-complete"
+            name="complete"
+            type="checkbox"
+          /> I completed this exercise's requirements</label
+        ><p id="training-finish-help" class="training-small"></p><label
+          >How did it feel? (optional)<select name="difficulty"
+            ><option value="">No rating</option><option value="hard"
+              >Hard</option
+            ><option value="right">About right</option><option value="easy"
+              >Easy</option
+            ></select
+          ></label
+        ><label
+          >Note or score (optional)<textarea
+            name="note"
+            rows="2"
+            maxlength="4000"></textarea></label
+        ><div class="training-actions">
+          <button class="primary" type="submit">Save practice</button><button
+            type="button"
+            data-close>Keep practicing</button
+          >
+        </div>
+      </form>
+    </dialog>
+    <dialog id="training-manual-dialog">
+      <form id="training-manual-form">
+        <h2>Log practice elsewhere</h2><label
+          >Assignment<select id="training-manual-task" name="task" required
+          ></select></label
+        ><label
+          >Minutes practiced<input
+            type="number"
+            name="minutes"
+            min="0"
+            max="240"
+            step="0.1"
+            value="15"
+            required
+          /></label
+        ><label
+          >Audio passes completed (if relevant)<input
+            type="number"
+            name="passes"
+            min="0"
+            max="100"
+            step="1"
+            value="0"
+          /></label
+        ><label class="training-check"
+          ><input type="checkbox" name="complete" /> Requirements completed</label
+        ><label
+          >Note (optional)<textarea name="note" rows="2" maxlength="3950"
+          ></textarea></label
+        ><div class="training-actions">
+          <button class="primary" type="submit">Save practice</button><button
+            type="button"
+            data-close>Cancel</button
+          >
+        </div>
+      </form>
+    </dialog>
+    <dialog id="training-material-dialog">
+      <form id="training-material-form">
+        <h2>Add instructor material</h2><label
+          >Class<select id="training-material-session" name="session"
+          ></select></label
+        ><label>Title<input name="title" maxlength="200" required /></label
+        ><label
+          >Purpose<select name="usage"
+            ><option value="unknown">Not sure yet</option><option
+              value="preparation">Prepare before class</option
+            ><option value="class">Use during class</option><option
+              value="reference">Reference</option
+            ></select
+          ></label
+        ><label
+          >Original instructions or sending text<textarea
+            id="training-material-text"
+            name="text"
+            rows="8"
+            maxlength="100000"></textarea></label
+        ><label
+          >Import a text file<input
+            id="training-material-file"
+            type="file"
+            accept=".txt,text/plain"
+          /></label
+        ><label
+          >Resource link (optional)<input
+            name="url"
+            type="url"
+            placeholder="https://"
+          /></label
+        ><p class="training-small">
+          Text stays private. Saving preparation adds work; it does not replace
+          completed or assigned curriculum.
+        </p><div class="training-actions">
+          <button class="primary" type="submit">Save material</button><button
+            type="button"
+            data-close>Cancel</button
+          >
+        </div>
+      </form>
+    </dialog>
+    <dialog id="training-reading-dialog" class="training-reading-dialog">
+      <h2 id="training-reading-title"></h2><p
+        id="training-reading-usage"
+        class="training-small"
+      >
+      </p><label
+        >Text size<input
+          id="training-reading-size"
+          type="range"
+          min="18"
+          max="48"
+          value="26"
+        /></label
+      ><pre id="training-reading-text" tabindex="0"></pre><div
+        id="training-reading-link"
+      >
+      </div><div class="training-actions">
+        <button type="button" data-action="practice-material"
+          >Practice this material</button
+        ><button type="button" data-close>Close</button>
+      </div>
+    </dialog>
+  </div>
+  <script>
+    import { initTraining } from "../../lib/cw-training/client";
+    initTraining();
+  </script>
+</BaseLayout>

@@ -1,0 +1,168 @@
+import { upcomingCwSessions, type CwSession } from "../cw-practice.ts";
+import type { TrainingAssignment, TrainingAttempt, TrainingCourse, TrainingMeeting, TrainingResource, TrainingTask } from "./types.ts";
+
+export interface TaskProgress {
+  complete: boolean;
+  completedPasses: number;
+  activeSeconds: number;
+  interrupted: boolean;
+}
+
+export interface PlannedTask {
+  assignment: TrainingAssignment;
+  task: TrainingTask;
+  resource?: TrainingResource;
+  completedPasses: number;
+  remainingPasses?: number;
+  suggestedMinutes: number;
+  passesThisBlock?: number;
+  interrupted: boolean;
+  reason?: string;
+  windows?: CwSession[];
+  availableNow?: boolean;
+}
+
+export interface TrainingPlan {
+  date: string;
+  assignment?: TrainingAssignment;
+  meeting?: TrainingMeeting;
+  nextMeeting?: TrainingMeeting;
+  phase: "practice" | "class" | "rest" | "complete" | "upcoming";
+  practicedMinutes: number;
+  dailyGoalMinutes: number;
+  queue: PlannedTask[];
+  blocked: PlannedTask[];
+  missed: PlannedTask[];
+  liveUpcoming: PlannedTask[];
+  next?: PlannedTask;
+}
+
+/** Local course dates are independent of the browser's current travel time zone. */
+export function dateInTimezone(value: Date | string, timezone = "America/New_York"): string {
+  const date = value instanceof Date ? value : new Date(value);
+  const parts = new Intl.DateTimeFormat("en-CA", { timeZone: timezone, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(date);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function uniqueAttempts(attempts: TrainingAttempt[]): TrainingAttempt[] {
+  return [...new Map(attempts.map((attempt) => [attempt.id, attempt])).values()];
+}
+
+export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): TaskProgress {
+  const relevant = uniqueAttempts(attempts).filter((attempt) => attempt.taskId === task.id && attempt.context === "practice").sort((a, b) => a.endedAt.localeCompare(b.endedAt));
+  const completedPasses = relevant.reduce((sum, attempt) => sum + Math.max(0, Math.floor(attempt.completedPasses ?? 0)), 0);
+  const activeSeconds = relevant.reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
+  let complete: boolean;
+  if (task.kind === "audio" && task.minimumPasses !== undefined) {
+    complete = (completedPasses >= task.minimumPasses && relevant.some((attempt) => attempt.completed)) ||
+      relevant.some((attempt) => attempt.completed && attempt.completedPasses === undefined);
+  } else if (task.kind === "simulator" && task.minutes !== undefined) {
+    // Two interrupted eight-minute runs do not satisfy an uninterrupted 15-minute run.
+    complete = relevant.some((attempt) => attempt.completed && attempt.activeSeconds >= task.minutes! * 60);
+  } else {
+    complete = relevant.some((attempt) => attempt.completed);
+  }
+  const latest = relevant.at(-1);
+  return { complete, completedPasses, activeSeconds, interrupted: !complete && !!latest && !latest.completed && latest.note !== "[Left missed]" };
+}
+
+function leftMissed(task: TrainingTask, attempts: TrainingAttempt[]): boolean {
+  return attempts.some((attempt) => attempt.taskId === task.id && attempt.note === "[Left missed]");
+}
+
+function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, task: TrainingTask, attempts: TrainingAttempt[], blockMinutes: 10 | 15, now: Date): PlannedTask {
+  const progress = taskProgress(task, attempts);
+  const resource = course.resources.find((resource) => resource.id === task.resourceId);
+  const result: PlannedTask = { assignment, task, resource, completedPasses: progress.completedPasses, suggestedMinutes: blockMinutes, interrupted: progress.interrupted };
+  if (task.kind === "simulator") result.suggestedMinutes = task.minutes ?? 15;
+  if (task.kind === "audio") {
+    result.remainingPasses = task.minimumPasses === undefined ? undefined : Math.max(0, task.minimumPasses - progress.completedPasses);
+    if (resource?.unresolved) {
+      result.reason = resource.unresolved;
+    } else if (!resource || resource.format !== "audio") {
+      result.reason = "The assigned recording needs a resource link before playback.";
+    } else if (resource.durationSeconds && resource.durationSeconds > 0) {
+      const fittingPasses = Math.max(1, Math.floor((blockMinutes * 60) / resource.durationSeconds));
+      result.passesThisBlock = Math.max(1, Math.min(fittingPasses, result.remainingPasses ?? fittingPasses));
+      result.suggestedMinutes = Math.ceil(resource.durationSeconds * result.passesThisBlock / 60);
+      if (result.remainingPasses === 0) result.reason = "Required passes are recorded. Confirm the listening objective, or play another pass for review.";
+      if (resource.durationSeconds > blockMinutes * 60) result.reason = "One full pass needs a longer block; reserve enough time or resume the recording later.";
+    } else {
+      result.passesThisBlock = 1;
+      result.reason = "Recording length is not yet measured. Load the player to check the time needed for a full pass.";
+    }
+  }
+  if (task.kind === "live") {
+    result.windows = upcomingCwSessions(now, 48).filter((session) => session.activity.id === "cwt" && session.start.getTime() < new Date(assignment.dueAt).getTime());
+    result.availableNow = result.windows.some((session) => session.start.getTime() <= now.getTime() && now.getTime() < session.end.getTime());
+    if (!result.windows.length) {
+      result.reason = "No CWT window remains before class. Keep the objective open and ask the advisor how to proceed.";
+    } else if (!result.availableNow) {
+      const nextWindow = new Intl.DateTimeFormat("en-US", { timeZone: course.timezone, weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" }).format(result.windows[0]!.start);
+      result.reason = `The next CWT window starts ${nextWindow}. Plan this radio activity for that window.`;
+    }
+  }
+  if (task.kind === "simulator" && result.suggestedMinutes > blockMinutes) result.reason = `This exercise needs ${result.suggestedMinutes} uninterrupted minutes.`;
+  return result;
+}
+
+function fits(item: PlannedTask, blockMinutes: number): boolean {
+  if (item.task.kind === "live" && !item.availableNow) return false;
+  if (item.resource?.unresolved) return false;
+  if (item.task.kind === "audio" && (!item.resource || item.resource.format !== "audio")) return false;
+  return item.suggestedMinutes <= blockMinutes;
+}
+
+/**
+ * Derive today's work without rolling old sessions into a permanent backlog.
+ * Assignments retain their dates after a class begins, so Monday evening cannot
+ * become Tuesday's required practice day or reset the same day's minute goal.
+ */
+export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: 10 | 15 = 15): TrainingPlan {
+  if (!Number.isFinite(now.getTime())) throw new Error("A valid planning date is required.");
+  const date = dateInTimezone(now, course.timezone);
+  const sortedAssignments = [...course.assignments].sort((a, b) => a.date.localeCompare(b.date));
+  const meetings = [...course.meetings].sort((a, b) => a.startsAt.localeCompare(b.startsAt));
+  const assignment = sortedAssignments.find((candidate) => candidate.date === date);
+  const meeting = meetings.find((candidate) => dateInTimezone(candidate.startsAt, course.timezone) === date);
+  const nextMeeting = meetings.find((candidate) => new Date(candidate.startsAt).getTime() > now.getTime());
+  const activeClass = meeting && now.getTime() >= new Date(meeting.startsAt).getTime() && now.getTime() < new Date(meeting.endsAt).getTime();
+  const firstDate = sortedAssignments[0]?.date;
+  const lastDate = sortedAssignments.at(-1)?.date;
+  const phase: TrainingPlan["phase"] = activeClass ? "class"
+    : assignment && now.getTime() < new Date(assignment.dueAt).getTime() ? "practice"
+    : lastDate && date > lastDate ? "complete"
+    : firstDate && date < firstDate ? "upcoming" : "rest";
+  const practicedSeconds = uniqueAttempts(attempts).filter((attempt) => attempt.context === "practice" && dateInTimezone(attempt.startedAt, course.timezone) === date)
+    .reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
+  const result: TrainingPlan = { date, assignment, meeting, nextMeeting, phase, practicedMinutes: practicedSeconds / 60, dailyGoalMinutes: assignment ? course.dailyGoalMinutes : 0, queue: [], blocked: [], missed: [], liveUpcoming: [] };
+
+  if (phase === "practice" && assignment) {
+    const eligible = sortedAssignments.filter((candidate) => candidate.session === assignment.session && candidate.date <= date);
+    const candidates = eligible.flatMap((candidate) => candidate.tasks.filter((task) => !task.optional && !taskProgress(task, attempts).complete && !leftMissed(task, attempts)).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
+    candidates.sort((a, b) => Number(b.interrupted) - Number(a.interrupted));
+    result.queue = candidates.filter((item) => fits(item, blockMinutes));
+    result.blocked = candidates.filter((item) => !fits(item, blockMinutes));
+    if (!candidates.length && result.practicedMinutes < course.dailyGoalMinutes) {
+      const history = sortedAssignments.filter((candidate) => candidate.date <= date).flatMap((candidate) => candidate.tasks);
+      const base = [...history].reverse().find((task) => task.kind === "icr") ?? assignment.tasks.find((task) => task.kind === "sending");
+      if (base) {
+        const task = { ...base, id: `${assignment.id}-reinforcement`, title: `Focused review: ${base.title}`, optional: true };
+        result.queue.push(plannedTask(course, assignment, task, [], blockMinutes, now));
+      }
+    }
+  }
+
+  const lastClass = [...meetings].reverse().find((candidate) => new Date(candidate.startsAt).getTime() <= now.getTime());
+  if (lastClass) {
+    result.missed = sortedAssignments.filter((candidate) => candidate.session === lastClass.session)
+      .flatMap((candidate) => candidate.tasks.filter((task) => !task.optional && !taskProgress(task, attempts).complete && !leftMissed(task, attempts)).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
+  }
+
+  const upcomingLimit = now.getTime() + 7 * 86_400_000;
+  result.liveUpcoming = sortedAssignments.filter((candidate) => new Date(candidate.dueAt).getTime() > now.getTime() && new Date(candidate.dueAt).getTime() <= upcomingLimit)
+    .flatMap((candidate) => candidate.tasks.filter((task) => task.kind === "live" && !taskProgress(task, attempts).complete).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
+  result.next = result.queue[0];
+  return result;
+}

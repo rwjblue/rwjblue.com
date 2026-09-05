@@ -11,6 +11,7 @@ styles, icon, and manifest they require:
 - `/radio/glossary/`
 - `/radio/shack/`
 - `/radio/cw-practice/`
+- `/radio/cw-training/` (generic shell only)
 - `/radio/cw-qso/`
 - `/radio/beacons/`
 - `/radio/field-log/`
@@ -21,6 +22,12 @@ visit and use a network-first strategy. Their runtime cache, including
 on-demand same-origin assets, is limited to 24 requests. Search indexes, map
 tiles, images outside the selected shells, and external/live data are not
 cached.
+
+CW training keeps its private curriculum snapshot, pending practice, and active
+block in IndexedDB after sign-in. The service worker never caches training API
+responses. Official CWops recordings stream directly from their source and are
+not available offline. Clearing the device in training preferences removes its
+private local data without deleting synced history.
 
 `scripts/build-service-worker.mjs` runs after Astro and derives a deterministic
 cache version from the service-worker generator, selected HTML, and generated

@@ -1,0 +1,426 @@
+.cw-training {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.cw-training [hidden] {
+  display: none !important;
+}
+.training-heading {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 28px;
+}
+.training-heading h1 {
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  line-height: 1.06;
+  margin-bottom: 12px;
+}
+.training-heading p {
+  margin-bottom: 5px;
+}
+.training-status {
+  flex-shrink: 0;
+  font-size: 0.76rem;
+  color: var(--green);
+  padding-top: 5px;
+  max-width: 160px;
+  line-height: 1.4;
+}
+.training-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line-strong);
+  margin-bottom: 26px;
+  gap: 6px;
+}
+.cw-training button,
+.training-button {
+  min-height: 44px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  padding: 10px 15px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+  line-height: 1.35;
+}
+.cw-training button:hover,
+.training-button:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.cw-training button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.cw-training button.primary,
+.training-button.primary {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--bg);
+}
+.cw-training button:focus-visible,
+.cw-training a:focus-visible,
+.cw-training input:focus-visible,
+.cw-training select:focus-visible,
+.cw-training textarea:focus-visible,
+.cw-training summary:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+.training-tabs button {
+  border: 0;
+  border-radius: 0;
+  color: var(--muted);
+  background: transparent;
+  border-bottom: 3px solid transparent;
+}
+.training-tabs button[aria-current] {
+  border-bottom-color: var(--green);
+  color: var(--ink);
+}
+.training-today-heading,
+.training-focus-meta {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.training-today-heading h2 {
+  margin-bottom: 0;
+}
+.training-today-heading > p {
+  font-size: 0.84rem;
+  text-align: right;
+  margin: 0;
+  max-width: 230px;
+}
+.training-card {
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  padding: 24px;
+  border-radius: 9px;
+  margin-bottom: 20px;
+}
+.training-card p:last-child {
+  margin-bottom: 0;
+}
+.training-next {
+  background: var(--green-wash);
+  border-top: 3px solid var(--green);
+}
+.training-next h3 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+.training-next .primary {
+  min-width: 210px;
+}
+.training-progress {
+  margin-bottom: 25px;
+}
+.training-progress > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.training-progress strong {
+  font-size: 1.3rem;
+}
+.training-progress span,
+.training-progress p {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.training-progress p {
+  margin: 4px 0 0;
+}
+.training-progress progress {
+  display: block;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  margin: 12px 0;
+  border: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--line);
+  accent-color: var(--green);
+}
+.training-progress progress::-webkit-progress-bar {
+  background: var(--line);
+}
+.training-progress progress::-webkit-progress-value {
+  background: var(--green);
+}
+.training-progress progress::-moz-progress-bar {
+  background: var(--green);
+}
+.training-section {
+  padding-top: 20px;
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.training-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+}
+.training-actions > a {
+  color: var(--blue);
+  font-size: 0.88rem;
+}
+.training-task {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+.training-task strong {
+  font-size: 0.95rem;
+}
+.training-task p {
+  margin: 5px 0 0;
+  font-size: 0.82rem;
+}
+.training-task .training-actions {
+  justify-content: end;
+}
+.training-task button {
+  font-size: 0.78rem;
+  padding: 8px 10px;
+}
+.training-small {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.training-notice {
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--rust);
+  border-radius: 4px;
+  padding: 14px 17px;
+  background: var(--rust-wash);
+  margin-bottom: 22px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.training-notice p {
+  margin: 0 0 9px;
+}
+.training-notice a {
+  color: var(--blue);
+}
+.cw-training details summary {
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 700;
+  padding: 6px 0;
+  line-height: 1.5;
+}
+.cw-training details[open] > summary {
+  margin-bottom: 16px;
+}
+.cw-training details details {
+  margin-top: 18px;
+}
+.training-original {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 12px 0 16px;
+}
+.training-section > a {
+  color: var(--blue);
+  font-size: 0.86rem;
+}
+.training-timer {
+  display: block;
+  font-size: clamp(2.7rem, 8vw, 4rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  font-weight: 750;
+  line-height: 1.1;
+}
+.training-focus-meta > p {
+  font-size: 0.84rem;
+  text-align: right;
+  max-width: 190px;
+}
+.training-pass-count {
+  font-size: 1.1rem;
+  font-weight: 750;
+  color: var(--ink);
+}
+.cw-training audio {
+  display: block;
+  width: 100%;
+  margin: 12px 0 20px;
+}
+#training-audio-state {
+  margin-top: 12px;
+}
+#training-focus-resource {
+  margin-top: 18px;
+}
+.cw-training label {
+  display: grid;
+  gap: 7px;
+  font-size: 0.87rem;
+  font-weight: 650;
+  margin: 15px 0;
+}
+.cw-training input,
+.cw-training select,
+.cw-training textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  padding: 10px;
+  background: var(--input-bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+}
+.cw-training textarea {
+  resize: vertical;
+}
+.cw-training input[type="checkbox"] {
+  width: 20px;
+  min-height: 20px;
+  margin: 0;
+  accent-color: var(--green);
+}
+.cw-training input[type="range"] {
+  padding: 0;
+  max-width: 300px;
+  accent-color: var(--green);
+}
+.cw-training label.training-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.5;
+}
+.training-settings label {
+  max-width: 420px;
+}
+.cw-training dialog {
+  width: min(600px, calc(100vw - 24px));
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  padding: 25px;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  box-shadow: 0 18px 80px var(--shadow-dialog);
+}
+.cw-training dialog::backdrop {
+  background: var(--overlay);
+}
+.cw-training dialog h2 {
+  font-size: 1.5rem;
+}
+.cw-training pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font:
+    26px/1.7 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  margin: 15px 0;
+  border: 1px solid var(--line);
+  padding: 18px;
+  background: var(--input-bg);
+  max-height: 58dvh;
+  overflow-y: auto;
+}
+.training-meeting {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+.training-meeting > summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+.training-meeting > summary span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.training-completed {
+  color: var(--green);
+}
+@media (max-width: 580px) {
+  .training-heading {
+    display: block;
+  }
+  .training-status {
+    display: block;
+    margin-top: 12px;
+    max-width: none;
+  }
+  .training-tabs {
+    gap: 0;
+  }
+  .training-tabs button {
+    padding: 10px 4px;
+    font-size: 0.84rem;
+  }
+  .training-card {
+    padding: 19px;
+  }
+  .training-today-heading {
+    display: block;
+  }
+  .training-today-heading > p {
+    text-align: left;
+    margin-top: 12px;
+    max-width: none;
+  }
+  .training-next .primary {
+    width: 100%;
+    min-width: 0;
+  }
+  .training-task {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .training-task .training-actions {
+    justify-content: start;
+  }
+  .cw-training dialog {
+    padding: 20px;
+  }
+  .training-meeting > summary {
+    display: block;
+  }
+  .training-meeting > summary span {
+    display: block;
+    margin-top: 4px;
+  }
+  .cw-training pre {
+    padding: 12px;
+  }
+}

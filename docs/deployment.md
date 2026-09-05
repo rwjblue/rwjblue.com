@@ -18,19 +18,28 @@ Wrangler config: wrangler.jsonc
 served directly from `assets.directory`; only explicitly selected dynamic paths
 run Worker code first.
 
-The current dynamic endpoint is:
+The current dynamic paths are:
 
 ```text
 /radio/cw-practice/calendar.ics
+/api/cw-training/*
+/api/cw-training-calendar/*
 ```
 
-It serves the subscribable CW Practice Schedule iCalendar feed. The feed uses
+The first serves the subscribable CW Practice Schedule iCalendar feed. The feed uses
 stable recurring event IDs so calendar clients can refresh it without requiring
 subscribers to remove and re-add the calendar.
 
 The schedule model, official sources, recurrence behavior, feed architecture,
 and update procedure are documented in
 [`docs/cw-practice-schedule.md`](cw-practice-schedule.md).
+
+The training API uses the `TRAINING_DB` D1 binding and verifies Cloudflare Access
+tokens before returning any curriculum or personal data. Its static page is a
+generic, non-indexed shell. The separate calendar path requires a revocable
+capability URL. Automatic invocation logs are disabled to keep those URLs out
+of request logs. Setup and data ownership are described in
+[`docs/cw-training.md`](cw-training.md).
 
 The local Node version is managed by mise and locked in `.mise/mise.lock`.
 
@@ -39,7 +48,7 @@ The local Node version is managed by mise and locked in `.mise/mise.lock`.
 Production builds generate `sitemap-index.xml`, `sitemap-0.xml`, and
 `robots.txt` for the canonical `https://rwjblue.com` origin. The sitemap filter
 excludes draft, unlisted, and not-yet-due scheduled notes plus search, RSS, the
-publication-schedule manifest, and generated share-image routes. `npm run build`
+publication-schedule manifest, private training shell, and generated share-image routes. `npm run build`
 verifies those exclusions and representative Article and BreadcrumbList JSON-LD
 before the output is considered complete.
 

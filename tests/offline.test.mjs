@@ -73,3 +73,20 @@ test("cache versions are deterministic and change with selected content", () => 
     rmSync(root, { recursive: true });
   }
 });
+
+test("offline shells include transitive shared modules but never API or remote imports", () => {
+  const root = fixture();
+  try {
+    write(root, "/_astro/app.js", 'import "./shared.js"; import("./lazy.js"); import("https://example.com/external.js"); import("/api/private.js");');
+    write(root, "/_astro/shared.js", 'export { value } from "./nested.js";');
+    write(root, "/_astro/nested.js", 'import "./shared.js"; export const value = 1;');
+    write(root, "/_astro/lazy.js", 'export const ready = true;');
+    const first = buildOfflineFieldKit(root);
+    for (const name of ["shared", "nested", "lazy"]) assert.ok(first.precache.includes(`/_astro/${name}.js`));
+    assert.ok(!first.precache.some((path) => path.includes("private") || path.includes("external")));
+    write(root, "/_astro/nested.js", 'export const value = 2;');
+    assert.notEqual(first.version, buildOfflineFieldKit(root).version);
+  } finally {
+    rmSync(root, { recursive: true });
+  }
+});

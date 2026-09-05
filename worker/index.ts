@@ -8,6 +8,7 @@ import {
   PUBLICATION_SCHEDULE_PATH,
   type PublicationSchedule,
 } from "../src/lib/note-publication.ts";
+import { trainingResponse } from "./cw-training.ts";
 
 interface WorkerEnv extends Env {
   PUBLICATION_DEPLOY_HOOK_URL?: string;
@@ -115,6 +116,11 @@ export function calendarResponse(request: Request): Response {
 export default {
   async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api/cw-training/") ||
+        url.pathname.startsWith("/api/cw-training-calendar/")) {
+      return trainingResponse(request, env);
+    }
 
     if (url.pathname === CW_CALENDAR_PATH) {
       return calendarResponse(request);

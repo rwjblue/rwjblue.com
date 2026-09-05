@@ -1,0 +1,102 @@
+import type {
+  TrainingSnapshot,
+  TrainingSync,
+  TrainingTask,
+  TrainingResource,
+} from "./types";
+
+export interface ActiveBlock {
+  id: string;
+  assignmentId: string;
+  task: TrainingTask;
+  resource?: TrainingResource;
+  startedAt: string;
+  targetMinutes: number;
+  activeSeconds: number;
+  completedPasses: number;
+  previousPasses: number;
+  targetPasses: number;
+  position: number;
+  coverage: [number, number][];
+  bookmarks: number[];
+  context: "practice" | "class";
+}
+
+export interface TrainingDeviceState {
+  snapshot?: TrainingSnapshot;
+  pending: TrainingSync;
+  active?: ActiveBlock;
+  reading: Record<string, { line: number; size: number }>;
+  dismissed: string[];
+}
+
+const databaseName = "n1rwj-cw-training";
+const emptyState = (): TrainingDeviceState => ({
+  pending: {},
+  reading: {},
+  dismissed: [],
+});
+
+/** One record and a serialized write queue keep timer checkpoints in order. */
+export class TrainingStorage {
+  private database?: IDBDatabase;
+  private writes: Promise<void> = Promise.resolve();
+  available = true;
+
+  async load(): Promise<TrainingDeviceState> {
+    try {
+      this.database = await new Promise<IDBDatabase>((resolve, reject) => {
+        const request = indexedDB.open(databaseName, 1);
+        request.onupgradeneeded = () =>
+          request.result.createObjectStore("state");
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+        request.onblocked = () =>
+          reject(new Error("Close another training tab to enable storage."));
+      });
+      const value = await new Promise<TrainingDeviceState | undefined>(
+        (resolve, reject) => {
+          const request = this.database!.transaction("state")
+            .objectStore("state")
+            .get("device");
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        },
+      );
+      return value ? { ...emptyState(), ...value } : emptyState();
+    } catch {
+      this.available = false;
+      return emptyState();
+    }
+  }
+
+  save(state: TrainingDeviceState): Promise<void> {
+    const copy = structuredClone(state);
+    this.writes = this.writes
+      .catch(() => {})
+      .then(async () => {
+        if (!this.database) return;
+        await new Promise<void>((resolve, reject) => {
+          const transaction = this.database!.transaction("state", "readwrite");
+          transaction.objectStore("state").put(copy, "device");
+          transaction.oncomplete = () => resolve();
+          transaction.onerror = () => reject(transaction.error);
+          transaction.onabort = () => reject(transaction.error);
+        }).catch(() => {
+          this.available = false;
+        });
+      });
+    return this.writes;
+  }
+
+  async clear(): Promise<void> {
+    await this.writes.catch(() => {});
+    if (!this.database) return;
+    await new Promise<void>((resolve, reject) => {
+      const transaction = this.database!.transaction("state", "readwrite");
+      transaction.objectStore("state").clear();
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(transaction.error);
+    });
+  }
+}

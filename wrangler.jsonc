@@ -12,16 +12,35 @@
   "triggers": {
     "crons": ["0 * * * *"]
   },
+  "d1_databases": [
+    {
+      "binding": "TRAINING_DB",
+      "database_name": "rwjblue-cw-training",
+      "database_id": "e514c6ec-9402-4bf5-8ef4-cd4f6aeb26dc",
+      "migrations_dir": "migrations/cw-training"
+    }
+  ],
+  "vars": {
+    "TRAINING_ACCESS_TEAM": "",
+    "TRAINING_ACCESS_AUD": "",
+    "TRAINING_OWNER_EMAIL": "me@rwjblue.com"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/radio/cw-practice/calendar.ics"]
+    "run_worker_first": [
+      "/radio/cw-practice/calendar.ics",
+      "/api/cw-training/*",
+      "/api/cw-training-calendar/*"
+    ]
   },
   "observability": {
     "logs": {
       "enabled": true,
       "head_sampling_rate": 1,
-      "invocation_logs": true
+      // Calendar subscription URLs contain bearer capabilities. Keep them out
+      // of automatic request logs; application logs never include private data.
+      "invocation_logs": false
     },
     "traces": {
       "enabled": false,

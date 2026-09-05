@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.cw-training.json",
+  "compilerOptions": {
+    "lib": ["ES2022"]
+  },
+  "include": [
+    "worker/index.ts",
+    "worker/cw-training.ts",
+    "worker-configuration.d.ts"
+  ]
+}

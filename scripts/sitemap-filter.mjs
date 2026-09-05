@@ -3,6 +3,7 @@ import { notePublicationState } from "./note-frontmatter.mjs";
 
 const UTILITY_PATHS = [
   /^\/search\/$/,
+  /^\/radio\/cw-training\/$/,
   /^\/rss\.xml$/,
   /^\/publication-schedule\.json$/,
   /\/share-image\/$/,

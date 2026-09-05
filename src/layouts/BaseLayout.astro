@@ -12,6 +12,7 @@ interface Props {
   type?: "website" | "article";
   robots?: "noindex, nofollow";
   searchable?: boolean;
+  analytics?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   backlinks?: boolean;
   searchType?: "Note" | "Project" | "Radio guide" | "Tool";
@@ -27,6 +28,7 @@ const {
   type = "website",
   robots,
   searchable = true,
+  analytics = true,
   structuredData,
   backlinks = false,
   searchType,
@@ -116,11 +118,13 @@ const isActive = (href: string) =>
       })();
     </script>
     <title>{title}</title>
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "22d098b3f6564ca1aba1f6297ab62668"}'
-    ></script>
+    {analytics && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "22d098b3f6564ca1aba1f6297ab62668"}'
+      ></script>
+    )}
   </head>
   <body>
     <div class="shell">

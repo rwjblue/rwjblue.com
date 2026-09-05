@@ -22,5 +22,11 @@ jobs:
       - name: Sync Astro types
         run: mise run check
 
+      - name: Test site tools and private training API
+        run: npm test
+
+      - name: Check private training types
+        run: npm run check:training
+
       - name: Build site
         run: mise run build

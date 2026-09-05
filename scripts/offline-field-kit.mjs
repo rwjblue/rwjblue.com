@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parse } from "es-module-lexer/js";
 
 export const FIELD_KIT_ROUTES = [
   "/radio/",
@@ -10,6 +11,7 @@ export const FIELD_KIT_ROUTES = [
   "/radio/equipment/",
   "/radio/cw-journey/",
   "/radio/cw-practice/",
+  "/radio/cw-training/",
   "/radio/cw-qso/",
   "/radio/beacons/",
   "/radio/field-log/",
@@ -44,6 +46,23 @@ export function collectFieldKitDependencies(distDirectory) {
         if (!value.startsWith("/")) continue;
         const pathname = new URL(value, "https://rwjblue.com").pathname;
         if (isFieldKitDependency(pathname)) paths.add(pathname);
+      }
+    }
+  }
+
+  // Astro can extract shared modules that are absent from the HTML. Follow
+  // only local build chunks so every selected shell also works after a cold
+  // offline reload; never pull API responses or remote resources into caches.
+  for (const pathname of paths) {
+    if (!/\.m?js$/.test(pathname)) continue;
+    const source = readFileSync(outputPathFor(distDirectory, pathname), "utf8");
+    const [imports] = parse(source);
+    for (const dependency of imports) {
+      if (!dependency.n || !/^(?:\.\.?\/|\/)/.test(dependency.n)) continue;
+      const url = new URL(dependency.n, `https://field-kit.invalid${pathname}`);
+      if (url.origin !== "https://field-kit.invalid") continue;
+      if (url.pathname.startsWith("/_astro/") || url.pathname.startsWith("/assets/")) {
+        paths.add(url.pathname);
       }
     }
   }
