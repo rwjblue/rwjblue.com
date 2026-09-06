@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T13:15:43.864Z",
+  "generatedAt": "2026-09-06T22:54:27.581Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -15,9 +15,9 @@
     },
     {
       "reference": "US-0515",
-      "attempts": 154,
-      "activations": 136,
-      "qsos": 3871
+      "attempts": 155,
+      "activations": 137,
+      "qsos": 3882
     },
     {
       "reference": "US-0516",
@@ -45,9 +45,9 @@
     },
     {
       "reference": "US-10542",
-      "attempts": 96,
-      "activations": 93,
-      "qsos": 4249
+      "attempts": 98,
+      "activations": 95,
+      "qsos": 4293
     },
     {
       "reference": "US-10543",
@@ -75,9 +75,9 @@
     },
     {
       "reference": "US-10547",
-      "attempts": 101,
-      "activations": 100,
-      "qsos": 3659
+      "attempts": 104,
+      "activations": 103,
+      "qsos": 3729
     },
     {
       "reference": "US-10548",
@@ -105,21 +105,21 @@
     },
     {
       "reference": "US-2871",
-      "attempts": 114,
-      "activations": 108,
-      "qsos": 2969
+      "attempts": 115,
+      "activations": 109,
+      "qsos": 2979
     },
     {
       "reference": "US-2872",
-      "attempts": 346,
-      "activations": 340,
-      "qsos": 13251
+      "attempts": 347,
+      "activations": 341,
+      "qsos": 13264
     },
     {
       "reference": "US-2873",
-      "attempts": 113,
-      "activations": 110,
-      "qsos": 4853
+      "attempts": 114,
+      "activations": 111,
+      "qsos": 4869
     },
     {
       "reference": "US-2874",
@@ -135,9 +135,9 @@
     },
     {
       "reference": "US-2876",
-      "attempts": 574,
-      "activations": 538,
-      "qsos": 23450
+      "attempts": 579,
+      "activations": 543,
+      "qsos": 23668
     },
     {
       "reference": "US-2877",
@@ -147,21 +147,21 @@
     },
     {
       "reference": "US-2878",
-      "attempts": 97,
-      "activations": 89,
-      "qsos": 2905
+      "attempts": 100,
+      "activations": 90,
+      "qsos": 2921
     },
     {
       "reference": "US-2879",
-      "attempts": 213,
-      "activations": 201,
-      "qsos": 8831
+      "attempts": 214,
+      "activations": 202,
+      "qsos": 8843
     },
     {
       "reference": "US-2880",
-      "attempts": 158,
-      "activations": 155,
-      "qsos": 5630
+      "attempts": 159,
+      "activations": 156,
+      "qsos": 5640
     },
     {
       "reference": "US-2881",
@@ -171,9 +171,9 @@
     },
     {
       "reference": "US-4582",
-      "attempts": 2757,
-      "activations": 2705,
-      "qsos": 113684
+      "attempts": 2760,
+      "activations": 2707,
+      "qsos": 113777
     },
     {
       "reference": "US-5482",
@@ -183,9 +183,9 @@
     },
     {
       "reference": "US-5483",
-      "attempts": 86,
-      "activations": 78,
-      "qsos": 2524
+      "attempts": 89,
+      "activations": 79,
+      "qsos": 2540
     },
     {
       "reference": "US-5484",
@@ -195,27 +195,27 @@
     },
     {
       "reference": "US-6979",
-      "attempts": 442,
-      "activations": 437,
-      "qsos": 15126
+      "attempts": 443,
+      "activations": 438,
+      "qsos": 15177
     },
     {
       "reference": "US-6980",
-      "attempts": 389,
-      "activations": 386,
-      "qsos": 13068
+      "attempts": 390,
+      "activations": 387,
+      "qsos": 13119
     },
     {
       "reference": "US-6981",
-      "attempts": 65,
-      "activations": 63,
-      "qsos": 2177
+      "attempts": 66,
+      "activations": 64,
+      "qsos": 2191
     },
     {
       "reference": "US-6982",
-      "attempts": 350,
-      "activations": 349,
-      "qsos": 14776
+      "attempts": 351,
+      "activations": 350,
+      "qsos": 14796
     },
     {
       "reference": "US-6983",
@@ -243,9 +243,9 @@
     },
     {
       "reference": "US-6987",
-      "attempts": 91,
-      "activations": 85,
-      "qsos": 3366
+      "attempts": 92,
+      "activations": 86,
+      "qsos": 3427
     },
     {
       "reference": "US-6988",
@@ -273,15 +273,15 @@
     },
     {
       "reference": "US-6992",
-      "attempts": 84,
+      "attempts": 85,
       "activations": 79,
-      "qsos": 2450
+      "qsos": 2454
     },
     {
       "reference": "US-7508",
-      "attempts": 122,
-      "activations": 121,
-      "qsos": 3525
+      "attempts": 123,
+      "activations": 122,
+      "qsos": 3538
     },
     {
       "reference": "US-7518",
@@ -345,9 +345,9 @@
     },
     {
       "reference": "US-7723",
-      "attempts": 72,
-      "activations": 72,
-      "qsos": 2572
+      "attempts": 73,
+      "activations": 73,
+      "qsos": 2585
     },
     {
       "reference": "US-7865",

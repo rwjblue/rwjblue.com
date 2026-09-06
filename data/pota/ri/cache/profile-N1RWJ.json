@@ -12,24 +12,34 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 143,
-      "parks": 93,
-      "qsos": 3343
+      "activations": 144,
+      "parks": 94,
+      "qsos": 3370
     },
     "attempts": {
-      "activations": 156,
-      "parks": 93,
-      "qsos": 3396
+      "activations": 157,
+      "parks": 94,
+      "qsos": 3423
     },
     "hunter": {
-      "parks": 570,
-      "qsos": 933
+      "parks": 571,
+      "qsos": 934
     },
     "awards": 28,
     "endorsements": 61
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-09-06",
+        "reference": "US-2872",
+        "park": "Colt State Park",
+        "location": "US-RI",
+        "cw": 0,
+        "data": 0,
+        "phone": 27,
+        "total": 27
+      },
       {
         "date": "2026-09-03",
         "reference": "US-6992",
@@ -62,16 +72,6 @@
       },
       {
         "date": "2026-08-28",
-        "reference": "US-0757",
-        "park": "San Francisco Maritime National Historical Park",
-        "location": "US-CA",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-08-28",
         "reference": "US-1196",
         "park": "San Bruno Mountain State Park",
         "location": "US-CA",
@@ -79,6 +79,16 @@
         "data": 0,
         "phone": 0,
         "total": 14
+      },
+      {
+        "date": "2026-08-28",
+        "reference": "US-0757",
+        "park": "San Francisco Maritime National Historical Park",
+        "location": "US-CA",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
       },
       {
         "date": "2026-08-26",
@@ -269,16 +279,6 @@
         "data": 0,
         "phone": 0,
         "total": 34
-      },
-      {
-        "date": "2026-07-06",
-        "reference": "US-6281",
-        "park": "Loxahatchee River National Wild and Scenic River",
-        "location": "US-FL",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
       }
     ],
     "hunter_qsos": [

@@ -1910,6 +1910,19 @@
         "phone": 0
       },
       "source": "profile"
+    },
+    {
+      "reference": "US-2872",
+      "park": "Colt State Park",
+      "date": "2026-09-06",
+      "callsign": "N1RWJ",
+      "qsos": {
+        "total": 27,
+        "cw": 0,
+        "data": 0,
+        "phone": 27
+      },
+      "source": "profile"
     }
   ]
 }
