@@ -70,20 +70,27 @@ Calendar apps control refresh timing and whether subscribed alarms are shown.
 ## Cloudflare setup
 
 `wrangler.jsonc` binds the `rwjblue-cw-training` database as `TRAINING_DB`.
-The database and course are provisioned. Access must be configured before a
-production user can sign in; empty Access variables intentionally return 503
-and never expose the seeded curriculum.
+The database, course, and owner-only Access application are provisioned.
+The application is named `CW Academy training`, with ID
+`e9145a0f-f889-4671-a17f-14c1ad1f4d8c`, in the existing
+`fragrant-cake-b1d4.cloudflareaccess.com` team. Empty Access variables still
+intentionally return 503 and never expose the seeded curriculum.
 
-Create a self-hosted Cloudflare Access application protecting
+The self-hosted Cloudflare Access application protects
 `rwjblue.com/api/cw-training/*` and `n1rwj.com/api/cw-training/*`. Keep the shell
 and `/api/cw-training-calendar/*` outside Access. The latter performs its own
-capability validation. Permit only the owner's email, currently
-`me@rwjblue.com`, using an existing identity provider or one-time PIN.
+capability validation. The `CW training owner` allow policy permits only
+`me@rwjblue.com`, using the team's existing email one-time PIN sign-in.
+Open the training page and choose Sign in, then enter the emailed code directly
+on Cloudflare's sign-in page. Cloudflare dashboard sign-in is separate and is
+not required for daily practice.
 
-Set both application and allow-policy session duration to `720h` (30 days).
+Both application and allow-policy session duration are `720h` (30 days), shown
+as `1 month` in the dashboard. The authorization cookie is HTTP-only.
 This avoids a daily code prompt; clearing cookies, revocation, or changing
-browsers can still require earlier sign-in. Do not change unrelated global
-session settings. Set these non-secret Worker variables in `wrangler.jsonc`:
+browsers can still require earlier sign-in. Each browser needs its own initial
+sign-in. Do not change unrelated global session settings. These non-secret
+Worker variables in `wrangler.jsonc` identify the team, application, and owner:
 
 ```text
 TRAINING_ACCESS_TEAM=https://<team>.cloudflareaccess.com
@@ -169,5 +176,5 @@ and desktop widths, pause/reload/resume, audio seeking and complete passes,
 offline logging/reconnect, instructor text revisions, calendar revocation,
 and unauthenticated API rejection before declaring a rollout ready.
 
-The remaining one-time sign-in setup and real-phone playback checks are tracked
+The owner first-use verification and real-phone playback checks are tracked
 in [issue #14](https://github.com/rwjblue/rwjblue.com/issues/14).

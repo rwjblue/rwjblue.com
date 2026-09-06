@@ -21,8 +21,8 @@
     }
   ],
   "vars": {
-    "TRAINING_ACCESS_TEAM": "",
-    "TRAINING_ACCESS_AUD": "",
+    "TRAINING_ACCESS_TEAM": "https://fragrant-cake-b1d4.cloudflareaccess.com",
+    "TRAINING_ACCESS_AUD": "97cf5513be6555a5914e0d3be6dc325a75080e547b81f4f582681e449ac86152",
     "TRAINING_OWNER_EMAIL": "me@rwjblue.com"
   },
   "assets": {
