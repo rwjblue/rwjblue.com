@@ -49,6 +49,8 @@ function cloudflareRedirectsDev() {
 
 export default defineConfig({
   site: "https://rwjblue.com",
+  // Preserve HTML-aware spacing between inline elements across Astro upgrades.
+  compressHTML: true,
   integrations: [
     sitemap({
       filter: createSitemapFilter(undefined, new Date(publicationCutoff)),

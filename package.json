@@ -12,30 +12,36 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
     "@ripota/parks": "https://github.com/ripota/parks/releases/download/v3.1.1/ripota-parks-3.1.1.tgz",
-    "@types/markdown-it": "^14.1.2",
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.4.1",
     "@types/sanitize-html": "^2.16.1",
-    "astro": "^6.3.7",
-    "es-module-lexer": "^2.1.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "astro": "^7.3.1",
+    "es-module-lexer": "^2.3.2",
     "jsqr": "^1.4.0",
-    "markdown-it": "^14.2.0",
-    "miniflare": "^4.20260708.1",
+    "markdown-it": "^15.0.1",
+    "miniflare": "^4.20260730.0",
     "pagefind": "^1.5.2",
     "parse5": "^8.0.1",
     "qrcode": "^1.5.4",
-    "sanitize-html": "^2.17.4",
-    "sharp": "^0.34.5",
-    "typescript": "^6.0.3",
-    "wrangler": "^4.110.0"
+    "sanitize-html": "^2.17.7",
+    "sharp": "^0.35.4",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "wrangler": "^4.129.0"
   },
   "dependencies": {
     "@ham2k/lib-dxcc-data": "^1.0.1",
     "@ham2k/lib-geo-tools": "^1.1.1",
-    "@ham2k/lib-qson-adif": "^0.5.1",
+    "@ham2k/lib-qson-adif": "^1.1.0",
+    "adif-parser-ts": "^0.7.7",
     "jose": "^6.2.12",
     "leaflet": "^1.9.4"
+  },
+  "overrides": {
+    "miniflare": {
+      "undici": "^7.29.1"
+    }
   }
 }

@@ -102,6 +102,16 @@ mise run install
 mise run dev
 ```
 
+The `tsc` command uses TypeScript 7 through the `@typescript/native` npm alias.
+The `typescript` alias supplies Microsoft's TypeScript 6 compatibility package
+for Astro editor tooling that still needs the JavaScript compiler API. This
+follows the [TypeScript side-by-side setup](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6-0).
+
+The direct Miniflare dependency stays on its latest stable v4 release while v5
+is in alpha. Wrangler manages its own internal Miniflare version. The scoped
+Undici override supplies v7 security fixes to both; remove it when both
+Miniflare versions include Undici 7.29.1 or newer.
+
 ## Validation
 
 ```bash

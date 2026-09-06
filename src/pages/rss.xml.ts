@@ -15,6 +15,8 @@ const parser = new MarkdownIt({
   html: true,
   linkify: true,
 });
+// Preserve automatic links for bare domains in existing notes.
+parser.linkify.set({ fuzzyLink: true });
 
 type NoteEntry = CollectionEntry<"notes">;
 
