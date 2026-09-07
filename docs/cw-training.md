@@ -86,17 +86,21 @@ exercises; it does not replace them or score live sending.
 Morse Runner tasks link to the official
 [CWops Community Edition guide](https://cwops.org/wp-content/uploads/2025/01/Morse-Runner-CE.pdf)
 in Today, Week, and Focus. Focus adds a compact setup reminder and expandable
-operating reference, with a link to the older CWops exchange walkthrough.
-The contest selector and Run mode are separate: assignment-specific single-call
-or WPX Competition mode, starting speed, duration, and activity level are
-preserved. The guide's example settings never overwrite course or instructor
-directions. Finish block and Done elsewhere accept results in the existing
-optional note; there is no automatic score import or external-app time tracking.
-WPX Competition reminders warn that CE enables band conditions and resets its
-timer to the competition duration (60 minutes by default in v1.85.4); students
-must stop at the assigned duration. This behavior was checked against the
-[CE release source](https://github.com/w7sst/MorseRunner/blob/v1.85.4/Main.pas#L1912)
-and does not silently substitute a different Run mode.
+operating reference. The instructor-recommended
+[Web Morse Runner](https://fritzsche.github.io/WebMorseRunner/) is the primary
+launch link for Mac use and opens in a new tab. Its Mode labels are Single Call
+and WPX Contest, mapped from the original curriculum without changing assigned
+speed, duration, or activity. In contrast to desktop CE, the web version uses
+the selected duration and does not enforce WPX band conditions. Check settings
+each session; Web Morse Runner stores them separately from the tracker.
+The [web runner documentation](https://github.com/fritzsche/WebMorseRunner#usage)
+is linked alongside Mac button guidance and a post-run transcript reminder.
+CWops PDFs and desktop downloads remain available as clearly labeled desktop
+references, not instructions to install a Windows app or find a separate
+CQ WPX contest selector in the web interface.
+Finish block and Done elsewhere accept results in the existing optional note;
+there is no embedding, settings transfer, automatic score import, or
+cross-site time tracking. Confirm actual practice minutes after returning.
 These are original summaries with external source links, not hosted PDF copies.
 
 ## Private data and synchronization

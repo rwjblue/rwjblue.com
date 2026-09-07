@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { MORSE_RUNNER_GUIDE_URL, MORSE_RUNNER_BASICS_URL } from "../../lib/cw-training/morse-runner";
+import { MORSE_RUNNER_GUIDE_URL, MORSE_RUNNER_BASICS_URL, MORSE_RUNNER_DOWNLOAD_URL, WEB_MORSE_RUNNER_HELP_URL } from "../../lib/cw-training/morse-runner";
 import "../../styles/cw-training.css";
 ---
 
@@ -222,25 +222,32 @@ import "../../styles/cw-training.css";
             <div id="training-focus-resource"></div>
           </div>
           <section id="training-runner-guidance" class="training-guidance training-runner" aria-labelledby="training-runner-heading" hidden>
-            <h3 id="training-runner-heading">Morse Runner setup</h3>
-            <p><a href={MORSE_RUNNER_GUIDE_URL} target="_blank" rel="noreferrer">CWops Morse Runner CE guide (PDF)</a></p>
+            <h3 id="training-runner-heading">Web Morse Runner setup</h3>
+            <p><a href={WEB_MORSE_RUNNER_HELP_URL} target="_blank" rel="noreferrer">Web version instructions</a></p>
             <p>Assignment: <strong id="training-runner-run"></strong></p>
             <p id="training-runner-mode"></p>
             <p id="training-runner-conditions" class="training-small"></p>
-            <p class="training-small">Guide defaults: Contest = CQ WPX; comfortable pitch. Your assignment and instructor override these defaults, including speed.</p>
-            <p class="training-small">Run Morse Runner in its desktop app. This page cannot see its timer or score and pauses timing when hidden. After the run, choose Finish block, confirm the actual minutes, and add your results to Note or score.</p>
+            <p class="training-small">Enter your station Call, set CW Speed and the Run for minutes to the assignment above, and choose a comfortable Pitch. Check these each session; the web runner remembers settings in its own browser storage.</p>
+            <p class="training-small">Practice in the new tab, keeping it awake. This tracker cannot read its timer or score and pauses timing when hidden. Return here to Finish block, confirm actual minutes, and record results in Note or score.</p>
             <details>
               <summary>During the run: keys &amp; troubleshooting</summary>
+              <p class="training-small">On Mac, use the on-screen F1-F8 buttons if your function keys control volume or brightness.</p>
               <p>Copy the callsign into Call, then press Enter after the station finishes. Copy its serial number into Nr. (RST fills automatically), then Enter to log.</p>
               <dl class="training-runner-keys">
                 <dt><kbd>F7</kbd></dt><dd>Request another copy of the call or exchange.</dd>
                 <dt><kbd>F2</kbd></dt><dd>Repeat your exchange when asked NR? or AGN.</dd>
                 <dt><kbd>F5</kbd></dt><dd>Send the partial callsign you have copied to prompt a correction.</dd>
-                <dt><kbd>F1</kbd></dt><dd>Call CQ if the station goes quiet. Ctrl-W or Alt-W clears the entry.</dd>
+                <dt><kbd>F1</kbd></dt><dd>Call CQ when needed. Single Call starts without CQ.</dd>
               </dl>
               <p class="training-small">Cut numbers: T/O = 0, N = 9, A = 1, E = 5. In Chk, NR flags an incorrect serial; repeated NILs are a reason to check your Enter timing and exchange sequence.</p>
-              <p class="training-small">Record Verified Pts and score, plus anything to ask your instructor.</p>
+              <p class="training-small">After the run, the page-icon button reveals a transcript for reviewing missed exchanges. Record Verified Pts, score, and questions before starting another run clears the results.</p>
+            </details>
+            <details>
+              <summary>CWops guides &amp; desktop version</summary>
+              <p class="training-small">These guides describe the desktop interface. Use the web Mode labels above; its duration and band-condition behavior differ. Your original assignment and instructor's directions still take precedence.</p>
+              <p><a href={MORSE_RUNNER_GUIDE_URL} target="_blank" rel="noreferrer">CWops Morse Runner CE guide (PDF)</a></p>
               <p><a href={MORSE_RUNNER_BASICS_URL} target="_blank" rel="noreferrer">CWops exchange walkthrough (PDF, older interface)</a></p>
+              <p><a href={MORSE_RUNNER_DOWNLOAD_URL} target="_blank" rel="noreferrer">Desktop Community Edition downloads</a></p>
             </details>
           </section>
           <details id="training-scratchpad-panel" class="training-section training-scratchpad" open hidden>

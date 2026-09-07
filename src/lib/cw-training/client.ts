@@ -1,7 +1,7 @@
 import { availableBlockMinutes, dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "./plan";
 import type { BlockMinutes, PlannedTask, PracticeMode } from "./plan";
 import { listeningGuidance } from "./guidance";
-import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, MORSE_RUNNER_DOWNLOAD_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
+import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { TrainingStorage } from "./storage";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
@@ -597,9 +597,11 @@ export async function initTraining() {
         `This ${active.review ? "review " : ""}block targets ${active.targetPasses} whole pass${active.targetPasses === 1 ? "" : "es"}. You may pause and resume; skipping audio does not complete a pass. Follow the original instructions and your instructor's directions.`;
       $("training-scratchpad-prompt").textContent = guidance.scratchpadPrompt;
     }
-    $("training-focus-resource").innerHTML = active.resource?.unresolved
+    $("training-focus-resource").innerHTML = runner
+      ? link(WEB_MORSE_RUNNER_URL, "Open Web Morse Runner", "training-button primary")
+      : active.resource?.unresolved
       ? `<p class="training-notice">${escapeHtml(active.resource.unresolved)} Read the source or ask your instructor before choosing a substitute.</p>`
-      : `${link(active.resource?.url || (runner ? MORSE_RUNNER_DOWNLOAD_URL : active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? "Open official audio separately" : runner ? "Morse Runner CE downloads" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
+      : `${link(active.resource?.url || (active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? "Open official audio separately" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
     if (active.task.kind === "icr")
       $("training-focus-resource").insertAdjacentHTML(
         "afterbegin",
