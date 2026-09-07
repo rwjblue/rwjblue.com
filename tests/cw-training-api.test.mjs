@@ -187,6 +187,53 @@ test("review requires a boolean and cannot bypass known-activity validation", as
   }
 });
 
+test("scratchpad and recall round-trip separately without adding recall to total time", async () => {
+  const saved = attempt({ scratchpad: "  First pass: CQ\n\nSecond pass: TEST\t?\n", note: "A separate reflection.", recallSeconds: 90 });
+  const empty = attempt({ scratchpad: "", recallSeconds: 0 });
+  const limit = attempt({
+    startedAt: new Date(Date.now() - 86_400_000).toISOString(),
+    activeSeconds: 86_400, recallSeconds: 86_400, scratchpad: "x".repeat(10_000),
+  });
+  const legacy = attempt();
+  for (const attempts of [[saved, empty, limit, legacy], [saved]]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts }), env);
+    assert.equal(response.status, 200);
+    const snapshot = await response.json();
+    for (const item of [saved, empty, limit, legacy]) {
+      assert.deepEqual(snapshot.attempts.filter((entry) => entry.id === item.id), [item]);
+    }
+    assert.equal(snapshot.attempts.find((item) => item.id === saved.id).activeSeconds, 600);
+  }
+  for (const changes of [{ scratchpad: "Changed scratchpad" }, { recallSeconds: 91 }]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [{ ...saved, ...changes }] }), env);
+    assert.equal(response.status, 409, "saved scratchpad and recall remain immutable");
+  }
+  const snapshot = await (await trainingResponse(request("bootstrap"), env)).json();
+  assert.deepEqual(snapshot.attempts.find((item) => item.id === saved.id), saved);
+});
+
+test("scratchpad and recall reject malformed, oversized, and inconsistent values", async () => {
+  for (const scratchpad of [null, true, 3, [], {}, "contains\0null", "x".repeat(10_001)]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [attempt({ scratchpad })] }), env);
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error, "Invalid scratchpad.");
+  }
+  for (const recallSeconds of [null, true, "90", [], {}, -1, 0.5, 86_401]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [attempt({ recallSeconds })] }), env);
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error, "Invalid recall seconds.");
+  }
+  for (const values of [{ recallSeconds: 601 }, { activeSeconds: 0, recallSeconds: 1 }]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [attempt(values)] }), env);
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error, "Recall time exceeds total practice time.");
+  }
+  const unknown = attempt({ taskId: "unknown", scratchpad: "CQ", recallSeconds: 90 });
+  const response = await trainingResponse(request("sync", "POST", { attempts: [unknown] }), env);
+  assert.equal(response.status, 400);
+  assert.equal((await response.json()).error, "Unknown practice activity.");
+});
+
 test("derived reinforcement IDs sync only for a real course assignment", async () => {
   const review = attempt({ taskId: "s1d1-reinforcement" });
   const response = await trainingResponse(request("sync", "POST", { attempts: [review] }), env);

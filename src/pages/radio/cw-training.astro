@@ -65,6 +65,8 @@ import "../../styles/cw-training.css";
             value="0"
             max="60"
             aria-label="Today's practice minutes"></progress><p
+            id="training-time-breakdown" class="training-small"
+          ></p><p
             id="training-coverage"
           >
           </p>
@@ -157,6 +159,11 @@ import "../../styles/cw-training.css";
           >
           </h2>
           <p id="training-focus-objective"></p>
+          <div id="training-listening-guidance" class="training-guidance" hidden>
+            <p class="eyebrow">Suggested approach</p>
+            <p id="training-listening-approach"></p>
+            <p id="training-listening-passes" class="training-small"></p>
+          </div>
           <div class="training-card">
             <div class="training-focus-meta">
               <div>
@@ -176,6 +183,14 @@ import "../../styles/cw-training.css";
               <p id="training-audio-state" class="training-small" role="status">
                 Tap play to begin listening.
               </p>
+              <div class="training-recall">
+                <div class="training-actions">
+                  <button id="training-recall-toggle" type="button" data-action="toggle-recall" aria-pressed="false">Start recall</button>
+                  <button type="button" data-action="listen">Resume listening</button>
+                </div>
+                <p id="training-recall-time" class="training-small">00:00 recall included in active practice</p>
+                <p class="training-small">Start recall to time focused thinking or notes with audio paused. Ordinary pauses and breaks do not count. Instructor directions take precedence.</p>
+              </div>
               <div id="training-bookmarks" class="training-actions"></div>
               <label class="training-check"
                 ><input id="training-recall-pause" type="checkbox" /> Pause for recall
@@ -199,6 +214,13 @@ import "../../styles/cw-training.css";
             </div>
             <div id="training-focus-resource"></div>
           </div>
+          <details id="training-scratchpad-panel" class="training-section training-scratchpad" open hidden>
+            <summary>Recall &amp; notes <span class="training-small">optional</span></summary>
+            <p id="training-scratchpad-prompt" class="training-small"></p>
+            <label for="training-scratchpad">Your scratchpad</label>
+            <textarea id="training-scratchpad" rows="4" maxlength="10000" spellcheck="false" autocapitalize="off" aria-describedby="training-scratchpad-prompt training-scratchpad-status"></textarea>
+            <p id="training-scratchpad-status" class="training-small" role="status">Autosaved on this device. Finish and save the block to sync notes with history.</p>
+          </details>
           <details class="training-section" open>
             <summary>Exercise instructions</summary><div
               id="training-focus-instructions"
@@ -335,7 +357,7 @@ import "../../styles/cw-training.css";
     <dialog id="training-finish-dialog">
       <form id="training-finish-form">
         <h2 id="training-finish-title">Finish this block</h2><label
-          >Minutes actually practiced<input
+          >Total minutes actually practiced<input
             id="training-finish-minutes"
             name="minutes"
             type="number"
@@ -344,7 +366,12 @@ import "../../styles/cw-training.css";
             step="0.1"
             required
           /></label
-        ><label class="training-check"
+        ><label id="training-finish-recall-label" hidden
+          >Recall minutes (included in total)<input
+            id="training-finish-recall" name="recall" type="number"
+            min="0" max="240" step="0.1" value="0" required
+          /></label
+        ><p id="training-finish-scratchpad" class="training-small" hidden>Your scratchpad will be saved with this history entry.</p><label class="training-check"
           ><input
             id="training-finish-complete"
             name="complete"

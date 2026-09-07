@@ -14,6 +14,9 @@ export interface ActiveBlock {
   startedAt: string;
   targetMinutes: number;
   activeSeconds: number;
+  /** Included in activeSeconds; only explicitly timed, paused-audio recall. */
+  recallSeconds?: number;
+  scratchpad?: string;
   completedPasses: number;
   previousPasses: number;
   targetPasses: number;

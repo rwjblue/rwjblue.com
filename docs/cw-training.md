@@ -13,7 +13,9 @@ sitemaps, and does not load the site's analytics beacon.
   simulator work. This device remembers the activity choice. It is a suggestion,
   not a mandatory exercise sequence; sending still begins with its warm-up.
 - Focus provides a timer, official audio player, source instructions, and
-  large sending text. Save for later preserves an unfinished block locally.
+  large sending text. Listening exercises add a Suggested approach above the
+  player, with the original instructions preserved below; instructor directions
+  take precedence. Save for later preserves an unfinished block locally.
 - Week exposes all 16 meetings and 48 assignments, including later on-air work.
 - Materials accepts pasted instructions, text files, or links. Preparation,
   class-only, reference, and unknown-purpose material remain distinct. Revisions
@@ -26,6 +28,8 @@ Thursdays, 3:30-4:30 p.m. in `America/New_York`, from September 7 through Octobe
 29. Saturday/Sunday/Monday prepare for Monday; Tuesday/Wednesday/Thursday
 prepare for Thursday. Friday has no independent-practice quota. Class time does
 not count toward the 60-minute practice goal.
+Today includes saved practice plus the current block on the same course date,
+excluding class time.
 
 Practice minutes and assignment coverage are separate. Whole audio passes are
 packed into blocks; seeking past an unheard section does not complete a pass.
@@ -50,6 +54,13 @@ and other assigned activities. To switch activities with a saved block, choose
 Record block and switch, confirm the partial practice, then select the next
 block. Saving partial practice preserves the unfinished objective.
 
+Listening uses head copy by default, not mandatory transcription. The optional
+Recall & notes scratchpad holds up to 10,000 characters. While audio is paused,
+choose Start recall timer to count deliberate recall or note-taking, and Pause
+recall timer to stop counting it. Recall time contributes to total practice
+(`activeSeconds`) but never earns an audio pass. Ordinary pauses and background
+time do not automatically become recall time.
+
 Official MP3s play directly in a native audio element, without a `crossorigin`
 attribute. The source supports playback and range requests but does not grant
 cross-origin fetch access. There is no audio proxy, mirror, waveform fetch, or
@@ -66,6 +77,9 @@ exercises; it does not replace them or score live sending.
 `src/lib/cw-training/types.ts` defines the course, assignment, attempt, material,
 and preference contracts. `plan.ts` derives the queue from those records.
 IndexedDB retains the downloaded snapshot, pending changes, and active block.
+Scratchpad and recall-timer drafts autosave on this device only. Finish, then
+Save practice, includes the notes and recall time in the saved history and
+syncs them through the existing private API; an unfinished draft is not synced.
 The service worker caches only the generic shell and public code/assets, never
 API responses or instructor content. Use a trusted device and clear its training
 data before sharing it. Local data is not encrypted separately from browser

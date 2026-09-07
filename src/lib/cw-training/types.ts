@@ -67,13 +67,18 @@ export interface TrainingAttempt {
   taskId: string;
   startedAt: string;
   endedAt: string;
+  /** Total practice time, including recallSeconds when present. */
   activeSeconds: number;
+  /** Recall time is a portion of activeSeconds, never added on top of it. */
+  recallSeconds?: number;
   completed: boolean;
   /** Extra practice counts toward time, not required assignment coverage. */
   review?: boolean;
   completedPasses?: number;
   difficulty?: Difficulty;
   note?: string;
+  /** Multiline scratchpad kept separately from the end-of-block note. */
+  scratchpad?: string;
   context: "practice" | "class";
 }
 

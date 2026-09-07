@@ -1,5 +1,7 @@
 import { dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "./plan";
 import type { PlannedTask, PracticeMode } from "./plan";
+import { listeningGuidance } from "./guidance";
+import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { TrainingStorage } from "./storage";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
 import type {
@@ -93,6 +95,8 @@ export async function initTraining() {
   let view = "today";
   let temporaryMinutes: 10 | 15 | undefined;
   let running = false;
+  let recalling = false;
+  let todayTime: { date: string; savedSeconds: number; goal: number; savedIds: Set<string> } | undefined;
   let lastClock = performance.now();
   let lastAudioPosition = 0;
   let lastAudioClock = performance.now();
@@ -150,7 +154,7 @@ export async function initTraining() {
             : !connectionKnown
               ? "Connection not confirmed"
               : authorized
-                ? "Saved and synced"
+                ? state.active ? "History synced · current block on this device" : "Saved and synced"
                 : "Sign in to sync";
   };
   const persist = async () => {
@@ -161,6 +165,9 @@ export async function initTraining() {
         "This browser cannot save training data locally. Keep this page open until your practice syncs, or export your data before leaving.",
       );
     status();
+    $("training-scratchpad-status").textContent = storage.available
+      ? "Autosaved on this device. Finish and save the block to sync notes with history."
+      : "Device storage unavailable. Keep this page open and finish and save the block to sync your notes.";
   };
   const mergeSnapshot = (remote: TrainingSnapshot) => {
     if (state.snapshot && state.snapshot.userId !== remote.userId)
@@ -231,7 +238,9 @@ export async function initTraining() {
         const batch: TrainingSync = state.pending.materials?.length
           ? { materials: state.pending.materials.slice(0, 1) }
           : {
-              attempts: state.pending.attempts?.slice(0, 25),
+              // Full scratchpads can expand sixfold when JSON-escaped. Keep
+              // offline batches below the API's 1 MiB request limit.
+              attempts: state.pending.attempts?.slice(0, 10),
               preferences: state.pending.preferences,
             };
         const remote = await request("sync", batch);
@@ -358,15 +367,15 @@ export async function initTraining() {
     $("training-class-time").textContent = meeting
       ? `${current.phase === "class" ? "Class now" : "Next class"}: ${formatMeeting(meeting.startsAt)} · 1 hour`
       : "Your training history stays here.";
-    $("training-minutes").textContent = current.dailyGoalMinutes
-      ? `${Math.round(current.practicedMinutes)} / ${current.dailyGoalMinutes} min`
-      : `${Math.round(current.practicedMinutes)} min · optional practice`;
+    todayTime = {
+      date: dateInTimezone(new Date(), course.timezone),
+      savedSeconds: current.practicedMinutes * 60,
+      goal: current.dailyGoalMinutes,
+      savedIds: new Set(snapshot().attempts.map((attempt) => attempt.id)),
+    };
     $<HTMLProgressElement>("training-progress").max =
       current.dailyGoalMinutes || course.dailyGoalMinutes;
-    $<HTMLProgressElement>("training-progress").value = Math.min(
-      current.practicedMinutes,
-      current.dailyGoalMinutes || course.dailyGoalMinutes,
-    );
+    updateTodayTime();
     const session = meeting?.session ?? assignment?.session;
     const materials = currentMaterials().filter(
       (item) => item.session === session,
@@ -474,7 +483,7 @@ export async function initTraining() {
         .slice(0, 100)
         .map(
           (attempt) =>
-            `<div class="training-task"><div><strong>${escapeHtml(findTask(attempt.taskId)?.task.title ?? snapshot().materials.find((item) => item.id === attempt.taskId)?.title ?? "Practice")}</strong><p>${escapeHtml(formatMeeting(attempt.endedAt))} · ${Math.round((attempt.activeSeconds / 60) * 10) / 10} min · ${attempt.context === "class" ? "Class use" : attempt.review ? "Extra review" : attempt.completed ? "Completed" : "Partial / review"}${attempt.completedPasses ? ` · ${attempt.completedPasses} passes` : ""}</p>${attempt.note ? `<p>${escapeHtml(attempt.note)}</p>` : ""}</div></div>`,
+            `<div class="training-task"><div><strong>${escapeHtml(findTask(attempt.taskId)?.task.title ?? snapshot().materials.find((item) => item.id === attempt.taskId)?.title ?? "Practice")}</strong><p>${escapeHtml(formatMeeting(attempt.endedAt))} · ${Math.round((attempt.activeSeconds / 60) * 10) / 10} min · ${attempt.context === "class" ? "Class use" : attempt.review ? "Extra review" : attempt.completed ? "Completed" : "Partial / review"}${attempt.completedPasses ? ` · ${attempt.completedPasses} passes` : ""}${attempt.recallSeconds ? ` · includes ${time(attempt.recallSeconds)} recall` : ""}</p>${attempt.scratchpad ? `<details><summary>Recall &amp; notes</summary><div class="training-history-notes">${escapeHtml(attempt.scratchpad)}</div></details>` : ""}${attempt.note ? `<p>${escapeHtml(attempt.note)}</p>` : ""}</div></div>`,
         )
         .join("") ||
       '<p class="training-small">Your first practice block will appear here.</p>';
@@ -497,6 +506,8 @@ export async function initTraining() {
     $("training-focus-empty").hidden = !!active;
     $("training-focus-content").hidden = !active;
     if (!active) {
+      running = false;
+      recalling = false;
       mountedBlock = undefined;
       audio.removeAttribute("src");
       audio.load();
@@ -509,7 +520,7 @@ export async function initTraining() {
       ? "Optional reinforcement using the original exercise below. These minutes count, but required assignment progress stays unchanged."
       : active.task.alternative
       ? `Alternative allowed by the curriculum: ${active.task.alternative}`
-      : "Follow the exercise instructions below. Your progress is saved as you go.";
+      : "Follow the exercise instructions below. This block autosaves on this device until you finish and save it.";
     $("training-focus-target").textContent =
       `${active.targetMinutes}-minute block${active.task.objectiveCount ? ` · Objective: ${active.task.objectiveCount}` : ""}`;
     $("training-focus-instructions").textContent = active.task.instructions;
@@ -523,6 +534,15 @@ export async function initTraining() {
       !active.resource.unresolved;
     $("training-audio-box").hidden = !isAudio;
     $("training-timer-box").hidden = isAudio;
+    const guidance = listeningGuidance(active.task);
+    $("training-listening-guidance").hidden = !guidance;
+    $("training-scratchpad-panel").hidden = !guidance;
+    if (guidance) {
+      $("training-listening-approach").textContent = `${guidance.title}: ${guidance.approach}`;
+      $("training-listening-passes").textContent =
+        `This ${active.review ? "review " : ""}block targets ${active.targetPasses} whole pass${active.targetPasses === 1 ? "" : "es"}. You may pause and resume; skipping audio does not complete a pass. Follow the original instructions and your instructor's directions.`;
+      $("training-scratchpad-prompt").textContent = guidance.scratchpadPrompt;
+    }
     $("training-focus-resource").innerHTML = active.resource?.unresolved
       ? `<p class="training-notice">${escapeHtml(active.resource.unresolved)} Read the source or ask your instructor before choosing a substitute.</p>`
       : `${link(active.resource?.url || (active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? "Open official audio separately" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
@@ -534,6 +554,9 @@ export async function initTraining() {
     if (mountedBlock !== active.id) {
       audioReady = false;
       mountedBlock = active.id;
+      $<HTMLTextAreaElement>("training-scratchpad").value = active.scratchpad ?? "";
+      $<HTMLDetailsElement>("training-scratchpad-panel").open = true;
+      $("training-audio-state").textContent = "Paused. Tap play to listen, or start recall to time focused thinking and notes.";
       if (isAudio) {
         audio.src = safeUrl(active.resource!.url);
         audio.load();
@@ -564,13 +587,33 @@ export async function initTraining() {
     }
     updateClock();
   }
+  function updateTodayTime() {
+    if (!todayTime || !state.snapshot) return;
+    const totals = practiceTimeSummary(todayTime.savedSeconds, state.active,
+      todayTime.date, snapshot().course.timezone, todayTime.savedIds);
+    $("training-minutes").textContent = todayTime.goal
+      ? `${Math.round(totals.totalSeconds / 60)} / ${todayTime.goal} min`
+      : `${Math.round(totals.totalSeconds / 60)} min · optional practice`;
+    const currentPractice = state.active?.context === "practice" &&
+      dateInTimezone(state.active.startedAt, snapshot().course.timezone) === todayTime.date &&
+      !todayTime.savedIds.has(state.active.id);
+    $("training-time-breakdown").textContent = currentPractice
+      ? `${time(totals.savedSeconds)} saved + ${time(totals.currentSeconds)} current block (on this device). Finish and save to add it to history.`
+      : `${time(totals.savedSeconds)} saved practice today.${state.active?.context === "class" ? " Class time is separate." : ""}`;
+    const progress = $<HTMLProgressElement>("training-progress");
+    progress.value = Math.min(totals.totalSeconds / 60, progress.max);
+  }
   function updateClock() {
+    updateTodayTime();
     if (!state.active) return;
     $("training-timer").textContent = time(state.active.activeSeconds);
     $("training-timer-toggle").textContent = running
       ? "Pause timer"
       : "Resume timer";
     const active = state.active;
+    $("training-recall-toggle").textContent = recalling ? "Pause recall" : "Start recall";
+    $("training-recall-toggle").setAttribute("aria-pressed", String(recalling));
+    $("training-recall-time").textContent = `${time(active.recallSeconds ?? 0)} recall included in active practice${recalling ? " · timing now" : ""}`;
     $("training-pass-count").textContent =
       `${active.completedPasses} of ${active.targetPasses} passes this block complete${active.previousPasses ? ` · ${active.previousPasses} recorded earlier` : ""}`;
     $("training-bookmarks").innerHTML = active.bookmarks
@@ -580,14 +623,44 @@ export async function initTraining() {
       )
       .join("");
   }
-  function pause() {
+  function settleTimer(audioPlaying = !audio.paused) {
+    const now = performance.now();
+    const elapsed = (now - lastClock) / 1000;
+    lastClock = now;
+    if (!state.active) return;
+    const delta = timedPracticeDelta(elapsed, {
+      running, visible: !document.hidden, kind: state.active.task.kind,
+      recalling, audioPlaying,
+    });
+    state.active.activeSeconds += delta.activeSeconds;
+    if (delta.recallSeconds)
+      state.active.recallSeconds = (state.active.recallSeconds ?? 0) + delta.recallSeconds;
+    if (delta.interrupted) {
+      running = false;
+      recalling = false;
+      if (state.active.task.kind === "audio")
+        $("training-audio-state").textContent = "Recall paused after an interruption. Resume listening or start recall when ready.";
+      notice("The timer paused after an interruption. Confirm any additional practice minutes when finishing.");
+    }
+  }
+  function stopTimer(audioPlaying = !audio.paused) {
+    const wasRecalling = recalling;
+    settleTimer(audioPlaying);
     running = false;
+    recalling = false;
+    if (wasRecalling)
+      $("training-audio-state").textContent = "Paused. Resume listening or start recall when ready.";
+    updateClock();
+  }
+  function pause() {
+    stopTimer();
     audio.pause();
     void persist();
     updateClock();
   }
   async function play(): Promise<void> {
     if (!allowActiveDate()) return;
+    stopTimer();
     try {
       await audio.play();
       $("training-audio-state").textContent =
@@ -620,6 +693,8 @@ export async function initTraining() {
       item.suggestedMinutes,
       item.task.kind === "simulator" ? (item.task.minutes ?? 15) : 0,
     );
+    running = false;
+    recalling = false;
     state.active = {
       id: crypto.randomUUID(),
       assignmentId: item.assignment.id,
@@ -689,6 +764,8 @@ export async function initTraining() {
       );
       return;
     }
+    recalling = false;
+    running = false;
     state.active = {
       id: crypto.randomUUID(),
       assignmentId: `material:${material.id}`,
@@ -725,6 +802,9 @@ export async function initTraining() {
       Math.round(state.active.activeSeconds / 6) / 10
     ).toString();
     const active = state.active;
+    $("training-finish-recall-label").hidden = active.task.kind !== "audio";
+    $<HTMLInputElement>("training-finish-recall").value = String(Math.round((active.recallSeconds ?? 0) / 6) / 10);
+    $("training-finish-scratchpad").hidden = !active.scratchpad;
     $("training-finish-title").textContent =
       active.context === "class" ? "Record class use" : active.review ? "Record extra review" : "Finish this block";
     $("training-finish-complete-label").textContent = active.review
@@ -758,6 +838,7 @@ export async function initTraining() {
     )
       return true;
     running = false;
+    recalling = false;
     audio.pause();
     notice(
       "This saved block belongs to an earlier practice day. Record its practiced minutes first, then start a new block so today's time is credited correctly.",
@@ -775,6 +856,12 @@ export async function initTraining() {
     lastAudioPosition = audio.currentTime;
     lastAudioClock = performance.now();
     audioReady = true;
+  });
+  audio.addEventListener("play", () => {
+    // The native control has flipped paused already, but playback has just started.
+    stopTimer(false);
+    if (!allowActiveDate()) return;
+    void persist();
   });
   audio.addEventListener("playing", () => {
     if (!allowActiveDate()) return;
@@ -806,6 +893,10 @@ export async function initTraining() {
   audio.addEventListener("pause", () => {
     if (state.active) {
       state.active.position = audio.currentTime;
+      if (!audio.ended)
+        $("training-audio-state").textContent = recalling
+          ? "Audio paused. Recall timer is running. Pause recall when you take a break."
+          : "Paused. Break time does not count; start recall to time focused thinking or notes.";
       void persist();
     }
   });
@@ -879,7 +970,7 @@ export async function initTraining() {
     }
     if ($<HTMLInputElement>("training-recall-pause").checked)
       $("training-audio-state").textContent =
-        "Take a moment to recall what you heard. Tap play for the next pass.";
+        "Take a moment to recall what you heard. Start recall to time it, or tap play for the next pass.";
     else void play();
   });
   if ("mediaSession" in navigator) {
@@ -888,7 +979,7 @@ export async function initTraining() {
         void play();
       },
       pause: (): void => {
-        audio.pause();
+        pause();
       },
       seekbackward: (): void => {
         audio.currentTime = Math.max(0, audio.currentTime - 8);
@@ -1070,10 +1161,31 @@ export async function initTraining() {
         break;
       case "toggle-timer":
         if (!allowActiveDate()) break;
-        running = !running;
-        lastClock = performance.now();
+        if (running) stopTimer();
+        else {
+          running = true;
+          lastClock = performance.now();
+        }
         updateClock();
         void persist();
+        break;
+      case "toggle-recall":
+        if (!state.active || state.active.task.kind !== "audio" || !allowActiveDate()) break;
+        if (recalling) {
+          stopTimer();
+          $("training-audio-state").textContent = "Paused. Resume listening or start recall when ready.";
+        } else {
+          audio.pause();
+          recalling = true;
+          running = true;
+          lastClock = performance.now();
+          $("training-audio-state").textContent = "Audio paused. Recall timer is running. Pause recall when you take a break.";
+        }
+        updateClock();
+        void persist();
+        break;
+      case "listen":
+        void play();
         break;
       case "replay":
         audio.currentTime = Math.max(0, audio.currentTime - 8);
@@ -1240,6 +1352,12 @@ export async function initTraining() {
     temporaryMinutes = (event.currentTarget as HTMLSelectElement).value === "10" ? 10 : 15;
     render();
   });
+  $<HTMLTextAreaElement>("training-scratchpad").addEventListener("input", (event) => {
+    if (!state.active) return;
+    state.active.scratchpad = (event.currentTarget as HTMLTextAreaElement).value;
+    $("training-scratchpad-status").textContent = "Saving on this device...";
+    void persist();
+  });
   $<HTMLFormElement>("training-finish-form").addEventListener(
     "submit",
     (event) => {
@@ -1259,6 +1377,16 @@ export async function initTraining() {
         activeSeconds > 14400
       )
         return;
+      const recallSeconds = active.task.kind === "audio"
+        ? Math.round(Number(data.get("recall")) * 60) : 0;
+      if (!Number.isFinite(recallSeconds) || recallSeconds < 0 || recallSeconds > activeSeconds) {
+        $("training-finish-help").textContent = "Recall minutes are included in the total. Enter recall time between zero and your total practice time.";
+        return;
+      }
+      if (active.scratchpad && (active.scratchpad.length > 10000 || active.scratchpad.includes("\0"))) {
+        $("training-finish-help").textContent = "Keep the scratchpad under 10,000 characters and remove null characters before saving.";
+        return;
+      }
       let completed = data.get("complete") === "on";
       const minimumPasses = active.review ? active.targetPasses : active.task.minimumPasses;
       if (
@@ -1304,8 +1432,9 @@ export async function initTraining() {
         activeSeconds,
         completed,
         ...(active.task.kind === "audio"
-          ? { completedPasses: active.completedPasses }
+          ? { completedPasses: active.completedPasses, recallSeconds }
           : {}),
+        ...(active.scratchpad !== undefined ? { scratchpad: active.scratchpad } : {}),
         ...(data.get("difficulty")
           ? { difficulty: data.get("difficulty") as Difficulty }
           : {}),
@@ -1316,6 +1445,7 @@ export async function initTraining() {
       state.active = undefined;
       audio.pause();
       running = false;
+      recalling = false;
       $<HTMLDialogElement>("training-finish-dialog").close();
       setView("today");
       void record(attempt);
@@ -1475,8 +1605,7 @@ export async function initTraining() {
   }
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && running) {
-      running = false;
-      updateClock();
+      stopTimer();
       notice(
         "The timer paused while you switched apps. If you continued practicing, confirm those minutes when finishing.",
       );
@@ -1484,7 +1613,7 @@ export async function initTraining() {
     if (document.hidden) void persist();
   });
   window.addEventListener("pagehide", () => {
-    running = false;
+    stopTimer();
     void persist();
   });
   window.addEventListener("online", () => {
@@ -1494,19 +1623,10 @@ export async function initTraining() {
   window.addEventListener("offline", status);
   setInterval(() => {
     if (disposed) return;
-    const now = performance.now();
-    const elapsed = (now - lastClock) / 1000;
-    lastClock = now;
+    if (todayTime && state.snapshot && todayTime.date !== dateInTimezone(new Date(), snapshot().course.timezone)) render();
     if (running && state.active) {
       if (!allowActiveDate()) return;
-      if (elapsed < 4 && !document.hidden)
-        state.active.activeSeconds += elapsed;
-      else {
-        running = false;
-        notice(
-          "The timer paused after an interruption. Confirm any additional practice minutes when finishing.",
-        );
-      }
+      settleTimer();
       updateClock();
       if (Date.now() - lastSaved > 5000) {
         lastSaved = Date.now();

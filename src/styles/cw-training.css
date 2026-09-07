@@ -411,6 +411,33 @@
 .training-completed {
   color: var(--green);
 }
+.training-guidance {
+  border-left: 3px solid var(--green);
+  padding: 4px 0 4px 16px;
+  margin: 20px 0;
+}
+.training-guidance p {
+  margin: 6px 0;
+}
+.training-recall {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+.training-recall [aria-pressed="true"] {
+  background: var(--green-wash);
+  border-color: var(--green);
+}
+.cw-training .training-scratchpad > label {
+  margin-bottom: 8px;
+}
+.cw-training .training-scratchpad textarea {
+  font: 1rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.training-history-notes {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 @media (max-width: 580px) {
   .training-heading {
     display: block;
