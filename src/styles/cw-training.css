@@ -441,6 +441,27 @@
 .training-guidance p {
   margin: 6px 0;
 }
+.training-runner h3 {
+  margin: 0 0 8px;
+}
+.training-runner details {
+  margin-top: 12px;
+}
+.training-runner-keys {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 10px 14px;
+  margin: 16px 0;
+}
+.training-runner-keys dd {
+  margin: 0;
+}
+.training-runner kbd {
+  font: 0.9em ui-monospace, SFMono-Regular, Menlo, monospace;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  padding: 2px 5px;
+}
 .training-recall {
   border-top: 1px solid var(--line);
   padding-top: 16px;

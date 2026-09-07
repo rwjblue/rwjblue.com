@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { MORSE_RUNNER_GUIDE_URL, MORSE_RUNNER_BASICS_URL } from "../../lib/cw-training/morse-runner";
 import "../../styles/cw-training.css";
 ---
 
@@ -220,6 +221,28 @@ import "../../styles/cw-training.css";
             </div>
             <div id="training-focus-resource"></div>
           </div>
+          <section id="training-runner-guidance" class="training-guidance training-runner" aria-labelledby="training-runner-heading" hidden>
+            <h3 id="training-runner-heading">Morse Runner setup</h3>
+            <p><a href={MORSE_RUNNER_GUIDE_URL} target="_blank" rel="noreferrer">CWops Morse Runner CE guide (PDF)</a></p>
+            <p>Assignment: <strong id="training-runner-run"></strong></p>
+            <p id="training-runner-mode"></p>
+            <p id="training-runner-conditions" class="training-small"></p>
+            <p class="training-small">Guide defaults: Contest = CQ WPX; comfortable pitch. Your assignment and instructor override these defaults, including speed.</p>
+            <p class="training-small">Run Morse Runner in its desktop app. This page cannot see its timer or score and pauses timing when hidden. After the run, choose Finish block, confirm the actual minutes, and add your results to Note or score.</p>
+            <details>
+              <summary>During the run: keys &amp; troubleshooting</summary>
+              <p>Copy the callsign into Call, then press Enter after the station finishes. Copy its serial number into Nr. (RST fills automatically), then Enter to log.</p>
+              <dl class="training-runner-keys">
+                <dt><kbd>F7</kbd></dt><dd>Request another copy of the call or exchange.</dd>
+                <dt><kbd>F2</kbd></dt><dd>Repeat your exchange when asked NR? or AGN.</dd>
+                <dt><kbd>F5</kbd></dt><dd>Send the partial callsign you have copied to prompt a correction.</dd>
+                <dt><kbd>F1</kbd></dt><dd>Call CQ if the station goes quiet. Ctrl-W or Alt-W clears the entry.</dd>
+              </dl>
+              <p class="training-small">Cut numbers: T/O = 0, N = 9, A = 1, E = 5. In Chk, NR flags an incorrect serial; repeated NILs are a reason to check your Enter timing and exchange sequence.</p>
+              <p class="training-small">Record Verified Pts and score, plus anything to ask your instructor.</p>
+              <p><a href={MORSE_RUNNER_BASICS_URL} target="_blank" rel="noreferrer">CWops exchange walkthrough (PDF, older interface)</a></p>
+            </details>
+          </section>
           <details id="training-scratchpad-panel" class="training-section training-scratchpad" open hidden>
             <summary>Recall &amp; notes <span class="training-small">optional</span></summary>
             <p id="training-scratchpad-prompt" class="training-small"></p>
@@ -393,6 +416,7 @@ import "../../styles/cw-training.css";
           ></label
         ><label
           >Note or score (optional)<textarea
+            id="training-finish-note"
             name="note"
             rows="2"
             maxlength="4000"></textarea></label
@@ -431,7 +455,7 @@ import "../../styles/cw-training.css";
         ><label class="training-check"
           ><input type="checkbox" name="complete" /> Requirements completed</label
         ><label
-          >Note (optional)<textarea name="note" rows="2" maxlength="3950"
+          >Note or score (optional)<textarea id="training-manual-note" name="note" rows="2" maxlength="3950"
           ></textarea></label
         ><div class="training-actions">
           <button class="primary" type="submit">Save practice</button><button

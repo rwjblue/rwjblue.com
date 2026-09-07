@@ -83,6 +83,22 @@ Instant-recognition trainers, Morse Runner, a physical key/radio, and online
 class meetings remain external resources. The page guides and logs those
 exercises; it does not replace them or score live sending.
 
+Morse Runner tasks link to the official
+[CWops Community Edition guide](https://cwops.org/wp-content/uploads/2025/01/Morse-Runner-CE.pdf)
+in Today, Week, and Focus. Focus adds a compact setup reminder and expandable
+operating reference, with a link to the older CWops exchange walkthrough.
+The contest selector and Run mode are separate: assignment-specific single-call
+or WPX Competition mode, starting speed, duration, and activity level are
+preserved. The guide's example settings never overwrite course or instructor
+directions. Finish block and Done elsewhere accept results in the existing
+optional note; there is no automatic score import or external-app time tracking.
+WPX Competition reminders warn that CE enables band conditions and resets its
+timer to the competition duration (60 minutes by default in v1.85.4); students
+must stop at the assigned duration. This behavior was checked against the
+[CE release source](https://github.com/w7sst/MorseRunner/blob/v1.85.4/Main.pas#L1912)
+and does not silently substitute a different Run mode.
+These are original summaries with external source links, not hosted PDF copies.
+
 ## Private data and synchronization
 
 `src/lib/cw-training/types.ts` defines the course, assignment, attempt, material,

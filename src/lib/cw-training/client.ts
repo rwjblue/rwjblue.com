@@ -1,6 +1,7 @@
 import { availableBlockMinutes, dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "./plan";
 import type { BlockMinutes, PlannedTask, PracticeMode } from "./plan";
 import { listeningGuidance } from "./guidance";
+import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, MORSE_RUNNER_DOWNLOAD_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { TrainingStorage } from "./storage";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
@@ -41,6 +42,8 @@ const link = (url: string | undefined, label: string, className = "") =>
   safeUrl(url)
     ? `<a href="${escapeHtml(safeUrl(url))}" target="_blank" rel="noreferrer" class="${className}">${escapeHtml(label)}</a>`
     : "";
+const runnerGuideLink = (task: TrainingTask) => isMorseRunner(task)
+  ? `<p>${link(MORSE_RUNNER_GUIDE_URL, "CWops Morse Runner CE guide (PDF)")}</p>` : "";
 const time = (seconds: number) =>
   `${Math.floor(seconds / 60)
     .toString()
@@ -340,7 +343,7 @@ export async function initTraining() {
             )
             .join("; ")}</p>`
         : ""
-    }</div>${item.extra ? `<button type="button" data-review="${escapeHtml(item.task.id)}">Extra review</button>` : buttons(item.task.id, missed, item.task.kind === "live" && !item.availableNow)}</div>`;
+    }${runnerGuideLink(item.task)}</div>${item.extra ? `<button type="button" data-review="${escapeHtml(item.task.id)}">Extra review</button>` : buttons(item.task.id, missed, item.task.kind === "live" && !item.availableNow)}</div>`;
 
   function setView(next: string) {
     view = next;
@@ -508,7 +511,7 @@ export async function initTraining() {
                     const live = current.liveUpcoming.find(
                       (item) => item.task.id === task.id,
                     );
-                    return `<div class="training-task"><div><strong class="${progress.complete ? "training-completed" : ""}">${progress.complete ? "Completed · " : ""}${escapeHtml(task.title)}</strong>${progressMarkup(task)}<details><summary>Instructions</summary><div class="training-original">${escapeHtml(task.instructions)}</div>${task.settings ? `<div class="training-original">${escapeHtml(task.settings)}</div>` : ""}${link(task.sourceUrl, "Official source")}</details></div>${buttons(task.id, false, task.kind === "live" && !live?.availableNow)}</div>`;
+                    return `<div class="training-task"><div><strong class="${progress.complete ? "training-completed" : ""}">${progress.complete ? "Completed · " : ""}${escapeHtml(task.title)}</strong>${progressMarkup(task)}${runnerGuideLink(task)}<details><summary>Instructions</summary><div class="training-original">${escapeHtml(task.instructions)}</div>${task.settings ? `<div class="training-original">${escapeHtml(task.settings)}</div>` : ""}${link(task.sourceUrl, "Official source")}</details></div>${buttons(task.id, false, task.kind === "live" && !live?.availableNow)}</div>`;
                   })
                   .join("")}</details>`,
             )
@@ -569,6 +572,13 @@ export async function initTraining() {
       `${active.targetMinutes}-minute block${active.task.objectiveCount ? ` · Objective: ${active.task.objectiveCount}` : ""}`;
     $("training-focus-instructions").textContent = active.task.instructions;
     $("training-focus-settings").textContent = active.task.settings ?? "";
+    const runner = morseRunnerSetup(active.task);
+    $("training-runner-guidance").hidden = !runner;
+    if (runner) {
+      $("training-runner-run").textContent = runner.run;
+      $("training-runner-mode").textContent = runner.mode;
+      $("training-runner-conditions").textContent = runner.conditions;
+    }
     const source = $<HTMLAnchorElement>("training-focus-source");
     source.hidden = !safeUrl(active.task.sourceUrl);
     source.href = safeUrl(active.task.sourceUrl);
@@ -589,7 +599,7 @@ export async function initTraining() {
     }
     $("training-focus-resource").innerHTML = active.resource?.unresolved
       ? `<p class="training-notice">${escapeHtml(active.resource.unresolved)} Read the source or ask your instructor before choosing a substitute.</p>`
-      : `${link(active.resource?.url || (active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? "Open official audio separately" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
+      : `${link(active.resource?.url || (runner ? MORSE_RUNNER_DOWNLOAD_URL : active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? "Open official audio separately" : runner ? "Morse Runner CE downloads" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
     if (active.task.kind === "icr")
       $("training-focus-resource").insertAdjacentHTML(
         "afterbegin",
@@ -849,6 +859,7 @@ export async function initTraining() {
     $("training-finish-recall-label").hidden = active.task.kind !== "audio";
     $<HTMLInputElement>("training-finish-recall").value = String(Math.round((active.recallSeconds ?? 0) / 6) / 10);
     $("training-finish-scratchpad").hidden = !active.scratchpad;
+    $<HTMLTextAreaElement>("training-finish-note").placeholder = isMorseRunner(active.task) ? MORSE_RUNNER_RESULTS_PROMPT : "";
     $("training-finish-title").textContent =
       active.context === "class" ? "Record class use" : active.review ? "Record extra review" : "Finish this block";
     $("training-finish-complete-label").textContent = active.review
@@ -1044,6 +1055,11 @@ export async function initTraining() {
     }
   }
 
+  function updateManualNotePrompt() {
+    const task = findTask($<HTMLSelectElement>("training-manual-task").value)?.task;
+    $<HTMLTextAreaElement>("training-manual-note").placeholder = task && isMorseRunner(task) ? MORSE_RUNNER_RESULTS_PROMPT : "";
+  }
+  $("training-manual-task").addEventListener("change", updateManualNotePrompt);
   function manual(taskId?: string) {
     $<HTMLFormElement>("training-manual-form").reset();
     $<HTMLSelectElement>("training-manual-task").innerHTML =
@@ -1063,6 +1079,7 @@ export async function initTraining() {
     const selection = taskId ?? plan().next?.task.id;
     if (selection)
       $<HTMLSelectElement>("training-manual-task").value = selection;
+    updateManualNotePrompt();
     $<HTMLDialogElement>("training-manual-dialog").showModal();
   }
   function addMaterial(revision?: TrainingMaterial) {
