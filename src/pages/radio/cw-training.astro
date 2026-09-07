@@ -75,12 +75,36 @@ import "../../styles/cw-training.css";
             data-action="resume">Return to your block</button
           >
         </div>
+        <div class="training-options">
+          <fieldset class="training-mode" aria-describedby="training-mode-help">
+            <legend>What can you do right now?</legend>
+            <div class="training-mode-buttons">
+              <button type="button" data-mode="anything" aria-pressed="true">Anything</button>
+              <button type="button" data-mode="listen" aria-pressed="false">Listen</button>
+              <button type="button" data-mode="send" aria-pressed="false">Send</button>
+              <button type="button" data-mode="computer" aria-pressed="false">Computer</button>
+            </div>
+          </fieldset>
+          <label>Time available
+            <select id="training-block-now">
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+            </select>
+          </label>
+        </div>
+        <p id="training-mode-help" class="training-small" role="status"></p>
         <div id="training-next" class="training-card training-next"></div>
         <div id="training-preparation"></div>
         <div class="training-section">
-          <h3>Your practice queue</h3><div id="training-queue"></div>
+          <h3>Assigned practice available now</h3><div id="training-queue"></div>
         </div>
+        <div id="training-deferred"></div>
         <div id="training-blocked"></div>
+        <details id="training-extra-panel" class="training-section" hidden>
+          <summary>Keep practicing: extra review</summary>
+          <p class="training-small">Optional blocks add to your practice time, not assignment completion. There is no 60-minute limit.</p>
+          <div id="training-extra"></div>
+        </details>
         <details id="training-missed-panel" class="training-section">
           <summary id="training-missed-label">Earlier practice</summary><div
             id="training-missed"
@@ -325,7 +349,7 @@ import "../../styles/cw-training.css";
             id="training-finish-complete"
             name="complete"
             type="checkbox"
-          /> I completed this exercise's requirements</label
+          /> <span id="training-finish-complete-label">I completed this exercise's requirements</span></label
         ><p id="training-finish-help" class="training-small"></p><label
           >How did it feel? (optional)<select name="difficulty"
             ><option value="">No rating</option><option value="hard"

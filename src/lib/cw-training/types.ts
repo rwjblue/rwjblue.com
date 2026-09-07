@@ -69,6 +69,8 @@ export interface TrainingAttempt {
   endedAt: string;
   activeSeconds: number;
   completed: boolean;
+  /** Extra practice counts toward time, not required assignment coverage. */
+  review?: boolean;
   completedPasses?: number;
   difficulty?: Difficulty;
   note?: string;

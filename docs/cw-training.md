@@ -7,7 +7,11 @@ sitemaps, and does not load the site's analytics beacon.
 
 ## Daily use
 
-- Today recommends the next exercise that fits a 10- or 15-minute block.
+- Today recommends the next exercise that fits a 10- or 15-minute block and
+  what is available right now: Anything, Listen, Send, or Computer. Listen is
+  native audio/head copy; Send uses a physical key; Computer covers ICR and
+  simulator work. This device remembers the activity choice. It is a suggestion,
+  not a mandatory exercise sequence; sending still begins with its warm-up.
 - Focus provides a timer, official audio player, source instructions, and
   large sending text. Save for later preserves an unfinished block locally.
 - Week exposes all 16 meetings and 48 assignments, including later on-air work.
@@ -28,9 +32,23 @@ packed into blocks; seeking past an unheard section does not complete a pass.
 Coverage and the final completion check-in are both required. A prescribed
 15-minute simulator run cannot be replaced by two short interrupted runs.
 Earlier missed work is offered explicitly without creating an endless backlog;
-all assignments remain accessible in Week. Optional review fills a remaining
-daily time goal after required work is done. Live CWT tasks show eligible
-operating windows and are recommended only while a window is active.
+all assignments remain accessible in Week. Exercises requiring other equipment
+stay visibly pending; changing the activity choice never changes coverage.
+If no unfinished assignment fits, optional review offers another suitable block,
+including after 60 minutes and on rest days. It uses the current/recent course
+material at its assigned speed and rotates through suitable exercises. It does
+not automatically preview future assignments or mark them complete. Extra
+review is labeled in Focus and history; its minutes count toward the day but
+its attempts and passes do not count toward required assignment coverage.
+Review respects full audio passes and uninterrupted simulator runs, and never
+substitutes an unresolved or unmeasured recording. During class, the class view
+takes precedence. Live CWT tasks show eligible operating windows and are
+recommended only while a window is active.
+
+The daily minute goal is a baseline, not a cap or a replacement for sending
+and other assigned activities. To switch activities with a saved block, choose
+Record block and switch, confirm the partial practice, then select the next
+block. Saving partial practice preserves the unfinished objective.
 
 Official MP3s play directly in a native audio element, without a `crossorigin`
 attribute. The source supports playback and range requests but does not grant
@@ -53,7 +71,10 @@ API responses or instructor content. Use a trusted device and clear its training
 data before sharing it. Local data is not encrypted separately from browser
 storage; a lost device can expose its saved snapshot.
 
-D1 owns synced records. Attempts and material revisions are immutable and
+D1 owns synced records. The optional `review` boolean on an attempt distinguishes
+extra practice; omitted values preserve the original required-practice behavior.
+It uses the existing sync endpoint and JSON storage without a schema migration.
+Attempts and material revisions are immutable and
 idempotent by ID. Preferences use their update timestamp to resolve stale
 device writes. API responses use `private, no-store`; mutations require a
 same-origin JSON request with bounded input. The Worker verifies the Access

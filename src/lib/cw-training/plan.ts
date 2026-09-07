@@ -1,6 +1,17 @@
 import { upcomingCwSessions, type CwSession } from "../cw-practice.ts";
 import type { TrainingAssignment, TrainingAttempt, TrainingCourse, TrainingMeeting, TrainingResource, TrainingTask } from "./types.ts";
 
+export type PracticeMode = "anything" | "listen" | "send" | "computer";
+
+export function matchesPracticeMode(task: TrainingTask, mode: PracticeMode): boolean {
+  switch (mode) {
+    case "anything": return true;
+    case "listen": return task.kind === "audio";
+    case "send": return task.kind === "sending";
+    case "computer": return task.kind === "icr" || task.kind === "simulator";
+  }
+}
+
 export interface TaskProgress {
   complete: boolean;
   completedPasses: number;
@@ -20,6 +31,7 @@ export interface PlannedTask {
   reason?: string;
   windows?: CwSession[];
   availableNow?: boolean;
+  extra?: boolean;
 }
 
 export interface TrainingPlan {
@@ -34,6 +46,7 @@ export interface TrainingPlan {
   blocked: PlannedTask[];
   missed: PlannedTask[];
   liveUpcoming: PlannedTask[];
+  extras: PlannedTask[];
   next?: PlannedTask;
 }
 
@@ -50,7 +63,7 @@ function uniqueAttempts(attempts: TrainingAttempt[]): TrainingAttempt[] {
 }
 
 export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): TaskProgress {
-  const relevant = uniqueAttempts(attempts).filter((attempt) => attempt.taskId === task.id && attempt.context === "practice").sort((a, b) => a.endedAt.localeCompare(b.endedAt));
+  const relevant = uniqueAttempts(attempts).filter((attempt) => attempt.taskId === task.id && attempt.context === "practice" && !attempt.review).sort((a, b) => a.endedAt.localeCompare(b.endedAt));
   const completedPasses = relevant.reduce((sum, attempt) => sum + Math.max(0, Math.floor(attempt.completedPasses ?? 0)), 0);
   const activeSeconds = relevant.reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
   let complete: boolean;
@@ -68,7 +81,7 @@ export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): T
 }
 
 function leftMissed(task: TrainingTask, attempts: TrainingAttempt[]): boolean {
-  return attempts.some((attempt) => attempt.taskId === task.id && attempt.note === "[Left missed]");
+  return attempts.some((attempt) => attempt.taskId === task.id && !attempt.review && attempt.note === "[Left missed]");
 }
 
 function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, task: TrainingTask, attempts: TrainingAttempt[], blockMinutes: 10 | 15, now: Date): PlannedTask {
@@ -114,12 +127,85 @@ function fits(item: PlannedTask, blockMinutes: number): boolean {
   return item.suggestedMinutes <= blockMinutes;
 }
 
+function practiceKey(task: TrainingTask, resource?: TrainingResource): string {
+  // A recording can recur in several assignments. Replaying it should rotate
+  // the material, not recommend the same audio under another assignment ID.
+  if (task.kind === "audio") return `audio:${resource?.url ?? task.resourceId ?? task.id}`;
+  return `${task.kind}:${task.resourceId ?? task.id}:${task.speedWpm ?? ""}:${task.settings ?? ""}`;
+}
+
+function extraPractice(
+  course: TrainingCourse,
+  assignments: TrainingAssignment[],
+  attempts: TrainingAttempt[],
+  date: string,
+  blockMinutes: 10 | 15,
+  mode: PracticeMode,
+  now: Date,
+  requiredIds: Set<string>,
+): PlannedTask[] {
+  const resources = new Map(course.resources.map((resource) => [resource.id, resource]));
+  const taskKeys = new Map(course.assignments.flatMap((assignment) => assignment.tasks.map((task) => [task.id, practiceKey(task, resources.get(task.resourceId ?? ""))] as const)));
+  const lastPracticed = new Map<string, number>();
+  const lastReviewedToday = new Map<string, number>();
+  for (const attempt of uniqueAttempts(attempts)) {
+    if (attempt.context !== "practice" || attempt.activeSeconds <= 0) continue;
+    const key = taskKeys.get(attempt.taskId);
+    const endedAt = Date.parse(attempt.endedAt);
+    if (key && Number.isFinite(endedAt) && endedAt <= now.getTime()) {
+      lastPracticed.set(key, Math.max(lastPracticed.get(key) ?? 0, endedAt));
+      if (attempt.review && dateInTimezone(attempt.startedAt, course.timezone) === date) {
+        lastReviewedToday.set(key, Math.max(lastReviewedToday.get(key) ?? 0, endedAt));
+      }
+    }
+  }
+
+  const candidates = assignments.filter((assignment) => assignment.date <= date)
+    .flatMap((assignment) => assignment.tasks
+      .filter((task) => task.kind !== "live" && matchesPracticeMode(task, mode) && !requiredIds.has(task.id))
+      .map((task) => {
+        // Reviews retain their original IDs and instructions, but their own
+        // block starts with fresh passes. The saved attempt has review: true.
+        const item = plannedTask(course, assignment, { ...task, optional: true }, [], blockMinutes, now);
+        item.extra = true;
+        if (!item.reason) item.reason = `Optional review from Session ${assignment.session}, Day ${assignment.day}.`;
+        return item;
+      }))
+    .filter((item) => fits(item, blockMinutes) &&
+      (item.task.kind !== "audio" || (item.resource?.durationSeconds ?? 0) > 0));
+
+  candidates.sort((a, b) => b.assignment.date.localeCompare(a.assignment.date));
+  // Keep a small current-level pool. A one-recording day must not trap the
+  // learner on that recording forever, but reviews should not drift through
+  // the whole course when several recent assignments have suitable material.
+  const recentDates = new Set([...new Set(candidates.map((item) => item.assignment.date))].slice(0, 3));
+  const seen = new Set<string>();
+  const recent = candidates.filter((item) => {
+    if (!recentDates.has(item.assignment.date)) return false;
+    const key = practiceKey(item.task, item.resource);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  return recent.sort((a, b) => {
+    const aKey = practiceKey(a.task, a.resource);
+    const bKey = practiceKey(b.task, b.resource);
+    const aReview = lastReviewedToday.get(aKey);
+    const bReview = lastReviewedToday.get(bKey);
+    if (aReview !== undefined && bReview === undefined) return 1;
+    if (aReview === undefined && bReview !== undefined) return -1;
+    if (aReview !== undefined && bReview !== undefined && aReview !== bReview) return aReview - bReview;
+    return b.assignment.date.localeCompare(a.assignment.date) ||
+      (lastPracticed.get(aKey) ?? 0) - (lastPracticed.get(bKey) ?? 0);
+  });
+}
+
 /**
  * Derive today's work without rolling old sessions into a permanent backlog.
  * Assignments retain their dates after a class begins, so Monday evening cannot
  * become Tuesday's required practice day or reset the same day's minute goal.
  */
-export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: 10 | 15 = 15): TrainingPlan {
+export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: 10 | 15 = 15, mode: PracticeMode = "anything"): TrainingPlan {
   if (!Number.isFinite(now.getTime())) throw new Error("A valid planning date is required.");
   const date = dateInTimezone(now, course.timezone);
   const sortedAssignments = [...course.assignments].sort((a, b) => a.date.localeCompare(b.date));
@@ -136,7 +222,7 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
     : firstDate && date < firstDate ? "upcoming" : "rest";
   const practicedSeconds = uniqueAttempts(attempts).filter((attempt) => attempt.context === "practice" && dateInTimezone(attempt.startedAt, course.timezone) === date)
     .reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
-  const result: TrainingPlan = { date, assignment, meeting, nextMeeting, phase, practicedMinutes: practicedSeconds / 60, dailyGoalMinutes: assignment ? course.dailyGoalMinutes : 0, queue: [], blocked: [], missed: [], liveUpcoming: [] };
+  const result: TrainingPlan = { date, assignment, meeting, nextMeeting, phase, practicedMinutes: practicedSeconds / 60, dailyGoalMinutes: assignment ? course.dailyGoalMinutes : 0, queue: [], blocked: [], missed: [], liveUpcoming: [], extras: [] };
 
   if (phase === "practice" && assignment) {
     const eligible = sortedAssignments.filter((candidate) => candidate.session === assignment.session && candidate.date <= date);
@@ -144,14 +230,6 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
     candidates.sort((a, b) => Number(b.interrupted) - Number(a.interrupted));
     result.queue = candidates.filter((item) => fits(item, blockMinutes));
     result.blocked = candidates.filter((item) => !fits(item, blockMinutes));
-    if (!candidates.length && result.practicedMinutes < course.dailyGoalMinutes) {
-      const history = sortedAssignments.filter((candidate) => candidate.date <= date).flatMap((candidate) => candidate.tasks);
-      const base = [...history].reverse().find((task) => task.kind === "icr") ?? assignment.tasks.find((task) => task.kind === "sending");
-      if (base) {
-        const task = { ...base, id: `${assignment.id}-reinforcement`, title: `Focused review: ${base.title}`, optional: true };
-        result.queue.push(plannedTask(course, assignment, task, [], blockMinutes, now));
-      }
-    }
   }
 
   const lastClass = [...meetings].reverse().find((candidate) => new Date(candidate.startsAt).getTime() <= now.getTime());
@@ -163,6 +241,10 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
   const upcomingLimit = now.getTime() + 7 * 86_400_000;
   result.liveUpcoming = sortedAssignments.filter((candidate) => new Date(candidate.dueAt).getTime() > now.getTime() && new Date(candidate.dueAt).getTime() <= upcomingLimit)
     .flatMap((candidate) => candidate.tasks.filter((task) => task.kind === "live" && !taskProgress(task, attempts).complete).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
-  result.next = result.queue[0];
+  if (phase !== "class") {
+    result.extras = extraPractice(course, sortedAssignments, attempts, date, blockMinutes, mode, now,
+      new Set([...result.queue, ...result.blocked].map((item) => item.task.id)));
+    result.next = result.queue.find((item) => matchesPracticeMode(item.task, mode)) ?? result.extras[0];
+  }
   return result;
 }

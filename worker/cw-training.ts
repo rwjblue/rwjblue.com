@@ -130,7 +130,7 @@ function httpUrl(value: unknown, name: string): string {
 }
 
 function attempt(value: unknown, now: number): TrainingAttempt {
-  const row = record(value, ["id", "assignmentId", "taskId", "startedAt", "endedAt", "activeSeconds", "completed", "completedPasses", "difficulty", "note", "context"]);
+  const row = record(value, ["id", "assignmentId", "taskId", "startedAt", "endedAt", "activeSeconds", "completed", "review", "completedPasses", "difficulty", "note", "context"]);
   const result: TrainingAttempt = {
     id: id(row.id, "attempt ID", true),
     assignmentId: id(row.assignmentId, "assignment ID"),
@@ -144,6 +144,10 @@ function attempt(value: unknown, now: number): TrainingAttempt {
   if (typeof row.completed !== "boolean" || !["practice", "class"].includes(String(row.context))) invalid("Invalid attempt outcome.");
   const wallSeconds = (Date.parse(result.endedAt) - Date.parse(result.startedAt)) / 1000;
   if (wallSeconds < 0 || result.activeSeconds > wallSeconds + 2) invalid("Practice time exceeds the elapsed time.");
+  if (row.review !== undefined) {
+    if (typeof row.review !== "boolean") invalid("Invalid review flag.");
+    result.review = row.review;
+  }
   if (row.completedPasses !== undefined) result.completedPasses = integer(row.completedPasses, "completed passes", 0, 100);
   if (row.difficulty !== undefined) {
     if (!["hard", "right", "easy"].includes(String(row.difficulty))) invalid("Invalid difficulty.");

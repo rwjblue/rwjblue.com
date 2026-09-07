@@ -4,6 +4,7 @@ import type {
   TrainingTask,
   TrainingResource,
 } from "./types";
+import type { PracticeMode } from "./plan";
 
 export interface ActiveBlock {
   id: string;
@@ -20,6 +21,7 @@ export interface ActiveBlock {
   coverage: [number, number][];
   bookmarks: number[];
   context: "practice" | "class";
+  review?: boolean;
 }
 
 export interface TrainingDeviceState {
@@ -28,6 +30,7 @@ export interface TrainingDeviceState {
   active?: ActiveBlock;
   reading: Record<string, { line: number; size: number }>;
   dismissed: string[];
+  practiceMode?: PracticeMode;
 }
 
 const databaseName = "n1rwj-cw-training";

@@ -152,6 +152,41 @@ test("material revisions preserve originals and can be practiced in class separa
   assert.equal((await trainingResponse(request("sync", "POST", { materials: [{ ...original, url: "javascript:alert(1)" }] }), env)).status, 400);
 });
 
+test("optional review attempts round-trip without changing task identity and stay immutable", async () => {
+  const saved = attempt({ review: true, completedPasses: 2 });
+  const ordinary = attempt({ review: false });
+  const legacy = attempt();
+  for (const attempts of [[saved, ordinary, legacy], [saved]]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts }), env);
+    assert.equal(response.status, 200);
+    const data = await response.json();
+    for (const item of [saved, ordinary, legacy]) {
+      assert.deepEqual(data.attempts.filter((entry) => entry.id === item.id), [item]);
+    }
+  }
+  const conflict = await trainingResponse(request("sync", "POST", { attempts: [{ ...saved, review: false }] }), env);
+  assert.equal(conflict.status, 409, "review status cannot rewrite a saved attempt");
+  const snapshot = await (await trainingResponse(request("bootstrap"), env)).json();
+  assert.deepEqual(snapshot.attempts.find((item) => item.id === saved.id), saved);
+});
+
+test("review requires a boolean and cannot bypass known-activity validation", async () => {
+  for (const review of [null, "true", "false", 0, 1, [], {}]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [attempt({ review })] }), env);
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error, "Invalid review flag.");
+  }
+  for (const overrides of [
+    { taskId: "unknown" },
+    { assignmentId: "unknown" },
+    { assignmentId: "unknown", taskId: "unknown-reinforcement" },
+  ]) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [attempt({ ...overrides, review: true })] }), env);
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error, "Unknown practice activity.");
+  }
+});
+
 test("derived reinforcement IDs sync only for a real course assignment", async () => {
   const review = attempt({ taskId: "s1d1-reinforcement" });
   const response = await trainingResponse(request("sync", "POST", { attempts: [review] }), env);
