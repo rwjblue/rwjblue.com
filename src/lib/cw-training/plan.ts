@@ -2,6 +2,7 @@ import { upcomingCwSessions, type CwSession } from "../cw-practice.ts";
 import type { TrainingAssignment, TrainingAttempt, TrainingCourse, TrainingMeeting, TrainingResource, TrainingTask } from "./types.ts";
 
 export type PracticeMode = "anything" | "listen" | "send" | "computer";
+export type BlockMinutes = 3 | 5 | 10 | 15;
 
 export function matchesPracticeMode(task: TrainingTask, mode: PracticeMode): boolean {
   switch (mode) {
@@ -14,6 +15,7 @@ export function matchesPracticeMode(task: TrainingTask, mode: PracticeMode): boo
 
 export interface TaskProgress {
   complete: boolean;
+  started: boolean;
   completedPasses: number;
   activeSeconds: number;
   interrupted: boolean;
@@ -27,6 +29,8 @@ export interface PlannedTask {
   remainingPasses?: number;
   suggestedMinutes: number;
   passesThisBlock?: number;
+  started?: boolean;
+  activeSeconds?: number;
   interrupted: boolean;
   reason?: string;
   windows?: CwSession[];
@@ -66,6 +70,7 @@ export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): T
   const relevant = uniqueAttempts(attempts).filter((attempt) => attempt.taskId === task.id && attempt.context === "practice" && !attempt.review).sort((a, b) => a.endedAt.localeCompare(b.endedAt));
   const completedPasses = relevant.reduce((sum, attempt) => sum + Math.max(0, Math.floor(attempt.completedPasses ?? 0)), 0);
   const activeSeconds = relevant.reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
+  const started = activeSeconds > 0 || completedPasses > 0 || relevant.some((attempt) => attempt.completed);
   let complete: boolean;
   if (task.kind === "audio" && task.minimumPasses !== undefined) {
     complete = (completedPasses >= task.minimumPasses && relevant.some((attempt) => attempt.completed)) ||
@@ -77,17 +82,17 @@ export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): T
     complete = relevant.some((attempt) => attempt.completed);
   }
   const latest = relevant.at(-1);
-  return { complete, completedPasses, activeSeconds, interrupted: !complete && !!latest && !latest.completed && latest.note !== "[Left missed]" };
+  return { complete, started, completedPasses, activeSeconds, interrupted: !complete && started && !!latest && !latest.completed && latest.note !== "[Left missed]" };
 }
 
 function leftMissed(task: TrainingTask, attempts: TrainingAttempt[]): boolean {
   return attempts.some((attempt) => attempt.taskId === task.id && !attempt.review && attempt.note === "[Left missed]");
 }
 
-function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, task: TrainingTask, attempts: TrainingAttempt[], blockMinutes: 10 | 15, now: Date): PlannedTask {
+function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, task: TrainingTask, attempts: TrainingAttempt[], blockMinutes: BlockMinutes, now: Date): PlannedTask {
   const progress = taskProgress(task, attempts);
   const resource = course.resources.find((resource) => resource.id === task.resourceId);
-  const result: PlannedTask = { assignment, task, resource, completedPasses: progress.completedPasses, suggestedMinutes: blockMinutes, interrupted: progress.interrupted };
+  const result: PlannedTask = { assignment, task, resource, completedPasses: progress.completedPasses, suggestedMinutes: blockMinutes, started: progress.started, activeSeconds: progress.activeSeconds, interrupted: progress.interrupted };
   if (task.kind === "simulator") result.suggestedMinutes = task.minutes ?? 15;
   if (task.kind === "audio") {
     result.remainingPasses = task.minimumPasses === undefined ? undefined : Math.max(0, task.minimumPasses - progress.completedPasses);
@@ -95,7 +100,7 @@ function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, tas
       result.reason = resource.unresolved;
     } else if (!resource || resource.format !== "audio") {
       result.reason = "The assigned recording needs a resource link before playback.";
-    } else if (resource.durationSeconds && resource.durationSeconds > 0) {
+    } else if (resource.durationSeconds && Number.isFinite(resource.durationSeconds) && resource.durationSeconds > 0) {
       const fittingPasses = Math.max(1, Math.floor((blockMinutes * 60) / resource.durationSeconds));
       result.passesThisBlock = Math.max(1, Math.min(fittingPasses, result.remainingPasses ?? fittingPasses));
       result.suggestedMinutes = Math.ceil(resource.durationSeconds * result.passesThisBlock / 60);
@@ -103,7 +108,9 @@ function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, tas
       if (resource.durationSeconds > blockMinutes * 60) result.reason = "One full pass needs a longer block; reserve enough time or resume the recording later.";
     } else {
       result.passesThisBlock = 1;
-      result.reason = "Recording length is not yet measured. Load the player to check the time needed for a full pass.";
+      result.reason = blockMinutes < 10
+        ? "Recording length is not yet measured, so it cannot be recommended for this short block. Check its length in a longer practice window."
+        : "Recording length is not yet measured. Load the player to check the time needed for a full pass.";
     }
   }
   if (task.kind === "live") {
@@ -123,7 +130,12 @@ function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, tas
 function fits(item: PlannedTask, blockMinutes: number): boolean {
   if (item.task.kind === "live" && !item.availableNow) return false;
   if (item.resource?.unresolved) return false;
-  if (item.task.kind === "audio" && (!item.resource || item.resource.format !== "audio")) return false;
+  if (item.task.kind === "audio") {
+    if (!item.resource || item.resource.format !== "audio") return false;
+    const duration = item.resource.durationSeconds;
+    if (duration && Number.isFinite(duration) && duration > 0) return duration <= blockMinutes * 60;
+    if (blockMinutes < 10) return false;
+  }
   return item.suggestedMinutes <= blockMinutes;
 }
 
@@ -139,7 +151,7 @@ function extraPractice(
   assignments: TrainingAssignment[],
   attempts: TrainingAttempt[],
   date: string,
-  blockMinutes: 10 | 15,
+  blockMinutes: BlockMinutes,
   mode: PracticeMode,
   now: Date,
   requiredIds: Set<string>,
@@ -205,7 +217,7 @@ function extraPractice(
  * Assignments retain their dates after a class begins, so Monday evening cannot
  * become Tuesday's required practice day or reset the same day's minute goal.
  */
-export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: 10 | 15 = 15, mode: PracticeMode = "anything"): TrainingPlan {
+export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: BlockMinutes = 15, mode: PracticeMode = "anything"): TrainingPlan {
   if (!Number.isFinite(now.getTime())) throw new Error("A valid planning date is required.");
   const date = dateInTimezone(now, course.timezone);
   const sortedAssignments = [...course.assignments].sort((a, b) => a.date.localeCompare(b.date));
@@ -227,7 +239,10 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
   if (phase === "practice" && assignment) {
     const eligible = sortedAssignments.filter((candidate) => candidate.session === assignment.session && candidate.date <= date);
     const candidates = eligible.flatMap((candidate) => candidate.tasks.filter((task) => !task.optional && !taskProgress(task, attempts).complete && !leftMissed(task, attempts)).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
-    candidates.sort((a, b) => Number(b.interrupted) - Number(a.interrupted));
+    candidates.sort((a, b) =>
+      Number(b.assignment.date === date) - Number(a.assignment.date === date) ||
+      a.assignment.date.localeCompare(b.assignment.date) ||
+      Number(b.started) - Number(a.started));
     result.queue = candidates.filter((item) => fits(item, blockMinutes));
     result.blocked = candidates.filter((item) => !fits(item, blockMinutes));
   }
@@ -247,4 +262,17 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
     result.next = result.queue.find((item) => matchesPracticeMode(item.task, mode)) ?? result.extras[0];
   }
   return result;
+}
+
+/** Short choices appear only when a matching whole exercise or review can fit. */
+export function availableBlockMinutes(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), mode: PracticeMode = "anything"): BlockMinutes[] {
+  const shortChoices: BlockMinutes[] = [3, 5];
+  return [
+    ...shortChoices.filter((minutes) => {
+      const plan = getTrainingPlan(course, attempts, now, minutes, mode);
+      return plan.phase !== "class" && [...plan.queue, ...plan.extras].some((item) => matchesPracticeMode(item.task, mode));
+    }),
+    10,
+    15,
+  ];
 }

@@ -88,20 +88,26 @@ import "../../styles/cw-training.css";
             </div>
           </fieldset>
           <label>Time available
-            <select id="training-block-now">
+            <select id="training-block-now" aria-describedby="training-time-help">
               <option value="10">10 minutes</option>
               <option value="15">15 minutes</option>
             </select>
           </label>
         </div>
+        <p id="training-time-help" class="training-small" role="status"></p>
         <p id="training-mode-help" class="training-small" role="status"></p>
         <div id="training-next" class="training-card training-next"></div>
         <div id="training-preparation"></div>
         <div class="training-section">
-          <h3>Assigned practice available now</h3><div id="training-queue"></div>
+          <h3>Today's assignments</h3><div id="training-queue"></div>
         </div>
         <div id="training-deferred"></div>
         <div id="training-blocked"></div>
+        <details id="training-earlier-panel" class="training-section" open hidden>
+          <summary id="training-earlier-label">Earlier unfinished preparation</summary>
+          <p class="training-small">These are still available before class, but they do not hold today's work back. Choose what is useful; ask your instructor which missed exercises to prioritize.</p>
+          <div id="training-earlier"></div>
+        </details>
         <details id="training-extra-panel" class="training-section" hidden>
           <summary>Keep practicing: extra review</summary>
           <p class="training-small">Optional blocks add to your practice time, not assignment completion. There is no 60-minute limit.</p>

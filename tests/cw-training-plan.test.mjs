@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "../src/lib/cw-training/plan.ts";
+import { availableBlockMinutes, dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "../src/lib/cw-training/plan.ts";
 
 const makeTask = (id, kind, extra = {}) => ({ id, kind, title: id, instructions: "Synthetic practice instruction.", sourceUrl: "https://example.invalid", ...extra });
 function fixtureCourse() {
@@ -348,4 +348,141 @@ test("extra suggestions respect audio fit, missing resources, and uninterrupted 
   assert.equal(getTrainingPlan(course, history, now, 15, "listen").extras.length, 0);
   const liveOnly = { ...course, assignments: course.assignments.map((assignment) => ({ ...assignment, tasks: assignment.tasks.filter((task) => task.kind === "live") })) };
   assert.equal(getTrainingPlan(liveOnly, [], new Date("2026-09-11T12:00:00Z")).extras.length, 0);
+});
+
+test("today's matching work comes before earlier started work in every activity mode", () => {
+  const course = fixtureCourse();
+  course.assignments[2].tasks.push(
+    makeTask("today-audio", "audio", { resourceId: "recording", minimumPasses: 2 }),
+    makeTask("today-icr", "icr"),
+  );
+  const history = ["send", "audio", "icr", "run"].map((id) => attempt(id, { completed: false, activeSeconds: 30 }));
+  const now = new Date("2026-09-07T12:00:00Z");
+  for (const [mode, expected] of [["anything", "send2"], ["send", "send2"], ["listen", "today-audio"], ["computer", "today-icr"]]) {
+    const plan = getTrainingPlan(course, history, now, 15, mode);
+    assert.equal(plan.next.task.id, expected);
+    assert.equal(plan.next.assignment.date, "2026-09-07");
+    assert.equal(plan.next.started, false);
+    assert.deepEqual(plan.queue.slice(0, 3).map((item) => item.assignment.day), [3, 3, 3]);
+    assert.equal(plan.queue.filter((item) => item.assignment.day < 3).length, 4, "earlier preparation stays available");
+    assert.equal(plan.queue.find((item) => item.task.id === "audio").started, true);
+    assert.equal(plan.queue.find((item) => item.task.id === "audio").activeSeconds, 30);
+  }
+});
+
+test("started work has priority only within its own assignment date", () => {
+  const course = fixtureCourse();
+  course.assignments[2].tasks.push(makeTask("today-icr", "icr"));
+  const history = [attempt("run", { completed: false }), attempt("today-icr", { completed: false, activeSeconds: 20 })];
+  const plan = getTrainingPlan(course, history, new Date("2026-09-07T12:00:00Z"));
+  assert.deepEqual(plan.queue.map((item) => item.task.id), ["today-icr", "send2", "send", "audio", "icr", "run"]);
+  const oldPartial = attempt("audio", { completed: false, activeSeconds: 20 });
+  const withEarlierPartial = getTrainingPlan(course, [...history, oldPartial], new Date("2026-09-07T12:00:00Z"));
+  assert.deepEqual(withEarlierPartial.queue.map((item) => item.task.id), ["today-icr", "send2", "audio", "send", "icr", "run"]);
+});
+
+test("started means actual required practice rather than an empty, missed, class, or review record", () => {
+  const task = makeTask("audio", "audio", { minimumPasses: 3 });
+  const empty = attempt("audio", { completed: false, activeSeconds: 0, completedPasses: 0 });
+  for (const history of [[], [empty], [{ ...empty, note: "A note without practice" }], [{ ...empty, note: "[Left missed]" }], [attempt("audio", { context: "class" })], [attempt("audio", { review: true, completedPasses: 2 })]]) {
+    const progress = taskProgress(task, history);
+    assert.equal(progress.started, false);
+    assert.equal(progress.interrupted, false);
+  }
+  for (const history of [
+    [{ ...empty, activeSeconds: 0.5 }],
+    [{ ...empty, completedPasses: 1 }],
+    [{ ...empty, completed: true }],
+  ]) assert.equal(taskProgress(task, history).started, true);
+  const partial = { ...empty, activeSeconds: 20, completedPasses: 1 };
+  const progress = taskProgress(task, [partial, partial]);
+  assert.equal(progress.completedPasses, 1);
+  assert.equal(progress.activeSeconds, 20);
+  assert.equal(progress.started, true);
+  assert.equal(progress.interrupted, true);
+});
+
+test("a short audio choice needs one full pass, not all remaining repetitions", () => {
+  const course = fixtureCourse();
+  course.resources[0].durationSeconds = 180;
+  course.assignments[0].tasks[1].minimumPasses = 3;
+  const now = new Date("2026-09-05T12:00:00Z");
+  assert.deepEqual(availableBlockMinutes(course, [], now, "listen"), [3, 5, 10, 15]);
+  for (const [minutes, passes] of [[3, 1], [5, 1], [10, 3], [15, 3]]) {
+    const plan = getTrainingPlan(course, [], now, minutes, "listen");
+    assert.equal(plan.next.task.id, "audio");
+    assert.equal(plan.next.remainingPasses, 3);
+    assert.equal(plan.next.passesThisBlock, passes);
+    assert.equal(plan.next.suggestedMinutes, passes * 3);
+  }
+  const history = [attempt("audio", { completed: false, completedPasses: 1, activeSeconds: 180 })];
+  assert.equal(getTrainingPlan(course, history, now, 10, "listen").next.passesThisBlock, 2);
+});
+
+test("short audio membership uses exact measured duration boundaries", () => {
+  const course = fixtureCourse();
+  const now = new Date("2026-09-05T12:00:00Z");
+  for (const [seconds, expected] of [[179.9, [3, 5, 10, 15]], [180, [3, 5, 10, 15]], [180.001, [5, 10, 15]], [300, [5, 10, 15]], [300.001, [10, 15]]]) {
+    course.resources[0].durationSeconds = seconds;
+    assert.deepEqual(availableBlockMinutes(course, [], now, "listen"), expected);
+    for (const minutes of [3, 5]) {
+      const plan = getTrainingPlan(course, [], now, minutes, "listen");
+      assert.equal(plan.queue.some((item) => item.task.kind === "audio"), seconds <= minutes * 60);
+    }
+  }
+});
+
+test("time choices depend on the selected activity, not unrelated fitting work", () => {
+  const course = fixtureCourse();
+  const now = new Date("2026-09-05T12:00:00Z");
+  assert.deepEqual(availableBlockMinutes(course, [], now, "listen"), [10, 15]);
+  for (const mode of ["anything", "send", "computer"]) assert.deepEqual(availableBlockMinutes(course, [], now, mode), [3, 5, 10, 15]);
+  const simulatorOnly = { ...course, assignments: course.assignments.map((assignment) => ({ ...assignment, tasks: assignment.tasks.filter((task) => task.kind === "simulator") })) };
+  const simulatorDate = new Date("2026-09-06T12:00:00Z");
+  assert.deepEqual(availableBlockMinutes(simulatorOnly, [], simulatorDate, "computer"), [10, 15]);
+  for (const minutes of [3, 5, 10]) {
+    const plan = getTrainingPlan(simulatorOnly, [], simulatorDate, minutes, "computer");
+    assert.equal(plan.next, undefined);
+    assert.equal(plan.blocked[0].suggestedMinutes, 15);
+  }
+  assert.equal(getTrainingPlan(simulatorOnly, [], simulatorDate, 15, "computer").next.task.id, "run");
+});
+
+test("unknown, unresolved, or missing audio cannot justify a short time choice", () => {
+  const course = fixtureCourse();
+  const now = new Date("2026-09-05T12:00:00Z");
+  for (const durationSeconds of [undefined, 0, -1, NaN, Infinity]) {
+    course.resources[0].durationSeconds = durationSeconds;
+    assert.deepEqual(availableBlockMinutes(course, [], now, "listen"), [10, 15]);
+    for (const minutes of [3, 5]) {
+      const plan = getTrainingPlan(course, [], now, minutes, "listen");
+      assert.equal(plan.next, undefined);
+      assert.match(plan.blocked.find((item) => item.task.id === "audio").reason, /not yet measured/);
+    }
+  }
+  course.resources[0].durationSeconds = 120;
+  course.resources[0].unresolved = "Ask the instructor about this source.";
+  assert.deepEqual(availableBlockMinutes(course, [], now, "listen"), [10, 15]);
+  course.resources = [];
+  assert.deepEqual(availableBlockMinutes(course, [], now, "listen"), [10, 15]);
+});
+
+test("short choices can come from completed-material review without advancing future work", () => {
+  const course = fixtureCourse();
+  course.resources[0].durationSeconds = 180;
+  const now = new Date("2026-09-05T12:00:00Z");
+  const history = [attempt("audio")];
+  assert.deepEqual(availableBlockMinutes(course, history, now, "listen"), [3, 5, 10, 15]);
+  assert.equal(getTrainingPlan(course, history, now, 3, "listen").next.extra, true);
+  assert.deepEqual(availableBlockMinutes(course, history, new Date("2026-09-07T19:45:00Z"), "listen"), [10, 15], "class does not advertise short independent practice");
+  assert.deepEqual(availableBlockMinutes(course, [], new Date("2026-09-04T12:00:00Z"), "listen"), [10, 15], "tomorrow's recording is not eligible today");
+  assert.deepEqual(availableBlockMinutes(course, history, new Date("2026-09-07T21:00:00Z"), "listen"), [3, 5, 10, 15], "post-class review can still be short");
+});
+
+test("short time choices preserve eligible live-event windows", () => {
+  const course = fixtureCourse();
+  course.assignments = course.assignments.map((assignment) => ({ ...assignment, tasks: assignment.tasks.filter((task) => task.kind === "live") }));
+  assert.deepEqual(availableBlockMinutes(course, [], new Date("2026-09-09T12:30:00Z"), "anything"), [10, 15]);
+  assert.deepEqual(availableBlockMinutes(course, [], new Date("2026-09-09T13:30:00Z"), "anything"), [3, 5, 10, 15]);
+  assert.deepEqual(availableBlockMinutes(course, [], new Date("2026-09-09T13:30:00Z"), "listen"), [10, 15]);
 });

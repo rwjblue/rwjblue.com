@@ -7,8 +7,8 @@ sitemaps, and does not load the site's analytics beacon.
 
 ## Daily use
 
-- Today recommends the next exercise that fits a 10- or 15-minute block and
-  what is available right now: Anything, Listen, Send, or Computer. Listen is
+- Today recommends today's work first, matching the time available and
+  activity: Anything, Listen, Send, or Computer. Listen is
   native audio/head copy; Send uses a physical key; Computer covers ICR and
   simulator work. This device remembers the activity choice. It is a suggestion,
   not a mandatory exercise sequence; sending still begins with its warm-up.
@@ -20,8 +20,8 @@ sitemaps, and does not load the site's analytics beacon.
 - Materials accepts pasted instructions, text files, or links. Preparation,
   class-only, reference, and unknown-purpose material remain distinct. Revisions
   preserve previous text and never rewrite completed practice.
-- Preferences provides the block length, class join link, calendar reminder
-  time, data export, and device clearing.
+- Preferences provides the usual 10- or 15-minute block length, class join link,
+  calendar reminder time, data export, and device clearing.
 
 The imported course begins Saturday, September 5, 2026. Classes are Mondays and
 Thursdays, 3:30-4:30 p.m. in `America/New_York`, from September 7 through October
@@ -31,13 +31,24 @@ not count toward the 60-minute practice goal.
 Today includes saved practice plus the current block on the same course date,
 excluding class time.
 
+Time available temporarily offers 3, 5, 10, or 15 minutes without changing the
+usual block-length preference. Shorter choices appear only when suitable work
+fits the selected activity. Suggestions show the actual planned duration and,
+for audio, the number of passes in this block. Each pass must fit; all assigned
+repetitions need not fit in one block.
+
+Started exercises show a Started badge with saved pass counts
+and practice time; the active block is marked Current block. Earlier unfinished
+preparation for the same session appears separately from today's work. The
+next session advances by date, without completing or skipping older objectives;
+all assignments remain accessible in Week.
+
 Practice minutes and assignment coverage are separate. Whole audio passes are
 packed into blocks; seeking past an unheard section does not complete a pass.
 Coverage and the final completion check-in are both required. A prescribed
 15-minute simulator run cannot be replaced by two short interrupted runs.
-Earlier missed work is offered explicitly without creating an endless backlog;
-all assignments remain accessible in Week. Exercises requiring other equipment
-stay visibly pending; changing the activity choice never changes coverage.
+Exercises requiring other equipment stay visibly pending; changing the activity
+choice never changes coverage.
 If no unfinished assignment fits, optional review offers another suitable block,
 including after 60 minutes and on rest days. It uses the current/recent course
 material at its assigned speed and rotates through suitable exercises. It does
