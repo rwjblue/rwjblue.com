@@ -98,6 +98,8 @@ export interface TrainingPreferences {
   blockMinutes: 10 | 15;
   reminderTime: string;
   joinUrl?: string;
+  /** Task IDs added to a course-local calendar date, without changing assignments. */
+  carriedTasks?: { taskId: string; date: string }[];
   updatedAt: string;
 }
 

@@ -254,6 +254,110 @@ test("stale preferences do not overwrite a newer device update", async () => {
   assert.deepEqual((await response.json()).preferences, latest);
 });
 
+test("carried tasks round-trip across reloads and remain scoped to their owner", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "carry-owner" };
+  const otherEnv = { ...env, TRAINING_DEV_USER: "carry-other-owner" };
+  const settings = {
+    blockMinutes: 15, reminderTime: "09:00", updatedAt: now(),
+    carriedTasks: [{ taskId: "warmup", date: "2026-09-06" }],
+  };
+  for (const req of [request("sync", "POST", { preferences: settings }), request("bootstrap")]) {
+    const response = await trainingResponse(req, ownerEnv);
+    assert.equal(response.status, 200);
+    const snapshot = await response.json();
+    assert.deepEqual(snapshot.preferences, settings, "past dates from offline work remain valid");
+    assert.equal(snapshot.course.assignments[0].date, "2026-09-05", "carry does not rewrite the curriculum");
+  }
+  const other = await (await trainingResponse(request("bootstrap"), otherEnv)).json();
+  assert.equal(other.preferences.carriedTasks, undefined);
+  const otherSettings = { ...settings, carriedTasks: [{ taskId: "warmup", date: "2026-09-07" }] };
+  assert.equal((await trainingResponse(request("sync", "POST", { preferences: otherSettings }), otherEnv)).status, 200);
+  const original = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
+  assert.deepEqual(original.preferences.carriedTasks, settings.carriedTasks);
+});
+
+test("carried tasks validate bounded unique known task IDs and real calendar dates", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "carry-validation-owner" };
+  const settings = { blockMinutes: 15, reminderTime: "09:00", updatedAt: now() };
+  const invalidLists = [
+    null, true, 1, "warmup", {},
+    [null], [true], ["warmup"], [[]], [{}],
+    [{ taskId: "warmup" }], [{ date: "2026-09-07" }],
+    [{ taskId: "warmup", date: "2026-09-07", owner: "other-owner" }],
+    [{ taskId: "warmup", date: "2026-09-07" }, { taskId: "warmup", date: "2026-09-08" }],
+    Array.from({ length: 101 }, (_, index) => ({ taskId: `task-${index}`, date: "2026-09-07" })),
+    ...[null, true, 1, [], {}, "bad task", "x".repeat(151), "unknown", "s1d1-reinforcement"].map((taskId) => [
+      { taskId, date: "2026-09-07" },
+    ]),
+    ...[
+      null, true, 1, [], {}, "", "2026-9-07", "2026-09-7", "2026-09-07T00:00:00.000Z",
+      "2026-02-29", "2026-04-31", "2026-00-07", "2026-13-07", "2026-09-00", "2026-09-32",
+      "2019-12-31", "2101-01-01", "2026-09-04",
+    ].map((date) => [{ taskId: "warmup", date }]),
+  ];
+  for (const carriedTasks of invalidLists) {
+    const response = await trainingResponse(request("sync", "POST", { preferences: { ...settings, carriedTasks } }), ownerEnv);
+    assert.equal(response.status, 400, JSON.stringify(carriedTasks));
+  }
+  for (const [index, date] of ["2026-09-05", "2028-02-29", "2100-12-31"].entries()) {
+    const preferences = { ...settings, updatedAt: new Date(Date.now() + index * 1000).toISOString(), carriedTasks: [{ taskId: "warmup", date }] };
+    const response = await trainingResponse(request("sync", "POST", { preferences }), ownerEnv);
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).preferences, preferences);
+  }
+});
+
+test("legacy preferences preserve carried tasks while explicit clearing uses the existing timestamp rule", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "carry-legacy-owner" };
+  const baseTime = Date.now() - 10_000;
+  const settings = {
+    blockMinutes: 15, reminderTime: "09:00", joinUrl: "https://example.org/class",
+    updatedAt: new Date(baseTime).toISOString(), carriedTasks: [{ taskId: "warmup", date: "2026-09-07" }],
+  };
+  assert.equal((await trainingResponse(request("sync", "POST", { preferences: settings }), ownerEnv)).status, 200);
+  const legacy = { blockMinutes: 10, reminderTime: "10:00", updatedAt: new Date(baseTime + 1000).toISOString() };
+  const preserved = await (await trainingResponse(request("sync", "POST", { preferences: legacy }), ownerEnv)).json();
+  assert.deepEqual(preserved.preferences, { ...legacy, carriedTasks: settings.carriedTasks });
+  assert.equal(preserved.preferences.joinUrl, undefined, "unrelated preferences retain replacement semantics");
+  const cleared = { ...legacy, carriedTasks: [], updatedAt: new Date(baseTime + 2000).toISOString() };
+  const response = await trainingResponse(request("sync", "POST", { preferences: cleared }), ownerEnv);
+  assert.equal(response.status, 200);
+  assert.deepEqual((await response.json()).preferences, cleared);
+  for (const preferences of [settings, legacy, { ...settings, updatedAt: cleared.updatedAt }]) {
+    const stale = await trainingResponse(request("sync", "POST", { preferences }), ownerEnv);
+    assert.equal(stale.status, 200);
+    assert.deepEqual((await stale.json()).preferences, cleared, "stale or same-time updates cannot restore a cleared carry");
+  }
+  const legacyAfterClear = { ...legacy, updatedAt: new Date(baseTime + 3000).toISOString() };
+  const latest = await (await trainingResponse(request("sync", "POST", { preferences: legacyAfterClear }), ownerEnv)).json();
+  assert.deepEqual(latest.preferences, { ...legacyAfterClear, carriedTasks: [] });
+});
+
+test("an older client preserves carry changes committed after its snapshot was read", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "carry-concurrent-owner" };
+  const baseTime = Date.now() - 10_000;
+  const original = { blockMinutes: 15, reminderTime: "09:00", updatedAt: new Date(baseTime).toISOString() };
+  assert.equal((await trainingResponse(request("sync", "POST", { preferences: original }), ownerEnv)).status, 200);
+  const concurrent = { ...original, carriedTasks: [{ taskId: "warmup", date: "2026-09-07" }], updatedAt: new Date(baseTime + 1000).toISOString() };
+  let firstRead = true;
+  const interleavedDb = {
+    prepare: db.prepare.bind(db),
+    async batch(statements) {
+      const results = await db.batch(statements);
+      if (firstRead) {
+        firstRead = false;
+        const response = await trainingResponse(request("sync", "POST", { preferences: concurrent }), ownerEnv);
+        assert.equal(response.status, 200);
+      }
+      return results;
+    },
+  };
+  const legacy = { ...original, blockMinutes: 10, updatedAt: new Date(baseTime + 2000).toISOString() };
+  const response = await trainingResponse(request("sync", "POST", { preferences: legacy }), { ...ownerEnv, TRAINING_DB: interleavedDb });
+  assert.equal(response.status, 200);
+  assert.deepEqual((await response.json()).preferences, { ...legacy, carriedTasks: concurrent.carriedTasks });
+});
+
 test("calendar capability is hashed, rotates, revokes, and exposes no private fields", async () => {
   const response = await trainingResponse(request("calendar-token", "POST"), env);
   assert.equal(response.status, 200);

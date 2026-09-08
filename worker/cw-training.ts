@@ -120,6 +120,16 @@ function timestamp(value: unknown, name: string, now: number): string {
   return result;
 }
 
+function practiceDate(value: unknown): string {
+  const result = string(value, "practice date", 10);
+  const millis = Date.parse(`${result}T00:00:00.000Z`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(result) || result < "2020-01-01" || result > "2100-12-31" ||
+      !Number.isFinite(millis) || new Date(millis).toISOString().slice(0, 10) !== result) {
+    invalid("Invalid practice date.");
+  }
+  return result;
+}
+
 function httpUrl(value: unknown, name: string): string {
   const result = string(value, name, 2_000);
   try {
@@ -182,7 +192,7 @@ function material(value: unknown, now: number): TrainingMaterial {
 }
 
 function preferences(value: unknown, now: number): TrainingPreferences {
-  const row = record(value, ["blockMinutes", "reminderTime", "joinUrl", "updatedAt"]);
+  const row = record(value, ["blockMinutes", "reminderTime", "joinUrl", "carriedTasks", "updatedAt"]);
   if (row.blockMinutes !== 10 && row.blockMinutes !== 15) invalid("Block length must be 10 or 15 minutes.");
   const reminderTime = string(row.reminderTime, "reminder time", 5);
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(reminderTime)) invalid("Invalid reminder time.");
@@ -193,6 +203,17 @@ function preferences(value: unknown, now: number): TrainingPreferences {
   };
   if (Date.parse(result.updatedAt) > now + 300_000) invalid("Preferences time is in the future.");
   if (row.joinUrl !== undefined && row.joinUrl !== "") result.joinUrl = httpUrl(row.joinUrl, "class URL");
+  if (row.carriedTasks !== undefined) {
+    if (!Array.isArray(row.carriedTasks) || row.carriedTasks.length > 100) invalid("Carry at most 100 tasks at once.");
+    const seen = new Set<string>();
+    result.carriedTasks = row.carriedTasks.map((value) => {
+      const item = record(value, ["taskId", "date"]);
+      const taskId = id(item.taskId, "carried task ID");
+      if (seen.has(taskId)) invalid("Each carried task must appear only once.");
+      seen.add(taskId);
+      return { taskId, date: practiceDate(item.date) };
+    });
+  }
   return result;
 }
 
@@ -297,6 +318,11 @@ async function sync(db: D1Database, owner: string, update: TrainingSync): Promis
     if (!assignment?.tasks.some((task) => task.id === item.taskId) &&
         !reinforcement && !(knownMaterials.has(materialId) && item.taskId === materialId)) invalid("Unknown practice activity.");
   }
+  for (const item of update.preferences?.carriedTasks ?? []) {
+    const assignment = current.course.assignments.find((entry) => entry.tasks.some((task) => task.id === item.taskId));
+    if (!assignment) invalid("Unknown carried task.");
+    if (item.date < assignment.date) invalid("A task cannot be carried before its assignment date.");
+  }
   const statements: D1PreparedStatement[] = [];
   const now = new Date().toISOString();
   for (const [table, values] of [
@@ -308,11 +334,21 @@ async function sync(db: D1Database, owner: string, update: TrainingSync): Promis
        ON CONFLICT(owner_id, course_id, id) DO UPDATE SET payload = excluded.payload`,
     ).bind(owner, TRAINING_COURSE_ID, item.id, JSON.stringify(item), now));
   }
-  if (update.preferences) statements.push(db.prepare(
-    `INSERT INTO training_preferences (owner_id, course_id, payload, updated_at) VALUES (?, ?, ?, ?)
-     ON CONFLICT(owner_id, course_id) DO UPDATE SET payload = excluded.payload, updated_at = excluded.updated_at
-     WHERE excluded.updated_at > training_preferences.updated_at`,
-  ).bind(owner, TRAINING_COURSE_ID, JSON.stringify(update.preferences), update.preferences.updatedAt));
+  if (update.preferences) {
+    // Preserve carry state from older clients atomically, including concurrent writes.
+    // An explicit array (including []) still replaces it under the usual timestamp rule.
+    statements.push(db.prepare(
+      `INSERT INTO training_preferences (owner_id, course_id, payload, updated_at) VALUES (?, ?, ?, ?)
+       ON CONFLICT(owner_id, course_id) DO UPDATE SET
+         payload = CASE
+           WHEN json_type(excluded.payload, '$.carriedTasks') IS NULL
+             AND json_type(training_preferences.payload, '$.carriedTasks') = 'array'
+           THEN json_set(excluded.payload, '$.carriedTasks', json_extract(training_preferences.payload, '$.carriedTasks'))
+           ELSE excluded.payload END,
+         updated_at = excluded.updated_at
+       WHERE excluded.updated_at > training_preferences.updated_at`,
+    ).bind(owner, TRAINING_COURSE_ID, JSON.stringify(update.preferences), update.preferences.updatedAt));
+  }
   if (statements.length) {
     try { await db.batch(statements); }
     catch (error) {
