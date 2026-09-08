@@ -464,9 +464,9 @@ import "../../styles/cw-training.css";
     <dialog id="training-manual-dialog">
       <form id="training-manual-form">
         <h2>Log practice elsewhere</h2><label
-          >Assignment<select id="training-manual-task" name="task" required
+          >Activity<select id="training-manual-task" name="task" aria-describedby="training-manual-help" required
           ></select></label
-        ><label
+        ><p id="training-manual-help" class="training-small"></p><label
           >Minutes practiced<input
             type="number"
             name="minutes"
@@ -476,8 +476,9 @@ import "../../styles/cw-training.css";
             value="15"
             required
           /></label
-        ><label
+        ><label id="training-manual-passes-field"
           >Audio passes completed (if relevant)<input
+            id="training-manual-passes"
             type="number"
             name="passes"
             min="0"
@@ -485,8 +486,8 @@ import "../../styles/cw-training.css";
             step="1"
             value="0"
           /></label
-        ><label class="training-check"
-          ><input type="checkbox" name="complete" /> Requirements completed</label
+        ><label id="training-manual-complete-field" class="training-check"
+          ><input id="training-manual-complete" type="checkbox" name="complete" /> Requirements completed</label
         ><label
           >Note or score (optional)<textarea id="training-manual-note" name="note" rows="2" maxlength="3950"
           ></textarea></label

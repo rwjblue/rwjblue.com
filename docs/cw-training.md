@@ -99,6 +99,15 @@ and other assigned activities. To switch activities with a saved block, choose
 Record block and switch, confirm the partial practice, then select the next
 block. Saving partial practice preserves the unfinished objective.
 
+Log practice elsewhere starts with an Other practice group: Word recognition,
+ICR (instant character recognition), and Other CW practice. The general button
+defaults to Other CW practice; an assignment's Done elsewhere button still
+preselects that assignment. Enter minutes and optional notes, for example after
+listening to a Morse Code Ninja podcast. Other practice counts toward daily
+practice time and appears by category in history, but never completes curriculum
+requirements or earns audio passes. The form hides those assignment-only fields
+for Other practice. Logging elsewhere does not replace an unfinished in-page block.
+
 Listening uses head copy by default, not mandatory transcription. The optional
 Recall & notes scratchpad holds up to 10,000 characters. While audio is paused,
 choose Start recall timer to count deliberate recall or note-taking, and Pause
@@ -214,6 +223,11 @@ storage; a lost device can expose its saved snapshot.
 D1 owns synced records. The optional `review` boolean on an attempt distinguishes
 extra practice; omitted values preserve the original required-practice behavior.
 It uses the existing sync endpoint and JSON storage without a schema migration.
+Self-directed entries use the reserved `other-practice` assignment ID and one of
+the stable `other:*` task IDs in `other-practice.ts`. The API requires a known
+category, practice context, `review: true`, `completed: false`, and no earned
+passes. These entries use the same private storage, offline queue, and time
+totals as other attempts, without being attached to a curriculum assignment.
 Attempts and material revisions are immutable and
 idempotent by ID. Preferences use their update timestamp to resolve stale
 device writes. The optional `preferences.carriedTasks` array stores bounded,

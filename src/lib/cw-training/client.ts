@@ -6,6 +6,7 @@ import { audioSessionNote, switchAudioRecording } from "./audio-session";
 import { createTrainingNavigation, type TrainingView } from "./navigation";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
+import { DEFAULT_OTHER_PRACTICE_ID, OTHER_PRACTICE_ACTIVITIES, OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "./other-practice";
 import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerMeetsAssignment, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
 import runnerVersion from "../../../public/vendor/web-morse-runner/UPSTREAM.json";
 import { TrainingStorage } from "./storage";
@@ -619,7 +620,7 @@ export async function initTraining() {
         .slice(0, 100)
         .map(
           (attempt) =>
-            `<div class="training-task"><div><strong>${escapeHtml(findTask(attempt.taskId)?.task.title ?? snapshot().materials.find((item) => item.id === attempt.taskId)?.title ?? "Practice")}</strong><p>${escapeHtml(formatMeeting(attempt.endedAt))} · ${Math.round((attempt.activeSeconds / 60) * 10) / 10} min · ${attempt.context === "class" ? "Class use" : attempt.review ? "Extra review" : attempt.completed ? "Completed" : "Partial / review"}${attempt.completedPasses ? ` · ${attempt.completedPasses} passes` : ""}${attempt.recallSeconds ? ` · includes ${time(attempt.recallSeconds)} recall` : ""}</p>${attempt.scratchpad ? `<details><summary>Recall &amp; notes</summary><div class="training-history-notes">${escapeHtml(attempt.scratchpad)}</div></details>` : ""}${attempt.note ? `<p>${escapeHtml(attempt.note)}</p>` : ""}</div></div>`,
+            `<div class="training-task"><div><strong>${escapeHtml(otherPracticeActivity(attempt.taskId)?.title ?? findTask(attempt.taskId)?.task.title ?? snapshot().materials.find((item) => item.id === attempt.taskId)?.title ?? "Practice")}</strong><p>${escapeHtml(formatMeeting(attempt.endedAt))} · ${Math.round((attempt.activeSeconds / 60) * 10) / 10} min · ${attempt.context === "class" ? "Class use" : otherPracticeActivity(attempt.taskId) ? "Other practice" : attempt.review ? "Extra review" : attempt.completed ? "Completed" : "Partial / review"}${attempt.completedPasses ? ` · ${attempt.completedPasses} passes` : ""}${attempt.recallSeconds ? ` · includes ${time(attempt.recallSeconds)} recall` : ""}</p>${attempt.scratchpad ? `<details><summary>Recall &amp; notes</summary><div class="training-history-notes">${escapeHtml(attempt.scratchpad)}</div></details>` : ""}${attempt.note ? `<p>${escapeHtml(attempt.note)}</p>` : ""}</div></div>`,
         )
         .join("") ||
       '<p class="training-small">Your first practice block will appear here.</p>';
@@ -1306,14 +1307,30 @@ export async function initTraining() {
     }
   }
 
-  function updateManualNotePrompt() {
-    const task = findTask($<HTMLSelectElement>("training-manual-task").value)?.task;
-    $<HTMLTextAreaElement>("training-manual-note").placeholder = task && isMorseRunner(task) ? MORSE_RUNNER_RESULTS_PROMPT : "";
+  function updateManualActivity() {
+    const taskId = $<HTMLSelectElement>("training-manual-task").value;
+    const other = otherPracticeActivity(taskId);
+    const task = findTask(taskId)?.task;
+    const passes = $<HTMLInputElement>("training-manual-passes");
+    const complete = $<HTMLInputElement>("training-manual-complete");
+    $("training-manual-passes-field").hidden = !!other;
+    $("training-manual-complete-field").hidden = !!other;
+    passes.disabled = !!other;
+    complete.disabled = !!other;
+    if (other) {
+      passes.value = "0";
+      complete.checked = false;
+    }
+    $("training-manual-help").textContent = other
+      ? "Counts toward your daily practice time, not curriculum completion."
+      : "Log time for this assignment. Mark requirements completed only if you met its instructions.";
+    $<HTMLTextAreaElement>("training-manual-note").placeholder = other?.notePlaceholder ?? (task && isMorseRunner(task) ? MORSE_RUNNER_RESULTS_PROMPT : "");
   }
-  $("training-manual-task").addEventListener("change", updateManualNotePrompt);
+  $("training-manual-task").addEventListener("change", updateManualActivity);
   function manual(taskId?: string) {
     $<HTMLFormElement>("training-manual-form").reset();
     $<HTMLSelectElement>("training-manual-task").innerHTML =
+      `<optgroup label="Other practice">${OTHER_PRACTICE_ACTIVITIES.map((activity) => `<option value="${activity.id}">${escapeHtml(activity.title)}</option>`).join("")}</optgroup>` +
       snapshot()
         .course.assignments.map(
           (assignment) =>
@@ -1327,10 +1344,8 @@ export async function initTraining() {
             `<option value="${material.id}">${escapeHtml(material.title)}</option>`,
         )
         .join("")}</optgroup>`;
-    const selection = taskId ?? plan().next?.task.id;
-    if (selection)
-      $<HTMLSelectElement>("training-manual-task").value = selection;
-    updateManualNotePrompt();
+    $<HTMLSelectElement>("training-manual-task").value = taskId ?? DEFAULT_OTHER_PRACTICE_ID;
+    updateManualActivity();
     $<HTMLDialogElement>("training-manual-dialog").showModal();
   }
   function addMaterial(revision?: TrainingMaterial) {
@@ -1858,9 +1873,10 @@ export async function initTraining() {
       }
       const found = findTask(taskId);
       const material = snapshot().materials.find((item) => item.id === taskId);
-      if (!found && !material) return;
+      const other = otherPracticeActivity(taskId);
+      if (!found && !material && !other) return;
       const activeSeconds = Math.round(Number(data.get("minutes")) * 60);
-      const passes = Number(data.get("passes"));
+      const passes = other ? 0 : Number(data.get("passes"));
       if (
         !Number.isFinite(activeSeconds) ||
         activeSeconds < 0 ||
@@ -1871,7 +1887,7 @@ export async function initTraining() {
       )
         return;
       const endedAt = new Date();
-      const complete = data.get("complete") === "on";
+      const complete = !other && data.get("complete") === "on";
       if (
         complete &&
         found?.task.kind === "simulator" &&
@@ -1884,7 +1900,7 @@ export async function initTraining() {
       }
       void record({
         id: crypto.randomUUID(),
-        assignmentId: found?.assignment.id ?? `material:${material!.id}`,
+        assignmentId: other ? OTHER_PRACTICE_ASSIGNMENT_ID : found?.assignment.id ?? `material:${material!.id}`,
         taskId,
         startedAt: new Date(
           endedAt.getTime() - activeSeconds * 1000,
@@ -1892,6 +1908,7 @@ export async function initTraining() {
         endedAt: endedAt.toISOString(),
         activeSeconds,
         completed: complete,
+        ...(other ? { review: true } : {}),
         ...(passes ? { completedPasses: passes } : {}),
         note: `[Practiced elsewhere] ${String(data.get("note") || "")}`.slice(
           0,

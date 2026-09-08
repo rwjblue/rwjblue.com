@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { Miniflare } from "miniflare";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
 import { buildTrainingCalendar, trainingResponse, TRAINING_COURSE_ID } from "../worker/cw-training.ts";
+import { OTHER_PRACTICE_ASSIGNMENT_ID, OTHER_PRACTICE_ACTIVITIES } from "../src/lib/cw-training/other-practice.ts";
 
 const origin = "http://localhost:8787";
 const now = () => new Date().toISOString();
@@ -45,6 +46,13 @@ function attempt(overrides = {}) {
     startedAt: new Date(end - 600_000).toISOString(), endedAt: new Date(end).toISOString(),
     activeSeconds: 600, completed: true, context: "practice", ...overrides,
   };
+}
+
+function otherPracticeAttempt(overrides = {}) {
+  return attempt({
+    assignmentId: OTHER_PRACTICE_ASSIGNMENT_ID, taskId: "other:general",
+    context: "practice", review: true, completed: false, ...overrides,
+  });
 }
 
 test("bootstrap is private and never enrolls from a client identity header", async () => {
@@ -185,6 +193,92 @@ test("review requires a boolean and cannot bypass known-activity validation", as
     assert.equal(response.status, 400);
     assert.equal((await response.json()).error, "Unknown practice activity.");
   }
+});
+
+test("all self-directed categories round-trip as extra practice without changing the curriculum", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "other-practice-roundtrip" };
+  const attempts = OTHER_PRACTICE_ACTIVITIES.map((activity, index) => otherPracticeAttempt({
+    taskId: activity.id, activeSeconds: 180 + index * 60, note: `Synthetic private ${activity.title} note.`,
+    ...(index === 1 ? { completedPasses: 0, recallSeconds: 30, scratchpad: "CQ\nTEST" } : {}),
+  }));
+  for (const req of [request("sync", "POST", { attempts }), request("bootstrap")]) {
+    const response = await trainingResponse(req, ownerEnv);
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("Cache-Control"), "private, no-store");
+    const snapshot = await response.json();
+    assert.equal(snapshot.attempts.length, 3);
+    for (const saved of attempts) assert.deepEqual(snapshot.attempts.find(item => item.id === saved.id), saved);
+    assert.deepEqual(snapshot.course, course, "self-directed categories do not become curriculum assignments");
+    assert.ok(snapshot.attempts.every(item => item.review === true && item.completed === false && !item.completedPasses));
+  }
+});
+
+test("self-directed activities reject unknown categories, assignment mismatches and forged completion atomically", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "other-practice-invalid" };
+  const invalid = [
+    { taskId: "other:unknown" }, { taskId: "other:general:extra" }, { taskId: "other:constructor" },
+    { taskId: "other:ICR" }, { taskId: "warmup" }, { taskId: "s1d1-reinforcement" },
+    { assignmentId: "s1d1" }, { assignmentId: "unknown" }, { assignmentId: "other-practice:extra" },
+    { context: "class" }, { review: false }, { review: undefined }, { completed: true },
+    { completedPasses: 1 }, { completedPasses: 100 }, { completedPasses: -1 }, { completedPasses: "0" },
+    { owner: "some-other-owner" }, { activeSeconds: 6010 }, { recallSeconds: 601 },
+  ];
+  for (const overrides of invalid) {
+    const pending = otherPracticeAttempt();
+    const response = await trainingResponse(request("sync", "POST", {
+      attempts: [pending, otherPracticeAttempt(overrides)],
+    }), ownerEnv);
+    assert.equal(response.status, 400, JSON.stringify(overrides));
+    const snapshot = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
+    assert.deepEqual(snapshot.attempts, [], "a rejected mixed batch writes neither record");
+  }
+});
+
+test("self-directed retries remain idempotent and cannot rewrite saved categories, notes or time", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "other-practice-immutable" };
+  const saved = otherPracticeAttempt({ taskId: "other:word-recognition", note: "Synthetic original podcast practice." });
+  for (let index = 0; index < 2; index++) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [saved] }), ownerEnv);
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).attempts, [saved]);
+  }
+  for (const overrides of [{ taskId: "other:icr" }, { note: "Changed" }, { activeSeconds: 599 }]) {
+    const pending = otherPracticeAttempt();
+    const response = await trainingResponse(request("sync", "POST", { attempts: [pending, { ...saved, ...overrides }] }), ownerEnv);
+    assert.equal(response.status, 409);
+    const snapshot = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
+    assert.deepEqual(snapshot.attempts, [saved], "immutable conflicts roll back the whole batch");
+  }
+});
+
+test("self-directed records stay owner-scoped even when two owners use the same attempt ID", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "other-practice-owner-a" };
+  const otherEnv = { ...env, TRAINING_DEV_USER: "other-practice-owner-b" };
+  const original = otherPracticeAttempt({ note: "Owner A private practice." });
+  assert.equal((await trainingResponse(request("sync", "POST", { attempts: [original] }), ownerEnv)).status, 200);
+  const empty = await (await trainingResponse(request("bootstrap"), otherEnv)).json();
+  assert.deepEqual(empty.attempts, []);
+  const other = { ...original, taskId: "other:icr", note: "Owner B private practice." };
+  const response = await trainingResponse(request("sync", "POST", { attempts: [other] }), otherEnv);
+  assert.equal(response.status, 200);
+  assert.deepEqual((await response.json()).attempts, [other]);
+  const unchanged = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
+  assert.deepEqual(unchanged.attempts, [original]);
+});
+
+test("self-directed logging cannot bypass Access authentication or same-origin write protection", async () => {
+  const attempts = [otherPracticeAttempt()];
+  const protectedEnv = {
+    ...env, TRAINING_ACCESS_TEAM: "https://other-practice-test.cloudflareaccess.com",
+    TRAINING_ACCESS_AUD: "test-audience", TRAINING_OWNER_EMAIL: "owner@example.org",
+  };
+  const forged = new Request("https://n1rwj.com/api/cw-training/sync", {
+    method: "POST", body: JSON.stringify({ attempts }),
+    headers: { Origin: "https://n1rwj.com", "Content-Type": "application/json", "Cf-Access-Authenticated-User-Email": "owner@example.org" },
+  });
+  assert.equal((await trainingResponse(forged, protectedEnv)).status, 401);
+  assert.equal((await trainingResponse(request("sync", "POST", { attempts }, { Origin: "https://other.example" }), env)).status, 403);
+  assert.equal((await trainingResponse(request("sync", "POST", { attempts }, { "Sec-Fetch-Site": "cross-site" }), env)).status, 403);
 });
 
 test("scratchpad and recall round-trip separately without adding recall to total time", async () => {

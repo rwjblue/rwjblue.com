@@ -1,4 +1,5 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "../src/lib/cw-training/other-practice.ts";
 import type {
   TrainingAttempt,
   TrainingCourse,
@@ -312,6 +313,17 @@ async function sync(db: D1Database, owner: string, update: TrainingSync): Promis
     }
   }
   for (const item of update.attempts ?? []) {
+    if (item.assignmentId === OTHER_PRACTICE_ASSIGNMENT_ID || item.taskId.startsWith("other:")) {
+      if (item.assignmentId !== OTHER_PRACTICE_ASSIGNMENT_ID || !otherPracticeActivity(item.taskId)) {
+        invalid("Unknown self-directed practice activity.");
+      }
+      // Self-directed time is useful practice, never curriculum completion.
+      if (item.context !== "practice" || item.review !== true || item.completed !== false ||
+          (item.completedPasses !== undefined && item.completedPasses !== 0)) {
+        invalid("Self-directed practice must be extra practice without assignment completion or passes.");
+      }
+      continue;
+    }
     const assignment = current.course.assignments.find((entry) => entry.id === item.assignmentId);
     const materialId = item.assignmentId.startsWith("material:") ? item.assignmentId.slice(9) : "";
     const reinforcement = assignment && item.taskId === `${assignment.id}-reinforcement`;
