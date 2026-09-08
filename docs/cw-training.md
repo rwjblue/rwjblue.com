@@ -189,26 +189,37 @@ starting speed, engine-timestamped speed changes, chosen duration,
 activity/conditions, QSOs, Verified Pts, verified score, NR/NIL errors, and upstream
 revision. Long speed-change histories use a bounded summary plus the distinct
 speeds used so automatic notes remain within their size limit. Completing a
-chosen run is separate from completing its assignment: required credit needs a
-full uninterrupted run in the original assigned mode lasting at least the
-assigned duration. WPM may vary; a shorter run or different mode records useful
-practice but leaves the assignment incomplete. Multiple partial runs never
-combine into an assigned full run. Extra-review attempts remain separate from
-required coverage regardless of their duration or settings.
+chosen run is separate from completing its assignment: required credit uses
+cumulative saved practice seconds for that assignment. A 10-minute run plus a
+5-minute run, or fifteen 1-minute runs, satisfies a 15-minute assignment. Stopped
+and interrupted runs count their confirmed engine time too. Old partial records
+count without a migration or re-entry. Run settings remain editable and recorded;
+completion does not require a fixed mode or speed. Attempts are deduplicated by
+ID, and class use and extra-review attempts remain separate from required
+coverage. Short-block recommendations use the remaining assignment time, rounded
+up to a whole minute and capped by the selected available time.
 
 Leaving Focus, switching apps, and page reload interrupt a run. Upstream cannot
 resume a contest. After stopping, completing, or interrupting a run, Save & start
 new run saves its time and result summary, then clears the simulator's timer,
-score, and transcript in a fresh frame. Mode, chosen duration, conditions, and
-the last practiced WPM carry forward; click Run explicitly to begin again.
+score, and transcript in a fresh frame. Mode, conditions, and the last practiced
+WPM carry forward; the next required run's duration is capped by the remaining
+assignment time (rounded up to at least one minute). Click Run explicitly to
+begin again. Completed or interrupted blocks say View results, not Resume.
 Finish block remains available to add a note or difficulty rating and stop here.
 Failed setup with no practiced time or results can restart without an empty
-history entry. Each run has its own identity and date, so restarts cannot combine
-partial runs or double-count time. Repeating a completed assignment becomes
+history entry. Each run has its own identity, result summary, and date; only
+practice time is accumulated, not scores or transcripts. Repeating a completed assignment becomes
 extra review. The old attempt and fresh block share one device checkpoint and
 use the existing offline sync queue; no database change is required. A missing
 engine/result retains the last confirmed time without inventing a score. Saved
 terminal runs retain their status after reload until the user explicitly restarts.
+Today includes a Practiced today list with expandable results, notes, scratchpad,
+and difficulty ratings. Saved-to-account and waiting-to-sync entries are labeled
+separately; an active device-local draft stays in the current-block card until
+saved. Week's Practice history uses the same readable entries with dates. Contact
+totals for instructor forms are not yet aggregated: each run's QSOs and score
+remain in its saved metadata pending review of the actual form.
 The standalone link and Done elsewhere remain available for unsupported settings
 or browser failures, with manually confirmed minutes/results for that separate run.
 Older device-local blocks created before embedding keep their manual workflow.

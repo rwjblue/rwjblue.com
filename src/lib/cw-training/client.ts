@@ -7,8 +7,9 @@ import { createTrainingNavigation, type TrainingView } from "./navigation";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { DEFAULT_OTHER_PRACTICE_ID, OTHER_PRACTICE_ACTIVITIES, OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "./other-practice";
-import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerMeetsAssignment, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
-import { restartRunnerBlock, runnerMetadata } from "./runner-session";
+import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
+import { restartRunnerBlock, runnerAssignmentProgress, runnerMetadata } from "./runner-session";
+import { practiceHistoryForDate, renderPracticeHistory } from "./history";
 import runnerVersion from "../../../public/vendor/web-morse-runner/UPSTREAM.json";
 import { TrainingStorage } from "./storage";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
@@ -358,29 +359,47 @@ export async function initTraining() {
   const progressMarkup = (task: TrainingTask, review = false) => {
     const active = state.active?.task.id === task.id && !!state.active.review === review ? state.active : undefined;
     if (active)
-      return `<span class="training-progress-badge">Current ${review ? "review" : "block"}</span><p>${time(active.activeSeconds)} in this block · saved on this device${active.task.kind === "audio" ? ` · ${active.completedPasses} passes this block` : ""}</p>`;
+      return `<span class="training-progress-badge">Current ${review ? "review" : "block"}</span><p>${time(active.activeSeconds)} in this block · saved on this device${active.task.kind === "audio" ? ` · ${active.completedPasses} passes this block` : ""}</p>${active.runner ? `<p>${escapeHtml(runnerProgressText(active))}</p>` : ""}`;
     if (review) return "";
     const progress = taskProgress(task, snapshot().attempts);
+    if (isMorseRunner(task) && task.minutes) {
+      const remaining = Math.max(0, task.minutes * 60 - progress.activeSeconds);
+      return `<span class="training-progress-badge">${progress.complete ? "Assignment satisfied" : progress.started ? "Started" : "Cumulative practice"}</span><p class="training-saved-progress">${time(progress.activeSeconds)} / ${time(task.minutes * 60)} recorded${remaining ? ` · ${time(remaining)} remaining` : ""}. Separate runs add up.</p>`;
+    }
     if (!progress.started || progress.complete) return "";
     const passes = task.kind === "audio"
       ? `${progress.completedPasses}${task.minimumPasses ? ` of ${task.minimumPasses} required` : ""} pass${progress.completedPasses === 1 && !task.minimumPasses ? "" : "es"} saved · `
       : "";
     return `<span class="training-progress-badge">Started</span><p class="training-saved-progress">${passes}${time(progress.activeSeconds)} practiced</p>`;
   };
+  function runnerEnded(active = state.active): boolean {
+    return !!active?.runner && ["completed", "stopped", "error"].includes(active.runner.status);
+  }
+  function runnerProgressText(active: ActiveBlock): string {
+    if (active.context === "class") return "Class use is separate from independent practice.";
+    if (active.review) return "Optional review adds to today's practice time, not required assignment time.";
+    const progress = runnerAssignmentProgress(active, snapshot().attempts);
+    return `${time(progress.savedSeconds)} previously recorded + ${time(progress.currentSeconds)} this run · ${time(progress.totalSeconds)} / ${time(progress.requiredSeconds)} assigned.${progress.complete ? " Assignment time reached; save this run to record it." : ` ${time(Math.max(0, progress.requiredSeconds - progress.totalSeconds))} remaining. Separate runs add up.`}`;
+  }
   const blockDescription = (item: PlannedTask) => {
     const active = state.active?.task.id === item.task.id ? state.active : undefined;
     if (active?.task.kind === "audio" && active.resource?.durationSeconds)
       return `${recordingLabel(active.task, active.resource)} · ${time(active.resource.durationSeconds)} per pass · current ${active.review ? "review" : "block"}`;
     return item.task.kind === "audio" && Number.isFinite(item.resource?.durationSeconds) && (item.resource?.durationSeconds ?? 0) > 0
       ? `${recordingLabel(item.task, item.resource)} · ${time(item.resource!.durationSeconds!)} per pass · ${item.passesThisBlock ?? 1} pass${item.passesThisBlock === 1 ? "" : "es"} this block (about ${item.suggestedMinutes} min)`
-      : `${item.suggestedMinutes}-minute ${item.task.kind === "simulator" ? "uninterrupted run" : "practice block"}`;
+      : isMorseRunner(item.task)
+        ? `${item.suggestedMinutes}-minute run. ${item.extra ? "Each run keeps its own results." : "Shorter runs count toward the cumulative assignment time."}`
+        : `${item.suggestedMinutes}-minute ${item.task.kind === "simulator" ? "uninterrupted run" : "practice block"}`;
   };
   const buttons = (taskId: string, missed = false, unavailable = false, carried = false) => {
     const current = state.active?.task.id === taskId && !state.active.review;
     const task = findTask(taskId)?.task;
     const progress = task ? taskProgress(task, snapshot().attempts) : undefined;
     const started = progress?.started && !progress.complete;
-    return `<div class="training-actions">${missed ? `<button type="button" data-carry="${escapeHtml(taskId)}">Add to today</button>` : ""}<button type="button" ${current ? 'data-action="resume"' : `data-start="${escapeHtml(taskId)}"`} ${unavailable && !current ? 'disabled title="This live activity needs an eligible event window"' : ""}>${current ? "Return to block" : started ? "Continue practice" : missed ? "Practice now" : "Practice"}</button><button type="button" data-manual="${escapeHtml(taskId)}">Done elsewhere</button>${missed ? `<button type="button" data-miss="${escapeHtml(taskId)}">Dismiss reminder</button>` : ""}${carried ? `<button type="button" data-uncarry="${escapeHtml(taskId)}">Remove from today</button>` : ""}</div>`;
+    const label = current ? runnerEnded() ? "View results" : "Return to block"
+      : task && isMorseRunner(task) && started ? "Start another run"
+        : started ? "Continue practice" : missed ? "Practice now" : "Practice";
+    return `<div class="training-actions">${missed ? `<button type="button" data-carry="${escapeHtml(taskId)}">Add to today</button>` : ""}<button type="button" ${current ? 'data-action="resume"' : `data-start="${escapeHtml(taskId)}"`} ${unavailable && !current ? 'disabled title="This live activity needs an eligible event window"' : ""}>${label}</button><button type="button" data-manual="${escapeHtml(taskId)}">Done elsewhere</button>${missed ? `<button type="button" data-miss="${escapeHtml(taskId)}">Dismiss reminder</button>` : ""}${carried ? `<button type="button" data-uncarry="${escapeHtml(taskId)}">Remove from today</button>` : ""}</div>`;
   };
   const taskRow = (item: PlannedTask, missed = false) =>
     `<div class="training-task${!item.extra && item.started ? " training-task-started" : ""}"><div><strong>${escapeHtml(item.task.title)}</strong>${progressMarkup(item.task, !!item.extra)}<p>${item.carried ? "Added from " : ""}${escapeHtml(assignmentLabel(item.assignment))}${item.task.speedWpm ? ` · ${item.task.speedWpm} WPM` : ""}${item.extra ? " · Optional review" : item.remainingPasses !== undefined ? ` · ${item.remainingPasses} pass${item.remainingPasses === 1 ? "" : "es"} remaining` : ""}</p><p>${escapeHtml(blockDescription(item))}</p>${item.carried && !matchesPracticeMode(item.task, practiceMode()) ? '<p class="training-small">Outside your selected activity. Kept here because you added it to today.</p>' : ""}${item.reason ? `<p>${escapeHtml(item.reason)}</p>` : ""}${
@@ -410,8 +429,10 @@ export async function initTraining() {
     }
     root.querySelectorAll<HTMLDialogElement>("dialog[open]").forEach((dialog) => dialog.close());
     applyView(next);
+    // Current-block cards must reflect the latest engine time and terminal state.
+    if (state.snapshot) render();
     if (leavingPractice) notice(state.active?.runner
-      ? "Your runner block is saved on this device. Any interrupted run stays partial; return to Focus to review and save it."
+      ? "Your run is saved on this device. Its practiced time counts toward the assignment; view results and save it to history."
       : "Your block is saved and paused. Choose Return to block when ready.");
     root.querySelector<HTMLButtonElement>(`.training-tabs [data-view="${next}"]`)?.focus({ preventScroll: true });
   });
@@ -514,16 +535,24 @@ export async function initTraining() {
           ? "Class time does not count toward your independent practice hour."
           : "Extra practice is optional. Review a familiar exercise for as long as it is useful.";
     $("training-resume").hidden = !state.active;
+    $("training-resume").querySelector("p")!.textContent = state.active?.runner
+      ? "This run is saved on this device. Save it to add its results to history."
+      : "A practice block is saved on this device.";
+    $("training-resume").querySelector("button")!.textContent = runnerEnded() ? "View results" : "Return to your block";
     const next = current.next;
     const activeAssignment = state.active ? findTask(state.active.task.id)?.assignment : undefined;
     $("training-next").innerHTML = state.active
-      ? `<p class="eyebrow">Current block${activeAssignment ? ` · ${escapeHtml(assignmentLabel(activeAssignment))}` : ""}</p><h3>${escapeHtml(state.active.task.title)}</h3><p>${time(state.active.activeSeconds)} practiced. ${activeAssignment && activeAssignment.date < current.date ? "This is earlier preparation, not today's assignment. " : ""}Resume where you stopped, or record this partial block to choose another activity.</p><div class="training-actions"><button type="button" class="primary" data-action="resume">Resume your block</button><button type="button" data-action="finish">Record block and switch</button></div>`
+      ? `<p class="eyebrow">Current block${activeAssignment ? ` · ${escapeHtml(assignmentLabel(activeAssignment))}` : ""}</p><h3>${escapeHtml(state.active.task.title)}</h3><p>${time(state.active.activeSeconds)} practiced. ${activeAssignment && activeAssignment.date < current.date ? "This is earlier preparation, not today's assignment. " : ""}${state.active.runner ? "Saved on this device; save the run to add its results to history. Each new run starts a fresh score." : "Resume where you stopped, or record this partial block to choose another activity."}</p>${state.active.runner ? `<p>${escapeHtml(runnerProgressText(state.active))}</p>` : ""}<div class="training-actions"><button type="button" class="primary" data-action="resume">${runnerEnded() ? "View results" : state.active.runner ? "Return to runner" : "Resume your block"}</button><button type="button" data-action="finish">${state.active.runner ? "Save run & notes" : "Record block and switch"}</button></div>`
       : next
         ? `<p class="eyebrow">${next.extra ? "Extra practice" : next.carried ? "Added to today" : next.assignment.date === current.date ? "Suggested for today" : "Earlier preparation"} · ${escapeHtml(next.task.kind)}${next.task.speedWpm ? ` · ${next.task.speedWpm} WPM` : ""}</p><h3>${escapeHtml(next.task.title)}</h3>${progressMarkup(next.task, !!next.extra)}<p>${escapeHtml(assignmentLabel(next.assignment))}</p><p>${escapeHtml(blockDescription(next))}</p>${next.reason ? `<p>${escapeHtml(next.reason)}</p>` : ""}${next.extra ? '<p class="training-small">This optional block adds practice minutes without changing required assignment progress.</p>' : next.carried ? '<p class="training-small">You added this exercise to today. Progress still belongs to its original assignment.</p>' : next.assignment.date < current.date ? '<p class="training-small">No unfinished exercise for today fits this activity and time choice. This earlier preparation is available if you want it.</p>' : ""}<button type="button" class="primary" ${next.extra ? "data-review" : "data-start"}="${escapeHtml(next.task.id)}">${next.started && !next.extra ? "Continue" : "Start"} ${next.suggestedMinutes} minutes</button>`
         : `<p class="eyebrow">${current.phase === "class" ? "Class materials are ready below" : "A little breathing room"}</p><h3>${remaining ? "Plan your next practice window" : "Your next action is yours."}</h3><p>${remaining ? "The remaining exercises need a longer block, an eligible event window, or a resource check. Review the details below." : current.phase === "rest" ? "Rest today, review an earlier exercise, or prepare with your instructor's material." : "Review the week, open class materials, or log practice completed elsewhere."}</p><div class="training-actions"><button type="button" data-view="week">View the course</button>${current.phase === "class" && snapshot().preferences.joinUrl ? link(snapshot().preferences.joinUrl, "Join class", "training-button primary") : ""}</div>`;
     if (!state.active && mode === "anything" && current.phase !== "class" && preparation.length && (!next || next.extra || next.task.optional))
       $("training-next").innerHTML =
         `<p class="eyebrow">Instructor preparation · Session ${preparation[0].session}</p><h3>${escapeHtml(preparation[0].title)}</h3><p>This additional preparation is due before class. Its exact duration depends on the instructor's instructions.</p><button type="button" class="primary" data-practice-material="${preparation[0].id}">Start preparation</button>`;
+    if (!state.active && next && isMorseRunner(next.task)) {
+      const startButton = $("training-next").querySelector<HTMLButtonElement>("button[data-start], button[data-review]");
+      if (startButton) startButton.textContent = `${next.started && !next.extra ? "Start another" : "Start a"} ${next.suggestedMinutes}-minute run`;
+    }
     if (state.active) {
       $("training-next").querySelector(".training-actions")?.insertAdjacentHTML("beforebegin", speedChoice(state.active.task));
     } else if (next) {
@@ -615,16 +644,19 @@ export async function initTraining() {
         "afterbegin",
         `<div class="training-notice"><h3>Upcoming on-air work</h3><p>Plan around a live operating window before the class deadline.</p>${link("/radio/cw-practice/", "CWT times and exchange guidance")}${upcoming.map((item) => taskRow(item)).join("")}</div>`,
       );
-    $("training-history").innerHTML =
-      [...snapshot().attempts]
-        .sort((a, b) => b.endedAt.localeCompare(a.endedAt))
-        .slice(0, 100)
-        .map(
-          (attempt) =>
-            `<div class="training-task"><div><strong>${escapeHtml(otherPracticeActivity(attempt.taskId)?.title ?? findTask(attempt.taskId)?.task.title ?? snapshot().materials.find((item) => item.id === attempt.taskId)?.title ?? "Practice")}</strong><p>${escapeHtml(formatMeeting(attempt.endedAt))} · ${Math.round((attempt.activeSeconds / 60) * 10) / 10} min · ${attempt.context === "class" ? "Class use" : otherPracticeActivity(attempt.taskId) ? "Other practice" : attempt.review ? "Extra review" : attempt.completed ? "Completed" : "Partial / review"}${attempt.completedPasses ? ` · ${attempt.completedPasses} passes` : ""}${attempt.recallSeconds ? ` · includes ${time(attempt.recallSeconds)} recall` : ""}</p>${attempt.scratchpad ? `<details><summary>Recall &amp; notes</summary><div class="training-history-notes">${escapeHtml(attempt.scratchpad)}</div></details>` : ""}${attempt.note ? `<p>${escapeHtml(attempt.note)}</p>` : ""}</div></div>`,
-        )
-        .join("") ||
-      '<p class="training-small">Your first practice block will appear here.</p>';
+    const historyOptions = {
+      course: snapshot().course,
+      materials: snapshot().materials,
+      pendingIds: new Set((state.pending.attempts ?? []).map((attempt) => attempt.id)),
+    };
+    for (const [id, attempts, includeDate] of [
+      ["training-today-history", practiceHistoryForDate(snapshot().attempts, current.date, snapshot().course.timezone), false],
+      ["training-history", [...snapshot().attempts].sort((a, b) => b.endedAt.localeCompare(a.endedAt)).slice(0, 100), true],
+    ] as const) {
+      const container = $(id);
+      const expandedIds = new Set([...container.querySelectorAll<HTMLDetailsElement>("details[data-history-id][open]")].map((detail) => detail.dataset.historyId!));
+      container.innerHTML = renderPracticeHistory(attempts, { ...historyOptions, expandedIds, includeDate });
+    }
     $("training-material-list").innerHTML =
       currentMaterials()
         .sort((a, b) => a.session - b.session)
@@ -765,7 +797,7 @@ export async function initTraining() {
     if (!state.active) return;
     let restarted;
     try {
-      restarted = restartRunnerBlock(state.active, crypto.randomUUID(), new Date().toISOString(), runnerVersion.revision);
+      restarted = restartRunnerBlock(state.active, crypto.randomUUID(), new Date().toISOString(), runnerVersion.revision, snapshot().attempts);
     } catch {
       notice("Could not start a new run. Nothing was cleared. Use Finish block to review and save this run first.");
       return;
@@ -789,18 +821,17 @@ export async function initTraining() {
     const active = state.active;
     const run = active?.runner;
     if (!active || !run) return;
-    const assigned = runnerMeetsAssignment(run, active.task);
     const messages = {
       loading: "Loading the pinned runner and assignment settings...",
       ready: "Ready. Adjust the settings, enter your station Call, and choose a comfortable Pitch. Click Run inside the simulator to start; setup time does not count.",
       running: "Run in progress. You can change WPM while practicing. Actual engine time is recorded automatically. Keep this page visible; leaving Focus, switching apps, or stopping ends this run as partial.",
-      completed: `${active.review ? "Review run complete." : assigned ? "Assigned run complete." : "Run complete, but its mode or duration does not meet the original assignment."} Save and start a new run below, or Finish block to add notes and stop here.`,
-      stopped: `Run stopped. Its practiced time and results are preserved${active.review ? " as optional review" : ", but a partial run does not complete the assignment"}. Save and start a new run below, or Finish block to add notes and stop here.`,
+      completed: "Run complete. Results are saved on this device. Save and start a new run below, or Finish block to add notes and save to history.",
+      stopped: "Run stopped. Its practiced time still counts. Results are saved on this device. Save and start a new run below, or Finish block to add notes and save to history.",
       error: "The run could not continue. Its last confirmed time is preserved as partial. Start a new run below, or Finish block to save and stop here.",
     };
     const actualWpm = run.speedHistory?.at(-1)?.wpm ?? run.settings.wpm;
     $("training-focus-kind").textContent = `${active.review ? "Extra review" : "Simulator"} · ${actualWpm} WPM${!active.review && active.task.speedWpm ? ` · assigned ${active.task.speedWpm} WPM` : ""}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
-    $("training-focus-target").textContent = `${run.settings.durationSeconds / 60}-minute run${!active.review && active.task.minutes ? ` · assigned ${active.task.minutes} minutes` : ""}`;
+    $("training-focus-target").textContent = `${run.settings.durationSeconds / 60}-minute run${!active.review && active.task.minutes ? ` · assigned ${active.task.minutes} minutes total` : ""}`;
     $("training-runner-status").textContent = messages[run.status];
     const ended = ["completed", "stopped", "error"].includes(run.status);
     $("training-runner-restart-actions").hidden = !ended;
@@ -860,7 +891,10 @@ export async function initTraining() {
     // click and the parent's visibility event crossed in the message queue.
     if (next.status === "running" && (document.hidden || view !== "focus" || !allowActiveDate())) stopRunner();
     const changed = next.status !== previous.status || next.speedHistory !== previous.speedHistory;
-    if (changed) renderRunner();
+    if (changed) {
+      if (view === "focus") renderRunner();
+      else render();
+    }
     updateClock();
     if (changed || Date.now() - lastSaved > 5000) {
       lastSaved = Date.now();
@@ -895,6 +929,7 @@ export async function initTraining() {
       ? "Pause timer"
       : "Resume timer";
     const active = state.active;
+    if (active.runner) $("training-runner-progress").textContent = runnerProgressText(active);
     $("training-recall-toggle").textContent = recalling ? "Pause recall" : "Start recall";
     $("training-recall-toggle").setAttribute("aria-pressed", String(recalling));
     $("training-recall-time").textContent = `${time(active.recallSeconds ?? 0)} recall included in active practice${recalling ? " · timing now" : ""}`;
@@ -980,7 +1015,7 @@ export async function initTraining() {
     }
     const targetMinutes = Math.max(
       item.suggestedMinutes,
-      item.task.kind === "simulator" && !item.extra ? (item.task.minutes ?? 15) : 0,
+      item.task.kind === "simulator" && !isMorseRunner(item.task) && !item.extra ? (item.task.minutes ?? 15) : 0,
     );
     running = false;
     recalling = false;
@@ -1004,7 +1039,7 @@ export async function initTraining() {
     };
     const settings = runnerSettings(state.active.task);
     if (settings) {
-      if (item.extra) settings.durationSeconds = targetMinutes * 60;
+      settings.durationSeconds = targetMinutes * 60;
       state.active.runner = createRunnerRun(state.active.id, settings);
       state.active.runnerRevision = runnerVersion.revision;
     }
@@ -1042,12 +1077,16 @@ export async function initTraining() {
         ? Math.max(0, found.task.minimumPasses - progress.completedPasses)
         : undefined,
       suggestedMinutes:
-        found.task.kind === "simulator"
+        isMorseRunner(found.task)
+          ? progress.complete ? (temporaryMinutes ?? snapshot().preferences.blockMinutes)
+            : Math.min(temporaryMinutes ?? snapshot().preferences.blockMinutes, Math.max(1, Math.ceil(((found.task.minutes ?? 15) * 60 - progress.activeSeconds) / 60)))
+          : found.task.kind === "simulator"
           ? (found.task.minutes ?? 15)
           : found.task.kind === "audio" && resource?.durationSeconds
           ? Math.ceil(resource.durationSeconds / 60)
           : (temporaryMinutes ?? snapshot().preferences.blockMinutes),
       passesThisBlock: found.task.kind === "audio" ? 1 : undefined,
+      ...(isMorseRunner(found.task) && progress.complete ? { extra: true } : {}),
       interrupted: progress.interrupted,
     });
   }
@@ -1131,9 +1170,13 @@ export async function initTraining() {
         : active.activeSeconds >=
           (active.task.minutes ?? active.targetMinutes) * 60;
     if (active.runner) {
-      const ready = active.review ? active.runner.status === "completed" : runnerMeetsAssignment(active.runner, active.task);
-      complete.disabled = !ready;
+      const ready = active.review ? active.runner.status === "completed" : runnerAssignmentProgress(active, snapshot().attempts).complete;
+      // Assignment satisfaction is derived from cumulative time, not a manual checkbox.
+      complete.disabled = !active.review || !ready;
       complete.checked = ready;
+      if (!active.review) $("training-finish-complete-label").textContent = ready
+        ? "Assignment time satisfied when this run is saved"
+        : "Assignment time still remaining (short runs count)";
     }
     $("training-finish-help").textContent = active.review
       ? `Extra practice time is saved separately from required coverage.${active.task.kind === "audio" ? ` ${active.completedPasses} fully played passes this block; partial listening still counts as time.` : " Confirm any minutes practiced away from this page."}`
@@ -1142,7 +1185,7 @@ export async function initTraining() {
         : "Correct the time if you practiced while away from this page. Mark complete only when you met the assigned objective.";
     if (active.runner) $("training-finish-help").textContent = active.review
       ? "Review time and actual settings are saved automatically. A shorter review is fine; it never completes a required assignment."
-      : "Engine time and actual settings are saved automatically. To complete the assignment, finish an uninterrupted run in its assigned mode lasting at least the assigned duration. You may adjust WPM. Other practice still counts toward your daily time.";
+      : `${runnerProgressText(active)} Engine time, settings, and this run's score are recorded when you save. Separate runs keep separate results.`;
     $<HTMLDialogElement>("training-finish-dialog").showModal();
   }
 
@@ -1336,19 +1379,21 @@ export async function initTraining() {
     const taskId = $<HTMLSelectElement>("training-manual-task").value;
     const other = otherPracticeActivity(taskId);
     const task = findTask(taskId)?.task;
+    const cumulativeRunner = !!task && isMorseRunner(task);
     const passes = $<HTMLInputElement>("training-manual-passes");
     const complete = $<HTMLInputElement>("training-manual-complete");
-    $("training-manual-passes-field").hidden = !!other;
-    $("training-manual-complete-field").hidden = !!other;
-    passes.disabled = !!other;
-    complete.disabled = !!other;
-    if (other) {
+    $("training-manual-passes-field").hidden = !!other || cumulativeRunner;
+    $("training-manual-complete-field").hidden = !!other || cumulativeRunner;
+    passes.disabled = !!other || cumulativeRunner;
+    complete.disabled = !!other || cumulativeRunner;
+    if (other || cumulativeRunner) {
       passes.value = "0";
       complete.checked = false;
     }
     $("training-manual-help").textContent = other
       ? "Counts toward your daily practice time, not curriculum completion."
-      : "Log time for this assignment. Mark requirements completed only if you met its instructions.";
+      : cumulativeRunner ? "Log this run's actual minutes and results. Saved runs add up; the assignment is satisfied automatically when its total practice time is reached."
+        : "Log time for this assignment. Mark requirements completed only if you met its instructions.";
     $<HTMLTextAreaElement>("training-manual-note").placeholder = other?.notePlaceholder ?? (task && isMorseRunner(task) ? MORSE_RUNNER_RESULTS_PROMPT : "");
   }
   $("training-manual-task").addEventListener("change", updateManualActivity);
@@ -1536,7 +1581,7 @@ export async function initTraining() {
         if (!allowActiveDate()) break;
         setView("focus");
         notice(
-          state.active?.runner ? "Your runner block is saved. Start it if ready, or review and save any finished or interrupted run." : "Your saved block is paused. Resume the player or timer when ready.",
+          state.active?.runner ? "This run is saved on this device. Review the results and save to history, or start it if it has not begun. A finished run cannot resume; each new run has its own score." : "Your saved block is paused. Resume the player or timer when ready.",
         );
         break;
       case "toggle-timer":
@@ -1820,7 +1865,11 @@ export async function initTraining() {
         return;
       }
       let completed = data.get("complete") === "on";
-      if (active.runner && !(active.review ? active.runner.status === "completed" : runnerMeetsAssignment(active.runner, active.task))) completed = false;
+      if (active.runner) completed = active.review
+        ? completed && active.runner.status === "completed"
+        : runnerAssignmentProgress(active, snapshot().attempts).complete;
+      else if (isMorseRunner(active.task) && !active.review && active.context === "practice")
+        completed = taskProgress(active.task, snapshot().attempts.filter((attempt) => attempt.id !== active.id)).activeSeconds + activeSeconds >= (active.task.minutes ?? 15) * 60;
       const minimumPasses = active.review ? active.targetPasses : active.task.minimumPasses;
       if (
         active.task.kind === "audio" &&
@@ -1831,6 +1880,7 @@ export async function initTraining() {
         completed = false;
       if (
         active.task.kind === "simulator" &&
+        !isMorseRunner(active.task) &&
         !active.review &&
         activeSeconds < (active.task.minutes ?? 15) * 60 &&
         completed
@@ -1915,10 +1965,13 @@ export async function initTraining() {
       )
         return;
       const endedAt = new Date();
-      const complete = !other && data.get("complete") === "on";
+      const complete = found && isMorseRunner(found.task)
+        ? taskProgress(found.task, snapshot().attempts).activeSeconds + activeSeconds >= (found.task.minutes ?? 15) * 60
+        : !other && data.get("complete") === "on";
       if (
         complete &&
         found?.task.kind === "simulator" &&
+        !isMorseRunner(found.task) &&
         activeSeconds < (found.task.minutes ?? 15) * 60
       ) {
         notice(
@@ -2083,7 +2136,7 @@ export async function initTraining() {
     const run = state.active?.runner;
     if (run) {
       // Upstream has no contest restore. Never convert a reload into a new
-      // contest with the old elapsed time or combine partial runs as complete.
+      // contest carrying over the old engine timer or score.
       if (["loading", "ready"].includes(run.status) && run.elapsedSeconds === 0) {
         state.active!.runner = createRunnerRun(run.runId, run.settings);
         state.active!.runnerRevision = runnerVersion.revision;

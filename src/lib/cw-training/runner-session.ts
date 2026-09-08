@@ -1,5 +1,6 @@
 import { isMorseRunner } from "./morse-runner.ts";
-import { createRunnerRun, isRunnerSettings, runnerMeetsAssignment, runnerResultNote, RUNNER_MAX_SECONDS } from "./runner-bridge.ts";
+import { taskProgress } from "./plan.ts";
+import { createRunnerRun, isRunnerSettings, runnerResultNote, RUNNER_MAX_SECONDS } from "./runner-bridge.ts";
 import type { ActiveBlock } from "./storage.ts";
 import type { TrainingAttempt } from "./types.ts";
 
@@ -10,12 +11,33 @@ export function runnerMetadata(active: ActiveBlock): string {
   return `${runnerResultNote(active.runner) ?? "Web Morse Runner: not started; no practice credited."} Upstream ${active.runnerRevision ?? "revision not recorded"}. Synthetic practice calls (not on-air contacts).`;
 }
 
+/** Assignment time accumulates across runs; each run's timer and score stay separate. */
+export function runnerAssignmentProgress(active: ActiveBlock, attempts: TrainingAttempt[] = []): {
+  savedSeconds: number;
+  currentSeconds: number;
+  totalSeconds: number;
+  requiredSeconds: number;
+  complete: boolean;
+} {
+  const requiredSeconds = isMorseRunner(active.task) && Number.isFinite(active.task.minutes) && active.task.minutes! > 0
+    ? active.task.minutes! * 60 : 0;
+  const savedSeconds = requiredSeconds > 0
+    ? taskProgress(active.task, attempts.filter(attempt => attempt.id !== active.id)).activeSeconds : 0;
+  const eligible = requiredSeconds > 0 && active.context === "practice" && !active.review;
+  const elapsed = active.runner?.elapsedSeconds;
+  const currentSeconds = eligible && typeof elapsed === "number" && Number.isFinite(elapsed) && elapsed >= 0 && elapsed <= RUNNER_MAX_SECONDS
+    ? Math.floor(elapsed) : 0;
+  const totalSeconds = savedSeconds + currentSeconds;
+  return { savedSeconds, currentSeconds, totalSeconds, requiredSeconds, complete: eligible && totalSeconds >= requiredSeconds };
+}
+
 /** Save one terminal run and prepare a separate, paused run with a fresh identity. */
 export function restartRunnerBlock(
   active: ActiveBlock,
   newId: string,
   startedAt: string,
   revision: string,
+  attempts: TrainingAttempt[] = [],
 ): { active: ActiveBlock; attempt?: TrainingAttempt } | undefined {
   const run = active.runner;
   if (!run || !isMorseRunner(active.task) || !["completed", "stopped", "error"].includes(run.status)) return undefined;
@@ -42,7 +64,8 @@ export function restartRunnerBlock(
     throw new Error("The new runner version is invalid. Reload before starting over.");
   }
   const activeSeconds = Math.floor(run.elapsedSeconds);
-  const completed = active.review ? run.status === "completed" : runnerMeetsAssignment(run, active.task);
+  const progress = runnerAssignmentProgress(active, attempts);
+  const completed = active.review ? run.status === "completed" : progress.complete;
   const shouldRecord = activeSeconds > 0 || (run.summary?.qsoCount ?? 0) > 0 || !!active.scratchpad?.trim();
   const attempt: TrainingAttempt | undefined = shouldRecord ? {
     id: active.id,
@@ -57,7 +80,14 @@ export function restartRunnerBlock(
     context: active.context,
     ...(active.review !== undefined ? { review: active.review } : {}),
   } : undefined;
-  const settings = { ...run.settings, wpm: run.speedHistory?.at(-1)?.wpm ?? run.settings.wpm };
+  const remainingSeconds = Math.max(0, progress.requiredSeconds - progress.totalSeconds);
+  const settings = {
+    ...run.settings,
+    wpm: run.speedHistory?.at(-1)?.wpm ?? run.settings.wpm,
+    durationSeconds: active.context === "practice" && !active.review && !progress.complete && remainingSeconds > 0
+      ? Math.min(run.settings.durationSeconds, Math.max(60, Math.ceil(remainingSeconds / 60) * 60))
+      : run.settings.durationSeconds,
+  };
   const next: ActiveBlock = {
     id: newId,
     assignmentId: active.assignmentId,
@@ -73,7 +103,7 @@ export function restartRunnerBlock(
     coverage: [],
     bookmarks: [],
     context: active.context,
-    ...(completed ? { review: true } : active.review !== undefined ? { review: active.review } : {}),
+    ...(progress.complete ? { review: true } : active.review !== undefined ? { review: active.review } : {}),
     runner: createRunnerRun(newId, settings),
     runnerRevision: revision,
   };

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createRunnerRun, reduceRunnerEvent, runnerMeetsAssignment, runnerResultNote, runnerSettings, RUNNER_CHANNEL, RUNNER_PROTOCOL_VERSION } from "../src/lib/cw-training/runner-bridge.ts";
-import { restartRunnerBlock, runnerMetadata } from "../src/lib/cw-training/runner-session.ts";
+import { createRunnerRun, reduceRunnerEvent, runnerResultNote, runnerSettings, RUNNER_CHANNEL, RUNNER_PROTOCOL_VERSION } from "../src/lib/cw-training/runner-bridge.ts";
+import { restartRunnerBlock, runnerAssignmentProgress, runnerMetadata } from "../src/lib/cw-training/runner-session.ts";
 
 const oldId = "11111111-1111-4111-8111-111111111111";
 const newId = "22222222-2222-4222-8222-222222222222";
@@ -30,6 +30,11 @@ const event = (state, type, sequence, elapsedSeconds = 0, extra = {}) => ({
   channel: RUNNER_CHANNEL, version: RUNNER_PROTOCOL_VERSION, runId: state.runId,
   type, sequence, elapsedSeconds, ...(type === "started" ? { settings: state.settings } : {}), ...extra,
 });
+const savedAttempt = (overrides = {}) => ({
+  id: "44444444-4444-4444-8444-444444444444", assignmentId: "synthetic-day", taskId: task().id,
+  startedAt: "2026-09-07T14:00:00.000Z", endedAt: "2026-09-07T14:10:00.000Z",
+  activeSeconds: 600, completed: false, context: "practice", ...overrides,
+});
 
 test("shared runner metadata stays exactly compatible with the existing normal-finish note", () => {
   const active = block();
@@ -54,7 +59,7 @@ test("restart captures earned engine time once and prepares a separate zeroed ru
   assert.equal(result.active.assignmentId, original.assignmentId);
   assert.equal(result.active.task, original.task);
   assert.equal(result.active.resource, original.resource);
-  assert.equal(result.active.targetMinutes, 15);
+  assert.equal(result.active.targetMinutes, 14, "remaining assignment time is rounded up to whole minutes");
   for (const key of ["activeSeconds", "completedPasses", "previousPasses", "targetPasses", "position"]) assert.equal(result.active[key], 0, key);
   assert.deepEqual(result.active.coverage, []);
   assert.deepEqual(result.active.bookmarks, []);
@@ -110,21 +115,22 @@ test("partial and review runs preserve review/context while completed required w
   assert.equal(reviewed.active.review, true);
 });
 
-test("a completed short or different-mode run cannot finish the original assignment during restart", () => {
-  for (const settings of [
-    { ...runnerSettings(task()), durationSeconds: 180 },
-    { ...runnerSettings(task()), mode: "WPX" },
+test("short work stays incomplete, while enough practice in a different mode satisfies the assignment", () => {
+  for (const [settings, expected] of [
+    [{ ...runnerSettings(task()), durationSeconds: 180 }, false],
+    [{ ...runnerSettings(task()), mode: "WPX" }, true],
   ]) {
     const original = block({ runner: run({ status: "completed", elapsedSeconds: settings.durationSeconds, settings }) });
     const result = restartRunnerBlock(original, newId, "2026-09-08T14:20:00.000Z", revision);
-    assert.equal(result.attempt.completed, false);
-    assert.equal(result.active.review, undefined);
+    assert.equal(result.attempt.completed, expected);
+    assert.equal(result.active.review, expected ? true : undefined);
   }
 });
 
-test("stale events from the removed frame cannot change the fresh run or combine its time with partial practice", () => {
+test("stale events cannot change a fresh run even though saved practice contributes to assignment time", () => {
   const original = block();
-  let fresh = restartRunnerBlock(original, newId, nextStart, revision).active.runner;
+  const transition = restartRunnerBlock(original, newId, nextStart, revision);
+  let fresh = transition.active.runner;
   for (const oldEvent of [
     event(original.runner, "ready", 0), event(original.runner, "started", 11),
     event(original.runner, "progress", 12, 150),
@@ -134,7 +140,9 @@ test("stale events from the removed frame cannot change the fresh run or combine
   fresh = reduceRunnerEvent(fresh, event(fresh, "started", 1));
   fresh = reduceRunnerEvent(fresh, event(fresh, "results", 2, 825, { reason: "completed", summary: summary() }));
   assert.equal(fresh.status, "stopped");
-  assert.equal(runnerMeetsAssignment(fresh, original.task), false, "75 old seconds plus 825 new seconds is not one full run");
+  assert.equal(fresh.elapsedSeconds, 825, "the simulator timer is only the new run");
+  const progress = runnerAssignmentProgress({ ...transition.active, runner: fresh }, [transition.attempt]);
+  assert.deepEqual(progress, { savedSeconds: 75, currentSeconds: 825, totalSeconds: 900, requiredSeconds: 900, complete: true });
 });
 
 test("multiple restarts use distinct saved IDs and per-run time instead of duplicating cumulative totals", () => {
@@ -143,7 +151,7 @@ test("multiple restarts use distinct saved IDs and per-run time instead of dupli
   nextRun = reduceRunnerEvent(nextRun, event(nextRun, "ready", 0));
   nextRun = reduceRunnerEvent(nextRun, event(nextRun, "started", 1));
   nextRun = reduceRunnerEvent(nextRun, event(nextRun, "results", 2, 30.75, { reason: "stopped", summary: summary() }));
-  const second = restartRunnerBlock({ ...first.active, activeSeconds: 30.75, runner: nextRun }, thirdId, "2026-09-08T14:06:00.000Z", revision);
+  const second = restartRunnerBlock({ ...first.active, activeSeconds: 30.75, runner: nextRun }, thirdId, "2026-09-08T14:06:00.000Z", revision, [first.attempt]);
   assert.deepEqual([first.attempt.id, second.attempt.id, second.active.id], [oldId, newId, thirdId]);
   assert.deepEqual([first.attempt.activeSeconds, second.attempt.activeSeconds, second.active.activeSeconds], [75, 30, 0]);
   assert.equal(second.attempt.startedAt, first.active.startedAt);
@@ -152,8 +160,91 @@ test("multiple restarts use distinct saved IDs and per-run time instead of dupli
   let completed = second.active.runner;
   completed = reduceRunnerEvent(completed, event(completed, "ready", 0));
   completed = reduceRunnerEvent(completed, event(completed, "started", 1));
-  completed = reduceRunnerEvent(completed, event(completed, "results", 2, 900, { reason: "completed", summary: summary() }));
-  assert.equal(runnerMeetsAssignment(completed, second.active.task), true, "a fresh run must earn its own whole duration");
+  completed = reduceRunnerEvent(completed, event(completed, "results", 2, completed.settings.durationSeconds, { reason: "completed", summary: summary() }));
+  assert.equal(runnerAssignmentProgress({ ...second.active, runner: completed }, [first.attempt, second.attempt]).complete, true);
+});
+
+test("600 saved seconds plus 300 current seconds complete the task even after Stop or an interruption", () => {
+  for (const status of ["running", "stopped", "error"]) {
+    const active = block({ runner: run({ status, elapsedSeconds: 300.9, settings: { ...runnerSettings(task()), mode: "WPX" } }) });
+    assert.deepEqual(runnerAssignmentProgress(active, [savedAttempt()]), {
+      savedSeconds: 600, currentSeconds: 300, totalSeconds: 900, requiredSeconds: 900, complete: true,
+    });
+    if (status !== "running") {
+      const restarted = restartRunnerBlock(active, newId, nextStart, revision, [savedAttempt()]);
+      assert.equal(restarted.attempt.activeSeconds, 300);
+      assert.equal(restarted.attempt.completed, true);
+      assert.equal(restarted.active.review, true);
+      assert.match(restarted.attempt.note, /WPX Contest/);
+    }
+  }
+  const almost = block({ runner: run({ elapsedSeconds: 299.9 }) });
+  assert.equal(runnerAssignmentProgress(almost, [savedAttempt()]).complete, false, "only whole recorded seconds count");
+});
+
+test("assignment progress deduplicates saved IDs, excludes the active ID, and filters reviews, class use and other tasks", () => {
+  const active = block({ runner: run({ elapsedSeconds: 300 }) });
+  const attempts = [
+    savedAttempt({ activeSeconds: 200 }), savedAttempt(), savedAttempt(),
+    savedAttempt({ id: active.id, activeSeconds: 300 }), savedAttempt({ id: active.id, activeSeconds: 900 }),
+    savedAttempt({ id: newId, review: true, activeSeconds: 900 }),
+    savedAttempt({ id: thirdId, context: "class", activeSeconds: 900 }),
+    savedAttempt({ id: "55555555-5555-4555-8555-555555555555", taskId: "different-task", activeSeconds: 900 }),
+  ];
+  assert.deepEqual(runnerAssignmentProgress(active, attempts), {
+    savedSeconds: 600, currentSeconds: 300, totalSeconds: 900, requiredSeconds: 900, complete: true,
+  });
+});
+
+test("review and class blocks do not contribute current assignment time or transition class use into review", () => {
+  for (const overrides of [{ review: true }, { context: "class" }, { context: "class", review: false }]) {
+    const active = block({ ...overrides, runner: run({ status: "completed", elapsedSeconds: 900 }) });
+    assert.deepEqual(runnerAssignmentProgress(active, [savedAttempt()]), {
+      savedSeconds: 600, currentSeconds: 0, totalSeconds: 600, requiredSeconds: 900, complete: false,
+    });
+    assert.equal(runnerAssignmentProgress(active, [savedAttempt({ activeSeconds: 900 })]).complete, false);
+    const restarted = restartRunnerBlock(active, newId, "2026-09-08T14:20:00.000Z", revision, [savedAttempt()]);
+    assert.equal(restarted.active.review, overrides.review);
+    assert.equal(restarted.active.runner.settings.durationSeconds, 900, "non-assignment runs keep their chosen duration");
+    assert.equal(restarted.attempt.completed, !!overrides.review, "review run outcomes remain separate from assignment credit");
+  }
+});
+
+test("fifteen one-minute restarts complete one 15-minute assignment without retaining per-run score or time", () => {
+  let active = block({ scratchpad: undefined, runner: run({ settings: { ...runnerSettings(task()), durationSeconds: 60 } }) });
+  const attempts = [];
+  const initialTime = Date.parse(active.startedAt);
+  for (let index = 1; index <= 15; index++) {
+    active = { ...active, activeSeconds: 60, runner: { ...active.runner, status: "stopped", elapsedSeconds: 60,
+      lastSequence: 4, summary: summary(), speedHistory: [{ elapsedSeconds: 0, wpm: 13 }] } };
+    const id = `aaaaaaaa-aaaa-4aaa-8aaa-${index.toString(16).padStart(12, "0")}`;
+    const transition = restartRunnerBlock(active, id, new Date(initialTime + index * 60000).toISOString(), revision, attempts);
+    assert.equal(transition.attempt.activeSeconds, 60);
+    assert.equal(transition.attempt.completed, index === 15);
+    assert.equal(transition.attempt.review, undefined, "all fifteen segments belong to the assigned task");
+    attempts.push(transition.attempt);
+    active = transition.active;
+    assert.equal(active.runner.elapsedSeconds, 0);
+    assert.equal(active.runner.summary, undefined);
+    assert.equal(active.runner.speedHistory, undefined);
+    assert.equal(active.runner.status, "loading");
+    assert.equal(active.activeSeconds, 0);
+    assert.equal(active.runner.settings.durationSeconds, 60);
+    assert.equal(active.review, index === 15 ? true : undefined);
+  }
+  assert.equal(new Set(attempts.map(attempt => attempt.id)).size, 15);
+  assert.equal(attempts.reduce((sum, attempt) => sum + attempt.activeSeconds, 0), 900);
+});
+
+test("remaining assignment time caps the next run without enlarging short choices or dropping sub-minute remainders", () => {
+  for (const [elapsedSeconds, durationSeconds, expected] of [[25, 900, 900], [150, 900, 180], [275, 900, 60], [25, 60, 60]]) {
+    const active = block({ runner: run({ elapsedSeconds, settings: { ...runnerSettings(task()), durationSeconds } }) });
+    const saved = elapsedSeconds === 25 ? [] : [savedAttempt()];
+    const next = restartRunnerBlock(active, newId, nextStart, revision, saved).active;
+    assert.equal(next.runner.settings.durationSeconds, expected);
+    assert.equal(next.targetMinutes, expected / 60);
+    assert.equal(next.review, undefined);
+  }
 });
 
 test("restarting a previous-day block retains its practice date and gives the new block today's date", () => {

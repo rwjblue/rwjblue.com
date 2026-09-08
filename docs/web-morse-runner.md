@@ -137,10 +137,11 @@ The upstream engine has no durable contest-state restore or public integration
 API. Starting a new contest clears the log/transcript; stopping closes its audio
 context. Adapter timing must use cumulative engine seconds, not add a second
 parent stopwatch. Protocol completion describes the chosen run, not necessarily
-the assignment: required credit needs a complete uninterrupted run in the
-original mode lasting at least the assigned duration. A changed WPM is allowed;
-a shorter run or different mode leaves the assignment incomplete. Multiple
-partial attempts cannot satisfy that uninterrupted duration. Every review attempt
+the assignment: required credit accumulates saved practice seconds for the
+assigned task across any number of runs, including stopped/interrupted runs and
+previously saved partial entries. A 10-minute run plus a 5-minute run satisfies
+a 15-minute assignment. Settings do not gate cumulative time; actual mode and
+speed remain recorded in each run's metadata. Every review attempt
 has `review: true` and contributes practice time without completing required
 work. The parent remains responsible for saving each attempt once and preserving
 these required-versus-extra-review rules.
@@ -148,9 +149,11 @@ these required-versus-extra-review rules.
 The parent offers Save & start new run after stopped, completed, or interrupted
 runs. It records the old attempt under its existing block ID and creates a fresh
 block/run ID with zero elapsed time, mounting a new iframe to reset the engine.
-The last practiced WPM and other run settings become editable starting defaults.
+The last practiced WPM and other run settings become editable starting defaults;
+the next required run's duration is capped by the remaining assignment time,
+rounded up to at least one minute.
 The old attempt and fresh block are saved in the same device checkpoint before
-sync; late messages from the removed frame cannot update the new run. Completing
-an assigned run makes the next run extra review. Failed setup without practice,
+sync; late messages from the removed frame cannot update the new run. Reaching
+the cumulative assignment time makes the next run extra review. Failed setup without practice,
 results, or notes restarts without adding empty history. No restart command or
 relaxation of the one-run protocol is needed, and audio still requires Run.

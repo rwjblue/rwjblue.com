@@ -510,6 +510,41 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+.training-today-history {
+  margin-bottom: 24px;
+}
+.training-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.training-history-entry {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+  font-size: 0.88rem;
+}
+.training-history-entry p {
+  margin: 4px 0 0;
+}
+.training-history-meta,
+.training-history-sync {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.cw-training .training-history-entry details {
+  margin-top: 6px;
+}
+.cw-training .training-history-entry details > summary {
+  min-height: 44px;
+}
+.cw-training .training-history-entry details[open] > summary {
+  margin-bottom: 6px;
+}
+.training-history-entry .training-history-label {
+  font-weight: 700;
+  margin-top: 12px;
+}
 @media (max-width: 580px) {
   .training-heading {
     display: block;

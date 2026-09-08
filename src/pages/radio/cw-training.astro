@@ -106,6 +106,11 @@ import "../../styles/cw-training.css";
         <p id="training-speed-help" class="training-small">This default applies to future blocks. Change an exercise's recording speed anytime in Today, Week, or Focus. Original instructions stay unchanged; full faster passes count toward the same exercise.</p>
         <div id="training-next" class="training-card training-next"></div>
         <p class="training-small">Start with today's assignments in any useful order. Add selected older exercises to today if you want to catch up; you do not need to clear the backlog. Extra review adds practice time without completing assignments.</p>
+        <section class="training-section training-today-history" aria-labelledby="training-today-history-heading">
+          <h3 id="training-today-history-heading">Practiced today</h3>
+          <p class="training-small">Saved sessions for today. Expand a session for its results and notes. Your current block appears here after you finish and save it; each run keeps its own score.</p>
+          <div id="training-today-history"></div>
+        </section>
         <div id="training-preparation"></div>
         <div class="training-section">
           <h3>Today's assignments</h3><div id="training-queue"></div>
@@ -240,6 +245,7 @@ import "../../styles/cw-training.css";
           <section id="training-runner-embedded" class="training-section" aria-labelledby="training-runner-embedded-heading" hidden>
             <h3 id="training-runner-embedded-heading">Practice here</h3>
             <p id="training-runner-status" class="training-small" role="status" tabindex="-1"></p>
+            <p id="training-runner-progress" class="training-small"></p>
             <p class="training-small">The assignment supplies starting defaults. Change mode, duration, activity, or conditions before Run; adjust CW Speed before or during a run. Actual settings are recorded. A keyboard is recommended. Click inside the simulator before using shortcuts. These are synthetic practice calls, not on-air contacts.</p>
             <div id="training-runner-frame-host"></div>
             <div id="training-runner-restart-actions" class="training-notice" hidden>
@@ -247,7 +253,7 @@ import "../../styles/cw-training.css";
                 <button id="training-runner-restart" class="primary" type="button" data-action="restart-runner" aria-describedby="training-runner-restart-help">Save &amp; start new run</button>
                 <button type="button" data-action="finish">Finish block</button>
               </div>
-              <p id="training-runner-restart-help" class="training-small">Starting over clears the simulator's timer, score, and transcript, keeping your settings. Practiced time and results stay in history; partial runs do not combine into a full assigned run. Click Run in the fresh simulator when ready.</p>
+              <p id="training-runner-restart-help" class="training-small">Starting a new run resets the simulator's timer, score, and transcript, keeping your settings. Saved time from separate required runs adds toward the assignment; each run keeps its own result summary in history. Click Run in the fresh simulator when ready.</p>
             </div>
             <p id="training-runner-result" class="training-small" hidden></p>
           </section>

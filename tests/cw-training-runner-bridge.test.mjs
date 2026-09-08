@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   createRunnerRun, isRunnerSettings, parseRunnerEvent, reduceRunnerEvent,
-  runnerConfigureCommand, runnerMeetsAssignment, runnerResultNote, runnerSettings, runnerStopCommand,
+  runnerConfigureCommand, runnerResultNote, runnerSettings, runnerStopCommand,
   RUNNER_CHANNEL, RUNNER_PROTOCOL_VERSION,
 } from "../src/lib/cw-training/runner-bridge.ts";
 import {
@@ -97,7 +97,7 @@ test("result summaries exclude logs and reject unbounded or inconsistent counts"
   assert.equal(parsed.summary.qsoCount, 12);
 });
 
-test("only started uninterrupted engine time reaching the chosen duration completes one run", () => {
+test("engine run completion requires a start, the chosen duration, and final results", () => {
   let state = run();
   assert.equal(state.status, "loading");
   assert.equal(state.elapsedSeconds, 0);
@@ -115,10 +115,9 @@ test("only started uninterrupted engine time reaching the chosen duration comple
   assert.equal(state.status, "completed");
   assert.equal(state.elapsedSeconds, 900);
   assert.match(runnerResultNote(state), /completed; 900 seconds; Single Call; 13 WPM starting speed; run duration 900 seconds; band conditions off; 12 QSOs; Verified Pts 10; verified score 80; NR 1; NIL 1/);
-  assert.equal(runnerMeetsAssignment(state, task()), true);
 });
 
-test("stopped or undersized completed runs remain partial and two short attempts never combine", () => {
+test("stopped or undersized engine results are terminal and cannot extend or restart the same run", () => {
   for (const reason of ["completed", "stopped"]) {
     const state = reduceRunnerEvent(started(), event("results", 2, 450, { reason, summary: summary() }));
     assert.equal(state.status, "stopped");
@@ -184,25 +183,30 @@ test("starting records chosen settings, without mutating defaults or accepting l
   assert.equal(reduceRunnerEvent(actual, event("started", 2, 0, { settings: settings() })), actual);
 });
 
-test("the chosen run can finish without incorrectly finishing a shorter or differently configured assignment", () => {
-  for (const [selected, expected] of [
-    [{ ...settings(), durationSeconds: 180 }, false],
-    [{ ...settings(), durationSeconds: 1200 }, true],
-    [{ ...settings(), mode: "WPX" }, false],
-    [{ ...settings(), wpm: 25 }, true],
-    [{ ...settings(), wpm: 10 }, true],
+test("each chosen run finishes against its actual duration and preserves selected settings in its note", () => {
+  for (const selected of [
+    { ...settings(), durationSeconds: 60 },
+    { ...settings(), durationSeconds: 180 },
+    { ...settings(), durationSeconds: 1200 },
+    { ...settings(), mode: "WPX" },
+    { ...settings(), wpm: 25 },
+    { ...settings(), wpm: 10 },
   ]) {
     let state = reduceRunnerEvent(reduceRunnerEvent(run(), event("ready", 0)), event("started", 1, 0, { settings: selected }));
     state = reduceRunnerEvent(state, event("results", 2, selected.durationSeconds, { reason: "completed", summary: summary() }));
     assert.equal(state.status, "completed", "each chosen run completed its own continuous duration");
-    assert.equal(runnerMeetsAssignment(state, task()), expected);
-    assert.equal(runnerMeetsAssignment({ ...state, status: "stopped" }, task()), false);
-    assert.equal(runnerMeetsAssignment({ ...state, status: "error" }, task()), false);
-    assert.equal(runnerMeetsAssignment(state, task({ instructions: "Unknown exercise" })), false);
+    assert.equal(state.elapsedSeconds, selected.durationSeconds);
+    assert.deepEqual(state.settings, selected);
+    assert.deepEqual(state.summary, summary());
+    const note = runnerResultNote(state);
+    assert.ok(note.includes(`${selected.durationSeconds} seconds`));
+    assert.ok(note.includes(`run duration ${selected.durationSeconds} seconds`));
+    assert.ok(note.includes(`${selected.wpm} WPM starting speed`));
+    assert.ok(note.includes(selected.mode === "WPX" ? "WPX Contest" : "Single Call"));
   }
 });
 
-test("speed events retain engine timestamps and actual starting speed without requiring fixed assignment WPM", () => {
+test("speed events retain engine timestamps and actual starting speed for the completed run", () => {
   let state = started();
   state = reduceRunnerEvent(state, event("speed", 2, 12.5, { wpm: 18 }));
   state = reduceRunnerEvent(state, event("speed", 3, 31.75, { wpm: 23 }));
@@ -218,7 +222,8 @@ test("speed events retain engine timestamps and actual starting speed without re
     event("speed", 6, 901, { wpm: 20 }), event("speed", 6, 120, { wpm: 0 }),
   ]) assert.equal(reduceRunnerEvent(state, invalid), state);
   state = reduceRunnerEvent(state, event("results", 6, 900, { reason: "completed", summary: summary() }));
-  assert.equal(runnerMeetsAssignment(state, task()), true);
+  assert.equal(state.status, "completed");
+  assert.equal(state.elapsedSeconds, 900);
   assert.match(runnerResultNote(state), /13 WPM starting speed/);
   assert.match(runnerResultNote(state), /speed changes: 18 WPM at 0:12, 23 WPM at 0:31, 15 WPM at 2:00/);
   assert.equal(reduceRunnerEvent(state, event("speed", 7, 900, { wpm: 20 })), state);
@@ -425,7 +430,7 @@ test("adapter captures edited fields at Run and uses the selected duration for e
   const reduced = surface.messages.reduce((state, item) => reduceRunnerEvent(state, item.message), run());
   assert.equal(reduced.status, "completed");
   assert.equal(reduced.elapsedSeconds, 180);
-  assert.equal(runnerMeetsAssignment(reduced, task()), false);
+  assert.deepEqual(reduced.settings, surface.messages[1].message.settings);
   assert.match(runnerResultNote(reduced), /180 seconds; WPX Contest; 18 WPM starting speed; run duration 180 seconds; Activity 4; band conditions QRM, QSB/);
 });
 
@@ -498,7 +503,7 @@ test("adapter engine completion caps overshoot, emits results once, and works wi
   assert.ok(surface.messages.every(item => item.origin === "https://example.invalid"));
 });
 
-test("suspended audio ends the run with measured partial time, not a resumable accumulated timer", async () => {
+test("suspended audio preserves measured partial time and cannot resume the same engine run", async () => {
   const surface = fakeSurface();
   await surface.configure();
   await surface.clickRun();

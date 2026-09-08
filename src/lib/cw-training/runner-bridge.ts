@@ -206,13 +206,6 @@ export function reduceRunnerEvent(state: RunnerRunState, value: unknown): Runner
   return state;
 }
 
-/** Speed is flexible; a shorter run or different mode cannot finish the assigned exercise. */
-export function runnerMeetsAssignment(state: RunnerRunState, task: TrainingTask): boolean {
-  const assigned = runnerSettings(task);
-  return !!assigned && state.status === "completed" && state.settings.mode === assigned.mode
-    && state.elapsedSeconds >= assigned.durationSeconds;
-}
-
 export function runnerResultNote(state: RunnerRunState): string | undefined {
   if (!["completed", "stopped", "error"].includes(state.status)) return undefined;
   const status = state.status === "completed" ? "completed"
