@@ -3,6 +3,7 @@ import type { BlockMinutes, PlannedTask, PracticeMode } from "./plan";
 import { listeningGuidance } from "./guidance";
 import { audioVariants, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
 import { audioSessionNote, switchAudioRecording } from "./audio-session";
+import { createTrainingNavigation, type TrainingView } from "./navigation";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerMeetsAssignment, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
@@ -100,7 +101,7 @@ export async function initTraining() {
   const audio = $<HTMLAudioElement>("training-audio");
   const storage = new TrainingStorage();
   let state: TrainingDeviceState = await storage.load();
-  let view = "today";
+  let view: TrainingView = "today";
   let temporaryMinutes: BlockMinutes | undefined;
   let running = false;
   let recalling = false;
@@ -387,8 +388,32 @@ export async function initTraining() {
         : ""
     }${speedChoice(item.task)}${runnerGuideLink(item.task)}</div>${item.extra ? `<button type="button" data-review="${escapeHtml(item.task.id)}">Extra review</button>` : buttons(item.task.id, missed, item.task.kind === "live" && !item.availableNow, item.carried)}</div>`;
 
+  const navigation = createTrainingNavigation(window, (next) => {
+    if (disposed) return;
+    const leavingPractice = view === "focus" && next !== "focus" && !!state.active;
+    if (leavingPractice) {
+      // Settle the last observed audio/timer interval before hiding practice.
+      // A queued end-of-pass event must not restart audio after navigation.
+      runnerFinishPending = false;
+      trackAudioProgress();
+      finishAudioPass(false);
+      if (state.active?.runner?.status === "running") stopRunner();
+      stopTimer();
+      audio.pause();
+      void persist();
+    }
+    root.querySelectorAll<HTMLDialogElement>("dialog[open]").forEach((dialog) => dialog.close());
+    applyView(next);
+    if (leavingPractice) notice(state.active?.runner
+      ? "Your runner block is saved on this device. Any interrupted run stays partial; return to Focus to review and save it."
+      : "Your block is saved and paused. Choose Return to block when ready.");
+    root.querySelector<HTMLButtonElement>(`.training-tabs [data-view="${next}"]`)?.focus({ preventScroll: true });
+  });
+  view = navigation.view;
   function setView(next: string) {
-    if (next !== "focus" && state.active?.runner?.status === "running") stopRunner();
+    navigation.navigate(next);
+  }
+  function applyView(next: TrainingView) {
     view = next;
     for (const name of ["today", "focus", "week", "materials"])
       $(`training-${name}`).hidden = name !== view;
@@ -606,7 +631,7 @@ export async function initTraining() {
         .join("") ||
       '<div class="training-card"><h3>A place for the next email.</h3><p>Paste instructions, import a text file, or save a link. Keep unclassified material as “Not sure yet” until its purpose is clear.</p></div>';
     renderActive();
-    setView(view);
+    applyView(view);
     status();
   }
 
@@ -1233,7 +1258,7 @@ export async function initTraining() {
     lastAudioClock = performance.now();
     updateClock();
     void persist();
-    if (!continuePlayback) return;
+    if (!continuePlayback || view !== "focus") return;
     if (!wholePass) {
       $("training-audio-state").textContent =
         "Some of this pass was skipped. Listening time is saved, but the full pass is still incomplete. Tap play for another pass.";
@@ -1978,8 +2003,11 @@ export async function initTraining() {
     if (document.hidden) void persist();
   });
   window.addEventListener("pagehide", () => {
+    trackAudioProgress();
+    finishAudioPass(false);
     stopRunner();
     stopTimer();
+    audio.pause();
     void persist();
   });
   window.addEventListener("online", () => {

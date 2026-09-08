@@ -23,6 +23,17 @@ sitemaps, and does not load the site's analytics beacon.
 - Preferences provides the usual 10- or 15-minute block length, class join link,
   calendar reminder time, data export, and device clearing.
 
+Today, Focus, Week, and Materials participate in browser history. Back (including
+the browser's swipe-back gesture) returns to the previous view; Forward reopens
+it. Leaving Focus pauses listening and timers, saves the unfinished block on
+this device, and stops a running simulator as partial. Returning does not
+autoplay or start a new run. Refreshing preserves the selected view, with active
+practice restored paused. Only the view name appears in the URL fragment; no
+practice notes or private curriculum data enter the URL or browser history.
+Background sync and rerenders do not create history entries. Finishing a block
+does not let Back resurrect it, and Back from the initial view still leaves the
+tracker normally.
+
 The imported course begins Saturday, September 5, 2026. Classes are Mondays and
 Thursdays, 3:30-4:30 p.m. in `America/New_York`, from September 7 through October
 29. Saturday/Sunday/Monday prepare for Monday; Tuesday/Wednesday/Thursday
@@ -324,7 +335,9 @@ Plain `mise run dev` serves the static shell without the Worker API.
 Run `npm test`, `npm run check:training`, `mise run check`, `mise run build`, and
 `mise run deploy -- --dry-run`. Regenerate Worker types after binding changes
 with `npx wrangler types --strict-vars=false`. Also check the live page at phone
-and desktop widths, pause/reload/resume, audio seeking and complete passes,
+and desktop widths, Back/Forward between views, reload into Focus, leaving an
+active block without losing progress, pause/reload/resume, audio seeking and
+complete passes,
 mid-block recording changes without combining partial passes, per-recording
 time/markers in saved notes, offline logging/reconnect, instructor text revisions,
 calendar revocation,
