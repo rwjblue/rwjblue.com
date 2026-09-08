@@ -239,9 +239,16 @@ import "../../styles/cw-training.css";
           </div>
           <section id="training-runner-embedded" class="training-section" aria-labelledby="training-runner-embedded-heading" hidden>
             <h3 id="training-runner-embedded-heading">Practice here</h3>
-            <p id="training-runner-status" class="training-small" role="status"></p>
+            <p id="training-runner-status" class="training-small" role="status" tabindex="-1"></p>
             <p class="training-small">The assignment supplies starting defaults. Change mode, duration, activity, or conditions before Run; adjust CW Speed before or during a run. Actual settings are recorded. A keyboard is recommended. Click inside the simulator before using shortcuts. These are synthetic practice calls, not on-air contacts.</p>
             <div id="training-runner-frame-host"></div>
+            <div id="training-runner-restart-actions" class="training-notice" hidden>
+              <div class="training-actions">
+                <button id="training-runner-restart" class="primary" type="button" data-action="restart-runner" aria-describedby="training-runner-restart-help">Save &amp; start new run</button>
+                <button type="button" data-action="finish">Finish block</button>
+              </div>
+              <p id="training-runner-restart-help" class="training-small">Starting over clears the simulator's timer, score, and transcript, keeping your settings. Practiced time and results stay in history; partial runs do not combine into a full assigned run. Click Run in the fresh simulator when ready.</p>
+            </div>
             <p id="training-runner-result" class="training-small" hidden></p>
           </section>
           <section id="training-runner-guidance" class="training-guidance training-runner" aria-labelledby="training-runner-heading" hidden>

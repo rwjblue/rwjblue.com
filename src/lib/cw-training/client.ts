@@ -8,6 +8,7 @@ import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNN
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { DEFAULT_OTHER_PRACTICE_ID, OTHER_PRACTICE_ACTIVITIES, OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "./other-practice";
 import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerMeetsAssignment, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
+import { restartRunnerBlock, runnerMetadata } from "./runner-session";
 import runnerVersion from "../../../public/vendor/web-morse-runner/UPSTREAM.json";
 import { TrainingStorage } from "./storage";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
@@ -760,9 +761,29 @@ export async function initTraining() {
     runnerFrame = undefined;
     runnerFinishPending = false;
   }
-  function runnerMetadata(active: ActiveBlock): string {
-    if (!active.runner) return "";
-    return `${runnerResultNote(active.runner) ?? "Web Morse Runner: not started; no practice credited."} Upstream ${active.runnerRevision ?? "revision not recorded"}. Synthetic practice calls (not on-air contacts).`;
+  function restartRunner() {
+    if (!state.active) return;
+    let restarted;
+    try {
+      restarted = restartRunnerBlock(state.active, crypto.randomUUID(), new Date().toISOString(), runnerVersion.revision);
+    } catch {
+      notice("Could not start a new run. Nothing was cleared. Use Finish block to review and save this run first.");
+      return;
+    }
+    if (!restarted) return;
+    // A fresh frame/run identity rejects late messages from the stopped engine.
+    unmountRunner();
+    state.active = restarted.active;
+    running = false;
+    recalling = false;
+    // Queue the old attempt and the new block in the same device checkpoint.
+    if (restarted.attempt) void record(restarted.attempt);
+    else void persist();
+    render();
+    notice(restarted.attempt
+      ? "Previous run saved to history. Your new run has a fresh timer and score. Adjust settings and click Run when ready."
+      : "Fresh run ready to set up. Adjust settings and click Run when ready.");
+    $("training-runner-status").focus();
   }
   function renderRunner() {
     const active = state.active;
@@ -773,15 +794,19 @@ export async function initTraining() {
       loading: "Loading the pinned runner and assignment settings...",
       ready: "Ready. Adjust the settings, enter your station Call, and choose a comfortable Pitch. Click Run inside the simulator to start; setup time does not count.",
       running: "Run in progress. You can change WPM while practicing. Actual engine time is recorded automatically. Keep this page visible; leaving Focus, switching apps, or stopping ends this run as partial.",
-      completed: `${active.review ? "Review run complete." : assigned ? "Assigned run complete." : "Run complete, but its mode or duration does not meet the original assignment."} Review the transcript, then Finish block to save your time and results.`,
-      stopped: `Run stopped. Its practiced time and results are preserved${active.review ? " as optional review" : ", but a partial run does not complete the assignment"}. Finish and save before starting a new run.`,
-      error: "The run could not continue. Its last confirmed time is preserved as partial; it cannot resume after interruption. Finish and save, then start a new block or use the standalone runner.",
+      completed: `${active.review ? "Review run complete." : assigned ? "Assigned run complete." : "Run complete, but its mode or duration does not meet the original assignment."} Save and start a new run below, or Finish block to add notes and stop here.`,
+      stopped: `Run stopped. Its practiced time and results are preserved${active.review ? " as optional review" : ", but a partial run does not complete the assignment"}. Save and start a new run below, or Finish block to add notes and stop here.`,
+      error: "The run could not continue. Its last confirmed time is preserved as partial. Start a new run below, or Finish block to save and stop here.",
     };
     const actualWpm = run.speedHistory?.at(-1)?.wpm ?? run.settings.wpm;
     $("training-focus-kind").textContent = `${active.review ? "Extra review" : "Simulator"} · ${actualWpm} WPM${!active.review && active.task.speedWpm ? ` · assigned ${active.task.speedWpm} WPM` : ""}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
     $("training-focus-target").textContent = `${run.settings.durationSeconds / 60}-minute run${!active.review && active.task.minutes ? ` · assigned ${active.task.minutes} minutes` : ""}`;
     $("training-runner-status").textContent = messages[run.status];
-    $("training-runner-result").hidden = !["completed", "stopped", "error"].includes(run.status);
+    const ended = ["completed", "stopped", "error"].includes(run.status);
+    $("training-runner-restart-actions").hidden = !ended;
+    $("training-runner-restart").textContent = run.elapsedSeconds >= 1 || run.summary?.qsoCount || active.scratchpad
+      ? "Save & start new run" : "Start new run";
+    $("training-runner-result").hidden = !ended;
     $("training-runner-result").textContent = runnerResultNote(run) ?? "";
     if (!runnerFrame && run.status === "loading") {
       const frame = document.createElement("iframe");
@@ -1557,12 +1582,15 @@ export async function initTraining() {
       case "finish":
         finish();
         break;
+      case "restart-runner":
+        restartRunner();
+        break;
       case "pause-block":
         pause();
         setView("today");
         render();
         notice(
-          state.active?.runner ? "This runner block is saved on this device. A stopped run cannot resume; finish and save its partial results before starting a new one." : "Your block is saved and paused. Return when you have a few minutes.",
+          state.active?.runner ? "This runner block is saved on this device. Return to Focus to save and start a new run, or Finish block to add notes and stop here." : "Your block is saved and paused. Return when you have a few minutes.",
         );
         break;
       case "manual":
@@ -2064,7 +2092,7 @@ export async function initTraining() {
     }
     render();
     if (state.active)
-      notice(state.active.runner ? "Your runner block is saved. Open Focus to review it; interrupted runs must be saved as partial before starting another run." : "Your interrupted block is saved and paused. Resume when ready.");
+      notice(state.active.runner ? "Your runner block is saved. Open Focus to review it, save and start a new run, or finish for now." : "Your interrupted block is saved and paused. Resume when ready.");
   }
   try {
     mergeSnapshot(await request("bootstrap"));

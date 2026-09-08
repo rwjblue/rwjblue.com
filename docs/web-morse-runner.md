@@ -75,7 +75,8 @@ affected generated files before retrying, without removing local integration wor
    then run the explicit-SHA update command. Re-run the offline check and tests.
 5. Verify Single Call and WPX assignments in a browser, including keyboard input,
    user-activated audio, editable starting settings, mid-run CW Speed changes,
-   short optional reviews, partial/completed runs, final results, hidden tabs,
+    short optional reviews, partial/completed runs, final results, hidden tabs,
+    stop/restart cycles with preserved history and fresh timer/score/transcript,
    and no duplicate or incorrect required-practice credit. Run the normal site
    validation before deployment.
 
@@ -143,3 +144,13 @@ partial attempts cannot satisfy that uninterrupted duration. Every review attemp
 has `review: true` and contributes practice time without completing required
 work. The parent remains responsible for saving each attempt once and preserving
 these required-versus-extra-review rules.
+
+The parent offers Save & start new run after stopped, completed, or interrupted
+runs. It records the old attempt under its existing block ID and creates a fresh
+block/run ID with zero elapsed time, mounting a new iframe to reset the engine.
+The last practiced WPM and other run settings become editable starting defaults.
+The old attempt and fresh block are saved in the same device checkpoint before
+sync; late messages from the removed frame cannot update the new run. Completing
+an assigned run makes the next run extra review. Failed setup without practice,
+results, or notes restarts without adding empty history. No restart command or
+relaxation of the one-run protocol is needed, and audio still requires Run.

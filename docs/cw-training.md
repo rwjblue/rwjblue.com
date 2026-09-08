@@ -197,9 +197,18 @@ combine into an assigned full run. Extra-review attempts remain separate from
 required coverage regardless of their duration or settings.
 
 Leaving Focus, switching apps, and page reload interrupt a run. Upstream cannot
-resume a contest, so save its partial time before starting another. A missing
+resume a contest. After stopping, completing, or interrupting a run, Save & start
+new run saves its time and result summary, then clears the simulator's timer,
+score, and transcript in a fresh frame. Mode, chosen duration, conditions, and
+the last practiced WPM carry forward; click Run explicitly to begin again.
+Finish block remains available to add a note or difficulty rating and stop here.
+Failed setup with no practiced time or results can restart without an empty
+history entry. Each run has its own identity and date, so restarts cannot combine
+partial runs or double-count time. Repeating a completed assignment becomes
+extra review. The old attempt and fresh block share one device checkpoint and
+use the existing offline sync queue; no database change is required. A missing
 engine/result retains the last confirmed time without inventing a score. Saved
-terminal runs retain their status after reload; no replacement contest starts.
+terminal runs retain their status after reload until the user explicitly restarts.
 The standalone link and Done elsewhere remain available for unsupported settings
 or browser failures, with manually confirmed minutes/results for that separate run.
 Older device-local blocks created before embedding keep their manual workflow.
