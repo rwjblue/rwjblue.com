@@ -35,6 +35,8 @@ export interface PracticeHistoryOptions {
   pendingIds: ReadonlySet<string>;
   /** Preserve expanded results when the surrounding tracker rerenders. */
   expandedIds?: ReadonlySet<string>;
+  /** Local replay needs an insertion point even when the user omitted a synced summary. */
+  sendingRecordingAttemptIds?: ReadonlySet<string>;
   includeDate?: boolean;
 }
 
@@ -69,6 +71,6 @@ export function renderPracticeHistory(attempts: readonly TrainingAttempt[], opti
       ...(rating ? [`Felt: ${rating}`] : []),
     ].join(" · ");
     const sync = options.pendingIds.has(attempt.id) ? "Saved on this device · waiting to sync" : "Saved in account";
-    return `<li class="training-history-entry"><strong>${escapeHtml(title)}</strong><p class="training-history-meta">${escapeHtml(metadata)}</p><p class="training-history-sync">${sync}</p>${details ? `<details data-history-id="${escapeHtml(attempt.id)}"${options.expandedIds?.has(attempt.id) ? " open" : ""}><summary>Results &amp; notes</summary>${details}</details>` : ""}</li>`;
+    return `<li class="training-history-entry"><strong>${escapeHtml(title)}</strong><p class="training-history-meta">${escapeHtml(metadata)}</p><p class="training-history-sync">${sync}</p>${details || options.sendingRecordingAttemptIds?.has(attempt.id) ? `<details data-history-id="${escapeHtml(attempt.id)}"${options.expandedIds?.has(attempt.id) ? " open" : ""}><summary>Results &amp; notes</summary>${details}</details>` : ""}</li>`;
   }).join("")}</ul>`;
 }

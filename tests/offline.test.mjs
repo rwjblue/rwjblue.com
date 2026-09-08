@@ -90,3 +90,31 @@ test("offline shells include transitive shared modules but never API or remote i
     rmSync(root, { recursive: true });
   }
 });
+
+test("optional sending capture and its decoder/audio graph stay out of automatic precache", () => {
+  const root = fixture();
+  try {
+    write(root, "/_astro/app.js", 'import("./sending-panel.Ab12_cd.js"); import("./other-lazy.js");');
+    write(root, "/_astro/sending-panel.Ab12_cd.js", 'import "./sending-decoder.js"; import("./morse-pro-player-waa.Xyz789.js");');
+    write(root, "/_astro/sending-decoder.js", 'import "./morse-dictionary.js"; import "./shared.js";');
+    write(root, "/_astro/morse-dictionary.js", 'export const dictionary = {};');
+    write(root, "/_astro/morse-pro-player-waa.Xyz789.js", 'export const play = () => {};');
+    write(root, "/_astro/other-lazy.js", 'import "./shared.js"; import("./offline-map.js");');
+    write(root, "/_astro/shared.js", 'export const shared = true;');
+    write(root, "/_astro/offline-map.js", 'export const ready = true;');
+    const first = buildOfflineFieldKit(root);
+    for (const name of ["app.js", "other-lazy.js", "shared.js", "offline-map.js"]) {
+      assert.ok(first.precache.includes(`/_astro/${name}`), `${name} remains available to the ordinary offline field kit`);
+    }
+    for (const name of ["sending-panel.Ab12_cd.js", "sending-decoder.js", "morse-dictionary.js", "morse-pro-player-waa.Xyz789.js"]) {
+      assert.ok(!first.precache.includes(`/_astro/${name}`), `${name} requires explicit capture opt-in`);
+      assert.ok(!first.source.includes(name), `${name} is absent from the generated worker precache`);
+    }
+    write(root, "/_astro/morse-dictionary.js", 'export const dictionary = { changed: true };');
+    assert.equal(first.version, buildOfflineFieldKit(root).version, "an excluded dependency does not change the core cache version");
+    write(root, FIELD_KIT_ROUTES[0], '<script src="/_astro/app.js"></script><link rel="modulepreload" href="/_astro/sending-panel.Ab12_cd.js">');
+    assert.ok(!buildOfflineFieldKit(root).precache.includes("/_astro/sending-panel.Ab12_cd.js"), "an HTML reference does not bypass the opt-in boundary");
+  } finally {
+    rmSync(root, { recursive: true });
+  }
+});

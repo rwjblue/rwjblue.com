@@ -37,9 +37,13 @@
     "@ham2k/lib-qson-adif": "^1.1.0",
     "adif-parser-ts": "^0.7.7",
     "jose": "^6.2.12",
-    "leaflet": "^1.9.4"
+    "leaflet": "^1.9.4",
+    "morse-pro": "https://gitlab.com/scphillips/morse-pro/-/archive/92bf6ec02092d45c159216c61e241ada3f146989/morse-pro-92bf6ec02092d45c159216c61e241ada3f146989.tar.gz"
   },
   "overrides": {
+    "morse-pro": {
+      "ebnf": "1.9.0"
+    },
     "miniflare": {
       "undici": "^7.29.1"
     }

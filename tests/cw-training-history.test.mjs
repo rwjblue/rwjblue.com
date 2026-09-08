@@ -89,6 +89,24 @@ test("sessions render independently with exact stored score summaries and explic
   assert.doesNotMatch(html, /<details[^>]+ open>/);
 });
 
+test("local sending replay remains expandable without a synced summary and does not invent remote replay", () => {
+  const id = 'local" data-injected="yes';
+  const local = attempt(id, { taskId: "sending" });
+  const remote = attempt("remote", { taskId: "sending" });
+  const remoteNote = attempt("remote-note", { taskId: "sending", note: "Practiced independently." });
+  const html = renderPracticeHistory([local, remote, remoteNote], options({
+    sendingRecordingAttemptIds: new Set([id]), expandedIds: new Set([id]),
+  }));
+  assert.match(html, /<details data-history-id="local&quot; data-injected=&quot;yes" open><summary>Results &amp; notes<\/summary><\/details>/);
+  assert.doesNotMatch(html, /data-history-id="remote"/);
+  assert.match(html, /data-history-id="remote-note"/);
+  assert.match(html, /Practiced independently\./);
+  assert.equal((html.match(/class="training-history-entry"/g) ?? []).length, 3);
+  assert.equal((html.match(/<details /g) ?? []).length, 2);
+  assert.doesNotMatch(renderPracticeHistory([local, remote], options()), /<details/, "another device has no local replay insertion point");
+  assert.equal(local.note, undefined, "rendering does not add a summary to the attempt");
+});
+
 test("titles, notes, scratchpads, and detail IDs are safely escaped and multiline text is preserved", () => {
   const id = 'id" onclick="bad()';
   const record = attempt(id, {

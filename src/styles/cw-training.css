@@ -5,6 +5,76 @@
 .cw-training [hidden] {
   display: none !important;
 }
+.training-sending {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.training-sending-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.training-sending-heading h3 { margin: 0; }
+.training-sending fieldset {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  min-width: 0;
+}
+.training-sending legend { padding: 0 6px; font-weight: 700; }
+.training-sending-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.training-sending-key-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  border: 2px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--green-wash);
+}
+.training-sending-key-area:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.training-sending-key-area [data-sending-light] {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  border: 1px solid var(--green);
+  border-radius: 50%;
+}
+.training-sending-key-area .is-keyed { background: var(--green); }
+.training-sending-label { color: var(--muted); font-size: 0.8rem; margin-bottom: 6px; }
+.cw-training pre.training-sending-transcript {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 300px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  padding: 14px;
+  background: var(--input-bg);
+  margin: 0 0 16px;
+}
+.cw-training #training-finish-sending-text { font-size: 0.82rem; }
+.training-sending [data-sending-review] { margin-top: 24px; border-top: 1px solid var(--line-strong); padding-top: 18px; }
+.training-sending [data-sending-message] { min-height: 1.5em; }
+.training-sending-takes { padding: 0; list-style: none; }
+.training-sending-takes li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0; }
+.training-sending-takes li span { flex: 1 1 200px; overflow-wrap: anywhere; }
+@media (max-width: 560px) {
+  .training-sending { padding: 16px; }
+  .training-sending-fields { grid-template-columns: 1fr; }
+  .training-sending fieldset { padding: 12px; }
+}
 .training-heading {
   display: flex;
   gap: 20px;

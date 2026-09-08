@@ -1,0 +1,244 @@
+<div id="cw-sending-concept" aria-label="CW sending practice design review">
+  <style>
+    #cw-sending-concept { --cw-bg:light-dark(#f7f4ee,#111719); --cw-panel:light-dark(#fffdfa,#192124); --cw-ink:light-dark(#172026,#edf2ef); --cw-muted:light-dark(#5f6f79,#b3c0bb); --cw-line:light-dark(#c5ccc4,#4a5759); --cw-green:light-dark(#2f6f4e,#7fcaa0); --cw-wash:light-dark(#f5fbf7,#17271f); --cw-rust:light-dark(#8a4b2b,#e2a078); --cw-warn:light-dark(#fdf7f0,#2b211d); --cw-blue:light-dark(#174ea6,#8ab4ff); color:var(--cw-ink); font:15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif; width:100%; }
+    #cw-sending-concept * { box-sizing:border-box; }
+    #cw-sending-concept [hidden] { display:none!important; }
+    #cw-sending-concept h1,#cw-sending-concept h2,#cw-sending-concept h3,#cw-sending-concept p { margin:0; color:inherit; }
+    #cw-sending-concept h1 { font-size:32px; line-height:1.1; font-weight:650; letter-spacing:-.8px; }
+    #cw-sending-concept h2 { font-size:24px; line-height:1.25; font-weight:600; letter-spacing:-.5px; }
+    #cw-sending-concept h3 { font-size:17px; line-height:1.4; font-weight:600; }
+    #cw-sending-concept button,#cw-sending-concept select,#cw-sending-concept input,#cw-sending-concept textarea { font:inherit; color:var(--cw-ink); }
+    #cw-sending-concept button { min-height:44px; border:1px solid var(--cw-line); border-radius:5px; padding:9px 14px; background:var(--cw-panel); font-size:14px; font-weight:550; cursor:pointer; }
+    #cw-sending-concept button:hover { border-color:var(--cw-blue); }
+    #cw-sending-concept button:disabled { opacity:.5; cursor:default; }
+    #cw-sending-concept button.cw-primary { background:var(--cw-green); border-color:var(--cw-green); color:var(--cw-bg); }
+    #cw-sending-concept button.cw-text { border-color:transparent; background:transparent; padding-left:0; color:var(--cw-blue); }
+    #cw-sending-concept .cw-small { font-size:12px; color:var(--cw-muted); }
+    #cw-sending-concept .cw-eyebrow { font-size:11px; letter-spacing:1.1px; text-transform:uppercase; font-weight:600; color:var(--cw-muted); }
+    #cw-sending-concept .cw-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+    #cw-sending-concept .cw-between { justify-content:space-between; }
+    #cw-sending-concept .cw-reviewbar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:0 0 14px; }
+    #cw-sending-concept .cw-reviewbar label { display:flex; gap:8px; align-items:center; font-size:12px; }
+    #cw-sending-concept .cw-reviewbar select { max-width:100%; min-height:36px; padding:5px 8px; font-size:12px; border:1px solid var(--cw-line); border-radius:4px; background:var(--cw-panel); }
+    #cw-sending-concept .cw-window { background:var(--cw-bg); border:1px solid var(--cw-line); border-radius:10px; overflow:hidden; }
+    #cw-sending-concept .cw-top { padding:16px 28px; border-bottom:1px solid var(--cw-line); display:flex; align-items:center; justify-content:space-between; gap:15px; font-size:13px; }
+    #cw-sending-concept .cw-brand { font-weight:600; }
+    #cw-sending-concept .cw-main { max-width:880px; margin:0 auto; padding:28px 32px 32px; }
+    #cw-sending-concept .cw-heading { display:flex; justify-content:space-between; gap:16px; align-items:start; }
+    #cw-sending-concept .cw-heading p { color:var(--cw-muted); margin-top:8px; font-size:14px; }
+    #cw-sending-concept .cw-tabs { display:flex; gap:0; border-bottom:1px solid var(--cw-line); margin:24px 0; }
+    #cw-sending-concept .cw-tabs span { flex:1; padding:8px; text-align:center; color:var(--cw-muted); font-size:13px; }
+    #cw-sending-concept .cw-tabs [aria-current] { color:var(--cw-ink); border-bottom:3px solid var(--cw-green); font-weight:600; }
+    #cw-sending-concept .cw-title { display:grid; gap:7px; margin-bottom:18px; }
+    #cw-sending-concept .cw-timer-panel { padding:16px 20px; background:var(--cw-panel); border:1px solid var(--cw-line); border-radius:8px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:20px; }
+    #cw-sending-concept .cw-time { font-size:30px; letter-spacing:-1px; font-weight:550; font-variant-numeric:tabular-nums; line-height:1.1; }
+    #cw-sending-concept .cw-subtle { color:var(--cw-muted); font-size:13px; }
+    #cw-sending-concept .cw-panel { padding:22px; background:var(--cw-panel); border:1px solid var(--cw-line); border-radius:8px; }
+    #cw-sending-concept .cw-stack { display:grid; gap:16px; }
+    #cw-sending-concept .cw-prompt { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:26px; line-height:1.8; letter-spacing:1px; overflow-wrap:anywhere; padding:22px 0; }
+    #cw-sending-concept .cw-optional { border-top:1px solid var(--cw-line); padding-top:16px; }
+    #cw-sending-concept .cw-status { display:inline-flex; align-items:center; gap:7px; color:var(--cw-green); font-size:12px; }
+    #cw-sending-concept .cw-status::before { content:''; display:block; width:7px; height:7px; border-radius:50%; background:currentColor; }
+    #cw-sending-concept .cw-caption { margin-top:8px; color:var(--cw-muted); font-size:13px; }
+    #cw-sending-concept .cw-footer { margin-top:20px; display:flex; gap:10px; justify-content:space-between; flex-wrap:wrap; }
+    #cw-sending-concept details { border:1px solid var(--cw-line); border-radius:6px; margin-top:18px; background:var(--cw-panel); }
+    #cw-sending-concept summary { cursor:pointer; padding:12px 16px; font-size:13px; }
+    #cw-sending-concept details p { padding:0 16px 16px; font-size:13px; color:var(--cw-muted); }
+    #cw-sending-concept .cw-form { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0; }
+    #cw-sending-concept .cw-form label { display:grid; gap:6px; font-size:13px; }
+    #cw-sending-concept select,#cw-sending-concept input[type=number],#cw-sending-concept textarea { width:100%; min-width:0; padding:10px; border:1px solid var(--cw-line); border-radius:5px; background:var(--cw-bg); font-size:16px; }
+    #cw-sending-concept .cw-test { padding:14px 16px; background:var(--cw-wash); border:1px solid var(--cw-line); border-radius:6px; }
+    #cw-sending-concept .cw-check { display:flex; align-items:start; gap:9px; font-size:13px; margin:12px 0; }
+    #cw-sending-concept .cw-check input { accent-color:var(--cw-green); margin-top:4px; }
+    #cw-sending-concept .cw-trace { display:flex; align-items:center; gap:6px; height:38px; }
+    #cw-sending-concept .cw-trace i { display:block; height:8px; background:var(--cw-green); border-radius:1px; width:10px; }
+    #cw-sending-concept .cw-trace i.cw-dah { width:30px; }
+    #cw-sending-concept .cw-trace i.cw-gap { background:transparent; width:24px; }
+    #cw-sending-concept .cw-pending { border:1px dashed var(--cw-line); border-radius:6px; padding:22px 18px; text-align:center; color:var(--cw-muted); font-size:14px; }
+    #cw-sending-concept .cw-transcript { font-family:ui-monospace,monospace; font-size:20px; letter-spacing:1px; overflow-wrap:anywhere; }
+    #cw-sending-concept mark { background:var(--cw-warn); color:var(--cw-rust); border-bottom:2px solid var(--cw-rust); padding:1px 3px; }
+    #cw-sending-concept .cw-comparison { display:grid; gap:16px; margin:18px 0; }
+    #cw-sending-concept .cw-comparison>div { display:grid; grid-template-columns:82px 1fr; gap:8px; align-items:baseline; }
+    #cw-sending-concept .cw-notice { background:var(--cw-warn); border-left:3px solid var(--cw-rust); padding:14px 16px; border-radius:0 5px 5px 0; }
+    #cw-sending-concept .cw-notice p { font-size:13px; margin-top:5px; }
+    #cw-sending-concept .cw-replay { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:16px 0; }
+    #cw-sending-concept .cw-replay>div { padding:12px 14px; border:1px solid var(--cw-line); border-radius:6px; }
+    #cw-sending-concept .cw-replay button { width:100%; font-size:13px; }
+    #cw-sending-concept .cw-result-meta { display:flex; gap:24px; flex-wrap:wrap; padding:15px 0; border-bottom:1px solid var(--cw-line); }
+    #cw-sending-concept .cw-result-meta strong { display:block; font-size:21px; font-weight:550; }
+    #cw-sending-concept .cw-toast { margin-top:16px; color:var(--cw-green); font-size:13px; min-height:20px; }
+    #cw-sending-concept .cw-wiregrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; padding:24px; background:var(--cw-bg); }
+    #cw-sending-concept .cw-wire { border:1px solid var(--cw-line); border-radius:3px; padding:18px; background:var(--cw-panel); display:grid; gap:12px; }
+    #cw-sending-concept .cw-wire h3 { font-size:15px; }
+    #cw-sending-concept .cw-wire .cw-wiretime { border:1px solid var(--cw-line); padding:8px 10px; font:12px ui-monospace,monospace; }
+    #cw-sending-concept .cw-wire .cw-wirebox { border:1px dashed var(--cw-line); min-height:95px; display:grid; place-content:center; gap:6px; padding:12px; text-align:center; font-size:13px; }
+    #cw-sending-concept .cw-wire p { font-size:12px; color:var(--cw-muted); }
+    @media(max-width:560px) {
+      #cw-sending-concept .cw-main { padding:22px 16px; }
+      #cw-sending-concept .cw-top { padding:14px 16px; }
+      #cw-sending-concept .cw-heading { display:block; }
+      #cw-sending-concept .cw-heading .cw-status { margin-top:12px; }
+      #cw-sending-concept h1 { font-size:28px; }
+      #cw-sending-concept .cw-panel { padding:18px; }
+      #cw-sending-concept .cw-form,#cw-sending-concept .cw-replay,#cw-sending-concept .cw-wiregrid { grid-template-columns:1fr; }
+      #cw-sending-concept .cw-prompt { font-size:23px; }
+      #cw-sending-concept .cw-comparison>div { grid-template-columns:1fr; gap:3px; }
+      #cw-sending-concept .cw-reviewbar { align-items:flex-start; }
+      #cw-sending-concept .cw-reviewbar label { flex-wrap:wrap; }
+      #cw-sending-concept .cw-wiregrid { padding:16px; }
+    }
+  </style>
+  <div class="cw-reviewbar">
+    <span class="cw-eyebrow">Concept / sample data</span>
+    <label>View <select id="cw-design-view"><option value="mockup">Interactive mockup</option><option value="wireframes">Wireframes</option></select></label>
+    <label id="cw-screen-label">Screen <select id="cw-design-screen"><option value="warmup">1. Warm-up / optional capture</option><option value="setup">2. Connect and test</option><option value="sending">3. Sending</option><option value="review">4. Review a capture</option><option value="interrupted">5. Adapter disconnected</option><option value="finish">6. Finish practice</option><option value="saved">7. Saved result</option><option value="ios">8. Safari on iOS</option></select></label>
+  </div>
+  <div class="cw-window">
+    <div id="cw-wireframes" hidden></div>
+    <div id="cw-mockup">
+      <div class="cw-top"><span class="cw-brand">rwjblue <span class="cw-small">/ radio</span></span><span class="cw-small">Private practice companion</span></div>
+      <div class="cw-main">
+        <div class="cw-heading"><div><h1>CW training</h1><p>A little practice, every day.</p></div><span class="cw-status">Saved to this device</span></div>
+        <nav class="cw-tabs" aria-label="Context: Focus view"><span>Today</span><span aria-current="page">Focus</span><span>Week</span><span>Materials</span></nav>
+        <div class="cw-title"><p class="cw-eyebrow">Sending / at your own pace</p><h2 id="cw-block-title">Warm up, then send</h2><p class="cw-subtle" id="cw-block-subtitle">Start with the warm-up. Continue with today's sending when ready.</p></div>
+        <div class="cw-timer-panel"><div><div class="cw-time" id="cw-practice-time">03:42</div><span class="cw-small" id="cw-time-caption">active practice / timer running</span></div><div class="cw-row"><button type="button" id="cw-pause">Pause timer</button><button type="button" class="cw-primary" data-action="finish">Finish block</button></div></div>
+        <div id="cw-screen-content"></div>
+        <div class="cw-footer" id="cw-block-footer"><button type="button" class="cw-text" data-action="save-later">Save for later</button><button type="button" class="cw-text" data-action="elsewhere">Log practice elsewhere</button></div>
+        <p class="cw-toast" id="cw-announcement" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const root = document.getElementById('cw-sending-concept');
+      const find = function (selector) { return root.querySelector(selector); };
+      const state = { screen:'warmup', view:'mockup', input:'midi', tested:false, running:true, phase:'warmup', liveDecode:false, compactPrompt:false, savedSummary:false, capture:null, interrupted:false };
+      const content = find('#cw-screen-content');
+      const screenSelect = find('#cw-design-screen');
+      const viewSelect = find('#cw-design-view');
+      const announce = function (text) { find('#cw-announcement').textContent = text; };
+      const prompt = function () { return state.phase === 'warmup' ? 'E I S H  /  T M O' : 'CQ CQ DE N1RWJ K'; };
+      const original = '<details><summary>Original instructions</summary><p>Instructor instructions and the full sending text stay available here. All text in this review is a generic example.</p></details>';
+      const noCapture = '<button type="button" class="cw-text" data-action="without">Continue without capture</button>';
+      function sampleTake() { state.capture = { phase:state.phase, input:state.input }; state.savedSummary=false; }
+      function selectDemoScreen(screen) {
+        state.phase = ['sending','review','interrupted'].includes(screen) ? 'sending' : 'warmup';
+        state.running = !['finish','saved'].includes(screen);
+        if (['sending','review','interrupted','finish','saved'].includes(screen)) { sampleTake(); state.savedSummary=['finish','saved'].includes(screen); }
+        else { state.capture=null; state.savedSummary=false; }
+        navigate(screen);
+      }
+      function navigate(screen) { state.screen = screen; announce(''); render(); }
+      function render() {
+        screenSelect.value = state.screen;
+        viewSelect.value = state.view;
+        find('#cw-wireframes').hidden = state.view !== 'wireframes';
+        find('#cw-mockup').hidden = state.view === 'wireframes';
+        find('#cw-screen-label').hidden = state.view === 'wireframes';
+        find('#cw-block-title').textContent = state.phase === 'warmup' ? 'Warm up, then send' : 'Sending practice';
+        find('#cw-block-subtitle').textContent = state.phase === 'warmup' ? 'Start with the warm-up. Continue with today\'s sending when ready.' : 'Send the selected text at a comfortable pace.';
+        find('#cw-practice-time').textContent = ['review','interrupted','finish','saved'].includes(state.screen) ? '08:30' : state.screen === 'sending' ? '05:18' : '03:42';
+        find('#cw-time-caption').textContent = state.screen === 'saved' ? 'practice recorded' : 'active practice / timer ' + (state.running ? 'running' : 'paused');
+        find('#cw-pause').textContent = state.running ? 'Pause timer' : 'Resume timer';
+        find('#cw-pause').disabled = ['finish','saved'].includes(state.screen);
+        find('#cw-block-footer').hidden = state.screen === 'saved';
+        if (state.screen === 'warmup') {
+          content.innerHTML = '<section class="cw-panel"><div class="cw-row cw-between"><h3>' + (state.phase === 'warmup' ? 'Warm-up' : 'Selected sending text') + '</h3><span class="cw-small">Example text</span></div><div class="cw-prompt">' + prompt() + '</div><div class="cw-optional cw-row cw-between"><div><h3>Record my sending <span class="cw-small">/ optional</span></h3><p class="cw-caption">Replay what you send and review possible mistakes.</p></div><button type="button" data-action="setup">Use my key</button></div></section><div class="cw-row" style="margin-top:14px"><button type="button" class="cw-primary" data-action="next-phase">' + (state.phase === 'warmup' ? 'Continue to sending' : 'Return to warm-up') + '</button><span class="cw-small">Practice counts with or without capture.</span></div>' + original;
+        } else if (state.screen === 'setup') {
+          content.innerHTML = '<section class="cw-panel"><div class="cw-row cw-between"><h3>Connect your key</h3><span class="cw-small">Optional sending capture</span></div><div class="cw-form"><label>Connection<select id="cw-input"><option value="midi"' + (state.input === 'midi' ? ' selected' : '') + '>Vail adapter / MIDI</option><option value="keyboard"' + (state.input === 'keyboard' ? ' selected' : '') + '>Vail adapter / keyboard</option></select></label><div><span class="cw-small">Keying for this concept</span><p style="margin-top:10px">Vail built-in keyer</p></div></div><p class="cw-caption">' + (state.input === 'midi' ? 'Allow MIDI access, select your Vail adapter, then test a few dits and dahs.' : 'Test with this page focused. Setup learns the keys your adapter sends.') + '</p><div class="cw-test" style="margin-top:16px"><div class="cw-row cw-between"><div><span class="cw-small">' + (state.tested ? 'Example connection verified' : 'No real hardware connected in this mockup') + '</span><h3>' + (state.tested ? 'Input received / ready' : 'Check your input') + '</h3></div><button type="button" data-action="test">' + (state.tested ? 'Test again (demo)' : 'Simulate connection + test') + '</button></div>' + (state.tested ? '<div class="cw-trace" role="img" aria-label="Sample dit and dah events"><i></i><i></i><i class="cw-dah"></i><i class="cw-gap"></i><i></i><i class="cw-dah"></i></div>' : '') + '</div><p class="cw-caption">Monitor with your adapter sidetone.</p><p class="cw-small">Your keyer speed stays under your control. Capture starts only when you choose it.</p><p class="cw-caption">Brave desktop is the first target; actual adapter testing is still needed.</p><div class="cw-row" style="margin-top:18px"><button type="button" class="cw-primary" data-action="capture"' + (!state.tested ? ' disabled' : '') + '>Start capture</button>' + noCapture + '</div></section>';
+        } else if (state.screen === 'sending') {
+          content.innerHTML = '<section class="cw-panel"><div class="cw-row cw-between"><h3>' + (state.phase === 'warmup' ? 'Warm-up capture' : 'Send this group') + '</h3><span class="cw-status">Capturing / Vail ' + (state.input === 'midi' ? 'MIDI' : 'keyboard') + '</span></div><div class="cw-prompt"' + (state.compactPrompt ? ' style="font-size:20px"' : '') + '>' + prompt() + '</div><div class="cw-row cw-between"><span class="cw-small">' + (state.phase === 'warmup' ? 'Free warm-up / rhythm and spacing' : 'Selected text / compare after sending') + '</span><label class="cw-check"><input id="cw-live" type="checkbox"' + (state.liveDecode ? ' checked' : '') + '> Show live decode</label></div>' + (state.liveDecode ? '<div class="cw-pending cw-transcript">' + (state.phase === 'warmup' ? 'E I S H' : 'CQ CQ DE') + ' ...</div>' : '<div class="cw-pending">Feedback appears when you stop.<br><span class="cw-small">Keep your attention on the sound.</span></div>') + '<div class="cw-row cw-between" style="margin-top:16px"><span class="cw-small">00:26 captured in this take</span><button type="button" class="cw-primary" data-action="review">Stop and review</button></div></section><div class="cw-row" style="margin-top:10px">' + noCapture + '<button type="button" class="cw-text" data-action="interrupt">Simulate unplugging</button></div>' + original;
+        } else if (state.screen === 'review') {
+          const warm = state.phase === 'warmup';
+          content.innerHTML = '<section class="cw-panel"><div class="cw-row cw-between"><h3>' + (warm ? 'Warm-up review' : 'Review your sending') + '</h3><span class="cw-small">Take 1 / 00:26 captured</span></div>' + (warm ? '<p class="cw-caption">Free warm-up / no expected-text score</p><div class="cw-comparison"><div><span class="cw-small">Decoded</span><div class="cw-transcript">E I S H &nbsp; T M O</div></div></div><div class="cw-notice"><h3>Listen to the gap between I and S</h3><p>In this sample, the letter gap is 120 ms. Compare it with the 180 ms reference at 20 WPM, then decide whether you want more separation.</p></div><div class="cw-replay"><div><span class="cw-small">Captured / I S / 120 ms gap</span><div class="cw-trace" role="img" aria-label="Captured I and S with a 120 millisecond letter gap"><i></i><i></i><i class="cw-gap" style="width:20px"></i><i></i><i></i><i></i></div><button type="button" data-action="replay-warmup-actual">Play captured I S</button></div><div><span class="cw-small">Reference / I S at 20 WPM</span><div class="cw-trace" role="img" aria-label="Reference I and S with a 180 millisecond letter gap"><i></i><i></i><i class="cw-gap" style="width:30px"></i><i></i><i></i><i></i></div><button type="button" data-action="replay-warmup-reference">Play reference I S</button></div></div>' : '<div class="cw-comparison"><div><span class="cw-small">Expected</span><div class="cw-transcript">CQ CQ DE N1RW<mark>J</mark> K</div></div><div><span class="cw-small">Decoded</span><div class="cw-transcript">CQ CQ DE N1RW<mark>U</mark> K</div></div></div><div class="cw-notice"><h3>One place to listen again</h3><p>J was decoded as U. Replay this character before treating it as a sending mistake.</p></div><div class="cw-replay"><div><span class="cw-small">Captured / U</span><div class="cw-trace" role="img" aria-label="Captured U: dit dit dah"><i></i><i></i><i class="cw-dah"></i></div><button type="button" data-action="replay-actual">Play captured character</button></div><div><span class="cw-small">Reference / J at 20 WPM</span><div class="cw-trace" role="img" aria-label="Reference J: dit dah dah dah"><i></i><i class="cw-dah"></i><i class="cw-dah"></i><i class="cw-dah"></i></div><button type="button" data-action="replay-reference">Play reference character</button></div></div>') + '<p class="cw-caption">' + (warm ? 'Capture is a listening aid. Repeat or move on when you are ready.' : 'Element lengths are set by your Vail keyer. Focus on the character and spacing.') + '</p><div class="cw-row" style="margin-top:18px"><button type="button" class="cw-primary" data-action="keep">Keep summary</button><button type="button" data-action="retry">' + (warm ? 'Repeat warm-up' : 'Try this group again') + '</button><button type="button" class="cw-text" data-action="discard">Discard capture</button></div></section><p class="cw-caption">This result does not change your practice minutes or completion.</p>';
+        } else if (state.screen === 'interrupted') {
+          content.innerHTML = '<section class="cw-panel cw-stack"><div class="cw-notice"><h3>Vail adapter disconnected</h3><p>Capture stopped. Your 00:26 take is available to review.</p></div><div><h3>Your practice timer is still ' + (state.running ? 'running' : 'paused') + '</h3><p class="cw-caption">Keep practicing, reconnect your key, or finish whenever you are ready.</p></div><div class="cw-row"><button type="button" class="cw-primary" data-action="without">Continue without capture</button><button type="button" data-action="reconnect">Reconnect</button><button type="button" class="cw-text" data-action="review">Review partial take</button></div></section>';
+        } else if (state.screen === 'finish') {
+          content.innerHTML = '<section class="cw-panel"><h3>Record this practice block</h3><div class="cw-result-meta"><div><span class="cw-small">Practice</span><strong>08:30</strong></div>' + (state.capture ? '<div><span class="cw-small">Captured within this block</span><strong>00:26</strong></div>' : '') + '</div><div class="cw-form"><label>Total practice minutes<input id="cw-minutes" type="number" min="0" step="0.1" value="8.5"></label><label>How did it feel?<select><option>Choose if useful</option>Comfortable</option>Challenging</option>Needs another pass</option></select></label></div><label class="cw-check"><input type="checkbox" id="cw-completed"> I completed the sending requirements</label>' + (state.capture ? '<label class="cw-check"><input type="checkbox" id="cw-include"' + (state.savedSummary ? ' checked' : '') + '> Include the sending summary</label>' : '<p class="cw-caption">No sending capture attached. Your practice counts in full.</p>') + '<label class="cw-small" for="cw-reflection">Reflection (optional)</label><textarea id="cw-reflection" rows="2" placeholder="What would you like to try next time?"></textarea><div class="cw-row" style="margin-top:18px"><button type="button" class="cw-primary" data-action="save">Save practice</button><button type="button" data-action="return">Return to practice</button></div><p class="cw-caption">All deliberate practice belongs in your total, including time without capture.</p></section>';
+        } else if (state.screen === 'ios') {
+          content.innerHTML = '<section class="cw-panel cw-stack"><div class="cw-row cw-between"><h3>Practice on Safari</h3><span class="cw-small">iOS / ordinary practice</span></div><div class="cw-prompt">' + prompt() + '</div><div class="cw-notice"><h3>Sending capture on another device</h3><p>MIDI capture is unavailable in Safari. Use Brave on your computer for Vail capture. Practice and logging work here as usual.</p></div><div class="cw-row"><button type="button" class="cw-primary" data-action="next-phase">Continue practicing</button></div></section>' + original;
+        } else {
+          content.innerHTML = '<section class="cw-panel cw-stack"><div class="cw-row cw-between"><h3>Practice recorded</h3><span class="cw-status">Example saved result</span></div><div><h3><span id="cw-saved-minutes">' + (state.minutes || '8.5') + '</span> minutes / Sending</h3><p class="cw-caption">' + (state.completed ? 'Sending requirements confirmed complete.' : 'Partial practice saved. Continue the assignment another time.') + '</p></div>' + (state.capture && state.savedSummary ? '<details open style="margin-top:0"><summary>Sending summary</summary><p>Vail ' + (state.capture.input === 'midi' ? 'MIDI' : 'keyboard') + ' / adapter keyer<br>00:26 captured within this block.<br>' + (state.capture.phase === 'warmup' ? 'Warm-up: revisit the letter gap between I and S.' : 'Possible mismatch: J decoded as U. Review by ear.') + '<br>Replay remains on this device in this proposed first version.</p></details>' : '') + '<div class="cw-row"><button type="button" data-action="new">Practice another block</button></div></section>';
+        }
+      }
+      const wires = [
+        ['warmup','01 / Warm-up','TIMER RUNNING','Large sending text<br>Optional: record my sending','Independent practice remains the default.'],
+        ['setup','02 / Connect','SAME PRACTICE TIMER','Choose input / test the key<br>Explicit Start capture','No permission prompt until connection is requested.'],
+        ['sending','03 / Send','SAME PRACTICE TIMER','Selected text or free warm-up<br>Capture / stop and review','Feedback after the take; live decode is optional.'],
+        ['review','04 / Review','SAME PRACTICE TIMER','Expected / decoded / replay<br>Keep, retry, or discard','Uncertain decode is shown as a possible mistake.'],
+        ['interrupted','05 / Disconnect','SAME PRACTICE TIMER','Partial take retained<br>Continue without capture','Device failure ends capture, not practice.'],
+        ['finish','06 / Save','EDITABLE PRACTICE MINUTES','Manual completion check-in<br>Optional feedback summary','Captured seconds are part of the total, never extra.']
+      ];
+      find('#cw-wireframes').innerHTML = '<div class="cw-wiregrid">' + wires.map(function (w) { return '<section class="cw-wire"><h3>' + w[1] + '</h3><div class="cw-wiretime">' + w[2] + '</div><div class="cw-wirebox">' + w[3] + '</div><p>' + w[4] + '</p><button type="button" data-screen="' + w[0] + '">Explore this screen</button></section>'; }).join('') + '</div>';
+      async function replay(sampleKind) {
+        const Audio = window.AudioContext || window.webkitAudioContext;
+        if (!Audio) { announce('Audio preview is unavailable in this browser.'); return; }
+        try {
+          const context = new Audio();
+          await context.resume();
+          const samples = {
+            'character-reference': { durations:[60,60,180,60,180,60,180], label:'Playing the sample reference J.' },
+            'character-actual': { durations:[60,60,60,60,180], label:'Playing the sample captured U.' },
+            'warmup-reference': { durations:[60,60,60,180,60,60,60,60,60], label:'Playing reference I S with a 180 millisecond letter gap.' },
+            'warmup-actual': { durations:[60,60,60,120,60,60,60,60,60], label:'Playing sample captured I S with a 120 millisecond letter gap.' }
+          };
+          const sample = samples[sampleKind];
+          const durations = sample.durations;
+          let start = context.currentTime + .06;
+          durations.forEach(function (duration, index) {
+            if (index % 2 === 0) {
+              const tone = context.createOscillator(); const gain = context.createGain();
+              tone.frequency.value = 600; tone.connect(gain); gain.connect(context.destination);
+              const end = start + duration / 1000;
+              gain.gain.setValueAtTime(0,start); gain.gain.linearRampToValueAtTime(.08,start+.004); gain.gain.setValueAtTime(.08,end-.004); gain.gain.linearRampToValueAtTime(0,end);
+              tone.start(start); tone.stop(end);
+            }
+            start += duration / 1000;
+          });
+          announce(sample.label);
+          setTimeout(function () { context.close(); }, Math.ceil((start-context.currentTime)*1000)+150);
+        } catch (_) { announce('Audio preview is unavailable here; the timing marks show the same sample.'); }
+      }
+      root.addEventListener('change', function (event) {
+        if (event.target.id === 'cw-design-view') { state.view = event.target.value; render(); }
+        if (event.target.id === 'cw-design-screen') selectDemoScreen(event.target.value);
+        if (event.target.id === 'cw-input') { state.input = event.target.value; state.tested=false; render(); }
+        if (event.target.id === 'cw-live') { state.liveDecode=event.target.checked; render(); }
+      });
+      find('#cw-pause').addEventListener('click', function () { state.running=!state.running; render(); announce(state.running ? 'Practice timer resumed (illustrative time).' : 'Practice timer paused.'); });
+      root.addEventListener('click', function (event) {
+        const screenButton=event.target.closest('[data-screen]');
+        if (screenButton) { state.view='mockup'; selectDemoScreen(screenButton.dataset.screen); return; }
+        const button=event.target.closest('[data-action]'); if (!button) return;
+        const action=button.dataset.action;
+        if (action === 'setup') navigate('setup');
+        if (action === 'test') { state.tested=true; render(); announce('Sample connection verified. This mockup has not requested hardware access.'); }
+        if (action === 'capture') { sampleTake(); navigate('sending'); }
+        if (action === 'review') { if (state.capture) state.phase=state.capture.phase; navigate('review'); }
+        if (action === 'interrupt') { state.interrupted=true; navigate('interrupted'); }
+        if (action === 'reconnect') { state.tested=false; navigate('setup'); }
+        if (action === 'without') { navigate('warmup'); announce('Capture is off. Your practice timer keeps its existing state.'); }
+        if (action === 'next-phase') { state.phase=state.phase==='warmup'?'sending':'warmup'; render(); }
+        if (action === 'retry') { sampleTake(); navigate('sending'); }
+        if (action === 'keep') { state.savedSummary=!!state.capture; navigate('warmup'); announce('Summary kept with this block. Save practice when you finish.'); }
+        if (action === 'discard') { state.capture=null; state.savedSummary=false; navigate('warmup'); announce('Capture discarded. Practice time preserved.'); }
+        if (action === 'finish') { state.running=false; navigate('finish'); }
+        if (action === 'return') { state.running=false; navigate('warmup'); }
+        if (action === 'save') { const minutes=find('#cw-minutes'); if (!minutes.reportValidity() || !minutes.value) return; state.minutes=minutes.value; state.completed=find('#cw-completed').checked; state.savedSummary=!!state.capture && !!find('#cw-include')?.checked; navigate('saved'); announce('Demo only: nothing has been saved to your account.'); }
+        if (action === 'new') { state.running=true; state.phase='warmup'; state.tested=false; state.capture=null; state.savedSummary=false; state.minutes=undefined; state.completed=false; navigate('warmup'); }
+        if (action === 'save-later') { state.running=false; render(); announce('Block would be saved paused on this device. No account data changed in this demo.'); }
+        if (action === 'elsewhere') { announce('The existing log form remains available for minutes, completion, and notes from practice elsewhere.'); }
+        if (action === 'replay-actual') replay('character-actual');
+        if (action === 'replay-reference') replay('character-reference');
+        if (action === 'replay-warmup-actual') replay('warmup-actual');
+        if (action === 'replay-warmup-reference') replay('warmup-reference');
+      });
+      render();
+      if (globalThis.Tweak) {
+        const tweak = new Tweak({ container:root, onChange:render });
+        tweak.addToggle(state,'liveDecode',{label:'Show decode while sending'});
+        tweak.addToggle(state,'compactPrompt',{label:'Compact sending text'});
+      }
+    })();
+  </script>
+</div>

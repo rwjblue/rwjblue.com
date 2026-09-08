@@ -12,6 +12,10 @@ import { restartRunnerBlock, runnerAssignmentProgress, runnerMetadata } from "./
 import { practiceHistoryForDate, renderPracticeHistory } from "./history";
 import runnerVersion from "../../../public/vendor/web-morse-runner/UPSTREAM.json";
 import { TrainingStorage } from "./storage";
+import { appendSendingTake, restoreSendingDraft, restoreSendingTakes, sendingSummary } from "./sending-session";
+import type { SendingStopReason } from "./sending-session";
+import { restoreSavedSendingRecordings, saveSendingRecordings, removeSavedSendingRecording } from "./sending-recordings";
+import type { SendingPanel } from "./sending-panel";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
 import type {
   Difficulty,
@@ -99,6 +103,9 @@ export async function initTraining() {
   const audio = $<HTMLAudioElement>("training-audio");
   const storage = new TrainingStorage();
   let state: TrainingDeviceState = await storage.load();
+  if (state.active?.sending) state.active.sending = restoreSendingDraft(state.active.sending);
+  if (state.active?.sendingTakes) state.active.sendingTakes = restoreSendingTakes(state.active.sendingTakes);
+  if (state.sendingRecordings) state.sendingRecordings = restoreSavedSendingRecordings(state.sendingRecordings);
   let view: TrainingView = "today";
   let running = false;
   let recalling = false;
@@ -120,6 +127,12 @@ export async function initTraining() {
   let importedFilename: string | undefined;
   let lastSaved = 0;
   let disposed = false;
+  let sendingPanel: SendingPanel | undefined;
+  let sendingBlock: string | undefined;
+  let sendingGeneration = 0;
+  let lastSendingCheckpoint = 0;
+  let closeSendingReplay: (() => void) | undefined;
+  let sendingReplayGeneration = 0;
   const snapshot = () => state.snapshot!;
   const audioMatchesActive = () => state.active?.task.kind === "audio" &&
     !!state.active.resource?.url && audio.currentSrc === safeUrl(state.active.resource.url);
@@ -407,6 +420,7 @@ export async function initTraining() {
     if (disposed) return;
     const leavingPractice = view === "focus" && next !== "focus" && !!state.active;
     if (leavingPractice) {
+      suspendSending("navigation");
       // Settle the last observed audio/timer interval before hiding practice.
       // A queued end-of-pass event must not restart audio after navigation.
       runnerFinishPending = false;
@@ -418,6 +432,7 @@ export async function initTraining() {
       void persist();
     }
     root.querySelectorAll<HTMLDialogElement>("dialog[open]").forEach((dialog) => dialog.close());
+    stopSendingReplay();
     applyView(next);
     // Current-block cards must reflect the latest engine time and terminal state.
     if (state.snapshot) render();
@@ -618,6 +633,7 @@ export async function initTraining() {
       course: snapshot().course,
       materials: snapshot().materials,
       pendingIds: new Set((state.pending.attempts ?? []).map((attempt) => attempt.id)),
+      sendingRecordingAttemptIds: new Set((state.sendingRecordings ?? []).map(recording => recording.attemptId)),
     };
     const todayHistory = practiceHistoryForDate(snapshot().attempts, current.date, snapshot().course.timezone);
     const savedMinutes = todayHistory.reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0) / 60;
@@ -631,6 +647,10 @@ export async function initTraining() {
       const container = $(id);
       const expandedIds = new Set([...container.querySelectorAll<HTMLDetailsElement>("details[data-history-id][open]")].map((detail) => detail.dataset.historyId!));
       container.innerHTML = renderPracticeHistory(attempts, { ...historyOptions, expandedIds, includeDate });
+      for (const entry of container.querySelectorAll<HTMLElement>("[data-history-id]")) {
+        const recordings = state.sendingRecordings?.filter(recording => recording.attemptId === entry.dataset.historyId) ?? [];
+        if (recordings.length) entry.insertAdjacentHTML("beforeend", `<div class="training-actions">${recordings.map((recording, index) => `<button type="button" data-sending-recording="${escapeHtml(recording.take.id)}" data-sending-attempt="${escapeHtml(recording.attemptId)}">Replay sending${recordings.length > 1 ? ` ${index + 1}` : ""} (this device)</button>`).join("")}</div>`);
+      }
     }
     $("training-material-list").innerHTML =
       currentMaterials()
@@ -651,6 +671,10 @@ export async function initTraining() {
 
   function renderActive() {
     const active = state.active;
+    if (sendingBlock && (sendingBlock !== active?.id || active?.task.kind !== "sending")) unmountSending();
+    $("training-sending-actions").hidden = active?.task.kind !== "sending";
+    $("training-sending-open").hidden = active?.task.kind !== "sending" || !!sendingPanel;
+    if (active?.task.kind !== "sending") $("training-sending-panel").hidden = true;
     $("training-focus-empty").hidden = !!active;
     $("training-focus-content").hidden = !active;
     if (!active) {
@@ -770,6 +794,88 @@ export async function initTraining() {
     runnerFrame?.remove();
     runnerFrame = undefined;
     runnerFinishPending = false;
+  }
+  function currentSendingTakes(active = state.active) {
+    return active?.task.kind === "sending" ? appendSendingTake(active.sendingTakes ?? [], active.sending?.take) : [];
+  }
+  function unmountSending() {
+    sendingGeneration++;
+    sendingPanel?.dispose();
+    sendingPanel = undefined;
+    sendingBlock = undefined;
+    $("training-sending-panel").hidden = true;
+    $("training-sending-panel").replaceChildren();
+  }
+  function suspendSending(reason: SendingStopReason) {
+    sendingGeneration++;
+    sendingPanel?.suspend(reason);
+    if (!sendingPanel) $("training-sending-panel").hidden = true;
+  }
+  function stopSendingReplay() {
+    sendingReplayGeneration++;
+    closeSendingReplay?.();
+    closeSendingReplay = undefined;
+  }
+  async function openSending() {
+    const block = state.active;
+    if (disposed || view !== "focus" || block?.task.kind !== "sending") return;
+    const container = $("training-sending-panel");
+    const button = $<HTMLButtonElement>("training-sending-open");
+    if (sendingPanel && sendingBlock === block.id) { container.hidden = false; return; }
+    const generation = ++sendingGeneration;
+    button.disabled = true;
+    container.hidden = false;
+    container.textContent = "Loading optional sending capture...";
+    try {
+      const module = await import("./sending-panel");
+      if (disposed || generation !== sendingGeneration || state.active?.id !== block.id || view !== "focus") return;
+      sendingBlock = block.id;
+      sendingPanel = module.createSendingPanel({
+        container, draft: block.sending, takes: block.sendingTakes, initialWpm: block.task.speedWpm ?? 20,
+        selectedText() {
+          const selection = window.getSelection();
+          const text = $("training-sending-text");
+          return selection?.anchorNode && selection.focusNode && text.contains(selection.anchorNode) && text.contains(selection.focusNode) ? selection.toString() : "";
+        },
+        onChange(draft, takes, checkpoint) {
+          if (disposed || state.active?.id !== block.id) return;
+          state.active.sending = draft;
+          state.active.sendingTakes = takes;
+          if (checkpoint || Date.now() - lastSendingCheckpoint > 1000) { lastSendingCheckpoint = Date.now(); void persist(); }
+        },
+        onClose() {
+          unmountSending();
+          button.hidden = false;
+          button.focus({ preventScroll: true });
+        },
+      });
+      button.hidden = true;
+    } catch {
+      if (generation === sendingGeneration && !disposed) container.textContent = "Sending capture could not load. Your text, timer, and manual practice are still available. Try Record my sending again when ready.";
+    } finally { button.disabled = false; }
+  }
+  $("training-sending-open").addEventListener("click", () => { void openSending(); });
+  const sendingHistoryDialog = $<HTMLDialogElement>("training-sending-history-dialog");
+  sendingHistoryDialog.addEventListener("close", stopSendingReplay);
+  async function openSendingReplay(attemptId: string, takeId: string) {
+    const recording = state.sendingRecordings?.find(item => item.attemptId === attemptId && item.take.id === takeId);
+    if (!recording || disposed) return;
+    suspendSending("paused");
+    stopSendingReplay();
+    const generation = sendingReplayGeneration;
+    const container = $("training-sending-history-content");
+    container.textContent = "Loading recording...";
+    sendingHistoryDialog.showModal();
+    try {
+      const module = await import("./sending-panel");
+      if (disposed || generation !== sendingReplayGeneration || !sendingHistoryDialog.open) return;
+      closeSendingReplay = module.mountSendingReplay(container, recording.take, () => {
+        state.sendingRecordings = removeSavedSendingRecording(state.sendingRecordings, attemptId, takeId);
+        sendingHistoryDialog.close();
+        stopSendingReplay();
+        void persist(); render();
+      });
+    } catch { if (generation === sendingReplayGeneration) container.textContent = "Replay could not load. The saved recording is still on this device. Close this view and try again."; }
   }
   function restartRunner() {
     if (!state.active) return;
@@ -933,6 +1039,7 @@ export async function initTraining() {
     if (delta.recallSeconds)
       state.active.recallSeconds = (state.active.recallSeconds ?? 0) + delta.recallSeconds;
     if (delta.interrupted) {
+      suspendSending("paused");
       running = false;
       recalling = false;
       if (state.active.task.kind === "audio")
@@ -941,6 +1048,7 @@ export async function initTraining() {
     }
   }
   function stopTimer(audioPlaying = !audio.paused) {
+    suspendSending("paused");
     const wasRecalling = recalling;
     settleTimer(audioPlaying);
     running = false;
@@ -1125,7 +1233,18 @@ export async function initTraining() {
     $("training-finish-recording").hidden = !recording;
     $("training-finish-recording").textContent = recording ? `Saved automatically with this entry: ${recording}` : "";
     const marks = !active.audioHistory && active.bookmarks.length ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}` : "";
-    $<HTMLTextAreaElement>("training-finish-note").maxLength = Math.max(0, 4000 - recording.length - marks.length - 50);
+    const captured = currentSendingTakes(active);
+    const sendingNote = sendingSummary(captured);
+    $("training-finish-sending").hidden = !captured.length;
+    $("training-finish-sending-info").textContent = `${captured.length} captured take${captured.length === 1 ? "" : "s"}, ${time(captured.reduce((total, take) => total + take.elapsedMs / 1000, 0))} within this block. Capture does not add to your minutes.`;
+    $("training-finish-sending-text").textContent = sendingNote;
+    const summaryCheckbox = $<HTMLInputElement>("training-finish-sending-summary");
+    const updateSendingSummary = () => {
+      $("training-finish-sending-text").hidden = !sendingNote || !summaryCheckbox.checked;
+      $<HTMLTextAreaElement>("training-finish-note").maxLength = Math.max(0, 4000 - recording.length - marks.length - (summaryCheckbox.checked ? sendingNote.length : 0) - 50);
+    };
+    summaryCheckbox.onchange = updateSendingSummary;
+    updateSendingSummary();
     $("training-finish-recall-label").hidden = active.task.kind !== "audio";
     $<HTMLInputElement>("training-finish-recall").value = String(Math.round((active.recallSeconds ?? 0) / 6) / 10);
     $("training-finish-scratchpad").hidden = !active.scratchpad;
@@ -1376,6 +1495,8 @@ export async function initTraining() {
   }
   $("training-manual-task").addEventListener("change", updateManualActivity);
   function manual(taskId?: string) {
+    suspendSending("paused");
+    stopSendingReplay();
     $<HTMLFormElement>("training-manual-form").reset();
     $<HTMLSelectElement>("training-manual-task").innerHTML =
       `<optgroup label="Other practice">${OTHER_PRACTICE_ACTIVITIES.map((activity) => `<option value="${activity.id}">${escapeHtml(activity.title)}</option>`).join("")}</optgroup>` +
@@ -1453,7 +1574,7 @@ export async function initTraining() {
 
   root.addEventListener("click", (event) => {
     const button = (event.target as HTMLElement).closest<HTMLElement>(
-      "[data-action], [data-view], [data-start], [data-review], [data-manual], [data-miss], [data-carry], [data-uncarry], [data-material], [data-revise-material], [data-practice-material], [data-close], [data-seek]",
+      "[data-action], [data-view], [data-start], [data-review], [data-manual], [data-miss], [data-carry], [data-uncarry], [data-material], [data-revise-material], [data-practice-material], [data-close], [data-seek], [data-sending-recording]",
     );
     if (!button) return;
     if (button.hasAttribute("data-close")) {
@@ -1461,6 +1582,10 @@ export async function initTraining() {
       return;
     }
     if (!state.snapshot) return;
+    if (button.dataset.sendingRecording && button.dataset.sendingAttempt) {
+      void openSendingReplay(button.dataset.sendingAttempt, button.dataset.sendingRecording);
+      return;
+    }
     if (button.dataset.review) {
       const current = plan();
       const item = [current.runnerReview, current.lcwoReview, ...current.extras].find((item) => item?.task.id === button.dataset.review);
@@ -1730,6 +1855,8 @@ export async function initTraining() {
         )
           break;
         pause();
+        unmountSending();
+        stopSendingReplay();
         disposed = true;
         void storage.clear().then(() => {
           state = { pending: {}, reading: {}, dismissed: [] };
@@ -1854,6 +1981,7 @@ export async function initTraining() {
       const endedAt = new Date();
       const note = [
         active.runner ? runnerMetadata(active) : audioSessionNote(active),
+        data.get("sendingSummary") === "on" ? sendingSummary(currentSendingTakes(active)) : "",
         String(data.get("note") || ""),
         !active.audioHistory && active.bookmarks.length
           ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}`
@@ -1892,6 +2020,8 @@ export async function initTraining() {
         context: active.context,
         ...(active.review ? { review: true } : {}),
       };
+      if (data.get("sendingRecordings") === "on") state.sendingRecordings = saveSendingRecordings(state.sendingRecordings, active.id, currentSendingTakes(active));
+      unmountSending();
       state.active = undefined;
       audio.pause();
       running = false;
@@ -2059,6 +2189,7 @@ export async function initTraining() {
     });
   }
   document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { suspendSending("hidden"); stopSendingReplay(); }
     if (document.hidden && state.active?.runner?.status === "running") stopRunner();
     if (document.hidden && running) {
       stopTimer();
@@ -2069,6 +2200,7 @@ export async function initTraining() {
     if (document.hidden) void persist();
   });
   window.addEventListener("pagehide", () => {
+    suspendSending("navigation"); stopSendingReplay();
     trackAudioProgress();
     finishAudioPass(false);
     stopRunner();

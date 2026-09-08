@@ -169,9 +169,53 @@ Save practice sync the attempt.
 This uses the existing immutable attempt API and requires no database migration.
 Refresh official variant metadata with `mise run cw-training:update-audio-variants`.
 
-Instant-recognition trainers, a physical key/radio, and online
-class meetings remain external resources. The page guides and logs those
-exercises; it does not replace them or score live sending.
+Instant-recognition trainers, a physical key/radio, and online class meetings
+remain external resources. Sending Focus also offers **Record my sending
+(optional)** for warm-up and sending practice, using the pinned Morse Pro
+decoder and timing player. The engine loads only after opening capture or a
+saved replay. Ordinary practice never requests device permission or requires a
+recording, decoded result, or connected adapter. Capture duration does not add
+practice minutes or control completion; Finish and Done elsewhere retain their
+editable minutes and completion check-in.
+The offline field kit excludes the optional sending dependency graph from its
+automatic download. Those assets use the existing bounded runtime cache after
+explicit use, so capture may need a connection on first use or after cache
+eviction. A missing capture chunk leaves the normal practice tools available.
+
+Capture supports already-keyed Vail output: MIDI channel 1, note 0, or keyboard
+Control signals while the capture area has focus. The adapter provides the keyer
+and live sidetone. Raw dit/dah paddle passthrough is detected in MIDI mode and
+stopped with an explanation; a browser keyer is not included. MIDI permission is
+requested explicitly, followed by selection and a press/release test. Only the
+selected matching input/output pair is opened, temporarily enabling MIDI output
+and restoring keyboard output on disconnect. Speed, tone, and persistent keyer
+settings are not changed. The decode/reference WPM must match the keyer's speed.
+Brave desktop is the intended MIDI path. Safari on iOS has no Web MIDI support;
+keyboard mode is offered with an explicit compatibility check. Physical Vail
+behavior on these browsers still needs the hardware checks below.
+
+Free sending is the default for warm-up. Compare with selected text accepts a
+highlighted group from the original sending text or pasted text; instructions
+are never inferred as a target. Record, stop, and review the decoder's reading
+alongside the intended text. Text comparison normalizes case and spacing and
+flags a possible mismatch; it is not an accuracy grade. Replay uses the received
+mark/gap timing, while Play reference uses the selected WPM. Optional live text
+is off by default. Keyer-generated element timing is not evidence of hand timing.
+
+Takes stop safely on lost keyboard focus, disconnection, page hiding, navigation,
+practice pause, or reload; incomplete marks are discarded. A take is bounded to
+ten minutes and 12,000 timing intervals. Stopping capture alone does not pause
+ordinary practice. Capture never reconnects or starts automatically. Keep a take
+to record another, discard it, or continue without capture at any point.
+
+Finish lets the user include a bounded text summary in the existing synced
+history note and separately keep replay on this device. The latest ten saved
+recordings are retained device-wide, in addition to up to ten takes in the
+active block. Raw timing traces and unfinished drafts stay in IndexedDB; they
+are never sent through the training API. Retained recordings are available from
+Today and Week history, can be removed individually, and are included in device
+export and clear. A replay does not start a practice timer. No database or API
+migration is required. See [Morse Pro provenance and updates](morse-pro.md).
 
 Morse Runner tasks link to the official
 [CWops Community Edition guide](https://cwops.org/wp-content/uploads/2025/01/Morse-Runner-CE.pdf)
@@ -396,3 +440,19 @@ and separate review, partial-run, and assignment-completion credit.
 
 The owner first-use verification and real-phone playback checks are tracked
 in [issue #14](https://github.com/rwjblue/rwjblue.com/issues/14).
+
+For optional sending, use a synthetic local course for browser checks; do not
+copy private curriculum into public fixtures. Verify ordinary sending with
+capture unopened, denied MIDI permission, keyboard press/release testing,
+known Morse capture and replay, interrupted held marks, save/reload, summary
+opt-out, and retained recordings after saving. Confirm that corrected minutes
+and completion work with no captured events and that sync payloads never contain
+raw timings. Check the panel and finish dialog at phone and desktop widths.
+
+Before relying on a physical adapter, check Vail in Brave desktop: select the
+correct MIDI port, receive channel-1 note-0 press/release pairs, listen for local
+sidetone without a duplicate browser tone, unplug during a mark, and reconnect
+explicitly. Verify other MIDI devices and persistent keyer settings remain
+unchanged. Check keyboard mode separately on the actual iPhone/iPad with Safari
+and its USB connection; browser viewport emulation cannot verify USB HID input.
+Unsupported or denied input must still allow normal practice and manual logging.

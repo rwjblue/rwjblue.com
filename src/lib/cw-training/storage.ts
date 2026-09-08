@@ -6,6 +6,7 @@ import type {
 } from "./types";
 import type { PracticeMode } from "./plan";
 import type { RunnerRunState } from "./runner-bridge";
+import type { SendingDraft, SendingTake } from "./sending-session";
 
 export interface AudioRecordingUsage {
   resource: TrainingResource;
@@ -40,6 +41,9 @@ export interface ActiveBlock {
   /** One uninterrupted embedded contest; elapsed time comes only from its engine. */
   runner?: RunnerRunState;
   runnerRevision?: string;
+  /** Optional device-local sending capture; never a source of practice credit. */
+  sending?: SendingDraft;
+  sendingTakes?: SendingTake[];
 }
 
 export interface TrainingDeviceState {
@@ -52,6 +56,8 @@ export interface TrainingDeviceState {
   /** Device-local choices; each active block keeps its own recording snapshot. */
   audioSpeedPreference?: "assigned" | "next";
   audioSpeedOverrides?: Record<string, number>;
+  /** Last ten saved takes on this device; only text summaries sync to the account. */
+  sendingRecordings?: { attemptId: string; take: SendingTake }[];
 }
 
 const databaseName = "n1rwj-cw-training";

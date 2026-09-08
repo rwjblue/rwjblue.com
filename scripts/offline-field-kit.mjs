@@ -35,6 +35,11 @@ const isFieldKitDependency = (pathname) =>
   pathname.startsWith("/assets/") ||
   /\.(?:css|js|mjs|svg|png|webp|woff2?|webmanifest)$/.test(pathname);
 
+// Sending capture is explicitly opt-in. Do not prefetch its entry or follow
+// its decoder/audio graph while installing the ordinary offline field kit.
+const isOptionalSendingEntry = (pathname) =>
+  /^\/_astro\/sending-panel\.[^/]+\.m?js$/.test(pathname);
+
 export function collectFieldKitDependencies(distDirectory) {
   const paths = new Set([...FIELD_KIT_ROUTES, ...STATIC_DEPENDENCIES]);
 
@@ -45,7 +50,7 @@ export function collectFieldKitDependencies(distDirectory) {
         const value = attribute[1];
         if (!value.startsWith("/")) continue;
         const pathname = new URL(value, "https://rwjblue.com").pathname;
-        if (isFieldKitDependency(pathname)) paths.add(pathname);
+        if (isFieldKitDependency(pathname) && !isOptionalSendingEntry(pathname)) paths.add(pathname);
       }
     }
   }
@@ -61,6 +66,7 @@ export function collectFieldKitDependencies(distDirectory) {
       if (!dependency.n || !/^(?:\.\.?\/|\/)/.test(dependency.n)) continue;
       const url = new URL(dependency.n, `https://field-kit.invalid${pathname}`);
       if (url.origin !== "https://field-kit.invalid") continue;
+      if (isOptionalSendingEntry(url.pathname)) continue;
       if (url.pathname.startsWith("/_astro/") || url.pathname.startsWith("/assets/")) {
         paths.add(url.pathname);
       }

@@ -285,6 +285,10 @@ import "../../styles/cw-training.css";
               /></label
             ><pre id="training-sending-text" tabindex="0"></pre>
           </div>
+          <div class="training-actions" id="training-sending-actions" hidden>
+            <button type="button" id="training-sending-open" hidden>Record my sending (optional)</button>
+          </div>
+          <section id="training-sending-panel" class="training-section training-sending" aria-label="Optional sending capture" hidden></section>
           <div class="training-actions">
             <button class="primary" type="button" data-action="finish"
               >Finish block</button
@@ -429,7 +433,15 @@ import "../../styles/cw-training.css";
             name="complete"
             type="checkbox"
           /> <span id="training-finish-complete-label">I completed this exercise's requirements</span></label
-        ><p id="training-finish-help" class="training-small"></p><p id="training-finish-recording" class="training-small" hidden></p><label
+        ><p id="training-finish-help" class="training-small"></p><p id="training-finish-recording" class="training-small" hidden></p>
+        <div id="training-finish-sending" hidden>
+          <p id="training-finish-sending-info" class="training-small"></p>
+          <label class="training-check"><input id="training-finish-sending-summary" name="sendingSummary" type="checkbox" checked /> Include sending summary in history</label>
+          <pre id="training-finish-sending-text" class="training-small training-sending-transcript"></pre>
+          <label class="training-check"><input name="sendingRecordings" type="checkbox" checked /> Keep replay on this device</label>
+          <p class="training-small">The ten most recent saved takes are kept here. Recordings do not sync to other devices and do not add practice minutes.</p>
+        </div>
+        <label
           >How did it feel? (optional)<select name="difficulty"
             ><option value="">No rating</option><option value="hard"
               >Hard</option
@@ -451,6 +463,11 @@ import "../../styles/cw-training.css";
           >
         </div>
       </form>
+    </dialog>
+    <dialog id="training-sending-history-dialog">
+      <h2>Sending recording</h2>
+      <div id="training-sending-history-content" class="training-sending"></div>
+      <div class="training-actions"><button type="button" data-close>Close</button></div>
     </dialog>
     <dialog id="training-manual-dialog">
       <form id="training-manual-form">
