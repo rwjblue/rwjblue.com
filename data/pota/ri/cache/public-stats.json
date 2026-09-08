@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T22:54:27.581Z",
+  "generatedAt": "2026-09-08T00:54:41.110Z",
   "parks": [
     {
       "reference": "US-0513",
@@ -39,9 +39,9 @@
     },
     {
       "reference": "US-10541",
-      "attempts": 120,
-      "activations": 119,
-      "qsos": 4797
+      "attempts": 121,
+      "activations": 120,
+      "qsos": 4831
     },
     {
       "reference": "US-10542",
@@ -63,9 +63,9 @@
     },
     {
       "reference": "US-10545",
-      "attempts": 294,
-      "activations": 293,
-      "qsos": 14044
+      "attempts": 296,
+      "activations": 295,
+      "qsos": 14118
     },
     {
       "reference": "US-10546",
@@ -111,15 +111,15 @@
     },
     {
       "reference": "US-2872",
-      "attempts": 347,
-      "activations": 341,
-      "qsos": 13264
+      "attempts": 348,
+      "activations": 342,
+      "qsos": 13291
     },
     {
       "reference": "US-2873",
-      "attempts": 114,
-      "activations": 111,
-      "qsos": 4869
+      "attempts": 115,
+      "activations": 112,
+      "qsos": 4889
     },
     {
       "reference": "US-2874",
@@ -135,9 +135,9 @@
     },
     {
       "reference": "US-2876",
-      "attempts": 579,
+      "attempts": 580,
       "activations": 543,
-      "qsos": 23668
+      "qsos": 23670
     },
     {
       "reference": "US-2877",
@@ -171,9 +171,9 @@
     },
     {
       "reference": "US-4582",
-      "attempts": 2760,
-      "activations": 2707,
-      "qsos": 113777
+      "attempts": 2761,
+      "activations": 2708,
+      "qsos": 113788
     },
     {
       "reference": "US-5482",
@@ -195,15 +195,15 @@
     },
     {
       "reference": "US-6979",
-      "attempts": 443,
-      "activations": 438,
-      "qsos": 15177
+      "attempts": 444,
+      "activations": 439,
+      "qsos": 15187
     },
     {
       "reference": "US-6980",
-      "attempts": 390,
-      "activations": 387,
-      "qsos": 13119
+      "attempts": 392,
+      "activations": 389,
+      "qsos": 13141
     },
     {
       "reference": "US-6981",
@@ -243,15 +243,15 @@
     },
     {
       "reference": "US-6987",
-      "attempts": 92,
-      "activations": 86,
-      "qsos": 3427
+      "attempts": 93,
+      "activations": 87,
+      "qsos": 3447
     },
     {
       "reference": "US-6988",
-      "attempts": 50,
-      "activations": 45,
-      "qsos": 1400
+      "attempts": 51,
+      "activations": 46,
+      "qsos": 1414
     },
     {
       "reference": "US-6989",
@@ -267,9 +267,9 @@
     },
     {
       "reference": "US-6991",
-      "attempts": 59,
-      "activations": 54,
-      "qsos": 2365
+      "attempts": 60,
+      "activations": 55,
+      "qsos": 2377
     },
     {
       "reference": "US-6992",
@@ -303,9 +303,9 @@
     },
     {
       "reference": "US-7716",
-      "attempts": 76,
-      "activations": 75,
-      "qsos": 3540
+      "attempts": 77,
+      "activations": 76,
+      "qsos": 3555
     },
     {
       "reference": "US-7717",

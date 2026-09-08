@@ -12,24 +12,34 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 144,
-      "parks": 94,
-      "qsos": 3370
+      "activations": 145,
+      "parks": 95,
+      "qsos": 3403
     },
     "attempts": {
-      "activations": 157,
-      "parks": 94,
-      "qsos": 3423
+      "activations": 158,
+      "parks": 95,
+      "qsos": 3456
     },
     "hunter": {
-      "parks": 571,
-      "qsos": 934
+      "parks": 572,
+      "qsos": 935
     },
     "awards": 28,
     "endorsements": 61
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-09-07",
+        "reference": "US-10545",
+        "park": "Hillsdale Preserve Management Area",
+        "location": "US-RI",
+        "cw": 33,
+        "data": 0,
+        "phone": 0,
+        "total": 33
+      },
       {
         "date": "2026-09-06",
         "reference": "US-2872",
@@ -142,16 +152,6 @@
       },
       {
         "date": "2026-08-14",
-        "reference": "US-2881",
-        "park": "World War II Veterans Memorial State Park",
-        "location": "US-RI",
-        "cw": 11,
-        "data": 0,
-        "phone": 0,
-        "total": 11
-      },
-      {
-        "date": "2026-08-14",
         "reference": "US-6985",
         "park": "Round Top Wildlife Management Area",
         "location": "US-RI",
@@ -159,6 +159,16 @@
         "data": 0,
         "phone": 0,
         "total": 7
+      },
+      {
+        "date": "2026-08-14",
+        "reference": "US-2881",
+        "park": "World War II Veterans Memorial State Park",
+        "location": "US-RI",
+        "cw": 11,
+        "data": 0,
+        "phone": 0,
+        "total": 11
       },
       {
         "date": "2026-08-09",
@@ -269,19 +279,27 @@
         "data": 0,
         "phone": 0,
         "total": 12
-      },
-      {
-        "date": "2026-07-07",
-        "reference": "US-1884",
-        "park": "John D. MacArthur Beach State Park",
-        "location": "US-FL",
-        "cw": 34,
-        "data": 0,
-        "phone": 0,
-        "total": 34
       }
     ],
     "hunter_qsos": [
+      {
+        "date": "2026-09-07T22:16:19",
+        "callsign": "KF0U",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6517",
+        "park": "Diana Bend State Conservation Area",
+        "location": "US-MO"
+      },
+      {
+        "date": "2026-09-06T19:34:25",
+        "callsign": "WB9KFA",
+        "band": "20M",
+        "mode": "PHONE",
+        "reference": "US-6487",
+        "park": "Apple Creek State Conservation Area",
+        "location": "US-MO"
+      },
       {
         "date": "2026-08-28T19:55:00",
         "callsign": "KE0E",
@@ -488,24 +506,6 @@
         "reference": "US-4451",
         "park": "Tuskegee National Forest",
         "location": "US-AL"
-      },
-      {
-        "date": "2026-08-16T20:28:49",
-        "callsign": "W2EQ",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-11992",
-        "park": "Whiting State Conservation Area",
-        "location": "US-NJ"
-      },
-      {
-        "date": "2026-08-16T20:28:49",
-        "callsign": "W2EQ",
-        "band": "40M",
-        "mode": "CW",
-        "reference": "US-6609",
-        "park": "Pinelands Preserve National Conservation Area",
-        "location": "US-NJ"
       }
     ]
   },

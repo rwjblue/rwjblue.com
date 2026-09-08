@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-06T22:54:28.516Z",
+  "generatedAt": "2026-09-08T00:54:42.036Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
     "KB9SMK"
   ],
   "summary": {
-    "completed": 55,
-    "remaining": 6,
+    "completed": 56,
+    "remaining": 5,
     "total": 61,
-    "percentComplete": 90
+    "percentComplete": 92
   },
   "references": [
     {
@@ -60,32 +60,9 @@
       "activationCount": 0,
       "notes": [],
       "publicStats": {
-        "attempts": 120,
-        "activations": 119,
-        "qsos": 4797
-      }
-    },
-    {
-      "reference": "US-10545",
-      "name": "Hillsdale Preserve Management Area",
-      "latitude": 41.522,
-      "longitude": -71.6411,
-      "grid": "FN41em",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Washington County"
-      ],
-      "status": "remaining",
-      "href": "/radio/pota/US-10545/",
-      "potaUrl": "https://pota.app/#/park/US-10545",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 294,
-        "activations": 293,
-        "qsos": 14044
+        "attempts": 121,
+        "activations": 120,
+        "qsos": 4831
       }
     },
     {
@@ -106,9 +83,9 @@
       "activationCount": 0,
       "notes": [],
       "publicStats": {
-        "attempts": 390,
-        "activations": 387,
-        "qsos": 13119
+        "attempts": 392,
+        "activations": 389,
+        "qsos": 13141
       }
     },
     {
@@ -152,9 +129,56 @@
       "activationCount": 0,
       "notes": [],
       "publicStats": {
-        "attempts": 50,
-        "activations": 45,
-        "qsos": 1400
+        "attempts": 51,
+        "activations": 46,
+        "qsos": 1414
+      }
+    },
+    {
+      "reference": "US-10545",
+      "name": "Hillsdale Preserve Management Area",
+      "latitude": 41.522,
+      "longitude": -71.6411,
+      "grid": "FN41em",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-10545/",
+      "potaUrl": "https://pota.app/#/park/US-10545",
+      "firstActivation": {
+        "reference": "US-10545",
+        "park": "Hillsdale Preserve Management Area",
+        "date": "2026-09-07",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 33,
+          "cw": 33,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-10545",
+        "park": "Hillsdale Preserve Management Area",
+        "date": "2026-09-07",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 33,
+          "cw": 33,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [],
+      "publicStats": {
+        "attempts": 296,
+        "activations": 295,
+        "qsos": 14118
       }
     },
     {
@@ -199,9 +223,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 347,
-        "activations": 341,
-        "qsos": 13264
+        "attempts": 348,
+        "activations": 342,
+        "qsos": 13291
       }
     },
     {
@@ -394,9 +418,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 76,
-        "activations": 75,
-        "qsos": 3540
+        "attempts": 77,
+        "activations": 76,
+        "qsos": 3555
       }
     },
     {
@@ -682,9 +706,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 59,
-        "activations": 54,
-        "qsos": 2365
+        "attempts": 60,
+        "activations": 55,
+        "qsos": 2377
       }
     },
     {
@@ -1674,9 +1698,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 114,
-        "activations": 111,
-        "qsos": 4869
+        "attempts": 115,
+        "activations": 112,
+        "qsos": 4889
       }
     },
     {
@@ -1862,9 +1886,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 579,
+        "attempts": 580,
         "activations": 543,
-        "qsos": 23668
+        "qsos": 23670
       }
     },
     {
@@ -2240,9 +2264,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 443,
-        "activations": 438,
-        "qsos": 15177
+        "attempts": 444,
+        "activations": 439,
+        "qsos": 15187
       }
     },
     {
@@ -2334,9 +2358,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 92,
-        "activations": 86,
-        "qsos": 3427
+        "attempts": 93,
+        "activations": 87,
+        "qsos": 3447
       }
     },
     {
@@ -2765,9 +2789,9 @@
       "activationCount": 1,
       "notes": [],
       "publicStats": {
-        "attempts": 2760,
-        "activations": 2707,
-        "qsos": 113777
+        "attempts": 2761,
+        "activations": 2708,
+        "qsos": 113788
       }
     },
     {
