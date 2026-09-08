@@ -5,6 +5,7 @@ import type {
   TrainingResource,
 } from "./types";
 import type { PracticeMode } from "./plan";
+import type { RunnerRunState } from "./runner-bridge";
 
 export interface ActiveBlock {
   id: string;
@@ -25,6 +26,9 @@ export interface ActiveBlock {
   bookmarks: number[];
   context: "practice" | "class";
   review?: boolean;
+  /** One uninterrupted embedded contest; elapsed time comes only from its engine. */
+  runner?: RunnerRunState;
+  runnerRevision?: string;
 }
 
 export interface TrainingDeviceState {

@@ -230,14 +230,23 @@ import "../../styles/cw-training.css";
             </div>
             <div id="training-focus-resource"></div>
           </div>
+          <section id="training-runner-embedded" class="training-section" aria-labelledby="training-runner-embedded-heading" hidden>
+            <h3 id="training-runner-embedded-heading">Practice here</h3>
+            <p id="training-runner-status" class="training-small" role="status"></p>
+            <p class="training-small">Mode, speed, duration, and band conditions follow the assignment automatically. A keyboard is recommended. Click inside the simulator before using its shortcuts. These are synthetic practice calls, not on-air contacts.</p>
+            <div id="training-runner-frame-host"></div>
+            <p id="training-runner-result" class="training-small" hidden></p>
+          </section>
           <section id="training-runner-guidance" class="training-guidance training-runner" aria-labelledby="training-runner-heading" hidden>
             <h3 id="training-runner-heading">Web Morse Runner setup</h3>
             <p><a href={WEB_MORSE_RUNNER_HELP_URL} target="_blank" rel="noreferrer">Web version instructions</a></p>
             <p>Assignment: <strong id="training-runner-run"></strong></p>
             <p id="training-runner-mode"></p>
             <p id="training-runner-conditions" class="training-small"></p>
-            <p class="training-small">Enter your station Call, set CW Speed and the Run for minutes to the assignment above, and choose a comfortable Pitch. Check these each session; the web runner remembers settings in its own browser storage.</p>
-            <p class="training-small">Practice in the new tab, keeping it awake. This tracker cannot read its timer or score and pauses timing when hidden. Return here to Finish block, confirm actual minutes, and record results in Note or score.</p>
+            <div id="training-runner-external-help">
+              <p class="training-small">For the standalone runner, enter your station Call, set CW Speed and Run for minutes to the assignment above, and choose a comfortable Pitch. Check these each session; that runner remembers settings separately.</p>
+              <p class="training-small">When practicing outside this page, keep the runner awake. Return here to Finish block and confirm actual minutes and results, or use Done elsewhere for a separate run. Only the embedded runner reports its timer and score automatically.</p>
+            </div>
             <details>
               <summary>During the run: keys &amp; troubleshooting</summary>
               <p class="training-small">On Mac, use the on-screen F1-F8 buttons if your function keys control volume or brightness.</p>
@@ -438,6 +447,7 @@ import "../../styles/cw-training.css";
             maxlength="4000"></textarea></label
         ><div class="training-actions">
           <button class="primary" type="submit">Save practice</button><button
+            id="training-finish-back"
             type="button"
             data-close>Keep practicing</button
           >

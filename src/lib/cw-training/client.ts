@@ -4,6 +4,8 @@ import { listeningGuidance } from "./guidance";
 import { audioVariants, audioRecordingNote, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
+import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
+import runnerVersion from "../../../public/vendor/web-morse-runner/UPSTREAM.json";
 import { TrainingStorage } from "./storage";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
 import type {
@@ -108,6 +110,9 @@ export async function initTraining() {
   let seeking = false;
   let audioReady = false;
   let mountedBlock: string | undefined;
+  let runnerFrame: HTMLIFrameElement | undefined;
+  let runnerTimeout: ReturnType<typeof setTimeout> | undefined;
+  let runnerFinishPending = false;
   let syncing = false;
   let authorized = true;
   let connectionKnown = false;
@@ -373,6 +378,7 @@ export async function initTraining() {
     }${speedChoice(item.task)}${runnerGuideLink(item.task)}</div>${item.extra ? `<button type="button" data-review="${escapeHtml(item.task.id)}">Extra review</button>` : buttons(item.task.id, missed, item.task.kind === "live" && !item.availableNow)}</div>`;
 
   function setView(next: string) {
+    if (next !== "focus" && state.active?.runner?.status === "running") stopRunner();
     view = next;
     for (const name of ["today", "focus", "week", "materials"])
       $(`training-${name}`).hidden = name !== view;
@@ -595,6 +601,7 @@ export async function initTraining() {
     $("training-focus-empty").hidden = !!active;
     $("training-focus-content").hidden = !active;
     if (!active) {
+      unmountRunner();
       running = false;
       recalling = false;
       mountedBlock = undefined;
@@ -630,7 +637,10 @@ export async function initTraining() {
       !!active.resource?.url &&
       !active.resource.unresolved;
     $("training-audio-box").hidden = !isAudio;
-    $("training-timer-box").hidden = isAudio;
+    $("training-timer-box").hidden = isAudio || !!active.runner;
+    $("training-runner-embedded").hidden = !active.runner;
+    $("training-runner-external-help").hidden = !!active.runner;
+    if (active.runner) renderRunner();
     const guidance = listeningGuidance(active.task);
     $("training-listening-guidance").hidden = !guidance;
     $("training-scratchpad-panel").hidden = !guidance;
@@ -641,7 +651,7 @@ export async function initTraining() {
       $("training-scratchpad-prompt").textContent = guidance.scratchpadPrompt;
     }
     $("training-focus-resource").innerHTML = runner
-      ? link(WEB_MORSE_RUNNER_URL, "Open Web Morse Runner", "training-button primary")
+      ? `${active.runner ? '<p class="training-small">If the embedded runner is unavailable, save this block as partial, practice externally, then use Done elsewhere to record that separate run.</p>' : ""}${link(WEB_MORSE_RUNNER_URL, "Open standalone Web Morse Runner", "training-button")}`
       : active.resource?.unresolved
       ? `<p class="training-notice">${escapeHtml(active.resource.unresolved)} Read the source or ask your instructor before choosing a substitute.</p>`
       : `${link(active.resource?.url || (active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? "Open official audio separately" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
@@ -688,6 +698,92 @@ export async function initTraining() {
     }
     updateClock();
   }
+  function unmountRunner() {
+    clearTimeout(runnerTimeout);
+    runnerTimeout = undefined;
+    runnerFrame?.remove();
+    runnerFrame = undefined;
+    runnerFinishPending = false;
+  }
+  function runnerMetadata(active: ActiveBlock): string {
+    if (!active.runner) return "";
+    return `${runnerResultNote(active.runner) ?? "Web Morse Runner: not started; no practice credited."} Upstream ${active.runnerRevision ?? "revision not recorded"}. Synthetic practice calls (not on-air contacts).`;
+  }
+  function renderRunner() {
+    const run = state.active?.runner;
+    if (!run) return;
+    const messages = {
+      loading: "Loading the pinned runner and assignment settings...",
+      ready: "Ready. Enter your station Call, choose a comfortable Pitch, then click Run inside the simulator. Setup time does not count.",
+      running: "Run in progress. Actual engine time is recorded automatically. Keep this page visible; leaving Focus, switching apps, or stopping ends this run as partial.",
+      completed: "Assigned run complete. Review the transcript, then Finish block to save your time and results.",
+      stopped: "Run stopped. Its practiced time and results are preserved, but a partial run does not complete the assignment. Finish and save before starting a new run.",
+      error: "The run could not continue. Its last confirmed time is preserved as partial; it cannot resume after interruption. Finish and save, then start a new block or use the standalone runner.",
+    };
+    $("training-runner-status").textContent = messages[run.status];
+    $("training-runner-result").hidden = !["completed", "stopped", "error"].includes(run.status);
+    $("training-runner-result").textContent = runnerResultNote(run) ?? "";
+    if (!runnerFrame && run.status === "loading") {
+      const frame = document.createElement("iframe");
+      frame.title = "Web Morse Runner practice simulator";
+      frame.className = "training-runner-frame";
+      frame.allow = "autoplay";
+      frame.addEventListener("load", () => {
+        if (runnerFrame !== frame || state.active?.runner?.runId !== run.runId) return;
+        frame.contentWindow?.postMessage(runnerConfigureCommand(run), location.origin);
+      });
+      runnerFrame = frame;
+      frame.src = "/vendor/web-morse-runner/";
+      $("training-runner-frame-host").append(frame);
+      runnerTimeout = setTimeout(() => failRunner(run.runId), 20000);
+    }
+    if (run.status === "error") {
+      runnerFrame?.remove();
+      runnerFrame = undefined;
+    }
+  }
+  function failRunner(runId: string) {
+    const active = state.active;
+    if (!active?.runner || active.runner.runId !== runId || ["completed", "stopped", "error"].includes(active.runner.status)) return;
+    active.runner = { ...active.runner, status: "error", errorCode: "interrupted" };
+    active.activeSeconds = active.runner.elapsedSeconds;
+    clearTimeout(runnerTimeout);
+    renderRunner();
+    updateClock();
+    void persist();
+    if (runnerFinishPending) { runnerFinishPending = false; finish(); }
+  }
+  function stopRunner() {
+    const run = state.active?.runner;
+    if (!run || ["completed", "stopped", "error"].includes(run.status)) return;
+    if (run.status === "loading") { failRunner(run.runId); return; }
+    runnerFrame?.contentWindow?.postMessage(runnerStopCommand(run), location.origin);
+    clearTimeout(runnerTimeout);
+    runnerTimeout = setTimeout(() => failRunner(run.runId), 2000);
+  }
+  window.addEventListener("message", (event) => {
+    const active = state.active;
+    if (disposed || !active?.runner || !runnerFrame || event.source !== runnerFrame.contentWindow || event.origin !== location.origin) return;
+    const previous = active.runner;
+    const next = reduceRunnerEvent(previous, event.data);
+    if (next === previous) return;
+    active.runner = next;
+    active.activeSeconds = next.elapsedSeconds;
+    if (next.status !== "loading" && next.status !== "running") clearTimeout(runnerTimeout);
+    // A ready frame must not start a hidden/previous-day block, even if its
+    // click and the parent's visibility event crossed in the message queue.
+    if (next.status === "running" && (document.hidden || view !== "focus" || !allowActiveDate())) stopRunner();
+    if (next.status !== previous.status) renderRunner();
+    updateClock();
+    if (next.status !== previous.status || Date.now() - lastSaved > 5000) {
+      lastSaved = Date.now();
+      void persist();
+    }
+    if (runnerFinishPending && ["completed", "stopped", "error"].includes(next.status)) {
+      runnerFinishPending = false;
+      finish();
+    }
+  });
   function updateTodayTime() {
     if (!todayTime || !state.snapshot) return;
     const totals = practiceTimeSummary(todayTime.savedSeconds, state.active,
@@ -728,7 +824,7 @@ export async function initTraining() {
     const now = performance.now();
     const elapsed = (now - lastClock) / 1000;
     lastClock = now;
-    if (!state.active) return;
+    if (!state.active || state.active.runner) return;
     const delta = timedPracticeDelta(elapsed, {
       running, visible: !document.hidden, kind: state.active.task.kind,
       recalling, audioPlaying,
@@ -754,6 +850,7 @@ export async function initTraining() {
     updateClock();
   }
   function pause() {
+    stopRunner();
     stopTimer();
     audio.pause();
     void persist();
@@ -814,11 +911,16 @@ export async function initTraining() {
       context: "practice",
       ...(item.extra ? { review: true } : {}),
     };
+    const settings = runnerSettings(state.active.task);
+    if (settings) {
+      state.active.runner = createRunnerRun(state.active.id, settings);
+      state.active.runnerRevision = runnerVersion.revision;
+    }
     render();
     setView("focus");
     void persist();
     if (item.task.kind === "audio" && item.resource?.url) void play();
-    else {
+    else if (!state.active.runner) {
       running = true;
       lastClock = performance.now();
       updateClock();
@@ -897,13 +999,20 @@ export async function initTraining() {
   }
   function finish() {
     if (!state.active) return;
+    if (state.active.runner && ["loading", "ready", "running"].includes(state.active.runner.status)) {
+      runnerFinishPending = true;
+      stopRunner();
+      return;
+    }
     pause();
     $<HTMLFormElement>("training-finish-form").reset();
     $<HTMLInputElement>("training-finish-minutes").value = (
       Math.round(state.active.activeSeconds / 6) / 10
     ).toString();
     const active = state.active;
-    const recording = audioRecordingNote(active.task, active.resource);
+    $("training-finish-back").textContent = active.runner ? "Back to results" : "Keep practicing";
+    $<HTMLInputElement>("training-finish-minutes").readOnly = !!active.runner;
+    const recording = active.runner ? runnerMetadata(active) : audioRecordingNote(active.task, active.resource);
     $("training-finish-recording").hidden = !recording;
     $("training-finish-recording").textContent = recording ? `Saved automatically with this entry: ${recording}` : "";
     const marks = active.bookmarks.length ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}` : "";
@@ -929,11 +1038,16 @@ export async function initTraining() {
         ? !!minimumPasses && passReady
         : active.activeSeconds >=
           (active.task.minutes ?? active.targetMinutes) * 60;
+    if (active.runner) {
+      complete.disabled = active.runner.status !== "completed";
+      complete.checked = active.runner.status === "completed";
+    }
     $("training-finish-help").textContent = active.review
       ? `Extra practice time is saved separately from required coverage.${active.task.kind === "audio" ? ` ${active.completedPasses} fully played passes this block; partial listening still counts as time.` : " Confirm any minutes practiced away from this page."}`
       : active.task.kind === "audio"
         ? `${active.completedPasses} fully played pass${active.completedPasses === 1 ? "" : "es"} this block. ${!passReady ? "More assigned passes remain; this partial block is still useful." : "Confirm completion when you have met the listening objective."}`
         : "Correct the time if you practiced while away from this page. Mark complete only when you met the assigned objective.";
+    if (active.runner) $("training-finish-help").textContent = "Engine time and results are saved automatically. Only a complete uninterrupted assigned run can finish this exercise; partial practice still counts toward your daily time. Save before starting another run.";
     $<HTMLDialogElement>("training-finish-dialog").showModal();
   }
 
@@ -1274,10 +1388,11 @@ export async function initTraining() {
         if (!allowActiveDate()) break;
         setView("focus");
         notice(
-          "Your saved block is paused. Resume the player or timer when ready.",
+          state.active?.runner ? "Your runner block is saved. Start it if ready, or review and save any finished or interrupted run." : "Your saved block is paused. Resume the player or timer when ready.",
         );
         break;
       case "toggle-timer":
+        if (state.active?.runner) break;
         if (!allowActiveDate()) break;
         if (running) stopTimer();
         else {
@@ -1324,7 +1439,7 @@ export async function initTraining() {
         setView("today");
         render();
         notice(
-          "Your block is saved and paused. Return when you have a few minutes.",
+          state.active?.runner ? "This runner block is saved on this device. A stopped run cannot resume; finish and save its partial results before starting a new one." : "Your block is saved and paused. Return when you have a few minutes.",
         );
         break;
       case "manual":
@@ -1512,7 +1627,7 @@ export async function initTraining() {
           "Remove null characters from the note before saving.";
         return;
       }
-      const activeSeconds = Math.round(Number(data.get("minutes")) * 60);
+      const activeSeconds = active.runner ? Math.floor(active.runner.elapsedSeconds) : Math.round(Number(data.get("minutes")) * 60);
       if (
         !Number.isFinite(activeSeconds) ||
         activeSeconds < 0 ||
@@ -1530,6 +1645,7 @@ export async function initTraining() {
         return;
       }
       let completed = data.get("complete") === "on";
+      if (active.runner && active.runner.status !== "completed") completed = false;
       const minimumPasses = active.review ? active.targetPasses : active.task.minimumPasses;
       if (
         active.task.kind === "audio" &&
@@ -1549,7 +1665,7 @@ export async function initTraining() {
       }
       const endedAt = new Date();
       const note = [
-        audioRecordingNote(active.task, active.resource),
+        active.runner ? runnerMetadata(active) : audioRecordingNote(active.task, active.resource),
         String(data.get("note") || ""),
         active.bookmarks.length
           ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}`
@@ -1750,6 +1866,7 @@ export async function initTraining() {
     });
   }
   document.addEventListener("visibilitychange", () => {
+    if (document.hidden && state.active?.runner?.status === "running") stopRunner();
     if (document.hidden && running) {
       stopTimer();
       notice(
@@ -1759,6 +1876,7 @@ export async function initTraining() {
     if (document.hidden) void persist();
   });
   window.addEventListener("pagehide", () => {
+    stopRunner();
     stopTimer();
     void persist();
   });
@@ -1781,9 +1899,19 @@ export async function initTraining() {
     }
   }, 1000);
   if (state.snapshot) {
+    const run = state.active?.runner;
+    if (run) {
+      // Upstream has no contest restore. Never convert a reload into a new
+      // contest with the old elapsed time or combine partial runs as complete.
+      if (["loading", "ready"].includes(run.status) && run.elapsedSeconds === 0) {
+        state.active!.runner = createRunnerRun(run.runId, run.settings);
+        state.active!.runnerRevision = runnerVersion.revision;
+      }
+      else if (run.status === "running") state.active!.runner = { ...run, status: "error", errorCode: "interrupted" };
+    }
     render();
     if (state.active)
-      notice("Your interrupted block is saved and paused. Resume when ready.");
+      notice(state.active.runner ? "Your runner block is saved. Open Focus to review it; interrupted runs must be saved as partial before starting another run." : "Your interrupted block is saved and paused. Resume when ready.");
   }
   try {
     mergeSnapshot(await request("bootstrap"));

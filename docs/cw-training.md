@@ -102,7 +102,7 @@ The finish dialog displays this metadata separately from the editable reflection
 This uses the existing immutable attempt API and requires no database migration.
 Refresh official variant metadata with `mise run cw-training:update-audio-variants`.
 
-Instant-recognition trainers, Morse Runner, a physical key/radio, and online
+Instant-recognition trainers, a physical key/radio, and online
 class meetings remain external resources. The page guides and logs those
 exercises; it does not replace them or score live sending.
 
@@ -110,20 +110,35 @@ Morse Runner tasks link to the official
 [CWops Community Edition guide](https://cwops.org/wp-content/uploads/2025/01/Morse-Runner-CE.pdf)
 in Today, Week, and Focus. Focus adds a compact setup reminder and expandable
 operating reference. The instructor-recommended
-[Web Morse Runner](https://fritzsche.github.io/WebMorseRunner/) is the primary
-launch link for Mac use and opens in a new tab. Its Mode labels are Single Call
-and WPX Contest, mapped from the original curriculum without changing assigned
-speed, duration, or activity. In contrast to desktop CE, the web version uses
-the selected duration and does not enforce WPX band conditions. Check settings
-each session; Web Morse Runner stores them separately from the tracker.
+[Web Morse Runner](https://fritzsche.github.io/WebMorseRunner/) runs in a locally
+hosted, version-pinned iframe. Single Call and WPX Contest map from the original
+curriculum without changing assigned speed, duration, or activity. Those settings
+and the disabled band conditions are applied and locked for each assigned run.
+The user enters their station call and comfortable pitch, then explicitly clicks
+Run to activate audio. No course content or authentication tokens go into the
+message protocol. The frame isolates keyboard handling and styles, not security.
 The [web runner documentation](https://github.com/fritzsche/WebMorseRunner#usage)
 is linked alongside Mac button guidance and a post-run transcript reminder.
 CWops PDFs and desktop downloads remain available as clearly labeled desktop
 references, not instructions to install a Windows app or find a separate
 CQ WPX contest selector in the web interface.
-Finish block and Done elsewhere accept results in the existing optional note;
-there is no embedding, settings transfer, automatic score import, or
-cross-site time tracking. Confirm actual practice minutes after returning.
+The embedded engine's elapsed seconds are the only timer for these blocks; setup
+and stopped time do not count. Finish block stops and awaits final results before
+opening the save dialog. The existing database note automatically records mode,
+speed, duration, activity/conditions, QSOs, Verified Pts, verified score, NR/NIL
+errors, and upstream revision. Only a full uninterrupted run permits completion;
+multiple partial runs never combine into an assigned full run. Extra-review
+attempts continue to be separate from required coverage.
+
+Leaving Focus, switching apps, and page reload interrupt a run. Upstream cannot
+resume a contest, so save its partial time before starting another. A missing
+engine/result retains the last confirmed time without inventing a score. Saved
+terminal runs retain their status after reload; no replacement contest starts.
+The standalone link and Done elsewhere remain available for unsupported settings
+or browser failures, with manually confirmed minutes/results for that separate run.
+Older device-local blocks created before embedding keep their manual workflow.
+See [the vendor/update workflow](web-morse-runner.md) for provenance, synthetic
+practice-call data, offline verification, and deliberate upstream upgrades.
 These are original summaries with external source links, not hosted PDF copies.
 
 ## Private data and synchronization

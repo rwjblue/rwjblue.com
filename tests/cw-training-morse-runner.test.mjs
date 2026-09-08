@@ -132,6 +132,6 @@ test("the client chooses the primary web link before any imported CE resource UR
   assert.match(client, /const runner = morseRunnerSetup\(active\.task\)/);
   // Imported course records can still carry a desktop CE resource URL. This
   // branch must choose the web app from the task before consulting that URL.
-  assert.match(client, /\$\("training-focus-resource"\)\.innerHTML = runner\s*\? link\(WEB_MORSE_RUNNER_URL, "Open Web Morse Runner", "training-button primary"\)\s*:\s*active\.resource\?\.unresolved/);
+  assert.match(client, /\$\("training-focus-resource"\)\.innerHTML = runner[\s\S]*?link\(WEB_MORSE_RUNNER_URL, "Open standalone Web Morse Runner", "training-button"\)[\s\S]*?: active\.resource\?\.unresolved/);
   assert.match(client, /link\(active\.resource\?\.url \|\|/);
 });
