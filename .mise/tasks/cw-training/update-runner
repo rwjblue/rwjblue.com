@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Update or verify the pinned Web Morse Runner runtime"
+
+set -euo pipefail
+
+exec node scripts/web-morse-runner/update.mjs "$@"
