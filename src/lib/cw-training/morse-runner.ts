@@ -20,7 +20,7 @@ export function morseRunnerSetup(task: TrainingTask): { run: string; mode: strin
   const speed = Number.isFinite(task.speedWpm) && task.speedWpm! > 0
     ? `${task.speedWpm} WPM starting speed` : "the assigned starting speed";
   const duration = Number.isFinite(task.minutes) && task.minutes! > 0
-    ? `${task.minutes} uninterrupted minutes` : "the full assigned duration";
+    ? `${task.minutes} minutes total across saved runs` : "the total assigned practice time";
   const activity = /\bactivity(?:\s+level)?\s+(\d+)\b/i.exec(instructions)?.[1];
   // Translate the original desktop curriculum to Web Morse Runner's Mode
   // selector. A reference to the CQ WPX contest alone does not set Run mode.

@@ -80,8 +80,12 @@ export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): T
   if (task.kind === "audio" && task.minimumPasses !== undefined) {
     complete = (completedPasses >= task.minimumPasses && relevant.some((attempt) => attempt.completed)) ||
       relevant.some((attempt) => attempt.completed && attempt.completedPasses === undefined);
+  } else if (isMorseRunner(task)) {
+    // Saved partial runs, including older completed:false records, contribute
+    // to this assignment's practice total without rewriting their history.
+    complete = activeSeconds >= (task.minutes ?? 15) * 60;
   } else if (task.kind === "simulator" && task.minutes !== undefined) {
-    // Two interrupted eight-minute runs do not satisfy an uninterrupted 15-minute run.
+    // Other simulators retain their original uninterrupted-run requirement.
     complete = relevant.some((attempt) => attempt.completed && attempt.activeSeconds >= task.minutes! * 60);
   } else {
     complete = relevant.some((attempt) => attempt.completed);
@@ -98,7 +102,10 @@ function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, tas
   const progress = taskProgress(task, attempts);
   const resource = course.resources.find((resource) => resource.id === task.resourceId);
   const result: PlannedTask = { assignment, task, resource, completedPasses: progress.completedPasses, suggestedMinutes: blockMinutes, started: progress.started, activeSeconds: progress.activeSeconds, interrupted: progress.interrupted };
-  if (task.kind === "simulator") result.suggestedMinutes = task.minutes ?? 15;
+  if (isMorseRunner(task)) {
+    const remainingMinutes = Math.ceil(((task.minutes ?? 15) * 60 - progress.activeSeconds) / 60);
+    result.suggestedMinutes = Math.max(1, Math.min(blockMinutes, remainingMinutes));
+  } else if (task.kind === "simulator") result.suggestedMinutes = task.minutes ?? 15;
   if (task.kind === "audio") {
     result.remainingPasses = task.minimumPasses === undefined ? undefined : Math.max(0, task.minimumPasses - progress.completedPasses);
     if (resource?.unresolved) {
@@ -128,7 +135,7 @@ function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, tas
       result.reason = `The next CWT window starts ${nextWindow}. Plan this radio activity for that window.`;
     }
   }
-  if (task.kind === "simulator" && result.suggestedMinutes > blockMinutes) result.reason = `This exercise needs ${result.suggestedMinutes} uninterrupted minutes.`;
+  if (task.kind === "simulator" && !isMorseRunner(task) && result.suggestedMinutes > blockMinutes) result.reason = `This exercise needs ${result.suggestedMinutes} uninterrupted minutes.`;
   return result;
 }
 

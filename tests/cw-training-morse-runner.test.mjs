@@ -78,17 +78,17 @@ test("all assigned course speeds and unusual durations are preserved instead of 
   for (const speedWpm of [10, 13, 15, 18, 20, 25]) {
     for (const minutes of [7.5, 17, 23]) {
       const setup = morseRunnerSetup(task({ speedWpm, minutes }));
-      assert.equal(setup.run, `${speedWpm} WPM starting speed · ${minutes} uninterrupted minutes`);
+      assert.equal(setup.run, `${speedWpm} WPM starting speed · ${minutes} minutes total across saved runs`);
     }
   }
 });
 
 test("missing or invalid speed and duration defer to the assignment without inventing numbers", () => {
   for (const missing of [undefined, 0, -1, NaN, Infinity]) {
-    assert.equal(morseRunnerSetup(task({ speedWpm: missing, minutes: missing })).run, "the assigned starting speed · the full assigned duration");
+    assert.equal(morseRunnerSetup(task({ speedWpm: missing, minutes: missing })).run, "the assigned starting speed · the total assigned practice time");
   }
-  assert.equal(morseRunnerSetup(task({ speedWpm: undefined, minutes: 9 })).run, "the assigned starting speed · 9 uninterrupted minutes");
-  assert.equal(morseRunnerSetup(task({ speedWpm: 18, minutes: undefined })).run, "18 WPM starting speed · the full assigned duration");
+  assert.equal(morseRunnerSetup(task({ speedWpm: undefined, minutes: 9 })).run, "the assigned starting speed · 9 minutes total across saved runs");
+  assert.equal(morseRunnerSetup(task({ speedWpm: 18, minutes: undefined })).run, "18 WPM starting speed · the total assigned practice time");
 });
 
 test("an unknown run mode defers to original instructions and setup never mutates the task", () => {
@@ -115,7 +115,8 @@ test("web app, help, guide, basics, and download links use the intended official
 
 test("Web WPX Contest keeps the selected duration without imposing desktop timer or band overrides", () => {
   const competition = morseRunnerSetup(task({ instructions: "WPX Competition; Activity 2." }));
-  assert.match(competition.run, /15 uninterrupted minutes/);
+  assert.match(competition.run, /15 minutes total across saved runs/);
+  assert.doesNotMatch(competition.run, /uninterrupted/);
   assert.match(competition.conditions, /keeps your selected duration/);
   assert.match(competition.conditions, /does not force band conditions on/);
   assert.match(competition.conditions, /assigned activity level.*instructor's band settings/);

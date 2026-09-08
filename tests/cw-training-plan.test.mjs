@@ -65,7 +65,7 @@ test("audio coverage does not override an explicitly unfinished listening object
   assert.equal(taskProgress(task, [listened, confirmed]).complete, true);
 });
 
-test("fixed simulator runs do not fit ten minutes and cannot aggregate partial runs", () => {
+test("unrelated fixed simulator runs do not fit ten minutes or aggregate partial runs", () => {
   const course = fixtureCourse();
   const plan = getTrainingPlan(course, [], new Date("2026-09-06T22:00:00Z"), 10);
   assert.equal(plan.blocked[0].task.id, "run");
@@ -73,6 +73,93 @@ test("fixed simulator runs do not fit ten minutes and cannot aggregate partial r
   const run = course.assignments[1].tasks[0];
   assert.equal(taskProgress(run, [attempt("run", { activeSeconds: 480 }), attempt("run", { id: "run-2", activeSeconds: 480 })]).complete, false);
   assert.equal(taskProgress(run, [attempt("run")]).complete, true);
+});
+
+test("Morse Runner assignment time combines ten plus five minutes without changing saved outcomes", () => {
+  const task = makeTask("runner", "simulator", { title: "Morse Runner", minutes: 15 });
+  const first = attempt("runner", { id: "ten-minute-run", completed: false, activeSeconds: 600 });
+  const second = attempt("runner", { id: "five-minute-run", completed: false, activeSeconds: 300 });
+  const history = [first, second];
+  const original = structuredClone(history);
+  assert.deepEqual(taskProgress(task, [first]), {
+    complete: false, started: true, completedPasses: 0, activeSeconds: 600, interrupted: true,
+  });
+  assert.deepEqual(taskProgress(task, history), {
+    complete: true, started: true, completedPasses: 0, activeSeconds: 900, interrupted: false,
+  });
+  assert.deepEqual(history, original, "retroactive credit is derived; saved records remain unchanged");
+});
+
+test("fifteen one-minute saved Morse Runner runs satisfy the assigned fifteen minutes", () => {
+  const task = makeTask("runner", "simulator", { title: "Morse Runner", minutes: 15 });
+  const history = Array.from({ length: 15 }, (_, index) => attempt("runner", {
+    id: `one-minute-run-${index}`, completed: false, activeSeconds: 60,
+  }));
+  assert.equal(taskProgress(task, history.slice(0, 14)).complete, false);
+  const progress = taskProgress(task, history);
+  assert.equal(progress.activeSeconds, 900);
+  assert.equal(progress.complete, true);
+  assert.equal(progress.interrupted, false);
+});
+
+test("interrupted and previously saved Morse Runner partials accumulate even with old result notes", () => {
+  const task = makeTask("runner", "simulator", { instructions: "Use Morse Runner for practice.", minutes: 15 });
+  const history = [
+    attempt("runner", { id: "older-embedded", completed: false, activeSeconds: 450, note: "Web Morse Runner: stopped (partial); 450s; 10 WPM starting speed." }),
+    attempt("runner", { id: "interrupted-embedded", completed: false, activeSeconds: 449, note: "Web Morse Runner interrupted; confirmed time retained." }),
+  ];
+  assert.equal(taskProgress(task, history).complete, false);
+  assert.equal(taskProgress(task, history).activeSeconds, 899);
+  const lastSecond = attempt("runner", { id: "last-second", completed: false, activeSeconds: 1 });
+  assert.equal(taskProgress(task, [...history, lastSecond]).complete, true);
+  const blankCompleted = attempt("runner", { id: "empty-confirmation", completed: true, activeSeconds: 0 });
+  assert.equal(taskProgress(task, [blankCompleted]).complete, false, "a completion flag alone cannot replace actual practice time");
+});
+
+test("cumulative Morse Runner credit deduplicates IDs and excludes review, class, and other tasks", () => {
+  const task = makeTask("runner", "simulator", { title: "Morse Runner", minutes: 15 });
+  const required = attempt("runner", { id: "required-ten", completed: false, activeSeconds: 600 });
+  const exclusions = [
+    attempt("runner", { id: "extra-review", activeSeconds: 900, review: true }),
+    attempt("runner", { id: "class-run", activeSeconds: 900, context: "class" }),
+    attempt("other-runner", { id: "another-assignment", activeSeconds: 900 }),
+  ];
+  const progress = taskProgress(task, [required, structuredClone(required), ...exclusions]);
+  assert.equal(progress.activeSeconds, 600);
+  assert.equal(progress.complete, false);
+  const remaining = attempt("runner", { id: "required-five", completed: false, activeSeconds: 300 });
+  assert.equal(taskProgress(task, [required, required, remaining, remaining, ...exclusions]).activeSeconds, 900);
+  assert.equal(taskProgress(task, [required, required, remaining, remaining, ...exclusions]).complete, true);
+});
+
+test("required Morse Runner practice fits short blocks and recommends only the remaining minutes", () => {
+  const course = fixtureCourse();
+  const runner = course.assignments[1].tasks[0];
+  Object.assign(runner, { title: "Morse Runner", instructions: "Single calls at 10 WPM.", speedWpm: 10 });
+  const now = new Date("2026-09-06T12:00:00Z");
+  const original = structuredClone(course);
+  assert.deepEqual(availableBlockMinutes(course, [], now, "computer"), [3, 5, 10, 15]);
+  for (const minutes of [3, 5, 10, 15]) {
+    const plan = getTrainingPlan(course, [], now, minutes, "computer");
+    assert.equal(plan.next.task.id, runner.id);
+    assert.equal(plan.next.extra, undefined, "short required practice stays separate from review");
+    assert.equal(plan.next.suggestedMinutes, minutes);
+    assert.ok(!plan.blocked.some((item) => item.task.id === runner.id));
+    assert.doesNotMatch(plan.next.reason ?? "", /uninterrupted/);
+  }
+  for (const [seconds, blockMinutes, expected] of [[600, 3, 3], [600, 10, 5], [600, 15, 5], [601, 15, 5], [839, 15, 2], [840, 15, 1], [899, 3, 1]]) {
+    const history = [attempt("run", { assignmentId: "s1d2", completed: false, activeSeconds: seconds })];
+    const plan = getTrainingPlan(course, history, now, blockMinutes, "computer");
+    assert.equal(plan.next.task.id, runner.id);
+    assert.equal(plan.next.suggestedMinutes, expected);
+    assert.equal(plan.next.activeSeconds, seconds);
+  }
+  const complete = [attempt("run", { assignmentId: "s1d2", completed: false, activeSeconds: 900 })];
+  const completedPlan = getTrainingPlan(course, complete, now, 3, "computer");
+  assert.ok(!completedPlan.queue.some((item) => item.task.id === runner.id));
+  assert.equal(completedPlan.runnerReview.extra, true);
+  assert.equal(completedPlan.runnerReview.suggestedMinutes, 3, "review is still its own fresh practice block");
+  assert.deepEqual(course, original);
 });
 
 test("class boundaries preserve today's quota and never start tomorrow's required queue", () => {
@@ -174,7 +261,7 @@ test("Morse Runner review is always discoverable, including short blocks and pen
   const now = new Date("2026-09-06T12:00:00Z");
   assert.deepEqual(availableBlockMinutes(course, [], now, "computer"), [3, 5, 10, 15]);
   const short = getTrainingPlan(course, [], now, 3, "computer");
-  assert.ok(short.blocked.some((item) => item.task.id === runner.id), "required uninterrupted run stays blocked");
+  assert.ok(short.queue.some((item) => item.task.id === runner.id), "required minutes can be practiced in short blocks too");
   const history = [attempt("run", { review: true, activeSeconds: 900 })];
   assert.equal(taskProgress(runner, history).complete, false);
   assert.ok(getTrainingPlan(course, history, now, 15, "computer").runnerReview);
