@@ -2,7 +2,7 @@ import { isMorseRunner } from "./morse-runner.ts";
 import type { TrainingTask } from "./types.ts";
 
 export const RUNNER_CHANNEL = "cw-training-runner";
-export const RUNNER_PROTOCOL_VERSION = 1;
+export const RUNNER_PROTOCOL_VERSION = 2;
 export const RUNNER_MAX_SECONDS = 6_000;
 
 export interface RunnerSettings {
@@ -42,17 +42,22 @@ interface RunnerEventEnvelope extends RunnerEnvelope {
 }
 
 export type RunnerEvent = RunnerEventEnvelope & (
-  | { type: "ready" | "started" | "progress" }
+  | { type: "ready" | "progress" }
+  | { type: "started"; settings: RunnerSettings }
+  | { type: "speed"; wpm: number }
   | { type: "results"; reason: "completed" | "stopped"; summary: RunnerSummary }
   | { type: "error"; code: RunnerErrorCode }
 );
 
 export interface RunnerRunState {
   runId: string;
+  /** Defaults until Run; then a snapshot of the settings actually used to start. */
   settings: RunnerSettings;
   status: "loading" | "ready" | "running" | "completed" | "stopped" | "error";
   lastSequence: number;
   elapsedSeconds: number;
+  /** Audio-engine timestamps, including the starting speed at zero. Optional for older saved blocks. */
+  speedHistory?: { elapsedSeconds: number; wpm: number }[];
   summary?: RunnerSummary;
   errorCode?: RunnerErrorCode;
 }
@@ -144,8 +149,14 @@ export function parseRunnerEvent(value: unknown): RunnerEvent | undefined {
     channel: RUNNER_CHANNEL, version: RUNNER_PROTOCOL_VERSION, runId: value.runId,
     sequence: value.sequence, elapsedSeconds: value.elapsedSeconds,
   } as const;
-  if ((value.type === "ready" || value.type === "started" || value.type === "progress")
+  if ((value.type === "ready" || value.type === "progress")
     && exactKeys(value, eventKeys)) return { ...base, type: value.type };
+  if (value.type === "started" && exactKeys(value, [...eventKeys, "settings"]) && isRunnerSettings(value.settings)) {
+    return { ...base, type: "started", settings: { ...value.settings, conditions: { ...value.settings.conditions } } };
+  }
+  if (value.type === "speed" && exactKeys(value, [...eventKeys, "wpm"]) && integer(value.wpm, 10, 60)) {
+    return { ...base, type: "speed", wpm: value.wpm };
+  }
   if (value.type === "results" && exactKeys(value, [...eventKeys, "reason", "summary"])
     && (value.reason === "completed" || value.reason === "stopped") && isRunnerSummary(value.summary)) {
     return { ...base, type: "results", reason: value.reason, summary: { ...value.summary } };
@@ -169,14 +180,22 @@ export function reduceRunnerEvent(state: RunnerRunState, value: unknown): Runner
       ? { ...next, status: "ready" } : state;
   }
   if (event.type === "started") {
-    return state.status === "ready" && event.elapsedSeconds === 0 ? { ...next, status: "running" } : state;
+    return state.status === "ready" && event.elapsedSeconds === 0
+      ? { ...next, status: "running", settings: event.settings, speedHistory: [{ elapsedSeconds: 0, wpm: event.settings.wpm }] }
+      : state;
   }
   if (event.type === "progress") return state.status === "running" ? next : state;
+  if (event.type === "speed") {
+    if (state.status !== "running") return state;
+    const history = state.speedHistory ?? [{ elapsedSeconds: 0, wpm: state.settings.wpm }];
+    return { ...next, speedHistory: history.at(-1)?.wpm === event.wpm
+      ? history : [...history, { elapsedSeconds: event.elapsedSeconds, wpm: event.wpm }] };
+  }
   if (event.type === "results") {
     if (state.status !== "running" && !(state.status === "ready" && event.reason === "stopped" && event.elapsedSeconds === 0)) return state;
     return {
       ...next,
-      // Even an engine claiming completion cannot waive the uninterrupted minimum.
+      // Completion here describes the chosen run, not the original assignment.
       status: event.reason === "completed" && event.elapsedSeconds === state.settings.durationSeconds ? "completed" : "stopped",
       summary: event.summary,
     };
@@ -185,6 +204,13 @@ export function reduceRunnerEvent(state: RunnerRunState, value: unknown): Runner
     return { ...next, status: "error", errorCode: event.code };
   }
   return state;
+}
+
+/** Speed is flexible; a shorter run or different mode cannot finish the assigned exercise. */
+export function runnerMeetsAssignment(state: RunnerRunState, task: TrainingTask): boolean {
+  const assigned = runnerSettings(task);
+  return !!assigned && state.status === "completed" && state.settings.mode === assigned.mode
+    && state.elapsedSeconds >= assigned.durationSeconds;
 }
 
 export function runnerResultNote(state: RunnerRunState): string | undefined {
@@ -197,10 +223,22 @@ export function runnerResultNote(state: RunnerRunState): string | undefined {
   const parts = [
     `Web Morse Runner: ${status}`, `${Math.floor(state.elapsedSeconds)} seconds`,
     mode === "WPX" ? "WPX Contest" : "Single Call", `${wpm} WPM starting speed`,
-    `assigned duration ${durationSeconds} seconds`,
+    `run duration ${durationSeconds} seconds`,
     ...(mode === "WPX" ? [`Activity ${activity}`] : []),
     enabled.length ? `band conditions ${enabled.join(", ")}` : "band conditions off",
   ];
+  const changes = state.speedHistory?.slice(1) ?? [];
+  if (changes.length) {
+    const timestamp = (seconds: number) => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
+    const describe = (change: { elapsedSeconds: number; wpm: number }) => `${change.wpm} WPM at ${timestamp(change.elapsedSeconds)}`;
+    // Keep automatic notes bounded even after a long run with many adjustments.
+    // Full engine-timestamped history remains in the saved device block until submission.
+    const details = changes.length <= 24 ? changes.map(describe)
+      : [...changes.slice(0, 12).map(describe), `${changes.length - 24} other changes`, ...changes.slice(-12).map(describe)];
+    const speeds = state.speedHistory!.map(change => change.wpm);
+    parts.push(`speed changes: ${details.join(", ")}`);
+    if (changes.length > 24) parts.push(`WPM used: ${[...new Set(speeds)].sort((a, b) => a - b).join(", ")}`);
+  }
   if (state.summary) {
     const { qsoCount, verifiedPoints, score, nrErrors, nilErrors } = state.summary;
     parts.push(`${qsoCount} QSOs`, `Verified Pts ${verifiedPoints}`, `verified score ${score}`, `NR ${nrErrors}`, `NIL ${nilErrors}`);

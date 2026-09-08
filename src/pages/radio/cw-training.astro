@@ -105,9 +105,15 @@ import "../../styles/cw-training.css";
         </label>
         <p id="training-speed-help" class="training-small">Remembered on this device. Choose a different speed on any exercise before starting. Original instructions stay unchanged; full faster passes count toward the same exercise.</p>
         <div id="training-next" class="training-card training-next"></div>
+        <p class="training-small">Start with today's assignments in any useful order. Add selected older exercises to today if you want to catch up; you do not need to clear the backlog. Extra review adds practice time without completing assignments.</p>
         <div id="training-preparation"></div>
         <div class="training-section">
           <h3>Today's assignments</h3><div id="training-queue"></div>
+          <section id="training-carried-panel" class="training-carried" aria-labelledby="training-carried-heading" hidden>
+            <h4 id="training-carried-heading">Added to today</h4>
+            <p class="training-small">Selected by you for today, saved across devices. Start each when ready. Original instructions and progress stay with its source assignment. Tomorrow these return to earlier work if still unfinished.</p>
+            <div id="training-carried"></div>
+          </section>
         </div>
         <div id="training-deferred"></div>
         <div id="training-blocked"></div>
@@ -116,7 +122,7 @@ import "../../styles/cw-training.css";
           <p class="training-small">These are still available before class, but they do not hold today's work back. Choose what is useful; ask your instructor which missed exercises to prioritize.</p>
           <div id="training-earlier"></div>
         </details>
-        <details id="training-extra-panel" class="training-section" hidden>
+        <details id="training-extra-panel" class="training-section" open hidden>
           <summary>Keep practicing: extra review</summary>
           <p class="training-small">Optional blocks add to your practice time, not assignment completion. There is no 60-minute limit.</p>
           <div id="training-extra"></div>
@@ -233,7 +239,7 @@ import "../../styles/cw-training.css";
           <section id="training-runner-embedded" class="training-section" aria-labelledby="training-runner-embedded-heading" hidden>
             <h3 id="training-runner-embedded-heading">Practice here</h3>
             <p id="training-runner-status" class="training-small" role="status"></p>
-            <p class="training-small">Mode, speed, duration, and band conditions follow the assignment automatically. A keyboard is recommended. Click inside the simulator before using its shortcuts. These are synthetic practice calls, not on-air contacts.</p>
+            <p class="training-small">The assignment supplies starting defaults. Change mode, duration, activity, or conditions before Run; adjust CW Speed before or during a run. Actual settings are recorded. A keyboard is recommended. Click inside the simulator before using shortcuts. These are synthetic practice calls, not on-air contacts.</p>
             <div id="training-runner-frame-host"></div>
             <p id="training-runner-result" class="training-small" hidden></p>
           </section>

@@ -1,4 +1,6 @@
 import { upcomingCwSessions, type CwSession } from "../cw-practice.ts";
+import { isMorseRunner } from "./morse-runner.ts";
+import { runnerSettings } from "./runner-bridge.ts";
 import type { TrainingAssignment, TrainingAttempt, TrainingCourse, TrainingMeeting, TrainingResource, TrainingTask } from "./types.ts";
 
 export type PracticeMode = "anything" | "listen" | "send" | "computer";
@@ -36,6 +38,7 @@ export interface PlannedTask {
   windows?: CwSession[];
   availableNow?: boolean;
   extra?: boolean;
+  carried?: boolean;
 }
 
 export interface TrainingPlan {
@@ -51,6 +54,8 @@ export interface TrainingPlan {
   missed: PlannedTask[];
   liveUpcoming: PlannedTask[];
   extras: PlannedTask[];
+  /** Always discoverable, even when activity filters don't recommend it. */
+  runnerReview?: PlannedTask;
   next?: PlannedTask;
 }
 
@@ -174,7 +179,7 @@ function extraPractice(
 
   const candidates = assignments.filter((assignment) => assignment.date <= date)
     .flatMap((assignment) => assignment.tasks
-      .filter((task) => task.kind !== "live" && matchesPracticeMode(task, mode) && !requiredIds.has(task.id))
+      .filter((task) => task.kind !== "live" && !isMorseRunner(task) && matchesPracticeMode(task, mode) && !requiredIds.has(task.id))
       .map((task) => {
         // Reviews retain their original IDs and instructions, but their own
         // block starts with fresh passes. The saved attempt has review: true.
@@ -212,12 +217,26 @@ function extraPractice(
   });
 }
 
+function runnerReview(course: TrainingCourse, date: string, blockMinutes: BlockMinutes, now: Date): PlannedTask | undefined {
+  const candidates = course.assignments.flatMap((assignment) => assignment.tasks
+    .filter((task) => !!runnerSettings(task)).map((task) => ({ assignment, task })))
+    .sort((a, b) => a.assignment.date.localeCompare(b.assignment.date));
+  // Before the first scheduled simulator, offer its introductory exercise as
+  // optional practice. Never pull in a future, more advanced WPX assignment.
+  const source = candidates.filter((item) => item.assignment.date <= date).at(-1)
+    ?? candidates.find((item) => runnerSettings(item.task)?.mode === "SingleCall");
+  if (!source) return undefined;
+  const item = plannedTask(course, source.assignment, source.task, [], blockMinutes, now);
+  return { ...item, extra: true, suggestedMinutes: blockMinutes,
+    reason: "Optional computer practice. Adjust the settings before Run; this does not complete the source assignment." };
+}
+
 /**
  * Derive today's work without rolling old sessions into a permanent backlog.
  * Assignments retain their dates after a class begins, so Monday evening cannot
  * become Tuesday's required practice day or reset the same day's minute goal.
  */
-export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: BlockMinutes = 15, mode: PracticeMode = "anything"): TrainingPlan {
+export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: BlockMinutes = 15, mode: PracticeMode = "anything", carriedTasks: { taskId: string; date: string }[] = []): TrainingPlan {
   if (!Number.isFinite(now.getTime())) throw new Error("A valid planning date is required.");
   const date = dateInTimezone(now, course.timezone);
   const sortedAssignments = [...course.assignments].sort((a, b) => a.date.localeCompare(b.date));
@@ -235,6 +254,7 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
   const practicedSeconds = uniqueAttempts(attempts).filter((attempt) => attempt.context === "practice" && dateInTimezone(attempt.startedAt, course.timezone) === date)
     .reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
   const result: TrainingPlan = { date, assignment, meeting, nextMeeting, phase, practicedMinutes: practicedSeconds / 60, dailyGoalMinutes: assignment ? course.dailyGoalMinutes : 0, queue: [], blocked: [], missed: [], liveUpcoming: [], extras: [] };
+  const carriedIds = new Set(carriedTasks.filter((item) => item.date === date).map((item) => item.taskId));
 
   if (phase === "practice" && assignment) {
     const eligible = sortedAssignments.filter((candidate) => candidate.session === assignment.session && candidate.date <= date);
@@ -247,30 +267,43 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
     result.blocked = candidates.filter((item) => !fits(item, blockMinutes));
   }
 
-  const lastClass = [...meetings].reverse().find((candidate) => new Date(candidate.startsAt).getTime() <= now.getTime());
-  if (lastClass) {
-    result.missed = sortedAssignments.filter((candidate) => candidate.session === lastClass.session)
-      .flatMap((candidate) => candidate.tasks.filter((task) => !task.optional && !taskProgress(task, attempts).complete && !leftMissed(task, attempts)).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
-  }
+  // Pins change today's presentation, never the source assignment or history.
+  // Explicitly adding a dismissed exercise opts back into it without rewriting
+  // the old dismissal record. Expired pins simply stop selecting that task.
+  const carried = sortedAssignments.filter((candidate) => candidate.date <= date)
+    .flatMap((candidate) => candidate.tasks.filter((task) => carriedIds.has(task.id) && !taskProgress(task, attempts).complete)
+      .map((task) => ({ ...plannedTask(course, candidate, task, attempts, blockMinutes, now), carried: true })));
+  const selected = new Map([...result.queue, ...result.blocked, ...carried].map((item) => [item.task.id, item]));
+  const candidates = [...selected.values()].sort((a, b) =>
+    Number(b.assignment.date === date && !b.carried) - Number(a.assignment.date === date && !a.carried) ||
+    Number(!!b.carried) - Number(!!a.carried) ||
+    a.assignment.date.localeCompare(b.assignment.date) || Number(b.started) - Number(a.started));
+  result.queue = candidates.filter((item) => fits(item, blockMinutes));
+  result.blocked = candidates.filter((item) => !fits(item, blockMinutes));
+  result.missed = sortedAssignments.filter((candidate) => new Date(candidate.dueAt).getTime() <= now.getTime())
+    .flatMap((candidate) => candidate.tasks.filter((task) => !selected.has(task.id) && !task.optional && !taskProgress(task, attempts).complete && !leftMissed(task, attempts))
+      .map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
 
   const upcomingLimit = now.getTime() + 7 * 86_400_000;
   result.liveUpcoming = sortedAssignments.filter((candidate) => new Date(candidate.dueAt).getTime() > now.getTime() && new Date(candidate.dueAt).getTime() <= upcomingLimit)
     .flatMap((candidate) => candidate.tasks.filter((task) => task.kind === "live" && !taskProgress(task, attempts).complete).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
+  result.runnerReview = runnerReview(course, date, blockMinutes, now);
   if (phase !== "class") {
     result.extras = extraPractice(course, sortedAssignments, attempts, date, blockMinutes, mode, now,
       new Set([...result.queue, ...result.blocked].map((item) => item.task.id)));
-    result.next = result.queue.find((item) => matchesPracticeMode(item.task, mode)) ?? result.extras[0];
+    result.next = result.queue.find((item) => matchesPracticeMode(item.task, mode)) ?? result.extras[0]
+      ?? (result.runnerReview && matchesPracticeMode(result.runnerReview.task, mode) ? result.runnerReview : undefined);
   }
   return result;
 }
 
 /** Short choices appear only when a matching whole exercise or review can fit. */
-export function availableBlockMinutes(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), mode: PracticeMode = "anything"): BlockMinutes[] {
+export function availableBlockMinutes(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), mode: PracticeMode = "anything", carriedTasks: { taskId: string; date: string }[] = []): BlockMinutes[] {
   const shortChoices: BlockMinutes[] = [3, 5];
   return [
     ...shortChoices.filter((minutes) => {
-      const plan = getTrainingPlan(course, attempts, now, minutes, mode);
-      return plan.phase !== "class" && [...plan.queue, ...plan.extras].some((item) => matchesPracticeMode(item.task, mode));
+      const plan = getTrainingPlan(course, attempts, now, minutes, mode, carriedTasks);
+      return plan.phase !== "class" && [...plan.queue, ...plan.extras, ...(plan.runnerReview ? [plan.runnerReview] : [])].some((item) => matchesPracticeMode(item.task, mode));
     }),
     10,
     15,

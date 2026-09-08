@@ -94,13 +94,90 @@ test("class boundaries preserve today's quota and never start tomorrow's require
   assert.ok(nextDay.missed.every((item) => item.assignment.session === 1));
 });
 
-test("missed work is explicit, bounded to the previous class, and never silently complete", () => {
+test("missed work remains available across previous classes and never silently completes", () => {
   const course = fixtureCourse();
   const left = attempt("send", { completed: false, note: "[Left missed]" });
   const plan = getTrainingPlan(course, [left], new Date("2026-09-10T21:00:00Z"));
-  assert.ok(plan.missed.every((item) => item.assignment.session === 2));
+  assert.deepEqual([...new Set(plan.missed.map((item) => item.assignment.session))], [1, 2]);
+  assert.ok(!plan.missed.some((item) => item.task.id === "send"));
   assert.equal(taskProgress(course.assignments[0].tasks[0], [left]).complete, false);
   assert.equal(taskProgress(course.assignments[0].tasks[0], [left]).interrupted, false);
+});
+
+test("adding old work to today preserves its assignment and progress without recording practice", () => {
+  const course = fixtureCourse();
+  const now = new Date("2026-09-08T12:00:00Z");
+  const history = [attempt("audio", { completed: false, activeSeconds: 443, completedPasses: 1 })];
+  const before = structuredClone({ course, history });
+  const pinned = [{ taskId: "audio", date: "2026-09-08" }, { taskId: "audio", date: "2026-09-08" }];
+  const plan = getTrainingPlan(course, history, now, 15, "anything", pinned);
+  assert.equal(plan.next.task.id, "send3", "today's required work stays first");
+  assert.deepEqual(plan.queue.map((item) => item.task.id), ["send3", "audio"]);
+  const item = plan.queue.find((item) => item.carried);
+  assert.equal(item.assignment.id, "s1d1");
+  assert.equal(item.assignment.date, "2026-09-05");
+  assert.equal(item.task, course.assignments[0].tasks[1]);
+  assert.equal(item.remainingPasses, 1);
+  assert.equal(item.activeSeconds, 443);
+  assert.equal(plan.practicedMinutes, 0);
+  assert.ok(!plan.missed.some((entry) => entry.task.id === "audio"));
+  assert.deepEqual({ course, history }, before, "selection never mutates curriculum/history");
+});
+
+test("carried work stays in the plan across filters, class/rest windows, and original dismissals", () => {
+  const course = fixtureCourse();
+  const pin = [{ taskId: "run", date: "2026-09-08" }];
+  const history = [attempt("run", { activeSeconds: 0, completed: false, note: "[Left missed]" })];
+  const short = getTrainingPlan(course, history, new Date("2026-09-08T12:00:00Z"), 3, "listen", pin);
+  assert.equal(short.blocked.find((item) => item.task.id === "run").carried, true);
+  assert.equal(short.next, undefined, "a computer carry never becomes a listening recommendation");
+  for (const stamp of ["2026-09-07T19:45:00Z", "2026-09-07T21:00:00Z", "2026-09-11T12:00:00Z"]) {
+    const date = stamp.slice(0, 10);
+    const plan = getTrainingPlan(course, history, new Date(stamp), 15, "computer", [{ taskId: "run", date }]);
+    assert.equal(plan.queue.find((item) => item.task.id === "run").carried, true);
+    if (plan.phase === "class") assert.equal(plan.next, undefined);
+  }
+});
+
+test("carry pins deduplicate natural queues and expire by course date without erasing progress", () => {
+  const course = fixtureCourse();
+  const pinned = [{ taskId: "audio", date: "2026-09-07" }];
+  const monday = getTrainingPlan(course, [], new Date("2026-09-07T12:00:00Z"), 15, "anything", pinned);
+  assert.equal(monday.queue.filter((item) => item.task.id === "audio").length, 1);
+  assert.equal(monday.queue.find((item) => item.task.id === "audio").carried, true);
+  const stillMonday = getTrainingPlan(course, [], new Date("2026-09-08T02:00:00Z"), 15, "anything", pinned);
+  assert.equal(stillMonday.queue.find((item) => item.task.id === "audio").carried, true);
+  const tuesday = getTrainingPlan(course, [], new Date("2026-09-08T12:00:00Z"), 15, "anything", pinned);
+  assert.ok(!tuesday.queue.some((item) => item.carried));
+  assert.ok(tuesday.missed.some((item) => item.task.id === "audio"));
+  const done = getTrainingPlan(course, [attempt("audio")], new Date("2026-09-07T12:00:00Z"), 15, "anything", pinned);
+  assert.ok(!done.queue.some((item) => item.carried));
+  const invalid = getTrainingPlan(course, [], new Date("2026-09-05T12:00:00Z"), 15, "anything", [{ taskId: "run", date: "2026-09-05" }, { taskId: "missing", date: "2026-09-05" }]);
+  assert.ok(!invalid.queue.some((item) => item.carried), "unknown and future source tasks cannot be pinned");
+});
+
+test("Morse Runner review is always discoverable, including short blocks and pending assignments", () => {
+  const course = fixtureCourse();
+  const runner = course.assignments[1].tasks[0];
+  Object.assign(runner, { title: "Morse Runner", instructions: "Single calls at 10 WPM.", speedWpm: 10 });
+  for (const stamp of ["2026-09-05T12:00:00Z", "2026-09-06T12:00:00Z", "2026-09-07T19:45:00Z", "2026-09-07T21:00:00Z", "2026-09-11T12:00:00Z"]) {
+    for (const minutes of [3, 5, 10, 15]) for (const mode of ["anything", "computer", "listen", "send"]) {
+      const plan = getTrainingPlan(course, [], new Date(stamp), minutes, mode);
+      assert.equal(plan.runnerReview.task.id, runner.id);
+      assert.equal(plan.runnerReview.extra, true);
+      assert.equal(plan.runnerReview.suggestedMinutes, minutes);
+      assert.ok(!plan.extras.some((item) => item.task.id === runner.id), "dedicated review doesn't duplicate filtered extras");
+      if (plan.phase === "class") assert.equal(plan.next, undefined);
+      else if (mode === "listen" || mode === "send") assert.notEqual(plan.next?.task.id, runner.id);
+    }
+  }
+  const now = new Date("2026-09-06T12:00:00Z");
+  assert.deepEqual(availableBlockMinutes(course, [], now, "computer"), [3, 5, 10, 15]);
+  const short = getTrainingPlan(course, [], now, 3, "computer");
+  assert.ok(short.blocked.some((item) => item.task.id === runner.id), "required uninterrupted run stays blocked");
+  const history = [attempt("run", { review: true, activeSeconds: 900 })];
+  assert.equal(taskProgress(runner, history).complete, false);
+  assert.ok(getTrainingPlan(course, history, now, 15, "computer").runnerReview);
 });
 
 test("unknown audio duration remains explicit and unresolved files stay blocked", () => {

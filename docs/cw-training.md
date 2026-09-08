@@ -43,6 +43,22 @@ preparation for the same session appears separately from today's work. The
 next session advances by date, without completing or skipping older objectives;
 all assignments remain accessible in Week.
 
+Unfinished work from previous classes includes all past-due classes, not just
+the latest one. Add to today selects an exercise without starting a timer or
+recording an attempt. It appears in the visible Added to today section even if
+it needs a different activity or more time than currently selected. Its original
+assignment, instructions, saved passes, and practice history stay unchanged.
+Today's scheduled exercises remain the first automatic suggestions. Practice
+now starts an old exercise immediately instead of adding it to today's list.
+
+Added items sync across devices and apply only to the selected course date in
+`America/New_York`. Remove from today removes only the selection; completion
+also removes an item from the actionable list. At the next course date, an
+unfinished item returns to its normal earlier-work location unless its reminder
+was previously dismissed. Dismiss reminder hides a reminder, not the assignment
+or its history; explicitly adding a dismissed item opts back into it for today.
+There is no requirement to clear or dismiss the backlog.
+
 Practice minutes and assignment coverage are separate. Whole audio passes are
 packed into blocks; seeking past an unheard section does not complete a pass.
 Coverage and the final completion check-in are both required. A prescribed
@@ -51,14 +67,21 @@ Exercises requiring other equipment stay visibly pending; changing the activity
 choice never changes coverage.
 If no unfinished assignment fits, optional review offers another suitable block,
 including after 60 minutes and on rest days. It uses the current/recent course
-material at its selected recording speed and rotates through suitable exercises. It does
-not automatically preview future assignments or mark them complete. Extra
+material at its selected recording speed and rotates through suitable exercises.
+It does not automatically preview future audio assignments or mark them complete. Extra
 review is labeled in Focus and history; its minutes count toward the day but
 its attempts and passes do not count toward required assignment coverage.
-Review respects full audio passes and uninterrupted simulator runs, and never
-substitutes an unresolved or unmeasured recording. During class, the class view
-takes precedence. Live CWT tasks show eligible operating windows and are
-recommended only while a window is active.
+Audio review respects full passes and never substitutes an unresolved or
+unmeasured recording. A dedicated Morse Runner review stays visible in every
+activity mode, including while assignments are pending, during class, on rest
+days, and after the course. It starts with the selected 3-, 5-, 10-, or 15-minute
+block and allows settings changes before Run. It uses the most recent runner
+exercise, or the introductory Single Call exercise before the first scheduled
+runner assignment. These short reviews never complete a required simulator run.
+Automatic suggestions still respect the selected activity: Runner is suggested
+only for Anything or Computer. During class, the class view takes precedence
+over automatic independent-practice recommendations. Live CWT tasks show eligible
+operating windows and are recommended only while a window is active.
 
 The daily minute goal is a baseline, not a cap or a replacement for sending
 and other assigned activities. To switch activities with a saved block, choose
@@ -112,8 +135,11 @@ in Today, Week, and Focus. Focus adds a compact setup reminder and expandable
 operating reference. The instructor-recommended
 [Web Morse Runner](https://fritzsche.github.io/WebMorseRunner/) runs in a locally
 hosted, version-pinned iframe. Single Call and WPX Contest map from the original
-curriculum without changing assigned speed, duration, or activity. Those settings
-and the disabled band conditions are applied and locked for each assigned run.
+curriculum without rewriting assigned speed, duration, or activity. These are
+starting defaults, not locked settings: mode, duration, activity, and band
+conditions can change before Run, and CW Speed can change before or during a
+run. The tracker records what was actually used, independently of the original
+instructions.
 The user enters their station call and comfortable pitch, then explicitly clicks
 Run to activate audio. No course content or authentication tokens go into the
 message protocol. The frame isolates keyboard handling and styles, not security.
@@ -125,10 +151,16 @@ CQ WPX contest selector in the web interface.
 The embedded engine's elapsed seconds are the only timer for these blocks; setup
 and stopped time do not count. Finish block stops and awaits final results before
 opening the save dialog. The existing database note automatically records mode,
-speed, duration, activity/conditions, QSOs, Verified Pts, verified score, NR/NIL
-errors, and upstream revision. Only a full uninterrupted run permits completion;
-multiple partial runs never combine into an assigned full run. Extra-review
-attempts continue to be separate from required coverage.
+starting speed, engine-timestamped speed changes, chosen duration,
+activity/conditions, QSOs, Verified Pts, verified score, NR/NIL errors, and upstream
+revision. Long speed-change histories use a bounded summary plus the distinct
+speeds used so automatic notes remain within their size limit. Completing a
+chosen run is separate from completing its assignment: required credit needs a
+full uninterrupted run in the original assigned mode lasting at least the
+assigned duration. WPM may vary; a shorter run or different mode records useful
+practice but leaves the assignment incomplete. Multiple partial runs never
+combine into an assigned full run. Extra-review attempts remain separate from
+required coverage regardless of their duration or settings.
 
 Leaving Focus, switching apps, and page reload interrupt a run. Upstream cannot
 resume a contest, so save its partial time before starting another. A missing
@@ -159,7 +191,12 @@ extra practice; omitted values preserve the original required-practice behavior.
 It uses the existing sync endpoint and JSON storage without a schema migration.
 Attempts and material revisions are immutable and
 idempotent by ID. Preferences use their update timestamp to resolve stale
-device writes. API responses use `private, no-store`; mutations require a
+device writes. The optional `preferences.carriedTasks` array stores bounded,
+unique `{ taskId, date }` selections using known course tasks and real calendar
+dates. It uses the existing preference JSON/API, with no database migration or
+new practice attempts. Older clients that omit this field preserve existing
+selections; an explicit empty array clears them under the same timestamp rule.
+API responses use `private, no-store`; mutations require a
 same-origin JSON request with bounded input. The Worker verifies the Access
 JWT's signature, issuer, audience, expiry, and configured owner email. Client
 identity headers cannot enroll another user.
@@ -278,7 +315,10 @@ Run `npm test`, `npm run check:training`, `mise run check`, `mise run build`, an
 with `npx wrangler types --strict-vars=false`. Also check the live page at phone
 and desktop widths, pause/reload/resume, audio seeking and complete passes,
 offline logging/reconnect, instructor text revisions, calendar revocation,
-and unauthenticated API rejection before declaring a rollout ready.
+and unauthenticated API rejection before declaring a rollout ready. Verify
+Add to today/remove across filters, reload, and the Eastern date boundary;
+Runner review discoverability; editable starting settings and mid-run speed;
+and separate review, partial-run, and assignment-completion credit.
 
 The owner first-use verification and real-phone playback checks are tracked
 in [issue #14](https://github.com/rwjblue/rwjblue.com/issues/14).

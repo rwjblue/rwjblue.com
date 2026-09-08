@@ -74,8 +74,10 @@ affected generated files before retrying, without removing local integration wor
 4. Update `scripts/web-morse-runner/approved.json` with the reviewed SHA/hashes,
    then run the explicit-SHA update command. Re-run the offline check and tests.
 5. Verify Single Call and WPX assignments in a browser, including keyboard input,
-   user-activated audio, partial/completed runs, final results, hidden tabs, and
-   no duplicate practice credit. Run the normal site validation before deployment.
+   user-activated audio, editable starting settings, mid-run CW Speed changes,
+   short optional reviews, partial/completed runs, final results, hidden tabs,
+   and no duplicate or incorrect required-practice credit. Run the normal site
+   validation before deployment.
 
 No automatic remote-code updates occur at page load, build time, or deployment.
 If the new revision changes integration contracts, stop and review; do not add a
@@ -113,9 +115,31 @@ small, validated parent-message protocol rather than exposing the parent tracker
 to arbitrary simulator commands or scraping DOM score strings. Keep authentication
 credentials and private course content out of the frame.
 
+The tracker supplies the assignment's starting defaults, not immutable settings.
+Users may edit mode, duration, activity, and band conditions before Run. CW Speed
+is editable before and during a run. The adapter snapshots the actual settings
+when audio starts and reports later speed changes with engine timestamps. The
+parent checks frame identity and origin, then validates protocol messages, run
+identity, event sequence, and monotonic elapsed time before accepting updates.
+Actual settings and a bounded speed-change history are saved in the existing
+attempt note; the source assignment and original instructions are not rewritten.
+
+Today exposes a dedicated optional Runner review even if other assignments are
+unfinished or the selected activity is Listen or Send. Review starts at the
+selected 3-, 5-, 10-, or 15-minute length with editable defaults. Its visibility
+is independent of recommendation filtering: automatic suggestions offer Runner
+only for Anything or Computer, and class time suppresses automatic practice
+suggestions. Before the first scheduled Runner exercise, review uses introductory
+Single Call settings rather than a future advanced WPX assignment.
+
 The upstream engine has no durable contest-state restore or public integration
 API. Starting a new contest clears the log/transcript; stopping closes its audio
 context. Adapter timing must use cumulative engine seconds, not add a second
-parent stopwatch, and must distinguish a complete uninterrupted assigned run
-from multiple partial attempts. The parent remains responsible for saving
-practice once and preserving the existing required-versus-extra-review rules.
+parent stopwatch. Protocol completion describes the chosen run, not necessarily
+the assignment: required credit needs a complete uninterrupted run in the
+original mode lasting at least the assigned duration. A changed WPM is allowed;
+a shorter run or different mode leaves the assignment incomplete. Multiple
+partial attempts cannot satisfy that uninterrupted duration. Every review attempt
+has `review: true` and contributes practice time without completing required
+work. The parent remains responsible for saving each attempt once and preserving
+these required-versus-extra-review rules.

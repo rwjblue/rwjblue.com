@@ -1,12 +1,18 @@
 // Local adapter for the pinned upstream runtime. Keep this wire schema aligned
 // with src/lib/cw-training/runner-bridge.ts; no lesson text or identity crosses it.
 export const CHANNEL = "cw-training-runner";
-export const VERSION = 1;
+export const VERSION = 2;
 const conditionKeys = ["qrm", "qrn", "qsb", "flutter", "lids"];
-const assignedIds = ["mode", "wpm", "time", "activity", ...conditionKeys, "expert_config"];
+const setupIds = ["mode", "time", "activity", ...conditionKeys];
 const record = value => typeof value === "object" && value !== null && !Array.isArray(value);
 const exact = (value, keys) => Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 const integer = (value, min, max) => Number.isSafeInteger(value) && value >= min && value <= max;
+
+const validSettings = settings => record(settings) && exact(settings, ["mode", "wpm", "durationSeconds", "activity", "conditions"])
+  && ["SingleCall", "WPX"].includes(settings.mode) && integer(settings.wpm, 10, 60)
+  && integer(settings.durationSeconds, 60, 6000) && integer(settings.activity, 1, 9)
+  && record(settings.conditions) && exact(settings.conditions, conditionKeys)
+  && conditionKeys.every(key => typeof settings.conditions[key] === "boolean");
 
 export function parseRunnerCommand(value) {
   if (!record(value) || value.channel !== CHANNEL || value.version !== VERSION
@@ -15,11 +21,7 @@ export function parseRunnerCommand(value) {
   if (value.type === "stop" && exact(value, ["channel", "version", "type", "runId"])) return base;
   if (value.type !== "configure" || !exact(value, ["channel", "version", "type", "runId", "settings"])) return undefined;
   const settings = value.settings;
-  if (!record(settings) || !exact(settings, ["mode", "wpm", "durationSeconds", "activity", "conditions"])
-    || !["SingleCall", "WPX"].includes(settings.mode) || !integer(settings.wpm, 10, 60)
-    || !integer(settings.durationSeconds, 60, 6000) || !integer(settings.activity, 1, 9)
-    || !record(settings.conditions) || !exact(settings.conditions, conditionKeys)
-    || !conditionKeys.every(key => typeof settings.conditions[key] === "boolean")) return undefined;
+  if (!validSettings(settings)) return undefined;
   return { ...base, settings: { ...settings, conditions: { ...settings.conditions } } };
 }
 
@@ -41,6 +43,7 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
   const runButton = doc.getElementById("run");
   const originalStart = view.startContest.bind(view);
   const originalToggle = view.toggleNoRunFields.bind(view);
+  const originalUpdate = view._config.update.bind(view._config);
   let configured;
   let sequence = -1;
   let ready = false;
@@ -53,14 +56,20 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
   let elapsedSeconds = 0;
   let heartbeat;
   let audioStateChanged;
+  let actualSettings;
+  let lastWpm;
 
   const send = (type, extra = {}) => {
     if (!configured) return;
     parent.postMessage({ channel: CHANNEL, version: VERSION, runId: configured.runId,
       type, sequence: ++sequence, elapsedSeconds, ...extra }, origin);
   };
-  const lockSettings = () => {
-    for (const id of assignedIds) doc.getElementById(id).disabled = true;
+  const syncControls = () => {
+    for (const id of setupIds) doc.getElementById(id).disabled = !ready || used || terminal;
+    doc.getElementById("wpm").disabled = !ready || terminal || (used && !started);
+    const expert = doc.getElementById("expert_config");
+    expert.disabled = true;
+    expert.title = "Expert timing settings are not supported by the tracker's measured runs. Use the standalone runner for these options.";
   };
   const enableSending = enabled => {
     for (const button of doc.querySelectorAll(".send button")) button.disabled = !enabled;
@@ -69,7 +78,7 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
     if (!started) return 0;
     const elapsed = view.ctx.currentTime - view.start_time;
     if (!Number.isFinite(elapsed) || elapsed < elapsedSeconds) throw new Error("Invalid runner clock");
-    return Math.min(configured.settings.durationSeconds, elapsed);
+    return Math.min(actualSettings.durationSeconds, elapsed);
   };
   const cleanup = () => {
     win.clearTimeout(gestureExpiry);
@@ -86,7 +95,7 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
     runButton.textContent = "Run finished";
     runButton.classList.remove("stop");
     enableSending(false);
-    lockSettings();
+    syncControls();
   };
   const fail = code => {
     if (terminal) return;
@@ -111,7 +120,7 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
     if (!started || terminal) return;
     try {
       elapsedSeconds = engineElapsed();
-      if (elapsedSeconds >= configured.settings.durationSeconds) stop("completed");
+      if (elapsedSeconds >= actualSettings.durationSeconds) stop("completed");
       else send("progress");
     } catch { fail("engine"); }
   };
@@ -120,25 +129,60 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
       wpm: settings.wpm, time: settings.durationSeconds / 60,
       contest_id: settings.mode === "SingleCall" ? "single" : "wpx", activity: settings.activity,
       ...settings.conditions,
-      // A previous standalone run must not change the assigned timing/speed.
+      // Reset unsupported expert options; the ordinary fields remain editable.
       min_dx: 0, max_dx: 0, dx_wpm_type: "standard", dx_min_wpm: settings.wpm,
       dx_max_wpm: settings.wpm, farnsworth: false, farnsworth_eff_wpm: null, contest_start_offset_min: 0,
     });
     view._config.update_dom();
     view._config.update();
-    lockSettings();
+    syncControls();
   };
 
-  // Upstream toggles these fields and changes WPM with keyboard shortcuts.
-  // Always retain the assigned values in embedded mode.
-  view.toggleNoRunFields = () => { originalToggle(); lockSettings(); };
-  view._config.updateWPM = () => {};
+  const selectedSettings = () => {
+    const config = view._config._config;
+    return {
+      mode: config.contest_id === "single" ? "SingleCall" : config.contest_id === "wpx" ? "WPX" : undefined,
+      wpm: Number(config.wpm), durationSeconds: Number(config.time) * 60, activity: Number(config.activity),
+      conditions: Object.fromEntries(conditionKeys.map(key => [key, config[key]])),
+    };
+  };
+  // These are the two modes whose results the tracker currently understands.
+  for (const option of [...doc.getElementById("mode").options]) {
+    if (!["single", "wpx"].includes(option.value)) option.remove();
+  }
+  // Preserve upstream speed changes (including keyboard shortcuts), but keep
+  // mode/duration fixed after Run so one continuous run has a coherent result.
+  view.toggleNoRunFields = () => { originalToggle(); syncControls(); };
+  view._config.update = (...args) => {
+    // Number inputs briefly become empty while typing. Do not send invalid
+    // speeds to the running audio engine during that intermediate state.
+    if (started && !terminal && !integer(Number(doc.getElementById("wpm").value), 10, 60)) return;
+    originalUpdate(...args);
+    if (!started || terminal) return;
+    const wpm = Number(view._config._config.wpm);
+    if (wpm === lastWpm) return;
+    try {
+      if (!integer(wpm, 10, 60)) throw new Error("Invalid speed");
+      elapsedSeconds = engineElapsed();
+      lastWpm = wpm;
+      send("speed", { wpm });
+    } catch { fail("engine"); }
+  };
   view.startContest = async () => {
     if (view.running || !ready || used || terminal || !runGesture) return;
     runGesture = false;
     win.clearTimeout(gestureExpiry);
+    view._config.read_dom();
+    const selected = selectedSettings();
+    if (!validSettings(selected)) {
+      for (const id of ["wpm", "time", "activity"]) doc.getElementById(id).reportValidity?.();
+      return;
+    }
+    actualSettings = selected;
+    lastWpm = selected.wpm;
     used = true;
     runButton.disabled = true;
+    syncControls();
     try {
       await originalStart();
       if (terminal) { cleanup(); return; }
@@ -147,8 +191,9 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
         return;
       }
       started = true;
-      send("started");
+      send("started", { settings: actualSettings });
       runButton.disabled = false;
+      syncControls();
       enableSending(true);
       audioStateChanged = () => {
         if (!terminal && view.ctx.state !== "running") fail("interrupted");
@@ -160,7 +205,7 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
   };
   view.stopContest = () => {
     if (!started) { stop("stopped"); return; }
-    try { stop(!explicitStop && engineElapsed() >= configured.settings.durationSeconds ? "completed" : "stopped"); }
+    try { stop(!explicitStop && engineElapsed() >= actualSettings.durationSeconds ? "completed" : "stopped"); }
     catch { fail("engine"); }
   };
   const onRunClick = event => {
@@ -175,7 +220,7 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
   runButton.addEventListener("click", onRunClick, true);
   runButton.disabled = true;
   enableSending(false);
-  lockSettings();
+  syncControls();
 
   const onMessage = async event => {
     if (parent === win || event.source !== parent || event.origin !== origin) return;
@@ -195,6 +240,7 @@ export function installRunnerBridge(view, { window: win, document: doc, callsRea
       if (!view.calls.calls?.length) { fail("configuration"); return; }
       ready = true;
       runButton.disabled = false;
+      syncControls();
       send("ready");
     } catch { fail("configuration"); }
   };
