@@ -97,6 +97,13 @@ import "../../styles/cw-training.css";
         </div>
         <p id="training-time-help" class="training-small" role="status"></p>
         <p id="training-mode-help" class="training-small" role="status"></p>
+        <label class="training-speed-preference">Short-recording default
+          <select id="training-audio-preference" aria-describedby="training-speed-help">
+            <option value="assigned">Assigned speed</option>
+            <option value="next">Next faster official recording</option>
+          </select>
+        </label>
+        <p id="training-speed-help" class="training-small">Remembered on this device. Choose a different speed on any exercise before starting. Original instructions stay unchanged; full faster passes count toward the same exercise.</p>
         <div id="training-next" class="training-card training-next"></div>
         <div id="training-preparation"></div>
         <div class="training-section">
@@ -179,6 +186,8 @@ import "../../styles/cw-training.css";
               </div><p id="training-focus-target"></p>
             </div>
             <div id="training-audio-box" hidden>
+              <p id="training-recording-label" class="training-small"></p>
+              <p class="training-small">To change recordings, finish and save this block first. Its time, completed passes, and notes will be kept.</p>
               <p id="training-pass-count" class="training-pass-count"></p>
               <audio id="training-audio" controls preload="metadata"></audio>
               <div class="training-actions">
@@ -413,7 +422,7 @@ import "../../styles/cw-training.css";
             name="complete"
             type="checkbox"
           /> <span id="training-finish-complete-label">I completed this exercise's requirements</span></label
-        ><p id="training-finish-help" class="training-small"></p><label
+        ><p id="training-finish-help" class="training-small"></p><p id="training-finish-recording" class="training-small" hidden></p><label
           >How did it feel? (optional)<select name="difficulty"
             ><option value="">No rating</option><option value="hard"
               >Hard</option

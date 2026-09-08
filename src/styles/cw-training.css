@@ -159,6 +159,19 @@
   font-size: 1.5rem;
   line-height: 1.25;
 }
+.cw-training .training-speed-preference,
+.cw-training .training-speed-choice {
+  max-width: 360px;
+  margin: 12px 0;
+}
+.cw-training .training-speed-choice {
+  font-size: 0.82rem;
+}
+#training-history .training-task p,
+#training-finish-recording {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .training-next .primary {
   min-width: 210px;
 }

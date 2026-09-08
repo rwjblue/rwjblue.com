@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Refresh verified official CW audio variants and measured durations"
+
+set -euo pipefail
+
+node scripts/cw-training/audio-variants.mjs "$@"

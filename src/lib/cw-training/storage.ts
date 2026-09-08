@@ -34,6 +34,9 @@ export interface TrainingDeviceState {
   reading: Record<string, { line: number; size: number }>;
   dismissed: string[];
   practiceMode?: PracticeMode;
+  /** Device-local choices; each active block keeps its own recording snapshot. */
+  audioSpeedPreference?: "assigned" | "next";
+  audioSpeedOverrides?: Record<string, number>;
 }
 
 const databaseName = "n1rwj-cw-training";

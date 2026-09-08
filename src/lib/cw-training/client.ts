@@ -1,6 +1,7 @@
 import { availableBlockMinutes, dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "./plan";
 import type { BlockMinutes, PlannedTask, PracticeMode } from "./plan";
 import { listeningGuidance } from "./guidance";
+import { audioVariants, audioRecordingNote, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { TrainingStorage } from "./storage";
@@ -13,6 +14,7 @@ import type {
   TrainingSnapshot,
   TrainingSync,
   TrainingTask,
+  TrainingResource,
 } from "./types";
 
 const escapeHtml = (value: unknown) =>
@@ -114,13 +116,15 @@ export async function initTraining() {
   let lastSaved = 0;
   let disposed = false;
   const snapshot = () => state.snapshot!;
+  const audioPreference = () => state.audioSpeedPreference === "next" ? "next" as const : "assigned" as const;
+  const practiceCourse = () => courseWithAudioVariants(snapshot().course, audioPreference(), state.audioSpeedOverrides);
   const practiceMode = (): PracticeMode =>
     state.practiceMode && Object.hasOwn(modeHelp, state.practiceMode)
       ? state.practiceMode
       : "anything";
   const plan = () =>
     getTrainingPlan(
-      snapshot().course,
+      practiceCourse(),
       snapshot().attempts,
       new Date(),
       temporaryMinutes ?? snapshot().preferences.blockMinutes,
@@ -310,6 +314,29 @@ export async function initTraining() {
   };
   const assignmentLabel = (assignment: PlannedTask["assignment"]) =>
     `Session ${assignment.session} · Day ${assignment.day} · ${new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(`${assignment.date}T12:00:00Z`))}`;
+  const assignedResource = (task: TrainingTask) => {
+    const original = findTask(task.id)?.task ?? task;
+    return snapshot().course.resources.find((resource) => resource.id === original.resourceId);
+  };
+  const selectedRecording = (task: TrainingTask) => selectAudioVariant(assignedResource(task), task.speedWpm, audioPreference(), state.audioSpeedOverrides?.[task.id]);
+  const recordingLabel = (task: TrainingTask, resource?: TrainingResource) => {
+    if (task.kind !== "audio") return "";
+    const actual = audioVariants(resource).find((variant) => variant.url === resource?.url);
+    return actual
+      ? `Practicing ${actual.speedWpm} WPM${task.speedWpm ? ` · assigned ${task.speedWpm} WPM` : ""}`
+      : resource?.title ?? task.title;
+  };
+  const speedChoice = (task: TrainingTask) => {
+    if (task.kind !== "audio") return "";
+    const resource = assignedResource(task);
+    if (resource?.unresolved || !task.speedWpm) return "";
+    const choices = audioVariants(resource).filter((variant) => variant.speedWpm >= task.speedWpm!);
+    if (choices.length < 2) return "";
+    const defaultVariant = selectAudioVariant(resource, task.speedWpm, audioPreference());
+    const defaultSpeed = choices.find((variant) => variant.url === defaultVariant?.url)?.speedWpm ?? task.speedWpm;
+    const override = choices.some((variant) => variant.speedWpm === state.audioSpeedOverrides?.[task.id]) ? state.audioSpeedOverrides?.[task.id] : undefined;
+    return `<label class="training-speed-choice">Recording speed for ${escapeHtml(task.title)}<select data-audio-speed="${escapeHtml(task.id)}"${state.active ? " disabled" : ""}><option value=""${override === undefined ? " selected" : ""}>Use default (${defaultSpeed} WPM)</option>${choices.map((variant) => `<option value="${variant.speedWpm}"${override === variant.speedWpm ? " selected" : ""}>${variant.speedWpm} WPM${variant.speedWpm === task.speedWpm ? " (assigned)" : " (stretch)"}${variant.durationSeconds ? ` · ${time(variant.durationSeconds)} per pass` : ""}</option>`).join("")}</select></label>`;
+  };
   const progressMarkup = (task: TrainingTask, review = false) => {
     const active = state.active?.task.id === task.id && !!state.active.review === review ? state.active : undefined;
     if (active)
@@ -324,7 +351,7 @@ export async function initTraining() {
   };
   const blockDescription = (item: PlannedTask) =>
     item.task.kind === "audio" && Number.isFinite(item.resource?.durationSeconds) && (item.resource?.durationSeconds ?? 0) > 0
-      ? `${time(item.resource!.durationSeconds!)} per pass · ${item.passesThisBlock ?? 1} pass${item.passesThisBlock === 1 ? "" : "es"} this block (about ${item.suggestedMinutes} min)`
+      ? `${recordingLabel(item.task, item.resource)} · ${time(item.resource!.durationSeconds!)} per pass · ${item.passesThisBlock ?? 1} pass${item.passesThisBlock === 1 ? "" : "es"} this block (about ${item.suggestedMinutes} min)`
       : `${item.suggestedMinutes}-minute ${item.task.kind === "simulator" ? "uninterrupted run" : "practice block"}`;
   const buttons = (taskId: string, missed = false, unavailable = false) => {
     const current = state.active?.task.id === taskId && !state.active.review;
@@ -343,7 +370,7 @@ export async function initTraining() {
             )
             .join("; ")}</p>`
         : ""
-    }${runnerGuideLink(item.task)}</div>${item.extra ? `<button type="button" data-review="${escapeHtml(item.task.id)}">Extra review</button>` : buttons(item.task.id, missed, item.task.kind === "live" && !item.availableNow)}</div>`;
+    }${speedChoice(item.task)}${runnerGuideLink(item.task)}</div>${item.extra ? `<button type="button" data-review="${escapeHtml(item.task.id)}">Extra review</button>` : buttons(item.task.id, missed, item.task.kind === "live" && !item.availableNow)}</div>`;
 
   function setView(next: string) {
     view = next;
@@ -359,9 +386,12 @@ export async function initTraining() {
   }
   function render() {
     if (!state.snapshot) return;
+    // Keep the user's place in Week when speed choices or sync rerender it.
+    const weekDetails = [...$("training-meetings").querySelectorAll<HTMLDetailsElement>("details")];
+    const expandedWeekDetails = new Set(weekDetails.flatMap((detail, index) => detail.open ? [index] : []));
     $("training-app").hidden = false;
     $("training-auth").hidden = true;
-    const course = snapshot().course;
+    const course = practiceCourse();
     const mode = practiceMode();
     const now = new Date();
     const choices = availableBlockMinutes(course, snapshot().attempts, now, mode);
@@ -378,6 +408,7 @@ export async function initTraining() {
       button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
     });
     $("training-mode-help").textContent = modeHelp[mode];
+    $<HTMLSelectElement>("training-audio-preference").value = audioPreference();
     $<HTMLSelectElement>("training-block-now").innerHTML = choices.map((minutes) => `<option value="${minutes}">${minutes} minutes</option>`).join("");
     $<HTMLSelectElement>("training-block-now").value = String(selectedMinutes);
     $("training-time-help").textContent = `${adjustedTime ? `No ${previousMinutes}-minute option fits this activity now; showing ${selectedMinutes} minutes. ` : ""}Audio fits when one whole pass fits. Other repeats can wait for another block. Short choices appear only when suitable practice is available.`;
@@ -444,6 +475,10 @@ export async function initTraining() {
     if (!state.active && mode === "anything" && current.phase !== "class" && preparation.length && (!next || next.task.optional))
       $("training-next").innerHTML =
         `<p class="eyebrow">Instructor preparation · Session ${preparation[0].session}</p><h3>${escapeHtml(preparation[0].title)}</h3><p>This additional preparation is due before class. Its exact duration depends on the instructor's instructions.</p><button type="button" class="primary" data-practice-material="${preparation[0].id}">Start preparation</button>`;
+    if (!state.active && next) {
+      const startButton = $("training-next").querySelector("button[data-start], button[data-review]");
+      startButton?.insertAdjacentHTML("beforebegin", speedChoice(next.task));
+    }
     const available = todayQueue.filter((item) => matchesPracticeMode(item.task, mode));
     const deferred = todayQueue.filter((item) => !matchesPracticeMode(item.task, mode));
     $("training-queue").innerHTML = available.length
@@ -518,6 +553,13 @@ export async function initTraining() {
             .join("")}</details>`,
       )
       .join("");
+    $("training-meetings").querySelectorAll<HTMLButtonElement>("button[data-start]").forEach((button) => {
+      const task = findTask(button.dataset.start!)?.task;
+      if (task) button.closest(".training-task")?.querySelector("div")?.insertAdjacentHTML("beforeend", speedChoice(task));
+    });
+    $("training-meetings").querySelectorAll<HTMLDetailsElement>("details").forEach((detail, index) => {
+      if (expandedWeekDetails.has(index)) detail.open = true;
+    });
     const upcoming = current.liveUpcoming ?? [];
     if (upcoming.length)
       $("training-meetings").insertAdjacentHTML(
@@ -563,6 +605,7 @@ export async function initTraining() {
     $("training-focus-kind").textContent =
       `${active.review ? "Extra review · " : ""}${active.task.kind}${active.task.speedWpm ? ` · ${active.task.speedWpm} WPM` : ""}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
     $("training-focus-title").textContent = active.task.title;
+    $("training-recording-label").textContent = recordingLabel(active.task, active.resource);
     $("training-focus-objective").textContent = active.review
       ? "Optional reinforcement using the original exercise below. These minutes count, but required assignment progress stays unchanged."
       : active.task.alternative
@@ -614,6 +657,8 @@ export async function initTraining() {
       $<HTMLDetailsElement>("training-scratchpad-panel").open = true;
       $("training-audio-state").textContent = "Paused. Tap play to listen, or start recall to time focused thinking and notes.";
       if (isAudio) {
+        audio.defaultPlaybackRate = 1;
+        audio.playbackRate = 1;
         audio.src = safeUrl(active.resource!.url);
         audio.load();
       } else {
@@ -636,7 +681,7 @@ export async function initTraining() {
       });
       if ("mediaSession" in navigator && typeof MediaMetadata !== "undefined")
         navigator.mediaSession.metadata = new MediaMetadata({
-          title: active.task.title,
+          title: active.task.kind === "audio" ? active.resource?.title ?? active.task.title : active.task.title,
           artist: "CW Academy practice",
           album: snapshot().course.title,
         });
@@ -754,7 +799,7 @@ export async function initTraining() {
     state.active = {
       id: crypto.randomUUID(),
       assignmentId: item.assignment.id,
-      task: item.task,
+      task: findTask(item.task.id)?.task ?? item.task,
       resource: item.resource,
       startedAt: new Date().toISOString(),
       targetMinutes,
@@ -793,9 +838,7 @@ export async function initTraining() {
     }
     const found = findTask(taskId);
     if (!found) return;
-    const resource = snapshot().course.resources.find(
-      (item) => item.id === found.task.resourceId,
-    );
+    const resource = found.task.kind === "audio" ? selectedRecording(found.task) : assignedResource(found.task);
     const progress = taskProgress(found.task, snapshot().attempts);
     start({
       ...found,
@@ -807,6 +850,8 @@ export async function initTraining() {
       suggestedMinutes:
         found.task.kind === "simulator"
           ? (found.task.minutes ?? 15)
+          : found.task.kind === "audio" && resource?.durationSeconds
+          ? Math.ceil(resource.durationSeconds / 60)
           : (temporaryMinutes ?? snapshot().preferences.blockMinutes),
       passesThisBlock: found.task.kind === "audio" ? 1 : undefined,
       interrupted: progress.interrupted,
@@ -858,6 +903,11 @@ export async function initTraining() {
       Math.round(state.active.activeSeconds / 6) / 10
     ).toString();
     const active = state.active;
+    const recording = audioRecordingNote(active.task, active.resource);
+    $("training-finish-recording").hidden = !recording;
+    $("training-finish-recording").textContent = recording ? `Saved automatically with this entry: ${recording}` : "";
+    const marks = active.bookmarks.length ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}` : "";
+    $<HTMLTextAreaElement>("training-finish-note").maxLength = Math.max(0, 4000 - recording.length - marks.length - 50);
     $("training-finish-recall-label").hidden = active.task.kind !== "audio";
     $<HTMLInputElement>("training-finish-recall").value = String(Math.round((active.recallSeconds ?? 0) / 6) / 10);
     $("training-finish-scratchpad").hidden = !active.scratchpad;
@@ -956,6 +1006,11 @@ export async function initTraining() {
           : "Paused. Break time does not count; start recall to time focused thinking or notes.";
       void persist();
     }
+  });
+  audio.addEventListener("ratechange", () => {
+    if (audio.playbackRate === 1) return;
+    audio.playbackRate = 1;
+    $("training-audio-state").textContent = "Playback stays at 1x so the recorded WPM stays accurate. Choose an official faster recording before your next block.";
   });
   audio.addEventListener("error", () => {
     $("training-audio-state").textContent =
@@ -1417,6 +1472,28 @@ export async function initTraining() {
     temporaryMinutes = minutes as BlockMinutes;
     render();
   });
+  $<HTMLSelectElement>("training-audio-preference").addEventListener("change", (event) => {
+    state.audioSpeedPreference = (event.currentTarget as HTMLSelectElement).value === "next" ? "next" : "assigned";
+    render();
+    void persist();
+    if (state.active) notice("The new default applies to future blocks. Your current recording and its progress are unchanged.");
+  });
+  root.addEventListener("change", (event) => {
+    const select = event.target;
+    if (!(select instanceof HTMLSelectElement) || !select.dataset.audioSpeed || state.active) return;
+    const task = findTask(select.dataset.audioSpeed)?.task;
+    if (!task || task.kind !== "audio" || !task.speedWpm) return;
+    const overrides = { ...state.audioSpeedOverrides };
+    if (!select.value) delete overrides[task.id];
+    else {
+      const wpm = Number(select.value);
+      if (!audioVariants(assignedResource(task)).some((variant) => variant.speedWpm === wpm && wpm >= task.speedWpm!)) return;
+      overrides[task.id] = wpm;
+    }
+    state.audioSpeedOverrides = overrides;
+    render();
+    void persist();
+  });
   $<HTMLTextAreaElement>("training-scratchpad").addEventListener("input", (event) => {
     if (!state.active) return;
     state.active.scratchpad = (event.currentTarget as HTMLTextAreaElement).value;
@@ -1472,6 +1549,7 @@ export async function initTraining() {
       }
       const endedAt = new Date();
       const note = [
+        audioRecordingNote(active.task, active.resource),
         String(data.get("note") || ""),
         active.bookmarks.length
           ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}`
@@ -1481,8 +1559,11 @@ export async function initTraining() {
           : "",
       ]
         .filter(Boolean)
-        .join("\n")
-        .slice(0, 4000);
+        .join("\n");
+      if (note.length > 4000) {
+        $("training-finish-help").textContent = "This note and its automatic practice details exceed 4,000 characters. Shorten your note before saving; nothing has been discarded.";
+        return;
+      }
       const attempt: TrainingAttempt = {
         id: active.id,
         assignmentId: active.assignmentId,

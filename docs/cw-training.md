@@ -51,7 +51,7 @@ Exercises requiring other equipment stay visibly pending; changing the activity
 choice never changes coverage.
 If no unfinished assignment fits, optional review offers another suitable block,
 including after 60 minutes and on rest days. It uses the current/recent course
-material at its assigned speed and rotates through suitable exercises. It does
+material at its selected recording speed and rotates through suitable exercises. It does
 not automatically preview future assignments or mark them complete. Extra
 review is labeled in Focus and history; its minutes count toward the day but
 its attempts and passes do not count toward required assignment coverage.
@@ -78,6 +78,29 @@ cross-origin fetch access. There is no audio proxy, mirror, waveform fetch, or
 automatic transcription. Initial playback needs a user gesture. Media Session
 controls are progressive enhancements; uninterrupted playback with a locked
 phone still requires real-device verification. Offline audio is not promised.
+
+Short recordings offer verified official speed variants before a block starts.
+Assigned speed is the default; Next faster selects the nearest available speed
+above the assignment. Per-exercise choices offer the assigned or faster speeds.
+These preferences stay on this device and never rewrite the curriculum or old
+history. The checked-in public metadata catalog contains only official file
+links, exercise identities, speeds, and measured durations, not course text.
+Its exact source URLs distinguish short and long QSO files with similar names.
+Unknown or unresolved resources keep their original behavior.
+
+Planning uses the selected recording's measured duration at native 1x playback,
+including eligibility for 3- and 5-minute blocks. Whole faster passes satisfy
+the same exercise; elapsed listening time remains actual time, not the duration
+of the slower assigned file. Extra-review passes remain separate from required
+coverage. Each active block snapshots one recording. To switch speeds after
+starting, finish and save that block first; a new block starts at the beginning
+without transferring partial coverage or difficult-position markers.
+
+Every saved in-page audio attempt automatically prefixes its existing database
+note with the actual recording, practiced WPM, assigned WPM, and source URL.
+The finish dialog displays this metadata separately from the editable reflection.
+This uses the existing immutable attempt API and requires no database migration.
+Refresh official variant metadata with `mise run cw-training:update-audio-variants`.
 
 Instant-recognition trainers, Morse Runner, a physical key/radio, and online
 class meetings remain external resources. The page guides and logs those
