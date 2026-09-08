@@ -72,96 +72,65 @@ import "../../styles/cw-training.css";
           >
           </p>
         </div>
-        <div id="training-resume" class="training-notice" hidden>
-          <p>A practice block is saved.</p><button
-            type="button"
-            data-action="resume">Return to your block</button
-          >
-        </div>
-        <div class="training-options">
-          <fieldset class="training-mode" aria-describedby="training-mode-help">
-            <legend>What can you do right now?</legend>
-            <div class="training-mode-buttons">
-              <button type="button" data-mode="anything" aria-pressed="true">Anything</button>
-              <button type="button" data-mode="listen" aria-pressed="false">Listen</button>
-              <button type="button" data-mode="send" aria-pressed="false">Send</button>
-              <button type="button" data-mode="computer" aria-pressed="false">Computer</button>
-            </div>
-          </fieldset>
-          <label>Time available
-            <select id="training-block-now" aria-describedby="training-time-help">
-              <option value="10">10 minutes</option>
-              <option value="15">15 minutes</option>
-            </select>
-          </label>
-        </div>
-        <p id="training-time-help" class="training-small" role="status"></p>
-        <p id="training-mode-help" class="training-small" role="status"></p>
-        <label class="training-speed-preference">Short-recording default
-          <select id="training-audio-preference" aria-describedby="training-speed-help">
-            <option value="assigned">Assigned speed</option>
-            <option value="next">Next faster official recording</option>
-          </select>
-        </label>
-        <p id="training-speed-help" class="training-small">This default applies to future blocks. Change an exercise's recording speed anytime in Today, Week, or Focus. Original instructions stay unchanged; full faster passes count toward the same exercise.</p>
         <div id="training-next" class="training-card training-next"></div>
-        <p class="training-small">Start with today's assignments in any useful order. Add selected older exercises to today if you want to catch up; you do not need to clear the backlog. Extra review adds practice time without completing assignments.</p>
-        <section class="training-section training-today-history" aria-labelledby="training-today-history-heading">
-          <h3 id="training-today-history-heading">Practiced today</h3>
-          <p class="training-small">Saved sessions for today. Expand a session for its results and notes. Your current block appears here after you finish and save it; each run keeps its own score.</p>
-          <div id="training-today-history"></div>
-        </section>
-        <div id="training-preparation"></div>
+        <p class="training-small">Choose any exercise. Practice for the time you have; partial listening counts.</p>
         <div class="training-section">
           <h3>Today's assignments</h3><div id="training-queue"></div>
           <section id="training-carried-panel" class="training-carried" aria-labelledby="training-carried-heading" hidden>
             <h4 id="training-carried-heading">Added to today</h4>
-            <p class="training-small">Selected by you for today, saved across devices. Start each when ready. Original instructions and progress stay with its source assignment. Tomorrow these return to earlier work if still unfinished.</p>
+            <p class="training-small">Selected for today. Progress stays with the original assignment; unfinished exercises return to earlier work tomorrow.</p>
             <div id="training-carried"></div>
           </section>
         </div>
-        <div id="training-deferred"></div>
         <div id="training-blocked"></div>
-        <details id="training-earlier-panel" class="training-section" open hidden>
-          <summary id="training-earlier-label">Earlier unfinished preparation</summary>
-          <p class="training-small">These are still available before class, but they do not hold today's work back. Choose what is useful; ask your instructor which missed exercises to prioritize.</p>
-          <div id="training-earlier"></div>
-        </details>
-        <details id="training-extra-panel" class="training-section" open hidden>
-          <summary>Keep practicing: extra review</summary>
-          <p class="training-small">Optional blocks add to your practice time, not assignment completion. There is no 60-minute limit.</p>
-          <div id="training-extra"></div>
-        </details>
-        <details id="training-missed-panel" class="training-section">
-          <summary id="training-missed-label">Earlier practice</summary><div
-            id="training-missed"
-          >
+        <div id="training-preparation"></div>
+        <details id="training-today-history-panel" class="training-panel training-today-history">
+          <summary>
+            <span id="training-today-history-heading">Practiced today</span>
+            <span id="training-today-history-summary" class="training-panel-meta"></span>
+          </summary>
+          <div class="training-panel-body">
+            <p class="training-small">Saved sessions, results, and notes. Your current block appears here after you finish and save it.</p>
+            <div id="training-today-history"></div>
           </div>
         </details>
-        <details class="training-section">
-          <summary>Original curriculum instructions</summary><p
-            class="training-small"
-          >
-            The supplied curriculum wording is preserved below.
-          </p><h3 id="training-assignment-label"></h3><div
-            id="training-assignment-instructions"
-            class="training-original"
-          >
-          </div><a
-            id="training-assignment-source"
-            target="_blank"
-            rel="noreferrer">Open the official assignment</a
-          ><details>
-            <summary>Course instructions</summary><div
-              id="training-course-instructions"
-              class="training-original"
-            >
-            </div><a
-              id="training-course-source"
-              target="_blank"
-              rel="noreferrer">Official curriculum</a
-            >
+        <section class="training-section" aria-labelledby="training-keep-practicing-heading">
+          <h3 id="training-keep-practicing-heading">Keep practicing</h3>
+          <p class="training-small">Optional practice adds minutes without changing assignment completion.</p>
+          <div id="training-regular-practice" class="training-regular-practice"></div>
+          <details id="training-extra-panel" class="training-panel" hidden>
+            <summary>Extra review</summary>
+            <div class="training-panel-body">
+              <p class="training-small">Revisit recent course exercises for as long as they are useful.</p>
+              <div id="training-extra"></div>
+            </div>
           </details>
+        </section>
+        <details id="training-earlier-panel" class="training-panel" hidden>
+          <summary><span id="training-earlier-label">Earlier unfinished preparation</span></summary>
+          <div class="training-panel-body">
+            <p class="training-small">Still available before class. Choose what is useful; ask your instructor which missed exercises to prioritize.</p>
+            <div id="training-earlier"></div>
+          </div>
+        </details>
+        <details id="training-missed-panel" class="training-panel">
+          <summary><span id="training-missed-label">Earlier practice</span></summary>
+          <div class="training-panel-body" id="training-missed"></div>
+        </details>
+        <details class="training-panel">
+          <summary>Original curriculum instructions</summary>
+          <div class="training-panel-body">
+            <h3 id="training-assignment-label"></h3>
+            <div id="training-assignment-instructions" class="training-original"></div>
+            <a id="training-assignment-source" target="_blank" rel="noreferrer">Open the official assignment</a>
+            <details class="training-panel">
+              <summary>Course instructions</summary>
+              <div class="training-panel-body">
+                <div id="training-course-instructions" class="training-original"></div>
+                <a id="training-course-source" target="_blank" rel="noreferrer">Official curriculum</a>
+              </div>
+            </details>
+          </div>
         </details>
         <div class="training-section training-actions">
           <button type="button" data-action="add-material"
@@ -353,71 +322,80 @@ import "../../styles/cw-training.css";
         <div id="training-material-list"></div>
       </section>
 
-      <details class="training-section training-settings">
+      <details class="training-panel training-settings">
         <summary>Preferences and your data</summary>
-        <label
-          >Usual block length <select id="training-block-preference"
-            ><option value="15">15 minutes</option><option value="10"
-              >10 minutes</option
-            ></select
-          ></label
-        >
-        <label
-          >Calendar practice time (Eastern)<input
-            id="training-reminder-time"
-            type="time"
-            value="09:00"
-          /></label
-        >
-        <label
-          >Private class join link (optional)<input
-            id="training-join-url"
-            type="url"
-            placeholder="https://"
-          /></label
-        >
-        <button type="button" data-action="save-preferences"
-          >Save preferences</button
-        >
-        <div class="training-section">
-          <h3>Practice reminders</h3><p class="training-small">
-            Create a private calendar subscription, then add its link in your
-            calendar app. Anyone with the link can see practice times, but not
-            your notes, scores, or curriculum. Replacing or revoking the link
-            stops the old subscription.
-          </p><div class="training-actions">
-            <button type="button" data-action="calendar-create"
-              >Create or replace calendar link</button
-            ><button type="button" data-action="calendar-revoke"
-              >Revoke calendar link</button
-            >
-          </div><div id="training-calendar-result" hidden>
-            <label
-              >Private calendar subscription URL<input
-                id="training-calendar-url"
-                type="url"
-                readonly
-              /></label
-            ><button type="button" data-action="calendar-copy"
-              >Copy calendar link</button
-            >
-          </div><p
-            id="training-calendar-status"
-            class="training-small"
-            role="status"
+        <div class="training-panel-body">
+          <label class="training-speed-preference">Short-recording default
+            <select id="training-audio-preference" aria-describedby="training-speed-help">
+              <option value="assigned">Assigned speed</option>
+              <option value="next">Next faster official recording</option>
+            </select>
+          </label>
+          <p id="training-speed-help" class="training-small">Saved automatically for future blocks. You can also change each exercise's recording speed in Today, Week, or Focus. Full faster passes count toward the same exercise.</p>
+          <label
+            >Calendar practice time (Eastern)<input
+              id="training-reminder-time"
+              type="time"
+              value="09:00"
+            /></label
           >
+          <label>Calendar reminder duration
+            <select id="training-calendar-duration" aria-describedby="training-calendar-duration-help">
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+            </select>
+          </label>
+          <p id="training-calendar-duration-help" class="training-small">Sets the calendar event length. Practice can be shorter or longer.</p>
+          <label
+            >Private class join link (optional)<input
+              id="training-join-url"
+              type="url"
+              placeholder="https://"
+            /></label
+          >
+          <button type="button" data-action="save-preferences"
+            >Save preferences</button
+          >
+          <div class="training-section">
+            <h3>Practice reminders</h3><p class="training-small">
+              Create a private calendar subscription, then add its link in your
+              calendar app. Anyone with the link can see practice times, but not
+              your notes, scores, or curriculum. Replacing or revoking the link
+              stops the old subscription.
+            </p><div class="training-actions">
+              <button type="button" data-action="calendar-create"
+                >Create or replace calendar link</button
+              ><button type="button" data-action="calendar-revoke"
+                >Revoke calendar link</button
+              >
+            </div><div id="training-calendar-result" hidden>
+              <label
+                >Private calendar subscription URL<input
+                  id="training-calendar-url"
+                  type="url"
+                  readonly
+                /></label
+              ><button type="button" data-action="calendar-copy"
+                >Copy calendar link</button
+              >
+            </div><p
+              id="training-calendar-status"
+              class="training-small"
+              role="status"
+            >
+            </p>
+          </div>
+          <p class="training-small">
+            Offline practice is saved on this device, then synced when you
+            reconnect. An expired sign-in will not discard your work.
           </p>
-        </div>
-        <p class="training-small">
-          Offline practice is saved on this device, then synced when you
-          reconnect. An expired sign-in will not discard your work.
-        </p>
-        <div class="training-actions">
-          <button type="button" data-action="sync">Sync now</button><button
-            type="button"
-            data-action="export">Export all training data</button
-          ><button type="button" data-action="clear">Clear this device</button
-          ><a href="/api/cw-training/login">Renew sign-in</a>
+          <div class="training-actions">
+            <button type="button" data-action="sync">Sync now</button><button
+              type="button"
+              data-action="export">Export all training data</button
+            ><button type="button" data-action="clear">Clear this device</button
+            ><a href="/api/cw-training/login">Renew sign-in</a>
+          </div>
         </div>
       </details>
     </div>

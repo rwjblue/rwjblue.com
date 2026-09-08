@@ -267,6 +267,59 @@ test("Morse Runner review is always discoverable, including short blocks and pen
   assert.ok(getTrainingPlan(course, history, now, 15, "computer").runnerReview);
 });
 
+test("LCWO is always available at the latest introduced settings without advancing future assignments", () => {
+  const course = fixtureCourse();
+  const introductory = course.assignments[0].tasks.find((task) => task.kind === "icr");
+  Object.assign(introductory, { speedWpm: 15, settings: "Two-character words", resourceId: "lcwo" });
+  const advanced = makeTask("advanced-icr", "icr", { speedWpm: 25, settings: "Five-character words", resourceId: "lcwo" });
+  course.assignments[4].tasks.push(advanced);
+  course.resources.push({ id: "lcwo", title: "LCWO", url: "https://lcwo.net/wordtraining", format: "link" });
+  const original = structuredClone(course);
+  for (const [stamp, expected] of [
+    ["2026-09-04T12:00:00Z", introductory],
+    ["2026-09-05T12:00:00Z", introductory],
+    ["2026-09-07T19:45:00Z", introductory],
+    ["2026-09-07T21:00:00Z", introductory],
+    ["2026-09-08T12:00:00Z", introductory],
+    ["2026-09-09T12:00:00Z", advanced],
+    ["2026-09-11T12:00:00Z", advanced],
+  ]) for (const mode of ["anything", "computer", "listen", "send"]) {
+    const plan = getTrainingPlan(course, [], new Date(stamp), null, mode);
+    const review = plan.lcwoReview;
+    assert.equal(review.task, expected, "preserve the original task and all its settings/instructions");
+    assert.equal(review.assignment, course.assignments.find((assignment) => assignment.tasks.includes(expected)));
+    assert.equal(review.resource, course.resources.at(-1));
+    assert.equal(review.extra, true);
+    assert.equal(review.suggestedMinutes, 15);
+    assert.equal(review.started, false);
+    assert.ok(!plan.extras.some((item) => item.task.kind === "icr"), "the dedicated LCWO card replaces rotating LCWO duplicates");
+    if (plan.phase === "class") assert.equal(plan.next, undefined);
+    if (mode === "listen" || mode === "send") assert.notEqual(plan.next?.task.kind, "icr");
+  }
+  course.assignments.reverse();
+  assert.equal(getTrainingPlan(course, [], new Date("2026-09-04T12:00:00Z"), null).lcwoReview.task, introductory, "introductory selection follows dates, not input order");
+  course.assignments.reverse();
+  assert.deepEqual(course, original);
+});
+
+test("LCWO review adds actual practice time without completing or starting its source assignment", () => {
+  const course = fixtureCourse();
+  const now = new Date("2026-09-05T22:00:00Z");
+  const original = structuredClone(course);
+  const review = getTrainingPlan(course, [], now, null).lcwoReview;
+  const saved = attempt(review.task.id, { review: review.extra, activeSeconds: 137 });
+  const plan = getTrainingPlan(course, [saved, saved], now, null);
+  assert.equal(plan.practicedMinutes, 137 / 60);
+  assert.equal(plan.queue.find((item) => item.task.id === review.task.id).started, false);
+  assert.equal(taskProgress(review.task, [saved]).complete, false);
+  assert.equal(plan.lcwoReview.activeSeconds, 0, "each optional block starts fresh");
+  const done = attempt(review.task.id, { id: "required-icr", activeSeconds: 180 });
+  const completed = getTrainingPlan(course, [saved, done], now, null, "computer");
+  assert.ok(!completed.queue.some((item) => item.task.id === review.task.id));
+  assert.equal(completed.next, completed.lcwoReview, "LCWO stays available after the required objective is complete");
+  assert.deepEqual(course, original);
+});
+
 test("unknown audio duration remains explicit and unresolved files stay blocked", () => {
   const course = fixtureCourse();
   delete course.resources[0].durationSeconds;
@@ -286,6 +339,76 @@ test("long audio passes require a larger block instead of being split", () => {
   const plan = getTrainingPlan(course, [attempt("send")], new Date("2026-09-05T22:00:00Z"));
   assert.equal(plan.blocked[0].suggestedMinutes, 16);
   assert.equal(plan.blocked[0].passesThisBlock, 1);
+});
+
+test("unrestricted practice offers long audio and fixed exercises without changing their completion requirements", () => {
+  const course = fixtureCourse();
+  course.resources[0].durationSeconds = 1_920;
+  const now = new Date("2026-09-06T22:00:00Z");
+  const history = [attempt("send"), attempt("audio", { completed: false, completedPasses: 0, activeSeconds: 180 })];
+  const original = structuredClone({ course, history });
+  const plan = getTrainingPlan(course, history, now, null);
+  assert.deepEqual(plan.queue.map((item) => item.task.id), ["run", "audio", "icr"]);
+  assert.deepEqual(plan.blocked, []);
+  const audio = plan.queue.find((item) => item.task.kind === "audio");
+  assert.equal(audio.suggestedMinutes, 15);
+  assert.equal(audio.passesThisBlock, 1);
+  assert.equal(audio.remainingPasses, 2);
+  assert.equal(audio.activeSeconds, 180);
+  assert.equal(audio.started, true);
+  assert.equal(audio.reason, undefined, "a complete recording is not required to begin a practice block");
+  assert.equal(taskProgress(audio.task, history).complete, false);
+  course.assignments[1].tasks[0].minutes = 25;
+  const longerSimulator = getTrainingPlan(course, history, now, null).queue.find((item) => item.task.id === "run");
+  assert.equal(longerSimulator.suggestedMinutes, 25, "the fixed exercise retains its assigned duration");
+  assert.equal(taskProgress(longerSimulator.task, [attempt("run", { activeSeconds: 900 })]).complete, false);
+  course.assignments[1].tasks[0].minutes = 15;
+  assert.deepEqual({ course, history }, original);
+});
+
+test("unrestricted listening includes playable recordings with unknown duration for required and optional practice", () => {
+  const course = fixtureCourse();
+  const now = new Date("2026-09-05T22:00:00Z");
+  for (const durationSeconds of [undefined, 0, -1, NaN, Infinity]) {
+    course.resources[0].durationSeconds = durationSeconds;
+    const required = getTrainingPlan(course, [], now, null, "listen");
+    assert.equal(required.next.task.id, "audio");
+    assert.equal(required.next.suggestedMinutes, 15);
+    assert.equal(required.next.passesThisBlock, 1);
+    assert.equal(required.blocked.length, 0);
+    assert.match(required.next.reason, /partial playback counts/);
+    const completed = getTrainingPlan(course, [attempt("audio")], now, null, "listen");
+    assert.equal(completed.next.task.id, "audio");
+    assert.equal(completed.next.extra, true);
+  }
+  course.resources[0].durationSeconds = 1_920;
+  const review = getTrainingPlan(course, [attempt("audio")], now, null, "listen");
+  assert.equal(review.next.extra, true);
+  assert.equal(review.next.suggestedMinutes, 15);
+});
+
+test("unrestricted practice still blocks unavailable sources and respects live-event windows", () => {
+  const course = fixtureCourse();
+  const now = new Date("2026-09-05T22:00:00Z");
+  for (const resources of [
+    [{ ...course.resources[0], unresolved: "Ask the advisor." }],
+    [{ ...course.resources[0], format: "link" }],
+    [],
+  ]) {
+    course.resources = resources;
+    const required = getTrainingPlan(course, [], now, null, "listen");
+    assert.equal(required.next, undefined);
+    assert.equal(required.blocked[0].task.id, "audio");
+    assert.equal(getTrainingPlan(course, [attempt("audio")], now, null, "listen").extras.length, 0);
+  }
+  const early = getTrainingPlan(course, [], new Date("2026-09-09T12:30:00Z"), null);
+  assert.equal(early.blocked.find((item) => item.task.id === "live").availableNow, false);
+  assert.ok(!early.queue.some((item) => item.task.id === "live"));
+  const onAir = getTrainingPlan(course, [], new Date("2026-09-09T13:30:00Z"), null);
+  assert.equal(onAir.next.task.id, "live");
+  assert.equal(onAir.next.availableNow, true);
+  const expired = getTrainingPlan(course, [], new Date("2026-09-10T12:00:00Z"), null);
+  assert.match(expired.blocked.find((item) => item.task.id === "live").reason, /No CWT window remains/);
 });
 
 test("daily minutes exclude class work and required coverage remains separate from the goal", () => {

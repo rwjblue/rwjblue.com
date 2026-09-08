@@ -56,6 +56,8 @@ export interface TrainingPlan {
   extras: PlannedTask[];
   /** Always discoverable, even when activity filters don't recommend it. */
   runnerReview?: PlannedTask;
+  /** Current-level LCWO practice, kept separate from assignment credit. */
+  lcwoReview?: PlannedTask;
   next?: PlannedTask;
 }
 
@@ -98,13 +100,14 @@ function leftMissed(task: TrainingTask, attempts: TrainingAttempt[]): boolean {
   return attempts.some((attempt) => attempt.taskId === task.id && !attempt.review && attempt.note === "[Left missed]");
 }
 
-function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, task: TrainingTask, attempts: TrainingAttempt[], blockMinutes: BlockMinutes, now: Date): PlannedTask {
+function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, task: TrainingTask, attempts: TrainingAttempt[], blockMinutes: BlockMinutes | null, now: Date): PlannedTask {
+  const suggestedBlockMinutes = blockMinutes ?? 15;
   const progress = taskProgress(task, attempts);
   const resource = course.resources.find((resource) => resource.id === task.resourceId);
-  const result: PlannedTask = { assignment, task, resource, completedPasses: progress.completedPasses, suggestedMinutes: blockMinutes, started: progress.started, activeSeconds: progress.activeSeconds, interrupted: progress.interrupted };
+  const result: PlannedTask = { assignment, task, resource, completedPasses: progress.completedPasses, suggestedMinutes: suggestedBlockMinutes, started: progress.started, activeSeconds: progress.activeSeconds, interrupted: progress.interrupted };
   if (isMorseRunner(task)) {
     const remainingMinutes = Math.ceil(((task.minutes ?? 15) * 60 - progress.activeSeconds) / 60);
-    result.suggestedMinutes = Math.max(1, Math.min(blockMinutes, remainingMinutes));
+    result.suggestedMinutes = Math.max(1, Math.min(suggestedBlockMinutes, remainingMinutes));
   } else if (task.kind === "simulator") result.suggestedMinutes = task.minutes ?? 15;
   if (task.kind === "audio") {
     result.remainingPasses = task.minimumPasses === undefined ? undefined : Math.max(0, task.minimumPasses - progress.completedPasses);
@@ -113,14 +116,17 @@ function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, tas
     } else if (!resource || resource.format !== "audio") {
       result.reason = "The assigned recording needs a resource link before playback.";
     } else if (resource.durationSeconds && Number.isFinite(resource.durationSeconds) && resource.durationSeconds > 0) {
-      const fittingPasses = Math.max(1, Math.floor((blockMinutes * 60) / resource.durationSeconds));
+      const fittingPasses = Math.max(1, Math.floor((suggestedBlockMinutes * 60) / resource.durationSeconds));
       result.passesThisBlock = Math.max(1, Math.min(fittingPasses, result.remainingPasses ?? fittingPasses));
       result.suggestedMinutes = Math.ceil(resource.durationSeconds * result.passesThisBlock / 60);
+      if (blockMinutes === null) result.suggestedMinutes = Math.min(suggestedBlockMinutes, result.suggestedMinutes);
       if (result.remainingPasses === 0) result.reason = "Required passes are recorded. Confirm the listening objective, or play another pass for review.";
-      if (resource.durationSeconds > blockMinutes * 60) result.reason = "One full pass needs a longer block; reserve enough time or resume the recording later.";
+      if (blockMinutes !== null && resource.durationSeconds > blockMinutes * 60) result.reason = "One full pass needs a longer block; reserve enough time or resume the recording later.";
     } else {
       result.passesThisBlock = 1;
-      result.reason = blockMinutes < 10
+      result.reason = blockMinutes === null
+        ? "Recording length is not yet measured. Start listening; partial playback counts toward practice time."
+        : blockMinutes < 10
         ? "Recording length is not yet measured, so it cannot be recommended for this short block. Check its length in a longer practice window."
         : "Recording length is not yet measured. Load the player to check the time needed for a full pass.";
     }
@@ -135,20 +141,21 @@ function plannedTask(course: TrainingCourse, assignment: TrainingAssignment, tas
       result.reason = `The next CWT window starts ${nextWindow}. Plan this radio activity for that window.`;
     }
   }
-  if (task.kind === "simulator" && !isMorseRunner(task) && result.suggestedMinutes > blockMinutes) result.reason = `This exercise needs ${result.suggestedMinutes} uninterrupted minutes.`;
+  if (blockMinutes !== null && task.kind === "simulator" && !isMorseRunner(task) && result.suggestedMinutes > blockMinutes) result.reason = `This exercise needs ${result.suggestedMinutes} uninterrupted minutes.`;
   return result;
 }
 
-function fits(item: PlannedTask, blockMinutes: number): boolean {
+function fits(item: PlannedTask, blockMinutes: number | null): boolean {
   if (item.task.kind === "live" && !item.availableNow) return false;
   if (item.resource?.unresolved) return false;
   if (item.task.kind === "audio") {
     if (!item.resource || item.resource.format !== "audio") return false;
+    if (blockMinutes === null) return true;
     const duration = item.resource.durationSeconds;
     if (duration && Number.isFinite(duration) && duration > 0) return duration <= blockMinutes * 60;
     if (blockMinutes < 10) return false;
   }
-  return item.suggestedMinutes <= blockMinutes;
+  return blockMinutes === null || item.suggestedMinutes <= blockMinutes;
 }
 
 function practiceKey(task: TrainingTask, resource?: TrainingResource): string {
@@ -163,7 +170,7 @@ function extraPractice(
   assignments: TrainingAssignment[],
   attempts: TrainingAttempt[],
   date: string,
-  blockMinutes: BlockMinutes,
+  blockMinutes: BlockMinutes | null,
   mode: PracticeMode,
   now: Date,
   requiredIds: Set<string>,
@@ -186,7 +193,7 @@ function extraPractice(
 
   const candidates = assignments.filter((assignment) => assignment.date <= date)
     .flatMap((assignment) => assignment.tasks
-      .filter((task) => task.kind !== "live" && !isMorseRunner(task) && matchesPracticeMode(task, mode) && !requiredIds.has(task.id))
+      .filter((task) => task.kind !== "live" && task.kind !== "icr" && !isMorseRunner(task) && matchesPracticeMode(task, mode) && !requiredIds.has(task.id))
       .map((task) => {
         // Reviews retain their original IDs and instructions, but their own
         // block starts with fresh passes. The saved attempt has review: true.
@@ -196,7 +203,7 @@ function extraPractice(
         return item;
       }))
     .filter((item) => fits(item, blockMinutes) &&
-      (item.task.kind !== "audio" || (item.resource?.durationSeconds ?? 0) > 0));
+      (blockMinutes === null || item.task.kind !== "audio" || (item.resource?.durationSeconds ?? 0) > 0));
 
   candidates.sort((a, b) => b.assignment.date.localeCompare(a.assignment.date));
   // Keep a small current-level pool. A one-recording day must not trap the
@@ -224,7 +231,7 @@ function extraPractice(
   });
 }
 
-function runnerReview(course: TrainingCourse, date: string, blockMinutes: BlockMinutes, now: Date): PlannedTask | undefined {
+function runnerReview(course: TrainingCourse, date: string, blockMinutes: BlockMinutes | null, now: Date): PlannedTask | undefined {
   const candidates = course.assignments.flatMap((assignment) => assignment.tasks
     .filter((task) => !!runnerSettings(task)).map((task) => ({ assignment, task })))
     .sort((a, b) => a.assignment.date.localeCompare(b.assignment.date));
@@ -234,16 +241,31 @@ function runnerReview(course: TrainingCourse, date: string, blockMinutes: BlockM
     ?? candidates.find((item) => runnerSettings(item.task)?.mode === "SingleCall");
   if (!source) return undefined;
   const item = plannedTask(course, source.assignment, source.task, [], blockMinutes, now);
-  return { ...item, extra: true, suggestedMinutes: blockMinutes,
+  return { ...item, extra: true, suggestedMinutes: blockMinutes ?? 15,
     reason: "Optional computer practice. Adjust the settings before Run; this does not complete the source assignment." };
+}
+
+function lcwoReview(course: TrainingCourse, date: string, blockMinutes: BlockMinutes | null, now: Date): PlannedTask | undefined {
+  const candidates = course.assignments.flatMap((assignment) => assignment.tasks
+    .filter((task) => task.kind === "icr").map((task) => ({ assignment, task })))
+    .sort((a, b) => a.assignment.date.localeCompare(b.assignment.date));
+  // The first ICR exercise introduces LCWO. Until its scheduled date, offer
+  // that introduction rather than skipping ahead to later speed/settings.
+  const source = candidates.filter((item) => item.assignment.date <= date).at(-1) ?? candidates[0];
+  if (!source) return undefined;
+  const item = plannedTask(course, source.assignment, source.task, [], blockMinutes, now);
+  if (!fits(item, blockMinutes)) return undefined;
+  return { ...item, extra: true,
+    reason: "Optional LCWO practice at your current course settings. This does not complete the source assignment." };
 }
 
 /**
  * Derive today's work without rolling old sessions into a permanent backlog.
  * Assignments retain their dates after a class begins, so Monday evening cannot
  * become Tuesday's required practice day or reset the same day's minute goal.
+ * A null block removes time restrictions; suggestions still start at 15 minutes.
  */
-export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: BlockMinutes = 15, mode: PracticeMode = "anything", carriedTasks: { taskId: string; date: string }[] = []): TrainingPlan {
+export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: BlockMinutes | null = 15, mode: PracticeMode = "anything", carriedTasks: { taskId: string; date: string }[] = []): TrainingPlan {
   if (!Number.isFinite(now.getTime())) throw new Error("A valid planning date is required.");
   const date = dateInTimezone(now, course.timezone);
   const sortedAssignments = [...course.assignments].sort((a, b) => a.date.localeCompare(b.date));
@@ -295,11 +317,13 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
   result.liveUpcoming = sortedAssignments.filter((candidate) => new Date(candidate.dueAt).getTime() > now.getTime() && new Date(candidate.dueAt).getTime() <= upcomingLimit)
     .flatMap((candidate) => candidate.tasks.filter((task) => task.kind === "live" && !taskProgress(task, attempts).complete).map((task) => plannedTask(course, candidate, task, attempts, blockMinutes, now)));
   result.runnerReview = runnerReview(course, date, blockMinutes, now);
+  result.lcwoReview = lcwoReview(course, date, blockMinutes, now);
   if (phase !== "class") {
     result.extras = extraPractice(course, sortedAssignments, attempts, date, blockMinutes, mode, now,
       new Set([...result.queue, ...result.blocked].map((item) => item.task.id)));
     result.next = result.queue.find((item) => matchesPracticeMode(item.task, mode)) ?? result.extras[0]
-      ?? (result.runnerReview && matchesPracticeMode(result.runnerReview.task, mode) ? result.runnerReview : undefined);
+      ?? (result.runnerReview && matchesPracticeMode(result.runnerReview.task, mode) ? result.runnerReview : undefined)
+      ?? (result.lcwoReview && matchesPracticeMode(result.lcwoReview.task, mode) ? result.lcwoReview : undefined);
   }
   return result;
 }
@@ -310,7 +334,7 @@ export function availableBlockMinutes(course: TrainingCourse, attempts: Training
   return [
     ...shortChoices.filter((minutes) => {
       const plan = getTrainingPlan(course, attempts, now, minutes, mode, carriedTasks);
-      return plan.phase !== "class" && [...plan.queue, ...plan.extras, ...(plan.runnerReview ? [plan.runnerReview] : [])].some((item) => matchesPracticeMode(item.task, mode));
+      return plan.phase !== "class" && [...plan.queue, ...plan.extras, ...(plan.runnerReview ? [plan.runnerReview] : []), ...(plan.lcwoReview ? [plan.lcwoReview] : [])].some((item) => matchesPracticeMode(item.task, mode));
     }),
     10,
     15,

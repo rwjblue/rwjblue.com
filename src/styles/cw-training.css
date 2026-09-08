@@ -116,45 +116,6 @@
   background: var(--green-wash);
   border-top: 3px solid var(--green);
 }
-.training-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: end;
-}
-.training-mode {
-  flex: 1 1 330px;
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-.training-mode legend {
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.training-mode-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
-}
-.training-mode-buttons button {
-  padding-inline: 6px;
-  font-size: 0.82rem;
-}
-.training-mode-buttons button[aria-pressed="true"] {
-  background: var(--green-wash);
-  border-color: var(--green);
-  box-shadow: inset 0 -3px var(--green);
-}
-.cw-training .training-options > label {
-  flex: 0 1 150px;
-  margin: 0;
-}
-#training-mode-help {
-  margin: 10px 0 18px;
-}
 .training-next h3 {
   font-size: 1.5rem;
   line-height: 1.25;
@@ -309,6 +270,101 @@
 }
 .cw-training details details {
   margin-top: 18px;
+}
+.training-panel {
+  margin-top: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--panel);
+}
+.cw-training .training-panel > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 15px 18px;
+  border-radius: 8px;
+  list-style: none;
+  font-size: 0.9rem;
+}
+.cw-training .training-panel > summary::-webkit-details-marker {
+  display: none;
+}
+.cw-training .training-panel > summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+}
+.cw-training .training-panel > summary:hover {
+  color: var(--blue);
+  background: var(--input-bg);
+}
+.cw-training .training-panel[open] > summary {
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 8px 8px 0 0;
+  background: var(--input-bg);
+}
+.cw-training .training-panel[open] > summary::after {
+  transform: rotate(225deg) translate(-2px, -1px);
+}
+.training-panel-meta {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 400;
+  text-align: right;
+}
+.cw-training .training-panel > summary:has(.training-panel-meta)::after {
+  margin-left: 2px;
+}
+.training-panel-body {
+  padding: 18px;
+}
+.training-panel-body > :first-child {
+  margin-top: 0;
+}
+.training-panel-body > :last-child {
+  margin-bottom: 0;
+}
+.training-panel-body > a {
+  color: var(--blue);
+  font-size: 0.86rem;
+}
+.training-panel-body .training-task:last-child,
+.training-panel-body .training-history-entry:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.training-regular-practice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.training-practice-card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--panel);
+}
+.training-practice-card h4,
+.training-practice-card p {
+  margin: 0;
+}
+.training-practice-card h4 {
+  font-size: 1rem;
+}
+.training-practice-card button {
+  margin-top: auto;
 }
 .training-original {
   white-space: pre-wrap;
@@ -582,6 +638,12 @@
   }
   .training-task .training-actions {
     justify-content: start;
+  }
+  .training-regular-practice {
+    grid-template-columns: 1fr;
+  }
+  .training-panel-meta {
+    max-width: 120px;
   }
   .cw-training dialog {
     padding: 20px;

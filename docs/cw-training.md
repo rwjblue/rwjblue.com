@@ -7,21 +7,20 @@ sitemaps, and does not load the site's analytics beacon.
 
 ## Daily use
 
-- Today recommends today's work first, matching the time available and
-  activity: Anything, Listen, Send, or Computer. Listen is
-  native audio/head copy; Send uses a physical key; Computer covers ICR and
-  simulator work. This device remembers the activity choice. It is a suggestion,
-  not a mandatory exercise sequence; sending still begins with its warm-up.
+- Today recommends today's work first and shows listening, sending, ICR, and
+  simulator assignments together. Choose any exercise without setting an
+  activity or time allowance first; sending still begins with its warm-up.
 - Focus provides a timer, official audio player, source instructions, and
-  large sending text. Listening exercises add a Suggested approach above the
+  large sending text. Non-simulator blocks say At your own pace. Listening
+  exercises add a Suggested approach above the
   player, with the original instructions preserved below; instructor directions
   take precedence. Save for later preserves an unfinished block locally.
 - Week exposes all 16 meetings and 48 assignments, including later on-air work.
 - Materials accepts pasted instructions, text files, or links. Preparation,
   class-only, reference, and unknown-purpose material remain distinct. Revisions
   preserve previous text and never rewrite completed practice.
-- Preferences provides the usual 10- or 15-minute block length, class join link,
-  calendar reminder time, data export, and device clearing.
+- Preferences provides the short-recording speed default, class join link,
+  calendar reminder time and duration, data export, and device clearing.
 
 Today, Focus, Week, and Materials participate in browser history. Back (including
 the browser's swipe-back gesture) returns to the previous view; Forward reopens
@@ -42,11 +41,21 @@ not count toward the 60-minute practice goal.
 Today includes saved practice plus the current block on the same course date,
 excluding class time.
 
-Time available temporarily offers 3, 5, 10, or 15 minutes without changing the
-usual block-length preference. Shorter choices appear only when suitable work
-fits the selected activity. Suggestions show the actual planned duration and,
-for audio, the number of passes in this block. Each pass must fit; all assigned
-repetitions need not fit in one block.
+Suggestions normally start with 15 minutes, but this is not a time limit or an
+eligibility filter. Start a playable recording even when a full pass takes
+longer, then save the time available or preserve the unfinished block for later.
+Audio suggestions show the recording length and planned passes. Previously
+stored activity and block-length preferences no longer control Today or new
+practice blocks. Calendar reminder duration still offers 10 or 15 minutes and
+uses the existing `preferences.blockMinutes` field to set calendar event length.
+The existing storage and API fields remain compatible with older clients.
+
+Practiced today sits below the assignments and starts collapsed, with the
+number of saved sessions and their minutes in its header. Keep practicing has
+direct Morse Runner and LCWO cards; additional exercises stay in the collapsed
+Extra review panel. History, earlier work, and original instructions use
+bordered disclosure panels with distinct headers and padded contents. The
+panels retain native keyboard and screen-reader disclosure behavior.
 
 Started exercises show a Started badge with saved pass counts
 and practice time; the active block is marked Current block. Earlier unfinished
@@ -56,9 +65,8 @@ all assignments remain accessible in Week.
 
 Unfinished work from previous classes includes all past-due classes, not just
 the latest one. Add to today selects an exercise without starting a timer or
-recording an attempt. It appears in the visible Added to today section even if
-it needs a different activity or more time than currently selected. Its original
-assignment, instructions, saved passes, and practice history stay unchanged.
+recording an attempt. It appears in the visible Added to today section. Its
+original assignment, instructions, saved passes, and practice history stay unchanged.
 Today's scheduled exercises remain the first automatic suggestions. Practice
 now starts an old exercise immediately instead of adding it to today's list.
 
@@ -70,28 +78,30 @@ was previously dismissed. Dismiss reminder hides a reminder, not the assignment
 or its history; explicitly adding a dismissed item opts back into it for today.
 There is no requirement to clear or dismiss the backlog.
 
-Practice minutes and assignment coverage are separate. Whole audio passes are
-packed into blocks; seeking past an unheard section does not complete a pass.
-Coverage and the final completion check-in are both required. A prescribed
-15-minute simulator run cannot be replaced by two short interrupted runs.
-Exercises requiring other equipment stay visibly pending; changing the activity
-choice never changes coverage.
-If no unfinished assignment fits, optional review offers another suitable block,
+Practice minutes and assignment coverage are separate. Partial listening counts
+toward practice time, while audio coverage requires whole passes; seeking past
+an unheard section does not complete a pass. Coverage and the final completion
+check-in are both required. Morse Runner assignments accumulate confirmed
+practice time across saved runs, including interrupted runs. Exercises requiring
+other equipment stay visibly pending until practiced.
+If no unfinished assignment is available, optional review offers another block,
 including after 60 minutes and on rest days. It uses the current/recent course
 material at its selected recording speed and rotates through suitable exercises.
 It does not automatically preview future audio assignments or mark them complete. Extra
 review is labeled in Focus and history; its minutes count toward the day but
 its attempts and passes do not count toward required assignment coverage.
-Audio review respects full passes and never substitutes an unresolved or
-unmeasured recording. A dedicated Morse Runner review stays visible in every
-activity mode, including while assignments are pending, during class, on rest
-days, and after the course. It starts with the selected 3-, 5-, 10-, or 15-minute
-block and allows settings changes before Run. It uses the most recent runner
-exercise, or the introductory Single Call exercise before the first scheduled
-runner assignment. These short reviews never complete a required simulator run.
-Automatic suggestions still respect the selected activity: Runner is suggested
-only for Anything or Computer. During class, the class view takes precedence
-over automatic independent-practice recommendations. Live CWT tasks show eligible
+Audio review respects full passes and never substitutes an unresolved recording.
+A playable recording with an unmeasured length can still be started; its actual
+listening time is recorded. Dedicated Morse Runner and LCWO reviews stay visible
+while assignments are pending, during class, on rest days, and after the course.
+Morse Runner starts with a 15-minute run and allows settings changes before Run.
+It uses the most recent runner exercise, or the introductory Single Call exercise
+before the first scheduled runner assignment. LCWO uses the most recent ICR
+exercise, falling back to the first introductory ICR exercise before its scheduled
+date. Focus preserves the source exercise's original instructions and settings.
+Both reviews add practice minutes without completing the source assignment.
+During class, the class view takes precedence over automatic independent-practice
+recommendations. Live CWT tasks show eligible
 operating windows and are recommended only while a window is active.
 
 The daily minute goal is a baseline, not a cap or a replacement for sending
@@ -135,11 +145,11 @@ The checked-in public metadata catalog contains only official file links,
 exercise identities, speeds, and measured durations, not
 course text.
 Its exact source URLs distinguish short and long QSO files with similar names.
-Unknown or unresolved resources keep their original behavior.
+Recordings without verified speed variants retain their original recording.
 
-Planning uses the selected recording's measured duration at native 1x playback,
-including eligibility for 3- and 5-minute blocks. Whole faster passes satisfy
-the same exercise; elapsed listening time remains actual time, not the duration
+Planning uses the selected recording's measured duration at native 1x playback
+to suggest passes, without filtering out longer recordings. Whole faster passes
+satisfy the same exercise; elapsed listening time remains actual time, not the duration
 of the slower assigned file. Extra-review passes remain separate from required
 coverage. Changing the current block's speed in any view pauses playback and
 starts the new recording at the beginning of the current pass. Cumulative practice time,
@@ -196,8 +206,8 @@ and interrupted runs count their confirmed engine time too. Old partial records
 count without a migration or re-entry. Run settings remain editable and recorded;
 completion does not require a fixed mode or speed. Attempts are deduplicated by
 ID, and class use and extra-review attempts remain separate from required
-coverage. Short-block recommendations use the remaining assignment time, rounded
-up to a whole minute and capped by the selected available time.
+coverage. Suggested runs use the remaining assignment time, rounded up to a
+whole minute and capped at the usual 15-minute starting suggestion.
 
 Leaving Focus, switching apps, and page reload interrupt a run. Upstream cannot
 resume a contest. After stopping, completing, or interrupting a run, Save & start
@@ -214,9 +224,9 @@ extra review. The old attempt and fresh block share one device checkpoint and
 use the existing offline sync queue; no database change is required. A missing
 engine/result retains the last confirmed time without inventing a score. Saved
 terminal runs retain their status after reload until the user explicitly restarts.
-Today includes a Practiced today list with expandable results, notes, scratchpad,
-and difficulty ratings. Saved-to-account and waiting-to-sync entries are labeled
-separately; an active device-local draft stays in the current-block card until
+Today's collapsed Practiced today panel contains expandable results, notes,
+scratchpad, and difficulty ratings. Saved-to-account and waiting-to-sync entries
+are labeled separately; an active device-local draft stays in the current-block card until
 saved. Week's Practice history uses the same readable entries with dates. Contact
 totals for instructor forms are not yet aggregated: each run's QSOs and score
 remain in its saved metadata pending review of the actual form.
@@ -379,8 +389,9 @@ mid-block recording changes without combining partial passes, per-recording
 time/markers in saved notes, offline logging/reconnect, instructor text revisions,
 calendar revocation,
 and unauthenticated API rejection before declaring a rollout ready. Verify
-Add to today/remove across filters, reload, and the Eastern date boundary;
-Runner review discoverability; editable starting settings and mid-run speed;
+Add to today/remove, reload, and the Eastern date boundary;
+Morse Runner and LCWO review discoverability; collapsed history and disclosure
+keyboard behavior; editable starting settings and mid-run speed;
 and separate review, partial-run, and assignment-completion credit.
 
 The owner first-use verification and real-phone playback checks are tracked

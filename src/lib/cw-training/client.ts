@@ -1,5 +1,5 @@
-import { availableBlockMinutes, dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "./plan";
-import type { BlockMinutes, PlannedTask, PracticeMode } from "./plan";
+import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
+import type { PlannedTask } from "./plan";
 import { listeningGuidance } from "./guidance";
 import { audioVariants, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
 import { audioSessionNote, switchAudioRecording } from "./audio-session";
@@ -65,12 +65,7 @@ const usageNames: Record<MaterialUsage, string> = {
   reference: "Reference",
   unknown: "Not sure yet",
 };
-const modeHelp: Record<PracticeMode, string> = {
-  anything: "A suggestion, not a required order. Choose any exercise below.",
-  listen: "Phone and headphones: focused listening and head copy. Other assignments stay pending.",
-  send: "At your key: warm up before other sending. Listening and computer work stay pending.",
-  computer: "Typing-based trainers and simulator practice. Other assignments stay pending.",
-};
+const DEFAULT_BLOCK_MINUTES = 15;
 const unique = <T extends { id: string }>(first: T[], second: T[]) => [
   ...new Map([...first, ...second].map((item) => [item.id, item])).values(),
 ];
@@ -105,7 +100,6 @@ export async function initTraining() {
   const storage = new TrainingStorage();
   let state: TrainingDeviceState = await storage.load();
   let view: TrainingView = "today";
-  let temporaryMinutes: BlockMinutes | undefined;
   let running = false;
   let recalling = false;
   let todayTime: { date: string; savedSeconds: number; goal: number; savedIds: Set<string> } | undefined;
@@ -131,17 +125,13 @@ export async function initTraining() {
     !!state.active.resource?.url && audio.currentSrc === safeUrl(state.active.resource.url);
   const audioPreference = () => state.audioSpeedPreference === "next" ? "next" as const : "assigned" as const;
   const practiceCourse = () => courseWithAudioVariants(snapshot().course, audioPreference(), state.audioSpeedOverrides);
-  const practiceMode = (): PracticeMode =>
-    state.practiceMode && Object.hasOwn(modeHelp, state.practiceMode)
-      ? state.practiceMode
-      : "anything";
   const plan = () =>
     getTrainingPlan(
       practiceCourse(),
       snapshot().attempts,
       new Date(),
-      temporaryMinutes ?? snapshot().preferences.blockMinutes,
-      practiceMode(),
+      null,
+      "anything",
       snapshot().preferences.carriedTasks,
     );
   const formatMeeting = (date: string, long = false) =>
@@ -310,7 +300,7 @@ export async function initTraining() {
     title: material.title,
     instructions: material.text || "Follow the instructor's linked material.",
     sourceUrl: material.url || "",
-    minutes: temporaryMinutes ?? snapshot().preferences.blockMinutes,
+    minutes: DEFAULT_BLOCK_MINUTES,
   });
   const materialComplete = (material: TrainingMaterial) =>
     snapshot().attempts.some(
@@ -386,10 +376,10 @@ export async function initTraining() {
     if (active?.task.kind === "audio" && active.resource?.durationSeconds)
       return `${recordingLabel(active.task, active.resource)} · ${time(active.resource.durationSeconds)} per pass · current ${active.review ? "review" : "block"}`;
     return item.task.kind === "audio" && Number.isFinite(item.resource?.durationSeconds) && (item.resource?.durationSeconds ?? 0) > 0
-      ? `${recordingLabel(item.task, item.resource)} · ${time(item.resource!.durationSeconds!)} per pass · ${item.passesThisBlock ?? 1} pass${item.passesThisBlock === 1 ? "" : "es"} this block (about ${item.suggestedMinutes} min)`
+      ? `${recordingLabel(item.task, item.resource)} · ${time(item.resource!.durationSeconds!)} per pass · ${item.passesThisBlock ?? 1} pass${item.passesThisBlock === 1 ? "" : "es"} planned`
       : isMorseRunner(item.task)
         ? `${item.suggestedMinutes}-minute run. ${item.extra ? "Each run keeps its own results." : "Shorter runs count toward the cumulative assignment time."}`
-        : `${item.suggestedMinutes}-minute ${item.task.kind === "simulator" ? "uninterrupted run" : "practice block"}`;
+        : item.task.kind === "simulator" ? `${item.suggestedMinutes}-minute uninterrupted run` : "Practice at your own pace; save the time you use.";
   };
   const buttons = (taskId: string, missed = false, unavailable = false, carried = false) => {
     const current = state.active?.task.id === taskId && !state.active.review;
@@ -402,7 +392,7 @@ export async function initTraining() {
     return `<div class="training-actions">${missed ? `<button type="button" data-carry="${escapeHtml(taskId)}">Add to today</button>` : ""}<button type="button" ${current ? 'data-action="resume"' : `data-start="${escapeHtml(taskId)}"`} ${unavailable && !current ? 'disabled title="This live activity needs an eligible event window"' : ""}>${label}</button><button type="button" data-manual="${escapeHtml(taskId)}">Done elsewhere</button>${missed ? `<button type="button" data-miss="${escapeHtml(taskId)}">Dismiss reminder</button>` : ""}${carried ? `<button type="button" data-uncarry="${escapeHtml(taskId)}">Remove from today</button>` : ""}</div>`;
   };
   const taskRow = (item: PlannedTask, missed = false) =>
-    `<div class="training-task${!item.extra && item.started ? " training-task-started" : ""}"><div><strong>${escapeHtml(item.task.title)}</strong>${progressMarkup(item.task, !!item.extra)}<p>${item.carried ? "Added from " : ""}${escapeHtml(assignmentLabel(item.assignment))}${item.task.speedWpm ? ` · ${item.task.speedWpm} WPM` : ""}${item.extra ? " · Optional review" : item.remainingPasses !== undefined ? ` · ${item.remainingPasses} pass${item.remainingPasses === 1 ? "" : "es"} remaining` : ""}</p><p>${escapeHtml(blockDescription(item))}</p>${item.carried && !matchesPracticeMode(item.task, practiceMode()) ? '<p class="training-small">Outside your selected activity. Kept here because you added it to today.</p>' : ""}${item.reason ? `<p>${escapeHtml(item.reason)}</p>` : ""}${
+    `<div class="training-task${!item.extra && item.started ? " training-task-started" : ""}"><div><strong>${escapeHtml(item.task.title)}</strong>${progressMarkup(item.task, !!item.extra)}<p>${item.carried ? "Added from " : ""}${escapeHtml(assignmentLabel(item.assignment))}${item.task.speedWpm ? ` · ${item.task.speedWpm} WPM` : ""}${item.extra ? " · Optional review" : item.remainingPasses !== undefined ? ` · ${item.remainingPasses} pass${item.remainingPasses === 1 ? "" : "es"} remaining` : ""}</p><p>${escapeHtml(blockDescription(item))}</p>${item.reason ? `<p>${escapeHtml(item.reason)}</p>` : ""}${
       item.windows?.length
         ? `<p>Eligible CWT windows: ${item.windows
             .slice(0, 3)
@@ -454,33 +444,22 @@ export async function initTraining() {
   }
   function render() {
     if (!state.snapshot) return;
+    // Speed selectors are rendered in several views. Keep keyboard focus on
+    // the same exercise in the same section when its recording is changed.
+    const focused = document.activeElement;
+    const speedAttribute = focused?.hasAttribute("data-active-audio-speed") ? "data-active-audio-speed"
+      : focused?.hasAttribute("data-audio-speed") ? "data-audio-speed" : undefined;
+    const focusedSection = speedAttribute ? focused?.parentElement?.closest<HTMLElement>("[id]") : undefined;
+    const focusedTask = speedAttribute ? focused?.getAttribute(speedAttribute) : undefined;
     // Keep the user's place in Week when speed choices or sync rerender it.
     const weekDetails = [...$("training-meetings").querySelectorAll<HTMLDetailsElement>("details")];
     const expandedWeekDetails = new Set(weekDetails.flatMap((detail, index) => detail.open ? [index] : []));
     $("training-app").hidden = false;
     $("training-auth").hidden = true;
     const course = practiceCourse();
-    const mode = practiceMode();
-    const now = new Date();
-    const carriedTasks = snapshot().preferences.carriedTasks;
-    const choices = availableBlockMinutes(course, snapshot().attempts, now, mode, carriedTasks);
-    const previousMinutes = temporaryMinutes ?? snapshot().preferences.blockMinutes;
-    const selectedMinutes = choices.includes(previousMinutes)
-      ? previousMinutes
-      : choices.find((minutes) => minutes > previousMinutes && getTrainingPlan(course, snapshot().attempts, now, minutes, mode, carriedTasks).next)
-        ?? choices.find((minutes) => minutes > previousMinutes) ?? 15;
-    const adjustedTime = selectedMinutes !== previousMinutes;
-    if (adjustedTime) temporaryMinutes = selectedMinutes;
-    const current = getTrainingPlan(course, snapshot().attempts, now, selectedMinutes, mode, carriedTasks);
+    const current = getTrainingPlan(course, snapshot().attempts, new Date(), null, "anything", snapshot().preferences.carriedTasks);
     const assignment = current.assignment;
-    root!.querySelectorAll<HTMLButtonElement>("[data-mode]").forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
-    });
-    $("training-mode-help").textContent = modeHelp[mode];
     $<HTMLSelectElement>("training-audio-preference").value = audioPreference();
-    $<HTMLSelectElement>("training-block-now").innerHTML = choices.map((minutes) => `<option value="${minutes}">${minutes} minutes</option>`).join("");
-    $<HTMLSelectElement>("training-block-now").value = String(selectedMinutes);
-    $("training-time-help").textContent = `${adjustedTime ? `No ${previousMinutes}-minute option fits this activity now; showing ${selectedMinutes} minutes. ` : ""}Audio fits when one whole pass fits. Other repeats can wait for another block. Short choices appear only when suitable practice is available.`;
     const meeting =
       current.phase === "class"
         ? current.meeting
@@ -528,25 +507,20 @@ export async function initTraining() {
     const todayRemaining = todayQueue.length + todayBlocked.length;
     const remaining = todayRemaining + added.length + earlierRemaining + preparation.length;
     $("training-coverage").textContent = remaining
-      ? `${todayRemaining} scheduled exercise${todayRemaining === 1 ? "" : "s"} remaining${added.length ? ` · ${added.length} added to today` : ""}${earlierRemaining ? ` · ${earlierRemaining} earlier unfinished` : ""}${preparation.length ? ` · ${preparation.length} instructor preparation` : ""}. Your schedule advances by date; you do not need to skip older work to move on.`
+      ? `${todayRemaining} scheduled exercise${todayRemaining === 1 ? "" : "s"} remaining${added.length ? ` · ${added.length} added to today` : ""}${earlierRemaining ? ` · ${earlierRemaining} earlier unfinished` : ""}${preparation.length ? ` · ${preparation.length} instructor preparation` : ""}.`
       : current.phase === "practice"
-        ? "Your required queue is complete. Keep practicing if you like: 60 minutes is a goal, not a limit."
+        ? "Today's assignments are complete. Keep practicing if you like."
         : current.phase === "class"
           ? "Class time does not count toward your independent practice hour."
           : "Extra practice is optional. Review a familiar exercise for as long as it is useful.";
-    $("training-resume").hidden = !state.active;
-    $("training-resume").querySelector("p")!.textContent = state.active?.runner
-      ? "This run is saved on this device. Save it to add its results to history."
-      : "A practice block is saved on this device.";
-    $("training-resume").querySelector("button")!.textContent = runnerEnded() ? "View results" : "Return to your block";
     const next = current.next;
     const activeAssignment = state.active ? findTask(state.active.task.id)?.assignment : undefined;
     $("training-next").innerHTML = state.active
       ? `<p class="eyebrow">Current block${activeAssignment ? ` · ${escapeHtml(assignmentLabel(activeAssignment))}` : ""}</p><h3>${escapeHtml(state.active.task.title)}</h3><p>${time(state.active.activeSeconds)} practiced. ${activeAssignment && activeAssignment.date < current.date ? "This is earlier preparation, not today's assignment. " : ""}${state.active.runner ? "Saved on this device; save the run to add its results to history. Each new run starts a fresh score." : "Resume where you stopped, or record this partial block to choose another activity."}</p>${state.active.runner ? `<p>${escapeHtml(runnerProgressText(state.active))}</p>` : ""}<div class="training-actions"><button type="button" class="primary" data-action="resume">${runnerEnded() ? "View results" : state.active.runner ? "Return to runner" : "Resume your block"}</button><button type="button" data-action="finish">${state.active.runner ? "Save run & notes" : "Record block and switch"}</button></div>`
       : next
-        ? `<p class="eyebrow">${next.extra ? "Extra practice" : next.carried ? "Added to today" : next.assignment.date === current.date ? "Suggested for today" : "Earlier preparation"} · ${escapeHtml(next.task.kind)}${next.task.speedWpm ? ` · ${next.task.speedWpm} WPM` : ""}</p><h3>${escapeHtml(next.task.title)}</h3>${progressMarkup(next.task, !!next.extra)}<p>${escapeHtml(assignmentLabel(next.assignment))}</p><p>${escapeHtml(blockDescription(next))}</p>${next.reason ? `<p>${escapeHtml(next.reason)}</p>` : ""}${next.extra ? '<p class="training-small">This optional block adds practice minutes without changing required assignment progress.</p>' : next.carried ? '<p class="training-small">You added this exercise to today. Progress still belongs to its original assignment.</p>' : next.assignment.date < current.date ? '<p class="training-small">No unfinished exercise for today fits this activity and time choice. This earlier preparation is available if you want it.</p>' : ""}<button type="button" class="primary" ${next.extra ? "data-review" : "data-start"}="${escapeHtml(next.task.id)}">${next.started && !next.extra ? "Continue" : "Start"} ${next.suggestedMinutes} minutes</button>`
-        : `<p class="eyebrow">${current.phase === "class" ? "Class materials are ready below" : "A little breathing room"}</p><h3>${remaining ? "Plan your next practice window" : "Your next action is yours."}</h3><p>${remaining ? "The remaining exercises need a longer block, an eligible event window, or a resource check. Review the details below." : current.phase === "rest" ? "Rest today, review an earlier exercise, or prepare with your instructor's material." : "Review the week, open class materials, or log practice completed elsewhere."}</p><div class="training-actions"><button type="button" data-view="week">View the course</button>${current.phase === "class" && snapshot().preferences.joinUrl ? link(snapshot().preferences.joinUrl, "Join class", "training-button primary") : ""}</div>`;
-    if (!state.active && mode === "anything" && current.phase !== "class" && preparation.length && (!next || next.extra || next.task.optional))
+        ? `<p class="eyebrow">${next.extra ? "Extra practice" : next.carried ? "Added to today" : next.assignment.date === current.date ? "Suggested for today" : "Earlier preparation"} · ${escapeHtml(next.task.kind)}${next.task.speedWpm ? ` · ${next.task.speedWpm} WPM` : ""}</p><h3>${escapeHtml(next.task.title)}</h3>${progressMarkup(next.task, !!next.extra)}<p>${escapeHtml(assignmentLabel(next.assignment))}</p><p>${escapeHtml(blockDescription(next))}</p>${next.reason ? `<p>${escapeHtml(next.reason)}</p>` : ""}${next.extra ? '<p class="training-small">This optional block adds practice minutes without changing required assignment progress.</p>' : next.carried ? '<p class="training-small">You added this exercise to today. Progress still belongs to its original assignment.</p>' : next.assignment.date < current.date ? '<p class="training-small">The available exercises for today are complete. This earlier preparation is here if you want it.</p>' : ""}<button type="button" class="primary" ${next.extra ? "data-review" : "data-start"}="${escapeHtml(next.task.id)}">${next.started && !next.extra ? "Continue" : "Start"} ${next.task.kind === "audio" ? "listening" : "practice"}</button>`
+        : `<p class="eyebrow">${current.phase === "class" ? "Class materials are ready below" : "A little breathing room"}</p><h3>${remaining ? "Plan your next practice window" : "Your next action is yours."}</h3><p>${remaining ? "The remaining exercises need an eligible event window or a resource check. Review the details below." : current.phase === "rest" ? "Rest today, review an earlier exercise, or prepare with your instructor's material." : "Review the week, open class materials, or log practice completed elsewhere."}</p><div class="training-actions"><button type="button" data-view="week">View the course</button>${current.phase === "class" && snapshot().preferences.joinUrl ? link(snapshot().preferences.joinUrl, "Join class", "training-button primary") : ""}</div>`;
+    if (!state.active && current.phase !== "class" && preparation.length && (!next || next.extra || next.task.optional))
       $("training-next").innerHTML =
         `<p class="eyebrow">Instructor preparation · Session ${preparation[0].session}</p><h3>${escapeHtml(preparation[0].title)}</h3><p>This additional preparation is due before class. Its exact duration depends on the instructor's instructions.</p><button type="button" class="primary" data-practice-material="${preparation[0].id}">Start preparation</button>`;
     if (!state.active && next && isMorseRunner(next.task)) {
@@ -559,29 +533,27 @@ export async function initTraining() {
       const startButton = $("training-next").querySelector("button[data-start], button[data-review]");
       startButton?.insertAdjacentHTML("beforebegin", speedChoice(next.task));
     }
-    const available = todayQueue.filter((item) => matchesPracticeMode(item.task, mode));
-    const deferred = todayQueue.filter((item) => !matchesPracticeMode(item.task, mode));
-    $("training-queue").innerHTML = available.length
-      ? available.map((item) => taskRow(item)).join("")
-      : `<p class="training-small">${todayRemaining ? "Today's unfinished exercises need a different activity or more time. See below; earlier preparation is separate." : current.phase === "practice" ? "Today's required exercises are complete. Earlier preparation and extra review are available below." : "No required practice is scheduled right now. Earlier work and extra review remain available."}</p>`;
+    $("training-queue").innerHTML = todayQueue.length
+      ? todayQueue.map((item) => taskRow(item)).join("")
+      : `<p class="training-small">${todayRemaining ? "The remaining assignments need a resource check or live event. See below." : current.phase === "practice" ? "Today's assignments are complete. Extra practice is ready below." : "No required practice is scheduled right now."}</p>`;
     $("training-carried-panel").hidden = !added.length;
     $("training-carried").innerHTML = added.map((item) => taskRow(item)).join("");
-    $("training-deferred").innerHTML = deferred.length
-      ? `<details class="training-section"><summary>Today: other activities (${deferred.length})</summary><p class="training-small">These stay pending while you practice something that fits right now.</p>${deferred.map((item) => taskRow(item)).join("")}</details>`
-      : "";
+    const blockedWasOpen = $("training-blocked").querySelector("details")?.open;
     $("training-blocked").innerHTML = todayBlocked.length
-      ? `<details class="training-section"><summary>Today: more time or a resource check (${todayBlocked.length})</summary>${todayBlocked.map((item) => taskRow(item)).join("")}</details>`
+      ? `<details class="training-panel"${blockedWasOpen ? " open" : ""}><summary>Needs a resource or live event (${todayBlocked.length})</summary><div class="training-panel-body">${todayBlocked.map((item) => taskRow(item)).join("")}</div></details>`
       : "";
     $("training-earlier-panel").hidden = !earlierRemaining;
     $("training-earlier-label").textContent = `Earlier unfinished preparation (${earlierRemaining})`;
-    const earlierAvailable = earlierQueue.filter((item) => matchesPracticeMode(item.task, mode));
-    const earlierDeferred = earlierQueue.filter((item) => !matchesPracticeMode(item.task, mode));
-    $("training-earlier").innerHTML =
-      (earlierAvailable.length ? earlierAvailable.map((item) => taskRow(item, true)).join("") : '<p class="training-small">No earlier exercise fits this activity and time choice.</p>') +
-      (earlierDeferred.length ? `<details><summary>Earlier: other activities (${earlierDeferred.length})</summary>${earlierDeferred.map((item) => taskRow(item, true)).join("")}</details>` : "") +
-      (earlierBlocked.length ? `<details><summary>Earlier: more time or a resource check (${earlierBlocked.length})</summary>${earlierBlocked.map((item) => taskRow(item, true)).join("")}</details>` : "");
-    $("training-extra-panel").hidden = !current.extras.length && !current.runnerReview;
-    $("training-extra").innerHTML = (current.runnerReview ? `<div class="training-card"><h3>Morse Runner review</h3><p class="training-small">Always available as optional computer practice. Start with ${current.runnerReview.suggestedMinutes} minutes at ${current.runnerReview.task.speedWpm} WPM; adjust the settings before Run. This never completes a required assignment.</p><button type="button" data-review="${escapeHtml(current.runnerReview.task.id)}">Start Morse Runner review</button>${runnerGuideLink(current.runnerReview.task)}</div>` : "") + current.extras.slice(0, 3).map((item) => taskRow(item)).join("");
+    $("training-earlier").innerHTML = [...earlierQueue, ...earlierBlocked].map((item) => taskRow(item, true)).join("");
+    $("training-regular-practice").innerHTML = [
+      current.runnerReview && { item: current.runnerReview, title: "Morse Runner", description: "Practice calls and exchanges. Adjust speed, duration, and conditions before Run." },
+      current.lcwoReview && { item: current.lcwoReview, title: "LCWO", description: "Practice instant character recognition. Keep your current course settings handy in Focus." },
+    ].filter((entry) => !!entry).map(({ item, title, description }) => {
+      const active = state.active?.task.id === item.task.id && !!state.active.review;
+      return `<div class="training-practice-card"><h4>${title}</h4><p class="training-small">${description}</p><button type="button" ${active ? 'data-action="resume"' : `data-review="${escapeHtml(item.task.id)}"`}>${active ? runnerEnded() ? "View results" : `Return to ${title}` : `Practice ${title}`}</button></div>`;
+    }).join("");
+    $("training-extra-panel").hidden = !current.extras.length;
+    $("training-extra").innerHTML = current.extras.slice(0, 3).map((item) => taskRow(item)).join("");
     const missed = current.missed.filter(
       (item) => !state.dismissed.includes(item.task.id),
     );
@@ -603,9 +575,7 @@ export async function initTraining() {
     $<HTMLAnchorElement>("training-course-source").href = safeUrl(
       course.sourceUrl,
     );
-    $<HTMLSelectElement>("training-block-preference").value = String(
-      snapshot().preferences.blockMinutes,
-    );
+    $<HTMLSelectElement>("training-calendar-duration").value = String(snapshot().preferences.blockMinutes);
     if (document.activeElement !== $("training-reminder-time"))
       $<HTMLInputElement>("training-reminder-time").value =
         snapshot().preferences.reminderTime;
@@ -614,7 +584,7 @@ export async function initTraining() {
         snapshot().preferences.joinUrl ?? "";
     $("training-preparation").innerHTML = materials.length
       ? `<div class="training-section"><h3>For your next class</h3>${materials.map((material) => `<div class="training-task"><div><strong>${escapeHtml(material.title)}</strong><p>${usageNames[material.usage]}${materialComplete(material) ? " · Preparation recorded" : ""}</p></div><div class="training-actions"><button type="button" data-material="${material.id}">Open material</button>${material.usage === "preparation" && !materialComplete(material) ? `<button type="button" data-practice-material="${material.id}">Start preparation</button>` : ""}</div></div>`).join("")}</div>`
-      : '<p class="training-small">Expecting an instructor email? Add its text or link to Materials when it arrives.</p>';
+      : "";
     $("training-meetings").innerHTML = course.meetings
       .map(
         (item) =>
@@ -649,8 +619,13 @@ export async function initTraining() {
       materials: snapshot().materials,
       pendingIds: new Set((state.pending.attempts ?? []).map((attempt) => attempt.id)),
     };
+    const todayHistory = practiceHistoryForDate(snapshot().attempts, current.date, snapshot().course.timezone);
+    const savedMinutes = todayHistory.reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0) / 60;
+    $("training-today-history-summary").textContent = todayHistory.length
+      ? `${todayHistory.length} session${todayHistory.length === 1 ? "" : "s"} · ${Number(savedMinutes.toFixed(1))} min saved`
+      : "No saved sessions yet";
     for (const [id, attempts, includeDate] of [
-      ["training-today-history", practiceHistoryForDate(snapshot().attempts, current.date, snapshot().course.timezone), false],
+      ["training-today-history", todayHistory, false],
       ["training-history", [...snapshot().attempts].sort((a, b) => b.endedAt.localeCompare(a.endedAt)).slice(0, 100), true],
     ] as const) {
       const container = $(id);
@@ -669,6 +644,9 @@ export async function initTraining() {
     renderActive();
     applyView(view);
     status();
+    if (focusedSection && speedAttribute && focusedTask && !focused?.isConnected) {
+      focusedSection.querySelector<HTMLSelectElement>(`[${speedAttribute}="${CSS.escape(focusedTask)}"]`)?.focus({ preventScroll: true });
+    }
   }
 
   function renderActive() {
@@ -699,7 +677,7 @@ export async function initTraining() {
       ? `Alternative allowed by the curriculum: ${active.task.alternative}`
       : "Follow the exercise instructions below. This block autosaves on this device until you finish and save it.";
     $("training-focus-target").textContent =
-      `${active.targetMinutes}-minute block${active.task.objectiveCount ? ` · Objective: ${active.task.objectiveCount}` : ""}`;
+      `${active.task.kind === "simulator" ? `${active.targetMinutes}-minute run` : "At your own pace"}${active.task.objectiveCount ? ` · Objective: ${active.task.objectiveCount}` : ""}`;
     if (active.task.kind === "audio" && active.resource?.durationSeconds) {
       $("training-focus-target").textContent = `${active.targetPasses}-pass block · ${time(active.resource.durationSeconds)} per pass`;
       $("training-focus-kind").textContent = `${active.review ? "Extra review · " : ""}Audio · ${recordingLabel(active.task, active.resource)}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
@@ -742,7 +720,7 @@ export async function initTraining() {
     if (active.task.kind === "icr")
       $("training-focus-resource").insertAdjacentHTML(
         "afterbegin",
-        `<p>${link("https://morsecode.world/international/trainer/character.html", "Open ICR trainer", "training-button primary")} ${link("https://morsecode.world/international/trainer/words.html", "Word trainer", "training-button")}</p><p class="training-small">Use CW Academy material, 25 WPM character speed, and ${active.task.speedWpm ?? 10} WPM effective speed. Follow the original guidelines below for word length and progression.</p>`,
+        `<p>${link("https://lcwo.net/", "Open LCWO", "training-button primary")} ${link("https://morsecode.world/international/trainer/character.html", "Open ICR trainer", "training-button")} ${link("https://morsecode.world/international/trainer/words.html", "Word trainer", "training-button")}</p><p class="training-small">Use CW Academy material, 25 WPM character speed, and ${active.task.speedWpm ?? 10} WPM effective speed. Follow the original guidelines below for word length and progression.</p>`,
       );
     if (mountedBlock !== active.id) {
       audioGeneration++;
@@ -1078,13 +1056,13 @@ export async function initTraining() {
         : undefined,
       suggestedMinutes:
         isMorseRunner(found.task)
-          ? progress.complete ? (temporaryMinutes ?? snapshot().preferences.blockMinutes)
-            : Math.min(temporaryMinutes ?? snapshot().preferences.blockMinutes, Math.max(1, Math.ceil(((found.task.minutes ?? 15) * 60 - progress.activeSeconds) / 60)))
+          ? progress.complete ? (DEFAULT_BLOCK_MINUTES)
+            : Math.min(DEFAULT_BLOCK_MINUTES, Math.max(1, Math.ceil(((found.task.minutes ?? 15) * 60 - progress.activeSeconds) / 60)))
           : found.task.kind === "simulator"
           ? (found.task.minutes ?? 15)
           : found.task.kind === "audio" && resource?.durationSeconds
           ? Math.ceil(resource.durationSeconds / 60)
-          : (temporaryMinutes ?? snapshot().preferences.blockMinutes),
+          : (DEFAULT_BLOCK_MINUTES),
       passesThisBlock: found.task.kind === "audio" ? 1 : undefined,
       ...(isMorseRunner(found.task) && progress.complete ? { extra: true } : {}),
       interrupted: progress.interrupted,
@@ -1105,7 +1083,7 @@ export async function initTraining() {
       assignmentId: `material:${material.id}`,
       task: materialTask(material),
       startedAt: new Date().toISOString(),
-      targetMinutes: temporaryMinutes ?? snapshot().preferences.blockMinutes,
+      targetMinutes: DEFAULT_BLOCK_MINUTES,
       activeSeconds: 0,
       completedPasses: 0,
       previousPasses: 0,
@@ -1475,7 +1453,7 @@ export async function initTraining() {
 
   root.addEventListener("click", (event) => {
     const button = (event.target as HTMLElement).closest<HTMLElement>(
-      "[data-action], [data-view], [data-start], [data-review], [data-mode], [data-manual], [data-miss], [data-carry], [data-uncarry], [data-material], [data-revise-material], [data-practice-material], [data-close], [data-seek]",
+      "[data-action], [data-view], [data-start], [data-review], [data-manual], [data-miss], [data-carry], [data-uncarry], [data-material], [data-revise-material], [data-practice-material], [data-close], [data-seek]",
     );
     if (!button) return;
     if (button.hasAttribute("data-close")) {
@@ -1483,16 +1461,9 @@ export async function initTraining() {
       return;
     }
     if (!state.snapshot) return;
-    if (button.dataset.mode && Object.hasOwn(modeHelp, button.dataset.mode)) {
-      state.practiceMode = button.dataset.mode as PracticeMode;
-      render();
-      void persist();
-      return;
-    }
     if (button.dataset.review) {
       const current = plan();
-      const item = current.runnerReview?.task.id === button.dataset.review ? current.runnerReview
-        : current.extras.find((item) => item.task.id === button.dataset.review);
+      const item = [current.runnerReview, current.lcwoReview, ...current.extras].find((item) => item?.task.id === button.dataset.review);
       if (item) start(item);
       return;
     }
@@ -1721,15 +1692,12 @@ export async function initTraining() {
         }
         snapshot().preferences = {
           ...snapshot().preferences,
-          blockMinutes: Number(
-            $<HTMLSelectElement>("training-block-preference").value,
-          ) as 10 | 15,
+          blockMinutes: Number($<HTMLSelectElement>("training-calendar-duration").value) as 10 | 15,
           reminderTime,
           joinUrl: joinUrl || undefined,
           updatedAt: new Date().toISOString(),
         };
         state.pending.preferences = snapshot().preferences;
-        temporaryMinutes = undefined;
         void persist();
         render();
         void sync();
@@ -1776,12 +1744,6 @@ export async function initTraining() {
         break;
       }
     }
-  });
-  $<HTMLSelectElement>("training-block-now").addEventListener("change", (event) => {
-    const minutes = Number((event.currentTarget as HTMLSelectElement).value);
-    if (![3, 5, 10, 15].includes(minutes)) return;
-    temporaryMinutes = minutes as BlockMinutes;
-    render();
   });
   $<HTMLSelectElement>("training-audio-preference").addEventListener("change", (event) => {
     state.audioSpeedPreference = (event.currentTarget as HTMLSelectElement).value === "next" ? "next" : "assigned";
