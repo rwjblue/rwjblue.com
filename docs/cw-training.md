@@ -102,12 +102,15 @@ automatic transcription. Initial playback needs a user gesture. Media Session
 controls are progressive enhancements; uninterrupted playback with a locked
 phone still requires real-device verification. Offline audio is not promised.
 
-Short recordings offer verified official speed variants before a block starts.
+Short recordings offer verified official speed variants before a block starts
+and through the Recording speed selector in Focus, even after playback starts.
 Assigned speed is the default; Next faster selects the nearest available speed
 above the assignment. Per-exercise choices offer the assigned or faster speeds.
 These preferences stay on this device and never rewrite the curriculum or old
-history. The checked-in public metadata catalog contains only official file
-links, exercise identities, speeds, and measured durations, not course text.
+history. Selectors outside Focus remain prelaunch controls; changing the default
+affects future blocks only. The checked-in public metadata catalog contains only
+official file links, exercise identities, speeds, and measured durations, not
+course text.
 Its exact source URLs distinguish short and long QSO files with similar names.
 Unknown or unresolved resources keep their original behavior.
 
@@ -115,13 +118,21 @@ Planning uses the selected recording's measured duration at native 1x playback,
 including eligibility for 3- and 5-minute blocks. Whole faster passes satisfy
 the same exercise; elapsed listening time remains actual time, not the duration
 of the slower assigned file. Extra-review passes remain separate from required
-coverage. Each active block snapshots one recording. To switch speeds after
-starting, finish and save that block first; a new block starts at the beginning
-without transferring partial coverage or difficult-position markers.
+coverage. Changing Recording speed in Focus pauses playback and starts the new
+recording at the beginning of the current pass. Cumulative practice time,
+completed whole passes, scratchpad, and required-versus-review identity remain
+intact. Partial coverage never combines across recordings, and difficult-position
+markers remain attached to the recording where they were made. The original
+curriculum instructions do not change.
 
 Every saved in-page audio attempt automatically prefixes its existing database
 note with the actual recording, practiced WPM, assigned WPM, and source URL.
+For mixed-speed blocks, it also groups practice time (including recall),
+completed whole passes, and recording-specific difficult-position markers by
+each exact official source URL.
 The finish dialog displays this metadata separately from the editable reflection.
+An active block's recording history stays on this device until Finish and
+Save practice sync the attempt.
 This uses the existing immutable attempt API and requires no database migration.
 Refresh official variant metadata with `mise run cw-training:update-audio-variants`.
 
@@ -314,7 +325,9 @@ Run `npm test`, `npm run check:training`, `mise run check`, `mise run build`, an
 `mise run deploy -- --dry-run`. Regenerate Worker types after binding changes
 with `npx wrangler types --strict-vars=false`. Also check the live page at phone
 and desktop widths, pause/reload/resume, audio seeking and complete passes,
-offline logging/reconnect, instructor text revisions, calendar revocation,
+mid-block recording changes without combining partial passes, per-recording
+time/markers in saved notes, offline logging/reconnect, instructor text revisions,
+calendar revocation,
 and unauthenticated API rejection before declaring a rollout ready. Verify
 Add to today/remove across filters, reload, and the Eastern date boundary;
 Runner review discoverability; editable starting settings and mid-run speed;

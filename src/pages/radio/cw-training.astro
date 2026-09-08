@@ -193,7 +193,8 @@ import "../../styles/cw-training.css";
             </div>
             <div id="training-audio-box" hidden>
               <p id="training-recording-label" class="training-small"></p>
-              <p class="training-small">To change recordings, finish and save this block first. Its time, completed passes, and notes will be kept.</p>
+              <div id="training-focus-speed"></div>
+              <p id="training-focus-speed-help" class="training-small" hidden>Change speed here anytime. The new recording starts paused at the beginning of the current pass. Your practice time, completed passes, and scratchpad stay intact. All speeds used are saved with this block.</p>
               <p id="training-pass-count" class="training-pass-count"></p>
               <audio id="training-audio" controls preload="metadata"></audio>
               <div class="training-actions">

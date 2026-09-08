@@ -7,11 +7,22 @@ import type {
 import type { PracticeMode } from "./plan";
 import type { RunnerRunState } from "./runner-bridge";
 
+export interface AudioRecordingUsage {
+  resource: TrainingResource;
+  /** Practice time includes recallSeconds; it is not listening time alone. */
+  activeSeconds: number;
+  recallSeconds: number;
+  completedPasses: number;
+  bookmarks: number[];
+}
+
 export interface ActiveBlock {
   id: string;
   assignmentId: string;
   task: TrainingTask;
   resource?: TrainingResource;
+  /** Archived recording usage only, grouped by URL. Current usage is total minus this history. */
+  audioHistory?: AudioRecordingUsage[];
   startedAt: string;
   targetMinutes: number;
   activeSeconds: number;

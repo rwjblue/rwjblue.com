@@ -1,7 +1,8 @@
 import { availableBlockMinutes, dateInTimezone, getTrainingPlan, matchesPracticeMode, taskProgress } from "./plan";
 import type { BlockMinutes, PlannedTask, PracticeMode } from "./plan";
 import { listeningGuidance } from "./guidance";
-import { audioVariants, audioRecordingNote, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
+import { audioVariants, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
+import { audioSessionNote, switchAudioRecording } from "./audio-session";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerMeetsAssignment, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
@@ -109,6 +110,7 @@ export async function initTraining() {
   let lastAudioClock = performance.now();
   let seeking = false;
   let audioReady = false;
+  let audioGeneration = 0;
   let mountedBlock: string | undefined;
   let runnerFrame: HTMLIFrameElement | undefined;
   let runnerTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -121,6 +123,8 @@ export async function initTraining() {
   let lastSaved = 0;
   let disposed = false;
   const snapshot = () => state.snapshot!;
+  const audioMatchesActive = () => state.active?.task.kind === "audio" &&
+    !!state.active.resource?.url && audio.currentSrc === safeUrl(state.active.resource.url);
   const audioPreference = () => state.audioSpeedPreference === "next" ? "next" as const : "assigned" as const;
   const practiceCourse = () => courseWithAudioVariants(snapshot().course, audioPreference(), state.audioSpeedOverrides);
   const practiceMode = (): PracticeMode =>
@@ -332,7 +336,7 @@ export async function initTraining() {
       ? `Practicing ${actual.speedWpm} WPM${task.speedWpm ? ` · assigned ${task.speedWpm} WPM` : ""}`
       : resource?.title ?? task.title;
   };
-  const speedChoice = (task: TrainingTask) => {
+  const speedChoice = (task: TrainingTask, inFocus = false) => {
     if (task.kind !== "audio") return "";
     const resource = assignedResource(task);
     if (resource?.unresolved || !task.speedWpm) return "";
@@ -341,6 +345,11 @@ export async function initTraining() {
     const defaultVariant = selectAudioVariant(resource, task.speedWpm, audioPreference());
     const defaultSpeed = choices.find((variant) => variant.url === defaultVariant?.url)?.speedWpm ?? task.speedWpm;
     const override = choices.some((variant) => variant.speedWpm === state.audioSpeedOverrides?.[task.id]) ? state.audioSpeedOverrides?.[task.id] : undefined;
+    if (inFocus) {
+      const selected = choices.find((variant) => variant.url === state.active?.resource?.url)?.speedWpm;
+      if (selected === undefined) return "";
+      return `<label class="training-speed-choice">Recording speed<select data-active-audio-speed="${escapeHtml(task.id)}" aria-describedby="training-focus-speed-help">${choices.map((variant) => `<option value="${variant.speedWpm}"${variant.speedWpm === selected ? " selected" : ""}>${variant.speedWpm} WPM${variant.speedWpm === task.speedWpm ? " (assigned)" : " (stretch)"}${variant.durationSeconds ? ` · ${time(variant.durationSeconds)} per pass` : ""}</option>`).join("")}</select></label>`;
+    }
     return `<label class="training-speed-choice">Recording speed for ${escapeHtml(task.title)}<select data-audio-speed="${escapeHtml(task.id)}"${state.active ? " disabled" : ""}><option value=""${override === undefined ? " selected" : ""}>Use default (${defaultSpeed} WPM)</option>${choices.map((variant) => `<option value="${variant.speedWpm}"${override === variant.speedWpm ? " selected" : ""}>${variant.speedWpm} WPM${variant.speedWpm === task.speedWpm ? " (assigned)" : " (stretch)"}${variant.durationSeconds ? ` · ${time(variant.durationSeconds)} per pass` : ""}</option>`).join("")}</select></label>`;
   };
   const progressMarkup = (task: TrainingTask, review = false) => {
@@ -610,6 +619,8 @@ export async function initTraining() {
       running = false;
       recalling = false;
       mountedBlock = undefined;
+      audioGeneration++;
+      audioReady = false;
       audio.removeAttribute("src");
       audio.load();
       return;
@@ -618,6 +629,9 @@ export async function initTraining() {
       `${active.review ? "Extra review · " : ""}${active.task.kind}${active.task.speedWpm ? ` · ${active.task.speedWpm} WPM` : ""}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
     $("training-focus-title").textContent = active.task.title;
     $("training-recording-label").textContent = recordingLabel(active.task, active.resource);
+    const focusSpeedChoice = speedChoice(active.task, true);
+    $("training-focus-speed").innerHTML = focusSpeedChoice;
+    $("training-focus-speed-help").hidden = !focusSpeedChoice;
     $("training-focus-objective").textContent = active.review
       ? "Optional reinforcement using the original exercise below. These minutes count, but required assignment progress stays unchanged."
       : active.task.alternative
@@ -625,6 +639,10 @@ export async function initTraining() {
       : "Follow the exercise instructions below. This block autosaves on this device until you finish and save it.";
     $("training-focus-target").textContent =
       `${active.targetMinutes}-minute block${active.task.objectiveCount ? ` · Objective: ${active.task.objectiveCount}` : ""}`;
+    if (active.task.kind === "audio" && active.resource?.durationSeconds) {
+      $("training-focus-target").textContent = `${active.targetPasses}-pass block · ${time(active.resource.durationSeconds)} per pass`;
+      $("training-focus-kind").textContent = `${active.review ? "Extra review · " : ""}Audio · ${recordingLabel(active.task, active.resource)}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
+    }
     $("training-focus-instructions").textContent = active.task.instructions;
     $("training-focus-settings").textContent = active.task.settings ?? "";
     const runner = morseRunnerSetup(active.task);
@@ -666,7 +684,11 @@ export async function initTraining() {
         `<p>${link("https://morsecode.world/international/trainer/character.html", "Open ICR trainer", "training-button primary")} ${link("https://morsecode.world/international/trainer/words.html", "Word trainer", "training-button")}</p><p class="training-small">Use CW Academy material, 25 WPM character speed, and ${active.task.speedWpm ?? 10} WPM effective speed. Follow the original guidelines below for word length and progression.</p>`,
       );
     if (mountedBlock !== active.id) {
+      audioGeneration++;
       audioReady = false;
+      seeking = false;
+      lastAudioPosition = 0;
+      lastAudioClock = performance.now();
       mountedBlock = active.id;
       $<HTMLTextAreaElement>("training-scratchpad").value = active.scratchpad ?? "";
       $<HTMLDetailsElement>("training-scratchpad-panel").open = true;
@@ -871,11 +893,15 @@ export async function initTraining() {
   async function play(): Promise<void> {
     if (!allowActiveDate()) return;
     stopTimer();
+    const generation = audioGeneration;
+    const blockId = state.active?.id;
     try {
       await audio.play();
+      if (generation !== audioGeneration || state.active?.id !== blockId || audio.paused) return;
       $("training-audio-state").textContent =
         "Listening. Pause whenever you need a break.";
     } catch {
+      if (generation !== audioGeneration || state.active?.id !== blockId) return;
       $("training-audio-state").textContent =
         "Tap the player's play button to continue. If audio is unavailable, use the official source link.";
     }
@@ -1025,10 +1051,10 @@ export async function initTraining() {
     const active = state.active;
     $("training-finish-back").textContent = active.runner ? "Back to results" : "Keep practicing";
     $<HTMLInputElement>("training-finish-minutes").readOnly = !!active.runner;
-    const recording = active.runner ? runnerMetadata(active) : audioRecordingNote(active.task, active.resource);
+    const recording = active.runner ? runnerMetadata(active) : audioSessionNote(active);
     $("training-finish-recording").hidden = !recording;
     $("training-finish-recording").textContent = recording ? `Saved automatically with this entry: ${recording}` : "";
-    const marks = active.bookmarks.length ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}` : "";
+    const marks = !active.audioHistory && active.bookmarks.length ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}` : "";
     $<HTMLTextAreaElement>("training-finish-note").maxLength = Math.max(0, 4000 - recording.length - marks.length - 50);
     $("training-finish-recall-label").hidden = active.task.kind !== "audio";
     $<HTMLInputElement>("training-finish-recall").value = String(Math.round((active.recallSeconds ?? 0) / 6) / 10);
@@ -1085,7 +1111,7 @@ export async function initTraining() {
   }
 
   audio.addEventListener("loadedmetadata", () => {
-    if (!state.active) return;
+    if (!state.active || !audioMatchesActive() || audio.readyState < 1) return;
     audio.currentTime = Math.min(
       state.active.position,
       Math.max(0, audio.duration - 0.1),
@@ -1095,12 +1121,14 @@ export async function initTraining() {
     audioReady = true;
   });
   audio.addEventListener("play", () => {
+    if (!audioMatchesActive() || audio.paused) return;
     // The native control has flipped paused already, but playback has just started.
     stopTimer(false);
     if (!allowActiveDate()) return;
     void persist();
   });
   audio.addEventListener("playing", () => {
+    if (!audioMatchesActive() || audio.paused) return;
     if (!allowActiveDate()) return;
     lastAudioPosition = audio.currentTime;
     lastAudioClock = performance.now();
@@ -1108,11 +1136,13 @@ export async function initTraining() {
       "Listening. Your position is saved.";
   });
   audio.addEventListener("seeking", () => {
+    if (!audioReady || !audioMatchesActive()) return;
     seeking = true;
     lastAudioPosition = audio.currentTime;
     lastAudioClock = performance.now();
   });
   audio.addEventListener("seeked", () => {
+    if (!audioReady || !audioMatchesActive()) return;
     seeking = false;
     lastAudioPosition = audio.currentTime;
     lastAudioClock = performance.now();
@@ -1122,13 +1152,14 @@ export async function initTraining() {
     }
   });
   audio.addEventListener("waiting", () => {
+    if (!audioMatchesActive()) return;
     lastAudioPosition = audio.currentTime;
     lastAudioClock = performance.now();
     $("training-audio-state").textContent =
       "Buffering. Waiting time is not counted.";
   });
   audio.addEventListener("pause", () => {
-    if (state.active) {
+    if (state.active && audioReady && audioMatchesActive()) {
       state.active.position = audio.currentTime;
       if (!audio.ended)
         $("training-audio-state").textContent = recalling
@@ -1140,15 +1171,16 @@ export async function initTraining() {
   audio.addEventListener("ratechange", () => {
     if (audio.playbackRate === 1) return;
     audio.playbackRate = 1;
-    $("training-audio-state").textContent = "Playback stays at 1x so the recorded WPM stays accurate. Choose an official faster recording before your next block.";
+    $("training-audio-state").textContent = "Playback stays at 1x so the recorded WPM stays accurate. Use Recording speed above to choose another official recording when available.";
   });
   audio.addEventListener("error", () => {
+    if (!audio.error || state.active?.task.kind !== "audio" || audio.src !== safeUrl(state.active.resource?.url)) return;
     $("training-audio-state").textContent =
       "The official recording could not load. Check your connection or use the source link. Your current progress is saved.";
   });
-  audio.addEventListener("timeupdate", () => {
+  function trackAudioProgress() {
     const active = state.active;
-    if (!active || !audioReady || active.task.kind !== "audio") return;
+    if (!active || !audioReady || !audioMatchesActive()) return;
     if (!allowActiveDate()) return;
     const position = audio.currentTime;
     const clock = performance.now();
@@ -1181,10 +1213,11 @@ export async function initTraining() {
       lastSaved = Date.now();
       void persist();
     }
-  });
-  audio.addEventListener("ended", () => {
+  }
+  audio.addEventListener("timeupdate", trackAudioProgress);
+  function finishAudioPass(continuePlayback = true) {
     const active = state.active;
-    if (!active) return;
+    if (!active || !audioReady || !audioMatchesActive() || !audio.ended || !Number.isFinite(audio.duration) || audio.duration <= 0) return;
     const covered = active.coverage.reduce(
       (total, range) => total + range[1] - range[0],
       0,
@@ -1200,6 +1233,7 @@ export async function initTraining() {
     lastAudioClock = performance.now();
     updateClock();
     void persist();
+    if (!continuePlayback) return;
     if (!wholePass) {
       $("training-audio-state").textContent =
         "Some of this pass was skipped. Listening time is saved, but the full pass is still incomplete. Tap play for another pass.";
@@ -1214,7 +1248,8 @@ export async function initTraining() {
       $("training-audio-state").textContent =
         "Take a moment to recall what you heard. Start recall to time it, or tap play for the next pass.";
     else void play();
-  });
+  }
+  audio.addEventListener("ended", () => finishAudioPass());
   if ("mediaSession" in navigator) {
     for (const [action, handler] of Object.entries({
       play: (): void => {
@@ -1639,6 +1674,28 @@ export async function initTraining() {
   });
   root.addEventListener("change", (event) => {
     const select = event.target;
+    if (select instanceof HTMLSelectElement && select.dataset.activeAudioSpeed) {
+      const active = state.active;
+      if (!active || active.task.id !== select.dataset.activeAudioSpeed || !allowActiveDate()) return;
+      const resource = audioVariants(active.resource).find((variant) => variant.speedWpm === Number(select.value) && variant.speedWpm >= (active.task.speedWpm ?? Infinity));
+      if (!resource || resource.url === active.resource?.url) return;
+      // Settle the old recording before resetting its media element. Whole
+      // passes survive; partial coverage must never cross recording boundaries.
+      trackAudioProgress();
+      // load() cancels queued ended events. Credit a just-finished whole pass
+      // first; rewinding here also makes any later ended event a no-op.
+      finishAudioPass(false);
+      pause();
+      audioReady = false;
+      state.active = switchAudioRecording(active, resource);
+      state.audioSpeedOverrides = { ...state.audioSpeedOverrides, [active.task.id]: resource.speedWpm };
+      mountedBlock = undefined;
+      render();
+      $("training-focus-speed").querySelector<HTMLSelectElement>("select")?.focus({ preventScroll: true });
+      $("training-audio-state").textContent = `Changed to ${resource.speedWpm} WPM. Tap play to start this pass from the beginning. Your time, completed passes, and scratchpad are kept.`;
+      void persist();
+      return;
+    }
     if (!(select instanceof HTMLSelectElement) || !select.dataset.audioSpeed || state.active) return;
     const task = findTask(select.dataset.audioSpeed)?.task;
     if (!task || task.kind !== "audio" || !task.speedWpm) return;
@@ -1710,9 +1767,9 @@ export async function initTraining() {
       }
       const endedAt = new Date();
       const note = [
-        active.runner ? runnerMetadata(active) : audioRecordingNote(active.task, active.resource),
+        active.runner ? runnerMetadata(active) : audioSessionNote(active),
         String(data.get("note") || ""),
-        active.bookmarks.length
+        !active.audioHistory && active.bookmarks.length
           ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}`
           : "",
         Math.abs(activeSeconds - active.activeSeconds) > 6
