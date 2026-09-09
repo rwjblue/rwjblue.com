@@ -1,8 +1,22 @@
-import { references } from "@ripota/parks";
+import { parks } from "@ripota/parks";
 import { diffReferences } from "@ripota/parks/compare";
 import { getDisplayReference } from "@ripota/parks/display";
+import type { PotaReference } from "@ripota/parks/types";
 
 import type { PotaPark } from "./parks.ts";
+
+// Generated activity data owns identity and statistics; visitor guidance stays
+// in the package and is read directly by canonical park pages at build time.
+const references: PotaReference[] = parks.map((park) => ({
+  reference: park.reference,
+  name: park.name,
+  latitude: park.latitude,
+  longitude: park.longitude,
+  grid: park.grid,
+  counties: [...park.counties],
+  locationDesc: park.locationDesc,
+  potaUrl: park.potaUrl,
+}));
 
 export interface RiPotaPublicStats {
   generatedAt: string;

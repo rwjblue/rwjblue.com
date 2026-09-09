@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { getPark } from "@ripota/parks";
 
 import {
   buildRiPotaPublicStats,
@@ -51,6 +52,20 @@ test("RI public statistics remain a derived API projection", () => {
   assert.equal(parks[0].attempts, 1);
   assert.equal(parks[0].activations, 2);
   assert.equal(parks[0].qsos, 3);
+});
+
+test("generated RI activity data keeps the identity projection separate from visitor guidance", () => {
+  const source = readRiPotaParks()[0];
+  const park = getPark(source.reference);
+
+  assert.ok(park.orange);
+  assert.deepEqual(Object.keys(source).sort(), [
+    "activations", "attempts", "counties", "grid", "latitude", "locationDesc",
+    "longitude", "name", "potaUrl", "qsos", "reference",
+  ]);
+  source.counties.push("Test county");
+  assert.ok(!park.counties.includes("Test county"));
+  assert.ok(!readRiPotaParks()[0].counties.includes("Test county"));
 });
 
 test("RI public statistics reject metadata drift from the POTA API", () => {

@@ -1,0 +1,138 @@
+---
+import type { Park } from "@ripota/parks/types";
+
+interface Props {
+  park: Park;
+}
+
+const { park } = Astro.props;
+const label = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1).replaceAll("-", " ");
+const orangeLabels = {
+  required: "Required",
+  recommended: "Recommended",
+  "area-dependent": "Varies by area",
+  "not-required": "No general requirement",
+};
+const access = Object.entries(park.access).filter(([, value]) => value);
+---
+
+<section class="section-block wide" aria-labelledby="park-visit-title">
+  <div class="section-heading">
+    <p class="section-label">Visit</p>
+    <h2 id="park-visit-title">Plan your visit</h2>
+    <p class="park-manager">{label(park.type)} · {park.manager}</p>
+  </div>
+  <div class="park-visit-grid">
+    <div>
+      <div class="park-orange">
+        <h3>Orange clothing: {orangeLabels[park.orange.status]}</h3>
+        {park.orange.season && <p>{park.orange.season}</p>}
+        <p>{park.orange.details}</p>
+        <a href={park.orange.sourceUrl}>Orange guidance source</a>
+      </div>
+      {park.activationNotes.length > 0 && (
+        <ul class="park-setup-notes">
+          {park.activationNotes.map((note) => <li>{note}</li>)}
+        </ul>
+      )}
+    </div>
+    <dl class="park-access">
+      {park.amenities.length > 0 && (
+        <div>
+          <dt>Amenities</dt>
+          <dd>{park.amenities.map(label).join(", ")}</dd>
+        </div>
+      )}
+      {access.map(([key, value]) => (
+        <div>
+          <dt>{label(key)}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+  <p class="park-visit-source">
+    Visitor information from the <a href="https://github.com/ripota/parks">RI POTA park dataset</a>.
+    Check the <a href={park.websiteUrl}>park website</a> for current notices before visiting.
+  </p>
+</section>
+
+<style>
+  .park-manager {
+    margin: 8px 0 0;
+    color: var(--muted);
+  }
+
+  .park-visit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    align-items: start;
+    line-height: 1.6;
+  }
+
+  .park-orange {
+    padding: 18px 20px;
+    border-left: 3px solid var(--rust);
+    background: var(--rust-wash);
+  }
+
+  .park-orange h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .park-orange p {
+    margin: 10px 0;
+  }
+
+  .park-orange a,
+  .park-visit-source a {
+    color: var(--blue);
+  }
+
+  .park-setup-notes {
+    padding-left: 20px;
+    margin: 20px 0 0;
+  }
+
+  .park-setup-notes li + li {
+    margin-top: 10px;
+  }
+
+  .park-access {
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .park-access div {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .park-access dt {
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .park-access dd {
+    margin: 0;
+  }
+
+  .park-visit-source {
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 700px) {
+    .park-visit-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+    }
+  }
+</style>

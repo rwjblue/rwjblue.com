@@ -1,10 +1,12 @@
 ---
 import "leaflet/dist/leaflet.css";
+import { getPark } from "@ripota/parks";
 import { getDisplayReference } from "@ripota/parks/display";
 import { readRiParkDisplayGeometry } from "../../../lib/pota/ri-park-geometry";
 
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import ParkVisitInfo from "../../../components/ParkVisitInfo.astro";
 import parksData from "../../../data/pota/parks.json";
 import { getPublicNotes } from "../../../lib/notes";
 
@@ -29,6 +31,7 @@ export async function getStaticPaths() {
 }
 
 const { park } = Astro.props;
+const riPark = getPark(park.reference);
 const riDisplayPark = getDisplayReference(park.reference);
 const parkJson = JSON.stringify({
   reference: park.reference,
@@ -99,6 +102,7 @@ const description =
       </p>
       <nav class="path-links" aria-label="Park links">
         <a href={park.potaUrl} target="_blank" rel="noreferrer">Open on POTA.app</a>
+        {riPark && <a href={riPark.websiteUrl} target="_blank" rel="noreferrer">Park website</a>}
       </nav>
     </div>
 
@@ -118,6 +122,8 @@ const description =
       <p>Park data generated {formattedGeneratedDate}</p>
     </aside>
   </section>
+
+  {riPark && <ParkVisitInfo park={riPark} />}
 
   <section class="section-block wide" aria-labelledby="park-map-title">
     <div class="section-heading">
