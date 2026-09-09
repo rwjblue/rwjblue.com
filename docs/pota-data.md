@@ -53,6 +53,15 @@ source rather than making a live requirement calculation, and the page links to
 the manager for current notices. An unlisted amenity is not a claim that it is
 absent.
 
+Orange guidance remains available year-round in a native disclosure. In the
+browser, Rhode Island's current date (`America/New_York`) expands and emphasizes
+required, recommended, and area-dependent guidance from August 15 through May 31.
+From June 1 through August 14 it starts collapsed with quiet styling; parks with
+no general requirement stay quiet all year. The page checks on load, when the tab
+becomes visible, and every minute, updating only when the seasonal state changes
+so visitors can freely open or close the disclosure. This needs no rebuild and
+does not alter the package's actual seasons or rules.
+
 Run `mise run pota:update` after a profile, activation, or field-note change.
 Use `--full-backfill` when historical RI activation data also needs refreshing.
 For a new or changed Rhode Island reference, update and release

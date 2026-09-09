@@ -25,12 +25,12 @@ const access = Object.entries(park.access).filter(([, value]) => value);
   </div>
   <div class="park-visit-grid">
     <div>
-      <div class="park-orange">
-        <h3>Orange clothing: {orangeLabels[park.orange.status]}</h3>
+      <details class="park-orange" data-orange-status={park.orange.status}>
+        <summary>Orange clothing: {orangeLabels[park.orange.status]}</summary>
         {park.orange.season && <p>{park.orange.season}</p>}
         <p>{park.orange.details}</p>
         <a href={park.orange.sourceUrl}>Orange guidance source</a>
-      </div>
+      </details>
       {park.activationNotes.length > 0 && (
         <ul class="park-setup-notes">
           {park.activationNotes.map((note) => <li>{note}</li>)}
@@ -58,6 +58,29 @@ const access = Object.entries(park.access).filter(([, value]) => value);
   </p>
 </section>
 
+<script>
+  import { shouldEmphasizeOrangeGuidance } from "../lib/pota/orange-presentation";
+
+  const presentationStates = new WeakMap<HTMLDetailsElement, boolean>();
+
+  function updateOrangePresentation() {
+    for (const guidance of document.querySelectorAll<HTMLDetailsElement>("[data-orange-status]")) {
+      const prominent = shouldEmphasizeOrangeGuidance(guidance.dataset.orangeStatus ?? "");
+      if (presentationStates.get(guidance) === prominent) continue;
+
+      presentationStates.set(guidance, prominent);
+      guidance.classList.toggle("is-prominent", prominent);
+      guidance.open = prominent;
+    }
+  }
+
+  updateOrangePresentation();
+  setInterval(updateOrangePresentation, 60_000);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) updateOrangePresentation();
+  });
+</script>
+
 <style>
   .park-manager {
     margin: 8px 0 0;
@@ -73,14 +96,22 @@ const access = Object.entries(park.access).filter(([, value]) => value);
   }
 
   .park-orange {
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .park-orange.is-prominent {
     padding: 18px 20px;
+    border: 0;
     border-left: 3px solid var(--rust);
     background: var(--rust-wash);
   }
 
-  .park-orange h3 {
-    margin: 0;
+  .park-orange summary {
     font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
   }
 
   .park-orange p {
