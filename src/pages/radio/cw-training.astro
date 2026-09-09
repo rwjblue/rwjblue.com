@@ -297,8 +297,11 @@ import "../../styles/cw-training.css";
               >Finish block</button
             ><button type="button" data-action="pause-block"
               >Save for later</button
+            ><button type="button" data-action="abort-block" aria-describedby="training-abort-help"
+              >Abort block</button
             >
           </div>
+          <p id="training-abort-help" class="training-small">Aborting discards this block's time, notes, and recordings without saving practice.</p>
         </div>
       </section>
 
@@ -463,8 +466,11 @@ import "../../styles/cw-training.css";
             id="training-finish-back"
             type="button"
             data-close>Keep practicing</button
+          ><button type="button" data-action="abort-block" aria-describedby="training-finish-abort-help"
+            >Abort block</button
           >
         </div>
+        <p id="training-finish-abort-help" class="training-small">Aborting discards this block's time, notes, and recordings without saving practice.</p>
       </form>
     </dialog>
     <dialog id="training-sending-history-dialog">

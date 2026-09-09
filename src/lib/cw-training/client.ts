@@ -1102,7 +1102,7 @@ export async function initTraining() {
     if (state.active) {
       setView("focus");
       notice(
-        "Finish or save the current block before starting another exercise.",
+        "Finish and save the current block, or abort it without recording practice, before starting another exercise.",
       );
       return;
     }
@@ -1198,7 +1198,7 @@ export async function initTraining() {
     if (state.active) {
       setView("focus");
       notice(
-        "Your current block is saved. Finish it before starting another exercise.",
+        "Finish and save the current block, or abort it without recording practice, before starting another exercise.",
       );
       return;
     }
@@ -1232,6 +1232,22 @@ export async function initTraining() {
     render();
     void sync();
   }
+  function abortBlock() {
+    if (!state.active) return;
+    // Detach the draft before disposing capture or navigating: those callbacks
+    // normally checkpoint practice, but this block must never be saved again.
+    state.active = undefined;
+    unmountSending();
+    running = false;
+    recalling = false;
+    audio.pause();
+    render();
+    $<HTMLDialogElement>("training-finish-dialog").close();
+    setView("today");
+    void persist();
+    notice("Block aborted. No practice was recorded.");
+  }
+
   function finish() {
     if (!state.active) return;
     if (state.active.runner && ["loading", "ready", "running"].includes(state.active.runner.status)) {
@@ -1316,7 +1332,7 @@ export async function initTraining() {
     recalling = false;
     audio.pause();
     notice(
-      "This saved block belongs to an earlier practice day. Record its practiced minutes first, then start a new block so today's time is credited correctly.",
+      "This saved block belongs to an earlier practice day. Save its practiced minutes or abort it without recording practice, then start a new block for today.",
     );
     if (!$<HTMLDialogElement>("training-finish-dialog").open) finish();
     return false;
@@ -1748,6 +1764,9 @@ export async function initTraining() {
         break;
       case "finish":
         finish();
+        break;
+      case "abort-block":
+        abortBlock();
         break;
       case "restart-runner":
         restartRunner();

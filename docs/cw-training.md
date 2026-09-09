@@ -15,6 +15,9 @@ sitemaps, and does not load the site's analytics beacon.
   exercises add a Suggested approach above the
   player, with the original instructions preserved below; instructor directions
   take precedence. Save for later preserves an unfinished block locally.
+  Abort block stops and discards the current block, including its minutes,
+  passes, notes, and sending captures. It creates no practice history or sync
+  entry, and previously saved practice stays intact.
 - Week exposes all 16 meetings and 48 assignments, including later on-air work.
 - Materials accepts pasted instructions, text files, or links. Preparation,
   class-only, reference, and unknown-purpose material remain distinct. Revisions
@@ -31,8 +34,9 @@ this device, and stops a running simulator as partial. Returning does not
 autoplay or start a new run. Refreshing preserves the selected view, with active
 practice restored paused. Only the view name appears in the URL fragment; no
 practice notes or private curriculum data enter the URL or browser history.
-Background sync and rerenders do not create history entries. Finishing a block
-does not let Back resurrect it, and Back from the initial view still leaves the
+Background sync and rerenders do not create history entries. Finishing or
+aborting a block does not let Back resurrect it. An aborted block also stays
+discarded after refreshing, and Back from the initial view still leaves the
 tracker normally.
 
 The imported course begins Saturday, September 5, 2026. Classes are Mondays and
@@ -109,7 +113,9 @@ operating windows and are recommended only while a window is active.
 The daily minute goal is a baseline, not a cap or a replacement for sending
 and other assigned activities. To switch activities with a saved block, choose
 Record block and switch, confirm the partial practice, then select the next
-block. Saving partial practice preserves the unfinished objective.
+block. Saving partial practice preserves the unfinished objective. If the
+current block was started by mistake, choose Abort block in Focus to discard
+it and select another exercise without recording practice.
 
 Log practice elsewhere starts with an Other practice group: Word recognition,
 ICR (instant character recognition), and Other CW practice. The general button
