@@ -100,7 +100,7 @@
 }
 .training-tabs {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   border-bottom: 1px solid var(--line-strong);
   margin-bottom: 26px;
   gap: 6px;
@@ -154,6 +154,30 @@
 .training-tabs button[aria-current] {
   border-bottom-color: var(--green);
   color: var(--ink);
+}
+.training-report-controls,
+.training-report-fields,
+.training-result-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 20px;
+}
+.training-report-controls { grid-template-columns: 1.4fr 1fr 1fr; }
+.training-report-fields label:has(textarea) { grid-column: 1 / -1; }
+.training-report-fields input,
+.training-report-fields select,
+.training-report-controls input,
+.training-report-controls select { min-width: 0; }
+.training-report-actions { margin: 24px 0 16px; }
+.training-report-summary { margin: 0; }
+.training-report-summary > div { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.training-report-summary dt { font-weight: 700; font-size: 0.85rem; }
+.training-report-summary dd { margin: 4px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+#training-report [data-report-message]:empty { display: none; }
+@media (max-width: 560px) {
+  .training-report-controls,
+  .training-report-fields,
+  .training-result-fields { grid-template-columns: minmax(0, 1fr); }
 }
 .training-today-heading,
 .training-focus-meta {

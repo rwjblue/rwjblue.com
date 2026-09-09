@@ -1,5 +1,7 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "../src/lib/cw-training/other-practice.ts";
+import { REPORT_FIELDS, validateReportAnswers } from "../src/lib/cw-training/report-fields.ts";
+import type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "../src/lib/cw-training/report-types.ts";
 import type {
   TrainingAttempt,
   TrainingCourse,
@@ -113,6 +115,13 @@ function integer(value: unknown, name: string, minimum: number, maximum: number)
   return value;
 }
 
+function finiteNumber(value: unknown, name: string, minimum: number, maximum: number): number {
+  if (typeof value !== "number" || !Number.isFinite(value) || value < minimum || value > maximum) {
+    invalid(`Invalid ${name}.`);
+  }
+  return value;
+}
+
 function timestamp(value: unknown, name: string, now: number): string {
   const result = string(value, name, 24);
   const millis = Date.parse(result);
@@ -140,8 +149,70 @@ function httpUrl(value: unknown, name: string): string {
   return result;
 }
 
+function runnerResult(value: unknown, now: number): TrainingRunnerResult {
+  const row = record(value, ["version", "mode", "wpm", "durationSeconds", "elapsedSeconds", "status", "verifiedPoints", "qsoCount", "score", "speeds", "conditions", "runStartedAt", "runEndedAt", "source"]);
+  if (row.version !== 1 || typeof row.mode !== "string" || !["SingleCall", "WPX"].includes(row.mode) ||
+      typeof row.status !== "string" || !["completed", "stopped", "error"].includes(row.status) ||
+      typeof row.source !== "string" || !["embedded", "manual", "legacy"].includes(row.source) || typeof row.conditions !== "boolean") {
+    invalid("Invalid Morse Runner result.");
+  }
+  if (!Array.isArray(row.speeds) || !row.speeds.length || row.speeds.length > 200) invalid("Invalid Morse Runner speeds.");
+  const speeds = row.speeds.map((speed) => finiteNumber(speed, "Morse Runner speed", 1, 200));
+  const result: TrainingRunnerResult = {
+    version: 1,
+    mode: row.mode as TrainingRunnerResult["mode"],
+    wpm: finiteNumber(row.wpm, "Morse Runner starting speed", 1, 200),
+    durationSeconds: finiteNumber(row.durationSeconds, "Morse Runner duration", 1, 86_400),
+    elapsedSeconds: finiteNumber(row.elapsedSeconds, "Morse Runner elapsed seconds", 0, 86_400),
+    status: row.status as TrainingRunnerResult["status"],
+    speeds,
+    conditions: row.conditions,
+    source: row.source as TrainingRunnerResult["source"],
+  };
+  if (new Set(speeds).size !== speeds.length || !speeds.includes(result.wpm)) invalid("Invalid Morse Runner speeds.");
+  for (const key of ["verifiedPoints", "qsoCount", "score"] as const) {
+    if (row[key] !== undefined) result[key] = integer(row[key], `Morse Runner ${key}`, 0, 1_000_000_000_000);
+  }
+  if (result.verifiedPoints !== undefined && result.qsoCount !== undefined && result.verifiedPoints > result.qsoCount) {
+    invalid("Verified points exceed Morse Runner contacts.");
+  }
+  if (row.runStartedAt !== undefined) result.runStartedAt = timestamp(row.runStartedAt, "Morse Runner start", now);
+  if (row.runEndedAt !== undefined) result.runEndedAt = timestamp(row.runEndedAt, "Morse Runner end", now);
+  if (result.runStartedAt && result.runEndedAt && result.runEndedAt < result.runStartedAt) invalid("Morse Runner ends before it starts.");
+  return result;
+}
+
+function audioResult(value: unknown): TrainingAudioResult {
+  const row = record(value, ["url", "title", "speedWpm", "activeSeconds", "completedPasses"]);
+  const result: TrainingAudioResult = {
+    url: httpUrl(row.url, "audio URL"),
+    title: string(row.title, "audio title", 200),
+    activeSeconds: finiteNumber(row.activeSeconds, "audio practice seconds", 0, 86_400),
+    completedPasses: integer(row.completedPasses, "audio passes", 0, 100),
+  };
+  if (row.speedWpm !== undefined) result.speedWpm = finiteNumber(row.speedWpm, "audio speed", 1, 200);
+  return result;
+}
+
+function lcwoResult(value: unknown): TrainingLcwoResult {
+  const row = record(value, ["kind", "speedWpm", "groupLength", "maximumLength", "score", "errorCount", "errorPercent"]);
+  if (typeof row.kind !== "string" || !["callsign", "letters", "words", "figures", "custom"].includes(row.kind)) invalid("Invalid LCWO category.");
+  const result: TrainingLcwoResult = { kind: row.kind as TrainingLcwoResult["kind"] };
+  if (row.speedWpm !== undefined) result.speedWpm = finiteNumber(row.speedWpm, "LCWO speed", 1, 200);
+  if (row.groupLength !== undefined) result.groupLength = integer(row.groupLength, "LCWO group length", 1, 1000);
+  if (row.maximumLength !== undefined) result.maximumLength = integer(row.maximumLength, "LCWO maximum length", 1, 1000);
+  if (row.score !== undefined) result.score = finiteNumber(row.score, "LCWO score", 0, 1_000_000_000_000);
+  if (row.errorCount !== undefined) result.errorCount = integer(row.errorCount, "LCWO error count", 0, 1_000_000);
+  if (row.errorPercent !== undefined) result.errorPercent = finiteNumber(row.errorPercent, "LCWO error percent", 0, 100);
+  const fields = result.kind === "callsign" ? ["speedWpm", "score", "errorCount"]
+    : result.kind === "words" ? ["speedWpm", "maximumLength", "score", "errorCount"]
+      : ["speedWpm", "groupLength", "errorPercent"];
+  if (Object.keys(result).some((key) => key !== "kind" && !fields.includes(key))) invalid("The LCWO metric does not belong to this category.");
+  return result;
+}
+
 function attempt(value: unknown, now: number): TrainingAttempt {
-  const row = record(value, ["id", "assignmentId", "taskId", "startedAt", "endedAt", "activeSeconds", "recallSeconds", "completed", "review", "completedPasses", "difficulty", "note", "scratchpad", "context"]);
+  const row = record(value, ["id", "assignmentId", "taskId", "startedAt", "endedAt", "activeSeconds", "recallSeconds", "completed", "review", "completedPasses", "difficulty", "performanceRating", "runnerResult", "audioResults", "lcwoResult", "note", "scratchpad", "context"]);
   const result: TrainingAttempt = {
     id: id(row.id, "attempt ID", true),
     assignmentId: id(row.assignmentId, "assignment ID"),
@@ -168,8 +239,67 @@ function attempt(value: unknown, now: number): TrainingAttempt {
     if (!["hard", "right", "easy"].includes(String(row.difficulty))) invalid("Invalid difficulty.");
     result.difficulty = row.difficulty as TrainingAttempt["difficulty"];
   }
+  if (row.performanceRating !== undefined) {
+    if (typeof row.performanceRating !== "string" || !["very-good", "good", "fair", "poor"].includes(row.performanceRating)) invalid("Invalid performance rating.");
+    result.performanceRating = row.performanceRating as PerformanceRating;
+  }
+  if (row.runnerResult !== undefined) result.runnerResult = runnerResult(row.runnerResult, now);
+  if (row.audioResults !== undefined) {
+    if (!Array.isArray(row.audioResults) || row.audioResults.length > 100) invalid("Record at most 100 audio results per attempt.");
+    result.audioResults = row.audioResults.map(audioResult);
+  }
+  if (row.lcwoResult !== undefined) result.lcwoResult = lcwoResult(row.lcwoResult);
   if (row.note !== undefined) result.note = string(row.note, "note", 4_000, true);
   if (row.scratchpad !== undefined) result.scratchpad = string(row.scratchpad, "scratchpad", 10_000, true);
+  return result;
+}
+
+function report(value: unknown, now: number): TrainingReport {
+  const row = record(value, ["id", "session", "fromDate", "toDate", "reportDate", "createdAt", "answers", "editedAnswerKeys", "sourceAttemptIds", "status", "submittedAt"]);
+  if (typeof row.status !== "string" || !["draft", "submitted"].includes(row.status)) invalid("Invalid report status.");
+  const answers = record(row.answers, REPORT_FIELDS.map((field) => field.key));
+  const result: TrainingReport = {
+    id: id(row.id, "report ID", true),
+    session: integer(row.session, "report session", 1, 16),
+    fromDate: practiceDate(row.fromDate),
+    toDate: practiceDate(row.toDate),
+    reportDate: practiceDate(row.reportDate),
+    createdAt: timestamp(row.createdAt, "report creation", now),
+    answers: {},
+    sourceAttemptIds: [],
+    status: row.status as TrainingReport["status"],
+  };
+  if (result.fromDate > result.toDate) invalid("Report dates are reversed.");
+  let answerLength = 0;
+  // Canonical field ordering keeps retries identical across clients.
+  for (const field of REPORT_FIELDS) {
+    if (answers[field.key] === undefined) continue;
+    const answer = string(answers[field.key], "report answer", 4_000, true);
+    answerLength += answer.length;
+    result.answers[field.key] = answer;
+  }
+  if (answerLength > 50_000) invalid("Report answers exceed 50,000 characters.");
+  if (row.editedAnswerKeys !== undefined) {
+    if (!Array.isArray(row.editedAnswerKeys) || row.editedAnswerKeys.length > REPORT_FIELDS.length) invalid("Invalid edited report fields.");
+    const knownKeys = new Set(REPORT_FIELDS.map((field) => field.key));
+    result.editedAnswerKeys = row.editedAnswerKeys.map((value) => {
+      const key = string(value, "edited report field", 100);
+      if (!knownKeys.has(key)) invalid("Unknown edited report field.");
+      return key;
+    });
+    if (new Set(result.editedAnswerKeys).size !== result.editedAnswerKeys.length) invalid("Edited report fields must be unique.");
+  }
+  const errors = validateReportAnswers(result.answers, { requireComplete: result.status === "submitted" });
+  if (errors.length) invalid(errors[0]!.message);
+  if (result.answers.session?.trim() && Number(result.answers.session) !== result.session) invalid("The report answer must match its session.");
+  if (result.answers.reportDate?.trim() && result.answers.reportDate.trim() !== result.reportDate) invalid("The report answer must match its date.");
+  if (!Array.isArray(row.sourceAttemptIds) || row.sourceAttemptIds.length > 1_000) invalid("Use at most 1,000 source attempts per report.");
+  result.sourceAttemptIds = row.sourceAttemptIds.map((value) => id(value, "report source attempt ID", true));
+  if (new Set(result.sourceAttemptIds).size !== result.sourceAttemptIds.length) invalid("Report source attempt IDs must be unique.");
+  if (row.submittedAt !== undefined) result.submittedAt = timestamp(row.submittedAt, "report submission", now);
+  if (result.status === "submitted" && !result.submittedAt) invalid("A submitted report needs its submission time.");
+  if (result.status === "draft" && result.submittedAt !== undefined) invalid("A draft cannot have a submission time.");
+  if (result.submittedAt && result.submittedAt < result.createdAt) invalid("A report cannot be submitted before it is created.");
   return result;
 }
 
@@ -219,7 +349,7 @@ function preferences(value: unknown, now: number): TrainingPreferences {
 }
 
 function parseSync(value: unknown, now: number): TrainingSync {
-  const row = record(value, ["attempts", "materials", "preferences"]);
+  const row = record(value, ["attempts", "materials", "preferences", "reports"]);
   const result: TrainingSync = {};
   if (row.attempts !== undefined) {
     if (!Array.isArray(row.attempts) || row.attempts.length > 100) invalid("Sync at most 100 attempts at once.");
@@ -230,6 +360,10 @@ function parseSync(value: unknown, now: number): TrainingSync {
     result.materials = row.materials.map((item) => material(item, now));
   }
   if (row.preferences !== undefined) result.preferences = preferences(row.preferences, now);
+  if (row.reports !== undefined) {
+    if (!Array.isArray(row.reports) || row.reports.length > 20) invalid("Sync at most 20 report revisions at once.");
+    result.reports = row.reports.map((item) => report(item, now));
+  }
   return result;
 }
 
@@ -281,6 +415,7 @@ async function snapshot(db: D1Database, owner: string): Promise<TrainingSnapshot
     db.prepare("SELECT payload FROM training_attempts WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
     db.prepare("SELECT payload FROM training_materials WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
     db.prepare("SELECT payload FROM training_preferences WHERE owner_id = ? AND course_id = ?").bind(owner, TRAINING_COURSE_ID),
+    db.prepare("SELECT payload FROM training_reports WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
   ]);
   const curriculum = results[0]?.results[0]?.payload;
   if (!curriculum) throw new TrainingError(503, "The training curriculum is not available yet.");
@@ -290,6 +425,7 @@ async function snapshot(db: D1Database, owner: string): Promise<TrainingSnapshot
     attempts: results[1]!.results.map((item) => JSON.parse(item.payload) as TrainingAttempt),
     materials: results[2]!.results.map((item) => JSON.parse(item.payload) as TrainingMaterial),
     preferences: results[3]?.results[0] ? JSON.parse(results[3].results[0].payload) as TrainingPreferences : defaultPreferences(),
+    reports: results[4]!.results.map((item) => JSON.parse(item.payload) as TrainingReport),
     serverTime: new Date().toISOString(),
   };
 }
@@ -335,11 +471,17 @@ async function sync(db: D1Database, owner: string, update: TrainingSync): Promis
     if (!assignment) invalid("Unknown carried task.");
     if (item.date < assignment.date) invalid("A task cannot be carried before its assignment date.");
   }
+  const knownAttempts = new Set([...current.attempts, ...(update.attempts ?? [])].map((item) => item.id));
+  for (const item of update.reports ?? []) {
+    if (!current.course.meetings.some((meeting) => meeting.session === item.session)) invalid("Unknown report session.");
+    if (item.sourceAttemptIds.some((id) => !knownAttempts.has(id))) invalid("Unknown report source attempt.");
+  }
   const statements: D1PreparedStatement[] = [];
   const now = new Date().toISOString();
   for (const [table, values] of [
     ["training_attempts", update.attempts ?? []],
     ["training_materials", update.materials ?? []],
+    ["training_reports", update.reports ?? []],
   ] as const) {
     for (const item of values) statements.push(db.prepare(
       `INSERT INTO ${table} (owner_id, course_id, id, payload, recorded_at) VALUES (?, ?, ?, ?, ?)

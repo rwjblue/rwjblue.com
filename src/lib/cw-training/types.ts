@@ -1,3 +1,6 @@
+import type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
+export type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
+
 /** Shared wire format. Curriculum content is fetched from the private API. */
 export type TrainingKind = "sending" | "audio" | "icr" | "simulator" | "live" | "review";
 export type MaterialUsage = "preparation" | "class" | "reference" | "unknown";
@@ -75,7 +78,12 @@ export interface TrainingAttempt {
   /** Extra practice counts toward time, not required assignment coverage. */
   review?: boolean;
   completedPasses?: number;
+  /** Historical difficulty is retained; report performance is a separate judgment. */
   difficulty?: Difficulty;
+  performanceRating?: PerformanceRating;
+  runnerResult?: TrainingRunnerResult;
+  audioResults?: TrainingAudioResult[];
+  lcwoResult?: TrainingLcwoResult;
   note?: string;
   /** Multiline scratchpad kept separately from the end-of-block note. */
   scratchpad?: string;
@@ -109,6 +117,7 @@ export interface TrainingSnapshot {
   attempts: TrainingAttempt[];
   materials: TrainingMaterial[];
   preferences: TrainingPreferences;
+  reports?: TrainingReport[];
   serverTime: string;
 }
 
@@ -116,4 +125,5 @@ export interface TrainingSync {
   attempts?: TrainingAttempt[];
   materials?: TrainingMaterial[];
   preferences?: TrainingPreferences;
+  reports?: TrainingReport[];
 }

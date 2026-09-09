@@ -2,13 +2,16 @@ import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
 import type { PlannedTask } from "./plan";
 import { listeningGuidance } from "./guidance";
 import { audioVariants, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
-import { audioSessionNote, switchAudioRecording } from "./audio-session";
+import { audioAttemptResults, audioSessionNote, switchAudioRecording } from "./audio-session";
 import { createTrainingNavigation, type TrainingView } from "./navigation";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
 import { DEFAULT_OTHER_PRACTICE_ID, OTHER_PRACTICE_ACTIVITIES, OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "./other-practice";
 import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
-import { restartRunnerBlock, runnerAssignmentProgress, runnerMetadata } from "./runner-session";
+import { restartRunnerBlock, runnerAssignmentProgress, runnerAttemptResult, runnerMetadata } from "./runner-session";
+import { mountLcwoResultFields, readLcwoResult } from "./practice-results-form";
+import { createTrainingReportPanel } from "./report-panel";
+import type { PerformanceRating, TrainingReport } from "./report-types";
 import { practiceHistoryForDate, renderPracticeHistory } from "./history";
 import runnerVersion from "../../../public/vendor/web-morse-runner/UPSTREAM.json";
 import { TrainingStorage } from "./storage";
@@ -18,7 +21,6 @@ import { restoreSavedSendingRecordings, saveSendingRecordings, removeSavedSendin
 import type { SendingPanel } from "./sending-panel";
 import type { ActiveBlock, TrainingDeviceState } from "./storage";
 import type {
-  Difficulty,
   MaterialUsage,
   TrainingAttempt,
   TrainingMaterial,
@@ -166,6 +168,7 @@ export async function initTraining() {
     const pending =
       (state.pending.attempts?.length ?? 0) +
       (state.pending.materials?.length ?? 0) +
+      (state.pending.reports?.length ?? 0) +
       Number(!!state.pending.preferences);
     $("training-sync-state").textContent = !storage.available
       ? "Device storage unavailable"
@@ -202,6 +205,7 @@ export async function initTraining() {
       ...remote,
       attempts: unique(remote.attempts, state.pending.attempts ?? []),
       materials: unique(remote.materials, state.pending.materials ?? []),
+      reports: unique(remote.reports ?? [], state.pending.reports ?? []),
       preferences:
         state.pending.preferences &&
         state.pending.preferences.updatedAt > remote.preferences.updatedAt
@@ -256,17 +260,18 @@ export async function initTraining() {
       while (
         (state.pending.materials?.length ?? 0) ||
         (state.pending.attempts?.length ?? 0) ||
+        (state.pending.reports?.length ?? 0) ||
         state.pending.preferences
       ) {
         // Import materials first so attempts can reference an acknowledged resource.
         const batch: TrainingSync = state.pending.materials?.length
           ? { materials: state.pending.materials.slice(0, 1) }
-          : {
+          : state.pending.attempts?.length || state.pending.preferences ? {
               // Full scratchpads can expand sixfold when JSON-escaped. Keep
               // offline batches below the API's 1 MiB request limit.
               attempts: state.pending.attempts?.slice(0, 10),
               preferences: state.pending.preferences,
-            };
+            } : { reports: state.pending.reports?.slice(0, 1) };
         const remote = await request("sync", batch);
         if (disposed) return;
         const ids = new Set(batch.attempts?.map((attempt) => attempt.id));
@@ -279,6 +284,8 @@ export async function initTraining() {
         state.pending.materials = state.pending.materials?.filter(
           (material) => !materialIds.has(material.id),
         );
+        const reportIds = new Set(batch.reports?.map((report) => report.id));
+        state.pending.reports = state.pending.reports?.filter((report) => !reportIds.has(report.id));
         if (
           batch.preferences?.updatedAt === state.pending.preferences?.updatedAt
         )
@@ -302,6 +309,16 @@ export async function initTraining() {
       }
     }
   }
+  const reportPanel = createTrainingReportPanel($("training-report"), {
+    state: () => state,
+    persist,
+    save: async (report: TrainingReport) => {
+      snapshot().reports = unique(snapshot().reports ?? [], [report]);
+      state.pending.reports = unique(state.pending.reports ?? [], [report]);
+      await persist();
+      void sync();
+    },
+  });
   const currentMaterials = () =>
     snapshot().materials.filter(
       (item) =>
@@ -447,7 +464,7 @@ export async function initTraining() {
   }
   function applyView(next: TrainingView) {
     view = next;
-    for (const name of ["today", "focus", "week", "materials"])
+    for (const name of ["today", "focus", "week", "materials", "report"])
       $(`training-${name}`).hidden = name !== view;
     root!
       .querySelectorAll<HTMLButtonElement>(".training-tabs [data-view]")
@@ -661,6 +678,7 @@ export async function initTraining() {
         )
         .join("") ||
       '<div class="training-card"><h3>A place for the next email.</h3><p>Paste instructions, import a text file, or save a link. Keep unclassified material as “Not sure yet” until its purpose is clear.</p></div>';
+    if (view === "report") reportPanel.render();
     renderActive();
     applyView(view);
     status();
@@ -734,7 +752,7 @@ export async function initTraining() {
       $("training-listening-approach").textContent = `${guidance.title}: ${guidance.approach}`;
       $("training-listening-passes").textContent =
         `This ${active.review ? "review " : ""}block targets ${active.targetPasses} whole pass${active.targetPasses === 1 ? "" : "es"}. You may pause and resume; skipping audio does not complete a pass. Follow the original instructions and your instructor's directions.`;
-      $("training-scratchpad-prompt").textContent = guidance.scratchpadPrompt;
+      $("training-scratchpad-prompt").textContent = `${guidance.scratchpadPrompt} To add words to your session report, write a line like Learned: word, another word.`;
     }
     $("training-focus-resource").innerHTML = runner
       ? `${active.runner ? '<p class="training-small">If the embedded runner is unavailable, save this block as partial, practice externally, then use Done elsewhere to record that separate run.</p>' : ""}${link(WEB_MORSE_RUNNER_URL, "Open standalone Web Morse Runner", "training-button")}`
@@ -965,7 +983,7 @@ export async function initTraining() {
     const active = state.active;
     if (disposed || !active?.runner || !runnerFrame || event.source !== runnerFrame.contentWindow || event.origin !== location.origin) return;
     const previous = active.runner;
-    const next = reduceRunnerEvent(previous, event.data);
+    const next = reduceRunnerEvent(previous, event.data, new Date().toISOString());
     if (next === previous) return;
     active.runner = next;
     active.activeSeconds = next.elapsedSeconds;
@@ -1223,6 +1241,7 @@ export async function initTraining() {
     }
     pause();
     $<HTMLFormElement>("training-finish-form").reset();
+    mountLcwoResultFields($("training-finish-lcwo"), state.active.task.kind === "icr");
     $<HTMLInputElement>("training-finish-minutes").value = (
       Math.round(state.active.activeSeconds / 6) / 10
     ).toString();
@@ -1477,6 +1496,9 @@ export async function initTraining() {
     const other = otherPracticeActivity(taskId);
     const task = findTask(taskId)?.task;
     const cumulativeRunner = !!task && isMorseRunner(task);
+    mountLcwoResultFields($("training-manual-lcwo"), task?.kind === "icr" || taskId === "other:icr");
+    $("training-manual-runner").hidden = !cumulativeRunner;
+    for (const input of $("training-manual-runner").querySelectorAll<HTMLInputElement | HTMLSelectElement>("input, select")) input.disabled = !cumulativeRunner;
     const passes = $<HTMLInputElement>("training-manual-passes");
     const complete = $<HTMLInputElement>("training-manual-complete");
     $("training-manual-passes-field").hidden = !!other || cumulativeRunner;
@@ -1498,6 +1520,10 @@ export async function initTraining() {
     suspendSending("paused");
     stopSendingReplay();
     $<HTMLFormElement>("training-manual-form").reset();
+    const manualNow = new Date();
+    const localStamp = new Date(manualNow.getTime() - manualNow.getTimezoneOffset() * 60_000).toISOString().slice(0, 16);
+    $<HTMLInputElement>("training-manual-ended").value = localStamp;
+    $<HTMLInputElement>("training-manual-ended").max = localStamp;
     $<HTMLSelectElement>("training-manual-task").innerHTML =
       `<optgroup label="Other practice">${OTHER_PRACTICE_ACTIVITIES.map((activity) => `<option value="${activity.id}">${escapeHtml(activity.title)}</option>`).join("")}</optgroup>` +
       snapshot()
@@ -1996,6 +2022,11 @@ export async function initTraining() {
         $("training-finish-help").textContent = "This note and its automatic practice details exceed 4,000 characters. Shorten your note before saving; nothing has been discarded.";
         return;
       }
+      let lcwoResult;
+      try { lcwoResult = readLcwoResult(data); }
+      catch (error) { $("training-finish-help").textContent = String(error); return; }
+      const runnerResult = runnerAttemptResult(active);
+      const audioResults = audioAttemptResults(active);
       const attempt: TrainingAttempt = {
         id: active.id,
         assignmentId: active.assignmentId,
@@ -2013,9 +2044,12 @@ export async function initTraining() {
           ? { completedPasses: active.completedPasses, recallSeconds }
           : {}),
         ...(active.scratchpad !== undefined ? { scratchpad: active.scratchpad } : {}),
-        ...(data.get("difficulty")
-          ? { difficulty: data.get("difficulty") as Difficulty }
+        ...(data.get("performanceRating")
+          ? { performanceRating: data.get("performanceRating") as PerformanceRating }
           : {}),
+        ...(runnerResult ? { runnerResult } : {}),
+        ...(audioResults?.length ? { audioResults } : {}),
+        ...(lcwoResult ? { lcwoResult } : {}),
         ...(note ? { note } : {}),
         context: active.context,
         ...(active.review ? { review: true } : {}),
@@ -2056,7 +2090,21 @@ export async function initTraining() {
         passes > 100
       )
         return;
-      const endedAt = new Date();
+      const endedAt = new Date(String(data.get("endedAt")));
+      if (!Number.isFinite(endedAt.getTime()) || endedAt.getTime() > Date.now()) {
+        notice("Enter when this practice ended, using a time no later than now."); return;
+      }
+      let lcwoResult;
+      try { lcwoResult = readLcwoResult(data); }
+      catch (error) { notice(String(error)); return; }
+      const scratchpad = String(data.get("scratchpad") || "");
+      if (scratchpad.includes("\0") || scratchpad.length > 10000) { notice("Keep the scratchpad under 10,000 characters and remove null characters."); return; }
+      const runnerWpm = String(data.get("runnerWpm") ?? "").trim();
+      const runnerPoints = String(data.get("runnerVerifiedPoints") ?? "").trim();
+      const hasRunnerResult = !!found && isMorseRunner(found.task) && !!(runnerWpm || runnerPoints);
+      if (hasRunnerResult && (!runnerWpm || !runnerPoints || Number(runnerWpm) <= 0 || Number(runnerWpm) > 200 || !Number.isInteger(Number(runnerPoints)) || Number(runnerPoints) < 0 || activeSeconds <= 0)) {
+        notice("Enter this run's actual WPM, Verified Pts and practiced minutes together."); return;
+      }
       const complete = found && isMorseRunner(found.task)
         ? taskProgress(found.task, snapshot().attempts).activeSeconds + activeSeconds >= (found.task.minutes ?? 15) * 60
         : !other && data.get("complete") === "on";
@@ -2083,6 +2131,17 @@ export async function initTraining() {
         completed: complete,
         ...(other ? { review: true } : {}),
         ...(passes ? { completedPasses: passes } : {}),
+        ...(data.get("performanceRating") ? { performanceRating: data.get("performanceRating") as PerformanceRating } : {}),
+        ...(scratchpad ? { scratchpad } : {}),
+        ...(lcwoResult ? { lcwoResult } : {}),
+        ...(hasRunnerResult ? { runnerResult: {
+          version: 1 as const, source: "manual" as const,
+          mode: data.get("runnerMode") === "WPX" ? "WPX" as const : "SingleCall" as const,
+          wpm: Number(runnerWpm), speeds: [Number(runnerWpm)],
+          durationSeconds: activeSeconds, elapsedSeconds: activeSeconds, status: "completed" as const,
+          conditions: data.get("runnerConditions") === "on", verifiedPoints: Number(runnerPoints),
+          runStartedAt: new Date(endedAt.getTime() - activeSeconds * 1000).toISOString(), runEndedAt: endedAt.toISOString(),
+        } } : {}),
         note: `[Practiced elsewhere] ${String(data.get("note") || "")}`.slice(
           0,
           4000,

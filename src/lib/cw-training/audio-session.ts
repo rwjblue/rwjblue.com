@@ -1,6 +1,7 @@
 import { audioRecordingNote, audioVariants } from "./audio-variants.ts";
 import type { ActiveBlock, AudioRecordingUsage } from "./storage.ts";
 import type { TrainingResource } from "./types.ts";
+import type { TrainingAudioResult } from "./report-types.ts";
 
 /** The counters on ActiveBlock are cumulative across every recording in it. */
 function currentUsage(active: ActiveBlock): AudioRecordingUsage | undefined {
@@ -33,6 +34,25 @@ function mergeUsage(history: readonly AudioRecordingUsage[], current: AudioRecor
     });
   }
   return [...byUrl.values()];
+}
+
+/** Preserve practiced recordings and their verified speeds, including partial and mixed-speed listening. */
+export function audioAttemptResults(active: ActiveBlock): TrainingAudioResult[] | undefined {
+  if (active.task.kind !== "audio") return undefined;
+  const results = mergeUsage(active.audioHistory ?? [], currentUsage(active))
+    .filter(usage => usage.resource.format === "audio" && !usage.resource.unresolved
+      && (usage.activeSeconds > 0 || usage.completedPasses > 0))
+    .map(usage => {
+      const recording = audioVariants(usage.resource).find(variant => variant.url === usage.resource.url);
+      return {
+        url: usage.resource.url,
+        title: recording?.title ?? usage.resource.title,
+        ...(recording ? { speedWpm: recording.speedWpm } : {}),
+        activeSeconds: usage.activeSeconds,
+        completedPasses: usage.completedPasses,
+      };
+    });
+  return results.length ? results : undefined;
 }
 
 /**

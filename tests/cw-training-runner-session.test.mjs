@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createRunnerRun, reduceRunnerEvent, runnerResultNote, runnerSettings, RUNNER_CHANNEL, RUNNER_PROTOCOL_VERSION } from "../src/lib/cw-training/runner-bridge.ts";
-import { restartRunnerBlock, runnerAssignmentProgress, runnerMetadata } from "../src/lib/cw-training/runner-session.ts";
+import { restartRunnerBlock, runnerAssignmentProgress, runnerAttemptResult, runnerMetadata } from "../src/lib/cw-training/runner-session.ts";
 
 const oldId = "11111111-1111-4111-8111-111111111111";
 const newId = "22222222-2222-4222-8222-222222222222";
@@ -52,6 +52,7 @@ test("restart captures earned engine time once and prepares a separate zeroed ru
     id: oldId, assignmentId: original.assignmentId, taskId: original.task.id,
     startedAt: original.startedAt, endedAt: nextStart, activeSeconds: 75, completed: false,
     scratchpad: original.scratchpad, note: runnerMetadata(original), context: "practice",
+    runnerResult: runnerAttemptResult(original),
   });
   assert.equal(result.active.id, newId);
   assert.equal(result.active.runner.runId, newId);
@@ -72,6 +73,46 @@ test("restart captures earned engine time once and prepares a separate zeroed ru
   assert.equal(result.active.runner.speedHistory, undefined);
   assert.equal(result.active.runnerRevision, revision);
   assert.deepEqual(original, before);
+});
+
+test("structured run results preserve exact individual evidence independently of practice credit", () => {
+  const runStartedAt = "2026-09-07T23:03:00.000Z";
+  const runEndedAt = "2026-09-07T23:04:15.900Z";
+  const original = block({ startedAt: "2026-09-07T23:00:00.000Z", runner: run({ runStartedAt, runEndedAt,
+    settings: { ...runnerSettings(task()), mode: "WPX", conditions: { ...runnerSettings(task()).conditions, qrm: true } },
+    speedHistory: [{ elapsedSeconds: 0, wpm: 13 }, { elapsedSeconds: 25, wpm: 25 }, { elapsedSeconds: 40, wpm: 13 }],
+  }) });
+  const expected = {
+    version: 1, mode: "WPX", wpm: 13, durationSeconds: 900, elapsedSeconds: 75.9, status: "stopped",
+    verifiedPoints: 2, qsoCount: 3, score: 4, speeds: [13, 25], conditions: true,
+    runStartedAt, runEndedAt, source: "embedded",
+  };
+  const before = structuredClone(original);
+  assert.deepEqual(runnerAttemptResult(original), expected);
+  const saved = restartRunnerBlock(original, newId, nextStart, revision).attempt;
+  assert.deepEqual(saved.runnerResult, expected);
+  assert.equal(saved.activeSeconds, 75, "practice credit keeps its existing whole-second behavior");
+  assert.equal(saved.endedAt, nextStart, "a later save is separate from the earlier run finish");
+  assert.deepEqual(original, before);
+  saved.runnerResult.speeds.push(60);
+  assert.deepEqual(runnerAttemptResult(original), expected, "the saved projection does not alias speed history");
+});
+
+test("unavailable results and old run timestamps are never invented", () => {
+  const active = block({ runner: run({ status: "error", errorCode: "interrupted", summary: undefined }) });
+  const result = runnerAttemptResult(active);
+  assert.deepEqual(result, {
+    version: 1, mode: "SingleCall", wpm: 13, durationSeconds: 900, elapsedSeconds: 75.9,
+    status: "error", speeds: [13], conditions: false, source: "embedded",
+  });
+  assert.deepEqual(restartRunnerBlock(active, newId, nextStart, revision).attempt.runnerResult, result);
+  for (const overrides of [
+    { runner: undefined }, { task: task({ kind: "audio" }) },
+    ...["loading", "ready", "running"].map(status => ({ runner: run({ status }) })),
+  ]) assert.equal(runnerAttemptResult(block(overrides)), undefined);
+  const long = block({ runner: run({ settings: { ...runnerSettings(task()), durationSeconds: 1800 }, elapsedSeconds: 1200 }) });
+  assert.equal(runnerAttemptResult(long).durationSeconds, 1800);
+  assert.equal(runnerAttemptResult(long).elapsedSeconds, 1200, "report selection may reject long runs but capture must not clamp them");
 });
 
 test("restart carries the latest WPM and chosen setup as independent fresh settings", () => {

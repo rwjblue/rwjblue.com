@@ -7,6 +7,7 @@ import type {
 import type { PracticeMode } from "./plan";
 import type { RunnerRunState } from "./runner-bridge";
 import type { SendingDraft, SendingTake } from "./sending-session";
+import type { TrainingReport } from "./report-types";
 
 export interface AudioRecordingUsage {
   resource: TrainingResource;
@@ -47,6 +48,12 @@ export interface ActiveBlock {
 }
 
 export interface TrainingDeviceState {
+  /** Editable report and the exact copy most recently opened in Google Forms. */
+  reportDraft?: TrainingReport;
+  reportEditedKeys?: string[];
+  reportDrafts?: Record<string, TrainingReport>;
+  reportEditsBySession?: Record<string, string[]>;
+  reportHandoff?: TrainingReport;
   snapshot?: TrainingSnapshot;
   pending: TrainingSync;
   active?: ActiveBlock;

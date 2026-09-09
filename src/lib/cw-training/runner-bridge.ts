@@ -60,6 +60,9 @@ export interface RunnerRunState {
   speedHistory?: { elapsedSeconds: number; wpm: number }[];
   summary?: RunnerSummary;
   errorCode?: RunnerErrorCode;
+  /** Parent receipt time of the engine's accepted start/terminal event, separate from practice block/save dates. */
+  runStartedAt?: string;
+  runEndedAt?: string;
 }
 
 const conditionKeys = ["qrm", "qrn", "qsb", "flutter", "lids"];
@@ -169,19 +172,24 @@ export function parseRunnerEvent(value: unknown): RunnerEvent | undefined {
 }
 
 /** One run only: duplicate/reordered messages and restarts cannot add practice time. */
-export function reduceRunnerEvent(state: RunnerRunState, value: unknown): RunnerRunState {
+export function reduceRunnerEvent(state: RunnerRunState, value: unknown, receivedAt?: string): RunnerRunState {
   const event = parseRunnerEvent(value);
   if (!event || event.runId !== state.runId || event.sequence <= state.lastSequence
     || event.elapsedSeconds < state.elapsedSeconds || event.elapsedSeconds > state.settings.durationSeconds
     || ["completed", "stopped", "error"].includes(state.status)) return state;
   const next = { ...state, lastSequence: event.sequence, elapsedSeconds: event.elapsedSeconds };
+  const receivedTime = typeof receivedAt === "string" ? Date.parse(receivedAt) : NaN;
+  const timestamp = Number.isFinite(receivedTime) && new Date(receivedTime).toISOString() === receivedAt ? receivedAt : undefined;
+  const terminalTime = state.status === "running" && timestamp
+    && (!state.runStartedAt || receivedTime >= Date.parse(state.runStartedAt)) ? timestamp : undefined;
   if (event.type === "ready") {
     return state.status === "loading" && event.sequence === 0 && event.elapsedSeconds === 0
       ? { ...next, status: "ready" } : state;
   }
   if (event.type === "started") {
     return state.status === "ready" && event.elapsedSeconds === 0
-      ? { ...next, status: "running", settings: event.settings, speedHistory: [{ elapsedSeconds: 0, wpm: event.settings.wpm }] }
+      ? { ...next, status: "running", settings: event.settings, speedHistory: [{ elapsedSeconds: 0, wpm: event.settings.wpm }],
+        ...(timestamp ? { runStartedAt: timestamp } : {}) }
       : state;
   }
   if (event.type === "progress") return state.status === "running" ? next : state;
@@ -198,10 +206,11 @@ export function reduceRunnerEvent(state: RunnerRunState, value: unknown): Runner
       // Completion here describes the chosen run, not the original assignment.
       status: event.reason === "completed" && event.elapsedSeconds === state.settings.durationSeconds ? "completed" : "stopped",
       summary: event.summary,
+      ...(terminalTime ? { runEndedAt: terminalTime } : {}),
     };
   }
   if (event.type === "error" && (state.status === "running" || event.elapsedSeconds === 0)) {
-    return { ...next, status: "error", errorCode: event.code };
+    return { ...next, status: "error", errorCode: event.code, ...(terminalTime ? { runEndedAt: terminalTime } : {}) };
   }
   return state;
 }

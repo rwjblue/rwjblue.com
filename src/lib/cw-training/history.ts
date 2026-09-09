@@ -12,7 +12,7 @@ const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => e
 function hasPractice(attempt: TrainingAttempt): boolean {
   const note = attempt.note?.trim();
   return attempt.activeSeconds > 0 || attempt.completed || (attempt.completedPasses ?? 0) > 0 ||
-    !!attempt.scratchpad?.trim() || !!attempt.difficulty ||
+    !!attempt.scratchpad?.trim() || !!attempt.difficulty || !!attempt.performanceRating ||
     !!(note && note !== "[Left missed]" && note !== "[Practiced elsewhere]");
 }
 
@@ -60,6 +60,7 @@ export function renderPracticeHistory(attempts: readonly TrainingAttempt[], opti
     const completion = task && isMorseRunner(task) ? "Assignment total reached" : "Requirements completed";
     const type = attempt.context === "class" ? "Class use" : otherPracticeActivity(attempt.taskId)
       ? "Other practice" : attempt.review ? "Extra review" : attempt.completed ? completion : "Practice logged";
+    const performance = attempt.performanceRating ? { "very-good": "Very good", good: "Good", fair: "Fair", poor: "Poor" }[attempt.performanceRating] : undefined;
     const rating = attempt.difficulty ? { hard: "Hard", right: "About right", easy: "Easy" }[attempt.difficulty] : undefined;
     const details = [
       attempt.note?.trim() ? `<div class="training-history-notes">${escapeHtml(attempt.note)}</div>` : "",
@@ -68,7 +69,7 @@ export function renderPracticeHistory(attempts: readonly TrainingAttempt[], opti
     const metadata = [stamp, duration, type,
       ...(attempt.completedPasses ? [`${attempt.completedPasses} pass${attempt.completedPasses === 1 ? "" : "es"}`] : []),
       ...(attempt.recallSeconds ? [`includes ${Math.round(attempt.recallSeconds / 6) / 10} min recall`] : []),
-      ...(rating ? [`Felt: ${rating}`] : []),
+      ...(performance ? [`Performance: ${performance}`] : rating ? [`Felt: ${rating} (earlier rating)`] : []),
     ].join(" · ");
     const sync = options.pendingIds.has(attempt.id) ? "Saved on this device · waiting to sync" : "Saved in account";
     return `<li class="training-history-entry"><strong>${escapeHtml(title)}</strong><p class="training-history-meta">${escapeHtml(metadata)}</p><p class="training-history-sync">${sync}</p>${details || options.sendingRecordingAttemptIds?.has(attempt.id) ? `<details data-history-id="${escapeHtml(attempt.id)}"${options.expandedIds?.has(attempt.id) ? " open" : ""}><summary>Results &amp; notes</summary>${details}</details>` : ""}</li>`;

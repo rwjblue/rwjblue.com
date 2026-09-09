@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { audioRecordingNote, audioVariants } from "../src/lib/cw-training/audio-variants.ts";
-import { audioSessionNote, switchAudioRecording } from "../src/lib/cw-training/audio-session.ts";
+import { audioAttemptResults, audioSessionNote, switchAudioRecording } from "../src/lib/cw-training/audio-session.ts";
 
 const source = (overrides = {}) => ({
   id: "assigned-recording", title: "WD101-10", format: "audio",
@@ -29,6 +29,37 @@ test("legacy and reloaded blocks retain the original recording note without infe
   assert.deepEqual(original, reloaded);
   assert.doesNotMatch(audioSessionNote(reloaded), /Difficult marks|Practice:/, "the client retains legacy bookmark handling");
   assert.equal(audioSessionNote(block({ task: task({ kind: "sending" }) })), "");
+});
+
+test("structured audio results preserve actual catalog speeds and precise usage across revisits", () => {
+  let active = switchAudioRecording(block({ activeSeconds: 100.25, recallSeconds: 20, completedPasses: 1 }), variant(25));
+  active = { ...active, activeSeconds: 150.75, completedPasses: 1 };
+  active = switchAudioRecording(active, variant(10));
+  active = { ...active, activeSeconds: 160.875, completedPasses: 2 };
+  const before = structuredClone(active);
+  assert.deepEqual(audioAttemptResults(active), [
+    { url: variant(10).url, title: variant(10).title, speedWpm: 10, activeSeconds: 110.375, completedPasses: 2 },
+    { url: variant(25).url, title: variant(25).title, speedWpm: 25, activeSeconds: 50.5, completedPasses: 0 },
+  ]);
+  assert.deepEqual(active, before);
+  active = switchAudioRecording(active, variant(20));
+  assert.equal(audioAttemptResults(active).length, 2, "an unplayed new selection is not a practiced recording");
+  assert.equal(audioAttemptResults(active).reduce((total, usage) => total + usage.activeSeconds, 0), 160.875,
+    "recall and repeated visits are not counted twice");
+});
+
+test("audio reporting does not infer speeds from assignment, title, or unknown recording URLs", () => {
+  const known = block({ task: task({ speedWpm: 10 }), resource: { ...variant(25), title: "Incorrect title", speedWpm: 99 } });
+  assert.equal(audioAttemptResults(known)[0].speedWpm, 25);
+  assert.equal(audioAttemptResults(known)[0].title, "WD101-25");
+  const unknown = block({ resource: source({ url: "https://example.invalid/WD101_25.mp3", title: "Custom audio 25 WPM", speedWpm: 25 }) });
+  assert.deepEqual(audioAttemptResults(unknown), [{
+    url: unknown.resource.url, title: unknown.resource.title, activeSeconds: 120, completedPasses: 1,
+  }]);
+  for (const overrides of [
+    { task: task({ kind: "sending" }) }, { resource: undefined }, { resource: source({ format: "link" }) },
+    { resource: source({ unresolved: "Missing recording" }) }, { activeSeconds: 0, completedPasses: 0 },
+  ]) assert.equal(audioAttemptResults(block(overrides)), undefined);
 });
 
 test("switching archives prior usage and resets only the recording-local playback state", () => {

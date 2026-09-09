@@ -1,7 +1,7 @@
-export type TrainingView = "today" | "focus" | "week" | "materials";
+export type TrainingView = "today" | "focus" | "week" | "materials" | "report";
 
 const isTrainingView = (value: string): value is TrainingView =>
-  value === "today" || value === "focus" || value === "week" || value === "materials";
+  value === "today" || value === "focus" || value === "week" || value === "materials" || value === "report";
 
 /** URL navigation owns only the selected view, never practice data or playback. */
 export function createTrainingNavigation(

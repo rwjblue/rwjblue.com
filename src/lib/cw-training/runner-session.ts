@@ -3,12 +3,38 @@ import { taskProgress } from "./plan.ts";
 import { createRunnerRun, isRunnerSettings, runnerResultNote, RUNNER_MAX_SECONDS } from "./runner-bridge.ts";
 import type { ActiveBlock } from "./storage.ts";
 import type { TrainingAttempt } from "./types.ts";
+import type { TrainingRunnerResult } from "./report-types.ts";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export function runnerMetadata(active: ActiveBlock): string {
   if (!active.runner) return "";
   return `${runnerResultNote(active.runner) ?? "Web Morse Runner: not started; no practice credited."} Upstream ${active.runnerRevision ?? "revision not recorded"}. Synthetic practice calls (not on-air contacts).`;
+}
+
+/** Persist the actual individual run; assignment totals and later save times are not run evidence. */
+export function runnerAttemptResult(active: ActiveBlock): TrainingRunnerResult | undefined {
+  const run = active.runner;
+  if (!run || !isMorseRunner(active.task)
+    || (run.status !== "completed" && run.status !== "stopped" && run.status !== "error")) return undefined;
+  return {
+    version: 1,
+    mode: run.settings.mode,
+    wpm: run.settings.wpm,
+    durationSeconds: run.settings.durationSeconds,
+    elapsedSeconds: run.elapsedSeconds,
+    status: run.status,
+    ...(run.summary ? {
+      verifiedPoints: run.summary.verifiedPoints,
+      qsoCount: run.summary.qsoCount,
+      score: run.summary.score,
+    } : {}),
+    speeds: [...new Set([run.settings.wpm, ...(run.speedHistory ?? []).map(change => change.wpm)])],
+    conditions: Object.values(run.settings.conditions).some(Boolean),
+    ...(run.runStartedAt ? { runStartedAt: run.runStartedAt } : {}),
+    ...(run.runEndedAt ? { runEndedAt: run.runEndedAt } : {}),
+    source: "embedded",
+  };
 }
 
 /** Assignment time accumulates across runs; each run's timer and score stay separate. */
@@ -75,6 +101,7 @@ export function restartRunnerBlock(
     endedAt: startedAt,
     activeSeconds,
     completed,
+    runnerResult: runnerAttemptResult(active),
     ...(active.scratchpad !== undefined ? { scratchpad: active.scratchpad } : {}),
     note,
     context: active.context,

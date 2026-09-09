@@ -23,9 +23,11 @@ let env;
 before(async () => {
   miniflare = new Miniflare({ modules: true, script: "export default { fetch() { return new Response('test'); } }", d1Databases: { TRAINING_DB: "cw-training-tests" } });
   db = await miniflare.getD1Database("TRAINING_DB");
-  const schema = await readFile(new URL("../migrations/cw-training/0001_training.sql", import.meta.url), "utf8");
-  const statements = schema.replace(/^--.*$/gm, "").trim().split(/;\n(?=\n|$)/).filter((sql) => sql.trim());
-  await db.batch(statements.map((sql) => db.prepare(sql)));
+  for (const migration of ["0001_training.sql", "0002_reports.sql"]) {
+    const schema = await readFile(new URL(`../migrations/cw-training/${migration}`, import.meta.url), "utf8");
+    const statements = schema.replace(/^--.*$/gm, "").trim().split(/;\n(?=\n|$)/).filter((sql) => sql.trim());
+    await db.batch(statements.map((sql) => db.prepare(sql)));
+  }
   await db.prepare("INSERT INTO training_courses(id, payload) VALUES (?, ?)").bind(course.id, JSON.stringify(course)).run();
   env = { TRAINING_DB: db, TRAINING_DEV_USER: "test-owner", TRAINING_ACCESS_TEAM: "", TRAINING_ACCESS_AUD: "", TRAINING_OWNER_EMAIL: "" };
 });
@@ -479,4 +481,178 @@ test("calendar reminders resolve course time zone across daylight saving changes
   assert.match(result, /DTSTART:20261031T130000Z/);
   assert.match(result, /DTSTART:20261102T140000Z/);
   assert.equal((result.match(/BEGIN:VEVENT/g) ?? []).length, 2);
+});
+
+function sessionReport(overrides = {}) {
+  return {
+    id: crypto.randomUUID(), session: 1,
+    fromDate: "2026-09-05", toDate: "2026-09-07", reportDate: "2026-09-07",
+    createdAt: now(), answers: {}, sourceAttemptIds: [], status: "draft", ...overrides,
+  };
+}
+
+function submittedReport(overrides = {}) {
+  const stamp = now();
+  return sessionReport({
+    createdAt: stamp, submittedAt: stamp, status: "submitted",
+    answers: { callsign: "TEST", firstName: "Test", session: "1", reportDate: "2026-09-07", scalesRating: "Very good", runnerVerifiedPoints: "0" },
+    ...overrides,
+  });
+}
+
+const runnerMetrics = {
+  version: 1, mode: "SingleCall", wpm: 18, durationSeconds: 900, elapsedSeconds: 599.75,
+  status: "stopped", verifiedPoints: 11, qsoCount: 12, score: 132,
+  speeds: [18, 20], conditions: false, source: "embedded",
+};
+
+test("structured practice metrics round-trip with exact values and retain legacy records", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "report-metrics-owner" };
+  const base = attempt();
+  const runner = attempt({
+    performanceRating: "very-good", runnerResult: {
+      ...runnerMetrics, runStartedAt: base.startedAt, runEndedAt: base.endedAt,
+    },
+  });
+  const audio = attempt({
+    difficulty: "hard", performanceRating: "fair",
+    audioResults: [{ url: "https://example.org/WD101-13.mp3", title: "WD101-13", speedWpm: 13, activeSeconds: 480.25, completedPasses: 2 }],
+  });
+  const lcwo = attempt({ lcwoResult: { kind: "letters", speedWpm: 13, groupLength: 3, errorPercent: 29.4 } });
+  const zero = attempt({ lcwoResult: { kind: "callsign", speedWpm: 15, score: 0, errorCount: 0 } });
+  const legacy = attempt({ difficulty: "right", note: "Historical note stays intact." });
+  const records = [runner, audio, lcwo, zero, legacy];
+  for (let index = 0; index < 2; index++) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: records }), ownerEnv);
+    assert.equal(response.status, 200);
+    const snapshot = await response.json();
+    assert.equal(snapshot.attempts.length, records.length);
+    for (const expected of records) assert.deepEqual(snapshot.attempts.find((item) => item.id === expected.id), expected);
+  }
+  const changed = { ...runner, runnerResult: { ...runner.runnerResult, verifiedPoints: 12 } };
+  assert.equal((await trainingResponse(request("sync", "POST", { attempts: [changed] }), ownerEnv)).status, 409);
+});
+
+test("structured metrics reject malformed values and distinguish LCWO counts from percentages", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "report-metrics-invalid" };
+  const invalid = [
+    { performanceRating: "easy" }, { performanceRating: null }, { performanceRating: ["good"] },
+    { runnerResult: null }, { runnerResult: { ...runnerMetrics, version: 2 } },
+    { runnerResult: { ...runnerMetrics, mode: ["SingleCall"] } },
+    { runnerResult: { ...runnerMetrics, status: ["completed"] } },
+    { runnerResult: { ...runnerMetrics, source: ["embedded"] } },
+    { runnerResult: { ...runnerMetrics, speeds: [] } },
+    { runnerResult: { ...runnerMetrics, speeds: [20] } },
+    { runnerResult: { ...runnerMetrics, speeds: [18, 18] } },
+    { runnerResult: { ...runnerMetrics, elapsedSeconds: -0.1 } },
+    { runnerResult: { ...runnerMetrics, verifiedPoints: 13 } },
+    { runnerResult: { ...runnerMetrics, verifiedPoints: 1.5 } },
+    { runnerResult: { ...runnerMetrics, conditions: "false" } },
+    { runnerResult: { ...runnerMetrics, source: "trusted" } },
+    { runnerResult: { ...runnerMetrics, runStartedAt: "2026-09-06T00:00:00.000Z", runEndedAt: "2026-09-05T00:00:00.000Z" } },
+    { audioResults: {} },
+    { audioResults: [{ url: "javascript:alert(1)", title: "Bad", activeSeconds: 0, completedPasses: 0 }] },
+    { audioResults: [{ url: "https://example.org/audio.mp3", title: "Bad", activeSeconds: -1, completedPasses: 0 }] },
+    { lcwoResult: { kind: ["letters"] } },
+    { lcwoResult: { kind: "letters", errorCount: 5 } },
+    { lcwoResult: { kind: "callsign", errorPercent: 5 } },
+    { lcwoResult: { kind: "words", errorCount: 0.5 } },
+    { lcwoResult: { kind: "custom", groupLength: 0 } },
+    { lcwoResult: { kind: "figures", errorPercent: 100.1 } },
+    { lcwoResult: { kind: "letters", errorPercent: null } },
+    { lcwoResult: { kind: "words", unknownMetric: 1 } },
+  ];
+  for (const fields of invalid) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [attempt(), attempt(fields)] }), ownerEnv);
+    assert.equal(response.status, 400, JSON.stringify(fields));
+  }
+  const snapshot = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
+  assert.deepEqual(snapshot.attempts, [], "no partial writes from rejected metric batches");
+});
+
+test("reports retain immutable draft revisions and submitted snapshots across retries and old-client sync", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "reports-revisions-owner" };
+  const source = attempt();
+  const draft = sessionReport({ answers: { firstName: "Test" }, editedAnswerKeys: ["firstName"], sourceAttemptIds: [source.id] });
+  const submitted = submittedReport({ editedAnswerKeys: [], sourceAttemptIds: [source.id] });
+  const first = await trainingResponse(request("sync", "POST", { attempts: [source], reports: [draft, submitted] }), ownerEnv);
+  assert.equal(first.status, 200, "a report can reference an attempt in the same atomic sync");
+  for (const body of [{ reports: [submitted, draft] }, { attempts: [source] }, { reports: [] }, {}]) {
+    const response = await trainingResponse(request("sync", "POST", body), ownerEnv);
+    assert.equal(response.status, 200);
+    const snapshot = await response.json();
+    assert.equal(snapshot.reports.length, 2);
+    assert.deepEqual(snapshot.reports.find((item) => item.id === draft.id), draft);
+    assert.deepEqual(snapshot.reports.find((item) => item.id === submitted.id), submitted);
+    assert.equal(snapshot.reports.find((item) => item.id === submitted.id).answers.runnerVerifiedPoints, "0");
+  }
+  for (const saved of [draft, submitted]) {
+    const pending = attempt();
+    const changed = { ...saved, answers: { ...saved.answers, problems: "Changed saved report." } };
+    const response = await trainingResponse(request("sync", "POST", { attempts: [pending], reports: [changed] }), ownerEnv);
+    assert.equal(response.status, 409);
+    const snapshot = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
+    assert.deepEqual(snapshot.attempts, [source], "a report conflict rolls back attempts in the same sync");
+    assert.deepEqual(snapshot.reports.find((item) => item.id === saved.id), saved);
+  }
+});
+
+test("report snapshots and their source references remain owner scoped", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "reports-owner-a" };
+  const otherEnv = { ...env, TRAINING_DEV_USER: "reports-owner-b" };
+  const source = attempt();
+  const original = sessionReport({ sourceAttemptIds: [source.id], answers: { firstName: "Owner A" } });
+  assert.equal((await trainingResponse(request("sync", "POST", { attempts: [source], reports: [original] }), ownerEnv)).status, 200);
+  const otherSnapshot = await (await trainingResponse(request("bootstrap"), otherEnv)).json();
+  assert.deepEqual(otherSnapshot.reports, []);
+  assert.equal((await trainingResponse(request("sync", "POST", { reports: [original] }), otherEnv)).status, 400, "another owner's source attempt is not accessible");
+  const other = { ...original, sourceAttemptIds: [], answers: { firstName: "Owner B" } };
+  const response = await trainingResponse(request("sync", "POST", { reports: [other] }), otherEnv);
+  assert.equal(response.status, 200, "the same UUID belongs to a separate owner namespace");
+  assert.deepEqual((await response.json()).reports, [other]);
+  assert.deepEqual((await (await trainingResponse(request("bootstrap"), ownerEnv)).json()).reports, [original]);
+});
+
+test("reports validate known fields, real dates, required submitted answers and bounded references before writing", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "reports-invalid-owner" };
+  const valid = submittedReport();
+  const invalid = [
+    sessionReport({ owner: "somebody-else" }),
+    sessionReport({ answers: { unknown: "answer" } }),
+    sessionReport({ answers: { firstName: null } }),
+    sessionReport({ answers: { problems: "bad\0note" } }),
+    sessionReport({ answers: { problems: "x".repeat(4_001) } }),
+    sessionReport({ answers: { runnerWpm: "10" } }),
+    sessionReport({ answers: { scalesRating: "Very Good" } }),
+    sessionReport({ answers: { session: "2" } }),
+    sessionReport({ answers: { reportDate: "2026-09-08" } }),
+    sessionReport({ editedAnswerKeys: null }),
+    sessionReport({ editedAnswerKeys: "firstName" }),
+    sessionReport({ editedAnswerKeys: ["unknown"] }),
+    sessionReport({ editedAnswerKeys: [["firstName"]] }),
+    sessionReport({ editedAnswerKeys: ["firstName", "firstName"] }),
+    sessionReport({ editedAnswerKeys: Array(43).fill("firstName") }),
+    sessionReport({ fromDate: "2026-02-30" }),
+    sessionReport({ fromDate: "2026-09-08" }),
+    sessionReport({ session: 2 }),
+    sessionReport({ sourceAttemptIds: [crypto.randomUUID()] }),
+    sessionReport({ sourceAttemptIds: ["not-a-uuid"] }),
+    sessionReport({ sourceAttemptIds: Array(2).fill(crypto.randomUUID()) }),
+    sessionReport({ submittedAt: now() }),
+    sessionReport({ status: ["draft"] }),
+    sessionReport({ status: "submitted" }),
+    { ...valid, submittedAt: undefined },
+    { ...valid, submittedAt: "2020-01-01T00:00:00.000Z" },
+    { ...valid, answers: { ...valid.answers, firstName: " " } },
+  ];
+  for (const report of invalid) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [attempt()], reports: [report] }), ownerEnv);
+    assert.equal(response.status, 400, JSON.stringify(report));
+  }
+  for (const reports of [null, {}, Array.from({ length: 21 }, () => sessionReport())]) {
+    assert.equal((await trainingResponse(request("sync", "POST", { reports }), ownerEnv)).status, 400);
+  }
+  const snapshot = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
+  assert.deepEqual(snapshot.reports, []);
+  assert.deepEqual(snapshot.attempts, []);
 });

@@ -44,6 +44,7 @@ import "../../styles/cw-training.css";
         <button type="button" data-view="focus">Focus</button>
         <button type="button" data-view="week">Week</button>
         <button type="button" data-view="materials">Materials</button>
+        <button type="button" data-view="report">Report</button>
       </nav>
 
       <section id="training-today" aria-label="Today">
@@ -140,6 +141,8 @@ import "../../styles/cw-training.css";
           >
         </div>
       </section>
+
+      <section id="training-report" aria-label="Session report" hidden></section>
 
       <section id="training-focus" aria-label="Practice focus" hidden>
         <div id="training-focus-empty" class="training-card">
@@ -442,14 +445,14 @@ import "../../styles/cw-training.css";
           <p class="training-small">The ten most recent saved takes are kept here. Recordings do not sync to other devices and do not add practice minutes.</p>
         </div>
         <label
-          >How did it feel? (optional)<select name="difficulty"
-            ><option value="">No rating</option><option value="hard"
-              >Hard</option
-            ><option value="right">About right</option><option value="easy"
-              >Easy</option
+          >How did it go? (optional)<select name="performanceRating"
+            ><option value="">No rating</option><option value="very-good"
+              >Very good</option
+            ><option value="good">Good</option><option value="fair"
+              >Fair</option><option value="poor">Poor</option
             ></select
           ></label
-        ><label
+        ><div id="training-finish-lcwo"></div><label
           >Note or score (optional)<textarea
             id="training-finish-note"
             name="note"
@@ -475,6 +478,8 @@ import "../../styles/cw-training.css";
           >Activity<select id="training-manual-task" name="task" aria-describedby="training-manual-help" required
           ></select></label
         ><p id="training-manual-help" class="training-small"></p><label
+          >Practice ended (your local time)<input id="training-manual-ended" type="datetime-local" name="endedAt" required /></label
+        ><label
           >Minutes practiced<input
             type="number"
             name="minutes"
@@ -496,7 +501,11 @@ import "../../styles/cw-training.css";
           /></label
         ><label id="training-manual-complete-field" class="training-check"
           ><input id="training-manual-complete" type="checkbox" name="complete" /> Requirements completed</label
-        ><label
+        ><label>How did it go? (optional)<select name="performanceRating"><option value="">No rating</option><option value="very-good">Very good</option><option value="good">Good</option><option value="fair">Fair</option><option value="poor">Poor</option></select></label>
+        <div id="training-manual-lcwo"></div>
+        <div id="training-manual-runner" hidden><label>Mode<select name="runnerMode"><option value="SingleCall">Single Call</option><option value="WPX">WPX Contest</option></select></label><label class="training-check"><input type="checkbox" name="runnerConditions" /> Band conditions enabled</label><label>Actual speed (WPM)<input type="number" name="runnerWpm" min="1" max="200" step="any" /></label><label>Verified Pts<input type="number" name="runnerVerifiedPoints" min="0" max="1000000000000" step="1" /></label></div>
+        <label>Scratchpad (optional)<textarea name="scratchpad" rows="2" maxlength="10000" placeholder="Learned: word, another word"></textarea></label>
+        <label
           >Note or score (optional)<textarea id="training-manual-note" name="note" rows="2" maxlength="3950"
           ></textarea></label
         ><div class="training-actions">

@@ -21,8 +21,10 @@ sitemaps, and does not load the site's analytics beacon.
   preserve previous text and never rewrite completed practice.
 - Preferences provides the short-recording speed default, class join link,
   calendar reminder time and duration, data export, and device clearing.
+- Report prepares the numbered class report from saved practice, with editable
+  answers, a prefilled Google Form, and a history of submitted copies.
 
-Today, Focus, Week, and Materials participate in browser history. Back (including
+Today, Focus, Week, Materials, and Report participate in browser history. Back (including
 the browser's swipe-back gesture) returns to the previous view; Forward reopens
 it. Leaving Focus pauses listening and timers, saves the unfinished block on
 this device, and stops a running simulator as partial. Returning does not
@@ -260,7 +262,7 @@ score, and transcript in a fresh frame. Mode, conditions, and the last practiced
 WPM carry forward; the next required run's duration is capped by the remaining
 assignment time (rounded up to at least one minute). Click Run explicitly to
 begin again. Completed or interrupted blocks say View results, not Resume.
-Finish block remains available to add a note or difficulty rating and stop here.
+Finish block remains available to add a note or performance rating and stop here.
 Failed setup with no practiced time or results can restart without an empty
 history entry. Each run has its own identity, result summary, and date; only
 practice time is accumulated, not scores or transcripts. Repeating a completed assignment becomes
@@ -269,17 +271,68 @@ use the existing offline sync queue; no database change is required. A missing
 engine/result retains the last confirmed time without inventing a score. Saved
 terminal runs retain their status after reload until the user explicitly restarts.
 Today's collapsed Practiced today panel contains expandable results, notes,
-scratchpad, and difficulty ratings. Saved-to-account and waiting-to-sync entries
+scratchpad, and performance ratings. Earlier difficulty ratings retain their
+original meaning and are labeled as earlier ratings. Saved-to-account and waiting-to-sync entries
 are labeled separately; an active device-local draft stays in the current-block card until
-saved. Week's Practice history uses the same readable entries with dates. Contact
-totals for instructor forms are not yet aggregated: each run's QSOs and score
-remain in its saved metadata pending review of the actual form.
+saved. Week's Practice history uses the same readable entries with dates. Report
+selects the highest Verified Pts from one recorded run of at most 15 minutes;
+longer duration breaks a tie. A five-minute run with 15 Verified Pts beats a
+ten-minute run with 10. Results are never summed, scaled, or replaced by contest
+score. Shorter and stopped runs remain eligible, and extra review counts.
 The standalone link and Done elsewhere remain available for unsupported settings
 or browser failures, with manually confirmed minutes/results for that separate run.
 Older device-local blocks created before embedding keep their manual workflow.
 See [the vendor/update workflow](web-morse-runner.md) for provenance, synthetic
 practice-call data, offline verification, and deliberate upstream upgrades.
 These are original summaries with external source links, not hosted PDF copies.
+
+## Session reports
+
+The Report view maps all 42 fields in Bob's Google Form. Select a numbered class
+and inspect the practice dates, which default to its three preparation dates
+through today. The target is two hours before the selected meeting. Opening
+Today does not initialize a hidden report. An unedited draft date advances when
+returning on another day; explicitly edited dates and windows stay selected.
+
+New practice uses Very good, Good, Fair, or Poor instead of the former difficulty
+scale. Report uses the latest explicit scales/listening-category rating in the
+window. Earlier Hard/About right/Easy entries are preserved without conversion.
+The finish dialog and Log practice elsewhere can record one LCWO run's drill,
+actual speed, length, score, and error count or percentage. The external trainer
+does not send these results automatically. Log practice elsewhere also records
+the actual end date/time and optional manual Morse Runner results.
+
+Structured Runner and audio results now sync with attempts. Actual run start/end
+timestamps are retained when observed. Existing generated notes can still supply
+report suggestions without rewriting older attempts. Audio suggestions use the
+actual recorded file/speed combinations. Runner suggestions preserve the selected
+run's WPM and show mixed speeds/settings for review.
+
+Write `Learned: rig, antenna` on a scratchpad line to nominate newly learned words.
+Only explicitly marked lines are extracted. Words are deduplicated without regard
+to case, and words in a submitted report are excluded from subsequent suggestions.
+The draft list remains editable. Monitoring, worked stations/names, and questions
+are entered within the report; the unrelated CW QSO tool is not a data source.
+
+Edits autosave on the device and survive switching report sessions. Save draft
+adds an immutable version to the private account history. Refresh from practice
+updates suggested answers while preserving edited answers, including after sync
+to another device. Optional empty answers remain distinct from zero results.
+
+Open filled Google Form validates the answers, saves a copy, and opens a prefilled
+responder page. It does not submit the form. After Google Forms confirms receipt,
+use Record submission to retain the exact opened copy, even if the editable draft
+has since changed. The confirmation is the user's attestation, not an automated
+receipt check. A download includes the report answers, dates, and source attempt
+IDs. Reports and learned words are never put into the training page URL, public
+HTML, search, analytics, or calendar feed.
+
+Report history requires `migrations/cw-training/0002_reports.sql` to be applied
+before deploying the updated Worker. Use the existing D1 migration command in
+Curriculum import below; `mise run deploy` does not apply migrations automatically. This
+change does not add a scheduler or an automatic Google Forms submission service.
+Verified automatic submission is tracked in
+[issue #16](https://github.com/rwjblue/rwjblue.com/issues/16).
 
 ## Private data and synchronization
 

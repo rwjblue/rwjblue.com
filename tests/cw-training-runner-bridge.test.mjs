@@ -117,6 +117,41 @@ test("engine run completion requires a start, the chosen duration, and final res
   assert.match(runnerResultNote(state), /completed; 900 seconds; Single Call; 13 WPM starting speed; run duration 900 seconds; band conditions off; 12 QSOs; Verified Pts 10; verified score 80; NR 1; NIL 1/);
 });
 
+test("run walltime records accepted start and finish receipts independently of engine time", () => {
+  const runStartedAt = "2026-09-09T14:00:00.000Z";
+  const runEndedAt = "2026-09-09T14:15:02.000Z";
+  const ready = reduceRunnerEvent(run(), event("ready", 0), "2026-09-09T13:50:00.000Z");
+  assert.equal(ready.runStartedAt, undefined);
+  let state = reduceRunnerEvent(ready, event("started", 1), runStartedAt);
+  assert.equal(state.runStartedAt, runStartedAt);
+  state = reduceRunnerEvent(state, event("progress", 2, 400), "2026-09-09T14:07:00.000Z");
+  assert.equal(state.runStartedAt, runStartedAt);
+  assert.equal(state.runEndedAt, undefined);
+  assert.equal(reduceRunnerEvent(state, event("started", 3), "2026-09-09T14:10:00.000Z"), state);
+  const done = reduceRunnerEvent(state, event("results", 3, 900, { reason: "completed", summary: summary() }), runEndedAt);
+  assert.equal(done.runStartedAt, runStartedAt);
+  assert.equal(done.runEndedAt, runEndedAt);
+  assert.equal(done.elapsedSeconds, 900, "walltime overhead is not credited as engine practice");
+  assert.equal(reduceRunnerEvent(done, event("results", 4, 900, { reason: "completed", summary: summary() }), "2026-09-10T14:00:00.000Z"), done);
+  const interrupted = reduceRunnerEvent(state, event("error", 3, 450, { code: "interrupted" }), "2026-09-09T14:07:32.000Z");
+  assert.equal(interrupted.runEndedAt, "2026-09-09T14:07:32.000Z");
+});
+
+test("missing, invalid or regressing receipt dates never fabricate run timestamps", () => {
+  for (const receivedAt of [undefined, "invalid", "2026-09-09", "2026-09-09T14:00:00Z"]) {
+    const ready = reduceRunnerEvent(run(), event("ready", 0));
+    const state = reduceRunnerEvent(ready, event("started", 1), receivedAt);
+    assert.equal(state.runStartedAt, undefined);
+    assert.equal(reduceRunnerEvent(state, event("results", 2, 900, { reason: "completed", summary: summary() }), receivedAt).runEndedAt, undefined);
+  }
+  const now = "2026-09-09T14:00:00.000Z";
+  const state = reduceRunnerEvent(reduceRunnerEvent(run(), event("ready", 0)), event("started", 1), now);
+  assert.equal(reduceRunnerEvent(state, event("results", 2, 450, { reason: "stopped", summary: summary() }), "2026-09-09T13:59:00.000Z").runEndedAt, undefined);
+  const failure = reduceRunnerEvent(run(), event("error", 0, 0, { code: "configuration" }), now);
+  assert.equal(failure.runStartedAt, undefined);
+  assert.equal(failure.runEndedAt, undefined, "setup failures are not real runs");
+});
+
 test("stopped or undersized engine results are terminal and cannot extend or restart the same run", () => {
   for (const reason of ["completed", "stopped"]) {
     const state = reduceRunnerEvent(started(), event("results", 2, 450, { reason, summary: summary() }));
