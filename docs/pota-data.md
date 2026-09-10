@@ -11,7 +11,7 @@ and practical visitor information on each park. The old root `references` and
 available from `@ripota/parks/types`.
 
 The same visitor metadata is available without npm in the
-[v4.0.0 standalone parks.json](https://github.com/ripota/parks/releases/download/v4.0.0/parks.json)
+[v4.1.0 standalone parks.json](https://github.com/ripota/parks/releases/download/v4.1.0/parks.json)
 release asset.
 
 `src/lib/pota/ri-park-source.ts` adapts the package for the site. It explicitly
@@ -52,6 +52,32 @@ existing locally cached information. Orange guidance displays its season and
 source rather than making a live requirement calculation, and the page links to
 the manager for current notices. An unlisted amenity is not a claim that it is
 absent.
+
+The v4.1 package also supplies optional original summaries and selected park
+photographs. Canonical park pages read summaries and `heroImageId` directly at
+build time. `src/lib/pota/ri-park-images.ts` resolves photo IDs through the opt-in
+`@ripota/parks/images.json` registry and its packaged WebP masters; neither the
+registry nor photo provenance enters generated activity data or browser map JSON.
+Parks without a selected photograph, including non-RI parks, keep their existing
+layout without a placeholder.
+
+`ParkPhoto.astro` displays the full photo after the park title and personal
+statistics, before visitor guidance. Captions retain the supplied title, creator,
+source link, and image-specific license; an expandable disclosure lists upstream
+transformations and this site's additional processing. Photographs preserve
+their full aspect ratio. The existing map, reference facts, and activation ledger
+remain separate below the visitor guidance. Park social previews use the same
+local photograph when available.
+
+Static image routes under `/assets/parks/` generate responsive WebP renditions
+with the existing explicit `sharp` dependency, at up to 480, 800, 1280, and 1920
+pixels wide, without enlargement. Builds read only package files and never fetch
+image source websites. URLs include the master checksum, rendition width, and
+processing recipe; they are cached immutably. Bump the recipe in
+`ri-park-images.ts` when changing processing settings or encoder versions.
+Contribute photo selection, summaries, and rights corrections in `ripota/parks`,
+then adopt its next immutable release here. A photo-only upgrade needs a build,
+not a POTA activity refresh.
 
 Orange guidance remains available year-round in a native disclosure. In the
 browser, Rhode Island's current date (`America/New_York`) expands and emphasizes
