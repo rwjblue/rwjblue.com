@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T00:54:42.884Z",
+  "generatedAt": "2026-09-14T00:27:13.844Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -149,9 +149,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 32,
-        "activations": 32,
-        "qsos": 2492
+        "attempts": 34,
+        "activations": 34,
+        "qsos": 2566
       }
     },
     {
@@ -166,9 +166,31 @@
       ],
       "href": "/radio/pota/US-0514/",
       "potaUrl": "https://pota.app/#/park/US-0514",
-      "activationCount": 0,
-      "qsoTotal": 0,
-      "activations": [],
+      "activationCount": 1,
+      "qsoTotal": 52,
+      "activations": [
+        {
+          "reference": "US-0514",
+          "park": "John H. Chafee National Wildlife Refuge",
+          "date": "2026-09-12",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 52,
+            "cw": 49,
+            "data": 0,
+            "phone": 3
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        }
+      ],
       "notes": [
         {
           "id": "2026-06-13-john-h-chafee-national-wildlife-refuge-pota-attempt",
@@ -178,9 +200,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 60,
-        "activations": 60,
-        "qsos": 2068
+        "attempts": 61,
+        "activations": 61,
+        "qsos": 2083
       }
     },
     {
@@ -236,9 +258,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 155,
-        "activations": 137,
-        "qsos": 3882
+        "attempts": 159,
+        "activations": 141,
+        "qsos": 3972
       }
     },
     {
@@ -294,9 +316,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 185,
-        "activations": 179,
-        "qsos": 7597
+        "attempts": 187,
+        "activations": 181,
+        "qsos": 7630
       }
     },
     {
@@ -338,9 +360,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 54,
-        "activations": 54,
-        "qsos": 1507
+        "attempts": 55,
+        "activations": 55,
+        "qsos": 1547
       }
     },
     {
@@ -1060,9 +1082,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 77,
-        "activations": 69,
-        "qsos": 1644
+        "attempts": 79,
+        "activations": 71,
+        "qsos": 1681
       }
     },
     {
@@ -1181,9 +1203,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 121,
-        "activations": 120,
-        "qsos": 4831
+        "attempts": 122,
+        "activations": 121,
+        "qsos": 4899
       }
     },
     {
@@ -1225,9 +1247,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 98,
-        "activations": 95,
-        "qsos": 4293
+        "attempts": 102,
+        "activations": 99,
+        "qsos": 4414
       }
     },
     {
@@ -1269,9 +1291,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 87,
-        "activations": 87,
-        "qsos": 2935
+        "attempts": 88,
+        "activations": 88,
+        "qsos": 2976
       }
     },
     {
@@ -1313,9 +1335,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 36,
-        "activations": 36,
-        "qsos": 1016
+        "attempts": 37,
+        "activations": 37,
+        "qsos": 1109
       }
     },
     {
@@ -1357,9 +1379,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 296,
-        "activations": 295,
-        "qsos": 14118
+        "attempts": 301,
+        "activations": 300,
+        "qsos": 14234
       }
     },
     {
@@ -1415,9 +1437,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 61,
-        "activations": 59,
-        "qsos": 2484
+        "attempts": 62,
+        "activations": 60,
+        "qsos": 2656
       }
     },
     {
@@ -1459,9 +1481,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 104,
-        "activations": 103,
-        "qsos": 3729
+        "attempts": 108,
+        "activations": 107,
+        "qsos": 3863
       }
     },
     {
@@ -1503,9 +1525,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 52,
-        "activations": 50,
-        "qsos": 1631
+        "attempts": 55,
+        "activations": 53,
+        "qsos": 1736
       }
     },
     {
@@ -1992,9 +2014,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 237,
-        "activations": 222,
-        "qsos": 38108
+        "attempts": 239,
+        "activations": 224,
+        "qsos": 38183
       }
     },
     {
@@ -2030,9 +2052,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 77,
-        "activations": 75,
-        "qsos": 2041
+        "attempts": 78,
+        "activations": 76,
+        "qsos": 2059
       }
     },
     {
@@ -2074,9 +2096,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 173,
-        "activations": 169,
-        "qsos": 6649
+        "attempts": 177,
+        "activations": 172,
+        "qsos": 6722
       }
     },
     {
@@ -2147,9 +2169,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 115,
-        "activations": 109,
-        "qsos": 2979
+        "attempts": 121,
+        "activations": 115,
+        "qsos": 3130
       }
     },
     {
@@ -2164,9 +2186,30 @@
       ],
       "href": "/radio/pota/US-2872/",
       "potaUrl": "https://pota.app/#/park/US-2872",
-      "activationCount": 1,
-      "qsoTotal": 27,
+      "activationCount": 2,
+      "qsoTotal": 37,
       "activations": [
+        {
+          "reference": "US-2872",
+          "park": "Colt State Park",
+          "date": "2026-09-13",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-2872",
           "park": "Colt State Park",
@@ -2191,9 +2234,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 348,
-        "activations": 342,
-        "qsos": 13291
+        "attempts": 351,
+        "activations": 344,
+        "qsos": 13320
       }
     },
     {
@@ -2235,9 +2278,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 115,
-        "activations": 112,
-        "qsos": 4889
+        "attempts": 117,
+        "activations": 114,
+        "qsos": 4918
       }
     },
     {
@@ -2300,9 +2343,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 172,
-        "activations": 161,
-        "qsos": 6043
+        "attempts": 174,
+        "activations": 163,
+        "qsos": 6156
       }
     },
     {
@@ -2344,9 +2387,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 187,
-        "activations": 183,
-        "qsos": 7029
+        "attempts": 189,
+        "activations": 185,
+        "qsos": 7070
       }
     },
     {
@@ -2388,9 +2431,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 580,
-        "activations": 543,
-        "qsos": 23670
+        "attempts": 582,
+        "activations": 545,
+        "qsos": 23696
       }
     },
     {
@@ -2454,9 +2497,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 187,
-        "activations": 185,
-        "qsos": 7352
+        "attempts": 188,
+        "activations": 186,
+        "qsos": 7470
       }
     },
     {
@@ -2513,9 +2556,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 100,
-        "activations": 90,
-        "qsos": 2921
+        "attempts": 104,
+        "activations": 94,
+        "qsos": 3166
       }
     },
     {
@@ -2592,9 +2635,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 214,
-        "activations": 202,
-        "qsos": 8843
+        "attempts": 216,
+        "activations": 204,
+        "qsos": 9041
       }
     },
     {
@@ -2672,9 +2715,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 159,
-        "activations": 156,
-        "qsos": 5640
+        "attempts": 161,
+        "activations": 158,
+        "qsos": 5664
       }
     },
     {
@@ -2716,9 +2759,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 57,
-        "activations": 55,
-        "qsos": 1334
+        "attempts": 58,
+        "activations": 56,
+        "qsos": 1363
       }
     },
     {
@@ -2988,9 +3031,30 @@
       },
       "href": "/radio/pota/US-4582/",
       "potaUrl": "https://pota.app/#/park/US-4582",
-      "activationCount": 2,
-      "qsoTotal": 12,
+      "activationCount": 3,
+      "qsoTotal": 62,
       "activations": [
+        {
+          "reference": "US-4582",
+          "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+          "date": "2026-09-11",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 50,
+            "cw": 35,
+            "data": 0,
+            "phone": 15
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-4582",
           "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
@@ -3030,9 +3094,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 2761,
-        "activations": 2708,
-        "qsos": 113788
+        "attempts": 2775,
+        "activations": 2722,
+        "qsos": 114428
       }
     },
     {
@@ -3124,9 +3188,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 73,
-        "activations": 72,
-        "qsos": 3127
+        "attempts": 75,
+        "activations": 74,
+        "qsos": 3157
       }
     },
     {
@@ -3183,9 +3247,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 89,
-        "activations": 79,
-        "qsos": 2540
+        "attempts": 93,
+        "activations": 83,
+        "qsos": 2785
       }
     },
     {
@@ -3343,9 +3407,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 444,
-        "activations": 439,
-        "qsos": 15187
+        "attempts": 446,
+        "activations": 441,
+        "qsos": 15226
       }
     },
     {
@@ -3365,9 +3429,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 392,
-        "activations": 389,
-        "qsos": 13141
+        "attempts": 394,
+        "activations": 391,
+        "qsos": 13180
       }
     },
     {
@@ -3387,9 +3451,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 66,
-        "activations": 64,
-        "qsos": 2191
+        "attempts": 69,
+        "activations": 67,
+        "qsos": 2272
       }
     },
     {
@@ -3482,9 +3546,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 351,
-        "activations": 350,
-        "qsos": 14796
+        "attempts": 356,
+        "activations": 355,
+        "qsos": 14965
       }
     },
     {
@@ -3540,9 +3604,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 52,
-        "activations": 51,
-        "qsos": 1495
+        "attempts": 54,
+        "activations": 53,
+        "qsos": 1547
       }
     },
     {
@@ -3598,9 +3662,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 39,
-        "activations": 39,
-        "qsos": 1492
+        "attempts": 40,
+        "activations": 40,
+        "qsos": 1825
       }
     },
     {
@@ -3657,9 +3721,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 69,
-        "activations": 66,
-        "qsos": 2466
+        "attempts": 71,
+        "activations": 68,
+        "qsos": 2543
       }
     },
     {
@@ -3759,9 +3823,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 93,
-        "activations": 87,
-        "qsos": 3447
+        "attempts": 95,
+        "activations": 89,
+        "qsos": 3491
       }
     },
     {
@@ -3781,9 +3845,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 51,
-        "activations": 46,
-        "qsos": 1414
+        "attempts": 53,
+        "activations": 48,
+        "qsos": 1442
       }
     },
     {
@@ -3825,9 +3889,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 66,
-        "activations": 65,
-        "qsos": 2416
+        "attempts": 69,
+        "activations": 68,
+        "qsos": 2477
       }
     },
     {
@@ -3869,9 +3933,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 68,
-        "activations": 67,
-        "qsos": 3181
+        "attempts": 70,
+        "activations": 69,
+        "qsos": 3220
       }
     },
     {
@@ -3927,9 +3991,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 60,
-        "activations": 55,
-        "qsos": 2377
+        "attempts": 62,
+        "activations": 57,
+        "qsos": 2399
       }
     },
     {
@@ -3944,9 +4008,30 @@
       ],
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 34,
-      "qsoTotal": 895,
+      "activationCount": 35,
+      "qsoTotal": 924,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-09-11",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 29,
+            "cw": 29,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",
@@ -4649,9 +4734,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 85,
-        "activations": 79,
-        "qsos": 2454
+        "attempts": 87,
+        "activations": 81,
+        "qsos": 2503
       }
     },
     {
@@ -4707,9 +4792,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 123,
-        "activations": 122,
-        "qsos": 3538
+        "attempts": 126,
+        "activations": 125,
+        "qsos": 3594
       }
     },
     {
@@ -4765,9 +4850,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 41,
-        "activations": 41,
-        "qsos": 1014
+        "attempts": 43,
+        "activations": 43,
+        "qsos": 1039
       }
     },
     {
@@ -4817,9 +4902,30 @@
       ],
       "href": "/radio/pota/US-7714/",
       "potaUrl": "https://pota.app/#/park/US-7714",
-      "activationCount": 1,
-      "qsoTotal": 12,
+      "activationCount": 2,
+      "qsoTotal": 62,
       "activations": [
+        {
+          "reference": "US-7714",
+          "park": "Buck Hill Wildlife Management Area",
+          "date": "2026-09-12",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 50,
+            "cw": 45,
+            "data": 0,
+            "phone": 5
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-7714",
           "park": "Buck Hill Wildlife Management Area",
@@ -4844,9 +4950,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 116,
-        "activations": 115,
-        "qsos": 4425
+        "attempts": 118,
+        "activations": 117,
+        "qsos": 4757
       }
     },
     {
@@ -4919,9 +5025,30 @@
       ],
       "href": "/radio/pota/US-7716/",
       "potaUrl": "https://pota.app/#/park/US-7716",
-      "activationCount": 1,
-      "qsoTotal": 12,
+      "activationCount": 2,
+      "qsoTotal": 63,
       "activations": [
+        {
+          "reference": "US-7716",
+          "park": "Carolina Wildlife Management Area",
+          "date": "2026-09-12",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 51,
+            "cw": 29,
+            "data": 0,
+            "phone": 22
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-7716",
           "park": "Carolina Wildlife Management Area",
@@ -4960,9 +5087,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 77,
-        "activations": 76,
-        "qsos": 3555
+        "attempts": 79,
+        "activations": 78,
+        "qsos": 3611
       }
     },
     {
@@ -5019,9 +5146,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 59,
-        "activations": 57,
-        "qsos": 2035
+        "attempts": 60,
+        "activations": 58,
+        "qsos": 2088
       }
     },
     {
@@ -5063,9 +5190,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 67,
-        "activations": 67,
-        "qsos": 2140
+        "attempts": 68,
+        "activations": 68,
+        "qsos": 2163
       }
     },
     {
@@ -5121,9 +5248,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 89,
-        "activations": 83,
-        "qsos": 2302
+        "attempts": 92,
+        "activations": 86,
+        "qsos": 2366
       }
     },
     {
@@ -5165,9 +5292,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 81,
-        "activations": 80,
-        "qsos": 2222
+        "attempts": 82,
+        "activations": 81,
+        "qsos": 2234
       }
     },
     {
@@ -5209,9 +5336,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 58,
-        "activations": 57,
-        "qsos": 1332
+        "attempts": 60,
+        "activations": 59,
+        "qsos": 1360
       }
     },
     {
@@ -5253,9 +5380,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 97,
-        "activations": 97,
-        "qsos": 3392
+        "attempts": 100,
+        "activations": 100,
+        "qsos": 3431
       }
     },
     {
@@ -5297,9 +5424,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 73,
-        "activations": 73,
-        "qsos": 2585
+        "attempts": 75,
+        "activations": 75,
+        "qsos": 2611
       }
     },
     {
@@ -5355,9 +5482,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 62,
-        "activations": 62,
-        "qsos": 1965
+        "attempts": 64,
+        "activations": 64,
+        "qsos": 2019
       }
     },
     {
@@ -5463,9 +5590,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 59,
-        "activations": 55,
-        "qsos": 1682
+        "attempts": 61,
+        "activations": 56,
+        "qsos": 1715
       }
     },
     {
