@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T00:27:12.723Z",
+  "generatedAt": "2026-09-14T00:39:23.458Z",
   "callsigns": [
     "N1RWJ",
     "KC1YDM",
@@ -298,6 +298,12 @@
           "title": "Mast-Supported Doublet at Carolina Management Area",
           "date": "2026-08-09",
           "href": "/notes/2026-08-09-carolina-management-area-doublet/"
+        },
+        {
+          "id": "2026-09-13-compact-20-meter-dipole",
+          "title": "A 20-Meter Dipole with Separate Winders",
+          "date": "2026-09-13",
+          "href": "/notes/2026-09-13-compact-20-meter-dipole/"
         }
       ],
       "publicStats": {
