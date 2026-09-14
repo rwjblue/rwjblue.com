@@ -2,25 +2,13 @@
 title: A Portable OCFD Experiment with Reliance Antennas
 date: 2026-07-21
 summary: "How Reliance helped turn unexpected OCFD measurements into a practical comparison of conventional 64/36 and experimental 80/20 feedpoints."
-visibility: draft
+visibility: public
 shareImage: /images/radio/2026-07-21-reliance-ocfd-replacement-wire-testing/original-transformer-closeup.jpg
 tags:
   - radio
   - field-notes
   - antennas
 ---
-
-<!--
-UNPUBLISHED WORKING DRAFT
-
-The `visibility: draft` frontmatter keeps this note out of production builds,
-indexes, feeds, and generated POTA data while allowing it to render in preview
-environments.
-
-Before publishing, incorporate Matt's response, confirm whether the orange
-wire remains untrimmed, resolve the short list at the end, and remove this
-comment.
--->
 
 I like having several antennas available for portable operating. There is no
 single best way to put an antenna in the air at every park or summit, and part
@@ -56,20 +44,21 @@ and a
 [4:1 Rybakov setup](https://www.relianceantennas.com/product/rybakov-bugout-vertical-40-6m-antenna/).
 
 I believe I now have examples of all four transformer boxes. They take up
-remarkably little room in a field kit while still leaving me the option of
-using a 100-watt radio such as my
-[FT-891](/radio/equipment/yaesu-ft-891/).
+remarkably little room in a field kit. The OCFD's power rating also leaves me
+the option of using my [FT-891](/radio/equipment/yaesu-ft-891/) at 100 watts
+on SSB or at reduced power on CW.
 
 ![Reliance OCFD Bugout transformer at the center of the original inverted-V installation](/images/radio/2026-07-21-reliance-ocfd-replacement-wire-testing/original-transformer-closeup.jpg)
 
 I placed my order before the 2026 New England QSO Party because I wanted to
 use the antennas in the woods that weekend. By coincidence,
 [NEQP ran May 2--3](https://neqp.org/rules/) while
-[NEAR-Fest XXXIX ran May 1--2](https://near-fest.com/) in New Boston, New
-Hampshire. Matt had driven up from Reliance's home in Pennsylvania for
+[NEAR-Fest XXXIX ran May 1--2](https://www.arrl.org/hamfests/new-england-amateur-radio-festival-near-fest-xxxix)
+in New Boston, New Hampshire. [Matt, N3VAN](https://www.qrz.com/db/N3VAN),
+had driven up from Reliance's home in Pennsylvania for
 NEAR-Fest, so he fulfilled my order in person rather than shipping it. We sat
 and talked about radios and portable antennas for at least an hour and a half.
-It was a genuinely lovely way to meet the person behind the gear.
+It was a lovely way to meet the person behind the gear.
 
 ## A problem became a collaborative experiment
 
@@ -108,9 +97,9 @@ ends about three to five feet high, and an included angle of roughly
 RG-174. I do not remember installing a choke for that session, and the setup
 photos do not show ferrites at the feedpoint.
 
-These measurements were made on a different day from the replacement tests,
-so they are a useful historical baseline rather than part of the controlled
-comparison.
+These measurements used different coax and an uncertain choke arrangement,
+so I treat them as a historical baseline. The two replacement tests kept the
+setup much more consistent.
 
 ![Original Reliance OCFD installed as an inverted V on a 20-foot mast](/images/radio/2026-07-21-reliance-ocfd-replacement-wire-testing/original-setup.jpg)
 
@@ -144,7 +133,9 @@ measured good results on 20, 15, and 10 meters. That experiment also struggled
 on 40 meters and identified common-mode current and choking as likely factors.
 A separate
 [modeled 20-percent-feedpoint design](https://hamwaves.com/cl-ocfd/en/)
-similarly treats the feedpoint position as a deliberate multiband compromise.
+similarly explores the multiband compromise. That is a larger, center-loaded
+antenna, so it is useful background on feedpoint choices rather than a
+prediction for this particular 40-meter wire.
 
 That does not make 80/20 universally better. It changes the feedpoint
 impedance on every band and can make the result more sensitive to the
@@ -159,6 +150,9 @@ transformer, 20-foot mast height, approximately 25 feet of RG-174, five
 ferrite beads on the coax near the feedpoint, end heights, and anchor
 directions. Both ends were at least three feet above ground, with one somewhat
 higher than the other.
+
+All SWR and impedance readings below were taken at the analyzer end of the
+feedline. They describe the antenna, transformer, and coax together.
 
 The only deliberate geometry adjustment was moving the mast a few feet toward
 one side for the orange test to accommodate the different leg lengths.
@@ -185,12 +179,12 @@ the weak band.
   ohms. The sweep reached 2.3:1 at 28.490 MHz, where the impedance was
   34.9 - j32.6 ohms.
 
-The 15-meter result was the clearest evidence for the alternate feedpoint.
+The 15-meter result was the most encouraging part of the alternate assembly.
 The green wire measured 1.51 at 21.225 MHz and reached 1.43 at 21.025 MHz.
 That is a dramatic change from the original assembly's 3.9 reading.
 
-Twenty meters was broad and usable, while 10 meters remained within reach of a
-small tuner. Forty meters did not follow: it measured 3.6 at 7.090 MHz, and
+Twenty meters had a broad, low-SWR region, while 10 meters looked like a
+candidate for a tuner. Forty meters did not follow: it measured 3.6 at 7.090 MHz, and
 its 2.8 minimum was still above the band at 8.370 MHz.
 
 A storm ended that session before I could install the orange wire. I returned
@@ -221,15 +215,16 @@ on all three bands, with 15 meters as the clear tradeoff.
   ohms. The sweep reached 1.31:1 at 28.410 MHz, where the impedance was
   56.0 + j13.0 ohms.
 
-The 40-meter curve was below 1.4:1 at 7.100 MHz and reached 1.18:1 at the upper
-edge of the amateur band. Twenty meters was broad and nearly flat, measuring
-1.33:1 at both the selected 14.175 MHz point and the analyzer's 14.205 MHz
-minimum.
+The 40-meter curve was below 1.4:1 at 7.100 MHz. Its lowest SWR was at
+7.400 MHz, above the amateur band, but the in-band match was already
+encouraging. Twenty meters had a broad minimum, measuring 1.33:1 at both the
+selected 14.175 MHz point and the analyzer's 14.205 MHz minimum.
 
 Ten meters measured 1.57:1 at 28.850 MHz and reached 1.31:1 at 28.410 MHz.
 Fifteen meters moved in the other direction: it measured 4.5:1 at 21.225 MHz,
-with substantial inductive reactance. That is exactly the harmonic tradeoff
-the experimental split was intended to explore.
+with substantial inductive reactance at the analyzer. That contrast is
+consistent with the harmonic tradeoff the experimental split was intended to
+explore.
 
 As a little victory lap before taking everything down, I connected my
 [Elecraft KH1](/radio/equipment/elecraft-kh1/) and called CQ at 5 watts on
@@ -253,37 +248,32 @@ The 15- and 10-meter measurements used identical frequencies.
 The chart makes the experiment pleasantly direct:
 
 - The orange 64/36 wire produced strong matches on 40, 20, and 10 meters.
-- The green 80/20 wire made 15 meters genuinely usable while remaining strong
-  on 20 meters.
+- The green 80/20 wire gave me a low-SWR option on 15 meters while remaining
+  strong on 20 meters.
 - The original wire remains a historical baseline because it used different
   coax and did not have a confirmed choke. The green and orange sessions are
-  the meaningful A/B comparison.
+  the closer comparison, although they took place on different days and the
+  mast position changed slightly.
 
 These are impedance-match measurements, not an efficiency comparison. They do
 answer the practical question of which bands each assembly presents cleanly to
 a 50-ohm radio.
 
-For my portable operating, the orange assembly is the better fit. A strong
+For my portable operating, the orange assembly is the better fit in this
+installation. A strong
 40-meter match matters more to me than adding 15 meters, and I can carry a
-different antenna when 15 is the priority. I plan to keep the orange wire and
-return both the original and green assemblies.
+different antenna when 15 is the priority. I emailed Matt the results and my
+plan to keep the orange wire and return both the original and green assemblies.
 
-I am leaving the orange wire untrimmed until Matt has reviewed the
-measurements. Its match is already broad, and I would rather ask before
-reaching for the cutters.
+I left the orange wire untrimmed and asked Matt whether he would leave it at
+that length too. With a useful match already on the bands I wanted, I was in
+no hurry to reach for the cutters.
 
 The experiment also reinforces how helpful Reliance has been. Matt took an
 unexpected set of readings, worked through the evidence with me, and supplied
 both a conventional replacement and a modeled alternative. I learned much more
 from comparing the two than I would have from simply swapping one wire and
 calling the problem closed.
-
-## Before I publish this
-
-- Incorporate Matt's response and record whether the orange wire remains
-  untrimmed.
-- Measure and photograph the OCFD, EFHW, EFRW, and Rybakov transformer boxes
-  together.
 
 ## References
 

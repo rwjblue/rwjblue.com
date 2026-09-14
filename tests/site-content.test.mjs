@@ -424,9 +424,6 @@ test("note visibility keeps drafts previewable without publishing them", () => {
   const publicationSchedule = read("src/pages/publication-schedule.json.ts");
   const worker = read("worker/index.ts");
   const wrangler = read("wrangler.jsonc");
-  const relianceDraft = read(
-    "src/content/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md",
-  );
 
   assert.match(contentConfig, /publishAt/);
   assert.match(contentConfig, /datetime\(\{ offset: true \}\)/);
@@ -457,7 +454,6 @@ test("note visibility keeps drafts previewable without publishing them", () => {
   assert.match(worker, /scheduled-publication-check/);
   assert.match(wrangler, /"0 \* \* \* \*"/);
   assert.match(wrangler, /"head_sampling_rate": 1/);
-  assert.match(relianceDraft, /visibility: draft/);
   assert.ok(!existsSync("drafts/notes/2026-07-21-reliance-ocfd-replacement-wire-testing.md"));
   assert.ok(!existsSync("drafts/notes/2026-america250-w1aw-1.md"));
 });

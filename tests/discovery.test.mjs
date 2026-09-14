@@ -6,7 +6,7 @@ import {
 } from "../src/lib/structured-data.ts";
 import { createSitemapFilter } from "../scripts/sitemap-filter.mjs";
 
-test("sitemap filter excludes private notes and utility routes", () => {
+test("sitemap filter includes published notes and excludes utility routes", () => {
   const filter = createSitemapFilter();
 
   assert.equal(filter("https://rwjblue.com/notes/public-workshop/"), true);
@@ -14,7 +14,7 @@ test("sitemap filter excludes private notes and utility routes", () => {
     filter(
       "https://rwjblue.com/notes/2026-07-21-reliance-ocfd-replacement-wire-testing/",
     ),
-    false,
+    true,
   );
   assert.equal(filter("https://rwjblue.com/search/"), false);
   assert.equal(filter("https://rwjblue.com/radio/cw-training/"), false);

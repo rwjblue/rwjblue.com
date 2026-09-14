@@ -25,6 +25,7 @@ wire assembly. The manufacturer sells that wire as a 40-through-10-meter
 assembly; I keep the broader 40-through-6-meter description here because that
 is how the complete tuned field setup is used.
 
-An unpublished replacement-wire testing note records the original and
-experimental feed-point layouts. Its backlink will appear here automatically
-when the draft is published.
+My [replacement-wire experiment](/notes/2026-07-21-reliance-ocfd-replacement-wire-testing/)
+compares the original assembly with conventional 64/36 and experimental 80/20
+replacements. The orange 64/36 assembly gave me the most useful combination
+of matches on 40, 20, and 10 meters in that installation.

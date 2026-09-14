@@ -15,7 +15,7 @@ assert.doesNotMatch(
   sitemap,
   /share-image|share\.png|\/search\/|publication-schedule/,
 );
-assert.doesNotMatch(sitemap, /2026-07-21-reliance-ocfd/);
+assert.match(sitemap, /2026-07-21-reliance-ocfd/);
 assert.match(sitemap, /2026-07-28-operating-w1aw/);
 
 const jsonLd = [...note.matchAll(
