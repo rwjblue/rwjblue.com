@@ -12,7 +12,7 @@ const attempt = (id, extra = {}) => ({
 const options = (extra = {}) => ({
   course: { timezone, assignments: [{ tasks: [
     { id: "runner", kind: "simulator", title: "Morse Runner" },
-    { id: "audio", title: "Official recording" },
+    { id: "audio", kind: "audio", title: "Official recording" },
     { id: "sending", title: "Sending practice" },
   ] }] },
   materials: [{ id: "material-one", title: "Instructor preparation" }],
@@ -140,7 +140,7 @@ test("history resolves assignment, instructor material, other-practice, and fall
   assert.match(html, /<strong>Practice<\/strong>/);
   assert.match(html, /Other practice/);
   assert.match(html, /Extra review/);
-  assert.match(html, /Requirements completed/);
+  assert.match(html, /Exercise completed/);
   assert.match(html, /2 passes/);
   assert.match(html, /includes 1.5 min recall/);
   assert.match(html, /Felt: About right/);

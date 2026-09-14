@@ -752,6 +752,9 @@ export async function initTraining() {
       !active.resource.unresolved;
     $("training-audio-box").hidden = !isAudio;
     $("training-timer-box").hidden = isAudio || !!active.runner;
+    $("training-timer-help").textContent = active.task.kind === "icr"
+      ? "For LCWO or another trainer, enter your total practice minutes when you finish the block. This timer pauses when you switch tabs or apps."
+      : "Pause when you stop practicing. If you switch tabs or apps, confirm those minutes when finishing.";
     $("training-runner-embedded").hidden = !active.runner;
     $("training-runner-external-help").hidden = !!active.runner;
     if (active.runner) renderRunner();
@@ -761,7 +764,7 @@ export async function initTraining() {
     if (guidance) {
       $("training-listening-approach").textContent = `${guidance.title}: ${guidance.approach}`;
       $("training-listening-passes").textContent =
-        `This ${active.review ? "review " : ""}block targets ${active.targetPasses} whole pass${active.targetPasses === 1 ? "" : "es"}. You may pause and resume; skipping audio does not complete a pass. Follow the original instructions and your instructor's directions.`;
+        `This ${active.review ? "review " : ""}block targets ${active.targetPasses} whole pass${active.targetPasses === 1 ? "" : "es"}. You may pause and resume; skipping audio does not complete a pass. You can mark ${active.review ? "the review block" : "the exercise"} complete when more repetitions would not help.`;
       $("training-scratchpad-prompt").textContent = `${guidance.scratchpadPrompt} To add words to your session report, write a line like Learned: word, another word.`;
     }
     $("training-focus-resource").innerHTML = runner
@@ -1298,6 +1301,7 @@ export async function initTraining() {
       active.context === "class" ? "Record class use" : active.review ? "Record extra review" : "Finish this block";
     $("training-finish-complete-label").textContent = active.review
       ? "I completed this review block"
+      : active.task.kind === "audio" ? "Mark this exercise complete"
       : "I completed this exercise's requirements";
     const complete = $<HTMLInputElement>("training-finish-complete");
     const minimumPasses = active.review ? active.targetPasses : active.task.minimumPasses;
@@ -1305,7 +1309,7 @@ export async function initTraining() {
       !minimumPasses ||
       active.previousPasses + active.completedPasses >=
         minimumPasses;
-    complete.disabled = active.task.kind === "audio" && !passReady;
+    complete.disabled = false;
     complete.checked =
       active.task.kind === "audio"
         ? !!minimumPasses && passReady
@@ -1323,8 +1327,10 @@ export async function initTraining() {
     $("training-finish-help").textContent = active.review
       ? `Extra practice time is saved separately from required coverage.${active.task.kind === "audio" ? ` ${active.completedPasses} fully played passes this block; partial listening still counts as time.` : " Confirm any minutes practiced away from this page."}`
       : active.task.kind === "audio"
-        ? `${active.completedPasses} fully played pass${active.completedPasses === 1 ? "" : "es"} this block. ${!passReady ? "More assigned passes remain; this partial block is still useful." : "Confirm completion when you have met the listening objective."}`
-        : "Correct the time if you practiced while away from this page. Mark complete only when you met the assigned objective.";
+        ? `${active.completedPasses} fully played pass${active.completedPasses === 1 ? "" : "es"} this block. You can mark the exercise complete with passes remaining if more repetitions would not help. Leave unchecked to continue later.`
+        : active.task.kind === "icr"
+          ? "Enter the total minutes you practiced in LCWO or another trainer, including time in another tab. Mark complete when you have met your practice objective."
+          : "Correct the time if you practiced while away from this page. Mark complete only when you met the assigned objective.";
     if (active.runner) $("training-finish-help").textContent = active.review
       ? "Review time and actual settings are saved automatically. A shorter review is fine; it never completes a required assignment."
       : `${runnerProgressText(active)} Engine time, settings, and this run's score are recorded when you save. Separate runs keep separate results.`;
@@ -1531,6 +1537,7 @@ export async function initTraining() {
     $("training-manual-complete-field").hidden = !!other || cumulativeRunner;
     passes.disabled = !!other || cumulativeRunner;
     complete.disabled = !!other || cumulativeRunner;
+    $("training-manual-complete-label").textContent = task?.kind === "audio" ? "Mark this exercise complete" : "Requirements completed";
     if (other || cumulativeRunner) {
       passes.value = "0";
       complete.checked = false;
@@ -1538,6 +1545,7 @@ export async function initTraining() {
     $("training-manual-help").textContent = other
       ? "Counts toward your daily practice time, not curriculum completion."
       : cumulativeRunner ? "Log this run's actual minutes and results. Saved runs add up; the assignment is satisfied automatically when its total practice time is reached."
+        : task?.kind === "audio" ? "Record your actual minutes and passes. You can mark the exercise complete with passes remaining if more repetitions would not help. Leave unchecked to continue later."
         : "Log time for this assignment. Mark requirements completed only if you met its instructions.";
     $<HTMLTextAreaElement>("training-manual-note").placeholder = other?.notePlaceholder ?? (task && isMorseRunner(task) ? MORSE_RUNNER_RESULTS_PROMPT : "");
   }
@@ -2014,14 +2022,6 @@ export async function initTraining() {
         : runnerAssignmentProgress(active, snapshot().attempts).complete;
       else if (isMorseRunner(active.task) && !active.review && active.context === "practice")
         completed = taskProgress(active.task, snapshot().attempts.filter((attempt) => attempt.id !== active.id)).activeSeconds + activeSeconds >= (active.task.minutes ?? 15) * 60;
-      const minimumPasses = active.review ? active.targetPasses : active.task.minimumPasses;
-      if (
-        active.task.kind === "audio" &&
-        minimumPasses &&
-        active.previousPasses + active.completedPasses <
-          minimumPasses
-      )
-        completed = false;
       if (
         active.task.kind === "simulator" &&
         !isMorseRunner(active.task) &&

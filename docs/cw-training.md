@@ -85,10 +85,12 @@ or its history; explicitly adding a dismissed item opts back into it for today.
 There is no requirement to clear or dismiss the backlog.
 
 Practice minutes and assignment coverage are separate. Partial listening counts
-toward practice time, while audio coverage requires whole passes; seeking past
-an unheard section does not complete a pass. Coverage and the final completion
-check-in are both required. Morse Runner assignments accumulate confirmed
-practice time across saved runs, including interrupted runs. Exercises requiring
+toward practice time, while recorded audio passes require whole playback; seeking
+past an unheard section does not complete a pass. Finish block and Done elsewhere
+let you mark an audio exercise complete with passes remaining when further
+repetitions would not be useful. The actual minutes and pass count stay intact;
+leave completion unchecked to continue later. Morse Runner assignments accumulate
+confirmed practice time across saved runs, including interrupted runs. Exercises requiring
 other equipment stay visibly pending until practiced.
 If no unfinished assignment is available, optional review offers another block,
 including after 60 minutes and on rest days. It uses the current/recent course
@@ -116,6 +118,11 @@ Record block and switch, confirm the partial practice, then select the next
 block. Saving partial practice preserves the unfinished objective. If the
 current block was started by mistake, choose Abort block in Focus to discard
 it and select another exercise without recording practice.
+
+For ICR practice in LCWO or another trainer, return to Finish block and enter
+your total minutes actually practiced. The companion's timer pauses when its
+tab is hidden or you switch apps, so it does not measure the whole external
+practice session. The entered minutes are saved to history and daily totals.
 
 Log practice elsewhere starts with an Other practice group: Word recognition,
 ICR (instant character recognition), and Other CW practice. The general button

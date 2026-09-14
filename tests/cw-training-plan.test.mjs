@@ -65,6 +65,59 @@ test("audio coverage does not override an explicitly unfinished listening object
   assert.equal(taskProgress(task, [listened, confirmed]).complete, true);
 });
 
+test("explicit listening completion accepts fewer suggested passes and preserves actual practice", () => {
+  const task = makeTask("audio", "audio", { minimumPasses: 3 });
+  for (const completedPasses of [1, 2]) {
+    const history = [attempt("audio", { completedPasses, activeSeconds: 443.2 * completedPasses })];
+    const original = structuredClone(history);
+    assert.deepEqual(taskProgress(task, history), {
+      complete: true, started: true, completedPasses, activeSeconds: 443.2 * completedPasses, interrupted: false,
+    });
+    assert.deepEqual(history, original, "completion never adds unplayed passes or practice time to saved history");
+  }
+});
+
+test("completing a listening objective early clears required, missed, and carried work", () => {
+  const course = fixtureCourse();
+  const task = course.assignments[0].tasks[1];
+  task.minimumPasses = 3;
+  const partial = attempt("audio", { completed: false, completedPasses: 1, activeSeconds: 443.2 });
+  const confirmed = attempt("audio", { id: "confirmation", completedPasses: 0, activeSeconds: 0 });
+  const history = [partial, confirmed];
+  const original = structuredClone({ course, history });
+  const today = new Date("2026-09-05T22:00:00Z");
+  const later = new Date("2026-09-08T12:00:00Z");
+  const pinned = [{ taskId: "audio", date: "2026-09-08" }];
+  assert.ok(getTrainingPlan(course, [partial], today).queue.some((item) => item.task.id === task.id));
+  assert.ok(getTrainingPlan(course, [partial], later).missed.some((item) => item.task.id === task.id));
+  assert.ok(getTrainingPlan(course, [partial], later, 15, "anything", pinned).queue.some((item) => item.task.id === task.id && item.carried));
+  for (const [now, carries] of [[today, []], [later, []], [later, pinned]]) {
+    const plan = getTrainingPlan(course, history, now, 15, "anything", carries);
+    assert.ok(!plan.queue.some((item) => item.task.id === task.id));
+    assert.ok(!plan.blocked.some((item) => item.task.id === task.id));
+    assert.ok(!plan.missed.some((item) => item.task.id === task.id));
+  }
+  assert.deepEqual(taskProgress(task, history), {
+    complete: true, started: true, completedPasses: 1, activeSeconds: 443.2, interrupted: false,
+  });
+  assert.deepEqual({ course, history }, original);
+});
+
+test("review and class completion cannot finish a required listening objective early", () => {
+  const task = makeTask("audio", "audio", { minimumPasses: 3 });
+  const partial = attempt("audio", { completed: false, completedPasses: 1, activeSeconds: 443.2 });
+  const excluded = [
+    attempt("audio", { id: "optional-review", review: true, completedPasses: 1 }),
+    attempt("audio", { id: "class-listening", context: "class", completedPasses: 1 }),
+  ];
+  assert.deepEqual(taskProgress(task, [partial, ...excluded]), {
+    complete: false, started: true, completedPasses: 1, activeSeconds: 443.2, interrupted: true,
+  });
+  assert.deepEqual(taskProgress(task, excluded), {
+    complete: false, started: false, completedPasses: 0, activeSeconds: 0, interrupted: false,
+  });
+});
+
 test("unrelated fixed simulator runs do not fit ten minutes or aggregate partial runs", () => {
   const course = fixtureCourse();
   const plan = getTrainingPlan(course, [], new Date("2026-09-06T22:00:00Z"), 10);

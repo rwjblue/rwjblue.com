@@ -207,8 +207,8 @@ import "../../styles/cw-training.css";
                 class="primary"
                 type="button"
                 data-action="toggle-timer">Start timer</button
-              ><p class="training-small">
-                Pause when you stop practicing. If you switch apps, confirm
+              ><p id="training-timer-help" class="training-small">
+                Pause when you stop practicing. If you switch tabs or apps, confirm
                 those minutes when finishing.
               </p>
             </div>
@@ -506,7 +506,7 @@ import "../../styles/cw-training.css";
             value="0"
           /></label
         ><label id="training-manual-complete-field" class="training-check"
-          ><input id="training-manual-complete" type="checkbox" name="complete" /> Requirements completed</label
+          ><input id="training-manual-complete" type="checkbox" name="complete" /> <span id="training-manual-complete-label">Requirements completed</span></label
         ><label>How did it go? (optional)<select name="performanceRating"><option value="">No rating</option><option value="very-good">Very good</option><option value="good">Good</option><option value="fair">Fair</option><option value="poor">Poor</option></select></label>
         <div id="training-manual-lcwo"></div>
         <div id="training-manual-runner" hidden><label>Mode<select name="runnerMode"><option value="SingleCall">Single Call</option><option value="WPX">WPX Contest</option></select></label><label class="training-check"><input type="checkbox" name="runnerConditions" /> Band conditions enabled</label><label>Actual speed (WPM)<input type="number" name="runnerWpm" min="1" max="200" step="any" /></label><label>Verified Pts<input type="number" name="runnerVerifiedPoints" min="0" max="1000000000000" step="1" /></label></div>

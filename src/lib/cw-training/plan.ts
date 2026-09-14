@@ -79,10 +79,7 @@ export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): T
   const activeSeconds = relevant.reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
   const started = activeSeconds > 0 || completedPasses > 0 || relevant.some((attempt) => attempt.completed);
   let complete: boolean;
-  if (task.kind === "audio" && task.minimumPasses !== undefined) {
-    complete = (completedPasses >= task.minimumPasses && relevant.some((attempt) => attempt.completed)) ||
-      relevant.some((attempt) => attempt.completed && attempt.completedPasses === undefined);
-  } else if (isMorseRunner(task)) {
+  if (isMorseRunner(task)) {
     // Saved partial runs, including older completed:false records, contribute
     // to this assignment's practice total without rewriting their history.
     complete = activeSeconds >= (task.minutes ?? 15) * 60;
@@ -90,6 +87,8 @@ export function taskProgress(task: TrainingTask, attempts: TrainingAttempt[]): T
     // Other simulators retain their original uninterrupted-run requirement.
     complete = relevant.some((attempt) => attempt.completed && attempt.activeSeconds >= task.minutes! * 60);
   } else {
+    // Completion is the learner's decision, including audio with passes remaining.
+    // Keep the actual pass count independently from that decision.
     complete = relevant.some((attempt) => attempt.completed);
   }
   const latest = relevant.at(-1);

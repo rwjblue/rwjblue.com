@@ -57,7 +57,7 @@ export function renderPracticeHistory(attempts: readonly TrainingAttempt[], opti
     const stamp = Number.isFinite(started.getTime()) ? formatter.format(started) : "Time unavailable";
     const duration = attempt.activeSeconds < 60 ? `${Math.round(attempt.activeSeconds)} sec` : `${Math.round(attempt.activeSeconds / 6) / 10} min`;
     const task = tasks.get(attempt.taskId);
-    const completion = task && isMorseRunner(task) ? "Assignment total reached" : "Requirements completed";
+    const completion = task && isMorseRunner(task) ? "Assignment total reached" : task?.kind === "audio" ? "Exercise completed" : "Requirements completed";
     const type = attempt.context === "class" ? "Class use" : otherPracticeActivity(attempt.taskId)
       ? "Other practice" : attempt.review ? "Extra review" : attempt.completed ? completion : "Practice logged";
     const performance = attempt.performanceRating ? { "very-good": "Very good", good: "Good", fair: "Fair", poor: "Poor" }[attempt.performanceRating] : undefined;
