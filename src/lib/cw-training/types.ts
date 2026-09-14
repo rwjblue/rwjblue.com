@@ -1,4 +1,5 @@
 import type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
+import type { LcwoImportState } from "./lcwo-types.ts";
 export type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
 
 /** Shared wire format. Curriculum content is fetched from the private API. */
@@ -118,6 +119,7 @@ export interface TrainingSnapshot {
   materials: TrainingMaterial[];
   preferences: TrainingPreferences;
   reports?: TrainingReport[];
+  lcwo?: LcwoImportState;
   serverTime: string;
 }
 

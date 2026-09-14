@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { REPORT_FIELDS, REPORT_FORM_URL, buildPrefilledReportUrl, validateReportAnswers } from "../src/lib/cw-training/report-fields.ts";
-import { buildReportDraft, learnedWordsFromScratchpad, legacyAudioResults, legacyRunnerResult,
-  reportAttemptsInWindow, reportWindowForSession, selectReportRunner } from "../src/lib/cw-training/report.ts";
+import { applyReportSuggestions, buildReportDraft, learnedWordsFromScratchpad, legacyAudioResults, legacyRunnerResult,
+  reportAttemptsInWindow, reportLcwoRunsInWindow, reportWindowForSession, selectReportRunner } from "../src/lib/cw-training/report.ts";
 
 const course = () => ({
   timezone: "America/New_York", resources: [],
@@ -32,6 +32,8 @@ const audio = (title, speedWpm, extra = {}) => ({
 });
 const draft = (attempts, extra = {}) => buildReportDraft(course(), attempts, options(extra));
 const required = () => ({ callsign: "N1RWJ", firstName: "Robert", session: "2", reportDate: "2026-09-10", scalesRating: "Good" });
+const lcwo = (id, extra = {}) => ({ id, kind: "words", sourceType: "words", sourceUserId: "123", sourceResultId: id,
+  recordedAt: "2026-09-09T14:00:00.000Z", sourceTime: "2026-09-09 14:00:00", ...extra });
 
 test("all 42 instructor fields have unique entry IDs and the exact required/rating values", () => {
   assert.equal(REPORT_FIELDS.length, 42);
@@ -238,4 +240,104 @@ test("learned words require explicit confirmation, deduplicate case-insensitivel
   assert.equal(result.answers.workedCallsigns, "");
   assert.equal(result.answers.problems, "");
   assert.ok(!JSON.stringify(result).includes("Need to learn NAME"));
+});
+
+test("LCWO API history uses course-local dates and deduplicates before choosing runs", () => {
+  const runs = [
+    lcwo("before", { recordedAt: "2026-09-08T03:59:59.000Z" }),
+    lcwo("first", { recordedAt: "2026-09-08T04:00:00.000Z" }),
+    lcwo("last", { recordedAt: "2026-09-11T03:59:59.000Z" }),
+    lcwo("after", { recordedAt: "2026-09-11T04:00:00.000Z" }),
+    lcwo("invalid", { recordedAt: "bad" }),
+    lcwo("moved"), lcwo("moved", { recordedAt: "2026-09-12T14:00:00.000Z" }),
+  ];
+  assert.deepEqual(reportLcwoRunsInWindow(runs, options(), course().timezone).map(run => run.id), ["first", "last"]);
+  assert.deepEqual(reportLcwoRunsInWindow(runs, options({ fromDate: "2026-09-11" }), course().timezone), []);
+});
+
+test("LCWO imports fill only matching measurements and retain maximum WPM and accuracy as evidence", () => {
+  const runs = [
+    lcwo("words", { score: 0, maximumWpm: 21 }),
+    lcwo("calls", { kind: "callsign", sourceType: "callsigns", score: 700, maximumWpm: 26 }),
+    ...["letters", "figures", "custom"].map(kind => lcwo(kind, { kind, sourceType: "groups", effectiveWpm: 15, characterWpm: 25, accuracyPercent: 70.6 })),
+  ];
+  const records = [];
+  const result = draft(records, { lcwoRuns: runs });
+  assert.equal(result.answers.wordsScore, "0");
+  assert.equal(result.answers.callsignScore, "700");
+  for (const key of ["wordsWpm", "callsignWpm", "wordsMaximumLength", "wordsErrors", "callsignErrors"]) assert.equal(result.answers[key], "");
+  for (const kind of ["letters", "figures", "custom"]) {
+    assert.equal(result.answers[`${kind}Wpm`], "15");
+    assert.equal(result.answers[`${kind}Length`], "");
+    assert.equal(result.answers[`${kind}ErrorPercent`], "");
+    assert.equal(result.lcwoSources.find(source => source.run.kind === kind).run.accuracyPercent, 70.6);
+  }
+  assert.equal(result.lcwoSources.find(source => source.run.kind === "words").run.maximumWpm, 21);
+  assert.deepEqual(new Set(result.sourceLcwoIds), new Set(runs.map(run => run.id)));
+  assert.deepEqual(result.sourceAttemptIds, []);
+  assert.deepEqual(records, []);
+});
+
+test("latest LCWO run wins across API and manual sources without carrying forward unrelated missing values", () => {
+  const result = draft([
+    attempt("manual-words", { lcwoResult: { kind: "words", speedWpm: 13, maximumLength: 3, errorCount: 2, score: 1200 } }),
+    attempt("manual-letters", { startedAt: "2026-09-10T14:00:00.000Z", endedAt: "2026-09-10T14:10:00.000Z", lcwoResult: { kind: "letters", groupLength: 3, errorPercent: 0 } }),
+  ], { lcwoRuns: [
+    lcwo("new-words", { score: 300, maximumWpm: 18 }),
+    lcwo("old-words", { recordedAt: "2026-09-08T12:00:00.000Z", score: 1500, maximumWpm: 30 }),
+    lcwo("imported-letters", { kind: "letters", sourceType: "groups", effectiveWpm: 15, characterWpm: 25, accuracyPercent: 100 }),
+  ] });
+  assert.equal(result.answers.wordsScore, "300");
+  assert.equal(result.answers.wordsErrors, "");
+  assert.equal(result.answers.wordsMaximumLength, "");
+  assert.equal(result.answers.wordsWpm, "");
+  assert.equal(result.answers.lettersLength, "3");
+  assert.equal(result.answers.lettersErrorPercent, "0");
+  assert.equal(result.answers.lettersWpm, "");
+  assert.deepEqual(result.sourceLcwoIds, ["new-words"]);
+  assert.deepEqual(result.sourceAttemptIds, ["manual-letters"]);
+});
+
+test("Koch lessons do not silently fill custom character practice", () => {
+  const result = draft([], { lcwoRuns: [lcwo("lesson", { kind: "koch", sourceType: "koch", lesson: 5, effectiveWpm: 18, characterWpm: 25, accuracyPercent: 100 })] });
+  assert.equal(result.answers.customWpm, "");
+  assert.equal(result.answers.customLength, "");
+  assert.equal(result.answers.customErrorPercent, "");
+  assert.deepEqual(result.sourceLcwoIds, []);
+  assert.match(result.warnings.join(" "), /Koch lesson results.*separate/);
+});
+
+test("an exported completion inside a manually logged block preserves that block's details", () => {
+  const manual = attempt("manual", { startedAt: "2026-09-09T14:00:00.000Z", endedAt: "2026-09-09T14:10:00.000Z",
+    lcwoResult: { kind: "words", speedWpm: 15, score: 300, maximumLength: 3, errorCount: 2 } });
+  const imported = lcwo("same-run", { recordedAt: "2026-09-09T14:09:00.000Z", score: 300, maximumWpm: 20 });
+  const result = draft([manual], { lcwoRuns: [imported] });
+  assert.equal(result.answers.wordsWpm, "15");
+  assert.equal(result.answers.wordsMaximumLength, "3");
+  assert.equal(result.answers.wordsErrors, "2");
+  assert.deepEqual(result.sourceAttemptIds, ["manual"]);
+  assert.deepEqual(result.sourceLcwoIds, []);
+  const later = draft([manual], { lcwoRuns: [imported, lcwo("later-run", { recordedAt: "2026-09-09T14:11:00.000Z", score: 350 })] });
+  assert.equal(later.answers.wordsScore, "350");
+  assert.equal(later.answers.wordsMaximumLength, "");
+  assert.equal(later.answers.wordsErrors, "");
+  assert.deepEqual(later.sourceAttemptIds, []);
+  assert.deepEqual(later.sourceLcwoIds, ["later-run"]);
+});
+
+test("report refresh updates imported sources while preserving deliberate answers and blanks", () => {
+  const original = { id: "draft", session: 2, fromDate: "2026-09-08", toDate: "2026-09-10", reportDate: "2026-09-10",
+    createdAt: "2026-09-10T15:00:00.000Z", status: "draft", sourceAttemptIds: ["old-manual"], sourceLcwoIds: ["old-import"],
+    answers: { ...required(), wordsScore: "100", wordsWpm: "13", wordsErrors: "0", lettersWpm: "", problems: "Ask Bob about this run." } };
+  const untouched = structuredClone(original);
+  const suggestions = draft([], { lcwoRuns: [lcwo("new", { score: 800 }), lcwo("letters", { kind: "letters", effectiveWpm: 15 })] });
+  const refreshed = applyReportSuggestions(original, suggestions, ["wordsWpm", "wordsErrors", "lettersWpm", "problems"]);
+  assert.equal(refreshed.answers.wordsScore, "800");
+  assert.equal(refreshed.answers.wordsWpm, "13");
+  assert.equal(refreshed.answers.wordsErrors, "0");
+  assert.equal(refreshed.answers.lettersWpm, "");
+  assert.equal(refreshed.answers.problems, original.answers.problems);
+  assert.deepEqual(refreshed.sourceAttemptIds, []);
+  assert.deepEqual(refreshed.sourceLcwoIds, suggestions.sourceLcwoIds);
+  assert.deepEqual(original, untouched);
 });

@@ -1,6 +1,9 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "../src/lib/cw-training/other-practice.ts";
 import { REPORT_FIELDS, validateReportAnswers } from "../src/lib/cw-training/report-fields.ts";
+import { dateInTimezone } from "../src/lib/cw-training/plan.ts";
+import type { LcwoRun } from "../src/lib/cw-training/lcwo-types.ts";
+import { fetchLCWOExports, LCWOImportError } from "./lcwo.ts";
 import type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "../src/lib/cw-training/report-types.ts";
 import type {
   TrainingAttempt,
@@ -255,7 +258,7 @@ function attempt(value: unknown, now: number): TrainingAttempt {
 }
 
 function report(value: unknown, now: number): TrainingReport {
-  const row = record(value, ["id", "session", "fromDate", "toDate", "reportDate", "createdAt", "answers", "editedAnswerKeys", "sourceAttemptIds", "status", "submittedAt"]);
+  const row = record(value, ["id", "session", "fromDate", "toDate", "reportDate", "createdAt", "answers", "editedAnswerKeys", "sourceAttemptIds", "sourceLcwoIds", "status", "submittedAt"]);
   if (typeof row.status !== "string" || !["draft", "submitted"].includes(row.status)) invalid("Invalid report status.");
   const answers = record(row.answers, REPORT_FIELDS.map((field) => field.key));
   const result: TrainingReport = {
@@ -296,6 +299,11 @@ function report(value: unknown, now: number): TrainingReport {
   if (!Array.isArray(row.sourceAttemptIds) || row.sourceAttemptIds.length > 1_000) invalid("Use at most 1,000 source attempts per report.");
   result.sourceAttemptIds = row.sourceAttemptIds.map((value) => id(value, "report source attempt ID", true));
   if (new Set(result.sourceAttemptIds).size !== result.sourceAttemptIds.length) invalid("Report source attempt IDs must be unique.");
+  if (row.sourceLcwoIds !== undefined) {
+    if (!Array.isArray(row.sourceLcwoIds) || row.sourceLcwoIds.length > 1_000) invalid("Use at most 1,000 LCWO results per report.");
+    result.sourceLcwoIds = row.sourceLcwoIds.map((value) => id(value, "report LCWO result ID"));
+    if (new Set(result.sourceLcwoIds).size !== result.sourceLcwoIds.length) invalid("Report LCWO result IDs must be unique.");
+  }
   if (row.submittedAt !== undefined) result.submittedAt = timestamp(row.submittedAt, "report submission", now);
   if (result.status === "submitted" && !result.submittedAt) invalid("A submitted report needs its submission time.");
   if (result.status === "draft" && result.submittedAt !== undefined) invalid("A draft cannot have a submission time.");
@@ -409,13 +417,22 @@ function defaultPreferences(): TrainingPreferences {
   return { blockMinutes: 15, reminderTime: "09:00", updatedAt: "2020-01-01T00:00:00.000Z" };
 }
 
-async function snapshot(db: D1Database, owner: string): Promise<TrainingSnapshot> {
+function lcwoCredentials(env: Env): { username: string; password: string } | undefined {
+  const username = "TRAINING_LCWO_USERNAME" in env ? env.TRAINING_LCWO_USERNAME : undefined;
+  const password = "TRAINING_LCWO_PASSWORD" in env ? env.TRAINING_LCWO_PASSWORD : undefined;
+  return typeof username === "string" && username.trim() && typeof password === "string" && password
+    ? { username: username.trim(), password } : undefined;
+}
+
+async function snapshot(db: D1Database, owner: string, lcwoConfigured = false): Promise<TrainingSnapshot> {
   const results = await db.batch<{ payload: string }>([
     db.prepare("SELECT payload FROM training_courses WHERE id = ?").bind(TRAINING_COURSE_ID),
     db.prepare("SELECT payload FROM training_attempts WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
     db.prepare("SELECT payload FROM training_materials WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
     db.prepare("SELECT payload FROM training_preferences WHERE owner_id = ? AND course_id = ?").bind(owner, TRAINING_COURSE_ID),
     db.prepare("SELECT payload FROM training_reports WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
+    db.prepare("SELECT payload FROM training_lcwo_results WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
+    db.prepare("SELECT synced_at AS payload FROM training_lcwo_sync WHERE owner_id = ? AND course_id = ?").bind(owner, TRAINING_COURSE_ID),
   ]);
   const curriculum = results[0]?.results[0]?.payload;
   if (!curriculum) throw new TrainingError(503, "The training curriculum is not available yet.");
@@ -426,12 +443,17 @@ async function snapshot(db: D1Database, owner: string): Promise<TrainingSnapshot
     materials: results[2]!.results.map((item) => JSON.parse(item.payload) as TrainingMaterial),
     preferences: results[3]?.results[0] ? JSON.parse(results[3].results[0].payload) as TrainingPreferences : defaultPreferences(),
     reports: results[4]!.results.map((item) => JSON.parse(item.payload) as TrainingReport),
+    lcwo: {
+      configured: lcwoConfigured,
+      runs: results[5]!.results.map((item) => JSON.parse(item.payload) as LcwoRun),
+      ...(results[6]?.results[0]?.payload ? { syncedAt: results[6].results[0].payload } : {}),
+    },
     serverTime: new Date().toISOString(),
   };
 }
 
-async function sync(db: D1Database, owner: string, update: TrainingSync): Promise<TrainingSnapshot> {
-  const current = await snapshot(db, owner);
+async function sync(db: D1Database, owner: string, update: TrainingSync, lcwoConfigured = false): Promise<TrainingSnapshot> {
+  const current = await snapshot(db, owner, lcwoConfigured);
   const knownMaterials = new Map(current.materials.map((item) => [item.id, item]));
   for (const item of update.materials ?? []) knownMaterials.set(item.id, item);
   for (const item of update.materials ?? []) {
@@ -472,9 +494,11 @@ async function sync(db: D1Database, owner: string, update: TrainingSync): Promis
     if (item.date < assignment.date) invalid("A task cannot be carried before its assignment date.");
   }
   const knownAttempts = new Set([...current.attempts, ...(update.attempts ?? [])].map((item) => item.id));
+  const knownLcwoResults = new Set(current.lcwo?.runs.map((item) => item.id));
   for (const item of update.reports ?? []) {
     if (!current.course.meetings.some((meeting) => meeting.session === item.session)) invalid("Unknown report session.");
     if (item.sourceAttemptIds.some((id) => !knownAttempts.has(id))) invalid("Unknown report source attempt.");
+    if (item.sourceLcwoIds?.some((id) => !knownLcwoResults.has(id))) invalid("Unknown report LCWO result.");
   }
   const statements: D1PreparedStatement[] = [];
   const now = new Date().toISOString();
@@ -512,7 +536,42 @@ async function sync(db: D1Database, owner: string, update: TrainingSync): Promis
       throw error;
     }
   }
-  return snapshot(db, owner);
+  return snapshot(db, owner, lcwoConfigured);
+}
+
+/** Imported measurements remain separate from timed practice and assignment credit. */
+async function syncLcwo(env: Env, owner: string): Promise<TrainingSnapshot> {
+  const credentials = lcwoCredentials(env);
+  if (!credentials) throw new TrainingError(409, "LCWO is not connected. Configure the LCWO login once to enable automatic imports.");
+  const current = await snapshot(env.TRAINING_DB, owner, true);
+  // Reports refresh on entry; nearby tabs and repeated clicks share a short cooldown.
+  if (current.lcwo?.syncedAt && Date.now() - Date.parse(current.lcwo.syncedAt) < 60_000) return current;
+  const exported = await fetchLCWOExports(credentials);
+  const courseStart = current.course.assignments.map((item) => item.date).sort()[0];
+  if (!courseStart) throw new TrainingError(409, "Load a training course before importing LCWO results.");
+  const imported = exported.filter((item) => dateInTimezone(item.recordedAt, current.course.timezone) >= courseStart);
+  const existing = current.lcwo?.runs ?? [];
+  const userIds = new Set([...existing, ...imported].map((item) => item.sourceUserId));
+  if (userIds.size > 1) throw new TrainingError(409, "This course already has results from another LCWO account. Restore the original LCWO connection.");
+  if (new Set([...existing, ...imported].map((item) => item.id)).size > 10_000) {
+    throw new TrainingError(409, "This course has too many LCWO results to import at once.");
+  }
+  const payload = JSON.stringify(imported);
+  if (new TextEncoder().encode(payload).byteLength > 1_500_000) {
+    throw new TrainingError(409, "The LCWO import is too large. Your previously imported results are unchanged.");
+  }
+  const syncedAt = new Date().toISOString();
+  // A single D1 transaction retains deleted upstream history and makes retries idempotent.
+  await env.TRAINING_DB.batch([
+    env.TRAINING_DB.prepare(`INSERT INTO training_lcwo_results (owner_id, course_id, id, payload, recorded_at)
+      SELECT ?, ?, json_extract(value, '$.id'), value, json_extract(value, '$.recordedAt')
+      FROM json_each(?) WHERE 1
+      ON CONFLICT(owner_id, course_id, id) DO NOTHING`).bind(owner, TRAINING_COURSE_ID, payload),
+    env.TRAINING_DB.prepare(`INSERT INTO training_lcwo_sync (owner_id, course_id, synced_at) VALUES (?, ?, ?)
+      ON CONFLICT(owner_id, course_id) DO UPDATE SET synced_at = excluded.synced_at
+      WHERE excluded.synced_at > training_lcwo_sync.synced_at`).bind(owner, TRAINING_COURSE_ID, syncedAt),
+  ]);
+  return snapshot(env.TRAINING_DB, owner, true);
 }
 
 async function tokenHash(token: string): Promise<string> {
@@ -596,6 +655,7 @@ export async function trainingResponse(request: Request, env: Env): Promise<Resp
       ["/api/cw-training/login", ["GET"]],
       ["/api/cw-training/bootstrap", ["GET"]],
       ["/api/cw-training/sync", ["POST"]],
+      ["/api/cw-training/lcwo/sync", ["POST"]],
       ["/api/cw-training/calendar-token", ["POST", "DELETE"]],
     ]);
     const allowed = routes.get(path);
@@ -608,10 +668,15 @@ export async function trainingResponse(request: Request, env: Env): Promise<Resp
     if (path.endsWith("/login")) {
       return new Response(null, { status: 302, headers: { ...PRIVATE_HEADERS, Location: "/radio/cw-training/" } });
     }
-    if (path.endsWith("/bootstrap")) return json(await snapshot(env.TRAINING_DB, owner));
-    if (path.endsWith("/sync")) {
+    const lcwoConfigured = Boolean(lcwoCredentials(env));
+    if (path.endsWith("/bootstrap")) return json(await snapshot(env.TRAINING_DB, owner, lcwoConfigured));
+    if (path === "/api/cw-training/lcwo/sync") {
+      record(await readJson(request), []);
+      return json(await syncLcwo(env, owner));
+    }
+    if (path === "/api/cw-training/sync") {
       const update = parseSync(await readJson(request), Date.now());
-      return json(await sync(env.TRAINING_DB, owner, update));
+      return json(await sync(env.TRAINING_DB, owner, update, lcwoConfigured));
     }
     if (request.method === "DELETE") {
       await env.TRAINING_DB.prepare("DELETE FROM training_calendar_tokens WHERE owner_id = ? AND course_id = ?")
@@ -627,6 +692,7 @@ export async function trainingResponse(request: Request, env: Env): Promise<Resp
     return json({ url: `${new URL(request.url).origin}/api/cw-training-calendar/${token}.ics` });
   } catch (error) {
     if (error instanceof TrainingError) return json({ error: error.message }, error.status);
+    if (error instanceof LCWOImportError) return json({ error: error.message }, 502);
     // No exception serialization: D1 errors can contain private SQL values.
     return json({ error: "Training sync is unavailable. Your local work is safe; try again." }, 503);
   }

@@ -3,6 +3,7 @@ import { dateInTimezone } from "./plan.ts";
 import { isReportDate, REPORT_FIELDS } from "./report-fields.ts";
 import type { TrainingAttempt, TrainingCourse, TrainingTask } from "./types.ts";
 import type { PerformanceRating, TrainingAudioResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
+import type { LcwoRun } from "./lcwo-types.ts";
 
 export type AudioReportCategory = "shortWords" | "shortPhrases" | "shortQso" | "shortPota" | "prefix" | "suffix";
 export interface ReportWindow { fromDate: string; toDate: string }
@@ -12,11 +13,14 @@ export interface ReportDraftOptions extends ReportWindow {
   callsign?: string;
   firstName?: string;
   reports?: readonly TrainingReport[];
+  lcwoRuns?: readonly LcwoRun[];
 }
 export interface ReportDraft {
   answers: Record<string, string>;
   sourceAttemptIds: string[];
+  sourceLcwoIds: string[];
   sources: { attemptId: string; description: string }[];
+  lcwoSources: { run: LcwoRun; missingKeys: string[] }[];
   warnings: string[];
   runner?: { attemptId: string; result: TrainingRunnerResult };
 }
@@ -53,6 +57,25 @@ export function reportAttemptsInWindow(
       return date >= window.fromDate && date <= window.toDate;
     } catch { return false; }
   }).sort((a, b) => reportStart(a).localeCompare(reportStart(b)) || a.endedAt.localeCompare(b.endedAt) || a.id.localeCompare(b.id));
+}
+
+/** API history has no practice duration and is selected independently of attempts. */
+export function reportLcwoRunsInWindow(runs: readonly LcwoRun[], window: ReportWindow, timezone: string): LcwoRun[] {
+  if (!isReportDate(window.fromDate) || !isReportDate(window.toDate) || window.fromDate > window.toDate) return [];
+  return [...new Map(runs.map(run => [run.id, run])).values()].filter(run => {
+    try {
+      const date = dateInTimezone(run.recordedAt, timezone);
+      return date >= window.fromDate && date <= window.toDate;
+    } catch { return false; }
+  }).sort((a, b) => Date.parse(a.recordedAt) - Date.parse(b.recordedAt) || a.id.localeCompare(b.id));
+}
+
+/** Refresh source suggestions without discarding deliberate edits, including deliberate blanks. */
+export function applyReportSuggestions(report: TrainingReport, result: ReportDraft, editedKeys: readonly string[]): TrainingReport {
+  const edited = new Set(editedKeys);
+  return { ...report, answers: { ...result.answers,
+    ...Object.fromEntries(Object.entries(report.answers).filter(([key]) => edited.has(key))),
+  }, sourceAttemptIds: result.sourceAttemptIds, sourceLcwoIds: result.sourceLcwoIds };
 }
 
 /** Read only the generated run summary, never free-form score prose. */
@@ -222,7 +245,12 @@ export function buildReportDraft(
     answers[key] = value;
     source(attempt.id, `${REPORT_FIELDS.find(field => field.key === key)?.label ?? key}: ${value}`);
   }
+  const imported = reportLcwoRunsInWindow(options.lcwoRuns ?? [], options, course.timezone);
   for (const [kind, attempt] of latestLcwo) {
+    // Choose one complete source per drill; missing metrics must never leak from an older run.
+    // An exported completion inside a manually recorded block must not erase its supplied details.
+    const newerImport = imported.some(run => run.kind === kind && Date.parse(run.recordedAt) > Date.parse(attempt.endedAt));
+    if (newerImport) continue;
     const result = attempt.lcwoResult!;
     const prefix = kind === "callsign" ? "callsign" : kind;
     const mappings: [keyof typeof result, string][] = [["speedWpm", `${prefix}Wpm`],
@@ -238,6 +266,23 @@ export function buildReportDraft(
     }
     if (used) source(attempt.id, `Latest ${kind} LCWO result`);
   }
+  const latestImports = new Map<string, LcwoRun>();
+  for (const run of imported) {
+    if (run.kind === "koch") continue;
+    const manual = latestLcwo.get(run.kind);
+    if (!manual || Date.parse(run.recordedAt) > Date.parse(manual.endedAt)) latestImports.set(run.kind, run);
+  }
+  const lcwoSources: ReportDraft["lcwoSources"] = [];
+  for (const [kind, run] of latestImports) {
+    const isAdaptive = kind === "words" || kind === "callsign";
+    if (isAdaptive && run.score !== undefined) answers[`${kind}Score`] = String(run.score);
+    if (!isAdaptive && run.effectiveWpm !== undefined) answers[`${kind}Wpm`] = String(run.effectiveWpm);
+    const missingKeys = isAdaptive
+      ? [`${kind}Wpm`, ...(kind === "words" ? ["wordsMaximumLength"] : []), `${kind}Errors`]
+      : [`${kind}Length`, `${kind}ErrorPercent`];
+    lcwoSources.push({ run, missingKeys });
+  }
+  if (imported.some(run => run.kind === "koch")) warnings.add("Koch lesson results are available in LCWO history, but are separate from the report's custom-character practice. They do not fill custom-character answers.");
   answers.learnedWords = [...learned.values()].join(", ");
   const runner = selectReportRunner(windowed);
   if (runner) {
@@ -250,7 +295,7 @@ export function buildReportDraft(
     if (speeds.length > 1) warnings.add(`The selected Morse Runner run used ${speeds.join(", ")} WPM. Review the suggested starting speed.`);
     if (result.source === "legacy") warnings.add("Morse Runner details were recovered from a saved note; its practice date uses the saved block date.");
   }
-  return { answers, sourceAttemptIds: [...sourceDescriptions.keys()],
+  return { answers, sourceAttemptIds: [...sourceDescriptions.keys()], sourceLcwoIds: lcwoSources.map(source => source.run.id), lcwoSources,
     sources: [...sourceDescriptions].map(([attemptId, descriptions]) => ({ attemptId, description: [...descriptions].join("; ") })),
     warnings: [...warnings], ...(runner ? { runner } : {}) };
 }

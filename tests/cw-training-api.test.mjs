@@ -23,7 +23,7 @@ let env;
 before(async () => {
   miniflare = new Miniflare({ modules: true, script: "export default { fetch() { return new Response('test'); } }", d1Databases: { TRAINING_DB: "cw-training-tests" } });
   db = await miniflare.getD1Database("TRAINING_DB");
-  for (const migration of ["0001_training.sql", "0002_reports.sql"]) {
+  for (const migration of ["0001_training.sql", "0002_reports.sql", "0003_lcwo.sql"]) {
     const schema = await readFile(new URL(`../migrations/cw-training/${migration}`, import.meta.url), "utf8");
     const statements = schema.replace(/^--.*$/gm, "").trim().split(/;\n(?=\n|$)/).filter((sql) => sql.trim());
     await db.batch(statements.map((sql) => db.prepare(sql)));
@@ -32,6 +32,19 @@ before(async () => {
   env = { TRAINING_DB: db, TRAINING_DEV_USER: "test-owner", TRAINING_ACCESS_TEAM: "", TRAINING_ACCESS_AUD: "", TRAINING_OWNER_EMAIL: "" };
 });
 after(async () => { await miniflare?.dispose(); });
+
+function lcwoFixtureFetch(exports, requests = []) {
+  return async (url, init) => {
+    const parsed = new URL(url);
+    requests.push({ url: parsed.toString(), init });
+    if (parsed.pathname === "/dologin") return new Response("<!-- LOGIN_SUCCESS -->", {
+      headers: { "Set-Cookie": "PHPSESSID=synthetic-session; Path=/; HttpOnly" },
+    });
+    assert.equal(parsed.pathname, "/api/index.php");
+    assert.match(new Headers(init.headers).get("Cookie"), /PHPSESSID=synthetic-session/);
+    return Response.json(exports[parsed.searchParams.get("type")] ?? []);
+  };
+}
 
 function request(path, method = "GET", body, headers = {}) {
   return new Request(`${origin}/api/cw-training/${path}`, {
@@ -655,4 +668,88 @@ test("reports validate known fields, real dates, required submitted answers and 
   const snapshot = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
   assert.deepEqual(snapshot.reports, []);
   assert.deepEqual(snapshot.attempts, []);
+});
+
+
+test("LCWO import requires configured secrets, owner authentication, same-origin JSON, and POST", async () => {
+  const connected = { ...env, TRAINING_LCWO_USERNAME: "fixture", TRAINING_LCWO_PASSWORD: "synthetic-secret" };
+  assert.equal((await trainingResponse(request("lcwo/sync", "POST", {}), env)).status, 409);
+  assert.equal((await trainingResponse(request("lcwo/sync"), connected)).status, 405);
+  assert.equal((await trainingResponse(request("lcwo/sync", "POST", {}, { Origin: "https://lcwo.net" }), connected)).status, 403);
+  assert.equal((await trainingResponse(request("lcwo/sync", "POST", { username: "no-client-credentials" }), connected)).status, 400);
+  const protectedEnv = { ...connected, TRAINING_ACCESS_TEAM: "https://training-api-test.cloudflareaccess.com", TRAINING_ACCESS_AUD: "test-audience", TRAINING_OWNER_EMAIL: "owner@example.org" };
+  assert.equal((await trainingResponse(request("lcwo/sync", "POST", {}), protectedEnv)).status, 401);
+  const boot = await (await trainingResponse(request("bootstrap"), connected)).json();
+  assert.deepEqual(boot.lcwo, { configured: true, runs: [] });
+  assert.ok(!JSON.stringify(boot).includes("synthetic-secret"));
+});
+
+test("LCWO import is idempotent, keeps source dates and missing metrics, adds no practice, and validates report sources", async () => {
+  const connected = { ...env, TRAINING_DEV_USER: "lcwo-import-owner", TRAINING_LCWO_USERNAME: "fixture", TRAINING_LCWO_PASSWORD: "synthetic-secret" };
+  const exports = {
+    words: [
+      { NR: "1", uid: "123", max: "18", score: "0", time: "2026-09-05 14:00:00", valid: "1" },
+      { NR: "2", uid: "123", max: "15", score: "100", time: "2026-09-05 02:00:00", valid: "1" },
+    ],
+    groups: [{ NR: "1", uid: "123", mode: "letters", speed: "25", eff: "15", accuracy: "70.6", time: "2026-09-05 15:00:00", valid: "0" }],
+  };
+  const requests = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = lcwoFixtureFetch(exports, requests);
+  try {
+    const response = await trainingResponse(request("lcwo/sync", "POST", {}), connected);
+    assert.equal(response.status, 200, await response.clone().text());
+    assert.equal(response.headers.get("Cache-Control"), "private, no-store");
+    const first = await response.json();
+    assert.equal(first.lcwo.runs.length, 2, "exclude the previous course-local date");
+    assert.equal(first.lcwo.runs[0].recordedAt, "2026-09-05T14:00:00.000Z");
+    assert.equal(first.lcwo.runs[0].score, 0);
+    assert.equal(first.lcwo.runs[0].errorCount, undefined);
+    assert.equal(first.lcwo.runs[1].effectiveWpm, 15);
+    assert.equal(first.lcwo.runs[1].accuracyPercent, 70.6);
+    assert.equal(first.lcwo.runs[1].groupLength, undefined);
+    assert.deepEqual(first.attempts, []);
+    assert.ok(first.lcwo.syncedAt);
+    assert.ok(!JSON.stringify(first).includes("synthetic-secret"));
+    assert.ok(!JSON.stringify(first).includes("synthetic-session"));
+    const count = requests.length;
+    const second = await (await trainingResponse(request("lcwo/sync", "POST", {}), connected)).json();
+    assert.deepEqual(second.lcwo, first.lcwo);
+    assert.equal(requests.length, count, "nearby retries share a cooldown");
+    await db.prepare("UPDATE training_lcwo_sync SET synced_at = ? WHERE owner_id = ?")
+      .bind("2026-01-01T00:00:00.000Z", "local:lcwo-import-owner").run();
+    const third = await (await trainingResponse(request("lcwo/sync", "POST", {}), connected)).json();
+    assert.deepEqual(third.lcwo.runs, first.lcwo.runs, "full exports do not duplicate saved results");
+    const report = sessionReport({ sourceLcwoIds: [first.lcwo.runs[0].id], answers: { wordsScore: "0" } });
+    const savedResponse = await trainingResponse(request("sync", "POST", { reports: [report] }), connected);
+    assert.equal(savedResponse.status, 200, await savedResponse.clone().text());
+    const saved = await savedResponse.json();
+    assert.equal(saved.lcwo.configured, true, "ordinary sync retains connection state");
+    assert.deepEqual(saved.reports[0].sourceLcwoIds, report.sourceLcwoIds);
+    assert.equal((await trainingResponse(request("sync", "POST", { reports: [report] }), { ...connected, TRAINING_DEV_USER: "lcwo-unrelated-owner" })).status, 400);
+    assert.equal((await trainingResponse(request("sync", "POST", { reports: [sessionReport({ sourceLcwoIds: ["words:123:999"] })] }), connected)).status, 400);
+    assert.equal((await trainingResponse(request("sync", "POST", { lcwo: { runs: [] } }), connected)).status, 400, "clients cannot forge imported results");
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test("LCWO failures retain imported history and successful sync time", async () => {
+  const connected = { ...env, TRAINING_DEV_USER: "lcwo-failure-owner", TRAINING_LCWO_USERNAME: "fixture", TRAINING_LCWO_PASSWORD: "synthetic-secret" };
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = lcwoFixtureFetch({ words: [{ NR: "10", uid: "123", max: "20", score: "400", time: "2026-09-05 14:00:00", valid: "1" }] });
+  try {
+    const before = await (await trainingResponse(request("lcwo/sync", "POST", {}), connected)).json();
+    assert.equal(before.lcwo.runs.length, 1);
+    await db.prepare("UPDATE training_lcwo_sync SET synced_at = ? WHERE owner_id = ?")
+      .bind("2026-01-01T00:00:00.000Z", "local:lcwo-failure-owner").run();
+    globalThis.fetch = async () => new Response("Password doesn't match. synthetic-secret", { status: 200 });
+    const failure = await trainingResponse(request("lcwo/sync", "POST", {}), connected);
+    assert.equal(failure.status, 502);
+    assert.ok(!(await failure.text()).includes("synthetic-secret"));
+    const afterFailure = await (await trainingResponse(request("bootstrap"), connected)).json();
+    assert.deepEqual(afterFailure.lcwo.runs, before.lcwo.runs);
+    assert.equal(afterFailure.lcwo.syncedAt, "2026-01-01T00:00:00.000Z");
+    globalThis.fetch = lcwoFixtureFetch({});
+    const empty = await (await trainingResponse(request("lcwo/sync", "POST", {}), connected)).json();
+    assert.deepEqual(empty.lcwo.runs, before.lcwo.runs, "upstream deletion does not erase recorded report evidence");
+  } finally { globalThis.fetch = originalFetch; }
 });

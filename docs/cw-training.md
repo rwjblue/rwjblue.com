@@ -305,7 +305,8 @@ scale. Report uses the latest explicit scales/listening-category rating in the
 window. Earlier Hard/About right/Easy entries are preserved without conversion.
 The finish dialog and Log practice elsewhere can record one LCWO run's drill,
 actual speed, length, score, and error count or percentage. The external trainer
-does not send these results automatically. Log practice elsewhere also records
+can also supply its saved results through the LCWO import described below.
+Log practice elsewhere also records
 the actual end date/time and optional manual Morse Runner results.
 
 Structured Runner and audio results now sync with attempts. Actual run start/end
@@ -339,6 +340,62 @@ Curriculum import below; `mise run deploy` does not apply migrations automatical
 change does not add a scheduler or an automatic Google Forms submission service.
 Verified automatic submission is tracked in
 [issue #16](https://github.com/rwjblue/rwjblue.com/issues/16).
+
+### LCWO result imports
+
+Once connected, entering Report imports saved LCWO results when the last
+successful import is at least five minutes old. Sync LCWO also requests an
+import; the server shares successful results for one minute to avoid repeated
+logins from nearby clicks or tabs. This runs while using Report, with no new
+background schedule. Offline or failed imports keep the saved results and draft.
+Only unedited report answers refresh; manually entered values stay intact.
+
+LCWO uses a normal username/password login and authenticated
+[`export_results` JSON endpoints](https://github.com/dj1yfk/lcwo/blob/master/api/index.php#L77-L123).
+The Worker signs in for each import and reads words, callsigns, groups, and Koch
+exports. It keeps the session cookie only for that request. Neither credentials
+nor cookies reach the browser, D1, logs, reports, or public assets. Store the
+login once as Worker secrets using the interactive prompts:
+
+```bash
+npx wrangler secret put TRAINING_LCWO_USERNAME
+npx wrangler secret put TRAINING_LCWO_PASSWORD
+```
+
+For local testing, these optional values belong in ignored `.dev.vars`. No LCWO
+secret is required for the rest of the training application to work. Change the
+secret if the LCWO password changes; do not paste passwords into report fields.
+Apply `migrations/cw-training/0003_lcwo.sql` before deploying this change using
+the existing D1 migration command. The migration adds private result and sync
+tables to the existing database, without changing practice attempts.
+
+Imported runs retain the LCWO user/result IDs, exact source timestamp, and
+measurements. LCWO's maintainer
+[confirmed the database server now uses UTC](https://lcwo.net/forum/3503/LCWOnet-moved-to-a-new-server).
+Report filtering converts those instants to the course timezone. Imports retain
+runs from the first course preparation date onward. Repeating an import does not
+duplicate records, and upstream deletion does not erase already saved evidence.
+Imported results provide no practice minutes, completed passes, or assignment
+credit because LCWO does not export those measurements. Reports retain separate
+LCWO source IDs alongside their ordinary practice source IDs.
+
+The latest run per drill in the selected report window supplies available
+values, whether it was imported or entered with practice. Callsign and word
+scores and code-group effective speeds can populate report answers. LCWO's
+maximum successful-copy WPM is shown as evidence, not substituted for an
+exercise's starting/fixed speed. Its stored accuracy uses the better of two
+error calculations, so it is shown without silently converting it to the
+report's displayed Errors percentage. Enter the missing speeds, lengths, and
+error counts/percentages in the report. The source card identifies the gaps;
+if a newer run arrives after an edit, review whether the preserved answer still
+belongs to that run.
+
+Koch lessons retain their own identity and are not treated as custom-character
+groups. Plaintext, QTC, and mixed code-group results do not map to this report.
+Imports reject malformed or conflicting records and bound each export to 8 MiB,
+the combined source data to 50,000 rows, and retained course history to 10,000
+results. A new course import must fit in a 1.5 MB database input. Limit failures
+leave the previous successful import available.
 
 ## Private data and synchronization
 

@@ -49,6 +49,8 @@ export interface TrainingReport {
   /** Answers deliberately edited by the user; automatic suggestions may refresh. */
   editedAnswerKeys?: string[];
   sourceAttemptIds: string[];
+  /** Imported LCWO measurements are sources, never timed practice attempts. */
+  sourceLcwoIds?: string[];
   status: "draft" | "submitted";
   submittedAt?: string;
 }

@@ -203,6 +203,8 @@ export async function initTraining() {
       );
     state.snapshot = {
       ...remote,
+      ...(state.snapshot?.lcwo && Date.parse(state.snapshot.lcwo.syncedAt ?? "") > Date.parse(remote.lcwo?.syncedAt ?? "1970-01-01")
+        ? { lcwo: { ...state.snapshot.lcwo, configured: remote.lcwo?.configured ?? state.snapshot.lcwo.configured } } : {}),
       attempts: unique(remote.attempts, state.pending.attempts ?? []),
       materials: unique(remote.materials, state.pending.materials ?? []),
       reports: unique(remote.reports ?? [], state.pending.reports ?? []),
@@ -312,6 +314,14 @@ export async function initTraining() {
   const reportPanel = createTrainingReportPanel($("training-report"), {
     state: () => state,
     persist,
+    syncLcwo: async () => {
+      const remote: TrainingSnapshot = await request("lcwo/sync", {});
+      if (disposed || !state.snapshot) return;
+      // Ordinary sync may have acknowledged new practice while LCWO was loading.
+      // Import only LCWO state, while retaining mergeSnapshot's account check.
+      mergeSnapshot({ ...snapshot(), userId: remote.userId, lcwo: remote.lcwo });
+      await persist();
+    },
     save: async (report: TrainingReport) => {
       snapshot().reports = unique(snapshot().reports ?? [], [report]);
       state.pending.reports = unique(state.pending.reports ?? [], [report]);
@@ -678,7 +688,7 @@ export async function initTraining() {
         )
         .join("") ||
       '<div class="training-card"><h3>A place for the next email.</h3><p>Paste instructions, import a text file, or save a link. Keep unclassified material as “Not sure yet” until its purpose is clear.</p></div>';
-    if (view === "report") reportPanel.render();
+    reportPanel.setVisible(view === "report");
     renderActive();
     applyView(view);
     status();
