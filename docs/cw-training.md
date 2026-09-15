@@ -7,6 +7,12 @@ sitemaps, and does not load the site's analytics beacon.
 
 ## Daily use
 
+The heading links to the public, fillable N1RWJ QSO cheat sheet at
+`/downloads/radio/n1rwj-cwa-qso-cheat-sheet.pdf` from every training view.
+The same PDF is linked from the CW QSO walkthrough's references. It provides
+an opening, a flexible menu of two or three facts per turn, and a closing for
+class and on-air practice.
+
 - Today recommends today's work first and shows listening, sending, ICR, and
   simulator assignments together. Choose any exercise without setting an
   activity or time allowance first; sending still begins with its warm-up.
