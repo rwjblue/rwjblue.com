@@ -191,7 +191,16 @@ This uses the existing immutable attempt API and requires no database migration.
 Refresh official variant metadata with `mise run cw-training:update-audio-variants`.
 
 Instant-recognition trainers, a physical key/radio, and online class meetings
-remain external resources. Sending Focus also offers **Record my sending
+remain external resources. Sending Focus renders the imported scales with
+section headings and uppercase practice text, omitting the prelude and revision
+date from the reader. Character groups and repeated phrases stay visually
+separate; punctuation runs keep their prosign labels directly underneath.
+The reader expands with the page instead of using a nested scroll box. Text size
+remains adjustable. This presentation also works with previously downloaded
+course snapshots and does not require a course reimport. Instructor material
+retains its original text and casing.
+
+Sending Focus also offers **Record my sending
 (optional)** for warm-up and sending practice, using the pinned Morse Pro
 decoder and timing player. The engine loads only after opening capture or a
 saved replay. Ordinary practice never requests device permission or requires a

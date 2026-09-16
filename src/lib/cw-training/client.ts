@@ -1,6 +1,7 @@
 import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
 import type { PlannedTask } from "./plan";
 import { listeningGuidance } from "./guidance";
+import { sendingReadingHtml } from "./sending-reading";
 import { audioVariants, courseWithAudioVariants, selectAudioVariant } from "./audio-variants";
 import { audioAttemptResults, audioSessionNote, switchAudioRecording } from "./audio-session";
 import { createTrainingNavigation, type TrainingView } from "./navigation";
@@ -801,7 +802,10 @@ export async function initTraining() {
       );
       const text = material?.text || active.resource?.text;
       $("training-focus-text").hidden = !text;
-      $("training-sending-text").textContent = text ?? "";
+      $("training-sending-text").innerHTML = sendingReadingHtml(
+        text ?? "",
+        !material?.text && active.task.kind === "sending" && !!active.resource?.id.startsWith("scales-"),
+      );
       const reading = state.reading[active.task.id];
       $("training-sending-text").style.fontSize = `${reading?.size ?? 26}px`;
       $<HTMLInputElement>("training-focus-font").value = String(
