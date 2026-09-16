@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Refresh the CWops Calls of Note file from the official member roster"
+
+set -euo pipefail
+
+node scripts/calls-of-note/update-cwops.mjs "$@"

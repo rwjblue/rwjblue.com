@@ -1,0 +1,24 @@
+{
+  "sourceUrl": "https://www.bkg.club/",
+  "sourcePageUrl": "https://www.bkg.club/",
+  "retrievedAt": "2026-09-16T13:46:27.586Z",
+  "memberCount": 485,
+  "callsignCount": 485,
+  "samples": [
+    {
+      "call": "N1RWJ",
+      "number": "256",
+      "note": "BKG #256 | RI OG"
+    },
+    {
+      "call": "W1VES",
+      "number": "002",
+      "note": "BKG #002 | OG"
+    },
+    {
+      "call": "N8JMS",
+      "number": "019",
+      "note": "BKG #019"
+    }
+  ]
+}

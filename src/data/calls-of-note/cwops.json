@@ -1,0 +1,28 @@
+{
+  "sourceUrl": "https://docs.google.com/spreadsheets/d/1Ew8b1WAorFRCixGRsr031atxmS0SsycvmOczS_fDqzc/export?format=csv",
+  "sourcePageUrl": "https://cwops.org/membership/member-roster-2/",
+  "retrievedAt": "2026-09-16T13:44:46.594Z",
+  "memberCount": 3020,
+  "callsignCount": 3392,
+  "excludedSilentKeys": 0,
+  "samples": [
+    {
+      "call": "K3LR",
+      "name": "Tim",
+      "number": "943",
+      "note": "Tim | CWops #943"
+    },
+    {
+      "call": "W1KM",
+      "name": "Greg",
+      "number": "1411",
+      "note": "Greg | CWops #1411"
+    },
+    {
+      "call": "CO8ZZ",
+      "name": "Raúl",
+      "number": "1682",
+      "note": "Raúl | CWops #1682"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Refresh BKG Calls of Note from the public club roster"
+
+set -euo pipefail
+
+node scripts/calls-of-note/update-bkg.mjs "$@"

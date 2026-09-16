@@ -1,0 +1,176 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import CallNoteFile from "../../../components/CallNoteFile.astro";
+import cwops from "../../../data/calls-of-note/cwops.json";
+import bkg from "../../../data/calls-of-note/bkg.json";
+
+const cwopsUrl = "https://rwjblue.com/radio/resources/calls-of-note/cwops.txt";
+---
+
+<BaseLayout
+  title="Radio Resources / N1RWJ"
+  description="Calls of Note files for Ham2K PoLo: CWops names and member numbers, BKG numbers and OG status, and the official CWO member file."
+  canonicalPath="/radio/resources/"
+  searchType="Radio guide"
+>
+  <Breadcrumbs items={[
+    { name: "Home", path: "/" },
+    { name: "Radio", path: "/radio/" },
+    { name: "Resources", path: "/radio/resources/" },
+  ]} />
+  <section class="resources-intro">
+    <p class="eyebrow">For the operating desk</p>
+    <h1>Radio resources</h1>
+    <p class="resources-lede">Small files. Useful context. Ready for the next contact.</p>
+    <p>
+      Reference files for the tools I use on the air, starting with club
+      membership notes for <a href="https://polo.ham2k.com/">Ham2K PoLo</a>.
+    </p>
+  </section>
+
+  <section class="calls-section" aria-labelledby="calls-title">
+    <div class="calls-intro">
+      <div>
+        <p class="section-label">Logging companions</p>
+        <h2 id="calls-title">Calls of Note</h2>
+        <p>
+          Put a name and club details beside a callsign while you log. PoLo
+          calls this feature <strong>Callsign Notes</strong>. Add a file once,
+          then refresh it in PoLo when you want the latest copy.
+        </p>
+      </div>
+      <a class="setup-link" href="#polo-setup">How to add a file <span aria-hidden="true">&darr;</span></a>
+    </div>
+
+    <div class="call-note-files">
+      <CallNoteFile
+        id="cwops"
+        title="CWops members"
+        description="The operator's name and CWops member number, ready to glance at during a CWT or a casual CW contact."
+        fileUrl={cwopsUrl}
+        sourceUrl={cwops.sourcePageUrl}
+        sourceLabel="Official CWops roster"
+        updated={cwops.retrievedAt}
+        count={cwops.callsignCount}
+        samples={cwops.samples}
+      >
+        <p class="file-footnote">
+          Built from the public CWops member roster, including alternate calls.
+          This is a dated copy; confirm the exchange on the air.
+        </p>
+      </CallNoteFile>
+
+      <CallNoteFile
+        id="bkg"
+        title="BKG members"
+        description="BKG member numbers and OG badges, including state and country OG designations where the club lists them."
+        fileUrl="https://rwjblue.com/radio/resources/calls-of-note/bkg.txt"
+        sourceUrl={bkg.sourcePageUrl}
+        sourceLabel="Official BKG roster"
+        updated={bkg.retrievedAt}
+        count={bkg.callsignCount}
+        samples={bkg.samples}
+      >
+        <p class="file-footnote">
+          OG labels follow the club's published badges. An entry without a
+          badge shows only the member number.
+        </p>
+      </CallNoteFile>
+
+      <CallNoteFile
+        id="cwo"
+        title="CWO members"
+        description="Continuous Wave Order publishes its own Callsign Notes file, with member names, nicknames, and other notes."
+        fileUrl="https://ditdit.club/data/members.txt"
+        sourceUrl="https://www.ditdit.club/"
+        sourceLabel="Continuous Wave Order"
+        external
+        samples={[
+          { call: "AC9M", note: "🌊 Josh IN" },
+          { call: "K2MMT", note: "🌊 Chris CA" },
+          { call: "KC3WOA", note: "🌊 Abe" },
+        ]}
+      >
+        <p class="file-footnote">
+          Hosted and maintained by CWO. The examples here are a preview;
+          refresh the file in PoLo to get the club's latest notes.
+        </p>
+      </CallNoteFile>
+    </div>
+  </section>
+
+  <section class="polo-setup" id="polo-setup" aria-labelledby="setup-title">
+    <div>
+      <p class="section-label">Set up once</p>
+      <h2 id="setup-title">Add a file to PoLo</h2>
+      <p>Use the plain-text file URL above as the Location.</p>
+      <a href="https://polo.ham2k.com/docs/polo-features/callsign-notes/">Ham2K's Callsign Notes guide <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <ol>
+      <li>Open <strong>Settings → Data Settings → Callsign Notes</strong>.</li>
+      <li>Tap <strong>+ Add a new file</strong>. Give it a name, then paste the file URL into <strong>Location</strong>.</li>
+      <li>Tap <strong>Done</strong> and enable the file with its slider.</li>
+      <li>In <strong>Offline Data</strong>, select the file and tap <strong>Refresh</strong> to download it.</li>
+    </ol>
+    <p class="setup-note">
+      Once downloaded, notes are available offline. A refresh fetches the
+      currently hosted copy. CWops and BKG are snapshots with update dates
+      shown above; CWO maintains its own file.
+    </p>
+  </section>
+
+  <nav class="resources-footer" aria-label="More radio resources">
+    <a href="/radio/cw-practice/">Find a CW practice session <span aria-hidden="true">&rarr;</span></a>
+    <a href="/radio/">Back to radio <span aria-hidden="true">&rarr;</span></a>
+  </nav>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-url]").forEach((button) => {
+    const id = button.dataset.copyUrl;
+    const input = document.getElementById(`${id}-url`) as HTMLInputElement | null;
+    const status = document.getElementById(`${id}-copy-status`);
+    if (!input || !status) return;
+    button.hidden = false;
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(input.value);
+        status.textContent = "Copied. Paste this into PoLo's Location field.";
+      } catch {
+        input.focus();
+        input.select();
+        status.textContent = "Select and copy this URL, then paste it into PoLo.";
+      }
+    });
+  });
+</script>
+
+<style>
+  .resources-intro { padding: 32px 0 42px; max-width: 740px; }
+  .resources-intro h1 { margin: 12px 0 18px; font-size: clamp(2.6rem, 7vw, 4.5rem); line-height: 1.03; letter-spacing: -0.055em; }
+  .resources-intro > p:last-child { max-width: 60ch; color: var(--muted); line-height: 1.75; margin-bottom: 0; }
+  .resources-lede { font-size: clamp(1.05rem, 2.5vw, 1.3rem); line-height: 1.6; }
+  .resources-intro a, .polo-setup a, .resources-footer a { color: var(--blue); text-underline-offset: 3px; }
+  .calls-intro { border-top: 1px solid var(--line); padding-top: 32px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+  .calls-intro h2, .polo-setup h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.035em; margin: 8px 0 14px; }
+  .calls-intro .section-label { margin: 0; }
+  .calls-intro p:last-child { max-width: 64ch; color: var(--muted); line-height: 1.7; margin-bottom: 0; }
+  .setup-link { color: var(--blue); font-size: 0.9rem; white-space: nowrap; text-underline-offset: 4px; }
+  .call-note-files { display: grid; gap: 28px; }
+  .file-footnote { color: var(--muted); font-size: 0.82rem; line-height: 1.65; margin: 20px 0 0; max-width: 85ch; }
+  .polo-setup { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px 48px; border-top: 1px solid var(--line); margin-top: 48px; padding-top: 32px; scroll-margin-top: 24px; }
+  .polo-setup .section-label { margin: 0; }
+  .polo-setup p { color: var(--muted); line-height: 1.7; }
+  .polo-setup a { font-size: 0.85rem; }
+  .polo-setup ol { display: grid; gap: 18px; margin: 0; padding-left: 24px; line-height: 1.65; }
+  .polo-setup li { padding-left: 8px; }
+  .polo-setup li::marker { color: var(--green); font-weight: 800; }
+  .setup-note { grid-column: 1 / -1; background: var(--green-wash); border-left: 3px solid var(--green); margin: 0; padding: 16px 20px; font-size: 0.88rem; }
+  .resources-footer { display: flex; flex-wrap: wrap; gap: 18px 30px; margin-top: 40px; font-size: 0.88rem; }
+  @media (max-width: 680px) {
+    .calls-intro { flex-direction: column; align-items: flex-start; }
+    .polo-setup { grid-template-columns: 1fr; }
+    .resources-intro { padding-top: 24px; }
+  }
+</style>

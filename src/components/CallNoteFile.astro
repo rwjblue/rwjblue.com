@@ -1,0 +1,93 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  fileUrl: string;
+  sourceUrl: string;
+  sourceLabel: string;
+  updated?: string;
+  count?: number;
+  external?: boolean;
+  samples: { call: string; note: string }[];
+}
+
+const {
+  id, title, description, fileUrl, sourceUrl, sourceLabel,
+  updated, count, external = false, samples,
+} = Astro.props;
+const date = updated && new Intl.DateTimeFormat("en-US", {
+  month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
+}).format(new Date(updated));
+const openUrl = external ? fileUrl : new URL(fileUrl).pathname;
+---
+
+<article class="call-note-file" id={id} aria-labelledby={`${id}-title`}>
+  <div class="file-heading">
+    <div>
+      <p class="section-label">{external ? "Published by the club" : "Hosted here"}</p>
+      <h3 id={`${id}-title`}>{title}</h3>
+    </div>
+    <span class="file-type">.txt</span>
+  </div>
+  <p class="file-description">{description}</p>
+  <p class="file-meta">
+    {count !== undefined && <span>{count.toLocaleString("en-US")} callsigns</span>}
+    {date && <span>Updated <time datetime={updated}>{date}</time></span>}
+    {external && <span>Use the club's current file directly</span>}
+  </p>
+  <div class="file-url-block" data-pagefind-ignore>
+    <label for={`${id}-url`}>File URL for PoLo</label>
+    <div class="file-url-row">
+      <input id={`${id}-url`} type="url" value={fileUrl} readonly spellcheck="false" />
+      <button type="button" data-copy-url={id} hidden>Copy URL</button>
+    </div>
+    <p class="copy-status" id={`${id}-copy-status`} role="status" aria-live="polite"></p>
+  </div>
+  <div class="file-example">
+    <p class="section-label">A few entries</p>
+    <dl>
+      {samples.map(({ call, note }) => (
+        <div><dt>{call}</dt><dd>{note}</dd></div>
+      ))}
+    </dl>
+  </div>
+  <div class="file-links">
+    <a href={openUrl}>Open plain-text file <span aria-hidden="true">&rarr;</span></a>
+    {!external && <a href={openUrl} download={`${id}.txt`}>Download</a>}
+    <a href={sourceUrl}>{sourceLabel}</a>
+  </div>
+  <slot />
+</article>
+
+<style>
+  .call-note-file { border-top: 3px solid var(--green); background: var(--panel); padding: clamp(20px, 4vw, 36px); min-width: 0; scroll-margin-top: 24px; }
+  .file-heading { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+  .file-heading h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 6px 0 0; letter-spacing: -0.035em; }
+  .file-heading .section-label { margin: 0; }
+  .file-type { font-family: monospace; font-size: 1rem; color: var(--green); border: 1px solid var(--line); padding: 8px 12px; border-radius: 4px; }
+  .file-description { max-width: 64ch; line-height: 1.65; color: var(--muted); margin: 18px 0 12px; }
+  .file-meta { display: flex; flex-wrap: wrap; gap: 6px 20px; color: var(--muted); font-size: 0.8rem; margin: 0 0 24px; }
+  .file-url-block label { display: block; font-weight: 700; font-size: 0.8rem; margin-bottom: 8px; }
+  .file-url-row { display: flex; gap: 8px; }
+  .file-url-row input { width: 100%; min-width: 0; padding: 12px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--input-bg); color: var(--ink); font: 0.82rem/1.5 monospace; }
+  .file-url-row button { flex-shrink: 0; padding: 12px 18px; border: 1px solid var(--green); border-radius: 4px; background: var(--green); color: var(--bg); font: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+  .file-url-row button:hover { filter: brightness(1.12); }
+  .file-url-row input:focus-visible, .file-url-row button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .copy-status { min-height: 1.4em; font-size: 0.8rem; color: var(--green); margin: 6px 0 12px; }
+  .file-example { background: var(--surface-faint); border: 1px solid var(--line); border-radius: 4px; padding: 16px 20px; }
+  .file-example .section-label { margin: 0 0 12px; }
+  .file-example dl { margin: 0; display: grid; gap: 10px; font-size: 0.88rem; }
+  .file-example dl > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 12px; }
+  .file-example dt { font-family: monospace; font-weight: 700; }
+  .file-example dd { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+  .file-links { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 22px; font-size: 0.85rem; }
+  .file-links a { color: var(--blue); text-underline-offset: 3px; }
+  @media (max-width: 520px) {
+    .file-url-row { flex-direction: column; }
+    .file-url-row input { box-sizing: border-box; }
+    .file-url-row button { align-self: flex-start; }
+    .file-example { padding: 14px; }
+    .file-example dl > div { grid-template-columns: 5.2rem 1fr; gap: 8px; }
+  }
+</style>
