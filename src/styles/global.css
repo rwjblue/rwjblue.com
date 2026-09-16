@@ -1758,6 +1758,33 @@ p {
   font-size: 1.03rem;
 }
 
+.document > table:not([class]) {
+  width: 100%;
+  margin: 24px 0;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: normal;
+}
+
+.document > table:not([class]) th,
+.document > table:not([class]) td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.document > table:not([class]) th:not([align]),
+.document > table:not([class]) td:not([align]) {
+  text-align: left;
+}
+
+.document > table:not([class]) thead th {
+  color: var(--muted);
+  border-bottom-color: var(--line-strong);
+}
+
 .document img {
   display: block;
   width: 100%;
