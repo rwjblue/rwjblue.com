@@ -2,7 +2,6 @@
 title: Building a 20/30/40-Meter Linked Dipole
 date: 2026-09-15
 summary: "Printed link insulators, bullet connectors, and the first field tuning of my compact 20/30/40-meter dipole."
-visibility: draft
 tags:
   - radio
   - antennas
@@ -18,8 +17,8 @@ opening or closing the links.
 
 On September 15, I assembled the extensions and took the antenna into the
 field to finish the connectors and tune it. The first session produced a
-good match on all three bands. The most useful lesson was to work outward
-from the feedpoint and check each section again with its connectors fitted.
+good match on all three bands. I worked outward from the feedpoint and
+checked each section again with its connectors fitted.
 
 ## How the links select the band
 
@@ -36,9 +35,14 @@ without carrying the tension of the antenna.
 
 [![Six orange printed insulators arranged in pairs labeled 20m, 30m, and 40m](/images/radio/2026-09-15-20-30-40-meter-linked-dipole/printed-link-insulators.jpg)](/images/radio/2026-09-15-20-30-40-meter-linked-dipole/printed-link-insulators.jpg)
 
-The 20m and 30m labels identify the two link positions on each leg. The
-40m-labeled pieces are the outer end insulators; there is no electrical link
-at those ends.
+Each label names the band the antenna is tuned for **with that link open**
+and all links closer to the feedpoint connected. Opening the 20m links makes
+it a 20-meter dipole. To use 30 meters, I connect those links and open the
+ones labeled 30m.
+
+I used the 20m and 30m pairs for this build. The printed 40m pair in the
+photo went unused: I kept my original end insulators because I did not need
+another link beyond 40 meters.
 
 The link settings are the same on both sides:
 
@@ -80,8 +84,8 @@ reduced the soldering work during tuning.
 I left about 50-75 mm (two or three inches) of tail below the insulators so
 the connectors would be easy to handle. The photo above shows that bench
 stage, with one connector fitted and the opposing tail still unstripped.
-The 2 mm size is the contact diameter; I did not have a measured connector
-length to use as a trimming allowance.
+The 2 mm size is the contact diameter. These male connectors add roughly
+10 mm beyond the wire end, something I needed to allow for during tuning.
 
 The small connectors also gave me some useful soldering practice. An
 oxidized iron tip slowed the work: it would melt solder, but the solder
@@ -117,10 +121,11 @@ frequencies that stayed well matched across the five shapes toward the CW
 portion of each band, at the expense of some match higher in the phone
 portions.
 
-In the field, I aimed for **14.060 MHz on 20 meters, 10.120 MHz on 30 meters,
-and 7.060 MHz on 40 meters**. The published report uses the earlier
-14.135/10.120/7.100 MHz targets and provisional wire dimensions. It helped
-me choose a deployment; it has not been calibrated to this finished antenna.
+By the time I went out to tune, I had settled on **14.060 MHz on 20 meters,
+10.120 MHz on 30 meters, and 7.060 MHz on 40 meters**. The report I linked
+above is from my earlier experiments, when I was aiming higher on 20 and
+40 meters. It helped me pick a starting shape. Taking the antenna into the
+field was my chance to get the actual wire where I wanted it.
 
 The original model also gave me a reason to raise the ends when space allows.
 On 40 meters, going from 1.5 m to 3.0 m ends added about 2 dB of realized gain
@@ -138,15 +143,18 @@ supports at both ends.
 
 ## Tuning from the center outward
 
-I took the soldering iron and helping-hands fixture with me and worked
-outward from the feedpoint: 20 meters first, then 30, then 40. That let me
-adjust each extension after the section inside it was set.
+The [Pinecil](https://pine64.org/devices/pinecil/) was fantastic for this.
+All I needed to power the iron was a USB Power Delivery (PD) battery bank
+and a USB-C cable. I brought the helping-hands fixture too, so I could
+finish the connectors right there in the field.
+
+I worked outward from the feedpoint: 20 meters first, then 30, then 40.
+That let me adjust each extension after the section inside it was set.
 
 The center was at 10.1 m (33 ft). The outer ends were roughly 150-300 mm
 (6-12 in) above my hand with my arm fully extended overhead; I am 1.85 m
-(6 ft 1 in) tall. I did not measure their height above the ground, so this
-was an approximate field deployment rather than an exact reproduction of
-the modeled 3.0 m end height.
+(6 ft 1 in) tall. I figured that put the ends around 2.7 m (9 ft), close
+enough to my 3.0 m (10 ft) target for this first session.
 
 [![The linked dipole deployed as an inverted V on a mast above a wooded trail entrance](/images/radio/2026-09-15-20-30-40-meter-linked-dipole/field-inverted-v.jpg)](/images/radio/2026-09-15-20-30-40-meter-linked-dipole/field-inverted-v.jpg)
 
@@ -156,15 +164,17 @@ The first scan put the minimum at 13.835 MHz. I trimmed 70 mm from each
 20-meter leg, which moved it to **14.075 MHz at 1.10:1**. That was close
 enough to my target to move on to the male connectors.
 
-I fitted the male connectors without shortening the wire again. The next
-sweep put the minimum at **14.035 MHz at 1.09:1**. At 14.075 MHz it was still
-only **1.11:1**, so I left it there. My 14.060 MHz target was between those
-two readings, near the bottom of the dip.
+This is where I missed a step: I soldered on the male connectors without
+trimming the extra 10 mm or so that each connector adds. I had tuned the
+wire, then made each leg a little longer by fitting the connector.
 
-The minimum was 40 kHz lower after fitting the connectors. That was a useful
-reminder to include the finished connections in the tuning process: assemble,
-sweep again, and decide whether more trimming would actually help. In this
-case, the match was already good where I wanted to operate.
+The next sweep put the minimum at **14.035 MHz at 1.09:1**, 40 kHz lower.
+At 14.075 MHz it was still only **1.11:1**, so I left it there. My
+14.060 MHz target was between those two readings, near the bottom of the dip.
+
+Next time I will account for the connector's added length when I trim,
+then sweep again with it fitted. This time, the match was already good
+where I wanted to operate, so there was no reason to keep cutting.
 
 [![Wire and a printed link insulator held in an orange helping-hands fixture beside a soldering iron on a field table](/images/radio/2026-09-15-20-30-40-meter-linked-dipole/field-soldering.jpg)](/images/radio/2026-09-15-20-30-40-meter-linked-dipole/field-soldering.jpg)
 
