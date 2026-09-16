@@ -1,4 +1,4 @@
-import type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
+import type { PerformanceRating, TrainingAudioResult, TrainingCwtResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
 import type { LcwoImportState } from "./lcwo-types.ts";
 export type { PerformanceRating, TrainingAudioResult, TrainingLcwoResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
 
@@ -85,6 +85,9 @@ export interface TrainingAttempt {
   runnerResult?: TrainingRunnerResult;
   audioResults?: TrainingAudioResult[];
   lcwoResult?: TrainingLcwoResult;
+  cwtResult?: TrainingCwtResult;
+  /** Contact count for POTA or other on-air practice; absent means unrecorded. */
+  qsoCount?: number;
   note?: string;
   /** Multiline scratchpad kept separately from the end-of-block note. */
   scratchpad?: string;

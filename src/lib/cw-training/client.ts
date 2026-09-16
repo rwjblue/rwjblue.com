@@ -11,6 +11,8 @@ import { DEFAULT_OTHER_PRACTICE_ID, OTHER_PRACTICE_ACTIVITIES, OTHER_PRACTICE_AS
 import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
 import { restartRunnerBlock, runnerAssignmentProgress, runnerAttemptResult, runnerMetadata } from "./runner-session";
 import { mountLcwoResultFields, readLcwoResult } from "./practice-results-form";
+import { readCwtResult } from "./cwt-result";
+import { readQsoCount, usesQsoCount } from "./qso-count";
 import { createTrainingReportPanel } from "./report-panel";
 import type { PerformanceRating, TrainingReport } from "./report-types";
 import { practiceHistoryForDate, renderPracticeHistory } from "./history";
@@ -1532,6 +1534,11 @@ export async function initTraining() {
     const other = otherPracticeActivity(taskId);
     const task = findTask(taskId)?.task;
     const cumulativeRunner = !!task && isMorseRunner(task);
+    const isCwt = taskId === "other:cwt";
+    $("training-manual-qso").hidden = !usesQsoCount(taskId);
+    $("training-manual-qso").querySelector<HTMLInputElement>("input")!.disabled = !usesQsoCount(taskId);
+    $("training-manual-cwt").hidden = !isCwt;
+    for (const input of $("training-manual-cwt").querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea")) input.disabled = !isCwt;
     mountLcwoResultFields($("training-manual-lcwo"), task?.kind === "icr" || taskId === "other:icr");
     $("training-manual-runner").hidden = !cumulativeRunner;
     for (const input of $("training-manual-runner").querySelectorAll<HTMLInputElement | HTMLSelectElement>("input, select")) input.disabled = !cumulativeRunner;
@@ -2127,6 +2134,12 @@ export async function initTraining() {
       if (!Number.isFinite(endedAt.getTime()) || endedAt.getTime() > Date.now()) {
         notice("Enter when this practice ended, using a time no later than now."); return;
       }
+      let cwtResult;
+      let qsoCount;
+      try { qsoCount = usesQsoCount(taskId) ? readQsoCount(data) : undefined; }
+      catch (error) { notice(String(error)); return; }
+      try { cwtResult = taskId === "other:cwt" ? readCwtResult(data) : undefined; }
+      catch (error) { notice(String(error)); return; }
       let lcwoResult;
       try { lcwoResult = readLcwoResult(data); }
       catch (error) { notice(String(error)); return; }
@@ -2163,6 +2176,8 @@ export async function initTraining() {
         activeSeconds,
         completed: complete,
         ...(other ? { review: true } : {}),
+        ...(cwtResult ? { cwtResult } : {}),
+        ...(qsoCount !== undefined ? { qsoCount } : {}),
         ...(passes ? { completedPasses: passes } : {}),
         ...(data.get("performanceRating") ? { performanceRating: data.get("performanceRating") as PerformanceRating } : {}),
         ...(scratchpad ? { scratchpad } : {}),

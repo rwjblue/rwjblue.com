@@ -9,6 +9,28 @@ const attempt = (id, extra = {}) => ({
   startedAt: "2026-09-08T12:00:00.000Z", endedAt: "2026-09-08T12:10:00.000Z",
   activeSeconds: 600, completed: false, ...extra,
 });
+
+test("CWT results remain visible in history and escape user-supplied observations", () => {
+  const saved = attempt("cwt", { taskId: "other:cwt", activeSeconds: 0, note: "[Practiced elsewhere]",
+    cwtResult: { qsoCount: 0, heardCallsigns: "<W1AAA>", comments: "Listened & learned" } });
+  assert.deepEqual(practiceHistoryForDate([saved], day, timezone), [saved]);
+  const html = renderPracticeHistory([saved], options());
+  assert.match(html, /CWT: 0 QSOs/);
+  assert.match(html, /&lt;W1AAA&gt;/);
+  assert.match(html, /Listened &amp; learned/);
+  assert.doesNotMatch(html, /<W1AAA>/);
+});
+
+test("POTA and other on-air history shows recorded counts including zero but does not infer old comments", () => {
+  for (const taskId of ["other:pota", "other:on-air"]) {
+    const saved = attempt(taskId, { taskId, activeSeconds: 0, qsoCount: 0 });
+    assert.deepEqual(practiceHistoryForDate([saved], day, timezone), [saved]);
+    assert.match(renderPracticeHistory([saved], options()), /0 QSOs/);
+    assert.match(renderPracticeHistory([{ ...saved, qsoCount: 23 }], options()), /23 QSOs/);
+    const { qsoCount, ...unknown } = saved;
+    assert.doesNotMatch(renderPracticeHistory([unknown], options()), /QSOs/);
+  }
+});
 const options = (extra = {}) => ({
   course: { timezone, assignments: [{ tasks: [
     { id: "runner", kind: "simulator", title: "Morse Runner" },

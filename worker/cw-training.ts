@@ -1,4 +1,6 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { parseCwtResult } from "../src/lib/cw-training/cwt-result.ts";
+import { parseQsoCount, usesQsoCount } from "../src/lib/cw-training/qso-count.ts";
 import { OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "../src/lib/cw-training/other-practice.ts";
 import { REPORT_FIELDS, validateReportAnswers } from "../src/lib/cw-training/report-fields.ts";
 import { dateInTimezone } from "../src/lib/cw-training/plan.ts";
@@ -215,7 +217,7 @@ function lcwoResult(value: unknown): TrainingLcwoResult {
 }
 
 function attempt(value: unknown, now: number): TrainingAttempt {
-  const row = record(value, ["id", "assignmentId", "taskId", "startedAt", "endedAt", "activeSeconds", "recallSeconds", "completed", "review", "completedPasses", "difficulty", "performanceRating", "runnerResult", "audioResults", "lcwoResult", "note", "scratchpad", "context"]);
+  const row = record(value, ["id", "assignmentId", "taskId", "startedAt", "endedAt", "activeSeconds", "recallSeconds", "completed", "review", "completedPasses", "difficulty", "performanceRating", "runnerResult", "audioResults", "lcwoResult", "cwtResult", "qsoCount", "note", "scratchpad", "context"]);
   const result: TrainingAttempt = {
     id: id(row.id, "attempt ID", true),
     assignmentId: id(row.assignmentId, "assignment ID"),
@@ -252,6 +254,16 @@ function attempt(value: unknown, now: number): TrainingAttempt {
     result.audioResults = row.audioResults.map(audioResult);
   }
   if (row.lcwoResult !== undefined) result.lcwoResult = lcwoResult(row.lcwoResult);
+  if (row.cwtResult !== undefined) {
+    if (result.taskId !== "other:cwt" || result.assignmentId !== OTHER_PRACTICE_ASSIGNMENT_ID) invalid("CWT results belong to CWT practice.");
+    try { result.cwtResult = parseCwtResult(row.cwtResult); }
+    catch (error) { invalid(error instanceof Error ? error.message : "Invalid CWT result."); }
+  }
+  if (row.qsoCount !== undefined) {
+    if (!usesQsoCount(result.taskId) || result.assignmentId !== OTHER_PRACTICE_ASSIGNMENT_ID) invalid("QSO counts belong to POTA or other on-air practice.");
+    try { result.qsoCount = parseQsoCount(row.qsoCount); }
+    catch (error) { invalid(error instanceof Error ? error.message : "Invalid QSO count."); }
+  }
   if (row.note !== undefined) result.note = string(row.note, "note", 4_000, true);
   if (row.scratchpad !== undefined) result.scratchpad = string(row.scratchpad, "scratchpad", 10_000, true);
   return result;

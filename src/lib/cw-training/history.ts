@@ -1,6 +1,7 @@
 import { dateInTimezone } from "./plan.ts";
 import { isMorseRunner } from "./morse-runner.ts";
 import { otherPracticeActivity } from "./other-practice.ts";
+import { cwtResultSummary } from "./cwt-result.ts";
 import type { TrainingAttempt, TrainingCourse, TrainingMaterial } from "./types.ts";
 
 const escapes: Record<string, string> = {
@@ -12,7 +13,7 @@ const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => e
 function hasPractice(attempt: TrainingAttempt): boolean {
   const note = attempt.note?.trim();
   return attempt.activeSeconds > 0 || attempt.completed || (attempt.completedPasses ?? 0) > 0 ||
-    !!attempt.scratchpad?.trim() || !!attempt.difficulty || !!attempt.performanceRating ||
+    !!attempt.scratchpad?.trim() || !!attempt.difficulty || !!attempt.performanceRating || !!attempt.cwtResult || attempt.qsoCount !== undefined ||
     !!(note && note !== "[Left missed]" && note !== "[Practiced elsewhere]");
 }
 
@@ -63,10 +64,12 @@ export function renderPracticeHistory(attempts: readonly TrainingAttempt[], opti
     const performance = attempt.performanceRating ? { "very-good": "Very good", good: "Good", fair: "Fair", poor: "Poor" }[attempt.performanceRating] : undefined;
     const rating = attempt.difficulty ? { hard: "Hard", right: "About right", easy: "Easy" }[attempt.difficulty] : undefined;
     const details = [
+      attempt.cwtResult ? `<div class="training-history-notes">${escapeHtml(cwtResultSummary(attempt.cwtResult))}</div>` : "",
       attempt.note?.trim() ? `<div class="training-history-notes">${escapeHtml(attempt.note)}</div>` : "",
       attempt.scratchpad?.trim() ? `<p class="training-history-label">Recall &amp; scratchpad</p><div class="training-history-notes">${escapeHtml(attempt.scratchpad)}</div>` : "",
     ].join("");
     const metadata = [stamp, duration, type,
+      ...(attempt.qsoCount !== undefined ? [`${attempt.qsoCount} QSOs`] : []),
       ...(attempt.completedPasses ? [`${attempt.completedPasses} pass${attempt.completedPasses === 1 ? "" : "es"}`] : []),
       ...(attempt.recallSeconds ? [`includes ${Math.round(attempt.recallSeconds / 6) / 10} min recall`] : []),
       ...(performance ? [`Performance: ${performance}`] : rating ? [`Felt: ${rating} (earlier rating)`] : []),

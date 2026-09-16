@@ -32,6 +32,54 @@ const audio = (title, speedWpm, extra = {}) => ({
 });
 const draft = (attempts, extra = {}) => buildReportDraft(course(), attempts, options(extra));
 const required = () => ({ callsign: "N1RWJ", firstName: "Robert", session: "2", reportDate: "2026-09-10", scalesRating: "Good" });
+
+test("CWT sessions fill report answers in order, deduplicate entries, and keep private notes out", () => {
+  const first = attempt("cwt-first", { taskId: "other:cwt", review: true,
+    cwtResult: { qsoCount: 12, workedCallsigns: "W1AAA\nK2BBB", workedNames: "Al\nBob", comments: "40m; copying improved." },
+    note: "Private reflection", scratchpad: "Private scratchpad" });
+  const second = attempt("cwt-second", { taskId: "other:cwt", startedAt: "2026-09-10T03:00:00.000Z",
+    cwtResult: { qsoCount: 0, heardCallsigns: "N3CCC", heardExchanges: "Carol 1234", comments: "Only monitored." } });
+  const outside = attempt("old-cwt", { taskId: "other:cwt", startedAt: "2026-09-08T03:00:00.000Z", cwtResult: { qsoCount: 100 } });
+  const result = draft([second, first, outside, first, attempt("class-cwt", { ...second, id: "class-cwt", context: "class" })]);
+  assert.equal(result.answers.workedCallsigns, "W1AAA\nK2BBB");
+  assert.equal(result.answers.workedNames, "Al\nBob");
+  assert.equal(result.answers.heardCallsigns, "N3CCC");
+  assert.equal(result.answers.heardExchanges, "Carol 1234");
+  assert.match(result.answers.eventComments, /CWT Sep 8, 10:00 AM EDT: 12 QSOs\n40m; copying improved\./);
+  assert.match(result.answers.eventComments, /CWT Sep 9, 11:00 PM EDT: 0 QSOs\nOnly monitored\./);
+  assert.doesNotMatch(JSON.stringify(result.answers), /Private|100 QSOs/);
+  assert.deepEqual(result.sourceAttemptIds, [first.id, second.id]);
+  const refreshed = applyReportSuggestions({ answers: { eventComments: "My edited summary", workedNames: "" } }, result, ["eventComments", "workedNames"]);
+  assert.equal(refreshed.answers.eventComments, "My edited summary");
+  assert.equal(refreshed.answers.workedNames, "");
+  assert.equal(refreshed.answers.workedCallsigns, result.answers.workedCallsigns);
+});
+
+test("CWT never invents counts or promotes freeform notes and bounds long report suggestions", () => {
+  const result = draft([attempt("legacy-cwt", { taskId: "other:cwt", note: "Made 20 QSOs" }),
+    attempt("heard-only", { taskId: "other:cwt", cwtResult: { heardCallsigns: "W1AAA" } })]);
+  assert.equal(result.answers.eventComments, "");
+  assert.equal(result.answers.workedCallsigns, "");
+  assert.deepEqual(result.sourceAttemptIds, ["heard-only"]);
+  const long = draft([attempt("long", { taskId: "other:cwt", cwtResult: { comments: "x".repeat(4000) } })]);
+  assert.equal(long.answers.eventComments.length, 4000);
+  assert.ok(long.warnings.some(warning => warning.includes("shortened")));
+});
+
+test("POTA and other on-air counts appear as dated report sources without becoming CWT results", () => {
+  const pota = attempt("pota", { taskId: "other:pota", qsoCount: 23, note: "Private field notes" });
+  const onAir = attempt("on-air", { taskId: "other:on-air", qsoCount: 0 });
+  const old = attempt("old-other", { taskId: "other:general", note: "POTA 50 QSOs" });
+  const unknown = attempt("unrecorded", { taskId: "other:pota" });
+  const outside = attempt("outside", { taskId: "other:on-air", qsoCount: 20, startedAt: "2026-09-08T03:59:00.000Z" });
+  const result = draft([pota, onAir, old, unknown, outside, pota]);
+  assert.equal(result.sources.length, 2);
+  assert.ok(result.sources.some(source => source.attemptId === "pota" && source.description === "POTA (Parks on the Air) (2026-09-08): 23 QSOs"));
+  assert.ok(result.sources.some(source => source.attemptId === "on-air" && source.description === "On-air (other) (2026-09-08): 0 QSOs"));
+  assert.equal(result.answers.eventComments, "");
+  assert.equal(result.answers.workedCallsigns, "");
+  assert.doesNotMatch(JSON.stringify(result), /Private field notes|50 QSOs/);
+});
 const lcwo = (id, extra = {}) => ({ id, kind: "words", sourceType: "words", sourceUserId: "123", sourceResultId: id,
   recordedAt: "2026-09-09T14:00:00.000Z", sourceTime: "2026-09-09 14:00:00", ...extra });
 

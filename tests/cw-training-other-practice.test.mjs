@@ -44,7 +44,7 @@ function otherAttempt(id, taskId = DEFAULT_OTHER_PRACTICE_ID, extra = {}) {
 test("self-directed practice exposes stable, distinct categories with an explicit default", () => {
   assert.equal(OTHER_PRACTICE_ASSIGNMENT_ID, "other-practice");
   assert.deepEqual(OTHER_PRACTICE_ACTIVITIES.map((activity) => activity.id), [
-    "other:word-recognition", "other:icr", "other:general",
+    "other:word-recognition", "other:icr", "other:pota", "other:cwt", "other:on-air", "other:general",
   ]);
   assert.equal(DEFAULT_OTHER_PRACTICE_ID, "other:general");
   for (const activity of OTHER_PRACTICE_ACTIVITIES) {
@@ -63,7 +63,7 @@ test("all self-directed categories add practice minutes without changing the req
   const before = structuredClone({ course, history });
   const baseline = getTrainingPlan(course, [], now);
   const plan = getTrainingPlan(course, history, now);
-  assert.equal(plan.practicedMinutes, 30);
+  assert.equal(plan.practicedMinutes, 60);
   assert.equal(plan.dailyGoalMinutes, 60);
   assert.equal(plan.next.task.id, "sending");
   assert.deepEqual({ ...plan, practicedMinutes: 0 }, baseline);
@@ -85,7 +85,7 @@ test("self-directed practice cannot complete or advance sending, listening, ICR,
     assert.equal(progress.complete, false, task.id);
   }
   const plan = getTrainingPlan(course, [...assigned, ...selfDirected], now);
-  assert.equal(plan.practicedMinutes, 93, "the daily target does not cap recorded time");
+  assert.equal(plan.practicedMinutes, 183, "the daily target does not cap recorded time");
   assert.equal(plan.dailyGoalMinutes, 60);
   assert.equal(plan.queue.length, 4, "exceeding an hour never clears assigned work");
   const words = plan.queue.find((item) => item.task.id === "words");
@@ -170,5 +170,5 @@ test("serialized snapshots preserve self-directed categories, notes, and daily a
     assert.equal(item.completed, false);
   }
   assert.deepEqual(getTrainingPlan(restored.course, restored.attempts, now), getTrainingPlan(course, attempts, now));
-  assert.equal(getTrainingPlan(restored.course, [...restored.attempts, ...attempts], now).practicedMinutes, 30);
+  assert.equal(getTrainingPlan(restored.course, [...restored.attempts, ...attempts], now).practicedMinutes, 60);
 });

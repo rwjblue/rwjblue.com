@@ -221,7 +221,7 @@ test("all self-directed categories round-trip as extra practice without changing
     assert.equal(response.status, 200);
     assert.equal(response.headers.get("Cache-Control"), "private, no-store");
     const snapshot = await response.json();
-    assert.equal(snapshot.attempts.length, 3);
+    assert.equal(snapshot.attempts.length, OTHER_PRACTICE_ACTIVITIES.length);
     for (const saved of attempts) assert.deepEqual(snapshot.attempts.find(item => item.id === saved.id), saved);
     assert.deepEqual(snapshot.course, course, "self-directed categories do not become curriculum assignments");
     assert.ok(snapshot.attempts.every(item => item.review === true && item.completed === false && !item.completedPasses));
@@ -247,6 +247,51 @@ test("self-directed activities reject unknown categories, assignment mismatches 
     const snapshot = await (await trainingResponse(request("bootstrap"), ownerEnv)).json();
     assert.deepEqual(snapshot.attempts, [], "a rejected mixed batch writes neither record");
   }
+});
+
+test("CWT results round-trip, retry once, and reject invalid counts or unrelated activities", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "cwt-results" };
+  const saved = otherPracticeAttempt({ taskId: "other:cwt", cwtResult: {
+    qsoCount: 0, heardCallsigns: "W1AAA", heardExchanges: "AL 1234\nBOB MA",
+    workedCallsigns: "", workedNames: "", comments: "Only listened on 40m.",
+  } });
+  for (let i = 0; i < 2; i++) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: [saved] }), ownerEnv);
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).attempts, [saved]);
+  }
+  assert.deepEqual((await (await trainingResponse(request("bootstrap"), ownerEnv)).json()).attempts, [saved]);
+  for (const extra of [{ cwtResult: { qsoCount: -1 } }, { cwtResult: { qsoCount: 0.5 } },
+    { cwtResult: { qsoCount: "5" } }, { cwtResult: { unknown: "field" } },
+    { cwtResult: { comments: "x".repeat(4001) } }, { cwtResult: { workedNames: "A\0B" } },
+    { taskId: "other:pota" }, { assignmentId: "s1d1", taskId: "warmup" }]) {
+    const invalid = { ...saved, id: crypto.randomUUID(), ...extra };
+    assert.equal((await trainingResponse(request("sync", "POST", { attempts: [invalid] }), ownerEnv)).status, 400);
+  }
+  assert.deepEqual((await (await trainingResponse(request("bootstrap"), ownerEnv)).json()).attempts, [saved]);
+});
+
+test("POTA and other on-air QSO counts persist without rewriting older notes or adding duplicates", async () => {
+  const ownerEnv = { ...env, TRAINING_DEV_USER: "on-air-counts" };
+  const old = otherPracticeAttempt({ note: "POTA: 23 QSOs" });
+  const entries = [old, otherPracticeAttempt({ taskId: "other:pota", qsoCount: 23 }),
+    otherPracticeAttempt({ taskId: "other:on-air", qsoCount: 0 }), otherPracticeAttempt({ taskId: "other:on-air" })];
+  for (let i = 0; i < 2; i++) {
+    const response = await trainingResponse(request("sync", "POST", { attempts: entries }), ownerEnv);
+    assert.equal(response.status, 200);
+    const saved = (await response.json()).attempts;
+    assert.equal(saved.length, entries.length);
+    for (const entry of entries) assert.deepEqual(saved.find(item => item.id === entry.id), entry);
+  }
+  for (const extra of [{ qsoCount: -1 }, { qsoCount: 0.5 }, { qsoCount: "3" }, { qsoCount: null },
+    { qsoCount: 1000001 }, { taskId: "other:general" }, { taskId: "other:cwt" },
+    { assignmentId: "s1d1", taskId: "warmup" }]) {
+    const invalid = otherPracticeAttempt({ taskId: "other:pota", qsoCount: 3, ...extra });
+    assert.equal((await trainingResponse(request("sync", "POST", { attempts: [invalid] }), ownerEnv)).status, 400);
+  }
+  const saved = (await (await trainingResponse(request("bootstrap"), ownerEnv)).json()).attempts;
+  assert.equal(saved.length, entries.length);
+  assert.deepEqual(saved.find(item => item.id === old.id), old);
 });
 
 test("self-directed retries remain idempotent and cannot rewrite saved categories, notes or time", async () => {

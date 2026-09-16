@@ -1,6 +1,16 @@
 /** Report metrics preserve the source measurement and never replace practice credit. */
 export type PerformanceRating = "very-good" | "good" | "fair" | "poor";
 
+/** Optional observations from one CWT session, kept separate from private notes. */
+export interface TrainingCwtResult {
+  qsoCount?: number;
+  heardCallsigns?: string;
+  heardExchanges?: string;
+  workedCallsigns?: string;
+  workedNames?: string;
+  comments?: string;
+}
+
 export interface TrainingRunnerResult {
   version: 1;
   mode: "SingleCall" | "WPX";

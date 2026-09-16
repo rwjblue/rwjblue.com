@@ -131,13 +131,35 @@ tab is hidden or you switch apps, so it does not measure the whole external
 practice session. The entered minutes are saved to history and daily totals.
 
 Log practice elsewhere starts with an Other practice group: Word recognition,
-ICR (instant character recognition), and Other CW practice. The general button
-defaults to Other CW practice; an assignment's Done elsewhere button still
-preselects that assignment. Enter minutes and optional notes, for example after
-listening to a Morse Code Ninja podcast. Other practice counts toward daily
+ICR (instant character recognition), POTA (Parks on the Air), CWT, On-air (other),
+and Other CW practice. The general button defaults to Other CW practice; an assignment's Done
+elsewhere button still preselects that assignment. Enter minutes and optional
+notes, for example after listening to a Morse Code Ninja podcast. Other practice counts toward daily
 practice time and appears by category in history, but never completes curriculum
 requirements or earns audio passes. The form hides those assignment-only fields
 for Other practice. Logging elsewhere does not replace an unfinished in-page block.
+
+POTA and On-air (other) entries accept an optional QSO count. Zero means no
+contacts; blank means the count was not recorded. Counts sync with the entry,
+appear in practice history, and are listed by date under the report's Practice
+sources and QSO counts for its selected dates. The instructor form has no
+general QSO-count field, so these counts do not fill its CWT comments or invent
+worked callsigns. Older entries and QSO counts written in comments stay as
+recorded; the application does not infer counts from prose or reclassify them.
+
+CWT entries also offer an optional QSO count, report comments, callsigns and first
+names worked, and callsigns, names, and exchanges heard while monitoring. Enter
+zero QSOs for listening-only practice, or leave the count blank if unknown.
+Keep worked callsigns and names in the same order. Results remain visible in
+practice history and sync with the entry. Within the selected report dates, CWT
+entries supply editable monitoring and on-air QSO answers; dated QSO counts and
+report comments go into the event-comments answer because the instructor form
+has no separate CWT count field. Multiple sessions contribute in time order,
+and repeated syncs do not duplicate an entry. Ordinary notes and scratchpad
+prose are not copied into those answers. Existing deliberate report edits,
+including blanks, remain intact when suggestions refresh. Suggestions longer
+than the report's 4,000-character answer limit are shortened with a review
+warning; full results remain in practice history.
 
 Listening uses head copy by default, not mandatory transcription. The optional
 Recall & notes scratchpad holds up to 10,000 characters. While audio is paused,

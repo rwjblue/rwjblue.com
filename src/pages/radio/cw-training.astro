@@ -512,6 +512,23 @@ import "../../styles/cw-training.css";
           ><input id="training-manual-complete" type="checkbox" name="complete" /> <span id="training-manual-complete-label">Requirements completed</span></label
         ><label>How did it go? (optional)<select name="performanceRating"><option value="">No rating</option><option value="very-good">Very good</option><option value="good">Good</option><option value="fair">Fair</option><option value="poor">Poor</option></select></label>
         <div id="training-manual-lcwo"></div>
+        <div id="training-manual-qso" hidden>
+          <label>Number of QSOs (optional)<input type="number" name="qsoCount" min="0" max="1000000" step="1" aria-describedby="training-manual-qso-help" disabled /></label>
+          <p id="training-manual-qso-help" class="training-small">Enter 0 if you made no contacts, or leave blank if you did not record a count. Saved counts appear in practice history and the report's practice sources.</p>
+        </div>
+        <div id="training-manual-cwt" hidden>
+          <h3>CWT results</h3>
+          <p class="training-small">These optional details suggest answers for your next report. Enter 0 QSOs if you only listened; leave blank if you did not record a count.</p>
+          <label>Number of QSOs<input type="number" name="cwtQsoCount" min="0" max="1000000" step="1" disabled /></label>
+          <label>CWT comments for the report<textarea name="cwtcomments" rows="2" maxlength="4000" placeholder="For example: band, conditions, progress, or difficulties copying exchanges." disabled></textarea></label>
+          <details class="training-panel"><summary>Stations worked or heard (optional)</summary><div class="training-panel-body">
+            <p class="training-small">Record worked callsigns and first names in the same order. For stations you only monitored, use the heard fields.</p>
+            <label>Callsigns worked<textarea name="cwtworkedCallsigns" rows="2" maxlength="4000" disabled></textarea></label>
+            <label>First names of people worked<textarea name="cwtworkedNames" rows="2" maxlength="4000" disabled></textarea></label>
+            <label>Callsigns heard<textarea name="cwtheardCallsigns" rows="2" maxlength="4000" disabled></textarea></label>
+            <label>Names and exchanges heard<textarea name="cwtheardExchanges" rows="2" maxlength="4000" disabled></textarea></label>
+          </div></details>
+        </div>
         <div id="training-manual-runner" hidden><label>Mode<select name="runnerMode"><option value="SingleCall">Single Call</option><option value="WPX">WPX Contest</option></select></label><label class="training-check"><input type="checkbox" name="runnerConditions" /> Band conditions enabled</label><label>Actual speed (WPM)<input type="number" name="runnerWpm" min="1" max="200" step="any" /></label><label>Verified Pts<input type="number" name="runnerVerifiedPoints" min="0" max="1000000000000" step="1" /></label></div>
         <label>Scratchpad (optional)<textarea name="scratchpad" rows="2" maxlength="10000" placeholder="Learned: word, another word"></textarea></label>
         <label

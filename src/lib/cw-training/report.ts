@@ -1,4 +1,6 @@
 import { audioVariants } from "./audio-variants.ts";
+import { otherPracticeActivity } from "./other-practice.ts";
+import { usesQsoCount } from "./qso-count.ts";
 import { dateInTimezone } from "./plan.ts";
 import { isReportDate, REPORT_FIELDS } from "./report-fields.ts";
 import type { TrainingAttempt, TrainingCourse, TrainingTask } from "./types.ts";
@@ -209,7 +211,23 @@ export function buildReportDraft(
   const reportedWords = new Set((options.reports ?? []).filter(report => report.status === "submitted")
     .flatMap(report => words(report.answers.learnedWords ?? "")).map(word => word.toLowerCase()));
   const learned = new Map<string, string>();
+  const cwtAnswers = new Map<string, string[]>();
+  const appendCwtAnswer = (key: string, value: string | undefined) => {
+    if (value?.trim()) cwtAnswers.set(key, [...(cwtAnswers.get(key) ?? []), value.trim()]);
+  };
   for (const attempt of windowed) {
+    if (usesQsoCount(attempt.taskId) && attempt.qsoCount !== undefined) {
+      source(attempt.id, `${otherPracticeActivity(attempt.taskId)!.title} (${dateInTimezone(attempt.startedAt, course.timezone)}): ${attempt.qsoCount} QSOs`);
+    }
+    if (attempt.taskId === "other:cwt" && attempt.cwtResult) {
+      const result = attempt.cwtResult;
+      for (const key of ["heardCallsigns", "heardExchanges", "workedCallsigns", "workedNames"] as const) appendCwtAnswer(key, result[key]);
+      const stamp = new Intl.DateTimeFormat("en-US", { timeZone: course.timezone,
+        month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" }).format(new Date(attempt.startedAt));
+      const summary = `CWT ${stamp}${result.qsoCount !== undefined ? `: ${result.qsoCount} QSOs` : ""}`;
+      if (result.qsoCount !== undefined || result.comments?.trim()) appendCwtAnswer("eventComments", `${summary}${result.comments?.trim() ? `\n${result.comments.trim()}` : ""}`);
+      if (result.qsoCount !== undefined || Object.values(result).some(value => typeof value === "string" && value.trim())) source(attempt.id, summary);
+    }
     const taskCategory = reportCategoryForTask(tasks.get(attempt.taskId));
     const categories = new Set<string>(taskCategory ? [taskCategory] : []);
     for (const result of attempt.audioResults ?? legacyAudioResults(attempt)) {
@@ -241,6 +259,11 @@ export function buildReportDraft(
     }
   }
   for (const [category, values] of files) answers[`${category}Files`] = [...values].join(", ");
+  for (const [key, values] of cwtAnswers) {
+    const combined = values.join("\n");
+    answers[key] = combined.slice(0, 4000);
+    if (combined.length > 4000) warnings.add(`Review ${REPORT_FIELDS.find(field => field.key === key)?.label ?? key}: CWT details exceed the 4,000-character answer limit. The suggestion was shortened; full results remain in practice history.`);
+  }
   for (const [key, { attempt, value }] of latestRatings) {
     answers[key] = value;
     source(attempt.id, `${REPORT_FIELDS.find(field => field.key === key)?.label ?? key}: ${value}`);
