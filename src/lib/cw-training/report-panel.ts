@@ -23,7 +23,7 @@ export function createTrainingReportPanel(root: HTMLElement, options: ReportPane
   let lcwoSyncing = false;
   let lcwoSyncMessage = "";
   let autoSyncAttempted = false;
-  let importedVersion: string | undefined;
+  let sourceVersion: string | undefined;
   const state = options.state;
   const snapshot = () => state().snapshot!;
   const draft = () => state().reportDraft!;
@@ -63,7 +63,7 @@ export function createTrainingReportPanel(root: HTMLElement, options: ReportPane
       state().reportEditedKeys = [];
     }
     renderedId = undefined;
-    importedVersion = undefined;
+    sourceVersion = undefined;
     saveLocal();
     render();
   }
@@ -192,11 +192,14 @@ export function createTrainingReportPanel(root: HTMLElement, options: ReportPane
       renderedId = undefined;
       saveLocal();
     }
-    const version = JSON.stringify([snapshot().lcwo?.configured, snapshot().lcwo?.syncedAt, snapshot().lcwo?.runs.map(run => run.id)]);
-    if (importedVersion !== version) {
-      importedVersion = version;
+    // Include saved practice content so new sessions and corrected records refresh
+    // an existing draft even when no LCWO import has changed.
+    const version = JSON.stringify([snapshot().course.version, snapshot().attempts,
+      snapshot().reports?.filter(report => report.status === "submitted"), snapshot().lcwo]);
+    if (sourceVersion !== version) {
+      sourceVersion = version;
       renderedId = undefined;
-      if (snapshot().lcwo && [draft().fromDate, draft().toDate, draft().reportDate].every(isReportDate)) {
+      if ([draft().fromDate, draft().toDate, draft().reportDate].every(isReportDate)) {
         state().reportDraft = applyReportSuggestions(draft(), build(draft().session, draft().reportDate, draft().fromDate, draft().toDate), state().reportEditedKeys ?? []);
         renderedId = undefined;
         saveLocal();

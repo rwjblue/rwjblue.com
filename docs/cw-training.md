@@ -161,6 +161,10 @@ including blanks, remain intact when suggestions refresh. Suggestions longer
 than the report's 4,000-character answer limit are shortened with a review
 warning; full results remain in practice history.
 
+Report suggestions also refresh automatically when saved practice changes,
+including a corrected entry, even when there is no new LCWO import. Answers
+you deliberately edited remain intact.
+
 Listening uses head copy by default, not mandatory transcription. The optional
 Recall & notes scratchpad holds up to 10,000 characters. While audio is paused,
 choose Start recall timer to count deliberate recall or note-taking, and Pause
