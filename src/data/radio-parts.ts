@@ -1,5 +1,7 @@
 export type RadioPartCategory =
   | "ferrites"
+  | "magnet-wire"
+  | "hookup-wire"
   | "connectors"
   | "terminations"
   | "capacitors"
@@ -11,12 +13,15 @@ export interface RadioPart {
   name: string;
   category: RadioPartCategory;
   manufacturer: string;
-  manufacturerPartNumber: string;
-  digikeyPartNumber: string;
+  manufacturerPartNumber?: string;
+  digikeyPartNumber?: string;
+  amazonAsin?: string;
   stock: {
     onHand: number;
     incoming: number;
     asOf: string;
+    unit?: "spool" | "pack";
+    note?: string;
   };
   specification: string;
   dimensions?: string;
@@ -39,6 +44,18 @@ export const RADIO_PART_CATEGORIES: RadioPartCategoryDefinition[] = [
     label: "Ferrite cores",
     description:
       "Mix 43 toroids for transformer experiments and Mix 31 cores for common-mode suppression.",
+  },
+  {
+    id: "magnet-wire",
+    label: "Winding wire",
+    description:
+      "Solid enamelled copper for winding experiments. Listed sizes describe the original spools, not the amount remaining.",
+  },
+  {
+    id: "hookup-wire",
+    label: "Insulated hookup wire",
+    description:
+      "FEP and silicone-insulated stranded wire for leads, power wiring, and paired-wire experiments. Spool sizes are original package lengths.",
   },
   {
     id: "connectors",
@@ -239,6 +256,174 @@ export const RADIO_PARTS: RadioPart[] = [
       "https://fair-rite.com/product/round-cable-emi-suppression-cores-2631250202/",
     datasheetUrl:
       "/downloads/radio/parts/fair-rite-2631250202-datasheet.pdf",
+  },
+  {
+    id: "bntechgo-b07h7dp7rn",
+    name: "18 AWG magnet wire, natural",
+    category: "magnet-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B07H7DP7RN",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "spool",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "18 AWG solid enamelled copper; polyurethane enamel; manufacturer temperature rating 155 C. Enamel build is not specified.",
+    dimensions:
+      "4 oz spool; approximately 51 ft; advertised diameter 0.0393 in (1.00 mm), not a verified finished OD.",
+    intendedUse:
+      "First owned-wire candidate for the compact bifilar balun; check pair impedance, coating, bending and winding fit. Needs larger-wire terminations or short 22 AWG pigtails.",
+    productUrl: "https://www.amazon.com/dp/B07H7DP7RN",
+  },
+  {
+    id: "bntechgo-b07hrkt1wq",
+    name: "28 AWG magnet wire, natural",
+    category: "magnet-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B07HRKT1WQ",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "spool",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "28 AWG solid enamelled copper; polyurethane enamel; manufacturer temperature rating 155 C. Enamel build is not specified.",
+    dimensions:
+      "4 oz spool; advertised diameter 0.0122 in (0.31 mm), not a verified finished OD.",
+    intendedUse:
+      "Small coils and low-power experiments. Thin, delicate conductor; not the first choice for the 100 W balun target.",
+    productUrl: "https://www.amazon.com/dp/B07HRKT1WQ",
+  },
+  {
+    id: "bntechgo-b0d21rsjhx",
+    name: "22 AWG FEP wire, orange",
+    category: "hookup-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B0D21RSJHX",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "spool",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "19 strands x 0.15 mm tinned copper; FEP insulation; manufacturer ratings 300 V and -65 to 200 C.",
+    dimensions:
+      "100 ft spool; 1.42 +/-0.1 mm insulated OD.",
+    intendedUse:
+      "Compact insulated leads and paired-wire experiments with the yellow spool. A pair is not specified as a 50 ohm transmission line.",
+    productUrl: "https://www.amazon.com/dp/B0D21RSJHX",
+  },
+  {
+    id: "bntechgo-b0d21lhtvl",
+    name: "22 AWG FEP wire, yellow",
+    category: "hookup-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B0D21LHTVL",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "spool",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "19 strands x 0.15 mm tinned copper; FEP insulation; manufacturer ratings 300 V and -65 to 200 C.",
+    dimensions:
+      "100 ft spool; 1.42 +/-0.1 mm insulated OD.",
+    intendedUse:
+      "Identifiable return lead or second conductor with orange FEP. Fits the 26-22 AWG conductor range of the Panduit terminals after stripping.",
+    productUrl: "https://www.amazon.com/dp/B0D21LHTVL",
+  },
+  {
+    id: "bntechgo-b077x9mvwg",
+    name: "20 AWG parallel silicone cable, red/black",
+    category: "hookup-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B077X9MVWG",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "spool",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "Two conductors of stranded tinned copper in silicone insulation; manufacturer ratings 600 V and up to 200 C.",
+    dimensions:
+      "25 ft of two-conductor cable; measure overall width and thickness before planning a winding.",
+    intendedUse:
+      "Flexible power and equipment leads. Convenient paired conductors, but relatively bulky for a small toroid and not specified as a 50 ohm line.",
+    productUrl: "https://www.amazon.com/dp/B077X9MVWG",
+  },
+  {
+    id: "bntechgo-b071l3dbg1",
+    name: "22 AWG silicone wire, orange",
+    category: "hookup-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B071L3DBG1",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "spool",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "60 strands x 0.08 mm tinned copper; silicone insulation; manufacturer ratings 600 V and -60 to 200 C.",
+    dimensions:
+      "250 ft spool; 1.7 +/-0.1 mm insulated OD.",
+    intendedUse:
+      "Flexible feedpoint jumpers and equipment wiring. Bulkier insulation than the same-gauge FEP stock.",
+    productUrl: "https://www.amazon.com/dp/B071L3DBG1",
+  },
+  {
+    id: "bntechgo-b071hh246z",
+    name: "18 AWG silicone wire, yellow",
+    category: "hookup-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B071HH246Z",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "spool",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "150 strands x 0.08 mm tinned copper; silicone insulation; manufacturer ratings 600 V and -60 to 200 C.",
+    dimensions:
+      "250 ft spool; 2.3 +/-0.1 mm insulated OD.",
+    intendedUse:
+      "Heavier flexible power and equipment leads. Too bulky to be the starting winding choice for the compact balun.",
+    productUrl: "https://www.amazon.com/dp/B071HH246Z",
+  },
+  {
+    id: "bntechgo-b07hgt77r5",
+    name: "28 AWG silicone wire, red/black",
+    category: "hookup-wire",
+    manufacturer: "BNTECHGO",
+    amazonAsin: "B07HGT77R5",
+    stock: {
+      onHand: 1,
+      incoming: 0,
+      asOf: "2026-09-17",
+      unit: "pack",
+      note: "Remaining length not measured.",
+    },
+    specification:
+      "16 strands x 0.08 mm tinned copper; silicone insulation; manufacturer ratings 600 V and -60 to 200 C.",
+    dimensions:
+      "Two separate colors, 50 ft each (100 ft total); 1.2 +/-0.1 mm insulated OD.",
+    intendedUse:
+      "Light signal wiring and small flexible jumpers. This is separate wire, not the bonded 20 AWG parallel cable.",
+    productUrl: "https://www.amazon.com/dp/B07HGT77R5",
   },
   {
     id: "amphenol-031-221-rfx",
