@@ -4,7 +4,9 @@
 `src/pages/radio/equipment/parts-bin.astro`. Keep product identity separate
 from stock: spool/package sizes describe the purchased variant, not remaining
 wire. `stock.asOf` records the inventory confirmation date. Wire quantities
-use an explicit spool or pack unit.
+use an explicit spool unit. All wire appears in a single `wire` category.
+Planned uses should be general applications, including the owner's actual
+uses, rather than instructions for a particular build.
 
 The September 17, 2026 wire additions comprise eight BNTECHGO variants.
 Seven product titles and quantities were checked against purchase
@@ -12,6 +14,15 @@ confirmations; the 28 AWG silicone red/black pack was identified by the owner.
 Current ownership was confirmed by the owner for all eight. On September 17,
 the owner also confirmed there are no outstanding orders; the August 13
 component quantities are now recorded as on hand.
+
+The 28 AWG silicone set is represented as separate red and black 50 ft spools,
+both linking to the shared product ASIN. The owner also uses the orange
+22 AWG and yellow 18 AWG silicone wire for antenna elements.
+
+The owner identified DX Engineering DXE-SANTW-500 as antenna wire on hand.
+The [DX Engineering listing](https://www.dxengineering.com/parts/dxe-santw-500)
+specifies a 500 ft spool of 26 AWG stranded copper-clad steel with black
+UV-resistant polyethylene insulation.
 
 Public records contain product ASINs, technical specifications, original
 package sizes and availability. Do not copy receipts, order IDs, private

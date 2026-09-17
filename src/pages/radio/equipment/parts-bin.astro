@@ -20,7 +20,7 @@ const ferriteMass = ferriteSummary.reduce(
 
 <BaseLayout
   title="Portable antenna parts bin / Radio equipment / N1RWJ"
-  description="A working inventory of ferrites, winding wire, FEP and silicone hookup wire, connectors, terminals, and analyzer loads for portable antenna feedpoint projects."
+  description="A working inventory of wire, ferrites, connectors, terminals, and analyzer loads for portable antennas and feedpoint projects."
   canonicalPath="/radio/equipment/parts-bin/"
   searchable={false}
 >
@@ -41,11 +41,6 @@ const ferriteMass = ferriteSummary.reduce(
       feedpoints, matching networks, and transformer tests. It sits beside the
       curated equipment inventory without turning every resistor and ferrule
       into a full equipment page.
-    </p>
-    <p class="parts-bin-status">
-      <strong>Inventory status:</strong> wire availability was confirmed on September 17,
-      2026. Wire lengths and weights describe the original packages; remaining
-      stock has not been measured.
     </p>
     <nav class="equipment-category-nav" aria-label="Parts-bin categories">
       {categories.map((category) => <a href={`#${category.id}`}>{category.label}</a>)}
@@ -152,9 +147,7 @@ const ferriteMass = ferriteSummary.reduce(
     <p>
       The intended-use column records uses I have in mind for each part. It does not assign
       a transmitter power rating or guarantee a particular choke impedance.
-      Wire gauge and insulation ratings do not specify a pair's characteristic
-      impedance. Winding geometry, frequency, duty cycle, load mismatch, enclosure, and
-      temperature all matter. The quarter-watt resistors are analyzer loads
+      The quarter-watt resistors are analyzer loads
       only and are not RF dummy loads.
     </p>
     <p>
