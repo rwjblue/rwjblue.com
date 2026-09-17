@@ -395,7 +395,7 @@ test("equipment inventory provides curated categories and stable item pages", ()
 });
 
 
-test("rss endpoint publishes notes with canonical domains", () => {
+test("rss endpoint publishes canonical links and preserves feed identities", () => {
   assert.ok(existsSync("src/pages/rss.xml.ts"));
 
   const rssEndpoint = read("src/pages/rss.xml.ts");
@@ -404,6 +404,8 @@ test("rss endpoint publishes notes with canonical domains", () => {
   assert.match(rssEndpoint, /getPublicNotes\(\)/);
   assert.match(rssEndpoint, /markdown-it/);
   assert.match(rssEndpoint, /sanitize-html/);
+  assert.match(rssEndpoint, /site: SITE_URL/);
+  assert.match(rssEndpoint, /customData: `<guid isPermaLink="true">/);
   assert.match(rssEndpoint, /note\.data\.tags\.includes\("radio"\)/);
   assert.match(rssEndpoint, /https:\/\/n1rwj\.com/);
   assert.match(rssEndpoint, /https:\/\/rwjblue\.com/);

@@ -27,12 +27,14 @@ export function normalizeInternalPath(value: string): string | undefined {
 
   let url: URL;
   try {
-    url = new URL(candidate, "https://rwjblue.com/");
+    url = new URL(candidate, "https://n1rwj.com/");
   } catch {
     return undefined;
   }
 
-  if (url.origin !== "https://rwjblue.com") return undefined;
+  if (!["https://n1rwj.com", "https://rwjblue.com"].includes(url.origin)) {
+    return undefined;
+  }
 
   let path = url.pathname.replace(/\/{2,}/g, "/");
   path = path.replace(/\/index\.html$/i, "/");

@@ -46,7 +46,7 @@ The local Node version is managed by mise and locked in `.mise/mise.lock`.
 ## Crawl Discovery
 
 Production builds generate `sitemap-index.xml`, `sitemap-0.xml`, and
-`robots.txt` for the canonical `https://rwjblue.com` origin. The sitemap filter
+`robots.txt` for the canonical `https://n1rwj.com` origin. The sitemap filter
 excludes draft, unlisted, and not-yet-due scheduled notes plus search, RSS, the
 publication-schedule manifest, private training shell, and generated share-image routes. `npm run build`
 verifies those exclusions and representative Article and BreadcrumbList JSON-LD
@@ -176,6 +176,10 @@ The site should serve these Cloudflare-managed hostnames:
 rwjblue.com
 n1rwj.com
 ```
+
+`https://n1rwj.com` is the canonical origin for page metadata, social sharing,
+structured data, sitemaps, and RSS links. RSS entry GUIDs retain their original
+domain-based identities to avoid duplicate entries in feed readers.
 
 There is no canonical redirect. A visitor who enters `n1rwj.com` should continue
 to see `n1rwj.com` in the browser address bar, and a visitor who enters

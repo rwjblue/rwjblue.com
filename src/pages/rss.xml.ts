@@ -4,9 +4,8 @@ import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
 import { notePublicationDate } from "../lib/note-publication";
 import { compareNotesNewestFirst, getPublicNotes } from "../lib/notes";
+import { SITE_URL } from "../lib/structured-data";
 
-const FEED_SITE = "https://rwjblue.com";
-const RADIO_SITE = "https://n1rwj.com";
 const FEED_TITLE = "Robert Jackson / Notes";
 const FEED_DESCRIPTION =
   "Field logs, software observations, radio updates, and site notes from Robert Jackson.";
@@ -20,11 +19,17 @@ parser.linkify.set({ fuzzyLink: true });
 
 type NoteEntry = CollectionEntry<"notes">;
 
-const canonicalHostForNote = (note: NoteEntry) =>
-  note.data.tags.includes("radio") ? RADIO_SITE : FEED_SITE;
-
 const canonicalUrlForNote = (note: NoteEntry) =>
-  `${canonicalHostForNote(note)}/notes/${note.id}/`;
+  `${SITE_URL}/notes/${note.id}/`;
+
+// Preserve feed identities so changing the canonical domain does not duplicate
+// existing entries in feed readers.
+const guidForNote = (note: NoteEntry) => {
+  const host = note.data.tags.includes("radio")
+    ? "https://n1rwj.com"
+    : "https://rwjblue.com";
+  return `${host}/notes/${note.id}/`;
+};
 
 const absoluteAttribute = (value: string | undefined, baseUrl: string) => {
   if (!value) {
@@ -69,7 +74,7 @@ export async function GET() {
   return rss({
     title: FEED_TITLE,
     description: FEED_DESCRIPTION,
-    site: FEED_SITE,
+    site: SITE_URL,
     items: notes.map((note) => {
       const noteUrl = canonicalUrlForNote(note);
 
@@ -79,7 +84,7 @@ export async function GET() {
         pubDate: notePublicationDate(note),
         categories: note.data.tags,
         link: noteUrl,
-        guid: noteUrl,
+        customData: `<guid isPermaLink="true">${guidForNote(note).replaceAll("&", "&amp;").replaceAll("<", "&lt;")}</guid>`,
         content: renderContent(note),
       };
     }),

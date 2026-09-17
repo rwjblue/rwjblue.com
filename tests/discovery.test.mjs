@@ -9,21 +9,21 @@ import { createSitemapFilter } from "../scripts/sitemap-filter.mjs";
 test("sitemap filter includes published notes and excludes utility routes", () => {
   const filter = createSitemapFilter();
 
-  assert.equal(filter("https://rwjblue.com/notes/public-workshop/"), true);
+  assert.equal(filter("https://n1rwj.com/notes/public-workshop/"), true);
   assert.equal(
     filter(
-      "https://rwjblue.com/notes/2026-07-21-reliance-ocfd-replacement-wire-testing/",
+      "https://n1rwj.com/notes/2026-07-21-reliance-ocfd-replacement-wire-testing/",
     ),
     true,
   );
-  assert.equal(filter("https://rwjblue.com/search/"), false);
-  assert.equal(filter("https://rwjblue.com/radio/cw-training/"), false);
+  assert.equal(filter("https://n1rwj.com/search/"), false);
+  assert.equal(filter("https://n1rwj.com/radio/cw-training/"), false);
   assert.equal(
-    filter("https://rwjblue.com/publication-schedule.json"),
+    filter("https://n1rwj.com/publication-schedule.json"),
     false,
   );
   assert.equal(
-    filter("https://rwjblue.com/notes/public-workshop/share-image/"),
+    filter("https://n1rwj.com/notes/public-workshop/share-image/"),
     false,
   );
 });
@@ -46,8 +46,8 @@ test("structured data uses canonical URLs and deterministic breadcrumb positions
   );
   assert.equal(
     breadcrumbs.itemListElement[1].item,
-    "https://rwjblue.com/notes/",
+    "https://n1rwj.com/notes/",
   );
-  assert.equal(article.url, "https://rwjblue.com/notes/example/");
+  assert.equal(article.url, "https://n1rwj.com/notes/example/");
   assert.equal(article["@type"], "Article");
 });

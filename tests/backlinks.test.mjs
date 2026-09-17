@@ -16,6 +16,10 @@ test("canonical path normalization collapses fragments and equivalent forms", ()
     "/notes/example/",
   );
   assert.equal(
+    normalizeInternalPath("https://n1rwj.com/notes/example/index.html?q=1"),
+    "/notes/example/",
+  );
+  assert.equal(
     normalizeInternalPath("/radio/pota/us-0513"),
     "/radio/pota/US-0513/",
   );

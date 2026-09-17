@@ -9,8 +9,8 @@ const note = read(
   "dist/notes/2026-07-23-learning-to-read-the-bands-with-ncdxf-beacons/index.html",
 );
 
-assert.match(sitemapIndex, /https:\/\/rwjblue\.com\/sitemap-0\.xml/);
-assert.match(robots, /Sitemap: https:\/\/rwjblue\.com\/sitemap-index\.xml/);
+assert.match(sitemapIndex, /https:\/\/n1rwj\.com\/sitemap-0\.xml/);
+assert.match(robots, /Sitemap: https:\/\/n1rwj\.com\/sitemap-index\.xml/);
 assert.doesNotMatch(
   sitemap,
   /share-image|share\.png|\/search\/|publication-schedule/,
@@ -28,5 +28,5 @@ const breadcrumbs = flattened.find(
 );
 
 assert.equal(article?.headline, "Learning to Read the Bands with NCDXF Beacons");
-assert.equal(article?.author?.["@id"], "https://rwjblue.com/about/#person");
+assert.equal(article?.author?.["@id"], "https://n1rwj.com/about/#person");
 assert.equal(breadcrumbs?.itemListElement?.length, 3);

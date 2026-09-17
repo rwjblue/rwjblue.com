@@ -1,4 +1,4 @@
-export const SITE_URL = "https://rwjblue.com";
+export const SITE_URL = "https://n1rwj.com";
 
 export interface BreadcrumbItem {
   name: string;
