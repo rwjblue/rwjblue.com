@@ -97,7 +97,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "5943000301",
     digikeyPartNumber: "1934-1095-ND",
-    stock: { onHand: 0, incoming: 10, asOf: "2026-08-13" },
+    stock: { onHand: 10, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 43 toroid; AL 440 nH +/-20%",
     dimensions: "12.7 mm OD x 7.15 mm ID x 4.9 mm high",
     intendedUse:
@@ -115,7 +115,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "5943000601",
     digikeyPartNumber: "1934-1258-ND",
-    stock: { onHand: 0, incoming: 15, asOf: "2026-08-13" },
+    stock: { onHand: 15, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 43 toroid; AL 470 nH +/-20%",
     dimensions: "21 mm OD x 13.2 mm ID x 6.35 mm high",
     intendedUse:
@@ -133,7 +133,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "5943001001",
     digikeyPartNumber: "1934-1590-ND",
-    stock: { onHand: 0, incoming: 25, asOf: "2026-08-13" },
+    stock: { onHand: 25, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 43 toroid; AL 510 nH +/-20%",
     dimensions: "29 mm OD x 19 mm ID x 7.5 mm high",
     intendedUse:
@@ -151,7 +151,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "5943002701",
     digikeyPartNumber: "1934-1221-ND",
-    stock: { onHand: 0, incoming: 2, asOf: "2026-08-13" },
+    stock: { onHand: 2, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 43 toroid; AL 885 nH +/-20%",
     dimensions: "35.55 mm OD x 23 mm ID x 12.7 mm high",
     intendedUse:
@@ -169,7 +169,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "2631800302",
     digikeyPartNumber: "1934-2631800302-ND",
-    stock: { onHand: 0, incoming: 2, asOf: "2026-08-13" },
+    stock: { onHand: 2, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 31 burnished suppression toroid",
     dimensions: "12.7 mm OD x 7.15 mm ID x 4.78 mm high",
     intendedUse:
@@ -188,7 +188,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "2631801802",
     digikeyPartNumber: "1934-2631801802-ND",
-    stock: { onHand: 0, incoming: 5, asOf: "2026-08-13" },
+    stock: { onHand: 5, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 31 burnished suppression toroid",
     dimensions: "22.1 mm OD x 13.7 mm ID x 6.35 mm high",
     intendedUse:
@@ -207,7 +207,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "2631801202",
     digikeyPartNumber: "1934-1160-ND",
-    stock: { onHand: 0, incoming: 5, asOf: "2026-08-13" },
+    stock: { onHand: 5, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 31 burnished suppression toroid; 88 ohms typical at 100 MHz",
     dimensions: "29 mm OD x 19 mm ID x 13.85 mm high",
     intendedUse:
@@ -226,7 +226,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "2631803802",
     digikeyPartNumber: "1934-1100-ND",
-    stock: { onHand: 0, incoming: 1, asOf: "2026-08-13" },
+    stock: { onHand: 1, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 31 round cable core; 119 ohms typical at 100 MHz",
     dimensions: "61 mm OD x 35.55 mm ID x 12.7 mm long",
     intendedUse:
@@ -245,7 +245,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Fair-Rite",
     manufacturerPartNumber: "2631250202",
     digikeyPartNumber: "1934-1413-ND",
-    stock: { onHand: 0, incoming: 25, asOf: "2026-08-13" },
+    stock: { onHand: 25, incoming: 0, asOf: "2026-09-17" },
     specification: "Mix 31 shield bead; 230 ohms typical at 100 MHz",
     dimensions: "6.35 mm OD x 2.95 mm nominal ID x 25.4 mm long",
     intendedUse:
@@ -432,7 +432,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Amphenol RF",
     manufacturerPartNumber: "031-221-RFX",
     digikeyPartNumber: "ARFX1064-ND",
-    stock: { onHand: 0, incoming: 10, asOf: "2026-08-13" },
+    stock: { onHand: 10, incoming: 0, asOf: "2026-09-17" },
     specification: "50 ohm straight bulkhead jack; front mount; solder cup; 4 GHz max",
     dimensions: "See customer drawing for panel cutout and thread dimensions",
     intendedUse:
@@ -448,7 +448,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "TE Connectivity",
     manufacturerPartNumber: "31428",
     digikeyPartNumber: "A27148-ND",
-    stock: { onHand: 0, incoming: 50, asOf: "2026-08-13" },
+    stock: { onHand: 50, incoming: 0, asOf: "2026-09-17" },
     specification: "26-22 AWG; #4 stud; tin-plated copper; closed barrel",
     dimensions: "11.43 mm long; 5.16 mm wide; 3.02 mm stud diameter",
     intendedUse:
@@ -463,7 +463,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Panduit",
     manufacturerPartNumber: "P22-6R-M",
     digikeyPartNumber: "298-10424-ND",
-    stock: { onHand: 0, incoming: 25, asOf: "2026-08-13" },
+    stock: { onHand: 25, incoming: 0, asOf: "2026-09-17" },
     specification: "26-22 AWG; #6 stud; tin-plated copper; brazed seam",
     dimensions: "13.21 mm long; 5.2 mm wide; 0.51 mm thick",
     intendedUse:
@@ -479,7 +479,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Molex",
     manufacturerPartNumber: "0190700007",
     digikeyPartNumber: "WM18272-ND",
-    stock: { onHand: 0, incoming: 25, asOf: "2026-08-13" },
+    stock: { onHand: 25, incoming: 0, asOf: "2026-09-17" },
     specification: "InsulKrimp; 22-18 AWG; #3-#4 (M2.6) stud; tin-plated copper",
     dimensions: "18.01 mm long; 3.7 mm maximum insulation diameter",
     intendedUse:
@@ -493,7 +493,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "Weidmuller",
     manufacturerPartNumber: "9028240000",
     digikeyPartNumber: "281-5143-ND",
-    stock: { onHand: 0, incoming: 100, asOf: "2026-08-13" },
+    stock: { onHand: 100, incoming: 0, asOf: "2026-09-17" },
     specification: "H0,14/12 GR SV; 26 AWG; 0.14 mm^2; 8 mm contact length",
     dimensions: "12 mm overall; 0.6 mm contact diameter; 1.5 mm collar diameter",
     intendedUse:
@@ -509,7 +509,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "KEMET",
     manufacturerPartNumber: "C330C470JHG5TA",
     digikeyPartNumber: "C330C470JHG5TA-ND",
-    stock: { onHand: 0, incoming: 5, asOf: "2026-08-13" },
+    stock: { onHand: 5, incoming: 0, asOf: "2026-09-17" },
     specification: "47 pF +/-5%; 3 kVDC; C0G/NP0; radial leaded",
     dimensions: "7.62 x 5.08 mm body; 10.67 mm max height; 5.08 mm lead spacing",
     intendedUse:
@@ -525,7 +525,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "KEMET",
     manufacturerPartNumber: "C330C101JHG5TA",
     digikeyPartNumber: "399-5096-ND",
-    stock: { onHand: 0, incoming: 5, asOf: "2026-08-13" },
+    stock: { onHand: 5, incoming: 0, asOf: "2026-09-17" },
     specification: "100 pF +/-5%; 3 kVDC; C0G/NP0; radial leaded",
     dimensions: "7.62 x 5.08 mm body; 10.67 mm max height; 5.08 mm lead spacing",
     intendedUse:
@@ -541,7 +541,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "KEMET",
     manufacturerPartNumber: "C330C201JHG5TA",
     digikeyPartNumber: "C330C201JHG5TA-ND",
-    stock: { onHand: 0, incoming: 5, asOf: "2026-08-13" },
+    stock: { onHand: 5, incoming: 0, asOf: "2026-09-17" },
     specification: "200 pF +/-5%; 3 kVDC; C0G/NP0; radial leaded",
     dimensions: "7.62 x 5.08 mm body; 10.67 mm max height; 5.08 mm lead spacing",
     intendedUse:
@@ -557,7 +557,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "TE Connectivity / Raychem",
     manufacturerPartNumber: "ATUM-3/1-0-STK",
     digikeyPartNumber: "ATU031K-ND",
-    stock: { onHand: 0, incoming: 1, asOf: "2026-08-13" },
+    stock: { onHand: 1, incoming: 0, asOf: "2026-09-17" },
     specification: "Black dual-wall irradiated polyolefin; 3:1 shrink ratio; 4 ft stick",
     dimensions: "3 mm expanded ID; 1 mm recovered ID",
     intendedUse:
@@ -572,7 +572,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "TE Connectivity / Raychem",
     manufacturerPartNumber: "ATUM-6/2-0-STK",
     digikeyPartNumber: "ATU062K-ND",
-    stock: { onHand: 0, incoming: 1, asOf: "2026-08-13" },
+    stock: { onHand: 1, incoming: 0, asOf: "2026-09-17" },
     specification: "Black dual-wall irradiated polyolefin; 3:1 shrink ratio; 4 ft stick",
     dimensions: "6 mm expanded ID; 2 mm recovered ID",
     intendedUse:
@@ -587,7 +587,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "TE Connectivity / Raychem",
     manufacturerPartNumber: "ATUM-9/3-0-STK",
     digikeyPartNumber: "ATU093K-ND",
-    stock: { onHand: 0, incoming: 1, asOf: "2026-08-13" },
+    stock: { onHand: 1, incoming: 0, asOf: "2026-09-17" },
     specification: "Black dual-wall irradiated polyolefin; 3:1 shrink ratio; 4 ft stick",
     dimensions: "9 mm expanded ID; 3 mm recovered ID",
     intendedUse:
@@ -602,7 +602,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "YAGEO",
     manufacturerPartNumber: "MFR-25FRF52-49R9",
     digikeyPartNumber: "13-MFR-25FRF52-49R9CT-ND",
-    stock: { onHand: 0, incoming: 10, asOf: "2026-08-13" },
+    stock: { onHand: 10, incoming: 0, asOf: "2026-09-17" },
     specification: "49.9 ohms +/-1%; 0.25 W; metal film; axial",
     dimensions: "2.4 mm diameter x 6.3 mm body length",
     intendedUse:
@@ -618,7 +618,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "YAGEO",
     manufacturerPartNumber: "MFR-25FRF52-200R",
     digikeyPartNumber: "13-MFR-25FRF52-200RCT-ND",
-    stock: { onHand: 0, incoming: 10, asOf: "2026-08-13" },
+    stock: { onHand: 10, incoming: 0, asOf: "2026-09-17" },
     specification: "200 ohms +/-1%; 0.25 W; metal film; axial",
     dimensions: "2.4 mm diameter x 6.3 mm body length",
     intendedUse:
@@ -634,7 +634,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "YAGEO",
     manufacturerPartNumber: "MFR-25FRF52-453R",
     digikeyPartNumber: "13-MFR-25FRF52-453RCT-ND",
-    stock: { onHand: 0, incoming: 20, asOf: "2026-08-13" },
+    stock: { onHand: 20, incoming: 0, asOf: "2026-09-17" },
     specification: "453 ohms +/-1%; 0.25 W; metal film; axial",
     dimensions: "2.4 mm diameter x 6.3 mm body length",
     intendedUse:
@@ -650,7 +650,7 @@ export const RADIO_PARTS: RadioPart[] = [
     manufacturer: "YAGEO",
     manufacturerPartNumber: "MFR-25FRF52-2K49",
     digikeyPartNumber: "13-MFR-25FRF52-2K49CT-ND",
-    stock: { onHand: 0, incoming: 10, asOf: "2026-08-13" },
+    stock: { onHand: 10, incoming: 0, asOf: "2026-09-17" },
     specification: "2.49 kohms +/-1%; 0.25 W; metal film; axial",
     dimensions: "2.4 mm diameter x 6.3 mm body length",
     intendedUse:

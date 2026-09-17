@@ -9,8 +9,9 @@ use an explicit spool or pack unit.
 The September 17, 2026 wire additions comprise eight BNTECHGO variants.
 Seven product titles and quantities were checked against purchase
 confirmations; the 28 AWG silicone red/black pack was identified by the owner.
-Current ownership was confirmed by the owner for all eight. The older
-component order retains its existing incoming counts until counted.
+Current ownership was confirmed by the owner for all eight. On September 17,
+the owner also confirmed there are no outstanding orders; the August 13
+component quantities are now recorded as on hand.
 
 Public records contain product ASINs, technical specifications, original
 package sizes and availability. Do not copy receipts, order IDs, private
