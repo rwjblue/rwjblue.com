@@ -552,12 +552,12 @@ async function sync(db: D1Database, owner: string, update: TrainingSync, lcwoCon
 }
 
 /** Imported measurements remain separate from timed practice and assignment credit. */
-async function syncLcwo(env: Env, owner: string): Promise<TrainingSnapshot> {
+async function syncLcwo(env: Env, owner: string, fresh = false): Promise<TrainingSnapshot> {
   const credentials = lcwoCredentials(env);
   if (!credentials) throw new TrainingError(409, "LCWO is not connected. Configure the LCWO login once to enable automatic imports.");
   const current = await snapshot(env.TRAINING_DB, owner, true);
   // Reports refresh on entry; nearby tabs and repeated clicks share a short cooldown.
-  if (current.lcwo?.syncedAt && Date.now() - Date.parse(current.lcwo.syncedAt) < 60_000) return current;
+  if (!fresh && current.lcwo?.syncedAt && Date.now() - Date.parse(current.lcwo.syncedAt) < 60_000) return current;
   const exported = await fetchLCWOExports(credentials);
   const courseStart = current.course.assignments.map((item) => item.date).sort()[0];
   if (!courseStart) throw new TrainingError(409, "Load a training course before importing LCWO results.");
@@ -683,8 +683,9 @@ export async function trainingResponse(request: Request, env: Env): Promise<Resp
     const lcwoConfigured = Boolean(lcwoCredentials(env));
     if (path.endsWith("/bootstrap")) return json(await snapshot(env.TRAINING_DB, owner, lcwoConfigured));
     if (path === "/api/cw-training/lcwo/sync") {
-      record(await readJson(request), []);
-      return json(await syncLcwo(env, owner));
+      const options = record(await readJson(request), ["fresh"]);
+      if (options.fresh !== undefined && typeof options.fresh !== "boolean") invalid("Use a boolean fresh flag.");
+      return json(await syncLcwo(env, owner, options.fresh === true));
     }
     if (path === "/api/cw-training/sync") {
       const update = parseSync(await readJson(request), Date.now());

@@ -6,6 +6,7 @@ import { isReportDate, REPORT_FIELDS } from "./report-fields.ts";
 import type { TrainingAttempt, TrainingCourse, TrainingTask } from "./types.ts";
 import type { PerformanceRating, TrainingAudioResult, TrainingReport, TrainingRunnerResult } from "./report-types.ts";
 import type { LcwoRun } from "./lcwo-types.ts";
+import { lcwoPracticeMinutes } from "./lcwo-practice.ts";
 
 export type AudioReportCategory = "shortWords" | "shortPhrases" | "shortQso" | "shortPota" | "prefix" | "suffix";
 export interface ReportWindow { fromDate: string; toDate: string }
@@ -22,8 +23,9 @@ export interface ReportDraft {
   sourceAttemptIds: string[];
   sourceLcwoIds: string[];
   sources: { attemptId: string; description: string }[];
-  lcwoSources: { run: LcwoRun; missingKeys: string[] }[];
+  lcwoSources: { run: LcwoRun; runs: LcwoRun[]; missingKeys: string[]; averageErrorPercent?: number }[];
   warnings: string[];
+  lcwoPractice: ReturnType<typeof lcwoPracticeMinutes>;
   runner?: { attemptId: string; result: TrainingRunnerResult };
 }
 
@@ -269,6 +271,7 @@ export function buildReportDraft(
     source(attempt.id, `${REPORT_FIELDS.find(field => field.key === key)?.label ?? key}: ${value}`);
   }
   const imported = reportLcwoRunsInWindow(options.lcwoRuns ?? [], options, course.timezone);
+  const lcwoPractice = lcwoPracticeMinutes(course, attempts, imported);
   for (const [kind, attempt] of latestLcwo) {
     // Choose one complete source per drill; missing metrics must never leak from an older run.
     // An exported completion inside a manually recorded block must not erase its supplied details.
@@ -300,10 +303,26 @@ export function buildReportDraft(
     const isAdaptive = kind === "words" || kind === "callsign";
     if (isAdaptive && run.score !== undefined) answers[`${kind}Score`] = String(run.score);
     if (!isAdaptive && run.effectiveWpm !== undefined) answers[`${kind}Wpm`] = String(run.effectiveWpm);
+    // Group exports omit length. Use the agreed course length, and average
+    // errors at the latest run's speeds within this report's practice dates.
+    // Keep every contributing ID so a saved report retains its evidence.
+    const matching = !isAdaptive && run.effectiveWpm !== undefined && run.characterWpm !== undefined
+      ? imported.filter(candidate => candidate.kind === kind
+        && candidate.effectiveWpm === run.effectiveWpm && candidate.characterWpm === run.characterWpm)
+      : [run];
+    const measured = matching.filter(candidate => candidate.accuracyPercent !== undefined);
+    const averageErrorPercent = !isAdaptive && measured.length
+      ? Math.round(measured.reduce((sum, candidate) => sum + 100 - candidate.accuracyPercent!, 0) / measured.length * 10) / 10
+      : undefined;
+    if (!isAdaptive) {
+      answers[`${kind}Length`] = "3";
+      if (averageErrorPercent !== undefined) answers[`${kind}ErrorPercent`] = String(averageErrorPercent);
+    }
     const missingKeys = isAdaptive
       ? [`${kind}Wpm`, ...(kind === "words" ? ["wordsMaximumLength"] : []), `${kind}Errors`]
-      : [`${kind}Length`, `${kind}ErrorPercent`];
-    lcwoSources.push({ run, missingKeys });
+      : [`${kind}Wpm`, `${kind}ErrorPercent`].filter(key => !answers[key]);
+    const runs = [...new Map([run, ...(!isAdaptive ? measured : [])].map(candidate => [candidate.id, candidate])).values()];
+    lcwoSources.push({ run, runs, missingKeys, ...(averageErrorPercent !== undefined ? { averageErrorPercent } : {}) });
   }
   if (imported.some(run => run.kind === "koch")) warnings.add("Koch lesson results are available in LCWO history, but are separate from the report's custom-character practice. They do not fill custom-character answers.");
   answers.learnedWords = [...learned.values()].join(", ");
@@ -318,7 +337,9 @@ export function buildReportDraft(
     if (speeds.length > 1) warnings.add(`The selected Morse Runner run used ${speeds.join(", ")} WPM. Review the suggested starting speed.`);
     if (result.source === "legacy") warnings.add("Morse Runner details were recovered from a saved note; its practice date uses the saved block date.");
   }
-  return { answers, sourceAttemptIds: [...sourceDescriptions.keys()], sourceLcwoIds: lcwoSources.map(source => source.run.id), lcwoSources,
+  return { answers, sourceAttemptIds: [...sourceDescriptions.keys()], sourceLcwoIds: [...new Set([
+    ...lcwoSources.flatMap(source => source.runs.map(run => run.id)), ...lcwoPractice.runs.map(run => run.id),
+  ])], lcwoSources, lcwoPractice,
     sources: [...sourceDescriptions].map(([attemptId, descriptions]) => ({ attemptId, description: [...descriptions].join("; ") })),
     warnings: [...warnings], ...(runner ? { runner } : {}) };
 }

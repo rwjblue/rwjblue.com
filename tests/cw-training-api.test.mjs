@@ -722,6 +722,7 @@ test("LCWO import requires configured secrets, owner authentication, same-origin
   assert.equal((await trainingResponse(request("lcwo/sync"), connected)).status, 405);
   assert.equal((await trainingResponse(request("lcwo/sync", "POST", {}, { Origin: "https://lcwo.net" }), connected)).status, 403);
   assert.equal((await trainingResponse(request("lcwo/sync", "POST", { username: "no-client-credentials" }), connected)).status, 400);
+  assert.equal((await trainingResponse(request("lcwo/sync", "POST", { fresh: "true" }), connected)).status, 400);
   const protectedEnv = { ...connected, TRAINING_ACCESS_TEAM: "https://training-api-test.cloudflareaccess.com", TRAINING_ACCESS_AUD: "test-audience", TRAINING_OWNER_EMAIL: "owner@example.org" };
   assert.equal((await trainingResponse(request("lcwo/sync", "POST", {}), protectedEnv)).status, 401);
   const boot = await (await trainingResponse(request("bootstrap"), connected)).json();
@@ -761,10 +762,14 @@ test("LCWO import is idempotent, keeps source dates and missing metrics, adds no
     const second = await (await trainingResponse(request("lcwo/sync", "POST", {}), connected)).json();
     assert.deepEqual(second.lcwo, first.lcwo);
     assert.equal(requests.length, count, "nearby retries share a cooldown");
+    exports.groups.push({ NR: "2", uid: "123", mode: "letters", speed: "25", eff: "15", accuracy: "95", time: "2026-09-05 15:01:00", valid: "0" });
+    const fresh = await (await trainingResponse(request("lcwo/sync", "POST", { fresh: true }), connected)).json();
+    assert.equal(fresh.lcwo.runs.length, 3, "Finish and explicit fetches see new runs inside the cooldown");
+    assert.ok(requests.length > count, "fresh requests bypass the cached snapshot");
     await db.prepare("UPDATE training_lcwo_sync SET synced_at = ? WHERE owner_id = ?")
       .bind("2026-01-01T00:00:00.000Z", "local:lcwo-import-owner").run();
     const third = await (await trainingResponse(request("lcwo/sync", "POST", {}), connected)).json();
-    assert.deepEqual(third.lcwo.runs, first.lcwo.runs, "full exports do not duplicate saved results");
+    assert.deepEqual(third.lcwo.runs, fresh.lcwo.runs, "full exports do not duplicate saved results");
     const report = sessionReport({ sourceLcwoIds: [first.lcwo.runs[0].id], answers: { wordsScore: "0" } });
     const savedResponse = await trainingResponse(request("sync", "POST", { reports: [report] }), connected);
     assert.equal(savedResponse.status, 200, await savedResponse.clone().text());

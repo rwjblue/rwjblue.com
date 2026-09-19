@@ -7,6 +7,7 @@ import { audioAttemptResults, audioSessionNote, switchAudioRecording } from "./a
 import { createTrainingNavigation, type TrainingView } from "./navigation";
 import { isMorseRunner, morseRunnerSetup, MORSE_RUNNER_GUIDE_URL, WEB_MORSE_RUNNER_URL, MORSE_RUNNER_RESULTS_PROMPT } from "./morse-runner";
 import { practiceTimeSummary, timedPracticeDelta } from "./practice-time";
+import { lcwoBlockMinutes } from "./lcwo-practice";
 import { DEFAULT_OTHER_PRACTICE_ID, OTHER_PRACTICE_ACTIVITIES, OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "./other-practice";
 import { createRunnerRun, reduceRunnerEvent, runnerConfigureCommand, runnerResultNote, runnerSettings, runnerStopCommand } from "./runner-bridge";
 import { restartRunnerBlock, runnerAssignmentProgress, runnerAttemptResult, runnerMetadata } from "./runner-session";
@@ -151,6 +152,7 @@ export async function initTraining() {
       null,
       "anything",
       snapshot().preferences.carriedTasks,
+      snapshot().lcwo?.runs,
     );
   const formatMeeting = (date: string, long = false) =>
     new Intl.DateTimeFormat("en-US", {
@@ -218,7 +220,7 @@ export async function initTraining() {
           : remote.preferences,
     };
   };
-  const request = async (path: string, body?: TrainingSync) => {
+  const request = async (path: string, body?: TrainingSync | { fresh: boolean }) => {
     let response: Response;
     try {
       response = await fetch(`/api/cw-training/${path}`, {
@@ -314,17 +316,55 @@ export async function initTraining() {
       }
     }
   }
-  const reportPanel = createTrainingReportPanel($("training-report"), {
-    state: () => state,
-    persist,
-    syncLcwo: async () => {
-      const remote: TrainingSnapshot = await request("lcwo/sync", {});
+  let lcwoSyncPromise: Promise<void> | undefined;
+  let lcwoSyncMessage = "";
+  let icrFinishWindow: { id: string; endedAt: string; editedMinutes: boolean } | undefined;
+  function updateIcrFinishEstimate() {
+    const active = state.active;
+    if (!active || active.task.kind !== "icr" || icrFinishWindow?.id !== active.id || icrFinishWindow.editedMinutes) return;
+    $<HTMLInputElement>("training-finish-minutes").value = String(lcwoBlockMinutes(snapshot().course,
+      snapshot().attempts, snapshot().lcwo?.runs ?? [], active.startedAt, icrFinishWindow.endedAt));
+  }
+  function updateLcwoSyncControls() {
+    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action="sync-lcwo"]')) {
+      button.disabled = !!lcwoSyncPromise || !state.snapshot?.lcwo?.configured;
+      button.textContent = lcwoSyncPromise ? "Syncing LCWO..." : "Sync LCWO";
+    }
+    for (const output of document.querySelectorAll<HTMLElement>("[data-icr-sync-status]")) {
+      const last = state.snapshot?.lcwo?.syncedAt;
+      output.textContent = lcwoSyncMessage || (last ? `Last synced ${new Date(last).toLocaleString()}.`
+        : state.snapshot?.lcwo?.configured ? "No LCWO results imported yet." : "LCWO syncing is not connected.");
+    }
+    const save = $("training-finish-form").querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (save) save.disabled = state.active?.task.kind === "icr" && !!lcwoSyncPromise;
+  }
+  function syncLcwo(): Promise<void> {
+    if (lcwoSyncPromise) return lcwoSyncPromise;
+    lcwoSyncMessage = "Fetching saved LCWO results...";
+    lcwoSyncPromise = (async () => {
+      const remote: TrainingSnapshot = await request("lcwo/sync", { fresh: true });
       if (disposed || !state.snapshot) return;
       // Ordinary sync may have acknowledged new practice while LCWO was loading.
       // Import only LCWO state, while retaining mergeSnapshot's account check.
       mergeSnapshot({ ...snapshot(), userId: remote.userId, lcwo: remote.lcwo });
       await persist();
-    },
+      lcwoSyncMessage = "";
+      updateIcrFinishEstimate();
+      render();
+    })().catch(error => {
+      lcwoSyncMessage = `${error instanceof Error ? error.message : "LCWO could not sync."} Saved practice is still available. Try Sync LCWO again.`;
+      throw error;
+    }).finally(() => {
+      lcwoSyncPromise = undefined;
+      updateLcwoSyncControls();
+    });
+    updateLcwoSyncControls();
+    return lcwoSyncPromise;
+  }
+  const reportPanel = createTrainingReportPanel($("training-report"), {
+    state: () => state,
+    persist,
+    syncLcwo,
     save: async (report: TrainingReport) => {
       snapshot().reports = unique(snapshot().reports ?? [], [report]);
       state.pending.reports = unique(state.pending.reports ?? [], [report]);
@@ -502,7 +542,7 @@ export async function initTraining() {
     $("training-app").hidden = false;
     $("training-auth").hidden = true;
     const course = practiceCourse();
-    const current = getTrainingPlan(course, snapshot().attempts, new Date(), null, "anything", snapshot().preferences.carriedTasks);
+    const current = getTrainingPlan(course, snapshot().attempts, new Date(), null, "anything", snapshot().preferences.carriedTasks, snapshot().lcwo?.runs);
     const assignment = current.assignment;
     $<HTMLSelectElement>("training-audio-preference").value = audioPreference();
     const meeting =
@@ -670,6 +710,8 @@ export async function initTraining() {
     $("training-today-history-summary").textContent = todayHistory.length
       ? `${todayHistory.length} session${todayHistory.length === 1 ? "" : "s"} · ${Number(savedMinutes.toFixed(1))} min saved`
       : "No saved sessions yet";
+    if (current.estimatedLcwoMinutes) $("training-today-history-summary").textContent +=
+      ` · ${current.estimatedLcwoMinutes} estimated LCWO min added (1 min per imported group run)`;
     for (const [id, attempts, includeDate] of [
       ["training-today-history", todayHistory, false],
       ["training-history", [...snapshot().attempts].sort((a, b) => b.endedAt.localeCompare(a.endedAt)).slice(0, 100), true],
@@ -754,10 +796,8 @@ export async function initTraining() {
       !!active.resource?.url &&
       !active.resource.unresolved;
     $("training-audio-box").hidden = !isAudio;
-    $("training-timer-box").hidden = isAudio || !!active.runner;
-    $("training-timer-help").textContent = active.task.kind === "icr"
-      ? "For LCWO or another trainer, enter your total practice minutes when you finish the block. This timer pauses when you switch tabs or apps."
-      : "Pause when you stop practicing. If you switch tabs or apps, confirm those minutes when finishing.";
+    $("training-timer-box").hidden = isAudio || !!active.runner || active.task.kind === "icr";
+    $("training-timer-help").textContent = "Pause when you stop practicing. If you switch tabs or apps, confirm those minutes when finishing.";
     $("training-runner-embedded").hidden = !active.runner;
     $("training-runner-external-help").hidden = !!active.runner;
     if (active.runner) renderRunner();
@@ -778,8 +818,9 @@ export async function initTraining() {
     if (active.task.kind === "icr")
       $("training-focus-resource").insertAdjacentHTML(
         "afterbegin",
-        `<p>${link("https://lcwo.net/", "Open LCWO", "training-button primary")} ${link("https://morsecode.world/international/trainer/character.html", "Open ICR trainer", "training-button")} ${link("https://morsecode.world/international/trainer/words.html", "Word trainer", "training-button")}</p><p class="training-small">Use CW Academy material, 25 WPM character speed, and ${active.task.speedWpm ?? 10} WPM effective speed. Follow the original guidelines below for word length and progression.</p>`,
+        `<p class="training-actions">${link("https://lcwo.net/", "Open LCWO", "training-button primary")} <button type="button" data-action="sync-lcwo">Sync LCWO</button> ${link("https://morsecode.world/international/trainer/character.html", "Open ICR trainer", "training-button")} ${link("https://morsecode.world/international/trainer/words.html", "Word trainer", "training-button")}</p><p class="training-small">No stopwatch for ICR. Finish block syncs LCWO and suggests one minute per code-group run completed during this block. Enter minutes manually for Words, Callsigns, or another trainer.</p><p class="training-small" data-icr-sync-status role="status" aria-live="polite"></p><p class="training-small">Use CW Academy material, 25 WPM character speed, and ${active.task.speedWpm ?? 10} WPM effective speed. Follow the original guidelines below for word length and progression.</p>`,
       );
+    updateLcwoSyncControls();
     if (mountedBlock !== active.id) {
       audioGeneration++;
       audioReady = false;
@@ -1028,12 +1069,12 @@ export async function initTraining() {
   });
   function updateTodayTime() {
     if (!todayTime || !state.snapshot) return;
-    const totals = practiceTimeSummary(todayTime.savedSeconds, state.active,
+    const totals = practiceTimeSummary(todayTime.savedSeconds, state.active?.task.kind === "icr" ? undefined : state.active,
       todayTime.date, snapshot().course.timezone, todayTime.savedIds);
     $("training-minutes").textContent = todayTime.goal
       ? `${Math.round(totals.totalSeconds / 60)} / ${todayTime.goal} min`
       : `${Math.round(totals.totalSeconds / 60)} min · optional practice`;
-    const currentPractice = state.active?.context === "practice" &&
+    const currentPractice = state.active?.context === "practice" && state.active.task.kind !== "icr" &&
       dateInTimezone(state.active.startedAt, snapshot().course.timezone) === todayTime.date &&
       !todayTime.savedIds.has(state.active.id);
     $("training-time-breakdown").textContent = currentPractice
@@ -1045,7 +1086,11 @@ export async function initTraining() {
   function updateClock() {
     updateTodayTime();
     if (!state.active) return;
-    $("training-timer").textContent = time(state.active.activeSeconds);
+    const icr = state.active.task.kind === "icr";
+    $("training-timer").textContent = time(icr
+      ? lcwoBlockMinutes(snapshot().course, snapshot().attempts, snapshot().lcwo?.runs ?? [], state.active.startedAt, new Date().toISOString()) * 60
+      : state.active.activeSeconds);
+    $("training-timer-label").textContent = icr ? "estimated LCWO practice from synced runs" : "active practice";
     $("training-timer-toggle").textContent = running
       ? "Pause timer"
       : "Resume timer";
@@ -1170,7 +1215,7 @@ export async function initTraining() {
     setView("focus");
     void persist();
     if (item.task.kind === "audio" && item.resource?.url) void play();
-    else if (!state.active.runner) {
+    else if (!state.active.runner && item.task.kind !== "icr") {
       running = true;
       lastClock = performance.now();
       updateClock();
@@ -1281,6 +1326,10 @@ export async function initTraining() {
       Math.round(state.active.activeSeconds / 6) / 10
     ).toString();
     const active = state.active;
+    icrFinishWindow = active.task.kind === "icr" ? { id: active.id, endedAt: new Date().toISOString(), editedMinutes: false } : undefined;
+    $("training-finish-minutes-label").textContent = active.task.kind === "icr" ? "Estimated LCWO minutes (editable)" : "Total minutes actually practiced";
+    $("training-finish-icr-sync").hidden = active.task.kind !== "icr";
+    updateIcrFinishEstimate();
     $("training-finish-back").textContent = active.runner ? "Back to results" : "Keep practicing";
     $<HTMLInputElement>("training-finish-minutes").readOnly = !!active.runner;
     const recording = active.runner ? runnerMetadata(active) : audioSessionNote(active);
@@ -1335,12 +1384,19 @@ export async function initTraining() {
       : active.task.kind === "audio"
         ? `${active.completedPasses} fully played pass${active.completedPasses === 1 ? "" : "es"} this block. You can mark the exercise complete with passes remaining if more repetitions would not help. Leave unchecked to continue later.`
         : active.task.kind === "icr"
-          ? "Enter the total minutes you practiced in LCWO or another trainer, including time in another tab. Mark complete when you have met your practice objective."
+          ? "Minutes come from synced one-minute code-group runs during this block. Enter minutes for Words, Callsigns, or another trainer yourself. Mark complete when you have met your practice objective."
           : "Correct the time if you practiced while away from this page. Mark complete only when you met the assigned objective.";
     if (active.runner) $("training-finish-help").textContent = active.review
       ? "Review time and actual settings are saved automatically. A shorter review is fine; it never completes a required assignment."
       : `${runnerProgressText(active)} Engine time, settings, and this run's score are recorded when you save. Separate runs keep separate results.`;
+    if (active.task.kind === "icr") $("training-finish-help").textContent =
+      "Minutes come from synced one-minute code-group runs during this block. Enter minutes for Words, Callsigns, or another trainer yourself. Mark complete when you have met your practice objective.";
     $<HTMLDialogElement>("training-finish-dialog").showModal();
+    updateLcwoSyncControls();
+    if (active.task.kind === "icr" && snapshot().lcwo?.configured)
+      void syncLcwo().catch(() => {
+        // The shared sync status offers retry without discarding the finish form.
+      });
   }
 
   function activeDateMatches(): boolean {
@@ -1744,6 +1800,9 @@ export async function initTraining() {
       return;
     }
     switch (button.dataset.action) {
+      case "sync-lcwo":
+        void syncLcwo().catch(() => notice(lcwoSyncMessage));
+        break;
       case "resume":
         if (!allowActiveDate()) break;
         setView("focus");
@@ -1752,7 +1811,7 @@ export async function initTraining() {
         );
         break;
       case "toggle-timer":
-        if (state.active?.runner) break;
+        if (state.active?.runner || state.active?.task.kind === "icr") break;
         if (!allowActiveDate()) break;
         if (running) stopTimer();
         else {
@@ -1998,12 +2057,16 @@ export async function initTraining() {
     $("training-scratchpad-status").textContent = "Saving on this device...";
     void persist();
   });
+  $<HTMLInputElement>("training-finish-minutes").addEventListener("input", () => {
+    if (icrFinishWindow && icrFinishWindow.id === state.active?.id) icrFinishWindow.editedMinutes = true;
+  });
   $<HTMLFormElement>("training-finish-form").addEventListener(
     "submit",
     (event) => {
       event.preventDefault();
       const active = state.active;
       if (!active) return;
+      if (active.task.kind === "icr" && lcwoSyncPromise) return;
       const data = new FormData(event.currentTarget as HTMLFormElement);
       if (String(data.get("note") || "").includes("\0")) {
         $("training-finish-help").textContent =
@@ -2044,7 +2107,7 @@ export async function initTraining() {
           `This assigned run requires ${active.task.minutes ?? 15} minutes. Record it as partial or correct the practiced duration.`;
         return;
       }
-      const endedAt = new Date();
+      const endedAt = new Date(active.task.kind === "icr" && icrFinishWindow?.id === active.id ? icrFinishWindow.endedAt : Date.now());
       const note = [
         active.runner ? runnerMetadata(active) : audioSessionNote(active),
         data.get("sendingSummary") === "on" ? sendingSummary(currentSendingTakes(active)) : "",
@@ -2052,7 +2115,9 @@ export async function initTraining() {
         !active.audioHistory && active.bookmarks.length
           ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}`
           : "",
-        Math.abs(activeSeconds - active.activeSeconds) > 6
+        active.task.kind === "icr" && !icrFinishWindow?.editedMinutes
+          ? "Practice minutes estimated from one-minute LCWO code-group runs."
+          : Math.abs(activeSeconds - active.activeSeconds) > 6
           ? "Practice duration confirmed manually."
           : "",
       ]

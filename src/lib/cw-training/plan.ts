@@ -2,6 +2,8 @@ import { upcomingCwSessions, type CwSession } from "../cw-practice.ts";
 import { isMorseRunner } from "./morse-runner.ts";
 import { runnerSettings } from "./runner-bridge.ts";
 import type { TrainingAssignment, TrainingAttempt, TrainingCourse, TrainingMeeting, TrainingResource, TrainingTask } from "./types.ts";
+import type { LcwoRun } from "./lcwo-types.ts";
+import { lcwoPracticeMinutes } from "./lcwo-practice.ts";
 
 export type PracticeMode = "anything" | "listen" | "send" | "computer";
 export type BlockMinutes = 3 | 5 | 10 | 15;
@@ -48,6 +50,7 @@ export interface TrainingPlan {
   nextMeeting?: TrainingMeeting;
   phase: "practice" | "class" | "rest" | "complete" | "upcoming";
   practicedMinutes: number;
+  estimatedLcwoMinutes: number;
   dailyGoalMinutes: number;
   queue: PlannedTask[];
   blocked: PlannedTask[];
@@ -264,7 +267,7 @@ function lcwoReview(course: TrainingCourse, date: string, blockMinutes: BlockMin
  * become Tuesday's required practice day or reset the same day's minute goal.
  * A null block removes time restrictions; suggestions still start at 15 minutes.
  */
-export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: BlockMinutes | null = 15, mode: PracticeMode = "anything", carriedTasks: { taskId: string; date: string }[] = []): TrainingPlan {
+export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttempt[], now = new Date(), blockMinutes: BlockMinutes | null = 15, mode: PracticeMode = "anything", carriedTasks: { taskId: string; date: string }[] = [], lcwoRuns: readonly LcwoRun[] = []): TrainingPlan {
   if (!Number.isFinite(now.getTime())) throw new Error("A valid planning date is required.");
   const date = dateInTimezone(now, course.timezone);
   const sortedAssignments = [...course.assignments].sort((a, b) => a.date.localeCompare(b.date));
@@ -281,7 +284,10 @@ export function getTrainingPlan(course: TrainingCourse, attempts: TrainingAttemp
     : firstDate && date < firstDate ? "upcoming" : "rest";
   const practicedSeconds = uniqueAttempts(attempts).filter((attempt) => attempt.context === "practice" && dateInTimezone(attempt.startedAt, course.timezone) === date)
     .reduce((sum, attempt) => sum + Math.max(0, attempt.activeSeconds), 0);
-  const result: TrainingPlan = { date, assignment, meeting, nextMeeting, phase, practicedMinutes: practicedSeconds / 60, dailyGoalMinutes: assignment ? course.dailyGoalMinutes : 0, queue: [], blocked: [], missed: [], liveUpcoming: [], extras: [] };
+  const estimatedLcwoMinutes = lcwoPracticeMinutes(course, attempts, lcwoRuns).unloggedRuns
+    .filter(run => dateInTimezone(run.recordedAt, course.timezone) === date).length;
+  const result: TrainingPlan = { date, assignment, meeting, nextMeeting, phase, practicedMinutes: practicedSeconds / 60 + estimatedLcwoMinutes,
+    estimatedLcwoMinutes, dailyGoalMinutes: assignment ? course.dailyGoalMinutes : 0, queue: [], blocked: [], missed: [], liveUpcoming: [], extras: [] };
   const carriedIds = new Set(carriedTasks.filter((item) => item.date === date).map((item) => item.taskId));
 
   if (phase === "practice" && assignment) {

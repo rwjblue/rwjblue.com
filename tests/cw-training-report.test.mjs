@@ -303,7 +303,7 @@ test("LCWO API history uses course-local dates and deduplicates before choosing 
   assert.deepEqual(reportLcwoRunsInWindow(runs, options({ fromDate: "2026-09-11" }), course().timezone), []);
 });
 
-test("LCWO imports fill only matching measurements and retain maximum WPM and accuracy as evidence", () => {
+test("LCWO imports fill group errors and assigned lengths while leaving adaptive trainer gaps", () => {
   const runs = [
     lcwo("words", { score: 0, maximumWpm: 21 }),
     lcwo("calls", { kind: "callsign", sourceType: "callsigns", score: 700, maximumWpm: 26 }),
@@ -316,8 +316,8 @@ test("LCWO imports fill only matching measurements and retain maximum WPM and ac
   for (const key of ["wordsWpm", "callsignWpm", "wordsMaximumLength", "wordsErrors", "callsignErrors"]) assert.equal(result.answers[key], "");
   for (const kind of ["letters", "figures", "custom"]) {
     assert.equal(result.answers[`${kind}Wpm`], "15");
-    assert.equal(result.answers[`${kind}Length`], "");
-    assert.equal(result.answers[`${kind}ErrorPercent`], "");
+    assert.equal(result.answers[`${kind}Length`], "3");
+    assert.equal(result.answers[`${kind}ErrorPercent`], "29.4");
     assert.equal(result.lcwoSources.find(source => source.run.kind === kind).run.accuracyPercent, 70.6);
   }
   assert.equal(result.lcwoSources.find(source => source.run.kind === "words").run.maximumWpm, 21);
@@ -342,7 +342,7 @@ test("latest LCWO run wins across API and manual sources without carrying forwar
   assert.equal(result.answers.lettersLength, "3");
   assert.equal(result.answers.lettersErrorPercent, "0");
   assert.equal(result.answers.lettersWpm, "");
-  assert.deepEqual(result.sourceLcwoIds, ["new-words"]);
+  assert.deepEqual(result.sourceLcwoIds, ["new-words", "imported-letters"]);
   assert.deepEqual(result.sourceAttemptIds, ["manual-letters"]);
 });
 
@@ -388,4 +388,53 @@ test("report refresh updates imported sources while preserving deliberate answer
   assert.deepEqual(refreshed.sourceAttemptIds, []);
   assert.deepEqual(refreshed.sourceLcwoIds, suggestions.sourceLcwoIds);
   assert.deepEqual(original, untouched);
+});
+
+
+test("group errors average unique runs at the latest speeds within the report window", () => {
+  const group = (id, extra = {}) => lcwo(id, { kind: "letters", sourceType: "groups",
+    effectiveWpm: 15, characterWpm: 25, accuracyPercent: 90, ...extra });
+  const first = group("first", { recordedAt: "2026-09-08T14:00:00.000Z", accuracyPercent: 80 });
+  const latest = group("latest", { recordedAt: "2026-09-10T14:00:00.000Z", accuracyPercent: 100 });
+  const runs = [latest, first, first,
+    group("other-effective", { effectiveWpm: 13, accuracyPercent: 0 }),
+    group("other-character", { characterWpm: 30, accuracyPercent: 0 }),
+    group("other-drill", { kind: "figures", accuracyPercent: 0 }),
+    group("outside", { recordedAt: "2026-09-08T03:59:00.000Z", accuracyPercent: 0 }),
+    group("missing-accuracy", { accuracyPercent: undefined })];
+  const before = structuredClone(runs);
+  const result = draft([], { lcwoRuns: runs });
+  assert.equal(result.answers.lettersErrorPercent, "10");
+  assert.equal(result.answers.lettersLength, "3");
+  assert.equal(result.answers.lettersWpm, "15");
+  assert.equal(result.answers.figuresErrorPercent, "100");
+  assert.deepEqual(new Set(result.sourceLcwoIds), new Set(["first", "latest", "other-drill", "other-effective", "other-character", "missing-accuracy"]));
+  assert.deepEqual(result.lcwoSources.find(source => source.run.kind === "letters").missingKeys, []);
+  assert.deepEqual(runs, before);
+});
+
+test("group summaries preserve zero, missing measurements, rounding, and manual overrides", () => {
+  const group = (id, extra = {}) => lcwo(id, { kind: "letters", sourceType: "groups",
+    effectiveWpm: 15, characterWpm: 25, ...extra });
+  assert.equal(draft([], { lcwoRuns: [group("perfect", { accuracyPercent: 100 })] }).answers.lettersErrorPercent, "0");
+  const absent = draft([], { lcwoRuns: [group("absent")] });
+  assert.equal(absent.answers.lettersErrorPercent, "");
+  assert.deepEqual(absent.lcwoSources[0].missingKeys, ["lettersErrorPercent"]);
+  const unknownSpeed = draft([], { lcwoRuns: [group("old", { accuracyPercent: 0 }),
+    group("new", { recordedAt: "2026-09-10T14:00:00.000Z", effectiveWpm: undefined, accuracyPercent: 95 })] });
+  assert.equal(unknownSpeed.answers.lettersWpm, "");
+  assert.equal(unknownSpeed.answers.lettersErrorPercent, "5");
+  assert.deepEqual(unknownSpeed.sourceLcwoIds, ["new", "old"]);
+  const rounded = draft([], { lcwoRuns: [group("a", { accuracyPercent: 99.9 }), group("b", { accuracyPercent: 99.8 }), group("c", { accuracyPercent: 100 })] });
+  assert.equal(rounded.answers.lettersErrorPercent, "0.1");
+  const edited = applyReportSuggestions({ answers: { lettersLength: "4", lettersErrorPercent: "" } }, rounded,
+    ["lettersLength", "lettersErrorPercent"]);
+  assert.equal(edited.answers.lettersLength, "4");
+  assert.equal(edited.answers.lettersErrorPercent, "");
+  const manual = draft([attempt("manual", { endedAt: "2026-09-10T14:00:00.000Z",
+    lcwoResult: { kind: "letters", groupLength: 5, errorPercent: 12 } })],
+    { lcwoRuns: [group("import", { accuracyPercent: 100 })] });
+  assert.equal(manual.answers.lettersLength, "5");
+  assert.equal(manual.answers.lettersErrorPercent, "12");
+  assert.deepEqual(manual.sourceLcwoIds, ["import"]);
 });

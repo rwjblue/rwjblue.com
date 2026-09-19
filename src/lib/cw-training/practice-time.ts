@@ -10,13 +10,13 @@ interface PracticeTimerState {
   audioPlaying: boolean;
 }
 
-/** Audio playback is credited separately from media events, never by this timer. */
+/** Audio playback and external ICR runs are credited separately, never by this timer. */
 export function timedPracticeDelta(elapsedSeconds: number, state: PracticeTimerState): {
   activeSeconds: number;
   recallSeconds: number;
   interrupted: boolean;
 } {
-  if (!state.running) return { activeSeconds: 0, recallSeconds: 0, interrupted: false };
+  if (!state.running || state.kind === "icr") return { activeSeconds: 0, recallSeconds: 0, interrupted: false };
   if (!state.visible || !Number.isFinite(elapsedSeconds) || elapsedSeconds < 0 || elapsedSeconds >= 4) {
     return { activeSeconds: 0, recallSeconds: 0, interrupted: true };
   }

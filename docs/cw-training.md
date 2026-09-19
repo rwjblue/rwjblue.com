@@ -125,10 +125,19 @@ block. Saving partial practice preserves the unfinished objective. If the
 current block was started by mistake, choose Abort block in Focus to discard
 it and select another exercise without recording practice.
 
-For ICR practice in LCWO or another trainer, return to Finish block and enter
-your total minutes actually practiced. The companion's timer pauses when its
-tab is hidden or you switch apps, so it does not measure the whole external
-practice session. The entered minutes are saved to history and daily totals.
+ICR blocks have no running stopwatch. Open the ICR entry, practice in LCWO,
+then choose Finish block. When connected, Finish fetches fresh LCWO results and
+suggests one minute per unique Letters, Figures, or Custom run completed after
+opening the block and through clicking Finish, excluding runs already covered
+by saved ICR practice. Save practice records that estimate as one block; the
+same imported runs no longer add extra minutes to daily totals. The completion
+checkbox remains your decision. Words, Callsigns, or other trainers need manually
+entered minutes. Deliberate minute edits survive a fetch; failed fetches keep
+the block and offer Sync LCWO again without preventing a manual save.
+
+Sync LCWO is available in ICR Focus and the Finish dialog. Concurrent sync
+requests in the same page share one request. Other block types do not trigger
+an LCWO fetch when finished.
 
 Log practice elsewhere starts with an Other practice group: Word recognition,
 ICR (instant character recognition), POTA (Parks on the Air), CWT, On-air (other),
@@ -392,10 +401,12 @@ Verified automatic submission is tracked in
 ### LCWO result imports
 
 Once connected, entering Report imports saved LCWO results when the last
-successful import is at least five minutes old. Sync LCWO also requests an
-import; the server shares successful results for one minute to avoid repeated
-logins from nearby clicks or tabs. This runs while using Report, with no new
-background schedule. Offline or failed imports keep the saved results and draft.
+successful import is at least five minutes old. Sync LCWO in Report or ICR
+Focus/Finish requests an import immediately, and opening Finish for an ICR
+block does the same automatically. These requests use `fresh: true` to bypass
+the server's one-minute cache so a just-completed run can be imported. Older
+clients without that flag still share cached results for one minute. There is
+no background polling. Offline or failed imports keep saved results and drafts.
 Only unedited report answers refresh; manually entered values stay intact.
 
 LCWO uses a normal username/password login and authenticated
@@ -423,20 +434,44 @@ measurements. LCWO's maintainer
 Report filtering converts those instants to the course timezone. Imports retain
 runs from the first course preparation date onward. Repeating an import does not
 duplicate records, and upstream deletion does not erase already saved evidence.
-Imported results provide no practice minutes, completed passes, or assignment
-credit because LCWO does not export those measurements. Reports retain separate
-LCWO source IDs alongside their ordinary practice source IDs.
+Each unique imported Letters, Figures, or Custom code-group run counts as one
+estimated exercise minute, based on the owner's one-minute exercise setting.
+Today includes these minutes in its daily total and labels the added estimate
+in saved practice; Report shows the estimate for all speeds in its selected
+window. Words, Callsigns, and ordinary Koch lessons do not add estimated time.
+The API does not measure duration, typing, checking, or breaks. Imports do not
+create practice entries, completed passes, or assignment completion credit.
 
-The latest run per drill in the selected report window supplies available
-values, whether it was imported or entered with practice. Callsign and word
-scores and code-group effective speeds can populate report answers. LCWO's
-maximum successful-copy WPM is shown as evidence, not substituted for an
-exercise's starting/fixed speed. Its stored accuracy uses the better of two
-error calculations, so it is shown without silently converting it to the
-report's displayed Errors percentage. Enter the missing speeds, lengths, and
-error counts/percentages in the report. The source card identifies the gaps;
-if a newer run arrives after an edit, review whether the preserved answer still
-belongs to that run.
+To avoid double-counting, a run whose completion timestamp falls within a saved
+ICR practice block with positive duration adds no extra time. This includes
+extra ICR and review blocks, even across midnight. ICR blocks may contain several
+drills; entering one result does not restrict their time coverage. For legacy
+results attached to other task types, only the named drill is covered. Manually logged block times must
+reflect when the practice actually happened. Reimporting or editing a block
+recalculates the totals from unique IDs instead of accumulating minutes.
+Report estimates use course-local dates and retain the imported result IDs
+alongside their ordinary practice source IDs.
+
+Imported Letters, Figures, and Custom groups assume the assigned group length
+of 3. Their error percentage is the arithmetic mean of `100 - accuracy` across
+imported runs in the selected report window at the latest run's character and
+effective speeds, rounded to one decimal place. Different drills and speeds
+are never averaged together. Runs without accuracy are excluded from the mean;
+if none have accuracy, errors remain blank. If the latest run lacks either
+speed, only that run can supply errors. The source card shows the average, run
+count, speeds, and assumed length, and saved reports retain all contributing
+LCWO IDs. This deliberately uses exported accuracy as the practical reporting
+measurement rather than requiring manual transcription of displayed errors.
+Importing individual runs does not create separate timed practice blocks.
+
+Callsign and word scores still use the latest run; their training speeds,
+maximum word length, and error counts need manual entry. Maximum successful-copy
+WPM remains evidence rather than a substitute for starting/fixed speed.
+A newer manually recorded result takes precedence over imports for its drill,
+including imports completed within that block. Explicit report edits, including
+group lengths and blanks, survive refreshes. Review preserved edits when newer
+results arrive. The length assumption applies only to imported code groups,
+not to Word Training maximum length or ordinary Koch lessons.
 
 Koch lessons retain their own identity and are not treated as custom-character
 groups. Plaintext, QTC, and mixed code-group results do not map to this report.

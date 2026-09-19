@@ -168,7 +168,7 @@ import "../../styles/cw-training.css";
             <div class="training-focus-meta">
               <div>
                 <span class="training-timer" id="training-timer">00:00</span
-                ><span class="training-small">active practice</span>
+                ><span class="training-small" id="training-timer-label">active practice</span>
               </div><p id="training-focus-target"></p>
             </div>
             <div id="training-audio-box" hidden>
@@ -422,7 +422,7 @@ import "../../styles/cw-training.css";
     <dialog id="training-finish-dialog">
       <form id="training-finish-form">
         <h2 id="training-finish-title">Finish this block</h2><label
-          >Total minutes actually practiced<input
+          ><span id="training-finish-minutes-label">Total minutes actually practiced</span><input
             id="training-finish-minutes"
             name="minutes"
             type="number"
@@ -443,6 +443,10 @@ import "../../styles/cw-training.css";
             type="checkbox"
           /> <span id="training-finish-complete-label">I completed this exercise's requirements</span></label
         ><p id="training-finish-help" class="training-small"></p><p id="training-finish-recording" class="training-small" hidden></p>
+        <div id="training-finish-icr-sync" hidden>
+          <button type="button" data-action="sync-lcwo">Sync LCWO</button>
+          <p class="training-small" data-icr-sync-status role="status" aria-live="polite"></p>
+        </div>
         <div id="training-finish-sending" hidden>
           <p id="training-finish-sending-info" class="training-small"></p>
           <label class="training-check"><input id="training-finish-sending-summary" name="sendingSummary" type="checkbox" checked /> Include sending summary in history</label>

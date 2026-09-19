@@ -17,10 +17,17 @@ test("playing audio is never credited by the recall timer", () => {
   assert.deepEqual(timedPracticeDelta(1, timer({ audioPlaying: true, recalling: true })), zeroDelta);
 });
 
-test("running non-audio practice receives active time but never recall time", () => {
-  for (const kind of ["sending", "icr", "simulator", "live", "review"]) {
+test("running timed non-audio practice receives active time but never recall time", () => {
+  for (const kind of ["sending", "simulator", "live", "review"]) {
     assert.deepEqual(timedPracticeDelta(0.75, timer({ kind })), { activeSeconds: 0.75, recallSeconds: 0, interrupted: false });
     assert.deepEqual(timedPracticeDelta(0.75, timer({ kind, recalling: true })), { activeSeconds: 0.75, recallSeconds: 0, interrupted: false });
+  }
+});
+
+test("ICR never accrues stopwatch time, even if a restored timer is running", () => {
+  for (const elapsed of [0.75, 60, 900, NaN]) {
+    assert.deepEqual(timedPracticeDelta(elapsed, timer({ kind: "icr" })), zeroDelta);
+    assert.deepEqual(timedPracticeDelta(elapsed, timer({ kind: "icr", visible: false, recalling: true })), zeroDelta);
   }
 });
 
