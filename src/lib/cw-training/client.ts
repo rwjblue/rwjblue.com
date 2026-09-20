@@ -514,6 +514,12 @@ export async function initTraining() {
   view = navigation.view;
   function setView(next: string) {
     navigation.navigate(next);
+    if (next === "focus") {
+      $("training-focus").scrollIntoView({ block: "start", behavior: "instant" });
+      // Long instructions and speed controls can put Play below a mobile viewport.
+      if (!$("training-audio-box").hidden && audio.getBoundingClientRect().bottom > window.innerHeight)
+        audio.scrollIntoView({ block: "center", behavior: "instant" });
+    }
   }
   function applyView(next: TrainingView) {
     view = next;
@@ -1391,11 +1397,24 @@ export async function initTraining() {
       : `${runnerProgressText(active)} Engine time, settings, and this run's score are recorded when you save. Separate runs keep separate results.`;
     if (active.task.kind === "icr") $("training-finish-help").textContent =
       "Minutes come from synced one-minute code-group runs during this block. Enter minutes for Words, Callsigns, or another trainer yourself. Mark complete when you have met your practice objective.";
-    $<HTMLDialogElement>("training-finish-dialog").showModal();
+    const dialog = $<HTMLDialogElement>("training-finish-dialog");
+    const title = $("training-finish-title");
+    const minutes = $("training-finish-minutes");
+    const save = $<HTMLButtonElement>("training-finish-save");
+    const syncIcr = active.task.kind === "icr" && snapshot().lcwo?.configured;
+    const initialFocus = syncIcr ? title : active.task.kind === "audio" || active.runner ? save : minutes;
+    // Select native dialog focus before opening so mobile never opens the keyboard
+    // for time that has already been captured. Save is disabled during LCWO sync.
+    for (const element of [title, minutes, save]) element.toggleAttribute("autofocus", element === initialFocus);
     updateLcwoSyncControls();
-    if (active.task.kind === "icr" && snapshot().lcwo?.configured)
+    dialog.showModal();
+    if (syncIcr)
       void syncLcwo().catch(() => {
         // The shared sync status offers retry without discarding the finish form.
+      }).finally(() => {
+        // Do not steal focus from edits made while the request was in flight.
+        if (!disposed && dialog.open && state.active?.id === active.id && document.activeElement === title)
+          save.focus();
       });
   }
 

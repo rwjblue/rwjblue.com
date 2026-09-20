@@ -421,7 +421,7 @@ import "../../styles/cw-training.css";
 
     <dialog id="training-finish-dialog">
       <form id="training-finish-form">
-        <h2 id="training-finish-title">Finish this block</h2><label
+        <h2 id="training-finish-title" tabindex="-1">Finish this block</h2><label
           ><span id="training-finish-minutes-label">Total minutes actually practiced</span><input
             id="training-finish-minutes"
             name="minutes"
@@ -469,7 +469,7 @@ import "../../styles/cw-training.css";
             rows="2"
             maxlength="4000"></textarea></label
         ><div class="training-actions">
-          <button class="primary" type="submit">Save practice</button><button
+          <button id="training-finish-save" class="primary" type="submit">Save practice</button><button
             id="training-finish-back"
             type="button"
             data-close>Keep practicing</button

@@ -45,6 +45,12 @@ aborting a block does not let Back resurrect it. An aborted block also stays
 discarded after refreshing, and Back from the initial view still leaves the
 tracker normally.
 
+Starting or resuming practice scrolls to Focus, with the audio player kept in
+view even on a small screen. Finish initially focuses Save practice for audio
+and embedded Morse Runner blocks. Connected LCWO blocks focus the dialog
+heading while results sync, then Save practice unless the user has moved focus
+to another field. Manual drills and unconnected ICR blocks still focus minutes.
+
 The imported course begins Saturday, September 5, 2026. Classes are Mondays and
 Thursdays, 3:30-4:30 p.m. in `America/New_York`, from September 7 through October
 29. Saturday/Sunday/Monday prepare for Monday; Tuesday/Wednesday/Thursday
