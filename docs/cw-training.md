@@ -45,9 +45,10 @@ aborting a block does not let Back resurrect it. An aborted block also stays
 discarded after refreshing, and Back from the initial view still leaves the
 tracker normally.
 
-Starting or resuming practice scrolls to Focus, with the audio player kept in
-view even on a small screen. Finish initially focuses Save practice for audio
-and embedded Morse Runner blocks. Connected LCWO blocks focus the dialog
+In-app navigation scrolls to the top of the selected view below the shared
+header. Every view and practice type uses the same content-top position,
+including starting or resuming a block. Finish initially focuses Save practice
+for audio and embedded Morse Runner blocks. Connected LCWO blocks focus the dialog
 heading while results sync, then Save practice unless the user has moved focus
 to another field. Manual drills and unconnected ICR blocks still focus minutes.
 

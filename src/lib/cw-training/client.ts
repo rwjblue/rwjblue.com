@@ -514,12 +514,9 @@ export async function initTraining() {
   view = navigation.view;
   function setView(next: string) {
     navigation.navigate(next);
-    if (next === "focus") {
-      $("training-focus").scrollIntoView({ block: "start", behavior: "instant" });
-      // Long instructions and speed controls can put Play below a mobile viewport.
-      if (!$("training-audio-box").hidden && audio.getBoundingClientRect().bottom > window.innerHeight)
-        audio.scrollIntoView({ block: "center", behavior: "instant" });
-    }
+    // In-app navigation starts below the shared header, for every view and task.
+    if (next === view)
+      $(`training-${view}`).scrollIntoView({ block: "start", behavior: "instant" });
   }
   function applyView(next: TrainingView) {
     view = next;
