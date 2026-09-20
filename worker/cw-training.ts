@@ -1,4 +1,5 @@
 import { createRemoteJWKSet, jwtVerify } from "jose";
+import { DAILY_LISTENING_ASSIGNMENT, DAILY_LISTENING_ID, DAILY_LISTENING_PATH } from "../src/lib/cw-training/daily-listening.ts";
 import { parseCwtResult } from "../src/lib/cw-training/cwt-result.ts";
 import { parseQsoCount, usesQsoCount } from "../src/lib/cw-training/qso-count.ts";
 import { OTHER_PRACTICE_ASSIGNMENT_ID, otherPracticeActivity } from "../src/lib/cw-training/other-practice.ts";
@@ -14,6 +15,7 @@ import type {
   TrainingPreferences,
   TrainingSnapshot,
   TrainingSync,
+  TrainingResource,
 } from "../src/lib/cw-training/types.ts";
 
 export const TRAINING_COURSE_ID = "cwa-intermediate-2026-09";
@@ -445,11 +447,13 @@ async function snapshot(db: D1Database, owner: string, lcwoConfigured = false): 
     db.prepare("SELECT payload FROM training_reports WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
     db.prepare("SELECT payload FROM training_lcwo_results WHERE owner_id = ? AND course_id = ? ORDER BY recorded_at, id").bind(owner, TRAINING_COURSE_ID),
     db.prepare("SELECT synced_at AS payload FROM training_lcwo_sync WHERE owner_id = ? AND course_id = ?").bind(owner, TRAINING_COURSE_ID),
+    db.prepare("SELECT payload FROM training_audio WHERE id = ?").bind(DAILY_LISTENING_ID),
   ]);
   const curriculum = results[0]?.results[0]?.payload;
   if (!curriculum) throw new TrainingError(503, "The training curriculum is not available yet.");
   return {
     userId: owner,
+    ...(results[7]?.results[0]?.payload ? { dailyListening: JSON.parse(results[7].results[0].payload) as TrainingResource } : {}),
     course: JSON.parse(curriculum) as TrainingCourse,
     attempts: results[1]!.results.map((item) => JSON.parse(item.payload) as TrainingAttempt),
     materials: results[2]!.results.map((item) => JSON.parse(item.payload) as TrainingMaterial),
@@ -483,6 +487,13 @@ async function sync(db: D1Database, owner: string, update: TrainingSync, lcwoCon
     }
   }
   for (const item of update.attempts ?? []) {
+    if (item.assignmentId === DAILY_LISTENING_ASSIGNMENT || item.taskId === DAILY_LISTENING_ID) {
+      if (!current.dailyListening || item.assignmentId !== DAILY_LISTENING_ASSIGNMENT || item.taskId !== DAILY_LISTENING_ID ||
+          item.context !== "practice" || item.review !== true || item.completed !== false) {
+        invalid("Daily listening is optional practice without assignment completion.");
+      }
+      continue;
+    }
     if (item.assignmentId === OTHER_PRACTICE_ASSIGNMENT_ID || item.taskId.startsWith("other:")) {
       if (item.assignmentId !== OTHER_PRACTICE_ASSIGNMENT_ID || !otherPracticeActivity(item.taskId)) {
         invalid("Unknown self-directed practice activity.");
@@ -657,6 +668,33 @@ async function calendar(request: Request, env: Env, token: string): Promise<Resp
   });
 }
 
+/** Only called after owner authentication; small curated audio supports native seeking. */
+async function dailyAudio(request: Request, db: D1Database): Promise<Response> {
+  const row = await db.prepare("SELECT audio_base64 FROM training_audio WHERE id = ?")
+    .bind(DAILY_LISTENING_ID).first<{ audio_base64: string }>();
+  if (!row) throw new TrainingError(404, "This recording has not been imported yet.");
+  if (!row.audio_base64.length || row.audio_base64.length > 700_000) throw new TrainingError(503, "Recording unavailable.");
+  const bytes = Uint8Array.from(atob(row.audio_base64), character => character.charCodeAt(0));
+  const headers = new Headers({ ...PRIVATE_HEADERS, "Content-Type": "audio/mpeg", "Accept-Ranges": "bytes", "Content-Disposition": 'inline; filename="bob-77-words-playback.mp3"' });
+  const range = request.method === "GET" ? request.headers.get("Range") : null;
+  let start = 0;
+  let end = bytes.length - 1;
+  if (range) {
+    const match = /^bytes=(\d*)-(\d*)$/.exec(range);
+    if (match && (match[1] || match[2])) {
+      start = match[1] ? Number(match[1]) : Math.max(0, bytes.length - Number(match[2]));
+      end = match[1] && match[2] ? Math.min(Number(match[2]), end) : end;
+    }
+    if (!match || (!match[1] && !match[2]) || !Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= bytes.length) {
+      headers.set("Content-Range", `bytes */${bytes.length}`);
+      return new Response(null, { status: 416, headers });
+    }
+    headers.set("Content-Range", `bytes ${start}-${end}/${bytes.length}`);
+  }
+  headers.set("Content-Length", String(end - start + 1));
+  return new Response(request.method === "HEAD" ? null : bytes.slice(start, end + 1), { status: range ? 206 : 200, headers });
+}
+
 export async function trainingResponse(request: Request, env: Env): Promise<Response> {
   try {
     if (!env.TRAINING_DB) throw new TrainingError(503, "Training storage is not configured.");
@@ -669,6 +707,7 @@ export async function trainingResponse(request: Request, env: Env): Promise<Resp
       ["/api/cw-training/sync", ["POST"]],
       ["/api/cw-training/lcwo/sync", ["POST"]],
       ["/api/cw-training/calendar-token", ["POST", "DELETE"]],
+      [DAILY_LISTENING_PATH, ["GET", "HEAD"]],
     ]);
     const allowed = routes.get(path);
     if (!allowed) throw new TrainingError(404, "Training route not found.");
@@ -676,6 +715,7 @@ export async function trainingResponse(request: Request, env: Env): Promise<Resp
       return new Response(null, { status: 405, headers: { ...PRIVATE_HEADERS, Allow: allowed.join(", ") } });
     }
     const owner = await identity(request, env);
+    if (path === DAILY_LISTENING_PATH) return await dailyAudio(request, env.TRAINING_DB);
     if (request.method !== "GET") sameOrigin(request);
     if (path.endsWith("/login")) {
       return new Response(null, { status: 302, headers: { ...PRIVATE_HEADERS, Location: "/radio/cw-training/" } });

@@ -88,6 +88,7 @@ import "../../styles/cw-training.css";
         </div>
         <div id="training-blocked"></div>
         <div id="training-preparation"></div>
+        <section id="training-daily-listening" class="training-section" aria-label="Optional daily listening" hidden></section>
         <details id="training-today-history-panel" class="training-panel training-today-history">
           <summary>
             <span id="training-today-history-heading">Practiced today</span>
@@ -196,13 +197,21 @@ import "../../styles/cw-training.css";
               </div>
               <div id="training-bookmarks" class="training-actions"></div>
               <label class="training-check"
-                ><input id="training-recall-pause" type="checkbox" /> Pause for recall
+                ><input id="training-auto-replay" type="checkbox" /> Automatically replay
                 between passes</label
               >
-              <p class="training-small">
+              <p id="training-repeat-help" class="training-small"></p>
+              <p id="training-audio-source-help" class="training-small">
                 Audio streams from the official source and needs a connection.
                 Played time and pass coverage are recorded separately.
               </p>
+              <details id="training-word-list" class="training-panel" hidden>
+                <summary>View word list</summary>
+                <div class="training-panel-body">
+                  <p class="training-small">Bob's supplied text, preserved as received. It may differ from the recording.</p>
+                  <div id="training-word-list-text" class="training-history-notes"></div>
+                </div>
+              </details>
             </div>
             <div id="training-timer-box">
               <button

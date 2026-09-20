@@ -195,6 +195,66 @@ automatic transcription. Initial playback needs a user gesture. Media Session
 controls are progressive enhancements; uninterrupted playback with a locked
 phone still requires real-device verification. Offline audio is not promised.
 
+### Optional daily word listening
+
+Today includes **Bob's 77 Words** after the recording is imported. It is optional
+every day, including Fridays and after the course, with a ten-minute listening
+suggestion. The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis
+indicates approximately 40-WPM characters with extra word spacing. The supplied
+text has 75 entries (70 unique), is preserved as received, and is available in
+a collapsed **View word list** panel. It is a reference, not a verified transcript.
+
+The daily recording automatically repeats by default, including after ten minutes
+and after a partially heard loop. Other audio pauses between passes by default;
+when enabled, its automatic repeats still stop at the block's planned pass count.
+The **Automatically replay between passes** checkbox saves two independent
+device preferences in IndexedDB: `dailyListeningAutoReplay` (default true) and
+`audioAutoReplay` (default false). Neither choice changes when switching exercises
+or refreshing, and neither syncs to other devices.
+
+Each new daily listening session starts at the beginning. An unfinished block
+retains the usual device-local pause/resume behavior, but finishing saves no
+cross-session recording position. Ten minutes is a suggestion, not an automatic
+stop. Today's counter sums actual listening across saved and current sessions in
+the course timezone, without duplicating pending entries or including recall.
+All practice time still contributes to the main daily total. Daily listening is
+saved under `daily-listening` / `bob-77-words` as optional practice with no
+assignment completion; full loops are retained as listening history. Reports
+list it among practice sources without filling required course-audio answers.
+
+The original 11,025 Hz MPEG-2.5 file stopped just before its reported end in
+browser verification, preventing the normal `ended` event and replay. The importer
+uses FFmpeg to make a 44,100 Hz mono, 32-kbps playback copy (115.931429 seconds,
+464,056 bytes for this attachment). This changes the encoding without changing
+the words, tone, speed, or spacing. The source attachment is left untouched.
+FFmpeg and ffprobe must be installed to run the import task.
+
+The playback MP3 is stored as bounded base64 in the existing private D1 database,
+with metadata and text. `/api/cw-training/audio/bob-77-words` verifies the same
+owner identity as the training API before serving GET/HEAD or byte-range requests.
+Responses are `private, no-store`. Audio and instructor text never enter public
+static assets, the repository, or the service worker cache. Offline audio and
+uninterrupted locked-phone playback are not promised.
+
+Apply `migrations/cw-training/0004_daily_listening.sql` before deploying the new
+Worker. Import the two original attachments locally, then prepare private SQL:
+
+```bash
+mise run cw-training:import-daily-listening -- \
+  /path/to/77.5.40.mp3 '/path/to/77 all current.txt'
+npx wrangler d1 migrations apply rwjblue-cw-training --remote
+npx wrangler d1 execute rwjblue-cw-training --remote \
+  --file .tmp/cw-training-daily-listening.sql
+```
+
+Use `--local` for development. The importer accepts a source MP3 up to 500,000
+bytes and text up to 10,000 characters; the playback copy must also fit within
+500,000 bytes. Private SQL stays in ignored `.tmp/`.
+Bounded staging chunks publish the recording atomically only after all chunks
+arrive; rerunning an import replaces the asset without changing practice history.
+An interrupted import can leave staging rows, but cannot replace the previous
+recording with a partial file. This is a curated import, not a general upload UI.
+
 Audio exercises offer verified official speed variants in Today, Week, and
 Focus, before or after a block starts. Starting or pausing a block does not
 disable any recording-speed selector. Selectors for the active exercise show

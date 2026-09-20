@@ -1,4 +1,5 @@
 import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
+import { audioAutoReplay, createDailyListeningBlock, dailyListeningSeconds, DAILY_LISTENING_SECONDS, isDailyListening, shouldReplayAudio } from "./daily-listening";
 import type { PlannedTask } from "./plan";
 import { listeningGuidance } from "./guidance";
 import { sendingReadingHtml } from "./sending-reading";
@@ -641,6 +642,13 @@ export async function initTraining() {
       return `<div class="training-practice-card"><h4>${title}</h4><p class="training-small">${description}</p><button type="button" ${active ? 'data-action="resume"' : `data-review="${escapeHtml(item.task.id)}"`}>${active ? runnerEnded() ? "View results" : `Return to ${title}` : `Practice ${title}`}</button></div>`;
     }).join("");
     $("training-extra-panel").hidden = !current.extras.length;
+    const daily = snapshot().dailyListening;
+    $("training-daily-listening").hidden = !daily;
+    if (daily) {
+      const active = state.active && isDailyListening(state.active.task);
+      $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>${escapeHtml(daily.title)}</h3><p>Listen for whole words at about 40 WPM character speed, with extra word spacing. The original recording is ${time(daily.durationSeconds ?? 0)} and can repeat while you practice.</p><p data-daily-listening-progress></p><button type="button" data-action="${active ? "resume" : "daily-listening"}">${active ? "Return to listening" : "Start listening"}</button></div>`;
+      updateDailyListeningProgress();
+    }
     $("training-extra").innerHTML = current.extras.slice(0, 3).map((item) => taskRow(item)).join("");
     const missed = current.missed.filter(
       (item) => !state.dismissed.includes(item.task.id),
@@ -767,6 +775,16 @@ export async function initTraining() {
     $("training-focus-kind").textContent =
       `${active.review ? "Extra review · " : ""}${active.task.kind}${active.task.speedWpm ? ` · ${active.task.speedWpm} WPM` : ""}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
     $("training-focus-title").textContent = active.task.title;
+    const daily = isDailyListening(active.task);
+    $<HTMLInputElement>("training-auto-replay").checked = audioAutoReplay(state, active.task);
+    $("training-repeat-help").textContent = daily
+      ? "Remembered on this device for Bob's words only. Replays continue until you pause, including after 10 minutes."
+      : "Remembered on this device for other listening exercises. Replays stop when the block's planned passes are complete.";
+    $("training-audio-source-help").textContent = daily
+      ? "A playback copy of Bob's recording, with the same speed and spacing, streams through your private training account. A connection is required. Each new session starts at the beginning."
+      : "Audio streams from the official source and needs a connection. Played time and pass coverage are recorded separately.";
+    $("training-word-list").hidden = !daily;
+    $("training-word-list-text").textContent = daily ? active.resource?.text ?? "" : "";
     $("training-recording-label").textContent = recordingLabel(active.task, active.resource);
     const focusSpeedChoice = speedChoice(active.task, true);
     $("training-focus-speed").innerHTML = focusSpeedChoice;
@@ -781,6 +799,11 @@ export async function initTraining() {
     if (active.task.kind === "audio" && active.resource?.durationSeconds) {
       $("training-focus-target").textContent = `${active.targetPasses}-pass block · ${time(active.resource.durationSeconds)} per pass`;
       $("training-focus-kind").textContent = `${active.review ? "Extra review · " : ""}Audio · ${recordingLabel(active.task, active.resource)}${active.context === "class" ? " · Class use (not practice minutes)" : ""}`;
+    }
+    if (daily) {
+      $("training-focus-kind").textContent = "Optional daily listening · Original recording";
+      $("training-focus-objective").textContent = "Listen for 10 minutes daily. These minutes count toward practice time; this exercise has no required passes or assignment completion.";
+      $("training-focus-target").textContent = "10 minutes suggested · Repeat as long as useful";
     }
     $("training-focus-instructions").textContent = active.task.instructions;
     $("training-focus-settings").textContent = active.task.settings ?? "";
@@ -812,12 +835,16 @@ export async function initTraining() {
       $("training-listening-passes").textContent =
         `This ${active.review ? "review " : ""}block targets ${active.targetPasses} whole pass${active.targetPasses === 1 ? "" : "es"}. You may pause and resume; skipping audio does not complete a pass. You can mark ${active.review ? "the review block" : "the exercise"} complete when more repetitions would not help.`;
       $("training-scratchpad-prompt").textContent = `${guidance.scratchpadPrompt} To add words to your session report, write a line like Learned: word, another word.`;
+      if (daily) {
+        $("training-listening-approach").textContent = "Listen for the sound of whole words and abbreviations. Use the word list below when useful.";
+        $("training-listening-passes").textContent = "Aim for 10 listening minutes across today's sessions. Pause whenever you need a break; the suggestion is not a time limit.";
+      }
     }
     $("training-focus-resource").innerHTML = runner
       ? `${active.runner ? '<p class="training-small">If the embedded runner is unavailable, save this block as partial, practice externally, then use Done elsewhere to record that separate run.</p>' : ""}${link(WEB_MORSE_RUNNER_URL, "Open standalone Web Morse Runner", "training-button")}`
       : active.resource?.unresolved
       ? `<p class="training-notice">${escapeHtml(active.resource.unresolved)} Read the source or ask your instructor before choosing a substitute.</p>`
-      : `${link(active.resource?.url || (active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? "Open official audio separately" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
+      : `${link(active.resource?.url || (active.task.kind !== "audio" ? active.task.sourceUrl : undefined), isAudio ? daily ? "Open recording separately" : "Open official audio separately" : "Open practice resource", "training-button")}${active.task.kind === "live" ? ` ${link("/radio/cw-practice/", "CWT schedule and exchanges", "training-button")}` : ""}`;
     if (active.task.kind === "icr")
       $("training-focus-resource").insertAdjacentHTML(
         "afterbegin",
@@ -846,7 +873,7 @@ export async function initTraining() {
       const material = snapshot().materials.find(
         (item) => item.id === active.task.id,
       );
-      const text = material?.text || active.resource?.text;
+      const text = daily ? undefined : material?.text || active.resource?.text;
       $("training-focus-text").hidden = !text;
       $("training-sending-text").innerHTML = sendingReadingHtml(
         text ?? "",
@@ -1086,8 +1113,17 @@ export async function initTraining() {
     const progress = $<HTMLProgressElement>("training-progress");
     progress.value = Math.min(totals.totalSeconds / 60, progress.max);
   }
+  function updateDailyListeningProgress() {
+    if (!state.snapshot) return;
+    const seconds = dailyListeningSeconds(snapshot().attempts, state.active, dateInTimezone(new Date().toISOString(), snapshot().course.timezone), snapshot().course.timezone);
+    for (const element of $("training-daily-listening").querySelectorAll<HTMLElement>("[data-daily-listening-progress]")) {
+      element.textContent = `${time(seconds)} of 10:00 listening today${seconds >= DAILY_LISTENING_SECONDS ? " · Daily suggestion reached" : ""}`;
+    }
+    return seconds;
+  }
   function updateClock() {
     updateTodayTime();
+    const dailySeconds = updateDailyListeningProgress();
     if (!state.active) return;
     const icr = state.active.task.kind === "icr";
     $("training-timer").textContent = time(icr
@@ -1104,6 +1140,7 @@ export async function initTraining() {
     $("training-recall-time").textContent = `${time(active.recallSeconds ?? 0)} recall included in active practice${recalling ? " · timing now" : ""}`;
     $("training-pass-count").textContent =
       `${active.completedPasses} of ${active.targetPasses} passes this block complete${active.previousPasses ? ` · ${active.previousPasses} recorded earlier` : ""}`;
+    if (isDailyListening(active.task)) $("training-pass-count").textContent = `${time(dailySeconds ?? 0)} of 10:00 listening today${(dailySeconds ?? 0) >= DAILY_LISTENING_SECONDS ? " · Daily suggestion reached" : ""} · ${active.completedPasses} full loops this session`;
     $("training-bookmarks").innerHTML = active.bookmarks
       .map(
         (mark, index) =>
@@ -1334,7 +1371,8 @@ export async function initTraining() {
     $("training-finish-icr-sync").hidden = active.task.kind !== "icr";
     updateIcrFinishEstimate();
     $("training-finish-back").textContent = active.runner ? "Back to results" : "Keep practicing";
-    $<HTMLInputElement>("training-finish-minutes").readOnly = !!active.runner;
+    $<HTMLInputElement>("training-finish-minutes").readOnly = !!active.runner || isDailyListening(active.task);
+    $<HTMLInputElement>("training-finish-recall").readOnly = isDailyListening(active.task);
     const recording = active.runner ? runnerMetadata(active) : audioSessionNote(active);
     $("training-finish-recording").hidden = !recording;
     $("training-finish-recording").textContent = recording ? `Saved automatically with this entry: ${recording}` : "";
@@ -1362,6 +1400,7 @@ export async function initTraining() {
       : active.task.kind === "audio" ? "Mark this exercise complete"
       : "I completed this exercise's requirements";
     const complete = $<HTMLInputElement>("training-finish-complete");
+    complete.closest("label")!.hidden = isDailyListening(active.task);
     const minimumPasses = active.review ? active.targetPasses : active.task.minimumPasses;
     const passReady =
       !minimumPasses ||
@@ -1394,6 +1433,7 @@ export async function initTraining() {
       : `${runnerProgressText(active)} Engine time, settings, and this run's score are recorded when you save. Separate runs keep separate results.`;
     if (active.task.kind === "icr") $("training-finish-help").textContent =
       "Minutes come from synced one-minute code-group runs during this block. Enter minutes for Words, Callsigns, or another trainer yourself. Mark complete when you have met your practice objective.";
+    if (isDailyListening(active.task)) $("training-finish-help").textContent = "Save this optional listening session. Listening time contributes to the daily suggestion; recall time counts only toward total practice. Your next session starts at the beginning.";
     const dialog = $<HTMLDialogElement>("training-finish-dialog");
     const title = $("training-finish-title");
     const minutes = $("training-finish-minutes");
@@ -1558,6 +1598,14 @@ export async function initTraining() {
     updateClock();
     void persist();
     if (!continuePlayback || view !== "focus") return;
+    if (shouldReplayAudio(active, wholePass, audioAutoReplay(state, active.task))) {
+      void play();
+      return;
+    }
+    if (isDailyListening(active.task)) {
+      $("training-audio-state").textContent = "Recording finished. Tap play for another loop, or enable automatic replay.";
+      return;
+    }
     if (!wholePass) {
       $("training-audio-state").textContent =
         "Some of this pass was skipped. Listening time is saved, but the full pass is still incomplete. Tap play for another pass.";
@@ -1568,12 +1616,17 @@ export async function initTraining() {
         "This block's passes are complete. Finish the block, or play again for extra review.";
       return;
     }
-    if ($<HTMLInputElement>("training-recall-pause").checked)
-      $("training-audio-state").textContent =
-        "Take a moment to recall what you heard. Start recall to time it, or tap play for the next pass.";
-    else void play();
+    $("training-audio-state").textContent =
+      "Take a moment to recall what you heard. Start recall to time it, or tap play for the next pass.";
   }
   audio.addEventListener("ended", () => finishAudioPass());
+  $<HTMLInputElement>("training-auto-replay").addEventListener("change", event => {
+    if (!state.active) return;
+    const enabled = (event.target as HTMLInputElement).checked;
+    if (isDailyListening(state.active.task)) state.dailyListeningAutoReplay = enabled;
+    else state.audioAutoReplay = enabled;
+    void persist();
+  });
   if ("mediaSession" in navigator) {
     for (const [action, handler] of Object.entries({
       play: (): void => {
@@ -1816,6 +1869,23 @@ export async function initTraining() {
       return;
     }
     switch (button.dataset.action) {
+      case "daily-listening": {
+        if (state.active) {
+          setView("focus");
+          notice("Finish and save the current block, or abort it, before starting another exercise.");
+          break;
+        }
+        const resource = snapshot().dailyListening;
+        if (!resource) break;
+        state.active = createDailyListeningBlock({ ...resource, url: safeUrl(resource.url) }, new Date().toISOString(), crypto.randomUUID());
+        running = false;
+        recalling = false;
+        render();
+        setView("focus");
+        void persist();
+        void play();
+        break;
+      }
       case "sync-lcwo":
         void syncLcwo().catch(() => notice(lcwoSyncMessage));
         break;
@@ -2089,7 +2159,7 @@ export async function initTraining() {
           "Remove null characters from the note before saving.";
         return;
       }
-      const activeSeconds = active.runner ? Math.floor(active.runner.elapsedSeconds) : Math.round(Number(data.get("minutes")) * 60);
+      const activeSeconds = active.runner ? Math.floor(active.runner.elapsedSeconds) : isDailyListening(active.task) ? Math.floor(active.activeSeconds) : Math.round(Number(data.get("minutes")) * 60);
       if (
         !Number.isFinite(activeSeconds) ||
         activeSeconds < 0 ||
@@ -2097,7 +2167,7 @@ export async function initTraining() {
       )
         return;
       const recallSeconds = active.task.kind === "audio"
-        ? Math.round(Number(data.get("recall")) * 60) : 0;
+        ? isDailyListening(active.task) ? Math.floor(active.recallSeconds ?? 0) : Math.round(Number(data.get("recall")) * 60) : 0;
       if (!Number.isFinite(recallSeconds) || recallSeconds < 0 || recallSeconds > activeSeconds) {
         $("training-finish-help").textContent = "Recall minutes are included in the total. Enter recall time between zero and your total practice time.";
         return;
@@ -2106,7 +2176,7 @@ export async function initTraining() {
         $("training-finish-help").textContent = "Keep the scratchpad under 10,000 characters and remove null characters before saving.";
         return;
       }
-      let completed = data.get("complete") === "on";
+      let completed = !isDailyListening(active.task) && data.get("complete") === "on";
       if (active.runner) completed = active.review
         ? completed && active.runner.status === "completed"
         : runnerAssignmentProgress(active, snapshot().attempts).complete;

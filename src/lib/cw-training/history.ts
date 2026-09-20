@@ -1,4 +1,5 @@
 import { dateInTimezone } from "./plan.ts";
+import { DAILY_LISTENING_ID, DAILY_LISTENING_TITLE } from "./daily-listening.ts";
 import { isMorseRunner } from "./morse-runner.ts";
 import { otherPracticeActivity } from "./other-practice.ts";
 import { cwtResultSummary } from "./cwt-result.ts";
@@ -53,7 +54,7 @@ export function renderPracticeHistory(attempts: readonly TrainingAttempt[], opti
     hour: "numeric", minute: "2-digit",
   });
   return `<ul class="training-history-list" role="list">${attempts.map((attempt) => {
-    const title = otherPracticeActivity(attempt.taskId)?.title ?? titles.get(attempt.taskId) ?? "Practice";
+    const title = attempt.taskId === DAILY_LISTENING_ID ? DAILY_LISTENING_TITLE : otherPracticeActivity(attempt.taskId)?.title ?? titles.get(attempt.taskId) ?? "Practice";
     const started = new Date(attempt.startedAt);
     const stamp = Number.isFinite(started.getTime()) ? formatter.format(started) : "Time unavailable";
     const duration = attempt.activeSeconds < 60 ? `${Math.round(attempt.activeSeconds)} sec` : `${Math.round(attempt.activeSeconds / 6) / 10} min`;

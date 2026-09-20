@@ -5,6 +5,8 @@ import { Miniflare } from "miniflare";
 import { exportJWK, generateKeyPair, SignJWT } from "jose";
 import { buildTrainingCalendar, trainingResponse, TRAINING_COURSE_ID } from "../worker/cw-training.ts";
 import { OTHER_PRACTICE_ASSIGNMENT_ID, OTHER_PRACTICE_ACTIVITIES } from "../src/lib/cw-training/other-practice.ts";
+import { dailyListeningSql } from "../scripts/cw-training/import-daily-listening.mjs";
+import { DAILY_LISTENING_ASSIGNMENT, DAILY_LISTENING_ID, DAILY_LISTENING_PATH } from "../src/lib/cw-training/daily-listening.ts";
 
 const origin = "http://localhost:8787";
 const now = () => new Date().toISOString();
@@ -23,7 +25,7 @@ let env;
 before(async () => {
   miniflare = new Miniflare({ modules: true, script: "export default { fetch() { return new Response('test'); } }", d1Databases: { TRAINING_DB: "cw-training-tests" } });
   db = await miniflare.getD1Database("TRAINING_DB");
-  for (const migration of ["0001_training.sql", "0002_reports.sql", "0003_lcwo.sql"]) {
+  for (const migration of ["0001_training.sql", "0002_reports.sql", "0003_lcwo.sql", "0004_daily_listening.sql"]) {
     const schema = await readFile(new URL(`../migrations/cw-training/${migration}`, import.meta.url), "utf8");
     const statements = schema.replace(/^--.*$/gm, "").trim().split(/;\n(?=\n|$)/).filter((sql) => sql.trim());
     await db.batch(statements.map((sql) => db.prepare(sql)));
@@ -69,6 +71,55 @@ function otherPracticeAttempt(overrides = {}) {
     context: "practice", review: true, completed: false, ...overrides,
   });
 }
+
+test("private daily audio imports intact, supports ranges, and only records optional practice", async () => {
+  const audio = Buffer.from(Array.from({ length: 80_000 }, (_, i) => i % 256));
+  const resource = { id: DAILY_LISTENING_ID, title: "Synthetic recording", url: DAILY_LISTENING_PATH, format: "audio", text: "SYNTHETIC WORDS", durationSeconds: 116 };
+  const sql = dailyListeningSql(audio, resource);
+  const statements = sql.split(";\n").filter(s => s.trim());
+  for (const statement of statements) assert.ok(statement.length < 40_000);
+  await db.batch(statements.map(statement => db.prepare(statement)));
+  const assetPath = `audio/${DAILY_LISTENING_ID}`;
+  try {
+    const denied = await trainingResponse(request(assetPath), { ...env, TRAINING_ACCESS_TEAM: "https://private-audio-test.cloudflareaccess.com", TRAINING_ACCESS_AUD: "aud", TRAINING_OWNER_EMAIL: "owner@example.org" });
+    assert.equal(denied.status, 401);
+    const full = await trainingResponse(request(assetPath), env);
+    assert.equal(full.status, 200);
+    assert.equal(full.headers.get("Cache-Control"), "private, no-store");
+    assert.equal(full.headers.get("Content-Type"), "audio/mpeg");
+    assert.deepEqual(Buffer.from(await full.arrayBuffer()), audio);
+    for (const [range, start, end] of [["bytes=0-1", 0, 1], ["bytes=70000-", 70000, 79999], ["bytes=-4", 79996, 79999], ["bytes=79998-999999", 79998, 79999]]) {
+      const part = await trainingResponse(request(assetPath, "GET", undefined, { Range: range }), env);
+      assert.equal(part.status, 206);
+      assert.equal(part.headers.get("Content-Range"), `bytes ${start}-${end}/${audio.length}`);
+      assert.deepEqual(Buffer.from(await part.arrayBuffer()), audio.subarray(start, end + 1));
+    }
+    for (const range of ["bytes=80000-", "bytes=-0", "bytes=12-3", "bytes=", "bytes=0-1,4-6"]) {
+      assert.equal((await trainingResponse(request(assetPath, "GET", undefined, { Range: range }), env)).status, 416);
+    }
+    const head = await trainingResponse(request(assetPath, "HEAD"), env);
+    assert.equal(head.status, 200);
+    assert.equal(head.headers.get("Content-Length"), String(audio.length));
+    assert.equal(await head.text(), "");
+    const bootstrap = await (await trainingResponse(request("bootstrap"), env)).json();
+    assert.deepEqual(bootstrap.dailyListening, resource);
+    assert.equal(JSON.stringify(bootstrap).includes(audio.toString("base64")), false);
+    const practice = attempt({ assignmentId: DAILY_LISTENING_ASSIGNMENT, taskId: DAILY_LISTENING_ID, completed: false, review: true, completedPasses: 5 });
+    for (const overrides of [{ completed: true }, { review: false }, { context: "class" }, { assignmentId: "s1d1" }]) {
+      assert.equal((await trainingResponse(request("sync", "POST", { attempts: [{ ...practice, ...overrides }] }), env)).status, 400);
+    }
+    const saved = await trainingResponse(request("sync", "POST", { attempts: [practice] }), env);
+    assert.equal(saved.status, 200);
+    assert.deepEqual((await saved.json()).attempts.find(entry => entry.id === practice.id), practice);
+    // Incomplete staging never replaces the already imported asset.
+    const partial = dailyListeningSql(Buffer.alloc(80_000, 42), resource, "interrupted").split(";\n").filter(s => s.trim());
+    await db.batch(partial.filter((_, i) => i !== 2).map(statement => db.prepare(statement)));
+    assert.deepEqual(Buffer.from(await (await trainingResponse(request(assetPath), env)).arrayBuffer()), audio);
+  } finally {
+    await db.prepare("DELETE FROM training_audio WHERE id = ?").bind(DAILY_LISTENING_ID).run();
+  }
+  assert.equal((await trainingResponse(request(assetPath), env)).status, 404);
+});
 
 test("bootstrap is private and never enrolls from a client identity header", async () => {
   const response = await trainingResponse(request("bootstrap"), env);

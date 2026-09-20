@@ -1,4 +1,5 @@
 import { audioRecordingNote, audioVariants } from "./audio-variants.ts";
+import { isDailyListening } from "./daily-listening.ts";
 import type { ActiveBlock, AudioRecordingUsage } from "./storage.ts";
 import type { TrainingResource } from "./types.ts";
 import type { TrainingAudioResult } from "./report-types.ts";
@@ -78,6 +79,7 @@ export function switchAudioRecording(active: ActiveBlock, resource: TrainingReso
 
 /** Legacy blocks keep their original note; mixed-speed blocks include their own marks. */
 export function audioSessionNote(active: ActiveBlock): string {
+  if (isDailyListening(active.task)) return `Audio recording: ${active.task.title}. Compatible playback copy (approximately 40 WPM characters, extra word spacing). Source: ${active.resource?.url ?? active.task.sourceUrl}`;
   if (active.audioHistory === undefined || active.task.kind !== "audio") {
     return audioRecordingNote(active.task, active.resource);
   }

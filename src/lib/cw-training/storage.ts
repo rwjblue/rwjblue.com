@@ -63,6 +63,9 @@ export interface TrainingDeviceState {
   /** Device-local choices; each active block keeps its own recording snapshot. */
   audioSpeedPreference?: "assigned" | "next";
   audioSpeedOverrides?: Record<string, number>;
+  /** Independent repeat choices; absent means pause for course audio, loop daily words. */
+  audioAutoReplay?: boolean;
+  dailyListeningAutoReplay?: boolean;
   /** Last ten saved takes on this device; only text summaries sync to the account. */
   sendingRecordings?: { attemptId: string; take: SendingTake }[];
 }

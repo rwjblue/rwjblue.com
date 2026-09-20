@@ -116,6 +116,8 @@ export interface TrainingPreferences {
 }
 
 export interface TrainingSnapshot {
+  /** Curated optional audio and reference text, delivered only after sign-in. */
+  dailyListening?: TrainingResource;
   userId: string;
   course: TrainingCourse;
   attempts: TrainingAttempt[];

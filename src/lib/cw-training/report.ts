@@ -1,5 +1,6 @@
 import { audioVariants } from "./audio-variants.ts";
 import { otherPracticeActivity } from "./other-practice.ts";
+import { DAILY_LISTENING_ID, DAILY_LISTENING_TITLE } from "./daily-listening.ts";
 import { usesQsoCount } from "./qso-count.ts";
 import { dateInTimezone } from "./plan.ts";
 import { isReportDate, REPORT_FIELDS } from "./report-fields.ts";
@@ -218,6 +219,9 @@ export function buildReportDraft(
     if (value?.trim()) cwtAnswers.set(key, [...(cwtAnswers.get(key) ?? []), value.trim()]);
   };
   for (const attempt of windowed) {
+    if (attempt.taskId === DAILY_LISTENING_ID) {
+      source(attempt.id, `${DAILY_LISTENING_TITLE} (${dateInTimezone(attempt.startedAt, course.timezone)}): ${Math.max(0, attempt.activeSeconds - (attempt.recallSeconds ?? 0))} seconds optional listening`);
+    }
     if (usesQsoCount(attempt.taskId) && attempt.qsoCount !== undefined) {
       source(attempt.id, `${otherPracticeActivity(attempt.taskId)!.title} (${dateInTimezone(attempt.startedAt, course.timezone)}): ${attempt.qsoCount} QSOs`);
     }
