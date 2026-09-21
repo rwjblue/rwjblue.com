@@ -12,7 +12,7 @@ const course = (tasks = [task()]) => ({
   resources: [source()],
 });
 
-test("the official catalog contains only public recording metadata from the six short families", () => {
+test("the official catalog covers every curriculum audio family with public recording metadata", () => {
   assert.equal(catalog.sourceUrl, "https://cwops.org/intermediate-practice-files/");
   assert.match(catalog.verifiedAt, /^\d{4}-\d{2}-\d{2}$/);
   const families = new Set();
@@ -25,7 +25,7 @@ test("the official catalog contains only public recording metadata from the six 
     for (const variant of group.variants) {
       assert.ok(Object.keys(variant).every((key) => ["id", "title", "url", "format", "speedWpm", "durationSeconds"].includes(key)), "no curriculum instructions or text are published");
       assert.equal(variant.format, "audio");
-      assert.ok([10, 13, 15, 18, 20, 25].includes(variant.speedWpm));
+      assert.ok([10, 13, 15, 18, 20, 25, 30].includes(variant.speedWpm));
       const url = new URL(variant.url);
       assert.equal(url.protocol, "https:");
       assert.ok(["cwops.org", "cwa.cwops.org"].includes(url.hostname));
@@ -34,10 +34,10 @@ test("the official catalog contains only public recording metadata from the six 
       assert.ok(Number.isFinite(variant.durationSeconds) && variant.durationSeconds > 0, "only playable, measured recordings are selectable");
     }
   }
-  assert.deepEqual([...families].sort(), ["prefix", "short-phrase", "short-pota", "short-qso", "short-word", "suffix"]);
+  assert.deepEqual([...families].sort(), ["cwt", "long-qso", "long-story", "prefix", "short-phrase", "short-pota", "short-qso", "short-story", "short-word", "suffix"]);
 });
 
-test("indexing keeps exact exercise IDs and excludes long QSO lookalikes and unsupported links", () => {
+test("indexing keeps long and short QSO identities separate and excludes unsupported links", () => {
   const groups = indexAudioVariants(`
     <h2>Intermediate Long QSO Practice Files</h2><a href="https://cwops.org/wp-content/uploads/2022/07/qso201_10.mp3">10</a>
     <h2>Intermediate Short QSO Files</h2>
@@ -48,10 +48,25 @@ test("indexing keeps exact exercise IDs and excludes long QSO lookalikes and uns
     <a href="http://cwa.cwops.org/wp-content/uploads/QSO_201_18.mp3">18</a>
     <a href="https://cwa.cwops.org/wp-content/uploads/QSO_201_30.mp3">30</a>
     <h2>Unrecognized new section</h2><a href="https://cwa.cwops.org/wp-content/uploads/QSO_201_25.mp3">25</a>`);
-  assert.deepEqual(groups.map((group) => group.id), ["short-qso-qso201", "short-qso-qso2010"]);
-  assert.deepEqual(groups[0].variants.map((variant) => variant.speedWpm), [10, 13]);
-  assert.equal(groups[1].variants.length, 1);
-  assert.ok(groups.flatMap((group) => group.variants).every((variant) => !variant.url.includes("2022/07")));
+  assert.deepEqual(groups.map((group) => group.id), ["long-qso-qso201", "short-qso-qso201", "short-qso-qso2010"]);
+  assert.deepEqual(groups[0].variants.map((variant) => variant.speedWpm), [10]);
+  assert.deepEqual(groups[1].variants.map((variant) => variant.speedWpm), [10, 13]);
+  assert.equal(groups[2].variants.length, 1);
+  assert.ok(groups.slice(1).flatMap((group) => group.variants).every((variant) => !variant.url.includes("2022/07")));
+});
+
+test("indexing includes both long-story series, new short stories, and 30 WPM CWT", () => {
+  const groups = indexAudioVariants(`
+    <h2>Intermediate Long Short Story Practice Files 100 Series</h2>
+    <a href="https://cwops.org/wp-content/uploads/2022/11/SS101_18.mp3">18</a>
+    <h2>Intermediate Long Short Story Practice Files</h2>
+    <a href="https://cwops.org/wp-content/uploads/2022/11/SS201_20.mp3">20</a>
+    <h2>Intermediate New Short Story Practice Files</h2>
+    <a href="https://cwa.cwops.org/wp-content/uploads/SL201_25.mp3">25</a>
+    <h2>Intermediate CWT Practice Files</h2>
+    <a href="https://cwops.org/wp-content/uploads/2018/12/CWT-213-30.mp3">30</a>`);
+  assert.deepEqual(groups.map(group => group.id), ["cwt-cwt213", "long-story-ss101", "long-story-ss201", "short-story-sl201"]);
+  assert.equal(groups[0].variants[0].speedWpm, 30);
 });
 
 test("duplicate index links are deduplicated and contradictory identities fail closed", () => {
@@ -72,8 +87,39 @@ test("variants anchor to the exact assigned URL and returned data cannot mutate 
   assert.deepEqual(audioVariants(undefined), []);
   assert.deepEqual(audioVariants(source({ url: "https://example.invalid/WD101_10.mp3" })), []);
   assert.deepEqual(audioVariants(source({ url: "https://cwa.cwops.org/wp-content/uploads/WD101_10.mp3?alternate=1" })), []);
-  assert.deepEqual(audioVariants(source({ url: "https://cwops.org/wp-content/uploads/2022/07/qso201_10.mp3" })), [], "long QSO cannot select similarly named short QSO");
+  assert.ok(audioVariants(source({ url: "https://cwops.org/wp-content/uploads/2022/07/qso201_10.mp3" })).every(variant => variant.id.startsWith("cw-audio-long-qso-")), "long QSO cannot select similarly named short QSO");
   assert.deepEqual(audioVariants(source({ url: "https://cwa.cwops.org/wp-content/uploads/WD405_10.mp3" })), [], "broken official links are not advertised as alternatives");
+});
+
+test("QSO203-13 selects faster long recordings while preserving the assigned task", () => {
+  const assigned = source({ title: "QSO203-13", url: "https://cwops.org/wp-content/uploads/2022/07/qso203_13.mp3" });
+  const original = course([task({ title: "QSO203-13", speedWpm: 13 })]);
+  original.resources = [assigned];
+  assert.deepEqual(audioVariants(assigned).map(variant => variant.speedWpm), [10, 13, 15, 18, 20, 25]);
+  for (const speed of [13, 15, 18, 20, 25]) {
+    const projected = courseWithAudioVariants(original, "assigned", { listening: speed });
+    const projectedTask = projected.assignments[0].tasks[0];
+    const selected = projected.resources.find(resource => resource.id === projectedTask.resourceId);
+    assert.equal(selected.url, `https://cwops.org/wp-content/uploads/2022/07/qso203_${speed}.mp3`);
+    assert.equal(selected.speedWpm, speed);
+    assert.ok(selected.durationSeconds > 0);
+    assert.equal(projectedTask.speedWpm, 13);
+    assert.equal(projectedTask.minimumPasses, 2);
+  }
+  assert.equal(selectAudioVariant(assigned, 13, "next").speedWpm, 15);
+  assert.ok(audioVariants(assigned).every(variant => variant.id.startsWith("cw-audio-long-qso-")));
+  assert.ok(audioVariants({ url: "https://cwa.cwops.org/wp-content/uploads/QSO_203_13.mp3" }).every(variant => variant.id.startsWith("cw-audio-short-qso-")));
+});
+
+test("long-story assignments gain stretch recordings and single-speed CWT stays assigned", () => {
+  for (const exercise of ["SS101", "SS103"]) {
+    const assigned = source({ url: `https://cwops.org/wp-content/uploads/2022/11/${exercise}_18.mp3` });
+    assert.deepEqual(audioVariants(assigned).filter(variant => variant.speedWpm >= 18).map(variant => variant.speedWpm), [18, 20, 25]);
+    assert.equal(selectAudioVariant(assigned, 18, "next").speedWpm, 20);
+  }
+  const assigned = source({ url: "https://cwops.org/wp-content/uploads/2020/06/CWT-201-20.mp3" });
+  assert.deepEqual(audioVariants(assigned).map(variant => variant.speedWpm), [20]);
+  assert.equal(selectAudioVariant(assigned, 20, "next"), assigned);
 });
 
 test("selection keeps assigned speed or chooses exactly the next verified faster recording", () => {

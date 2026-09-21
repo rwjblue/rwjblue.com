@@ -10,12 +10,17 @@ const outputPath = "src/data/cw-training/audio-variants.json";
 const cachePath = ".tmp/cw-training-audio-duration-cache.json";
 const execFileAsync = promisify(execFile);
 const families = new Map([
+  ["Intermediate Long Short Story Practice Files 100 Series", "long-story"],
+  ["Intermediate Long Short Story Practice Files", "long-story"],
+  ["Intermediate Long QSO Practice Files", "long-qso"],
+  ["Intermediate CWT Practice Files", "cwt"],
   ["Intermediate Short Word Files", "short-word"],
   ["Intermediate Short Phrase Files", "short-phrase"],
   ["Intermediate Short QSO Files", "short-qso"],
   ["Intermediate Short POTA Files", "short-pota"],
   ["Intermediate Suffix Files", "suffix"],
   ["Intermediate Prefix Files", "prefix"],
+  ["Intermediate New Short Story Practice Files", "short-story"],
 ]);
 const nodeText = (node) => node.nodeName === "#text" ? node.value : (node.childNodes ?? []).map(nodeText).join("");
 
@@ -32,8 +37,8 @@ export function indexAudioVariants(html) {
         try { url = new URL(href, AUDIO_INDEX_URL); } catch { return; }
         if (url.protocol !== "https:" || !["cwops.org", "cwa.cwops.org"].includes(url.hostname) || url.username || url.password || url.search || url.hash) return;
         const name = decodeURIComponent(url.pathname.split("/").at(-1));
-        const match = /^([a-z]+)[_-]?(\d+)[_-](10|13|15|18|20|25)\.mp3$/i.exec(name);
-        if (match) {
+        const match = /^([a-z]+)[_-]?(\d+)[_-](10|13|15|18|20|25|30)\.mp3$/i.exec(name);
+        if (match && (match[3] !== "30" || family === "cwt")) {
           const exercise = `${match[1].toUpperCase()}${match[2]}`;
           const speedWpm = Number(match[3]);
           const id = `${family}-${exercise.toLowerCase()}`;

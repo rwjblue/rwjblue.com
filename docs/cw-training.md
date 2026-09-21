@@ -28,7 +28,7 @@ class and on-air practice.
 - Materials accepts pasted instructions, text files, or links. Preparation,
   class-only, reference, and unknown-purpose material remain distinct. Revisions
   preserve previous text and never rewrite completed practice.
-- Preferences provides the short-recording speed default, class join link,
+- Preferences provides the recording speed default, class join link,
   calendar reminder time and duration, data export, and device clearing.
 - Report prepares the numbered class report from saved practice, with editable
   answers, a prefilled Google Form, and a history of submitted copies.
@@ -195,7 +195,7 @@ automatic transcription. Initial playback needs a user gesture. Media Session
 controls are progressive enhancements; uninterrupted playback with a locked
 phone still requires real-device verification. Offline audio is not promised.
 
-Short recordings offer verified official speed variants in Today, Week, and
+Audio exercises offer verified official speed variants in Today, Week, and
 Focus, before or after a block starts. Starting or pausing a block does not
 disable any recording-speed selector. Selectors for the active exercise show
 its actual recording and change that block wherever they appear; other
@@ -203,11 +203,15 @@ exercises' selectors prepare their next block without changing current work.
 Assigned speed is the default; Next faster selects the nearest available speed
 above the assignment. Per-exercise choices offer the assigned or faster speeds.
 These preferences stay on this device and never rewrite the curriculum or old
-history. Changing the short-recording default affects future blocks only.
+history. Changing the recording speed default affects future blocks only.
 The checked-in public metadata catalog contains only official file links,
 exercise identities, speeds, and measured durations, not
 course text.
 Its exact source URLs distinguish short and long QSO files with similar names.
+The catalog covers long QSOs, both long-story series, CWT, short words,
+phrases, QSOs, POTA, prefixes, suffixes, and new short stories. CWT recordings
+also support 30 WPM when officially published. A selector appears only when
+at least two verified recordings are available at or above the assigned speed.
 Recordings without verified speed variants retain their original recording.
 
 Planning uses the selected recording's measured duration at native 1x playback
@@ -598,6 +602,14 @@ Two source discrepancies intentionally remain unresolved: `CWT209-20` versus
 the index's 25-WPM file, and `CWT213-25` versus its 30-WPM file. Ask the advisor
 which recording to use before updating these resource records. The importer
 never invents a substitute URL. Session/day speed exceptions are preserved.
+
+The September 24, 2026 audio audit checked all 120 audio assignments across
+the 48 practice days. All 117 available assigned recordings match the speed
+catalog. The remaining entries are the two CWT discrepancies above and
+`WD405-25`, whose published URL returns HTTP 404 (all six WD405 speeds failed
+verification). `CWT201-20` and `CWT202-20` each have only one published speed.
+Exercises already assigned the fastest recording also have no speed selector.
+These source limitations are not filled with guessed URLs or different exercises.
 
 Instructor files are added through Materials, not by changing the curriculum.
 There is no inbox access or automatic email ingestion. Unknown file formats,

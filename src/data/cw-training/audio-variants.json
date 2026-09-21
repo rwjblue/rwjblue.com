@@ -1,7 +1,3872 @@
 {
   "sourceUrl": "https://cwops.org/intermediate-practice-files/",
-  "verifiedAt": "2026-09-08",
+  "verifiedAt": "2026-09-24",
   "groups": [
+    {
+      "id": "cwt-cwt201",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt201-20",
+          "title": "CWT201-20",
+          "url": "https://cwops.org/wp-content/uploads/2020/06/CWT-201-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 56.071
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt202",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt202-20",
+          "title": "CWT202-20",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-202-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 55.444
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt203",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt203-20",
+          "title": "CWT203-20",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-203-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 54.869
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt204",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt204-20",
+          "title": "CWT204-20",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-204-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 52.936
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt205",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt205-20",
+          "title": "CWT205-20",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-205-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 41.808
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt206",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt206-20",
+          "title": "CWT206-20",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-206-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 44.89
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt207",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt207-20",
+          "title": "CWT207-20",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-207-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 48.234
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt208",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt208-20",
+          "title": "CWT208-20",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-208-20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 41.076
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt209",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt209-25",
+          "title": "CWT209-25",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-209-25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 38.099
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt210",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt210-25",
+          "title": "CWT210-25",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-210-25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 39.143
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt211",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt211-25",
+          "title": "CWT211-25",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-211-25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 35.904
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt212",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt212-25",
+          "title": "CWT212-25",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-212-25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 44.263
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt213",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt213-30",
+          "title": "CWT213-30",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-213-30.mp3",
+          "format": "audio",
+          "speedWpm": 30,
+          "durationSeconds": 36.113
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt214",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt214-30",
+          "title": "CWT214-30",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-214-30.mp3",
+          "format": "audio",
+          "speedWpm": 30,
+          "durationSeconds": 34.128
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt215",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt215-30",
+          "title": "CWT215-30",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-215-30.mp3",
+          "format": "audio",
+          "speedWpm": 30,
+          "durationSeconds": 30.784
+        }
+      ]
+    },
+    {
+      "id": "cwt-cwt216",
+      "variants": [
+        {
+          "id": "cw-audio-cwt-cwt216-30",
+          "title": "CWT216-30",
+          "url": "https://cwops.org/wp-content/uploads/2018/12/CWT-216-30.mp3",
+          "format": "audio",
+          "speedWpm": 30,
+          "durationSeconds": 35.121
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso201",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso201-10",
+          "title": "QSO201-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso201_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 654.432
+        },
+        {
+          "id": "cw-audio-long-qso-qso201-13",
+          "title": "QSO201-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso201_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 505.116
+        },
+        {
+          "id": "cw-audio-long-qso-qso201-15",
+          "title": "QSO201-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso201_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 438.556
+        },
+        {
+          "id": "cw-audio-long-qso-qso201-18",
+          "title": "QSO201-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso201_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 366.771
+        },
+        {
+          "id": "cw-audio-long-qso-qso201-20",
+          "title": "QSO201-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso201_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 330.722
+        },
+        {
+          "id": "cw-audio-long-qso-qso201-25",
+          "title": "QSO201-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso201_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 265.991
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso202",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso202-10",
+          "title": "QSO202-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso202_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 698.004
+        },
+        {
+          "id": "cw-audio-long-qso-qso202-13",
+          "title": "QSO202-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso202_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 542.419
+        },
+        {
+          "id": "cw-audio-long-qso-qso202-15",
+          "title": "QSO202-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso202_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 473.037
+        },
+        {
+          "id": "cw-audio-long-qso-qso202-18",
+          "title": "QSO202-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso202_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 398.275
+        },
+        {
+          "id": "cw-audio-long-qso-qso202-20",
+          "title": "QSO202-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso202_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 360.659
+        },
+        {
+          "id": "cw-audio-long-qso-qso202-25",
+          "title": "QSO202-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso202_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 293.263
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso203",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso203-10",
+          "title": "QSO203-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso203_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 646.386
+        },
+        {
+          "id": "cw-audio-long-qso-qso203-13",
+          "title": "QSO203-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso203_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 499.682
+        },
+        {
+          "id": "cw-audio-long-qso-qso203-15",
+          "title": "QSO203-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso203_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 434.272
+        },
+        {
+          "id": "cw-audio-long-qso-qso203-18",
+          "title": "QSO203-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso203_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 363.741
+        },
+        {
+          "id": "cw-audio-long-qso-qso203-20",
+          "title": "QSO203-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso203_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 328.319
+        },
+        {
+          "id": "cw-audio-long-qso-qso203-25",
+          "title": "QSO203-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso203_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 264.737
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso204",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso204-10",
+          "title": "QSO204-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso204_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 610.703
+        },
+        {
+          "id": "cw-audio-long-qso-qso204-13",
+          "title": "QSO204-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso204_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 471.47
+        },
+        {
+          "id": "cw-audio-long-qso-qso204-15",
+          "title": "QSO204-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso204_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 409.403
+        },
+        {
+          "id": "cw-audio-long-qso-qso204-18",
+          "title": "QSO204-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso204_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 342.425
+        },
+        {
+          "id": "cw-audio-long-qso-qso204-20",
+          "title": "QSO204-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso204_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 308.779
+        },
+        {
+          "id": "cw-audio-long-qso-qso204-25",
+          "title": "QSO204-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso204_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 248.436
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso205",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso205-10",
+          "title": "QSO205-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso205_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 616.502
+        },
+        {
+          "id": "cw-audio-long-qso-qso205-13",
+          "title": "QSO205-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso205_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 477.217
+        },
+        {
+          "id": "cw-audio-long-qso-qso205-15",
+          "title": "QSO205-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso205_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 415.15
+        },
+        {
+          "id": "cw-audio-long-qso-qso205-18",
+          "title": "QSO205-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso205_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 348.172
+        },
+        {
+          "id": "cw-audio-long-qso-qso205-20",
+          "title": "QSO205-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso205_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 314.526
+        },
+        {
+          "id": "cw-audio-long-qso-qso205-25",
+          "title": "QSO205-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso205_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 254.183
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso206",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso206-10",
+          "title": "QSO206-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso206_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 693.459
+        },
+        {
+          "id": "cw-audio-long-qso-qso206-13",
+          "title": "QSO206-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso206_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 534.321
+        },
+        {
+          "id": "cw-audio-long-qso-qso206-15",
+          "title": "QSO206-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso206_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 463.372
+        },
+        {
+          "id": "cw-audio-long-qso-qso206-18",
+          "title": "QSO206-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso206_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 386.833
+        },
+        {
+          "id": "cw-audio-long-qso-qso206-20",
+          "title": "QSO206-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso206_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 348.381
+        },
+        {
+          "id": "cw-audio-long-qso-qso206-25",
+          "title": "QSO206-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso206_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 279.418
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso207",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso207-10",
+          "title": "QSO207-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso207_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 644.766
+        },
+        {
+          "id": "cw-audio-long-qso-qso207-13",
+          "title": "QSO207-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso207_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 499.473
+        },
+        {
+          "id": "cw-audio-long-qso-qso207-15",
+          "title": "QSO207-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso207_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 434.69
+        },
+        {
+          "id": "cw-audio-long-qso-qso207-18",
+          "title": "QSO207-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso207_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 364.838
+        },
+        {
+          "id": "cw-audio-long-qso-qso207-20",
+          "title": "QSO207-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso207_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 329.73
+        },
+        {
+          "id": "cw-audio-long-qso-qso207-25",
+          "title": "QSO207-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso207_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 266.774
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso208",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso208-10",
+          "title": "QSO208-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso208_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 668.694
+        },
+        {
+          "id": "cw-audio-long-qso-qso208-13",
+          "title": "QSO208-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso208_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 520.58
+        },
+        {
+          "id": "cw-audio-long-qso-qso208-15",
+          "title": "QSO208-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso208_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 454.595
+        },
+        {
+          "id": "cw-audio-long-qso-qso208-18",
+          "title": "QSO208-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso208_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 383.437
+        },
+        {
+          "id": "cw-audio-long-qso-qso208-20",
+          "title": "QSO208-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso208_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 347.65
+        },
+        {
+          "id": "cw-audio-long-qso-qso208-25",
+          "title": "QSO208-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso208_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 283.493
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso209",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso209-10",
+          "title": "QSO209-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso209_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 739.434
+        },
+        {
+          "id": "cw-audio-long-qso-qso209-13",
+          "title": "QSO209-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso209_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 571.832
+        },
+        {
+          "id": "cw-audio-long-qso-qso209-15",
+          "title": "QSO209-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso209_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 497.122
+        },
+        {
+          "id": "cw-audio-long-qso-qso209-18",
+          "title": "QSO209-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso209_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 416.561
+        },
+        {
+          "id": "cw-audio-long-qso-qso209-20",
+          "title": "QSO209-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso209_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 376.071
+        },
+        {
+          "id": "cw-audio-long-qso-qso209-25",
+          "title": "QSO209-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso209_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 303.45
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso210",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso210-10",
+          "title": "QSO210-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso210_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 722.872
+        },
+        {
+          "id": "cw-audio-long-qso-qso210-13",
+          "title": "QSO210-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso210_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 562.951
+        },
+        {
+          "id": "cw-audio-long-qso-qso210-15",
+          "title": "QSO210-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso210_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 491.636
+        },
+        {
+          "id": "cw-audio-long-qso-qso210-18",
+          "title": "QSO210-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso210_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 414.732
+        },
+        {
+          "id": "cw-audio-long-qso-qso210-20",
+          "title": "QSO210-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso210_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 376.123
+        },
+        {
+          "id": "cw-audio-long-qso-qso210-25",
+          "title": "QSO210-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso210_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 306.794
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso211",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso211-10",
+          "title": "QSO211-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso211_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 636.407
+        },
+        {
+          "id": "cw-audio-long-qso-qso211-13",
+          "title": "QSO211-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso211_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 490.592
+        },
+        {
+          "id": "cw-audio-long-qso-qso211-15",
+          "title": "QSO211-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso211_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 425.599
+        },
+        {
+          "id": "cw-audio-long-qso-qso211-18",
+          "title": "QSO211-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso211_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 355.486
+        },
+        {
+          "id": "cw-audio-long-qso-qso211-20",
+          "title": "QSO211-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso211_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 320.273
+        },
+        {
+          "id": "cw-audio-long-qso-qso211-25",
+          "title": "QSO211-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/qso211_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 257.057
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso212",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso212-10",
+          "title": "QSO212-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso212_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 1327.921
+        },
+        {
+          "id": "cw-audio-long-qso-qso212-13",
+          "title": "QSO212-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso212_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 1018.422
+        },
+        {
+          "id": "cw-audio-long-qso-qso212-15",
+          "title": "QSO212-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso212_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 880.443
+        },
+        {
+          "id": "cw-audio-long-qso-qso212-18",
+          "title": "QSO212-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso212_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 731.702
+        },
+        {
+          "id": "cw-audio-long-qso-qso212-20",
+          "title": "QSO212-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso212_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 656.939
+        },
+        {
+          "id": "cw-audio-long-qso-qso212-25",
+          "title": "QSO212-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso212_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 522.827
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso213",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso213-10",
+          "title": "QSO213-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso213_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 676.583
+        },
+        {
+          "id": "cw-audio-long-qso-qso213-13",
+          "title": "QSO213-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso213_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 525.961
+        },
+        {
+          "id": "cw-audio-long-qso-qso213-15",
+          "title": "QSO213-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso213_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 458.774
+        },
+        {
+          "id": "cw-audio-long-qso-qso213-18",
+          "title": "QSO213-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso213_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 386.415
+        },
+        {
+          "id": "cw-audio-long-qso-qso213-20",
+          "title": "QSO213-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso213_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 350.001
+        },
+        {
+          "id": "cw-audio-long-qso-qso213-25",
+          "title": "QSO213-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso213_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 284.747
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso214",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso214-10",
+          "title": "QSO214-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso214_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 724.701
+        },
+        {
+          "id": "cw-audio-long-qso-qso214-13",
+          "title": "QSO214-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso214_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 556.002
+        },
+        {
+          "id": "cw-audio-long-qso-qso214-15",
+          "title": "QSO214-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso214_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 480.822
+        },
+        {
+          "id": "cw-audio-long-qso-qso214-18",
+          "title": "QSO214-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso214_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 399.738
+        },
+        {
+          "id": "cw-audio-long-qso-qso214-20",
+          "title": "QSO214-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso214_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 358.987
+        },
+        {
+          "id": "cw-audio-long-qso-qso214-25",
+          "title": "QSO214-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso214_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 285.844
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso215",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso215-10",
+          "title": "QSO215-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso215_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 726.007
+        },
+        {
+          "id": "cw-audio-long-qso-qso215-13",
+          "title": "QSO215-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso215_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 561.227
+        },
+        {
+          "id": "cw-audio-long-qso-qso215-15",
+          "title": "QSO215-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso215_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 487.77
+        },
+        {
+          "id": "cw-audio-long-qso-qso215-18",
+          "title": "QSO215-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso215_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 408.619
+        },
+        {
+          "id": "cw-audio-long-qso-qso215-20",
+          "title": "QSO215-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso215_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 368.809
+        },
+        {
+          "id": "cw-audio-long-qso-qso215-25",
+          "title": "QSO215-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso215_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 297.39
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso216",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso216-10",
+          "title": "QSO216-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/qso216_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 750.301
+        },
+        {
+          "id": "cw-audio-long-qso-qso216-13",
+          "title": "QSO216-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/qso216_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 584.423
+        },
+        {
+          "id": "cw-audio-long-qso-qso216-15",
+          "title": "QSO216-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/qso216_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 510.445
+        },
+        {
+          "id": "cw-audio-long-qso-qso216-18",
+          "title": "QSO216-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/qso216_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 430.667
+        },
+        {
+          "id": "cw-audio-long-qso-qso216-20",
+          "title": "QSO216-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/qso216_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 390.595
+        },
+        {
+          "id": "cw-audio-long-qso-qso216-25",
+          "title": "QSO216-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/qso216_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 318.706
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso217",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso217-10",
+          "title": "QSO217-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso217_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 751.921
+        },
+        {
+          "id": "cw-audio-long-qso-qso217-13",
+          "title": "QSO217-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso217_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 579.512
+        },
+        {
+          "id": "cw-audio-long-qso-qso217-15",
+          "title": "QSO217-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso217_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 502.66
+        },
+        {
+          "id": "cw-audio-long-qso-qso217-18",
+          "title": "QSO217-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso217_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 419.8
+        },
+        {
+          "id": "cw-audio-long-qso-qso217-20",
+          "title": "QSO217-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso217_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 378.161
+        },
+        {
+          "id": "cw-audio-long-qso-qso217-25",
+          "title": "QSO217-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso217_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 303.45
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso218",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso218-10",
+          "title": "QSO218-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso218_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 949.093
+        },
+        {
+          "id": "cw-audio-long-qso-qso218-13",
+          "title": "QSO218-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso218_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 729.351
+        },
+        {
+          "id": "cw-audio-long-qso-qso218-15",
+          "title": "QSO218-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso218_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 631.339
+        },
+        {
+          "id": "cw-audio-long-qso-qso218-18",
+          "title": "QSO218-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso218_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 525.752
+        },
+        {
+          "id": "cw-audio-long-qso-qso218-20",
+          "title": "QSO218-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso218_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 472.672
+        },
+        {
+          "id": "cw-audio-long-qso-qso218-25",
+          "title": "QSO218-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso218_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 377.429
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso219",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso219-10",
+          "title": "QSO219-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso219_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 760.071
+        },
+        {
+          "id": "cw-audio-long-qso-qso219-13",
+          "title": "QSO219-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso219_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 587.401
+        },
+        {
+          "id": "cw-audio-long-qso-qso219-15",
+          "title": "QSO219-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso219_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 510.392
+        },
+        {
+          "id": "cw-audio-long-qso-qso219-18",
+          "title": "QSO219-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso219_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 427.375
+        },
+        {
+          "id": "cw-audio-long-qso-qso219-20",
+          "title": "QSO219-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso219_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 385.684
+        },
+        {
+          "id": "cw-audio-long-qso-qso219-25",
+          "title": "QSO219-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso219_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 310.817
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso220",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso220-10",
+          "title": "QSO220-10",
+          "url": "https://cwops.org/wp-content/uploads/2025/04/qso220_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 767.281
+        },
+        {
+          "id": "cw-audio-long-qso-qso220-13",
+          "title": "QSO220-13",
+          "url": "https://cwops.org/wp-content/uploads/2025/04/qso220_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 591.894
+        },
+        {
+          "id": "cw-audio-long-qso-qso220-15",
+          "title": "QSO220-15",
+          "url": "https://cwops.org/wp-content/uploads/2025/04/qso220_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 513.684
+        },
+        {
+          "id": "cw-audio-long-qso-qso220-18",
+          "title": "QSO220-18",
+          "url": "https://cwops.org/wp-content/uploads/2025/04/qso220_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 429.413
+        },
+        {
+          "id": "cw-audio-long-qso-qso220-20",
+          "title": "QSO220-20",
+          "url": "https://cwops.org/wp-content/uploads/2025/04/qso220_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 387.042
+        },
+        {
+          "id": "cw-audio-long-qso-qso220-25",
+          "title": "QSO220-25",
+          "url": "https://cwops.org/wp-content/uploads/2025/04/qso220_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 311.026
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso221",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso221-10",
+          "title": "QSO221-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso221_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 751.294
+        },
+        {
+          "id": "cw-audio-long-qso-qso221-13",
+          "title": "QSO221-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso221_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 574.81
+        },
+        {
+          "id": "cw-audio-long-qso-qso221-15",
+          "title": "QSO221-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso221_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 496.13
+        },
+        {
+          "id": "cw-audio-long-qso-qso221-18",
+          "title": "QSO221-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso221_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 411.336
+        },
+        {
+          "id": "cw-audio-long-qso-qso221-20",
+          "title": "QSO221-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso221_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 368.704
+        },
+        {
+          "id": "cw-audio-long-qso-qso221-25",
+          "title": "QSO221-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso221_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 292.218
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso222",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso222-10",
+          "title": "QSO222-10",
+          "url": "https://cwops.org/wp-content/uploads/2023/03/qso222_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 752.548
+        },
+        {
+          "id": "cw-audio-long-qso-qso222-13",
+          "title": "QSO222-13",
+          "url": "https://cwops.org/wp-content/uploads/2023/03/qso222_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 578.676
+        },
+        {
+          "id": "cw-audio-long-qso-qso222-15",
+          "title": "QSO222-15",
+          "url": "https://cwops.org/wp-content/uploads/2023/03/qso222_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 501.197
+        },
+        {
+          "id": "cw-audio-long-qso-qso222-18",
+          "title": "QSO222-18",
+          "url": "https://cwops.org/wp-content/uploads/2023/03/qso222_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 417.605
+        },
+        {
+          "id": "cw-audio-long-qso-qso222-20",
+          "title": "QSO222-20",
+          "url": "https://cwops.org/wp-content/uploads/2023/03/qso222_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 375.601
+        },
+        {
+          "id": "cw-audio-long-qso-qso222-25",
+          "title": "QSO222-25",
+          "url": "https://cwops.org/wp-content/uploads/2023/03/qso222_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 300.263
+        }
+      ]
+    },
+    {
+      "id": "long-qso-qso223",
+      "variants": [
+        {
+          "id": "cw-audio-long-qso-qso223-10",
+          "title": "QSO223-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso223_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 726.791
+        },
+        {
+          "id": "cw-audio-long-qso-qso223-13",
+          "title": "QSO223-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso223_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 557.831
+        },
+        {
+          "id": "cw-audio-long-qso-qso223-15",
+          "title": "QSO223-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso223_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 482.494
+        },
+        {
+          "id": "cw-audio-long-qso-qso223-18",
+          "title": "QSO223-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso223_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 401.253
+        },
+        {
+          "id": "cw-audio-long-qso-qso223-20",
+          "title": "QSO223-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso223_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 360.45
+        },
+        {
+          "id": "cw-audio-long-qso-qso223-25",
+          "title": "QSO223-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/07/qso223_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 287.202
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss101",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss101-10",
+          "title": "SS101-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS101_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 640.221
+        },
+        {
+          "id": "cw-audio-long-story-ss101-13",
+          "title": "SS101-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS101_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 484.218
+        },
+        {
+          "id": "cw-audio-long-story-ss101-15",
+          "title": "SS101-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS101_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 414.628
+        },
+        {
+          "id": "cw-audio-long-story-ss101-18",
+          "title": "SS101-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS101_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 339.656
+        },
+        {
+          "id": "cw-audio-long-story-ss101-20",
+          "title": "SS101-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS101_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 301.988
+        },
+        {
+          "id": "cw-audio-long-story-ss101-25",
+          "title": "SS101-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS101_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 234.33
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss102",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss102-10",
+          "title": "SS102-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS102_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 780.394
+        },
+        {
+          "id": "cw-audio-long-story-ss102-13",
+          "title": "SS102-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS102_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 589.805
+        },
+        {
+          "id": "cw-audio-long-story-ss102-15",
+          "title": "SS102-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS102_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 504.802
+        },
+        {
+          "id": "cw-audio-long-story-ss102-18",
+          "title": "SS102-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS102_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 413.217
+        },
+        {
+          "id": "cw-audio-long-story-ss102-20",
+          "title": "SS102-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS102_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 367.137
+        },
+        {
+          "id": "cw-audio-long-story-ss102-25",
+          "title": "SS102-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS102_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 284.538
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss103",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss103-10",
+          "title": "SS103-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS103_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 704.012
+        },
+        {
+          "id": "cw-audio-long-story-ss103-13",
+          "title": "SS103-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS103_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 530.768
+        },
+        {
+          "id": "cw-audio-long-story-ss103-15",
+          "title": "SS103-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS103_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 453.498
+        },
+        {
+          "id": "cw-audio-long-story-ss103-18",
+          "title": "SS103-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS103_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 370.219
+        },
+        {
+          "id": "cw-audio-long-story-ss103-20",
+          "title": "SS103-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS103_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 328.371
+        },
+        {
+          "id": "cw-audio-long-story-ss103-25",
+          "title": "SS103-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS103_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 253.243
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss104",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss104-10",
+          "title": "SS104-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS104_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 616.188
+        },
+        {
+          "id": "cw-audio-long-story-ss104-13",
+          "title": "SS104-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS104_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 464.783
+        },
+        {
+          "id": "cw-audio-long-story-ss104-15",
+          "title": "SS104-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS104_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 397.23
+        },
+        {
+          "id": "cw-audio-long-story-ss104-18",
+          "title": "SS104-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS104_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 324.453
+        },
+        {
+          "id": "cw-audio-long-story-ss104-20",
+          "title": "SS104-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS104_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 287.881
+        },
+        {
+          "id": "cw-audio-long-story-ss104-25",
+          "title": "SS104-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS104_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 222.262
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss105",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss105-10",
+          "title": "SS105-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS105_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 771.512
+        },
+        {
+          "id": "cw-audio-long-story-ss105-13",
+          "title": "SS105-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS105_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 584.841
+        },
+        {
+          "id": "cw-audio-long-story-ss105-15",
+          "title": "SS105-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS105_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 501.615
+        },
+        {
+          "id": "cw-audio-long-story-ss105-18",
+          "title": "SS105-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS105_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 411.859
+        },
+        {
+          "id": "cw-audio-long-story-ss105-20",
+          "title": "SS105-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS105_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 366.771
+        },
+        {
+          "id": "cw-audio-long-story-ss105-25",
+          "title": "SS105-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS105_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 285.896
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss106",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss106-10",
+          "title": "SS106-10",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS106_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 728.724
+        },
+        {
+          "id": "cw-audio-long-story-ss106-13",
+          "title": "SS106-13",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS106_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 559.816
+        },
+        {
+          "id": "cw-audio-long-story-ss106-15",
+          "title": "SS106-15",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS106_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 484.531
+        },
+        {
+          "id": "cw-audio-long-story-ss106-18",
+          "title": "SS106-18",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS106_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 403.343
+        },
+        {
+          "id": "cw-audio-long-story-ss106-20",
+          "title": "SS106-20",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS106_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 362.539
+        },
+        {
+          "id": "cw-audio-long-story-ss106-25",
+          "title": "SS106-25",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS106_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 289.344
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss107",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss107-10",
+          "title": "SS107-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS107_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 719.999
+        },
+        {
+          "id": "cw-audio-long-story-ss107-13",
+          "title": "SS107-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS107_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 548.427
+        },
+        {
+          "id": "cw-audio-long-story-ss107-15",
+          "title": "SS107-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS107_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 471.888
+        },
+        {
+          "id": "cw-audio-long-story-ss107-18",
+          "title": "SS107-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS107_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 389.445
+        },
+        {
+          "id": "cw-audio-long-story-ss107-20",
+          "title": "SS107-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS107_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 347.963
+        },
+        {
+          "id": "cw-audio-long-story-ss107-25",
+          "title": "SS107-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS107_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 273.619
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss108",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss108-10",
+          "title": "SS108-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS108_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 689.749
+        },
+        {
+          "id": "cw-audio-long-story-ss108-13",
+          "title": "SS108-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS108_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 522.409
+        },
+        {
+          "id": "cw-audio-long-story-ss108-15",
+          "title": "SS108-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS108_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 447.855
+        },
+        {
+          "id": "cw-audio-long-story-ss108-18",
+          "title": "SS108-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS108_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 367.45
+        },
+        {
+          "id": "cw-audio-long-story-ss108-20",
+          "title": "SS108-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS108_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 327.013
+        },
+        {
+          "id": "cw-audio-long-story-ss108-25",
+          "title": "SS108-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS108_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 254.497
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss109",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss109-10",
+          "title": "SS109-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS109_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 750.196
+        },
+        {
+          "id": "cw-audio-long-story-ss109-13",
+          "title": "SS109-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS109_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 568.698
+        },
+        {
+          "id": "cw-audio-long-story-ss109-15",
+          "title": "SS109-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS109_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 487.77
+        },
+        {
+          "id": "cw-audio-long-story-ss109-18",
+          "title": "SS109-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS109_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 400.521
+        },
+        {
+          "id": "cw-audio-long-story-ss109-20",
+          "title": "SS109-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS109_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 356.688
+        },
+        {
+          "id": "cw-audio-long-story-ss109-25",
+          "title": "SS109-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS109_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 278.007
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss110",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss110-10",
+          "title": "SS110-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/SS110_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 643.826
+        },
+        {
+          "id": "cw-audio-long-story-ss110-13",
+          "title": "SS110-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/SS110_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 492.786
+        },
+        {
+          "id": "cw-audio-long-story-ss110-15",
+          "title": "SS110-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/SS110_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 425.39
+        },
+        {
+          "id": "cw-audio-long-story-ss110-18",
+          "title": "SS110-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/SS110_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 352.822
+        },
+        {
+          "id": "cw-audio-long-story-ss110-20",
+          "title": "SS110-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/SS110_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 316.303
+        },
+        {
+          "id": "cw-audio-long-story-ss110-25",
+          "title": "SS110-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/05/SS110_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 250.84
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss111",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss111-10",
+          "title": "SS111-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS111_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 666.396
+        },
+        {
+          "id": "cw-audio-long-story-ss111-13",
+          "title": "SS111-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS111_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 503.966
+        },
+        {
+          "id": "cw-audio-long-story-ss111-15",
+          "title": "SS111-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS111_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 431.555
+        },
+        {
+          "id": "cw-audio-long-story-ss111-18",
+          "title": "SS111-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS111_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 353.501
+        },
+        {
+          "id": "cw-audio-long-story-ss111-20",
+          "title": "SS111-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS111_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 314.265
+        },
+        {
+          "id": "cw-audio-long-story-ss111-25",
+          "title": "SS111-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS111_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 243.839
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss112",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss112-10",
+          "title": "SS112-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS112_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 704.012
+        },
+        {
+          "id": "cw-audio-long-story-ss112-13",
+          "title": "SS112-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS112_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 532.701
+        },
+        {
+          "id": "cw-audio-long-story-ss112-15",
+          "title": "SS112-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS112_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 456.319
+        },
+        {
+          "id": "cw-audio-long-story-ss112-18",
+          "title": "SS112-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS112_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 373.981
+        },
+        {
+          "id": "cw-audio-long-story-ss112-20",
+          "title": "SS112-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS112_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 332.603
+        },
+        {
+          "id": "cw-audio-long-story-ss112-25",
+          "title": "SS112-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS112_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 258.363
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss113",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss113-10",
+          "title": "SS113-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS113_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 694.817
+        },
+        {
+          "id": "cw-audio-long-story-ss113-13",
+          "title": "SS113-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS113_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 524.446
+        },
+        {
+          "id": "cw-audio-long-story-ss113-15",
+          "title": "SS113-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS113_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 448.482
+        },
+        {
+          "id": "cw-audio-long-story-ss113-18",
+          "title": "SS113-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS113_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 366.614
+        },
+        {
+          "id": "cw-audio-long-story-ss113-20",
+          "title": "SS113-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS113_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 325.445
+        },
+        {
+          "id": "cw-audio-long-story-ss113-25",
+          "title": "SS113-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS113_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 251.623
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss114",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss114-10",
+          "title": "SS114-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS114_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 749.57
+        },
+        {
+          "id": "cw-audio-long-story-ss114-13",
+          "title": "SS114-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS114_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 567.235
+        },
+        {
+          "id": "cw-audio-long-story-ss114-15",
+          "title": "SS114-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS114_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 485.89
+        },
+        {
+          "id": "cw-audio-long-story-ss114-18",
+          "title": "SS114-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS114_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 398.223
+        },
+        {
+          "id": "cw-audio-long-story-ss114-20",
+          "title": "SS114-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS114_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 354.18
+        },
+        {
+          "id": "cw-audio-long-story-ss114-25",
+          "title": "SS114-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS114_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 275.134
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss115",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss115-10",
+          "title": "SS115-10",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS115_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 619.166
+        },
+        {
+          "id": "cw-audio-long-story-ss115-13",
+          "title": "SS115-13",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS115_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 473.925
+        },
+        {
+          "id": "cw-audio-long-story-ss115-15",
+          "title": "SS115-15",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS115_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 409.194
+        },
+        {
+          "id": "cw-audio-long-story-ss115-18",
+          "title": "SS115-18",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS115_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 339.343
+        },
+        {
+          "id": "cw-audio-long-story-ss115-20",
+          "title": "SS115-20",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS115_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 304.286
+        },
+        {
+          "id": "cw-audio-long-story-ss115-25",
+          "title": "SS115-25",
+          "url": "https://cwops.org/wp-content/uploads/2023/09/SS115_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 241.331
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss116",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss116-10",
+          "title": "SS116-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS116_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 644.035
+        },
+        {
+          "id": "cw-audio-long-story-ss116-13",
+          "title": "SS116-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS116_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 491.01
+        },
+        {
+          "id": "cw-audio-long-story-ss116-15",
+          "title": "SS116-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS116_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 422.778
+        },
+        {
+          "id": "cw-audio-long-story-ss116-18",
+          "title": "SS116-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS116_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 349.217
+        },
+        {
+          "id": "cw-audio-long-story-ss116-20",
+          "title": "SS116-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS116_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 312.28
+        },
+        {
+          "id": "cw-audio-long-story-ss116-25",
+          "title": "SS116-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS116_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 245.929
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss117",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss117-10",
+          "title": "SS117-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS117_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 632.228
+        },
+        {
+          "id": "cw-audio-long-story-ss117-13",
+          "title": "SS117-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS117_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 482.18
+        },
+        {
+          "id": "cw-audio-long-story-ss117-15",
+          "title": "SS117-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS117_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 415.307
+        },
+        {
+          "id": "cw-audio-long-story-ss117-18",
+          "title": "SS117-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS117_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 343.209
+        },
+        {
+          "id": "cw-audio-long-story-ss117-20",
+          "title": "SS117-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS117_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 306.951
+        },
+        {
+          "id": "cw-audio-long-story-ss117-25",
+          "title": "SS117-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS117_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 241.906
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss118",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss118-10",
+          "title": "SS118-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS118_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 783.79
+        },
+        {
+          "id": "cw-audio-long-story-ss118-13",
+          "title": "SS118-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS118_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 593.305
+        },
+        {
+          "id": "cw-audio-long-story-ss118-15",
+          "title": "SS118-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS118_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 508.407
+        },
+        {
+          "id": "cw-audio-long-story-ss118-18",
+          "title": "SS118-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS118_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 416.822
+        },
+        {
+          "id": "cw-audio-long-story-ss118-20",
+          "title": "SS118-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS118_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 370.846
+        },
+        {
+          "id": "cw-audio-long-story-ss118-25",
+          "title": "SS118-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS118_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 288.299
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss119",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss119-10",
+          "title": "SS119-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS119_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 650.304
+        },
+        {
+          "id": "cw-audio-long-story-ss119-13",
+          "title": "SS119-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS119_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 491.219
+        },
+        {
+          "id": "cw-audio-long-story-ss119-15",
+          "title": "SS119-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS119_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 420.27
+        },
+        {
+          "id": "cw-audio-long-story-ss119-18",
+          "title": "SS119-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS119_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 343.836
+        },
+        {
+          "id": "cw-audio-long-story-ss119-20",
+          "title": "SS119-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS119_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 305.383
+        },
+        {
+          "id": "cw-audio-long-story-ss119-25",
+          "title": "SS119-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS119_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 236.472
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss120",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss120-10",
+          "title": "SS120-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS120_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 724.91
+        },
+        {
+          "id": "cw-audio-long-story-ss120-13",
+          "title": "SS120-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS120_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 547.539
+        },
+        {
+          "id": "cw-audio-long-story-ss120-15",
+          "title": "SS120-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS120_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 468.492
+        },
+        {
+          "id": "cw-audio-long-story-ss120-18",
+          "title": "SS120-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS120_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 383.228
+        },
+        {
+          "id": "cw-audio-long-story-ss120-20",
+          "title": "SS120-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS120_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 340.388
+        },
+        {
+          "id": "cw-audio-long-story-ss120-25",
+          "title": "SS120-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS120_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 263.535
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss121",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss121-10",
+          "title": "SS121-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS121_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 675.173
+        },
+        {
+          "id": "cw-audio-long-story-ss121-13",
+          "title": "SS121-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS121_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 509.191
+        },
+        {
+          "id": "cw-audio-long-story-ss121-15",
+          "title": "SS121-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS121_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 435.212
+        },
+        {
+          "id": "cw-audio-long-story-ss121-18",
+          "title": "SS121-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS121_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 355.434
+        },
+        {
+          "id": "cw-audio-long-story-ss121-20",
+          "title": "SS121-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS121_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 315.31
+        },
+        {
+          "id": "cw-audio-long-story-ss121-25",
+          "title": "SS121-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS121_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 243.369
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss122",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss122-10",
+          "title": "SS122-10",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS122_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 580.505
+        },
+        {
+          "id": "cw-audio-long-story-ss122-13",
+          "title": "SS122-13",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS122_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 444.094
+        },
+        {
+          "id": "cw-audio-long-story-ss122-15",
+          "title": "SS122-15",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS122_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 383.281
+        },
+        {
+          "id": "cw-audio-long-story-ss122-18",
+          "title": "SS122-18",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS122_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 349.217
+        },
+        {
+          "id": "cw-audio-long-story-ss122-20",
+          "title": "SS122-20",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS122_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 284.747
+        },
+        {
+          "id": "cw-audio-long-story-ss122-25",
+          "title": "SS122-25",
+          "url": "https://cwops.org/wp-content/uploads/2024/06/SS122_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 225.605
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss123",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss123-10",
+          "title": "SS123-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS123_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 700.25
+        },
+        {
+          "id": "cw-audio-long-story-ss123-13",
+          "title": "SS123-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS123_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 529.462
+        },
+        {
+          "id": "cw-audio-long-story-ss123-15",
+          "title": "SS123-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS123_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 453.341
+        },
+        {
+          "id": "cw-audio-long-story-ss123-18",
+          "title": "SS123-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS123_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 371.212
+        },
+        {
+          "id": "cw-audio-long-story-ss123-20",
+          "title": "SS123-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS123_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 329.939
+        },
+        {
+          "id": "cw-audio-long-story-ss123-25",
+          "title": "SS123-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS123_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 255.96
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss201",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss201-10",
+          "title": "SS201-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS201_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 395.715
+        },
+        {
+          "id": "cw-audio-long-story-ss201-13",
+          "title": "SS201-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS201_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 303.241
+        },
+        {
+          "id": "cw-audio-long-story-ss201-15",
+          "title": "SS201-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS201_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 261.967
+        },
+        {
+          "id": "cw-audio-long-story-ss201-18",
+          "title": "SS201-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS201_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 217.508
+        },
+        {
+          "id": "cw-audio-long-story-ss201-20",
+          "title": "SS201-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS201_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 195.147
+        },
+        {
+          "id": "cw-audio-long-story-ss201-25",
+          "title": "SS201-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS201_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 155.075
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss202",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss202-10",
+          "title": "SS202-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS202_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 383.855
+        },
+        {
+          "id": "cw-audio-long-story-ss202-13",
+          "title": "SS202-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS202_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 293.001
+        },
+        {
+          "id": "cw-audio-long-story-ss202-15",
+          "title": "SS202-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS202_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 252.459
+        },
+        {
+          "id": "cw-audio-long-story-ss202-18",
+          "title": "SS202-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS202_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 208.783
+        },
+        {
+          "id": "cw-audio-long-story-ss202-20",
+          "title": "SS202-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS202_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 186.788
+        },
+        {
+          "id": "cw-audio-long-story-ss202-25",
+          "title": "SS202-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS202_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 147.395
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss203",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss203-10",
+          "title": "SS203-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS203_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 519.953
+        },
+        {
+          "id": "cw-audio-long-story-ss203-13",
+          "title": "SS203-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS203_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 400.574
+        },
+        {
+          "id": "cw-audio-long-story-ss203-15",
+          "title": "SS203-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS203_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 347.336
+        },
+        {
+          "id": "cw-audio-long-story-ss203-18",
+          "title": "SS203-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS203_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 289.971
+        },
+        {
+          "id": "cw-audio-long-story-ss203-20",
+          "title": "SS203-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS203_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 261.132
+        },
+        {
+          "id": "cw-audio-long-story-ss203-25",
+          "title": "SS203-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS203_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 209.41
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss204",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss204-10",
+          "title": "SS204-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS204_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 443.31
+        },
+        {
+          "id": "cw-audio-long-story-ss204-13",
+          "title": "SS204-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS204_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 339.134
+        },
+        {
+          "id": "cw-audio-long-story-ss204-15",
+          "title": "SS204-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS204_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 292.74
+        },
+        {
+          "id": "cw-audio-long-story-ss204-18",
+          "title": "SS204-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS204_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 242.637
+        },
+        {
+          "id": "cw-audio-long-story-ss204-20",
+          "title": "SS204-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS204_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 217.508
+        },
+        {
+          "id": "cw-audio-long-story-ss204-25",
+          "title": "SS204-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS204_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 172.368
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss205",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss205-10",
+          "title": "SS205-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS205_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 537.716
+        },
+        {
+          "id": "cw-audio-long-story-ss205-13",
+          "title": "SS205-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS205_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 412.224
+        },
+        {
+          "id": "cw-audio-long-story-ss205-15",
+          "title": "SS205-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS205_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 356.27
+        },
+        {
+          "id": "cw-audio-long-story-ss205-18",
+          "title": "SS205-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS205_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 295.927
+        },
+        {
+          "id": "cw-audio-long-story-ss205-20",
+          "title": "SS205-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS205_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 265.625
+        },
+        {
+          "id": "cw-audio-long-story-ss205-25",
+          "title": "SS205-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS205_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 211.238
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss206",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss206-10",
+          "title": "SS206-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS206_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 414.523
+        },
+        {
+          "id": "cw-audio-long-story-ss206-13",
+          "title": "SS206-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS206_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 319.124
+        },
+        {
+          "id": "cw-audio-long-story-ss206-15",
+          "title": "SS206-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS206_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 276.596
+        },
+        {
+          "id": "cw-audio-long-story-ss206-18",
+          "title": "SS206-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS206_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 230.725
+        },
+        {
+          "id": "cw-audio-long-story-ss206-20",
+          "title": "SS206-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS206_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 207.685
+        },
+        {
+          "id": "cw-audio-long-story-ss206-25",
+          "title": "SS206-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS206_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 166.308
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss207",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss207-10",
+          "title": "SS207-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS207_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 397.23
+        },
+        {
+          "id": "cw-audio-long-story-ss207-13",
+          "title": "SS207-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS207_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 304.443
+        },
+        {
+          "id": "cw-audio-long-story-ss207-15",
+          "title": "SS207-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS207_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 263.065
+        },
+        {
+          "id": "cw-audio-long-story-ss207-18",
+          "title": "SS207-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS207_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 218.5
+        },
+        {
+          "id": "cw-audio-long-story-ss207-20",
+          "title": "SS207-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS207_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 196.087
+        },
+        {
+          "id": "cw-audio-long-story-ss207-25",
+          "title": "SS207-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS207_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 155.859
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss208",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss208-10",
+          "title": "SS208-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS208_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 491.95
+        },
+        {
+          "id": "cw-audio-long-story-ss208-13",
+          "title": "SS208-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS208_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 376.541
+        },
+        {
+          "id": "cw-audio-long-story-ss208-15",
+          "title": "SS208-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS208_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 325.08
+        },
+        {
+          "id": "cw-audio-long-story-ss208-18",
+          "title": "SS208-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS208_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 269.543
+        },
+        {
+          "id": "cw-audio-long-story-ss208-20",
+          "title": "SS208-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS208_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 241.697
+        },
+        {
+          "id": "cw-audio-long-story-ss208-25",
+          "title": "SS208-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS208_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 191.646
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss209",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss209-10",
+          "title": "SS209-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS209_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 524.864
+        },
+        {
+          "id": "cw-audio-long-story-ss209-13",
+          "title": "SS209-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS209_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 403.029
+        },
+        {
+          "id": "cw-audio-long-story-ss209-15",
+          "title": "SS209-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS209_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 348.694
+        },
+        {
+          "id": "cw-audio-long-story-ss209-18",
+          "title": "SS209-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS209_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 290.128
+        },
+        {
+          "id": "cw-audio-long-story-ss209-20",
+          "title": "SS209-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS209_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 260.662
+        },
+        {
+          "id": "cw-audio-long-story-ss209-25",
+          "title": "SS209-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS209_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 207.842
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss210",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss210-10",
+          "title": "SS210-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS210_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 472.881
+        },
+        {
+          "id": "cw-audio-long-story-ss210-13",
+          "title": "SS210-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS210_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 363.793
+        },
+        {
+          "id": "cw-audio-long-story-ss210-15",
+          "title": "SS210-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS210_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 315.153
+        },
+        {
+          "id": "cw-audio-long-story-ss210-18",
+          "title": "SS210-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS210_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 262.699
+        },
+        {
+          "id": "cw-audio-long-story-ss210-20",
+          "title": "SS210-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS210_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 236.316
+        },
+        {
+          "id": "cw-audio-long-story-ss210-25",
+          "title": "SS210-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS210_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 189.034
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss211",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss211-10",
+          "title": "SS211-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS211_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 740.688
+        },
+        {
+          "id": "cw-audio-long-story-ss211-13",
+          "title": "SS211-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS211_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 570.265
+        },
+        {
+          "id": "cw-audio-long-story-ss211-15",
+          "title": "SS211-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS211_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 494.249
+        },
+        {
+          "id": "cw-audio-long-story-ss211-18",
+          "title": "SS211-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS211_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 412.329
+        },
+        {
+          "id": "cw-audio-long-story-ss211-20",
+          "title": "SS211-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS211_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 371.16
+        },
+        {
+          "id": "cw-audio-long-story-ss211-25",
+          "title": "SS211-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS211_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 297.285
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss212",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss212-10",
+          "title": "SS212-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS212_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 513.893
+        },
+        {
+          "id": "cw-audio-long-story-ss212-13",
+          "title": "SS212-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS212_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 397.125
+        },
+        {
+          "id": "cw-audio-long-story-ss212-15",
+          "title": "SS212-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS212_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 345.09
+        },
+        {
+          "id": "cw-audio-long-story-ss212-18",
+          "title": "SS212-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS212_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 288.979
+        },
+        {
+          "id": "cw-audio-long-story-ss212-20",
+          "title": "SS212-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS212_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 260.766
+        },
+        {
+          "id": "cw-audio-long-story-ss212-25",
+          "title": "SS212-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS212_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 210.193
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss213",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss213-10",
+          "title": "SS213-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS213_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 467.97
+        },
+        {
+          "id": "cw-audio-long-story-ss213-13",
+          "title": "SS213-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS213_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 358.673
+        },
+        {
+          "id": "cw-audio-long-story-ss213-15",
+          "title": "SS213-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS213_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 309.929
+        },
+        {
+          "id": "cw-audio-long-story-ss213-18",
+          "title": "SS213-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS213_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 257.37
+        },
+        {
+          "id": "cw-audio-long-story-ss213-20",
+          "title": "SS213-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS213_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 230.987
+        },
+        {
+          "id": "cw-audio-long-story-ss213-25",
+          "title": "SS213-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS213_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 183.601
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss214",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss214-10",
+          "title": "SS214-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS214_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 664.358
+        },
+        {
+          "id": "cw-audio-long-story-ss214-13",
+          "title": "SS214-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS214_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 510.34
+        },
+        {
+          "id": "cw-audio-long-story-ss214-15",
+          "title": "SS214-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS214_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 441.638
+        },
+        {
+          "id": "cw-audio-long-story-ss214-18",
+          "title": "SS214-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS214_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 367.607
+        },
+        {
+          "id": "cw-audio-long-story-ss214-20",
+          "title": "SS214-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS214_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 330.356
+        },
+        {
+          "id": "cw-audio-long-story-ss214-25",
+          "title": "SS214-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS214_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 263.64
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss215",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss215-10",
+          "title": "SS215-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS215_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 600.463
+        },
+        {
+          "id": "cw-audio-long-story-ss215-13",
+          "title": "SS215-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS215_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 461.073
+        },
+        {
+          "id": "cw-audio-long-story-ss215-15",
+          "title": "SS215-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS215_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 398.902
+        },
+        {
+          "id": "cw-audio-long-story-ss215-18",
+          "title": "SS215-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS215_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 331.924
+        },
+        {
+          "id": "cw-audio-long-story-ss215-20",
+          "title": "SS215-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS215_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 298.226
+        },
+        {
+          "id": "cw-audio-long-story-ss215-25",
+          "title": "SS215-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS215_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 237.831
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss216",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss216-10",
+          "title": "SS216-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS216_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 539.493
+        },
+        {
+          "id": "cw-audio-long-story-ss216-13",
+          "title": "SS216-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS216_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 413.321
+        },
+        {
+          "id": "cw-audio-long-story-ss216-15",
+          "title": "SS216-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS216_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 357.106
+        },
+        {
+          "id": "cw-audio-long-story-ss216-18",
+          "title": "SS216-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS216_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 296.45
+        },
+        {
+          "id": "cw-audio-long-story-ss216-20",
+          "title": "SS216-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS216_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 265.991
+        },
+        {
+          "id": "cw-audio-long-story-ss216-25",
+          "title": "SS216-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS216_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 211.343
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss217",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss217-10",
+          "title": "SS217-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS217_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 432.652
+        },
+        {
+          "id": "cw-audio-long-story-ss217-13",
+          "title": "SS217-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS217_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 331.872
+        },
+        {
+          "id": "cw-audio-long-story-ss217-15",
+          "title": "SS217-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS217_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 286.941
+        },
+        {
+          "id": "cw-audio-long-story-ss217-18",
+          "title": "SS217-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS217_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 238.458
+        },
+        {
+          "id": "cw-audio-long-story-ss217-20",
+          "title": "SS217-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS217_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 214.112
+        },
+        {
+          "id": "cw-audio-long-story-ss217-25",
+          "title": "SS217-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS217_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 170.435
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss218",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss218-10",
+          "title": "SS218-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS218_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 555.845
+        },
+        {
+          "id": "cw-audio-long-story-ss218-13",
+          "title": "SS218-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS218_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 427.636
+        },
+        {
+          "id": "cw-audio-long-story-ss218-15",
+          "title": "SS218-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS218_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 370.481
+        },
+        {
+          "id": "cw-audio-long-story-ss218-18",
+          "title": "SS218-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS218_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 308.884
+        },
+        {
+          "id": "cw-audio-long-story-ss218-20",
+          "title": "SS218-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS218_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 277.903
+        },
+        {
+          "id": "cw-audio-long-story-ss218-25",
+          "title": "SS218-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS218_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 222.366
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss219",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss219-10",
+          "title": "SS219-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS219_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 402.872
+        },
+        {
+          "id": "cw-audio-long-story-ss219-13",
+          "title": "SS219-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS219_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 308.779
+        },
+        {
+          "id": "cw-audio-long-story-ss219-15",
+          "title": "SS219-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS219_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 266.827
+        },
+        {
+          "id": "cw-audio-long-story-ss219-18",
+          "title": "SS219-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS219_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 221.583
+        },
+        {
+          "id": "cw-audio-long-story-ss219-20",
+          "title": "SS219-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS219_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 198.856
+        },
+        {
+          "id": "cw-audio-long-story-ss219-25",
+          "title": "SS219-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS219_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 158.053
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss220",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss220-10",
+          "title": "SS220-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS220_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 580.871
+        },
+        {
+          "id": "cw-audio-long-story-ss220-13",
+          "title": "SS220-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS220_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 444.198
+        },
+        {
+          "id": "cw-audio-long-story-ss220-15",
+          "title": "SS220-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS220_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 383.228
+        },
+        {
+          "id": "cw-audio-long-story-ss220-18",
+          "title": "SS220-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS220_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 317.504
+        },
+        {
+          "id": "cw-audio-long-story-ss220-20",
+          "title": "SS220-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS220_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 284.485
+        },
+        {
+          "id": "cw-audio-long-story-ss220-25",
+          "title": "SS220-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS220_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 225.24
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss221",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss221-10",
+          "title": "SS221-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS221_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 403.134
+        },
+        {
+          "id": "cw-audio-long-story-ss221-13",
+          "title": "SS221-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS221_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 307.682
+        },
+        {
+          "id": "cw-audio-long-story-ss221-15",
+          "title": "SS221-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS221_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 265.155
+        },
+        {
+          "id": "cw-audio-long-story-ss221-18",
+          "title": "SS221-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS221_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 219.284
+        },
+        {
+          "id": "cw-audio-long-story-ss221-20",
+          "title": "SS221-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS221_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 196.244
+        },
+        {
+          "id": "cw-audio-long-story-ss221-25",
+          "title": "SS221-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS221_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 154.918
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss222",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss222-10",
+          "title": "SS222-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS222_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 269.282
+        },
+        {
+          "id": "cw-audio-long-story-ss222-13",
+          "title": "SS222-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS222_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 206.066
+        },
+        {
+          "id": "cw-audio-long-story-ss222-15",
+          "title": "SS222-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS222_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 177.854
+        },
+        {
+          "id": "cw-audio-long-story-ss222-18",
+          "title": "SS222-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS222_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 147.447
+        },
+        {
+          "id": "cw-audio-long-story-ss222-20",
+          "title": "SS222-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS222_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 132.192
+        },
+        {
+          "id": "cw-audio-long-story-ss222-25",
+          "title": "SS222-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS222_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 104.815
+        }
+      ]
+    },
+    {
+      "id": "long-story-ss223",
+      "variants": [
+        {
+          "id": "cw-audio-long-story-ss223-10",
+          "title": "SS223-10",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS223_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 271.738
+        },
+        {
+          "id": "cw-audio-long-story-ss223-13",
+          "title": "SS223-13",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS223_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 207.581
+        },
+        {
+          "id": "cw-audio-long-story-ss223-15",
+          "title": "SS223-15",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS223_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 178.951
+        },
+        {
+          "id": "cw-audio-long-story-ss223-18",
+          "title": "SS223-18",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS223_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 148.126
+        },
+        {
+          "id": "cw-audio-long-story-ss223-20",
+          "title": "SS223-20",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS223_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 132.61
+        },
+        {
+          "id": "cw-audio-long-story-ss223-25",
+          "title": "SS223-25",
+          "url": "https://cwops.org/wp-content/uploads/2022/11/SS223_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 104.815
+        }
+      ]
+    },
     {
       "id": "prefix-dis4",
       "variants": [
@@ -6343,6 +10208,854 @@
           "format": "audio",
           "speedWpm": 25,
           "durationSeconds": 106.905
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl201",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl201-10",
+          "title": "SL201-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL201_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 471.265
+        },
+        {
+          "id": "cw-audio-short-story-sl201-13",
+          "title": "SL201-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL201_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 346.87
+        },
+        {
+          "id": "cw-audio-short-story-sl201-15",
+          "title": "SL201-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL201_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 291.386
+        },
+        {
+          "id": "cw-audio-short-story-sl201-18",
+          "title": "SL201-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL201_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 231.566
+        },
+        {
+          "id": "cw-audio-short-story-sl201-20",
+          "title": "SL201-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL201_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 201.525
+        },
+        {
+          "id": "cw-audio-short-story-sl201-25",
+          "title": "SL201-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL201_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 147.608
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl202",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl202-10",
+          "title": "SL202-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL202_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 430.201
+        },
+        {
+          "id": "cw-audio-short-story-sl202-13",
+          "title": "SL202-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL202_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 315.785
+        },
+        {
+          "id": "cw-audio-short-story-sl202-15",
+          "title": "SL202-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL202_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 264.794
+        },
+        {
+          "id": "cw-audio-short-story-sl202-18",
+          "title": "SL202-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL202_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 209.78
+        },
+        {
+          "id": "cw-audio-short-story-sl202-20",
+          "title": "SL202-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL202_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 182.142
+        },
+        {
+          "id": "cw-audio-short-story-sl202-25",
+          "title": "SL202-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL202_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 132.562
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl203",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl203-10",
+          "title": "SL203-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL203_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 363.119
+        },
+        {
+          "id": "cw-audio-short-story-sl203-13",
+          "title": "SL203-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL203_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 267.981
+        },
+        {
+          "id": "cw-audio-short-story-sl203-15",
+          "title": "SL203-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL203_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 225.61
+        },
+        {
+          "id": "cw-audio-short-story-sl203-18",
+          "title": "SL203-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL203_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 179.896
+        },
+        {
+          "id": "cw-audio-short-story-sl203-20",
+          "title": "SL203-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL203_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 156.908
+        },
+        {
+          "id": "cw-audio-short-story-sl203-25",
+          "title": "SL203-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL203_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 115.687
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl204",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl204-10",
+          "title": "SL204-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL204_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 492.372
+        },
+        {
+          "id": "cw-audio-short-story-sl204-13",
+          "title": "SL204-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL204_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 362.126
+        },
+        {
+          "id": "cw-audio-short-story-sl204-15",
+          "title": "SL204-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL204_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 304.082
+        },
+        {
+          "id": "cw-audio-short-story-sl204-18",
+          "title": "SL204-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL204_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 241.492
+        },
+        {
+          "id": "cw-audio-short-story-sl204-20",
+          "title": "SL204-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL204_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 209.989
+        },
+        {
+          "id": "cw-audio-short-story-sl204-25",
+          "title": "SL204-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL204_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 153.564
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl205",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl205-10",
+          "title": "SL205-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL205_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 456.219
+        },
+        {
+          "id": "cw-audio-short-story-sl205-13",
+          "title": "SL205-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL205_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 335.429
+        },
+        {
+          "id": "cw-audio-short-story-sl205-15",
+          "title": "SL205-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL205_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 281.616
+        },
+        {
+          "id": "cw-audio-short-story-sl205-18",
+          "title": "SL205-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL205_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 223.572
+        },
+        {
+          "id": "cw-audio-short-story-sl205-20",
+          "title": "SL205-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL205_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 194.368
+        },
+        {
+          "id": "cw-audio-short-story-sl205-25",
+          "title": "SL205-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL205_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 142.07
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl206",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl206-10",
+          "title": "SL206-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL206_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 430.776
+        },
+        {
+          "id": "cw-audio-short-story-sl206-13",
+          "title": "SL206-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL206_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 316.098
+        },
+        {
+          "id": "cw-audio-short-story-sl206-15",
+          "title": "SL206-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL206_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 264.95
+        },
+        {
+          "id": "cw-audio-short-story-sl206-18",
+          "title": "SL206-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL206_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 209.78
+        },
+        {
+          "id": "cw-audio-short-story-sl206-20",
+          "title": "SL206-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL206_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 182.09
+        },
+        {
+          "id": "cw-audio-short-story-sl206-25",
+          "title": "SL206-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL206_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 132.353
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl207",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl207-10",
+          "title": "SL207-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL207_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 475.968
+        },
+        {
+          "id": "cw-audio-short-story-sl207-13",
+          "title": "SL207-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL207_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 349.065
+        },
+        {
+          "id": "cw-audio-short-story-sl207-15",
+          "title": "SL207-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL207_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 292.536
+        },
+        {
+          "id": "cw-audio-short-story-sl207-18",
+          "title": "SL207-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL207_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 231.514
+        },
+        {
+          "id": "cw-audio-short-story-sl207-20",
+          "title": "SL207-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL207_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 200.898
+        },
+        {
+          "id": "cw-audio-short-story-sl207-25",
+          "title": "SL207-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL207_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 145.884
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl208",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl208-10",
+          "title": "SL208-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL208_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 475.184
+        },
+        {
+          "id": "cw-audio-short-story-sl208-13",
+          "title": "SL208-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL208_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 348.385
+        },
+        {
+          "id": "cw-audio-short-story-sl208-15",
+          "title": "SL208-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL208_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 291.856
+        },
+        {
+          "id": "cw-audio-short-story-sl208-18",
+          "title": "SL208-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL208_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 230.887
+        },
+        {
+          "id": "cw-audio-short-story-sl208-20",
+          "title": "SL208-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL208_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 200.271
+        },
+        {
+          "id": "cw-audio-short-story-sl208-25",
+          "title": "SL208-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL208_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 145.31
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl209",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl209-10",
+          "title": "SL209-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL209_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 404.079
+        },
+        {
+          "id": "cw-audio-short-story-sl209-13",
+          "title": "SL209-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL209_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 296.872
+        },
+        {
+          "id": "cw-audio-short-story-sl209-15",
+          "title": "SL209-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL209_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 249.068
+        },
+        {
+          "id": "cw-audio-short-story-sl209-18",
+          "title": "SL209-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL209_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 197.554
+        },
+        {
+          "id": "cw-audio-short-story-sl209-20",
+          "title": "SL209-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL209_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 171.641
+        },
+        {
+          "id": "cw-audio-short-story-sl209-25",
+          "title": "SL209-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL209_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 125.143
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl210",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl210-10",
+          "title": "SL210-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL210_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 425.29
+        },
+        {
+          "id": "cw-audio-short-story-sl210-13",
+          "title": "SL210-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL210_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 312.023
+        },
+        {
+          "id": "cw-audio-short-story-sl210-15",
+          "title": "SL210-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL210_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 261.502
+        },
+        {
+          "id": "cw-audio-short-story-sl210-18",
+          "title": "SL210-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL210_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 207.063
+        },
+        {
+          "id": "cw-audio-short-story-sl210-20",
+          "title": "SL210-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL210_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 179.739
+        },
+        {
+          "id": "cw-audio-short-story-sl210-25",
+          "title": "SL210-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL210_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 130.629
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl211",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl211-10",
+          "title": "SL211-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL211_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 384.225
+        },
+        {
+          "id": "cw-audio-short-story-sl211-13",
+          "title": "SL211-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL211_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 282.4
+        },
+        {
+          "id": "cw-audio-short-story-sl211-15",
+          "title": "SL211-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL211_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 236.999
+        },
+        {
+          "id": "cw-audio-short-story-sl211-18",
+          "title": "SL211-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL211_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 188.046
+        },
+        {
+          "id": "cw-audio-short-story-sl211-20",
+          "title": "SL211-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL211_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 163.439
+        },
+        {
+          "id": "cw-audio-short-story-sl211-25",
+          "title": "SL211-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL211_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 119.292
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl212",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl212-10",
+          "title": "SL212-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL212_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 549.999
+        },
+        {
+          "id": "cw-audio-short-story-sl212-13",
+          "title": "SL212-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL212_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 403.713
+        },
+        {
+          "id": "cw-audio-short-story-sl212-15",
+          "title": "SL212-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL212_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 338.511
+        },
+        {
+          "id": "cw-audio-short-story-sl212-18",
+          "title": "SL212-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL212_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 268.242
+        },
+        {
+          "id": "cw-audio-short-story-sl212-20",
+          "title": "SL212-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL212_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 232.872
+        },
+        {
+          "id": "cw-audio-short-story-sl212-25",
+          "title": "SL212-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL212_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 169.499
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl213",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl213-10",
+          "title": "SL213-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL213_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 489.185
+        },
+        {
+          "id": "cw-audio-short-story-sl213-13",
+          "title": "SL213-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL213_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 358.834
+        },
+        {
+          "id": "cw-audio-short-story-sl213-15",
+          "title": "SL213-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL213_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 300.686
+        },
+        {
+          "id": "cw-audio-short-story-sl213-18",
+          "title": "SL213-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL213_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 238.044
+        },
+        {
+          "id": "cw-audio-short-story-sl213-20",
+          "title": "SL213-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL213_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 206.541
+        },
+        {
+          "id": "cw-audio-short-story-sl213-25",
+          "title": "SL213-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL213_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 150.012
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl214",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl214-10",
+          "title": "SL214-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL214_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 444.464
+        },
+        {
+          "id": "cw-audio-short-story-sl214-13",
+          "title": "SL214-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL214_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 325.607
+        },
+        {
+          "id": "cw-audio-short-story-sl214-15",
+          "title": "SL214-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL214_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 272.63
+        },
+        {
+          "id": "cw-audio-short-story-sl214-18",
+          "title": "SL214-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL214_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 215.474
+        },
+        {
+          "id": "cw-audio-short-story-sl214-20",
+          "title": "SL214-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL214_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 186.74
+        },
+        {
+          "id": "cw-audio-short-story-sl214-25",
+          "title": "SL214-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL214_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 135.226
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl215",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl215-10",
+          "title": "SL215-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL215_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 412.803
+        },
+        {
+          "id": "cw-audio-short-story-sl215-13",
+          "title": "SL215-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL215_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 302.776
+        },
+        {
+          "id": "cw-audio-short-story-sl215-15",
+          "title": "SL215-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL215_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 253.718
+        },
+        {
+          "id": "cw-audio-short-story-sl215-18",
+          "title": "SL215-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL215_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 200.794
+        },
+        {
+          "id": "cw-audio-short-story-sl215-20",
+          "title": "SL215-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL215_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 174.201
+        },
+        {
+          "id": "cw-audio-short-story-sl215-25",
+          "title": "SL215-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL215_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 126.501
+        }
+      ]
+    },
+    {
+      "id": "short-story-sl216",
+      "variants": [
+        {
+          "id": "cw-audio-short-story-sl216-10",
+          "title": "SL216-10",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL216_10.mp3",
+          "format": "audio",
+          "speedWpm": 10,
+          "durationSeconds": 539.706
+        },
+        {
+          "id": "cw-audio-short-story-sl216-13",
+          "title": "SL216-13",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL216_13.mp3",
+          "format": "audio",
+          "speedWpm": 13,
+          "durationSeconds": 396.973
+        },
+        {
+          "id": "cw-audio-short-story-sl216-15",
+          "title": "SL216-15",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL216_15.mp3",
+          "format": "audio",
+          "speedWpm": 15,
+          "durationSeconds": 333.339
+        },
+        {
+          "id": "cw-audio-short-story-sl216-18",
+          "title": "SL216-18",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL216_18.mp3",
+          "format": "audio",
+          "speedWpm": 18,
+          "durationSeconds": 264.689
+        },
+        {
+          "id": "cw-audio-short-story-sl216-20",
+          "title": "SL216-20",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL216_20.mp3",
+          "format": "audio",
+          "speedWpm": 20,
+          "durationSeconds": 230.208
+        },
+        {
+          "id": "cw-audio-short-story-sl216-25",
+          "title": "SL216-25",
+          "url": "https://cwa.cwops.org/wp-content/uploads/SL216_25.mp3",
+          "format": "audio",
+          "speedWpm": 25,
+          "durationSeconds": 168.35
         }
       ]
     },
