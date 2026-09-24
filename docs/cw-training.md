@@ -201,9 +201,9 @@ phone still requires real-device verification. Offline audio is not promised.
 
 Today > **Word recognition** opens optional word practice in Focus. Choose the
 30 common words supplied on September 24, Bob's existing private 77-word reference
-(when imported), or paste a custom list. **Practice Bob's 77 words** opens the same
-player with that list selected. The reference preserves its 75 entries and
-duplicates; it is not a transcript of his MP3.
+(when imported), or paste a custom list. All lists are selected inside the player;
+Today has a single **Practice words** entry. The reference preserves its 75 entries
+and duplicates; it is not a transcript of his MP3.
 
 Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
 standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
@@ -249,15 +249,16 @@ round on Play.
 
 ### Optional daily word listening
 
-The Word recognition card has one ten-minute suggestion for all word lists and
-Bob's original recording. It remains available every day, including Fridays and
+The Word recognition card has one ten-minute suggestion for all word lists,
+including any listening already recorded with Bob's original MP3. It remains available every day, including Fridays and
 after the course. Today's counter sums actual listening across saved and current
 sessions in the course timezone, without duplicating pending entries or including
 recall. Ten minutes is a suggestion, not an automatic stop. All listening still
 contributes to the main daily total, with no assignment completion.
 
-A collapsed **Original recording** section keeps the imported MP3 available at its
-recorded speed and pitch. Existing recording sessions and history remain valid.
+The separate original-recording entry has been removed. Bob's list is available
+in the Word recognition selector. Existing recording sessions can still be
+resumed from Focus and saved, and their history remains valid.
 The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis indicates
 approximately 40-WPM characters with extra word spacing. The supplied text has
 75 entries (70 unique), preserved as received.
@@ -265,9 +266,9 @@ approximately 40-WPM characters with extra word spacing. The supplied text has
 Original-recording sessions still save under `daily-listening` / `bob-77-words`.
 They automatically repeat by default, including after ten minutes or a partially
 heard loop; course recordings pause by default. The independent device preferences
-`dailyListeningAutoReplay` and `audioAutoReplay` remain supported. Each new original
-recording session starts at the beginning, while an unfinished block retains its
-pause/resume position. Reports preserve recording history as optional practice.
+`dailyListeningAutoReplay` and `audioAutoReplay` remain supported for restored
+blocks. An unfinished recording block retains its pause/resume position. Reports
+preserve recording history as optional practice.
 
 The original 11,025 Hz MPEG-2.5 file stopped just before its reported end in
 browser verification, preventing the normal `ended` event and replay. The importer

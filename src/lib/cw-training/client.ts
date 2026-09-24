@@ -1,7 +1,7 @@
 import { createWordPracticeBlock, wordPracticeNote } from "./word-practice";
 import type { WordPanel } from "./word-panel";
 import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
-import { audioAutoReplay, createDailyListeningBlock, dailyListeningSeconds, DAILY_LISTENING_SECONDS, isDailyListening, shouldReplayAudio } from "./daily-listening";
+import { audioAutoReplay, dailyListeningSeconds, DAILY_LISTENING_SECONDS, isDailyListening, shouldReplayAudio } from "./daily-listening";
 import type { PlannedTask } from "./plan";
 import { listeningGuidance } from "./guidance";
 import { sendingReadingHtml } from "./sending-reading";
@@ -652,8 +652,7 @@ export async function initTraining() {
     const daily = snapshot().dailyListening;
     $("training-daily-listening").hidden = false;
     const wordActive = !!state.active?.wordPractice;
-    const originalActive = state.active && isDailyListening(state.active.task);
-    $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>Word recognition</h3><p>Practice the 30 common words${daily?.text ? ", Bob's 77-word reference," : ""} or your own list. Adjust speed while listening, shuffle the words, and show or hide each word.</p><p data-daily-listening-progress></p><div class="training-actions"><button type="button" data-action="word-practice">${wordActive ? "Return to word practice" : "Practice words"}</button>${daily?.text ? '<button type="button" data-action="bob-word-practice">Practice Bob\'s 77 words</button>' : ""}</div>${daily ? `<details class="training-panel"><summary>Original recording</summary><div class="training-panel-body"><p class="training-small">Bob's original ${time(daily.durationSeconds ?? 0)} recording is also available at its recorded speed and pitch.</p><button type="button" data-action="${originalActive ? "resume" : "daily-listening"}">${originalActive ? "Return to original recording" : "Play original recording"}</button></div></details>` : ""}</div>`;
+    $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>Word recognition</h3><p>Practice the 30 common words${daily?.text ? ", Bob's 77-word reference," : ""} or your own list. Adjust speed while listening, shuffle the words, and show or hide each word.</p><p data-daily-listening-progress></p><button type="button" data-action="word-practice">${wordActive ? "Return to word practice" : "Practice words"}</button></div>`;
     updateDailyListeningProgress();
     $("training-extra").innerHTML = current.extras.slice(0, 3).map((item) => taskRow(item)).join("");
     const missed = current.missed.filter(
@@ -1840,32 +1839,14 @@ export async function initTraining() {
     $("training-reading-text").scrollTop = reading.line;
   }
 
-  function startWords(bob = false) {
-    const bobText = bob ? snapshot().dailyListening?.text : undefined;
-    const same = !!state.active?.wordPractice && (!bobText || state.active.wordPractice.text === bobText);
-    if (switchActivity("Word practice", () => startWords(bob), same)) return;
+  function startWords() {
+    if (switchActivity("Word practice", startWords, !!state.active?.wordPractice)) return;
     state.active = createWordPracticeBlock(new Date().toISOString(), crypto.randomUUID(), state.wordPracticeDefaults);
-    if (bobText) {
-      state.active.wordPractice!.title = "Bob's 77-word reference";
-      state.active.wordPractice!.text = bobText;
-    }
     running = false;
     recalling = false;
     render();
     setView("focus");
     void persist();
-  }
-  function startDailyListening() {
-    const resource = snapshot().dailyListening;
-    if (!resource) return;
-    if (switchActivity(resource.title, startDailyListening, !!state.active && isDailyListening(state.active.task))) return;
-    state.active = createDailyListeningBlock({ ...resource, url: safeUrl(resource.url) }, new Date().toISOString(), crypto.randomUUID());
-    running = false;
-    recalling = false;
-    render();
-    setView("focus");
-    void persist();
-    void play();
   }
 
   $<HTMLDialogElement>("training-finish-dialog").addEventListener("cancel", () => { pendingActivity = undefined; });
@@ -1974,14 +1955,6 @@ export async function initTraining() {
     switch (button.dataset.action) {
       case "word-practice": {
         startWords();
-        break;
-      }
-      case "bob-word-practice": {
-        startWords(true);
-        break;
-      }
-      case "daily-listening": {
-        startDailyListening();
         break;
       }
       case "sync-lcwo":
