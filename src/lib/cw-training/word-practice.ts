@@ -1,4 +1,5 @@
 import type { ActiveBlock } from "./storage.ts";
+import type { TrainingAttempt } from "./types.ts";
 
 export const COMMON_WORDS = "THE OF AND TO A IN IS FOR THAT WAS ON WITH HE IT AS AT HIS BY BE FROM ARE THIS I BUT HAVE AN HAS NOT THEY OR";
 export interface WordSettings {
@@ -43,6 +44,19 @@ export function wordSettingsNote(draft: WordPracticeDraft): string {
 
 export function wordPracticeNote(draft: WordPracticeDraft): string {
   return `Browser word recognition (Morse Pro).\n${draft.used.join("\n") || "No audio played."}`;
+}
+
+/** Finish a quick listening visit without an editable time or completion claim. */
+export function wordPracticeAttempt(active: ActiveBlock, endedAt: string): TrainingAttempt | undefined {
+  if (!active.wordPractice || !Number.isFinite(active.activeSeconds)) return;
+  const activeSeconds = Math.min(14400, Math.floor(active.activeSeconds));
+  if (activeSeconds < 1) return;
+  return {
+    id: active.id, assignmentId: "other-practice", taskId: "other:word-recognition",
+    startedAt: new Date(Math.min(Date.parse(active.startedAt), Date.parse(endedAt) - activeSeconds * 1000)).toISOString(),
+    endedAt, activeSeconds, completed: false, context: "practice", review: true,
+    note: wordPracticeNote(active.wordPractice),
+  };
 }
 
 export function recordWordSettings(draft: WordPracticeDraft): void {

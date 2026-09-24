@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, wordPlaybackPosition, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
+import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, wordPlaybackPosition, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
 import { createWordRound, renderWordSamples, retimeWordRound } from "../src/lib/cw-training/word-round.ts";
 import { createWordPlayer } from "../src/lib/cw-training/word-player.ts";
 
@@ -78,6 +78,36 @@ test("frequent live adjustments keep history bounded without blocking playback",
   assert.equal(draft.used.length, 16);
   assert.match(draft.used.at(-1), /Additional settings/);
   assert.ok(wordPracticeNote(draft).length < 4000);
+});
+
+test("quick saves use actual audio time and a stable ID without assigning course credit", () => {
+  const active = createWordPracticeBlock("2026-09-24T12:00:00Z", "listening-visit");
+  active.activeSeconds = 83.9;
+  recordWordSettings(active.wordPractice);
+  const attempt = wordPracticeAttempt(active, "2026-09-24T12:05:00Z");
+  assert.equal(attempt.id, active.id);
+  assert.equal(attempt.activeSeconds, 83);
+  assert.equal(Date.parse(attempt.startedAt), Date.parse(active.startedAt));
+  assert.equal(attempt.endedAt, "2026-09-24T12:05:00Z");
+  assert.equal(attempt.assignmentId, "other-practice");
+  assert.equal(attempt.taskId, "other:word-recognition");
+  assert.equal(attempt.completed, false);
+  assert.equal(attempt.review, true);
+  assert.equal(attempt.context, "practice");
+  assert.match(attempt.note, /40 WPM.*450 Hz/);
+  assert.equal(wordPracticeAttempt(active, attempt.endedAt).id, attempt.id);
+  // A clock correction cannot make credited time exceed the recorded window.
+  const corrected = wordPracticeAttempt(active, "2026-09-24T12:00:30Z");
+  assert.equal(Date.parse(corrected.endedAt) - Date.parse(corrected.startedAt), 83000);
+});
+
+test("opening word controls without listening does not create an empty history entry", () => {
+  const active = createWordPracticeBlock("2026-09-24T12:00:00Z", "empty-visit");
+  assert.equal(wordPracticeAttempt(active, "2026-09-24T12:10:00Z"), undefined);
+  active.activeSeconds = 0.9;
+  assert.equal(wordPracticeAttempt(active, "2026-09-24T12:10:00Z"), undefined);
+  active.activeSeconds = NaN;
+  assert.equal(wordPracticeAttempt(active, "2026-09-24T12:10:00Z"), undefined);
 });
 
 test("speed changes preserve the heard prefix, pitch, shuffle order and extra word pauses", () => {

@@ -132,7 +132,9 @@ current block. Saving preserves practiced time, results, and notes; aborting
 discards the current block without recording practice. Either switch choice
 opens the selected activity in Focus. A running Morse Runner first stops and
 collects its final results. Canceling the dialog or navigating away cancels the
-switch. Returning to the same activity resumes its existing block.
+switch. Returning to the same activity resumes its existing block. Word
+recognition is a lightweight exception: starting another activity automatically
+saves actual listening time and opens the selected activity without a dialog.
 
 ICR blocks have no running stopwatch. Open the ICR entry, practice in LCWO,
 then choose Finish block. When connected, Finish fetches fresh LCWO results and
@@ -217,8 +219,9 @@ and the remaining words use the new speed with the same pitch and order. The
 transition is scheduled on the audio clock, without waiting for a timer callback.
 If the last word is already playing, the speed applies to the next round. Show/hide
 and repeat work immediately; shuffle applies to the next round. Changing the list,
-pitch, or spacing pauses playback and starts a fresh round on Play. Pause/Play
-retains the current position. New round discards that position. Lists accept
+pitch, or spacing pauses playback and starts a fresh round on Play. One button
+toggles **Play words / Pause words**, retaining the current position. The other
+two buttons are **Show words / Hide words** and **Done**. Lists accept
 1-200 whitespace-separated entries, punctuation and explicit prosigns; unsupported
 text and rounds longer than ten minutes are rejected. Duplicates remain.
 
@@ -239,13 +242,18 @@ confirmed iOS background playback on September 24. Lock-screen card presentation
 remains browser-controlled and needs another real-device test after the metadata
 and position changes; this is not a native iOS Live Activity.
 
-Finish and save records actual listening under `other-practice` /
-`other:word-recognition`, with the list title and settings selected during listening,
-without course completion or LCWO credit. Settings and custom text stay on this
+**Done** saves immediately and returns to Today. Starting another activity also
+saves immediately, without a finish dialog. Both paths record actual listening
+under `other-practice` / `other:word-recognition`, with the list title and settings
+selected during listening, without course completion or LCWO credit. Visits with
+less than one second of audio do not create empty history entries. The final audio
+interval is accounted for before the player is disposed. History is queued with
+the draft cleared in a serialized device-local write, then syncs when connected. Settings and custom text stay on this
 device; only the history summary syncs. The summary retains the first fifteen
 setting combinations and notes additional changes, without stopping playback.
 An unfinished block checkpoints time and text, reloads paused, and starts a fresh
-round on Play.
+round on Play. Navigating away from Focus pauses the player and keeps the draft;
+returning to word practice resumes it, while choosing another activity saves it.
 
 ### Optional daily word listening
 

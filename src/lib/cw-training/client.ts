@@ -1,4 +1,4 @@
-import { createWordPracticeBlock, wordPracticeNote } from "./word-practice";
+import { createWordPracticeBlock, wordPracticeAttempt, wordPracticeNote } from "./word-practice";
 import type { WordPanel } from "./word-panel";
 import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
 import { audioAutoReplay, dailyListeningSeconds, DAILY_LISTENING_SECONDS, isDailyListening, shouldReplayAudio } from "./daily-listening";
@@ -498,6 +498,7 @@ export async function initTraining() {
     pendingActivity = undefined;
     const leavingPractice = view === "focus" && next !== "focus" && !!state.active;
     if (leavingPractice) {
+      wordPanel?.pause();
       suspendSending("navigation");
       // Settle the last observed audio/timer interval before hiding practice.
       // A queued end-of-pass event must not restart audio after navigation.
@@ -514,7 +515,9 @@ export async function initTraining() {
     applyView(next);
     // Current-block cards must reflect the latest engine time and terminal state.
     if (state.snapshot) render();
-    if (leavingPractice) notice(state.active?.runner
+    if (leavingPractice) notice(state.active?.wordPractice
+      ? "Word practice is paused. Return to resume, or start another activity to save your listening time."
+      : state.active?.runner
       ? "Your run is saved on this device. Its practiced time counts toward the assignment; view results and save it to history."
       : "Your block is saved and paused. Choose Return to block when ready.");
     root.querySelector<HTMLButtonElement>(`.training-tabs [data-view="${next}"]`)?.focus({ preventScroll: true });
@@ -777,6 +780,7 @@ export async function initTraining() {
       wordPanel = mountWordPanel(host, active.wordPractice!, {
         bobText: snapshot().dailyListening?.text,
         canPlay: () => allowActiveDate(),
+        done: () => finish(),
         changed: () => {
           if (state.active?.id !== active.id) return;
           state.wordPracticeDefaults = { ...structuredClone(active.wordPractice!), used: [] };
@@ -799,6 +803,8 @@ export async function initTraining() {
     const active = state.active;
     if (wordBlock && (wordBlock !== active?.id || !active?.wordPractice)) unmountWords();
     $("training-word-practice").hidden = !active?.wordPractice;
+    $("training-block-actions").hidden = !!active?.wordPractice;
+    $("training-abort-help").hidden = !!active?.wordPractice;
     if (active?.wordPractice) renderWords(active);
     if (sendingBlock && (sendingBlock !== active?.id || active?.task.kind !== "sending")) unmountSending();
     $("training-sending-actions").hidden = active?.task.kind !== "sending";
@@ -1158,7 +1164,7 @@ export async function initTraining() {
       dateInTimezone(state.active.startedAt, snapshot().course.timezone) === todayTime.date &&
       !todayTime.savedIds.has(state.active.id);
     $("training-time-breakdown").textContent = currentPractice
-      ? `${time(totals.savedSeconds)} saved + ${time(totals.currentSeconds)} current block (on this device). Finish and save to add it to history.`
+      ? `${time(totals.savedSeconds)} saved + ${time(totals.currentSeconds)} current block (on this device). ${state.active?.wordPractice ? "Choose Done or start another activity to save to history." : "Finish and save to add it to history."}`
       : `${time(totals.savedSeconds)} saved practice today.${state.active?.context === "class" ? " Class time is separate." : ""}`;
     const progress = $<HTMLProgressElement>("training-progress");
     progress.value = Math.min(totals.totalSeconds / 60, progress.max);
@@ -1255,6 +1261,10 @@ export async function initTraining() {
   }
   function switchActivity(title: string, start: () => void, sameActivity = false): boolean {
     if (!state.active) return false;
+    if (!sameActivity && state.active.wordPractice) {
+      saveWordPractice();
+      return false;
+    }
     setView("focus");
     if (sameActivity) return true;
     pendingActivity = { title, start };
@@ -1396,6 +1406,22 @@ export async function initTraining() {
     render();
     void sync();
   }
+  function saveWordPractice() {
+    const active = state.active;
+    if (!active?.wordPractice) return;
+    wordPanel?.pause(); // Account for audio since the last UI checkpoint.
+    const attempt = wordPracticeAttempt(active, new Date().toISOString());
+    state.wordPracticeDefaults = { ...structuredClone(active.wordPractice), used: [] };
+    state.active = undefined;
+    unmountWords();
+    running = false;
+    recalling = false;
+    // record queues history and clears the draft in one serialized local write
+    // before the next activity starts. Sync can finish later, including offline.
+    if (attempt) void record(attempt);
+    else void persist();
+    render();
+  }
   function abortBlock() {
     if (!state.active) return;
     // Detach the draft before disposing capture or navigating: those callbacks
@@ -1414,6 +1440,11 @@ export async function initTraining() {
 
   function finish() {
     if (!state.active) return;
+    if (state.active.wordPractice) {
+      saveWordPractice();
+      setView("today");
+      return;
+    }
     if (state.active.runner && ["loading", "ready", "running"].includes(state.active.runner.status)) {
       runnerFinishPending = true;
       stopRunner();

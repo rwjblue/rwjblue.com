@@ -14,9 +14,10 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   canPlay: () => boolean;
   changed: () => void;
   progress: (seconds: number) => void;
+  done: () => void;
 }): WordPanel {
   host.innerHTML = `
-    <div class="training-actions"><button type="button" data-word="play" class="primary">Play words</button><button type="button" data-word="pause" disabled>Pause words</button><button type="button" data-word="reveal" aria-pressed="false">Show words</button><button type="button" data-word="new">New round</button></div>
+    <div class="training-actions"><button type="button" data-word="play" class="primary">Play words</button><button type="button" data-word="reveal" aria-pressed="false">Show words</button><button type="button" data-word="done">Done</button></div>
     <p data-word="status" role="status">Ready. Press Play to listen.</p>
     <p data-word="position" class="training-small"></p>
     <p data-word="answer" class="training-word-answer" hidden></p>
@@ -35,7 +36,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       <label class="training-check"><input data-word="shuffle" type="checkbox" /> Shuffle each round</label>
       <label class="training-check"><input data-word="repeat" type="checkbox" /> Repeat rounds</label>
     </div>
-    <p class="training-small">Listening time saves with this block. After reloading, the round starts again; saved listening time is retained. If your phone interrupts audio, return here and press Play.</p>`;
+    <p class="training-small">Listening time saves automatically when you choose Done or start another activity. Your progress is also saved on this device while you listen. If your phone interrupts audio, return here and press Play.</p>`;
   const $ = <T extends HTMLElement = HTMLElement>(name: string) => host.querySelector<T>(`[data-word="${name}"]`)!;
   const input = (name: string) => $<HTMLInputElement>(name);
   const text = $<HTMLTextAreaElement>("text");
@@ -51,6 +52,10 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   let playing = false;
   let generation = 0;
   let revealed = false;
+  function playbackButton() {
+    $("play").textContent = playing ? "Pause words" : busy ? "Starting..." : "Play words";
+    $<HTMLButtonElement>("play").disabled = busy && !playing;
+  }
   function mediaInfo() {
     if (!("mediaSession" in navigator)) return;
     try {
@@ -78,8 +83,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       playing = status === "playing";
       if ("mediaSession" in navigator) navigator.mediaSession.playbackState = playing ? "playing" : "paused";
       mediaInfo();
-      $<HTMLButtonElement>("pause").disabled = !playing;
-      $<HTMLButtonElement>("play").disabled = playing || busy;
+      playbackButton();
       $("status").textContent = status === "playing" ? "Listening. Pause whenever you need a break."
         : status === "interrupted" ? "Audio interrupted. Listening time is paused. Press Play to resume."
         : status === "ended" ? "Round complete." : "Paused. Press Play to continue.";
@@ -94,6 +98,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   async function play() {
     if (busy || playing || disposed || !options.canPlay()) return;
     busy = true;
+    playbackButton();
     const run = ++generation;
     try {
       if (!round) {
@@ -110,7 +115,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       player.pause();
       $("status").textContent = error instanceof Error ? error.message : "Audio unavailable. Try Play again.";
     } finally {
-      if (generation === run) { busy = false; $<HTMLButtonElement>("play").disabled = playing; }
+      if (generation === run) { busy = false; playbackButton(); }
     }
   }
   function reset() {
@@ -159,8 +164,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     $("reveal").setAttribute("aria-pressed", String(revealed));
     showPosition();
   });
-  $("play").addEventListener("click", () => void play());
-  $("pause").addEventListener("click", pause);
-  $("new").addEventListener("click", reset);
+  $("play").addEventListener("click", () => { if (playing) pause(); else void play(); });
+  $("done").addEventListener("click", options.done);
   return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
 }
