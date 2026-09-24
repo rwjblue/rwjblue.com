@@ -794,3 +794,6 @@
     padding: 12px;
   }
 }
+
+.training-word-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
+.training-word-answer { font-size: 2rem; font-weight: 700; overflow-wrap: anywhere; }

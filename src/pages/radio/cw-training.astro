@@ -102,6 +102,7 @@ import "../../styles/cw-training.css";
         <section class="training-section" aria-labelledby="training-keep-practicing-heading">
           <h3 id="training-keep-practicing-heading">Keep practicing</h3>
           <p class="training-small">Optional practice adds minutes without changing assignment completion.</p>
+          <div class="training-card"><h4>Word recognition</h4><p>Practice common words, Bob's reference list, or your own words with adjustable speed and spacing.</p><button type="button" data-action="word-practice">Practice words</button></div>
           <div id="training-regular-practice" class="training-regular-practice"></div>
           <details id="training-extra-panel" class="training-panel" hidden>
             <summary>Extra review</summary>
@@ -213,6 +214,7 @@ import "../../styles/cw-training.css";
                 </div>
               </details>
             </div>
+            <section id="training-word-practice" aria-label="Word recognition controls" hidden></section>
             <div id="training-timer-box">
               <button
                 id="training-timer-toggle"

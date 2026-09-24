@@ -126,11 +126,13 @@ recommendations. Live CWT tasks show eligible
 operating windows and are recommended only while a window is active.
 
 The daily minute goal is a baseline, not a cap or a replacement for sending
-and other assigned activities. To switch activities with a saved block, choose
-Record block and switch, confirm the partial practice, then select the next
-block. Saving partial practice preserves the unfinished objective. If the
-current block was started by mistake, choose Abort block in Focus to discard
-it and select another exercise without recording practice.
+and other assigned activities. Starting another activity while a block exists
+opens its finish dialog with Save and switch, Abort and switch, and Stay in
+current block. Saving preserves practiced time, results, and notes; aborting
+discards the current block without recording practice. Either switch choice
+opens the selected activity in Focus. A running Morse Runner first stops and
+collects its final results. Canceling the dialog or navigating away cancels the
+switch. Returning to the same activity resumes its existing block.
 
 ICR blocks have no running stopwatch. Open the ICR entry, practice in LCWO,
 then choose Finish block. When connected, Finish fetches fresh LCWO results and
@@ -194,6 +196,43 @@ cross-origin fetch access. There is no audio proxy, mirror, waveform fetch, or
 automatic transcription. Initial playback needs a user gesture. Media Session
 controls are progressive enhancements; uninterrupted playback with a locked
 phone still requires real-device verification. Offline audio is not promised.
+
+### Browser word recognition
+
+Today > Keep practicing > **Practice words** opens optional word recognition in
+Focus. Choose the 30 common words supplied on September 24, Bob's existing private
+77-word reference (when imported), or paste a custom list. The 77-word reference
+preserves its 75 entries and duplicates; it is not a transcript of his MP3.
+
+Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
+standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
+and optional word reveal. Defaults are 30 WPM, 600 Hz, one extra second, shuffle
+and repeat enabled. Changing a setting pauses playback; Play starts a fresh round.
+Pause/Play retains the current position. New round discards that position. Lists
+accept 1-200 whitespace-separated entries, punctuation and explicit prosigns;
+unsupported text and rounds longer than ten minutes are rejected. Duplicates remain.
+
+The existing pinned Morse Pro engine supplies word timings. A lazily loaded panel
+renders a complete round as mono PCM with 5 ms tone envelopes and schedules one
+Web Audio buffer. Dits and dahs do not depend on JavaScript timers. Starting the
+next round still requires a callback; throttling can delay that transition.
+No MP3 is generated or downloaded, and no new external service is involved.
+
+Where supported, playback requests the Audio Session playback type and exposes
+Media Session play/pause. Switching apps does not deliberately pause word audio.
+An interrupted audio context pauses the session and requires Play to resume.
+Listening time comes from the audio clock, capped at the round's duration, so
+suspension, pauses, and delayed loop callbacks cannot earn extra time. iPhone
+screen-lock playback and lock-screen controls still require real-device testing;
+MP3 playback remains a possible later fallback.
+
+Finish and save records actual listening under `other-practice` /
+`other:word-recognition`, with the list title and settings actually played, without
+course completion or LCWO credit. Settings and custom text stay on this device;
+only the history summary syncs. An unfinished block checkpoints time and text,
+reloads paused, and starts a fresh round on Play. Last-used settings carry into
+new blocks. Up to sixteen distinct setting combinations fit in one saved block.
+The original private daily recording remains a separate exercise.
 
 ### Optional daily word listening
 

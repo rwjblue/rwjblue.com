@@ -19,6 +19,7 @@ export interface AudioRecordingUsage {
 }
 
 export interface ActiveBlock {
+  wordPractice?: import("./word-practice").WordPracticeDraft;
   id: string;
   assignmentId: string;
   task: TrainingTask;
@@ -48,6 +49,7 @@ export interface ActiveBlock {
 }
 
 export interface TrainingDeviceState {
+  wordPracticeDefaults?: import("./word-practice").WordPracticeDraft;
   /** Editable report and the exact copy most recently opened in Google Forms. */
   reportDraft?: TrainingReport;
   reportEditedKeys?: string[];
