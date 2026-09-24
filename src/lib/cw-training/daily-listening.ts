@@ -36,7 +36,9 @@ export function dailyListeningSeconds(attempts: readonly TrainingAttempt[], acti
   if (active && !records.has(active.id)) records.set(active.id, { ...active, taskId: active.task.id, endedAt: active.startedAt, completed: false });
   let seconds = 0;
   for (const entry of records.values()) {
-    if (entry.assignmentId !== DAILY_LISTENING_ASSIGNMENT || entry.taskId !== DAILY_LISTENING_ID || entry.context !== "practice") continue;
+    const original = entry.assignmentId === DAILY_LISTENING_ASSIGNMENT && entry.taskId === DAILY_LISTENING_ID;
+    const generated = entry.assignmentId === "other-practice" && entry.taskId === "other:word-recognition";
+    if ((!original && !generated) || entry.context !== "practice") continue;
     if (dateInTimezone(entry.startedAt, timezone) !== date) continue;
     seconds += Math.max(0, entry.activeSeconds - (entry.recallSeconds ?? 0));
   }

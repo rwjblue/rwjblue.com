@@ -3,6 +3,7 @@ import { test } from "node:test";
 import { audioAutoReplay, createDailyListeningBlock, dailyListeningSeconds, DAILY_LISTENING_ID, shouldReplayAudio } from "../src/lib/cw-training/daily-listening.ts";
 import { taskProgress } from "../src/lib/cw-training/plan.ts";
 import { renderPracticeHistory } from "../src/lib/cw-training/history.ts";
+import { createWordPracticeBlock } from "../src/lib/cw-training/word-practice.ts";
 
 const resource = { id: DAILY_LISTENING_ID, title: "Bob's 77 Words", url: "https://example.org/audio", format: "audio", durationSeconds: 116 };
 const start = () => createDailyListeningBlock(resource, "2026-09-21T20:00:00.000Z", "session");
@@ -40,4 +41,14 @@ test("new sessions start at zero while daily progress excludes recall, other day
   const html = renderPracticeHistory([saved], { course: { assignments: [], timezone: "America/New_York" }, materials: [], pendingIds: new Set() });
   assert.match(html, /Bob&#39;s 77 Words/);
   assert.match(html, /Extra review/);
+});
+
+test("one daily suggestion includes generated words and the original recording without duplication", () => {
+  const original = { ...start(), activeSeconds: 120, taskId: DAILY_LISTENING_ID, completed: false, endedAt: "2026-09-21T20:04:00.000Z" };
+  const active = createWordPracticeBlock("2026-09-21T20:10:00.000Z", "words");
+  active.activeSeconds = 45;
+  const saved = { ...active, taskId: active.task.id, completed: false, endedAt: "2026-09-21T20:11:00.000Z" };
+  assert.equal(dailyListeningSeconds([original], active, "2026-09-21", "America/New_York"), 165);
+  assert.equal(dailyListeningSeconds([original, saved, saved], active, "2026-09-21", "America/New_York"), 165);
+  assert.equal(dailyListeningSeconds([original], { ...active, context: "class" }, "2026-09-21", "America/New_York"), 120);
 });

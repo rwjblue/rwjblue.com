@@ -1,4 +1,4 @@
-import { renderWordSamples, type WordRound } from "./word-round.ts";
+import { renderWordSamples, retimeWordRound, type WordRound } from "./word-round.ts";
 import { wordPlaybackPosition } from "./word-practice.ts";
 
 export interface WordPlayerCallbacks {
@@ -10,6 +10,8 @@ export interface WordPlayerCallbacks {
 export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   let context: AudioContext | undefined;
   let source: AudioBufferSourceNode | undefined;
+  const sources = new Set<AudioBufferSourceNode>();
+  let pitch = 450;
   let buffer: AudioBuffer | undefined;
   let round: WordRound | undefined;
   let offset = 0;
@@ -35,18 +37,68 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
     offset = checkpoint();
     playing = false;
     clearInterval(ticker);
-    if (source) {
-      source.onended = null;
-      source.stop();
-      source.disconnect();
-      source = undefined;
+    for (const node of sources) {
+      node.onended = null;
+      node.stop();
+      node.disconnect();
     }
+    sources.clear();
+    source = undefined;
     callbacks.status(status);
+  }
+  function makeBuffer(nextRound: WordRound) {
+    const samples = renderWordSamples(nextRound, pitch);
+    const next = context!.createBuffer(1, samples.length, 22050);
+    next.getChannelData(0).set(samples);
+    return next;
+  }
+  function schedule(when: number, at: number) {
+    const node = context!.createBufferSource();
+    const run = generation;
+    node.buffer = buffer!;
+    node.connect(context!.destination);
+    sources.add(node);
+    node.onended = () => {
+      sources.delete(node);
+      node.disconnect();
+      if (node !== source || !playing || generation !== run) return;
+      checkpoint();
+      playing = false;
+      clearInterval(ticker);
+      source = undefined;
+      offset = round!.duration;
+      callbacks.status("ended");
+    };
+    node.start(when, at);
+    return node;
   }
   return {
     checkpoint,
     pause,
-    async play(nextRound: WordRound, pitch: number, restart = false) {
+    setSpeed(wpm: number) {
+      if (!round || !context || !buffer) return round;
+      // Buffer rendering may cross a boundary. Recheck the audio clock before
+      // scheduling, leaving the currently sounding word completely intact.
+      for (let index = 0; index < round.words.length; index++) {
+        const position = playing ? wordPlaybackPosition(offset, started, context.currentTime, round.duration) : offset;
+        const boundary = round.starts[index];
+        if (boundary < position + (playing ? 0.05 : 0)) continue;
+        const next = retimeWordRound(round, wpm, index);
+        const nextBuffer = makeBuffer(next);
+        const when = started + boundary - offset;
+        if (playing && when < context.currentTime + 0.02) continue;
+        round = next;
+        buffer = nextBuffer;
+        if (playing) {
+          const previous = source;
+          source = schedule(when, boundary);
+          previous?.stop(when);
+        }
+        return round;
+      }
+      return round; // Last word: the next round will use the new setting.
+    },
+    async play(nextRound: WordRound, nextPitch: number, restart = false) {
       if (disposed) throw new Error("Word player has been disposed.");
       pause();
       const run = generation;
@@ -70,31 +122,17 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       if (round !== nextRound || !buffer || restart) {
         round = nextRound;
         offset = 0;
-        const samples = renderWordSamples(round, pitch);
-        buffer = context.createBuffer(1, samples.length, 22050);
-        buffer.getChannelData(0).set(samples);
+        pitch = nextPitch;
+        buffer = makeBuffer(round);
       }
       await resumed;
       if (disposed || generation !== run) return;
       if (context.state !== "running") throw new Error("Audio is interrupted. Return to this page and press Play.");
       if (offset >= round.duration) offset = 0;
-      source = context.createBufferSource();
-      source.buffer = buffer;
-      source.connect(context.destination);
       accounted = offset;
       started = context.currentTime;
       playing = true;
-      source.onended = () => {
-        if (!playing || generation !== run) return;
-        checkpoint();
-        playing = false;
-        clearInterval(ticker);
-        source?.disconnect();
-        source = undefined;
-        offset = round!.duration;
-        callbacks.status("ended");
-      };
-      source.start(0, offset);
+      source = schedule(0, offset);
       ticker = setInterval(checkpoint, 250);
       callbacks.status("playing");
     },

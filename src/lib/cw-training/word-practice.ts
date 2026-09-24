@@ -9,13 +9,14 @@ export interface WordSettings {
   repeat: boolean;
 }
 export interface WordPracticeDraft {
+  defaultsVersion?: 2;
   title: string;
   text: string;
   settings: WordSettings;
   /** Distinct settings actually played, bounded for the synced note. */
   used: string[];
 }
-export const DEFAULT_WORD_SETTINGS: WordSettings = { wpm: 30, gapSeconds: 1, pitch: 600, shuffle: true, repeat: true };
+export const DEFAULT_WORD_SETTINGS: WordSettings = { wpm: 40, gapSeconds: 1, pitch: 450, shuffle: true, repeat: true };
 
 export function parsePracticeWords(text: string): string[] {
   const words = text.trim().toUpperCase().split(/\s+/).filter(Boolean);
@@ -44,7 +45,23 @@ export function wordPracticeNote(draft: WordPracticeDraft): string {
   return `Browser word recognition (Morse Pro).\n${draft.used.join("\n") || "No audio played."}`;
 }
 
+export function recordWordSettings(draft: WordPracticeDraft): void {
+  const summary = wordSettingsNote(draft);
+  if (draft.used.includes(summary)) return;
+  if (draft.used.length < 15) draft.used.push(summary);
+  else if (draft.used.length === 15) draft.used.push("Additional settings were selected during this block.");
+}
+
 export function createWordPracticeBlock(now: string, id: string, previous?: WordPracticeDraft): ActiveBlock {
+  const draft: WordPracticeDraft = previous ? { ...structuredClone(previous), used: [] } : {
+    title: "30 common words", text: COMMON_WORDS, settings: { ...DEFAULT_WORD_SETTINGS }, used: [],
+  };
+  // Upgrade the old defaults once, while preserving other customized values.
+  if (previous && !previous.defaultsVersion) {
+    if (draft.settings.wpm === 30) draft.settings.wpm = DEFAULT_WORD_SETTINGS.wpm;
+    if (draft.settings.pitch === 600) draft.settings.pitch = DEFAULT_WORD_SETTINGS.pitch;
+  }
+  draft.defaultsVersion = 2;
   return {
     id, assignmentId: "other-practice", task: {
       id: "other:word-recognition", kind: "review", title: "Word recognition",
@@ -54,9 +71,7 @@ export function createWordPracticeBlock(now: string, id: string, previous?: Word
     startedAt: now, targetMinutes: 10, activeSeconds: 0, completedPasses: 0,
     previousPasses: 0, targetPasses: 0, position: 0, coverage: [], bookmarks: [],
     context: "practice", review: true,
-    wordPractice: previous ? { ...structuredClone(previous), used: [] } : {
-      title: "30 common words", text: COMMON_WORDS, settings: { ...DEFAULT_WORD_SETTINGS }, used: [],
-    },
+    wordPractice: draft,
   };
 }
 

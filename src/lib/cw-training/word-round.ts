@@ -5,6 +5,8 @@ export interface WordRound {
   words: string[];
   timings: number[];
   starts: number[];
+  timingStarts: number[];
+  settings: WordSettings;
   duration: number;
 }
 
@@ -17,16 +19,35 @@ export function createWordRound(text: string, settings: WordSettings, random = M
   }
   const timings: number[] = [];
   const starts: number[] = [];
+  const timingStarts: number[] = [];
   let duration = 0;
   for (const word of words) {
     starts.push(duration);
+    timingStarts.push(timings.length);
     const part = sendingTextTimings(word, settings.wpm);
     part.push(-(8400 / settings.wpm + settings.gapSeconds * 1000));
     timings.push(...part);
     duration += part.reduce((sum, ms) => sum + Math.abs(ms), 0) / 1000;
   }
   if (duration > 600) throw new Error("This round exceeds 10 minutes. Use fewer words, a shorter pause, or a faster speed.");
-  return { words, timings, starts, duration };
+  return { words, timings, starts, timingStarts, settings: { ...settings }, duration };
+}
+
+/** Keep the heard prefix and shuffled order; only unsent words change speed. */
+export function retimeWordRound(round: WordRound, wpm: number, firstWord: number): WordRound {
+  if (firstWord >= round.words.length) return round;
+  const settings = { ...round.settings, wpm };
+  const tail = createWordRound(round.words.slice(firstWord).join(" "), { ...settings, shuffle: false });
+  const boundary = round.starts[firstWord];
+  const timingBoundary = round.timingStarts[firstWord];
+  const duration = boundary + tail.duration;
+  if (duration > 600) throw new Error("This round would exceed 10 minutes. Use a faster speed or start a shorter list.");
+  return {
+    words: [...round.words], settings, duration,
+    timings: [...round.timings.slice(0, timingBoundary), ...tail.timings],
+    starts: [...round.starts.slice(0, firstWord), ...tail.starts.map(start => boundary + start)],
+    timingStarts: [...round.timingStarts.slice(0, firstWord), ...tail.timingStarts.map(start => timingBoundary + start)],
+  };
 }
 
 /** One complete round is scheduled as a buffer, independent of JS timer cadence. */
@@ -47,4 +68,3 @@ export function renderWordSamples(round: WordRound, pitch: number, sampleRate = 
   }
   return samples;
 }
-

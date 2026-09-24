@@ -1,5 +1,5 @@
 import { createWordRound, type WordRound } from "./word-round.ts";
-import { COMMON_WORDS, wordSettingsNote, type WordPracticeDraft } from "./word-practice.ts";
+import { checkWordSettings, COMMON_WORDS, recordWordSettings, type WordPracticeDraft } from "./word-practice.ts";
 import { createWordPlayer } from "./word-player.ts";
 
 export interface WordPanel {
@@ -16,7 +16,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   progress: (seconds: number) => void;
 }): WordPanel {
   host.innerHTML = `
-    <div class="training-actions"><button type="button" data-word="play" class="primary">Play words</button><button type="button" data-word="pause" disabled>Pause words</button><button type="button" data-word="new">New round</button></div>
+    <div class="training-actions"><button type="button" data-word="play" class="primary">Play words</button><button type="button" data-word="pause" disabled>Pause words</button><button type="button" data-word="reveal" aria-pressed="false">Show words</button><button type="button" data-word="new">New round</button></div>
     <p data-word="status" role="status">Ready. Press Play to listen.</p>
     <p data-word="position" class="training-small"></p>
     <p data-word="answer" class="training-word-answer" hidden></p>
@@ -26,7 +26,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       <label>Extra pause between words (seconds)<input data-word="gapSeconds" type="number" min="0" max="5" step="0.1" /></label>
       <label>Pitch (Hz)<input data-word="pitch" type="number" min="300" max="1000" step="10" /></label>
     </div>
-    <p class="training-small">Each word keeps normal Morse spacing at the chosen speed. The extra pause comes after each word. Changes start a fresh round when you press Play.</p>
+    <p class="training-small">Speed changes apply to the next word without stopping playback. Show or hide words at any time. Each word keeps normal Morse spacing, followed by the extra pause. Changing the list, pitch, or spacing starts a fresh round.</p>
     <details class="training-panel"><summary>View or edit words</summary><div class="training-panel-body">
       <label>Words<textarea data-word="text" rows="5" maxlength="10000" spellcheck="false"></textarea></label>
       <p class="training-small">Separate entries with spaces or newlines. Duplicates are preserved. Edits become a custom list on this device. Bob's reference is his supplied text, not a verified transcript of the recording.</p>
@@ -34,7 +34,6 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     <div class="training-actions">
       <label class="training-check"><input data-word="shuffle" type="checkbox" /> Shuffle each round</label>
       <label class="training-check"><input data-word="repeat" type="checkbox" /> Repeat rounds</label>
-      <label class="training-check"><input data-word="reveal" type="checkbox" /> Show words while listening</label>
     </div>
     <p class="training-small">Listening time saves with this block. After reloading, the round starts again; saved listening time is retained. If your phone interrupts audio, return here and press Play.</p>`;
   const $ = <T extends HTMLElement = HTMLElement>(name: string) => host.querySelector<T>(`[data-word="${name}"]`)!;
@@ -51,10 +50,21 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   let busy = false;
   let playing = false;
   let generation = 0;
+  let revealed = false;
+  function mediaInfo() {
+    if (!("mediaSession" in navigator)) return;
+    try {
+      if (typeof MediaMetadata !== "undefined" && navigator.mediaSession.metadata?.title !== draft.title) navigator.mediaSession.metadata = new MediaMetadata({
+        title: draft.title, artist: "CW word practice", album: "Word recognition",
+      });
+      if (round) navigator.mediaSession.setPositionState?.({ duration: round.duration, position: Math.min(position, round.duration), playbackRate: 1 });
+      else navigator.mediaSession.setPositionState?.();
+    } catch { /* Lock-screen integration is optional on this browser. */ }
+  }
   function showPosition() {
     const index = round ? Math.max(0, round.starts.filter(start => start <= position).length - 1) : 0;
     $("position").textContent = round ? `Word ${index + 1} of ${round.words.length}` : "";
-    $("answer").hidden = !input("reveal").checked || !round;
+    $("answer").hidden = !revealed || !round;
     $("answer").textContent = round?.words[index] ?? "";
   }
   const player = createWordPlayer({
@@ -62,10 +72,12 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       position = at;
       options.progress(seconds);
       showPosition();
+      mediaInfo();
     },
     status(status) {
       playing = status === "playing";
       if ("mediaSession" in navigator) navigator.mediaSession.playbackState = playing ? "playing" : "paused";
+      mediaInfo();
       $<HTMLButtonElement>("pause").disabled = !playing;
       $<HTMLButtonElement>("play").disabled = playing || busy;
       $("status").textContent = status === "playing" ? "Listening. Pause whenever you need a break."
@@ -84,12 +96,14 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     busy = true;
     const run = ++generation;
     try {
-      if (!round) round = createWordRound(draft.text, draft.settings);
-      const summary = wordSettingsNote(draft);
-      if (!draft.used.includes(summary) && draft.used.length >= 16) throw new Error("Save this block before trying more settings.");
+      if (!round) {
+        round = createWordRound(draft.text, draft.settings);
+        position = 0;
+        showPosition();
+      }
       await player.play(round, draft.settings.pitch);
       if (disposed || generation !== run) return;
-      if (!draft.used.includes(summary)) draft.used.push(summary);
+      recordWordSettings(draft);
       options.changed();
     } catch (error) {
       if (disposed || generation !== run) return;
@@ -101,13 +115,31 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   }
   function reset() {
     pause(); round = undefined; position = 0; showPosition();
+    mediaInfo();
     $("status").textContent = "Ready for a new round. Press Play.";
   }
   for (const key of ["wpm", "gapSeconds", "pitch", "shuffle", "repeat"] as const) {
     input(key).addEventListener("change", () => {
-      reset();
+      if (key === "wpm") {
+        try {
+          const wpm = Number(input(key).value);
+          checkWordSettings({ ...draft.settings, wpm });
+          if (round) round = player.setSpeed(wpm) ?? round;
+          draft.settings.wpm = wpm;
+          if (playing) recordWordSettings(draft);
+          $("status").textContent = playing ? `${wpm} WPM from the next word; the current word finishes at its original speed.` : `Speed set to ${wpm} WPM.`;
+          mediaInfo();
+          options.changed();
+        } catch (error) {
+          input(key).value = String(draft.settings.wpm);
+          $("status").textContent = error instanceof Error ? error.message : "Unable to change speed.";
+        }
+        return;
+      }
+      if (key === "gapSeconds" || key === "pitch") reset();
       if (key === "shuffle" || key === "repeat") draft.settings[key] = input(key).checked;
       else draft.settings[key] = Number(input(key).value);
+      if (playing) recordWordSettings(draft);
       options.changed();
     });
   }
@@ -121,9 +153,14 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   text.addEventListener("input", () => {
     reset(); draft.text = text.value; draft.title = "Custom words"; list.value = "custom"; options.changed();
   });
-  input("reveal").addEventListener("change", showPosition);
+  $("reveal").addEventListener("click", () => {
+    revealed = !revealed;
+    $("reveal").textContent = revealed ? "Hide words" : "Show words";
+    $("reveal").setAttribute("aria-pressed", String(revealed));
+    showPosition();
+  });
   $("play").addEventListener("click", () => void play());
   $("pause").addEventListener("click", pause);
   $("new").addEventListener("click", reset);
-  return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; pause(); player.dispose(); host.replaceChildren(); } };
+  return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
 }

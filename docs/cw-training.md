@@ -199,67 +199,75 @@ phone still requires real-device verification. Offline audio is not promised.
 
 ### Browser word recognition
 
-Today > Keep practicing > **Practice words** opens optional word recognition in
-Focus. Choose the 30 common words supplied on September 24, Bob's existing private
-77-word reference (when imported), or paste a custom list. The 77-word reference
-preserves its 75 entries and duplicates; it is not a transcript of his MP3.
+Today > **Word recognition** opens optional word practice in Focus. Choose the
+30 common words supplied on September 24, Bob's existing private 77-word reference
+(when imported), or paste a custom list. **Practice Bob's 77 words** opens the same
+player with that list selected. The reference preserves its 75 entries and
+duplicates; it is not a transcript of his MP3.
 
 Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
 standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
-and optional word reveal. Defaults are 30 WPM, 600 Hz, one extra second, shuffle
-and repeat enabled. Changing a setting pauses playback; Play starts a fresh round.
-Pause/Play retains the current position. New round discards that position. Lists
-accept 1-200 whitespace-separated entries, punctuation and explicit prosigns;
-unsupported text and rounds longer than ten minutes are rejected. Duplicates remain.
+and a **Show words / Hide words** button beside playback. Defaults are 40 WPM,
+450 Hz, one extra second, shuffle and repeat enabled. On the next new block, old
+30-WPM/600-Hz defaults migrate once; other customized values are preserved.
+Subsequent choices carry into new blocks.
+
+Speed can change during playback: the current word and its pause finish intact,
+and the remaining words use the new speed with the same pitch and order. The
+transition is scheduled on the audio clock, without waiting for a timer callback.
+If the last word is already playing, the speed applies to the next round. Show/hide
+and repeat work immediately; shuffle applies to the next round. Changing the list,
+pitch, or spacing pauses playback and starts a fresh round on Play. Pause/Play
+retains the current position. New round discards that position. Lists accept
+1-200 whitespace-separated entries, punctuation and explicit prosigns; unsupported
+text and rounds longer than ten minutes are rejected. Duplicates remain.
 
 The existing pinned Morse Pro engine supplies word timings. A lazily loaded panel
-renders a complete round as mono PCM with 5 ms tone envelopes and schedules one
-Web Audio buffer. Dits and dahs do not depend on JavaScript timers. Starting the
-next round still requires a callback; throttling can delay that transition.
-No MP3 is generated or downloaded, and no new external service is involved.
+renders a complete round as mono PCM with 5 ms tone envelopes and schedules a
+Web Audio buffer. Dits and dahs do not depend on JavaScript timers. Speed changes
+render the remaining words and schedule a replacement buffer at a word boundary.
+Starting the next round still requires a callback; throttling can delay that
+transition. No MP3 is generated or downloaded, and no new service is involved.
 
 Where supported, playback requests the Audio Session playback type and exposes
-Media Session play/pause. Switching apps does not deliberately pause word audio.
-An interrupted audio context pauses the session and requires Play to resume.
+Media Session play/pause, list metadata, duration, and current position for Now
+Playing controls. Switching apps does not deliberately pause word audio. An
+interrupted audio context pauses the session and requires Play to resume.
 Listening time comes from the audio clock, capped at the round's duration, so
-suspension, pauses, and delayed loop callbacks cannot earn extra time. iPhone
-screen-lock playback and lock-screen controls still require real-device testing;
-MP3 playback remains a possible later fallback.
+suspension, pauses, and delayed loop callbacks cannot earn extra time. The owner
+confirmed iOS background playback on September 24. Lock-screen card presentation
+remains browser-controlled and needs another real-device test after the metadata
+and position changes; this is not a native iOS Live Activity.
 
 Finish and save records actual listening under `other-practice` /
-`other:word-recognition`, with the list title and settings actually played, without
-course completion or LCWO credit. Settings and custom text stay on this device;
-only the history summary syncs. An unfinished block checkpoints time and text,
-reloads paused, and starts a fresh round on Play. Last-used settings carry into
-new blocks. Up to sixteen distinct setting combinations fit in one saved block.
-The original private daily recording remains a separate exercise.
+`other:word-recognition`, with the list title and settings selected during listening,
+without course completion or LCWO credit. Settings and custom text stay on this
+device; only the history summary syncs. The summary retains the first fifteen
+setting combinations and notes additional changes, without stopping playback.
+An unfinished block checkpoints time and text, reloads paused, and starts a fresh
+round on Play.
 
 ### Optional daily word listening
 
-Today includes **Bob's 77 Words** after the recording is imported. It is optional
-every day, including Fridays and after the course, with a ten-minute listening
-suggestion. The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis
-indicates approximately 40-WPM characters with extra word spacing. The supplied
-text has 75 entries (70 unique), is preserved as received, and is available in
-a collapsed **View word list** panel. It is a reference, not a verified transcript.
+The Word recognition card has one ten-minute suggestion for all word lists and
+Bob's original recording. It remains available every day, including Fridays and
+after the course. Today's counter sums actual listening across saved and current
+sessions in the course timezone, without duplicating pending entries or including
+recall. Ten minutes is a suggestion, not an automatic stop. All listening still
+contributes to the main daily total, with no assignment completion.
 
-The daily recording automatically repeats by default, including after ten minutes
-and after a partially heard loop. Other audio pauses between passes by default;
-when enabled, its automatic repeats still stop at the block's planned pass count.
-The **Automatically replay between passes** checkbox saves two independent
-device preferences in IndexedDB: `dailyListeningAutoReplay` (default true) and
-`audioAutoReplay` (default false). Neither choice changes when switching exercises
-or refreshing, and neither syncs to other devices.
+A collapsed **Original recording** section keeps the imported MP3 available at its
+recorded speed and pitch. Existing recording sessions and history remain valid.
+The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis indicates
+approximately 40-WPM characters with extra word spacing. The supplied text has
+75 entries (70 unique), preserved as received.
 
-Each new daily listening session starts at the beginning. An unfinished block
-retains the usual device-local pause/resume behavior, but finishing saves no
-cross-session recording position. Ten minutes is a suggestion, not an automatic
-stop. Today's counter sums actual listening across saved and current sessions in
-the course timezone, without duplicating pending entries or including recall.
-All practice time still contributes to the main daily total. Daily listening is
-saved under `daily-listening` / `bob-77-words` as optional practice with no
-assignment completion; full loops are retained as listening history. Reports
-list it among practice sources without filling required course-audio answers.
+Original-recording sessions still save under `daily-listening` / `bob-77-words`.
+They automatically repeat by default, including after ten minutes or a partially
+heard loop; course recordings pause by default. The independent device preferences
+`dailyListeningAutoReplay` and `audioAutoReplay` remain supported. Each new original
+recording session starts at the beginning, while an unfinished block retains its
+pause/resume position. Reports preserve recording history as optional practice.
 
 The original 11,025 Hz MPEG-2.5 file stopped just before its reported end in
 browser verification, preventing the normal `ended` event and replay. The importer
