@@ -1,18 +1,17 @@
 import { createWordRound, renderWordWav, retimeWordRound, type WordRound, type WordSpeechClips } from "./word-round.ts";
 
 export interface WordPlayerCallbacks {
+  canPlay?: () => boolean;
   progress: (seconds: number, position: number) => void;
   status: (status: "playing" | "paused" | "interrupted" | "ended") => void;
 }
 
 /** Native playback of locally generated audio, independent of an AudioContext. */
-export function createWordPlayer(callbacks: WordPlayerCallbacks) {
+export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElement) {
   let output: HTMLAudioElement | undefined;
   let url: string | undefined;
   let ownsUrl = false;
   let pitch = 450;
-  let volume = 1;
-  let nativeVolume = true;
   let round: WordRound | undefined;
   let accounted = 0;
   let pendingSeek: number | undefined;
@@ -26,8 +25,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   }
   function checkpoint() {
     const at = position();
-    if (!playing) return at;
-    const delta = Math.max(0, at - accounted);
+    const delta = playing && !output?.seeking ? Math.max(0, at - accounted) / (output?.playbackRate || 1) : 0;
     accounted = at;
     callbacks.progress(delta, at);
     return at;
@@ -43,6 +41,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   }
   function markPlaying() {
     if (disposed || !output || output.paused || playing) return;
+    accounted = position();
     playing = true;
     ticker = setInterval(checkpoint, 250);
     callbacks.status("playing");
@@ -50,16 +49,21 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   function ensureOutput() {
     if (output) return;
     output = document.createElement("audio");
-    // iPhone Safari ignores per-element volume. Probe the capability rather
-    // than routing native playback through a background-sensitive AudioContext.
-    output.volume = 0.5;
-    nativeVolume = output.volume === 0.5;
-    output.volume = nativeVolume ? volume : 1;
-    output.hidden = true;
+    output.controls = true;
+    output.setAttribute("aria-label", "Word practice audio");
     output.preload = "auto";
     output.setAttribute("playsinline", "");
+    output.onplay = () => {
+      if (disposed || !round || callbacks.canPlay?.() === false) pause();
+    };
     output.onplaying = markPlaying;
+    output.onseeking = output.onseeked = () => {
+      // Seeking changes the displayed word but earns no listening credit.
+      accounted = position();
+      callbacks.progress(0, accounted);
+    };
     output.ontimeupdate = checkpoint;
+    output.onratechange = () => callbacks.progress(0, position());
     output.onloadedmetadata = () => {
       if (pendingSeek !== undefined) {
         output!.currentTime = pendingSeek;
@@ -67,7 +71,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       }
     };
     output.onpause = () => {
-      if (playing && output?.paused && !output.ended) pause("interrupted");
+      if (playing && output?.paused && !output.ended) pause();
     };
     output.onerror = () => pause("interrupted");
     output.onended = () => {
@@ -77,7 +81,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       clearInterval(ticker);
       callbacks.status("ended");
     };
-    document.body.append(output);
+    (host ?? document.body).append(output);
   }
   function load(recording: Blob | string, at: number) {
     const nextUrl = typeof recording === "string" ? recording : URL.createObjectURL(recording);
@@ -109,30 +113,37 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
     if (disposed || generation !== run) return;
     markPlaying();
   }
+  function prepare(nextRound: WordRound, nextPitch: number, restart = false) {
+    if (disposed) throw new Error("Word player has been disposed.");
+    ensureOutput();
+    if (round !== nextRound || pitch !== nextPitch || restart) {
+      const recording = nextRound.recordingUrl ?? renderWordWav(nextRound, nextPitch);
+      checkpoint();
+      round = nextRound;
+      pitch = nextPitch;
+      load(recording, 0);
+    }
+  }
   return {
     checkpoint,
     pause,
-    clearRound() { round = undefined; },
-    get nativeVolume() { ensureOutput(); return nativeVolume; },
-    setVolume(value: number, speechClips?: WordSpeechClips) {
-      if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error("Use a volume between 0 and 1.");
-      ensureOutput();
-      if (value === volume) return round;
-      if (nativeVolume || !round) {
-        volume = value;
-        output!.volume = nativeVolume ? volume : 1;
-        return round;
+    prepare,
+    get playbackRate() { return output?.playbackRate || 1; },
+    clearRound() {
+      generation++;
+      playing = false;
+      clearInterval(ticker);
+      round = undefined;
+      pendingSeek = undefined;
+      accounted = 0;
+      if (output) {
+        output.pause();
+        output.removeAttribute("src");
+        output.load();
       }
-      const next = round.recordingUrl
-        ? createWordRound(round.words.join(" "), { ...round.settings, shuffle: false }, Math.random, speechClips) : round;
-      const recording = renderWordWav(next, pitch, value);
-      const resume = !output!.paused;
-      const at = checkpoint();
-      volume = value;
-      round = next;
-      load(recording, at);
-      if (resume) void start().catch(() => { /* start reports interruption. */ });
-      return round;
+      if (url && ownsUrl) URL.revokeObjectURL(url);
+      url = undefined;
+      ownsUrl = false;
     },
     setSpeed(wpm: number, speechClips?: WordSpeechClips) {
       if (!round || !output) return round;
@@ -145,7 +156,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
         const boundary = round.starts[index];
         if (boundary < position() + (playing ? 0.05 : 0)) continue;
         const next = retimeWordRound(editable, wpm, index);
-        const recording = renderWordWav(next, pitch, nativeVolume ? 1 : volume);
+        const recording = renderWordWav(next, pitch);
         // Rendering can cross a word boundary while native playback continues.
         if (boundary < position() + (playing ? 0.02 : 0)) continue;
         const resume = !output.paused;
@@ -157,18 +168,9 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       }
       return round; // Last word: the next round will use the new setting.
     },
-    async play(nextRound: WordRound, nextPitch: number, restart = false, speechClips?: WordSpeechClips) {
-      if (disposed) throw new Error("Word player has been disposed.");
-      ensureOutput();
-      if (round !== nextRound || pitch !== nextPitch || restart) {
-        const editable = nextRound.recordingUrl && !nativeVolume && volume !== 1
-          ? createWordRound(nextRound.words.join(" "), { ...nextRound.settings, shuffle: false }, Math.random, speechClips) : nextRound;
-        const recording = editable.recordingUrl ?? renderWordWav(editable, nextPitch, nativeVolume ? 1 : volume);
-        checkpoint();
-        round = nextRound;
-        pitch = nextPitch;
-        load(recording, 0);
-      } else if (position() >= round.duration || output!.ended) {
+    async play(nextRound: WordRound, nextPitch: number, restart = false) {
+      prepare(nextRound, nextPitch, restart);
+      if (position() >= nextRound.duration || output!.ended) {
         output!.currentTime = 0;
         accounted = 0;
       }
@@ -179,8 +181,8 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       pause();
       disposed = true;
       if (output) {
-        output.onplaying = output.onpause = output.onerror = output.onended = null;
-        output.ontimeupdate = output.onloadedmetadata = null;
+        output.onplay = output.onplaying = output.onpause = output.onerror = output.onended = null;
+        output.ontimeupdate = output.onloadedmetadata = output.onseeking = output.onseeked = output.onratechange = null;
         output.removeAttribute("src");
         output.load();
         output.remove();

@@ -19,8 +19,10 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
 }): WordPanel {
   restoreWordPractice(draft);
   host.innerHTML = `
-    <div class="training-actions"><button type="button" data-word="play" class="primary">Play words</button><button type="button" data-word="reveal" aria-pressed="false">Show words</button><button type="button" data-word="done">Done</button></div>
+    <div data-word="audio"></div>
+    <div class="training-actions"><button type="button" data-word="reveal" aria-pressed="false">Show words</button><button type="button" data-word="done">Done</button></div>
     <p data-word="status" role="status">Ready. Press Play to listen.</p>
+    <button type="button" data-word="retry" hidden>Retry audio</button>
     <p data-word="position" class="training-small"></p>
     <p data-word="answer" class="training-word-answer" hidden></p>
     <div class="training-actions"><label class="training-check"><input data-word="spokenAnswers" type="checkbox" /> Three repeats + spoken answer</label></div>
@@ -29,7 +31,6 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       <label>Word speed (WPM)<input data-word="wpm" type="number" min="10" max="60" step="1" /></label>
       <label>Extra pause between words (seconds)<input data-word="gapSeconds" type="number" min="0" max="5" step="0.1" /></label>
       <label>Pitch (Hz)<input data-word="pitch" type="number" min="300" max="1000" step="10" /></label>
-      <label><span>Volume <span data-word="volume-label"></span></span><input data-word="volume" type="range" min="0" max="100" step="1" /></label>
     </div>
     <p class="training-small" data-word="help"></p>
     <details class="training-panel"><summary>View or edit words</summary><div class="training-panel-body">
@@ -49,18 +50,8 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   text.value = draft.text;
   for (const key of ["wpm", "gapSeconds", "pitch"] as const) input(key).value = String(draft.settings[key]);
   for (const key of ["shuffle", "repeat", "spokenAnswers"] as const) input(key).checked = !!draft.settings[key];
-  if (!Number.isFinite(draft.volume) || draft.volume! < 0 || draft.volume! > 1) draft.volume = 0.5;
-  input("volume").value = String(Math.round(draft.volume! * 100));
-  function volumeLabel() {
-    const percent = Math.round(draft.volume! * 100);
-    $("volume-label").textContent = `${percent}%`;
-    input("volume").setAttribute("aria-valuetext", percent === 0 ? "Muted" : `${percent}%`);
-  }
-  volumeLabel();
-  let volumeTimer: ReturnType<typeof setTimeout> | undefined;
   let round: WordRound | undefined;
   let speechClips: WordSpeechClips | undefined;
-  let recording: WordRound | undefined;
   let preparing = false;
   let preparationFailed = false;
   let preparation = 0;
@@ -70,19 +61,16 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   let disposed = false;
   let busy = false;
   let playing = false;
+  let started = false;
   let generation = 0;
   let revealed = false;
-  function playbackButton() {
-    $("play").textContent = playing ? "Pause words" : preparing ? "Loading audio..." : busy ? "Starting..." : "Play words";
-    $<HTMLButtonElement>("play").disabled = preparing || (busy && !playing);
-  }
   function mediaInfo() {
     if (!("mediaSession" in navigator)) return;
     try {
       if (typeof MediaMetadata !== "undefined" && navigator.mediaSession.metadata?.title !== draft.title) navigator.mediaSession.metadata = new MediaMetadata({
         title: draft.title, artist: "CW word practice", album: "Word recognition",
       });
-      if (round) navigator.mediaSession.setPositionState?.({ duration: round.duration, position: Math.min(position, round.duration), playbackRate: 1 });
+      if (round) navigator.mediaSession.setPositionState?.({ duration: round.duration, position: Math.min(position, round.duration), playbackRate: player.playbackRate });
       else navigator.mediaSession.setPositionState?.();
     } catch { /* Lock-screen integration is optional on this browser. */ }
   }
@@ -93,6 +81,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     $("answer").textContent = round?.words[index] ?? "";
   }
   const player = createWordPlayer({
+    canPlay: () => !disposed && !preparing && options.canPlay(),
     progress(seconds, at) {
       position = at;
       options.progress(seconds);
@@ -103,11 +92,20 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       playing = status === "playing";
       if ("mediaSession" in navigator) navigator.mediaSession.playbackState = playing ? "playing" : "paused";
       mediaInfo();
-      playbackButton();
       $("status").textContent = status === "playing" ? "Listening. Pause whenever you need a break."
         : status === "interrupted" ? "Audio interrupted. Listening time is paused. Press Play to resume."
         : status === "ended" ? "Round complete." : "Paused. Press Play to continue.";
+      if (playing) {
+        started = true;
+        recordWordSettings(draft);
+        options.changed();
+      } else if (status !== "ended") {
+        continueRound = false;
+        options.changed();
+      }
+      $("retry").hidden = status !== "interrupted";
       if (status === "ended") {
+        started = false;
         round = undefined;
         player.clearRound();
         options.changed();
@@ -115,25 +113,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
         void prepare();
       }
     },
-  });
-  player.setVolume(draft.volume!);
-  function applyVolume() {
-    clearTimeout(volumeTimer);
-    try {
-      round = player.setVolume(draft.volume!, speechClips) ?? round;
-    } catch (error) {
-      $("status").textContent = error instanceof Error ? error.message : "Unable to change volume.";
-    }
-  }
-  input("volume").addEventListener("input", () => {
-    draft.volume = Number(input("volume").value) / 100;
-    volumeLabel();
-    options.changed();
-    clearTimeout(volumeTimer);
-    if (player.nativeVolume) applyVolume();
-    else volumeTimer = setTimeout(applyVolume, 120);
-  });
-  input("volume").addEventListener("change", applyVolume);
+  }, $("audio"));
   function pause() { continueRound = false; generation++; busy = false; player.pause(); options.changed(); }
   async function play() {
     if (disposed || !options.canPlay()) return;
@@ -141,35 +121,28 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     if (preparationFailed) { await prepare(); return; }
     if (busy || playing || disposed || !options.canPlay()) return;
     busy = true;
-    playbackButton();
     const run = ++generation;
     try {
-      applyVolume();
-      if (!round) {
-        round = recording ?? createWordRound(draft.text, draft.settings, Math.random, speechClips);
-        position = 0;
-        showPosition();
-      }
-      await player.play(round, draft.settings.pitch, false, speechClips);
+      if (!round) return;
+      await player.play(round, draft.settings.pitch);
       if (disposed || generation !== run) return;
-      recordWordSettings(draft);
-      options.changed();
     } catch (error) {
       if (disposed || generation !== run) return;
       player.pause();
       $("status").textContent = error instanceof Error ? error.message : "Audio unavailable. Try Play again.";
     } finally {
-      if (generation === run) { busy = false; playbackButton(); }
+      if (generation === run) busy = false;
     }
   }
   function reset() {
     speedChange++;
+    started = false;
     pause(); player.clearRound(); round = undefined; position = 0; showPosition();
     mediaInfo();
     $("status").textContent = "Ready for a new round. Press Play.";
   }
   function controls() {
-    $("help").textContent = "Adjust volume while listening. Change speed while listening; the current item finishes at its original speed. Changing the list, pitch, spacing, or spoken answers starts a fresh round. Show or hide words at any time.";
+    $("help").textContent = "Use the audio controls to play, pause, seek, and adjust volume. Change speed while listening; the current item finishes at its original speed. Changing the list, pitch, spacing, or spoken answers starts a fresh round. Show or hide words at any time.";
     if (draft.settings.spokenAnswers) $("help").textContent += " Each word plays three times with normal Morse word spacing, then its spoken answer. The extra pause is between items, never between repeats.";
   }
   async function prepare() {
@@ -180,31 +153,37 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     preparing = true;
     preparationFailed = false;
     speechClips = undefined;
-    recording = undefined;
-    playbackButton();
+    $("retry").hidden = true;
+    $("audio").setAttribute("aria-busy", "true");
+    player.clearRound();
+    round = undefined;
+    position = 0;
+    showPosition();
     $("status").textContent = "Loading audio for this list...";
     try {
       checkWordSettings(settings);
       const nextRecording = await loadWordRecording(words, settings);
       if (disposed || run !== preparation) return false;
-      // Prepare the iPhone volume fallback before Play so live adjustments and
-      // lock-screen resume never wait for a speech download.
-      const nextClips = (!nextRecording || !player.nativeVolume) && settings.spokenAnswers ? await loadWordSpeech(words) : undefined;
+      const nextClips = !nextRecording && settings.spokenAnswers ? await loadWordSpeech(words) : undefined;
       if (disposed || run !== preparation) return false;
-      recording = nextRecording;
       speechClips = nextClips;
+      round = nextRecording ?? createWordRound(words, settings, Math.random, speechClips);
+      player.prepare(round, settings.pitch);
+      showPosition();
+      mediaInfo();
       $("status").textContent = "Ready. Press Play to listen.";
       ready = true;
       return true;
     } catch (error) {
       if (disposed || run !== preparation) return false;
       preparationFailed = true;
-      $("status").textContent = error instanceof Error ? error.message : "Audio unavailable. Press Play to retry.";
+      $("retry").hidden = false;
+      $("status").textContent = error instanceof Error ? error.message : "Audio unavailable. Choose Retry audio.";
       return false;
     } finally {
       if (!disposed && run === preparation) {
         preparing = false;
-        playbackButton();
+        $("audio").setAttribute("aria-busy", "false");
         const resume = ready && continueRound && draft.settings.repeat;
         continueRound = false;
         if (resume) void play();
@@ -229,6 +208,11 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
           checkWordSettings({ ...draft.settings, wpm });
           draft.settings.wpm = wpm;
           options.changed();
+          if (!started) {
+            reset();
+            void prepare();
+            return;
+          }
           if (currentRound && currentRound.settings.wpm !== wpm) {
             // Keep playing the MP3 while the clips needed for a live edit load.
             // The player converts at its current media position, preserving the
@@ -237,7 +221,6 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
               ? speechClips ?? await loadWordSpeech(currentRound.words.join(" ")) : undefined;
             if (disposed || run !== speedChange || round !== currentRound) return;
             round = player.setSpeed(wpm, clips) ?? round;
-            recording = undefined;
           }
           if (playing) recordWordSettings(draft);
           $("status").textContent = playing ? `${wpm} WPM from the next word; the current item finishes at its original speed.` : `Speed set to ${wpm} WPM.`;
@@ -253,7 +236,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
         }
         return;
       }
-      if (key === "gapSeconds" || key === "pitch") reset();
+      if (key === "gapSeconds" || key === "pitch" || (key === "shuffle" && !started)) reset();
       if (key === "shuffle" || key === "repeat") draft.settings[key] = input(key).checked;
       else draft.settings[key] = Number(input(key).value);
       if (playing) recordWordSettings(draft);
@@ -280,9 +263,9 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     $("reveal").setAttribute("aria-pressed", String(revealed));
     showPosition();
   });
-  $("play").addEventListener("click", () => { if (playing) pause(); else void play(); });
+  $("retry").addEventListener("click", () => { void prepare(); });
   $("done").addEventListener("click", options.done);
   controls();
   void prepare();
-  return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; preparation++; clearTimeout(volumeTimer); pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
+  return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; preparation++; pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
 }

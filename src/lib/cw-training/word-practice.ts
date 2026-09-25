@@ -16,7 +16,7 @@ export interface WordSettings {
 }
 export interface WordPracticeDraft {
   defaultsVersion?: 2;
-  /** Device listening preference, independent of the recording configuration. */
+  /** Legacy custom volume, removed in favor of native audio controls. */
   volume?: number;
   title: string;
   text: string;
@@ -83,6 +83,7 @@ export function restoreWordSettings(settings: WordSettings): void {
 
 export function restoreWordPractice(draft: WordPracticeDraft): void {
   restoreWordSettings(draft.settings);
+  delete draft.volume;
   const previousTitle = "Bob's 77-word reference";
   if (draft.title === previousTitle) draft.title = COMMON_77_WORDS_TITLE;
   draft.used = draft.used.map(note => note.startsWith(`${previousTitle}:`)

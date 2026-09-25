@@ -218,15 +218,12 @@ before the extra pause. Defaults are 40 WPM, 450 Hz, one extra second, shuffle a
 30-WPM/600-Hz defaults migrate once; other customized values are preserved.
 Subsequent choices carry into new blocks.
 
-The Volume slider defaults to 50%, remembers the level on this device, and
-adjusts both Morse tones and spoken answers independently of system volume.
-Browsers supporting per-element volume keep using matching MP3s directly.
-On iPhone browsers that ignore that setting, the player renders the chosen
-level into a local WAV instead. Live volume edits retain the word order and
-media position, although replacing that recording may briefly buffer. Speech
-clips are prepared before Play on these browsers, including for matching MP3s,
-so adjusting volume does not require a download during playback. This keeps
-background audio and lock-screen resume on the native audio element.
+The visible native audio player supplies play/pause, seeking, and the browser's
+volume controls, just like the other audio exercises. There is no separate
+Play/Pause button or custom volume slider. On iPhone, volume may still use the
+device's buttons. Old custom volume preferences are discarded. Each round is
+prepared before playback so the native Play control works directly. Seeking
+updates the shown word without counting skipped audio as listening time.
 
 Speed can change during playback: the current word and its pause finish intact,
 and the remaining words use the new speed with the same pitch and order. The
@@ -234,8 +231,7 @@ replacement recording retains the same media position; the browser may briefly
 buffer it. If the last word is already playing, the speed applies to the next round. Show/hide
 and repeat work immediately; shuffle applies to the next round. Changing the list,
 pitch, spacing, or spoken answers pauses playback and starts a fresh round
-on Play. One button toggles **Play words / Pause words**, retaining the current position. The other
-two buttons are **Show words / Hide words** and **Done**. Lists accept
+on Play. The two app buttons are **Show words / Hide words** and **Done**. Lists accept
 1-200 whitespace-separated entries, punctuation and explicit prosigns; unsupported
 text and rounds longer than ten minutes are rejected. Duplicates remain.
 

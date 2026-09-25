@@ -52,7 +52,7 @@ test("optional blocks use word-recognition history and copy defaults without pre
   assert.equal(first.wordPractice.settings.wpm, 40);
   assert.equal(first.wordPractice.settings.pitch, 450);
   assert.deepEqual(second.wordPractice.used, []);
-  assert.equal(second.wordPractice.volume, 0.23);
+  assert.equal(second.wordPractice.volume, undefined);
   assert.equal(second.assignmentId, "other-practice");
   assert.equal(second.task.id, "other:word-recognition");
   assert.equal(second.activeSeconds, 0);
@@ -148,7 +148,7 @@ test("generated WAV contains seekable mono PCM with the exact rendered tones and
   for (let i = 0; i < samples.length; i++) assert.equal(view.getInt16(44 + i * 2, true), Math.round(samples[i] * 32767) || 0);
 });
 
-function harness(t, outputWait = Promise.resolve(), nativeVolume = true) {
+function harness(t, outputWait = Promise.resolve(), canPlay = () => true) {
   const previousDocument = globalThis.document;
   const previousWindow = globalThis.window;
   const outputs = [];
@@ -162,9 +162,8 @@ function harness(t, outputWait = Promise.resolve(), nativeVolume = true) {
   });
   t.mock.method(URL, "revokeObjectURL", url => revoked.push(url));
   class Output {
-    level = 1;
-    get volume() { return this.level; }
-    set volume(value) { if (nativeVolume) this.level = value; }
+    volume = 1;
+    seeking = false;
     paused = true;
     ended = false;
     currentTime = 0;
@@ -176,6 +175,7 @@ function harness(t, outputWait = Promise.resolve(), nativeVolume = true) {
     async play() {
       this.playCalls++;
       this.paused = false;
+      this.onplay?.();
       await outputWait;
       if (this.paused) throw new Error("Playback cancelled.");
       if (this.fail) throw new Error("Playback interrupted.");
@@ -196,13 +196,14 @@ function harness(t, outputWait = Promise.resolve(), nativeVolume = true) {
   };
   let seconds = 0;
   const statuses = [];
-  const player = createWordPlayer({ progress: delta => { seconds += delta; }, status: status => statuses.push(status) });
+  const positions = [];
+  const player = createWordPlayer({ canPlay, progress: (delta, position) => { seconds += delta; positions.push(position); }, status: status => statuses.push(status) });
   t.after(() => {
     player.dispose();
     if (previousDocument === undefined) delete globalThis.document; else globalThis.document = previousDocument;
     if (previousWindow === undefined) delete globalThis.window; else globalThis.window = previousWindow;
   });
-  return { outputs, recordings, revoked, player, statuses, seconds: () => seconds };
+  return { outputs, recordings, revoked, player, statuses, positions, seconds: () => seconds };
 }
 
 test("native recording retains its source on pause and resumes without Web Audio, then releases on disposal", async t => {
@@ -243,7 +244,7 @@ test("native transport events keep the trainer and listening time synchronized",
   output.currentTime = 0.4;
   output.pause();
   await Promise.resolve();
-  assert.equal(h.statuses.at(-1), "interrupted");
+  assert.equal(h.statuses.at(-1), "paused");
   assert.equal(output.src, url);
   h.player.checkpoint();
   near(h.seconds(), 0.4);
@@ -450,102 +451,7 @@ test("a live MP3 speed edit converts to generated audio at the same position and
 });
 
 
-test("native volume changes MP3 and generated playback without reloading or changing position", async t => {
-  const h = harness(t);
-  assert.equal(h.player.nativeVolume, true);
-  h.player.setVolume(0.5);
-  const round = { ...createWordRound("PARIS THE", settings), recordingUrl: "/ready.mp3" };
-  await h.player.play(round, 450);
-  const output = h.outputs[0];
-  assert.equal(output.volume, 0.5);
-  output.currentTime = 0.8;
-  for (const volume of [0.2, 0, 1]) {
-    h.player.setVolume(volume);
-    assert.equal(output.volume, volume);
-    assert.equal(output.src, "/ready.mp3");
-    assert.equal(output.currentTime, 0.8);
-    assert.equal(output.paused, false);
-  }
-  assert.equal(output.playCalls, 1);
-  h.player.pause();
-  h.player.setVolume(0.3);
-  assert.equal(output.paused, true);
-  await h.player.play(round, 450);
-  assert.equal(output.volume, 0.3);
-  near(output.currentTime, 0.8);
-  near(h.seconds(), 0.8);
-  await h.player.play(createWordRound("E", settings), 450);
-  assert.equal(output.volume, 0.3);
-  for (const invalid of [NaN, Infinity, -1, 2]) assert.throws(() => h.player.setVolume(invalid));
-});
-
-async function assertVolumeWav(blob, round, volume) {
-  const bytes = new DataView(await blob.arrayBuffer());
-  const samples = renderWordSamples(round, 450);
-  assert.equal(bytes.byteLength, 44 + samples.length * 2);
-  for (let i = 0; i < samples.length; i++) {
-    assert.ok(Math.abs(bytes.getInt16(44 + i * 2, true) - samples[i] * volume * 32767) <= 1);
-  }
-}
-
-test("read-only volume fallback scales tones and speech, keeps position, and resumes natively", async t => {
-  const h = harness(t, Promise.resolve(), false);
-  const clips = new Map([["E", new Float32Array(2205).fill(0.8)], ["T", new Float32Array(2205).fill(-0.6)]]);
-  const full = createWordRound("E T E", { ...settings, spokenAnswers: true }, Math.random, clips);
-  let round = { ...full, timings: [], timingStarts: [], speech: [], speechClips: undefined, recordingUrl: "/ready.mp3" };
-  assert.equal(h.player.nativeVolume, false);
-  h.player.setVolume(0.5);
-  await h.player.play(round, 450, false, clips);
-  const output = h.outputs[0];
-  assert.equal(output.volume, 1);
-  await assertVolumeWav(h.recordings.get(output.src), full, 0.5);
-  output.currentTime = 0.2;
-  round = h.player.setVolume(0.25, clips);
-  await Promise.resolve();
-  assert.equal(output.paused, false);
-  near(output.currentTime, 0.2);
-  near(h.seconds(), 0.2);
-  assert.deepEqual(round.words, full.words);
-  await assertVolumeWav(h.recordings.get(output.src), full, 0.25);
-  h.player.pause();
-  round = h.player.setVolume(0);
-  assert.equal(output.paused, true);
-  await assertVolumeWav(h.recordings.get(output.src), full, 0);
-  round = h.player.setVolume(0.5);
-  assert.equal(output.paused, true);
-  const resumeUrl = output.src;
-  await h.player.play(round, 450);
-  assert.equal(output.src, resumeUrl);
-  near(output.currentTime, 0.2);
-  round = h.player.setSpeed(40);
-  await Promise.resolve();
-  await assertVolumeWav(h.recordings.get(output.src), round, 0.5);
-  h.player.pause();
-  h.player.clearRound();
-  assert.equal(h.player.setVolume(0.3), undefined);
-  const next = createWordRound("T", settings);
-  await h.player.play(next, 450);
-  near(output.currentTime, 0);
-  await assertVolumeWav(h.recordings.get(output.src), next, 0.3);
-});
-
-test("read-only volume leaves full-volume MP3s intact until a live adjustment", async t => {
-  const h = harness(t, Promise.resolve(), false);
-  const full = createWordRound("E T", settings);
-  const round = { ...full, timings: [], timingStarts: [], recordingUrl: "/ready.mp3" };
-  await h.player.play(round, 450);
-  const output = h.outputs[0];
-  assert.equal(output.src, "/ready.mp3");
-  output.currentTime = 0.1;
-  h.player.setVolume(0.4);
-  await Promise.resolve();
-  assert.equal(output.paused, false);
-  near(output.currentTime, 0.1);
-  await assertVolumeWav(h.recordings.get(output.src), full, 0.4);
-});
-
-
-test("renaming the 77-word list preserves saved selection, words, settings and volume", () => {
+test("restoring word practice preserves its selection and removes legacy custom volume", () => {
   const previous = {
     defaultsVersion: 2, title: "Bob's 77-word reference", text: "RR THE RR QTH",
     settings: { ...settings, wpm: 42, spokenAnswers: true }, volume: 0.23,
@@ -556,12 +462,106 @@ test("renaming the 77-word list preserves saved selection, words, settings and v
   assert.equal(restored.title, "77 most common words");
   assert.equal(restored.text, previous.text);
   assert.deepEqual(restored.settings, previous.settings);
-  assert.equal(restored.volume, previous.volume);
+  assert.equal(restored.volume, undefined);
   assert.deepEqual(restored.used, ["77 most common words: 4 entries, 42 WPM", previous.used[1]]);
   const next = createWordPracticeBlock("2026-09-25T12:00:00Z", "renamed", previous).wordPractice;
   assert.equal(next.title, restored.title);
   assert.equal(next.text, previous.text);
   assert.deepEqual(next.settings, previous.settings);
-  assert.equal(next.volume, previous.volume);
+  assert.equal(next.volume, undefined);
   assert.equal(previous.title, "Bob's 77-word reference");
+});
+
+
+test("prepared native controls can start audio without a separate play button", async t => {
+  const h = harness(t);
+  const round = createWordRound("PARIS THE OF", settings);
+  h.player.prepare(round, 450);
+  const output = h.outputs[0];
+  assert.equal(output.controls, true);
+  assert.notEqual(output.hidden, true);
+  assert.equal(output.paused, true);
+  assert.equal(output.playCalls, 0);
+  await output.play();
+  assert.equal(h.statuses.at(-1), "playing");
+  output.currentTime = 0.5;
+  output.pause();
+  await Promise.resolve();
+  near(h.seconds(), 0.5);
+  assert.equal(h.statuses.at(-1), "paused");
+  output.volume = 0.2;
+  h.player.setSpeed(40);
+  assert.equal(output.paused, true);
+  assert.equal(output.volume, 0.2);
+  await output.play();
+  near(output.currentTime, 0.5);
+  h.player.clearRound();
+  assert.equal(output.src, undefined);
+  assert.equal(output.paused, true);
+  assert.ok(h.revoked.length > 0);
+});
+
+test("native seeks update the word position without awarding skipped or paused time", async t => {
+  const h = harness(t);
+  const round = createWordRound("PARIS THE OF THE PARIS", settings);
+  h.player.prepare(round, 450);
+  const output = h.outputs[0];
+  await output.play();
+  output.currentTime = 1.2;
+  output.ontimeupdate();
+  function seek(at) {
+    output.currentTime = at;
+    output.seeking = true;
+    output.ontimeupdate(); // Even a timeupdate preceding seeking cannot earn credit.
+    output.onseeking();
+    output.seeking = false;
+    output.onseeked();
+    output.ontimeupdate();
+  }
+  seek(8);
+  near(h.seconds(), 1.2);
+  near(h.positions.at(-1), 8);
+  output.currentTime = 8.5;
+  h.player.pause();
+  near(h.seconds(), 1.7);
+  seek(2);
+  near(h.positions.at(-1), 2);
+  near(h.seconds(), 1.7);
+  await output.play();
+  output.currentTime = 2.3;
+  output.ontimeupdate();
+  near(h.seconds(), 2);
+  seek(round.duration);
+  output.finish(round.duration);
+  near(h.seconds(), 2);
+});
+
+test("native play observes the same eligibility check as lock-screen playback", async t => {
+  let allowed = false;
+  const h = harness(t, Promise.resolve(), () => allowed);
+  h.player.prepare(createWordRound("PARIS", settings), 450);
+  await assert.rejects(h.outputs[0].play(), /cancelled/);
+  assert.equal(h.outputs[0].paused, true);
+  assert.equal(h.seconds(), 0);
+  allowed = true;
+  await h.outputs[0].play();
+  assert.equal(h.statuses.at(-1), "playing");
+});
+
+
+test("native playback rate credits listening time rather than accelerated media time", async t => {
+  const h = harness(t);
+  h.player.prepare(createWordRound("PARIS THE", settings), 450);
+  const output = h.outputs[0];
+  output.playbackRate = 2;
+  await output.play();
+  output.currentTime = 0.8;
+  output.ontimeupdate();
+  near(h.seconds(), 0.4);
+  assert.equal(h.player.playbackRate, 2);
+  output.playbackRate = 1;
+  output.onratechange();
+  output.currentTime = 1.8;
+  h.player.pause();
+  near(h.seconds(), 1.4);
 });

@@ -98,9 +98,6 @@ export function renderWordSamples(round: WordRound, pitch: number, sampleRate = 
 }
 
 /** A local, seekable recording lets native media controls resume without Web Audio. */
-export function renderWordWav(round: WordRound, pitch: number, volume = 1): Blob {
-  if (!Number.isFinite(volume) || volume < 0 || volume > 1) throw new Error("Use a volume between 0 and 1.");
-  const samples = renderWordSamples(round, pitch);
-  if (volume !== 1) for (let i = 0; i < samples.length; i++) samples[i] *= volume;
-  return encodeWordWav(samples);
+export function renderWordWav(round: WordRound, pitch: number): Blob {
+  return encodeWordWav(renderWordSamples(round, pitch));
 }
