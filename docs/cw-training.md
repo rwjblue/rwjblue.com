@@ -227,7 +227,10 @@ text and rounds longer than ten minutes are rejected. Duplicates remain.
 
 The existing pinned Morse Pro engine supplies word timings. A lazily loaded panel
 renders a complete round as mono PCM with 5 ms tone envelopes and schedules a
-Web Audio buffer. Dits and dahs do not depend on JavaScript timers. Speed changes
+Web Audio buffer. Its sound flows through a MediaStream destination to one native
+audio element, which owns playback controls. The stream is generated locally;
+it uses no microphone, network stream, or additional audio file. Dits and dahs do
+not depend on JavaScript timers. Speed changes
 render the remaining words and schedule a replacement buffer at a word boundary.
 Starting the next round still requires a callback; throttling can delay that
 transition. No MP3 is generated or downloaded, and no new service is involved.
@@ -238,9 +241,14 @@ Playing controls. Switching apps does not deliberately pause word audio. An
 interrupted audio context pauses the session and requires Play to resume.
 Listening time comes from the audio clock, capped at the round's duration, so
 suspension, pauses, and delayed loop callbacks cannot earn extra time. The owner
-confirmed iOS background playback on September 24. Lock-screen card presentation
-remains browser-controlled and needs another real-device test after the metadata
-and position changes; this is not a native iOS Live Activity.
+confirmed iOS background playback and the Now Playing card while playing on
+September 24. Pause retains the native audio element and its loaded stream while
+stopping all Morse sources and listening-time credit. Done or switching activities
+removes the element, stops its tracks, and closes the context. This avoids removing
+WebKit's Now Playing candidate whenever the last Morse source stops. Native pause
+and interruption events also pause the trainer. Lock-screen pause/resume still
+needs real-device verification with this output path; this is not a native iOS
+Live Activity.
 
 **Done** saves immediately and returns to Today. Starting another activity also
 saves immediately, without a finish dialog. Both paths record actual listening

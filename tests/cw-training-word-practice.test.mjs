@@ -123,9 +123,24 @@ test("speed changes preserve the heard prefix, pitch, shuffle order and extra wo
   assert.deepEqual(renderWordSamples(next, 450).slice(0, prefixLength), renderWordSamples(round, 450).slice(0, prefixLength));
 });
 
-function harness(t, resumeWait = Promise.resolve()) {
+function harness(t, resumeWait = Promise.resolve(), outputWait = Promise.resolve()) {
   const previous = globalThis.window;
+  const previousDocument = globalThis.document;
   const contexts = [];
+  const outputs = [];
+  class Output {
+    paused = true;
+    playCalls = 0;
+    setAttribute() {}
+    async play() {
+      this.playCalls++;
+      this.paused = false;
+      await outputWait;
+      if (this.paused) throw new Error("Playback cancelled.");
+    }
+    pause() { this.paused = true; queueMicrotask(() => this.onpause?.()); }
+    remove() { this.attached = false; }
+  }
   class Context {
     currentTime = 0;
     state = "suspended";
@@ -135,19 +150,88 @@ function harness(t, resumeWait = Promise.resolve()) {
     async resume() { await resumeWait; this.state = "running"; this.onstatechange?.(); }
     async close() { this.state = "closed"; }
     createBuffer(channels, length) { const samples = new Float32Array(length); return { getChannelData: () => samples }; }
+    createMediaStreamDestination() {
+      const track = { stopped: false, stop() { this.stopped = true; } };
+      this.mediaDestination = { stream: { getTracks: () => [track] }, disconnect() { this.disconnected = true; } };
+      return this.mediaDestination;
+    }
     createBufferSource() {
-      const source = { connect() {}, disconnect() { this.disconnected = true; }, stop(when = 0) { this.stopAt = when; }, start(when, offset) { this.when = when; this.offset = offset; } };
+      const source = { connect(destination) { this.destination = destination; }, disconnect() { this.disconnected = true; }, stop(when = 0) { this.stopAt = when; }, start(when, offset) { this.when = when; this.offset = offset; } };
       this.sources.push(source); return source;
     }
   }
   globalThis.window = { AudioContext: Context };
+  globalThis.document = {
+    createElement(tag) { assert.equal(tag, "audio"); const output = new Output(); outputs.push(output); return output; },
+    body: { append(output) { output.attached = true; } },
+  };
   t.after(() => { if (previous === undefined) delete globalThis.window; else globalThis.window = previous; });
+  t.after(() => { if (previousDocument === undefined) delete globalThis.document; else globalThis.document = previousDocument; });
   let seconds = 0;
   const statuses = [];
   const player = createWordPlayer({ progress: delta => { seconds += delta; }, status: status => statuses.push(status) });
   t.after(() => player.dispose());
-  return { contexts, player, statuses, seconds: () => seconds };
+  return { contexts, outputs, player, statuses, seconds: () => seconds };
 }
+
+test("native output retains its source on pause, resumes at the saved position, and releases on disposal", async t => {
+  const h = harness(t);
+  const round = createWordRound("PARIS THE", settings);
+  await h.player.play(round, 450);
+  const context = h.contexts[0];
+  const output = h.outputs[0];
+  const stream = context.mediaDestination.stream;
+  assert.equal(context.sources[0].destination, context.mediaDestination);
+  assert.notEqual(context.sources[0].destination, context.destination);
+  context.currentTime = 0.8;
+  h.player.pause();
+  assert.equal(output.paused, true);
+  assert.equal(output.srcObject, stream);
+  assert.equal(output.attached, true);
+  assert.equal(stream.getTracks()[0].stopped, false);
+  context.currentTime = 300;
+  h.player.checkpoint();
+  near(h.seconds(), 0.8);
+  await h.player.play(round, 450);
+  assert.equal(h.outputs.length, 1);
+  assert.equal(output.playCalls, 2);
+  assert.equal(output.paused, false);
+  near(context.sources.at(-1).offset, 0.8);
+  h.player.dispose();
+  assert.equal(output.srcObject, null);
+  assert.equal(output.attached, false);
+  assert.equal(stream.getTracks()[0].stopped, true);
+  assert.equal(context.state, "closed");
+});
+
+test("a native pause stops Morse sources and listening time without dropping the media source", async t => {
+  const h = harness(t);
+  await h.player.play(createWordRound("PARIS THE", settings), 450);
+  const context = h.contexts[0];
+  const output = h.outputs[0];
+  context.currentTime = 0.4;
+  output.pause();
+  await Promise.resolve();
+  assert.equal(h.statuses.at(-1), "interrupted");
+  assert.ok(context.sources.every(node => node.disconnected));
+  assert.equal(output.srcObject, context.mediaDestination.stream);
+  context.currentTime = 100;
+  h.player.checkpoint();
+  near(h.seconds(), 0.4);
+});
+
+test("cancelling pending native playback cannot start tones or earn practice time", async t => {
+  let release;
+  const h = harness(t, Promise.resolve(), new Promise(resolve => { release = resolve; }));
+  const playing = h.player.play(createWordRound("PARIS", settings), 450);
+  h.player.dispose();
+  release();
+  await playing;
+  assert.equal(h.contexts[0].sources.length, 0);
+  assert.equal(h.outputs[0].paused, true);
+  assert.equal(h.outputs[0].attached, false);
+  assert.equal(h.seconds(), 0);
+});
 
 test("audio clock credits partial listening once, pauses on interruption, resumes from position and caps delayed completion", async t => {
   const h = harness(t);

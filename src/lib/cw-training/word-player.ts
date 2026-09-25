@@ -9,6 +9,8 @@ export interface WordPlayerCallbacks {
 /** Owns its context; never suspends the recording or sending players' contexts. */
 export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   let context: AudioContext | undefined;
+  let output: HTMLAudioElement | undefined;
+  let destination: MediaStreamAudioDestinationNode | undefined;
   let source: AudioBufferSourceNode | undefined;
   const sources = new Set<AudioBufferSourceNode>();
   let pitch = 450;
@@ -44,7 +46,23 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
     }
     sources.clear();
     source = undefined;
+    // Keep the element and its stream loaded while paused. Disconnecting the
+    // final Web Audio output makes WebKit discard its Now Playing candidate.
+    output?.pause();
     callbacks.status(status);
+  }
+  function releaseOutput() {
+    if (output) {
+      output.onpause = null;
+      output.onerror = null;
+      output.pause();
+      output.srcObject = null;
+      output.remove();
+      output = undefined;
+    }
+    destination?.stream.getTracks().forEach(track => track.stop());
+    destination?.disconnect();
+    destination = undefined;
   }
   function makeBuffer(nextRound: WordRound) {
     const samples = renderWordSamples(nextRound, pitch);
@@ -56,7 +74,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
     const node = context!.createBufferSource();
     const run = generation;
     node.buffer = buffer!;
-    node.connect(context!.destination);
+    node.connect(destination!);
     sources.add(node);
     node.onended = () => {
       sources.delete(node);
@@ -67,6 +85,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       clearInterval(ticker);
       source = undefined;
       offset = round!.duration;
+      output?.pause();
       callbacks.status("ended");
     };
     node.start(when, at);
@@ -112,20 +131,38 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
         }
       }
       if (!context || context.state === "closed") {
+        releaseOutput();
         context = new AudioContextClass();
+        destination = context.createMediaStreamDestination();
+        output = document.createElement("audio");
+        output.hidden = true;
+        output.setAttribute("playsinline", "");
+        output.srcObject = destination.stream;
+        output.onpause = () => {
+          if (playing && output?.paused) pause("interrupted");
+        };
+        output.onerror = () => { if (playing) pause("interrupted"); };
+        document.body.append(output);
         context.onstatechange = () => {
           if (playing && context?.state !== "running") pause("interrupted");
         };
       }
-      // Invoke resume in the button's gesture, before rendering or awaiting.
-      const resumed = context.resume();
       if (round !== nextRound || !buffer || restart) {
         round = nextRound;
         offset = 0;
         pitch = nextPitch;
         buffer = makeBuffer(round);
       }
-      await resumed;
+      // Both calls run in the Play/Media Session gesture. The native element
+      // carries the generated sound and owns the paused lock-screen transport;
+      // no silent recording, microphone, or second audible path is involved.
+      try {
+        await Promise.all([context.resume(), output!.play()]);
+      } catch (error) {
+        if (disposed || generation !== run) return;
+        pause();
+        throw error;
+      }
       if (disposed || generation !== run) return;
       if (context.state !== "running") throw new Error("Audio is interrupted. Return to this page and press Play.");
       if (offset >= round.duration) offset = 0;
@@ -139,6 +176,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
     dispose() {
       pause();
       disposed = true;
+      releaseOutput();
       if (context) { context.onstatechange = null; void context.close().catch(() => {}); }
       if (session && previousSessionType && session.type === "playback") {
         try { session.type = previousSessionType; } catch { /* Optional platform hint. */ }
