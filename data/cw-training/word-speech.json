@@ -25,7 +25,7 @@
     },
     {
       "word": "ABT",
-      "pronunciation": "A B T",
+      "pronunciation": "about",
       "path": "public/audio/cw-training/words/abt.wav"
     },
     {
@@ -35,7 +35,7 @@
     },
     {
       "word": "AGN",
-      "pronunciation": "A G N",
+      "pronunciation": "again",
       "path": "public/audio/cw-training/words/agn.wav"
     },
     {
@@ -130,7 +130,7 @@
     },
     {
       "word": "DE",
-      "pronunciation": "D E",
+      "pronunciation": "this is",
       "path": "public/audio/cw-training/words/de.wav"
     },
     {
@@ -150,7 +150,7 @@
     },
     {
       "word": "ES",
-      "pronunciation": "E S",
+      "pronunciation": "and",
       "path": "public/audio/cw-training/words/es.wav"
     },
     {
@@ -185,7 +185,7 @@
     },
     {
       "word": "HI",
-      "pronunciation": "hi",
+      "pronunciation": "laughing",
       "path": "public/audio/cw-training/words/hi.wav"
     },
     {
@@ -195,12 +195,12 @@
     },
     {
       "word": "HR",
-      "pronunciation": "H R",
+      "pronunciation": "here",
       "path": "public/audio/cw-training/words/hr.wav"
     },
     {
       "word": "HW?",
-      "pronunciation": "H W question mark",
+      "pronunciation": "how copy?",
       "path": "public/audio/cw-training/words/hw-question.wav"
     },
     {
@@ -255,7 +255,7 @@
     },
     {
       "word": "NR",
-      "pronunciation": "N R",
+      "pronunciation": "number",
       "path": "public/audio/cw-training/words/nr.wav"
     },
     {
@@ -265,7 +265,7 @@
     },
     {
       "word": "OM",
-      "pronunciation": "O M",
+      "pronunciation": "Old Man",
       "path": "public/audio/cw-training/words/om.wav"
     },
     {
@@ -275,7 +275,7 @@
     },
     {
       "word": "OP",
-      "pronunciation": "O P",
+      "pronunciation": "operator",
       "path": "public/audio/cw-training/words/op.wav"
     },
     {
@@ -290,7 +290,7 @@
     },
     {
       "word": "PSE",
-      "pronunciation": "P S E",
+      "pronunciation": "please",
       "path": "public/audio/cw-training/words/pse.wav"
     },
     {
@@ -375,7 +375,7 @@
     },
     {
       "word": "RR",
-      "pronunciation": "R R",
+      "pronunciation": "Roger Roger",
       "path": "public/audio/cw-training/words/rr.wav"
     },
     {
@@ -425,12 +425,12 @@
     },
     {
       "word": "TKS",
-      "pronunciation": "T K S",
+      "pronunciation": "thanks",
       "path": "public/audio/cw-training/words/tks.wav"
     },
     {
       "word": "TNX",
-      "pronunciation": "T N X",
+      "pronunciation": "thanks",
       "path": "public/audio/cw-training/words/tnx.wav"
     },
     {
@@ -440,12 +440,12 @@
     },
     {
       "word": "TU",
-      "pronunciation": "T U",
+      "pronunciation": "thank you",
       "path": "public/audio/cw-training/words/tu.wav"
     },
     {
       "word": "VERT",
-      "pronunciation": "V E R T",
+      "pronunciation": "vert",
       "path": "public/audio/cw-training/words/vert.wav"
     },
     {
@@ -455,7 +455,7 @@
     },
     {
       "word": "VY",
-      "pronunciation": "V Y",
+      "pronunciation": "very",
       "path": "public/audio/cw-training/words/vy.wav"
     },
     {
@@ -480,7 +480,7 @@
     },
     {
       "word": "WX",
-      "pronunciation": "W X",
+      "pronunciation": "weather",
       "path": "public/audio/cw-training/words/wx.wav"
     },
     {
