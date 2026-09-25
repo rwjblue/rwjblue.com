@@ -226,29 +226,30 @@ two buttons are **Show words / Hide words** and **Done**. Lists accept
 text and rounds longer than ten minutes are rejected. Duplicates remain.
 
 The existing pinned Morse Pro engine supplies word timings. A lazily loaded panel
-renders a complete round as mono PCM with 5 ms tone envelopes and schedules a
-Web Audio buffer. Its sound flows through a MediaStream destination to one native
-audio element, which owns playback controls. The stream is generated locally;
-it uses no microphone, network stream, or additional audio file. Dits and dahs do
-not depend on JavaScript timers. Speed changes
-render the remaining words and schedule a replacement buffer at a word boundary.
-Starting the next round still requires a callback; throttling can delay that
-transition. No MP3 is generated or downloaded, and no new service is involved.
+renders each complete round as a local mono PCM WAV with 5 ms tone envelopes.
+One native audio element plays that recording directly, without a Web Audio
+context or live stream. Dits and dahs do not depend on JavaScript timers. Nothing
+is uploaded or checked in, no MP3 is downloaded, and no new service is involved.
+Speed changes regenerate the recording with the current word and heard prefix
+unchanged, then seek to the same position; only subsequent words change speed.
+The native player may briefly buffer the replacement. Pitch and shuffled order
+are preserved. Starting the next round still requires a callback; background
+throttling can delay that transition.
 
-Where supported, playback requests the Audio Session playback type and exposes
-Media Session play/pause, list metadata, duration, and current position for Now
-Playing controls. Switching apps does not deliberately pause word audio. An
-interrupted audio context pauses the session and requires Play to resume.
-Listening time comes from the audio clock, capped at the round's duration, so
-suspension, pauses, and delayed loop callbacks cannot earn extra time. The owner
-confirmed iOS background playback and the Now Playing card while playing on
-September 24. Pause retains the native audio element and its loaded stream while
-stopping all Morse sources and listening-time credit. Done or switching activities
-removes the element, stops its tracks, and closes the context. This avoids removing
-WebKit's Now Playing candidate whenever the last Morse source stops. Native pause
-and interruption events also pause the trainer. Lock-screen pause/resume still
-needs real-device verification with this output path; this is not a native iOS
-Live Activity.
+Media Session exposes play/pause, list metadata, duration, and current position
+for Now Playing controls. Switching apps does not deliberately pause word audio.
+Listening time comes from the native media position, capped at the round's
+duration, so buffering, pauses, and delayed loop callbacks cannot earn extra
+time. Pause retains the native element, recording, and position. Done or switching
+activities unloads the element and revokes the recording's object URL. Native
+play, pause, and interruption events also update the trainer.
+
+The owner confirmed iOS background playback and the Now Playing card on September
+24, but the previous generated-stream output could not resume sound from the
+lock screen after pausing. Native WAV playback removes that output's dependency
+on resuming a background AudioContext. Lock-screen pause/resume still needs
+real-device verification with this output path; this is not a native iOS Live
+Activity.
 
 **Done** saves immediately and returns to Today. Starting another activity also
 saves immediately, without a finish dialog. Both paths record actual listening

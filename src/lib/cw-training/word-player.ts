@@ -1,187 +1,155 @@
-import { renderWordSamples, retimeWordRound, type WordRound } from "./word-round.ts";
-import { wordPlaybackPosition } from "./word-practice.ts";
+import { renderWordWav, retimeWordRound, type WordRound } from "./word-round.ts";
 
 export interface WordPlayerCallbacks {
   progress: (seconds: number, position: number) => void;
   status: (status: "playing" | "paused" | "interrupted" | "ended") => void;
 }
 
-/** Owns its context; never suspends the recording or sending players' contexts. */
+/** Native playback of locally generated audio, independent of an AudioContext. */
 export function createWordPlayer(callbacks: WordPlayerCallbacks) {
-  let context: AudioContext | undefined;
   let output: HTMLAudioElement | undefined;
-  let destination: MediaStreamAudioDestinationNode | undefined;
-  let source: AudioBufferSourceNode | undefined;
-  const sources = new Set<AudioBufferSourceNode>();
+  let url: string | undefined;
   let pitch = 450;
-  let buffer: AudioBuffer | undefined;
   let round: WordRound | undefined;
-  let offset = 0;
-  let started = 0;
   let accounted = 0;
+  let pendingSeek: number | undefined;
   let generation = 0;
   let playing = false;
   let disposed = false;
-  let session: { type: string } | undefined;
-  let previousSessionType: string | undefined;
   let ticker: ReturnType<typeof setInterval> | undefined;
 
+  function position() {
+    return Math.min(round?.duration ?? 0, Math.max(0, pendingSeek ?? output?.currentTime ?? 0));
+  }
   function checkpoint() {
-    if (!playing || !context || !round) return offset;
-    const position = wordPlaybackPosition(offset, started, context.currentTime, round.duration);
-    const delta = Math.max(0, position - accounted);
-    accounted = position;
-    callbacks.progress(delta, position);
-    return position;
+    const at = position();
+    if (!playing) return at;
+    const delta = Math.max(0, at - accounted);
+    accounted = at;
+    callbacks.progress(delta, at);
+    return at;
   }
   function pause(status: "paused" | "interrupted" = "paused") {
     generation++;
-    offset = checkpoint();
+    checkpoint();
     playing = false;
     clearInterval(ticker);
-    for (const node of sources) {
-      node.onended = null;
-      node.stop();
-      node.disconnect();
-    }
-    sources.clear();
-    source = undefined;
-    // Keep the element and its stream loaded while paused. Disconnecting the
-    // final Web Audio output makes WebKit discard its Now Playing candidate.
+    // Keep the recording loaded, including its native playback position.
     output?.pause();
     callbacks.status(status);
   }
-  function releaseOutput() {
-    if (output) {
-      output.onpause = null;
-      output.onerror = null;
-      output.pause();
-      output.srcObject = null;
-      output.remove();
-      output = undefined;
-    }
-    destination?.stream.getTracks().forEach(track => track.stop());
-    destination?.disconnect();
-    destination = undefined;
+  function markPlaying() {
+    if (disposed || !output || output.paused || playing) return;
+    playing = true;
+    ticker = setInterval(checkpoint, 250);
+    callbacks.status("playing");
   }
-  function makeBuffer(nextRound: WordRound) {
-    const samples = renderWordSamples(nextRound, pitch);
-    const next = context!.createBuffer(1, samples.length, 22050);
-    next.getChannelData(0).set(samples);
-    return next;
-  }
-  function schedule(when: number, at: number) {
-    const node = context!.createBufferSource();
-    const run = generation;
-    node.buffer = buffer!;
-    node.connect(destination!);
-    sources.add(node);
-    node.onended = () => {
-      sources.delete(node);
-      node.disconnect();
-      if (node !== source || !playing || generation !== run) return;
+  function ensureOutput() {
+    if (output) return;
+    output = document.createElement("audio");
+    output.hidden = true;
+    output.preload = "auto";
+    output.setAttribute("playsinline", "");
+    output.onplaying = markPlaying;
+    output.ontimeupdate = checkpoint;
+    output.onloadedmetadata = () => {
+      if (pendingSeek !== undefined) {
+        output!.currentTime = pendingSeek;
+        pendingSeek = undefined;
+      }
+    };
+    output.onpause = () => {
+      if (playing && output?.paused && !output.ended) pause("interrupted");
+    };
+    output.onerror = () => pause("interrupted");
+    output.onended = () => {
+      if (disposed || !output?.ended || !round) return;
       checkpoint();
       playing = false;
       clearInterval(ticker);
-      source = undefined;
-      offset = round!.duration;
-      output?.pause();
       callbacks.status("ended");
     };
-    node.start(when, at);
-    return node;
+    document.body.append(output);
+  }
+  function load(recording: Blob, at: number) {
+    const nextUrl = URL.createObjectURL(recording);
+    generation++;
+    playing = false;
+    clearInterval(ticker);
+    const previousUrl = url;
+    url = nextUrl;
+    pendingSeek = at;
+    accounted = at;
+    output!.src = nextUrl;
+    // The pre-metadata value is the media element's default start position.
+    // Reapply on metadata for browsers that defer seeking until then.
+    output!.currentTime = at;
+    if (previousUrl) URL.revokeObjectURL(previousUrl);
+  }
+  async function start() {
+    const run = ++generation;
+    try {
+      // Invoke directly in the click or Media Session handler. There is no
+      // suspended Web Audio context or live stream to restart in the background.
+      await output!.play();
+    } catch (error) {
+      if (disposed || generation !== run) return;
+      pause("interrupted");
+      throw error;
+    }
+    if (disposed || generation !== run) return;
+    markPlaying();
   }
   return {
     checkpoint,
     pause,
     setSpeed(wpm: number) {
-      if (!round || !context || !buffer) return round;
-      // Buffer rendering may cross a boundary. Recheck the audio clock before
-      // scheduling, leaving the currently sounding word completely intact.
+      if (!round || !output) return round;
       for (let index = 0; index < round.words.length; index++) {
-        const position = playing ? wordPlaybackPosition(offset, started, context.currentTime, round.duration) : offset;
         const boundary = round.starts[index];
-        if (boundary < position + (playing ? 0.05 : 0)) continue;
+        if (boundary < position() + (playing ? 0.05 : 0)) continue;
         const next = retimeWordRound(round, wpm, index);
-        const nextBuffer = makeBuffer(next);
-        const when = started + boundary - offset;
-        if (playing && when < context.currentTime + 0.02) continue;
+        const recording = renderWordWav(next, pitch);
+        // Rendering can cross a word boundary while native playback continues.
+        if (boundary < position() + (playing ? 0.02 : 0)) continue;
+        const resume = !output.paused;
+        const at = checkpoint();
         round = next;
-        buffer = nextBuffer;
-        if (playing) {
-          const previous = source;
-          source = schedule(when, boundary);
-          previous?.stop(when);
-        }
+        load(recording, at);
+        if (resume) void start().catch(() => { /* start reports interruption. */ });
         return round;
       }
       return round; // Last word: the next round will use the new setting.
     },
     async play(nextRound: WordRound, nextPitch: number, restart = false) {
       if (disposed) throw new Error("Word player has been disposed.");
-      pause();
-      const run = generation;
-      const AudioContextClass = window.AudioContext ?? (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-      if (!AudioContextClass) throw new Error("This browser does not support Web Audio.");
-      if (!session) {
-        session = (navigator as Navigator & { audioSession?: { type: string } }).audioSession;
-        if (session) {
-          previousSessionType = session.type;
-          try { session.type = "playback"; } catch { /* Optional platform hint. */ }
-        }
-      }
-      if (!context || context.state === "closed") {
-        releaseOutput();
-        context = new AudioContextClass();
-        destination = context.createMediaStreamDestination();
-        output = document.createElement("audio");
-        output.hidden = true;
-        output.setAttribute("playsinline", "");
-        output.srcObject = destination.stream;
-        output.onpause = () => {
-          if (playing && output?.paused) pause("interrupted");
-        };
-        output.onerror = () => { if (playing) pause("interrupted"); };
-        document.body.append(output);
-        context.onstatechange = () => {
-          if (playing && context?.state !== "running") pause("interrupted");
-        };
-      }
-      if (round !== nextRound || !buffer || restart) {
+      ensureOutput();
+      if (round !== nextRound || pitch !== nextPitch || restart) {
+        const recording = renderWordWav(nextRound, nextPitch);
+        checkpoint();
         round = nextRound;
-        offset = 0;
         pitch = nextPitch;
-        buffer = makeBuffer(round);
+        load(recording, 0);
+      } else if (position() >= round.duration || output!.ended) {
+        output!.currentTime = 0;
+        accounted = 0;
       }
-      // Both calls run in the Play/Media Session gesture. The native element
-      // carries the generated sound and owns the paused lock-screen transport;
-      // no silent recording, microphone, or second audible path is involved.
-      try {
-        await Promise.all([context.resume(), output!.play()]);
-      } catch (error) {
-        if (disposed || generation !== run) return;
-        pause();
-        throw error;
-      }
-      if (disposed || generation !== run) return;
-      if (context.state !== "running") throw new Error("Audio is interrupted. Return to this page and press Play.");
-      if (offset >= round.duration) offset = 0;
-      accounted = offset;
-      started = context.currentTime;
-      playing = true;
-      source = schedule(0, offset);
-      ticker = setInterval(checkpoint, 250);
-      callbacks.status("playing");
+      await start();
     },
     dispose() {
+      if (disposed) return;
       pause();
       disposed = true;
-      releaseOutput();
-      if (context) { context.onstatechange = null; void context.close().catch(() => {}); }
-      if (session && previousSessionType && session.type === "playback") {
-        try { session.type = previousSessionType; } catch { /* Optional platform hint. */ }
+      if (output) {
+        output.onplaying = output.onpause = output.onerror = output.onended = null;
+        output.ontimeupdate = output.onloadedmetadata = null;
+        output.removeAttribute("src");
+        output.load();
+        output.remove();
+        output = undefined;
       }
-      buffer = undefined;
+      if (url) URL.revokeObjectURL(url);
+      url = undefined;
       round = undefined;
     },
   };

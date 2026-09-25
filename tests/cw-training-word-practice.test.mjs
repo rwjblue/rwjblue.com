@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, wordPlaybackPosition, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
-import { createWordRound, renderWordSamples, retimeWordRound } from "../src/lib/cw-training/word-round.ts";
+import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
+import { createWordRound, renderWordSamples, renderWordWav, retimeWordRound } from "../src/lib/cw-training/word-round.ts";
 import { createWordPlayer } from "../src/lib/cw-training/word-player.ts";
 
 const settings = { ...DEFAULT_WORD_SETTINGS, wpm: 30, shuffle: false };
@@ -123,197 +123,235 @@ test("speed changes preserve the heard prefix, pitch, shuffle order and extra wo
   assert.deepEqual(renderWordSamples(next, 450).slice(0, prefixLength), renderWordSamples(round, 450).slice(0, prefixLength));
 });
 
-function harness(t, resumeWait = Promise.resolve(), outputWait = Promise.resolve()) {
-  const previous = globalThis.window;
+test("generated WAV contains seekable mono PCM with the exact rendered tones and duration", async () => {
+  const round = createWordRound("PARIS THE", settings);
+  const blob = renderWordWav(round, 450);
+  assert.equal(blob.type, "audio/wav");
+  const bytes = await blob.arrayBuffer();
+  const view = new DataView(bytes);
+  const text = (at, length) => new TextDecoder().decode(bytes.slice(at, at + length));
+  assert.equal(text(0, 4), "RIFF");
+  assert.equal(text(8, 8), "WAVEfmt ");
+  assert.equal(text(36, 4), "data");
+  assert.equal(view.getUint32(4, true), bytes.byteLength - 8);
+  assert.equal(view.getUint16(20, true), 1);
+  assert.equal(view.getUint16(22, true), 1);
+  assert.equal(view.getUint32(24, true), 22050);
+  assert.equal(view.getUint32(28, true), 44100);
+  assert.equal(view.getUint16(32, true), 2);
+  assert.equal(view.getUint16(34, true), 16);
+  const samples = renderWordSamples(round, 450);
+  assert.equal(view.getUint32(40, true), samples.length * 2);
+  assert.equal(bytes.byteLength, 44 + samples.length * 2);
+  for (let i = 0; i < samples.length; i++) assert.equal(view.getInt16(44 + i * 2, true), Math.round(samples[i] * 32767) || 0);
+});
+
+function harness(t, outputWait = Promise.resolve()) {
   const previousDocument = globalThis.document;
-  const contexts = [];
+  const previousWindow = globalThis.window;
   const outputs = [];
+  const recordings = new Map();
+  const revoked = [];
+  let nextUrl = 0;
+  t.mock.method(URL, "createObjectURL", blob => {
+    const url = `blob:word-test-${++nextUrl}`;
+    recordings.set(url, blob);
+    return url;
+  });
+  t.mock.method(URL, "revokeObjectURL", url => revoked.push(url));
   class Output {
     paused = true;
+    ended = false;
+    currentTime = 0;
     playCalls = 0;
+    loaded = false;
     setAttribute() {}
+    set src(value) { this.url = value; this.currentTime = 0; this.paused = true; this.ended = false; this.loaded = false; }
+    get src() { return this.url; }
     async play() {
       this.playCalls++;
       this.paused = false;
       await outputWait;
       if (this.paused) throw new Error("Playback cancelled.");
+      if (this.fail) throw new Error("Playback interrupted.");
+      if (!this.loaded) { this.loaded = true; this.onloadedmetadata?.(); }
+      this.onplaying?.();
     }
     pause() { this.paused = true; queueMicrotask(() => this.onpause?.()); }
+    finish(duration) { this.currentTime = duration; this.ended = true; this.paused = true; this.onpause?.(); this.onended?.(); }
+    removeAttribute(name) { assert.equal(name, "src"); this.url = undefined; }
+    load() { this.loaded = false; }
     remove() { this.attached = false; }
   }
-  class Context {
-    currentTime = 0;
-    state = "suspended";
-    destination = {};
-    sources = [];
-    constructor() { contexts.push(this); }
-    async resume() { await resumeWait; this.state = "running"; this.onstatechange?.(); }
-    async close() { this.state = "closed"; }
-    createBuffer(channels, length) { const samples = new Float32Array(length); return { getChannelData: () => samples }; }
-    createMediaStreamDestination() {
-      const track = { stopped: false, stop() { this.stopped = true; } };
-      this.mediaDestination = { stream: { getTracks: () => [track] }, disconnect() { this.disconnected = true; } };
-      return this.mediaDestination;
-    }
-    createBufferSource() {
-      const source = { connect(destination) { this.destination = destination; }, disconnect() { this.disconnected = true; }, stop(when = 0) { this.stopAt = when; }, start(when, offset) { this.when = when; this.offset = offset; } };
-      this.sources.push(source); return source;
-    }
-  }
-  globalThis.window = { AudioContext: Context };
+  // The regression is specifically resuming without relying on Web Audio.
+  globalThis.window = { AudioContext: class { constructor() { throw new Error("Web Audio unavailable in background"); } } };
   globalThis.document = {
     createElement(tag) { assert.equal(tag, "audio"); const output = new Output(); outputs.push(output); return output; },
     body: { append(output) { output.attached = true; } },
   };
-  t.after(() => { if (previous === undefined) delete globalThis.window; else globalThis.window = previous; });
-  t.after(() => { if (previousDocument === undefined) delete globalThis.document; else globalThis.document = previousDocument; });
   let seconds = 0;
   const statuses = [];
   const player = createWordPlayer({ progress: delta => { seconds += delta; }, status: status => statuses.push(status) });
-  t.after(() => player.dispose());
-  return { contexts, outputs, player, statuses, seconds: () => seconds };
+  t.after(() => {
+    player.dispose();
+    if (previousDocument === undefined) delete globalThis.document; else globalThis.document = previousDocument;
+    if (previousWindow === undefined) delete globalThis.window; else globalThis.window = previousWindow;
+  });
+  return { outputs, recordings, revoked, player, statuses, seconds: () => seconds };
 }
 
-test("native output retains its source on pause, resumes at the saved position, and releases on disposal", async t => {
+test("native recording retains its source on pause and resumes without Web Audio, then releases on disposal", async t => {
   const h = harness(t);
   const round = createWordRound("PARIS THE", settings);
   await h.player.play(round, 450);
-  const context = h.contexts[0];
   const output = h.outputs[0];
-  const stream = context.mediaDestination.stream;
-  assert.equal(context.sources[0].destination, context.mediaDestination);
-  assert.notEqual(context.sources[0].destination, context.destination);
-  context.currentTime = 0.8;
+  const url = output.src;
+  assert.equal(h.recordings.get(url).type, "audio/wav");
+  output.currentTime = 0.8;
   h.player.pause();
   assert.equal(output.paused, true);
-  assert.equal(output.srcObject, stream);
+  assert.equal(output.src, url);
   assert.equal(output.attached, true);
-  assert.equal(stream.getTracks()[0].stopped, false);
-  context.currentTime = 300;
+  assert.deepEqual(h.revoked, []);
   h.player.checkpoint();
   near(h.seconds(), 0.8);
   await h.player.play(round, 450);
   assert.equal(h.outputs.length, 1);
   assert.equal(output.playCalls, 2);
   assert.equal(output.paused, false);
-  near(context.sources.at(-1).offset, 0.8);
+  assert.equal(output.src, url);
+  near(output.currentTime, 0.8);
+  output.currentTime = 1.3;
+  h.player.checkpoint();
+  near(h.seconds(), 1.3);
   h.player.dispose();
-  assert.equal(output.srcObject, null);
+  assert.equal(output.src, undefined);
   assert.equal(output.attached, false);
-  assert.equal(stream.getTracks()[0].stopped, true);
-  assert.equal(context.state, "closed");
+  assert.deepEqual(h.revoked, [url]);
 });
 
-test("a native pause stops Morse sources and listening time without dropping the media source", async t => {
+test("native transport events keep the trainer and listening time synchronized", async t => {
   const h = harness(t);
   await h.player.play(createWordRound("PARIS THE", settings), 450);
-  const context = h.contexts[0];
   const output = h.outputs[0];
-  context.currentTime = 0.4;
+  const url = output.src;
+  output.currentTime = 0.4;
   output.pause();
   await Promise.resolve();
   assert.equal(h.statuses.at(-1), "interrupted");
-  assert.ok(context.sources.every(node => node.disconnected));
-  assert.equal(output.srcObject, context.mediaDestination.stream);
-  context.currentTime = 100;
+  assert.equal(output.src, url);
   h.player.checkpoint();
   near(h.seconds(), 0.4);
+  await output.play();
+  assert.equal(h.statuses.at(-1), "playing");
+  output.currentTime = 0.9;
+  output.ontimeupdate();
+  near(h.seconds(), 0.9);
 });
 
-test("cancelling pending native playback cannot start tones or earn practice time", async t => {
+test("cancelling pending native playback cannot start audio or earn practice time", async t => {
   let release;
-  const h = harness(t, Promise.resolve(), new Promise(resolve => { release = resolve; }));
+  const h = harness(t, new Promise(resolve => { release = resolve; }));
   const playing = h.player.play(createWordRound("PARIS", settings), 450);
   h.player.dispose();
   release();
   await playing;
-  assert.equal(h.contexts[0].sources.length, 0);
   assert.equal(h.outputs[0].paused, true);
   assert.equal(h.outputs[0].attached, false);
   assert.equal(h.seconds(), 0);
+  assert.ok(!h.statuses.includes("playing"));
 });
 
-test("audio clock credits partial listening once, pauses on interruption, resumes from position and caps delayed completion", async t => {
+test("media clock credits partial listening once and caps delayed completion", async t => {
   const h = harness(t);
   const round = createWordRound("PARIS", settings);
-  await h.player.play(round, 600);
-  const context = h.contexts[0];
-  context.currentTime = 0.6; h.player.checkpoint(); h.player.checkpoint();
+  await h.player.play(round, 450);
+  const output = h.outputs[0];
+  output.currentTime = 0.6; h.player.checkpoint(); h.player.checkpoint();
   near(h.seconds(), 0.6);
-  context.state = "interrupted"; context.onstatechange();
-  assert.equal(h.statuses.at(-1), "interrupted");
-  context.currentTime = 100; h.player.checkpoint();
+  h.player.pause();
+  h.player.checkpoint();
   near(h.seconds(), 0.6);
-  await h.player.play(round, 600);
-  near(context.sources.at(-1).offset, 0.6);
-  context.currentTime = 101; h.player.pause();
+  await h.player.play(round, 450);
+  near(output.currentTime, 0.6);
+  output.currentTime = 1.6; h.player.pause();
   near(h.seconds(), 1.6);
-  await h.player.play(round, 600);
-  context.currentTime = 1000;
-  context.sources.at(-1).onended();
+  await h.player.play(round, 450);
+  output.finish(round.duration + 0.001);
   near(h.seconds(), round.duration);
   h.player.checkpoint(); near(h.seconds(), round.duration);
   assert.equal(h.statuses.at(-1), "ended");
-  near(wordPlaybackPosition(1, 20, 19, 5), 1);
+  await h.player.play(round, 450);
+  near(output.currentTime, 0);
 });
 
-test("cancel while resuming never starts audio or credits elapsed time", async t => {
-  let release;
-  const h = harness(t, new Promise(resolve => { release = resolve; }));
-  const playing = h.player.play(createWordRound("PARIS", settings), 600);
-  h.player.pause(); release(); await playing;
-  assert.equal(h.contexts[0].sources.length, 0);
-  assert.equal(h.seconds(), 0);
-});
-
-test("live speed changes schedule at word boundaries without pause, restart, or double-counting", async t => {
+test("live speed changes retain position, heard prefix, pitch, and word order without double-counting", async t => {
   const h = harness(t);
   let round = createWordRound("PARIS THE OF", settings);
   await h.player.play(round, 450);
-  const context = h.contexts[0];
-  context.currentTime = 0.6;
-  h.player.checkpoint();
-  const statuses = [...h.statuses];
+  const output = h.outputs[0];
+  const firstUrl = output.src;
+  output.currentTime = 0.6;
   round = h.player.setSpeed(40);
-  near(context.sources[0].stopAt, 3);
-  near(context.sources[1].when, 3);
-  near(context.sources[1].offset, 3);
-  context.currentTime = 0.8;
-  round = h.player.setSpeed(25);
-  near(context.sources[1].stopAt, 3);
-  near(context.sources[2].when, 3);
-  assert.deepEqual(h.statuses, statuses);
+  await Promise.resolve();
+  assert.equal(output.paused, false);
+  near(output.currentTime, 0.6);
+  near(round.starts[1], 3);
   near(h.seconds(), 0.6);
-  context.currentTime = 3.2;
-  context.sources[0].onended();
-  context.sources[1].onended();
+  assert.deepEqual(h.revoked, [firstUrl]);
+  const first = new Uint8Array(await h.recordings.get(firstUrl).arrayBuffer());
+  const updated = new Uint8Array(await h.recordings.get(output.src).arrayBuffer());
+  assert.deepEqual(updated.slice(44, 44 + 3 * 44100), first.slice(44, 44 + 3 * 44100));
+  output.currentTime = 0.8;
+  round = h.player.setSpeed(25);
+  await Promise.resolve();
+  near(output.currentTime, 0.8);
+  near(round.starts[1], 3);
+  assert.deepEqual(round.words, ["PARIS", "THE", "OF"]);
+  assert.ok(h.statuses.every(status => status === "playing"));
+  output.currentTime = 3.2;
   h.player.checkpoint();
   near(h.seconds(), 3.2);
   h.player.pause();
-  assert.ok(context.sources.every(node => node.disconnected));
   await h.player.play(round, 450);
-  near(context.sources.at(-1).offset, 3.2);
-  context.currentTime = 1000;
-  context.sources.at(-1).onended();
+  near(output.currentTime, 3.2);
+  output.finish(round.duration);
   near(h.seconds(), round.duration);
-  assert.equal(h.statuses.at(-1), "ended");
 });
 
-test("pausing before a scheduled speed transition cancels every source and retains position", async t => {
+test("pause during a speed replacement cancels resume and retains the seek position", async t => {
   const h = harness(t);
-  const round = createWordRound("PARIS THE OF", settings);
-  await h.player.play(round, 450);
-  const context = h.contexts[0];
-  context.currentTime = 0.5;
+  await h.player.play(createWordRound("PARIS THE OF", settings), 450);
+  const output = h.outputs[0];
+  output.currentTime = 0.5;
   const next = h.player.setSpeed(40);
-  context.currentTime = 0.7;
   h.player.pause();
-  for (const node of context.sources) {
-    assert.equal(node.stopAt, 0);
-    assert.equal(node.onended, null);
-    assert.equal(node.disconnected, true);
-  }
-  near(h.seconds(), 0.7);
+  await Promise.resolve();
+  assert.equal(output.paused, true);
+  near(h.seconds(), 0.5);
   await h.player.play(next, 450);
-  near(context.sources.at(-1).offset, 0.7);
+  near(output.currentTime, 0.5);
+  output.currentTime = 0.7;
+  h.player.pause();
+  near(h.seconds(), 0.7);
+});
+
+test("paused speed changes do not autoplay and a failed resume can be retried", async t => {
+  const h = harness(t);
+  await h.player.play(createWordRound("PARIS THE OF", settings), 450);
+  const output = h.outputs[0];
+  output.currentTime = 0.5;
+  h.player.pause();
+  const next = h.player.setSpeed(40);
+  assert.equal(output.playCalls, 1);
+  assert.equal(output.paused, true);
+  near(output.currentTime, 0.5);
+  output.fail = true;
+  await assert.rejects(h.player.play(next, 450), /interrupted/);
+  assert.equal(h.statuses.at(-1), "interrupted");
+  near(h.seconds(), 0.5);
+  output.fail = false;
+  await h.player.play(next, 450);
+  assert.equal(output.paused, false);
+  near(output.currentTime, 0.5);
 });

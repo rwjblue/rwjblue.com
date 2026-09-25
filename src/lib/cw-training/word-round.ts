@@ -50,7 +50,7 @@ export function retimeWordRound(round: WordRound, wpm: number, firstWord: number
   };
 }
 
-/** One complete round is scheduled as a buffer, independent of JS timer cadence. */
+/** Render a complete round so dits and dahs do not depend on JS timer cadence. */
 export function renderWordSamples(round: WordRound, pitch: number, sampleRate = 22050): Float32Array {
   const samples = new Float32Array(Math.ceil(round.duration * sampleRate));
   let elapsed = 0;
@@ -67,4 +67,29 @@ export function renderWordSamples(round: WordRound, pitch: number, sampleRate = 
     }
   }
   return samples;
+}
+
+/** A local, seekable recording lets native media controls resume without Web Audio. */
+export function renderWordWav(round: WordRound, pitch: number): Blob {
+  const sampleRate = 22050;
+  const samples = renderWordSamples(round, pitch, sampleRate);
+  const bytes = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(bytes);
+  const text = (at: number, value: string) => {
+    for (let i = 0; i < value.length; i++) view.setUint8(at + i, value.charCodeAt(i));
+  };
+  text(0, "RIFF");
+  view.setUint32(4, bytes.byteLength - 8, true);
+  text(8, "WAVEfmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true); // PCM
+  view.setUint16(22, 1, true); // mono
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  text(36, "data");
+  view.setUint32(40, samples.length * 2, true);
+  for (let i = 0; i < samples.length; i++) view.setInt16(44 + i * 2, Math.round(samples[i] * 32767), true);
+  return new Blob([bytes], { type: "audio/wav" });
 }
