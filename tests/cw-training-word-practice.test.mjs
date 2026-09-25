@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
+import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, restoreWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
 import { createWordRound, renderWordSamples, renderWordWav, retimeWordRound } from "../src/lib/cw-training/word-round.ts";
 import { createWordPlayer } from "../src/lib/cw-training/word-player.ts";
 
@@ -404,4 +404,42 @@ test("ready-made recordings play and resume directly without creating a generate
   assert.equal(h.player.setSpeed(30), round);
   h.player.dispose();
   assert.deepEqual(h.revoked, []);
+});
+
+
+test("legacy source preferences restore the displayed configuration once without locking controls", () => {
+  const fixed = { ...settings, wpm: 25, pitch: 700, gapSeconds: 2, shuffle: true, audioSource: "recording" };
+  restoreWordSettings(fixed);
+  assert.deepEqual(fixed, { ...settings, wpm: 40, pitch: 450, gapSeconds: 1, shuffle: false });
+  fixed.wpm = 35;
+  restoreWordSettings(fixed);
+  assert.equal(fixed.wpm, 35);
+  const generated = { ...settings, wpm: 25, audioSource: "generated" };
+  restoreWordSettings(generated);
+  assert.equal(generated.wpm, 25);
+  assert.equal(generated.audioSource, undefined);
+});
+
+test("a live MP3 speed edit converts to generated audio at the same position and preserves the current spoken item", async t => {
+  const h = harness(t);
+  const clips = new Map([["THE", new Float32Array(2205).fill(.2)], ["OF", new Float32Array(4410).fill(.3)]]);
+  const generated = createWordRound("THE OF", { ...settings, wpm: 40, spokenAnswers: true }, Math.random, clips);
+  const recording = { ...generated, speech: [], speechClips: undefined, timings: [], timingStarts: [], recordingUrl: '/practice.mp3' };
+  await h.player.play(recording, 450);
+  const output = h.outputs[0];
+  output.currentTime = .8;
+  const next = h.player.setSpeed(30, clips);
+  await Promise.resolve();
+  assert.equal(next.recordingUrl, undefined);
+  assert.match(output.src, /^blob:/);
+  assert.equal(output.paused, false);
+  near(output.currentTime, .8);
+  near(next.starts[1], generated.starts[1]);
+  assert.deepEqual(next.speech[0], generated.speech[0]);
+  const prefix = Math.floor(generated.starts[1] * 22050);
+  assert.deepEqual(renderWordSamples(next, 450).slice(0, prefix), renderWordSamples(generated, 450).slice(0, prefix));
+  near(h.seconds(), .8);
+  h.player.pause();
+  await h.player.play(next, 450);
+  near(output.currentTime, .8);
 });

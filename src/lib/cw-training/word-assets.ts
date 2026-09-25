@@ -31,16 +31,23 @@ export async function loadWordSpeech(text: string): Promise<WordSpeechClips> {
   return result;
 }
 
-export async function loadWordRecording(text: string, spokenAnswers: boolean): Promise<WordRound> {
-  recordingIndex ??= fetchAsset("/audio/cw-training/recordings/index.json").then(r => r.json()).catch(error => { recordingIndex = undefined; throw error; });
+export async function loadWordRecording(text: string, settings: WordSettings): Promise<WordRound | undefined> {
+  // A fixed recording can never supply a fresh shuffle. Repeat is a transport
+  // preference, so it does not affect the sound of an individual round.
+  if (settings.shuffle) return;
   const words = parsePracticeWords(text);
+  // This index is an optimization. Its absence must not block generated audio.
+  const { recordings }: { recordings: Recording[] } = await (recordingIndex ??= fetchAsset("/audio/cw-training/recordings/index.json")
+    .then(r => r.json()).catch(() => { recordingIndex = undefined; return { recordings: [] }; }));
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(words.join(" ")));
   const wordsHash = [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
-  const { recordings } = await recordingIndex;
-  const recording = recordings.find(item => item.wordsHash === wordsHash && !!item.settings.spokenAnswers === spokenAnswers);
-  if (!recording || recording.starts.length !== words.length) throw new Error("No ready-made recording matches this list. Choose customizable playback.");
+  const recording = recordings.find(item => item.wordsHash === wordsHash
+    && item.settings.wpm === settings.wpm && item.settings.pitch === settings.pitch
+    && item.settings.gapSeconds === settings.gapSeconds && !item.settings.shuffle
+    && !!item.settings.spokenAnswers === !!settings.spokenAnswers);
+  if (!recording || recording.starts.length !== words.length) return;
   return {
-    words, starts: recording.starts, duration: recording.duration, settings: recording.settings,
+    words, starts: recording.starts, duration: recording.duration, settings: { ...settings },
     recordingUrl: `${recording.url}?v=${recording.sha256}`, timings: [], timingStarts: [], speech: [],
   };
 }

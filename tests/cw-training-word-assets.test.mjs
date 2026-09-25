@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { decodeWordWav, encodeWordWav } from '../src/lib/cw-training/word-wav.ts';
 import { loadWordRecording, loadWordSpeech } from '../src/lib/cw-training/word-assets.ts';
-import { COMMON_WORDS } from '../src/lib/cw-training/word-practice.ts';
+import { COMMON_WORDS, DEFAULT_WORD_SETTINGS } from '../src/lib/cw-training/word-practice.ts';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const buffer = bytes => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
 
@@ -62,16 +62,20 @@ test('PCM decoder rejects malformed, truncated or wrong-format clips', async () 
 test('asset loading reuses speech, rejects missing custom words, and loads MP3 metadata without speech downloads', async t => {
   const requested = [];
   let failSpeechIndex = true;
+  let failRecordingIndex = true;
   t.mock.method(globalThis, 'fetch', async url => {
     requested.push(url);
+    if (url.endsWith("/recordings/index.json") && failRecordingIndex) { failRecordingIndex = false; return new Response("", {status:503}); }
     if (url.endsWith('/words/index.json') && failSpeechIndex) { failSpeechIndex = false; return new Response('', {status:503}); }
     const path = 'public' + new URL(url, 'http://localhost').pathname;
     return new Response(await readFile(path));
   });
-  const recording = await loadWordRecording(COMMON_WORDS, true);
+  const settings = { ...DEFAULT_WORD_SETTINGS, shuffle: false, spokenAnswers: true };
+  assert.equal(await loadWordRecording(COMMON_WORDS, settings), undefined, 'Index failure falls back to generated audio');
+  const recording = await loadWordRecording(COMMON_WORDS, settings);
   assert.match(recording.recordingUrl, /common-spoken\.mp3\?v=/);
   assert.equal(recording.words.length, 30);
-  assert.equal(requested.length, 1);
+  assert.equal(requested.length, 2);
   await assert.rejects(loadWordSpeech('DIPOLE QTH'), /Check your connection/);
   const clips = await loadWordSpeech('DIPOLE QTH');
   assert.equal(clips.size, 2);
@@ -80,5 +84,13 @@ test('asset loading reuses speech, rejects missing custom words, and loads MP3 m
   assert.equal(requested.length, count);
   assert.equal(again.get('DIPOLE'), clips.get('DIPOLE'));
   await assert.rejects(loadWordSpeech('NEWWORD'), /No spoken clips for NEWWORD/);
-  await assert.rejects(loadWordRecording('NEWWORD', true), /No ready-made recording/);
+  assert.equal(await loadWordRecording('NEWWORD', settings), undefined);
+  for (const mismatch of [{ wpm: 30 }, { pitch: 500 }, { gapSeconds: .5 }, { shuffle: true }]) {
+    assert.equal(await loadWordRecording(COMMON_WORDS, { ...settings, ...mismatch }), undefined);
+  }
+  const compact = await loadWordRecording(COMMON_WORDS, { ...settings, spokenAnswers: false, repeat: false });
+  assert.match(compact.recordingUrl, /common-compact/);
+  assert.equal(compact.settings.repeat, false);
+  assert.equal(await loadWordRecording(COMMON_WORDS.split(' ').reverse().join(' '), settings), undefined);
+  assert.equal(await loadWordRecording(COMMON_WORDS + ' THE', settings), undefined);
 });

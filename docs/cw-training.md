@@ -209,8 +209,8 @@ and duplicates; it is not a transcript of his MP3.
 
 Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
 standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
-and a **Show words / Hide words** button beside playback. **Compact: once per
-word** remains the default. **Three repeats, then spoken answer** sends each word
+and a **Show words / Hide words** button beside playback. Compact playback remains the default. The **Three repeats + spoken answer**
+toggle sends each word
 three times with the standard seven-dit gap at the selected WPM, then plays its
 spoken clip. The extra pause applies between items, never between those repeats.
 A seven-dit gap separates the final repeat from speech and follows the answer
@@ -223,7 +223,7 @@ and the remaining words use the new speed with the same pitch and order. The
 replacement recording retains the same media position; the browser may briefly
 buffer it. If the last word is already playing, the speed applies to the next round. Show/hide
 and repeat work immediately; shuffle applies to the next round. Changing the list,
-pitch, spacing, mode, or playback source pauses playback and starts a fresh round
+pitch, spacing, or spoken answers pauses playback and starts a fresh round
 on Play. One button toggles **Play words / Pause words**, retaining the current position. The other
 two buttons are **Show words / Hide words** and **Done**. Lists accept
 1-200 whitespace-separated entries, punctuation and explicit prosigns; unsupported
@@ -244,15 +244,23 @@ The native player may briefly buffer the replacement. Pitch and shuffled order
 are preserved. Starting the next round still requires a callback; background
 throttling can delay that transition.
 
-**Playback source > Ready-made MP3** plays one of four checked-in recordings:
-common words or Bob's reference, each in compact and spoken-answer modes. These
-use list order, 40 WPM, 450 Hz, and one extra second between items. The fixed
-controls are disabled and display the recording's settings; switching back to
-**Customizable playback** restores the user's settings and enables fresh shuffles.
-MP3 playback fetches only recording metadata and the selected MP3, not individual
-speech clips or a generated WAV. The index matches a hash of the exact normalized
-word list, including duplicates and order, so a changed private reference cannot
-silently play a stale recording. Editing words switches to customizable playback.
+The player automatically selects a checked-in MP3 when the exact normalized list,
+WPM, pitch, extra spacing, and spoken-answer setting match, with shuffle off.
+The four recordings cover common words and Bob's reference in compact and spoken
+modes at 40 WPM, 450 Hz, and one extra second between items. Repeat on/off does not
+affect matching. Other configurations use browser generation. There is no source
+selector, and controls remain editable. A missing recording index also falls back
+to generation; MP3 playback otherwise loads no individual speech clips.
+
+Changing speed during an MP3 loads any needed spoken clips while playback continues,
+then converts to a generated round at the current position. The current item and
+its speech remain intact; later items use the new speed. Source selection runs
+again for the next round, so returning to matching settings can use an MP3 again.
+Shuffle changes also apply to the next round, preserving the current order.
+Previous explicit MP3 preferences migrate once to the settings those controls
+actually displayed. The exact-list hash preserves duplicates and order and prevents
+a changed reference from silently selecting a stale recording.
+
 The generated word audio is public static content; Bob's original recording and
 course data remain private.
 

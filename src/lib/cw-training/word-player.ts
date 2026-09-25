@@ -1,4 +1,4 @@
-import { renderWordWav, retimeWordRound, type WordRound } from "./word-round.ts";
+import { createWordRound, renderWordWav, retimeWordRound, type WordRound, type WordSpeechClips } from "./word-round.ts";
 
 export interface WordPlayerCallbacks {
   progress: (seconds: number, position: number) => void;
@@ -105,12 +105,17 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   return {
     checkpoint,
     pause,
-    setSpeed(wpm: number) {
-      if (!round || !output || round.recordingUrl) return round;
+    setSpeed(wpm: number, speechClips?: WordSpeechClips) {
+      if (!round || !output) return round;
+      if (round.settings.wpm === wpm) return round;
+      // Reconstruct a fixed recording's timeline only when a live edit needs it.
+      // The generated prefix has the same order and timing as the MP3 export.
+      const editable = round.recordingUrl
+        ? createWordRound(round.words.join(" "), round.settings, Math.random, speechClips) : round;
       for (let index = 0; index < round.words.length; index++) {
         const boundary = round.starts[index];
         if (boundary < position() + (playing ? 0.05 : 0)) continue;
-        const next = retimeWordRound(round, wpm, index);
+        const next = retimeWordRound(editable, wpm, index);
         const recording = renderWordWav(next, pitch);
         // Rendering can cross a word boundary while native playback continues.
         if (boundary < position() + (playing ? 0.02 : 0)) continue;
