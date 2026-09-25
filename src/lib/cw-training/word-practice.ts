@@ -1,7 +1,9 @@
 import type { ActiveBlock } from "./storage.ts";
 import type { TrainingAttempt } from "./types.ts";
+import { DAILY_LISTENING_TITLE } from "./daily-listening.ts";
 
 export const COMMON_WORDS = "THE OF AND TO A IN IS FOR THAT WAS ON WITH HE IT AS AT HIS BY BE FROM ARE THIS I BUT HAVE AN HAS NOT THEY OR";
+export const COMMON_77_WORDS_TITLE = DAILY_LISTENING_TITLE;
 export interface WordSettings {
   wpm: number;
   gapSeconds: number;
@@ -79,6 +81,14 @@ export function restoreWordSettings(settings: WordSettings): void {
   delete settings.audioSource;
 }
 
+export function restoreWordPractice(draft: WordPracticeDraft): void {
+  restoreWordSettings(draft.settings);
+  const previousTitle = "Bob's 77-word reference";
+  if (draft.title === previousTitle) draft.title = COMMON_77_WORDS_TITLE;
+  draft.used = draft.used.map(note => note.startsWith(`${previousTitle}:`)
+    ? COMMON_77_WORDS_TITLE + note.slice(previousTitle.length) : note);
+}
+
 export function createWordPracticeBlock(now: string, id: string, previous?: WordPracticeDraft): ActiveBlock {
   const draft: WordPracticeDraft = previous ? { ...structuredClone(previous), used: [] } : {
     title: "30 common words", text: COMMON_WORDS, settings: { ...DEFAULT_WORD_SETTINGS }, used: [],
@@ -88,7 +98,7 @@ export function createWordPracticeBlock(now: string, id: string, previous?: Word
     if (draft.settings.wpm === 30) draft.settings.wpm = DEFAULT_WORD_SETTINGS.wpm;
     if (draft.settings.pitch === 600) draft.settings.pitch = DEFAULT_WORD_SETTINGS.pitch;
   }
-  restoreWordSettings(draft.settings);
+  restoreWordPractice(draft);
   draft.defaultsVersion = 2;
   return {
     id, assignmentId: "other-practice", task: {

@@ -1,7 +1,7 @@
-import { createWordPracticeBlock, wordPracticeAttempt, wordPracticeNote } from "./word-practice";
+import { COMMON_77_WORDS_TITLE, createWordPracticeBlock, wordPracticeAttempt, wordPracticeNote } from "./word-practice";
 import type { WordPanel } from "./word-panel";
 import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
-import { audioAutoReplay, dailyListeningSeconds, DAILY_LISTENING_SECONDS, isDailyListening, shouldReplayAudio } from "./daily-listening";
+import { audioAutoReplay, dailyListeningSeconds, DAILY_LISTENING_SECONDS, DAILY_LISTENING_TITLE, DAILY_LISTENING_INSTRUCTIONS, isDailyListening, shouldReplayAudio } from "./daily-listening";
 import type { PlannedTask } from "./plan";
 import { listeningGuidance } from "./guidance";
 import { sendingReadingHtml } from "./sending-reading";
@@ -112,6 +112,11 @@ export async function initTraining() {
   const audio = $<HTMLAudioElement>("training-audio");
   const storage = new TrainingStorage();
   let state: TrainingDeviceState = await storage.load();
+  if (state.active && isDailyListening(state.active.task)) {
+    state.active.task.title = DAILY_LISTENING_TITLE;
+    state.active.task.instructions = DAILY_LISTENING_INSTRUCTIONS;
+    if (state.active.resource) state.active.resource.title = DAILY_LISTENING_TITLE;
+  }
   if (state.active?.sending) state.active.sending = restoreSendingDraft(state.active.sending);
   if (state.active?.sendingTakes) state.active.sendingTakes = restoreSendingTakes(state.active.sendingTakes);
   if (state.sendingRecordings) state.sendingRecordings = restoreSavedSendingRecordings(state.sendingRecordings);
@@ -655,7 +660,7 @@ export async function initTraining() {
     const daily = snapshot().dailyListening;
     $("training-daily-listening").hidden = false;
     const wordActive = !!state.active?.wordPractice;
-    $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>Word recognition</h3><p>Practice the 30 common words${daily?.text ? ", Bob's 77-word reference," : ""} or your own list. Adjust speed while listening, shuffle the words, and show or hide each word.</p><p data-daily-listening-progress></p><button type="button" data-action="word-practice">${wordActive ? "Return to word practice" : "Practice words"}</button></div>`;
+    $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>Word recognition</h3><p>Practice the 30 common words${daily?.text ? `, the ${COMMON_77_WORDS_TITLE},` : ""} or your own list. Adjust speed while listening, shuffle the words, and show or hide each word.</p><p data-daily-listening-progress></p><button type="button" data-action="word-practice">${wordActive ? "Return to word practice" : "Practice words"}</button></div>`;
     updateDailyListeningProgress();
     $("training-extra").innerHTML = current.extras.slice(0, 3).map((item) => taskRow(item)).join("");
     const missed = current.missed.filter(
@@ -829,10 +834,10 @@ export async function initTraining() {
     const daily = isDailyListening(active.task);
     $<HTMLInputElement>("training-auto-replay").checked = audioAutoReplay(state, active.task);
     $("training-repeat-help").textContent = daily
-      ? "Remembered on this device for Bob's words only. Replays continue until you pause, including after 10 minutes."
+      ? "Remembered on this device for the 77-word recording only. Replays continue until you pause, including after 10 minutes."
       : "Remembered on this device for other listening exercises. Replays stop when the block's planned passes are complete.";
     $("training-audio-source-help").textContent = daily
-      ? "A playback copy of Bob's recording, with the same speed and spacing, streams through your private training account. A connection is required. Each new session starts at the beginning."
+      ? "A playback copy of the original 77-word recording, with the same speed and spacing, streams through your private training account. A connection is required. Each new session starts at the beginning."
       : "Audio streams from the official source and needs a connection. Played time and pass coverage are recorded separately.";
     $("training-word-list").hidden = !daily;
     $("training-word-list-text").textContent = daily ? active.resource?.text ?? "" : "";

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, restoreWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
+import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, restoreWordPractice, restoreWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
 import { createWordRound, renderWordSamples, renderWordWav, retimeWordRound } from "../src/lib/cw-training/word-round.ts";
 import { createWordPlayer } from "../src/lib/cw-training/word-player.ts";
 
@@ -542,4 +542,26 @@ test("read-only volume leaves full-volume MP3s intact until a live adjustment", 
   assert.equal(output.paused, false);
   near(output.currentTime, 0.1);
   await assertVolumeWav(h.recordings.get(output.src), full, 0.4);
+});
+
+
+test("renaming the 77-word list preserves saved selection, words, settings and volume", () => {
+  const previous = {
+    defaultsVersion: 2, title: "Bob's 77-word reference", text: "RR THE RR QTH",
+    settings: { ...settings, wpm: 42, spokenAnswers: true }, volume: 0.23,
+    used: ["Bob's 77-word reference: 4 entries, 42 WPM", "Custom words: 2 entries, 30 WPM"],
+  };
+  const restored = structuredClone(previous);
+  restoreWordPractice(restored);
+  assert.equal(restored.title, "77 most common words");
+  assert.equal(restored.text, previous.text);
+  assert.deepEqual(restored.settings, previous.settings);
+  assert.equal(restored.volume, previous.volume);
+  assert.deepEqual(restored.used, ["77 most common words: 4 entries, 42 WPM", previous.used[1]]);
+  const next = createWordPracticeBlock("2026-09-25T12:00:00Z", "renamed", previous).wordPractice;
+  assert.equal(next.title, restored.title);
+  assert.equal(next.text, previous.text);
+  assert.deepEqual(next.settings, previous.settings);
+  assert.equal(next.volume, previous.volume);
+  assert.equal(previous.title, "Bob's 77-word reference");
 });

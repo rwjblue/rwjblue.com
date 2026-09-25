@@ -202,7 +202,7 @@ phone still requires real-device verification. Offline audio is not promised.
 ### Browser word recognition
 
 Today > **Word recognition** opens optional word practice in Focus. Choose the
-30 common words supplied on September 24, Bob's existing private 77-word reference
+30 common words supplied on September 24, the private **77 most common words** list
 (when imported), or paste a custom list. All lists are selected inside the player;
 Today has a single **Practice words** entry. The reference preserves its 75 entries
 and duplicates; it is not a transcript of his MP3.
@@ -256,7 +256,7 @@ throttling can delay that transition.
 
 The player automatically selects a checked-in MP3 when the exact normalized list,
 WPM, pitch, extra spacing, and spoken-answer setting match, with shuffle off.
-The four recordings cover common words and Bob's reference in compact and spoken
+The four recordings cover the 30- and 77-word lists in compact and spoken
 modes at 40 WPM, 450 Hz, and one extra second between items. Repeat on/off does not
 affect matching. Other configurations use browser generation. There is no source
 selector, and controls remain editable. A missing recording index also falls back
@@ -271,7 +271,7 @@ Previous explicit MP3 preferences migrate once to the settings those controls
 actually displayed. The exact-list hash preserves duplicates and order and prevents
 a changed reference from silently selecting a stale recording.
 
-The generated word audio is public static content; Bob's original recording and
+The generated word audio is public static content; the original 77-word recording and
 course data remain private.
 
 Media Session exposes play/pause, list metadata, duration, and current position
@@ -313,7 +313,7 @@ returning to word practice resumes it, while choosing another activity saves it.
   hashes, so editing a pronunciation automatically invalidates that clip.
 - `mise run cw-training:generate-word-recordings -- --bob-text .tmp/bob-practice-words.txt`
   generates both modes for the common words and the supplied private reference.
-  Omitting `--bob-text` regenerates common words and preserves existing Bob MP3s.
+  Omitting `--bob-text` regenerates common words and preserves existing 77-word MP3s.
   Use `-- --text .tmp/my-words.txt --id my-list` for another ready-made list after
   adding any missing speech entries. The script uses the same TypeScript round
   renderer as the browser and encodes mono 64 kbps MP3s with FFmpeg.
@@ -337,13 +337,13 @@ the manifest is intentionally easy to refine.
 ### Optional daily word listening
 
 The Word recognition card has one ten-minute suggestion for all word lists,
-including any listening already recorded with Bob's original MP3. It remains available every day, including Fridays and
+including any listening already recorded with the original 77-word MP3. It remains available every day, including Fridays and
 after the course. Today's counter sums actual listening across saved and current
 sessions in the course timezone, without duplicating pending entries or including
 recall. Ten minutes is a suggestion, not an automatic stop. All listening still
 contributes to the main daily total, with no assignment completion.
 
-The separate original-recording entry has been removed. Bob's list is available
+The separate original-recording entry has been removed. The 77 most common words list is available
 in the Word recognition selector. Existing recording sessions can still be
 resumed from Focus and saved, and their history remains valid.
 The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis indicates

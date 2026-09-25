@@ -1,5 +1,5 @@
 import { createWordRound, type WordRound, type WordSpeechClips } from "./word-round.ts";
-import { checkWordSettings, COMMON_WORDS, recordWordSettings, restoreWordSettings, type WordPracticeDraft } from "./word-practice.ts";
+import { checkWordSettings, COMMON_WORDS, COMMON_77_WORDS_TITLE, recordWordSettings, restoreWordPractice, type WordPracticeDraft } from "./word-practice.ts";
 import { loadWordRecording, loadWordSpeech } from "./word-assets.ts";
 import { createWordPlayer } from "./word-player.ts";
 
@@ -17,7 +17,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   progress: (seconds: number) => void;
   done: () => void;
 }): WordPanel {
-  restoreWordSettings(draft.settings);
+  restoreWordPractice(draft);
   host.innerHTML = `
     <div class="training-actions"><button type="button" data-word="play" class="primary">Play words</button><button type="button" data-word="reveal" aria-pressed="false">Show words</button><button type="button" data-word="done">Done</button></div>
     <p data-word="status" role="status">Ready. Press Play to listen.</p>
@@ -25,7 +25,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     <p data-word="answer" class="training-word-answer" hidden></p>
     <div class="training-actions"><label class="training-check"><input data-word="spokenAnswers" type="checkbox" /> Three repeats + spoken answer</label></div>
     <div class="training-word-controls">
-      <label>Word list<select data-word="list"><option value="common">30 common words</option>${options.bobText ? '<option value="bob">Bob\'s 77-word reference</option>' : ""}<option value="custom">Custom words</option></select></label>
+      <label>Word list<select data-word="list"><option value="common">30 common words</option>${options.bobText ? `<option value="bob">${COMMON_77_WORDS_TITLE}</option>` : ""}<option value="custom">Custom words</option></select></label>
       <label>Word speed (WPM)<input data-word="wpm" type="number" min="10" max="60" step="1" /></label>
       <label>Extra pause between words (seconds)<input data-word="gapSeconds" type="number" min="0" max="5" step="0.1" /></label>
       <label>Pitch (Hz)<input data-word="pitch" type="number" min="300" max="1000" step="10" /></label>
@@ -34,7 +34,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     <p class="training-small" data-word="help"></p>
     <details class="training-panel"><summary>View or edit words</summary><div class="training-panel-body">
       <label>Words<textarea data-word="text" rows="5" maxlength="10000" spellcheck="false"></textarea></label>
-      <p class="training-small">Separate entries with spaces or newlines. Duplicates are preserved. Edits become a custom list on this device. Bob's reference is his supplied text, not a verified transcript of the recording.</p>
+      <p class="training-small">Separate entries with spaces or newlines. Duplicates are preserved. Edits become a custom list on this device.</p>
     </div></details>
     <div class="training-actions">
       <label class="training-check"><input data-word="shuffle" type="checkbox" /> Shuffle each round</label>
@@ -45,7 +45,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   const input = (name: string) => $<HTMLInputElement>(name);
   const text = $<HTMLTextAreaElement>("text");
   const list = $<HTMLSelectElement>("list");
-  list.value = draft.title === "30 common words" ? "common" : draft.title === "Bob's 77-word reference" && options.bobText ? "bob" : "custom";
+  list.value = draft.title === "30 common words" ? "common" : draft.title === COMMON_77_WORDS_TITLE && options.bobText ? "bob" : "custom";
   text.value = draft.text;
   for (const key of ["wpm", "gapSeconds", "pitch"] as const) input(key).value = String(draft.settings[key]);
   for (const key of ["shuffle", "repeat", "spokenAnswers"] as const) input(key).checked = !!draft.settings[key];
@@ -263,7 +263,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   }
   list.addEventListener("change", () => {
     reset();
-    draft.title = list.value === "common" ? "30 common words" : list.value === "bob" ? "Bob's 77-word reference" : "Custom words";
+    draft.title = list.value === "common" ? "30 common words" : list.value === "bob" ? COMMON_77_WORDS_TITLE : "Custom words";
     if (list.value !== "custom") draft.text = list.value === "common" ? COMMON_WORDS : options.bobText!;
     text.value = draft.text;
     options.changed();
