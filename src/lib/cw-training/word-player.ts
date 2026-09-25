@@ -9,6 +9,7 @@ export interface WordPlayerCallbacks {
 export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   let output: HTMLAudioElement | undefined;
   let url: string | undefined;
+  let ownsUrl = false;
   let pitch = 450;
   let round: WordRound | undefined;
   let accounted = 0;
@@ -71,12 +72,13 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
     };
     document.body.append(output);
   }
-  function load(recording: Blob, at: number) {
-    const nextUrl = URL.createObjectURL(recording);
+  function load(recording: Blob | string, at: number) {
+    const nextUrl = typeof recording === "string" ? recording : URL.createObjectURL(recording);
     generation++;
     playing = false;
     clearInterval(ticker);
-    const previousUrl = url;
+    const previousUrl = ownsUrl ? url : undefined;
+    ownsUrl = typeof recording !== "string";
     url = nextUrl;
     pendingSeek = at;
     accounted = at;
@@ -104,7 +106,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
     checkpoint,
     pause,
     setSpeed(wpm: number) {
-      if (!round || !output) return round;
+      if (!round || !output || round.recordingUrl) return round;
       for (let index = 0; index < round.words.length; index++) {
         const boundary = round.starts[index];
         if (boundary < position() + (playing ? 0.05 : 0)) continue;
@@ -125,7 +127,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       if (disposed) throw new Error("Word player has been disposed.");
       ensureOutput();
       if (round !== nextRound || pitch !== nextPitch || restart) {
-        const recording = renderWordWav(nextRound, nextPitch);
+        const recording = nextRound.recordingUrl ?? renderWordWav(nextRound, nextPitch);
         checkpoint();
         round = nextRound;
         pitch = nextPitch;
@@ -148,7 +150,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
         output.remove();
         output = undefined;
       }
-      if (url) URL.revokeObjectURL(url);
+      if (url && ownsUrl) URL.revokeObjectURL(url);
       url = undefined;
       round = undefined;
     },

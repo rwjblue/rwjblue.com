@@ -355,3 +355,53 @@ test("paused speed changes do not autoplay and a failed resume can be retried", 
   assert.equal(output.paused, false);
   near(output.currentTime, 0.5);
 });
+
+test("spoken mode sends exactly three repetitions with seven-dit gaps before the answer", () => {
+  const speech = new Float32Array(11025).fill(0.25); // half a second
+  const clips = new Map([["PARIS", speech]]);
+  for (const wpm of [30, 40]) {
+    const round = createWordRound("PARIS", { ...settings, wpm, spokenAnswers: true, gapSeconds: 1 }, Math.random, clips);
+    const compact = createWordRound("PARIS", { ...settings, wpm, gapSeconds: 0 });
+    const repeatDuration = 60 / wpm;
+    near(round.speech[0].at, repeatDuration * 3);
+    near(round.duration, repeatDuration * 3 + .5 + 8.4 / wpm + 1);
+    assert.equal(round.speech.length, 1);
+    const repetition = [...compact.timings];
+    assert.deepEqual(round.timings.slice(0, repetition.length * 3), [...repetition, ...repetition, ...repetition]);
+    const samples = renderWordSamples(round, 450);
+    const at = Math.round(round.speech[0].at * 22050);
+    assert.deepEqual(samples.slice(at, at + speech.length), speech);
+    assert.ok(samples.slice(at + speech.length).every(value => value === 0));
+  }
+});
+
+test("spoken speed changes preserve the current item, spoken clip speed, duplicates and shuffled order", () => {
+  const clips = new Map([["THE", new Float32Array(2205).fill(.2)], ["OF", new Float32Array(4410).fill(.3)]]);
+  const round = createWordRound("THE OF THE", { ...settings, spokenAnswers: true, shuffle: true }, () => 0, clips);
+  const next = retimeWordRound(round, 40, 1);
+  assert.deepEqual(next.words, round.words);
+  near(next.starts[1], round.starts[1]);
+  assert.equal(next.speech.length, 3);
+  assert.deepEqual(next.speech[0], round.speech[0]);
+  for (let i = 0; i < next.words.length; i++) assert.equal(next.speech[i].samples, clips.get(next.words[i]));
+  const prefix = Math.floor(round.starts[1] * 22050);
+  assert.deepEqual(renderWordSamples(next, 450).slice(0, prefix), renderWordSamples(round, 450).slice(0, prefix));
+  assert.throws(() => createWordRound("NEWWORD", { ...settings, spokenAnswers: true }, Math.random, clips), /No spoken clip/);
+  assert.doesNotThrow(() => createWordRound("NEWWORD", settings));
+});
+
+test("ready-made recordings play and resume directly without creating a generated WAV", async t => {
+  const h = harness(t);
+  const round = { words: ["THE"], starts: [0], duration: 3, settings, recordingUrl: "/audio/cw-training/recordings/common-compact.mp3", speech: [], timings: [], timingStarts: [] };
+  await h.player.play(round, 450);
+  const output = h.outputs[0];
+  assert.equal(output.src, round.recordingUrl);
+  assert.equal(h.recordings.size, 0);
+  output.currentTime = .8;
+  h.player.pause();
+  await h.player.play(round, 450);
+  near(output.currentTime, .8);
+  assert.equal(h.player.setSpeed(30), round);
+  h.player.dispose();
+  assert.deepEqual(h.revoked, []);
+});

@@ -209,18 +209,22 @@ and duplicates; it is not a transcript of his MP3.
 
 Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
 standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
-and a **Show words / Hide words** button beside playback. Defaults are 40 WPM,
-450 Hz, one extra second, shuffle and repeat enabled. On the next new block, old
+and a **Show words / Hide words** button beside playback. **Compact: once per
+word** remains the default. **Three repeats, then spoken answer** sends each word
+three times with the standard seven-dit gap at the selected WPM, then plays its
+spoken clip. The extra pause applies between items, never between those repeats.
+A seven-dit gap separates the final repeat from speech and follows the answer
+before the extra pause. Defaults are 40 WPM, 450 Hz, one extra second, shuffle and repeat enabled. On the next new block, old
 30-WPM/600-Hz defaults migrate once; other customized values are preserved.
 Subsequent choices carry into new blocks.
 
 Speed can change during playback: the current word and its pause finish intact,
 and the remaining words use the new speed with the same pitch and order. The
-transition is scheduled on the audio clock, without waiting for a timer callback.
-If the last word is already playing, the speed applies to the next round. Show/hide
+replacement recording retains the same media position; the browser may briefly
+buffer it. If the last word is already playing, the speed applies to the next round. Show/hide
 and repeat work immediately; shuffle applies to the next round. Changing the list,
-pitch, or spacing pauses playback and starts a fresh round on Play. One button
-toggles **Play words / Pause words**, retaining the current position. The other
+pitch, spacing, mode, or playback source pauses playback and starts a fresh round
+on Play. One button toggles **Play words / Pause words**, retaining the current position. The other
 two buttons are **Show words / Hide words** and **Done**. Lists accept
 1-200 whitespace-separated entries, punctuation and explicit prosigns; unsupported
 text and rounds longer than ten minutes are rejected. Duplicates remain.
@@ -228,13 +232,29 @@ text and rounds longer than ten minutes are rejected. Duplicates remain.
 The existing pinned Morse Pro engine supplies word timings. A lazily loaded panel
 renders each complete round as a local mono PCM WAV with 5 ms tone envelopes.
 One native audio element plays that recording directly, without a Web Audio
-context or live stream. Dits and dahs do not depend on JavaScript timers. Nothing
-is uploaded or checked in, no MP3 is downloaded, and no new service is involved.
+context or live stream. Spoken mode fetches published PCM word clips before Play
+is enabled and inserts them into the same recording; it does not use browser
+speech synthesis. Clips are reused in memory across rounds. Missing clips produce
+a named error and leave compact mode available. Dits and dahs do not depend on
+JavaScript timers. The browser-generated round is temporary; no word text is
+uploaded and no new service is involved.
 Speed changes regenerate the recording with the current word and heard prefix
 unchanged, then seek to the same position; only subsequent words change speed.
 The native player may briefly buffer the replacement. Pitch and shuffled order
 are preserved. Starting the next round still requires a callback; background
 throttling can delay that transition.
+
+**Playback source > Ready-made MP3** plays one of four checked-in recordings:
+common words or Bob's reference, each in compact and spoken-answer modes. These
+use list order, 40 WPM, 450 Hz, and one extra second between items. The fixed
+controls are disabled and display the recording's settings; switching back to
+**Customizable playback** restores the user's settings and enables fresh shuffles.
+MP3 playback fetches only recording metadata and the selected MP3, not individual
+speech clips or a generated WAV. The index matches a hash of the exact normalized
+word list, including duplicates and order, so a changed private reference cannot
+silently play a stale recording. Editing words switches to customizable playback.
+The generated word audio is public static content; Bob's original recording and
+course data remain private.
 
 Media Session exposes play/pause, list metadata, duration, and current position
 for Now Playing controls. Switching apps does not deliberately pause word audio.
@@ -263,6 +283,38 @@ setting combinations and notes additional changes, without stopping playback.
 An unfinished block checkpoints time and text, reloads paused, and starts a fresh
 round on Play. Navigating away from Focus pauses the player and keeps the draft;
 returning to word practice resumes it, while choosing another activity saves it.
+
+#### Pronunciation and local audio generation
+
+- `data/cw-training/word-speech.json` is the editable source: word, pronunciation,
+  and local `public/audio/cw-training/words/*.wav` path. Spell out abbreviations
+  such as `QTH` as `Q T H`; use spoken words or phonetic respellings where needed.
+- `mise run cw-training:generate-word-speech` generates missing or changed clips.
+  Use `-- --word QTH` to limit generation, or `-- --force` to regenerate all.
+  The script fingerprints pronunciation/voice settings and validates cached file
+  hashes, so editing a pronunciation automatically invalidates that clip.
+- `mise run cw-training:generate-word-recordings -- --bob-text .tmp/bob-practice-words.txt`
+  generates both modes for the common words and the supplied private reference.
+  Omitting `--bob-text` regenerates common words and preserves existing Bob MP3s.
+  Use `-- --text .tmp/my-words.txt --id my-list` for another ready-made list after
+  adding any missing speech entries. The script uses the same TypeScript round
+  renderer as the browser and encodes mono 64 kbps MP3s with FFmpeg.
+- After pronunciation changes, regenerate the relevant clips **and** their MP3s.
+  Check in the manifest, word WAVs, MP3s, and both generated `index.json` files.
+  SHA-256 URL versions refresh changed audio in browser caches. The MP3 index
+  stores timing and a list hash, not the private source text.
+
+The local generator requires `uv` and FFmpeg. Its isolated Python 3.12 environment
+and dependencies are locked under `scripts/cw-training/speech/`; neither is part of
+normal site builds. First use downloads checksum-verified Kokoro model files into
+ignored `.tmp/cw-speech/`. Inference stays local and later runs reuse these files.
+Published clips use [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M), an
+Apache-2.0 model, with the `af_heart` voice via the MIT-licensed
+[kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) runtime. The model itself
+is not published. Clips are trimmed with small speech margins, normalized, and
+resampled to 22050 Hz mono 16-bit PCM. The browser decodes this format directly,
+without an AudioContext. Review pronunciation by listening to the generated WAVs;
+the manifest is intentionally easy to refine.
 
 ### Optional daily word listening
 

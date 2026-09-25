@@ -1,5 +1,8 @@
+import { encodeWordWav, WORD_SAMPLE_RATE } from "./word-wav.ts";
 import { sendingTextTimings } from "./sending-engine.ts";
 import { checkWordSettings, parsePracticeWords, type WordSettings } from "./word-practice.ts";
+
+export type WordSpeechClips = ReadonlyMap<string, Float32Array>;
 
 export interface WordRound {
   words: string[];
@@ -8,9 +11,12 @@ export interface WordRound {
   timingStarts: number[];
   settings: WordSettings;
   duration: number;
+  speech: { at: number; wordIndex: number; samples: Float32Array }[];
+  speechClips?: WordSpeechClips;
+  recordingUrl?: string;
 }
 
-export function createWordRound(text: string, settings: WordSettings, random = Math.random): WordRound {
+export function createWordRound(text: string, settings: WordSettings, random = Math.random, speechClips?: WordSpeechClips): WordRound {
   checkWordSettings(settings);
   const words = parsePracticeWords(text);
   if (settings.shuffle) for (let i = words.length - 1; i > 0; i--) {
@@ -20,30 +26,48 @@ export function createWordRound(text: string, settings: WordSettings, random = M
   const timings: number[] = [];
   const starts: number[] = [];
   const timingStarts: number[] = [];
+  const speech: WordRound["speech"] = [];
   let duration = 0;
   for (const word of words) {
     starts.push(duration);
     timingStarts.push(timings.length);
     const part = sendingTextTimings(word, settings.wpm);
-    part.push(-(8400 / settings.wpm + settings.gapSeconds * 1000));
-    timings.push(...part);
-    duration += part.reduce((sum, ms) => sum + Math.abs(ms), 0) / 1000;
+    const gap = 8400 / settings.wpm;
+    const repeats = settings.spokenAnswers ? 3 : 1;
+    for (let repeat = 0; repeat < repeats; repeat++) {
+      timings.push(...part, -gap);
+      duration += (part.reduce((sum, ms) => sum + Math.abs(ms), 0) + gap) / 1000;
+    }
+    if (settings.spokenAnswers) {
+      const samples = speechClips?.get(word);
+      if (!samples?.length) throw new Error(`No spoken clip for ${word}. Choose compact playback or add its pronunciation and audio clip.`);
+      speech.push({ at: duration, wordIndex: starts.length - 1, samples });
+      const speechSeconds = samples.length / WORD_SAMPLE_RATE;
+      timings.push(-speechSeconds * 1000, -gap);
+      duration += speechSeconds + gap / 1000;
+    }
+    // Extra spacing belongs between items, never between the three repeats.
+    if (settings.gapSeconds) {
+      timings[timings.length - 1] -= settings.gapSeconds * 1000;
+      duration += settings.gapSeconds;
+    }
   }
   if (duration > 600) throw new Error("This round exceeds 10 minutes. Use fewer words, a shorter pause, or a faster speed.");
-  return { words, timings, starts, timingStarts, settings: { ...settings }, duration };
+  return { words, timings, starts, timingStarts, settings: { ...settings }, duration, speech, speechClips };
 }
 
 /** Keep the heard prefix and shuffled order; only unsent words change speed. */
 export function retimeWordRound(round: WordRound, wpm: number, firstWord: number): WordRound {
   if (firstWord >= round.words.length) return round;
   const settings = { ...round.settings, wpm };
-  const tail = createWordRound(round.words.slice(firstWord).join(" "), { ...settings, shuffle: false });
+  const tail = createWordRound(round.words.slice(firstWord).join(" "), { ...settings, shuffle: false }, Math.random, round.speechClips);
   const boundary = round.starts[firstWord];
   const timingBoundary = round.timingStarts[firstWord];
   const duration = boundary + tail.duration;
   if (duration > 600) throw new Error("This round would exceed 10 minutes. Use a faster speed or start a shorter list.");
   return {
-    words: [...round.words], settings, duration,
+    words: [...round.words], settings, duration, speechClips: round.speechClips,
+    speech: [...round.speech.filter(item => item.wordIndex < firstWord), ...tail.speech.map(item => ({ ...item, at: boundary + item.at, wordIndex: firstWord + item.wordIndex }))],
     timings: [...round.timings.slice(0, timingBoundary), ...tail.timings],
     starts: [...round.starts.slice(0, firstWord), ...tail.starts.map(start => boundary + start)],
     timingStarts: [...round.timingStarts.slice(0, firstWord), ...tail.timingStarts.map(start => timingBoundary + start)],
@@ -51,7 +75,7 @@ export function retimeWordRound(round: WordRound, wpm: number, firstWord: number
 }
 
 /** Render a complete round so dits and dahs do not depend on JS timer cadence. */
-export function renderWordSamples(round: WordRound, pitch: number, sampleRate = 22050): Float32Array {
+export function renderWordSamples(round: WordRound, pitch: number, sampleRate = WORD_SAMPLE_RATE): Float32Array {
   const samples = new Float32Array(Math.ceil(round.duration * sampleRate));
   let elapsed = 0;
   for (const ms of round.timings) {
@@ -66,30 +90,14 @@ export function renderWordSamples(round: WordRound, pitch: number, sampleRate = 
       samples[i] = 0.65 * envelope * Math.sin(2 * Math.PI * pitch * (i - start) / sampleRate);
     }
   }
+  for (const item of round.speech) {
+    if (sampleRate !== WORD_SAMPLE_RATE) throw new Error("Speech requires the standard sample rate.");
+    samples.set(item.samples, Math.round(item.at * sampleRate));
+  }
   return samples;
 }
 
 /** A local, seekable recording lets native media controls resume without Web Audio. */
 export function renderWordWav(round: WordRound, pitch: number): Blob {
-  const sampleRate = 22050;
-  const samples = renderWordSamples(round, pitch, sampleRate);
-  const bytes = new ArrayBuffer(44 + samples.length * 2);
-  const view = new DataView(bytes);
-  const text = (at: number, value: string) => {
-    for (let i = 0; i < value.length; i++) view.setUint8(at + i, value.charCodeAt(i));
-  };
-  text(0, "RIFF");
-  view.setUint32(4, bytes.byteLength - 8, true);
-  text(8, "WAVEfmt ");
-  view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true); // PCM
-  view.setUint16(22, 1, true); // mono
-  view.setUint32(24, sampleRate, true);
-  view.setUint32(28, sampleRate * 2, true);
-  view.setUint16(32, 2, true);
-  view.setUint16(34, 16, true);
-  text(36, "data");
-  view.setUint32(40, samples.length * 2, true);
-  for (let i = 0; i < samples.length; i++) view.setInt16(44 + i * 2, Math.round(samples[i] * 32767), true);
-  return new Blob([bytes], { type: "audio/wav" });
+  return encodeWordWav(renderWordSamples(round, pitch));
 }

@@ -1,5 +1,6 @@
-import { createWordRound, type WordRound } from "./word-round.ts";
+import { createWordRound, type WordRound, type WordSpeechClips } from "./word-round.ts";
 import { checkWordSettings, COMMON_WORDS, recordWordSettings, type WordPracticeDraft } from "./word-practice.ts";
+import { loadWordRecording, loadWordSpeech } from "./word-assets.ts";
 import { createWordPlayer } from "./word-player.ts";
 
 export interface WordPanel {
@@ -23,11 +24,13 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     <p data-word="answer" class="training-word-answer" hidden></p>
     <div class="training-word-controls">
       <label>Word list<select data-word="list"><option value="common">30 common words</option>${options.bobText ? '<option value="bob">Bob\'s 77-word reference</option>' : ""}<option value="custom">Custom words</option></select></label>
+      <label>Practice mode<select data-word="mode"><option value="compact">Compact: once per word</option><option value="spoken">Three repeats, then spoken answer</option></select></label>
+      <label>Playback source<select data-word="source"><option value="generated">Customizable playback</option><option value="recording">Ready-made MP3 (40 WPM, 450 Hz)</option></select></label>
       <label>Word speed (WPM)<input data-word="wpm" type="number" min="10" max="60" step="1" /></label>
       <label>Extra pause between words (seconds)<input data-word="gapSeconds" type="number" min="0" max="5" step="0.1" /></label>
       <label>Pitch (Hz)<input data-word="pitch" type="number" min="300" max="1000" step="10" /></label>
     </div>
-    <p class="training-small">Speed changes apply to the next word without stopping playback. Show or hide words at any time. Each word keeps normal Morse spacing, followed by the extra pause. Changing the list, pitch, or spacing starts a fresh round.</p>
+    <p class="training-small" data-word="help"></p>
     <details class="training-panel"><summary>View or edit words</summary><div class="training-panel-body">
       <label>Words<textarea data-word="text" rows="5" maxlength="10000" spellcheck="false"></textarea></label>
       <p class="training-small">Separate entries with spaces or newlines. Duplicates are preserved. Edits become a custom list on this device. Bob's reference is his supplied text, not a verified transcript of the recording.</p>
@@ -45,7 +48,16 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   text.value = draft.text;
   for (const key of ["wpm", "gapSeconds", "pitch"] as const) input(key).value = String(draft.settings[key]);
   for (const key of ["shuffle", "repeat"] as const) input(key).checked = draft.settings[key];
+  const mode = $<HTMLSelectElement>("mode");
+  const source = $<HTMLSelectElement>("source");
+  mode.value = draft.settings.spokenAnswers ? "spoken" : "compact";
+  source.value = draft.settings.audioSource ?? "generated";
   let round: WordRound | undefined;
+  let speechClips: WordSpeechClips | undefined;
+  let recording: WordRound | undefined;
+  let preparing = false;
+  let preparationFailed = false;
+  let preparation = 0;
   let position = 0;
   let disposed = false;
   let busy = false;
@@ -53,8 +65,8 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   let generation = 0;
   let revealed = false;
   function playbackButton() {
-    $("play").textContent = playing ? "Pause words" : busy ? "Starting..." : "Play words";
-    $<HTMLButtonElement>("play").disabled = busy && !playing;
+    $("play").textContent = playing ? "Pause words" : preparing ? "Loading audio..." : busy ? "Starting..." : "Play words";
+    $<HTMLButtonElement>("play").disabled = preparing || (busy && !playing);
   }
   function mediaInfo() {
     if (!("mediaSession" in navigator)) return;
@@ -96,13 +108,16 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   });
   function pause() { generation++; busy = false; player.pause(); options.changed(); }
   async function play() {
+    if (disposed || !options.canPlay()) return;
+    if (preparing) return;
+    if (preparationFailed) { await prepare(); return; }
     if (busy || playing || disposed || !options.canPlay()) return;
     busy = true;
     playbackButton();
     const run = ++generation;
     try {
       if (!round) {
-        round = createWordRound(draft.text, draft.settings);
+        round = recording ?? createWordRound(draft.text, draft.settings, Math.random, speechClips);
         position = 0;
         showPosition();
       }
@@ -123,6 +138,49 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     mediaInfo();
     $("status").textContent = "Ready for a new round. Press Play.";
   }
+  function controls() {
+    const fixed = draft.settings.audioSource === "recording";
+    for (const key of ["wpm", "pitch", "gapSeconds", "shuffle"] as const) input(key).disabled = fixed;
+    input("wpm").value = String(fixed ? 40 : draft.settings.wpm);
+    input("pitch").value = String(fixed ? 450 : draft.settings.pitch);
+    input("gapSeconds").value = String(fixed ? 1 : draft.settings.gapSeconds);
+    input("shuffle").checked = fixed ? false : draft.settings.shuffle;
+    $("help").textContent = fixed
+      ? "Ready-made recordings use list order, 40 WPM, 450 Hz, and one extra second between items. Choose customizable playback to change these settings."
+      : "Change speed while listening; the current item finishes at its original speed. Changing mode, list, pitch, or spacing starts a fresh round. Show or hide words at any time.";
+    if (draft.settings.spokenAnswers) $("help").textContent += " Each word plays three times with normal Morse word spacing, then its spoken answer. The extra pause is between items, never between repeats.";
+  }
+  async function prepare() {
+    const run = ++preparation;
+    preparing = true;
+    preparationFailed = false;
+    speechClips = undefined;
+    recording = undefined;
+    playbackButton();
+    $("status").textContent = "Loading audio for this list...";
+    try {
+      const nextRecording = draft.settings.audioSource === "recording" ? await loadWordRecording(draft.text, !!draft.settings.spokenAnswers) : undefined;
+      const nextClips = !nextRecording && draft.settings.spokenAnswers ? await loadWordSpeech(draft.text) : undefined;
+      if (disposed || run !== preparation) return;
+      recording = nextRecording;
+      speechClips = nextClips;
+      $("status").textContent = "Ready. Press Play to listen.";
+    } catch (error) {
+      if (disposed || run !== preparation) return;
+      preparationFailed = true;
+      $("status").textContent = error instanceof Error ? error.message : "Audio unavailable. Press Play to retry.";
+    } finally {
+      if (!disposed && run === preparation) { preparing = false; playbackButton(); }
+    }
+  }
+  for (const select of [mode, source]) select.addEventListener("change", () => {
+    reset();
+    draft.settings.spokenAnswers = mode.value === "spoken";
+    draft.settings.audioSource = source.value as "generated" | "recording";
+    controls();
+    options.changed();
+    void prepare();
+  });
   for (const key of ["wpm", "gapSeconds", "pitch", "shuffle", "repeat"] as const) {
     input(key).addEventListener("change", () => {
       if (key === "wpm") {
@@ -153,10 +211,15 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     draft.title = list.value === "common" ? "30 common words" : list.value === "bob" ? "Bob's 77-word reference" : "Custom words";
     if (list.value !== "custom") draft.text = list.value === "common" ? COMMON_WORDS : options.bobText!;
     text.value = draft.text;
+    if (list.value === "custom") { draft.settings.audioSource = "generated"; source.value = "generated"; controls(); }
     options.changed();
+    void prepare();
   });
   text.addEventListener("input", () => {
-    reset(); draft.text = text.value; draft.title = "Custom words"; list.value = "custom"; options.changed();
+    reset(); draft.text = text.value; draft.title = "Custom words"; list.value = "custom";
+    draft.settings.audioSource = "generated"; source.value = "generated"; controls();
+    options.changed();
+    void prepare();
   });
   $("reveal").addEventListener("click", () => {
     revealed = !revealed;
@@ -166,5 +229,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   });
   $("play").addEventListener("click", () => { if (playing) pause(); else void play(); });
   $("done").addEventListener("click", options.done);
-  return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
+  controls();
+  void prepare();
+  return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; preparation++; pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
 }

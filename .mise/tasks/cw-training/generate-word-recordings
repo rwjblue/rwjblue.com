@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Generate ready-made 40 WPM word-practice MP3s from the shared renderer"
+set -euo pipefail
+node --experimental-strip-types scripts/cw-training/generate-word-recordings.mjs "$@"

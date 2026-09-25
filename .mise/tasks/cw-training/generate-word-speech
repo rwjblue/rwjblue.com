@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Generate local spoken-word WAV clips from the pronunciation manifest"
+set -euo pipefail
+uv run --project scripts/cw-training/speech --python 3.12 --locked python scripts/cw-training/speech/generate.py "$@"

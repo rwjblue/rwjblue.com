@@ -8,6 +8,8 @@ export interface WordSettings {
   pitch: number;
   shuffle: boolean;
   repeat: boolean;
+  spokenAnswers?: boolean;
+  audioSource?: "generated" | "recording";
 }
 export interface WordPracticeDraft {
   defaultsVersion?: 2;
@@ -17,7 +19,7 @@ export interface WordPracticeDraft {
   /** Distinct settings actually played, bounded for the synced note. */
   used: string[];
 }
-export const DEFAULT_WORD_SETTINGS: WordSettings = { wpm: 40, gapSeconds: 1, pitch: 450, shuffle: true, repeat: true };
+export const DEFAULT_WORD_SETTINGS: WordSettings = { wpm: 40, gapSeconds: 1, pitch: 450, shuffle: true, repeat: true, spokenAnswers: false, audioSource: "generated" };
 
 export function parsePracticeWords(text: string): string[] {
   const words = text.trim().toUpperCase().split(/\s+/).filter(Boolean);
@@ -34,12 +36,15 @@ export function checkWordSettings(settings: WordSettings): void {
   if (!Number.isFinite(settings.wpm) || settings.wpm < 10 || settings.wpm > 60
     || !Number.isFinite(settings.gapSeconds) || settings.gapSeconds < 0 || settings.gapSeconds > 5
     || !Number.isFinite(settings.pitch) || settings.pitch < 300 || settings.pitch > 1000
+    || (settings.spokenAnswers !== undefined && typeof settings.spokenAnswers !== "boolean")
+    || (settings.audioSource !== undefined && !["generated", "recording"].includes(settings.audioSource))
     || typeof settings.shuffle !== "boolean" || typeof settings.repeat !== "boolean") throw new Error("Use 10-60 WPM, 0-5 seconds extra pause, and a 300-1000 Hz pitch.");
 }
 
 export function wordSettingsNote(draft: WordPracticeDraft): string {
-  const s = draft.settings;
-  return `${draft.title.slice(0, 100)}: ${parsePracticeWords(draft.text).length} entries, ${s.wpm} WPM, ${s.gapSeconds}s extra word pause, ${s.pitch} Hz, ${s.shuffle ? "shuffled" : "list order"}, repeat ${s.repeat ? "on" : "off"}`;
+  const s = draft.settings.audioSource === "recording"
+    ? { ...draft.settings, wpm: 40, pitch: 450, gapSeconds: 1, shuffle: false } : draft.settings;
+  return `${draft.title.slice(0, 100)}: ${parsePracticeWords(draft.text).length} entries, ${s.wpm} WPM, ${s.gapSeconds}s extra word pause, ${s.pitch} Hz, ${s.shuffle ? "shuffled" : "list order"}, ${s.spokenAnswers ? "3 repeats + spoken answer" : "compact"}, ${s.audioSource === "recording" ? "ready-made MP3" : "browser generated"}, repeat ${s.repeat ? "on" : "off"}`;
 }
 
 export function wordPracticeNote(draft: WordPracticeDraft): string {
