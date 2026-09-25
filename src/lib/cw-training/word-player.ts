@@ -11,6 +11,8 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   let url: string | undefined;
   let ownsUrl = false;
   let pitch = 450;
+  let volume = 1;
+  let nativeVolume = true;
   let round: WordRound | undefined;
   let accounted = 0;
   let pendingSeek: number | undefined;
@@ -48,6 +50,11 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   function ensureOutput() {
     if (output) return;
     output = document.createElement("audio");
+    // iPhone Safari ignores per-element volume. Probe the capability rather
+    // than routing native playback through a background-sensitive AudioContext.
+    output.volume = 0.5;
+    nativeVolume = output.volume === 0.5;
+    output.volume = nativeVolume ? volume : 1;
     output.hidden = true;
     output.preload = "auto";
     output.setAttribute("playsinline", "");
@@ -105,6 +112,28 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
   return {
     checkpoint,
     pause,
+    clearRound() { round = undefined; },
+    get nativeVolume() { ensureOutput(); return nativeVolume; },
+    setVolume(value: number, speechClips?: WordSpeechClips) {
+      if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error("Use a volume between 0 and 1.");
+      ensureOutput();
+      if (value === volume) return round;
+      if (nativeVolume || !round) {
+        volume = value;
+        output!.volume = nativeVolume ? volume : 1;
+        return round;
+      }
+      const next = round.recordingUrl
+        ? createWordRound(round.words.join(" "), { ...round.settings, shuffle: false }, Math.random, speechClips) : round;
+      const recording = renderWordWav(next, pitch, value);
+      const resume = !output!.paused;
+      const at = checkpoint();
+      volume = value;
+      round = next;
+      load(recording, at);
+      if (resume) void start().catch(() => { /* start reports interruption. */ });
+      return round;
+    },
     setSpeed(wpm: number, speechClips?: WordSpeechClips) {
       if (!round || !output) return round;
       if (round.settings.wpm === wpm) return round;
@@ -116,7 +145,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
         const boundary = round.starts[index];
         if (boundary < position() + (playing ? 0.05 : 0)) continue;
         const next = retimeWordRound(editable, wpm, index);
-        const recording = renderWordWav(next, pitch);
+        const recording = renderWordWav(next, pitch, nativeVolume ? 1 : volume);
         // Rendering can cross a word boundary while native playback continues.
         if (boundary < position() + (playing ? 0.02 : 0)) continue;
         const resume = !output.paused;
@@ -128,11 +157,13 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks) {
       }
       return round; // Last word: the next round will use the new setting.
     },
-    async play(nextRound: WordRound, nextPitch: number, restart = false) {
+    async play(nextRound: WordRound, nextPitch: number, restart = false, speechClips?: WordSpeechClips) {
       if (disposed) throw new Error("Word player has been disposed.");
       ensureOutput();
       if (round !== nextRound || pitch !== nextPitch || restart) {
-        const recording = nextRound.recordingUrl ?? renderWordWav(nextRound, nextPitch);
+        const editable = nextRound.recordingUrl && !nativeVolume && volume !== 1
+          ? createWordRound(nextRound.words.join(" "), { ...nextRound.settings, shuffle: false }, Math.random, speechClips) : nextRound;
+        const recording = editable.recordingUrl ?? renderWordWav(editable, nextPitch, nativeVolume ? 1 : volume);
         checkpoint();
         round = nextRound;
         pitch = nextPitch;

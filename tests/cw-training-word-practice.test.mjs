@@ -46,11 +46,13 @@ test("PCM has the requested duration, silent gaps, bounded amplitude and smooth 
 test("optional blocks use word-recognition history and copy defaults without previous credit", () => {
   const first = createWordPracticeBlock("2026-09-24T12:00:00Z", "first");
   first.wordPractice.used.push("30 WPM");
+  first.wordPractice.volume = 0.23;
   const second = createWordPracticeBlock("2026-09-24T12:00:00Z", "second", first.wordPractice);
   second.wordPractice.settings.wpm = 30;
   assert.equal(first.wordPractice.settings.wpm, 40);
   assert.equal(first.wordPractice.settings.pitch, 450);
   assert.deepEqual(second.wordPractice.used, []);
+  assert.equal(second.wordPractice.volume, 0.23);
   assert.equal(second.assignmentId, "other-practice");
   assert.equal(second.task.id, "other:word-recognition");
   assert.equal(second.activeSeconds, 0);
@@ -146,7 +148,7 @@ test("generated WAV contains seekable mono PCM with the exact rendered tones and
   for (let i = 0; i < samples.length; i++) assert.equal(view.getInt16(44 + i * 2, true), Math.round(samples[i] * 32767) || 0);
 });
 
-function harness(t, outputWait = Promise.resolve()) {
+function harness(t, outputWait = Promise.resolve(), nativeVolume = true) {
   const previousDocument = globalThis.document;
   const previousWindow = globalThis.window;
   const outputs = [];
@@ -160,6 +162,9 @@ function harness(t, outputWait = Promise.resolve()) {
   });
   t.mock.method(URL, "revokeObjectURL", url => revoked.push(url));
   class Output {
+    level = 1;
+    get volume() { return this.level; }
+    set volume(value) { if (nativeVolume) this.level = value; }
     paused = true;
     ended = false;
     currentTime = 0;
@@ -442,4 +447,99 @@ test("a live MP3 speed edit converts to generated audio at the same position and
   h.player.pause();
   await h.player.play(next, 450);
   near(output.currentTime, .8);
+});
+
+
+test("native volume changes MP3 and generated playback without reloading or changing position", async t => {
+  const h = harness(t);
+  assert.equal(h.player.nativeVolume, true);
+  h.player.setVolume(0.5);
+  const round = { ...createWordRound("PARIS THE", settings), recordingUrl: "/ready.mp3" };
+  await h.player.play(round, 450);
+  const output = h.outputs[0];
+  assert.equal(output.volume, 0.5);
+  output.currentTime = 0.8;
+  for (const volume of [0.2, 0, 1]) {
+    h.player.setVolume(volume);
+    assert.equal(output.volume, volume);
+    assert.equal(output.src, "/ready.mp3");
+    assert.equal(output.currentTime, 0.8);
+    assert.equal(output.paused, false);
+  }
+  assert.equal(output.playCalls, 1);
+  h.player.pause();
+  h.player.setVolume(0.3);
+  assert.equal(output.paused, true);
+  await h.player.play(round, 450);
+  assert.equal(output.volume, 0.3);
+  near(output.currentTime, 0.8);
+  near(h.seconds(), 0.8);
+  await h.player.play(createWordRound("E", settings), 450);
+  assert.equal(output.volume, 0.3);
+  for (const invalid of [NaN, Infinity, -1, 2]) assert.throws(() => h.player.setVolume(invalid));
+});
+
+async function assertVolumeWav(blob, round, volume) {
+  const bytes = new DataView(await blob.arrayBuffer());
+  const samples = renderWordSamples(round, 450);
+  assert.equal(bytes.byteLength, 44 + samples.length * 2);
+  for (let i = 0; i < samples.length; i++) {
+    assert.ok(Math.abs(bytes.getInt16(44 + i * 2, true) - samples[i] * volume * 32767) <= 1);
+  }
+}
+
+test("read-only volume fallback scales tones and speech, keeps position, and resumes natively", async t => {
+  const h = harness(t, Promise.resolve(), false);
+  const clips = new Map([["E", new Float32Array(2205).fill(0.8)], ["T", new Float32Array(2205).fill(-0.6)]]);
+  const full = createWordRound("E T E", { ...settings, spokenAnswers: true }, Math.random, clips);
+  let round = { ...full, timings: [], timingStarts: [], speech: [], speechClips: undefined, recordingUrl: "/ready.mp3" };
+  assert.equal(h.player.nativeVolume, false);
+  h.player.setVolume(0.5);
+  await h.player.play(round, 450, false, clips);
+  const output = h.outputs[0];
+  assert.equal(output.volume, 1);
+  await assertVolumeWav(h.recordings.get(output.src), full, 0.5);
+  output.currentTime = 0.2;
+  round = h.player.setVolume(0.25, clips);
+  await Promise.resolve();
+  assert.equal(output.paused, false);
+  near(output.currentTime, 0.2);
+  near(h.seconds(), 0.2);
+  assert.deepEqual(round.words, full.words);
+  await assertVolumeWav(h.recordings.get(output.src), full, 0.25);
+  h.player.pause();
+  round = h.player.setVolume(0);
+  assert.equal(output.paused, true);
+  await assertVolumeWav(h.recordings.get(output.src), full, 0);
+  round = h.player.setVolume(0.5);
+  assert.equal(output.paused, true);
+  const resumeUrl = output.src;
+  await h.player.play(round, 450);
+  assert.equal(output.src, resumeUrl);
+  near(output.currentTime, 0.2);
+  round = h.player.setSpeed(40);
+  await Promise.resolve();
+  await assertVolumeWav(h.recordings.get(output.src), round, 0.5);
+  h.player.pause();
+  h.player.clearRound();
+  assert.equal(h.player.setVolume(0.3), undefined);
+  const next = createWordRound("T", settings);
+  await h.player.play(next, 450);
+  near(output.currentTime, 0);
+  await assertVolumeWav(h.recordings.get(output.src), next, 0.3);
+});
+
+test("read-only volume leaves full-volume MP3s intact until a live adjustment", async t => {
+  const h = harness(t, Promise.resolve(), false);
+  const full = createWordRound("E T", settings);
+  const round = { ...full, timings: [], timingStarts: [], recordingUrl: "/ready.mp3" };
+  await h.player.play(round, 450);
+  const output = h.outputs[0];
+  assert.equal(output.src, "/ready.mp3");
+  output.currentTime = 0.1;
+  h.player.setVolume(0.4);
+  await Promise.resolve();
+  assert.equal(output.paused, false);
+  near(output.currentTime, 0.1);
+  await assertVolumeWav(h.recordings.get(output.src), full, 0.4);
 });

@@ -14,6 +14,8 @@ export interface WordSettings {
 }
 export interface WordPracticeDraft {
   defaultsVersion?: 2;
+  /** Device listening preference, independent of the recording configuration. */
+  volume?: number;
   title: string;
   text: string;
   settings: WordSettings;
