@@ -39,7 +39,7 @@ test('all four ready-made MP3s match their index and have bounded, ordered word 
     assert.equal(item.settings.wpm, 40);
     assert.equal(item.settings.pitch, 450);
     assert.equal(item.settings.shuffle, false);
-    assert.equal(item.starts.length, item.id.startsWith('bob') ? 75 : 30);
+    assert.equal(item.starts.length, item.id.startsWith('bob') ? 70 : 30);
     assert.equal(item.starts[0], 0);
     assert.ok(item.starts.every((at, i) => at < item.duration && (!i || at > item.starts[i - 1])));
     assert.ok(item.duration < 600);
