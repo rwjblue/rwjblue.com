@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import CwListeningPlayer from "../../components/CwListeningPlayer.astro";
 import { MORSE_RUNNER_GUIDE_URL, MORSE_RUNNER_BASICS_URL, MORSE_RUNNER_DOWNLOAD_URL, WEB_MORSE_RUNNER_HELP_URL } from "../../lib/cw-training/morse-runner";
 import "../../styles/cw-training.css";
 ---
@@ -35,6 +36,7 @@ import "../../styles/cw-training.css";
         Sign in to load your private curriculum and training history. This
         browser will remember your session.
       </p>
+      <p><a href="/radio/cw-listening/">Use public CW Listening Practice</a> for words, QSOs, and stories without signing in.</p>
       <a class="training-button primary" href="/api/cw-training/login"
         >Sign in</a
       >
@@ -213,7 +215,7 @@ import "../../styles/cw-training.css";
                 </div>
               </details>
             </div>
-            <section id="training-reference-practice" aria-label="Listening practice controls" hidden></section>
+            <CwListeningPlayer id="training-reference-practice" hidden />
             <div id="training-timer-box">
               <button
                 id="training-timer-toggle"

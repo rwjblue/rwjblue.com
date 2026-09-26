@@ -1,4 +1,4 @@
-import MorseCW from "morse-pro/src/morse-pro-cw.js";
+export { sendingTextTimings } from "../cw-listening/morse.ts";
 import MorseDecoder from "morse-pro/src/morse-pro-decoder.js";
 import type MorsePlayer from "morse-pro/src/morse-pro-player-waa.js";
 
@@ -33,16 +33,6 @@ export function decodeSendingTimings(timings: number[], wpm: number): { text: st
     text: decoder.message.trim(),
     morse: decoder.displayMorse(decoder.loadMorse(decoder.morse)).trim(),
   };
-}
-
-/** Generate the reference with the same upstream dictionary and timing model. */
-export function sendingTextTimings(text: string, wpm: number): number[] {
-  const speed = checkedSpeed(wpm);
-  if (!text.trim()) return [];
-  const cw = new MorseCW({ wpm: speed, fwpm: speed, dictionaryOptions: ["prosigns"] });
-  const tokens = cw.loadText(text);
-  if (tokens === null || tokens.error) throw new Error("This prompt contains characters that cannot be sent as Morse.");
-  return [...cw.getTimings(tokens)];
 }
 
 /**

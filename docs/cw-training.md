@@ -199,17 +199,32 @@ automatic transcription. Initial playback needs a user gesture. Media Session
 controls are progressive enhancements; uninterrupted playback with a locked
 phone still requires real-device verification. Offline audio is not promised.
 
+### Shared public listening player
+
+[CW Listening Practice](/radio/cw-listening/) is the public home for words,
+generated QSOs, and stories. See [cw-listening.md](cw-listening.md) for content,
+module ownership, local-session behavior, and preset links. Focus mounts the same
+player with a tracking banner and **Done and save**. The training adapter owns
+ActiveBlock/attempt conversion; public code never imports curriculum or auth.
+
+Mode changes pause and settle the previous activity, save it under its existing
+category, then begin a new block with a new ID. Cumulative player totals update
+blocks idempotently. Preferences are shared on the same origin, while public
+sessions remain separate and never enter private history. Existing word/QSO
+blocks retain their drafts, generated scripts, accumulated seconds, and IDs.
+Older word-list titles migrate to the new labels without altering their text.
+
 ### Browser word recognition
 
 Today > **Word recognition** opens optional word practice in Focus. Choose the
-30 common words supplied on September 24, the private **77 most common words** list
-(when imported), or paste a custom list. All lists are selected inside the player;
+**30 most common English words**, **Common QSO words**, or paste a custom list.
+Both built-in lists now come from the public static catalog; no import is needed. All lists are selected inside the player;
 Today has a single **Practice words** entry. The reference preserves its 75 entries
-and duplicates; it is not a transcript of his MP3.
+and duplicates; it is not a transcript of the original instructor MP3.
 
 Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
 standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
-and a **Show words / Hide words** button beside playback. Compact playback remains the default. The **Three repeats + spoken answer**
+and a **Show text / Hide text** button beside playback. Compact playback remains the default. The **Three repeats + spoken answer**
 toggle sends each word
 three times with the standard seven-dit gap at the selected WPM, then plays its
 spoken clip. The extra pause applies between items, never between those repeats.
@@ -231,7 +246,7 @@ replacement recording retains the same media position; the browser may briefly
 buffer it. If the last word is already playing, the speed applies to the next round. Show/hide
 and repeat work immediately; shuffle applies to the next round. Changing the list,
 pitch, spacing, or spoken answers pauses playback and starts a fresh round
-on Play. The two app buttons are **Show words / Hide words** and **Done**. Lists accept
+on Play. The two app buttons are **Show text / Hide text** and **Done and save**. Lists accept
 1-200 whitespace-separated entries, punctuation and explicit prosigns; unsupported
 text and rounds longer than ten minutes are rejected. Duplicates remain.
 
@@ -252,7 +267,7 @@ throttling can delay that transition.
 
 The player automatically selects a checked-in MP3 when the exact normalized list,
 WPM, pitch, extra spacing, and spoken-answer setting match, with shuffle off.
-The four recordings cover the 30- and 77-word lists in compact and spoken
+The four recordings cover the English and QSO word lists in compact and spoken
 modes at 40 WPM, 450 Hz, and one extra second between items. Repeat on/off does not
 affect matching. Other configurations use browser generation. There is no source
 selector, and controls remain editable. A missing recording index also falls back
@@ -285,7 +300,7 @@ on resuming a background AudioContext. Lock-screen pause/resume still needs
 real-device verification with this output path; this is not a native iOS Live
 Activity.
 
-**Done** saves immediately and returns to Today. Starting another activity also
+**Done and save** saves immediately and returns to Today. Starting another activity also
 saves immediately, without a finish dialog. Both paths record actual listening
 under `other-practice` / `other:word-recognition`, with the list title and settings
 selected during listening, without course completion or LCWO credit. Visits with
@@ -307,16 +322,16 @@ returning to word practice resumes it, while choosing another activity saves it.
   Use `-- --word QTH` to limit generation, or `-- --force` to regenerate all.
   The script fingerprints pronunciation/voice settings and validates cached file
   hashes, so editing a pronunciation automatically invalidates that clip.
-- `mise run cw-training:generate-word-recordings -- --bob-text .tmp/bob-practice-words.txt`
-  generates both modes for the common words and the supplied private reference.
-  Omitting `--bob-text` regenerates common words and preserves existing 77-word MP3s.
+- `mise run cw-training:generate-word-recordings` generates compact and spoken
+  MP3s for both checked-in public word catalogs. The legacy `--bob-text <file>`
+  option can override the QSO list for local generation.
   Use `-- --text .tmp/my-words.txt --id my-list` for another ready-made list after
   adding any missing speech entries. The script uses the same TypeScript round
   renderer as the browser and encodes mono 64 kbps MP3s with FFmpeg.
 - After pronunciation changes, regenerate the relevant clips **and** their MP3s.
   Check in the manifest, word WAVs, MP3s, and both generated `index.json` files.
   SHA-256 URL versions refresh changed audio in browser caches. The MP3 index
-  stores timing and a list hash, not the private source text.
+  stores timing and a hash of each public catalog's exact words and order.
 
 The local generator requires `uv` and FFmpeg. Its isolated Python 3.12 environment
 and dependencies are locked under `scripts/cw-training/speech/`; neither is part of
@@ -335,8 +350,8 @@ the manifest is intentionally easy to refine.
 Today also offers **Listen to QSOs and stories**. The library contains four
 QSO templates (a first contact, a ragchew, POTA, and a repeat request) and three
 original stories of increasing length. These are practice examples, not
-recordings or logs of real contacts. `qso-practice.ts` owns the library;
-`qso-generator.ts` owns the templates and the callsign, name, location, radio,
+recordings or logs of real contacts. `src/data/cw-listening/stories.ts` owns the stories;
+`src/lib/cw-listening/qso-generator.ts` owns the templates and the callsign, name, location, radio,
 antenna, weather, and report pools.
 
 Opening a QSO template generates two distinct station profiles. City/state and
@@ -383,7 +398,7 @@ sessions in the course timezone, without duplicating pending entries or includin
 recall. Ten minutes is a suggestion, not an automatic stop. All listening still
 contributes to the main daily total, with no assignment completion.
 
-The separate original-recording entry has been removed. The 77 most common words list is available
+The separate original-recording entry has been removed. The Common QSO words list is available
 in the Word recognition selector. Existing recording sessions can still be
 resumed from Focus and saved, and their history remains valid.
 The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis indicates
@@ -407,8 +422,9 @@ FFmpeg and ffprobe must be installed to run the import task.
 The playback MP3 is stored as bounded base64 in the existing private D1 database,
 with metadata and text. `/api/cw-training/audio/bob-77-words` verifies the same
 owner identity as the training API before serving GET/HEAD or byte-range requests.
-Responses are `private, no-store`. Audio and instructor text never enter public
-static assets, the repository, or the service worker cache. Offline audio and
+Responses are `private, no-store`. The original audio and private course materials
+never enter public static assets or the service worker cache. The separately
+authorized Common QSO words catalog is checked in for public generated playback. Offline audio and
 uninterrupted locked-phone playback are not promised.
 
 Apply `migrations/cw-training/0004_daily_listening.sql` before deploying the new

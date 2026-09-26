@@ -1,5 +1,8 @@
-import { createQsoPracticeBlock, qsoPracticeAttempt, qsoPracticeNote } from "./qso-practice";
-import { COMMON_77_WORDS_TITLE, createWordPracticeBlock, wordPracticeAttempt, wordPracticeNote } from "./word-practice";
+import { applyListeningTotal, createTrainingListeningBlock, listeningDraftForBlock } from "./listening-adapter";
+import { listeningPreferences, rememberListening } from "../cw-listening/storage";
+import type { ListeningMode } from "../cw-listening/session";
+import { qsoPracticeAttempt, qsoPracticeNote } from "./qso-practice";
+import { wordPracticeAttempt, wordPracticeNote } from "./word-practice";
 import type { WordPanel } from "./word-panel";
 import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
 import { audioAutoReplay, dailyListeningSeconds, DAILY_LISTENING_SECONDS, DAILY_LISTENING_TITLE, DAILY_LISTENING_INSTRUCTIONS, isDailyListening, shouldReplayAudio } from "./daily-listening";
@@ -658,10 +661,9 @@ export async function initTraining() {
       return `<div class="training-practice-card"><h4>${title}</h4><p class="training-small">${description}</p><button type="button" ${active ? 'data-action="resume"' : `data-review="${escapeHtml(item.task.id)}"`}>${active ? runnerEnded() ? "View results" : `Return to ${title}` : `Practice ${title}`}</button></div>`;
     }).join("");
     $("training-extra-panel").hidden = !current.extras.length;
-    const daily = snapshot().dailyListening;
     $("training-daily-listening").hidden = false;
     const wordActive = !!state.active?.wordPractice;
-    $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>Word recognition</h3><p>Practice the 30 common words${daily?.text ? `, the ${COMMON_77_WORDS_TITLE},` : ""} or your own list. Adjust speed while listening, shuffle the words, and show or hide each word.</p><p data-daily-listening-progress></p><button type="button" data-action="word-practice">${wordActive ? "Return to word practice" : "Practice words"}</button></div>`;
+    $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>Word recognition</h3><p>Practice the 30 most common English words, common QSO words, or your own list. Adjust speed while listening, shuffle the words, and show or hide each word.</p><p data-daily-listening-progress></p><button type="button" data-action="word-practice">${wordActive ? "Return to word practice" : "Practice words"}</button></div>`;
     $("training-daily-listening").innerHTML += `<div class="training-card"><p class="eyebrow">Optional listening</p><h3>QSOs and short stories</h3><p>Hear full contacts with distinct station tones, or choose a short, medium, or longer story. Show each line and follow the highlighted word.</p><button type="button" data-action="qso-practice">${state.active?.qsoPractice ? "Return to QSO and story listening" : "Listen to QSOs and stories"}</button></div>`;
     updateDailyListeningProgress();
     $("training-extra").innerHTML = current.extras.slice(0, 3).map((item) => taskRow(item)).join("");
@@ -773,6 +775,7 @@ export async function initTraining() {
   function saveListeningDefaults(active: ActiveBlock) {
     if (active.wordPractice) state.wordPracticeDefaults = { ...structuredClone(active.wordPractice), used: [] };
     if (active.qsoPractice) state.qsoPracticeDefaults = { qsoId: active.qsoPractice.qsoId, wpm: active.qsoPractice.wpm, used: [] };
+    rememberListening(listeningDraftForBlock(active));
   }
 
   function unmountListening() {
@@ -789,12 +792,15 @@ export async function initTraining() {
     const generation = listeningGeneration;
     const host = $("training-reference-practice");
     host.textContent = "Loading listening controls...";
-    const mount = active.qsoPractice
-      ? import("./qso-panel").then(({ mountQsoPanel }) => (options: Parameters<typeof mountQsoPanel>[2]) => mountQsoPanel(host, active.qsoPractice!, options))
-      : import("./word-panel").then(({ mountWordPanel }) => (options: Parameters<typeof mountWordPanel>[2]) => mountWordPanel(host, active.wordPractice!, { ...options, bobText: snapshot().dailyListening?.text }));
-    void mount.then(mountPanel => {
+    const draft = listeningDraftForBlock(active);
+    void import("../cw-listening/player").then(({ mountListeningPlayer }) => {
       if (generation !== listeningGeneration || state.active?.id !== active.id || disposed) return;
-      listeningPanel = mountPanel({
+      listeningPanel = mountListeningPlayer(host, draft, {
+        initialSeconds: active.activeSeconds,
+        tracking: true,
+        revealed: listeningPreferences().revealed,
+        revealChanged: revealed => rememberListening(draft, revealed),
+        changeMode: mode => { saveListeningPractice(); beginListening(mode); },
         canPlay: () => allowActiveDate(),
         done: () => finish(),
         changed: () => {
@@ -802,9 +808,9 @@ export async function initTraining() {
           saveListeningDefaults(active);
           void persist();
         },
-        progress: seconds => {
+        progress: total => {
           if (state.active?.id !== active.id) return;
-          active.activeSeconds = Math.min(14400, active.activeSeconds + seconds);
+          applyListeningTotal(active, total);
           updateClock();
           if (Date.now() - lastSaved > 3000) { lastSaved = Date.now(); void persist(); }
         },
@@ -1886,9 +1892,8 @@ export async function initTraining() {
     $("training-reading-text").scrollTop = reading.line;
   }
 
-  function startQsos() {
-    if (switchActivity("QSO and story listening", startQsos, !!state.active?.qsoPractice)) return;
-    state.active = createQsoPracticeBlock(new Date().toISOString(), crypto.randomUUID(), state.qsoPracticeDefaults);
+  function beginListening(mode: ListeningMode) {
+    state.active = createTrainingListeningBlock(mode, new Date().toISOString(), crypto.randomUUID(), state, listeningPreferences());
     running = false;
     recalling = false;
     render();
@@ -1896,14 +1901,16 @@ export async function initTraining() {
     void persist();
   }
 
+  function startQsos() {
+    if (switchActivity("QSO and story listening", startQsos, !!state.active?.qsoPractice)) return;
+    const preferences = listeningPreferences();
+    const legacyStory = !preferences.qsos && !preferences.stories && state.qsoPracticeDefaults?.qsoId.startsWith("story-");
+    beginListening(preferences.mode === "stories" || legacyStory ? "stories" : "qsos");
+  }
+
   function startWords() {
     if (switchActivity("Word practice", startWords, !!state.active?.wordPractice)) return;
-    state.active = createWordPracticeBlock(new Date().toISOString(), crypto.randomUUID(), state.wordPracticeDefaults);
-    running = false;
-    recalling = false;
-    render();
-    setView("focus");
-    void persist();
+    beginListening("words");
   }
 
   $<HTMLDialogElement>("training-finish-dialog").addEventListener("cancel", () => { pendingActivity = undefined; });

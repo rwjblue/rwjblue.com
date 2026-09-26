@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CwListeningPlayer from "../../components/CwListeningPlayer.astro";
+import { WORD_LISTS } from "../../data/cw-listening/words";
+---
+
+<BaseLayout title="CW Listening Practice / N1RWJ"
+  description="Listen to common English and QSO words, generated two-station contacts, and short stories in Morse code. Choose your speed and follow the highlighted text."
+  canonicalPath="/radio/cw-listening/" searchType="Tool" backlinks>
+  <div class="listening-page">
+    <section class="page-intro">
+      <p class="eyebrow">Radio / Listening practice</p>
+      <h1>CW Listening Practice</h1>
+      <p>Get comfortable hearing whole words, following a contact, and copying a story. Choose something to listen to.</p>
+    </section>
+    <CwListeningPlayer id="cw-listening-player" />
+    <noscript><p>Enable JavaScript to generate and play Morse audio in your browser.</p></noscript>
+    <p class="listening-public-note">No account needed. Your settings and current session stay on this device.</p>
+    <details class="listening-about">
+      <summary>About the practice material</summary>
+      {WORD_LISTS.map(list => <p><strong>{list.title}.</strong> {list.description}</p>)}
+      <p>The QSO generator combines fictional station profiles with four practice scenarios. One station sends at 450 Hz and the other at 500 Hz. The three original stories use a single 450 Hz narrator.</p>
+      <p>Audio follows your selected speed and spacing. Show text to follow the current word, transmission, or sentence, or keep it hidden and listen. The session counter measures time actually listened, including pauses between words and stations.</p>
+    </details>
+    <nav class="listening-related" aria-label="More CW tools">
+      <a href="/radio/cw-qso/">CW QSO Walkthrough</a>
+      <a href="/radio/cw-practice/">CW Practice Schedule</a>
+      <a href="/radio/">All radio tools</a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initCwListening } from "../../lib/cw-listening/client";
+  initCwListening();
+  document.addEventListener("astro:page-load", initCwListening);
+</script>

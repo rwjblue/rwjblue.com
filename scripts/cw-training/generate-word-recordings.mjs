@@ -5,15 +5,15 @@ import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
-import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, parsePracticeWords } from '../../src/lib/cw-training/word-practice.ts';
-import { createWordRound, renderWordWav } from '../../src/lib/cw-training/word-round.ts';
-import { decodeWordWav } from '../../src/lib/cw-training/word-wav.ts';
+import { COMMON_WORDS, COMMON_QSO_WORDS, DEFAULT_WORD_SETTINGS, parsePracticeWords } from '../../src/lib/cw-listening/word-practice.ts';
+import { createWordRound, renderWordWav } from '../../src/lib/cw-listening/word-round.ts';
+import { decodeWordWav } from '../../src/lib/cw-listening/word-wav.ts';
 
 const { values: args } = parseArgs({ options: {
   'bob-text': { type: 'string' }, text: { type: 'string' }, id: { type: 'string' }, help: { type: 'boolean' },
 } });
 if (args.help) {
-  console.log('Generate common-word MP3s; add --bob-text <private text file> for Bob, or --text <file> --id <name> for another list. Existing recordings for omitted lists remain.');
+  console.log('Generate both public word-list MP3s. Use --text <file> --id <name> for another list, or --bob-text <file> to override the Common QSO words catalog. Existing custom recordings remain.');
   process.exit(0);
 }
 if (!!args.text !== !!args.id || (args.id && (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(args.id) || ['common', 'bob'].includes(args.id)))) throw new Error('Custom lists require --text <file> and a unique lowercase --id <name>.');
@@ -24,8 +24,7 @@ await mkdir(folder, { recursive: true });
 let index = { version: 1, recordings: [] };
 try { index = JSON.parse(await readFile(indexPath, 'utf8')); } catch (error) { if (error.code !== 'ENOENT') throw error; }
 const speechIndex = JSON.parse(await readFile('public/audio/cw-training/words/index.json', 'utf8'));
-const lists = [{ id: 'common', text: COMMON_WORDS }];
-if (args['bob-text']) lists.push({ id: 'bob', text: await readFile(args['bob-text'], 'utf8') });
+const lists = [{ id: 'common', text: COMMON_WORDS }, { id: 'bob', text: args['bob-text'] ? await readFile(args['bob-text'], 'utf8') : COMMON_QSO_WORDS }];
 if (args.text) lists.push({ id: args.id, text: await readFile(args.text, 'utf8') });
 const temp = await mkdtemp(join(tmpdir(), 'cw-word-recordings-'));
 try {

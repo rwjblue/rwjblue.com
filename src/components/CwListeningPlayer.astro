@@ -1,0 +1,8 @@
+---
+import "../styles/cw-listening.css";
+interface Props { id: string; hidden?: boolean }
+const { id, hidden = false } = Astro.props;
+---
+<section {id} class="cw-listening" aria-label="CW listening practice" {hidden}>
+  <p>Loading listening controls...</p>
+</section>

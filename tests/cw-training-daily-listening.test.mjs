@@ -39,7 +39,7 @@ test("new sessions start at zero while daily progress excludes recall, other day
   assert.equal(start().activeSeconds, 0);
   assert.equal(taskProgress(active.task, [saved]).complete, false);
   const html = renderPracticeHistory([saved], { course: { assignments: [], timezone: "America/New_York" }, materials: [], pendingIds: new Set() });
-  assert.match(html, /77 most common words/);
+  assert.match(html, /Common QSO words/);
   assert.match(html, /Extra review/);
 });
 

@@ -3,7 +3,8 @@ import type { TrainingAttempt, TrainingResource, TrainingTask } from "./types.ts
 
 export const DAILY_LISTENING_ID = "bob-77-words";
 export const DAILY_LISTENING_ASSIGNMENT = "daily-listening";
-export const DAILY_LISTENING_TITLE = "77 most common words";
+export { QSO_WORDS_TITLE as DAILY_LISTENING_TITLE } from "../../data/cw-listening/words.ts";
+import { QSO_WORDS_TITLE as DAILY_LISTENING_TITLE } from "../../data/cw-listening/words.ts";
 export const DAILY_LISTENING_INSTRUCTIONS = "Optional: listen for at least 10 minutes each day. Listen for the sound of whole words and abbreviations. The original recording uses approximately 40 WPM characters with extra word spacing. The supplied word list is available for reference.";
 export const DAILY_LISTENING_PATH = `/api/cw-training/audio/${DAILY_LISTENING_ID}`;
 export const DAILY_LISTENING_SECONDS = 600;

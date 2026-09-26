@@ -11,6 +11,8 @@
     "types": []
   },
   "include": [
-    "src/lib/cw-training/**/*.ts"
+    "src/lib/cw-training/**/*.ts",
+    "src/lib/cw-listening/**/*.ts",
+    "src/data/cw-listening/**/*.ts"
   ]
 }

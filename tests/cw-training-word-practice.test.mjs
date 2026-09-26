@@ -206,6 +206,27 @@ function harness(t, outputWait = Promise.resolve(), canPlay = () => true) {
   return { outputs, recordings, revoked, player, statuses, positions, seconds: () => seconds };
 }
 
+test("changing native playback rate settles the preceding interval at its original rate", async t => {
+  const h = harness(t);
+  await h.player.play(createWordRound("PARIS PARIS PARIS", settings), 450);
+  const output = h.outputs[0];
+  output.currentTime = 1;
+  output.playbackRate = 2;
+  output.onratechange();
+  near(h.seconds(), 1);
+  output.currentTime = 3;
+  h.player.checkpoint();
+  near(h.seconds(), 2);
+  output.playbackRate = 0.5;
+  output.onratechange();
+  output.currentTime = 3.5;
+  h.player.pause();
+  near(h.seconds(), 3);
+  output.playbackRate = 1;
+  output.onratechange();
+  near(h.seconds(), 3);
+});
+
 test("native recording retains its source on pause and resumes without Web Audio, then releases on disposal", async t => {
   const h = harness(t);
   const round = createWordRound("PARIS THE", settings);
@@ -459,11 +480,11 @@ test("restoring word practice preserves its selection and removes legacy custom 
   };
   const restored = structuredClone(previous);
   restoreWordPractice(restored);
-  assert.equal(restored.title, "77 most common words");
+  assert.equal(restored.title, "Common QSO words");
   assert.equal(restored.text, previous.text);
   assert.deepEqual(restored.settings, previous.settings);
   assert.equal(restored.volume, undefined);
-  assert.deepEqual(restored.used, ["77 most common words: 4 entries, 42 WPM", previous.used[1]]);
+  assert.deepEqual(restored.used, ["Common QSO words: 4 entries, 42 WPM", previous.used[1]]);
   const next = createWordPracticeBlock("2026-09-25T12:00:00Z", "renamed", previous).wordPractice;
   assert.equal(next.title, restored.title);
   assert.equal(next.text, previous.text);
