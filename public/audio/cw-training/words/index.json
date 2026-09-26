@@ -101,8 +101,8 @@
       "url": "/audio/cw-training/words/call.wav"
     },
     "CL": {
-      "inputHash": "ae881d4b388fe340180b2cd2f258c964f05a77c65ab9ae6a022d71060b753d26",
-      "sha256": "1cc42514adfc4158f780d8ede5c6d0d38a447640ad925c16c29a55375d153790",
+      "inputHash": "c9c4e2f9bf5346fa6c22d96587cf23622ad3c994911b956c34a468c99edf20a0",
+      "sha256": "b8fcc983941f68728d10fa189eda854b78cd276b938e2c83959d641019145a47",
       "url": "/audio/cw-training/words/cl.wav"
     },
     "CPY": {
@@ -386,8 +386,8 @@
       "url": "/audio/cw-training/words/sk.wav"
     },
     "TEMP": {
-      "inputHash": "04aeb6642222d986c92d23ad2b12befdd5c0376c007d084e4505deb81255a900",
-      "sha256": "193190b7c74316cf05c09bc54c889cfa259e5d07dcb6354766b9840b2d7decc4",
+      "inputHash": "35617edb5d13e059414ae64173be009874af35ab1fbb9b0c5656c93c481ed429",
+      "sha256": "173e644ba9895145fdde6fccbd0eb660b7ba5f82711ff17d3766bb44f3b1a262",
       "url": "/audio/cw-training/words/temp.wav"
     },
     "TEST": {

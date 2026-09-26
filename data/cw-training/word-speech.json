@@ -110,7 +110,7 @@
     },
     {
       "word": "CL",
-      "pronunciation": "C L",
+      "pronunciation": "closing station",
       "path": "public/audio/cw-training/words/cl.wav"
     },
     {
@@ -395,7 +395,7 @@
     },
     {
       "word": "TEMP",
-      "pronunciation": "T E M P",
+      "pronunciation": "temperature",
       "path": "public/audio/cw-training/words/temp.wav"
     },
     {
