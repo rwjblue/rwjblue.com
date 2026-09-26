@@ -219,8 +219,9 @@ Older word-list titles migrate to the new labels without altering their text.
 Today > **Word recognition** opens optional word practice in Focus. Choose the
 **30 most common English words**, **Common QSO words**, or paste a custom list.
 Both built-in lists now come from the public static catalog; no import is needed. All lists are selected inside the player;
-Today has a single **Practice words** entry. The reference preserves its 75 entries
-and duplicates; it is not a transcript of the original instructor MP3.
+Today has a single **Practice words** entry. The QSO catalog has 70 distinct
+literal tokens, keeping TKS and TNX separate and VVV first. It is not a
+transcript of the original instructor MP3.
 
 Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
 standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
@@ -406,8 +407,9 @@ The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis indicates
 approximately 40-WPM characters with extra word spacing. The `77 all current.txt`
 attachment has 15 rows of five entries, totaling 75 including VVV, preserved as
 received. TKS and TNX remain distinct entries; RR, CL, WX, AR, and BEAM each occur
-twice with identical spelling. The Common QSO words player keeps VVV first and
-shuffles only the remaining entries.
+twice with identical spelling. The public Common QSO words catalog removes
+those five duplicate occurrences, leaving 70 entries. Its player keeps VVV
+first and shuffles only the remaining 69 entries.
 
 Original-recording sessions still save under `daily-listening` / `bob-77-words`.
 They automatically repeat by default, including after ten minutes or a partially

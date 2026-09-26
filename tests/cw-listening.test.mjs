@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { WORD_LISTS, COMMON_QSO_WORDS, QSO_WORDS_TITLE, ENGLISH_WORDS_TITLE } from '../src/data/cw-listening/words.ts';
+import { WORD_LISTS, COMMON_QSO_WORDS, LEGACY_COMMON_QSO_WORDS, QSO_WORDS_TITLE, ENGLISH_WORDS_TITLE } from '../src/data/cw-listening/words.ts';
 import { createWordDraft, restoreWordPractice, recordWordSettings } from '../src/lib/cw-listening/word-practice.ts';
 import { practiceQso, recordQsoSettings } from '../src/lib/cw-listening/qso-practice.ts';
 import { createListeningDraft, restoreListeningDraft, restoreListeningSession, restoreListeningPreferences, listeningPreset, applyListeningPreset, listeningLinkSettings } from '../src/lib/cw-listening/session.ts';
@@ -13,17 +13,19 @@ import { wordPracticeAttempt } from '../src/lib/cw-training/word-practice.ts';
 import { qsoPracticeAttempt } from '../src/lib/cw-training/qso-practice.ts';
 import { dailyListeningSeconds } from '../src/lib/cw-training/daily-listening.ts';
 
-test('public word catalogs preserve exact MP3 timing identities, repeats, and spoken coverage', async () => {
+test('public word catalogs have unique tokens, matching MP3 timing identities, and spoken coverage', async () => {
   const recordings = JSON.parse(await readFile('public/audio/cw-training/recordings/index.json', 'utf8')).recordings;
   const speech = JSON.parse(await readFile('public/audio/cw-training/words/index.json', 'utf8')).clips;
   assert.equal(WORD_LISTS[0].title, '30 most common English words');
   assert.equal(WORD_LISTS[1].title, 'Common QSO words');
   assert.equal(WORD_LISTS[0].text.split(' ').length, 30);
-  assert.equal(COMMON_QSO_WORDS.split(' ').length, 75);
+  assert.equal(COMMON_QSO_WORDS.split(' ').length, 70);
+  assert.equal(COMMON_QSO_WORDS.split(' ')[0], 'VVV');
+  assert.deepEqual(COMMON_QSO_WORDS.split(' '), [...new Set(LEGACY_COMMON_QSO_WORDS.split(' '))]);
   assert.equal(new Set(COMMON_QSO_WORDS.split(' ')).size, 70);
   const counts = new Map();
   for (const word of COMMON_QSO_WORDS.split(' ')) counts.set(word, (counts.get(word) ?? 0) + 1);
-  assert.deepEqual(Object.fromEntries([...counts].filter(([, count]) => count > 1)), { RR: 2, CL: 2, AR: 2, WX: 2, BEAM: 2 });
+  assert.deepEqual(Object.fromEntries([...counts].filter(([, count]) => count > 1)), {});
   assert.equal(counts.get('TKS'), 1);
   assert.equal(counts.get('TNX'), 1);
   for (const list of WORD_LISTS) {
@@ -44,6 +46,29 @@ test('both old reference names and English titles migrate without changing text 
     assert.equal(draft.text, 'RR THE RR QTH');
     assert.equal(draft.settings.wpm, 37);
     assert.deepEqual(draft.used, [`${expected}: 4 entries`]);
+  }
+});
+
+test('saved built-in QSO lists lose exact duplicates without rewriting custom lists or history', () => {
+  for (const title of [QSO_WORDS_TITLE, "Bob's 77-word reference", '77 most common words']) {
+    const word = { ...createWordDraft(), title, text: LEGACY_COMMON_QSO_WORDS.toLowerCase().replaceAll(' ', '\n'),
+      used: [`${title}: 75 entries`], settings: { ...createWordDraft().settings, wpm: 37 } };
+    const saved = { version: 1, id: 'words-visit', startedAt: '2026-09-26T14:00:00Z', activeSeconds: 38.4,
+      draft: { mode: 'words', word }, ended: false, preset: 'words:common-qso' };
+    const restored = restoreListeningSession(JSON.parse(JSON.stringify(saved)));
+    assert.equal(restored.draft.word.text, COMMON_QSO_WORDS);
+    assert.equal(restored.draft.word.settings.wpm, 37);
+    assert.deepEqual(restored.draft.word.used, [`${QSO_WORDS_TITLE}: 75 entries`]);
+    assert.equal(restored.activeSeconds, 38.4);
+    assert.equal(restored.id, saved.id);
+    const preferences = restoreListeningPreferences({ version: 1, mode: 'words', words: word });
+    assert.equal(preferences.words.text, COMMON_QSO_WORDS);
+    assert.equal(createWordDraft(word).text, COMMON_QSO_WORDS);
+  }
+  for (const [title, text] of [['Custom words', LEGACY_COMMON_QSO_WORDS], [QSO_WORDS_TITLE, 'VVV TKS TNX RR RR']]) {
+    const word = { ...createWordDraft(), title, text };
+    restoreWordPractice(word);
+    assert.equal(word.text, text);
   }
 });
 

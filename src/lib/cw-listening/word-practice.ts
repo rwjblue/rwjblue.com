@@ -1,4 +1,4 @@
-import { COMMON_WORDS, ENGLISH_WORDS_TITLE, QSO_WORDS_TITLE } from "../../data/cw-listening/words.ts";
+import { COMMON_WORDS, COMMON_QSO_WORDS, LEGACY_COMMON_QSO_WORDS, ENGLISH_WORDS_TITLE, QSO_WORDS_TITLE } from "../../data/cw-listening/words.ts";
 export { COMMON_WORDS, COMMON_QSO_WORDS, ENGLISH_WORDS_TITLE, QSO_WORDS_TITLE, WORD_LISTS } from "../../data/cw-listening/words.ts";
 /** Compatibility for existing imports; the public label no longer includes a count. */
 export const COMMON_77_WORDS_TITLE = QSO_WORDS_TITLE;
@@ -75,6 +75,10 @@ export function restoreWordPractice(draft: WordPracticeDraft): void {
     "30 common words": ENGLISH_WORDS_TITLE,
   };
   draft.title = titles[draft.title] ?? draft.title;
+  // Update only the old built-in catalog; custom lists may deliberately repeat words.
+  if (draft.title === QSO_WORDS_TITLE && draft.text.trim().toUpperCase().split(/\s+/).join(" ") === LEGACY_COMMON_QSO_WORDS) {
+    draft.text = COMMON_QSO_WORDS;
+  }
   draft.used = draft.used.map(note => {
     const previous = Object.keys(titles).find(title => note.startsWith(`${title}:`));
     return previous ? titles[previous] + note.slice(previous.length) : note;
