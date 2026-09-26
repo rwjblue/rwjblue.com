@@ -23,8 +23,9 @@ in every mode, stopping at the beginning. Optional text follows the current
 word, transmission, or sentence. Each displayed word is a keyboard-accessible
 button that jumps to that occurrence's exact start. Jumps preserve the current
 play/pause state and do not award skipped time; listening again counts normally.
-Word highlighting uses the media clock; updates
-are not live screen-reader announcements. Text starts hidden and its visibility
+The current word uses a background highlight driven by the media clock, rather
+than hover or the last clicked word. Keyboard focus has a separate outline.
+Updates are not live screen-reader announcements. Text starts hidden and its visibility
 is remembered across modes. Words also support shuffle, repeat, spoken answers,
 pitch, and extra word spacing. Custom text stays on the device.
 
