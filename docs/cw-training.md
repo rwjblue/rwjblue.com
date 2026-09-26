@@ -333,9 +333,24 @@ the manifest is intentionally easy to refine.
 ### QSO and story listening
 
 Today also offers **Listen to QSOs and stories**. The library contains four
-original example contacts (a first contact, a ragchew, POTA, and a repeat request)
-and three original stories of increasing length. These are practice examples,
-not recordings or logs of real contacts. `qso-practice.ts` owns the library.
+QSO templates (a first contact, a ragchew, POTA, and a repeat request) and three
+original stories of increasing length. These are practice examples, not
+recordings or logs of real contacts. `qso-practice.ts` owns the library;
+`qso-generator.ts` owns the templates and the callsign, name, location, radio,
+antenna, weather, and report pools.
+
+Opening a QSO template generates two distinct station profiles. City/state and
+radio/power choices stay paired, and every reference to a station throughout the
+exchange uses the same details. The illustrative profiles do not describe the
+real owners of any matching callsigns. **New QSO** prepares another exchange
+with different callsigns in the same scenario. It pauses playback and restarts at
+the beginning. Selecting a template or starting a new listening block also
+generates a new exchange. Stories remain fixed authored text.
+
+The full generated script is saved in the active device draft. Replay, speed
+changes, navigation, and reload retain that script, even after a template update.
+Older drafts without a script generate one when first opened. This is local
+sampling and template substitution; it needs no AI service or network request.
 
 QSOs alternate between 450 Hz and 500 Hz stations. Stories use a single 450 Hz
 narrator. Each transmission or story sentence is a display line, with a
@@ -353,8 +368,8 @@ speech or audio service is required.
 
 Selection and speed are remembered separately from word-practice defaults.
 Done or switching activities saves actual listening seconds under **Other CW
-practice**, with the selections and speeds heard in its note. Pauses and seeks
-earn no credit; these sessions never count as on-air QSOs, required assignment
+practice**, with the selections, speeds, and generated station callsigns heard
+in its note. Pauses and seeks earn no credit; these sessions never count as on-air QSOs, required assignment
 completion, or daily word-recognition practice. Navigation pauses playback;
 reload retains the unfinished block and accumulated time, and prepares the
 selected recording paused at its beginning.

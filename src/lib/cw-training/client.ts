@@ -772,7 +772,7 @@ export async function initTraining() {
 
   function saveListeningDefaults(active: ActiveBlock) {
     if (active.wordPractice) state.wordPracticeDefaults = { ...structuredClone(active.wordPractice), used: [] };
-    if (active.qsoPractice) state.qsoPracticeDefaults = { ...structuredClone(active.qsoPractice), used: [] };
+    if (active.qsoPractice) state.qsoPracticeDefaults = { qsoId: active.qsoPractice.qsoId, wpm: active.qsoPractice.wpm, used: [] };
   }
 
   function unmountListening() {

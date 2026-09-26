@@ -1,4 +1,4 @@
-import { PRACTICE_QSOS, practiceQso, recordQsoSettings, type QsoPracticeDraft } from "./qso-practice.ts";
+import { PRACTICE_QSOS, practiceQso, practiceSelection, newPracticeQso, recordQsoSettings, type QsoPracticeDraft } from "./qso-practice.ts";
 import { createQsoRound, qsoPosition, type QsoRound } from "./qso-round.ts";
 import { createWordPlayer } from "./word-player.ts";
 import type { WordPanel } from "./word-panel.ts";
@@ -16,7 +16,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     </div>
     <p data-qso="description" class="training-small"></p>
     <div data-qso="audio"></div>
-    <div class="training-actions"><button type="button" data-qso="reveal" aria-pressed="false">Show text</button><button type="button" data-qso="done">Done</button></div>
+    <div class="training-actions"><button type="button" data-qso="reveal" aria-pressed="false">Show text</button><button type="button" data-qso="new">New QSO</button><button type="button" data-qso="done">Done</button></div>
     <p data-qso="status" role="status"></p>
     <p data-qso="position" class="training-small"></p>
     <div data-qso="display" class="training-qso-display" hidden>
@@ -24,7 +24,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       <p data-qso="line" class="training-word-answer"></p>
     </div>
     <p class="training-small">Show text to follow the current line and highlighted word. Use the audio controls to pause, seek, or replay. Changing the selection or speed restarts from the beginning.</p>
-    <p class="training-small">Original practice stories and example contacts. Listening time saves when you choose Done or start another activity.</p>`;
+    <p class="training-small">Generated practice contacts and original stories. Choose New QSO for fresh station details; replay keeps the same exchange. Listening time saves when you choose Done or start another activity.</p>`;
   const $ = <T extends HTMLElement = HTMLElement>(name: string) => host.querySelector<T>(`[data-qso="${name}"]`)!;
   const selection = $<HTMLSelectElement>("selection");
   for (const [kind, label] of [["qso", "Two-station QSOs"], ["story", "Short stories"]]) {
@@ -47,7 +47,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     if (!round) return;
     const position = qsoPosition(round, at);
     const line = round.lines[position.line];
-    const story = practiceQso(draft.qsoId).kind === "story";
+    const story = practiceSelection(draft.qsoId).kind === "story";
     $("position").textContent = `${story ? "Line" : "Transmission"} ${position.line + 1} of ${round.lines.length}${at >= round.duration ? " · Complete" : at >= line.end ? " · Pause" : ""}`;
     $("display").hidden = !revealed;
     if (displayedLine !== position.line) {
@@ -81,7 +81,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     if (!("mediaSession" in navigator)) return;
     try {
       navigator.mediaSession.playbackState = playing ? "playing" : "paused";
-      if (typeof MediaMetadata !== "undefined") navigator.mediaSession.metadata = new MediaMetadata({ title: practiceQso(draft.qsoId).title, artist: "CW QSO and story listening" });
+      if (typeof MediaMetadata !== "undefined") navigator.mediaSession.metadata = new MediaMetadata({ title: practiceSelection(draft.qsoId).title, artist: "CW QSO and story listening" });
     } catch { /* Optional lock-screen metadata. */ }
   }
   const player = createWordPlayer({
@@ -108,7 +108,8 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     $("display").hidden = true;
     $("position").textContent = "";
     try {
-      const item = practiceQso(draft.qsoId);
+      const item = practiceQso(draft);
+      $("new").hidden = item.kind === "story";
       round = createQsoRound(item, draft.wpm);
       player.prepare(round, 450);
       const duration = Math.floor(round.duration);
@@ -119,6 +120,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       mediaInfo();
       mediaPosition();
       $("status").textContent = "Ready. Press Play to listen.";
+      options.changed();
     } catch (error) {
       $("status").textContent = error instanceof Error ? error.message : "Unable to prepare audio.";
     }
@@ -126,6 +128,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
   selection.addEventListener("change", () => {
     player.pause();
     draft.qsoId = selection.value;
+    delete draft.generated;
     prepare();
     options.changed();
   });
@@ -135,6 +138,11 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     draft.wpm = Number(speed.value);
     prepare();
     options.changed();
+  });
+  $("new").addEventListener("click", () => {
+    player.pause();
+    newPracticeQso(draft);
+    prepare();
   });
   $("reveal").addEventListener("click", () => {
     revealed = !revealed;
