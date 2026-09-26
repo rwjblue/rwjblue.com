@@ -22,6 +22,9 @@
 .cw-listening .listening-line, .cw-listening .listening-word { font-size: clamp(1.25rem, 3vw, 1.6rem); line-height: 1.7; font-weight: 650; }
 .cw-listening .listening-line { margin: 10px 0 0; }
 .cw-listening .listening-word, .cw-listening [aria-current="true"] { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+.cw-listening .listening-seek-word { font: inherit; min-width: 44px; max-width: 100%; min-height: 44px; padding: 2px 4px; color: inherit; background: transparent; border-color: transparent; vertical-align: baseline; }
+.cw-listening .listening-seek-word:hover { color: var(--green); background: var(--panel); border-color: var(--line-strong); }
+.cw-listening .listening-seek-word[aria-current="true"] { color: var(--blue); }
 .cw-listening .listening-options { margin-top: 18px; gap: 8px 18px; }
 .cw-listening .listening-check { display: flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 400; }
 .cw-listening input[type="checkbox"] { width: 18px; height: 18px; margin: 0; accent-color: var(--green); }

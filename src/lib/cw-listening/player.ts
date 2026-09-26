@@ -46,7 +46,14 @@ export function mountListeningPlayer(host: HTMLElement, draft: ListeningDraft, o
   };
   const panel = draft.mode === "words" ? mountWordPanel(body, draft.word, callbacks)
     : mountQsoPanel(body, draft.qso, { ...callbacks, mode: draft.mode });
-  body.querySelector("[data-transport-actions]")!.append(counter);
+  const actions = body.querySelector("[data-transport-actions]")!;
+  const rewind = document.createElement("button");
+  rewind.type = "button";
+  rewind.textContent = "Back 10 sec";
+  rewind.setAttribute("aria-label", "Rewind 10 seconds");
+  rewind.addEventListener("click", () => { if (!disposed) panel.seekBy(-10); });
+  actions.prepend(rewind);
+  actions.append(counter);
   for (const [mode, label] of [["words", "Words"], ["qsos", "QSOs"], ["stories", "Stories"]] as const) {
     const button = document.createElement("button");
     button.type = "button";
@@ -60,6 +67,6 @@ export function mountListeningPlayer(host: HTMLElement, draft: ListeningDraft, o
     });
     tabs.append(button);
   }
-  return { play: () => panel.play(), pause: () => panel.pause(), checkpoint: () => panel.checkpoint(),
+  return { play: () => panel.play(), pause: () => panel.pause(), seekBy: seconds => panel.seekBy(seconds), checkpoint: () => panel.checkpoint(),
     dispose() { if (disposed) return; panel.dispose(); disposed = true; host.replaceChildren(); } };
 }

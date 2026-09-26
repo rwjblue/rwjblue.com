@@ -44,6 +44,17 @@ test("display follows words and transmissions on forward and backward seeks with
   assert.deepEqual(qsoPosition(round, .01), { line: 0, word: 0 });
 });
 
+test("paused word jumps keep their highlight when the native clock rounds to microseconds", () => {
+  for (const selection of PRACTICE_QSOS) {
+    const round = createQsoRound(practiceQso({ qsoId: selection.id }, () => 0.5), 20);
+    for (const [index, start] of round.starts.entries()) {
+      const nativeTime = Math.floor(start * 1_000_000) / 1_000_000;
+      const line = round.lines.findIndex(line => index >= line.firstWord && index < line.firstWord + line.wordCount);
+      assert.deepEqual(qsoPosition(round, nativeTime), { line, word: index });
+    }
+  }
+});
+
 test("the rendered signal uses 450 and 500 Hz with silent handoffs and smooth envelopes", () => {
   const item = { id: "test", title: "Test", stations: ["A", "B"], lines: ["T", "T"] };
   const round = createQsoRound(item, 20);

@@ -557,6 +557,89 @@ test("native seeks update the word position without awarding skipped or paused t
   near(h.seconds(), 2);
 });
 
+test("rewind and word jumps preserve playback and count heard audio instead of skipped time", async t => {
+  const h = harness(t);
+  const round = createWordRound("PARIS ".repeat(20), settings);
+  await h.player.play(round, 450);
+  const output = h.outputs[0];
+  const source = output.src;
+  output.currentTime = 14.4;
+  h.player.seekBy(-10);
+  near(output.currentTime, 4.4);
+  near(h.seconds(), 14.4);
+  assert.equal(output.paused, false);
+  assert.equal(output.src, source);
+  assert.equal(output.playCalls, 1);
+  output.ontimeupdate();
+  near(h.seconds(), 14.4);
+
+  output.currentTime = 4.9;
+  h.player.seekWord(8);
+  near(output.currentTime, round.starts[8]);
+  near(h.positions.at(-1), round.starts[8]);
+  near(h.seconds(), 14.9);
+  output.onseeking();
+  output.onseeked();
+  output.ontimeupdate();
+  near(h.seconds(), 14.9);
+
+  output.currentTime += 0.5;
+  h.player.pause();
+  near(h.seconds(), 15.4);
+  h.player.seekWord(3);
+  near(output.currentTime, round.starts[3]);
+  assert.equal(output.paused, true);
+  near(h.seconds(), 15.4);
+  await h.player.play(round, 450);
+  output.currentTime += 0.6;
+  h.player.pause();
+  near(h.seconds(), 16);
+});
+
+test("paused MP3 word jumps survive metadata loading, clamp to the recording, and ignore invalid targets", t => {
+  const h = harness(t);
+  h.player.seekBy(-10); // No recording yet.
+  const round = { ...createWordRound("THE THE <AR> THE", settings), recordingUrl: "/practice.mp3" };
+  h.player.prepare(round, 450);
+  const output = h.outputs[0];
+  h.player.seekWord(3); // The selected occurrence, not the first identical word.
+  near(output.currentTime, round.starts[3]);
+  output.onloadedmetadata();
+  near(output.currentTime, round.starts[3]);
+  assert.equal(output.playCalls, 0);
+  assert.equal(output.paused, true);
+  assert.equal(h.seconds(), 0);
+  assert.equal(h.recordings.size, 0);
+  h.player.seekBy(-1000);
+  near(output.currentTime, 0);
+  h.player.seekBy(1000);
+  near(output.currentTime, round.duration);
+  for (const invalid of [NaN, Infinity, -Infinity]) h.player.seek(invalid);
+  for (const invalid of [-1, 99, 1.5, NaN]) h.player.seekWord(invalid);
+  near(output.currentTime, round.duration);
+  assert.equal(h.seconds(), 0);
+  h.player.clearRound();
+  h.player.seekWord(0);
+  h.player.seekBy(-10);
+  assert.equal(output.src, undefined);
+});
+
+test("word jumps follow the updated timeline after a live speed change", async t => {
+  const h = harness(t);
+  const original = createWordRound("PARIS THE THE <AR> OF", settings);
+  await h.player.play(original, 450);
+  const output = h.outputs[0];
+  output.currentTime = 0.5;
+  const updated = h.player.setSpeed(40);
+  await Promise.resolve();
+  assert.notEqual(updated.starts[3], original.starts[3]);
+  h.player.seekWord(3);
+  near(output.currentTime, updated.starts[3]);
+  near(h.positions.at(-1), updated.starts[3]);
+  near(h.seconds(), 0.5);
+  assert.equal(output.paused, false);
+});
+
 test("native play observes the same eligibility check as lock-screen playback", async t => {
   let allowed = false;
   const h = harness(t, Promise.resolve(), () => allowed);

@@ -33,6 +33,18 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElem
     callbacks.progress(delta, at);
     return at;
   }
+  function seek(seconds: number) {
+    if (disposed || !round || !output || !Number.isFinite(seconds)) return;
+    checkpoint();
+    const at = Math.min(round.duration, Math.max(0, seconds));
+    // Settle what was heard before jumping, then establish the new baseline
+    // before native seeking/timeupdate events can fire.
+    accounted = at;
+    if (pendingSeek !== undefined) pendingSeek = at;
+    output.currentTime = at;
+    callbacks.progress(0, at);
+    callbacks.status(playing ? "playing" : "paused");
+  }
   function pause(status: "paused" | "interrupted" = "paused") {
     generation++;
     checkpoint();
@@ -135,6 +147,12 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElem
     checkpoint,
     pause,
     prepare,
+    seek,
+    seekBy(seconds: number) { seek(position() + seconds); },
+    seekWord(index: number) {
+      const at = round?.starts[index];
+      if (at !== undefined) seek(at);
+    },
     get playbackRate() { return output?.playbackRate || 1; },
     clearRound() {
       generation++;

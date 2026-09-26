@@ -18,8 +18,12 @@ The private trainer mounts the same player in Focus and supplies history trackin
   `src/data/cw-listening/stories.ts`, with one 450 Hz narrator.
 
 Word speed is 10-60 WPM; QSO/story speed is 10-40 WPM. Native audio controls
-provide play/pause, seek, volume, and replay. Optional text follows the current
-word, transmission, or sentence. Word highlighting uses the media clock; updates
+provide play/pause, seek, volume, and replay. A **Back 10 sec** button rewinds
+in every mode, stopping at the beginning. Optional text follows the current
+word, transmission, or sentence. Each displayed word is a keyboard-accessible
+button that jumps to that occurrence's exact start. Jumps preserve the current
+play/pause state and do not award skipped time; listening again counts normally.
+Word highlighting uses the media clock; updates
 are not live screen-reader announcements. Text starts hidden and its visibility
 is remembered across modes. Words also support shuffle, repeat, spoken answers,
 pitch, and extra word spacing. Custom text stays on the device.
@@ -105,5 +109,6 @@ time conversion, and the public dependency boundary. Existing word/QSO tests
 exercise the shared audio implementation through compatible import paths.
 Run `npm test`, `npm run check:training`, `mise run check`, and `mise run build`.
 Browser QA should cover signed-out playback and private tracking separately,
-native seeking, speed edits, repeated playback, mode changes, reload, both word
-audio paths, and mobile/desktop light/dark layouts.
+native seeking, rewind and word jumps (playing and paused), speed edits, repeated
+playback, mode changes, reload, both word audio paths, and mobile/desktop
+light/dark layouts.

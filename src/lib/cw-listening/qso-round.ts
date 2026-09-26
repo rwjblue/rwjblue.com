@@ -38,7 +38,8 @@ export function createQsoRound(qso: PracticeQso, wpm: number): QsoRound {
 
 /** The media clock drives both line changes and word highlights, including seeks. */
 export function qsoPosition(round: QsoRound, seconds: number): { line: number; word: number } {
-  const at = Math.max(0, seconds);
+  // Native currentTime can round a seek down by a fraction of a microsecond.
+  const at = Math.max(0, seconds) + 0.000001;
   let line = round.lines.filter(line => line.start <= at).length - 1;
   if (line < 0) line = 0;
   const word = round.starts.filter(start => start <= at).length - 1;

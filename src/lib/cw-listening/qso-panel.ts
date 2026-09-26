@@ -27,7 +27,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       <p data-qso="station" class="eyebrow"></p>
       <p data-qso="line" class="listening-line"></p>
     </div>
-    <p class="listening-small">Show text to follow the current line and highlighted word. Use the audio controls to pause, seek, or replay. Changing the selection or speed restarts from the beginning.</p>
+    <p class="listening-small">Show text to follow the current line and highlighted word. Tap any word to jump to its beginning. Use the audio controls to pause, seek, or replay. Changing the selection or speed restarts from the beginning.</p>
     <p class="listening-small" data-qso="help"></p>`;
   const $ = <T extends HTMLElement = HTMLElement>(name: string) => host.querySelector<T>(`[data-qso="${name}"]`)!;
   const selection = $<HTMLSelectElement>("selection");
@@ -49,7 +49,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
   let disposed = false;
   let displayedLine = -1;
   let displayedWord = -1;
-  let wordSpans: HTMLElement[] = [];
+  let wordButtons: HTMLButtonElement[] = [];
   function showPosition() {
     $("reveal").textContent = revealed ? "Hide text" : "Show text";
     $("reveal").setAttribute("aria-pressed", String(revealed));
@@ -64,18 +64,22 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       displayedWord = -1;
       $("station").textContent = `${line.station} · ${line.pitch} Hz`;
       $("line").replaceChildren();
-      wordSpans = round.words.slice(line.firstWord, line.firstWord + line.wordCount).map((word, index) => {
-        const span = document.createElement("span");
-        span.textContent = word;
+      wordButtons = round.words.slice(line.firstWord, line.firstWord + line.wordCount).map((word, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "listening-seek-word";
+        button.textContent = word;
+        button.setAttribute("aria-label", `Jump to start of ${word}`);
+        button.addEventListener("click", () => player.seekWord(line.firstWord + index));
         if (index) $("line").append(" ");
-        $("line").append(span);
-        return span;
+        $("line").append(button);
+        return button;
       });
     }
     const word = position.word < 0 ? -1 : position.word - line.firstWord;
     if (displayedWord !== word) {
-      wordSpans[displayedWord]?.removeAttribute("aria-current");
-      wordSpans[word]?.setAttribute("aria-current", "true");
+      wordButtons[displayedWord]?.removeAttribute("aria-current");
+      wordButtons[word]?.setAttribute("aria-current", "true");
       displayedWord = word;
     }
   }
@@ -167,6 +171,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
   prepare();
   return {
     pause: () => player.pause(), checkpoint: () => { player.checkpoint(); },
+    seekBy: seconds => player.seekBy(seconds),
     play: () => { if (round && !disposed && options.canPlay()) void player.play(round, 450).catch(() => {}); },
     dispose() { player.pause(); disposed = true; player.dispose(); round = undefined; mediaPosition(); host.replaceChildren(); },
   };

@@ -6,6 +6,7 @@ import { createWordPlayer } from "./word-player.ts";
 export interface WordPanel {
   pause(): void;
   play(): void;
+  seekBy(seconds: number): void;
   checkpoint(): void;
   dispose(): void;
 }
@@ -30,7 +31,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     <div class="listening-actions" data-transport-actions><button type="button" data-word="reveal" aria-pressed="false">Show text</button><button type="button" data-word="done"></button></div>
     <p data-word="status" class="listening-small" role="status">Ready. Press Play to listen.</p>
     <button type="button" data-word="retry" hidden>Retry audio</button>
-    <p data-word="answer" class="listening-word listening-display" hidden></p>
+    <p data-word="answer" class="listening-word listening-display" hidden><button type="button" data-word="answer-word" class="listening-seek-word"></button></p>
     <div class="listening-actions listening-options">
       <label class="listening-check"><input data-word="shuffle" type="checkbox" /> Shuffle each round</label>
       <label class="listening-check"><input data-word="repeat" type="checkbox" /> Repeat rounds</label>
@@ -62,6 +63,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   let speedChange = 0;
   let continueRound = false;
   let position = 0;
+  let displayedWord = 0;
   let disposed = false;
   let busy = false;
   let playing = false;
@@ -81,10 +83,14 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   function showPosition() {
     $("reveal").textContent = revealed ? "Hide text" : "Show text";
     $("reveal").setAttribute("aria-pressed", String(revealed));
-    const index = round ? Math.max(0, round.starts.filter(start => start <= position).length - 1) : 0;
+    // Match the word boundary even if native currentTime rounds the seek down.
+    const index = round ? Math.max(0, round.starts.filter(start => start <= position + 0.000001).length - 1) : 0;
+    displayedWord = index;
     $("position").textContent = round ? `Word ${index + 1} of ${round.words.length}` : "";
     $("answer").hidden = !revealed || !round;
-    $("answer").textContent = round?.words[index] ?? "";
+    const word = round?.words[index] ?? "";
+    $("answer-word").textContent = word;
+    $("answer-word").setAttribute("aria-label", `Jump to start of ${word}`);
   }
   const player = createWordPlayer({
     canPlay: () => !disposed && !preparing && options.canPlay(),
@@ -148,7 +154,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     $("status").textContent = "Ready for a new round. Press Play.";
   }
   function controls() {
-    $("help").textContent = "Use the audio controls to play, pause, seek, and adjust volume. Change speed while listening; the current item finishes at its original speed. Changing the list, pitch, spacing, or spoken answers starts a fresh round. Show or hide words at any time.";
+    $("help").textContent = "Use the audio controls to play, pause, seek, and adjust volume. Tap a displayed word to jump to its beginning. Change speed while listening; the current item finishes at its original speed. Changing the list, pitch, spacing, or spoken answers starts a fresh round. Show or hide words at any time.";
     if (draft.settings.spokenAnswers) $("help").textContent += " Each word plays three times with normal Morse word spacing, then its spoken answer. The extra pause is between items, never between repeats.";
   }
   async function prepare() {
@@ -275,8 +281,9 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     showPosition();
   });
   $("retry").addEventListener("click", () => { void prepare(); });
+  $("answer-word").addEventListener("click", () => player.seekWord(displayedWord));
   $("done").addEventListener("click", options.done);
   controls();
   void prepare();
-  return { play: () => void play(), pause, checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; preparation++; pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
+  return { play: () => void play(), pause, seekBy: seconds => player.seekBy(seconds), checkpoint: () => { player.checkpoint(); }, dispose() { disposed = true; preparation++; pause(); player.dispose(); round = undefined; mediaInfo(); host.replaceChildren(); } };
 }
