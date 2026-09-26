@@ -330,6 +330,35 @@ resampled to 22050 Hz mono 16-bit PCM. The browser decodes this format directly,
 without an AudioContext. Review pronunciation by listening to the generated WAVs;
 the manifest is intentionally easy to refine.
 
+### QSO and story listening
+
+Today also offers **Listen to QSOs and stories**. The library contains four
+original example contacts (a first contact, a ragchew, POTA, and a repeat request)
+and three original stories of increasing length. These are practice examples,
+not recordings or logs of real contacts. `qso-practice.ts` owns the library.
+
+QSOs alternate between 450 Hz and 500 Hz stations. Stories use a single 450 Hz
+narrator. Each transmission or story sentence is a display line, with a
+two-second pause between lines. **Show text** reveals the current line and
+underlines the word being sent; gaps have no highlighted word. The display
+follows the native media clock when playing, pausing, seeking, or replaying.
+Prosigns such as `<SK>` remain joined Morse symbols.
+
+The native player supports play/pause, seeking, volume, and replay after the
+end. Speed is adjustable from 10 to 40 WPM; the duration is shown for the selected
+speed. Changing speed or selection pauses playback and prepares a fresh recording
+at the beginning. The shared word renderer generates a temporary local WAV with
+per-station pitch and the same 5 ms envelopes as word practice. No external
+speech or audio service is required.
+
+Selection and speed are remembered separately from word-practice defaults.
+Done or switching activities saves actual listening seconds under **Other CW
+practice**, with the selections and speeds heard in its note. Pauses and seeks
+earn no credit; these sessions never count as on-air QSOs, required assignment
+completion, or daily word-recognition practice. Navigation pauses playback;
+reload retains the unfinished block and accumulated time, and prepares the
+selected recording paused at its beginning.
+
 ### Optional daily word listening
 
 The Word recognition card has one ten-minute suggestion for all word lists,

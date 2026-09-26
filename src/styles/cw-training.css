@@ -797,3 +797,18 @@
 
 .training-word-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; }
 .training-word-answer { font-size: 2rem; font-weight: 700; overflow-wrap: anywhere; }
+
+.training-qso-display {
+  padding: 1rem;
+  margin-block: 1rem;
+  border-inline-start: 4px solid var(--green);
+  background: var(--panel);
+}
+.training-qso-display .training-word-answer { font-size: clamp(1.15rem, 3vw, 1.65rem); line-height: 1.7; margin-bottom: 0; }
+.training-qso-display [aria-current="true"] {
+  color: var(--status-info-ink);
+  background: var(--status-info-bg);
+  border-radius: 3px;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

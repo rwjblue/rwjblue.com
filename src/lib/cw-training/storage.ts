@@ -19,6 +19,7 @@ export interface AudioRecordingUsage {
 }
 
 export interface ActiveBlock {
+  qsoPractice?: import("./qso-practice").QsoPracticeDraft;
   wordPractice?: import("./word-practice").WordPracticeDraft;
   id: string;
   assignmentId: string;
@@ -49,6 +50,7 @@ export interface ActiveBlock {
 }
 
 export interface TrainingDeviceState {
+  qsoPracticeDefaults?: import("./qso-practice").QsoPracticeDraft;
   wordPracticeDefaults?: import("./word-practice").WordPracticeDraft;
   /** Editable report and the exact copy most recently opened in Google Forms. */
   reportDraft?: TrainingReport;

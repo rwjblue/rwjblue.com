@@ -14,6 +14,8 @@ export interface WordRound {
   speech: { at: number; wordIndex: number; samples: Float32Array }[];
   speechClips?: WordSpeechClips;
   recordingUrl?: string;
+  /** Optional per-timing pitches for conversations with more than one station. */
+  pitches?: number[];
 }
 
 export function createWordRound(text: string, settings: WordSettings, random = Math.random, speechClips?: WordSpeechClips): WordRound {
@@ -78,16 +80,17 @@ export function retimeWordRound(round: WordRound, wpm: number, firstWord: number
 export function renderWordSamples(round: WordRound, pitch: number, sampleRate = WORD_SAMPLE_RATE): Float32Array {
   const samples = new Float32Array(Math.ceil(round.duration * sampleRate));
   let elapsed = 0;
-  for (const ms of round.timings) {
+  for (const [index, ms] of round.timings.entries()) {
     const start = Math.round(elapsed * sampleRate);
     elapsed += Math.abs(ms) / 1000;
     const end = Math.min(samples.length, Math.round(elapsed * sampleRate));
     if (ms <= 0) continue;
+    const tone = round.pitches?.[index] ?? pitch;
     const ramp = Math.min(Math.round(sampleRate * 0.005), Math.floor((end - start) / 2));
     for (let i = start; i < end; i++) {
       const edge = Math.min(1, (i - start) / ramp, (end - 1 - i) / ramp);
       const envelope = (1 - Math.cos(Math.PI * edge)) / 2;
-      samples[i] = 0.65 * envelope * Math.sin(2 * Math.PI * pitch * (i - start) / sampleRate);
+      samples[i] = 0.65 * envelope * Math.sin(2 * Math.PI * tone * (i - start) / sampleRate);
     }
   }
   for (const item of round.speech) {

@@ -2,12 +2,14 @@ import { createWordRound, renderWordWav, retimeWordRound, type WordRound, type W
 
 export interface WordPlayerCallbacks {
   canPlay?: () => boolean;
+  /** Faster text highlighting can opt in without changing audio timing. */
+  positionIntervalMs?: number;
   progress: (seconds: number, position: number) => void;
   status: (status: "playing" | "paused" | "interrupted" | "ended") => void;
 }
 
 /** Native playback of locally generated audio, independent of an AudioContext. */
-export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElement) {
+export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElement, label = "Word practice audio") {
   let output: HTMLAudioElement | undefined;
   let url: string | undefined;
   let ownsUrl = false;
@@ -43,14 +45,14 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElem
     if (disposed || !output || output.paused || playing) return;
     accounted = position();
     playing = true;
-    ticker = setInterval(checkpoint, 250);
+    ticker = setInterval(checkpoint, callbacks.positionIntervalMs ?? 250);
     callbacks.status("playing");
   }
   function ensureOutput() {
     if (output) return;
     output = document.createElement("audio");
     output.controls = true;
-    output.setAttribute("aria-label", "Word practice audio");
+    output.setAttribute("aria-label", label);
     output.preload = "auto";
     output.setAttribute("playsinline", "");
     output.onplay = () => {

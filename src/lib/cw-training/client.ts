@@ -1,3 +1,4 @@
+import { createQsoPracticeBlock, qsoPracticeAttempt, qsoPracticeNote } from "./qso-practice";
 import { COMMON_77_WORDS_TITLE, createWordPracticeBlock, wordPracticeAttempt, wordPracticeNote } from "./word-practice";
 import type { WordPanel } from "./word-panel";
 import { dateInTimezone, getTrainingPlan, taskProgress } from "./plan";
@@ -142,9 +143,9 @@ export async function initTraining() {
   let importedFilename: string | undefined;
   let lastSaved = 0;
   let disposed = false;
-  let wordPanel: WordPanel | undefined;
-  let wordBlock: string | undefined;
-  let wordGeneration = 0;
+  let listeningPanel: WordPanel | undefined;
+  let listeningBlock: string | undefined;
+  let listeningGeneration = 0;
   let sendingPanel: SendingPanel | undefined;
   let sendingBlock: string | undefined;
   let sendingGeneration = 0;
@@ -503,7 +504,7 @@ export async function initTraining() {
     pendingActivity = undefined;
     const leavingPractice = view === "focus" && next !== "focus" && !!state.active;
     if (leavingPractice) {
-      wordPanel?.pause();
+      listeningPanel?.pause();
       suspendSending("navigation");
       // Settle the last observed audio/timer interval before hiding practice.
       // A queued end-of-pass event must not restart audio after navigation.
@@ -520,8 +521,8 @@ export async function initTraining() {
     applyView(next);
     // Current-block cards must reflect the latest engine time and terminal state.
     if (state.snapshot) render();
-    if (leavingPractice) notice(state.active?.wordPractice
-      ? "Word practice is paused. Return to resume, or start another activity to save your listening time."
+    if (leavingPractice) notice(hasListeningPractice(state.active)
+      ? "Listening practice is paused. Return to resume, or start another activity to save your listening time."
       : state.active?.runner
       ? "Your run is saved on this device. Its practiced time counts toward the assignment; view results and save it to history."
       : "Your block is saved and paused. Choose Return to block when ready.");
@@ -661,6 +662,7 @@ export async function initTraining() {
     $("training-daily-listening").hidden = false;
     const wordActive = !!state.active?.wordPractice;
     $("training-daily-listening").innerHTML = `<div class="training-card"><p class="eyebrow">Optional · 10 minutes daily</p><h3>Word recognition</h3><p>Practice the 30 common words${daily?.text ? `, the ${COMMON_77_WORDS_TITLE},` : ""} or your own list. Adjust speed while listening, shuffle the words, and show or hide each word.</p><p data-daily-listening-progress></p><button type="button" data-action="word-practice">${wordActive ? "Return to word practice" : "Practice words"}</button></div>`;
+    $("training-daily-listening").innerHTML += `<div class="training-card"><p class="eyebrow">Optional listening</p><h3>QSOs and short stories</h3><p>Hear full contacts with distinct station tones, or choose a short, medium, or longer story. Show each line and follow the highlighted word.</p><button type="button" data-action="qso-practice">${state.active?.qsoPractice ? "Return to QSO and story listening" : "Listen to QSOs and stories"}</button></div>`;
     updateDailyListeningProgress();
     $("training-extra").innerHTML = current.extras.slice(0, 3).map((item) => taskRow(item)).join("");
     const missed = current.missed.filter(
@@ -766,29 +768,38 @@ export async function initTraining() {
     }
   }
 
-  function unmountWords() {
-    wordGeneration++;
-    const previous = wordPanel;
-    wordPanel = undefined;
-    wordBlock = undefined;
+  function hasListeningPractice(active?: ActiveBlock): boolean { return !!(active?.wordPractice || active?.qsoPractice); }
+
+  function saveListeningDefaults(active: ActiveBlock) {
+    if (active.wordPractice) state.wordPracticeDefaults = { ...structuredClone(active.wordPractice), used: [] };
+    if (active.qsoPractice) state.qsoPracticeDefaults = { ...structuredClone(active.qsoPractice), used: [] };
+  }
+
+  function unmountListening() {
+    listeningGeneration++;
+    const previous = listeningPanel;
+    listeningPanel = undefined;
+    listeningBlock = undefined;
     previous?.dispose();
   }
-  function renderWords(active: ActiveBlock) {
-    if (!active.wordPractice || wordBlock === active.id) return;
-    unmountWords();
-    wordBlock = active.id;
-    const generation = wordGeneration;
-    const host = $("training-word-practice");
-    host.textContent = "Loading word controls...";
-    void import("./word-panel").then(({ mountWordPanel }) => {
-      if (generation !== wordGeneration || state.active?.id !== active.id || disposed) return;
-      wordPanel = mountWordPanel(host, active.wordPractice!, {
-        bobText: snapshot().dailyListening?.text,
+  function renderListening(active: ActiveBlock) {
+    if (!hasListeningPractice(active) || listeningBlock === active.id) return;
+    unmountListening();
+    listeningBlock = active.id;
+    const generation = listeningGeneration;
+    const host = $("training-reference-practice");
+    host.textContent = "Loading listening controls...";
+    const mount = active.qsoPractice
+      ? import("./qso-panel").then(({ mountQsoPanel }) => (options: Parameters<typeof mountQsoPanel>[2]) => mountQsoPanel(host, active.qsoPractice!, options))
+      : import("./word-panel").then(({ mountWordPanel }) => (options: Parameters<typeof mountWordPanel>[2]) => mountWordPanel(host, active.wordPractice!, { ...options, bobText: snapshot().dailyListening?.text }));
+    void mount.then(mountPanel => {
+      if (generation !== listeningGeneration || state.active?.id !== active.id || disposed) return;
+      listeningPanel = mountPanel({
         canPlay: () => allowActiveDate(),
         done: () => finish(),
         changed: () => {
           if (state.active?.id !== active.id) return;
-          state.wordPracticeDefaults = { ...structuredClone(active.wordPractice!), used: [] };
+          saveListeningDefaults(active);
           void persist();
         },
         progress: seconds => {
@@ -799,18 +810,18 @@ export async function initTraining() {
         },
       });
     }).catch(() => {
-      if (generation !== wordGeneration) return;
-      wordBlock = undefined;
-      host.textContent = "Word controls could not load. Reload this page to try again; your block is saved.";
+      if (generation !== listeningGeneration) return;
+      listeningBlock = undefined;
+      host.textContent = "Listening controls could not load. Reload this page to try again; your block is saved.";
     });
   }
   function renderActive() {
     const active = state.active;
-    if (wordBlock && (wordBlock !== active?.id || !active?.wordPractice)) unmountWords();
-    $("training-word-practice").hidden = !active?.wordPractice;
-    $("training-block-actions").hidden = !!active?.wordPractice;
-    $("training-abort-help").hidden = !!active?.wordPractice;
-    if (active?.wordPractice) renderWords(active);
+    if (listeningBlock && (listeningBlock !== active?.id || !hasListeningPractice(active))) unmountListening();
+    $("training-reference-practice").hidden = !hasListeningPractice(active);
+    $("training-block-actions").hidden = hasListeningPractice(active);
+    $("training-abort-help").hidden = hasListeningPractice(active);
+    if (active && hasListeningPractice(active)) renderListening(active);
     if (sendingBlock && (sendingBlock !== active?.id || active?.task.kind !== "sending")) unmountSending();
     $("training-sending-actions").hidden = active?.task.kind !== "sending";
     $("training-sending-open").hidden = active?.task.kind !== "sending" || !!sendingPanel;
@@ -861,8 +872,8 @@ export async function initTraining() {
       $("training-focus-objective").textContent = "Listen for 10 minutes daily. These minutes count toward practice time; this exercise has no required passes or assignment completion.";
       $("training-focus-target").textContent = "10 minutes suggested · Repeat as long as useful";
     }
-    if (active.wordPractice) {
-      $("training-focus-kind").textContent = "Optional word recognition";
+    if (hasListeningPractice(active)) {
+      $("training-focus-kind").textContent = active.qsoPractice ? "Optional QSO and story listening" : "Optional word recognition";
       $("training-focus-objective").textContent = "Actual listening time counts toward practice without completing course assignments.";
       $("training-focus-target").textContent = "At your own pace";
     }
@@ -883,7 +894,7 @@ export async function initTraining() {
       !!active.resource?.url &&
       !active.resource.unresolved;
     $("training-audio-box").hidden = !isAudio;
-    $("training-timer-box").hidden = isAudio || !!active.runner || !!active.wordPractice || active.task.kind === "icr";
+    $("training-timer-box").hidden = isAudio || !!active.runner || hasListeningPractice(active) || active.task.kind === "icr";
     $("training-timer-help").textContent = "Pause when you stop practicing. If you switch tabs or apps, confirm those minutes when finishing.";
     $("training-runner-embedded").hidden = !active.runner;
     $("training-runner-external-help").hidden = !!active.runner;
@@ -1169,7 +1180,7 @@ export async function initTraining() {
       dateInTimezone(state.active.startedAt, snapshot().course.timezone) === todayTime.date &&
       !todayTime.savedIds.has(state.active.id);
     $("training-time-breakdown").textContent = currentPractice
-      ? `${time(totals.savedSeconds)} saved + ${time(totals.currentSeconds)} current block (on this device). ${state.active?.wordPractice ? "Choose Done or start another activity to save to history." : "Finish and save to add it to history."}`
+      ? `${time(totals.savedSeconds)} saved + ${time(totals.currentSeconds)} current block (on this device). ${hasListeningPractice(state.active) ? "Choose Done or start another activity to save to history." : "Finish and save to add it to history."}`
       : `${time(totals.savedSeconds)} saved practice today.${state.active?.context === "class" ? " Class time is separate." : ""}`;
     const progress = $<HTMLProgressElement>("training-progress");
     progress.value = Math.min(totals.totalSeconds / 60, progress.max);
@@ -1213,7 +1224,7 @@ export async function initTraining() {
     const now = performance.now();
     const elapsed = (now - lastClock) / 1000;
     lastClock = now;
-    if (!state.active || state.active.runner || state.active.wordPractice) return;
+    if (!state.active || state.active.runner || hasListeningPractice(state.active)) return;
     const delta = timedPracticeDelta(elapsed, {
       running, visible: !document.hidden, kind: state.active.task.kind,
       recalling, audioPlaying,
@@ -1241,7 +1252,7 @@ export async function initTraining() {
     updateClock();
   }
   function pause() {
-    wordPanel?.pause();
+    listeningPanel?.pause();
     stopRunner();
     stopTimer();
     audio.pause();
@@ -1266,8 +1277,8 @@ export async function initTraining() {
   }
   function switchActivity(title: string, start: () => void, sameActivity = false): boolean {
     if (!state.active) return false;
-    if (!sameActivity && state.active.wordPractice) {
-      saveWordPractice();
+    if (!sameActivity && hasListeningPractice(state.active)) {
+      saveListeningPractice();
       return false;
     }
     setView("focus");
@@ -1411,14 +1422,14 @@ export async function initTraining() {
     render();
     void sync();
   }
-  function saveWordPractice() {
+  function saveListeningPractice() {
     const active = state.active;
-    if (!active?.wordPractice) return;
-    wordPanel?.pause(); // Account for audio since the last UI checkpoint.
-    const attempt = wordPracticeAttempt(active, new Date().toISOString());
-    state.wordPracticeDefaults = { ...structuredClone(active.wordPractice), used: [] };
+    if (!active || !hasListeningPractice(active)) return;
+    listeningPanel?.pause(); // Account for audio since the last UI checkpoint.
+    const attempt = active.qsoPractice ? qsoPracticeAttempt(active, new Date().toISOString()) : wordPracticeAttempt(active, new Date().toISOString());
+    saveListeningDefaults(active);
     state.active = undefined;
-    unmountWords();
+    unmountListening();
     running = false;
     recalling = false;
     // record queues history and clears the draft in one serialized local write
@@ -1445,8 +1456,8 @@ export async function initTraining() {
 
   function finish() {
     if (!state.active) return;
-    if (state.active.wordPractice) {
-      saveWordPractice();
+    if (hasListeningPractice(state.active)) {
+      saveListeningPractice();
       setView("today");
       return;
     }
@@ -1467,9 +1478,9 @@ export async function initTraining() {
     $("training-finish-icr-sync").hidden = active.task.kind !== "icr";
     updateIcrFinishEstimate();
     $("training-finish-back").textContent = active.runner ? "Back to results" : "Keep practicing";
-    $<HTMLInputElement>("training-finish-minutes").readOnly = !!active.runner || !!active.wordPractice || isDailyListening(active.task);
+    $<HTMLInputElement>("training-finish-minutes").readOnly = !!active.runner || hasListeningPractice(active) || isDailyListening(active.task);
     $<HTMLInputElement>("training-finish-recall").readOnly = isDailyListening(active.task);
-    const recording = active.wordPractice ? wordPracticeNote(active.wordPractice) : active.runner ? runnerMetadata(active) : audioSessionNote(active);
+    const recording = active.wordPractice ? wordPracticeNote(active.wordPractice) : active.qsoPractice ? qsoPracticeNote(active.qsoPractice) : active.runner ? runnerMetadata(active) : audioSessionNote(active);
     $("training-finish-recording").hidden = !recording;
     $("training-finish-recording").textContent = recording ? `Saved automatically with this entry: ${recording}` : "";
     const marks = !active.audioHistory && active.bookmarks.length ? `Difficult audio marks: ${active.bookmarks.map(time).join(", ")}` : "";
@@ -1490,13 +1501,13 @@ export async function initTraining() {
     $("training-finish-scratchpad").hidden = !active.scratchpad;
     $<HTMLTextAreaElement>("training-finish-note").placeholder = isMorseRunner(active.task) ? MORSE_RUNNER_RESULTS_PROMPT : "";
     $("training-finish-title").textContent =
-      active.wordPractice ? "Record word practice" : active.context === "class" ? "Record class use" : active.review ? "Record extra review" : "Finish this block";
+      hasListeningPractice(active) ? "Record listening practice" : active.context === "class" ? "Record class use" : active.review ? "Record extra review" : "Finish this block";
     $("training-finish-complete-label").textContent = active.review
       ? "I completed this review block"
       : active.task.kind === "audio" ? "Mark this exercise complete"
       : "I completed this exercise's requirements";
     const complete = $<HTMLInputElement>("training-finish-complete");
-    complete.closest("label")!.hidden = isDailyListening(active.task) || !!active.wordPractice;
+    complete.closest("label")!.hidden = isDailyListening(active.task) || hasListeningPractice(active);
     const minimumPasses = active.review ? active.targetPasses : active.task.minimumPasses;
     const passReady =
       !minimumPasses ||
@@ -1530,7 +1541,7 @@ export async function initTraining() {
     if (active.task.kind === "icr") $("training-finish-help").textContent =
       "Minutes come from synced one-minute code-group runs during this block. Enter minutes for Words, Callsigns, or another trainer yourself. Mark complete when you have met your practice objective.";
     if (isDailyListening(active.task)) $("training-finish-help").textContent = "Save this optional listening session. Listening time contributes to the daily suggestion; recall time counts only toward total practice. Your next session starts at the beginning.";
-    if (active.wordPractice) $("training-finish-help").textContent = "Save actual listening time and the word settings used. Paused or interrupted time is excluded. This is optional word recognition practice.";
+    if (hasListeningPractice(active)) $("training-finish-help").textContent = "Save actual listening time and the selections and settings used. Paused or interrupted time is excluded.";
     const dialog = $<HTMLDialogElement>("training-finish-dialog");
     const title = $("training-finish-title");
     const minutes = $("training-finish-minutes");
@@ -1543,7 +1554,7 @@ export async function initTraining() {
       $("training-finish-help").textContent = `Save ${active.task.title} before switching, or abort it to discard this block. ${$("training-finish-help").textContent}`;
     }
     const syncIcr = active.task.kind === "icr" && snapshot().lcwo?.configured;
-    const initialFocus = syncIcr ? title : active.task.kind === "audio" || active.runner || active.wordPractice ? save : minutes;
+    const initialFocus = syncIcr ? title : active.task.kind === "audio" || active.runner || hasListeningPractice(active) ? save : minutes;
     // Select native dialog focus before opening so mobile never opens the keyboard
     // for time that has already been captured. Save is disabled during LCWO sync.
     for (const element of [title, minutes, save]) element.toggleAttribute("autofocus", element === initialFocus);
@@ -1734,18 +1745,18 @@ export async function initTraining() {
   if ("mediaSession" in navigator) {
     for (const [action, handler] of Object.entries({
       play: (): void => {
-        if (state.active?.wordPractice) wordPanel?.play();
+        if (hasListeningPractice(state.active)) listeningPanel?.play();
         else void play();
       },
       pause: (): void => {
         pause();
       },
       seekbackward: (): void => {
-        if (state.active?.wordPractice) return;
+        if (hasListeningPractice(state.active)) return;
         audio.currentTime = Math.max(0, audio.currentTime - 8);
       },
       seekforward: (): void => {
-        if (state.active?.wordPractice) return;
+        if (hasListeningPractice(state.active)) return;
         if (Number.isFinite(audio.duration))
           audio.currentTime = Math.min(audio.duration, audio.currentTime + 8);
       },
@@ -1875,6 +1886,16 @@ export async function initTraining() {
     $("training-reading-text").scrollTop = reading.line;
   }
 
+  function startQsos() {
+    if (switchActivity("QSO and story listening", startQsos, !!state.active?.qsoPractice)) return;
+    state.active = createQsoPracticeBlock(new Date().toISOString(), crypto.randomUUID(), state.qsoPracticeDefaults);
+    running = false;
+    recalling = false;
+    render();
+    setView("focus");
+    void persist();
+  }
+
   function startWords() {
     if (switchActivity("Word practice", startWords, !!state.active?.wordPractice)) return;
     state.active = createWordPracticeBlock(new Date().toISOString(), crypto.randomUUID(), state.wordPracticeDefaults);
@@ -1989,6 +2010,10 @@ export async function initTraining() {
       return;
     }
     switch (button.dataset.action) {
+      case "qso-practice": {
+        startQsos();
+        break;
+      }
       case "word-practice": {
         startWords();
         break;
@@ -2004,7 +2029,7 @@ export async function initTraining() {
         );
         break;
       case "toggle-timer":
-        if (state.active?.runner || state.active?.wordPractice || state.active?.task.kind === "icr") break;
+        if (state.active?.runner || hasListeningPractice(state.active) || state.active?.task.kind === "icr") break;
         if (!allowActiveDate()) break;
         if (running) stopTimer();
         else {
@@ -2183,7 +2208,7 @@ export async function initTraining() {
         pause();
         unmountSending();
         stopSendingReplay();
-        unmountWords();
+        unmountListening();
         disposed = true;
         void storage.clear().then(() => {
           state = { pending: {}, reading: {}, dismissed: [] };
@@ -2267,7 +2292,7 @@ export async function initTraining() {
           "Remove null characters from the note before saving.";
         return;
       }
-      const activeSeconds = active.runner ? Math.floor(active.runner.elapsedSeconds) : (isDailyListening(active.task) || active.wordPractice) ? Math.floor(active.activeSeconds) : Math.round(Number(data.get("minutes")) * 60);
+      const activeSeconds = active.runner ? Math.floor(active.runner.elapsedSeconds) : (isDailyListening(active.task) || hasListeningPractice(active)) ? Math.floor(active.activeSeconds) : Math.round(Number(data.get("minutes")) * 60);
       if (
         !Number.isFinite(activeSeconds) ||
         activeSeconds < 0 ||
@@ -2284,7 +2309,7 @@ export async function initTraining() {
         $("training-finish-help").textContent = "Keep the scratchpad under 10,000 characters and remove null characters before saving.";
         return;
       }
-      let completed = !active.wordPractice && !isDailyListening(active.task) && data.get("complete") === "on";
+      let completed = !hasListeningPractice(active) && !isDailyListening(active.task) && data.get("complete") === "on";
       if (active.runner) completed = active.review
         ? completed && active.runner.status === "completed"
         : runnerAssignmentProgress(active, snapshot().attempts).complete;
@@ -2303,7 +2328,7 @@ export async function initTraining() {
       }
       const endedAt = new Date(active.task.kind === "icr" && icrFinishWindow?.id === active.id ? icrFinishWindow.endedAt : Date.now());
       const note = [
-        active.wordPractice ? wordPracticeNote(active.wordPractice) : active.runner ? runnerMetadata(active) : audioSessionNote(active),
+        active.wordPractice ? wordPracticeNote(active.wordPractice) : active.qsoPractice ? qsoPracticeNote(active.qsoPractice) : active.runner ? runnerMetadata(active) : audioSessionNote(active),
         data.get("sendingSummary") === "on" ? sendingSummary(currentSendingTakes(active)) : "",
         String(data.get("note") || ""),
         !active.audioHistory && active.bookmarks.length
@@ -2563,11 +2588,11 @@ export async function initTraining() {
         "The timer paused while you switched apps. If you continued practicing, confirm those minutes when finishing.",
       );
     }
-    wordPanel?.checkpoint();
+    listeningPanel?.checkpoint();
     if (document.hidden) void persist();
   });
   window.addEventListener("pagehide", () => {
-    wordPanel?.pause();
+    listeningPanel?.pause();
     suspendSending("navigation"); stopSendingReplay();
     trackAudioProgress();
     finishAudioPass(false);
