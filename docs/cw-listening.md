@@ -8,7 +8,11 @@ The private trainer mounts the same player in Focus and supplies history trackin
 
 - **Words:** 30 most common English words, Common QSO words, or custom text.
   `src/data/cw-listening/words.ts` owns the two public catalogs and their labels.
-  The QSO reference preserves all 75 supplied entries (70 unique) in order.
+  The QSO reference preserves all 75 supplied entries in order. The original
+  `77 all current.txt` attachment contains 15 rows of five entries, including
+  the opening VVV. Alternate spellings such as TKS and TNX are separate entries;
+  literal repeated tokens are preserved too. VVV stays first in every round,
+  with the **Shuffle after VVV** option shuffling the remaining 74 entries.
   Its former numeric label is supported only for draft migration.
 - **QSOs:** four templates with coherent station profiles, a New QSO action,
   and alternating 450/500 Hz stations. `src/lib/cw-listening/qso-generator.ts`

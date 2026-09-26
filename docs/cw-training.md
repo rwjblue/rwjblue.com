@@ -403,8 +403,11 @@ The separate original-recording entry has been removed. The Common QSO words lis
 in the Word recognition selector. Existing recording sessions can still be
 resumed from Focus and saved, and their history remains valid.
 The original `77.5.40.mp3` is 115.8955 seconds long; timing analysis indicates
-approximately 40-WPM characters with extra word spacing. The supplied text has
-75 entries (70 unique), preserved as received.
+approximately 40-WPM characters with extra word spacing. The `77 all current.txt`
+attachment has 15 rows of five entries, totaling 75 including VVV, preserved as
+received. TKS and TNX remain distinct entries; RR, CL, WX, AR, and BEAM each occur
+twice with identical spelling. The Common QSO words player keeps VVV first and
+shuffles only the remaining entries.
 
 Original-recording sessions still save under `daily-listening` / `bob-77-words`.
 They automatically repeat by default, including after ten minutes or a partially

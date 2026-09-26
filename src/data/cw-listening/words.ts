@@ -1,4 +1,4 @@
-/** Public practice catalogs. Order and repeated entries are intentional. */
+/** Public practice catalogs. Preserve the supplied entries and their order. */
 export const ENGLISH_WORDS_TITLE = "30 most common English words";
 export const QSO_WORDS_TITLE = "Common QSO words";
 export const COMMON_WORDS = "THE OF AND TO A IN IS FOR THAT WAS ON WITH HE IT AS AT HIS BY BE FROM ARE THIS I BUT HAVE AN HAS NOT THEY OR";

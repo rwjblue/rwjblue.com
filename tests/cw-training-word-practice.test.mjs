@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, restoreWordPractice, restoreWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
+import { COMMON_WORDS, COMMON_QSO_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, restoreWordPractice, restoreWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
 import { createWordRound, renderWordSamples, renderWordWav, retimeWordRound } from "../src/lib/cw-training/word-round.ts";
 import { createWordPlayer } from "../src/lib/cw-training/word-player.ts";
 import { createQsoRound, retimedQsoPosition } from "../src/lib/cw-listening/qso-round.ts";
@@ -31,6 +31,32 @@ test("shuffle retains every entry including duplicates without rewriting the sou
   assert.notDeepEqual(round.words, source.split(" "));
   assert.deepEqual([...round.words].sort(), source.split(" ").sort());
   assert.equal(source, "THE OF THE AND");
+});
+
+test("QSO rounds keep VVV first while shuffling every other supplied entry in both audio modes", () => {
+  const source = parsePracticeWords(COMMON_QSO_WORDS);
+  const clips = new Map(source.map(word => [word, new Float32Array(2205)]));
+  const orders = new Set();
+  for (const spokenAnswers of [false, true]) for (let seed = 0; seed < 20; seed++) {
+    let state = seed;
+    const random = () => ((state = (Math.imul(state, 1664525) + 1013904223) >>> 0) / 4294967296);
+    const round = createWordRound(COMMON_QSO_WORDS, { ...settings, wpm: 40, shuffle: true, spokenAnswers }, random, clips, "VVV");
+    assert.equal(round.words[0], "VVV");
+    assert.equal(round.starts[0], 0);
+    assert.deepEqual([...round.words].sort(), [...source].sort());
+    assert.equal(round.words.filter(word => word === "TKS").length, 1);
+    assert.equal(round.words.filter(word => word === "TNX").length, 1);
+    orders.add(round.words.join(" "));
+    const retimed = retimeWordRound(round, 35, 3);
+    assert.deepEqual(retimed.words, round.words);
+    if (spokenAnswers) {
+      assert.equal(round.speech[0].wordIndex, 0);
+      assert.equal(round.speech[0].samples, clips.get("VVV"));
+    }
+  }
+  assert.ok(orders.size > 10);
+  assert.deepEqual(createWordRound(COMMON_QSO_WORDS, settings, Math.random, undefined, "VVV").words, source);
+  assert.deepEqual(createWordRound("VVV THE OF", { ...settings, shuffle: true }, () => 0).words, ["THE", "OF", "VVV"], "Other lists keep their normal shuffle behavior");
 });
 
 test("PCM has the requested duration, silent gaps, bounded amplitude and smooth tone edges", () => {

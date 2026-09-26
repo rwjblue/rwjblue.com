@@ -21,6 +21,11 @@ test('public word catalogs preserve exact MP3 timing identities, repeats, and sp
   assert.equal(WORD_LISTS[0].text.split(' ').length, 30);
   assert.equal(COMMON_QSO_WORDS.split(' ').length, 75);
   assert.equal(new Set(COMMON_QSO_WORDS.split(' ')).size, 70);
+  const counts = new Map();
+  for (const word of COMMON_QSO_WORDS.split(' ')) counts.set(word, (counts.get(word) ?? 0) + 1);
+  assert.deepEqual(Object.fromEntries([...counts].filter(([, count]) => count > 1)), { RR: 2, CL: 2, AR: 2, WX: 2, BEAM: 2 });
+  assert.equal(counts.get('TKS'), 1);
+  assert.equal(counts.get('TNX'), 1);
   for (const list of WORD_LISTS) {
     const words = list.text.split(' ');
     const hash = createHash('sha256').update(words.join(' ')).digest('hex');

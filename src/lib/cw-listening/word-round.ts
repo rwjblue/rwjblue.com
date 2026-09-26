@@ -18,11 +18,14 @@ export interface WordRound {
   pitches?: number[];
 }
 
-export function createWordRound(text: string, settings: WordSettings, random = Math.random, speechClips?: WordSpeechClips): WordRound {
+export function createWordRound(text: string, settings: WordSettings, random = Math.random, speechClips?: WordSpeechClips, openingWord?: string): WordRound {
   checkWordSettings(settings);
   const words = parsePracticeWords(text);
-  if (settings.shuffle) for (let i = words.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
+  // A designated transmission opener stays first; every later occurrence and
+  // alternate abbreviation remains an independent entry in the shuffle.
+  const shuffleFrom = words[0] === openingWord ? 1 : 0;
+  if (settings.shuffle) for (let i = words.length - 1; i > shuffleFrom; i--) {
+    const j = shuffleFrom + Math.floor(random() * (i - shuffleFrom + 1));
     [words[i], words[j]] = [words[j], words[i]];
   }
   const timings: number[] = [];

@@ -34,7 +34,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     <button type="button" data-word="retry" hidden>Retry audio</button>
     <p data-word="answer" class="listening-word listening-display" hidden><button type="button" data-word="answer-word" class="listening-seek-word"></button></p>
     <div class="listening-actions listening-options">
-      <label class="listening-check"><input data-word="shuffle" type="checkbox" /> Shuffle each round</label>
+      <label class="listening-check"><input data-word="shuffle" type="checkbox" /> <span data-word="shuffle-label">Shuffle each round</span></label>
       <label class="listening-check"><input data-word="repeat" type="checkbox" /> Repeat rounds</label>
       <label class="listening-check"><input data-word="spokenAnswers" type="checkbox" /> Three repeats + spoken answer</label>
     </div>
@@ -155,6 +155,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     $("status").textContent = "Ready for a new round. Press Play.";
   }
   function controls() {
+    $("shuffle-label").textContent = draft.title === QSO_WORDS_TITLE ? "Shuffle after VVV" : "Shuffle each round";
     $("help").textContent = "Use the audio controls to play, pause, seek, and adjust volume. Tap a displayed word to jump to its beginning. Change speed while listening; the current item finishes at its original speed. Changing the list, pitch, spacing, or spoken answers starts a fresh round. Show or hide words at any time.";
     if (draft.settings.spokenAnswers) $("help").textContent += " Each word plays three times with normal Morse word spacing, then its spoken answer. The extra pause is between items, never between repeats.";
   }
@@ -162,6 +163,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     const run = ++preparation;
     const settings = { ...draft.settings };
     const words = draft.text;
+    const openingWord = draft.title === QSO_WORDS_TITLE ? "VVV" : undefined;
     let ready = false;
     preparing = true;
     preparationFailed = false;
@@ -180,7 +182,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
       const nextClips = !nextRecording && settings.spokenAnswers ? await loadWordSpeech(words) : undefined;
       if (disposed || run !== preparation) return false;
       speechClips = nextClips;
-      round = nextRecording ?? createWordRound(words, settings, Math.random, speechClips);
+      round = nextRecording ?? createWordRound(words, settings, Math.random, speechClips, openingWord);
       player.prepare(round, settings.pitch);
       showPosition();
       mediaInfo();
@@ -265,11 +267,13 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     if (list.value !== "custom") draft.text = list.value === "common" ? COMMON_WORDS : COMMON_QSO_WORDS;
     text.value = draft.text;
     if (list.value === "custom") host.querySelector<HTMLDetailsElement>(".listening-settings")!.open = true;
+    controls();
     options.changed();
     void prepare();
   });
   text.addEventListener("input", () => {
     reset(); draft.text = text.value; draft.title = "Custom words"; list.value = "custom";
+    controls();
     options.changed();
     void prepare();
   });
