@@ -20,7 +20,10 @@ export const FIELD_KIT_ROUTES = [
 
 export const CACHE_PREFIX = "rwjblue-field-kit";
 export const MAX_RUNTIME_ENTRIES = 24;
-const STATIC_DEPENDENCIES = ["/manifest.webmanifest", "/favicon.svg"];
+const STATIC_DEPENDENCIES = [
+  "/manifest.webmanifest", "/favicon.svg",
+  ...["site", "cw"].flatMap(name => [192, 512].map(size => `/assets/branding/${name}-${size}.png`)),
+];
 const GENERATOR_SOURCE = fileURLToPath(import.meta.url);
 
 const outputPathFor = (distDirectory, pathname) => {

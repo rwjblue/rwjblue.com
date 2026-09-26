@@ -15,9 +15,17 @@
 .cw-listening select, .cw-listening input[type="number"], .cw-listening textarea { display: block; width: 100%; max-width: 100%; min-height: 44px; margin: 6px 0 0; padding: 10px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--input-bg); color: var(--ink); font: inherit; font-size: 1rem; box-sizing: border-box; }
 .cw-listening textarea { resize: vertical; font-family: ui-monospace, monospace; }
 .cw-listening .listening-speed-label output { float: right; font-variant-numeric: tabular-nums; }
-.cw-listening input[type="range"] { display: block; width: 100%; min-height: 44px; margin: 6px 0 0; accent-color: var(--green); cursor: pointer; }
+.cw-listening .listening-speed { --speed-thumb-size: 24px; }
+/* Match the label endpoints to the thumb's travel in every browser, including
+   when the player is embedded in the training page's narrower range styles. */
+.cw-listening .listening-speed input[type="range"] { appearance: none; -webkit-appearance: none; display: block; width: 100%; max-width: none; height: 44px; min-height: 44px; margin: 6px 0 0; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.cw-listening .listening-speed input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--green); }
+.cw-listening .listening-speed input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: var(--green); }
+.cw-listening .listening-speed input[type="range"]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; box-sizing: border-box; width: var(--speed-thumb-size); height: var(--speed-thumb-size); margin-top: calc((4px - var(--speed-thumb-size)) / 2); border: 2px solid var(--green); border-radius: 50%; background: var(--panel); }
+.cw-listening .listening-speed input[type="range"]::-moz-range-thumb { box-sizing: border-box; width: var(--speed-thumb-size); height: var(--speed-thumb-size); border: 2px solid var(--green); border-radius: 50%; background: var(--panel); }
 .cw-listening input[type="range"]:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-.cw-listening .listening-speed-stops { display: flex; justify-content: space-between; margin: -4px 0 8px; font-size: 0.7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cw-listening .listening-speed-stops { display: flex; justify-content: space-between; margin: -4px calc(var(--speed-thumb-size) / 2) 8px; font-size: 0.7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cw-listening .listening-speed-stops span { display: flex; justify-content: center; width: 0; white-space: nowrap; }
 .cw-listening .listening-speed details { font-size: 0.82rem; }
 .cw-listening .listening-speed summary { min-height: 44px; padding-top: 8px; box-sizing: border-box; color: var(--muted); }
 .cw-listening .listening-speed input[type="number"] { max-width: 160px; }

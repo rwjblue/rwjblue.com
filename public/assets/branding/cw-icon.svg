@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="N1RWJ CW practice">
+  <rect width="128" height="128" rx="24" fill="#286247"/>
+  <g fill="none" stroke="#fcfaf5" stroke-width="9" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M49 39c-24-13-37 1-37 18s13 31 37 18"/>
+    <path d="m63 36 10 43 14-31 14 31 10-43"/>
+  </g>
+  <g fill="none" stroke="#fcfaf5" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M37 105V95l7 10V95m6 2 3-2v10m-3 0h6m6 0V95h4c5 0 5 5 0 5h-4m4 0 4 5m5-10 2 10 3-7 3 7 2-10m5 0h5v7c0 5-6 5-6 1"/>
+  </g>
+</svg>

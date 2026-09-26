@@ -4,6 +4,19 @@
 layout, appears in the Radio tools, search, and sitemap, and needs no account.
 The private trainer mounts the same player in Focus and supplies history tracking.
 
+## Icons and lock-screen artwork
+
+The site uses an RJ monogram for Robert Jackson (`public/favicon.svg`). The
+listening and training pages use a green CW / N1RWJ icon
+(`public/assets/branding/cw-icon.svg`), including their Apple touch icons.
+Words, QSOs, stories, and course recordings explicitly supply that artwork to
+Media Session through `src/lib/cw-listening/media-artwork.ts`.
+The field kit precaches both sets of artwork for offline use.
+
+After editing either SVG, run `mise run icons` to regenerate the checked-in PNGs
+for browser tabs (32px), Apple home screens (180px), and installed apps and media
+artwork (192px and 512px). SVG lettering uses paths rather than system fonts.
+
 ## Content and controls
 
 - **Words:** 30 most common English words, Common QSO words, or custom text.

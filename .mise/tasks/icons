@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#MISE description="Regenerate website and CW icons from their SVG originals"
+set -euo pipefail
+node scripts/build-icons.mjs

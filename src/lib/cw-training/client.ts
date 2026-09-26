@@ -1,5 +1,6 @@
 import { applyListeningTotal, createTrainingListeningBlock, listeningDraftForBlock } from "./listening-adapter";
 import { listeningPreferences, rememberListening } from "../cw-listening/storage";
+import { CW_ARTWORK } from "../cw-listening/media-artwork";
 import type { ListeningMode } from "../cw-listening/session";
 import { qsoPracticeAttempt, qsoPracticeNote } from "./qso-practice";
 import { wordPracticeAttempt, wordPracticeNote } from "./word-practice";
@@ -970,6 +971,7 @@ export async function initTraining() {
           title: active.task.kind === "audio" ? active.resource?.title ?? active.task.title : active.task.title,
           artist: "CW Academy practice",
           album: snapshot().course.title,
+          artwork: CW_ARTWORK,
         });
     }
     updateClock();

@@ -2,6 +2,7 @@ import { PRACTICE_QSOS, practiceQso, practiceSelection, newPracticeQso, recordQs
 import { createQsoRound, qsoPosition, retimedQsoPosition, type QsoRound } from "./qso-round.ts";
 import { createWordPlayer } from "./word-player.ts";
 import { mountSpeedControl } from "./speed-control.ts";
+import { CW_ARTWORK } from "./media-artwork.ts";
 import type { WordPanel } from "./word-panel.ts";
 
 export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, options: {
@@ -98,7 +99,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     if (!("mediaSession" in navigator)) return;
     try {
       navigator.mediaSession.playbackState = playing ? "playing" : "paused";
-      if (typeof MediaMetadata !== "undefined") navigator.mediaSession.metadata = new MediaMetadata({ title: practiceSelection(draft.qsoId).title, artist: "CW QSO and story listening" });
+      if (typeof MediaMetadata !== "undefined") navigator.mediaSession.metadata = new MediaMetadata({ title: practiceSelection(draft.qsoId).title, artist: "CW QSO and story listening", artwork: CW_ARTWORK });
     } catch { /* Optional lock-screen metadata. */ }
   }
   const player = createWordPlayer({

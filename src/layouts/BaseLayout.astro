@@ -50,6 +50,8 @@ const nav = [
 ];
 
 const currentPath = Astro.url.pathname;
+const isCwPlayer = /^\/radio\/cw-(?:training|listening)\/?$/.test(currentPath);
+const iconName = isCwPlayer ? "cw" : "site";
 const isActive = (href: string) =>
   href === "/" ? currentPath === "/" : currentPath.startsWith(href);
 ---
@@ -64,7 +66,9 @@ const isActive = (href: string) =>
     {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={`/assets/branding/${iconName}-32.png`} type="image/png" sizes="32x32" />
+    <link rel="icon" href={isCwPlayer ? "/assets/branding/cw-icon.svg" : "/favicon.svg"} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`/assets/branding/${iconName}-180.png`} sizes="180x180" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link
       rel="alternate"

@@ -3,6 +3,7 @@ import { checkWordSettings, COMMON_WORDS, COMMON_QSO_WORDS, ENGLISH_WORDS_TITLE,
 import { loadWordRecording, loadWordSpeech } from "./word-assets.ts";
 import { createWordPlayer } from "./word-player.ts";
 import { mountSpeedControl } from "./speed-control.ts";
+import { CW_ARTWORK } from "./media-artwork.ts";
 
 export interface WordPanel {
   pause(): void;
@@ -76,6 +77,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     try {
       if (typeof MediaMetadata !== "undefined" && navigator.mediaSession.metadata?.title !== draft.title) navigator.mediaSession.metadata = new MediaMetadata({
         title: draft.title, artist: "CW word practice", album: "Word recognition",
+        artwork: CW_ARTWORK,
       });
       if (round) navigator.mediaSession.setPositionState?.({ duration: round.duration, position: Math.min(position, round.duration), playbackRate: player.playbackRate });
       else navigator.mediaSession.setPositionState?.();

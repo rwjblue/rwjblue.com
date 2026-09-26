@@ -37,6 +37,9 @@ const fixture = () => {
   write(root, "/_astro/app.js", "console.log('field kit');");
   write(root, "/manifest.webmanifest", "{}");
   write(root, "/favicon.svg", "<svg></svg>");
+  for (const name of ["site", "cw"]) {
+    for (const size of [192, 512]) write(root, `/assets/branding/${name}-${size}.png`, `${name} ${size}`);
+  }
   return root;
 };
 
