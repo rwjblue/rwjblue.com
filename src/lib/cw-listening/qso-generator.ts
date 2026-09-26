@@ -1,4 +1,8 @@
-import type { PracticeQso } from "./qso-practice.ts";
+import type { PracticeQso } from "./qso-types.ts";
+
+// Link recipe v1: these pool entries and templates are a public format. Append
+// new choices, but do not reorder/edit existing entries or templates. Changes to
+// existing material need a new recipe version, retaining the v1 renderer.
 
 /** Illustrative calls only; these profiles do not describe the calls' real owners. */
 export const QSO_CALLSIGNS = [
@@ -101,20 +105,77 @@ export const QSO_TEMPLATES: readonly QsoTemplate[] = [
 
 /** Sample once per station; repeated details in the script always agree. */
 export function generateQso(id: string, random = Math.random, previousCalls: readonly string[] = []): PracticeQso {
-  const template = QSO_TEMPLATES.find(template => template.id === id);
-  if (!template) throw new Error("Choose a QSO template from the list.");
-  const pick = <T>(values: readonly T[]): T => values[Math.floor(random() * values.length)];
-  const calls = QSO_CALLSIGNS.filter(call => !previousCalls.includes(call));
-  const firstCall = pick(calls);
-  const secondCall = pick(calls.filter(call => call !== firstCall));
-  function station(call: string, names: readonly string[]): QsoStation {
-    const radio = pick(QSO_RADIOS);
-    return {
-      call, name: pick(names), ...pick(QSO_LOCATIONS), rig: radio.rig, watts: pick(radio.watts),
-      antenna: pick(QSO_ANTENNAS), weather: pick(QSO_WEATHER), report: pick(QSO_REPORTS),
-    };
+  const template = QSO_TEMPLATES.findIndex(template => template.id === id);
+  if (template < 0) throw new Error("Choose a QSO template from the list.");
+  function pick(values: readonly unknown[], excluded: number[] = []): number {
+    const indexes = values.map((_, index) => index).filter(index => !excluded.includes(index));
+    return indexes[Math.floor(random() * indexes.length)];
   }
-  const a = station(firstCall, QSO_NAMES);
-  const b = station(secondCall, QSO_NAMES.filter(name => name !== a.name));
-  return { id: template.id, title: template.title, stations: [a.call, b.call], lines: template.lines(a, b) };
+  const previous = QSO_CALLSIGNS.flatMap((call, index) => previousCalls.includes(call) ? [index] : []);
+  const first = pick(QSO_CALLSIGNS, previous);
+  const second = pick(QSO_CALLSIGNS, [...previous, first]);
+  function station(call: number, names: number[] = []): number[] {
+    const radio = pick(QSO_RADIOS);
+    return [call, pick(QSO_NAMES, names), pick(QSO_LOCATIONS), radio,
+      pick(QSO_RADIOS[radio].watts), pick(QSO_ANTENNAS), pick(QSO_WEATHER), pick(QSO_REPORTS)];
+  }
+  const a = station(first);
+  return qsoFromRecipe(encodeRecipe(template, a, station(second, [a[1]])));
+}
+
+function encodeRecipe(template: number, a: number[], b: number[]): string {
+  return [1, template, ...a, ...b].map(index => index.toString(36)).join(".");
+}
+
+/** v1: version, template, then call/name/QTH/rig/power/antenna/weather/RST per station. */
+export function qsoFromRecipe(recipe: string): PracticeQso {
+  const invalid = () => { throw new Error("This QSO link is invalid or uses an unsupported version."); };
+  if (typeof recipe !== "string" || recipe.length > 128
+    || !/^[0-9a-z]+(?:\.[0-9a-z]+){17}$/.test(recipe)) return invalid();
+  const values = recipe.split(".").map(value => parseInt(value, 36));
+  if (values[0] !== 1 || values.map(value => value.toString(36)).join(".") !== recipe) return invalid();
+  const template = QSO_TEMPLATES[values[1]];
+  if (!template) return invalid();
+  function station([call, name, location, radio, power, antenna, weather, report]: number[]): QsoStation {
+    const rig = QSO_RADIOS[radio];
+    if (!QSO_CALLSIGNS[call] || !QSO_NAMES[name] || !QSO_LOCATIONS[location] || !rig
+      || rig.watts[power] === undefined || !QSO_ANTENNAS[antenna] || !QSO_WEATHER[weather] || !QSO_REPORTS[report]) return invalid();
+    return { call: QSO_CALLSIGNS[call], name: QSO_NAMES[name], ...QSO_LOCATIONS[location], rig: rig.rig,
+      watts: rig.watts[power], antenna: QSO_ANTENNAS[antenna], weather: QSO_WEATHER[weather], report: QSO_REPORTS[report] };
+  }
+  const a = station(values.slice(2, 10));
+  const b = station(values.slice(10));
+  if (a.call === b.call || a.name === b.name) return invalid();
+  return { id: template.id, title: template.title, stations: [a.call, b.call], lines: template.lines(a, b), recipe };
+}
+
+/** Recover indexes for saved exchanges that predate recipes, without changing text. */
+export function shareableQsoRecipe(qso: PracticeQso): string | undefined {
+  const matches = (recipe: string) => {
+    try {
+      const rebuilt = qsoFromRecipe(recipe);
+      return rebuilt.id === qso.id && JSON.stringify(rebuilt.stations) === JSON.stringify(qso.stations)
+        && JSON.stringify(rebuilt.lines) === JSON.stringify(qso.lines);
+    } catch { return false; }
+  };
+  if (qso.recipe && matches(qso.recipe)) return qso.recipe;
+  const template = QSO_TEMPLATES.findIndex(template => template.id === qso.id);
+  if (template < 0) return;
+  const stations = qso.stations.map((call, index) => {
+    const text = qso.lines.filter((_, line) => line % 2 === index).join(" ");
+    const name = QSO_NAMES.findIndex(name => text.includes(`NAME ${name} ${name}`));
+    const location = QSO_LOCATIONS.findIndex(({ city, state }) => text.includes(`QTH ${city} ${state}`)
+      || (qso.id === "pota" && text.includes(` ${state} ${state} BK`)));
+    const radio = QSO_RADIOS.findIndex(({ rig }) => text.includes(`RIG HR ${rig} PWR`));
+    const rig = QSO_RADIOS[Math.max(0, radio)];
+    return [QSO_CALLSIGNS.findIndex(value => value === call), name < 0 ? index : name, Math.max(0, location), Math.max(0, radio),
+      Math.max(0, rig.watts.findIndex(watts => text.includes(`PWR ${watts} WATTS`))),
+      Math.max(0, QSO_ANTENNAS.findIndex(antenna => text.includes(`ANT ${antenna} WX`))),
+      Math.max(0, QSO_WEATHER.findIndex(weather => text.includes(`WX ${weather} `))),
+      Math.max(0, QSO_REPORTS.findIndex(report => text.includes(`UR RST ${report} ${report}`) || text.includes(`UR ${report} ${report}`)))];
+  });
+  const recipe = encodeRecipe(template, stations[0], stations[1]);
+  if (!matches(recipe)) return;
+  qso.recipe = recipe;
+  return recipe;
 }

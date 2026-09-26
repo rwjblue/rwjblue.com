@@ -14,6 +14,13 @@ import { WORD_LISTS } from "../../data/cw-listening/words";
       <p>Get comfortable hearing whole words, following a contact, and copying a story. Choose something to listen to.</p>
     </section>
     <CwListeningPlayer id="cw-listening-player" />
+    <div id="cw-listening-share" class="cw-listening" hidden>
+      <div class="listening-actions listening-share">
+        <button type="button" data-copy-listening-link>Copy link</button>
+        <span class="listening-small" data-listening-share-status role="status">Share this selection, speed, and text setting.</span>
+      </div>
+      <label data-listening-link-fallback hidden>Copy this link<input type="text" readonly /></label>
+    </div>
     <noscript><p>Enable JavaScript to generate and play Morse audio in your browser.</p></noscript>
     <p class="listening-public-note">No account needed. Your settings and current session stay on this device.</p>
     <details class="listening-about">

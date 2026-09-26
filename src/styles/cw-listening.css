@@ -10,10 +10,19 @@
 .cw-listening .listening-tabs { display: flex; gap: 4px; margin-bottom: 22px; border-bottom: 1px solid var(--line-strong); }
 .cw-listening .listening-tabs button { border: 0; border-bottom: 3px solid transparent; border-radius: 0; background: transparent; color: var(--muted); min-width: 80px; }
 .cw-listening .listening-tabs button[aria-pressed="true"] { color: var(--green); border-bottom-color: var(--green); }
-.cw-listening .listening-controls { display: grid; grid-template-columns: minmax(0, 1fr) 145px; gap: 18px; align-items: start; }
+.cw-listening .listening-controls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 1fr); gap: 24px; align-items: start; }
 .cw-listening label { display: block; font-size: 0.85rem; font-weight: 600; min-width: 0; }
 .cw-listening select, .cw-listening input[type="number"], .cw-listening textarea { display: block; width: 100%; max-width: 100%; min-height: 44px; margin: 6px 0 0; padding: 10px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--input-bg); color: var(--ink); font: inherit; font-size: 1rem; box-sizing: border-box; }
 .cw-listening textarea { resize: vertical; font-family: ui-monospace, monospace; }
+.cw-listening .listening-speed-label output { float: right; font-variant-numeric: tabular-nums; }
+.cw-listening input[type="range"] { display: block; width: 100%; min-height: 44px; margin: 6px 0 0; accent-color: var(--green); cursor: pointer; }
+.cw-listening input[type="range"]:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.cw-listening .listening-speed-stops { display: flex; justify-content: space-between; margin: -4px 0 8px; font-size: 0.7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cw-listening .listening-speed details { font-size: 0.82rem; }
+.cw-listening .listening-speed summary { min-height: 44px; padding-top: 8px; box-sizing: border-box; color: var(--muted); }
+.cw-listening .listening-speed input[type="number"] { max-width: 160px; }
+.cw-listening .listening-share { margin-top: 16px; }
+.cw-listening .listening-share input { width: 100%; box-sizing: border-box; margin-top: 8px; padding: 10px; color: var(--ink); background: var(--input-bg); border: 1px solid var(--line-strong); border-radius: 4px; }
 .cw-listening audio { display: block; width: 100%; margin: 18px 0; }
 .cw-listening .listening-small { font-size: 0.82rem; color: var(--muted); margin: 12px 0; line-height: 1.6; }
 .cw-listening .listening-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }

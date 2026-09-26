@@ -153,6 +153,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElem
       const at = round?.starts[index];
       if (at !== undefined) seek(at);
     },
+    get paused() { return output?.paused ?? true; },
     get playbackRate() { return output?.playbackRate || 1; },
     clearRound() {
       generation++;

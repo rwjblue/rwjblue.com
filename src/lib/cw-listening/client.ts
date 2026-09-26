@@ -1,15 +1,32 @@
 import { mountListeningPlayer } from "./player.ts";
-import { applyListeningPreset, createListeningDraft, listeningPreset, listeningTime, type ListeningMode, type ListeningSession } from "./session.ts";
+import { applyListeningPreset, createListeningDraft, listeningPreset, listeningLinkSettings, listeningTime, type ListeningMode, type ListeningSession } from "./session.ts";
 import { listeningPreferences, publicListeningSession, rememberListening, savePublicListeningSession } from "./storage.ts";
 import type { WordPanel } from "./word-panel.ts";
 
 let disposePrevious: (() => void) | undefined;
 export function initCwListening(): void {
   disposePrevious?.();
+  disposePrevious = undefined;
   const host = document.getElementById("cw-listening-player");
   if (!host) return;
+  const share = document.getElementById("cw-listening-share")!;
+  const copy = share.querySelector<HTMLButtonElement>("[data-copy-listening-link]")!;
+  const shareStatus = share.querySelector<HTMLElement>("[data-listening-share-status]")!;
+  const fallback = share.querySelector<HTMLElement>("[data-listening-link-fallback]")!;
+  const linkInput = fallback.querySelector("input")!;
+  share.hidden = true;
   let preferences = listeningPreferences();
   const preset = listeningPreset(location.search);
+  if (preset.error) {
+    host.innerHTML = '<div class="listening-body"><h2>Unable to open this QSO</h2><p role="alert"></p><button type="button">Start new practice</button></div>';
+    host.querySelector("p")!.textContent = preset.error;
+    host.querySelector("button")!.addEventListener("click", () => {
+      history.replaceState(history.state, "", location.pathname);
+      initCwListening();
+    });
+    return;
+  }
+  preferences.revealed = preset.revealed ?? preferences.revealed;
   let session = publicListeningSession();
   function fresh(mode: ListeningMode): ListeningSession {
     return { version: 1, id: crypto.randomUUID(), startedAt: new Date().toISOString(),
@@ -17,14 +34,46 @@ export function initCwListening(): void {
   }
   if (!session || (preset.key && session.preset !== preset.key)) {
     session = fresh(preset.mode ?? preferences.mode);
-    applyListeningPreset(session.draft, preset.selection);
   }
+  applyListeningPreset(session.draft, preset);
   let current: ListeningSession = session;
   let panel: WordPanel | undefined;
   let lastSaved = 0;
   let disposed = false;
+  let shareUrl = "";
   function persist() { savePublicListeningSession(current); }
-  function changed() { rememberListening(current.draft, preferences.revealed); persist(); }
+  function updateLink() {
+    const settings = listeningLinkSettings(current.draft, preferences.revealed);
+    const url = new URL(location.href);
+    url.search = settings.search;
+    current.preset = listeningPreset(url.search).key;
+    if (url.href !== location.href) history.replaceState(history.state, "", url);
+    share.hidden = current.draft.mode === "words" && !settings.shareable;
+    copy.disabled = !settings.shareable;
+    if (url.href !== shareUrl) {
+      shareUrl = url.href;
+      fallback.hidden = true;
+      shareStatus.textContent = settings.shareable ? "Share this selection, speed, and text setting."
+        : "Choose New QSO to make this older exchange shareable.";
+    }
+  }
+  function changed() {
+    if (disposed) return;
+    updateLink(); rememberListening(current.draft, preferences.revealed); persist();
+  }
+  async function copyLink() {
+    const copiedUrl = shareUrl;
+    try {
+      await navigator.clipboard.writeText(copiedUrl);
+      if (!disposed && shareUrl === copiedUrl) shareStatus.textContent = "Link copied.";
+    } catch {
+      if (disposed || shareUrl !== copiedUrl) return;
+      shareStatus.textContent = "Select and copy the link below.";
+      fallback.hidden = false;
+      linkInput.value = shareUrl;
+      linkInput.focus(); linkInput.select();
+    }
+  }
   function mount() {
     panel?.dispose();
     panel = undefined;
@@ -63,14 +112,20 @@ export function initCwListening(): void {
   function hide() { panel?.pause(); persist(); }
   function dispose() {
     if (disposed) return;
-    panel?.dispose(); panel = undefined; persist(); disposed = true;
+    // Settle audio time, but do not rewrite an incoming URL while disposing the
+    // old player during navigation or another initialization.
+    disposed = true;
+    panel?.dispose(); panel = undefined; persist();
     document.removeEventListener("visibilitychange", checkpoint);
     window.removeEventListener("pagehide", hide);
     document.removeEventListener("astro:before-swap", dispose);
+    copy.removeEventListener("click", copyLink);
   }
   document.addEventListener("visibilitychange", checkpoint);
   window.addEventListener("pagehide", hide);
   document.addEventListener("astro:before-swap", dispose);
+  copy.addEventListener("click", copyLink);
   disposePrevious = dispose;
   mount();
+  updateLink();
 }

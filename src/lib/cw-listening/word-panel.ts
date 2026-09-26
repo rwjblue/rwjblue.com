@@ -2,6 +2,7 @@ import { createWordRound, type WordRound, type WordSpeechClips } from "./word-ro
 import { checkWordSettings, COMMON_WORDS, COMMON_QSO_WORDS, ENGLISH_WORDS_TITLE, QSO_WORDS_TITLE, recordWordSettings, restoreWordPractice, type WordPracticeDraft } from "./word-practice.ts";
 import { loadWordRecording, loadWordSpeech } from "./word-assets.ts";
 import { createWordPlayer } from "./word-player.ts";
+import { mountSpeedControl } from "./speed-control.ts";
 
 export interface WordPanel {
   pause(): void;
@@ -24,7 +25,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   host.innerHTML = `
     <div class="listening-controls">
       <label>Word list<select data-word="list"><option value="common">${ENGLISH_WORDS_TITLE}</option><option value="qso">${QSO_WORDS_TITLE}</option><option value="custom">Custom words</option></select></label>
-      <label>Speed (WPM)<input data-word="wpm" type="number" min="10" max="60" step="1" required /></label>
+      <div data-word="speed"></div>
     </div>
     <p data-word="position" class="listening-small"></p>
     <div data-word="audio"></div>
@@ -53,7 +54,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   list.value = draft.title === ENGLISH_WORDS_TITLE ? "common" : draft.title === QSO_WORDS_TITLE ? "qso" : "custom";
   $("done").textContent = options.doneLabel ?? "End session";
   text.value = draft.text;
-  for (const key of ["wpm", "gapSeconds", "pitch"] as const) input(key).value = String(draft.settings[key]);
+  for (const key of ["gapSeconds", "pitch"] as const) input(key).value = String(draft.settings[key]);
   for (const key of ["shuffle", "repeat", "spokenAnswers"] as const) input(key).checked = !!draft.settings[key];
   let round: WordRound | undefined;
   let speechClips: WordSpeechClips | undefined;
@@ -209,45 +210,44 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     options.changed();
     void prepare();
   });
-  for (const key of ["wpm", "gapSeconds", "pitch", "shuffle", "repeat"] as const) {
-    input(key).addEventListener("change", async () => {
-      if (key === "wpm") {
-        const previous = draft.settings.wpm;
-        const run = ++speedChange;
-        const currentRound = round;
-        try {
-          const wpm = Number(input(key).value);
-          checkWordSettings({ ...draft.settings, wpm });
-          draft.settings.wpm = wpm;
-          options.changed();
-          if (!started) {
-            reset();
-            void prepare();
-            return;
-          }
-          if (currentRound && currentRound.settings.wpm !== wpm) {
-            // Keep playing the MP3 while the clips needed for a live edit load.
-            // The player converts at its current media position, preserving the
-            // current item. Later rounds can use an MP3 again if settings match.
-            const clips = currentRound.recordingUrl && currentRound.settings.spokenAnswers
-              ? speechClips ?? await loadWordSpeech(currentRound.words.join(" ")) : undefined;
-            if (disposed || run !== speedChange || round !== currentRound) return;
-            round = player.setSpeed(wpm, clips) ?? round;
-          }
-          if (playing) recordWordSettings(draft);
-          $("status").textContent = playing ? `${wpm} WPM from the next word; the current item finishes at its original speed.` : `Speed set to ${wpm} WPM.`;
-          mediaInfo();
-          options.changed();
-          if (!round) void prepare();
-        } catch (error) {
-          if (disposed || run !== speedChange) return;
-          draft.settings.wpm = previous;
-          input(key).value = String(previous);
-          options.changed();
-          $("status").textContent = error instanceof Error ? error.message : "Unable to change speed.";
-        }
+  const speed = mountSpeedControl($("speed"), draft.settings.wpm, async wpm => {
+    if (wpm === draft.settings.wpm) return;
+    const previous = draft.settings.wpm;
+    const run = ++speedChange;
+    const currentRound = round;
+    try {
+      checkWordSettings({ ...draft.settings, wpm });
+      draft.settings.wpm = wpm;
+      options.changed();
+      if (!started) {
+        reset();
+        void prepare();
         return;
       }
+      if (currentRound && currentRound.settings.wpm !== wpm) {
+        // Keep playing the MP3 while the clips needed for a live edit load.
+        // The player converts at its current media position, preserving the
+        // current item. Later rounds can use an MP3 again if settings match.
+        const clips = currentRound.recordingUrl && currentRound.settings.spokenAnswers
+          ? speechClips ?? await loadWordSpeech(currentRound.words.join(" ")) : undefined;
+        if (disposed || run !== speedChange || round !== currentRound) return;
+        round = player.setSpeed(wpm, clips) ?? round;
+      }
+      if (playing) recordWordSettings(draft);
+      $("status").textContent = playing ? `${wpm} WPM from the next word; the current item finishes at its original speed.` : `Speed set to ${wpm} WPM.`;
+      mediaInfo();
+      options.changed();
+      if (!round) void prepare();
+    } catch (error) {
+      if (disposed || run !== speedChange) return;
+      draft.settings.wpm = previous;
+      speed.set(previous);
+      options.changed();
+      $("status").textContent = error instanceof Error ? error.message : "Unable to change speed.";
+    }
+  });
+  for (const key of ["gapSeconds", "pitch", "shuffle", "repeat"] as const) {
+    input(key).addEventListener("change", () => {
       if ((key === "gapSeconds" || key === "pitch") && !input(key).checkValidity()) {
         input(key).reportValidity(); input(key).value = String(draft.settings[key]); return;
       }
@@ -264,7 +264,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     draft.title = list.value === "common" ? ENGLISH_WORDS_TITLE : list.value === "qso" ? QSO_WORDS_TITLE : "Custom words";
     if (list.value !== "custom") draft.text = list.value === "common" ? COMMON_WORDS : COMMON_QSO_WORDS;
     text.value = draft.text;
-    if (list.value === "custom") host.querySelector<HTMLDetailsElement>("details")!.open = true;
+    if (list.value === "custom") host.querySelector<HTMLDetailsElement>(".listening-settings")!.open = true;
     options.changed();
     void prepare();
   });

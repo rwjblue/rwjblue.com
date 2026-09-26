@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { PRACTICE_QSOS, practiceQso, newPracticeQso, createQsoPracticeBlock, qsoPracticeAttempt, recordQsoSettings } from "../src/lib/cw-training/qso-practice.ts";
-import { createQsoRound, qsoPosition } from "../src/lib/cw-training/qso-round.ts";
+import { createQsoRound, qsoPosition, retimedQsoPosition } from "../src/lib/cw-training/qso-round.ts";
 import { renderWordSamples } from "../src/lib/cw-training/word-round.ts";
 import { sendingTextTimings } from "../src/lib/cw-training/sending-engine.ts";
 
@@ -10,7 +10,7 @@ const near = (a, b) => assert.ok(Math.abs(a - b) < 0.00001, `${a} != ${b}`);
 test("every full exchange and story has exact Morse timing and a bounded timeline at both speed limits", () => {
   assert.equal(new Set(PRACTICE_QSOS.map(item => item.id)).size, PRACTICE_QSOS.length);
   assert.equal(PRACTICE_QSOS.filter(item => item.kind === "qso").length, 4);
-  for (const selection of PRACTICE_QSOS) for (const wpm of [10, 40]) {
+  for (const selection of PRACTICE_QSOS) for (const wpm of [10, 60]) {
     const item = practiceQso({ qsoId: selection.id }, () => 0.5);
     const round = createQsoRound(item, wpm);
     near(round.duration, round.timings.reduce((sum, ms) => sum + Math.abs(ms), 0) / 1000);
@@ -90,7 +90,7 @@ test("listening saves real seconds as optional general practice, with selections
   assert.equal(next.qsoPractice.qsoId, "story-trail");
   assert.deepEqual(next.qsoPractice.used, []);
   assert.equal(block.qsoPractice.used.length, 2);
-  for (const speed of [0, NaN, Infinity, 9, 41]) assert.throws(() => createQsoRound(practiceQso({ qsoId: PRACTICE_QSOS[0].id }, () => 0.5), speed));
+  for (const speed of [0, NaN, Infinity, 9, 61]) assert.throws(() => createQsoRound(practiceQso({ qsoId: PRACTICE_QSOS[0].id }, () => 0.5), speed));
 });
 
 function seededRandom(seed) {
@@ -183,4 +183,25 @@ test("legacy drafts generate once, changing templates discards mismatched script
   assert.equal(practiceQso(draft), story);
   assert.deepEqual(draft.generated, previous);
   assert.throws(() => generateQso("unknown"), /Choose a QSO template/);
+});
+
+
+test("retiming QSOs and stories restarts the same occurrence through word and station gaps", () => {
+  for (const selection of PRACTICE_QSOS) {
+    const item = practiceQso({ qsoId: selection.id }, () => 0.5);
+    const previous = createQsoRound(item, 20);
+    for (const wpm of [12, 23, 37, 60]) {
+      const next = createQsoRound(item, wpm);
+      for (const [word, start] of previous.starts.entries()) {
+        for (const at of [start, start + (previous.wordEnds[word] - start) / 2]) {
+          const position = retimedQsoPosition(previous, next, at);
+          near(position, next.starts[word]);
+          assert.equal(qsoPosition(next, position).word, word);
+        }
+        const following = previous.starts[word + 1];
+        if (following !== undefined) near(retimedQsoPosition(previous, next, (previous.wordEnds[word] + following) / 2), next.starts[word]);
+      }
+      near(retimedQsoPosition(previous, next, previous.duration), next.duration);
+    }
+  }
 });

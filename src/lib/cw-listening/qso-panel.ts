@@ -1,6 +1,7 @@
 import { PRACTICE_QSOS, practiceQso, practiceSelection, newPracticeQso, recordQsoSettings, type QsoPracticeDraft } from "./qso-practice.ts";
-import { createQsoRound, qsoPosition, type QsoRound } from "./qso-round.ts";
+import { createQsoRound, qsoPosition, retimedQsoPosition, type QsoRound } from "./qso-round.ts";
 import { createWordPlayer } from "./word-player.ts";
+import { mountSpeedControl } from "./speed-control.ts";
 import type { WordPanel } from "./word-panel.ts";
 
 export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, options: {
@@ -16,7 +17,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
   host.innerHTML = `
     <div class="listening-controls">
       <label><span data-qso="selection-label"></span><select data-qso="selection"></select></label>
-      <label>Speed (WPM)<input data-qso="wpm" type="number" min="10" max="40" step="1" required /></label>
+      <div data-qso="speed"></div>
     </div>
     <p data-qso="description" class="listening-small"></p>
     <div data-qso="audio"></div>
@@ -27,7 +28,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       <p data-qso="station" class="eyebrow"></p>
       <p data-qso="line" class="listening-line"></p>
     </div>
-    <p class="listening-small">Show text to follow the current line and highlighted word. Tap any word to jump to its beginning. Use the audio controls to pause, seek, or replay. Changing the selection or speed restarts from the beginning.</p>
+    <p class="listening-small">Show text to follow the current line and highlighted word. Tap any word to jump to its beginning. A speed change restarts the current word and keeps playing if it was already playing. Changing the selection starts from the beginning.</p>
     <p class="listening-small" data-qso="help"></p>`;
   const $ = <T extends HTMLElement = HTMLElement>(name: string) => host.querySelector<T>(`[data-qso="${name}"]`)!;
   const selection = $<HTMLSelectElement>("selection");
@@ -41,8 +42,11 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     selection.append(group);
   }
   selection.value = draft.qsoId;
-  const speed = $<HTMLInputElement>("wpm");
-  speed.value = String(draft.wpm);
+  mountSpeedControl($("speed"), draft.wpm, wpm => {
+    if (wpm === draft.wpm) return;
+    draft.wpm = wpm;
+    prepare(true);
+  });
   let round: QsoRound | undefined;
   let at = 0;
   let revealed = options.revealed ?? false;
@@ -112,7 +116,10 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       options.changed();
     },
   }, $("audio"), "QSO and story audio");
-  function prepare() {
+  function prepare(preservePosition = false) {
+    const previous = round;
+    const previousAt = player.checkpoint();
+    const resume = preservePosition && !player.paused;
     player.pause();
     player.clearRound();
     round = undefined;
@@ -128,6 +135,7 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
         : "Generated practice contacts. New QSO changes the station details; replay keeps this exchange.";
       round = createQsoRound(item, draft.wpm);
       player.prepare(round, 450);
+      if (preservePosition && previous) player.seek(retimedQsoPosition(previous, round, previousAt));
       const duration = Math.floor(round.duration);
       const minutes = Math.floor(duration / 60);
       const seconds = String(duration % 60).padStart(2, "0");
@@ -135,8 +143,9 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       showPosition();
       mediaInfo();
       mediaPosition();
-      $("status").textContent = "Ready. Press Play to listen.";
+      $("status").textContent = preservePosition ? "Speed updated. Press Play to continue." : "Ready. Press Play to listen.";
       options.changed();
+      if (resume && options.canPlay()) void player.play(round, 450).catch(() => { /* Player reports interruptions. */ });
     } catch (error) {
       $("status").textContent = error instanceof Error ? error.message : "Unable to prepare audio.";
     }
@@ -145,13 +154,6 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     player.pause();
     draft.qsoId = selection.value;
     delete draft.generated;
-    prepare();
-    options.changed();
-  });
-  speed.addEventListener("change", () => {
-    if (!speed.checkValidity()) { speed.reportValidity(); speed.value = String(draft.wpm); return; }
-    player.pause();
-    draft.wpm = Number(speed.value);
     prepare();
     options.changed();
   });

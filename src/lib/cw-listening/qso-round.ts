@@ -45,3 +45,10 @@ export function qsoPosition(round: QsoRound, seconds: number): { line: number; w
   const word = round.starts.filter(start => start <= at).length - 1;
   return { line, word: word >= 0 && at < round.wordEnds[word] ? word : -1 };
 }
+
+/** Restart the same word occurrence after retiming, including a word's gap. */
+export function retimedQsoPosition(previous: QsoRound, next: QsoRound, seconds: number): number {
+  if (seconds >= previous.duration) return next.duration;
+  const word = Math.max(0, previous.starts.filter(start => start <= seconds + 0.000001).length - 1);
+  return next.starts[word] ?? 0;
+}

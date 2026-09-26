@@ -27,7 +27,7 @@ export function newPracticeQso(draft: QsoPracticeDraft, random = Math.random): v
   draft.generated = generateQso(draft.qsoId, random, draft.generated?.stations);
 }
 export function checkQsoSpeed(wpm: number): void {
-  if (!Number.isFinite(wpm) || wpm < 10 || wpm > 40) throw new Error("Use a speed between 10 and 40 WPM.");
+  if (!Number.isFinite(wpm) || wpm < 10 || wpm > 60) throw new Error("Use a speed between 10 and 60 WPM.");
 }
 export function recordQsoSettings(draft: QsoPracticeDraft): void {
   const item = practiceQso(draft);

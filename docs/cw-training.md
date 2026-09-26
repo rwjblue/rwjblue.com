@@ -370,14 +370,15 @@ sampling and template substitution; it needs no AI service or network request.
 QSOs alternate between 450 Hz and 500 Hz stations. Stories use a single 450 Hz
 narrator. Each transmission or story sentence is a display line, with a
 two-second pause between lines. **Show text** reveals the current line and
-underlines the word being sent; gaps have no highlighted word. The display
+highlights the word being sent; gaps have no highlighted word. The display
 follows the native media clock when playing, pausing, seeking, or replaying.
 Prosigns such as `<SK>` remain joined Morse symbols.
 
 The native player supports play/pause, seeking, volume, and replay after the
-end. Speed is adjustable from 10 to 40 WPM; the duration is shown for the selected
-speed. Changing speed or selection pauses playback and prepares a fresh recording
-at the beginning. The shared word renderer generates a temporary local WAV with
+end. A preset speed slider and expandable numeric entry support 10-60 WPM; the
+duration is shown for the selected speed. Changing speed prepares a fresh
+recording at the beginning of the same word occurrence and resumes only if audio
+was playing. Changing selection starts at the beginning, paused. The shared word renderer generates a temporary local WAV with
 per-station pitch and the same 5 ms envelopes as word practice. No external
 speech or audio service is required.
 

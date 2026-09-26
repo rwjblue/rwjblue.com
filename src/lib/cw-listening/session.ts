@@ -1,5 +1,7 @@
 import { createWordDraft, checkWordSettings, restoreWordPractice, WORD_LISTS, type WordPracticeDraft } from "./word-practice.ts";
 import { checkQsoSpeed, practiceQso, practiceSelection, PRACTICE_QSOS, type QsoPracticeDraft } from "./qso-practice.ts";
+import { qsoFromRecipe, shareableQsoRecipe } from "./qso-generator.ts";
+import type { PracticeQso } from "./qso-types.ts";
 
 export type ListeningMode = "words" | "qsos" | "stories";
 export type ListeningDraft = { mode: "words"; word: WordPracticeDraft }
@@ -98,26 +100,77 @@ export function restoreListeningSession(value: unknown): ListeningSession | unde
     draft, ended: input.ended === true, preset: typeof input.preset === "string" ? input.preset.slice(0, 150) : "" };
 }
 
-/** Only catalog IDs can enter shareable links; never include custom text. */
-export function listeningPreset(search: string): { key: string; mode?: ListeningMode; selection?: string } {
+export interface ListeningPreset {
+  key: string;
+  mode?: ListeningMode;
+  selection?: string;
+  wpm?: number;
+  revealed?: boolean;
+  generated?: PracticeQso;
+  error?: string;
+}
+
+/** Public links contain catalog IDs and bounded pool indexes, never arbitrary text. */
+export function listeningPreset(search: string): ListeningPreset {
   const params = new URLSearchParams(search);
   const mode = params.get("mode");
-  if (!isListeningMode(mode)) return { key: "" };
+  const result: ListeningPreset = { key: "" };
+  const wpm = Number(params.get("wpm"));
+  if (Number.isFinite(wpm) && wpm >= 10 && wpm <= 60) result.wpm = wpm;
+  if (params.get("text") === "show") result.revealed = true;
+  if (params.get("text") === "hide") result.revealed = false;
+  if (params.has("qso")) {
+    try {
+      const generated = qsoFromRecipe(params.get("qso")!);
+      if ((mode && mode !== "qsos") || (params.has("scenario") && params.get("scenario") !== generated.id)) {
+        throw new Error("This QSO link has conflicting selections.");
+      }
+      return { ...result, key: `qsos:${generated.id}:${generated.recipe}`, mode: "qsos", selection: generated.id, generated };
+    } catch (error) {
+      return { ...result, error: error instanceof Error ? error.message : "Unable to open this QSO link." };
+    }
+  }
+  if (!isListeningMode(mode)) return result;
   const selection = mode === "words" ? WORD_LISTS.find(item => item.id === params.get("list"))?.id
     : PRACTICE_QSOS.find(item => item.id === params.get(mode === "qsos" ? "scenario" : "story")
       && (item.kind === "story") === (mode === "stories"))?.id;
-  return { key: `${mode}:${selection ?? ""}`, mode, selection };
+  return { ...result, key: `${mode}:${selection ?? ""}`, mode, selection };
 }
-export function applyListeningPreset(draft: ListeningDraft, selection?: string): void {
-  if (!selection) return;
+export function applyListeningPreset(draft: ListeningDraft, preset: ListeningPreset): void {
+  if (preset.mode && draft.mode !== preset.mode) return;
   if (draft.mode === "words") {
-    const item = WORD_LISTS.find(item => item.id === selection);
+    const item = WORD_LISTS.find(item => item.id === preset.selection);
     if (item) Object.assign(draft.word, { title: item.title, text: item.text });
+    if (preset.wpm !== undefined) draft.word.settings.wpm = preset.wpm;
   } else {
-    const item = practiceSelection(selection);
-    if ((item.kind === "story") !== (draft.mode === "stories")) return;
-    draft.qso.qsoId = item.id;
-    delete draft.qso.generated;
+    if (preset.selection) {
+      const item = practiceSelection(preset.selection);
+      if ((item.kind === "story") !== (draft.mode === "stories")) return;
+      draft.qso.qsoId = item.id;
+    }
+    if (preset.generated) draft.qso.generated = structuredClone(preset.generated);
+    if (preset.wpm !== undefined) draft.qso.wpm = preset.wpm;
     practiceQso(draft.qso);
   }
+}
+
+export function listeningLinkSettings(draft: ListeningDraft, revealed: boolean): { search: string; shareable: boolean } {
+  const params = new URLSearchParams({ mode: draft.mode });
+  let shareable = true;
+  if (draft.mode === "words") {
+    const list = WORD_LISTS.find(item => item.title === draft.word.title && item.text === draft.word.text);
+    params.set("list", list?.id ?? "custom");
+    shareable = !!list;
+    params.set("wpm", String(draft.word.settings.wpm));
+  } else {
+    params.set(draft.mode === "qsos" ? "scenario" : "story", draft.qso.qsoId);
+    params.set("wpm", String(draft.qso.wpm));
+    if (draft.mode === "qsos") {
+      const recipe = shareableQsoRecipe(practiceQso(draft.qso));
+      if (recipe) params.set("qso", recipe);
+      shareable = !!recipe;
+    }
+  }
+  params.set("text", revealed ? "show" : "hide");
+  return { search: `?${params}`, shareable };
 }

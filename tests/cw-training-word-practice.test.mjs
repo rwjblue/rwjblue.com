@@ -3,6 +3,7 @@ import test from "node:test";
 import { COMMON_WORDS, DEFAULT_WORD_SETTINGS, createWordPracticeBlock, parsePracticeWords, recordWordSettings, restoreWordPractice, restoreWordSettings, wordPracticeAttempt, wordPracticeNote } from "../src/lib/cw-training/word-practice.ts";
 import { createWordRound, renderWordSamples, renderWordWav, retimeWordRound } from "../src/lib/cw-training/word-round.ts";
 import { createWordPlayer } from "../src/lib/cw-training/word-player.ts";
+import { createQsoRound, retimedQsoPosition } from "../src/lib/cw-listening/qso-round.ts";
 
 const settings = { ...DEFAULT_WORD_SETTINGS, wpm: 30, shuffle: false };
 const near = (actual, expected) => assert.ok(Math.abs(actual - expected) < 0.00001, `${actual} != ${expected}`);
@@ -668,4 +669,33 @@ test("native playback rate credits listening time rather than accelerated media 
   output.currentTime = 1.8;
   h.player.pause();
   near(h.seconds(), 1.4);
+});
+
+test("replacing QSO audio preserves pause state and credits only listening across a remapped word", async t => {
+  const h = harness(t);
+  const qso = { id: 'test', title: 'Test', stations: ['A', 'B'], lines: ['THE THE THE', 'THE THE THE'] };
+  const before = createQsoRound(qso, 20);
+  const next = createQsoRound(qso, 35);
+  await h.player.play(before, 450);
+  const output = h.outputs[0];
+  h.player.seekWord(4);
+  output.currentTime += 0.2;
+  const at = h.player.checkpoint();
+  assert.equal(h.player.paused, false);
+  h.player.pause();
+  h.player.clearRound();
+  h.player.prepare(next, 450);
+  h.player.seek(retimedQsoPosition(before, next, at));
+  near(h.seconds(), 0.2);
+  assert.equal(h.player.paused, true);
+  near(output.currentTime, next.starts[4]);
+  await h.player.play(next, 450);
+  assert.equal(h.player.paused, false);
+  near(output.currentTime, next.starts[4]);
+  output.currentTime += 0.3;
+  h.player.pause();
+  near(h.seconds(), 0.5);
+  assert.equal(h.player.paused, true);
+  assert.equal(h.recordings.size, 2);
+  assert.equal(h.revoked.length, 1);
 });

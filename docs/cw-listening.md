@@ -17,7 +17,10 @@ The private trainer mounts the same player in Focus and supplies history trackin
 - **Stories:** three original short/medium/longer stories in
   `src/data/cw-listening/stories.ts`, with one 450 Hz narrator.
 
-Word speed is 10-60 WPM; QSO/story speed is 10-40 WPM. Native audio controls
+All modes offer a speed slider with stops at 12, 15, 18, 20, 23, 25, 28, 30,
+35, and 40 WPM. **Enter speed** expands a numeric field for 10-60 WPM. An exact
+speed outside the presets appears as an additional stop until another speed is
+selected. Dragging previews the speed; releasing applies it. Native audio controls
 provide play/pause, seek, volume, and replay. A **Back 10 sec** button rewinds
 in every mode, stopping at the beginning. Optional text follows the current
 word, transmission, or sentence. Each displayed word is a keyboard-accessible
@@ -32,6 +35,12 @@ pitch, and extra word spacing. Custom text stays on the device.
 QSO generation happens once per selection/new session. Replay, speed changes,
 and restoring an unfinished session keep the saved script. New QSO samples
 another exchange with different callsigns. Stories are fixed authored text.
+Changing QSO/story speed rebuilds the audio and seeks to the beginning of the
+same word occurrence, including its station and line. During a gap it returns
+to the preceding word; a completed recording stays at the end. Playback resumes
+only if it was playing before the change. Rebuilding and seeking earn no time.
+Word lists retain their existing behavior: the current item finishes at its old
+speed and later words use the new speed.
 
 ## Shared implementation
 
@@ -75,7 +84,10 @@ sessions and historical attempts remain supported.
 
 ## Links and audio assets
 
-Preset URLs accept catalog IDs only:
+Public URLs preserve the selection, speed (`wpm`), and text visibility
+(`text=show` or `text=hide`). The **Copy link** button copies the current URL, with
+a selectable text fallback if clipboard access is unavailable. Existing catalog
+links remain supported:
 
 - `/radio/cw-listening/?mode=words&list=common-30`
 - `/radio/cw-listening/?mode=words&list=common-qso`
@@ -83,9 +95,28 @@ Preset URLs accept catalog IDs only:
 - `/radio/cw-listening/?mode=stories&story=story-radio`
 
 The other QSO IDs are `short-contact`, `pota`, and `repeat`; other story IDs are
-`story-trail` and `story-light`. No custom text or private data enters URLs.
-Reloading the same preset restores its unfinished session; opening a different
-preset starts a fresh session.
+`story-trail` and `story-light`. QSO links also include a compact `qso` recipe,
+for example `qso=1.1.0.0.0.0.0.0.0.0.t.j.d.5.1.5.5.6`. Its dot-separated base-36
+integers contain the format version, template index, then eight pool indexes
+per station: callsign, name, location, radio, power within that radio's choices,
+antenna, weather, and report. Current recipes are 35 characters; the full exchange
+is rebuilt in the recipient's browser. The generator stores the recipe alongside
+the saved script. Older scripts can recover a recipe only if it reproduces their
+exact text; otherwise Copy link is disabled until New QSO is chosen.
+
+Recipe v1 pool entries and templates are a compatibility contract. New entries
+may be appended; edits or reordering need a new format version and a retained
+v1 renderer so published links do not change. Regression snapshots protect the
+original scripts. Invalid, unsupported, or conflicting recipes show an error
+instead of silently generating another exchange.
+
+No custom word text, private history, session IDs, listened time, or playback
+position enters URLs. Custom lists have no Copy link button. The recipient
+starts paused at the beginning. Explicit URL settings override device preferences.
+Reloading the same recipe restores the local session and its listened time;
+changing speed or visibility does not reset that session. A different recipe or
+catalog selection starts a fresh session. The trainer never writes these URL
+parameters or exposes Copy link.
 
 Exact matching word configurations use existing public generated MP3s. Other
 configurations use temporary browser-generated WAVs, combining published spoken
