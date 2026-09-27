@@ -212,13 +212,37 @@ test('malformed or incompatible QSO recipes cannot silently generate a different
   assert.ok(listeningPreset(`?mode=qsos&scenario=pota&qso=${recipe}`).error);
 });
 
+test('new trainer word sessions select QSO words and retain playback preferences without changing saved drafts', () => {
+  const now = '2026-09-27T16:00:00Z';
+  const custom = { ...createWordDraft(), title: 'Custom words', text: 'MY CUSTOM LIST', used: ['Previous listening'] };
+  custom.settings.wpm = 25;
+  custom.settings.spokenAnswers = true;
+  for (const [previous, preferences, expectedSettings] of [
+    [{}, restoreListeningPreferences(), createWordDraft().settings],
+    [{ wordPracticeDefaults: custom }, restoreListeningPreferences(), custom.settings],
+    [{ wordPracticeDefaults: custom }, { ...restoreListeningPreferences(), words: createWordDraft() }, createWordDraft().settings],
+    [{}, { ...restoreListeningPreferences(), words: custom }, custom.settings],
+  ]) {
+    const before = structuredClone({ previous, preferences });
+    const active = createTrainingListeningBlock('words', now, 'new-words', previous, preferences);
+    assert.equal(active.wordPractice.title, QSO_WORDS_TITLE);
+    assert.equal(active.wordPractice.text, COMMON_QSO_WORDS);
+    assert.deepEqual(active.wordPractice.settings, expectedSettings);
+    assert.deepEqual(active.wordPractice.used, []);
+    assert.deepEqual({ previous, preferences }, before);
+    active.wordPractice = structuredClone(custom);
+    assert.equal(listeningDraftForBlock(active).word.text, custom.text, 'resuming keeps the selected list');
+  }
+  assert.equal(createWordDraft().title, ENGLISH_WORDS_TITLE, 'the public player keeps its default');
+});
+
 test('trainer transitions keep stable IDs and independent category totals with repeated progress notifications', () => {
   const preferences = restoreListeningPreferences();
   const now = '2026-09-26T14:00:00Z';
   const previous = { wordPracticeDefaults: { ...createWordDraft(), title: 'Custom words', text: 'MY CUSTOM LIST' },
     qsoPracticeDefaults: { qsoId: 'story-radio', wpm: 25, used: [] } };
   const words = createTrainingListeningBlock('words', now, 'words', previous, preferences);
-  assert.equal(words.wordPractice.text, 'MY CUSTOM LIST');
+  assert.equal(words.wordPractice.text, COMMON_QSO_WORDS);
   words.activeSeconds = 7.5; // An unfinished block, already credited before reload.
   applyListeningTotal(words, 12.8);
   applyListeningTotal(words, 12.8);

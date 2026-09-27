@@ -3,6 +3,9 @@
 `/radio/cw-listening/` is a public static Astro tool. It uses the normal site
 layout, appears in the Radio tools, search, and sitemap, and needs no account.
 The private trainer mounts the same player in Focus and supplies history tracking.
+Each new Word recognition session in the trainer starts with Common QSO words,
+retaining saved speed and audio settings. Resuming an unfinished session keeps
+its selected list. The public player's default and remembered lists are unchanged.
 
 ## Icons and lock-screen artwork
 

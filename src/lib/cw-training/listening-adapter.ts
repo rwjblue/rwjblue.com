@@ -1,5 +1,6 @@
 import type { ActiveBlock, TrainingDeviceState } from "./storage.ts";
 import { createWordPracticeBlock } from "./word-practice.ts";
+import { COMMON_QSO_WORDS, QSO_WORDS_TITLE } from "../cw-listening/word-practice.ts";
 import { createQsoPracticeBlock } from "./qso-practice.ts";
 import { practiceSelection } from "../cw-listening/qso-practice.ts";
 import { listeningSeconds, type ListeningDraft, type ListeningMode, type ListeningPreferences } from "../cw-listening/session.ts";
@@ -14,7 +15,13 @@ export function applyListeningTotal(active: ActiveBlock, total: number): void {
 }
 export function createTrainingListeningBlock(mode: ListeningMode, now: string, id: string,
   previous: Pick<TrainingDeviceState, "wordPracticeDefaults" | "qsoPracticeDefaults">, preferences: ListeningPreferences): ActiveBlock {
-  if (mode === "words") return createWordPracticeBlock(now, id, preferences.words ?? previous.wordPracticeDefaults);
+  if (mode === "words") {
+    const block = createWordPracticeBlock(now, id, preferences.words ?? previous.wordPracticeDefaults);
+    // New trainer visits start with QSO words while retaining playback settings.
+    block.wordPractice!.title = QSO_WORDS_TITLE;
+    block.wordPractice!.text = COMMON_QSO_WORDS;
+    return block;
+  }
   const legacy = previous.qsoPracticeDefaults;
   const matchingLegacy = legacy && (practiceSelection(legacy.qsoId).kind === "story") === (mode === "stories") ? legacy : undefined;
   const defaults = preferences[mode] ?? matchingLegacy ?? { qsoId: mode === "stories" ? "story-trail" : "short-contact", wpm: 20, used: [] };
