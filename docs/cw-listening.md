@@ -39,7 +39,14 @@ artwork (192px and 512px). SVG lettering uses paths rather than system fonts.
 - **Stories:** three original short/medium/longer stories in
   `src/data/cw-listening/stories.ts`, with one 450 Hz narrator.
 
-All modes offer a speed slider with stops at 12, 15, 18, 20, 23, 25, 28, 30,
+All modes offer separate character and effective WPM controls. Effective speed
+ranges from 5 WPM up to character speed. Matching speeds gives normal spacing;
+a lower effective speed uses Morse Pro's built-in Farnsworth character and word
+gaps without changing dits and dahs. Speech, extra word pauses, and QSO handoffs
+are additional to the effective Morse speed. Existing settings retain normal
+spacing. Both speeds are remembered and included in practice history.
+
+All modes offer a character speed slider with stops at 12, 15, 18, 20, 23, 25, 28, 30,
 35, and 40 WPM. **Enter speed** expands a numeric field for 10-60 WPM. An exact
 speed outside the presets appears as an additional stop until another speed is
 selected. Dragging previews the speed; releasing applies it. Native audio controls
@@ -52,7 +59,10 @@ The current word uses a background highlight driven by the media clock, rather
 than hover or the last clicked word. Keyboard focus has a separate outline.
 Updates are not live screen-reader announcements. Text starts hidden and its visibility
 is remembered across modes. Words also support shuffle, repeat, spoken answers,
-pitch, and extra word spacing. Custom text stays on the device.
+pitch, and extra word spacing. The extra pause applies between each Morse
+repeat and after the spoken answer; the gap before the answer uses only the
+selected Morse word spacing. With answers off, it applies between words.
+Changing the pause prepares a fresh round, including when the old round was an MP3. Custom text stays on the device.
 
 QSO generation happens once per selection/new session. Replay, speed changes,
 and restoring an unfinished session keep the saved script. New QSO samples
@@ -106,7 +116,7 @@ sessions and historical attempts remain supported.
 
 ## Links and audio assets
 
-Public URLs preserve the selection, speed (`wpm`), and text visibility
+Public URLs preserve the selection, character speed (`wpm`), effective speed (`fwpm`, when lower), and text visibility
 (`text=show` or `text=hide`). The **Copy link** button copies the current URL, with
 a selectable text fallback if clipboard access is unavailable. Existing catalog
 links remain supported:

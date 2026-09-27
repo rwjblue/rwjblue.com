@@ -15,7 +15,7 @@ export function qsoPracticeAttempt(active: ActiveBlock, endedAt: string): Traini
   };
 }
 export function createQsoPracticeBlock(now: string, id: string, previous?: QsoPracticeDraft): ActiveBlock {
-  const draft: QsoPracticeDraft = { qsoId: previous?.qsoId ?? PRACTICE_QSOS[0].id, wpm: previous?.wpm ?? 20, used: [] };
+  const draft: QsoPracticeDraft = { qsoId: previous?.qsoId ?? PRACTICE_QSOS[0].id, wpm: previous?.wpm ?? 20, ...(previous?.fwpm !== undefined ? { fwpm: previous.fwpm } : {}), used: [] };
   practiceQso(draft);
   return {
     id, assignmentId: "other-practice", task: {

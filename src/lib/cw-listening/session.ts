@@ -38,7 +38,7 @@ export function createListeningDraft(mode: ListeningMode, preferences?: Listenin
   if (mode === "words") return { mode, word: createWordDraft(preferences?.words) };
   const previous = preferences?.[mode];
   const qsoId = previous?.qsoId ?? PRACTICE_QSOS.find(item => (item.kind === "story") === (mode === "stories"))!.id;
-  const qso: QsoPracticeDraft = { qsoId, wpm: previous?.wpm ?? 20, used: [] };
+  const qso: QsoPracticeDraft = { qsoId, wpm: previous?.wpm ?? 20, ...(previous?.fwpm !== undefined ? { fwpm: previous.fwpm } : {}), used: [] };
   practiceQso(qso);
   return { mode, qso };
 }
@@ -59,7 +59,7 @@ export function restoreListeningDraft(value: unknown): ListeningDraft | undefine
     }
     const qso = draft.qso;
     if (!qso) return;
-    checkQsoSpeed(qso.wpm);
+    checkQsoSpeed(qso.wpm, qso.fwpm);
     const selection = practiceSelection(qso.qsoId);
     if ((selection.kind === "story") !== (draft.mode === "stories")) return;
     qso.used = cleanNotes(qso.used);
@@ -105,6 +105,7 @@ export interface ListeningPreset {
   mode?: ListeningMode;
   selection?: string;
   wpm?: number;
+  fwpm?: number;
   revealed?: boolean;
   generated?: PracticeQso;
   error?: string;
@@ -117,6 +118,8 @@ export function listeningPreset(search: string): ListeningPreset {
   const result: ListeningPreset = { key: "" };
   const wpm = Number(params.get("wpm"));
   if (Number.isFinite(wpm) && wpm >= 10 && wpm <= 60) result.wpm = wpm;
+  const fwpm = Number(params.get("fwpm"));
+  if (Number.isFinite(fwpm) && fwpm >= 5 && fwpm <= (result.wpm ?? 60)) result.fwpm = fwpm;
   if (params.get("text") === "show") result.revealed = true;
   if (params.get("text") === "hide") result.revealed = false;
   if (params.has("qso")) {
@@ -142,6 +145,9 @@ export function applyListeningPreset(draft: ListeningDraft, preset: ListeningPre
     const item = WORD_LISTS.find(item => item.id === preset.selection);
     if (item) Object.assign(draft.word, { title: item.title, text: item.text });
     if (preset.wpm !== undefined) draft.word.settings.wpm = preset.wpm;
+    if (preset.fwpm !== undefined || preset.wpm !== undefined) {
+      draft.word.settings.fwpm = Math.min(preset.fwpm ?? draft.word.settings.wpm, draft.word.settings.wpm);
+    }
   } else {
     if (preset.selection) {
       const item = practiceSelection(preset.selection);
@@ -150,6 +156,9 @@ export function applyListeningPreset(draft: ListeningDraft, preset: ListeningPre
     }
     if (preset.generated) draft.qso.generated = structuredClone(preset.generated);
     if (preset.wpm !== undefined) draft.qso.wpm = preset.wpm;
+    if (preset.fwpm !== undefined || preset.wpm !== undefined) {
+      draft.qso.fwpm = Math.min(preset.fwpm ?? draft.qso.wpm, draft.qso.wpm);
+    }
     practiceQso(draft.qso);
   }
 }
@@ -171,6 +180,8 @@ export function listeningLinkSettings(draft: ListeningDraft, revealed: boolean):
       shareable = !!recipe;
     }
   }
+  const settings = draft.mode === "words" ? draft.word.settings : draft.qso;
+  if (settings.fwpm !== undefined && settings.fwpm < settings.wpm) params.set("fwpm", String(settings.fwpm));
   params.set("text", revealed ? "show" : "hide");
   return { search: `?${params}`, shareable };
 }

@@ -85,7 +85,7 @@ test('asset loading reuses speech, rejects missing custom words, and loads MP3 m
   assert.equal(again.get('DIPOLE'), clips.get('DIPOLE'));
   await assert.rejects(loadWordSpeech('NEWWORD'), /No spoken clips for NEWWORD/);
   assert.equal(await loadWordRecording('NEWWORD', settings), undefined);
-  for (const mismatch of [{ wpm: 30 }, { pitch: 500 }, { gapSeconds: .5 }, { shuffle: true }]) {
+  for (const mismatch of [{ wpm: 30 }, { fwpm: 20 }, { pitch: 500 }, { gapSeconds: .5 }, { shuffle: true }]) {
     assert.equal(await loadWordRecording(COMMON_WORDS, { ...settings, ...mismatch }), undefined);
   }
   const compact = await loadWordRecording(COMMON_WORDS, { ...settings, spokenAnswers: false, repeat: false });

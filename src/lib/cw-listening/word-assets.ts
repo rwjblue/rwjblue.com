@@ -42,6 +42,7 @@ export async function loadWordRecording(text: string, settings: WordSettings): P
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(words.join(" ")));
   const wordsHash = [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
   const recording = recordings.find(item => item.wordsHash === wordsHash
+    && (item.settings.fwpm ?? item.settings.wpm) === (settings.fwpm ?? settings.wpm)
     && item.settings.wpm === settings.wpm && item.settings.pitch === settings.pitch
     && item.settings.gapSeconds === settings.gapSeconds && !item.settings.shuffle
     && !!item.settings.spokenAnswers === !!settings.spokenAnswers);

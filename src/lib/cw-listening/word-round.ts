@@ -1,5 +1,5 @@
 import { encodeWordWav, WORD_SAMPLE_RATE } from "./word-wav.ts";
-import { sendingTextTimings } from "./morse.ts";
+import { sendingTextTimings, morseWordGap } from "./morse.ts";
 import { checkWordSettings, parsePracticeWords, type WordSettings } from "./word-practice.ts";
 
 export type WordSpeechClips = ReadonlyMap<string, Float32Array>;
@@ -33,15 +33,16 @@ export function createWordRound(text: string, settings: WordSettings, random = M
   const timingStarts: number[] = [];
   const speech: WordRound["speech"] = [];
   let duration = 0;
+  const gap = morseWordGap(settings.wpm, settings.fwpm);
   for (const word of words) {
     starts.push(duration);
     timingStarts.push(timings.length);
-    const part = sendingTextTimings(word, settings.wpm);
-    const gap = 8400 / settings.wpm;
+    const part = sendingTextTimings(word, settings.wpm, settings.fwpm);
     const repeats = settings.spokenAnswers ? 3 : 1;
     for (let repeat = 0; repeat < repeats; repeat++) {
-      timings.push(...part, -gap);
-      duration += (part.reduce((sum, ms) => sum + Math.abs(ms), 0) + gap) / 1000;
+      const repeatGap = gap + (repeat < repeats - 1 ? settings.gapSeconds * 1000 : 0);
+      timings.push(...part, -repeatGap);
+      duration += (part.reduce((sum, ms) => sum + Math.abs(ms), 0) + repeatGap) / 1000;
     }
     if (settings.spokenAnswers) {
       const samples = speechClips?.get(word);
@@ -51,25 +52,25 @@ export function createWordRound(text: string, settings: WordSettings, random = M
       timings.push(-speechSeconds * 1000, -gap);
       duration += speechSeconds + gap / 1000;
     }
-    // Extra spacing belongs between items, never between the three repeats.
+    // Also add the pause after the answer (or after each compact item).
     if (settings.gapSeconds) {
       timings[timings.length - 1] -= settings.gapSeconds * 1000;
       duration += settings.gapSeconds;
     }
   }
-  if (duration > 600) throw new Error("This round exceeds 10 minutes. Use fewer words, a shorter pause, or a faster speed.");
+  if (duration > 1200) throw new Error("This round exceeds 20 minutes. Use fewer words, a shorter pause, or a faster speed.");
   return { words, timings, starts, timingStarts, settings: { ...settings }, duration, speech, speechClips };
 }
 
 /** Keep the heard prefix and shuffled order; only unsent words change speed. */
-export function retimeWordRound(round: WordRound, wpm: number, firstWord: number): WordRound {
+export function retimeWordRound(round: WordRound, wpm: number, firstWord: number, fwpm = round.settings.fwpm === undefined ? undefined : Math.min(round.settings.fwpm, wpm)): WordRound {
   if (firstWord >= round.words.length) return round;
-  const settings = { ...round.settings, wpm };
+  const settings = { ...round.settings, wpm, fwpm };
   const tail = createWordRound(round.words.slice(firstWord).join(" "), { ...settings, shuffle: false }, Math.random, round.speechClips);
   const boundary = round.starts[firstWord];
   const timingBoundary = round.timingStarts[firstWord];
   const duration = boundary + tail.duration;
-  if (duration > 600) throw new Error("This round would exceed 10 minutes. Use a faster speed or start a shorter list.");
+  if (duration > 1200) throw new Error("This round would exceed 20 minutes. Use a faster speed or start a shorter list.");
   return {
     words: [...round.words], settings, duration, speechClips: round.speechClips,
     speech: [...round.speech.filter(item => item.wordIndex < firstWord), ...tail.speech.map(item => ({ ...item, at: boundary + item.at, wordIndex: firstWord + item.wordIndex }))],

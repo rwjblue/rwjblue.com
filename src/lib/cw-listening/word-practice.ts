@@ -1,9 +1,12 @@
+import { checkListeningSpeed } from "./morse.ts";
 import { COMMON_WORDS, COMMON_QSO_WORDS, LEGACY_COMMON_QSO_WORDS, ENGLISH_WORDS_TITLE, QSO_WORDS_TITLE } from "../../data/cw-listening/words.ts";
 export { COMMON_WORDS, COMMON_QSO_WORDS, ENGLISH_WORDS_TITLE, QSO_WORDS_TITLE, WORD_LISTS } from "../../data/cw-listening/words.ts";
 /** Compatibility for existing imports; the public label no longer includes a count. */
 export const COMMON_77_WORDS_TITLE = QSO_WORDS_TITLE;
 export interface WordSettings {
   wpm: number;
+  /** Omitted means normal spacing at character speed. */
+  fwpm?: number;
   gapSeconds: number;
   pitch: number;
   shuffle: boolean;
@@ -36,6 +39,7 @@ export function parsePracticeWords(text: string): string[] {
 }
 
 export function checkWordSettings(settings: WordSettings): void {
+  checkListeningSpeed(settings.wpm, settings.fwpm);
   if (!Number.isFinite(settings.wpm) || settings.wpm < 10 || settings.wpm > 60
     || !Number.isFinite(settings.gapSeconds) || settings.gapSeconds < 0 || settings.gapSeconds > 5
     || !Number.isFinite(settings.pitch) || settings.pitch < 300 || settings.pitch > 1000
@@ -46,7 +50,7 @@ export function checkWordSettings(settings: WordSettings): void {
 
 export function wordSettingsNote(draft: WordPracticeDraft): string {
   const s = draft.settings;
-  return `${draft.title.slice(0, 100)}: ${parsePracticeWords(draft.text).length} entries, ${s.wpm} WPM, ${s.gapSeconds}s extra word pause, ${s.pitch} Hz, ${s.shuffle ? "shuffled" : "list order"}, ${s.spokenAnswers ? "3 repeats + spoken answer" : "compact"}, repeat ${s.repeat ? "on" : "off"}`;
+  return `${draft.title.slice(0, 100)}: ${parsePracticeWords(draft.text).length} entries, ${s.wpm} WPM${s.fwpm !== undefined && s.fwpm < s.wpm ? ` (${s.fwpm} effective)` : ""}, ${s.gapSeconds}s extra word pause, ${s.pitch} Hz, ${s.shuffle ? "shuffled" : "list order"}, ${s.spokenAnswers ? "3 repeats + spoken answer" : "compact"}, repeat ${s.repeat ? "on" : "off"}`;
 }
 
 export function wordPracticeNote(draft: WordPracticeDraft): string {

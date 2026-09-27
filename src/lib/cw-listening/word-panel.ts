@@ -44,6 +44,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
         <label>Pitch (Hz)<input data-word="pitch" type="number" min="300" max="1000" step="10" required /></label>
         <label>Extra word pause (seconds)<input data-word="gapSeconds" type="number" min="0" max="5" step="0.1" required /></label>
       </div>
+      <p class="listening-small">Extra pause is added between Morse repeats and after the spoken answer, or between words with spoken answers off. Changing it starts a fresh round.</p>
       <label>Words<textarea data-word="text" rows="5" maxlength="10000" spellcheck="false"></textarea></label>
       <p class="listening-small">Separate entries with spaces or newlines. Repeats are preserved. Edits become a custom list on this device.</p>
     </details>
@@ -159,7 +160,7 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
   function controls() {
     $("shuffle-label").textContent = draft.title === QSO_WORDS_TITLE ? "Shuffle after VVV" : "Shuffle each round";
     $("help").textContent = "Use the audio controls to play, pause, seek, and adjust volume. Tap a displayed word to jump to its beginning. Change speed while listening; the current item finishes at its original speed. Changing the list, pitch, spacing, or spoken answers starts a fresh round. Show or hide words at any time.";
-    if (draft.settings.spokenAnswers) $("help").textContent += " Each word plays three times with normal Morse word spacing, then its spoken answer. The extra pause is between items, never between repeats.";
+    if (draft.settings.spokenAnswers) $("help").textContent += " Each word plays three times, then its spoken answer. Extra pause applies between repeats and after the answer; the gap before the answer uses the selected Morse spacing.";
   }
   async function prepare() {
     const run = ++preparation;
@@ -214,42 +215,42 @@ export function mountWordPanel(host: HTMLElement, draft: WordPracticeDraft, opti
     options.changed();
     void prepare();
   });
-  const speed = mountSpeedControl($("speed"), draft.settings.wpm, async wpm => {
-    if (wpm === draft.settings.wpm) return;
-    const previous = draft.settings.wpm;
+  const speed = mountSpeedControl($("speed"), draft.settings.wpm, async (wpm, fwpm) => {
+    if (wpm === draft.settings.wpm && fwpm === draft.settings.fwpm) return;
+    const previous = { ...draft.settings };
     const run = ++speedChange;
     const currentRound = round;
     try {
-      checkWordSettings({ ...draft.settings, wpm });
-      draft.settings.wpm = wpm;
+      checkWordSettings({ ...draft.settings, wpm, fwpm });
+      Object.assign(draft.settings, { wpm, fwpm });
       options.changed();
       if (!started) {
         reset();
         void prepare();
         return;
       }
-      if (currentRound && currentRound.settings.wpm !== wpm) {
+      if (currentRound && (currentRound.settings.wpm !== wpm || currentRound.settings.fwpm !== fwpm)) {
         // Keep playing the MP3 while the clips needed for a live edit load.
         // The player converts at its current media position, preserving the
         // current item. Later rounds can use an MP3 again if settings match.
         const clips = currentRound.recordingUrl && currentRound.settings.spokenAnswers
           ? speechClips ?? await loadWordSpeech(currentRound.words.join(" ")) : undefined;
         if (disposed || run !== speedChange || round !== currentRound) return;
-        round = player.setSpeed(wpm, clips) ?? round;
+        round = player.setSpeed(wpm, clips, fwpm) ?? round;
       }
       if (playing) recordWordSettings(draft);
-      $("status").textContent = playing ? `${wpm} WPM from the next word; the current item finishes at its original speed.` : `Speed set to ${wpm} WPM.`;
+      $("status").textContent = playing ? `${wpm} character / ${fwpm ?? wpm} effective WPM from the next word; the current item finishes at its original speed.` : `Speed set to ${wpm} character / ${fwpm ?? wpm} effective WPM.`;
       mediaInfo();
       options.changed();
       if (!round) void prepare();
     } catch (error) {
       if (disposed || run !== speedChange) return;
-      draft.settings.wpm = previous;
-      speed.set(previous);
+      Object.assign(draft.settings, previous);
+      speed.set(previous.wpm, previous.fwpm ?? previous.wpm);
       options.changed();
       $("status").textContent = error instanceof Error ? error.message : "Unable to change speed.";
     }
-  });
+  }, draft.settings.fwpm);
   for (const key of ["gapSeconds", "pitch", "shuffle", "repeat"] as const) {
     input(key).addEventListener("change", () => {
       if ((key === "gapSeconds" || key === "pitch") && !input(key).checkValidity()) {

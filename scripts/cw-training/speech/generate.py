@@ -71,7 +71,7 @@ def main():
             import numpy as np
             import soundfile as sf
             engine = Kokoro(str(model_file(generator['model'])), str(model_file('voices-v1.0.bin')))
-        samples, rate = engine.create(entry['pronunciation'], voice=generator['voice'], speed=generator['speed'], lang=generator['language'])
+        samples, rate = engine.create(entry.get('phonemes', entry['pronunciation']), voice=generator['voice'], speed=generator['speed'], lang=generator['language'], is_phonemes='phonemes' in entry)
         audible = np.flatnonzero(np.abs(samples) > 0.003)
         if audible.size == 0:
             raise ValueError(f'Empty speech for {word}')

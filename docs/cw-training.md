@@ -223,14 +223,18 @@ Today has a single **Practice words** entry. The QSO catalog has 70 distinct
 literal tokens, keeping TKS and TNX separate and VVV first. It is not a
 transcript of the original instructor MP3.
 
-Controls offer 10-60 WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the
-standard seven-dit word gap, list order or a fresh shuffle each round, repetition,
+Controls offer 10-60 character WPM, 5 WPM up to character speed for effective
+WPM, 300-1000 Hz pitch, 0-5 seconds of extra pause after the selected Morse word gap, list order or a fresh shuffle each round, repetition,
 and a **Show text / Hide text** button beside playback. Compact playback remains the default. The **Three repeats + spoken answer**
 toggle sends each word
-three times with the standard seven-dit gap at the selected WPM, then plays its
-spoken clip. The extra pause applies between items, never between those repeats.
-A seven-dit gap separates the final repeat from speech and follows the answer
-before the extra pause. Defaults are 40 WPM, 450 Hz, one extra second, shuffle and repeat enabled. On the next new block, old
+three times with the selected Morse word gap plus the extra pause between
+repeats, then plays its spoken clip. The final repeat has only the Morse word
+gap before speech. The Morse gap plus extra pause follows the answer.
+Character and effective WPM are separate: a lower effective speed uses Morse
+Pro's built-in Farnsworth spacing for characters and words, leaving dits and
+dahs at character speed. Omitted effective speed preserves normal spacing.
+Defaults are 40 WPM, 450 Hz, one extra second, shuffle and repeat enabled.
+On the next new block, old
 30-WPM/600-Hz defaults migrate once; other customized values are preserved.
 Subsequent choices carry into new blocks.
 
@@ -249,7 +253,7 @@ and repeat work immediately; shuffle applies to the next round. Changing the lis
 pitch, spacing, or spoken answers pauses playback and starts a fresh round
 on Play. The two app buttons are **Show text / Hide text** and **Done and save**. Lists accept
 1-200 whitespace-separated entries, punctuation and explicit prosigns; unsupported
-text and rounds longer than ten minutes are rejected. Duplicates remain.
+text and rounds longer than twenty minutes are rejected. Duplicates remain.
 
 The existing pinned Morse Pro engine supplies word timings. A lazily loaded panel
 renders each complete round as a local mono PCM WAV with 5 ms tone envelopes.
@@ -319,6 +323,8 @@ returning to word practice resumes it, while choosing another activity saves it.
 - `data/cw-training/word-speech.json` is the editable source: word, pronunciation,
   and local `public/audio/cw-training/words/*.wav` path. Spell out abbreviations
   such as `QTH` as `Q T H`; use spoken words or phonetic respellings where needed.
+  An optional `phonemes` override goes directly to Kokoro instead of its text
+  phonemizer. AS uses stressed /æz/; ABT says "about" and PKT says "packet".
 - `mise run cw-training:generate-word-speech` generates missing or changed clips.
   Use `-- --word QTH` to limit generation, or `-- --force` to regenerate all.
   The script fingerprints pronunciation/voice settings and validates cached file

@@ -410,18 +410,20 @@ test("paused speed changes do not autoplay and a failed resume can be retried", 
   near(output.currentTime, 0.5);
 });
 
-test("spoken mode sends exactly three repetitions with seven-dit gaps before the answer", () => {
+test("spoken mode adds the requested pause between repeats and after the answer", () => {
   const speech = new Float32Array(11025).fill(0.25); // half a second
   const clips = new Map([["PARIS", speech]]);
   for (const wpm of [30, 40]) {
     const round = createWordRound("PARIS", { ...settings, wpm, spokenAnswers: true, gapSeconds: 1 }, Math.random, clips);
     const compact = createWordRound("PARIS", { ...settings, wpm, gapSeconds: 0 });
     const repeatDuration = 60 / wpm;
-    near(round.speech[0].at, repeatDuration * 3);
-    near(round.duration, repeatDuration * 3 + .5 + 8.4 / wpm + 1);
+    near(round.speech[0].at, repeatDuration * 3 + 2);
+    near(round.duration, repeatDuration * 3 + .5 + 8.4 / wpm + 3);
     assert.equal(round.speech.length, 1);
     const repetition = [...compact.timings];
-    assert.deepEqual(round.timings.slice(0, repetition.length * 3), [...repetition, ...repetition, ...repetition]);
+    const spaced = [...repetition];
+    spaced[spaced.length - 1] -= 1000;
+    assert.deepEqual(round.timings.slice(0, repetition.length * 3), [...spaced, ...spaced, ...repetition]);
     const samples = renderWordSamples(round, 450);
     const at = Math.round(round.speech[0].at * 22050);
     assert.deepEqual(samples.slice(at, at + speech.length), speech);
@@ -724,4 +726,56 @@ test("replacing QSO audio preserves pause state and credits only listening acros
   assert.equal(h.player.paused, true);
   assert.equal(h.recordings.size, 2);
   assert.equal(h.revoked.length, 1);
+});
+
+test("Farnsworth stretches only character and word gaps using the upstream PARIS standard", () => {
+  const normal = createWordRound("PARIS PARIS", { ...settings, wpm: 30, gapSeconds: 0 });
+  const spaced = createWordRound("PARIS PARIS", { ...settings, wpm: 30, fwpm: 15, gapSeconds: 0 });
+  near(spaced.starts[1], 4);
+  near(spaced.duration, 8);
+  assert.deepEqual(spaced.timings.filter(ms => ms > 0), normal.timings.filter(ms => ms > 0));
+  assert.deepEqual(spaced.timings.filter(ms => ms === -40), normal.timings.filter(ms => ms === -40));
+  for (const fwpm of [0, 4, 31, NaN, Infinity]) assert.throws(() => createWordRound("PARIS", { ...settings, wpm: 30, fwpm }));
+  const clips = new Map([["PARIS", new Float32Array(11025).fill(.2)]]);
+  const short = createWordRound("PARIS PARIS", { ...settings, fwpm: 15, gapSeconds: 0, spokenAnswers: true }, Math.random, clips);
+  const long = createWordRound("PARIS PARIS", { ...settings, fwpm: 15, gapSeconds: 2, spokenAnswers: true }, Math.random, clips);
+  near(long.speech[0].at - short.speech[0].at, 4);
+  near(long.starts[1] - short.starts[1], 6);
+  near(long.duration - short.duration, 12);
+});
+
+test("effective-speed-only MP3 edits preserve the current answer and listening credit", async t => {
+  const h = harness(t);
+  const clips = new Map([["PARIS", new Float32Array(2205).fill(.2)]]);
+  const before = createWordRound("PARIS PARIS PARIS", { ...settings, spokenAnswers: true }, Math.random, clips);
+  await h.player.play({ ...before, recordingUrl: '/practice.mp3', speech: [], timings: [], timingStarts: [], speechClips: undefined }, 450);
+  const output = h.outputs[0];
+  output.currentTime = .5;
+  const next = h.player.setSpeed(30, clips, 15);
+  await Promise.resolve();
+  near(next.starts[1], before.starts[1]);
+  assert.deepEqual(next.speech[0], before.speech[0]);
+  assert.ok(next.starts[2] > before.starts[2]);
+  near(output.currentTime, .5);
+  near(h.seconds(), .5);
+  assert.equal(output.paused, false);
+});
+
+test("QSO Farnsworth timing retains exact word ends and two-second station handoffs", () => {
+  const qso = { id: 'test', title: 'Test', stations: ['A', 'B'], lines: ['PARIS PARIS', 'PARIS PARIS'] };
+  const normal = createQsoRound(qso, 30);
+  const spaced = createQsoRound(qso, 30, 15);
+  near(spaced.starts[1], 4);
+  near(spaced.lines[1].start - spaced.lines[0].end, 2);
+  near(spaced.duration, spaced.wordEnds.at(-1));
+  near(spaced.duration, spaced.timings.reduce((total, ms) => total + Math.abs(ms), 0) / 1000);
+  assert.deepEqual(spaced.timings.filter(ms => ms > 0), normal.timings.filter(ms => ms > 0));
+  near(retimedQsoPosition(normal, spaced, normal.starts[2] + .1), spaced.starts[2]);
+});
+
+test("the full Common QSO list supports two-second repeat pauses within the round limit", () => {
+  const clips = new Map(parsePracticeWords(COMMON_QSO_WORDS).map(word => [word, new Float32Array(22050)]));
+  const round = createWordRound(COMMON_QSO_WORDS, { ...settings, wpm: 40, gapSeconds: 2, spokenAnswers: true }, Math.random, clips);
+  assert.equal(round.words.length, 70);
+  assert.ok(round.duration > 600 && round.duration < 1200);
 });

@@ -43,11 +43,11 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
     selection.append(group);
   }
   selection.value = draft.qsoId;
-  mountSpeedControl($("speed"), draft.wpm, wpm => {
-    if (wpm === draft.wpm) return;
-    draft.wpm = wpm;
+  mountSpeedControl($("speed"), draft.wpm, (wpm, fwpm) => {
+    if (wpm === draft.wpm && fwpm === draft.fwpm) return;
+    Object.assign(draft, { wpm, fwpm });
     prepare(true);
-  });
+  }, draft.fwpm);
   let round: QsoRound | undefined;
   let at = 0;
   let revealed = options.revealed ?? false;
@@ -134,13 +134,13 @@ export function mountQsoPanel(host: HTMLElement, draft: QsoPracticeDraft, option
       $("help").textContent = item.kind === "story"
         ? "Original stories for sentence-by-sentence listening. Replay keeps the same story."
         : "Generated practice contacts. New QSO changes the station details; replay keeps this exchange.";
-      round = createQsoRound(item, draft.wpm);
+      round = createQsoRound(item, draft.wpm, draft.fwpm);
       player.prepare(round, 450);
       if (preservePosition && previous) player.seek(retimedQsoPosition(previous, round, previousAt));
       const duration = Math.floor(round.duration);
       const minutes = Math.floor(duration / 60);
       const seconds = String(duration % 60).padStart(2, "0");
-      $("description").textContent = `${item.kind === "story" ? "Narrator: 450 Hz" : `${item.stations[0]}: 450 Hz · ${item.stations[1]}: 500 Hz`} · ${minutes}:${seconds} at ${draft.wpm} WPM`;
+      $("description").textContent = `${item.kind === "story" ? "Narrator: 450 Hz" : `${item.stations[0]}: 450 Hz · ${item.stations[1]}: 500 Hz`} · ${minutes}:${seconds} at ${draft.wpm} character / ${draft.fwpm ?? draft.wpm} effective WPM`;
       showPosition();
       mediaInfo();
       mediaPosition();

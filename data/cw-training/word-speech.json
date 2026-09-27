@@ -66,7 +66,8 @@
     {
       "word": "AS",
       "pronunciation": "as",
-      "path": "public/audio/cw-training/words/as.wav"
+      "path": "public/audio/cw-training/words/as.wav",
+      "phonemes": "\u02c8\u00e6z"
     },
     {
       "word": "AT",
@@ -285,7 +286,7 @@
     },
     {
       "word": "PKT",
-      "pronunciation": "P K T",
+      "pronunciation": "packet",
       "path": "public/audio/cw-training/words/pkt.wav"
     },
     {

@@ -57,8 +57,10 @@ The wrapper supplies fixed-speed decoding, reference timing, and replay:
 - `decodeSendingTimings(timings, wpm)` returns `{ text, morse }`. Positive
   milliseconds are marks; negative values are gaps. It flushes the last
   completed mark without adding a trailing gap. Unknown patterns retain `#`.
-- `sendingTextTimings(text, wpm)` generates International Morse, including
-  prosigns, and rejects unsupported target characters.
+- `sendingTextTimings(text, wpm, fwpm = wpm)` generates International Morse, including
+  prosigns, and rejects unsupported target characters. Listening practice passes
+  effective WPM to upstream `fwpm` and reads `wordSpace` for word gaps.
+  Morse Pro owns all Farnsworth calculations; sending references retain normal spacing.
 - `createSendingPlayer()` supplies `play(timings)`, `stop()`, and `dispose()`.
   Playback resolves on completion or cancellation and rejects on audio failure.
 

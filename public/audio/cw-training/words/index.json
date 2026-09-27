@@ -17,7 +17,7 @@
     },
     "ABT": {
       "inputHash": "bc2b5266bb2da8b7679205b1ed5d038aed90459db322d26adbe3fbf0438782f8",
-      "sha256": "9e5dc15f54270683b3881188fdf4752b6b01f8010a33a3f6091b23ddc1ef651b",
+      "sha256": "51514b295619e30669e7751044949cbf4d036c016d9a473494f906456cadd3db",
       "url": "/audio/cw-training/words/abt.wav"
     },
     "AGE": {
@@ -56,8 +56,8 @@
       "url": "/audio/cw-training/words/are.wav"
     },
     "AS": {
-      "inputHash": "83107ebc12970499bf8c3d945b7a075dad6c10daf5c10393d60163f893241229",
-      "sha256": "846ea2f9a993545dad0dbd6abd37cf84c31cf6a6952c0e1dc029e41cc17a4168",
+      "inputHash": "4880ebdcd9df44f7bc82cdfd200a90fac9c5765aff373a0dd0446babcfe0c7ad",
+      "sha256": "94e6bcbae22b384c6ed26a205f77bb8205fdd3111a7630af4975bf737f4d58cd",
       "url": "/audio/cw-training/words/as.wav"
     },
     "AT": {
@@ -276,8 +276,8 @@
       "url": "/audio/cw-training/words/or.wav"
     },
     "PKT": {
-      "inputHash": "a1c9bfc505bb2a0df07d440e1061ace50cb26939a24de4226562082c3d5c25d6",
-      "sha256": "cb4c9da134e147c22f8c58f4d0ca55ddee61b37d02c02418a7c146f9ef015e4d",
+      "inputHash": "391f742cc0f8d84ffd1b90564e16610f5484e93dca688e362537c4c6c933f966",
+      "sha256": "996c84667248b1f902511acf822a64bf9aeef42331c9e79a65d545bb1fa60ba0",
       "url": "/audio/cw-training/words/pkt.wav"
     },
     "PSE": {

@@ -171,9 +171,9 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElem
       url = undefined;
       ownsUrl = false;
     },
-    setSpeed(wpm: number, speechClips?: WordSpeechClips) {
+    setSpeed(wpm: number, speechClips?: WordSpeechClips, fwpm?: number) {
       if (!round || !output) return round;
-      if (round.settings.wpm === wpm) return round;
+      if (round.settings.wpm === wpm && (round.settings.fwpm ?? wpm) === (fwpm ?? wpm)) return round;
       // Reconstruct a fixed recording's timeline only when a live edit needs it.
       // The generated prefix has the same order and timing as the MP3 export.
       const editable = round.recordingUrl
@@ -181,7 +181,7 @@ export function createWordPlayer(callbacks: WordPlayerCallbacks, host?: HTMLElem
       for (let index = 0; index < round.words.length; index++) {
         const boundary = round.starts[index];
         if (boundary < position() + (playing ? 0.05 : 0)) continue;
-        const next = retimeWordRound(editable, wpm, index);
+        const next = retimeWordRound(editable, wpm, index, fwpm ?? wpm);
         const recording = renderWordWav(next, pitch);
         // Rendering can cross a word boundary while native playback continues.
         if (boundary < position() + (playing ? 0.02 : 0)) continue;

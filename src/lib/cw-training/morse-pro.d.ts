@@ -3,6 +3,7 @@ declare module "morse-pro/src/morse-pro-cw.js" {
   export interface MorseTokens { error?: boolean; }
   export default class MorseCW {
     constructor(options: { wpm: number; fwpm?: number; dictionaryOptions?: string[] });
+    readonly wordSpace: number;
     loadText(text: string): MorseTokens | null;
     loadMorse(morse: string): MorseTokens | null;
     displayMorse(tokens: MorseTokens | null): string;

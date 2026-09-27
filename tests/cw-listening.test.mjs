@@ -282,3 +282,30 @@ test('public player dependency graph never imports private training code', async
   await visit(new URL('../src/lib/cw-listening/client.ts', import.meta.url));
   assert.ok(visited.size >= 12);
 });
+
+test('Farnsworth preferences, trainer blocks, history and share links retain both speeds in all modes', () => {
+  for (const mode of ['words', 'qsos', 'stories']) {
+    const draft = createListeningDraft(mode);
+    const settings = mode === 'words' ? draft.word.settings : draft.qso;
+    Object.assign(settings, { wpm: 30, fwpm: 15 });
+    const saved = restoreListeningDraft(JSON.parse(JSON.stringify(draft)));
+    const preferences = restoreListeningPreferences({ version: 1, mode, [mode]: mode === 'words' ? saved.word : saved.qso });
+    const fresh = createListeningDraft(mode, preferences);
+    assert.equal(mode === 'words' ? fresh.word.settings.fwpm : fresh.qso.fwpm, 15);
+    const block = createTrainingListeningBlock(mode, '2026-09-28T12:00:00Z', mode, {}, preferences);
+    assert.equal(mode === 'words' ? block.wordPractice.settings.fwpm : block.qsoPractice.fwpm, 15);
+    const link = listeningLinkSettings(draft, true);
+    assert.match(link.search, /fwpm=15/);
+    const recipient = createListeningDraft(mode);
+    applyListeningPreset(recipient, listeningPreset(link.search));
+    const received = mode === 'words' ? recipient.word.settings : recipient.qso;
+    assert.equal(received.wpm, 30);
+    assert.equal(received.fwpm, 15);
+    applyListeningPreset(recipient, listeningPreset(link.search.replace('&fwpm=15', '')));
+    assert.equal(received.fwpm, 30, 'Old links specify normal spacing instead of remembered Farnsworth');
+    settings.fwpm = 31;
+    assert.equal(restoreListeningDraft(draft), undefined);
+    delete settings.fwpm;
+    assert.ok(restoreListeningDraft(draft), 'Existing drafts remain valid');
+  }
+});
