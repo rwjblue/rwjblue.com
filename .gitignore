@@ -16,3 +16,6 @@ dist/
 !/.claude/
 /.claude/*
 !/.claude/skills
+
+# Personal training backups, report settings, drafts, and submission snapshots.
+/data/private/

@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.cw-training.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true
+  },
+  "include": ["scripts/cw-training/report*.ts"]
+}

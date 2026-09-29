@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Typecheck and test the private Companion report task"
+
+set -euo pipefail
+npx tsc --project tsconfig.cw-report.json
+node --experimental-strip-types --test tests/cw-training-report-task.test.mjs tests/cw-training-report.test.mjs

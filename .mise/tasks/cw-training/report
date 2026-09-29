@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash; -*-
+#MISE description="Prepare Bob's report privately from a Companion backup"
+
+set -euo pipefail
+node --experimental-strip-types scripts/cw-training/report.ts "$@"

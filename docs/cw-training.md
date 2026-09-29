@@ -625,6 +625,11 @@ These are original summaries with external source links, not hosted PDF copies.
 
 ## Session reports
 
+For reports from a downloaded independent CW Academy Companion backup, use
+[`mise run cw-training:report`](cw-training-reports.md). That local task keeps
+Bob-specific settings, editable answers, and submission snapshots in ignored
+private storage in this repository.
+
 The Report view maps all 42 fields in Bob's Google Form. Select a numbered class
 and inspect the practice dates, which default to its three preparation dates
 through today. The target is two hours before the selected meeting. Opening
