@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T00:39:23.691Z",
+  "generatedAt": "2026-10-05T12:59:12.901Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -149,9 +149,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 34,
-        "activations": 34,
-        "qsos": 2566
+        "attempts": 35,
+        "activations": 35,
+        "qsos": 2676
       }
     },
     {
@@ -200,9 +200,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 61,
-        "activations": 61,
-        "qsos": 2083
+        "attempts": 62,
+        "activations": 62,
+        "qsos": 2135
       }
     },
     {
@@ -260,7 +260,7 @@
       "publicStats": {
         "attempts": 159,
         "activations": 141,
-        "qsos": 3972
+        "qsos": 3971
       }
     },
     {
@@ -316,9 +316,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 187,
-        "activations": 181,
-        "qsos": 7630
+        "attempts": 188,
+        "activations": 182,
+        "qsos": 7652
       }
     },
     {
@@ -362,7 +362,7 @@
       "publicStats": {
         "attempts": 55,
         "activations": 55,
-        "qsos": 1547
+        "qsos": 1544
       }
     },
     {
@@ -1203,9 +1203,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 122,
-        "activations": 121,
-        "qsos": 4899
+        "attempts": 124,
+        "activations": 123,
+        "qsos": 4980
       }
     },
     {
@@ -1247,9 +1247,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 102,
-        "activations": 99,
-        "qsos": 4414
+        "attempts": 105,
+        "activations": 102,
+        "qsos": 4484
       }
     },
     {
@@ -1335,9 +1335,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 37,
-        "activations": 37,
-        "qsos": 1109
+        "attempts": 38,
+        "activations": 38,
+        "qsos": 1143
       }
     },
     {
@@ -1379,9 +1379,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 301,
-        "activations": 300,
-        "qsos": 14234
+        "attempts": 304,
+        "activations": 303,
+        "qsos": 14344
       }
     },
     {
@@ -1437,9 +1437,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 62,
-        "activations": 60,
-        "qsos": 2656
+        "attempts": 65,
+        "activations": 63,
+        "qsos": 2889
       }
     },
     {
@@ -1481,9 +1481,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 108,
-        "activations": 107,
-        "qsos": 3863
+        "attempts": 110,
+        "activations": 109,
+        "qsos": 3894
       }
     },
     {
@@ -1525,9 +1525,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 55,
-        "activations": 53,
-        "qsos": 1736
+        "attempts": 57,
+        "activations": 55,
+        "qsos": 1784
       }
     },
     {
@@ -2014,9 +2014,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 239,
-        "activations": 224,
-        "qsos": 38183
+        "attempts": 242,
+        "activations": 227,
+        "qsos": 38236
       }
     },
     {
@@ -2052,9 +2052,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 78,
-        "activations": 76,
-        "qsos": 2059
+        "attempts": 80,
+        "activations": 78,
+        "qsos": 2153
       }
     },
     {
@@ -2096,9 +2096,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 177,
-        "activations": 172,
-        "qsos": 6722
+        "attempts": 179,
+        "activations": 174,
+        "qsos": 6747
       }
     },
     {
@@ -2169,9 +2169,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 121,
-        "activations": 115,
-        "qsos": 3130
+        "attempts": 120,
+        "activations": 114,
+        "qsos": 3105
       }
     },
     {
@@ -2234,9 +2234,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 351,
-        "activations": 344,
-        "qsos": 13320
+        "attempts": 356,
+        "activations": 349,
+        "qsos": 13464
       }
     },
     {
@@ -2295,9 +2295,30 @@
       ],
       "href": "/radio/pota/US-2874/",
       "potaUrl": "https://pota.app/#/park/US-2874",
-      "activationCount": 2,
-      "qsoTotal": 38,
+      "activationCount": 3,
+      "qsoTotal": 50,
       "activations": [
+        {
+          "reference": "US-2874",
+          "park": "Fort Adams State Park",
+          "date": "2026-10-03",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 12,
+            "cw": 12,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-2874",
           "park": "Fort Adams State Park",
@@ -2343,9 +2364,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 174,
-        "activations": 163,
-        "qsos": 6156
+        "attempts": 176,
+        "activations": 165,
+        "qsos": 6193
       }
     },
     {
@@ -2387,9 +2408,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 189,
-        "activations": 185,
-        "qsos": 7070
+        "attempts": 191,
+        "activations": 186,
+        "qsos": 7097
       }
     },
     {
@@ -2431,9 +2452,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 582,
-        "activations": 545,
-        "qsos": 23696
+        "attempts": 593,
+        "activations": 555,
+        "qsos": 24094
       }
     },
     {
@@ -2497,9 +2518,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 188,
-        "activations": 186,
-        "qsos": 7470
+        "attempts": 190,
+        "activations": 188,
+        "qsos": 7498
       }
     },
     {
@@ -2556,9 +2577,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 104,
-        "activations": 94,
-        "qsos": 3166
+        "attempts": 106,
+        "activations": 96,
+        "qsos": 3347
       }
     },
     {
@@ -2635,9 +2656,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 216,
-        "activations": 204,
-        "qsos": 9041
+        "attempts": 221,
+        "activations": 208,
+        "qsos": 9239
       }
     },
     {
@@ -2652,9 +2673,30 @@
       ],
       "href": "/radio/pota/US-2880/",
       "potaUrl": "https://pota.app/#/park/US-2880",
-      "activationCount": 3,
-      "qsoTotal": 64,
+      "activationCount": 4,
+      "qsoTotal": 88,
       "activations": [
+        {
+          "reference": "US-2880",
+          "park": "Snake Den State Park",
+          "date": "2026-09-24",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 24,
+            "cw": 24,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-2880",
           "park": "Snake Den State Park",
@@ -2715,9 +2757,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 161,
-        "activations": 158,
-        "qsos": 5664
+        "attempts": 164,
+        "activations": 161,
+        "qsos": 5742
       }
     },
     {
@@ -2759,9 +2801,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 58,
-        "activations": 56,
-        "qsos": 1363
+        "attempts": 59,
+        "activations": 57,
+        "qsos": 1377
       }
     },
     {
@@ -3031,9 +3073,30 @@
       },
       "href": "/radio/pota/US-4582/",
       "potaUrl": "https://pota.app/#/park/US-4582",
-      "activationCount": 3,
-      "qsoTotal": 62,
+      "activationCount": 4,
+      "qsoTotal": 72,
       "activations": [
+        {
+          "reference": "US-4582",
+          "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+          "date": "2026-09-16",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 10,
+            "cw": 10,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-4582",
           "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
@@ -3094,9 +3157,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 2775,
-        "activations": 2722,
-        "qsos": 114428
+        "attempts": 2806,
+        "activations": 2752,
+        "qsos": 115568
       }
     },
     {
@@ -3188,9 +3251,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 75,
-        "activations": 74,
-        "qsos": 3157
+        "attempts": 76,
+        "activations": 75,
+        "qsos": 3199
       }
     },
     {
@@ -3247,9 +3310,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 93,
-        "activations": 83,
-        "qsos": 2785
+        "attempts": 95,
+        "activations": 85,
+        "qsos": 2966
       }
     },
     {
@@ -3312,9 +3375,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 64,
-        "activations": 62,
-        "qsos": 2308
+        "attempts": 68,
+        "activations": 66,
+        "qsos": 2469
       }
     },
     {
@@ -3407,9 +3470,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 446,
-        "activations": 441,
-        "qsos": 15226
+        "attempts": 453,
+        "activations": 448,
+        "qsos": 15524
       }
     },
     {
@@ -3429,9 +3492,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 394,
-        "activations": 391,
-        "qsos": 13180
+        "attempts": 400,
+        "activations": 397,
+        "qsos": 13417
       }
     },
     {
@@ -3451,9 +3514,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 69,
+        "attempts": 68,
         "activations": 67,
-        "qsos": 2272
+        "qsos": 2278
       }
     },
     {
@@ -3543,12 +3606,18 @@
           "title": "Big River shakedown before the rove",
           "date": "2026-06-16",
           "href": "/notes/2026-06-16-big-river-wildlife-management-area-pota/"
+        },
+        {
+          "id": "2026-10-04-big-river-clearing-pota",
+          "title": "A new favorite clearing at Big River",
+          "date": "2026-10-04",
+          "href": "/notes/2026-10-04-big-river-clearing-pota/"
         }
       ],
       "publicStats": {
-        "attempts": 356,
-        "activations": 355,
-        "qsos": 14965
+        "attempts": 361,
+        "activations": 360,
+        "qsos": 15271
       }
     },
     {
@@ -3604,9 +3673,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 54,
-        "activations": 53,
-        "qsos": 1547
+        "attempts": 52,
+        "activations": 51,
+        "qsos": 1521
       }
     },
     {
@@ -3662,9 +3731,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 40,
-        "activations": 40,
-        "qsos": 1825
+        "attempts": 41,
+        "activations": 41,
+        "qsos": 1844
       }
     },
     {
@@ -3721,9 +3790,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 71,
-        "activations": 68,
-        "qsos": 2543
+        "attempts": 72,
+        "activations": 69,
+        "qsos": 2557
       }
     },
     {
@@ -3779,9 +3848,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 63,
-        "activations": 63,
-        "qsos": 2249
+        "attempts": 66,
+        "activations": 66,
+        "qsos": 2335
       }
     },
     {
@@ -3823,9 +3892,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 95,
-        "activations": 89,
-        "qsos": 3491
+        "attempts": 101,
+        "activations": 95,
+        "qsos": 3779
       }
     },
     {
@@ -3847,7 +3916,7 @@
       "publicStats": {
         "attempts": 53,
         "activations": 48,
-        "qsos": 1442
+        "qsos": 1462
       }
     },
     {
@@ -3889,9 +3958,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 69,
-        "activations": 68,
-        "qsos": 2477
+        "attempts": 70,
+        "activations": 69,
+        "qsos": 2489
       }
     },
     {
@@ -4008,9 +4077,30 @@
       ],
       "href": "/radio/pota/US-6992/",
       "potaUrl": "https://pota.app/#/park/US-6992",
-      "activationCount": 35,
-      "qsoTotal": 924,
+      "activationCount": 36,
+      "qsoTotal": 950,
       "activations": [
+        {
+          "reference": "US-6992",
+          "park": "JL Curran State Park",
+          "date": "2026-09-16",
+          "callsign": "N1RWJ",
+          "qsos": {
+            "total": 26,
+            "cw": 26,
+            "data": 0,
+            "phone": 0
+          },
+          "source": "profile",
+          "notes": [],
+          "projects": [
+            {
+              "id": "2026-ri-pota",
+              "label": "2026 RI POTA Challenge",
+              "href": "/projects/2026-activate-all-ri-pota/"
+            }
+          ]
+        },
         {
           "reference": "US-6992",
           "park": "JL Curran State Park",
@@ -4734,9 +4824,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 87,
-        "activations": 81,
-        "qsos": 2503
+        "attempts": 88,
+        "activations": 82,
+        "qsos": 2536
       }
     },
     {
@@ -4792,9 +4882,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 126,
-        "activations": 125,
-        "qsos": 3594
+        "attempts": 131,
+        "activations": 130,
+        "qsos": 3769
       }
     },
     {
@@ -4950,9 +5040,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 118,
-        "activations": 117,
-        "qsos": 4757
+        "attempts": 119,
+        "activations": 118,
+        "qsos": 4807
       }
     },
     {
@@ -5008,9 +5098,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 78,
-        "activations": 78,
-        "qsos": 2961
+        "attempts": 79,
+        "activations": 79,
+        "qsos": 3000
       }
     },
     {
@@ -5093,9 +5183,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 79,
-        "activations": 78,
-        "qsos": 3611
+        "attempts": 80,
+        "activations": 79,
+        "qsos": 3661
       }
     },
     {
@@ -5152,9 +5242,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 60,
-        "activations": 58,
-        "qsos": 2088
+        "attempts": 59,
+        "activations": 57,
+        "qsos": 2068
       }
     },
     {
@@ -5196,9 +5286,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 68,
-        "activations": 68,
-        "qsos": 2163
+        "attempts": 69,
+        "activations": 69,
+        "qsos": 2182
       }
     },
     {
@@ -5254,9 +5344,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 92,
-        "activations": 86,
-        "qsos": 2366
+        "attempts": 105,
+        "activations": 98,
+        "qsos": 2516
       }
     },
     {
@@ -5298,9 +5388,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 82,
-        "activations": 81,
-        "qsos": 2234
+        "attempts": 83,
+        "activations": 82,
+        "qsos": 2272
       }
     },
     {
@@ -5386,9 +5476,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 100,
-        "activations": 100,
-        "qsos": 3431
+        "attempts": 101,
+        "activations": 101,
+        "qsos": 3442
       }
     },
     {
@@ -5488,9 +5578,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 64,
-        "activations": 64,
-        "qsos": 2019
+        "attempts": 63,
+        "activations": 63,
+        "qsos": 1994
       }
     },
     {
@@ -5596,9 +5686,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 61,
-        "activations": 56,
-        "qsos": 1715
+        "attempts": 62,
+        "activations": 57,
+        "qsos": 1776
       }
     },
     {
@@ -5647,9 +5737,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 143,
-        "activations": 137,
-        "qsos": 6984
+        "attempts": 147,
+        "activations": 141,
+        "qsos": 7189
       }
     },
     {

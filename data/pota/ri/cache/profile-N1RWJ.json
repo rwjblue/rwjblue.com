@@ -12,24 +12,64 @@
   "gravatar": "ba9860a14193e5bff4c93cdde3608492",
   "stats": {
     "activator": {
-      "activations": 151,
+      "activations": 155,
       "parks": 96,
-      "qsos": 3645
+      "qsos": 3717
     },
     "attempts": {
-      "activations": 164,
+      "activations": 168,
       "parks": 96,
-      "qsos": 3698
+      "qsos": 3770
     },
     "hunter": {
-      "parks": 596,
-      "qsos": 979
+      "parks": 628,
+      "qsos": 1034
     },
-    "awards": 28,
+    "awards": 29,
     "endorsements": 64
   },
   "recent_activity": {
     "activations": [
+      {
+        "date": "2026-10-03",
+        "reference": "US-2874",
+        "park": "Fort Adams State Park",
+        "location": "US-RI",
+        "cw": 12,
+        "data": 0,
+        "phone": 0,
+        "total": 12
+      },
+      {
+        "date": "2026-09-24",
+        "reference": "US-2880",
+        "park": "Snake Den State Park",
+        "location": "US-RI",
+        "cw": 24,
+        "data": 0,
+        "phone": 0,
+        "total": 24
+      },
+      {
+        "date": "2026-09-16",
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "location": "US-RI",
+        "cw": 26,
+        "data": 0,
+        "phone": 0,
+        "total": 26
+      },
+      {
+        "date": "2026-09-16",
+        "reference": "US-4582",
+        "park": "Washington-Rochambeau Revolutionary Route National Historic Trail",
+        "location": "US-RI",
+        "cw": 10,
+        "data": 0,
+        "phone": 0,
+        "total": 10
+      },
       {
         "date": "2026-09-13",
         "reference": "US-2872",
@@ -132,13 +172,13 @@
       },
       {
         "date": "2026-08-28",
-        "reference": "US-7889",
-        "park": "Presidio of SF National Historic Site",
+        "reference": "US-0757",
+        "park": "San Francisco Maritime National Historical Park",
         "location": "US-CA",
-        "cw": 21,
+        "cw": 11,
         "data": 0,
         "phone": 0,
-        "total": 21
+        "total": 11
       },
       {
         "date": "2026-08-28",
@@ -152,13 +192,13 @@
       },
       {
         "date": "2026-08-28",
-        "reference": "US-0757",
-        "park": "San Francisco Maritime National Historical Park",
+        "reference": "US-7889",
+        "park": "Presidio of SF National Historic Site",
         "location": "US-CA",
-        "cw": 11,
+        "cw": 21,
         "data": 0,
         "phone": 0,
-        "total": 11
+        "total": 21
       },
       {
         "date": "2026-08-26",
@@ -212,16 +252,6 @@
       },
       {
         "date": "2026-08-14",
-        "reference": "US-6985",
-        "park": "Round Top Wildlife Management Area",
-        "location": "US-RI",
-        "cw": 7,
-        "data": 0,
-        "phone": 0,
-        "total": 7
-      },
-      {
-        "date": "2026-08-14",
         "reference": "US-2881",
         "park": "World War II Veterans Memorial State Park",
         "location": "US-RI",
@@ -229,6 +259,16 @@
         "data": 0,
         "phone": 0,
         "total": 11
+      },
+      {
+        "date": "2026-08-14",
+        "reference": "US-6985",
+        "park": "Round Top Wildlife Management Area",
+        "location": "US-RI",
+        "cw": 7,
+        "data": 0,
+        "phone": 0,
+        "total": 7
       },
       {
         "date": "2026-08-09",
@@ -239,60 +279,83 @@
         "data": 0,
         "phone": 0,
         "total": 12
-      },
-      {
-        "date": "2026-08-08",
-        "reference": "US-7508",
-        "park": "Pulaski State Park",
-        "location": "US-RI",
-        "cw": 12,
-        "data": 0,
-        "phone": 0,
-        "total": 12
-      },
-      {
-        "date": "2026-08-07",
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "location": "US-RI",
-        "cw": 34,
-        "data": 0,
-        "phone": 0,
-        "total": 34
-      },
-      {
-        "date": "2026-08-05",
-        "reference": "US-2879",
-        "park": "Rocky Point State Park",
-        "location": "US-RI",
-        "cw": 0,
-        "data": 0,
-        "phone": 39,
-        "total": 39
-      },
-      {
-        "date": "2026-07-26",
-        "reference": "US-0513",
-        "park": "Block Island National Wildlife Refuge",
-        "location": "US-RI",
-        "cw": 61,
-        "data": 0,
-        "phone": 0,
-        "total": 61
       }
     ],
     "hunter_qsos": [
       {
-        "date": "2026-09-13T12:33:50",
-        "callsign": "KC1NDQ",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-6986",
-        "park": "Simmons Mill Wildlife Management Area",
-        "location": "US-RI"
+        "date": "2026-10-04T17:47:00",
+        "callsign": "WT5O",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-3578",
+        "park": "Tijuana Estuary Reserve State Conservation Area",
+        "location": "US-CA"
       },
       {
-        "date": "2026-09-12T23:07:00",
+        "date": "2026-10-04T17:47:00",
+        "callsign": "WT5O",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1130",
+        "park": "Border Field State Park",
+        "location": "US-CA"
+      },
+      {
+        "date": "2026-10-04T17:33:49",
+        "callsign": "N4IN",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-1267",
+        "park": "My Old Kentucky Home State Park",
+        "location": "US-KY"
+      },
+      {
+        "date": "2026-10-04T17:28:42",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-10-02T14:28:10",
+        "callsign": "AD0DB",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-11698",
+        "park": "Seminary Fen SNA State Sanctuary",
+        "location": "US-MN"
+      },
+      {
+        "date": "2026-10-02T14:15:19",
+        "callsign": "K3MTO",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6302",
+        "park": "Fisheating Creek Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-10-02T14:07:26",
+        "callsign": "N9HO",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-12740",
+        "park": "Hinds Road Outcrop Forever Wild Tract State Conservation Area",
+        "location": "US-AL"
+      },
+      {
+        "date": "2026-10-02T14:02:27",
+        "callsign": "KG1A",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
+      },
+      {
+        "date": "2026-10-02T13:53:00",
         "callsign": "K3CBK",
         "band": "20M",
         "mode": "CW",
@@ -301,106 +364,133 @@
         "location": "US-MS"
       },
       {
-        "date": "2026-09-12T23:04:13",
-        "callsign": "N0NV",
+        "date": "2026-10-02T13:29:00",
+        "callsign": "VA3KSF",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "CA-5316",
+        "park": "Wolseley Barracks National Historic Site",
+        "location": "CA-ON"
+      },
+      {
+        "date": "2026-10-02T13:26:40",
+        "callsign": "N3WT",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1573",
+        "park": "Gambrill State Park",
+        "location": "US-MD"
+      },
+      {
+        "date": "2026-10-02T13:25:18",
+        "callsign": "W8KNX",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-1556",
+        "park": "Wilderness State Park",
+        "location": "US-MI"
+      },
+      {
+        "date": "2026-10-02T13:19:00",
+        "callsign": "K2JVB",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-2014",
+        "park": "Bethpage State Park",
+        "location": "US-NY"
+      },
+      {
+        "date": "2026-10-01T21:56:29",
+        "callsign": "N4SSD",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-6372",
-        "park": "Rita Blanca Wildlife Management Area",
+        "reference": "US-7615",
+        "park": "Percy Priest Wildlife Management Area",
+        "location": "US-TN"
+      },
+      {
+        "date": "2026-10-01T21:56:29",
+        "callsign": "N4SSD",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-6276",
+        "park": "Walterhill Floodplain State Natural Area",
+        "location": "US-TN"
+      },
+      {
+        "date": "2026-10-01T21:42:31",
+        "callsign": "AB5SE",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-2793",
+        "park": "Lake Wister State Park",
         "location": "US-OK"
       },
       {
-        "date": "2026-09-12T22:35:28",
-        "callsign": "KC1UUH",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-7721",
-        "park": "Salty Brine State Beach",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-09-12T22:09:54",
-        "callsign": "KO4FX",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2940",
-        "park": "Cummins Falls State Park",
-        "location": "US-TN"
-      },
-      {
-        "date": "2026-09-12T21:48:48",
-        "callsign": "M0TTQ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "GB-0711",
-        "park": "King Charles III England Coast National Scenic Trail",
-        "location": "GB-ENG"
-      },
-      {
-        "date": "2026-09-12T21:48:48",
-        "callsign": "M0TTQ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "GB-4591",
-        "park": "Farlington Marshes Nature Reserve",
-        "location": "GB-ENG"
-      },
-      {
-        "date": "2026-09-12T21:48:48",
-        "callsign": "M0TTQ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "GB-0022",
-        "park": "Langstone Harbour SSSI & Conservation Reserve",
-        "location": "GB-ENG"
-      },
-      {
-        "date": "2026-09-12T21:34:24",
-        "callsign": "WB0RLJ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-4011",
-        "park": "Chalco Hills State Recreation Area",
-        "location": "US-NE"
-      },
-      {
-        "date": "2026-09-12T21:25:20",
-        "callsign": "KB1G",
+        "date": "2026-09-26T19:32:45",
+        "callsign": "K0OTC",
         "band": "20M",
         "mode": "PHONE",
-        "reference": "US-6979",
-        "park": "Arcadia Management Area",
-        "location": "US-RI"
+        "reference": "US-13561",
+        "park": "Vermillion Highlands Wildlife Management Area",
+        "location": "US-MN"
       },
       {
-        "date": "2026-09-12T21:23:29",
-        "callsign": "KO4FX",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-2940",
-        "park": "Cummins Falls State Park",
-        "location": "US-TN"
+        "date": "2026-09-24T13:32:35",
+        "callsign": "KG1A",
+        "band": "30M",
+        "mode": "CW",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
+        "location": "US-FL"
       },
       {
-        "date": "2026-09-12T18:30:57",
-        "callsign": "KF0U",
+        "date": "2026-09-23T12:50:48",
+        "callsign": "WA1VEI",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-0321",
+        "park": "Great Meadows National Wildlife Refuge",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-09-23T12:50:48",
+        "callsign": "WA1VEI",
+        "band": "40M",
+        "mode": "CW",
+        "reference": "US-11602",
+        "park": "Pantry Brook Wildlife Management Area",
+        "location": "US-MA"
+      },
+      {
+        "date": "2026-09-22T22:41:31",
+        "callsign": "KC0ZPS",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-6524",
-        "park": "Eagle Bluffs State Conservation Area",
-        "location": "US-MO"
+        "reference": "US-1241",
+        "park": "St. Vrain State Park",
+        "location": "US-CO"
       },
       {
-        "date": "2026-09-12T18:20:00",
-        "callsign": "K8ZFJ",
+        "date": "2026-09-22T22:38:00",
+        "callsign": "W0ANM",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "location": "US-RI"
+        "reference": "US-2486",
+        "park": "Glacial Lakes State Park",
+        "location": "US-MN"
       },
       {
-        "date": "2026-09-12T18:19:08",
+        "date": "2026-09-16T14:39:52",
+        "callsign": "K5OHY",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "US-10272",
+        "park": "Bush Family Home State Historic Site",
+        "location": "US-TX"
+      },
+      {
+        "date": "2026-09-16T14:23:03",
         "callsign": "N1BS",
         "band": "20M",
         "mode": "CW",
@@ -409,103 +499,13 @@
         "location": "US-RI"
       },
       {
-        "date": "2026-09-12T17:13:00",
-        "callsign": "KF8GGI",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-6763",
-        "park": "Portage Marsh Wildlife Management Area",
-        "location": "US-MI"
-      },
-      {
-        "date": "2026-09-12T14:35:24",
-        "callsign": "N0NV",
-        "band": "20M",
-        "mode": "PHONE",
-        "reference": "US-1248",
-        "park": "Trinidad Lake State Park",
-        "location": "US-CO"
-      },
-      {
-        "date": "2026-09-12T14:30:00",
-        "callsign": "AK2G",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-5483",
-        "park": "Lincoln Woods State Forest",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-09-12T14:30:00",
-        "callsign": "AK2G",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-2878",
-        "park": "Lincoln Woods State Park",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-09-12T14:21:00",
-        "callsign": "K0RQ",
+        "date": "2026-09-16T14:16:29",
+        "callsign": "KG1A",
         "band": "20M",
         "mode": "CW",
-        "reference": "US-1214",
-        "park": "Cheyenne Mountain State Park",
-        "location": "US-CO"
-      },
-      {
-        "date": "2026-09-12T14:19:00",
-        "callsign": "K8ZFJ",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-2880",
-        "park": "Snake Den State Park",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-09-12T14:13:26",
-        "callsign": "K3MTO",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1887",
-        "park": "Jonathan Dickinson State Park",
+        "reference": "US-6305",
+        "park": "Guana River Wildlife Management Area",
         "location": "US-FL"
-      },
-      {
-        "date": "2026-09-12T14:13:26",
-        "callsign": "K3MTO",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-6281",
-        "park": "Loxahatchee River National Wild and Scenic River",
-        "location": "US-FL"
-      },
-      {
-        "date": "2026-09-12T14:08:04",
-        "callsign": "WA1VIN",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-6983",
-        "park": "Woody Hill Wildlife Management Area",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-09-12T13:40:03",
-        "callsign": "KC1ZBU",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-10543",
-        "park": "Patriots Park State Historic Site",
-        "location": "US-RI"
-      },
-      {
-        "date": "2026-09-12T13:37:32",
-        "callsign": "KV1T",
-        "band": "40M",
-        "mode": "PHONE",
-        "reference": "US-10544",
-        "park": "Jerimoth Hill State Recreation Area",
-        "location": "US-RI"
       }
     ]
   },
@@ -667,6 +667,11 @@
     {
       "name": "Howells Spectacular Thelypody Hunter",
       "granted": "2026-06-24T11:47:04",
+      "endorsements": []
+    },
+    {
+      "name": "Texas Wild Rice Hunter",
+      "granted": "2026-09-14T02:21:39",
       "endorsements": []
     },
     {
