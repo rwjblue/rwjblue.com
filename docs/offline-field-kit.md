@@ -40,3 +40,11 @@ RBN active-node data and OpenStreetMap tiles still require a connection. The
 RBN tool may identify locally stored node data by age, but it must not present
 that data as current. The field log timeline, beacon schedule, CW tools, and
 written references remain useful without those network services.
+
+The CW QSO walkthrough keeps operating defaults and saved contacts in local
+storage. Each listening turn has structured fields and a free-form copy area;
+copy stays with its section when switching between calling and answering.
+Saving a contact includes nonempty copy areas in the ADIF `COMMENT` field, then
+clears the other station and copy fields. Unsaved copy is only kept while the
+page remains open. The sticky jump menu links to the basic exchange, station
+details, background details, and closing.

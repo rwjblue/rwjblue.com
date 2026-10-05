@@ -1,6 +1,15 @@
 export type CwQsoRole = "cq" | "ans";
 
+export const COPY_FIELDS = {
+  copyCall: "Call",
+  copyBasic: "Basic exchange",
+  copyStation: "Rig, antenna, power, weather",
+  copyBackground: "Age, job, ham age",
+  copyWrapUp: "Wrap up",
+} as const;
+
 export type CwQsoFieldId =
+  | keyof typeof COPY_FIELDS
   | "myCall"
   | "myName"
   | "myQth"
@@ -29,6 +38,11 @@ export type CwQsoFieldId =
   | "comment";
 
 export interface CwQsoValues {
+  copyCall: string;
+  copyBasic: string;
+  copyStation: string;
+  copyBackground: string;
+  copyWrapUp: string;
   myCall: string;
   myName: string;
   myQth: string;
@@ -90,6 +104,11 @@ interface CwStepText {
 export const LOG_KEY = "cwqso.log";
 
 export const FIELD_DEFAULTS: Record<CwQsoFieldId, string> = {
+  copyCall: "",
+  copyBasic: "",
+  copyStation: "",
+  copyBackground: "",
+  copyWrapUp: "",
   myCall: "[YOURCALL]",
   myName: "[NAME]",
   myQth: "[QTH]",
@@ -165,20 +184,20 @@ export const STEP_TEXT: Record<number, CwStepText> = {
       "Send only your callsign, twice. No DE, no preamble - just your call. They'll come back with the first exchange.",
   },
   3: {
-    titleCq: "First exchange - greet + report + name + QTH",
+    titleCq: "First exchange - greet + report + QTH + name",
     titleAns: "Their first exchange",
     tipCq:
-      '<strong>DR OM</strong> = "dear old man" (friendly, used for any op). <strong>TU fer call</strong> = thanks for the call. RST and QTH each sent twice. <strong>HW?</strong> = how copy? <strong>BK</strong> = back to you.',
+      '<strong>TNX FER CALL</strong> = thanks for the call. <strong>UR RST</strong> introduces their signal report; <strong>QTH</strong> introduces your location, and <strong>NAME</strong> your name. <strong>&lt;BT&gt;</strong> separates topics within your turn. <strong>HW?</strong> = how copy? <strong>BK</strong> = back to you.',
     tipAns:
-      "Copy their RST, name, and QTH - each sent twice so you can verify. Fill them into the fields above so your reply (next step) populates correctly.",
+      "Copy their RST, QTH, and name - each sent twice so you can verify. Use the fields below for details and the free-form area for anything else you hear.",
   },
   4: {
     titleCq: "Their exchange back to you",
-    titleAns: "Your reply - thank + report + name + QTH",
+    titleAns: "Your reply - thank + report + QTH + name",
     tipCq:
-      'Copy their RST, name, and QTH. Fill them in above so the sign-off line populates correctly. If you miss something, see "If you missed something" on the right.',
+      'Copy their RST, QTH, and name below. If you miss something, see "If you missed something" in the reference panel. You can go straight to Wrap Up after this exchange.',
     tipAns:
-      "HI [their name] is a personal greeting. TU fer RPRT means thanks for the report. RST and QTH twice. Bracket your transmission with the calls: [THEIR] DE [YOU] ... [YOU] DE [THEIR] BK.",
+      "Greet them by name, then TNX FER RPRT (thanks for the report). Send UR RST, QTH, and NAME, repeating the details twice. Use <strong>&lt;BT&gt;</strong> between topics and finish with BK.",
   },
   5: {
     titleCq: "Rig, power, antenna, and weather",
@@ -232,6 +251,11 @@ export const STEP_TEXT: Record<number, CwStepText> = {
 
 export function createEmptyValues(): CwQsoValues {
   return {
+    copyCall: "",
+    copyBasic: "",
+    copyStation: "",
+    copyBackground: "",
+    copyWrapUp: "",
     myCall: "",
     myName: "",
     myQth: "",
@@ -486,48 +510,50 @@ export function renderTransmissions(role: CwQsoRole, values: CwQsoValues) {
     tx2: renderLine([station2Call, " ", station2Call]),
     tx3: [
       renderLine([station2Call, " DE ", station1Call]),
-      renderLine([greeting, " DR OM ES TU FER CALL"]),
-      renderLine(["RST ", station1Rst, " ", station1Rst, " IN ", station1Qth, " ", station1Qth]),
-      renderLine(["ES OP ", station1Name, " ", station1Name]),
+      renderLine([greeting, " TNX FER CALL <BT>"]),
+      renderLine(["UR RST ", station1Rst, " ", station1Rst, " <BT>"]),
+      renderLine(["QTH ", station1Qth, " ", station1Qth, " <BT>"]),
+      renderLine(["NAME ", station1Name, " ", station1Name, " <BT>"]),
       "HW? BK",
     ].join("\n"),
     tx4: [
       renderLine([station1Call, " DE ", station2Call]),
-      renderLine(["HI ", station1Name, " TU FER RPRT"]),
-      renderLine(["UR ", station2Rst, " ", station2Rst, " IN ", station2Qth, " ", station2Qth]),
-      renderLine(["ES OP ", station2Name, " ", station2Name]),
+      renderLine([greeting, " ", station1Name, " TNX FER RPRT <BT>"]),
+      renderLine(["UR RST ", station2Rst, " ", station2Rst, " <BT>"]),
+      renderLine(["QTH ", station2Qth, " ", station2Qth, " <BT>"]),
+      renderLine(["NAME ", station2Name, " ", station2Name, " <BT>"]),
       renderLine([station1Call, " DE ", station2Call, " BK"]),
     ].join("\n"),
     tx5: [
       renderLine([station2Call, " DE ", station1Call]),
-      renderLine(["RIG HR ", station1Rig, " ES PWR ", station1Pwr]),
-      renderLine(["ANT HR ", station1Ant]),
-      renderLine(["WX HR ", station1Wx]),
+      renderLine(["RIG HR ", station1Rig, " ES PWR ", station1Pwr, " <BT>"]),
+      renderLine(["ANT HR ", station1Ant, " <BT>"]),
+      renderLine(["WX HR ", station1Wx, " <BT>"]),
       "HW? BK",
     ].join("\n"),
     tx6: [
       renderLine([station1Call, " DE ", station2Call]),
-      renderLine(["RIG HR ", station2Rig, " ES PWR ", station2Pwr]),
-      renderLine(["ANT HR ", station2Ant]),
-      renderLine(["WX HR ", station2Wx]),
+      renderLine(["RIG HR ", station2Rig, " ES PWR ", station2Pwr, " <BT>"]),
+      renderLine(["ANT HR ", station2Ant, " <BT>"]),
+      renderLine(["WX HR ", station2Wx, " <BT>"]),
       renderLine([station1Call, " DE ", station2Call, " BK"]),
     ].join("\n"),
     tx7: [
       renderLine([station2Call, " DE ", station1Call]),
-      renderLine(["HAM FER ", station1HamYears]),
-      renderLine(["AGE HR ", station1Age]),
-      renderLine(["JOB HR ", station1Job]),
+      renderLine(["HAM FER ", station1HamYears, " <BT>"]),
+      renderLine(["AGE HR ", station1Age, " <BT>"]),
+      renderLine(["JOB HR ", station1Job, " <BT>"]),
       "HW? BK",
     ].join("\n"),
     tx8: [
       renderLine([station1Call, " DE ", station2Call]),
-      renderLine(["HAM FER ", station2HamYears]),
-      renderLine(["AGE HR ", station2Age]),
-      renderLine(["JOB HR ", station2Job]),
+      renderLine(["HAM FER ", station2HamYears, " <BT>"]),
+      renderLine(["AGE HR ", station2Age, " <BT>"]),
+      renderLine(["JOB HR ", station2Job, " <BT>"]),
       renderLine([station1Call, " DE ", station2Call, " BK"]),
     ].join("\n"),
     tx9: [
-      renderLine([station2Call, " DE ", station1Call, " TNX FER FB QSO ES INFO"]),
+      renderLine([station2Call, " DE ", station1Call, " TNX FER FB QSO ES INFO <BT>"]),
       "HPE CUAGN SN 73",
       renderLine([station2Call, " DE ", station1Call, " TU SK"]),
     ].join("\n"),
@@ -575,7 +601,13 @@ export function createLogEntry(
     qth: isFilled(values, "hisQth") ? getDisplayValue(values, "hisQth") : "",
     operator: getDisplayValue(values, "myCall"),
     myQth: getDisplayValue(values, "myQth"),
-    comment: values.comment.trim(),
+    comment: [
+      values.comment.trim(),
+      ...Object.entries(COPY_FIELDS).map(([field, label]) => {
+        const copy = values[field as keyof typeof COPY_FIELDS].trim();
+        return copy ? `${label}: ${copy}` : "";
+      }),
+    ].filter(Boolean).join("\n\n"),
     savedAt: now.getTime(),
   };
 }

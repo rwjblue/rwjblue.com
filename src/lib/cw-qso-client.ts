@@ -2,6 +2,7 @@ import {
   buildAdifFile,
   createEmptyValues,
   createLogEntry,
+  COPY_FIELDS,
   FIELD_DEFAULTS,
   getAutoGreeting,
   isFilled,
@@ -17,11 +18,12 @@ import {
   type CwQsoRole,
 } from "./cw-qso";
 
-type InputControl = HTMLInputElement | HTMLSelectElement;
+type InputControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 export function initCwQsoTool(rootId = "cw-qso-tool"): void {
-  const root = document.getElementById(rootId);
-  if (!(root instanceof HTMLElement)) return;
+  const element = document.getElementById(rootId);
+  if (!(element instanceof HTMLElement)) return;
+  const root: HTMLElement = element;
 
   const fieldIds = Object.keys(FIELD_DEFAULTS) as CwQsoFieldId[];
   const values = createEmptyValues();
@@ -30,7 +32,11 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
 
   const getControl = (id: string): InputControl => {
     const el = root.querySelector(`#${id}`);
-    if (!(el instanceof HTMLInputElement || el instanceof HTMLSelectElement)) {
+    if (!(
+      el instanceof HTMLInputElement ||
+      el instanceof HTMLSelectElement ||
+      el instanceof HTMLTextAreaElement
+    )) {
       throw new Error(`Missing CW QSO control: ${id}`);
     }
     return el;
@@ -197,6 +203,7 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
       "hisHamYears",
       "hisAge",
       "hisJob",
+      ...(Object.keys(COPY_FIELDS) as Array<keyof typeof COPY_FIELDS>),
     ] as const).forEach((id) => {
       getControl(id).value = "";
       getControl(id).dispatchEvent(new Event("input", { bubbles: true }));
@@ -238,6 +245,7 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
       "hisAge",
       "hisJob",
       "comment",
+      ...(Object.keys(COPY_FIELDS) as Array<keyof typeof COPY_FIELDS>),
     ] as const).forEach((id) => {
       getControl(id).value = "";
       getControl(id).dispatchEvent(new Event("input", { bubbles: true }));
@@ -265,7 +273,7 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
 
   function setupFieldSync(masterId: CwQsoFieldId): void {
     const master = getControl(masterId);
-    const slaves = root.querySelectorAll<HTMLInputElement>(`[data-master="${masterId}"]`);
+    const slaves = root.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(`[data-master="${masterId}"]`);
 
     slaves.forEach((slave) => {
       slave.value = master.value;
@@ -347,6 +355,7 @@ export function initCwQsoTool(rootId = "cw-qso-tool"): void {
     "hisHamYears",
     "hisAge",
     "hisJob",
+    ...(Object.keys(COPY_FIELDS) as Array<keyof typeof COPY_FIELDS>),
   ] as const).forEach(setupFieldSync);
 
   applyRole();

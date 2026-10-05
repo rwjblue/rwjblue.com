@@ -62,7 +62,7 @@ test("renderTransmissions builds cq-side examples with escaped highlighted field
   });
 
   assert.match(tx.tx1, /CQ CQ CQ DE <span class="me">N1RWJ<\/span>/);
-  assert.match(tx.tx4, /UR <span class="him">559<\/span>/);
+  assert.match(tx.tx4, /UR RST <span class="him">559<\/span>/);
   assert.match(tx.tx5, /RIG HR <span class="me">KX3<\/span>/);
   assert.match(tx.tx6, /RIG HR <span class="him">TEN TEC EAGLE<\/span>/);
   assert.match(tx.tx8, /JOB HR <span class="him">RETIRED ARMY<\/span>/);
@@ -77,6 +77,34 @@ test("renderTransmissions swaps station roles when answering a cq", () => {
   assert.match(tx.tx1, /<span class="him">K9XYZ<\/span>/);
   assert.match(tx.tx2, /<span class="me">N1RWJ<\/span>/);
   assert.match(tx.tx3, /<span class="me">N1RWJ<\/span> DE <span class="him">K9XYZ<\/span>/);
+});
+
+test("basic exchanges label report, location, and name with topic separators in both roles", () => {
+  for (const role of ["cq", "ans"]) {
+    const tx = renderTransmissions(role, sampleValues());
+    assert.match(tx.tx3, /GE<\/span> TNX FER CALL &lt;BT&gt;/);
+    assert.match(tx.tx4, /TNX FER RPRT &lt;BT&gt;/);
+    for (const exchange of [tx.tx3, tx.tx4]) {
+      assert.match(exchange, /UR RST .* &lt;BT&gt;\nQTH .* &lt;BT&gt;\nNAME .* &lt;BT&gt;/);
+      assert.doesNotMatch(exchange, /DR OM|ES OP| IN /);
+    }
+  }
+});
+
+test("free-form copy is preserved with section labels in the log and ADIF export", () => {
+  const values = {
+    ...sampleValues(),
+    copyBasic: "  Name might be Bob?\nQTH near Austin  ",
+    copyStation: "Runs a homebrew rig & loop",
+    copyWrapUp: "Will listen again tomorrow",
+  };
+  const now = new Date("2026-06-02T13:07:00.000Z");
+  const entry = createLogEntry(values, now, null);
+  const expectedComment = "portable practice\n\nBasic exchange: Name might be Bob?\nQTH near Austin\n\nRig, antenna, power, weather: Runs a homebrew rig & loop\n\nWrap up: Will listen again tomorrow";
+
+  assert.equal(entry.comment, expectedComment);
+  assert.ok(buildAdifFile([entry], now).includes(adifTag("COMMENT", expectedComment)));
+  assert.doesNotMatch(entry.comment, /Age, job, ham age:/);
 });
 
 test("createLogEntry derives utc values and omits missing optional fields", () => {

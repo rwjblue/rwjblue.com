@@ -1,0 +1,61 @@
+---
+interface Props {
+  step: number;
+}
+
+const { step } = Astro.props;
+const sections = [
+  {
+    copy: "copyCall",
+    fields: [["hisCall", "Their callsign", "K9XYZ"]],
+  },
+  {
+    copy: "copyBasic",
+    fields: [
+      ["hisCall", "Their callsign", "K9XYZ"],
+      ["hisRst", "RST they gave you", "579"],
+      ["hisQth", "Their QTH", "TEXAS TX"],
+      ["hisName", "Their name", "BOB"],
+    ],
+  },
+  {
+    copy: "copyStation",
+    fields: [
+      ["hisRig", "Their rig", "TEN TEC EAGLE"],
+      ["hisPwr", "Their power", "50W"],
+      ["hisAnt", "Their antenna", "DIPOLE UP 45 FT"],
+      ["hisWx", "Their weather", "RAIN 60F"],
+    ],
+  },
+  {
+    copy: "copyBackground",
+    fields: [
+      ["hisHamYears", "Ham for", "24 YRS"],
+      ["hisAge", "Their age", "55"],
+      ["hisJob", "Their job", "RETIRED ARMY"],
+    ],
+  },
+  { copy: "copyWrapUp", fields: [] },
+];
+const section = sections[Math.ceil(step / 2) - 1];
+const isMaster = step % 2 === 0;
+const copyId = isMaster ? section.copy : `${section.copy}-s${step}`;
+---
+
+<div class="cw-copy-panel">
+  {section.fields.map(([field, label, placeholder]) => (
+    <div class="cw-copy-field">
+      <label for={`${field}-s${step}`}>{label}</label>
+      <input type="text" id={`${field}-s${step}`} data-master={field} autocomplete="off" placeholder={placeholder} />
+    </div>
+  ))}
+  <div class="cw-copy-field cw-copy-notes">
+    <label for={copyId}>Free-form copy</label>
+    <textarea
+      id={copyId}
+      data-master={isMaster ? undefined : section.copy}
+      rows="5"
+      placeholder="Copy what you hear: partial words, extra details, questions..."
+    ></textarea>
+  </div>
+</div>
