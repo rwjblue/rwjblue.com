@@ -67,7 +67,7 @@ test("renderTransmissions builds cq-side examples with escaped highlighted field
   assert.match(tx.tx6, /RIG HR <span class="him">TEN TEC EAGLE<\/span>/);
   assert.match(tx.tx8, /JOB HR <span class="him">RETIRED ARMY<\/span>/);
   assert.match(tx.tx9, /TNX FER FB QSO ES INFO/);
-  assert.equal(tx.tx10, "TNX INFO ES QSO 73 TU SK");
+  assert.match(tx.tx10, /TNX INFO ES QSO 73/);
   assert.match(tx.wQrz, /DE <span class="me">N1RWJ<\/span>/);
 });
 
@@ -87,6 +87,17 @@ test("basic exchanges label report, location, and name with topic separators in 
     for (const exchange of [tx.tx3, tx.tx4]) {
       assert.match(exchange, /UR RST .* &lt;BT&gt;\nQTH .* &lt;BT&gt;\nNAME .* &lt;BT&gt;/);
       assert.doesNotMatch(exchange, /DR OM|ES OP| IN /);
+      assert.match(exchange, /^<span class="(?:me|him)">.* DE /);
+      assert.match(exchange, /\n<span class="(?:me|him)">.* DE .* K$/);
+    }
+    for (const exchange of [tx.tx5, tx.tx6, tx.tx7, tx.tx8]) {
+      assert.match(exchange, /^BK\n/);
+      assert.match(exchange, /BK$/);
+      assert.doesNotMatch(exchange, / DE /);
+    }
+    for (const exchange of [tx.tx9, tx.tx10]) {
+      assert.match(exchange, /^<span class="(?:me|him)">.* DE /);
+      assert.match(exchange, /\n<span class="(?:me|him)">.* DE .* TU SK$/);
     }
   }
 });

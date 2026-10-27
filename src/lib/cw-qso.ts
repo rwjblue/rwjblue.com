@@ -187,7 +187,7 @@ export const STEP_TEXT: Record<number, CwStepText> = {
     titleCq: "First exchange - greet + report + QTH + name",
     titleAns: "Their first exchange",
     tipCq:
-      '<strong>TNX FER CALL</strong> = thanks for the call. <strong>UR RST</strong> introduces their signal report; <strong>QTH</strong> introduces your location, and <strong>NAME</strong> your name. <strong>&lt;BT&gt;</strong> separates topics within your turn. <strong>HW?</strong> = how copy? <strong>BK</strong> = back to you.',
+      '<strong>TNX FER CALL</strong> = thanks for the call. <strong>UR RST</strong> introduces their signal report; <strong>QTH</strong> introduces your location, and <strong>NAME</strong> your name. <strong>&lt;BT&gt;</strong> separates topics. Start and end this basic turn with their call DE your call; <strong>K</strong> hands it back.',
     tipAns:
       "Copy their RST, QTH, and name - each sent twice so you can verify. Use the fields below for details and the free-form area for anything else you hear.",
   },
@@ -197,13 +197,13 @@ export const STEP_TEXT: Record<number, CwStepText> = {
     tipCq:
       'Copy their RST, QTH, and name below. If you miss something, see "If you missed something" in the reference panel. You can go straight to Wrap Up after this exchange.',
     tipAns:
-      "Greet them by name, then TNX FER RPRT (thanks for the report). Send UR RST, QTH, and NAME, repeating the details twice. Use <strong>&lt;BT&gt;</strong> between topics and finish with BK.",
+      "Greet them by name, then TNX FER RPRT (thanks for the report). Send UR RST, QTH, and NAME, repeating the details twice. Use <strong>&lt;BT&gt;</strong> between topics. Begin and end with their call DE your call, finishing with K.",
   },
   5: {
     titleCq: "Rig, power, antenna, and weather",
     titleAns: "Their station and weather details",
     tipCq:
-      "This is the first common ragchew extension after the basic exchange. Keep the station description compact and readable.",
+      "After the basic exchange, use BK to resume and BK to hand it back. Keep the station description compact and readable.",
     tipAns:
       "Copy their rig, power, antenna, and weather. If you miss one item, ask just for that item instead of restarting the whole turn.",
   },
@@ -213,13 +213,13 @@ export const STEP_TEXT: Record<number, CwStepText> = {
     tipCq:
       "Copy their station details. If you want a short QSO, you can skip from step 4 to the closing instead of taking this extension.",
     tipAns:
-      "Answer with your own rig, power, antenna, and weather details, then pass it back with BK.",
+      "Start with BK, send your rig, power, antenna, and weather details, then pass it back with BK.",
   },
   7: {
     titleCq: "Age, job, and how long you've been a ham",
     titleAns: "Their background details",
     tipCq:
-      "This is the second common extension in a longer ragchew. Share as much or as little background as feels natural.",
+      "Use BK at the start and end of this turn too. Share as much or as little background as feels natural.",
     tipAns:
       "Copy their ham-years, age, and job details. Once the exchange gets this far, it often feels more conversational and less rigid.",
   },
@@ -229,13 +229,13 @@ export const STEP_TEXT: Record<number, CwStepText> = {
     tipCq:
       "Copy their background details. Pull out only the specific item you missed if you need a repeat.",
     tipAns:
-      "Answer with your own ham-years, age, and job details, then hand it back with BK.",
+      "Start with BK, send your ham-years, age, and job details, then hand it back with BK.",
   },
   9: {
     titleCq: "Wrap up - thanks + 73",
     titleAns: "They wrap up",
     tipCq:
-      '<strong>FB QSO</strong> = "fine business QSO" (great contact). <strong>CUAGN</strong> = see you again. <strong>SK</strong> marks the end of the contact.',
+      'Return to their call DE your call for the closing. <strong>FB QSO</strong> = "fine business QSO" (great contact). <strong>CUAGN</strong> = see you again. <strong>SK</strong> marks the end of the contact.',
     tipAns:
       "Listen for their closing turn. After a longer ragchew, this usually includes thanks for the QSO and the info before 73 and SK.",
   },
@@ -245,7 +245,7 @@ export const STEP_TEXT: Record<number, CwStepText> = {
     tipCq:
       "QSO complete. Log it while the extra station and background details are still fresh.",
     tipAns:
-      "A short final closes the contact cleanly. Then log it while the details are still fresh.",
+      "Use their call DE your call again for your final, ending with SK. Then log it while the details are still fresh.",
   },
 };
 
@@ -514,7 +514,8 @@ export function renderTransmissions(role: CwQsoRole, values: CwQsoValues) {
       renderLine(["UR RST ", station1Rst, " ", station1Rst, " <BT>"]),
       renderLine(["QTH ", station1Qth, " ", station1Qth, " <BT>"]),
       renderLine(["NAME ", station1Name, " ", station1Name, " <BT>"]),
-      "HW? BK",
+      "HW?",
+      renderLine([station2Call, " DE ", station1Call, " K"]),
     ].join("\n"),
     tx4: [
       renderLine([station1Call, " DE ", station2Call]),
@@ -522,42 +523,47 @@ export function renderTransmissions(role: CwQsoRole, values: CwQsoValues) {
       renderLine(["UR RST ", station2Rst, " ", station2Rst, " <BT>"]),
       renderLine(["QTH ", station2Qth, " ", station2Qth, " <BT>"]),
       renderLine(["NAME ", station2Name, " ", station2Name, " <BT>"]),
-      renderLine([station1Call, " DE ", station2Call, " BK"]),
+      "HW?",
+      renderLine([station1Call, " DE ", station2Call, " K"]),
     ].join("\n"),
     tx5: [
-      renderLine([station2Call, " DE ", station1Call]),
+      "BK",
       renderLine(["RIG HR ", station1Rig, " ES PWR ", station1Pwr, " <BT>"]),
       renderLine(["ANT HR ", station1Ant, " <BT>"]),
       renderLine(["WX HR ", station1Wx, " <BT>"]),
       "HW? BK",
     ].join("\n"),
     tx6: [
-      renderLine([station1Call, " DE ", station2Call]),
+      "BK",
       renderLine(["RIG HR ", station2Rig, " ES PWR ", station2Pwr, " <BT>"]),
       renderLine(["ANT HR ", station2Ant, " <BT>"]),
       renderLine(["WX HR ", station2Wx, " <BT>"]),
-      renderLine([station1Call, " DE ", station2Call, " BK"]),
+      "HW? BK",
     ].join("\n"),
     tx7: [
-      renderLine([station2Call, " DE ", station1Call]),
+      "BK",
       renderLine(["HAM FER ", station1HamYears, " <BT>"]),
       renderLine(["AGE HR ", station1Age, " <BT>"]),
       renderLine(["JOB HR ", station1Job, " <BT>"]),
       "HW? BK",
     ].join("\n"),
     tx8: [
-      renderLine([station1Call, " DE ", station2Call]),
+      "BK",
       renderLine(["HAM FER ", station2HamYears, " <BT>"]),
       renderLine(["AGE HR ", station2Age, " <BT>"]),
       renderLine(["JOB HR ", station2Job, " <BT>"]),
-      renderLine([station1Call, " DE ", station2Call, " BK"]),
+      "HW? BK",
     ].join("\n"),
     tx9: [
       renderLine([station2Call, " DE ", station1Call, " TNX FER FB QSO ES INFO <BT>"]),
       "HPE CUAGN SN 73",
       renderLine([station2Call, " DE ", station1Call, " TU SK"]),
     ].join("\n"),
-    tx10: "TNX INFO ES QSO 73 TU SK",
+    tx10: [
+      renderLine([station1Call, " DE ", station2Call]),
+      "TNX INFO ES QSO 73",
+      renderLine([station1Call, " DE ", station2Call, " TU SK"]),
+    ].join("\n"),
     wQrz: renderLine(["DE ", myCall, " ", myCall]),
     wAgnName: getDisplayValue(values, "myName"),
     wAgnQth: getDisplayValue(values, "myQth"),
