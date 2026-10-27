@@ -3,6 +3,10 @@ lockfile = true
 
 [tools]
 node = "lts"
+rust = "1.98.0"
+# Build Jay's tools from tagged sources; current releases only ship Linux binaries.
+"cargo:https://github.com/jsvana/callsign-notes-merger" = "tag:v0.2.0"
+"cargo:https://github.com/jsvana/discord-callsign-bot" = "tag:v0.6.0"
 "pipx:pota-mcp" = "latest"
 "pipx:sota-mcp" = "latest"
 "pipx:solar-mcp" = "latest"

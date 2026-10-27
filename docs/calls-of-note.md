@@ -120,3 +120,55 @@ checked-in files using the same workflow as CWops.
 page links directly to that club-maintained file; no Discord export, local copy,
 or repository refresh is needed. Install and refresh it in PoLo using the same
 procedure as the CWops file.
+
+## Upstream community tools
+
+Mise pins Jay's [callsign-notes-merger](https://github.com/jsvana/callsign-notes-merger)
+at `v0.2.0` and [discord-callsign-bot](https://github.com/jsvana/discord-callsign-bot)
+at `v0.6.0`. Both install from tagged Git sources through mise's Cargo backend
+because these releases only provide Linux binaries. Rust is declared in the
+project toolchain. On macOS, building requires working Apple developer tools
+and acceptance of their license. The bot's upstream release does not include
+a Cargo.lock, so its transitive dependencies are not pinned by that release.
+
+```sh
+mise install
+mise exec -- callsign-notes-merger --help
+mise exec -- discord-callsign-bot --help
+mise run calls-of-note:merge-preview
+```
+
+The preview fetches the three published club files and writes
+`.tmp/calls-of-note/merged-preview.txt`, outside the site's public assets. Its
+configuration is `scripts/calls-of-note/merge-preview.toml`; additional sources
+need a URL in `[sources]` and a position in `priority_order`. This previews the
+upstream tool's current full-union behavior, including repeated names and full
+source notes. It is not a publishable overlap-only feed. In this release,
+failed source downloads are skipped and even a failed one-shot sync can exit
+successfully, so inspect logs and output before using the result.
+
+Local verification of `v0.2.0` also found that its callsign validator rejects
+numeric prefixes and slash callsigns. With the September 16, 2026 snapshots,
+it drops 100 CWops entries (for example, `2E0OBO` and `3B9FR`) and produces
+3,730 callsigns instead of the 3,830-call union. Correct this in the upstream
+merger before publishing its output.
+
+Discord roster collection belongs in the upstream bot. Each community has its
+own guild configuration and output file, which can then become another URL for
+the merger. A server member with Manage Server permission must install the bot,
+and its application needs the Server Members intent. Put bot configuration and
+credentials outside the repository, then run it explicitly:
+
+```sh
+mise exec -- discord-callsign-bot --config /absolute/private/path/config.toml
+```
+
+This starts the bot and can write to the GitHub destination specified in that
+configuration; it is not a preview command. Follow the upstream configuration
+reference for the Discord token and `GITHUB_TOKEN`. Installing the tools does
+not start either daemon. Everyday Ham does not yet have a configured source.
+
+Implement merger or Discord extraction enhancements in Jay's repositories,
+then update the mise source pin to the reviewed release or commit. Keep this
+repository responsible for its source configuration, roster conversion, and
+site integration.

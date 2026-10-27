@@ -1,0 +1,10 @@
+# Preview the upstream merger's current behavior. This includes single-source
+# callsigns and full notes; it is not the proposed public overlap-only feed.
+output_path = ".tmp/calls-of-note/merged-preview.txt"
+run_once = true
+priority_order = ["cwops", "bkg", "cwo"]
+
+[sources]
+cwops = "https://rwjblue.com/radio/resources/calls-of-note/cwops.txt"
+bkg = "https://rwjblue.com/radio/resources/calls-of-note/bkg.txt"
+cwo = "https://ditdit.club/data/members.txt"
