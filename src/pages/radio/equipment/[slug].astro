@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import MacroCopyControls from "../../../components/MacroCopyControls.astro";
 import {
   connectedEquipment,
   EQUIPMENT_CATEGORIES,
@@ -124,6 +125,7 @@ const history = [
     }
 
     <Content />
+    {entry.body?.includes("data-macro-snippet") && <MacroCopyControls />}
 
     {
   entry.data.history.length > 0 && (

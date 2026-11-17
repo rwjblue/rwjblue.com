@@ -1,0 +1,133 @@
+<template id="macro-copy-controls">
+  <button class="macro-copy-button" type="button" data-pagefind-ignore>
+    <svg class="macro-copy-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+      <rect x="8" y="8" width="12" height="12" rx="2" />
+      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+    </svg>
+    <svg class="macro-copied-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="m5 12 4 4L19 6" />
+    </svg>
+  </button>
+  <span class="macro-copy-status" role="status" aria-live="polite" aria-atomic="true" data-pagefind-ignore></span>
+</template>
+
+<script>
+  const template = document.querySelector<HTMLTemplateElement>("#macro-copy-controls");
+  document.querySelectorAll<HTMLElement>(".equipment-document [data-macro-snippet]").forEach((snippet) => {
+    const code = snippet.querySelector("pre code");
+    if (!template || !code) return;
+
+    const controls = template.content.cloneNode(true) as DocumentFragment;
+    const button = controls.querySelector<HTMLButtonElement>("button")!;
+    const status = controls.querySelector<HTMLElement>("[role=status]")!;
+    const name = snippet.dataset.macroSnippet;
+    const label = `Copy ${name} macro`;
+    button.setAttribute("aria-label", label);
+    button.title = label;
+    let feedbackTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    button.addEventListener("click", async () => {
+      clearTimeout(feedbackTimeout);
+      status.textContent = "";
+      button.removeAttribute("data-copied");
+      status.removeAttribute("data-error");
+      try {
+        // Remove only the fence's final newline; preserve the macro's exact text.
+        await navigator.clipboard.writeText((code.textContent ?? "").replace(/\r?\n$/, ""));
+        button.dataset.copied = "true";
+        button.title = `Copied ${name} macro`;
+        status.textContent = `Copied ${name} macro.`;
+        feedbackTimeout = setTimeout(() => {
+          button.removeAttribute("data-copied");
+          button.title = label;
+          status.textContent = "";
+        }, 2000);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        button.title = label;
+        status.dataset.error = "true";
+        status.textContent = `Could not copy ${name}. The macro is selected; copy it manually.`;
+      }
+    });
+    snippet.append(controls);
+  });
+</script>
+
+<style>
+  :global(.equipment-document .macro-snippet) {
+    position: relative;
+    margin-block: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface-soft);
+  }
+
+  :global(.equipment-document .macro-snippet pre) {
+    margin: 0;
+    padding: 1rem 3.75rem 1rem 1rem;
+    background: transparent !important;
+    color: var(--ink) !important;
+    font-size: 0.86rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  :global(.equipment-document .macro-copy-button) {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  :global(.equipment-document .macro-copy-button:hover) {
+    background: var(--surface-faint);
+    color: var(--ink);
+  }
+
+  :global(.equipment-document .macro-copy-button:focus-visible) {
+    outline: 3px solid var(--blue);
+    outline-offset: 1px;
+  }
+
+  :global(.equipment-document .macro-copied-icon),
+  :global(.equipment-document [data-copied] .macro-copy-icon) {
+    display: none;
+  }
+
+  :global(.equipment-document [data-copied] .macro-copied-icon) {
+    display: block;
+    color: var(--green);
+  }
+
+  :global(.equipment-document .macro-copy-status:not([data-error])) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  :global(.equipment-document .macro-copy-status[data-error]) {
+    display: block;
+    padding: 0 1rem 1rem;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+</style>
