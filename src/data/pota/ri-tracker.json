@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-10-05T12:59:12.156Z",
+  "generatedAt": "2026-11-21T04:18:33.520Z",
   "callsigns": [
-    "N1RWJ",
-    "KC1YDM",
-    "KB9SMK"
+    "N1RWJ"
   ],
   "summary": {
-    "completed": 57,
-    "remaining": 4,
+    "completed": 58,
+    "remaining": 3,
     "total": 61,
-    "percentComplete": 93
+    "percentComplete": 95
   },
   "references": [
     {
@@ -59,29 +57,6 @@
       }
     },
     {
-      "reference": "US-6981",
-      "name": "Great Swamp Wildlife Management Area",
-      "latitude": 41.4691,
-      "longitude": -71.5796,
-      "grid": "FN41fl",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Washington County"
-      ],
-      "status": "remaining",
-      "href": "/radio/pota/US-6981/",
-      "potaUrl": "https://pota.app/#/park/US-6981",
-      "firstActivation": null,
-      "latestActivation": null,
-      "activationCount": 0,
-      "notes": [],
-      "publicStats": {
-        "attempts": 68,
-        "activations": 67,
-        "qsos": 2278
-      }
-    },
-    {
       "reference": "US-6988",
       "name": "Grills State Preserve",
       "latitude": 41.3997,
@@ -102,6 +77,389 @@
         "attempts": 53,
         "activations": 48,
         "qsos": 1462
+      }
+    },
+    {
+      "reference": "US-6992",
+      "name": "JL Curran State Park",
+      "latitude": 41.7507,
+      "longitude": -71.5516,
+      "grid": "FN41fs",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-6992/",
+      "potaUrl": "https://pota.app/#/park/US-6992",
+      "firstActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2025-09-21",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 0,
+          "data": 0,
+          "phone": 10
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-6992",
+        "park": "JL Curran State Park",
+        "date": "2026-11-19",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 14,
+          "cw": 14,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 34,
+      "notes": [
+        {
+          "id": "2026-06-03-jl-curran-state-park-pota",
+          "title": "JL Curran State Park Pack Mule Activation",
+          "date": "2026-06-03",
+          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
+        },
+        {
+          "id": "2026-07-18-k2hrc-rhode-island-pota",
+          "title": "Taking K2HRC to Rhode Island",
+          "date": "2026-07-18",
+          "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
+        },
+        {
+          "id": "2026-08-12-jl-curran-kh1-doublet",
+          "title": "My First KH1 POTA Activation at JL Curran",
+          "date": "2026-08-12",
+          "href": "/notes/2026-08-12-jl-curran-kh1-doublet/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 88,
+        "activations": 82,
+        "qsos": 2536
+      }
+    },
+    {
+      "reference": "US-2871",
+      "name": "Burlingame State Park",
+      "latitude": 41.3756,
+      "longitude": -71.6986,
+      "grid": "FN41dj",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-2871/",
+      "potaUrl": "https://pota.app/#/park/US-2871",
+      "firstActivation": {
+        "reference": "US-2871",
+        "park": "Burlingame State Park",
+        "date": "2026-05-25",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-2871",
+        "park": "Burlingame State Park",
+        "date": "2026-11-15",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 10,
+          "cw": 10,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 2,
+      "notes": [
+        {
+          "id": "2026-05-25-pota-rove",
+          "title": "Memorial Day Rhode Island POTA Rove",
+          "date": "2026-05-25",
+          "href": "/notes/2026-05-25-pota-rove/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 120,
+        "activations": 114,
+        "qsos": 3105
+      }
+    },
+    {
+      "reference": "US-6981",
+      "name": "Great Swamp Wildlife Management Area",
+      "latitude": 41.4691,
+      "longitude": -71.5796,
+      "grid": "FN41fl",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-6981/",
+      "potaUrl": "https://pota.app/#/park/US-6981",
+      "firstActivation": {
+        "reference": "US-6981",
+        "park": "Great Swamp Wildlife Management Area",
+        "date": "2026-11-15",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 14,
+          "cw": 14,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6981",
+        "park": "Great Swamp Wildlife Management Area",
+        "date": "2026-11-15",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 14,
+          "cw": 14,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 1,
+      "notes": [],
+      "publicStats": {
+        "attempts": 68,
+        "activations": 67,
+        "qsos": 2278
+      }
+    },
+    {
+      "reference": "US-6984",
+      "name": "Black Hut Wildlife Management Area",
+      "latitude": 41.9928,
+      "longitude": -71.6568,
+      "grid": "FN41ex",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Providence County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-6984/",
+      "potaUrl": "https://pota.app/#/park/US-6984",
+      "firstActivation": {
+        "reference": "US-6984",
+        "park": "Black Hut Wildlife Management Area",
+        "date": "2026-05-27",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 25,
+          "cw": 25,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6984",
+        "park": "Black Hut Wildlife Management Area",
+        "date": "2026-10-30",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 12,
+          "cw": 12,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 2,
+      "notes": [
+        {
+          "id": "2026-05-27-black-hut-wildlife-management-area-pota",
+          "title": "Black Hut Wildlife Management Area with a 40m EFHW",
+          "date": "2026-05-27",
+          "href": "/notes/2026-05-27-black-hut-wildlife-management-area-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 41,
+        "activations": 41,
+        "qsos": 1844
+      }
+    },
+    {
+      "reference": "US-6991",
+      "name": "Rockville Wildlife Management Area",
+      "latitude": 41.5054,
+      "longitude": -71.7591,
+      "grid": "FN41cm",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-6991/",
+      "potaUrl": "https://pota.app/#/park/US-6991",
+      "firstActivation": {
+        "reference": "US-6991",
+        "park": "Rockville Wildlife Management Area",
+        "date": "2026-06-19",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 11,
+          "cw": 11,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6991",
+        "park": "Rockville Wildlife Management Area",
+        "date": "2026-10-27",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 19,
+          "cw": 19,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 2,
+      "notes": [
+        {
+          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
+          "title": "Rhode Island-to-Florida rove, day one",
+          "date": "2026-06-19",
+          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 62,
+        "activations": 57,
+        "qsos": 2399
+      }
+    },
+    {
+      "reference": "US-6982",
+      "name": "Big River Wildlife Management Area",
+      "latitude": 41.6311,
+      "longitude": -71.5714,
+      "grid": "FN41fp",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Kent County",
+        "Washington County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-6982/",
+      "potaUrl": "https://pota.app/#/park/US-6982",
+      "firstActivation": {
+        "reference": "US-6982",
+        "park": "Big River Wildlife Management Area",
+        "date": "2026-05-14",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 20,
+          "cw": 20,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "latestActivation": {
+        "reference": "US-6982",
+        "park": "Big River Wildlife Management Area",
+        "date": "2026-10-18",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 23,
+          "cw": 23,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 4,
+      "notes": [
+        {
+          "id": "2026-06-16-big-river-wildlife-management-area-pota",
+          "title": "Big River shakedown before the rove",
+          "date": "2026-06-16",
+          "href": "/notes/2026-06-16-big-river-wildlife-management-area-pota/"
+        },
+        {
+          "id": "2026-10-04-big-river-clearing-pota",
+          "title": "A new favorite clearing at Big River",
+          "date": "2026-10-04",
+          "href": "/notes/2026-10-04-big-river-clearing-pota/"
+        }
+      ],
+      "publicStats": {
+        "attempts": 361,
+        "activations": 360,
+        "qsos": 15271
+      }
+    },
+    {
+      "reference": "US-6987",
+      "name": "Cocumcussoc State Park",
+      "latitude": 41.5823,
+      "longitude": -71.4599,
+      "grid": "FN41gn",
+      "locationDesc": "US-RI",
+      "counties": [
+        "Washington County"
+      ],
+      "status": "completed",
+      "href": "/radio/pota/US-6987/",
+      "potaUrl": "https://pota.app/#/park/US-6987",
+      "firstActivation": {
+        "reference": "US-6987",
+        "park": "Cocumcussoc State Park",
+        "date": "2026-04-04",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 69,
+          "cw": 0,
+          "data": 0,
+          "phone": 69
+        },
+        "source": "backfill"
+      },
+      "latestActivation": {
+        "reference": "US-6987",
+        "park": "Cocumcussoc State Park",
+        "date": "2026-10-10",
+        "callsign": "N1RWJ",
+        "qsos": {
+          "total": 15,
+          "cw": 15,
+          "data": 0,
+          "phone": 0
+        },
+        "source": "profile"
+      },
+      "activationCount": 2,
+      "notes": [],
+      "publicStats": {
+        "attempts": 101,
+        "activations": 95,
+        "qsos": 3779
       }
     },
     {
@@ -251,72 +609,6 @@
         "attempts": 2806,
         "activations": 2752,
         "qsos": 115568
-      }
-    },
-    {
-      "reference": "US-6992",
-      "name": "JL Curran State Park",
-      "latitude": 41.7507,
-      "longitude": -71.5516,
-      "grid": "FN41fs",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Providence County"
-      ],
-      "status": "completed",
-      "href": "/radio/pota/US-6992/",
-      "potaUrl": "https://pota.app/#/park/US-6992",
-      "firstActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2025-09-21",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 10,
-          "cw": 0,
-          "data": 0,
-          "phone": 10
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-6992",
-        "park": "JL Curran State Park",
-        "date": "2026-09-16",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 26,
-          "cw": 26,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 32,
-      "notes": [
-        {
-          "id": "2026-06-03-jl-curran-state-park-pota",
-          "title": "JL Curran State Park Pack Mule Activation",
-          "date": "2026-06-03",
-          "href": "/notes/2026-06-03-jl-curran-state-park-pota/"
-        },
-        {
-          "id": "2026-07-18-k2hrc-rhode-island-pota",
-          "title": "Taking K2HRC to Rhode Island",
-          "date": "2026-07-18",
-          "href": "/notes/2026-07-18-k2hrc-rhode-island-pota/"
-        },
-        {
-          "id": "2026-08-12-jl-curran-kh1-doublet",
-          "title": "My First KH1 POTA Activation at JL Curran",
-          "date": "2026-08-12",
-          "href": "/notes/2026-08-12-jl-curran-kh1-doublet/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 88,
-        "activations": 82,
-        "qsos": 2536
       }
     },
     {
@@ -837,121 +1129,6 @@
       }
     },
     {
-      "reference": "US-6991",
-      "name": "Rockville Wildlife Management Area",
-      "latitude": 41.5054,
-      "longitude": -71.7591,
-      "grid": "FN41cm",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Washington County"
-      ],
-      "status": "completed",
-      "href": "/radio/pota/US-6991/",
-      "potaUrl": "https://pota.app/#/park/US-6991",
-      "firstActivation": {
-        "reference": "US-6991",
-        "park": "Rockville Wildlife Management Area",
-        "date": "2026-06-19",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 11,
-          "cw": 11,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "latestActivation": {
-        "reference": "US-6991",
-        "park": "Rockville Wildlife Management Area",
-        "date": "2026-06-19",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 11,
-          "cw": 11,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 1,
-      "notes": [
-        {
-          "id": "2026-06-19-rhode-island-to-florida-rove-day-one",
-          "title": "Rhode Island-to-Florida rove, day one",
-          "date": "2026-06-19",
-          "href": "/notes/2026-06-19-rhode-island-to-florida-rove-day-one/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 62,
-        "activations": 57,
-        "qsos": 2399
-      }
-    },
-    {
-      "reference": "US-6982",
-      "name": "Big River Wildlife Management Area",
-      "latitude": 41.6311,
-      "longitude": -71.5714,
-      "grid": "FN41fp",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Kent County",
-        "Washington County"
-      ],
-      "status": "completed",
-      "href": "/radio/pota/US-6982/",
-      "potaUrl": "https://pota.app/#/park/US-6982",
-      "firstActivation": {
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "date": "2026-05-14",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 20,
-          "cw": 20,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "latestActivation": {
-        "reference": "US-6982",
-        "park": "Big River Wildlife Management Area",
-        "date": "2026-06-16",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 17,
-          "cw": 13,
-          "data": 0,
-          "phone": 4
-        },
-        "source": "profile"
-      },
-      "activationCount": 2,
-      "notes": [
-        {
-          "id": "2026-06-16-big-river-wildlife-management-area-pota",
-          "title": "Big River shakedown before the rove",
-          "date": "2026-06-16",
-          "href": "/notes/2026-06-16-big-river-wildlife-management-area-pota/"
-        },
-        {
-          "id": "2026-10-04-big-river-clearing-pota",
-          "title": "A new favorite clearing at Big River",
-          "date": "2026-10-04",
-          "href": "/notes/2026-10-04-big-river-clearing-pota/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 361,
-        "activations": 360,
-        "qsos": 15271
-      }
-    },
-    {
       "reference": "US-7971",
       "name": "Blackstone River Valley National Historical Park",
       "latitude": 42.015,
@@ -1323,60 +1500,6 @@
       }
     },
     {
-      "reference": "US-6984",
-      "name": "Black Hut Wildlife Management Area",
-      "latitude": 41.9928,
-      "longitude": -71.6568,
-      "grid": "FN41ex",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Providence County"
-      ],
-      "status": "completed",
-      "href": "/radio/pota/US-6984/",
-      "potaUrl": "https://pota.app/#/park/US-6984",
-      "firstActivation": {
-        "reference": "US-6984",
-        "park": "Black Hut Wildlife Management Area",
-        "date": "2026-05-27",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 25,
-          "cw": 25,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "latestActivation": {
-        "reference": "US-6984",
-        "park": "Black Hut Wildlife Management Area",
-        "date": "2026-05-27",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 25,
-          "cw": 25,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 1,
-      "notes": [
-        {
-          "id": "2026-05-27-black-hut-wildlife-management-area-pota",
-          "title": "Black Hut Wildlife Management Area with a 40m EFHW",
-          "date": "2026-05-27",
-          "href": "/notes/2026-05-27-black-hut-wildlife-management-area-pota/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 41,
-        "activations": 41,
-        "qsos": 1844
-      }
-    },
-    {
       "reference": "US-0515",
       "name": "Ninigret National Wildlife Refuge",
       "latitude": 41.3682,
@@ -1428,60 +1551,6 @@
         "attempts": 159,
         "activations": 141,
         "qsos": 3971
-      }
-    },
-    {
-      "reference": "US-2871",
-      "name": "Burlingame State Park",
-      "latitude": 41.3756,
-      "longitude": -71.6986,
-      "grid": "FN41dj",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Washington County"
-      ],
-      "status": "completed",
-      "href": "/radio/pota/US-2871/",
-      "potaUrl": "https://pota.app/#/park/US-2871",
-      "firstActivation": {
-        "reference": "US-2871",
-        "park": "Burlingame State Park",
-        "date": "2026-05-25",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 12,
-          "cw": 12,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "latestActivation": {
-        "reference": "US-2871",
-        "park": "Burlingame State Park",
-        "date": "2026-05-25",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 12,
-          "cw": 12,
-          "data": 0,
-          "phone": 0
-        },
-        "source": "profile"
-      },
-      "activationCount": 1,
-      "notes": [
-        {
-          "id": "2026-05-25-pota-rove",
-          "title": "Memorial Day Rhode Island POTA Rove",
-          "date": "2026-05-25",
-          "href": "/notes/2026-05-25-pota-rove/"
-        }
-      ],
-      "publicStats": {
-        "attempts": 120,
-        "activations": 114,
-        "qsos": 3105
       }
     },
     {
@@ -2452,53 +2521,6 @@
         "attempts": 57,
         "activations": 55,
         "qsos": 1784
-      }
-    },
-    {
-      "reference": "US-6987",
-      "name": "Cocumcussoc State Park",
-      "latitude": 41.5823,
-      "longitude": -71.4599,
-      "grid": "FN41gn",
-      "locationDesc": "US-RI",
-      "counties": [
-        "Washington County"
-      ],
-      "status": "completed",
-      "href": "/radio/pota/US-6987/",
-      "potaUrl": "https://pota.app/#/park/US-6987",
-      "firstActivation": {
-        "reference": "US-6987",
-        "park": "Cocumcussoc State Park",
-        "date": "2026-04-04",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 69,
-          "cw": 0,
-          "data": 0,
-          "phone": 69
-        },
-        "source": "backfill"
-      },
-      "latestActivation": {
-        "reference": "US-6987",
-        "park": "Cocumcussoc State Park",
-        "date": "2026-04-04",
-        "callsign": "N1RWJ",
-        "qsos": {
-          "total": 69,
-          "cw": 0,
-          "data": 0,
-          "phone": 69
-        },
-        "source": "backfill"
-      },
-      "activationCount": 1,
-      "notes": [],
-      "publicStats": {
-        "attempts": 101,
-        "activations": 95,
-        "qsos": 3779
       }
     },
     {
