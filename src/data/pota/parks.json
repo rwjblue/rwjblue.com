@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T04:18:34.607Z",
+  "generatedAt": "2026-11-21T13:44:01.740Z",
   "parks": [
     {
       "reference": "US-0015",
@@ -200,9 +200,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 62,
-        "activations": 62,
-        "qsos": 2135
+        "attempts": 64,
+        "activations": 64,
+        "qsos": 2177
       }
     },
     {
@@ -258,9 +258,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 159,
-        "activations": 141,
-        "qsos": 3971
+        "attempts": 172,
+        "activations": 153,
+        "qsos": 4147
       }
     },
     {
@@ -316,9 +316,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 188,
-        "activations": 182,
-        "qsos": 7652
+        "attempts": 192,
+        "activations": 186,
+        "qsos": 7850
       }
     },
     {
@@ -360,9 +360,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 55,
-        "activations": 55,
-        "qsos": 1544
+        "attempts": 58,
+        "activations": 58,
+        "qsos": 1770
       }
     },
     {
@@ -1082,9 +1082,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 79,
-        "activations": 71,
-        "qsos": 1681
+        "attempts": 81,
+        "activations": 73,
+        "qsos": 1717
       }
     },
     {
@@ -1203,9 +1203,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 124,
-        "activations": 123,
-        "qsos": 4980
+        "attempts": 130,
+        "activations": 129,
+        "qsos": 5140
       }
     },
     {
@@ -1247,9 +1247,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 105,
-        "activations": 102,
-        "qsos": 4484
+        "attempts": 113,
+        "activations": 110,
+        "qsos": 4865
       }
     },
     {
@@ -1291,9 +1291,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 88,
-        "activations": 88,
-        "qsos": 2976
+        "attempts": 89,
+        "activations": 89,
+        "qsos": 2993
       }
     },
     {
@@ -1335,9 +1335,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 38,
-        "activations": 38,
-        "qsos": 1143
+        "attempts": 40,
+        "activations": 40,
+        "qsos": 1180
       }
     },
     {
@@ -1379,9 +1379,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 304,
-        "activations": 303,
-        "qsos": 14344
+        "attempts": 308,
+        "activations": 307,
+        "qsos": 14478
       }
     },
     {
@@ -1437,9 +1437,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 65,
-        "activations": 63,
-        "qsos": 2889
+        "attempts": 66,
+        "activations": 64,
+        "qsos": 2941
       }
     },
     {
@@ -1481,9 +1481,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 110,
-        "activations": 109,
-        "qsos": 3894
+        "attempts": 116,
+        "activations": 115,
+        "qsos": 4089
       }
     },
     {
@@ -1525,9 +1525,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 57,
-        "activations": 55,
-        "qsos": 1784
+        "attempts": 59,
+        "activations": 57,
+        "qsos": 1914
       }
     },
     {
@@ -2014,9 +2014,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 242,
-        "activations": 227,
-        "qsos": 38236
+        "attempts": 244,
+        "activations": 229,
+        "qsos": 38277
       }
     },
     {
@@ -2052,9 +2052,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 80,
-        "activations": 78,
-        "qsos": 2153
+        "attempts": 83,
+        "activations": 81,
+        "qsos": 2209
       }
     },
     {
@@ -2096,9 +2096,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 179,
-        "activations": 174,
-        "qsos": 6747
+        "attempts": 184,
+        "activations": 179,
+        "qsos": 7014
       }
     },
     {
@@ -2190,9 +2190,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 120,
-        "activations": 114,
-        "qsos": 3105
+        "attempts": 128,
+        "activations": 121,
+        "qsos": 3580
       }
     },
     {
@@ -2255,9 +2255,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 356,
-        "activations": 349,
-        "qsos": 13464
+        "attempts": 361,
+        "activations": 354,
+        "qsos": 13627
       }
     },
     {
@@ -2299,9 +2299,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 117,
-        "activations": 114,
-        "qsos": 4918
+        "attempts": 120,
+        "activations": 117,
+        "qsos": 5019
       }
     },
     {
@@ -2385,9 +2385,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 176,
-        "activations": 165,
-        "qsos": 6193
+        "attempts": 178,
+        "activations": 167,
+        "qsos": 6301
       }
     },
     {
@@ -2429,9 +2429,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 191,
-        "activations": 186,
-        "qsos": 7097
+        "attempts": 192,
+        "activations": 187,
+        "qsos": 7107
       }
     },
     {
@@ -2473,9 +2473,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 593,
-        "activations": 555,
-        "qsos": 24094
+        "attempts": 604,
+        "activations": 566,
+        "qsos": 24593
       }
     },
     {
@@ -2539,9 +2539,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 190,
-        "activations": 188,
-        "qsos": 7498
+        "attempts": 195,
+        "activations": 193,
+        "qsos": 7661
       }
     },
     {
@@ -2598,9 +2598,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 106,
-        "activations": 96,
-        "qsos": 3347
+        "attempts": 115,
+        "activations": 105,
+        "qsos": 3578
       }
     },
     {
@@ -2677,14 +2677,14 @@
         }
       ],
       "publicStats": {
-        "attempts": 221,
-        "activations": 208,
-        "qsos": 9239
+        "attempts": 229,
+        "activations": 216,
+        "qsos": 9550
       }
     },
     {
       "reference": "US-2880",
-      "name": "Snake Den State Park",
+      "name": "Snake Den/Dame Farm State Park",
       "latitude": 41.8303,
       "longitude": -71.5373,
       "grid": "FN41ft",
@@ -2778,9 +2778,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 164,
-        "activations": 161,
-        "qsos": 5742
+        "attempts": 165,
+        "activations": 162,
+        "qsos": 5796
       }
     },
     {
@@ -2822,9 +2822,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 59,
-        "activations": 57,
-        "qsos": 1377
+        "attempts": 63,
+        "activations": 61,
+        "qsos": 1454
       }
     },
     {
@@ -3178,9 +3178,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 2806,
-        "activations": 2752,
-        "qsos": 115568
+        "attempts": 2909,
+        "activations": 2851,
+        "qsos": 120664
       }
     },
     {
@@ -3272,9 +3272,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 76,
-        "activations": 75,
-        "qsos": 3199
+        "attempts": 77,
+        "activations": 76,
+        "qsos": 3220
       }
     },
     {
@@ -3331,14 +3331,14 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 95,
-        "activations": 85,
-        "qsos": 2966
+        "attempts": 103,
+        "activations": 93,
+        "qsos": 3179
       }
     },
     {
       "reference": "US-5484",
-      "name": "George Washington Memorial State Forest",
+      "name": "George Washington Wildlife Management Area",
       "latitude": 41.9259,
       "longitude": -71.7359,
       "grid": "FN41dw",
@@ -3396,9 +3396,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 68,
-        "activations": 66,
-        "qsos": 2469
+        "attempts": 73,
+        "activations": 71,
+        "qsos": 2627
       }
     },
     {
@@ -3491,9 +3491,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 453,
-        "activations": 448,
-        "qsos": 15524
+        "attempts": 455,
+        "activations": 450,
+        "qsos": 15558
       }
     },
     {
@@ -3513,9 +3513,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 400,
-        "activations": 397,
-        "qsos": 13417
+        "attempts": 402,
+        "activations": 399,
+        "qsos": 13459
       }
     },
     {
@@ -3557,9 +3557,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 68,
-        "activations": 67,
-        "qsos": 2278
+        "attempts": 74,
+        "activations": 73,
+        "qsos": 2418
       }
     },
     {
@@ -3700,9 +3700,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 361,
-        "activations": 360,
-        "qsos": 15271
+        "attempts": 367,
+        "activations": 366,
+        "qsos": 15489
       }
     },
     {
@@ -3758,9 +3758,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 52,
-        "activations": 51,
-        "qsos": 1521
+        "attempts": 53,
+        "activations": 52,
+        "qsos": 1580
       }
     },
     {
@@ -3837,9 +3837,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 41,
-        "activations": 41,
-        "qsos": 1844
+        "attempts": 44,
+        "activations": 44,
+        "qsos": 1928
       }
     },
     {
@@ -3896,9 +3896,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 72,
-        "activations": 69,
-        "qsos": 2557
+        "attempts": 74,
+        "activations": 71,
+        "qsos": 2628
       }
     },
     {
@@ -3954,9 +3954,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 66,
-        "activations": 66,
-        "qsos": 2335
+        "attempts": 67,
+        "activations": 67,
+        "qsos": 2403
       }
     },
     {
@@ -4019,9 +4019,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 101,
-        "activations": 95,
-        "qsos": 3779
+        "attempts": 111,
+        "activations": 105,
+        "qsos": 4144
       }
     },
     {
@@ -4041,9 +4041,9 @@
       "activations": [],
       "notes": [],
       "publicStats": {
-        "attempts": 53,
-        "activations": 48,
-        "qsos": 1462
+        "attempts": 54,
+        "activations": 49,
+        "qsos": 1482
       }
     },
     {
@@ -4085,9 +4085,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 70,
-        "activations": 69,
-        "qsos": 2489
+        "attempts": 71,
+        "activations": 70,
+        "qsos": 2511
       }
     },
     {
@@ -4129,9 +4129,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 70,
-        "activations": 69,
-        "qsos": 3220
+        "attempts": 73,
+        "activations": 72,
+        "qsos": 3314
       }
     },
     {
@@ -4208,9 +4208,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 62,
-        "activations": 57,
-        "qsos": 2399
+        "attempts": 66,
+        "activations": 61,
+        "qsos": 2518
       }
     },
     {
@@ -5014,9 +5014,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 88,
-        "activations": 82,
-        "qsos": 2536
+        "attempts": 90,
+        "activations": 84,
+        "qsos": 2577
       }
     },
     {
@@ -5072,9 +5072,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 131,
-        "activations": 130,
-        "qsos": 3769
+        "attempts": 143,
+        "activations": 142,
+        "qsos": 4276
       }
     },
     {
@@ -5230,9 +5230,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 119,
-        "activations": 118,
-        "qsos": 4807
+        "attempts": 121,
+        "activations": 120,
+        "qsos": 4962
       }
     },
     {
@@ -5288,9 +5288,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 79,
-        "activations": 79,
-        "qsos": 3000
+        "attempts": 81,
+        "activations": 81,
+        "qsos": 3034
       }
     },
     {
@@ -5432,9 +5432,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 59,
-        "activations": 57,
-        "qsos": 2068
+        "attempts": 61,
+        "activations": 59,
+        "qsos": 2100
       }
     },
     {
@@ -5476,9 +5476,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 69,
-        "activations": 69,
-        "qsos": 2182
+        "attempts": 71,
+        "activations": 71,
+        "qsos": 2209
       }
     },
     {
@@ -5534,9 +5534,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 105,
-        "activations": 98,
-        "qsos": 2516
+        "attempts": 128,
+        "activations": 121,
+        "qsos": 2840
       }
     },
     {
@@ -5578,9 +5578,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 83,
-        "activations": 82,
-        "qsos": 2272
+        "attempts": 86,
+        "activations": 85,
+        "qsos": 2462
       }
     },
     {
@@ -5622,9 +5622,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 60,
-        "activations": 59,
-        "qsos": 1360
+        "attempts": 61,
+        "activations": 60,
+        "qsos": 1372
       }
     },
     {
@@ -5666,9 +5666,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 101,
-        "activations": 101,
-        "qsos": 3442
+        "attempts": 103,
+        "activations": 103,
+        "qsos": 3516
       }
     },
     {
@@ -5710,9 +5710,9 @@
       ],
       "notes": [],
       "publicStats": {
-        "attempts": 75,
-        "activations": 75,
-        "qsos": 2611
+        "attempts": 77,
+        "activations": 77,
+        "qsos": 2686
       }
     },
     {
@@ -5768,9 +5768,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 63,
-        "activations": 63,
-        "qsos": 1994
+        "attempts": 64,
+        "activations": 64,
+        "qsos": 2005
       }
     },
     {
@@ -5876,9 +5876,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 62,
-        "activations": 57,
-        "qsos": 1776
+        "attempts": 64,
+        "activations": 59,
+        "qsos": 1808
       }
     },
     {
@@ -5927,9 +5927,9 @@
         }
       ],
       "publicStats": {
-        "attempts": 147,
-        "activations": 141,
-        "qsos": 7189
+        "attempts": 150,
+        "activations": 144,
+        "qsos": 7339
       }
     },
     {

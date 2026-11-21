@@ -11,7 +11,7 @@ and practical visitor information on each park. The old root `references` and
 available from `@ripota/parks/types`.
 
 The same visitor metadata is available without npm in the
-[v4.1.0 standalone parks.json](https://github.com/ripota/parks/releases/download/v4.1.0/parks.json)
+[v4.1.1 standalone parks.json](https://github.com/ripota/parks/releases/download/v4.1.1/parks.json)
 release asset.
 
 `src/lib/pota/ri-park-source.ts` adapts the package for the site. It explicitly

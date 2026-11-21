@@ -25,8 +25,8 @@
       "qsos": 3930
     },
     "hunter": {
-      "parks": 661,
-      "qsos": 1097
+      "parks": 664,
+      "qsos": 1112
     },
     "awards": 31,
     "endorsements": 69
@@ -322,6 +322,15 @@
         "location": "US-FL"
       },
       {
+        "date": "2026-11-20T17:57:00",
+        "callsign": "IK2JTU",
+        "band": "20M",
+        "mode": "CW",
+        "reference": "IT-0821",
+        "park": "Parco delle Colline di Brescia Other Conservation Area",
+        "location": "IT-LM"
+      },
+      {
         "date": "2026-11-20T17:53:32",
         "callsign": "KE0VIM",
         "band": "40M",
@@ -500,15 +509,6 @@
         "reference": "US-12962",
         "park": "TVA Veterans Park Regional Park",
         "location": "US-AL"
-      },
-      {
-        "date": "2026-11-15T19:25:28",
-        "callsign": "N8JMS",
-        "band": "20M",
-        "mode": "CW",
-        "reference": "US-1933",
-        "park": "Alum Creek State Park",
-        "location": "US-OH"
       }
     ]
   },
